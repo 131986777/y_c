@@ -5672,7 +5672,7 @@
                     quality = 100;
                 }
     
-                if(currentQuality == quality) return; // don't recalc if unchanged
+                if(currentQuality == quality) return;; // don't recalc if unchanged
     
                 var sf = 0;
                 if (quality < 50) {
