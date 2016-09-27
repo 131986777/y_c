@@ -1,0 +1,30 @@
+{
+  "name": "bubu",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [
+    "bubu"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "font-awesome": "~4.4.0",
+    "angular": "~1.4.7",
+    "angular-route": "^1.5.7",
+    "angular-ui-router": "^0.3.1",
+    "ng-resource": "^0.0.2",
+    "angular-resource": "^1.5.8",
+    "angular-mocks": "^1.5.8",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.37"
+  },
+  "resolutions": {
+    "angular": "1.5.8"
+  }
+}

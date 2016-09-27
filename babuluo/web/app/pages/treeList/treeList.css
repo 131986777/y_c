@@ -1,0 +1,68 @@
+/* 多级菜单样式 */
+ .multi-menu .dropdown-menu {
+     margin-top: 1px;
+     overflow: auto;
+     max-height: 340px;
+     width: 300px;
+ }
+.multi-menu .dropdown-menu::after, .multi-menu .dropdown-menu::before {
+    display: none !important;
+}
+.multi-menu .fa {
+    width: 9px;
+    min-height: 14px;
+    margin-right: 5px;
+}
+.multi-menu .fa.fa-angle-up,
+.multi-menu .fa.fa-angle-down {
+    cursor: pointer;
+}
+.multi-menu .item {
+    padding: 8px 20px;
+    font-weight: 300;
+    line-height: 18px;
+    white-space: nowrap;
+}
+.multi-menu  .first-menu-item > .item {
+    padding-left: 10px;
+}
+.multi-menu .second-menu-item > .item {
+    padding-left: 40px;
+}
+.multi-menu .third-menu-item > .item {
+    padding-left: 70px;
+}
+.multi-menu .fourth-menu-item > .item {
+    padding-left: 100px;
+}
+.multi-menu .fifth-menu-item > .item {
+    padding-left: 130px;
+}
+.multi-menu .sixth-menu-item > .item {
+    padding-left: 160px;
+}
+.multi-menu .item:hover,
+.multi-menu .item.active,
+.multi-menu .item.active:hover {
+    background-image: none;
+    background-color: #f6f6f6;
+}
+.multi-menu.multi-menu-bordered .item {
+    border: 1px solid #eee;
+    margin: 5px 0;
+}
+.multi-menu .multi-menu-text {
+    display: inline-block;
+    width: 100px;
+}
+.dropdown-menu .item a {
+    color: #6e6e6e;
+    text-decoration: none;
+    display: inline-block;
+    clear: both;
+}
+.dropdown.dropdown-form-control,
+.dropdown.dropdown-form-control .btn,
+.dropdown.dropdown-form-control .dropdown-menu {
+    width: 100%;
+}

@@ -1,0 +1,49 @@
+.table-link + .table-link {
+	margin-left: 15px;
+}
+body, html {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	font-family: "微软雅黑";
+}
+
+#allmap {
+	height: 500px;
+	width: 100%;
+}
+
+#container {
+	height: 500px;
+	width: 100%;
+}
+
+#myPageTop {
+	position: absolute;
+	top: 5px;
+	right: 10px;
+	background: #fff none repeat scroll 0 0;
+	border: 1px solid #ccc;
+	margin: 10px auto;
+	padding: 6px;
+	font-family: "Microsoft Yahei", "微软雅黑", "Pinghei";
+	font-size: 14px;
+}
+
+#myPageTop label {
+	margin: 0 20px 0 0;
+	color: #666666;
+	font-weight: normal;
+}
+
+#myPageTop input {
+	width: 170px;
+}
+
+#myPageTop .column2 {
+	padding-left: 25px;
+}
+
+.amap-sug-result {
+	z-index: 1600;
+}
