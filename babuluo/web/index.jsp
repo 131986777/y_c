@@ -1,15 +1,10 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: pabula
-  Date: 16/9/27
-  Time: 下午3:21
-  To change this template use File | Settings | File Templates.
---%>
+<%--Created by Pabula on 16/7/29 10:57.--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
     <title>$Title$</title>
   </head>
+  asdfasdfd
   <body>
   $END$
   </body>

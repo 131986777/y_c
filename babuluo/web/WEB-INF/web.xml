@@ -3,4 +3,54 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+
+    <!-- DO控制器 -->
+    <servlet>
+        <servlet-name>bubu</servlet-name>
+        <servlet-class>com.pabula.api.BuBuGetwayController</servlet-class>
+        <init-param>
+            <!--此项目的根package-->
+            <param-name>packages</param-name>
+            <param-value>com</param-value>
+        </init-param>
+
+        <init-param>
+            <!--此项目的根package-->
+            <param-name>context</param-name>
+            <param-value>/bubu</param-value>
+        </init-param>
+    </servlet>
+
+
+    <servlet-mapping>
+        <servlet-name>bubu</servlet-name>
+
+        <!--url访问的前缀-->
+        <url-pattern>/bubu/*</url-pattern>
+    </servlet-mapping>
+
+
+    <!--Hessian-->
+    <servlet>
+        <!-- 配置 HessianServlet，Servlet的名字随便配置，例如这里配置成ServiceServlet-->
+        <servlet-name>APIServlet</servlet-name>
+        <servlet-class>com.caucho.hessian.server.HessianServlet</servlet-class>
+
+        <init-param>
+            <param-name>service-class</param-name><!-- 远程服务实现类 -->
+            <param-value>com.pabula.api.call.rpc.hessian.HessianAPICall</param-value>
+        </init-param>
+        <!--<init-param>-->
+        <!--<param-name>home-api</param-name>&lt;!&ndash; 远程服务接口 &ndash;&gt;-->
+        <!--<param-value>com.pabula.api.rpc.APICall</param-value>-->
+        <!--</init-param>-->
+
+    </servlet>
+    <!-- 映射 HessianServlet的访问URL地址-->
+    <servlet-mapping>
+        <servlet-name>APIServlet</servlet-name>
+        <url-pattern>/api</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
