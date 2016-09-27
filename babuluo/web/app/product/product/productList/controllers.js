@@ -7,16 +7,16 @@ AndSellMainModule.controller('productListController', function ($scope, productF
             console.log(response);
             modalFactory.showShortAlert("jaja");
         });
-    }
+    };
     //$scope.initLoad();
 
     $scope.bindData = function (response) {
         $scope.productSpuSizeMap = new Map;
         $scope.productMap = new Map;
-        $scope.productOrderList = new Array;
-        $scope.productResultList = new Array;
-        $scope.checkedSpu = new Array;
-        $scope.checkedSku = new Array;
+        $scope.productOrderList = [];
+        $scope.productResultList = [];
+        $scope.checkedSpu = [];
+        $scope.checkedSku = [];
         $scope.checkAllProduct = false;
 
         filterTableFromList(response.data, "shop_product");
@@ -65,14 +65,14 @@ AndSellMainModule.controller('productListController', function ($scope, productF
             }
         });
 
-    }
+    };
 
     $scope.listToMap = function (productList) {
         var map = new Map;
         productList.forEach(function (element, index, arr) {
             var childList = map.get(element.prdSpu);
             if (childList == undefined) {
-                childList = new Array;
+                childList = [];
                 map.set(element.prdSpu, childList);
             }
             childList.push(element);
@@ -87,4 +87,4 @@ AndSellMainModule.controller('productListController', function ($scope, productF
     };
 
 
-})
+});

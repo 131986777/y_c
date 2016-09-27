@@ -32,4 +32,4 @@ AndSellMainModule.service('memberFactory', function ($resource, baseURL) {
         });
       };
 
-    })
+    });

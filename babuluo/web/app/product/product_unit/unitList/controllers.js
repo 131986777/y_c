@@ -7,7 +7,7 @@ AndSellMainModule.controller('unitListController', function ($scope, $stateParam
       console.log(repsonce);
       $scope.productUnitList = repsonce.data;
     }, null);
-  }
+  };
   $scope.initLoad();
 
   $scope.addProductUnit = function () {
@@ -29,7 +29,7 @@ AndSellMainModule.controller('unitListController', function ($scope, $stateParam
 
   $scope.modifyUnitNameClick = function (item) {
     $scope.modify = clone(item);
-  }
+  };
 
   $scope.modifyProductUnit = function () {
     $scope.modify['shop_unit.SERVICE_ID'] = 1;
@@ -42,7 +42,7 @@ AndSellMainModule.controller('unitListController', function ($scope, $stateParam
         $scope.initLoad();
       }
     });
-  }
+  };
 
   $scope.delProductUnit = function (id) {
     console.log(id);
@@ -57,4 +57,4 @@ AndSellMainModule.controller('unitListController', function ($scope, $stateParam
 
   }
 
-})
+});

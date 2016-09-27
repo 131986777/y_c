@@ -7,7 +7,7 @@ AndSellMainModule.controller('classListController', function ($scope, $statePara
       console.log(repsonce);
       $scope.productClassList = repsonce.data;
     }, null);
-  }
+  };
   $scope.initLoad();
 
   $scope.addProductClass = function () {
@@ -30,7 +30,7 @@ AndSellMainModule.controller('classListController', function ($scope, $statePara
 
   $scope.modifyClssNameClick = function (item) {
     $scope.modify = clone(item);
-  }
+  };
 
   $scope.modifyProductClass = function () {
     $scope.modify['shop_product_class.SERVICE_ID'] = 1;
@@ -43,7 +43,7 @@ AndSellMainModule.controller('classListController', function ($scope, $statePara
         $scope.initLoad();
       }
     });
-  }
+  };
 
   $scope.delProductClass = function (id) {
 
@@ -58,4 +58,4 @@ AndSellMainModule.controller('classListController', function ($scope, $statePara
 
   }
 
-})
+});

@@ -7,7 +7,7 @@ AndSellMainModule.controller('tagListController', function ($scope, $stateParams
       console.log(repsonce);
       $scope.productTagList = repsonce.data;
     }, null);
-  }
+  };
   $scope.initLoad();
 
   $scope.addProductTag = function () {
@@ -30,7 +30,7 @@ AndSellMainModule.controller('tagListController', function ($scope, $stateParams
 
     $scope.modify = clone(item);
     console.log('in');
-  }
+  };
 
   $scope.modifyProductTag = function () {
     $scope.modify['shop_tag.SERVICE_ID'] = 1;
@@ -43,7 +43,7 @@ AndSellMainModule.controller('tagListController', function ($scope, $stateParams
         $scope.initLoad();
       }
     });
-  }
+  };
 
   $scope.delProductTag = function (id) {
 
@@ -58,4 +58,4 @@ AndSellMainModule.controller('tagListController', function ($scope, $stateParams
 
   }
 
-})
+});

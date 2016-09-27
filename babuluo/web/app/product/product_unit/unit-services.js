@@ -33,4 +33,4 @@ AndSellMainModule.service('unitFactory', function ($resource, baseURL) {
         });
       };
 
-    })
+    });

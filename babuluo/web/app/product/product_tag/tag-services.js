@@ -33,4 +33,4 @@ AndSellMainModule.service('tagFactory', function ($resource, baseURL) {
         });
       };
 
-    })
+    });

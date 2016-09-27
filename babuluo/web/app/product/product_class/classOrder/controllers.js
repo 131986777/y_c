@@ -2,4 +2,4 @@ AndSellMainModule.controller('classOrderController', function ($scope, $statePar
 
   modalFactory.setTitle('商品分类排序');
 
-})
+});

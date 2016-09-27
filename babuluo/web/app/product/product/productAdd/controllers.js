@@ -6,7 +6,7 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
         $scope.addProductSubmit();
     }, function () {
         $state.go('productList');
-    })
+    });
 
     /**
      * 初始变量
@@ -97,7 +97,7 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
         productFactory.addProduct(form).get({}, function () {
             modalFactory.showShortAlert("保存成功");
         });
-    }
+    };
 
     $scope.changeSettingSku = function () {
 
@@ -105,7 +105,7 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
         $scope.product.skuName1 = '重量';
         $scope.product.skuName2 = '';
         $scope.product.skuName3 = '';
-    }
+    };
 
     /**
      * 选择tag按钮
@@ -247,13 +247,13 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
             }
 
         }
-    }
+    };
 
     /**
      * 临时保存的sku对象
      * */
     function Tag() {
-        var object = new Object;
+        var object = {};
         object['shop_product_sku.PRD_SKU'] = '';
         object['shop_product_sku.SKU_NAME1'] = '';
         object['shop_product_sku.SKU_CONTENT1'] = '';
@@ -276,4 +276,4 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
         return object;
     }
 
-})
+});

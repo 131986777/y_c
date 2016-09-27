@@ -2,4 +2,4 @@ AndSellMainModule.controller('tagOrderController', function ($scope, $stateParam
 
     modalFactory.setTitle('商品标签排序');
 
-    })
+    });

@@ -1326,12 +1326,12 @@ jiaOrderUI.directive('confirm', function () {
                 scope.top = -75 + t1;
                 scope.left = t2 + (pWidth / 2) - 70;
                 scope.ifShow = true;
-            }
+            };
 
             scope.btnLeftClick = function () {
                 scope.callback();
                 scope.ifShow = false;
-            }
+            };
 
             scope.btnRightClick = function () {
                 scope.ifShow = false;

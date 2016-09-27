@@ -14,7 +14,7 @@ AndSellMainModule.controller('MainController', function ($scope, $state, modalFa
         }
     });
 
-})
+});
 
 AndSellMainModule.controller('MianModalController', function ($scope, $state, modalFactory) {
 
@@ -28,6 +28,6 @@ AndSellMainModule.controller('MianModalController', function ($scope, $state, mo
         $state.go(state);
     }
 
-})
+});
 
 //也可以将所有controller 放在这里  但是controller结构不清洗
