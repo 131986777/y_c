@@ -1,4 +1,4 @@
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="table-operbar row">
     <div class="table-toolbar">
 
@@ -9,7 +9,7 @@
     </div>
     <div class="col-md-12">
         <div class="table-scrollable">
-            <table class="table table-striped table-hover">
+            <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
 
