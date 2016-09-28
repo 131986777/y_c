@@ -14,6 +14,7 @@ AndSellMainModule.controller('MemberDetailsController', function ($scope, member
     };
 
     $scope.loadMemberDetails = function () {
+
         $scope.deferLoad = $q.defer();
 
         $scope.loadSource();
