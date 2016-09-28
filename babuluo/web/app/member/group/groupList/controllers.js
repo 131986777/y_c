@@ -14,7 +14,6 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
        memberGroupFactory.getMemberTypeList().get({},function (response) {
            console.log("返回的类型列表"+response.data);
 
-
            $scope.MemberTypeList = response.data;
            $scope.MemberTypeList.forEach(function (ele) {
                $scope.typeMap.set(ele['member_code_type.ID'], ele['member_code_type.NAME']);
