@@ -1,0 +1,40 @@
+  <div ng-cloak class="table-pagebar" >
+    <div class="col-md-12" ng-show="!showPageBar">
+      暂无数据
+    </div>
+
+    <div class="row" ng-show="showPageBar">
+      <div class="col-md-12 form-inline  text-right">
+        <ul class="pager" style="text-align: right">
+          <li>共 {{totalCount}} 条，每页显示</li>
+          <li style="padding-right: 20px;">
+            <select ng-model="selectPageSize"
+                    ng-init="selectPageSize = '10'"
+                    class="nya-bs-select form-control"
+                    data-width="80px">
+              <option class="nya-bs-option" value="10">10条</option>
+              <option class="nya-bs-option" value="30">30条</option>
+              <option class="nya-bs-option" value="50">50条</option>
+              <option class="nya-bs-option" value="100">100条</option>
+            </select>
+          </li>
+          <li class="previous">
+            <button type="button" ng-click="prevPage()"
+                    class="btn btn-default">< 上一页
+            </button>
+          </li>
+          <li>
+            <input type="text" class=" form-control text-center"
+                   ng-enter="changePage()" ng-model="currentPageMirror"
+                   style="width: 40px;padding-right: 4px;padding-left: 4px;">
+          </li>
+          <li class="next">
+            <button type="button" ng-click="nextPage()"
+                    class="btn btn-default">下一页 >
+            </button>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
