@@ -5,11 +5,8 @@ AndSellMainModule.controller('MemberDetailsController', function ($scope, member
 
     modalFactory.setBottom(true);
 
-    $scope.memberAdd = {};
-    $scope.memberEdited = {};
-    $scope.memberFilter = {};
-
     $scope.initLoad = function () {
+
 
     };
 
@@ -22,6 +19,10 @@ AndSellMainModule.controller('MemberDetailsController', function ($scope, member
         $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
 
         $scope.promiseAll.then(function () {
+
+            memberFactory.getMemberListById().get({},function () {
+
+            });
 
             $scope.memberList = response.data;
             console.log($scope.memberList);
