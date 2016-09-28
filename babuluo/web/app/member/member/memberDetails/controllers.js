@@ -11,6 +11,7 @@ AndSellMainModule.controller('MemberDetailsController', function ($scope, member
 
     $scope.initLoad = function () {
 
+
     };
 
     $scope.loadMemberDetails = function () {
