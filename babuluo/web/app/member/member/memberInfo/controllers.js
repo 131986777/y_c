@@ -1,4 +1,4 @@
-AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $stateParams, memberFactory, memberSourceFactory, modalFactory, $q) {
+AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $stateParams, memberFactory, memberSourceFactory, memberTypeFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('客户信息');
@@ -13,6 +13,7 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
         $scope.deferLoad = $q.defer();
 
         $scope.loadSource();
+        $scope.loadType();
         $scope.loadMemberDetails();
 
     };
@@ -43,6 +44,16 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
             $scope.sourceList.forEach(function (ele) {
                 $scope.sourceMap.set(ele['member_code_source.CODE'], ele['member_code_source.NAME']);
             });
+            $scope.deferLoad.resolve(response);
+        }, null);
+    };
+
+    //加载客户类型
+    $scope.loadType = function () {
+
+        memberTypeFactory.getMemberTypeList().get({}, function (response) {
+            $scope.typeList = response.data;
+            console.log($scope.typeList);
             $scope.deferLoad.resolve(response);
         }, null);
     };

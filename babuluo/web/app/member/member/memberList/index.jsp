@@ -80,7 +80,7 @@
                 <th class="col-sm-2">登陆账号</th>
                 <th class="col-sm-2">用户名</th>
                 <th class="col-sm-1">手机号码</th>
-                <th class="col-sm-1">会员等级</th>
+                <th class="col-sm-1">会员分组</th>
                 <th class="col-sm-1">来源</th>
                 <th class="col-sm-2">注册时间</th>
                 <th class="col-sm-1">状态</th>
@@ -92,7 +92,7 @@
                 <td ng-bind="ml['member.LOGIN_ID']"></td>
                 <td ng-bind="ml['member.USER_NAME']"></td>
                 <td ng-bind="ml['member.MOBILE']"></td>
-                <td>会员等级</td>
+                <td>会员分组</td>
                 <td ng-bind="sourceMap.get(ml['member.CODE_ID'])"></td>
                 <td ng-bind="ml['member.REG_DATETIME'] | FormatAllDate"></td>
                 <td ng-bind="ml['member.USE_STATE'] | FormatState"></td>

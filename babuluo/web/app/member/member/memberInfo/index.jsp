@@ -91,9 +91,9 @@
                     <select ng-model="memberInfo['member.TYPE_ID']"
                             class="nya-bs-select form-control">
                         <option class="nya-bs-option"
-                                ng-repeat="value in sourceList"
-                                ng-bind="value['member_code_source.NAME']"
-                                value="{{value['member_code_source.CODE']}}">
+                                ng-repeat="value in typeList"
+                                ng-bind="value['member_code_type.NAME']"
+                                value="{{value['member_code_type.ID']}}">
                         </option>
                     </select>
                 </td>
