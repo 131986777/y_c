@@ -40,7 +40,6 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
         }, null);
     };
 
-
     //新增客户
     $scope.addMemberList = function () {
 
@@ -61,26 +60,6 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
         });
     };
 
-    $scope.getMemberListById = function (sl) {
-        console.log(sl);
-        $scope.memberEdited = clone(sl);
-    };
-
-    $scope.modMemberList = function () {
-
-        if ($scope.memberEdited['member.USER_NAME'] == undefined || $scope.memberEdited['member.LOGIN_ID'] == undefined || $scope.memberEdited['member.MOBILE'] == undefined) {
-            modalFactory.showAlert("请先填写完必填项。");
-            return;
-        }
-
-        memberFactory.modMemberListById($scope.memberEdited).get({}, function (response) {
-            if (response.extraData.state == 'true') {
-                $('#edit').modal('hide');
-                $scope.$broadcast('pageBar.reload');
-            }
-        });
-    };
-
     //删除客户
     $scope.delMemberListById = function (ml) {
         modalFactory.showAlert("确定删除客户：［" + ml['member.USER_NAME'] + "］?", function () {
@@ -95,8 +74,8 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
     $scope.changeState = function (ml) {
         if (ml['member.USE_STATE'] == 1) {
             //停用
-            ml['member.USE_STATE'] = -1;
             modalFactory.showAlert("确定停用客户：［" + ml['member.USER_NAME'] + "］?", function () {
+                ml['member.USE_STATE'] = -1;
                 memberFactory.modMemberListById(ml).get({}, function (response) {
                     if (response.extraData.state == 'true') {
                         modalFactory.showShortAlert("停用客户成功");
@@ -119,9 +98,7 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
         $scope.memberAdd['member.USER_NAME'] = undefined;
         $scope.memberAdd['member.LOGIN_ID'] = undefined;
         $scope.memberAdd['member.MOBILE'] = undefined;
-        // $scope.shopAdd['shop.latitude'] = undefined;
-        // $scope.shopEdited['shop.longtude'] = undefined;
-        // $scope.shopEdited['shop.latitude'] = undefined;
+        $scope.memberAdd['member.CODE_ID'] = undefined;
     };
 
     //用于清除地图的内容
