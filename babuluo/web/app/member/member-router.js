@@ -10,7 +10,11 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/member/member/memberList/index.jsp",
             controller: "memberListController"
         })
-
+        .state("memberDetails", {
+            url: "/memberDetails",
+            templateUrl: "/AndSell/app/member/member/memberDetails/index.jsp",
+            controller: "MemberDetailsController"
+        })
         .state("memberSourceList", {
             url: "/memberSourceList",
             templateUrl: "/AndSell/app/member/source/sourceList/index.jsp",
