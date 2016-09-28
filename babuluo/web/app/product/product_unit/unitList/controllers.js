@@ -1,6 +1,6 @@
 AndSellMainModule.controller('unitListController', function ($scope, $stateParams, unitFactory, modalFactory) {
 
-  modalFactory.setTitle('商品分类管理');
+  modalFactory.setTitle('商品单位管理');
 
   $scope.initLoad = function () {
     unitFactory.getPrdUnitList().get({}, function (repsonce) {
