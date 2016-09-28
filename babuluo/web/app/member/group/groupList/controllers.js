@@ -30,7 +30,7 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
            // $scope.loadShopList();
             return;
         }else {
-            memberGroupFactory.getMemberGroupListByType().get({}, function (repsonse) {
+            memberGroupFactory.getMemberGroupListByType(id).get({}, function (repsonse) {
                 console.log(repsonse.data);
                 $scope.MemberGroupList = repsonse.data;
             }, null);
