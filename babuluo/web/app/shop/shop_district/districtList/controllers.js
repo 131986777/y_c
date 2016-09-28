@@ -41,7 +41,7 @@ AndSellMainModule.controller('districtListController', function ($scope, $stateP
     $scope.modifyDistrict = function () {
         $scope.modify['district.SERVICE_ID'] = 1;
         districtFactory.modDistrictById().get($scope.modify, function (response) {
-            if (response.code != undefined && response.code == 4000) {
+            if (response.code != undefined && response.code == 400) {
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
                 $("#modifyDistrict").modal('hide');

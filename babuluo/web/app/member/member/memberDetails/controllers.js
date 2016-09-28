@@ -1,30 +1,36 @@
-AndSellMainModule.controller('memberListController', function ($scope, memberFactory, memberSourceFactory, modalFactory, $q) {
+AndSellMainModule.controller('MemberDetailsController', function ($scope, memberFactory, memberSourceFactory, modalFactory, $q) {
 
     //设置页面Title
-    modalFactory.setTitle('客户管理');
+    modalFactory.setTitle('客户详情');
 
-    modalFactory.setBottom(false);
+    modalFactory.setBottom(true);
 
-    $scope.memberAdd = {};
-    $scope.memberEdited = {};
-    $scope.memberFilter = {};
+    $scope.initLoad = function () {
 
-    $scope.bindData = function (response) {
-        console.log(response);
+
+    };
+
+    $scope.loadMemberDetails = function () {
 
         $scope.deferLoad = $q.defer();
 
         $scope.loadSource();
 
+
         $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
 
         $scope.promiseAll.then(function () {
 
+            memberFactory.getMemberListById().get({},function () {
+
+            });
+
             $scope.memberList = response.data;
             console.log($scope.memberList);
         });
-
     };
+
+    $scope.initLoad();
 
     $scope.sourceMap = new Map;
     //加载客户来源
@@ -40,42 +46,11 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
         }, null);
     };
 
-    //新增客户
-    $scope.addMemberList = function () {
-
-        if ($scope.memberAdd['member.USER_NAME'] == undefined || $scope.memberAdd['member.LOGIN_ID'] == undefined || $scope.memberAdd['member.MOBILE'] == undefined) {
-            modalFactory.showAlert("请先填写完必填项。");
-            return;
-        }
-        $scope.memberAdd['member.LOGIN_PWD'] = "A123456";
-        console.log($scope.memberAdd);
-        memberFactory.addMemberList($scope.memberAdd).get({}, function (response) {
-            if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                $("#add").modal('hide');
-                $scope.clearForm();
-                $scope.$broadcast('pageBar.reload');
-            }
-        });
-    };
-
-    //删除客户
-    $scope.delMemberListById = function (ml) {
-        modalFactory.showAlert("确定删除客户：［" + ml['member.USER_NAME'] + "］?", function () {
-            memberFactory.delById(ml).get({}, function (response) {
-                if (response.extraData.state == 'true') {
-                    $scope.$broadcast('pageBar.reload');
-                }
-            });
-        });
-    };
-
     $scope.changeState = function (ml) {
         if (ml['member.USE_STATE'] == 1) {
             //停用
+            ml['member.USE_STATE'] = -1;
             modalFactory.showAlert("确定停用客户：［" + ml['member.USER_NAME'] + "］?", function () {
-                ml['member.USE_STATE'] = -1;
                 memberFactory.modMemberListById(ml).get({}, function (response) {
                     if (response.extraData.state == 'true') {
                         modalFactory.showShortAlert("停用客户成功");
@@ -98,7 +73,9 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
         $scope.memberAdd['member.USER_NAME'] = undefined;
         $scope.memberAdd['member.LOGIN_ID'] = undefined;
         $scope.memberAdd['member.MOBILE'] = undefined;
-        $scope.memberAdd['member.CODE_ID'] = undefined;
+        // $scope.shopAdd['shop.latitude'] = undefined;
+        // $scope.shopEdited['shop.longtude'] = undefined;
+        // $scope.shopEdited['shop.latitude'] = undefined;
     };
 
     //用于清除地图的内容
