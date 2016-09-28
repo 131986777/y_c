@@ -1,6 +1,6 @@
 AndSellMainModule.controller('MemberGroupController', function ($scope, $stateParams, memberGroupFactory, modalFactory) {
 
-    $scope.MemberType= [];
+    $scope.MemberType = [];
     modalFactory.setTitle('客户分组管理');
 
     $scope.initLoad = function () {
@@ -11,26 +11,26 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
             $scope.MemberGroupList = repsonse.data;
         }, null);
 
-       memberGroupFactory.getMemberTypeList().get({},function (response) {
-           console.log("返回的类型列表"+response.data);
+        memberGroupFactory.getMemberTypeList().get({}, function (response) {
+            console.log("返回的类型列表" + response.data);
 
-           $scope.MemberTypeList = response.data;
-           $scope.MemberTypeList.forEach(function (ele) {
-               $scope.typeMap.set(ele['member_code_type.ID'], ele['member_code_type.NAME']);
-           });
+            $scope.MemberTypeList = response.data;
+            $scope.MemberTypeList.forEach(function (ele) {
+                $scope.typeMap.set(ele['member_code_type.ID'], ele['member_code_type.NAME']);
+            });
 
 
-       },null);
+        }, null);
     };
 
     //根据类型ID筛选分组
     $scope.filterGroup = function (id) {
-        console.log("id为"+id);
+        console.log("id为" + id);
         if ($scope.groupFilter['member_code_type.ID'] == "-1") {
-           // $scope.loadShopList();
+            // $scope.loadShopList();
             return;
-        }else {
-            memberGroupFactory.getMemberGroupListByType().get({}, function (repsonse) {
+        } else {
+            memberGroupFactory.getMemberGroupListByType(id).get({}, function (repsonse) {
                 console.log(repsonse.data);
                 $scope.MemberGroupList = repsonse.data;
             }, null);
@@ -39,7 +39,7 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
     };
     $scope.initLoad();
 
-    $scope.addMemberGroup=function () {
+    $scope.addMemberGroup = function () {
         console.log($scope.add);
         $scope.add['MEMBER_CODE_Group.SERVICE_ID'] = 1;
         memberGroupFactory.addMemberGroup($scope.add).get({}, function (response) {
@@ -48,7 +48,7 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert('新增成功');
-                $scope.add='';
+                $scope.add = '';
                 $("#addMemberGroup").modal('hide');
                 $scope.initLoad();
 
@@ -58,7 +58,9 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
     };
 
     $scope.modifyMemberGroupClick = function (item) {
-        $scope.modify=clone(item);
+        console.log(item);
+        console.log($scope.MemberTypeList);
+        $scope.modify = clone(item);
     };
 
     $scope.modifyMemberGroup = function () {
@@ -67,8 +69,9 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
             if (response.code == 400) {
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
-                $("#modifyMember").modal('hide');
+
                 modalFactory.showShortAlert("修改成功");
+                $("#modifyMemberGroup").modal('hide');
                 $scope.initLoad();
             }
         });

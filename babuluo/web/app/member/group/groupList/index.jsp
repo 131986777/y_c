@@ -32,7 +32,7 @@
     </div>
     <div class="col-md-12">
         <div class="table-scrollable">
-            <table class="table table-striped table-hover">
+            <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
 
@@ -147,50 +147,43 @@
             <div class="modal-body form-body text-right">
 
                 <form class="form-horizontal">
-
-
                     <div class="form-group row">
-                        <label class="col-md-3 control-label">
-                            所属类型
+                        <label class="col-md-3 control-label">所属类型:
                         </label>
 
                         <div class="col-md-8">
-                            <%--<input type="text" class="form-control"
-                                   ng-model="modify['member_code_group.TYPE_ID']"></div>--%>
                             <select ng-model="modify['member_code_group.TYPE_ID']"
-                                    ng-init="typeMap.get(modify['member_code_group.TYPE_ID'])"
-                                    class="nya-bs-select form-control"
-                                    ng-change="addDistrictModal(shopEdited['shop.DISTRICT_ID'])">
+                                    class="nya-bs-select form-control">
                                 <option class="nya-bs-option"
                                         ng-repeat="item in MemberTypeList"
                                         ng-bind="item['member_code_type.NAME']"
-                                        value="{{item['member_code_type.NAME']}}">
+                                        value="{{item['member_code_type.ID']}}">
                                 </option>
 
                             </select>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 分组名称
-                            </label>
-
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="modify['member_code_group.NAME']"
-                                       placeholder=""></div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                分组介绍
-                            </label>
-
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="modify['member_code_group.INTRO']"
-                                       placeholder=""></div>
-                        </div>
                     </div>
 
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> * </span> 分类名称:
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                            ng-model="modify['member_code_group.NAME']"
+                            placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> * </span> 分类名称:
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="modify['member_code_group.INTRO']"
+                                   placeholder=""></div>
+                    </div>
 
                 </form>
             </div>
@@ -200,6 +193,7 @@
                 <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
                 </button>
             </div>
+
         </div>
         <!-- /.modal-content -->
     </div>
