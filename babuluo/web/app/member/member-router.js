@@ -10,16 +10,25 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/member/member/memberList/index.jsp",
             controller: "memberListController"
         })
-
+        .state("memberDetails", {
+            url: "/memberDetails",
+            templateUrl: "/AndSell/app/member/member/memberDetails/index.jsp",
+            controller: "MemberDetailsController"
+        })
         .state("memberSourceList", {
             url: "/memberSourceList",
-            templateUrl: "/AndSell/app/member/code/codeList/index.jsp",
+            templateUrl: "/AndSell/app/member/source/sourceList/index.jsp",
             controller: "MemberSourceController"
         })
         .state("memberTypeList", {
             url: "/memberTypeList",
-            templateUrl: "/AndSell/app/member/code2/code2List/index.jsp",
+            templateUrl: "/AndSell/app/member/type/typeList/index.jsp",
             controller: "MemberTypeController"
+        })
+        .state("memberGroupList", {
+            url: "/memberGroupList",
+            templateUrl: "/AndSell/app/member/group/groupList/index.jsp",
+            controller: "MemberGroupController"
         })
 
 });

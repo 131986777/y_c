@@ -8,6 +8,8 @@ AndSellMainModule.service('memberSourceFactory', function ($resource, baseURL) {
         });
       };
 
+
+
       this.addMemberSource = function (form) {
         return $resource(baseURL + '/member/source/add', form, {           //http://192.168.1.200:8080/ape/bubu/member/source/add
           'update': {
@@ -16,9 +18,9 @@ AndSellMainModule.service('memberSourceFactory', function ($resource, baseURL) {
         });
       };
 
-      this.delMemberSource = function (id) {         //id应为字符串类型
-          var  code="'"+id+"'";
-          return $resource(baseURL + '/member/source/delById?member_code_source.CODE=:code', {'code': code}, {
+      this.delMemberSource = function (id) {
+
+          return $resource(baseURL + '/member/source/delById?member_code_source.CODE=:code', {'code': id}, {
           'update': {
             method: 'PUT'
           }
