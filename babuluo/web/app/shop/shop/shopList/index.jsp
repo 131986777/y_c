@@ -89,7 +89,7 @@
                                 </label>
                                 <div class="col-sm-7">
                                     <input class="form-control" type="text"
-                                           name="name" ng-model="shopAdd['shop.shop_name']"
+                                           name="name" ng-model="shopAdd['shop.SHOP_NAME']"
                                            required>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                                 </label>
                                 <div class="col-sm-7">
                                     <input class="form-control" type="text"
-                                           name="telephone" ng-model="shopAdd['shop.telephone']"
+                                           name="telephone" ng-model="shopAdd['shop.TELEPHONE']"
                                            required>
                                 </div>
                             </div>

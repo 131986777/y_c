@@ -49,7 +49,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
     $scope.loadShopList = function () {
         var form = {};
         //目前serviceId都设为1
-        form['shop.service_id'] = 1;
+        form['shop.SERVICE_ID'] = 1;
         $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
 
         $scope.promiseAll.then(function () {
@@ -69,7 +69,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
             return;
         }
         //目前serviceId都设为1
-        $scope.shopFilter['shop.service_id'] = 1;
+        $scope.shopFilter['shop.SERVICE_ID'] = 1;
         $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
 
         $scope.promiseAll.then(function () {
@@ -82,16 +82,16 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
 
     $scope.addShopList = function () {
 
-        if ($scope.shopAdd['shop.shop_name'] == undefined || $scope.shopAdd['shop.telephone'] == undefined || $scope.shopAdd['shop.DISTRICT_ID'] == '-1') {
+        if ($scope.shopAdd['shop.SHOP_NAME'] == undefined || $scope.shopAdd['shop.TELEPHONE'] == undefined || $scope.shopAdd['shop.DISTRICT_ID'] == '-1') {
             modalFactory.showAlert("请先填写完必填项。");
             return;
         }
 
         //目前serviceId都设为1
-        $scope.shopAdd['shop.service_id'] = 1;
+        $scope.shopAdd['shop.SERVICE_ID'] = 1;
         //拼接时间
-        $scope.shopAdd['shop.open_time'] = $scope.open_time_hour + ":" + $scope.open_time_min;
-        $scope.shopAdd['shop.close_time'] = $scope.close_time_hour + ":" + $scope.close_time_min;
+        $scope.shopAdd['shop.OPEN_TIME'] = $scope.open_time_hour + ":" + $scope.open_time_min;
+        $scope.shopAdd['shop.CLOSE_TIME'] = $scope.close_time_hour + ":" + $scope.close_time_min;
         shopFactory.addShopList($scope.shopAdd).get({}, function (response) {
             if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
                 modalFactory.showShortAlert(response.msg);
@@ -113,7 +113,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
     };
 
     $scope.commitEdit = function () {
-        if ($scope.shopEdited['shop.shop_name'] == undefined || $scope.shopEdited['shop.telephone'] == undefined || $scope.shopEdited['shop.DISTRICT_ID'] == '-1') {
+        if ($scope.shopEdited['shop.SHOP_NAME'] == undefined || $scope.shopEdited['shop.TELEPHONE'] == undefined || $scope.shopEdited['shop.DISTRICT_ID'] == '-1') {
             modalFactory.showAlert("请先填写完必填项。");
             return;
         }
@@ -126,6 +126,8 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
             if (response.extraData.state == 'true') {
                 $('#edit').modal('hide');
                 $scope.initLoad();
+            } else {
+                modalFactory.showShortAlert(response.msg);
             }
         });
     };
@@ -174,17 +176,17 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
 
     //用于清除填写的内容
     $scope.clearForm = function () {
-        $scope.shopAdd['shop.shop_name'] = undefined;
-        $scope.shopAdd['shop.telephone'] = undefined;
-        $scope.shopAdd['shop.longtude'] = undefined;
-        $scope.shopAdd['shop.latitude'] = undefined;
+        $scope.shopAdd['shop.SHOP_NAME'] = undefined;
+        $scope.shopAdd['shop.TELEPHONE'] = undefined;
+        $scope.shopAdd['shop.LONGTUDE'] = undefined;
+        $scope.shopAdd['shop.LATITUDE'] = undefined;
         $scope.shopAdd['shop.DISTRICT_ID'] = "-1";
         $scope.open_time_hour = "0";
         $scope.open_time_min = "00";
         $scope.close_time_hour = "0";
         $scope.close_time_min = "00";
-        $scope.shopEdited['shop.longtude'] = undefined;
-        $scope.shopEdited['shop.latitude'] = undefined;
+        $scope.shopEdited['shop.LONGTUDE'] = undefined;
+        $scope.shopEdited['shop.LATITUDE'] = undefined;
     };
 
     //用于清除地图的内容
@@ -231,10 +233,10 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
     //为地图注册click事件获取鼠标点击出的经纬度坐标
     var clickEventListener = map.on('click', function (e) {
         document.getElementById("lnglat").value = e.lnglat.getLng() + ',' + e.lnglat.getLat();
-        $scope.shopAdd['shop.longtude'] = e.lnglat.getLng();
-        $scope.shopAdd['shop.latitude'] = e.lnglat.getLat();
-        $scope.shopEdited['shop.longtude'] = e.lnglat.getLng();
-        $scope.shopEdited['shop.latitude'] = e.lnglat.getLat();
+        $scope.shopAdd['shop.LONGTUDE'] = e.lnglat.getLng();
+        $scope.shopAdd['shop.LATITUDE'] = e.lnglat.getLat();
+        $scope.shopEdited['shop.LONGTUDE'] = e.lnglat.getLng();
+        $scope.shopEdited['shop.LATITUDE'] = e.lnglat.getLat();
     });
     var auto = new AMap.Autocomplete({
         input: "tipinput"
