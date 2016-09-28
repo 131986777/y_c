@@ -20,6 +20,7 @@ AndSellMainModule.controller('MemberSourceController', function ($scope, $stateP
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert('新增成功');
+                $scope.add='';
                 $("#addMember").modal('hide');
                 $scope.initLoad();
 

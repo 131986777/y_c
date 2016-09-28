@@ -109,7 +109,7 @@
 </div>
 <!--END 新增客户来源-->
 
-<!--BEGIN 修改客户来源-->
+<!--BEGIN 修改客户类型->
 <div class="modal fade text-left" id="modifyMemberType" tabindex="-1" aria-hidden="true"
      style="display: none;">
     <div class="modal-dialog">

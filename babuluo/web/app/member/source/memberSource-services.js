@@ -17,7 +17,7 @@ AndSellMainModule.service('memberSourceFactory', function ($resource, baseURL) {
       };
 
       this.delMemberSource = function (id) {         //id应为字符串类型
-          var  code="'"+id+"'";
+
           return $resource(baseURL + '/member/source/delById?member_code_source.CODE=:code', {'code': code}, {
           'update': {
             method: 'PUT'
