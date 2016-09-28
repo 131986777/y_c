@@ -1,24 +1,31 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: cxy
-  Date: 2016/9/26
-  Time: 14:36
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-
-
-<body>
 <%--<h1>Hello Word！</h1>--%>
 <div class="table-operbar row">
-    <div class="table-toolbar">
+    <div class="tablebar">
 
-        <div class="col-md-12 text-right" >
-            <a   show-modal id="#addMemberGroup" class="btn sbold green" >
+        <div class="col-sm-2">
+            <div class="col-sm-3" style="padding: 8px">
+                <label>筛选:</label>
+            </div>
+            <div class="col-sm-5" style="padding: 0px">
+
+                <select ng-model="groupFilter['member_code_type.ID']"
+                        ng-init="groupFilter['member_code_type.ID']='-1'"
+                        class="nya-bs-select form-control " data-width="80px"
+                        ng-change="filterGroup(groupFilter['member_code_type.ID'])">
+                    <option class="nya-bs-option" value="-1">
+                        所属类型
+                    </option>
+                    <option class="nya-bs-option"
+                            ng-repeat="value in MemberTypeList"
+                            ng-bind="value['member_code_type.NAME']"
+                            value="{{value['member_code_type.ID']}}">
+                    </option>
+                </select>
+            </div>
+
+        </div>
+        <div class="col-sm-10 text-right">
+            <a show-modal id="#addMemberGroup" class="btn sbold green">
                 <i class="fa fa-plus"></i> 新增客户分组 </a>
         </div>
     </div>
@@ -38,13 +45,14 @@
                 <tbody ng-cloak>
                 <tr ng-repeat="item in MemberGroupList">
 
-                    <td ng-bind="typeMap.get(item['member_code_group.TYPE_ID'])" ></td>
+                    <td ng-bind="typeMap.get(item['member_code_group.TYPE_ID'])"></td>
                     <td ng-bind="item['member_code_group.NAME']"></td>
                     <td ng-bind="item['member_code_group.INTRO']"></td>
                     <td class="text-center">
                         <a type="button" show-modal id="#modifyMemberGroup"
                            ng-click="modifyMemberGroupClick(item)">修改</a>
-                        <button type="button" ng-click="deleteMemberGroup(item['member_code_group.ID'])" class="btn btn-link btn-xs">
+                        <button type="button" ng-click="deleteMemberGroup(item['member_code_group.ID'])"
+                                class="btn btn-link btn-xs">
                             删除
                         </button>
                     </td>
@@ -77,14 +85,14 @@
 
                         <div class="col-md-8">
 
-                               <select ng-model="add['member_code_group.TYPE_ID']"
-                                       ng-init="add['member_code_group.TYPE_ID']='-1'"
-                                       class="nya-bs-select form-control">
-                                   <option class="nya-bs-option" ng-repeat="item in MemberTypeList "
-                                           ng-bind="item['member_code_type.NAME']"
-                                           value="{{item['member_code_type.ID']}}">
-                                   </option>
-                               </select>
+                            <select ng-model="add['member_code_group.TYPE_ID']"
+                                    ng-init="add['member_code_group.TYPE_ID']='-1'"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" ng-repeat="item in MemberTypeList "
+                                        ng-bind="item['member_code_type.NAME']"
+                                        value="{{item['member_code_type.ID']}}">
+                                </option>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -100,7 +108,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                           分组介绍
+                            分组介绍
                         </label>
 
                         <div class="col-md-8">
@@ -142,44 +150,44 @@
 
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                             所属类型
+                            所属类型
                         </label>
 
                         <div class="col-md-8">
                             <%--<input type="text" class="form-control"
                                    ng-model="modify['member_code_group.TYPE_ID']"></div>--%>
-                                <select ng-model="modify['member_code_group.TYPE_ID']"
-                                         ng-init="modify['member_code_group.TYPE_ID']"
-                                        class="nya-bs-select form-control"
-                                        ng-change="addDistrictModal(shopEdited['shop.DISTRICT_ID'])">
-                                    <option class="nya-bs-option"
-                                            ng-repeat="item in MemberTypeList"
-                                            ng-bind="item['member_code_type.NAME']"
-                                            value="{{item['member_code_type.NAME']}}">
-                                    </option>
+                            <select ng-model="modify['member_code_group.TYPE_ID']"
+                                    ng-init="typeMap.get(modify['member_code_group.TYPE_ID'])"
+                                    class="nya-bs-select form-control"
+                                    ng-change="addDistrictModal(shopEdited['shop.DISTRICT_ID'])">
+                                <option class="nya-bs-option"
+                                        ng-repeat="item in MemberTypeList"
+                                        ng-bind="item['member_code_type.NAME']"
+                                        value="{{item['member_code_type.NAME']}}">
+                                </option>
 
-                                </select>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 control-label">
-                            <span class="required"> * </span> 分组名称
-                        </label>
+                            </select>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 分组名称
+                            </label>
 
-                        <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="modify['member_code_group.NAME']"
-                                   placeholder=""></div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 control-label">
-                            分组介绍
-                        </label>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control"
+                                       ng-model="modify['member_code_group.NAME']"
+                                       placeholder=""></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                分组介绍
+                            </label>
 
-                        <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="modify['member_code_group.INTRO']"
-                                   placeholder=""></div>
-                    </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control"
+                                       ng-model="modify['member_code_group.INTRO']"
+                                       placeholder=""></div>
+                        </div>
                     </div>
 
                 </form>
@@ -197,5 +205,4 @@
 </div>
 <!--END 修改客户来源-->
 
-</body>
-</html>
+

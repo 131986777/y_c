@@ -23,20 +23,20 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
        },null);
     };
 
- /*   $scope.loadType = function () {
-        var form = {};
-        //目前serviceId都设为1
-        form['district.service_id'] = 1;
+    //根据类型ID筛选分组
+    $scope.filterGroup = function (id) {
+        console.log("id为"+id);
+        if ($scope.groupFilter['member_code_type.ID'] == "-1") {
+           // $scope.loadShopList();
+            return;
+        }else {
+            memberGroupFactory.getMemberGroupListByType().get({}, function (repsonse) {
+                console.log(repsonse.data);
+                $scope.MemberGroupList = repsonse.data;
+            }, null);
+        }
 
-        districtFactory.getDistrictList(form).get({}, function (response) {
-            console.log(response);
-            $scope.districtList = response.data;
-            $scope.districtList.forEach(function (ele) {
-                $scope.districtMap.set(ele['district.DISTRICT_ID'], ele['district.DISTRICT_NAME']);
-            });
-            $scope.deferLoad.resolve(response);
-        }, null);
-    };*/
+    };
     $scope.initLoad();
 
     $scope.addMemberGroup=function () {

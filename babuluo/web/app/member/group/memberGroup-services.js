@@ -8,6 +8,14 @@ AndSellMainModule.service('memberGroupFactory', function ($resource, baseURL) {
         });
       };
 
+    this.getMemberGroupListByType = function () {
+        return $resource(baseURL +'/member/group/queryAll', null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
       this.getMemberTypeList=function () {
           return $resource(baseURL +'/member/type/queryAll', null, {
               'update': {
