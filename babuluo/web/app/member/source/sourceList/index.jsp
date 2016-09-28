@@ -1,19 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: cxy
-  Date: 2016/9/26
-  Time: 14:36
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
 
-
-<body>
-<%--<h1>Hello Word！</h1>--%>
 <div class="table-operbar row">
     <div class="table-toolbar">
 
@@ -136,13 +121,13 @@
 
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                            <span class="required"> * </span> 客户来源编码
+                             客户来源编码
                         </label>
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
                                    ng-model="modify['member_code_source.CODE']"
-                                   placeholder=""></div>
+                                   disabled></div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
@@ -180,5 +165,3 @@
 </div>
 <!--END 修改客户来源-->
 
-</body>
-</html>
