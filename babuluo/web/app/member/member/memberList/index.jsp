@@ -97,7 +97,7 @@
                 <td ng-bind="ml['member.REG_DATETIME'] | FormatAllDate"></td>
                 <td ng-bind="ml['member.USE_STATE'] | FormatState"></td>
                 <td>
-                    <a class="table-link" ui-sref="memberDetails({id:ml['member.USER_ID']})">
+                    <a class="table-link" ui-sref="memberInfo({id:ml['member.USER_ID']})">
                         客户详情
                     </a>
                     <a class="table-link" ng-click="delMemberListById(ml)">
