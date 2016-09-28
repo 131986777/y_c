@@ -16,6 +16,7 @@ AndSellMainModule.controller('MemberDetailsController', function ($scope, member
 
         $scope.loadSource();
 
+
         $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
 
         $scope.promiseAll.then(function () {
