@@ -8,6 +8,14 @@ AndSellMainModule.service('memberFactory', function ($resource, baseURL) {
         });
     };
 
+    this.getMemberListById = function (form) {
+        return $resource(baseURL + '/member/member/getById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
 
     this.modMemberListById = function (form) {
         return $resource(baseURL + '/member/member/modifyById', form, {

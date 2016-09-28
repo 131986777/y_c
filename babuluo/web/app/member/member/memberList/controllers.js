@@ -100,11 +100,5 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
         $scope.memberAdd['member.MOBILE'] = undefined;
         $scope.memberAdd['member.CODE_ID'] = undefined;
     };
-
-    //用于清除地图的内容
-    $scope.clearMap = function () {
-        document.getElementById("tipinput").value = null;
-        document.getElementById("lnglat").value = null;
-    };
 });
 
