@@ -14,6 +14,7 @@ AndSellMainModule.controller('MemberSourceController', function ($scope, $stateP
     $scope.addMemberClass = function () {
         console.log($scope.add);
         $scope.add['MEMBER_CODE_SOURCE.SERVICE_ID'] = 1;
+        $scope.add['MEMBER_CODE_SOURCE.IS_SYS'] = -1;
         memberSourceFactory.addMemberSource($scope.add).get({}, function (response) {
 
             if (response.code == 400) {
@@ -31,10 +32,12 @@ AndSellMainModule.controller('MemberSourceController', function ($scope, $stateP
 
     $scope.modifyMemberSourceClick = function (item) {
         $scope.modify=clone(item);
+
     };
 
     $scope.modifyMemberSource = function () {
         $scope.modify['MEMBER_CODE_SOURCE.SERVICE_ID'] = 1;
+        $scope.add['MEMBER_CODE_SOURCE.IS_SYS'] = -1;
         memberSourceFactory.modifyById().get($scope.modify, function (response) {
             if (response.code == 400) {
                 modalFactory.showShortAlert(response.msg);

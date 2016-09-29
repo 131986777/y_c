@@ -9,17 +9,17 @@
             </div>
             <div class="col-sm-5" style="padding: 0px">
 
-                <select ng-model="groupFilter['member_code_type.ID']"
-                        ng-init="groupFilter['member_code_type.ID']='-1'"
+                <select ng-model="groupFilter['MEMBER_CODE_TYPE.ID']"
+                        ng-init="groupFilter['MEMBER_CODE_TYPE.ID']='-1'"
                         class="nya-bs-select form-control " data-width="80px"
-                        ng-change="filterGroup(groupFilter['member_code_type.ID'])">
+                        ng-change="filterGroup(groupFilter['MEMBER_CODE_TYPE.ID'])">
                     <option class="nya-bs-option" value="-1">
                         所属类型
                     </option>
                     <option class="nya-bs-option"
                             ng-repeat="value in MemberTypeList"
-                            ng-bind="value['member_code_type.NAME']"
-                            value="{{value['member_code_type.ID']}}">
+                            ng-bind="value['MEMBER_CODE_TYPE.NAME']"
+                            value="{{value['MEMBER_CODE_TYPE.ID']}}">
                     </option>
                 </select>
             </div>
@@ -46,16 +46,15 @@
                 <tbody ng-cloak>
                 <tr ng-repeat="item in MemberGroupList">
 
-                    <td ng-bind="typeMap.get(item['member_code_group.TYPE_ID'])"></td>
-                    <td ng-bind="item['member_code_group.NAME']"></td>
-                    <td ng-bind="item['member_code_group.INTRO']"></td>
+                    <td ng-bind="typeMap.get(item['MEMBER_CODE_GROUP.TYPE_ID'])"></td>
+                    <td ng-bind="item['MEMBER_CODE_GROUP.NAME']"></td>
+                    <td ng-bind="item['MEMBER_CODE_GROUP.INTRO']"></td>
                     <td class="text-center">
                         <a type="button" show-modal id="#modifyMemberGroup"
                            ng-click="modifyMemberGroupClick(item)">修改</a>
-                        <button type="button" ng-click="deleteMemberGroup(item['member_code_group.ID'])"
-                                class="btn btn-link btn-xs">
+                        <a type="button" ng-click="deleteMemberGroup(item['MEMBER_CODE_GROUP.ID'])">
                             删除
-                        </button>
+                        </a>
                     </td>
                 </tr>
                 </tbody>
@@ -86,12 +85,12 @@
 
                         <div class="col-md-8">
 
-                            <select ng-model="add['member_code_group.TYPE_ID']"
-                                    ng-init="add['member_code_group.TYPE_ID']='-1'"
+                            <select ng-model="add['MEMBER_CODE_GROUP.TYPE_ID']"
+                                    ng-init="add['MEMBER_CODE_GROUP.TYPE_ID']='-1'"
                                     class="nya-bs-select form-control">
                                 <option class="nya-bs-option" ng-repeat="item in MemberTypeList "
-                                        ng-bind="item['member_code_type.NAME']"
-                                        value="{{item['member_code_type.ID']}}">
+                                        ng-bind="item['MEMBER_CODE_TYPE.NAME']"
+                                        value="{{item['MEMBER_CODE_TYPE.ID']}}">
                                 </option>
                             </select>
                         </div>
@@ -114,8 +113,8 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="add['member_code_group.INTRO']"
-                                   ng-init="add['member_code_group.INTRO']=''"
+                                   ng-model="add['MEMBER_CODE_GROUP.INTRO']"
+                                   ng-init="add['MEMBER_CODE_GROUP.INTRO']=''"
                                    placeholder=""></div>
                     </div>
 
@@ -152,12 +151,12 @@
                         </label>
 
                         <div class="col-md-8">
-                            <select ng-model="modify['member_code_group.TYPE_ID']"
+                            <select ng-model="modify['MEMBER_CODE_GROUP.TYPE_ID']"
                                     class="nya-bs-select form-control">
                                 <option class="nya-bs-option"
                                         ng-repeat="item in MemberTypeList"
-                                        ng-bind="item['member_code_type.NAME']"
-                                        value="{{item['member_code_type.ID']}}">
+                                        ng-bind="item['MEMBER_CODE_TYPE.NAME']"
+                                        value="{{item['MEMBER_CODE_TYPE.ID']}}">
                                 </option>
 
                             </select>
@@ -171,7 +170,7 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                            ng-model="modify['member_code_group.NAME']"
+                            ng-model="modify['MEMBER_CODE_GROUP.NAME']"
                             placeholder=""></div>
                     </div>
                     <div class="form-group row">
@@ -181,7 +180,7 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="modify['member_code_group.INTRO']"
+                                   ng-model="modify['MEMBER_CODE_GROUP.INTRO']"
                                    placeholder=""></div>
                     </div>
 
