@@ -23,15 +23,17 @@
                 <tbody ng-cloak>
                 <tr ng-repeat="item in MemberSourceList">
 
-                    <td ng-bind="item['member_code_source.CODE']" ></td>
-                    <td ng-bind="item['member_code_source.NAME']"></td>
-                    <td ng-bind="item['member_code_source.INTRO']"></td>
-                    <td class="text-center">
+                    <td ng-bind="item['MEMBER_CODE_SOURCE.CODE']" ></td>
+                    <td ng-bind="item['MEMBER_CODE_SOURCE.NAME']"></td>
+                    <td ng-bind="item['MEMBER_CODE_SOURCE.INTRO']"></td>
+                    <td class="text-center" >
+                            <div ng-show="item['MEMBER_CODE_SOURCE.IS_SYS']==-1">
                         <a type="button" show-modal id="#modifyMember"
                            ng-click="modifyMemberSourceClick(item)">修改</a>
-                        <button type="button" ng-click="deleteMember(item['member_code_source.CODE'])" class="btn btn-link btn-xs">
+                        <a type="button" ng-click="deleteMember(item['MEMBER_CODE_SOURCE.CODE'])" >
                             删除
-                        </button>
+                        </a>
+                            </div>
                     </td>
                 </tr>
                 </tbody>
@@ -62,8 +64,8 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="add['member_code_source.CODE']"
-                                   ng-init="add['member_code_source.CODE']=''"
+                                   ng-model="add['MEMBER_CODE_SOURCE.CODE']"
+                                   ng-init="add['MEMBER_CODE_SOURCE.CODE']=''"
                                    placeholder=""></div>
                     </div>
                     <div class="form-group row">
@@ -73,8 +75,8 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="add['member_code_source.NAME']"
-                                   ng-init="add['member_code_source.NAME']=''"
+                                   ng-model="add['MEMBER_CODE_SOURCE.NAME']"
+                                   ng-init="add['MEMBER_CODE_SOURCE.NAME']=''"
                                    placeholder=""></div>
                     </div>
                     <div class="form-group row">
@@ -84,8 +86,8 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="add['member_code_source.INTRO']"
-                                   ng-init="add['member_code_source.INTRO']=''"
+                                   ng-model="add['MEMBER_CODE_SOURCE.INTRO']"
+                                   ng-init="add['MEMBER_CODE_SOURCE.INTRO']=''"
                                    placeholder=""></div>
                     </div>
 
@@ -126,7 +128,7 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="modify['member_code_source.CODE']"
+                                   ng-model="modify['MEMBER_CODE_SOURCE.CODE']"
                                    disabled></div>
                     </div>
                     <div class="form-group row">
@@ -136,7 +138,7 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="modify['member_code_source.NAME']"
+                                   ng-model="modify['MEMBER_CODE_SOURCE.NAME']"
                                    placeholder=""></div>
                     </div>
                     <div class="form-group row">
@@ -146,7 +148,7 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="modify['member_code_source.INTRO']"
+                                   ng-model="modify['MEMBER_CODE_SOURCE.INTRO']"
                                    placeholder=""></div>
                     </div>
 
