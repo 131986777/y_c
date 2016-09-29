@@ -1,6 +1,6 @@
-AndSellMainModule.controller('pointListController', function ($scope, $stateParams, unitFactory, modalFactory) {
+AndSellMainModule.controller('balanceListController', function ($scope, $stateParams, unitFactory, modalFactory) {
 
-  modalFactory.setTitle('积分管理');
+  modalFactory.setTitle('资金明细');
 
   $scope.initLoad = function () {
     unitFactory.getPrdUnitList().get({}, function (repsonce) {
