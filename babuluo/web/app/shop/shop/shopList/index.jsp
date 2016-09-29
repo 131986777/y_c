@@ -112,6 +112,9 @@
                                             ng-init="shopAdd['shop.DISTRICT_ID']='-1'"
                                             class="nya-bs-select form-control"
                                             ng-change="addDistrictModal(shopAdd['shop.DISTRICT_ID'])">
+                                        <option class="nya-bs-option" value="-1">
+                                            选择门店区域
+                                        </option>
                                         <option class="nya-bs-option" ng-repeat="value in districtList"
                                                 ng-bind="value['district.DISTRICT_NAME']"
                                                 value="{{value['district.DISTRICT_ID']}}">
