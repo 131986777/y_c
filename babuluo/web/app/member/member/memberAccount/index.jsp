@@ -60,8 +60,8 @@
                         </option>
                         <option class="nya-bs-option"
                                 ng-repeat="value in groupList"
-                                ng-bind="value['member_code_group.NAME']"
-                                value="{{value['member_code_group.ID']}}">
+                                ng-bind="value['MEMBER_CODE_GROUP.NAME']"
+                                value="{{value['MEMBER_CODE_GROUP.ID']}}">
                         </option>
                     </select>
                 </td>
