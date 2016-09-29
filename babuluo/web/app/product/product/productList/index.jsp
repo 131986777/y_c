@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="page-content">
 
@@ -232,7 +231,7 @@
                         <th style="width: 20px">&nbsp;</th>
                         <th class="text-left"> 商品名称</th>
                         <th style="width: 120px" class="text-left"> 编码</th>
-                        <th style="width: 40px" class="text-center"> 单位</th>
+                        <th style="width: 60px" class="text-left"> 单位</th>
                         <th style="width: 100px" class="text-left"> 市场价</th>
                         <th style="width: 100px" class="text-left"> 成本价</th>
                         <th style="width: 60px" class="text-center"> 状态</th>
@@ -240,102 +239,118 @@
                     </tr>
                     </thead>
                     <tbody ng-cloak>
-                    <tr ng-class="{false:'table-tr-small'}[product.isParent]"
-                        ng-if="product.isParent || product.parent.showChildSku"
-                        ng-repeat="product in productResultList">
 
-                        <td>
-                            <div ng-if="product.isParent" class="md-checkbox"
-                                 style="margin-left: 10px">
-                                <input type="checkbox"
-                                       id="checkbox_parent_{{product.prdSpu}}"
-                                       ng-model="product.checkedParent"
-                                       ng-change="checkProduct(product)"
-                                       name="checkProduct"
-                                       class="md-check">
-                                <label for="checkbox_parent_{{product.prdSpu}}">
-                                    <span class="inc"></span>
-                                    <span class="check"></span>
-                                    <span class="box"></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <i ng-if="product.isParent && product.hasSku"
-                               ng-click="showChildSku(product)"
-                               ng-class="{true:'glyphicon glyphicon-minus-sign green  btn-lg', false:'glyphicon glyphicon-plus-sign green btn-lg'}[product.showChildSku]"></i>
-                        </td>
+                        <tr  ng-repeat-start='product in productList'>
+                            <td>
+                                <div class="md-checkbox"
+                                     style="margin-left: 10px">
+                                    <input type="checkbox"
+                                           id="checkbox_parent_{{product['SHOP_PRODUCT.PRD_ID']}}"
+                                           ng-model="product.checkedParent"
+                                           ng-change="checkProduct(product)"
+                                           name="checkProduct"
+                                           class="md-check">
+                                    <label for="checkbox_parent_{{product['SHOP_PRODUCT.PRD_ID']}}">
+                                        <span class="inc"></span>
+                                        <span class="check"></span>
+                                        <span class="box"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <i ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
+                                   ng-click="product['SHOP_PRODUCT.SHOUSKULIST']=!product['SHOP_PRODUCT.SHOUSKULIST']"
+                                   ng-class="{true:'glyphicon glyphicon-minus-sign green  btn-lg', false:'glyphicon glyphicon-plus-sign green btn-lg'}[product['SHOP_PRODUCT.SHOUSKULIST']]"></i>
+                            </td>
 
-                        <td ng-if="product.isParent" class="text-left">
-                            <a href="productDetail.jsp?prdId={{product.prdId}}">
-                                <img class="img-thumbnail"
-                                     ng-src=""
-                                     style="height: 60px;width: 60px;float: left">
-                            </a>
+                            <td class="text-left">
+                                <a href="productDetail.jsp">
+                                    <img class="img-thumbnail"
+                                         ng-src=""
+                                         style="height: 60px;width: 60px;float: left">
+                                </a>
 
-                            <div style="padding-left: 70px">
+                                <div style="padding-left: 70px">
 
-        <span ng-if="product.hasTag">
-        <span class="label label-info" style="padding: 1px"
-              ng-bind="product.tag1"> </span>
-        <span class="label label-info" style="padding: 1px"
-              ng-bind="product.tag2"> </span>
-        <span class="label label-info" style="padding: 1px"
-              ng-bind="product.tag3"> </span>
-        <span class="label label-info" style="padding: 1px"
-              ng-bind="product.tag4"> </span>
-        <span class="label label-info" style="padding: 1px"
-              ng-bind="product.tag5"> </span>
-        <br></span>
-                                <a class="black_a" href="productDetail.jsp?prdId={{product.prdId}}"
-                                   ng-bind="product.PRD_NAME"
-                                   class="font-dark"></a>
-                            </div>
-                        </td>
+                                    <span class="label label-info" style="margin-left: 5px"
+                                          ng-repeat="tag in product['SHOP_PRODUCT.TAG']"
+                                          ng-bind="tag"> </span>
 
-                        <td ng-if="!product.isParent && product.hasSku"
-                            style="text-align: left">
-                            <div>
-                                <span ng-bind="product.skuShowName"></span>
-                            </div>
-                        </td>
-
-                        <td ng-if="product.isParent" ng-bind="product.PRD_SPU"></td>
-                        <td ng-if="!product.isParent" ng-bind="product.prdSku"></td>
-
-                        <td ng-bind="product.unitName" class="text-center"></td>
-                        <td ng-if="product.isParent"
-                            ng-bind="product.maxPrice | currency :'￥'"
-                            class="text-left"></td>
-                        <td ng-if="!product.isParent"
-                            ng-bind="product.price | currency :'￥'"
-                            class="text-left"></td>
-                        <td ng-bind="product.cost  | currency :'￥'" class="text-left"></td>
-
-                        <td>
-
-                            <a ng-click="changeProductSaleState(product)"><span
-                                    class="label"
-                                    ng-class="{true:'label-success', false:'label-danger'}[getPrdIsSale(product)]"
-                                    ng-bind="getProductSaleState(product)"></span></a>
+                                    <br>
+                                    <a class="black_a"
+                                       href="productDetail.jsp?prdId={{product.prdId}}"
+                                       ng-bind="product['SHOP_PRODUCT.PRD_NAME']"
+                                       class="font-dark"></a>
+                                </div>
+                            </td>
 
 
-                        </td>
-                        <td>
-                            <a ng-if="product.isParent"
-                               href="productModify.jsp?prdId={{product.prdId}}"
-                               target="_blank">修改</a>
-                            <a ng-if="!product.isParent" ng-click="showModifySku(product)">修改</a>
+                            <td ng-bind="product['SHOP_PRODUCT.PRD_SPU']"></td>
 
-                            <a ng-if="product.isParent"
-                               href="productModifyPrice.jsp?prdId={{product.prdId}}"
-                               target="_blank"> 改价</a>
-                            <a ng-if="!product.isParent"
-                               ng-click="showModifySkuPrice(product)">改价</a>
+                            <td ng-bind="product['SHOP_PRODUCT.UNIT_NAME']"></td>
 
-                            <a ng-click="delProduct(product)">删除</a>
-                        </td>
-                    </tr>
+                            <td> </td>
+                            <td> </td>
+
+                            <td>
+                                <a ng-click="product['SHOP_PRODUCT.IS_SALE']=product['SHOP_PRODUCT.IS_SALE']*-1;changeProductSaleState(product)"><span
+                                        class="label"
+                                        ng-class="{true:'label-success', false:'label-danger'}[product['SHOP_PRODUCT.IS_SALE']==1]"
+                                        ng-bind="product['SHOP_PRODUCT.IS_SALE']==1?'正在销售':'下架停售'"></span></a>
+
+                            </td>
+                            <td>
+                                <a ng-if="product.isParent"
+                                   href="productModify.jsp?prdId={{product.prdId}}"
+                                   target="_blank">修改</a>
+                               <a ng-click="delProduct(product)">删除</a>
+                            </td>
+                        </tr>
+
+                        <tr ng-class="table-tr-small" ng-if="product['SHOP_PRODUCT.SHOUSKULIST']"
+                            ng-repeat-end="" ng-repeat=" sku in product['SHOP_PRODUCT.SKULIST'] ">
+
+                            <td> </td>
+                            <td> </td>
+
+                            <td class="text-left">
+
+                                <div style="padding-left: 70px" ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
+
+
+                                </div>
+                            </td>
+
+
+                            <td ng-bind="sku['SHOP_PRODUCT_SKU.PRD_SKU']"></td>
+
+                            <td> </td>
+
+                            <td ng-bind="sku['SHOP_PRODUCT_SKU.PRICE'] | currency :'￥'"
+                                class="text-left"></td>
+                            <td ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"
+                                class="text-left"></td>
+
+                            <td>
+                                <a ng-click="sku['SHOP_PRODUCT_SKU.IS_SALE']=sku['SHOP_PRODUCT_SKU.IS_SALE']*-1;changeSkuSaleState(sku)">
+                                    <span
+                                        class="label"
+                                        ng-class="{true:'label-success', false:'label-danger'}[sku['SHOP_PRODUCT_SKU.IS_SALE']==1]"
+                                        ng-bind="sku['SHOP_PRODUCT_SKU.IS_SALE']==1?'正在销售':'下架停售'"></span>
+                                </a>
+
+                            </td>
+                            <td>
+                                <a ng-if="product.isParent"
+                                   href="productModify.jsp?prdId={{product.prdId}}"
+                                   target="_blank">修改</a>
+
+                                <a ng-if="!product.isParent"
+                                   ng-click="showModifySkuPrice(product)">改价</a>
+
+                                <a ng-click="delSku(sku)">删除</a>
+                            </td>
+                        </tr>
 
                     </tbody>
                 </table>

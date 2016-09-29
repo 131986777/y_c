@@ -25,13 +25,13 @@
                     <tr ng-repeat=" value in productTagList">
                         <td class="col-md-10" style="text-align: left">
                             <i class="fa fa-folder-o"></i>
-                            {{value['shop_tag.TAG']}}
+                            {{value['SHOP_TAG.TAG']}}
                         </td>
 
                         <td class="col-md-2">
                             <a show-modal id="#modifyTag"
                                ng-click="modifyTagNameClick(value)">修改</a>
-                            <a ng-click="delProductTag(value['shop_tag.TAG_ID'])">删除</a>
+                            <a ng-click="delProductTag(value['SHOP_TAG.TAG_ID'])">删除</a>
                         </td>
 
                     </tr>
@@ -65,8 +65,8 @@
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control"
-                                       ng-model="add['shop_tag.TAG']"
-                                       ng-init="add['shop_tag.TAG']=''"
+                                       ng-model="add['SHOP_TAG.TAG']"
+                                       ng-init="add['SHOP_TAG.TAG']=''"
                                        placeholder=""></div>
                         </div>
 
@@ -102,7 +102,7 @@
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control"
-                                       ng-model="modify['shop_tag.TAG']"
+                                       ng-model="modify['SHOP_TAG.TAG']"
                                        placeholder=""></div>
                         </div>
                     </form>

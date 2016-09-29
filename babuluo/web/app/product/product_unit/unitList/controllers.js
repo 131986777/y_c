@@ -12,7 +12,7 @@ AndSellMainModule.controller('unitListController', function ($scope, $stateParam
 
   $scope.addProductUnit = function () {
     console.log($scope.add);
-    $scope.add['shop_unit.SERVICE_ID'] = 1;
+    $scope.add['SHOP_UNIT.SERVICE_ID'] = 1;
     unitFactory.addPrdUnit($scope.add).get({}, function (response) {
       $("#addUnit").modal('hide');
       console.log(response);
@@ -21,7 +21,7 @@ AndSellMainModule.controller('unitListController', function ($scope, $stateParam
       } else if (response.extraData.state == 'true') {
         modalFactory.showShortAlert('新增成功');
         $scope.initLoad();
-        $scope.add['shop_unit.UNIT_NAME'] = "";
+        $scope.add['SHOP_UNIT.UNIT_NAME'] = "";
       }
 
     });
@@ -32,7 +32,7 @@ AndSellMainModule.controller('unitListController', function ($scope, $stateParam
   };
 
   $scope.modifyProductUnit = function () {
-    $scope.modify['shop_unit.SERVICE_ID'] = 1;
+    $scope.modify['SHOP_UNIT.SERVICE_ID'] = 1;
     unitFactory.modifyPrdUnit().get($scope.modify, function (response) {
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);

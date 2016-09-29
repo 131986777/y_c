@@ -142,13 +142,13 @@
                     <tr ng-repeat=" value in productClassList">
                         <td class="col-md-10" style="text-align: left">
                             <i class="fa fa-folder-o"></i>
-                            {{value['shop_product_class.CLASS_NAME']}}
+                            {{value['SHOP_PRODUCT_CLASS.CLASS_NAME']}}
                         </td>
 
                         <td class="col-md-2">
                             <a show-modal id="#modifyClass"
                                ng-click="modifyClssNameClick(value)">修改</a>
-                            <a ng-click="delProductClass(value['shop_product_class.CLASS_ID'])">删除</a>
+                            <a ng-click="delProductClass(value['SHOP_PRODUCT_CLASS.CLASS_ID'])">删除</a>
                         </td>
 
                     </tr>
@@ -179,14 +179,14 @@
                             </label>
 
                             <div class="col-md-8">
-                                <select ng-model="add['shop_product_class.PARENT_CLASS_ID']"
-                                        ng-init="add['shop_product_class.PARENT_CLASS_ID']='BASIC'"
+                                <select ng-model="add['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID']"
+                                        ng-init="add['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID']='BASIC'"
                                         class="nya-bs-select form-control">
                                     <option class="nya-bs-option" value="BASIC">根分类</option>
                                     <option class="nya-bs-option"
                                             ng-repeat="value in productClassList"
-                                            ng-bind="value['shop_product_class.CLASS_NAME']"
-                                            value="{{value['shop_product_class.CLASS_ID']}}">
+                                            ng-bind="value['SHOP_PRODUCT_CLASS.CLASS_NAME']"
+                                            value="{{value['SHOP_PRODUCT_CLASS.CLASS_ID']}}">
                                     </option>
                                 </select>
 
@@ -287,8 +287,8 @@
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control"
-                                       ng-model="add['shop_product_class.CLASS_NAME']"
-                                       ng-init="add['shop_product_class.CLASS_NAME']=''"
+                                       ng-model="add['SHOP_PRODUCT_CLASS.CLASS_NAME']"
+                                       ng-init="add['SHOP_PRODUCT_CLASS.CLASS_NAME']=''"
                                        placeholder=""></div>
                         </div>
 
@@ -326,7 +326,7 @@
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control"
-                                       ng-model="modify['shop_product_class.CLASS_NAME']"
+                                       ng-model="modify['SHOP_PRODUCT_CLASS.CLASS_NAME']"
                                        placeholder=""></div>
                         </div>
                     </form>

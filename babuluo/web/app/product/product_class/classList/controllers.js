@@ -12,7 +12,7 @@ AndSellMainModule.controller('classListController', function ($scope, $statePara
 
   $scope.addProductClass = function () {
     console.log($scope.add);
-    $scope.add['shop_product_class.SERVICE_ID'] = 1;
+    $scope.add['SHOP_PRODUCT_CLASS.SERVICE_ID'] = 1;
     classFactory.addPrdClass($scope.add).get({}, function (response) {
       $("#addClass").modal('hide');
       if (response.code == 400) {
@@ -21,8 +21,8 @@ AndSellMainModule.controller('classListController', function ($scope, $statePara
         modalFactory.showShortAlert('新增成功');
         $scope.initLoad();
         $scope.add.key = 0;
-        $scope.add['shop_product_class.PARENT_CLASS_ID'] = 'BASIC';
-        $scope.add['shop_product_class.CLASS_NAME'] = "";
+        $scope.add['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID'] = 'BASIC';
+        $scope.add['SHOP_PRODUCT_CLASS.CLASS_NAME'] = "";
       }
 
     });
@@ -33,7 +33,7 @@ AndSellMainModule.controller('classListController', function ($scope, $statePara
   };
 
   $scope.modifyProductClass = function () {
-    $scope.modify['shop_product_class.SERVICE_ID'] = 1;
+    $scope.modify['SHOP_PRODUCT_CLASS.SERVICE_ID'] = 1;
     classFactory.modifyPrdClass().get($scope.modify, function (response) {
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);

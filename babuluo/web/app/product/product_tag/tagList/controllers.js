@@ -12,7 +12,7 @@ AndSellMainModule.controller('tagListController', function ($scope, $stateParams
 
   $scope.addProductTag = function () {
     console.log($scope.add);
-    $scope.add['shop_tag.SERVICE_ID'] = 1;
+    $scope.add['SHOP_TAG.SERVICE_ID'] = 1;
     tagFactory.addPrdTag($scope.add).get({}, function (response) {
       $("#addTag").modal('hide');
       if ( response.code == 400) {
@@ -20,7 +20,7 @@ AndSellMainModule.controller('tagListController', function ($scope, $stateParams
       } else if (response.extraData.state == 'true') {
         modalFactory.showShortAlert('新增成功');
         $scope.initLoad();
-        $scope.add['shop_tag.TAG'] = "";
+        $scope.add['SHOP_TAG.TAG'] = "";
       }
 
     });
@@ -33,7 +33,7 @@ AndSellMainModule.controller('tagListController', function ($scope, $stateParams
   };
 
   $scope.modifyProductTag = function () {
-    $scope.modify['shop_tag.SERVICE_ID'] = 1;
+    $scope.modify['SHOP_TAG.SERVICE_ID'] = 1;
     tagFactory.modifyPrdTag().get($scope.modify, function (response) {
       if ( response.code == 400) {
         modalFactory.showShortAlert(response.msg);

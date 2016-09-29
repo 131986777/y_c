@@ -55,7 +55,7 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
         classFactory.getPrdClassList().get({}, function (response) {
             $scope.prdClssList = response.data;
             if ($scope.prdClssList.length > 1) {
-                $scope.add['shop_product_class.CLASS_ID'] = $scope.prdClssList[0]['shop_product_class.CLASS_ID'];
+                $scope.add['SHOP_PRODUCT_CLASS.CLASS_ID'] = $scope.prdClssList[0]['SHOP_PRODUCT_CLASS.CLASS_ID'];
             }
             initDefer_class.resolve();
         });
@@ -70,7 +70,7 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
         unitFactory.getPrdUnitList().get({}, function (response) {
             $scope.prdUnitList = response.data;
             if ($scope.prdUnitList.length > 1) {
-                $scope.add['shop_unit.UNIT_ID'] = $scope.prdUnitList[0]['shop_unit.UNIT_ID'];
+                $scope.add['SHOP_UNIT.UNIT_ID'] = $scope.prdUnitList[0]['SHOP_UNIT.UNIT_ID'];
             }
             initDefer_unit.resolve();
         });
@@ -79,7 +79,7 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
         productFactory.getSpuCode().get({}, function (response) {
             $scope.spuCode = response.extraData.spuCode;
             $scope.product.tags.push(new Tag());
-            $scope.product.tags[0]['shop_product_sku.PRD_SKU'] = $scope.spuCode + '010101';
+            $scope.product.tags[0]['SHOP_PRODUCT_SKU.PRD_SKU'] = $scope.spuCode + '010101';
             initDefer_spuCode.resolve();
         });
 
@@ -87,15 +87,22 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
     $scope.initLoad();
 
     $scope.addProductSubmit = function () {
-        $scope.add['shop_product.KEYWORD'] = getTabInputText($scope.keyword);
+        $scope.add['SHOP_PRODUCT.KEYWORD'] = getTabInputText($scope.keyword);
+        $scope.add['SHOP_PRODUCT.CLASS_ID'] = $scope.add['SHOP_PRODUCT_CLASS.CLASS_ID'];
+        $scope.add['SHOP_PRODUCT.UNIT_ID'] = $scope.add['SHOP_UNIT.UNIT_ID'];
         var form = $scope.add;
-        form['shop_product.SERVICE_ID'] = 1;
-        form['shop_product.PRD_SPU'] = $scope.spuCode;
-        form['shop_product.SHOP_DES'] = ue.getContent();
-        form['shop_product.TAG_ID'] = $scope.selectTagIds.toString();
+        form['SHOP_PRODUCT.SERVICE_ID'] = 1;
+        form['SHOP_PRODUCT.PRD_SPU'] = $scope.spuCode;
+        form['SHOP_PRODUCT.SHOP_DES'] = ue.getContent();
+        form['SHOP_PRODUCT.TAG_ID'] = $scope.selectTagIds.toString();
         form['SkuListData'] = JSON.stringify($scope.product.tags);
-        productFactory.addProduct(form).get({}, function () {
-            modalFactory.showShortAlert("保存成功");
+        productFactory.addProduct(form).get({}, function (response) {
+            if(response.code==0){
+                modalFactory.showShortAlert("保存成功");
+                $state.go("productList");
+            }else{
+                modalFactory.showShortAlert(response.msg);
+            }
         });
     };
 
@@ -209,29 +216,29 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
                     var tagg = Tag();
 
                     if (i1 >= $scope.tags1.length) {
-                        tagg['shop_product_sku.SKU_CONTENT1'] = '';
+                        tagg['SHOP_PRODUCT_SKU.SKU_CONTENT1'] = '';
                     } else {
-                        tagg['shop_product_sku.SKU_NAME1'] = $scope.product.skuName1;
-                        tagg['shop_product_sku.SKU_CONTENT1'] = $scope.tags1[i1].text;
+                        tagg['SHOP_PRODUCT_SKU.SKU_NAME1'] = $scope.product.skuName1;
+                        tagg['SHOP_PRODUCT_SKU.SKU_CONTENT1'] = $scope.tags1[i1].text;
                     }
                     if (i2 >= $scope.tags2.length) {
-                        tagg['shop_product_sku.SKU_CONTENT2'] = '';
+                        tagg['SHOP_PRODUCT_SKU.SKU_CONTENT2'] = '';
                     } else {
-                        tagg['shop_product_sku.SKU_NAME2'] = $scope.product.skuName2;
-                        tagg['shop_product_sku.SKU_CONTENT2'] = $scope.tags2[i2].text;
+                        tagg['SHOP_PRODUCT_SKU.SKU_NAME2'] = $scope.product.skuName2;
+                        tagg['SHOP_PRODUCT_SKU.SKU_CONTENT2'] = $scope.tags2[i2].text;
                     }
                     if (i3 >= $scope.tags3.length) {
-                        tagg['shop_product_sku.SKU_CONTENT3'] = '';
+                        tagg['SHOP_PRODUCT_SKU.SKU_CONTENT3'] = '';
                     } else {
-                        tagg['shop_product_sku.SKU_NAME3'] = $scope.product.skuName3;
-                        tagg['shop_product_sku.SKU_CONTENT3'] = $scope.tags3[i3].text;
+                        tagg['SHOP_PRODUCT_SKU.SKU_NAME3'] = $scope.product.skuName3;
+                        tagg['SHOP_PRODUCT_SKU.SKU_CONTENT3'] = $scope.tags3[i3].text;
                     }
 
                     var a = skuTmpCode + i1 < 10 ? '0' + (skuTmpCode + i1) : (skuTmpCode + i1);
                     var b = skuTmpCode + i2 < 10 ? '0' + (skuTmpCode + i2) : (skuTmpCode + i2);
                     var c = skuTmpCode + i3 < 10 ? '0' + (skuTmpCode + i3) : (skuTmpCode + i3);
 
-                    tagg['shop_product_sku.PRD_SKU'] = $scope.spuCode + a + b + c;
+                    tagg['SHOP_PRODUCT_SKU.PRD_SKU'] = $scope.spuCode + a + b + c;
 
                     var saved = $scope.tempSaveSkuMap.get(tagg.hashCode());
 
@@ -254,24 +261,24 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
      * */
     function Tag() {
         var object = {};
-        object['shop_product_sku.PRD_SKU'] = '';
-        object['shop_product_sku.SKU_NAME1'] = '';
-        object['shop_product_sku.SKU_CONTENT1'] = '';
-        object['shop_product_sku.SKU_NAME2'] = '';
-        object['shop_product_sku.SKU_CONTENT2'] = '';
-        object['shop_product_sku.SKU_NAME3'] = '';
-        object['shop_product_sku.SKU_CONTENT3'] = '';
-        object['shop_product_sku.PRICE'] = '';
-        object['shop_product_sku.REAL_PRICES'] = '';
+        object['SHOP_PRODUCT_SKU.PRD_SKU'] = '';
+        object['SHOP_PRODUCT_SKU.SKU_NAME1'] = '';
+        object['SHOP_PRODUCT_SKU.SKU_CONTENT1'] = '';
+        object['SHOP_PRODUCT_SKU.SKU_NAME2'] = '';
+        object['SHOP_PRODUCT_SKU.SKU_CONTENT2'] = '';
+        object['SHOP_PRODUCT_SKU.SKU_NAME3'] = '';
+        object['SHOP_PRODUCT_SKU.SKU_CONTENT3'] = '';
+        object['SHOP_PRODUCT_SKU.PRICE'] = '';
+        object['SHOP_PRODUCT_SKU.REAL_PRICES'] = '';
         object.isDel = false;
 
         object.hashCode = function () {
             return "#"
-                + object['shop_product_sku.SKU_CONTENT1']
+                + object['SHOP_PRODUCT_SKU.SKU_CONTENT1']
                 + "#"
-                + object['shop_product_sku.SKU_CONTENT2']
+                + object['SHOP_PRODUCT_SKU.SKU_CONTENT2']
                 + "#"
-                + object['shop_product_sku.SKU_CONTENT3'];
+                + object['SHOP_PRODUCT_SKU.SKU_CONTENT3'];
         };
         return object;
     }

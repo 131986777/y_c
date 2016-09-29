@@ -23,13 +23,13 @@
                     <tr ng-repeat=" value in productUnitList">
                         <td class="col-md-10" style="text-align: left">
                             <i class="fa fa-folder-o"></i>
-                            {{value['shop_unit.UNIT_NAME']}}
+                            {{value['SHOP_UNIT.UNIT_NAME']}}
                         </td>
 
                         <td class="col-md-2">
                             <a show-modal id="#modifyUnit"
                                ng-click="modifyUnitNameClick(value)">修改</a>
-                            <a ng-click="delProductUnit(value['shop_unit.UNIT_ID'])">删除</a>
+                            <a ng-click="delProductUnit(value['SHOP_UNIT.UNIT_ID'])">删除</a>
                         </td>
 
                     </tr>
@@ -62,8 +62,8 @@
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control"
-                                       ng-model="add['shop_unit.UNIT_NAME']"
-                                       ng-init="add['shop_unit.UNIT_NAME']=''"
+                                       ng-model="add['SHOP_UNIT.UNIT_NAME']"
+                                       ng-init="add['SHOP_UNIT.UNIT_NAME']=''"
                                        placeholder=""></div>
                         </div>
 
@@ -101,7 +101,7 @@
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control"
-                                       ng-model="modify['shop_unit.UNIT_NAME']"
+                                       ng-model="modify['SHOP_UNIT.UNIT_NAME']"
                                        placeholder=""></div>
                         </div>
                     </form>
