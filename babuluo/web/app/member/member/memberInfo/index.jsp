@@ -34,18 +34,25 @@
             <tbody>
             <tr>
                 <th class="col-sm-1">ID</th>
-                <td class="col-sm-2" ng-bind="memberInfo['member.TYPE_ID']"></td>
+                <td class="col-sm-2" ng-bind="memberInfo['MEMBER.TYPE_ID']"></td>
                 <td class="col-sm-1"></td>
             </tr>
-            <tr>
+            <tr ng-init="modifyID=false">
                 <th class="col-sm-1">登陆ID</th>
-                <td class="col-sm-2" ng-bind="memberInfo['member.LOGIN_ID']"></td>
-                <td class="col-sm-1"></td>
+                <td class="col-sm-2" ng-show="!modifyID" ng-bind="memberInfo['MEMBER.LOGIN_ID']"></td>
+                <td class="col-sm-2" ng-show="modifyID">
+                    <input class="form-control" type="text" ng-model="memberInfo['MEMBER.LOGIN_ID']">
+                </td>
+                </td>
+                <td class="col-sm-1">
+                    <a class="table-link" ng-click="modifyID=true">重置登陆ID</a>
+                    <a class="table-link" ng-click="initPWD()">重置密码</a>
+                </td>
             </tr>
             <tr>
-                <th class="col-sm-1">昵称</th>
+                <th class="col-sm-1">用户名</th>
                 <td class="col-sm-2">
-                    <input class="form-control" type="text" ng-model="memberInfo['member.USER_NAME']"></td>
+                    <input class="form-control" type="text" ng-model="memberInfo['MEMBER.USER_NAME']"></td>
                 <td class="col-sm-1"></td>
             </tr>
             <tr>
@@ -56,14 +63,14 @@
             <tr>
                 <th class="col-sm-1">手机号</th>
                 <td class="col-sm-2">
-                    <input class="form-control" type="text" ng-model="memberInfo['member.MOBILE']"></td>
+                    <input class="form-control" type="text" ng-model="memberInfo['MEMBER.MOBILE']"></td>
                 </td>
                 <td class="col-sm-1"></td>
             </tr>
             <tr>
                 <th class="col-sm-1">邮箱</th>
                 <td class="col-sm-2">
-                    <input class="form-control" type="text" ng-model="memberInfo['member.EMAIL']">
+                    <input class="form-control" type="text" ng-model="memberInfo['MEMBER.EMAIL']">
                 </td>
                 </td>
                 <td class="col-sm-1"></td>
@@ -71,7 +78,7 @@
             <tr>
                 <th class="col-sm-1">备注</th>
                 <td class="col-sm-2">
-                    <input class="form-control" type="text" ng-model="memberInfo['member.REMARK']"></td>
+                    <input class="form-control" type="text" ng-model="memberInfo['MEMBER.REMARK']"></td>
                 </td>
                 <td class="col-sm-1"></td>
             </tr>
@@ -82,18 +89,18 @@
             <tbody>
             <tr>
                 <th class="col-sm-1">来源</th>
-                <td class="col-sm-2" ng-bind="sourceMap.get(memberInfo['member.CODE_ID'])"></td>
+                <td class="col-sm-2" ng-bind="sourceMap.get(memberInfo['MEMBER.CODE_ID'])"></td>
                 <td class="col-sm-1"></td>
             </tr>
             <tr>
                 <th class="col-sm-1">类型</th>
                 <td class="col-sm-2">
-                    <select ng-model="memberInfo['member.TYPE_ID']"
+                    <select ng-model="memberInfo['MEMBER.TYPE_ID']"
                             class="nya-bs-select form-control">
                         <option class="nya-bs-option"
                                 ng-repeat="value in typeList"
-                                ng-bind="value['member_code_type.NAME']"
-                                value="{{value['member_code_type.ID']}}">
+                                ng-bind="value['MEMBER_CODE_TYPE.NAME']"
+                                value="{{value['MEMBER_CODE_TYPE.ID']}}">
                         </option>
                     </select>
                 </td>
@@ -101,14 +108,14 @@
             </tr>
             <tr>
                 <th class="col-sm-1">绑定微信ID</th>
-                <td class="col-sm-2" ng-bind="memberInfo['member.WX_OPENID']"></td>
-                <td class="col-sm-1"><a class="table-link" ng-show="memberInfo['member.WX_OPENID']!=undefined">解除</a>
+                <td class="col-sm-2" ng-bind="memberInfo['MEMBER.WX_OPENID']"></td>
+                <td class="col-sm-1"><a class="table-link" ng-show="memberInfo['MEMBER.WX_OPENID']!=undefined">解除</a>
                 </td>
             </tr>
             <tr>
                 <th class="col-sm-1">绑定QQ登录</th>
-                <td class="col-sm-2" ng-bind="memberInfo['member.QQ_OPENID']"></td>
-                <td class="col-sm-1"><a class="table-link" ng-show="memberInfo['member.QQ_OPENID']!=undefined">解除</a>
+                <td class="col-sm-2" ng-bind="memberInfo['MEMBER.QQ_OPENID']"></td>
+                <td class="col-sm-1"><a class="table-link" ng-show="memberInfo['MEMBER.QQ_OPENID']!=undefined">解除</a>
                 </td>
             </tr>
             </tbody>

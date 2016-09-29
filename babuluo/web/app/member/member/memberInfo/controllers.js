@@ -42,7 +42,7 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
         memberSourceFactory.getMemberSourceList().get({}, function (response) {
             $scope.sourceList = response.data;
             $scope.sourceList.forEach(function (ele) {
-                $scope.sourceMap.set(ele['member_code_source.CODE'], ele['member_code_source.NAME']);
+                $scope.sourceMap.set(ele['MEMBER_CODE_SOURCE.CODE'], ele['MEMBER_CODE_SOURCE.NAME']);
             });
             $scope.deferLoad.resolve(response);
         }, null);
@@ -60,5 +60,48 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
 
     $scope.initLoad();
 
+    //重置密码
+    $scope.initPWD = function () {
+        $scope.memberInfo['MEMBER.LOGIN_PWD'] = "A123456";
+        modalFactory.showAlert("确定将密码重置为【 A123456 】吗？", function () {
+            memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
+                if (response.extraData.state == 'true') {
+                    modalFactory.showShortAlert("密码重置成功");
+                }else{
+                    modalFactory.showShortAlert(response.msg);
+                }
+            });
+        });
+    };
+
+    //设置页面Bottom触发事件
+    modalFactory.setBottom(true, function () {
+        if ($scope.memberInfo['MEMBER.LOGIN_ID'] == undefined) {
+            modalFactory.showAlert("登陆ID不能为空。");
+            return;
+        }
+        if ($scope.memberInfo['MEMBER.MOBILE'] == undefined) {
+            modalFactory.showAlert("手机号码不能为空。");
+            return;
+        }
+
+        if ($scope.memberInfo['MEMBER.USER_NAME'] == undefined) {
+            modalFactory.showAlert("用户名不能为空。");
+            return;
+        }
+        console.log($scope.memberInfo);
+        memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
+            if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
+                modalFactory.showShortAlert(response.msg);
+            } else if (response.extraData.state == 'true') {
+                modalFactory.showShortAlert("保存成功");
+                $scope.modifyID = false;
+                $scope.initLoad();
+            }
+        });
+    }, function () {
+        //取消事件
+        $scope.initLoad();
+    });
 });
 
