@@ -26,6 +26,8 @@
                     </li>
                 </ul>
                 <!-- END 导航标签 -->
+                <h3 >{{address}}</h3><br>
+                <h3>{{name}}&nbsp;&nbsp;&nbsp;{{mobile}}</h3>
             </div>
         </div>
     </div>

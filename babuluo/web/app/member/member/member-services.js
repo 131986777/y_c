@@ -39,4 +39,14 @@ AndSellMainModule.service('memberFactory', function ($resource, baseURL) {
             }
         });
     };
+    this.getMemberAddress = function (userId) {
+        console.log(userId);
+
+        return $resource(baseURL + '/member/address/getByUserId?member_address.USER_ID=:ID', {'ID': userId}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
 });
