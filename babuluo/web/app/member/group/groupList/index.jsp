@@ -35,9 +35,8 @@
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-
-                    <th class="col-md-2"> 所属类型</th>
                     <th class="col-md-2"> 分组名称</th>
+                    <th class="col-md-2"> 所属类型</th>
                     <th class="col-md-3"> 分组介绍</th>
 
                     <th class="col-md-1 text-center"> 操作</th>
@@ -45,9 +44,8 @@
                 </thead>
                 <tbody ng-cloak>
                 <tr ng-repeat="item in MemberGroupList">
-
-                    <td ng-bind="typeMap.get(item['MEMBER_CODE_GROUP.TYPE_ID'])"></td>
                     <td ng-bind="item['MEMBER_CODE_GROUP.NAME']"></td>
+                    <td ng-bind="typeMap.get(item['MEMBER_CODE_GROUP.TYPE_ID'])"></td>
                     <td ng-bind="item['MEMBER_CODE_GROUP.INTRO']"></td>
                     <td class="text-center">
                         <a type="button" show-modal id="#modifyMemberGroup"
