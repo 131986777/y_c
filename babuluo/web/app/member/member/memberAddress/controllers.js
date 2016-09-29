@@ -12,6 +12,7 @@ AndSellMainModule.controller('MemberAddressController', function ($scope, $state
         console.log($scope.memberId);
         memberFactory.getMemberAddress($scope.memberId).get({}, function (response) {
             console.log(response.data);
+
             var data=response.data;
 
             var address=data[0]['MEMBER_ADDRESS.ADDR_GUO']+data[0]['MEMBER_ADDRESS.ADDR_SHENG']+data[0]['MEMBER_ADDRESS.ADDR_SHI']+data[0]['MEMBER_ADDRESS.ADDR_XIAN']+data[0]['MEMBER_ADDRESS.ADDR_QU']+data[0]['MEMBER_ADDRESS.ADDR']+"  "+data[0]['MEMBER_ADDRESS.ZIP_CODE'];

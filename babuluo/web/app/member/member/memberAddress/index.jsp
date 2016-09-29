@@ -26,8 +26,10 @@
                     </li>
                 </ul>
                 <!-- END 导航标签 -->
-                <h3 >{{address}}</h3><br>
-                <h3>{{name}}&nbsp;&nbsp;&nbsp;{{mobile}}</h3>
+            </div>
+            <div style="margin-top: 30px">
+                <label>{{address}}</label><br>
+                <label>{{name}}&nbsp;&nbsp;{{mobile}}</label>
             </div>
         </div>
     </div>
