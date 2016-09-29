@@ -66,7 +66,9 @@
                             <input type="text" class="form-control"
                                    ng-model="add['MEMBER_CODE_SOURCE.CODE']"
                                    ng-init="add['MEMBER_CODE_SOURCE.CODE']=''"
-                                   placeholder=""></div>
+                                   placeholder=""
+                                   onkeyup="value=value.replace(/[\W]/g,'') ">
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
