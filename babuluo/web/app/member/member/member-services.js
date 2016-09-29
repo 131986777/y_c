@@ -32,6 +32,23 @@ AndSellMainModule.service('memberFactory', function ($resource, baseURL) {
             }
         });
     };
+
+    this.loadMemberAccount = function (form) {
+        return $resource(baseURL + '/member/account/getById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
+    this.modMemberAccount = function (form) {
+        return $resource(baseURL + '/member/account/modifyById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
     this.delById = function (form) {
         return $resource(baseURL + '/member/member/delById', form, {
             'update': {
@@ -39,4 +56,38 @@ AndSellMainModule.service('memberFactory', function ($resource, baseURL) {
             }
         });
     };
+    this.getMemberAddress = function (userId) {
+        console.log(userId);
+        return $resource(baseURL + '/member/address/getByUserId?member_address.USER_ID=:ID', {'ID': userId}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
+    this.getMembercardInfo = function (userId) {
+        console.log(userId);
+        return $resource(baseURL + '/member/membercard/getByUserId?member_card.USER_ID=:ID', {'ID': userId}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+    this.getMembercardType= function (typeId) {
+        console.log('typeId'+typeId);
+        return $resource(baseURL + '/member/cardType/getById?MEMBER_CARD_TYPE.ID=:ID', {'ID': typeId}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+    this.getMembercardSource= function (sourceId) {
+        console.log(sourceId);
+        return $resource(baseURL + '/member/cardSource/getById?MEMBER_CARD_SOURCE.ID=:ID', {'ID':sourceId}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
 });

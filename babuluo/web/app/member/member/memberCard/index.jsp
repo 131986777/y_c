@@ -26,6 +26,25 @@
                     </li>
                 </ul>
                 <!-- END 导航标签 -->
+
+            </div>
+            <!--内容区-->
+            <div style="margin-top: 50px;margin-left: 100px">
+                <div>
+                    <label>卡号：</label><label>{{cardNum}}</label>
+
+                    <label style="margin-left: 100px">{{cardName}}</label>
+                </div><br>
+                <label  style="margin-left: 70px">{{cardType}}</label>
+                <div style="margin-left: 230px">
+                    <label>余额：</label><label>{{balance}}</label><br>
+                    <label>冻结：</label><label>{{freezeBalance}}</label>
+                </div>
+                <div >
+                    <label>面值：</label><label>{{faceValue}}</label>
+                </div>
+                <span>{{addDatatime+cardSource}}</span>
+
             </div>
         </div>
     </div>

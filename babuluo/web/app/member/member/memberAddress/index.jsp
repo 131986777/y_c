@@ -27,5 +27,10 @@
                 </ul>
                 <!-- END 导航标签 -->
             </div>
+            <div style="margin-top: 30px" ng-repeat="item in addressList">
+                <input ng-if="item['MEMBER_ADDRESS.IS_DEFAULT']==1"  type="checkbox" checked="checked" disabled/>
+                <label>{{item['MEMBER_ADDRESS.ADDR_GUO']+item['MEMBER_ADDRESS.ADDR_SHENG']+item['MEMBER_ADDRESS.ADDR_SHI']+item['MEMBER_ADDRESS.ADDR_XIAN']+item['MEMBER_ADDRESS.ADDR_QU']+item['MEMBER_ADDRESS.ADDR']+"  "+item['MEMBER_ADDRESS.ZIP_CODE']}}</label><br>
+                <label>{{item['MEMBER_ADDRESS.NAME']}}&nbsp;&nbsp;{{item['MEMBER_ADDRESS.MOBILE']}}</label>
+            </div>
         </div>
     </div>

@@ -1,4 +1,4 @@
-AndSellMainModule.controller('memberListController', function ($scope, memberFactory, memberSourceFactory, memberTypeFactory, modalFactory, $q) {
+AndSellMainModule.controller('memberListController', function ($scope, memberFactory, memberGroupFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('客户管理');
@@ -19,6 +19,17 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
         $scope.groupList = response.extraData.groupList;
         console.log("memberList");
         console.log($scope.memberList);
+    };
+
+
+    //根据类型加载客户分组
+    $scope.loadGroupByType = function (id) {
+
+        memberGroupFactory.getMemberGroupListByType(id).get({}, function (repsonse) {
+            console.log(repsonse.data);
+            $scope.groupListById = repsonse.data;
+        }, null);
+
     };
 
     //新增客户
@@ -80,7 +91,8 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
         $scope.memberAdd['MEMBER.USER_NAME'] = undefined;
         $scope.memberAdd['MEMBER.LOGIN_ID'] = undefined;
         $scope.memberAdd['MEMBER.MOBILE'] = undefined;
-        $scope.memberAdd['MEMBER.CODE_ID'] = undefined;
+        $scope.memberAdd['MEMBER.TYPE_ID'] = undefined;
+        $scope.memberAdd['MEMBER.GROUP_ID'] = undefined;
     };
 });
 

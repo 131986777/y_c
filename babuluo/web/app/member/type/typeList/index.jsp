@@ -25,14 +25,14 @@
                 <tr ng-repeat="item in MemberTypeList">
 
                     <%--<td ng-bind="item['member_code_source.CODE']" ></td>--%>
-                    <td ng-bind="item['member_code_type.NAME']"></td>
-                    <td ng-bind="item['member_code_type.INTRO']"></td>
+                    <td ng-bind="item['MEMBER_CODE_TYPE.NAME']"></td>
+                    <td ng-bind="item['MEMBER_CODE_TYPE.INTRO']"></td>
                     <td class="text-center">
                         <a type="button" show-modal id="#modifyMemberType"
                            ng-click="modifyMemberTypeClick(item)">修改</a>
-                        <button type="button" ng-click="deleteMemberType(item['member_code_type.ID'])" class="btn btn-link btn-xs">
+                        <a type="button" ng-click="deleteMemberType(item['MEMBER_CODE_TYPE.ID'])" >
                             删除
-                        </button>
+                        </a>
                     </td>
                 </tr>
                 </tbody>
@@ -64,8 +64,8 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="add['member_code_type.NAME']"
-                                   ng-init="add['member_code_type.NAME']=''"
+                                   ng-model="add['MEMBER_CODE_TYPE.NAME']"
+                                   ng-init="add['MEMBER_CODE_TYPE.NAME']=''"
                                    placeholder=""></div>
                     </div>
                     <div class="form-group row">
@@ -75,8 +75,8 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="add['member_code_type.INTRO']"
-                                   ng-init="add['member_code_type.INTRO']=''"
+                                   ng-model="add['MEMBER_CODE_TYPE.INTRO']"
+                                   ng-init="add['MEMBER_CODE_TYPE.INTRO']=''"
                                    placeholder=""></div>
                     </div>
 
@@ -117,7 +117,7 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="modify['member_code_type.NAME']"
+                                   ng-model="modify['MEMBER_CODE_TYPE.NAME']"
                                    placeholder=""></div>
                     </div>
                     <div class="form-group row">
@@ -127,7 +127,7 @@
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="modify['member_code_type.INTRO']"
+                                   ng-model="modify['MEMBER_CODE_TYPE.INTRO']"
                                    placeholder=""></div>
                     </div>
 
