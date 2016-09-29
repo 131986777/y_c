@@ -35,17 +35,36 @@
             <tbody>
             <tr>
                 <th class="col-sm-1">余额</th>
-                <td class="col-sm-2"></td>
+                <td class="col-sm-2">
+                    可用：<span ng-bind="account['MEMBER_ACCOUNT.BALANCE']"></span>
+                    冻结：<span ng-bind="account['MEMBER_ACCOUNT.FREEZE_BALANCE']"></span>
+                </td>
                 <td class="col-sm-1"></td>
             </tr>
             <tr>
                 <th class="col-sm-1">积分</th>
-                <td class="col-sm-2"></td>
+                <td class="col-sm-2">
+                    可用：<span ng-bind="account['MEMBER_ACCOUNT.POINT']"></span>
+                    冻结：<span ng-bind="account['MEMBER_ACCOUNT.FREEZE_POINT']"></span>
+                </td>
                 <td class="col-sm-1"></td>
             </tr>
             <tr>
-                <th class="col-sm-1">分类</th>
-                <td class="col-sm-2"></td>
+                <th class="col-sm-1">分组</th>
+                <td class="col-sm-2">
+                    <select ng-model="account['MEMBER_ACCOUNT.GROUP_ID']"
+                            ng-init="account['MEMBER_ACCOUNT.GROUP_ID']='-1'"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="-1">
+                            选择客户分组
+                        </option>
+                        <option class="nya-bs-option"
+                                ng-repeat="value in groupList"
+                                ng-bind="value['MEMBER_CODE_GROUP.NAME']"
+                                value="{{value['MEMBER_CODE_GROUP.ID']}}">
+                        </option>
+                    </select>
+                </td>
                 <td class="col-sm-1"></td>
             </tr>
 

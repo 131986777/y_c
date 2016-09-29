@@ -32,6 +32,23 @@ AndSellMainModule.service('memberFactory', function ($resource, baseURL) {
             }
         });
     };
+
+    this.loadMemberAccount = function (form) {
+        return $resource(baseURL + '/member/account/getById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
+    this.modMemberAccount = function (form) {
+        return $resource(baseURL + '/member/account/modifyById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
     this.delById = function (form) {
         return $resource(baseURL + '/member/member/delById', form, {
             'update': {

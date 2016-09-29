@@ -169,8 +169,8 @@
                                         </option>
                                         <option class="nya-bs-option"
                                                 ng-repeat="value in typeList"
-                                                ng-bind="value['member_code_type.NAME']"
-                                                value="{{value['member_code_type.ID']}}">
+                                                ng-bind="value['MEMBER_CODE_TYPE.NAME']"
+                                                value="{{value['MEMBER_CODE_TYPE.ID']}}">
                                         </option>
                                     </select>
                                 </div>
@@ -188,8 +188,8 @@
                                         </option>
                                         <option class="nya-bs-option"
                                                 ng-repeat="value in groupListById"
-                                                ng-bind="value['member_code_group.NAME']"
-                                                value="{{value['member_code_group.ID']}}">
+                                                ng-bind="value['MEMBER_CODE_GROUP.NAME']"
+                                                value="{{value['MEMBER_CODE_GROUP.ID']}}">
                                         </option>
                                     </select>
                                 </div>
@@ -219,45 +219,6 @@
                 </div>
             </div>
         </div>
-        <!-- END add modal -->
-        <%--<!--BEGIN 新增-->--%>
-        <%--<div class="modal fade text-left" id="addMember" tabindex="-1" aria-hidden="true"--%>
-        <%--style="display: none;">--%>
-        <%--<div class="modal-dialog">--%>
-        <%--<div class="modal-content">--%>
-        <%--<div class="modal-header">--%>
-        <%--<button type="button" class="close" data-dismiss="modal"--%>
-        <%--aria-hidden="true"></button>--%>
-        <%--<h4 class="modal-title">新增客户</h4>--%>
-        <%--</div>--%>
-        <%--<div class="modal-body form-body text-right">--%>
-
-        <%--<form class="form-horizontal">--%>
-
-        <%--<div class="form-group row">--%>
-        <%--<label class="col-md-3 control-label">--%>
-        <%--<span class="required" style="color: red"> * </span> 用户名:--%>
-        <%--</label>--%>
-
-        <%--<div class="col-md-8">--%>
-        <%--<input type="text" class="form-control"--%>
-        <%--ng-model="add['district.DISTRICT_NAME']"--%>
-        <%--ng-init="add['district.DISTRICT_NAME']=''"--%>
-        <%--placeholder=""></div>--%>
-        <%--</div>--%>
-
-        <%--</form>--%>
-        <%--</div>--%>
-        <%--<div class="modal-footer">--%>
-        <%--<button type="button" ng-click="addDistrict()" class="btn green">确定--%>
-        <%--</button>--%>
-        <%--<button type="button" class="btn green  btn-outline" data-dismiss="modal">取消--%>
-        <%--</button>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-        <%--</div>--%>
-        <%--<!--END 新增-->--%>
         <div page-bar
              filter-obj="filter"
              url="/member/member/queryAll"
