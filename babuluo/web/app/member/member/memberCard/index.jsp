@@ -35,7 +35,7 @@
 
                     <label style="margin-left: 100px">{{cardName}}</label>
                 </div><br>
-                <label  style="margin-left: 70px">卡类型</label>
+                <label  style="margin-left: 70px">{{cardType}}</label>
                 <div style="margin-left: 230px">
                     <label>余额：</label><label>{{balance}}</label><br>
                     <label>冻结：</label><label>{{freezeBalance}}</label>
@@ -43,7 +43,7 @@
                 <div >
                     <label>面值：</label><label>{{faceValue}}</label>
                 </div>
-                <span>{{addDatatime}}</span>
+                <span>{{addDatatime+cardSource}}</span>
 
             </div>
         </div>

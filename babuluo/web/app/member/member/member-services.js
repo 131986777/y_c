@@ -56,5 +56,21 @@ AndSellMainModule.service('memberFactory', function ($resource, baseURL) {
             }
         });
     };
+    this.getMembercardType= function (typeId) {
+        console.log('typeId'+typeId);
+        return $resource(baseURL + '/member/cardType/getById?MEMBER_CARD_TYPE.ID=:ID', {'ID': typeId}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+    this.getMembercardSource= function (sourceId) {
+        console.log(sourceId);
+        return $resource(baseURL + '/member/cardSource/getById?MEMBER_CARD_SOURCE.ID=:ID', {'ID':sourceId}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
 
 });
