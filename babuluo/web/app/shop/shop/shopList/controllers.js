@@ -125,6 +125,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
         shopFactory.modShopListById($scope.shopEdited).get({}, function (response) {
             if (response.extraData.state == 'true') {
                 $('#edit').modal('hide');
+                modalFactory.showShortAlert('修改成功');
                 $scope.initLoad();
             } else {
                 modalFactory.showShortAlert(response.msg);
