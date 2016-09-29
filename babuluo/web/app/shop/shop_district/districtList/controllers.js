@@ -6,7 +6,7 @@ AndSellMainModule.controller('districtListController', function ($scope, $stateP
 
         var form = {};
         //目前serviceId都设为1
-        form['district.service_id'] = 1;
+        form['DISTRICT.SERVICE_ID'] = 1;
 
         districtFactory.getDistrictList(form).get({}, function (response) {
             console.log(response);
@@ -17,11 +17,11 @@ AndSellMainModule.controller('districtListController', function ($scope, $stateP
 
     $scope.addDistrict = function () {
 
-        if ($scope.add['district.DISTRICT_NAME'] == undefined || $scope.add['district.DISTRICT_NAME'] == "") {
+        if ($scope.add['DISTRICT.DISTRICT_NAME'] == undefined || $scope.add['DISTRICT.DISTRICT_NAME'] == "") {
             modalFactory.showShortAlert("请填写区域名称");
             return
         }
-        $scope.add['district.SERVICE_ID'] = 1;
+        $scope.add['DISTRICT.SERVICE_ID'] = 1;
         districtFactory.addDistrict($scope.add).get({}, function (response) {
             if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
                 modalFactory.showShortAlert(response.msg);
@@ -29,7 +29,7 @@ AndSellMainModule.controller('districtListController', function ($scope, $stateP
                 $("#addDistrict").modal('hide');
                 modalFactory.showShortAlert('新增成功');
                 $scope.initLoad();
-                $scope.add['district.DISTRICT_NAME'] = "";
+                $scope.add['DISTRICT.DISTRICT_NAME'] = "";
             }
         });
     };
@@ -39,7 +39,8 @@ AndSellMainModule.controller('districtListController', function ($scope, $stateP
     };
 
     $scope.modifyDistrict = function () {
-        $scope.modify['district.SERVICE_ID'] = 1;
+        $scope.modify['DISTRICT.SERVICE_ID'] = 1;
+        console.log($scope.modify);
         districtFactory.modDistrictById().get($scope.modify, function (response) {
             if (response.code != undefined && response.code == 400) {
                 modalFactory.showShortAlert(response.msg);
@@ -53,7 +54,7 @@ AndSellMainModule.controller('districtListController', function ($scope, $stateP
 
     $scope.delDistrict = function (value) {
 
-        modalFactory.showAlert("确认删除区域：［"+value['district.DISTRICT_NAME']+"］吗?", function () {
+        modalFactory.showAlert("确认删除区域：［"+value['DISTRICT.DISTRICT_NAME']+"］吗?", function () {
             districtFactory.delById(value).get({}, function (response) {
                 if (response.extraData.state = 'true') {
                     modalFactory.showShortAlert("删除成功");

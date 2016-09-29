@@ -11,17 +11,17 @@
                     </div>
                     <div class="col-sm-6" style="padding: 0px">
 
-                        <select ng-model="shopFilter['shop.DISTRICT_ID']"
-                                ng-init="shopFilter['shop.DISTRICT_ID']='-1'"
+                        <select ng-model="shopFilter['SHOP.DISTRICT_ID']"
+                                ng-init="shopFilter['SHOP.DISTRICT_ID']='-1'"
                                 class="nya-bs-select form-control " data-width="80px"
-                                ng-change="filterShop(shopFilter['shop.DISTRICT_ID'])">
+                                ng-change="filterShop(shopFilter['SHOP.DISTRICT_ID'])">
                             <option class="nya-bs-option" value="-1">
                                 门店区域
                             </option>
                             <option class="nya-bs-option"
                                     ng-repeat="value in districtList"
-                                    ng-bind="value['district.DISTRICT_NAME']"
-                                    value="{{value['district.DISTRICT_ID']}}">
+                                    ng-bind="value['DISTRICT.DISTRICT_NAME']"
+                                    value="{{value['DISTRICT.DISTRICT_ID']}}">
                             </option>
                         </select>
                     </div>
@@ -50,12 +50,12 @@
             </thead>
             <tbody>
             <tr ng-repeat="sl in shopList">
-                <td ng-bind="sl['shop.SHOP_NAME']"></td>
-                <td ng-bind="districtMap.get(sl['shop.DISTRICT_ID'])"></td>
+                <td ng-bind="sl['SHOP.SHOP_NAME']"></td>
+                <td ng-bind="districtMap.get(sl['SHOP.DISTRICT_ID'])"></td>
                 <td><a class="table-link" ng-click="showMap(sl)">查看地图</a></td>
-                <td ng-bind="sl['shop.TELEPHONE']"></td>
+                <td ng-bind="sl['SHOP.TELEPHONE']"></td>
                 <td>暂无</td>
-                <td ng-bind="sl['shop.ADD_DATETIME'] | FormatStrDate"></td>
+                <td ng-bind="sl['SHOP.ADD_DATETIME'] | FormatStrDate"></td>
                 <td>
                     <a class="table-link" data-toggle="modal" data-target="#edit" ng-click="getShopListById(sl)">
                         修改
@@ -89,7 +89,7 @@
                                 </label>
                                 <div class="col-sm-7">
                                     <input class="form-control" type="text"
-                                           name="name" ng-model="shopAdd['shop.SHOP_NAME']"
+                                           name="name" ng-model="shopAdd['SHOP.SHOP_NAME']"
                                            required>
                                 </div>
                             </div>
@@ -99,7 +99,7 @@
                                 </label>
                                 <div class="col-sm-7">
                                     <input class="form-control" type="text"
-                                           name="telephone" ng-model="shopAdd['shop.TELEPHONE']"
+                                           name="telephone" ng-model="shopAdd['SHOP.TELEPHONE']"
                                            required>
                                 </div>
                             </div>
@@ -108,16 +108,16 @@
                                     <span class="required" style="color: red"> * </span>区域：
                                 </label>
                                 <div class="col-sm-7">
-                                    <select ng-model="shopAdd['shop.DISTRICT_ID']"
-                                            ng-init="shopAdd['shop.DISTRICT_ID']='-1'"
+                                    <select ng-model="shopAdd['SHOP.DISTRICT_ID']"
+                                            ng-init="shopAdd['SHOP.DISTRICT_ID']='-1'"
                                             class="nya-bs-select form-control"
-                                            ng-change="addDistrictModal(shopAdd['shop.DISTRICT_ID'])">
+                                            ng-change="addDistrictModal(shopAdd['SHOP.DISTRICT_ID'])">
                                         <option class="nya-bs-option" value="-1">
                                             选择门店区域
                                         </option>
                                         <option class="nya-bs-option" ng-repeat="value in districtList"
-                                                ng-bind="value['district.DISTRICT_NAME']"
-                                                value="{{value['district.DISTRICT_ID']}}">
+                                                ng-bind="value['DISTRICT.DISTRICT_NAME']"
+                                                value="{{value['DISTRICT.DISTRICT_ID']}}">
                                         </option>
                                         <option class="nya-bs-option" value="-100">
                                             ----添加门店区域----
@@ -230,7 +230,7 @@
                                 </label>
                                 <div class="col-sm-7">
                                     <input class="form-control" type="text"
-                                           name="name" ng-model="shopEdited['shop.SHOP_NAME']" required>
+                                           name="name" ng-model="shopEdited['SHOP.SHOP_NAME']" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -239,7 +239,7 @@
                                 </label>
                                 <div class="col-sm-7">
                                     <input class="form-control" type="text"
-                                           name="telephone" ng-model="shopEdited['shop.TELEPHONE']">
+                                           name="telephone" ng-model="shopEdited['SHOP.TELEPHONE']">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -247,14 +247,14 @@
                                     <span class="required" style="color: red"> * </span>区域：
                                 </label>
                                 <div class="col-sm-7">
-                                    <select ng-model="shopEdited['shop.DISTRICT_ID']"
-                                            ng-init="shopEdited['shop.DISTRICT_ID']='-1'"
+                                    <select ng-model="shopEdited['SHOP.DISTRICT_ID']"
+                                            ng-init="shopEdited['SHOP.DISTRICT_ID']='-1'"
                                             class="nya-bs-select form-control"
-                                            ng-change="addDistrictModal(shopEdited['shop.DISTRICT_ID'])">
+                                            ng-change="addDistrictModal(shopEdited['SHOP.DISTRICT_ID'])">
                                         <option class="nya-bs-option"
                                                 ng-repeat="value in districtList"
-                                                ng-bind="value['district.DISTRICT_NAME']"
-                                                value="{{value['district.DISTRICT_ID']}}">
+                                                ng-bind="value['DISTRICT.DISTRICT_NAME']"
+                                                value="{{value['DISTRICT.DISTRICT_ID']}}">
                                         </option>
                                         <option class="nya-bs-option" value="-100">
                                             ----添加门店区域----
@@ -429,8 +429,8 @@
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control"
-                                       ng-model="add['district.DISTRICT_NAME']"
-                                       ng-init="add['district.DISTRICT_NAME']=''"
+                                       ng-model="add['DISTRICT.DISTRICT_NAME']"
+                                       ng-init="add['DISTRICT.DISTRICT_NAME']=''"
                                        placeholder=""></div>
                         </div>
 

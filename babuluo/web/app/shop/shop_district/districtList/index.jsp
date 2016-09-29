@@ -25,7 +25,7 @@
                     <tr ng-repeat="value in districtList">
                         <td class="col-md-10" style="text-align: left">
                             <i class="fa fa-folder-o"></i>
-                            {{value['district.DISTRICT_NAME']}}
+                            {{value['DISTRICT.DISTRICT_NAME']}}
                         </td>
 
                         <td class="col-md-2">
@@ -65,8 +65,8 @@
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control"
-                                       ng-model="add['district.DISTRICT_NAME']"
-                                       ng-init="add['district.DISTRICT_NAME']=''"
+                                       ng-model="add['DISTRICT.DISTRICT_NAME']"
+                                       ng-init="add['DISTRICT.DISTRICT_NAME']=''"
                                        placeholder=""></div>
                         </div>
 
@@ -102,7 +102,7 @@
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control"
-                                       ng-model="modify['district.DISTRICT_NAME']"
+                                       ng-model="modify['DISTRICT.DISTRICT_NAME']"
                                        placeholder=""></div>
                         </div>
                     </form>
