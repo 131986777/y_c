@@ -34,13 +34,13 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
     $scope.loadDistrict = function () {
         var form = {};
         //目前serviceId都设为1
-        form['district.service_id'] = 1;
+        form['DISTRICT.service_id'] = 1;
 
         districtFactory.getDistrictList(form).get({}, function (response) {
             console.log(response);
             $scope.districtList = response.data;
             $scope.districtList.forEach(function (ele) {
-                $scope.districtMap.set(ele['district.DISTRICT_ID'], ele['district.DISTRICT_NAME']);
+                $scope.districtMap.set(ele['DISTRICT.DISTRICT_ID'], ele['DISTRICT.DISTRICT_NAME']);
             });
             $scope.deferLoad.resolve(response);
         }, null);
@@ -49,7 +49,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
     $scope.loadShopList = function () {
         var form = {};
         //目前serviceId都设为1
-        form['shop.SERVICE_ID'] = 1;
+        form['SHOP.SERVICE_ID'] = 1;
         $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
 
         $scope.promiseAll.then(function () {
@@ -64,12 +64,12 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
 
     //根据区域筛选门店
     $scope.filterShop = function () {
-        if ($scope.shopFilter['shop.DISTRICT_ID'] == "-1") {
+        if ($scope.shopFilter['SHOP.DISTRICT_ID'] == "-1") {
             $scope.loadShopList();
             return;
         }
         //目前serviceId都设为1
-        $scope.shopFilter['shop.SERVICE_ID'] = 1;
+        $scope.shopFilter['SHOP.SERVICE_ID'] = 1;
         $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
 
         $scope.promiseAll.then(function () {
@@ -82,16 +82,16 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
 
     $scope.addShopList = function () {
 
-        if ($scope.shopAdd['shop.SHOP_NAME'] == undefined || $scope.shopAdd['shop.TELEPHONE'] == undefined || $scope.shopAdd['shop.DISTRICT_ID'] == '-1') {
+        if ($scope.shopAdd['SHOP.SHOP_NAME'] == undefined || $scope.shopAdd['SHOP.TELEPHONE'] == undefined || $scope.shopAdd['SHOP.DISTRICT_ID'] == '-1') {
             modalFactory.showAlert("请先填写完必填项。");
             return;
         }
 
         //目前serviceId都设为1
-        $scope.shopAdd['shop.SERVICE_ID'] = 1;
+        $scope.shopAdd['SHOP.SERVICE_ID'] = 1;
         //拼接时间
-        $scope.shopAdd['shop.OPEN_TIME'] = $scope.open_time_hour + ":" + $scope.open_time_min;
-        $scope.shopAdd['shop.CLOSE_TIME'] = $scope.close_time_hour + ":" + $scope.close_time_min;
+        $scope.shopAdd['SHOP.OPEN_TIME'] = $scope.open_time_hour + ":" + $scope.open_time_min;
+        $scope.shopAdd['SHOP.CLOSE_TIME'] = $scope.close_time_hour + ":" + $scope.close_time_min;
         shopFactory.addShopList($scope.shopAdd).get({}, function (response) {
             if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
                 modalFactory.showShortAlert(response.msg);
@@ -106,21 +106,21 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
     $scope.getShopListById = function (sl) {
         console.log(sl);
         $scope.shopEdited = clone(sl);
-        $scope.edit_open_time_hour = $scope.shopEdited['shop.OPEN_TIME'].split(":")[0];
-        $scope.edit_open_time_min = $scope.shopEdited['shop.OPEN_TIME'].split(":")[1];
-        $scope.edit_close_time_hour = $scope.shopEdited['shop.CLOSE_TIME'].split(":")[0];
-        $scope.edit_close_time_min = $scope.shopEdited['shop.CLOSE_TIME'].split(":")[1];
+        $scope.edit_open_time_hour = $scope.shopEdited['SHOP.OPEN_TIME'].split(":")[0];
+        $scope.edit_open_time_min = $scope.shopEdited['SHOP.OPEN_TIME'].split(":")[1];
+        $scope.edit_close_time_hour = $scope.shopEdited['SHOP.CLOSE_TIME'].split(":")[0];
+        $scope.edit_close_time_min = $scope.shopEdited['SHOP.CLOSE_TIME'].split(":")[1];
     };
 
     $scope.commitEdit = function () {
-        if ($scope.shopEdited['shop.SHOP_NAME'] == undefined || $scope.shopEdited['shop.TELEPHONE'] == undefined || $scope.shopEdited['shop.DISTRICT_ID'] == '-1') {
+        if ($scope.shopEdited['SHOP.SHOP_NAME'] == undefined || $scope.shopEdited['SHOP.TELEPHONE'] == undefined || $scope.shopEdited['SHOP.DISTRICT_ID'] == '-1') {
             modalFactory.showAlert("请先填写完必填项。");
             return;
         }
         //目前serviceId都设为1
-        $scope.shopEdited['shop.SERVICE_ID'] = 1;
-        $scope.shopEdited['shop.OPEN_TIME'] = $scope.edit_open_time_hour + ":" + $scope.edit_open_time_min;
-        $scope.shopEdited['shop.CLOSE_TIME'] = $scope.edit_close_time_hour + ":" + $scope.edit_close_time_min;
+        $scope.shopEdited['SHOP.SERVICE_ID'] = 1;
+        $scope.shopEdited['SHOP.OPEN_TIME'] = $scope.edit_open_time_hour + ":" + $scope.edit_open_time_min;
+        $scope.shopEdited['SHOP.CLOSE_TIME'] = $scope.edit_close_time_hour + ":" + $scope.edit_close_time_min;
 
         shopFactory.modShopListById($scope.shopEdited).get({}, function (response) {
             if (response.extraData.state == 'true') {
@@ -133,7 +133,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
     };
 
     $scope.delShopListById = function (sl) {
-        modalFactory.showAlert("确定删除门店：［" + sl['shop.SHOP_NAME'] + "］?", function () {
+        modalFactory.showAlert("确定删除门店：［" + sl['SHOP.SHOP_NAME'] + "］?", function () {
             shopFactory.delById(sl).get({}, function (response) {
                 if (response.extraData.state == 'true') {
                     $scope.initLoad();
@@ -149,18 +149,18 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
     $scope.addDistrictModal = function (value) {
         if (value == "-100") {
             $('#addDistrict').modal('show');
-            $scope.shopAdd['shop.DISTRICT_ID'] = "-1";
-            $scope.shopEdited['shop.DISTRICT_ID'] = "-1";
+            $scope.shopAdd['SHOP.DISTRICT_ID'] = "-1";
+            $scope.shopEdited['SHOP.DISTRICT_ID'] = "-1";
         }
     };
 
     $scope.addDistrict = function () {
 
-        if ($scope.add['district.DISTRICT_NAME'] == undefined || $scope.add['district.DISTRICT_NAME'] == "") {
+        if ($scope.add['DISTRICT.DISTRICT_NAME'] == undefined || $scope.add['DISTRICT.DISTRICT_NAME'] == "") {
             modalFactory.showShortAlert("请填写区域名称");
             return
         }
-        $scope.add['district.SERVICE_ID'] = 1;
+        $scope.add['DISTRICT.SERVICE_ID'] = 1;
         districtFactory.addDistrict($scope.add).get({}, function (response) {
             $("#addDistrict").modal('hide');
             if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
@@ -168,7 +168,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
             } else if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert('新增成功');
                 $scope.initLoad();
-                $scope.add['district.DISTRICT_NAME'] = "";
+                $scope.add['DISTRICT.DISTRICT_NAME'] = "";
             }
         });
     };
@@ -176,17 +176,17 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
 
     //用于清除填写的内容
     $scope.clearForm = function () {
-        $scope.shopAdd['shop.SHOP_NAME'] = undefined;
-        $scope.shopAdd['shop.TELEPHONE'] = undefined;
-        $scope.shopAdd['shop.LONGTUDE'] = undefined;
-        $scope.shopAdd['shop.LATITUDE'] = undefined;
-        $scope.shopAdd['shop.DISTRICT_ID'] = "-1";
+        $scope.shopAdd['SHOP.SHOP_NAME'] = undefined;
+        $scope.shopAdd['SHOP.TELEPHONE'] = undefined;
+        $scope.shopAdd['SHOP.LONGTUDE'] = undefined;
+        $scope.shopAdd['SHOP.LATITUDE'] = undefined;
+        $scope.shopAdd['SHOP.DISTRICT_ID'] = "-1";
         $scope.open_time_hour = "0";
         $scope.open_time_min = "00";
         $scope.close_time_hour = "0";
         $scope.close_time_min = "00";
-        $scope.shopEdited['shop.LONGTUDE'] = undefined;
-        $scope.shopEdited['shop.LATITUDE'] = undefined;
+        $scope.shopEdited['SHOP.LONGTUDE'] = undefined;
+        $scope.shopEdited['SHOP.LATITUDE'] = undefined;
     };
 
     //用于清除地图的内容
@@ -201,14 +201,14 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
      */
     // 用经纬度设置地图中心点
     $scope.showMap = function (sl) {
-        if (sl['shop.LONGTUDE'] == undefined && sl['shop.LATITUDE'] == undefined) {
+        if (sl['SHOP.LONGTUDE'] == undefined && sl['SHOP.LATITUDE'] == undefined) {
             modalFactory.showShortAlert("暂无地图信息");
             return;
         }
         $('#showMap').modal('show');
         var map1 = new AMap.Map('allmap', {
             resizeEnable: true,
-            center: [sl['shop.LONGTUDE'], sl['shop.LATITUDE']],
+            center: [sl['SHOP.LONGTUDE'], sl['SHOP.LATITUDE']],
             zoom: 16
         });
         var marker = new AMap.Marker({
@@ -233,10 +233,10 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
     //为地图注册click事件获取鼠标点击出的经纬度坐标
     var clickEventListener = map.on('click', function (e) {
         document.getElementById("lnglat").value = e.lnglat.getLng() + ',' + e.lnglat.getLat();
-        $scope.shopAdd['shop.LONGTUDE'] = e.lnglat.getLng();
-        $scope.shopAdd['shop.LATITUDE'] = e.lnglat.getLat();
-        $scope.shopEdited['shop.LONGTUDE'] = e.lnglat.getLng();
-        $scope.shopEdited['shop.LATITUDE'] = e.lnglat.getLat();
+        $scope.shopAdd['SHOP.LONGTUDE'] = e.lnglat.getLng();
+        $scope.shopAdd['SHOP.LATITUDE'] = e.lnglat.getLat();
+        $scope.shopEdited['SHOP.LONGTUDE'] = e.lnglat.getLng();
+        $scope.shopEdited['SHOP.LATITUDE'] = e.lnglat.getLat();
     });
     var auto = new AMap.Autocomplete({
         input: "tipinput"

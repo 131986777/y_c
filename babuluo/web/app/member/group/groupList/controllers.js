@@ -16,7 +16,7 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
 
             $scope.MemberTypeList = response.data;
             $scope.MemberTypeList.forEach(function (ele) {
-                $scope.typeMap.set(ele['member_code_type.ID'], ele['member_code_type.NAME']);
+                $scope.typeMap.set(ele['MEMBER_CODE_TYPE.ID'], ele['MEMBER_CODE_TYPE.NAME']);
             });
 
 
@@ -26,7 +26,7 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
     //根据类型ID筛选分组
     $scope.filterGroup = function (id) {
         console.log("id为" + id);
-        if ($scope.groupFilter['member_code_type.ID'] == "-1") {
+        if ($scope.groupFilter['MEMBER_CODE_TYPE.ID'] == "-1") {
             // $scope.loadShopList();
             return;
         } else {

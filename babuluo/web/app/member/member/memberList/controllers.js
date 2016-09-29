@@ -1,4 +1,4 @@
-AndSellMainModule.controller('memberListController', function ($scope, memberFactory, memberSourceFactory, modalFactory, $q) {
+AndSellMainModule.controller('memberListController', function ($scope, memberFactory, memberGroupFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('客户管理');
@@ -10,44 +10,37 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
     $scope.memberFilter = {};
 
     $scope.bindData = function (response) {
+
         console.log(response);
 
-        $scope.deferLoad = $q.defer();
-
-        $scope.loadSource();
-
-        $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
-
-        $scope.promiseAll.then(function () {
-
-            $scope.memberList = response.data;
-            console.log($scope.memberList);
-        });
-
+        $scope.memberList = response.data;
+        $scope.sourceList = response.extraData.sourceList;
+        $scope.typeList = response.extraData.typeList;
+        $scope.groupList = response.extraData.groupList;
+        console.log("memberList");
+        console.log($scope.memberList);
     };
 
-    $scope.sourceMap = new Map;
-    //加载客户来源
-    $scope.loadSource = function () {
 
-        memberSourceFactory.getMemberSourceList().get({}, function (response) {
-            console.log(response);
-            $scope.sourceList = response.data;
-            $scope.sourceList.forEach(function (ele) {
-                $scope.sourceMap.set(ele['member_code_source.CODE'], ele['member_code_source.NAME']);
-            });
-            $scope.deferLoad.resolve(response);
+    //根据类型加载客户分组
+    $scope.loadGroupByType = function (id) {
+
+        memberGroupFactory.getMemberGroupListByType(id).get({}, function (repsonse) {
+            console.log(repsonse.data);
+            $scope.groupListById = repsonse.data;
         }, null);
+
     };
 
     //新增客户
     $scope.addMemberList = function () {
 
-        if ($scope.memberAdd['member.USER_NAME'] == undefined || $scope.memberAdd['member.LOGIN_ID'] == undefined || $scope.memberAdd['member.MOBILE'] == undefined) {
+        if ($scope.memberAdd['MEMBER.USER_NAME'] == undefined || $scope.memberAdd['MEMBER.LOGIN_ID'] == undefined || $scope.memberAdd['MEMBER.MOBILE'] == undefined) {
             modalFactory.showAlert("请先填写完必填项。");
             return;
         }
-        $scope.memberAdd['member.LOGIN_PWD'] = "A123456";
+        $scope.memberAdd['MEMBER.LOGIN_PWD'] = "A123456";
+        $scope.memberAdd['MEMBER.CODE_ID'] = "SYS";
         console.log($scope.memberAdd);
         memberFactory.addMemberList($scope.memberAdd).get({}, function (response) {
             if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
@@ -62,7 +55,7 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
 
     //删除客户
     $scope.delMemberListById = function (ml) {
-        modalFactory.showAlert("确定删除客户：［" + ml['member.USER_NAME'] + "］?", function () {
+        modalFactory.showAlert("确定删除客户：［" + ml['MEMBER.USER_NAME'] + "］?", function () {
             memberFactory.delById(ml).get({}, function (response) {
                 if (response.extraData.state == 'true') {
                     $scope.$broadcast('pageBar.reload');
@@ -72,10 +65,10 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
     };
 
     $scope.changeState = function (ml) {
-        if (ml['member.USE_STATE'] == 1) {
+        if (ml['MEMBER.USE_STATE'] == 1) {
             //停用
-            modalFactory.showAlert("确定停用客户：［" + ml['member.USER_NAME'] + "］?", function () {
-                ml['member.USE_STATE'] = -1;
+            modalFactory.showAlert("确定停用客户：［" + ml['MEMBER.USER_NAME'] + "］?", function () {
+                ml['MEMBER.USE_STATE'] = -1;
                 memberFactory.modMemberListById(ml).get({}, function (response) {
                     if (response.extraData.state == 'true') {
                         modalFactory.showShortAlert("停用客户成功");
@@ -84,7 +77,7 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
             });
         } else {
             //启用
-            ml['member.USE_STATE'] = 1;
+            ml['MEMBER.USE_STATE'] = 1;
             memberFactory.modMemberListById(ml).get({}, function (response) {
                 if (response.extraData.state == 'true') {
                     modalFactory.showShortAlert("启用客户成功");
@@ -95,10 +88,10 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
 
     //用于清除填写的内容
     $scope.clearForm = function () {
-        $scope.memberAdd['member.USER_NAME'] = undefined;
-        $scope.memberAdd['member.LOGIN_ID'] = undefined;
-        $scope.memberAdd['member.MOBILE'] = undefined;
-        $scope.memberAdd['member.CODE_ID'] = undefined;
+        $scope.memberAdd['MEMBER.USER_NAME'] = undefined;
+        $scope.memberAdd['MEMBER.LOGIN_ID'] = undefined;
+        $scope.memberAdd['MEMBER.MOBILE'] = undefined;
+        $scope.memberAdd['MEMBER.CODE_ID'] = undefined;
     };
 });
 

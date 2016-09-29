@@ -11,54 +11,54 @@
                     </div>
                     <div class="col-sm-2">
 
-                        <select ng-model="filter['member.CODE_ID']"
-                                ng-init="filter['member.CODE_ID']='-1'"
+                        <select ng-model="filter['MEMBER.CODE_ID']"
+                                ng-init="filter['MEMBER.CODE_ID']='-1'"
                                 class="nya-bs-select form-control " data-width="80px">
                             <option class="nya-bs-option" value="-1">
                                 客户来源
                             </option>
                             <option class="nya-bs-option"
                                     ng-repeat="value in sourceList"
-                                    ng-bind="value['member_code_source.NAME']"
-                                    value="{{value['member_code_source.CODE']}}">
+                                    ng-bind="value['MEMBER_CODE_SOURCE.NAME']"
+                                    value="{{value['MEMBER_CODE_SOURCE.CODE']}}">
                             </option>
                         </select>
                     </div>
                     <div class="col-sm-2">
 
-                        <select ng-model="filter['member.TYPE_ID']"
-                                ng-init="filter['member.TYPE_ID']='-1'"
+                        <select ng-model="filter['MEMBER.TYPE_ID']"
+                                ng-init="filter['MEMBER.TYPE_ID']='-1'"
                                 class="nya-bs-select form-control " data-width="80px">
                             <option class="nya-bs-option" value="-1">
                                 客户类型
                             </option>
-                            <%--<option class="nya-bs-option"--%>
-                            <%--ng-repeat="value in sourceList"--%>
-                            <%--ng-bind="value['member_code_source.NAME']"--%>
-                            <%--value="{{value['member_code_source.CODE']}}">--%>
-                            <%--</option>--%>
+                            <option class="nya-bs-option"
+                                    ng-repeat="value in typeList"
+                                    ng-bind="value['MEMBER_CODE_TYPE.NAME']"
+                                    value="{{value['MEMBER_CODE_TYPE.ID']}}">
+                            </option>
                         </select>
                     </div>
                     <div class="col-sm-2">
-                        <select ng-model="filter['member.GROUP_ID']"
-                                ng-init="filter['member.GROUP_ID']='-1'"
+                        <select ng-model="filter['MEMBER.GROUP_ID']"
+                                ng-init="filter['MEMBER.GROUP_ID']='-1'"
                                 class="nya-bs-select form-control " data-width="80px">
                             <option class="nya-bs-option" value="-1">
                                 客户分组
                             </option>
-                            <%--<option class="nya-bs-option"--%>
-                            <%--ng-repeat="value in sourceList"--%>
-                            <%--ng-bind="value['member_code_source.NAME']"--%>
-                            <%--value="{{value['member_code_source.CODE']}}">--%>
-                            <%--</option>--%>
+                            <option class="nya-bs-option"
+                                    ng-repeat="value in groupList"
+                                    ng-bind="value['MEMBER_CODE_GROUP.NAME']"
+                                    value="{{value['MEMBER_CODE_GROUP.ID']}}">
+                            </option>
                         </select>
                     </div>
                     <div class="col-sm-1" style="padding-top: 8px;text-align: right">
                         排序:
                     </div>
                     <div class="col-sm-2">
-                        <%--<select ng-model="filter['member.CODE_ID']"--%>
-                        <%--ng-init="filter['member.CODE_ID']='-1'"--%>
+                        <%--<select ng-model="filter['MEMBER.CODE_ID']"--%>
+                        <%--ng-init="filter['MEMBER.CODE_ID']='-1'"--%>
                         <%--class="nya-bs-select form-control " data-width="80px">--%>
                         <%--<option class="nya-bs-option" value="-1">--%>
                         <%--注册时间--%>
@@ -80,7 +80,7 @@
                 <th class="col-sm-2">登陆账号</th>
                 <th class="col-sm-2">用户名</th>
                 <th class="col-sm-1">手机号码</th>
-                <th class="col-sm-1">会员分组</th>
+                <th class="col-sm-1">客户分组</th>
                 <th class="col-sm-1">来源</th>
                 <th class="col-sm-2">注册时间</th>
                 <th class="col-sm-1">状态</th>
@@ -89,23 +89,23 @@
             </thead>
             <tbody>
             <tr ng-repeat="ml in memberList">
-                <td ng-bind="ml['member.LOGIN_ID']"></td>
-                <td ng-bind="ml['member.USER_NAME']"></td>
-                <td ng-bind="ml['member.MOBILE']"></td>
-                <td>会员分组</td>
-                <td ng-bind="sourceMap.get(ml['member.CODE_ID'])"></td>
-                <td ng-bind="ml['member.REG_DATETIME'] | FormatAllDate"></td>
-                <td ng-bind="ml['member.USE_STATE'] | FormatState"></td>
+                <td ng-bind="ml['MEMBER.LOGIN_ID']"></td>
+                <td ng-bind="ml['MEMBER.USER_NAME']"></td>
+                <td ng-bind="ml['MEMBER.MOBILE']"></td>
+                <td ng-bind="ml['MEMBER.GROUP_NAME']"></td>
+                <td ng-bind="ml['MEMBER.CODE_NAME']"></td>
+                <td ng-bind="ml['MEMBER.REG_DATETIME'] | FormatAllDate"></td>
+                <td ng-bind="ml['MEMBER.USE_STATE'] | FormatState"></td>
                 <td>
-                    <a class="table-link" ui-sref="memberInfo({id:ml['member.USER_ID']})">
+                    <a class="table-link" ui-sref="memberInfo({id:ml['MEMBER.USER_ID']})">
                         客户详情
                     </a>
                     <a class="table-link" ng-click="delMemberListById(ml)">
                         删除
                     </a>
                     <a class="table-link" ng-click="changeState(ml)">
-                        <span ng-show="ml['member.USE_STATE'] == 1">停用</span>
-                        <span ng-show="ml['member.USE_STATE'] == -1">启用</span>
+                        <span ng-show="ml['MEMBER.USE_STATE'] == 1">停用</span>
+                        <span ng-show="ml['MEMBER.USE_STATE'] == -1">启用</span>
                     </a>
                 </td>
             </tr>
@@ -133,7 +133,7 @@
                                 </label>
                                 <div class="col-sm-7">
                                     <input class="form-control" type="text"
-                                           name="name" ng-model="memberAdd['member.USER_NAME']"
+                                           name="name" ng-model="memberAdd['MEMBER.USER_NAME']"
                                            required>
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                                 </label>
                                 <div class="col-sm-7">
                                     <input class="form-control" type="text"
-                                           name="telephone" ng-model="memberAdd['member.LOGIN_ID']"
+                                           name="telephone" ng-model="memberAdd['MEMBER.LOGIN_ID']"
                                            required>
                                 </div>
                             </div>
@@ -157,61 +157,50 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
-                                    客户来源：
+                                    客户类型：
                                 </label>
                                 <div class="col-sm-7">
-                                    <select ng-model="memberAdd['member.CODE_ID']"
-                                            ng-init="memberAdd['member.CODE_ID']='-1'"
-                                            class="nya-bs-select form-control">
+                                    <select ng-model="memberAdd['MEMBER.TYPE_ID']"
+                                            ng-init="memberAdd['MEMBER.TYPE_ID']='-1'"
+                                            class="nya-bs-select form-control"
+                                            ng-change="loadGroupByType(memberAdd['MEMBER.TYPE_ID'])">
+                                        <option class="nya-bs-option" value="-1">
+                                            选择客户类型
+                                        </option>
                                         <option class="nya-bs-option"
-                                                ng-repeat="value in sourceList"
-                                                ng-bind="value['member_code_source.NAME']"
-                                                value="{{value['member_code_source.CODE']}}">
+                                                ng-repeat="value in typeList"
+                                                ng-bind="value['member_code_type.NAME']"
+                                                value="{{value['member_code_type.ID']}}">
                                         </option>
                                     </select>
                                 </div>
                             </div>
-                            <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">--%>
-                            <%--<span class="required" style="color: red"> * </span>客户类型：--%>
-                            <%--</label>--%>
-                            <%--<div class="col-sm-7">--%>
-                            <%--<select ng-model="memberAdd['shop.DISTRICT_ID']"--%>
-                            <%--ng-init="memberAdd['shop.DISTRICT_ID']='-1'"--%>
-                            <%--class="nya-bs-select form-control"--%>
-                            <%--ng-change="addDistrictModal(memberAdd['shop.DISTRICT_ID'])">--%>
-                            <%--<option class="nya-bs-option"--%>
-                            <%--ng-repeat="value in districtList"--%>
-                            <%--ng-bind="value['district.DISTRICT_NAME']"--%>
-                            <%--value="{{value['district.DISTRICT_ID']}}">--%>
-                            <%--</option>--%>
-                            <%--</select>--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
-                            <%--<div class="form-group">--%>
-                            <%--<label class="col-sm-3 control-label">--%>
-                            <%--<span class="required" style="color: red"> * </span>客户分组：--%>
-                            <%--</label>--%>
-                            <%--<div class="col-sm-7">--%>
-                            <%--<select ng-model="memberAdd['shop.DISTRICT_ID']"--%>
-                            <%--ng-init="memberAdd['shop.DISTRICT_ID']='-1'"--%>
-                            <%--class="nya-bs-select form-control"--%>
-                            <%--ng-change="addDistrictModal(memberAdd['shop.DISTRICT_ID'])">--%>
-                            <%--<option class="nya-bs-option"--%>
-                            <%--ng-repeat="value in districtList"--%>
-                            <%--ng-bind="value['district.DISTRICT_NAME']"--%>
-                            <%--value="{{value['district.DISTRICT_ID']}}">--%>
-                            <%--</option>--%>
-                            <%--</select>--%>
-                            <%--</div>--%>
-                            <%--</div>--%>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
+                                    客户分组：
+                                </label>
+                                <div class="col-sm-7">
+                                    <select ng-model="memberAdd['MEMBER.GROUP_ID']"
+                                            ng-init="memberAdd['MEMBER.GROUP_ID']='-1'"
+                                            class="nya-bs-select form-control">
+                                        <option class="nya-bs-option" value="-1">
+                                            选择客户分组
+                                        </option>
+                                        <option class="nya-bs-option"
+                                                ng-repeat="value in groupListById"
+                                                ng-bind="value['member_code_group.NAME']"
+                                                value="{{value['member_code_group.ID']}}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
                                     <span class="required" style="color: red"> * </span>手机号码：
                                 </label>
                                 <div class="col-sm-7">
                                     <input class="form-control" type="text"
-                                           name="telephone" ng-model="memberAdd['member.MOBILE']"
+                                           name="telephone" ng-model="memberAdd['MEMBER.MOBILE']"
                                            maxlength="11" required>
                                 </div>
                             </div>
@@ -233,40 +222,40 @@
         <!-- END add modal -->
         <%--<!--BEGIN 新增-->--%>
         <%--<div class="modal fade text-left" id="addMember" tabindex="-1" aria-hidden="true"--%>
-             <%--style="display: none;">--%>
-            <%--<div class="modal-dialog">--%>
-                <%--<div class="modal-content">--%>
-                    <%--<div class="modal-header">--%>
-                        <%--<button type="button" class="close" data-dismiss="modal"--%>
-                                <%--aria-hidden="true"></button>--%>
-                        <%--<h4 class="modal-title">新增客户</h4>--%>
-                    <%--</div>--%>
-                    <%--<div class="modal-body form-body text-right">--%>
+        <%--style="display: none;">--%>
+        <%--<div class="modal-dialog">--%>
+        <%--<div class="modal-content">--%>
+        <%--<div class="modal-header">--%>
+        <%--<button type="button" class="close" data-dismiss="modal"--%>
+        <%--aria-hidden="true"></button>--%>
+        <%--<h4 class="modal-title">新增客户</h4>--%>
+        <%--</div>--%>
+        <%--<div class="modal-body form-body text-right">--%>
 
-                        <%--<form class="form-horizontal">--%>
+        <%--<form class="form-horizontal">--%>
 
-                            <%--<div class="form-group row">--%>
-                                <%--<label class="col-md-3 control-label">--%>
-                                    <%--<span class="required" style="color: red"> * </span> 用户名:--%>
-                                <%--</label>--%>
+        <%--<div class="form-group row">--%>
+        <%--<label class="col-md-3 control-label">--%>
+        <%--<span class="required" style="color: red"> * </span> 用户名:--%>
+        <%--</label>--%>
 
-                                <%--<div class="col-md-8">--%>
-                                    <%--<input type="text" class="form-control"--%>
-                                           <%--ng-model="add['district.DISTRICT_NAME']"--%>
-                                           <%--ng-init="add['district.DISTRICT_NAME']=''"--%>
-                                           <%--placeholder=""></div>--%>
-                            <%--</div>--%>
+        <%--<div class="col-md-8">--%>
+        <%--<input type="text" class="form-control"--%>
+        <%--ng-model="add['district.DISTRICT_NAME']"--%>
+        <%--ng-init="add['district.DISTRICT_NAME']=''"--%>
+        <%--placeholder=""></div>--%>
+        <%--</div>--%>
 
-                        <%--</form>--%>
-                    <%--</div>--%>
-                    <%--<div class="modal-footer">--%>
-                        <%--<button type="button" ng-click="addDistrict()" class="btn green">确定--%>
-                        <%--</button>--%>
-                        <%--<button type="button" class="btn green  btn-outline" data-dismiss="modal">取消--%>
-                        <%--</button>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-            <%--</div>--%>
+        <%--</form>--%>
+        <%--</div>--%>
+        <%--<div class="modal-footer">--%>
+        <%--<button type="button" ng-click="addDistrict()" class="btn green">确定--%>
+        <%--</button>--%>
+        <%--<button type="button" class="btn green  btn-outline" data-dismiss="modal">取消--%>
+        <%--</button>--%>
+        <%--</div>--%>
+        <%--</div>--%>
+        <%--</div>--%>
         <%--</div>--%>
         <%--<!--END 新增-->--%>
         <div page-bar
