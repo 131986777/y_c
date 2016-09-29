@@ -91,7 +91,8 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
         $scope.memberAdd['MEMBER.USER_NAME'] = undefined;
         $scope.memberAdd['MEMBER.LOGIN_ID'] = undefined;
         $scope.memberAdd['MEMBER.MOBILE'] = undefined;
-        $scope.memberAdd['MEMBER.CODE_ID'] = undefined;
+        $scope.memberAdd['MEMBER.TYPE_ID'] = undefined;
+        $scope.memberAdd['MEMBER.GROUP_ID'] = undefined;
     };
 });
 
