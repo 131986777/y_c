@@ -11,9 +11,11 @@ AndSellMainModule.controller('MemberCardController', function ($scope, $state, $
     $scope.initLoad = function () {
         //var sourceID,typeID;
         memberFactory.getMembercardInfo($scope.memberId).get({}, function (response) {
+            $scope.cardInfoList=response.data;
             console.log(response.data);
 
             var data=response.data;
+            console.log(data);
             var cardNum=data[0]['MEMBER_CARD.CARD_ID'];
             var cardName=data[0]['MEMBER_CARD.CARD_NAME'];
             var isFaceVale=data[0]['IS_FACE_VALUE'];
@@ -33,16 +35,18 @@ AndSellMainModule.controller('MemberCardController', function ($scope, $state, $
             $scope.freezeBalance=freezeBalance;
 
             memberFactory.getMembercardSource($scope.sourceID).get({},function (response) {
-               // console.log('1111');
+
                 console.log(response.data);
-                $scope.cardSource=response.data[0]['MEMBER_CARD_SOURCE.NAME'];
+                $scope.cardSourceList=new Array();
+                $scope.cardSourceList.push(response.data[0]['MEMBER_CARD_SOURCE.NAME']);
 
             },null);
 
             memberFactory.getMembercardType($scope.typeID).get({},function (response) {
                // console.log('2222');
                 console.log(response.data);
-                $scope.cardType=response.data[0]['MEMBER_CARD_TYPE.NAME'];
+                $scope.cardTypeList=new Array();
+                $scope.cardTypeList.push(response.data[0]['MEMBER_CARD_TYPE.NAME']);
             },null);
 
 

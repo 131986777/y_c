@@ -29,22 +29,27 @@
 
             </div>
             <!--内容区-->
-            <div style="margin-top: 50px;margin-left: 100px">
-                <div>
-                    <label>卡号：</label><label>{{cardNum}}</label>
 
-                    <label style="margin-left: 100px">{{cardName}}</label>
-                </div><br>
-                <label  style="margin-left: 70px">{{cardType}}</label>
-                <div style="margin-left: 230px">
-                    <label>余额：</label><label>{{balance}}</label><br>
-                    <label>冻结：</label><label>{{freezeBalance}}</label>
-                </div>
-                <div >
-                    <label>面值：</label><label>{{faceValue}}</label>
-                </div>
-                <span>{{addDatatime+cardSource}}</span>
+            <div style="margin-top:50px;margin-left:100px">
 
+                <div style="width:500px;float:left" ng-repeat="(key,item) in cardInfoList">
+                    <div>
+                        <label>卡号：</label><label>{{item['MEMBER_CARD.CARD_ID']}}</label>
+
+                        <label style="margin-left: 120px">{{item['MEMBER_CARD.CARD_NAME']}}</label>
+                    </div>
+                    <br>
+                    <label style="margin-left: 70px">{{cardTypeList[key]}}</label>
+                    <div style="margin-left: 230px">
+                        <label>余额：</label><label>{{item['MEMBER_CARD.BALANCE']}}</label><br>
+                        <label>冻结：</label><label>{{item['MEMBER_CARD.FREEZE_BALANCE']}}</label>
+                    </div>
+                    <div>
+                        <label>面值：</label><label>{{item['MEMBER_CARD.FACE_VALUE']}}</label>
+                    </div><br>
+                    <span>{{item['MEMBER_CARD.ADD_DATETIME']+cardSourceList[key]}}</span>
+                </div>
             </div>
         </div>
     </div>
+</div>
