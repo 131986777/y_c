@@ -23,11 +23,16 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
 
 
     //根据类型加载客户分组
-    $scope.loadGroupByType = function (id) {
+    $scope.loadGroupByType = function (what,id) {
 
         memberGroupFactory.getMemberGroupListByType(id).get({}, function (repsonse) {
             console.log(repsonse.data);
-            $scope.groupListById = repsonse.data;
+            if (what==1){
+                $scope.groupListById = repsonse.data;
+            }else if (what==2){
+                $scope.groupListByTypeId = repsonse.data;
+            }
+
         }, null);
 
     };
@@ -91,8 +96,8 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
         $scope.memberAdd['MEMBER.USER_NAME'] = undefined;
         $scope.memberAdd['MEMBER.LOGIN_ID'] = undefined;
         $scope.memberAdd['MEMBER.MOBILE'] = undefined;
-        $scope.memberAdd['MEMBER.TYPE_ID'] = undefined;
-        $scope.memberAdd['MEMBER.GROUP_ID'] = undefined;
+        $scope.memberAdd['MEMBER.TYPE_ID'] = "-1";
+        $scope.memberAdd['MEMBER.GROUP_ID'] = "-1";
     };
 });
 

@@ -28,7 +28,8 @@
 
                         <select ng-model="filter['MEMBER.TYPE_ID']"
                                 ng-init="filter['MEMBER.TYPE_ID']='-1'"
-                                class="nya-bs-select form-control " data-width="80px">
+                                class="nya-bs-select form-control " data-width="80px"
+                                ng-change="loadGroupByType(1,filter['MEMBER.TYPE_ID'])">
                             <option class="nya-bs-option" value="-1">
                                 客户类型
                             </option>
@@ -47,7 +48,7 @@
                                 客户分组
                             </option>
                             <option class="nya-bs-option"
-                                    ng-repeat="value in groupList"
+                                    ng-repeat="value in groupListById"
                                     ng-bind="value['MEMBER_CODE_GROUP.NAME']"
                                     value="{{value['MEMBER_CODE_GROUP.ID']}}">
                             </option>
@@ -57,13 +58,19 @@
                         排序:
                     </div>
                     <div class="col-sm-2">
-                        <%--<select ng-model="filter['MEMBER.CODE_ID']"--%>
-                        <%--ng-init="filter['MEMBER.CODE_ID']='-1'"--%>
-                        <%--class="nya-bs-select form-control " data-width="80px">--%>
-                        <%--<option class="nya-bs-option" value="-1">--%>
-                        <%--注册时间--%>
-                        <%--</option>--%>
-                        <%--</select>--%>
+                        <select ng-model="filter['MEMBER.REG_DATETIME']"
+                                ng-init="filter['MEMBER.REG_DATETIME']='-1'"
+                                class="nya-bs-select form-control " data-width="80px">
+                            <option class="nya-bs-option" value="-1">
+                                注册时间
+                            </option>
+                            <option class="nya-bs-option" value="1">
+                                升序
+                            </option>
+                            <option class="nya-bs-option" value="2">
+                                降序
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-sm-6 text-right">
@@ -163,7 +170,7 @@
                                     <select ng-model="memberAdd['MEMBER.TYPE_ID']"
                                             ng-init="memberAdd['MEMBER.TYPE_ID']='-1'"
                                             class="nya-bs-select form-control"
-                                            ng-change="loadGroupByType(memberAdd['MEMBER.TYPE_ID'])">
+                                            ng-change="loadGroupByType(2,memberAdd['MEMBER.TYPE_ID'])">
                                         <option class="nya-bs-option" value="-1">
                                             选择客户类型
                                         </option>
@@ -187,7 +194,7 @@
                                             选择客户分组
                                         </option>
                                         <option class="nya-bs-option"
-                                                ng-repeat="value in groupListById"
+                                                ng-repeat="value in groupListByTypeId"
                                                 ng-bind="value['MEMBER_CODE_GROUP.NAME']"
                                                 value="{{value['MEMBER_CODE_GROUP.ID']}}">
                                         </option>
