@@ -109,13 +109,13 @@
             <tr>
                 <th class="col-sm-1">绑定微信ID</th>
                 <td class="col-sm-2" ng-bind="memberInfo['MEMBER.WX_OPENID']"></td>
-                <td class="col-sm-1"><a class="table-link" ng-show="memberInfo['MEMBER.WX_OPENID']!=undefined">解除</a>
+                <td class="col-sm-1"><a class="table-link" ng-click="unBindWX()" ng-show="memberInfo['MEMBER.WX_OPENID']!=undefined">解除</a>
                 </td>
             </tr>
             <tr>
                 <th class="col-sm-1">绑定QQ登录</th>
                 <td class="col-sm-2" ng-bind="memberInfo['MEMBER.QQ_OPENID']"></td>
-                <td class="col-sm-1"><a class="table-link" ng-show="memberInfo['MEMBER.QQ_OPENID']!=undefined">解除</a>
+                <td class="col-sm-1"><a class="table-link" ng-click="unBindQQ()" ng-show="memberInfo['MEMBER.QQ_OPENID']!=undefined">解除</a>
                 </td>
             </tr>
             </tbody>

@@ -52,12 +52,8 @@
             <tr>
                 <th class="col-sm-1">分组</th>
                 <td class="col-sm-2">
-                    <select ng-model="account['MEMBER_ACCOUNT.GROUP_ID']"
-                            ng-init="account['MEMBER_ACCOUNT.GROUP_ID']='-1'"
+                    <select ng-model="member['MEMBER.GROUP_ID']"
                             class="nya-bs-select form-control">
-                        <option class="nya-bs-option" value="-1">
-                            选择客户分组
-                        </option>
                         <option class="nya-bs-option"
                                 ng-repeat="value in groupList"
                                 ng-bind="value['MEMBER_CODE_GROUP.NAME']"
