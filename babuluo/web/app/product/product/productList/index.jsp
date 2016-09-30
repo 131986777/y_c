@@ -102,44 +102,34 @@
                 <%--</div>--%>
 
 
-                <%--<span>--%>
-                <%--<select ng-model="filter.isSale"--%>
-                <%--ng-init="filter.isSale =0"--%>
-                <%--class="nya-selectpicker bs-select form-control input-small">--%>
-                <%--<option value="<%=0%>">所有商品</option>--%>
-                <%--<option value="<%=1%>">上架</option>--%>
-                <%--<option value="<%=-1%>">下架</option>--%>
-                <%--</select>--%>
+                <span>
+                <select ng-model="filter['SHOP_PRODUCT.IS_SALE']"
+                ng-init="filter['SHOP_PRODUCT.IS_SALE'] = 'null'"
+                class="nya-bs-select ">
+                <option class="nya-bs-option" value="null">所有商品</option>
+                <option class="nya-bs-option" value="1">上架</option>
+                <option class="nya-bs-option" value="-1">下架</option>
+                </select>
+                </span>
+
+                <span>
+                <select ng-model="filter['SHOP_PRODUCT.TAG_ID']"
+                ng-init="filter['SHOP_PRODUCT.TAG_ID'] = 'null'"
+                class="nya-bs-select">
+                <option class="nya-bs-option" value="null">全部标签</option>
+                <option class="nya-bs-option" ng-repeat="tag in tagList" ng-bind="tag['SHOP_TAG.TAG']" value="'{{tag['SHOP_TAG.TAG_ID']}}'"></option>
+                </select>
                 <%--</span>--%>
 
-                <%--<span>--%>
-                <%--<select ng-model="filter.tagId"--%>
-                <%--ng-init="filter.tagId = 0;"--%>
-                <%--class="nya-selectpicker bs-select form-control input-small">--%>
-                <%--<option value="<%=0%>">全部标签</option>--%>
-                <%--<option value="{{prdTag.tag_ID}}"--%>
-                <%--ng-repeat="prdTag in productTagList">--%>
-                <%--{{prdTag.tag}}--%>
-                <%--</option>--%>
-
-                <%--</select>--%>
-                <%--</span>--%>
-
-                <%--&lt;%&ndash;<span>&nbsp;排序</span>&ndash;%&gt;--%>
-                <%--<select ng-model="filter.orderState"--%>
-                <%--ng-init="filter.orderState = 'ORDER_NUM DESC'; "--%>
-                <%--class="nya-selectpicker bs-select form-control input-small">--%>
-                <%--<option value="ORDER_NUM DESC">排序号</option>--%>
-                <%--<option value="ADD_DATETIME DESC">添加时间 ↓</option>--%>
-                <%--<option value="ADD_DATETIME ASC">添加时间 ↑</option>--%>
-                <%--<option value="MIN_PRICE DESC">市场价 ↓</option>--%>
-                <%--<option value="MAX_PRICE ASC">市场价 ↑</option>--%>
-                <%--<option value="UPDATE_DATETIME DESC">修改时间 ↓</option>--%>
-                <%--<option value="UPDATE_DATETIME ASC">修改时间 ↑</option>--%>
-                <%--<option value="SALES_VOLUME DESC">销量 ↓</option>--%>
-                <%--<option value="SALES_VOLUME ASC">销量 ↑</option>--%>
-                <%--</select>--%>
-                <%--</div>--%>
+                <%--<span>&nbsp;排序</span>--%>
+                <select ng-model="filter['SHOP_PRODUCT.ODRDER']"
+                ng-init="filter['SHOP_PRODUCT.ODRDER'] = 'ORDER_NUM DESC'; "
+                class="nya-bs-select">
+                <option class="nya-bs-option" value="ORDER_NUM DESC">排序号</option>
+                <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
+                <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
+                </select>
+                </div>
 
                 <%--<div class="col-md-3 text-right">--%>
 
@@ -151,13 +141,13 @@
                 <%--</a>--%>
                 <%--</div>--%>
 
-                <%--<div class="btn-group ">--%>
-                <%--<a href="productAdd.jsp">--%>
-                <%--<button id="sample_editable_1_new" class="btn sbold green">--%>
-                <%--<i class="fa fa-plus"></i> 新增商品--%>
-                <%--</button>--%>
-                <%--</a>--%>
-                <%--</div>--%>
+                <div class="btn-group ">
+                <a ui-sref="productAdd">
+                <button id="sample_editable_1_new" class="btn sbold green">
+                <i class="fa fa-plus"></i> 新增商品
+                </button>
+                </a>
+                </div>
 
                 <%--<div class="btn-group ">--%>
                 <%--<button class="btn green  btn-outline dropdown-toggle"--%>
@@ -368,4 +358,70 @@
 
     </div>
 
+
+    <%--修改商品价格--%>
+    <div class="modal fade text-left" id="modifySkuPrice" ng-enter="submitModifySkuPrice()" tabindex="-1"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true"></button>
+                    <h4 class="modal-title">设置商品价格</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+
+                    <div class="form-body " style="">
+                        <div class="form-group">
+                            <div class="form-group row">
+                                <div class="col-md-2">
+                                    <img style="width: 40px; height: 40px;"
+                                         ng-src="{{modifySkuPriceInfo.img}}">
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="col-md-12 text-left"
+                                         ng-bind="modifySkuPriceInfo.prdName"></div>
+                                    <div class="col-md-12 text-left"
+                                         ng-bind="modifySkuPriceInfo.skuShowName"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-2 right form-inpit-title font-green"
+                                       style="padding-right:0px;font-size: 16px;font-weight: 600;">市场价</label>
+
+                                <div class="col-md-3">
+                                    <input focus-select currency format-currency
+                                           ng-blur="changeMemberLevelPrice(modifySkuPriceInfo, modifySkuPriceInfo.memberLevelPriceList)"
+                                           style="padding-right:0px;font-size: 16px;font-weight: 600;"
+                                           ng-model="modifySkuPriceInfo.price"
+                                           class="form-control font-green">
+                                </div>
+                                <label class="control-label col-md-2 right form-inpit-title font-green"
+                                       style="padding-right:0px;font-size: 16px;font-weight: 600;">成本价</label>
+
+                                <div class="col-md-3">
+                                    <input focus-select currency format-currency
+                                           style="padding-right:0px;font-size: 16px;font-weight: 600;"
+                                           ng-model="modifySkuPriceInfo.cost"
+                                           class="form-control font-green">
+                                </div>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" ng-click="submitModifySkuPrice()"
+                                class="btn green">确定
+                        </button>
+                        <button type="button" class="btn green  btn-outline"
+                                data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+    <%--结束修改--%>
 </div>

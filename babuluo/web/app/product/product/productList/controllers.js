@@ -7,6 +7,7 @@ AndSellMainModule.controller('productListController', function ($scope, productF
     $scope.bindData = function (response) {
 
         $scope.productList = response.data;
+        $scope.tagList = response.extraData.tagList;
         console.log( $scope.productList);
 
     };
