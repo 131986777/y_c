@@ -34,12 +34,16 @@
             <tbody>
             <tr>
                 <th class="col-sm-1">真实姓名</th>
-                <td class="col-sm-2"></td>
+                <td class="col-sm-2">
+                    <input class="form-control" type="text" ng-model="memberData['MEMBER.USER_NAME']">
+                </td>
                 <td class="col-sm-1"></td>
             </tr>
             <tr>
                 <th class="col-sm-1">QQ</th>
-                <td class="col-sm-2"></td>
+                <td class="col-sm-2">
+                    <input class="form-control" type="text" ng-model="memberData['MEMBER.USER_NAME']">
+                </td>
                 <td class="col-sm-1"></td>
             </tr>
             <tr>
@@ -49,7 +53,9 @@
             </tr>
             <tr>
                 <th class="col-sm-1">地址</th>
-                <td class="col-sm-2"></td>
+                <td class="col-sm-2">
+                    <input class="form-control" type="text" ng-model="memberData['MEMBER.USER_NAME']">
+                </td>
                 <td class="col-sm-1"></td>
             </tr>
             </tbody>

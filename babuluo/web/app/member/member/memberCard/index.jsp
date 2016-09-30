@@ -40,7 +40,7 @@
                     </div>
                     <br>
                     <label style="margin-left: 70px">{{cardTypeList[key]}}</label>
-                    <div style="margin-left: 230px">
+                    <div style="margin-left: 200px">
                         <label>余额：</label><label>{{item['MEMBER_CARD.BALANCE']}}</label><br>
                         <label>冻结：</label><label>{{item['MEMBER_CARD.FREEZE_BALANCE']}}</label>
                     </div>
