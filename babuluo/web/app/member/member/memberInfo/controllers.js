@@ -67,7 +67,37 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
             memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
                 if (response.extraData.state == 'true') {
                     modalFactory.showShortAlert("密码重置成功");
-                }else{
+                } else {
+                    modalFactory.showShortAlert(response.msg);
+                }
+            });
+        });
+    };
+
+    //解除微信
+    $scope.unBindWX = function () {
+        modalFactory.showAlert("确定解除微信绑定吗？", function () {
+            $scope.memberInfo['MEMBER.WX_OPENID'] = "{$empty}";
+            memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
+                if (response.extraData.state == 'true') {
+                    $scope.memberInfo['MEMBER.WX_OPENID'] = undefined;
+                    modalFactory.showShortAlert("解绑成功");
+                } else {
+                    modalFactory.showShortAlert(response.msg);
+                }
+            });
+        });
+    };
+
+    //解除QQ
+    $scope.unBindQQ = function () {
+        modalFactory.showAlert("确定解除QQ绑定吗？", function () {
+            $scope.memberInfo['MEMBER.QQ_OPENID'] = "{$empty}";
+            memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
+                if (response.extraData.state == 'true') {
+                    $scope.memberInfo['MEMBER.QQ_OPENID'] = undefined;
+                    modalFactory.showShortAlert("解绑成功");
+                } else {
                     modalFactory.showShortAlert(response.msg);
                 }
             });

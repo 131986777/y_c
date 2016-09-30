@@ -21,6 +21,8 @@ AndSellMainModule.controller('MemberAccountController', function ($scope, $state
                 $scope.account = response.data[0];
                 console.log(response);
                 $scope.groupList = response.extraData.groupList;
+                $scope.member = response.extraData.member[0];
+                console.log($scope.member['MEMBER.GROUP_ID']);
             }
         });
     };
@@ -29,13 +31,12 @@ AndSellMainModule.controller('MemberAccountController', function ($scope, $state
 
     //设置页面Bottom触发事件
     modalFactory.setBottom(true, function () {
-        console.log($scope.account);
-        memberFactory.modMemberAccount($scope.account).get({}, function (response) {
+        console.log($scope.member);
+        memberFactory.modMemberListById($scope.member).get({}, function (response) {
             if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert("保存成功");
-                $scope.modifyID = false;
                 $scope.initLoad();
             }
         });
