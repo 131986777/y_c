@@ -65,9 +65,27 @@ AndSellMainModule.service('memberFactory', function ($resource, baseURL) {
         });
     };
 
+    this.getMemberData = function (userId) {
+        console.log(userId);
+        return $resource(baseURL + '/member/memberData/getById?member_info.USER_ID=:ID', {'ID': userId}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
+    this.modMemberDataById = function (form) {
+        return $resource(baseURL + '/member/memberData/modifyById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
+
     this.getMembercardInfo = function (userId) {
         console.log(userId);
-        return $resource(baseURL + '/member/membercard/getByUserId?member_card.USER_ID=:ID', {'ID': userId}, {
+        return $resource(baseURL + '/member/membercard/getById?member_card.USER_ID=:ID', {'ID': userId}, {
             'update': {
                 method: 'PUT'
             }
