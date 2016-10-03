@@ -26,13 +26,11 @@
                     </li>
                 </ul>
                 <!-- END 导航标签 -->
-
             </div>
             <!--内容区-->
-
             <div style="margin-top:50px;margin-left:100px">
 
-                <div style="width:500px;float:left" ng-repeat="(key,item) in cardInfoList">
+                <div style="width:500px;float:left"  ng-repeat="(key,item) in cardInfoList">
                     <div>
                         <label>卡号：</label><label>{{item['MEMBER_CARD.CARD_ID']}}</label>
 

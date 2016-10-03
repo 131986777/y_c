@@ -85,7 +85,7 @@ AndSellMainModule.service('memberFactory', function ($resource, baseURL) {
 
     this.getMembercardInfo = function (userId) {
         console.log(userId);
-        return $resource(baseURL + '/member/membercard/getById?member_card.USER_ID=:ID', {'ID': userId}, {
+        return $resource(baseURL + '/member/membercard/getByUserId?MEMBER_CARD.USER_ID=:ID', {'ID': userId}, {
             'update': {
                 method: 'PUT'
             }

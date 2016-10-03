@@ -1,7 +1,7 @@
 AndSellMainModule.controller('MemberCardController', function ($scope, $state, $stateParams, memberFactory, memberSourceFactory, modalFactory, $q) {
 
     //设置页面Title
-    modalFactory.setTitle('客户详情');
+    modalFactory.setTitle('客户会员卡信息');
 
     modalFactory.setBottom(true);
 

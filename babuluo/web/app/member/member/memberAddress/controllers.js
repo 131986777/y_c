@@ -1,7 +1,7 @@
 AndSellMainModule.controller('MemberAddressController', function ($scope, $state, $stateParams, memberFactory, memberSourceFactory, modalFactory, $q) {
 
     //设置页面Title
-    modalFactory.setTitle('客户详情');
+    modalFactory.setTitle('客户收件地址');
 
     modalFactory.setBottom(true);
 
