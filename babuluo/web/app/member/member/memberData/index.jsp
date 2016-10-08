@@ -17,7 +17,6 @@
                     <li>
                         <a ui-sref="memberAccount({id:memberId})"> 账户 </a>
                     </li>
-
                     <li>
                         <a ui-sref="memberAddress({id:memberId})"> 收件地址 </a>
                     </li>
@@ -28,45 +27,38 @@
                 <!-- END 导航标签 -->
             </div>
         </div>
-
-        <table class="table table-bordered table-hover table-striped">
+        <form class="form-horizontal" novalidate="novalidate">
             <h4>资料</h4>
-            <tbody>
-            <tr>
-                <th class="col-sm-1">真实姓名</th>
-                <td class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">真实姓名</label>
+                <div class="col-sm-4">
                     <input class="form-control" type="text" ng-model="memberData['MEMBER_INFO.TRUE_NAME']">
-                </td>
-                <td class="col-sm-1"></td>
-            </tr>
-            <tr>
-                <th class="col-sm-1">QQ</th>
-                <td class="col-sm-2">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">QQ</label>
+                <div class="col-sm-4">
                     <input class="form-control" type="text" ng-model="memberData['MEMBER_INFO.QQ']">
-                </td>
-                <td class="col-sm-1"></td>
-            </tr>
-            <tr>
-                <th class="col-sm-1">所在地区</th>
-                <td class="col-sm-2">
-
-                    <div >
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">所在地区</label>
+                <div class="col-sm-4">
+                    <div>
                         <div class="col-sm-3">
-                            <select ng-model="memberData['MEMBER_INFO.ADDR_GUO']" class="form-control " ng-change="newSheng(ADDR_SHENG)" required>
+                            <select ng-model="memberData['MEMBER_INFO.ADDR_GUO']" class="form-control "
+                                    ng-change="newSheng(ADDR_SHENG)" required>
                                 <option>中国</option>
                                 <option>其他区域</option>
-
                             </select>
-
                         </div>
                         <div class="col-sm-3">
-                            <select ng-model="memberData['MEMBER_INFO.ADDR_SHENG']" class="form-control " ng-change="newSheng(ADDR_SHENG)"
+                            <select ng-model="memberData['MEMBER_INFO.ADDR_SHENG']" class="form-control "
+                                    ng-change="newSheng(ADDR_SHENG)"
 
                                     ng-options="district.p for district in citys" name="addrSheng" required>
                                 <option value="{{ADDR_SHENG}}"></option>
-
                             </select>
-
                         </div>
 
                         <div class="col-sm-3">
@@ -81,19 +73,14 @@
                                     ng-options="unit.s for unit in ADDR_SHI.a">
                             </select>
                         </div>
-
-
                     </div>
-                </td>
-                <td class="col-sm-1"></td>
-            </tr>
-            <tr>
-                <th class="col-sm-1">地址</th>
-                <td class="col-sm-2">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">地址</label>
+                <div class="col-sm-4">
                     <input class="form-control" type="text" ng-model="memberData['MEMBER_INFO.ADDR']">
-                </td>
-                <td class="col-sm-1"></td>
-            </tr>
-            </tbody>
-        </table>
+                </div>
+            </div>
+        </form>
     </div>

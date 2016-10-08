@@ -28,73 +28,72 @@
                 <!-- END 导航标签 -->
             </div>
         </div>
-
-        <table class="table table-bordered table-hover table-striped">
+        <form class="form-horizontal" novalidate="novalidate">
             <h4>基本信息</h4>
-            <tbody>
-            <tr>
-                <th class="col-sm-1">ID</th>
-                <td class="col-sm-2" ng-bind="memberInfo['MEMBER.TYPE_ID']"></td>
-                <td class="col-sm-1"></td>
-            </tr>
-            <tr ng-init="modifyID=false">
-                <th class="col-sm-1">登陆ID</th>
-                <td class="col-sm-2" ng-show="!modifyID" ng-bind="memberInfo['MEMBER.LOGIN_ID']"></td>
-                <td class="col-sm-2" ng-show="modifyID">
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">ID</label>
+                <div class="col-sm-4">
+                    <label class="control-label" ng-bind="memberInfo['MEMBER.TYPE_ID']"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">登陆ID</label>
+                <div ng-show="!modifyID" class="col-sm-4">
+                    <label class="control-label" ng-bind="memberInfo['MEMBER.LOGIN_ID']"></label>
+                </div>
+                <div ng-show="modifyID" class="col-sm-4">
                     <input class="form-control" type="text" ng-model="memberInfo['MEMBER.LOGIN_ID']">
-                </td>
-                </td>
-                <td class="col-sm-1">
-                    <a class="table-link" ng-click="modifyID=true">重置登陆ID</a>
-                    <a class="table-link" ng-click="initPWD()">重置密码</a>
-                </td>
-            </tr>
-            <tr>
-                <th class="col-sm-1">用户名</th>
-                <td class="col-sm-2">
-                    <input class="form-control" type="text" ng-model="memberInfo['MEMBER.USER_NAME']"></td>
-                <td class="col-sm-1"></td>
-            </tr>
-            <tr>
-                <th class="col-sm-1">头像</th>
-                <td class="col-sm-2"></td>
-                <td class="col-sm-1"></td>
-            </tr>
-            <tr>
-                <th class="col-sm-1">手机号</th>
-                <td class="col-sm-2">
-                    <input class="form-control" type="text" ng-model="memberInfo['MEMBER.MOBILE']"></td>
-                </td>
-                <td class="col-sm-1"></td>
-            </tr>
-            <tr>
-                <th class="col-sm-1">邮箱</th>
-                <td class="col-sm-2">
+                </div>
+            </div>
+            <div ng-init="modifyID=false" class="form-group">
+                <label class="control-label col-sm-1 right form-input-title"></label>
+                <div class="col-sm-2">
+                    <a class="table-link control-label" ng-click="modifyID=true">重置登陆ID</a>
+                    <a class="table-link control-label" ng-click="initPWD()">重置密码</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">用户名</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" ng-model="memberInfo['MEMBER.USER_NAME']">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">头像</label>
+                <div class="col-sm-4">
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">手机号</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" ng-model="memberInfo['MEMBER.MOBILE']">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">邮箱</label>
+                <div class="col-sm-4">
                     <input class="form-control" type="text" ng-model="memberInfo['MEMBER.EMAIL']">
-                </td>
-                </td>
-                <td class="col-sm-1"></td>
-            </tr>
-            <tr>
-                <th class="col-sm-1">备注</th>
-                <td class="col-sm-2">
-                    <input class="form-control" type="text" ng-model="memberInfo['MEMBER.REMARK']"></td>
-                </td>
-                <td class="col-sm-1"></td>
-            </tr>
-            </tbody>
-        </table>
-        <table class="table table-bordered table-hover table-striped">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">备注</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" ng-model="memberInfo['MEMBER.REMARK']">
+                </div>
+            </div>
+        </form>
+        <form class="form-horizontal" novalidate="novalidate">
             <h4>渠道</h4>
-            <tbody>
-            <tr>
-                <th class="col-sm-1">来源</th>
-                <td class="col-sm-2" ng-bind="sourceMap.get(memberInfo['MEMBER.CODE_ID'])"></td>
-                <td class="col-sm-1"></td>
-            </tr>
-            <tr>
-                <th class="col-sm-1">类型</th>
-                <td class="col-sm-2">
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">来源</label>
+                <div class="col-sm-4">
+                    <label class="control-label" ng-bind="sourceMap.get(memberInfo['MEMBER.CODE_ID'])"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">类型</label>
+                <div class="col-sm-4">
                     <select ng-model="memberInfo['MEMBER.TYPE_ID']"
                             class="nya-bs-select form-control">
                         <option class="nya-bs-option"
@@ -103,21 +102,27 @@
                                 value="{{value['MEMBER_CODE_TYPE.ID']}}">
                         </option>
                     </select>
-                </td>
-                <td class="col-sm-1"></td>
-            </tr>
-            <tr>
-                <th class="col-sm-1">绑定微信ID</th>
-                <td class="col-sm-2" ng-bind="memberInfo['MEMBER.WX_OPENID']"></td>
-                <td class="col-sm-1"><a class="table-link" ng-click="unBindWX()" ng-show="memberInfo['MEMBER.WX_OPENID']!=undefined">解除</a>
-                </td>
-            </tr>
-            <tr>
-                <th class="col-sm-1">绑定QQ登录</th>
-                <td class="col-sm-2" ng-bind="memberInfo['MEMBER.QQ_OPENID']"></td>
-                <td class="col-sm-1"><a class="table-link" ng-click="unBindQQ()" ng-show="memberInfo['MEMBER.QQ_OPENID']!=undefined">解除</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">绑定微信ID</label>
+                <div class="col-sm-4">
+                    <label class="control-label" ng-bind="memberInfo['MEMBER.WX_OPENID']"></label>
+                </div>
+                <div class="col-sm-4">
+                    <a class="table-link" ng-click="unBindWX()"
+                       ng-show="memberInfo['MEMBER.WX_OPENID']!=undefined">解除</a>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">绑定QQ登录</label>
+                <div class="col-sm-4">
+                    <label class="control-label" ng-bind="memberInfo['MEMBER.QQ_OPENID']"></label>
+                </div>
+                <div class="col-sm-1">
+                    <a class="table-link" ng-click="unBindQQ()"
+                       ng-show="memberInfo['MEMBER.QQ_OPENID']!=undefined">解除</a>
+                </div>
+            </div>
+        </form>
     </div>
