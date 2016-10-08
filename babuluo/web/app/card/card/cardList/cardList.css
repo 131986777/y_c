@@ -3,11 +3,9 @@
     height: 220px;
     margin-top: 20px;
     border-radius: 10px;
-    position: relative;
     color: #fff;
 }
 .card1{
-
     background-color: #31C552;
 }
 .card2{
@@ -38,27 +36,28 @@
     background-color: #303133;
 }
 .balance{
-    line-height: 134px;
+    line-height: 122px;
     text-align: center;
     font-size: 38px;
     position: relative;
 }
 .balance span{
     color: rgb(240,231,231);
-    font-size: 25px;
+    font-size: 18px;
 }
 .balance .froze{
     color: rgb(240,231,231);
     font-size: 16px;
     position: absolute;
-    right: 137px;
-    top: -27px;
+    right: 141px;
+    top: -30px;
 }
 .cardTitle{
-    padding: 5px 15px 0 15px;
-    font-size: 28px;
+    padding: 14px 20px 0 20px;
+    font-size: 22px;
 }
 .cardFooter{
-    padding: 0 15px 5px 15px;
+    padding: 0 20px 5px 20px;
     font-size: 14px;
+    color:
 }
