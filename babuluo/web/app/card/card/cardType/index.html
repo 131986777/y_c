@@ -1,29 +1,16 @@
-
 <div class="page-content" >
 
     <div class="table-operbar">
         <div class="table-toolbar">
             <div class="row">
-                <div class="form-inline form-group">
-                    <div class="form-group">
-                        <label for="name" class="control-label">客户</label>
-                        <input type="text" class="form-control" id="name" placeholder="姓名/手机">
-                    </div>
-                    <div class="form-group">
-                        <label for="cardNum" class="control-label">卡号</label>
-                        <input type="text" class="form-control" id="cardNum">
-                    </div>
-                    <div class="form-group col-md-offset-1">
-                        <select class="form-control">
-                            <option>所有类型</option>
-                            <option>金卡</option>
-                        </select>
-                        <select class="form-control">
-                            <option>所有渠道</option>
-                            <option>线下门店</option>>
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#cardList">+ 开卡</button>
+                <div class="col-md-2">
+                    <select class="form-control">
+                        <option>所有渠道</option>
+                        <option>线下门店</option>
+                    </select>
+                </div>
+                <div class="col-md-10">
+                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#cardType">+ 添加</button>
                 </div>
             </div><!-- row end -->
         </div>
@@ -186,7 +173,7 @@
 
 
     <!-MODAL-->
-    <div class="modal fade" id="cardList" >
+    <div class="modal fade" id="cardType" >
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -198,37 +185,6 @@
                     <form class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                所属客户
-                            </label>
-
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                卡号
-                            </label>
-
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                类型
-                            </label>
-
-                            <div class="col-md-8">
-                                <select class="form-control">
-                                    <option>金卡</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
                                 名称
                             </label>
 
@@ -236,33 +192,48 @@
                                 <input type="text" class="form-control" placeholder="">
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                面额
+                                描述
                             </label>
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control" placeholder="">
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                可用余额
+                                背景色
                             </label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                冻结金额
-                            </label>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <input type="text" class="form-control" placeholder="">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="center-block">
+                                            <div class="color" style="background-color: #31C552"></div>
+                                            <div class="color" style="background-color: #199B93"></div>
+                                            <div class="color" style="background-color: #EF5B5B"></div>
+                                            <div class="color" style="background-color: #A90807"></div>
+                                            <div class="color" style="background-color: #3679E1"></div>
+                                        </div>
+                                        <div class="center-block">
+                                            <div class="color" style="background-color: #8C56B2"></div>
+                                            <div class="color" style="background-color: #E19318"></div>
+                                            <div class="color" style="background-color: #CCCA12"></div>
+                                            <div class="color" style="background-color: #C7C7C7"></div>
+                                            <div class="color" style="background-color: #303133"></div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="">
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
                                 发卡渠道
@@ -274,6 +245,17 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                起始卡号
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" placeholder="">
+                            </div>
+                        </div>
+
+
                     </form>
                 </div>
                 <div class="modal-footer">

@@ -1,0 +1,45 @@
+.card{
+    width: 480px;
+    height: 220px;
+    margin-top: 20px;
+    border-radius: 10px;
+    color: #fff;
+    position: relative;
+}
+.balance{
+    line-height: 124px;
+    text-align: center;
+    font-size: 38px;
+    position: relative;
+}
+.balance span{
+    color: rgb(240,231,231);
+    font-size: 18px;
+    padding-bottom: 2px;
+}
+.froze{
+    color: rgb(240,231,231);
+    font-size: 16px;
+    position: absolute;
+    right: 130px;
+    top: 64px;
+}
+.cardTitle{
+    padding: 14px 20px 0 20px;
+    font-size: 22px;
+}
+.cardFooter{
+    padding: 0 20px 5px 20px;
+    font-size: 14px;
+}
+.color{
+    width: 36px;
+    height: 36px;
+    float: left;
+    margin-right: 3px;
+    margin-top: 3px;
+}
+.center-block{
+    overflow: hidden;
+
+}
