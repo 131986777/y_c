@@ -1,0 +1,64 @@
+.card{
+    width: 480px;
+    height: 220px;
+    margin-top: 20px;
+    border-radius: 10px;
+    position: relative;
+    color: #fff;
+}
+.card1{
+
+    background-color: #31C552;
+}
+.card2{
+    background-color: #199B93;
+}
+.card3{
+    background-color:#EF5B5B;
+}
+.card4{
+    background-color:#A90807;
+}
+.card5{
+    background-color: #3679E1;
+}
+.card6{
+    background-color: #8C56B2;
+}
+.card7{
+    background-color: #E19318;
+}
+.card8{
+    background-color: #CCCA12;
+}
+.card9{
+    background-color: #C7C7C7;
+}
+.card10{
+    background-color: #303133;
+}
+.balance{
+    line-height: 134px;
+    text-align: center;
+    font-size: 38px;
+    position: relative;
+}
+.balance span{
+    color: rgb(240,231,231);
+    font-size: 25px;
+}
+.balance .froze{
+    color: rgb(240,231,231);
+    font-size: 16px;
+    position: absolute;
+    right: 137px;
+    top: -27px;
+}
+.cardTitle{
+    padding: 5px 15px 0 15px;
+    font-size: 28px;
+}
+.cardFooter{
+    padding: 0 15px 5px 15px;
+    font-size: 14px;
+}
