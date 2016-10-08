@@ -88,7 +88,7 @@
                 <th class="col-sm-2">用户名</th>
                 <th class="col-sm-1">手机号码</th>
                 <th class="col-sm-1">客户分组</th>
-                <th class="col-sm-1" ng-model>来源</th>
+                <th class="col-sm-1">来源</th>
                 <th class="col-sm-2">注册时间</th>
                 <th class="col-sm-1">状态</th>
                 <th class="col-sm-2">操作</th>
