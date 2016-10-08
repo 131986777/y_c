@@ -8,7 +8,6 @@
 
     <title ng-bind="title"></title>
 
-
     <!--############CSS引用区############-->
     <link href="/AndSell/app/components/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/AndSell/app/components/libs/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
@@ -197,11 +196,6 @@
                                     退货单
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    订单详情
-                                </a>
-                            </li>
                         </ul>
                     </div>
                 </li>
@@ -213,11 +207,6 @@
                     </a>
                     <div class="sub-menu-wrap dropdown-menu" role="menu">
                         <ul class="sub-menu ">
-                            <li>
-                                <a href="#">
-                                    门店管理
-                                </a>
-                            </li>
                             <li>
                                 <a href="#">
                                     仓库列表
@@ -232,8 +221,8 @@
                         <i class="icon-users"></i>
                         客户
                     </a>
-                    <div class="sub-menu-wrap dropdown-menu" role="menu">
-                        <ul class="sub-menu ">
+                    <div class="sub-menu-wrap sub-menu-3 dropdown-menu">
+                        <ul class="sub-menu " role="menu">
                             <li>
                                 <a ui-sref="memberList">
                                     客户列表
@@ -254,40 +243,62 @@
                                     客户类型
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    积分管理
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    积分明细
-                                </a>
-                            </li>
                         </ul>
-                    </div>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"
-                       data-hover="dropdown">
-                        <i class="iconfont icon-zijinyue"></i>
-                        资金
-                    </a>
-                    <div class="sub-menu-wrap dropdown-menu">
+
                         <ul class="sub-menu " role="menu">
                             <li>
                                 <a href="#">
-                                    用户资金账户
+                                    已开会员卡
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    收支明细
+                                    会员卡类型
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    发卡渠道
                                 </a>
                             </li>
                         </ul>
+
+                        <ul class="sub-menu " role="menu">
+                            <li>
+                                <a ui-sref="balanceList">
+                                    资金明细
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="pointList">
+                                    积分明细
+                                </a>
+                            </li>
+
+                        </ul>
                     </div>
                 </li>
+                <!--<li class="dropdown">-->
+                    <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#"-->
+                       <!--data-hover="dropdown">-->
+                        <!--<i class="iconfont icon-zijinyue"></i>-->
+                        <!--资金-->
+                    <!--</a>-->
+                    <!--<div class="sub-menu-wrap dropdown-menu">-->
+                        <!--<ul class="sub-menu " role="menu">-->
+                            <!--<li>-->
+                                <!--<a href="#">-->
+                                    <!--用户资金账户-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a ui-sref="balanceList">-->
+                                    <!--收支明细-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                <!--</li>-->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#"
                        data-hover="dropdown">
@@ -331,13 +342,13 @@
                     <div class="sub-menu-wrap sub-menu-3 dropdown-menu">
                         <ul class="sub-menu " role="menu">
                             <li>
-                                <a href="#">
-                                    管理员列表
+                                <a ui-sref="shopList">
+                                    门店管理
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
-                                    新增管理员
+                                <a ui-sref="shopDistrict">
+                                    门店区域管理
                                 </a>
                             </li>
                         </ul>
