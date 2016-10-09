@@ -9,10 +9,10 @@ AndSellMainModule.controller('MemberDataController',function ($scope, $state, $s
 
     console.log("这是客户的id：" + $scope.memberId);
 
-   // var jiaOrderData = angular.module("jiaOrder.data");
+    var andSellData = angular.module("AndSell.data");
 
     $scope.initLoad = function () {
-
+        $scope.citys = andSellData.citys;
         $scope.loadMemberData();
 
     };
