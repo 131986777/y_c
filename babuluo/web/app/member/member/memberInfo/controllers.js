@@ -77,7 +77,7 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
     //解除微信
     $scope.unBindWX = function () {
         modalFactory.showAlert("确定解除微信绑定吗？", function () {
-            $scope.memberInfo['MEMBER.WX_OPENID'] = "{$empty}";
+            $scope.memberInfo['MEMBER.WX_OPENID'] = "{$null}";
             memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
                 if (response.extraData.state == 'true') {
                     $scope.memberInfo['MEMBER.WX_OPENID'] = undefined;

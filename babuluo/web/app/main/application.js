@@ -68,6 +68,10 @@ AndSellUI.service('modalFactory', function ($rootScope) {
         $rootScope.$broadcast("title", title);
     };
 
+    this.reload = function () {
+        $rootScope.$broadcast("pageBar.reload", {});
+    };
+
     this.showAlert = function (msg, func) {
         $rootScope.$broadcast("to-modal", {
             message: msg, callback: func
@@ -273,6 +277,7 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
             }, true);
 
             scope.$on("pageBar.reload", function (d, data) {
+                console.log('reload');
                 scope.currentPage = 1;
                 scope.loadData();
             });
