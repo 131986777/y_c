@@ -39,7 +39,6 @@ AndSellMainModule.service('productFactory', function ($resource, baseURL) {
           }
         });
       };
-
     this.delProduct = function (form) {
         return $resource(baseURL + '/shop/product/falseDelete', form, {
           'update': {
@@ -55,6 +54,14 @@ AndSellMainModule.service('productFactory', function ($resource, baseURL) {
           }
         });
       };
+
+    this.modifySkuListPrice = function (form) {
+        return $resource(baseURL + '/shop/product/sku/modifySkuListPrice', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
 
       /*this.addProduct = function (id) {
         return $resource(baseURL
