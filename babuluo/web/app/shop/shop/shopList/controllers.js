@@ -134,7 +134,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
     };
 
     $scope.delShopListById = function (sl) {
-        modalFactory.showAlert("确定删除门店：［" + sl['SHOP.SHOP_NAME'] + "］?", function () {
+        modalFactory.showAlert("确定关停门店：［" + sl['SHOP.SHOP_NAME'] + "］?", function () {
             shopFactory.delById(sl).get({}, function (response) {
                 if (response.extraData.state == 'true') {
                     $scope.initLoad();
