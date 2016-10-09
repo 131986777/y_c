@@ -198,24 +198,54 @@
                     <form class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                所属客户
+                                <span class="required"> * </span> 会员:
                             </label>
 
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="">
+                            <div class="col-md-8 text-left form-inline">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="请输入会员登录名称">
+                                </div>
+                                <button type="submit" class="btn btn-default">查询</button>
+
+
+                                <span class="help-block" ng-show="editForm.name.$error.required && !editForm.name.$pristine">
+                                    请先输入会员ID
+                                </span>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                卡号
+                                <span class="required"> * </span> 姓名:
                             </label>
 
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="">
+                            <div class="col-md-8 text-left">
+                                <h5>怕不辣</h5>
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 手机:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5>13966667777</h5>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                发卡渠道
+                            </label>
+
+                            <div class="col-md-8">
+                                <select class="form-control">
+                                    <option>线下门店</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
                                 类型
@@ -229,13 +259,22 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                名称
+                                卡号
                             </label>
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control" placeholder="">
                             </div>
                         </div>
+                        <!--<div class="form-group row">-->
+                            <!--<label class="col-md-3 control-label">-->
+                                <!--名称-->
+                            <!--</label>-->
+
+                            <!--<div class="col-md-8">-->
+                                <!--<input type="text" class="form-control" placeholder="">-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
                                 面额
@@ -263,17 +302,7 @@
                                 <input type="text" class="form-control" placeholder="">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                发卡渠道
-                            </label>
 
-                            <div class="col-md-8">
-                                <select class="form-control">
-                                    <option>线下门店</option>
-                                </select>
-                            </div>
-                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
