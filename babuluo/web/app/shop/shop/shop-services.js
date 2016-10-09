@@ -32,7 +32,7 @@ AndSellMainModule.service('shopFactory', function ($resource, baseURL) {
         });
     };
     this.delById = function (form) {
-        return $resource(baseURL + '/shop/shop/delById', form, {
+        return $resource(baseURL + '/shop/shop/closeShop', form, {
             'update': {
                 method: 'PUT'
             }

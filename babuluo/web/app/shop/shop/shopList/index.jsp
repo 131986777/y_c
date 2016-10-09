@@ -61,7 +61,7 @@
                         修改
                     </a>
                     <a class="table-link" ng-click="delShopListById(sl)">
-                        删除
+                        关闭
                     </a>
                 </td>
             </tr>
