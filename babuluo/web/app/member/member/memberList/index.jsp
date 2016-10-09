@@ -12,9 +12,9 @@
                     <div class="col-sm-2">
 
                         <select ng-model="filter['MEMBER.CODE_ID']"
-                                ng-init="filter['MEMBER.CODE_ID']='-1'"
+                                ng-init="filter['MEMBER.CODE_ID']='null'"
                                 class="nya-bs-select form-control " data-width="80px">
-                            <option class="nya-bs-option" value="-1">
+                            <option class="nya-bs-option" value="null">
                                 客户来源
                             </option>
                             <option class="nya-bs-option"
@@ -27,10 +27,10 @@
                     <div class="col-sm-2">
 
                         <select ng-model="filter['MEMBER.TYPE_ID']"
-                                ng-init="filter['MEMBER.TYPE_ID']='-1'"
+                                ng-init="filter['MEMBER.TYPE_ID']='null'"
                                 class="nya-bs-select form-control " data-width="80px"
                                 ng-change="loadGroupByType(1,filter['MEMBER.TYPE_ID'])">
-                            <option class="nya-bs-option" value="-1">
+                            <option class="nya-bs-option" value="null">
                                 客户类型
                             </option>
                             <option class="nya-bs-option"
@@ -42,9 +42,9 @@
                     </div>
                     <div class="col-sm-2">
                         <select ng-model="filter['MEMBER.GROUP_ID']"
-                                ng-init="filter['MEMBER.GROUP_ID']='-1'"
+                                ng-init="filter['MEMBER.GROUP_ID']='null'"
                                 class="nya-bs-select form-control " data-width="80px">
-                            <option class="nya-bs-option" value="-1">
+                            <option class="nya-bs-option" value="null">
                                 客户分组
                             </option>
                             <option class="nya-bs-option"
@@ -59,16 +59,13 @@
                     </div>
                     <div class="col-sm-2">
                         <select ng-model="filter['MEMBER.REG_DATETIME']"
-                                ng-init="filter['MEMBER.REG_DATETIME']='-1'"
+                                ng-init="filter['MEMBER.REG_DATETIME']='REG_DATETIME DESC'"
                                 class="nya-bs-select form-control " data-width="80px">
-                            <option class="nya-bs-option" value="-1">
-                                注册时间
+                            <option class="nya-bs-option" value="REG_DATETIME DESC">
+                                注册时间↓
                             </option>
-                            <option class="nya-bs-option" value="1">
-                                升序
-                            </option>
-                            <option class="nya-bs-option" value="2">
-                                降序
+                            <option class="nya-bs-option" value="REG_DATETIME ASC">
+                                注册时间↑
                             </option>
                         </select>
                     </div>
