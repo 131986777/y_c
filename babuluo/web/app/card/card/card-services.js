@@ -42,4 +42,13 @@ AndSellMainModule.service('unitFactory', function ($resource, baseURL) {
         });
     };
 
-    });
+    this.addCardType = function (form) {
+        return $resource(baseURL + '/member/cardType/add', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
+
+});
