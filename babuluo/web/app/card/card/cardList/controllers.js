@@ -1,14 +1,18 @@
-AndSellMainModule.controller('cardListController', function ($scope, $stateParams, unitFactory, modalFactory) {
+AndSellMainModule.controller('cardListController', function ($scope, $stateParams, cardFactory, modalFactory) {
 
-  modalFactory.setTitle('已开会员卡');
+    modalFactory.setTitle('已开会员卡');
 
-  $scope.initLoad = function () {
-    unitFactory.getPrdUnitList().get({}, function (repsonce) {
-      console.log(repsonce);
-      $scope.productUnitList = repsonce.data;
-    }, null);
-  };
-  $scope.initLoad();
+    $scope.initLoad = function () {
+        cardFactory.getMemberCardList().get({}, function (response) {
+            console.log(response);
+            $scope.productUnitList = response.data;
+        }, null);
+    };
+    $scope.yy={
+        'background-color' : '#31C552'
+    };
+
+    $scope.initLoad();
 
 
 });
