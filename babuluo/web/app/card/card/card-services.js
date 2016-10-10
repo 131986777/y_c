@@ -18,7 +18,15 @@ AndSellMainModule.service('unitFactory', function ($resource, baseURL) {
         });
     };
 
-     this.addCardSource = function (form) {
+    this. getCardListBySource = function (sourceID) {
+        return $resource(baseURL + '/member/cardType/getBySource?MEMBER_CARD_TYPE.CARD_SOURCE_ID=:ID', {'ID': sourceID}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
+    this.addCardSource = function (form) {
         return $resource(baseURL + '/member/cardSource/add', form, {
             'update': {
                 method: 'PUT'
@@ -44,6 +52,13 @@ AndSellMainModule.service('unitFactory', function ($resource, baseURL) {
 
     this.addCardType = function (form) {
         return $resource(baseURL + '/member/cardType/add', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+    this.delCardType = function (id) {
+        return $resource(baseURL + '/member/cardType/delById?member_card_type.ID=:ID', {'ID': id},{
             'update': {
                 method: 'PUT'
             }
