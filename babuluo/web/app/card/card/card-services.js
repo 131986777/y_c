@@ -1,14 +1,13 @@
-AndSellMainModule.service('unitFactory', function ($resource, baseURL) {
+AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
 
-
-
-      this.addPrdUnit = function (form) {
-        return $resource(baseURL + '/shop/product/unit/add', form, {
-          'update': {
-            method: 'PUT'
-          }
+    this.getMemberCardList = function () {
+        return $resource(baseURL + '/member/membercard/queryAll', {}, {
+            'update': {
+                method: 'PUT'
+            }
         });
-      };
+    };
+
 
     this.getCardSourceList = function () {
         return $resource(baseURL + '/member/cardSource/queryAll', null, {
@@ -18,7 +17,7 @@ AndSellMainModule.service('unitFactory', function ($resource, baseURL) {
         });
     };
 
-    this. getCardListBySource = function (sourceID) {
+    this.getCardListBySource = function (sourceID) {
         return $resource(baseURL + '/member/cardType/getBySource?MEMBER_CARD_TYPE.CARD_SOURCE_ID=:ID', {'ID': sourceID}, {
             'update': {
                 method: 'PUT'
