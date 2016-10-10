@@ -56,9 +56,9 @@
                 <p ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0" class="froze">
                     （冻结{{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}}）</p>
                 <div class="row cardFooter">
-                    <div class="col-md-3 nowrap">{{cl['MEMBER_CARD.MEMBER_LOGIN_ID']}}</div>
-                    <div class="col-md-4 nowrap text-right">面值：{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</div>
-                    <div class="col-md-3 text-right">{{cl['MEMBER_CARD.ADD_DATETIME'] | FormatStrDate}}</div>
+                    <div class="col-md-4 nowrap">{{cl['MEMBER_CARD.MEMBER_LOGIN_ID']}}</div>
+                    <div class="col-md-4 nowrap text-right count">面值：{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</div>
+                    <div class="col-md-2 text-right time">{{cl['MEMBER_CARD.ADD_DATETIME'] | FormatStrDate}}</div>
                     <div class="col-md-2 nowrap text-right">{{cl['MEMBER_CARD.SOURCE_NAME']}}</div>
                 </div>
             </div>
