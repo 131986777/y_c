@@ -57,8 +57,7 @@
                 <div class="row cardFooter">
                     <div class="col-md-4 nowrap">{{cl['MEMBER_CARD.MEMBER_LOGIN_ID']}}</div>
                     <div class="col-md-4 nowrap text-right count">面值：{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</div>
-                    <div class="col-md-2 text-right time">{{cl['MEMBER_CARD.ADD_DATETIME'] | FormatStrDate}}</div>
-                    <div class="col-md-2 nowrap text-right">{{cl['MEMBER_CARD.SOURCE_NAME']}}</div>
+                    <div class="col-md-4 text-right time">{{cl['MEMBER_CARD.ADD_DATETIME'] | FormatStrDate}}{{cl['MEMBER_CARD.SOURCE_NAME']}}</div>
                 </div>
             </div>
         </div> <!-- right -->
