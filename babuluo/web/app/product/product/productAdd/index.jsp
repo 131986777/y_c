@@ -102,11 +102,11 @@
                     <div class="col-md-10">
                         <button class="btn"
                                 ng-repeat="item in prdTagList"
-                                ng-bind="item['shop_tag.TAG']"
+                                ng-bind="item['SHOP_TAG.TAG']"
                                 style="margin-right:10px;min-width: 100px"
-                                ng-init="tag[item['shop_tag.TAG_ID']]=false"
-                                ng-class="{true:'btn-default', false:'green'}[tag[item['shop_tag.TAG_ID']]]"
-                                ng-click="selectTagButton(item['shop_tag.TAG_ID'],item['shop_tag.TAG'])">
+                                ng-init="tag[item['SHOP_TAG.TAG_ID']]=false"
+                                ng-class="{true:'btn-primary', false:'btn-default'}[tag[item['SHOP_TAG.TAG_ID']]]"
+                                ng-click="selectTagButton(item['SHOP_TAG.TAG_ID'],item['SHOP_TAG.TAG'])">
                         </button>
                     </div>
                 </div>

@@ -3,9 +3,9 @@ AndSellMainModule.controller('cardSourceController', function ($scope, $statePar
     modalFactory.setTitle('会员卡发布渠道');
 
     $scope.initLoad = function () {
-        cardFactory.getCardSourceList().get({}, function (repsonce) {
-            console.log(repsonce);
-            $scope.cardSourceList = repsonce.data;
+        cardFactory.getCardSourceList().get({}, function (response) {
+            console.log(response);
+            $scope.cardSourceList = response.data;
         }, null);
     };
 

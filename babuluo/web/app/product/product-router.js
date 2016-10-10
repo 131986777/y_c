@@ -8,10 +8,11 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("productModify", {
             url: "/productModify",
+            params: {productId: 0},
             templateUrl: "/AndSell/app/product/product/productModify/index.jsp",
             controller: "productModifyController"
         })
-        .state("productList", {
+        .state("productList",{
             url: "/productList",
             templateUrl: "/AndSell/app/product/product/productList/index.jsp",
             controller: "productListController"

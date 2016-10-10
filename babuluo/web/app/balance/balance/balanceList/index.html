@@ -6,70 +6,65 @@
             <div class="row">
                 <div class="form-inline form-group">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="输入用户名/用户编码">
-                        <button type="submit" class="btn btn-default">搜索</button>
+                        <input type="text" class="form-control" placeholder="输入登录ID" ng-model="loginId">
+                        <button type="submit" class="btn btn-default" ng-click="searchInfo(loginId)">搜索</button>
                     </div>
 
                     <div class="form-group  col-md-offset-2">
-                        <select class="form-control">
-                            <option>流向</option>
-                            <option>支出</option>
-                            <option>收入</option>
+                        <label>筛选:</label>
+                        <select ng-model="filter['FINANCE_LIST.CHANGE_TYPE']"
+                                ng-init="filter['FINANCE_LIST.CHANGE_TYPE']='null'"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="null">
+                                来源
+                            </option>
+                            <option class="nya-bs-option" value="decrease">
+                                支出
+                            </option>
+                            <option class="nya-bs-option" value="increase">
+                                收入
+                            </option>
                         </select>
                     </div> <!-- select-center  -->
                     <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#balance">调整资金</button>
-                </div>
+            </div>
             </div>
         </div>
     </div>
 
-    <div>
-        <table class="table table-bordered table-hover table-striped">
-            <theak>
-                <tr >
-                    <th>时间</th>
-                    <th>用户名</th>
-                    <th>事件</th>
-                    <th>说明</th>
-                    <th class="text-right">金额</th>
-                    <th  class="text-right">剩余金额</th>
+
+    <div class="col-md-12">
+        <div class="table-scrollable">
+            <table class="table table-striped table-hover">
+                <thead>
+                    <th > 时间</th>
+                    <th > 登录ID</th>
+                    <th > 事件</th>
+                    <th > 说明</th>
+                    <th class="text-right"> 金额</th>
+                    <th class="text-right"> 剩余金额</th>
                 </tr>
-                </theak>
-            <tr>
-                    <td>2016-05-03</td>
-                    <td>1396666787</td>
-                    <td>订单</td>
-                    <td>订单（3284）</td>
-                    <td class="text-right text-danger">-10</td>
-                    <td class="text-right">3928.08</td>
+                </thead>
+                <tbody ng-cloak>
+
+                <tr  ng-repeat='balanceInfo in balanceList'>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.ADD_DATETIME']"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.LOGIN_ID']"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT']"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>
+                    <td class="text-right" ng-bind="balanceInfo['FINANCE_LIST.CHANGE_VALUE']"></td>
+                    <td class="text-right" ng-bind="balanceInfo['FINANCE_LIST.BALANCE']"></td>
                 </tr>
-            <tr>
-                    <td>2016-05-03</td>
-                    <td>1396666787</td>
-                    <td>订单</td>
-                    <td>充值</td>
-                    <td class="text-right">+199</td>
-                    <td class="text-right">1999.00</td>
-                </tr>
-            <tr>
-                    <td>2016-05-03</td>
-                    <td>1396666787</td>
-                    <td>订单</td>
-                    <td>订单（3233）</td>
-                    <td class="text-right text-danger">-109</td>
-                    <td class="text-right">1928.00</td>
-                </tr>
-        </table>
+                </tbody>
+            </table>
+        </div>
+
     </div>
-
-
     <div page-bar
          filter-obj="filter"
-         url="/shop/product/queryAll"
+         url="/member/balance/getAllBalanceList"
          callback="bindData(response)">
     </div>
-
-
 
 
     <!-MODAL-->
@@ -90,14 +85,14 @@
 
                                 <div class="col-md-8 text-left form-inline">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="请输入会员ID\姓名">
+                                        <input type="text" class="form-control" placeholder="请输入会员ID" ng-model="memberId">
                                     </div>
-                                    <button type="submit" class="btn btn-default">查询</button>
 
-
-                                <span class="help-block" ng-show="editForm.name.$error.required && !editForm.name.$pristine">
-                                    请先输入会员ID
-                                </span>
+                                    <!--调用根据ID查询用户信息的API：/member/member/getById-->
+                                    <button type="submit" class="btn btn-default" ng-click="queryById(memberId)">查询</button>
+                                     <span class="help-block" ng-show="editForm.name.$error.required && !editForm.name.$pristine">
+                                         请先输入会员ID
+                                     </span>
                                 </div>
                             </div>
 
@@ -108,7 +103,7 @@
                                 </label>
 
                                 <div class="col-md-8 text-left">
-                                    <h5 >怕不辣</h5>
+                                    <h5 ng-bind="privateInfo['MEMBER.USER_NAME']"></h5>
                                 </div>
                             </div>
 
@@ -118,7 +113,7 @@
                                 </label>
 
                                 <div class="col-md-8 text-left">
-                                    <h5>13966667777</h5>
+                                    <h5 ng-bind="privateInfo['MEMBER.MOBILE']"></h5>
                                 </div>
                             </div>
 
@@ -128,7 +123,9 @@
                                 </label>
 
                                 <div class="col-md-8 text-left">
-                                    <h5>pabula@jiajia.com</h5>
+                                    <h5 ng-bind="privateInfo['member.EMAIL']"></h5>
+
+
                                 </div>
                             </div>
 
@@ -138,7 +135,7 @@
                                 </label>
 
                                 <div class="col-md-8 text-left">
-                                    <h5>1293</h5>
+                                    <h5 ng-bind="accountList['MEMBER_ACCOUNT.BALANCE']"></h5>
                                 </div>
                             </div>
 
@@ -149,23 +146,24 @@
 
                                 <div class="col-md-8 text-left">
                                     <label class="radio-inline">
-                                        <input type="radio" name="types"  value="increase"> 新增
+                                        <input type="radio" name="types"  value="1" ng-model="value"> 新增
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="types"  value="decrese"> 减少
+                                        <input type="radio" name="types"  value="0" ng-model="value"> 减少
                                     </label>
                                 </div>
                             </div>
 
                             <div class="form-group row">
                                 <label class="col-md-3 control-label">
-                                    <span class="required"> * </span> 调整数值:
+                                    <span class="required" > * </span> 调整数值:
                                 </label>
 
                                 <div class="col-md-8">
                                     <input type="text" class="form-control"
-                                           ng-model="modify['shop_product_class.CLASS_NAME']"
-                                           placeholder="">
+                                           ng-model="modifyvalue"
+                                           ng-blur="getDynamicBala()"
+                                    >
                                 </div>
                             </div>
 
@@ -176,8 +174,7 @@
 
                                 <div class="col-md-8">
                                     <input type="text" class="form-control"
-                                           ng-model="modify['shop_product_class.CLASS_NAME']"
-                                           placeholder="">
+                                           placeholder="请输入调整的原因">
                                 </div>
                             </div>
 
@@ -187,19 +184,19 @@
                                 </label>
 
                                 <div class="col-md-8 text-left">
-                                    <h5>1293</h5>
+                                    <h5>{{afterModify}}</h5>
                                 </div>
                             </div>
 
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-info btn-outline" ng-click="modifyProductClass()">确定
+                        <button type="button" class="btn btn-info btn-outline" data-dismiss="modal" ng-click="saveAccount(accountList,balanceList)">确定
                         </button>
                         <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
                         </button>
                     </div>
-                </div> <!-- modal-content-->
+                </div>
             </div>
         </div>
 
