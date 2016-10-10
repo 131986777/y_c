@@ -111,8 +111,7 @@
                                           ng-bind="tag"> </span>
 
                             <br>
-                            <a class="black_a"
-                               href="productDetail.jsp?prdId={{product.prdId}}"
+                            <a href="productDetail.jsp?prdId={{product.prdId}}"
                                ng-bind="product['SHOP_PRODUCT.PRD_NAME']"
                                class="font-dark"></a>
                         </div>
@@ -134,9 +133,7 @@
 
                     </td>
                     <td>
-                        <a ng-if="product.isParent"
-                           href="productModify.jsp?prdId={{product.prdId}}"
-                           target="_blank">修改</a>
+                        <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">修改</a>
 
                         <a show-modal id="#modifySkuPrice"
                            ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
@@ -246,13 +243,13 @@
                                 </td>
 
                                 <td class="text-left">
-                                    <span ng-click="addToChangeList(sku)"  ng-show="!sku.isChange"
+                                    <span ng-click="addToChangeList(sku)" ng-show="!sku.isChange"
                                           ng-bind="sku['SHOP_PRODUCT_SKU.PRICE'] | currency :'￥'"></span>
                                     <input type="text" ng-show="sku.isChange" class="form-control"
                                            ng-model="sku['SHOP_PRODUCT_SKU.PRICE']">
                                 </td>
                                 <td class="text-left">
-                                    <span ng-click="addToChangeList(sku)"  ng-show="!sku.isChange"
+                                    <span ng-click="addToChangeList(sku)" ng-show="!sku.isChange"
                                           ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
                                     <input type="text" ng-show="sku.isChange" class="form-control"
                                            ng-model="sku['SHOP_PRODUCT_SKU.REAL_PRICES']">
@@ -279,6 +276,5 @@
     </div>
     <%--结束修改--%>
 </div>
-
-</div>
+<script src="controllers.js"></script>
 
