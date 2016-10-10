@@ -72,7 +72,6 @@
             });
     };
 
-
     var PRODUCT_DEFAULT_IMG = "/uploads/images/product.png";
 
 </script>
