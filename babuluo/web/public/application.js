@@ -2,7 +2,6 @@ var AndSellRouter = angular.module('AndSell.Router', ['ui.router']);
 var AndSellService = angular.module('AndSell.Service', ['ngResource']);
 var AndSellUI = angular.module('AndSell.UI', ['nya.bootstrap.select','ngTagsInput']);
 var AndSellMainModule = angular.module('main', ['AndSell.Service', 'AndSell.Router', 'AndSell.UI']);
-
 AndSellService.constant('baseURL', 'http://localhost:8080/AndSell/-service');
 
 AndSellRouter.config(function ($stateProvider, $urlRouterProvider) {
@@ -237,3 +236,4 @@ AndSellUI.filter('FormatStrDate', function () {
     return formatDate;
   }
 });
+

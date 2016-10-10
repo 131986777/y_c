@@ -92,7 +92,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="ml in memberList">
+            <tr ng-repeat="ml in memberList|filter:{}">
                 <td ng-bind="ml['MEMBER.LOGIN_ID']"></td>
                 <td ng-bind="ml['MEMBER.USER_NAME']"></td>
                 <td ng-bind="ml['MEMBER.MOBILE']"></td>

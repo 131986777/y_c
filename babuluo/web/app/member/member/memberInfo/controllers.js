@@ -92,7 +92,7 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
     //解除QQ
     $scope.unBindQQ = function () {
         modalFactory.showAlert("确定解除QQ绑定吗？", function () {
-            $scope.memberInfo['MEMBER.QQ_OPENID'] = "{$empty}";
+            $scope.memberInfo['MEMBER.QQ_OPENID'] = "{$null}";
             memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
                 if (response.extraData.state == 'true') {
                     $scope.memberInfo['MEMBER.QQ_OPENID'] = undefined;
