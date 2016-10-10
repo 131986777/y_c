@@ -32,7 +32,7 @@
 
                 <div style="width:500px;float:left"  ng-repeat="(key,item) in cardInfoList">
                     <div>
-                        <label>卡号：</label><label>{{item['MEMBER_CARD.CARD_ID']}}</label>
+                        <label>卡号：</label><label>{{item['MEMBER_CARD.CARD_NO']}}</label>
 
                         <label style="margin-left: 120px">{{item['MEMBER_CARD.CARD_NAME']}}</label>
                     </div>

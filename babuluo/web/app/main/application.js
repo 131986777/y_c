@@ -192,7 +192,7 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
 
             //只是页数改变
             $scope.loadPage = function (pageIndex) {
-                if ( $scope.pageIndex != $scope.currentPage && !($scope.pageIndex
+                if ($scope.pageIndex != $scope.currentPage && !($scope.pageIndex
                     < 1 || $scope.pageIndex > $scope.totalPage )) {
                     $scope.currentPage = pageIndex;
                 }
@@ -231,7 +231,7 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
                     if (data != undefined && data.data.length > 0) {
                         $scope.pageObject = data.data;
                         var tmp = parseInt(data.extraData.page.querySize / data.extraData.page.pageSize);
-                        $scope.totalPage =( tmp * data.extraData.page.pageSize == data.extraData.page.querySize) ? tmp : tmp
+                        $scope.totalPage = ( tmp * data.extraData.page.pageSize == data.extraData.page.querySize) ? tmp : tmp
                         + 1;
                         $scope.totalCount = data.extraData.page.querySize;
 
@@ -287,6 +287,10 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
     };
 });
 
+/**
+ *
+ * 时间格式，精确到天
+ */
 AndSellUI.filter('FormatStrDate', function () {
     return function (input) {
         var date = new Date(input);
@@ -295,6 +299,10 @@ AndSellUI.filter('FormatStrDate', function () {
     }
 });
 
+/**
+ *
+ * 时间格式，精确到秒
+ */
 AndSellUI.filter('FormatAllDate', function () {
     return function (input) {
         var date = new Date(input);
@@ -303,18 +311,33 @@ AndSellUI.filter('FormatAllDate', function () {
         return formatDate;
     }
 });
-
+/**
+ *
+ * 根据1和-1判断状态
+ */
 AndSellUI.filter('FormatState', function () {
     return function (input) {
         var a;
         if (input == 1) {
             a = "启用";
-        }else if (input == -1){
+        } else if (input == -1) {
             a = "停用";
         }
         return a;
     }
 });
+
+/**
+ *
+ * 编码前面加上"No."
+ */
+AndSellUI.filter('FormatNo', function () {
+    return function (input) {
+        return "No." + input;
+    }
+});
+
+
 AndSellData.citys = [{
     "p": "北京", "c": [{
         "n": "北京市",
@@ -1237,28 +1260,6 @@ AndSellData.citys = [{
     "p": "台湾",
     "c": [{"n": "台北市"}, {"n": "高雄市"}, {"n": "基隆市"}, {"n": "台中市"}, {"n": "台南市"}, {"n": "新竹市"}, {"n": "嘉义市"}, {"n": "台北县"}, {"n": "宜兰县"}, {"n": "新竹县"}, {"n": "桃园县"}, {"n": "苗栗县"}, {"n": "台中县"}, {"n": "彰化县"}, {"n": "南投县"}, {"n": "嘉义县"}, {"n": "云林县"}, {"n": "台南县"}, {"n": "高雄县"}, {"n": "屏东县"}, {"n": "台东县"}, {"n": "花莲县"}, {"n": "澎湖县"}]
 }, {"p": "国外"}];
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //
