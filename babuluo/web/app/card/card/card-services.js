@@ -64,6 +64,12 @@ AndSellMainModule.service('unitFactory', function ($resource, baseURL) {
             }
         });
     };
-
+    this.modifyCardTypeById = function () {
+        return $resource(baseURL + '/member/cardType/modifyById', null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
 
 });

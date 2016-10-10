@@ -31,9 +31,10 @@ AndSellMainModule.controller('cardSourceController', function ($scope, $statePar
   };
 
   $scope.modifyCardSourceClick = function (item) {
+
     $scope.modify=clone(item);
     $scope.modifyId=item['MEMBER_CARD_SOURCE.ID'];
-    console.log('删除ID为'+modifyId);
+    //console.log('删除ID为'+modifyId);
 
   };
 
