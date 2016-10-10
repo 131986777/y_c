@@ -7,10 +7,10 @@
                 <li class="active"><a href="#shop" data-toggle="tab">线下门店</a></li>
                 <li><a href="#phone" data-toggle="tab">电话预约</a></li>
                 <li><a href="#net" data-toggle="tab">网上注册</a></li>
-                <li class="pull-right">
+               <!-- <li class="pull-right">
                     <button type="buttone" class="btn btn-default" data-toggle="modal" data-target="#channel">+渠道
                     </button>
-                </li>
+                </li>-->
                 <li class="pull-right">
                     <button type="buttone" class="btn btn-default" data-toggle="modal" data-target="#cardType">+卡种
                     </button>
@@ -310,7 +310,9 @@
                             </label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" class="form-control" placeholder=""
+                                       ng-model="add['MEMBER_CARD_TYPE.NAME']"
+                                       ng-init="add['MEMBER_CARD_TYPE.NAME']=''">
                             </div>
                         </div>
 
@@ -320,7 +322,9 @@
                             </label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" class="form-control" placeholder=""
+                                       ng-model="add['MEMBER_CARD_TYPE.INTRO']"
+                                       ng-init="add['MEMBER_CARD_TYPE.INTRO']=''">
                             </div>
                         </div>
 
@@ -332,22 +336,24 @@
                             <div class="col-md-8">
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <input type="text" class="form-control" placeholder="">
+                                        <input type="text" class="form-control" placeholder=""
+                                               ng-model="add['MEMBER_CARD_TYPE.BG_COLOR']"
+                                               ng-init="add['MEMBER_CARD_TYPE.BG_COLOR']=''">
                                     </div>
                                     <div class="col-md-8">
                                         <div class="center-block">
-                                            <div class="color" style="background-color: #31C552"></div>
-                                            <div class="color" style="background-color: #199B93"></div>
-                                            <div class="color" style="background-color: #EF5B5B"></div>
-                                            <div class="color" style="background-color: #A90807"></div>
-                                            <div class="color" style="background-color: #3679E1"></div>
+                                            <div class="color" style="background-color: #31C552" ng-click="selectCardColor('#31C552')"></div>
+                                            <div class="color" style="background-color: #199B93" ng-click="selectCardColor('#199B93')"></div>
+                                            <div class="color" style="background-color: #EF5B5B" ng-click="selectCardColor('#EF5B5B')"></div>
+                                            <div class="color" style="background-color: #A90807" ng-click="selectCardColor('#A90807')"></div>
+                                            <div class="color" style="background-color: #3679E1" ng-click="selectCardColor('#3679E1')"></div>
                                         </div>
                                         <div class="center-block">
-                                            <div class="color" style="background-color: #8C56B2"></div>
-                                            <div class="color" style="background-color: #E19318"></div>
-                                            <div class="color" style="background-color: #CCCA12"></div>
-                                            <div class="color" style="background-color: #C7C7C7"></div>
-                                            <div class="color" style="background-color: #303133"></div>
+                                            <div class="color" style="background-color: #8C56B2" ng-click="selectCardColor('#8C56B2')"></div>
+                                            <div class="color" style="background-color: #E19318" ng-click="selectCardColor('#E19318')"></div>
+                                            <div class="color" style="background-color: #CCCA12" ng-click="selectCardColor('#CCCA12')"></div>
+                                            <div class="color" style="background-color: #C7C7C7" ng-click="selectCardColor('#C7C7C7')"></div>
+                                            <div class="color" style="background-color: #303133" ng-click="selectCardColor('#303133')"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -361,8 +367,10 @@
                             </label>
 
                             <div class="col-md-8">
-                                <select class="form-control">
-                                    <option>线下门店</option>
+                                <select class="form-control" ng-model="add['MEMBER_CARD_TYPE.CARD_SOURCE_ID']"
+                                        ng-init="add['MEMBER_CARD_TYPE.CARD_SOURCE_ID']='-1'"
+                                        ng-options="item['member_card_source.ID'] as item['member_card_source.NAME'] for item in cardSourceList">
+                                    <option value="">--请选择--</option>
                                 </select>
                             </div>
                         </div>
@@ -372,14 +380,16 @@
                             </label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" class="form-control" placeholder=""
+                                       ng-model="add['MEMBER_CARD_TYPE.BEGIN_CARD_ID']"
+                                       ng-init="add['MEMBER_CARD_TYPE.BEGIN_CARD_ID']=''">
                             </div>
                         </div>
 
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info btn-outline" ng-click="modifyProductClass()">确定
+                    <button type="button" class="btn btn-info btn-outline" ng-click="addCardType()">确定
                     </button>
                     <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
                     </button>
@@ -388,7 +398,7 @@
         </div>
     </div>
     <!--渠道-->
-    <div class="modal fade" id="channel">
+ <!--   <div class="modal fade" id="channel">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -424,9 +434,9 @@
                             </button>
                         </div>
                     </div>
-                </div> <!-- modal-content-->
+                </div> &lt;!&ndash; modal-content&ndash;&gt;
             </div>
         </div>
-    </div>
+    </div>-->
 </div>
 </div>
