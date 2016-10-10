@@ -41,6 +41,7 @@
     <link href="/AndSell/app/shop/shop/shopList/shopList.css" rel="stylesheet">
     <link href="/AndSell/app/card/card/cardList/cardList.css" rel="stylesheet">
     <link href="/AndSell/app/card/card/cardType/cardType.css" rel="stylesheet">
+    <link href="/AndSell/app/order/order/orderList/orderList.css" rel="stylesheet">
 
 </head>
 
@@ -189,7 +190,7 @@
                     <div class="sub-menu-wrap dropdown-menu" role="menu">
                         <ul class="sub-menu ">
                             <li>
-                                <a href="#">
+                                <a ui-sref="orderList">
                                     订货单
                                 </a>
                             </li>
@@ -247,7 +248,7 @@
                             </li>
                         </ul>
 
-                        <ul class="sub-menu " role="menu">
+                        <ul class="sub-menu" role="menu">
                             <li>
                                 <a ui-sref="cardList">
                                     已开会员卡
@@ -259,7 +260,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a ui-sref="cardSource">
                                     发卡渠道
                                 </a>
                             </li>
@@ -559,6 +560,7 @@
 <script src="/AndSell/app/balance/balance-router.js"></script><!--demo相关路由中心-->
 <script src="/AndSell/app/point/point-router.js"></script><!--demo相关路由中心-->
 <script src="/AndSell/app/card/card-router.js"></script><!--demo相关路由中心-->
+<script src="/AndSell/app/order/order-router.js"></script><!--demo相关路由中心-->
 
 <!--############service集合区############-->
 <script src="/AndSell/app/product/product/product-services.js"></script><!--商品-->
@@ -577,6 +579,7 @@
 <script src="/AndSell/app/point/point/point-services.js"></script><!--demo2 示例使用-->
 <script src="/AndSell/app/balance/balance/balance-services.js"></script><!--demo2 示例使用-->
 <script src="/AndSell/app/card/card/card-services.js"></script><!--demo2 示例使用-->
+<script src="/AndSell/app/order/order/order-services.js"></script><!--demo2 示例使用-->
 
 <!--############controller集合区(以后尝试 切换时注入)############-->
 <script src="main_controller.js"></script>
@@ -601,6 +604,7 @@
 <script src="/AndSell/app/point/point/pointList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/balance/balance/balanceList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/card/card/cardList/controllers.js"></script><!--demoList 示例使用-->
+<script src="/AndSell/app/order/order/orderList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/card/card/cardType/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/card/card/cardSource/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/demo/demo/demoAdd/controllers.js"></script><!--demoList 示例使用-->

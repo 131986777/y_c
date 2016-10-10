@@ -43,7 +43,8 @@
         </div>
     </div>
 
-    <div class="row"> <!-- cardList -->
+    <!-- cardList -->
+    <div class="row">
         <div class="col-md-6">
 
             <div ng-repeat="cl in cardList|filter:{}" class="card center-block" ng-style="cl['MEMBER_CARD.CARD_STYLE']">
@@ -55,13 +56,12 @@
                 <p ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0" class="froze">
                     （冻结{{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}}）</p>
                 <div class="row cardFooter">
-                    <div class="col-md-3 nowrap">{{cl['MEMBER_CARD.MEMBER_LOGIN_ID']}}</div>
-                    <div class="col-md-4 nowrap text-right">面值：{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</div>
-                    <div class="col-md-3 text-right">{{cl['MEMBER_CARD.ADD_DATETIME'] | FormatStrDate}}</div>
-                    <div class="col-md-2 nowrap text-right">{{cl['MEMBER_CARD.SOURCE_NAME']}}</div>
+                    <div class="col-md-4 nowrap">{{cl['MEMBER_CARD.MEMBER_LOGIN_ID']}}</div>
+                    <div class="col-md-4 nowrap text-right count">面值{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</div>
+                    <div class="col-md-4 text-right time nowrap">{{cl['MEMBER_CARD.ADD_DATETIME'] | FormatStrDate}}{{cl['MEMBER_CARD.SOURCE_NAME']}}</div>
                 </div>
             </div>
-        </div> <!-- right -->
+        </div>
     </div>
 
     <div page-bar
@@ -89,9 +89,9 @@
 
                             <div class="col-md-8 text-left form-inline">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="请输入会员登录名称">
+                                    <input type="text" class="form-control" ng-model="memberId" placeholder="请输入会员登录名称">
                                 </div>
-                                <button type="submit" class="btn btn-default">查询</button>
+                                <button type="submit" class="btn btn-default" ng-click="queryMemberById(memberId)">查询</button>
 
 
                                 <span class="help-block"
@@ -107,7 +107,7 @@
                             </label>
 
                             <div class="col-md-8 text-left">
-                                <h5>怕不辣</h5>
+                                <h5>{{memberDetail['MEMBER.USER_NAME']}}</h5>
                             </div>
                         </div>
 
@@ -117,7 +117,7 @@
                             </label>
 
                             <div class="col-md-8 text-left">
-                                <h5>13966667777</h5>
+                                <h5>{{memberDetail['MEMBER.MOBILE']}}</h5>
                             </div>
                         </div>
 
