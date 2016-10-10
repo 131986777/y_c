@@ -43,7 +43,8 @@
         </div>
     </div>
 
-    <div class="row"> <!-- cardList -->
+    <!-- cardList -->
+    <div class="row">
         <div class="col-md-6">
 
             <div ng-repeat="cl in cardList|filter:{}" class="card center-block" ng-style="cl['MEMBER_CARD.CARD_STYLE']">
@@ -61,7 +62,7 @@
                     <div class="col-md-2 nowrap text-right">{{cl['MEMBER_CARD.SOURCE_NAME']}}</div>
                 </div>
             </div>
-        </div> <!-- right -->
+        </div>
     </div>
 
     <div page-bar
