@@ -13,7 +13,12 @@ AndSellMainModule.controller('cardListController', function ($scope, $stateParam
     $scope.bindData = function (response) {
         $scope.cardList = response.data;
         $scope.sourceList = response.extraData.sourceList;
-        console.log(response);
+        $scope.userDetailMap = response.extraData.userDetailMap;
+        console.log($scope.userDetailMap);
+    }
+
+    $scope.queryMemberById = function (memberId) {
+        $scope.memberDetail = $scope.userDetailMap[memberId];
     }
 
 });
