@@ -60,7 +60,7 @@
                     <div class="col-sm-2">
                         <select ng-model="filter['MEMBER.REG_DATETIME']"
                                 ng-init="filter['MEMBER.REG_DATETIME']='REG_DATETIME DESC'"
-                                class="nya-bs-select form-control " data-width="80px">
+                                class="nya-bs-select form-control" data-width="80px">
                             <option class="nya-bs-option" value="REG_DATETIME DESC">
                                 注册时间↓
                             </option>
