@@ -1,36 +1,5 @@
-.card{
-    width: 480px;
-    height: 220px;
-    margin-top: 20px;
-    border-radius: 10px;
-    color: #fff;
-    position: relative;
-}
-.balance{
-    line-height: 124px;
-    text-align: center;
-    font-size: 38px;
-    position: relative;
-}
-.balance span{
-    color: rgb(240,231,231);
-    font-size: 18px;
-    padding-bottom: 2px;
-}
-.froze{
-    color: rgb(240,231,231);
-    font-size: 16px;
-    position: absolute;
-    right: 130px;
-    top: 64px;
-}
-.cardTitle{
-    padding: 14px 20px 0 20px;
-    font-size: 22px;
-}
-.cardFooter{
-    padding: 0 20px 5px 20px;
-    font-size: 14px;
+.page-content{
+    font:14px/1.5 "Helvetica Neue",Helvetica,Arial,"Microsoft Yahei","Hiragino Sans GB","Heiti SC","WenQuanYi Micro Hei",sans-serif;
 }
 .orderNav{
     margin-bottom: 20px;
@@ -47,6 +16,7 @@
     padding: 0;
     display: inline-block;
     font-size: 16px;
+    text-decoration: none;
 
 }
 .orderNav li.first{
@@ -57,8 +27,7 @@
 .orderNav>li.active>a:focus,
 .orderNav>li.active>a:hover{
     color: rgb(220,84,36);
-    border-bottom: 2px solid rgb(220,84,36);
-    text-decoration: none;
+
 }
 .orderNav>li>a>span{
     color: rgb(220,84,36);
@@ -94,7 +63,7 @@
     color: #fff;
 }
 .imformation{
-    padding:25px 30px 1px 30px;
+    padding:25px 30px 10px 30px;
     border-bottom: 1px solid rgb(169,167,171);
 }
 .orderUnpayed{
@@ -103,17 +72,23 @@
 }
 .unpayed{
     color: rgb(252,80,8);
-    font-size: 20px;
+    font-size: 18px;
 }
 .payed{
     color: rgb(169,167,171);
-    font-size: 20px;
+    font-size: 18px;
 }
 .details{
     padding-top: 15px;
+    font-weight: 400;
+    color: rgb(164,162,161);
+}
+.sum{
+    color: rgb(164,162,161);
 }
 .sum span{
     font-size: 30px;
+    color: rgb(51,51,51);
 }
 
 .itemColor{
