@@ -161,8 +161,7 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <script id="container_prd_modify"  type="text/plain">
-
+                        <script id="container"  type="text/plain">
                         </script>
                     </div>
                 </div>

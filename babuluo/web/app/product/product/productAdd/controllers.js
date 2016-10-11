@@ -23,9 +23,7 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
     $scope.tempSaveSkuMap = new Map();
 
     // UE 实例化
-    var ue = UE.getEditor('container', {
-        initialFrameHeight: 300, initialFrameWidth: 900
-    });
+    var ue;
 
     /**
      * defer数据加载区
@@ -50,6 +48,11 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
      * 初始加载，和数据的准备
      **/
     $scope.initLoad = function () {
+
+        UE.delEditor('container');
+        ue = UE.getEditor('container', {
+            initialFrameHeight: 300, initialFrameWidth: 900
+        });
 
         //加载商品分类数据
         classFactory.getPrdClassList().get({}, function (response) {

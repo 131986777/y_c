@@ -23,10 +23,7 @@ AndSellMainModule.controller('productModifyController', function ($scope, $state
     $scope.tempSaveSkuMap = new Map();
     $scope.prdTagMap=new Map;
 
-    // UE 实例化
-    var ue = UE.getEditor('container_prd_modify', {
-        initialFrameHeight: 300, initialFrameWidth: 900
-    });
+    var ue;//editor
     insertHtml = function(html) {
         ue.execCommand('inserthtml', html);
     };
@@ -60,6 +57,12 @@ AndSellMainModule.controller('productModifyController', function ($scope, $state
      * 初始加载，和数据的准备
      **/
     $scope.initLoad = function () {
+
+        UE.delEditor('container');
+        // UE 实例化
+        ue = UE.getEditor('container', {
+            initialFrameHeight: 300, initialFrameWidth: 900
+        });
 
         //加载商品数据
         productFactory.getProducById($stateParams.productId).get({}, function (response) {
