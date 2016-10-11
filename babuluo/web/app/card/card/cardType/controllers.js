@@ -1,10 +1,10 @@
-AndSellMainModule.controller('cardTypeController', function ($scope, $stateParams, unitFactory, modalFactory) {
+AndSellMainModule.controller('cardTypeController', function ($scope, $stateParams, cardFactory, modalFactory) {
 
     modalFactory.setTitle('会员卡类型');
 
     $scope.initLoad = function () {
 
-        unitFactory.getCardSourceList().get({}, function (repsonce) {
+        cardFactory.getCardSourceList().get({}, function (repsonce) {
             console.log(repsonce);
             $scope.cardSourceList = repsonce.data;
 
@@ -31,15 +31,21 @@ AndSellMainModule.controller('cardTypeController', function ($scope, $stateParam
 
     };
 
+    $scope.tabClick=function (cardSource) {
+        $scope.add['MEMBER_CARD_TYPE.CARD_SOURCE_ID']=cardSource;
+        $scope.cardSourceId=cardSource;
+        $scope.queryCardBySource(cardSource);
 
+}
     $scope.queryCardBySource = function (cardSource) {
         // alert(cardSource);
 
-        unitFactory.getCardListBySource(cardSource).get({}, function (repsonce) {
+        cardFactory.getCardListBySource(cardSource).get({}, function (repsonce) {
             console.log(repsonce);
             $scope.cardList = repsonce.data;
-
-            var index = $scope.cardList.length % 2;
+            $scope.cardListLeft=new Array();
+            $scope.cardListRight=new Array();
+            /*var index = $scope.cardList.length % 2;
             var size = $scope.cardList.length / 2;
             if (index == 0) {   //数组长度为偶数
                 $scope.cardListLeft = $scope.cardList.slice(0, size);   //0 1 2 3  ：2
@@ -50,7 +56,16 @@ AndSellMainModule.controller('cardTypeController', function ($scope, $stateParam
                 $scope.cardListLeft = $scope.cardList.slice(0, size + 1);   //0 1 2 3 4 ：2
                 $scope.cardListRight = $scope.cardList.slice(size + 1, $scope.cardList.length);
                 console.log("left" + $scope.cardListLeft + 'right' + $scope.cardListRight);
+            }*/
+
+            for(i in  $scope.cardList){
+                if(i%2==0){       //偶数
+                    $scope.cardListLeft.push($scope.cardList[i]);
+                }else{  //奇数
+                    $scope.cardListRight.push($scope.cardList[i]);
+                }
             }
+
         }, null);
 
     }
@@ -60,15 +75,17 @@ AndSellMainModule.controller('cardTypeController', function ($scope, $stateParam
     $scope.addCardType = function () {
         console.log($scope.add);
 
-        unitFactory.addCardType($scope.add).get({}, function (response) {
+        cardFactory.addCardType($scope.add).get({}, function (response) {
 
             if (response.code == 400) {
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert('新增成功');
-                $scope.add = '';
                 $("#cardType").modal('hide');
-                $scope.initLoad();
+               // $scope.initLoad();
+                $scope.add={};
+                $scope.add['MEMBER_CARD_TYPE.CARD_SOURCE_ID']=$scope.cardSourceId;
+                $scope.queryCardBySource( $scope.cardSourceId);
 
             }
 
@@ -83,11 +100,13 @@ AndSellMainModule.controller('cardTypeController', function ($scope, $stateParam
 
     $scope.deleteCardType=function (id) {
         modalFactory.showAlert("确认删除吗?", function () {
-            unitFactory.delCardType(id).get({}, function (res) {
+            cardFactory.delCardType(id).get({}, function (res) {
                 if (res.extraData.state = 'true') {
                     modalFactory.showShortAlert("删除成功");
 
-                    $scope.initLoad();
+                   // $scope.initLoad();
+                    $scope.queryCardBySource($scope.cardSourceId);
+
                 }
             });
         });
@@ -104,13 +123,13 @@ AndSellMainModule.controller('cardTypeController', function ($scope, $stateParam
     $scope.modifyCardType = function () {
         $scope.modify['MEMBER_CARD_TYPE.ID'] =  $scope.modifyId;
 
-        unitFactory.modifyCardTypeById ().get($scope.modify, function (response) {
+        cardFactory.modifyCardTypeById ().get($scope.modify, function (response) {
             if (response.code == 400) {
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
                 $("#modifyCardType").modal('hide');
                 modalFactory.showShortAlert("修改成功");
-                $scope.initLoad();
+                $scope.queryCardBySource($scope.cardSourceId);
             }
         });
     };

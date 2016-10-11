@@ -6,7 +6,7 @@
             <ul class="nav nav-tabs">
 
                 <li ng-repeat=" item in cardSourceList" ng-class="{'active':$first}">
-                    <a href="#phone" data-toggle="tab" ng-click="queryCardBySource(item['member_card_source.ID'])">{{item['member_card_source.NAME']}}</a>
+                    <a href="#newTab" data-toggle="tab" ng-click="tabClick(item['member_card_source.ID'])">{{item['member_card_source.NAME']}}</a>
                 </li>
 
                 <!-- <li class="pull-right">
@@ -21,8 +21,8 @@
 
             <div class="tab-content">
 
-                <!-- 电话预约 -->
-                <div  id="phone">
+                <!-- Tab -->
+                <div  id="newTab">
                     <div class="row"> <!-- cardList   $scope.cardList-->
                         <div class="col-md-6">
                             <div  class="card center-block" ng-repeat="item in cardListLeft">
@@ -188,9 +188,8 @@
 
                                     <div class="col-md-8">
                                         <select class="form-control" ng-model="add['MEMBER_CARD_TYPE.CARD_SOURCE_ID']"
-                                                ng-init="add['MEMBER_CARD_TYPE.CARD_SOURCE_ID']='-1'"
                                                 ng-options="item['member_card_source.ID'] as item['member_card_source.NAME'] for item in cardSourceList">
-                                            <option value="">--请选择--</option>
+
                                         </select>
                                     </div>
                                 </div>

@@ -1,9 +1,9 @@
-AndSellMainModule.controller('cardSourceController', function ($scope, $stateParams, unitFactory, modalFactory) {
+AndSellMainModule.controller('cardSourceController', function ($scope, $stateParams, cardFactory, modalFactory) {
 
   modalFactory.setTitle('会员卡发布渠道');
 
   $scope.initLoad = function () {
-    unitFactory.getCardSourceList().get({}, function (repsonce) {
+    cardFactory.getCardSourceList().get({}, function (repsonce) {
       console.log(repsonce);
       $scope.cardSourceList = repsonce.data;
     }, null);
@@ -15,7 +15,7 @@ AndSellMainModule.controller('cardSourceController', function ($scope, $statePar
   $scope.addCardSource = function () {
     console.log($scope.add);
 
-    unitFactory.addCardSource($scope.add).get({}, function (response) {
+    cardFactory.addCardSource($scope.add).get({}, function (response) {
 
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);
@@ -41,7 +41,7 @@ AndSellMainModule.controller('cardSourceController', function ($scope, $statePar
   $scope.modifyCardSource = function () {
     $scope.modify['MEMBER_CARD_SOURCE.ID'] =  $scope.modifyId;
 
-    unitFactory.modifyCardSourceById ().get($scope.modify, function (response) {
+    cardFactory.modifyCardSourceById ().get($scope.modify, function (response) {
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);
       } else if (response.extraData.state == 'true') {
@@ -55,7 +55,7 @@ AndSellMainModule.controller('cardSourceController', function ($scope, $statePar
   $scope.deleteCardSource = function (id) {
 
     modalFactory.showAlert("确认删除吗?", function () {
-      unitFactory.delCardSource(id).get({}, function (res) {
+      cardFactory.delCardSource(id).get({}, function (res) {
         if (res.extraData.state = 'true') {
           modalFactory.showShortAlert("删除成功");
 
