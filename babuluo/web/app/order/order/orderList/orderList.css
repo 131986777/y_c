@@ -1,40 +1,125 @@
-.nav-tabs>li.active>a,
-.nav-tabs>li.active>a:focus,
-.nav-tabs>li.active>a:hover{
+.card{
+    width: 480px;
+    height: 220px;
+    margin-top: 20px;
+    border-radius: 10px;
+    color: #fff;
+    position: relative;
+}
+.balance{
+    line-height: 124px;
+    text-align: center;
+    font-size: 38px;
+    position: relative;
+}
+.balance span{
+    color: rgb(240,231,231);
+    font-size: 18px;
+    padding-bottom: 2px;
+}
+.froze{
+    color: rgb(240,231,231);
+    font-size: 16px;
+    position: absolute;
+    right: 130px;
+    top: 64px;
+}
+.cardTitle{
+    padding: 14px 20px 0 20px;
+    font-size: 22px;
+}
+.cardFooter{
+    padding: 0 20px 5px 20px;
+    font-size: 14px;
+}
+.orderNav{
+    margin-bottom: 20px;
+
+}
+.orderNav li{
+    width: 96px;
+    text-align: center;
+    border-left: 1px solid #e0e0e0;
+
+}
+.orderNav li a{
+    width: 9
+    padding: 0;
+    display: inline-block;
+    font-size: 16px;
+
+}
+.orderNav li.first{
+    border-left: 0;
+}
+
+.orderNav>li.active>a,
+.orderNav>li.active>a:focus,
+.orderNav>li.active>a:hover{
     color: rgb(220,84,36);
     border-bottom: 2px solid rgb(220,84,36);
+    text-decoration: none;
 }
-.nav-tabs>li>a>span{
+.orderNav>li>a>span{
     color: rgb(220,84,36);
 }
-.productInfo{
-    position: relative;
-    height: 100px;
+.orderItem{
+    margin-bottom: 20px;
+    border:1px solid rgb(169,167,171);
 }
-.productInfo .itemColor{
-    position: absolute;
-    bottom: -10px;
+.unfinished{
+    border: 1px solid rgb(220,84,36);
 }
+.product{
+    overflow: hidden;
+    padding:20px 30px 10px;
+}
+.productList{
+    width: 80%;
+}
+.productList li{
+    height: 80px;
+    margin-bottom: 20px;
+}
+
+.productInfo img{
+    margin-right: 20px;
+}
+.productInfo p{
+    line-height: 1.6;
+}
+
 .pay,.pay:hover,.pay:focus{
     background-color: rgb(252,80,8);
     color: #fff;
 }
-.orderItem{
-    border:1px solid rgb(220,84,36);
-}
 .imformation{
+    padding:25px 30px 1px 30px;
+    border-bottom: 1px solid rgb(169,167,171);
+}
+.orderUnpayed{
     background-color: rgb(254,249,245);
-    padding:30px 30px 25px;
+    border-bottom: 1px solid rgb(253,216,192);
 }
 .unpayed{
     color: rgb(252,80,8);
     font-size: 20px;
-    margin-bottom: 10px;
 }
-.product{
-    padding: 20px 25px 15px 15px;
+.payed{
+    color: rgb(169,167,171);
+    font-size: 20px;
 }
+.details{
+    padding-top: 15px;
+}
+.sum span{
+    font-size: 30px;
+}
+
 .itemColor{
     color: rgb(169,167,171);
     font-size: 12px;
+}
+.buttons button{
+    margin-bottom: 10px;
 }
