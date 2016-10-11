@@ -8,6 +8,14 @@ AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
         });
     };
 
+    this.addMemberCard = function (form) {
+        return $resource(baseURL + '/member/membercard/add', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
 
     this.getCardSourceList = function () {
         return $resource(baseURL + '/member/cardSource/queryAll', null, {
