@@ -1,8 +1,8 @@
 .card{
     width: 480px;
-    height: 220px;
+    height: 210px;
     margin-top: 20px;
-    border-radius: 10px;
+    border-radius: 20px;
     color: #fff;
     position: relative;
 }
@@ -39,3 +39,4 @@
 .nav li{
     margin-right: 5px;
 }
+
