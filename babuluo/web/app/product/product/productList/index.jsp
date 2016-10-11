@@ -276,5 +276,5 @@
     </div>
     <%--结束修改--%>
 </div>
-<script src="controllers.js"></script>
+
 

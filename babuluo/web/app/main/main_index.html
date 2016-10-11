@@ -484,69 +484,8 @@
 <script src="/AndSell/public/angular/ngTagInput/ng-tags-input.js"></script>
 <!--importantJs -->
 <script src="application.js"></script>
-
-
 <!--############通用方法区############-->
-<script>
-    /**
-     * 普通对象 不引用赋值
-     * @param myObj
-     * @returns {*}
-     */
-    function clone(myObj) {
-        if (typeof(myObj) != 'object' || myObj == null) return myObj;
-        var newObj = {};
-        for (var i in myObj) {
-            newObj[i] = clone(myObj[i]);
-        }
-        return newObj;
-    }
-
-    /**
-     * tab_input getTest
-     * @param myObj
-     * @returns {*}
-     */
-    function getTabInputText(values) {
-        var list = [];
-        if (values != undefined) {
-            values.forEach(function (ele) {
-                list.push(ele.text);
-            });
-        }
-        return list.toString();
-    }
-
-    var filterTableFromList = function (list, tablename) {
-        if (list != undefined) {
-            list.forEach(function (ele) {
-                for (var p in ele) { // 方法
-                    if (typeof ( ele [p]) == " function ") {
-                        ele [p]();
-                    } else { // p 为属性名称，obj[p]为对应属性的值
-                        if (p.trim().startsWith(tablename)) {
-                            var a = p.substring(tablename.length + 1);
-                            ele[a] = ele [p];
-                        }
-                    }
-                } // 最后显示所有的属性
-            });
-        }
-    };
-
-    function moneyFormat(money) {
-        return Number(money / 100).toFixed(2);
-    }
-
-</script>
-
-
-<!--############通用变量区############-->
-<script>
-
-    var PRODUCT_DEFAULT_IMG = "/uploads/images/product.png";
-
-</script>
+<script src="commonJs.js"> </script>
 
 
 <!--############router集合区############-->
@@ -584,7 +523,7 @@
 <!--############controller集合区(以后尝试 切换时注入)############-->
 <script src="main_controller.js"></script>
 <script src="/AndSell/app/product/product/productAdd/controllers.js"></script><!--商品新增-->
-<script src="/AndSell/app/product/product/productList/controllers.js"></script><!--商品列表-->
+
 <script src="/AndSell/app/product/product_class/classList/controllers.js"></script><!--商品分类-->
 <script src="/AndSell/app/product/product_tag/tagList/controllers.js"></script><!--商品标签-->
 <script src="/AndSell/app/product/product_unit/unitList/controllers.js"></script><!--商品单位-->
@@ -600,6 +539,7 @@
 <script src="/AndSell/app/member/type/typeList/controllers.js"></script><!--code客户类型 示例使用-->
 <script src="/AndSell/app/member/group/groupList/controllers.js"></script><!--code客户类型 示例使用-->
 <script src="/AndSell/app/member/member/memberList/controllers.js"></script><!--会员 示例使用-->
+<script src="/AndSell/app/product/product/productModify/controllers.js"></script><!--商品修改-->
 
 <script src="/AndSell/app/point/point/pointList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/balance/balance/balanceList/controllers.js"></script><!--demoList 示例使用-->
