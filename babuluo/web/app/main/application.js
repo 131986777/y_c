@@ -53,6 +53,19 @@ AndSellService.factory("http", function ($http) {
     };
 });
 
+AndSellUI.directive('stringToNumber', function () {
+    return {
+        require: 'ngModel', link: function (scope, element, attrs, ngModel) {
+            ngModel.$parsers.push(function (value) {
+                return '' + value;
+            });
+            ngModel.$formatters.push(function (value) {
+                return parseFloat(value);
+            });
+        }
+    };
+});
+
 AndSellUI.service('modalFactory', function ($rootScope) {
 
     this.setBottom = function (state, funcSubm, funcCanc) {
@@ -193,7 +206,9 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
             //只是页数改变
             $scope.loadPage = function (pageIndex) {
                 if ($scope.pageIndex != $scope.currentPage && !($scope.pageIndex
-                    < 1 || $scope.pageIndex > $scope.totalPage )) {
+                    < 1
+                    || $scope.pageIndex
+                    > $scope.totalPage )) {
                     $scope.currentPage = pageIndex;
                 }
             };
@@ -230,9 +245,11 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
                 http.post(url, obj, function (data) {
                     if (data != undefined && data.data.length > 0) {
                         $scope.pageObject = data.data;
-                        var tmp = parseInt(data.extraData.page.querySize / data.extraData.page.pageSize);
-                        $scope.totalPage = ( tmp * data.extraData.page.pageSize == data.extraData.page.querySize) ? tmp : tmp
-                        + 1;
+                        var tmp = parseInt(data.extraData.page.querySize
+                            / data.extraData.page.pageSize);
+                        $scope.totalPage = ( tmp
+                        * data.extraData.page.pageSize
+                        == data.extraData.page.querySize) ? tmp : tmp + 1;
                         $scope.totalCount = data.extraData.page.querySize;
 
                         if ($scope.totalCount == 0) {
@@ -278,7 +295,6 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
             }, true);
 
             scope.$on("pageBar.reload", function (d, data) {
-                console.log('reload');
                 scope.currentPage = 1;
                 scope.loadData();
             });
@@ -306,8 +322,17 @@ AndSellUI.filter('FormatStrDate', function () {
 AndSellUI.filter('FormatAllDate', function () {
     return function (input) {
         var date = new Date(input);
-        var formatDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-            + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+        var formatDate = date.getFullYear()
+            + "-"
+            + (date.getMonth() + 1)
+            + "-"
+            + date.getDate()
+            + " "
+            + date.getHours()
+            + ":"
+            + date.getMinutes()
+            + ":"
+            + date.getSeconds();
         return formatDate;
     }
 });
@@ -336,7 +361,6 @@ AndSellUI.filter('FormatNo', function () {
         return "No." + input;
     }
 });
-
 
 AndSellData.citys = [{
     "p": "北京", "c": [{
@@ -507,7 +531,8 @@ AndSellData.citys = [{
         "n": "白山",
         "a": [{"s": "八道江区"}, {"s": "江源区"}, {"s": "抚松县"}, {"s": "靖宇县"}, {"s": "长白朝鲜族自治县"}, {"s": "临江市"}]
     }, {
-        "n": "松原", "a": [{"s": "宁江区"}, {"s": "前郭尔罗斯蒙古族自治县"}, {"s": "长岭县"}, {"s": "乾安县"}, {"s": "扶余县"}]
+        "n": "松原",
+        "a": [{"s": "宁江区"}, {"s": "前郭尔罗斯蒙古族自治县"}, {"s": "长岭县"}, {"s": "乾安县"}, {"s": "扶余县"}]
     }, {
         "n": "白城", "a": [{"s": "洮北区"}, {"s": "镇赉县"}, {"s": "通榆县"}, {"s": "洮南市"}, {"s": "大安市"}]
     }, {
@@ -1080,7 +1105,8 @@ AndSellData.citys = [{
         "n": "昭通",
         "a": [{"s": "昭阳区"}, {"s": "鲁甸县"}, {"s": "巧家县"}, {"s": "盐津县"}, {"s": "大关县"}, {"s": "永善县"}, {"s": "绥江县"}, {"s": "镇雄县"}, {"s": "彝良县"}, {"s": "威信县"}, {"s": "水富县"}]
     }, {
-        "n": "丽江", "a": [{"s": "古城区"}, {"s": "玉龙纳西族自治县"}, {"s": "永胜县"}, {"s": "华坪县"}, {"s": "宁蒗彝族自治县"}]
+        "n": "丽江",
+        "a": [{"s": "古城区"}, {"s": "玉龙纳西族自治县"}, {"s": "永胜县"}, {"s": "华坪县"}, {"s": "宁蒗彝族自治县"}]
     }, {
         "n": "普洱",
         "a": [{"s": "思茅区"}, {"s": "宁洱镇"}, {"s": "墨江哈尼族自治县"}, {"s": "景东彝族自治县"}, {"s": "景谷傣族彝族自治县"}, {"s": "镇沅彝族哈尼族拉祜族自治县"}, {"s": "江城哈尼族彝族自治县"}, {"s": "孟连傣族拉祜族佤族自治县"}, {"s": "澜沧拉祜族自治县"}, {"s": "西盟佤族自治县"}]
@@ -1207,7 +1233,9 @@ AndSellData.citys = [{
     }, {
         "n": "玉树",
         "a": [{"s": "玉树县"}, {"s": "杂多县"}, {"s": "称多县"}, {"s": "治多县"}, {"s": "囊谦县"}, {"s": "曲麻莱县"}]
-    }, {"n": "梅西", "a": [{"s": "格尔木市"}, {"s": "德令哈市"}, {"s": "乌兰县"}, {"s": "都兰县"}, {"s": "天峻县"}]}]
+    }, {
+        "n": "梅西", "a": [{"s": "格尔木市"}, {"s": "德令哈市"}, {"s": "乌兰县"}, {"s": "都兰县"}, {"s": "天峻县"}]
+    }]
 }, {
     "p": "宁夏", "c": [{
         "n": "银川",
@@ -1260,23 +1288,3 @@ AndSellData.citys = [{
     "p": "台湾",
     "c": [{"n": "台北市"}, {"n": "高雄市"}, {"n": "基隆市"}, {"n": "台中市"}, {"n": "台南市"}, {"n": "新竹市"}, {"n": "嘉义市"}, {"n": "台北县"}, {"n": "宜兰县"}, {"n": "新竹县"}, {"n": "桃园县"}, {"n": "苗栗县"}, {"n": "台中县"}, {"n": "彰化县"}, {"n": "南投县"}, {"n": "嘉义县"}, {"n": "云林县"}, {"n": "台南县"}, {"n": "高雄县"}, {"n": "屏东县"}, {"n": "台东县"}, {"n": "花莲县"}, {"n": "澎湖县"}]
 }, {"p": "国外"}];
-
-
-//
-//AndSellRouter.config(function ($stateProvider, $urlRouterProvider) {
-//  $stateProvider
-//      .state('app', {
-//        url: '/', views: {
-//          'nav': {
-//            templateUrl: '/AndSell/app/components/nav/nav.html'
-//          }, //'sidebar': {
-//          //  templateUrl: '/AndSell/app/components/sidebar/sidebar.html'
-//          //},
-//          'footer': {
-//            templateUrl: '/AndSell/app/components/footer/footer.html'
-//          }
-//        }
-//      });
-//
-//  $urlRouterProvider.otherwise('/');
-//});

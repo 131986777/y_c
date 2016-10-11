@@ -18,7 +18,7 @@
                     <div class="col-md-4">
                         <%--<tree-list tree-data="productClass" type="dropdown">--%>
                         <%--</tree-list>--%>
-                        <select ng-model="add['SHOP_PRODUCT_CLASS.CLASS_ID']"
+                        <select ng-model="modify['SHOP_PRODUCT.CLASS_ID']"
                                 class="nya-bs-select form-control">
                             <option class="nya-bs-option"
                                     ng-repeat="value in prdClssList"
@@ -32,7 +32,7 @@
                         商品单位
                     </label>
                     <div class="col-md-4">
-                        <select ng-model="add['SHOP_UNIT.UNIT_ID']"
+                        <select ng-model="modify['SHOP_PRODUCT.UNIT_ID']"
                                 class="nya-bs-select form-control">
                             <option class="nya-bs-option"
                                     ng-repeat="value in prdUnitList"
@@ -52,8 +52,8 @@
                     </label>
                     <div class="col-md-10">
                         <input class="form-control"
-                               ng-model="add['SHOP_PRODUCT.PRD_NAME']"
-                               name="number" type="text"
+                               ng-model="modify['SHOP_PRODUCT.PRD_NAME']"
+                               type="text"
                                placeholder="请输入商品名称">
                     </div>
                 </div>
@@ -68,16 +68,13 @@
                                     max-length="10">
                         </tags-input>
                     </div>
-
-
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">
                         是否上架
                     </label>
                     <div class="col-md-4">
-                        <select ng-model="add['SHOP_PRODUCT.IS_SALE']"
-                                ng-init="add['SHOP_PRODUCT.IS_SALE']='1'"
+                        <select ng-model="modify['SHOP_PRODUCT.IS_SALE']"
                                 class="nya-bs-select form-control">
                             <option class="nya-bs-option" value="1">上架</option>
                             <option class="nya-bs-option" value="-1">下架</option>
@@ -88,8 +85,9 @@
                     </label>
                     <div class="col-md-4">
                         <input class="form-control"
-                               ng-model="add['SHOP_PRODUCT.ORDER_NUM']"
+                               ng-model="modify['SHOP_PRODUCT.ORDER_NUM']"
                                type="number"
+                               string-to-number
                                placeholder="数字越大排名越靠前">
                     </div>
                 </div>
@@ -102,119 +100,18 @@
                     <div class="col-md-10">
                         <button class="btn"
                                 ng-repeat="item in prdTagList"
-                                ng-bind="item['shop_tag.TAG']"
+                                ng-bind="item['SHOP_TAG.TAG']"
                                 style="margin-right:10px;min-width: 100px"
-                                ng-init="tag[item['shop_tag.TAG_ID']]=false"
-                                ng-class="{true:'btn-default', false:'green'}[tag[item['shop_tag.TAG_ID']]]"
-                                ng-click="selectTagButton(item['shop_tag.TAG_ID'],item['shop_tag.TAG'])">
+                                ng-init="tag[item['SHOP_TAG.TAG_ID']]=false"
+                                ng-class="{true:'btn-primary', false:'btn-default'}[tag[item['SHOP_TAG.TAG_ID']]]"
+                                ng-click="selectTagButton(item['SHOP_TAG.TAG_ID'],item['SHOP_TAG.TAG'])">
                         </button>
                     </div>
                 </div>
 
-                <div class="alert alert-grey clearfix">
-                    <label class="col-md-2">
-                        <input ng-model="product.setSku"
-                               ng-init="product.setSku=false;" ng-change="changeSettingSku()"
-                               type="checkbox">
-                        设置商品多规格
-                    </label>
-                    <%--<div ng-cloak ng-show="product.setSku"--%>
-                    <%--class="control-label col-md-10 text-right">--%>
-                    <%--<a href="#chooseSkuModel" ng-click="loadSkuTemplet()" data-toggle="modal">--%>
-                    <%--选择模板>>--%>
-                    <%--</a>--%>
-                    <%--</div>--%>
-                    <div ng-show="product.setSku">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="col-md-offset-2 col-md-9">
-                                    <span class="text-remark">可使用键盘“回车键”快速添加多个规格值</span>
-                                </div>
-                            </div>
-                            <div class="form-group" ng-init="hasSkuAttrCount = 0;">
-                                <div class="col-md-2">
-                                    <input type="text"
-                                           class="form-control text-center"
-                                           ng-init="product.skuName1 = '规格1';"
-                                           ng-model="product.skuName1"
-                                           focus-select
-                                           placeholder="规格1"
-                                           style="padding: 0;margin: 0;">
-                                </div>
-                                <div class="col-md-9">
-                                    <tags-input ng-model="tags1"
-                                                placeholder="输入一个属性按[回车键]"
-                                                min-length="1"
-                                                max-length="58">
-                                    </tags-input>
-                                </div>
-                            </div>
-                            <div class="form-group" ng-show="hasSkuAttrCount>=1">
-                                <div class="col-md-2">
-                                    <input type="text"
-                                           class="form-control text-center"
-                                           ng-init="product.skuName2 = '规格2';"
-                                           ng-model="product.skuName2"
-                                           focus-select
-                                           placeholder="规格2">
-                                </div>
-                                <div class="col-md-9">
-                                    <tags-input ng-model="tags2"
-                                                placeholder="输入一个属性按[回车键]"
-                                                min-length="1"
-                                                max-length="58">
-                                    </tags-input>
-                                </div>
-                                <!--删除，需要时再用-->
-                                <div class="col-md-1" ng-if="hasSkuAttrCount == 1">
-                                    <a class="control-remark"
-                                       ng-click="subHasSkuAttrCount();">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="form-group" ng-show="hasSkuAttrCount>=2">
-                                <div class="col-md-2">
-                                    <input type="text"
-                                           class="form-control text-center"
-                                           ng-init="product.skuName3= '规格3';"
-                                           ng-model="product.skuName3"
-                                           focus-select
-                                           value="规格3"
-                                           placeholder="规格3">
-                                </div>
-                                <div class="col-md-9">
-                                    <tags-input ng-model="tags3"
-                                                placeholder="输入一个属性按[回车键]"
-                                                min-length="1"
-                                                max-length="58">
-                                    </tags-input>
-                                </div>
-                                <!--删除，需要时再用-->
-                                <div class="col-md-1" ng-if="hasSkuAttrCount==2">
-                                    <a class="control-remark"
-                                       ng-click="subHasSkuAttrCount()">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12 control-label">
-                            <div class="col-md-3 text-left">
-                                <a ng-click="addHasSkuAttrCount();"
-                                   class="font-green" ng-if="hasSkuAttrCount < 2">
-                                    <i class="fa fa-plus"></i>
-                                    添加规格</a>
-                            </div>
-                            <div class="col-md-9 text-right">
-                                <a href="#inputSkuModelName" data-toggle="modal">
-                                    保存为模板
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h4 class="form-title">
+                    规格列表
+                </h4>
 
                 <div class="form-group">
                     <div class="col-md-12">
@@ -222,45 +119,32 @@
                             <thead>
                             <tr>
                                 <th style="width: 16px;"></th>
-                                <th ng-if="!product.setSku" style="width: 70px;">规格</th>
-                                <th ng-if="product.setSku" style="width: 70px;"
-                                    ng-bind="product.skuName1"></th>
-                                <th ng-if="hasSkuAttrCount>=1" style="width: 70px;"
-                                    ng-bind="product.skuName2"></th>
-                                <th ng-if="hasSkuAttrCount>=2" style="width: 70px;"
-                                    ng-bind="product.skuName3"></th>
+                                <th ng-if="skuList.length<=0&&skuList[0]['SHOP_PRODUCT_SKU.SKU_NAME1']==undefined" style="width: 70px;">规格</th>
+                                <th ng-if="skuList.length>0&&skuList[0]['SHOP_PRODUCT_SKU.SKU_NAME1']!=undefined" style="width: 70px;"
+                                    ng-bind="skuList[0]['SHOP_PRODUCT_SKU.SKU_NAME1']"></th>
+                                <th ng-if="skuList[0]['SHOP_PRODUCT_SKU.SKU_NAME2']!=undefined" style="width: 70px;"
+                                    ng-bind="skuList[0]['SHOP_PRODUCT_SKU.SKU_NAME2']"></th>
+                                <th ng-if="skuList[0]['SHOP_PRODUCT_SKU.SKU_NAME3']!=undefined"  style="width: 70px;"
+                                    ng-bind="skuList[0]['SHOP_PRODUCT_SKU.SKU_NAME3']"></th>
                                 <th style="width: 120px;">商品编码</th>
-                                <th style="width: 80px;">现价</th>
-                                <th style="width: 80px;">市场价</th>
                                 <th style="width: 40px;">操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="(key,tag) in product.tags">
+                            <tr ng-repeat="(key,sku) in skuList">
                                 <td ng-bind="key + 1"></td>
-                                <td ng-if="!product.setSku">无</td>
-                                <td ng-if="product.setSku"
-                                    ng-bind="tag['SHOP_PRODUCT_SKU.SKU_CONTENT1']"></td>
-                                <td ng-if="hasSkuAttrCount>=1"
-                                    ng-bind="tag['SHOP_PRODUCT_SKU.SKU_CONTENT2']"></td>
-                                <td ng-if="hasSkuAttrCount>=2"
-                                    ng-bind="tag['SHOP_PRODUCT_SKU.SKU_CONTENT3']"></td>
+                                <td ng-if="skuList.length<=0&&skuList[0]['SHOP_PRODUCT_SKU.SKU_NAME1']==undefined">无</td>
+                                <td ng-if="skuList.length>0&&skuList[0]['SHOP_PRODUCT_SKU.SKU_NAME1']!=undefined"
+                                    ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT1']"></td>
+                                <td ng-if="skuList.length>0&&skuList[0]['SHOP_PRODUCT_SKU.SKU_NAME2']!=undefined"
+                                    ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT2']"></td>
+                                <td ng-if="skuList.length>0&&skuList[0]['SHOP_PRODUCT_SKU.SKU_NAME3']!=undefined"
+                                    ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT3']"></td>
 
-                                <td><input ng-readonly="tag.isDel" type="text"
-                                           focus-select
-                                           ng-model="tag['SHOP_PRODUCT_SKU.PRD_SKU']"
-                                           class="form-control">
+                                <td  ng-bind="sku['SHOP_PRODUCT_SKU.PRD_SKU']">
                                 </td>
-                                <td><input ng-readonly="tag.isDel" type="number" number
-                                           ng-model="tag['SHOP_PRODUCT_SKU.PRICE']"
-                                           class="form-control">
-                                </td>
-                                <td><input ng-readonly="tag.isDel" type="number" number
-                                           ng-model="tag['SHOP_PRODUCT_SKU.REAL_PRICES']"
-                                           class="form-control">
-                                </td>
+
                                 <td>
-
                                     <%--<a ng-click="delOrRebackSkuTag(tag)"--%>
                                     <%--ng-if="!tag.isDel">删除</a>--%>
                                 </td>
@@ -277,7 +161,9 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <script id="container" type="text/plain"></script>
+                        <script id="container_prd_modify"  type="text/plain">
+
+                        </script>
                     </div>
                 </div>
 

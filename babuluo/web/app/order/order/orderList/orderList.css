@@ -1,34 +1,40 @@
-.card{
-    width: 480px;
-    height: 220px;
-    margin-top: 20px;
-    border-radius: 10px;
-    color: #fff;
+.nav-tabs>li.active>a,
+.nav-tabs>li.active>a:focus,
+.nav-tabs>li.active>a:hover{
+    color: rgb(220,84,36);
+    border-bottom: 2px solid rgb(220,84,36);
+}
+.nav-tabs>li>a>span{
+    color: rgb(220,84,36);
+}
+.productInfo{
     position: relative;
+    height: 100px;
 }
-.balance{
-    line-height: 124px;
-    text-align: center;
-    font-size: 38px;
-    position: relative;
-}
-.balance span{
-    color: rgb(240,231,231);
-    font-size: 18px;
-    padding-bottom: 2px;
-}
-.froze{
-    color: rgb(240,231,231);
-    font-size: 16px;
+.productInfo .itemColor{
     position: absolute;
-    right: 130px;
-    top: 64px;
+    bottom: -10px;
 }
-.cardTitle{
-    padding: 14px 20px 0 20px;
-    font-size: 22px;
+.pay,.pay:hover,.pay:focus{
+    background-color: rgb(252,80,8);
+    color: #fff;
 }
-.cardFooter{
-    padding: 0 20px 5px 20px;
-    font-size: 14px;
+.orderItem{
+    border:1px solid rgb(220,84,36);
+}
+.imformation{
+    background-color: rgb(254,249,245);
+    padding:30px 30px 25px;
+}
+.unpayed{
+    color: rgb(252,80,8);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+.product{
+    padding: 20px 25px 15px 15px;
+}
+.itemColor{
+    color: rgb(169,167,171);
+    font-size: 12px;
 }
