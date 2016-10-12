@@ -6,18 +6,27 @@
             <div class="row">
                 <div class="form-inline form-group">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="输入用户名/用户编码">
-                        <button type="submit" class="btn btn-default">搜索</button>
+                        <input type="text" class="form-control" placeholder="输入用户名" ng-model="loginId">
+                        <button type="submit" class="btn btn-default" ng-click="queryPointByLoginId(loginId)">搜索</button>
                     </div>
 
-                    <div class="form-group  col-md-offset-2">
-                        <select class="form-control">
-                            <option>流向</option>
-                            <option>支出</option>
-                            <option>收入</option>
-                        </select>
-                    </div>
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#modify">调整积分</button>
+                        <div class="form-group  col-md-offset-2">
+                            <label>筛选：</label>
+                            <select ng-model="filter['MEMBER_POINT_LIST.CHANGE_TYPE']"
+                                    ng-init="filter['MEMBER_POINT_LIST.CHANGE_TYPE']='null'"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value="null">
+                                    来源
+                                </option>
+                                <option class="nya-bs-option" value="decrease">
+                                    支出
+                                </option>
+                                <option class="nya-bs-option" value="increase">
+                                    收入
+                                </option>
+                            </select>
+                        </div>
+                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#point">调整积分</button>
                 </div>
             </div>
         </div>
@@ -33,82 +42,20 @@
                     <th>时间</th>
                     <th>事件</th>
                     <th>说明</th>
-                    <th class="text-right">积分</th>
-                    <th class="text-right">剩余积分</th>
+                    <th class="text-center">积分</th>
+                    <th class="text-center">剩余积分</th>
                 </tr>
                 </thead>
 
                 <tbody ng-cloak>
-                <tr>
-                    <td >
-                        2834
-                    </td>
-                    <td >
-                        pabula
-                    </td>
-                    <td >
-                        2016-05-24 15:23
-                    </td>
-                    <td >
-                        订单
-                    </td>
-                    <td >
-                        订单(3284)
-                    </td>
-                    <td class="text-right">
-                        +103
-                    </td>
-                    <td  class="text-right">
-                        2838
-                    </td>
-                </tr>
-
-                <tr>
-                    <td >
-                        2834
-                    </td>
-                    <td >
-                        pabula
-                    </td>
-                    <td >
-                        2016-05-24 15:23
-                    </td>
-                    <td >
-                        订单
-                    </td>
-                    <td >
-                        订单(3284)
-                    </td>
-                    <td  class="text-right">
-                        +103
-                    </td>
-                    <td  class="text-right">
-                        2838
-                    </td>
-                </tr>
-
-                <tr>
-                    <td >
-                        2834
-                    </td>
-                    <td >
-                        pabula
-                    </td>
-                    <td >
-                        2016-05-24 15:23
-                    </td>
-                    <td >
-                        订单
-                    </td>
-                    <td >
-                        订单(3284)
-                    </td>
-                    <td  class="text-right">
-                        +103
-                    </td>
-                    <td  class="text-right">
-                        2838
-                    </td>
+                <tr  ng-repeat='pointInfo in pointList'>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.USER_ID' ]"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.LOGIN_ID' ]"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.ADD_DATETIME']"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT' ]"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT_INTRO' ]"></td>
+                    <td class="text-center" ng-bind="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT' ]"></td>
+                    <td class="text-center" ng-bind="pointInfo['MEMBER_POINT_LIST.POINT' ]"></td>
                 </tr>
                 </tbody>
             </table>
@@ -117,7 +64,7 @@
 
     <div page-bar
          filter-obj="filter"
-         url="/shop/product/queryAll"
+         url="/member/point/queryAll"
          callback="bindData(response)">
     </div>
 
@@ -125,7 +72,7 @@
 
 
     <!--BEGIN 修正-->
-    <div class="modal fade text-left" id="modify" tabindex="-1" aria-hidden="true" style="display: none;">
+    <div class="modal fade" id="point" >
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -142,14 +89,14 @@
 
                             <div class="col-md-8 text-left form-inline">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="请输入会员ID\姓名">
+                                    <input type="text" class="form-control" placeholder="请输入会员登录ID" ng-model="memberId">
                                 </div>
-                                <button type="submit" class="btn btn-default">查询</button>
 
-
-                                <span class="help-block" ng-show="editForm.name.$error.required && !editForm.name.$pristine">
-                                    请先输入会员ID
-                                </span>
+                                <!--调用根据ID查询用户信息的API：/member/member/getById-->
+                                <button type="submit" class="btn btn-default" ng-click="queryById(memberId)">查询</button>
+                                     <span class="help-block" ng-show="editForm.name.$error.required && !editForm.name.$pristine">
+                                         请先输入会员ID
+                                     </span>
                             </div>
                         </div>
 
@@ -160,7 +107,7 @@
                             </label>
 
                             <div class="col-md-8 text-left">
-                                <h5>怕不辣</h5>
+                                <h5 ng-bind="memberDetail['MEMBER.USER_NAME']"></h5>
                             </div>
                         </div>
 
@@ -170,7 +117,7 @@
                             </label>
 
                             <div class="col-md-8 text-left">
-                                <h5>13966667777</h5>
+                                <h5 ng-bind="memberDetail['MEMBER.MOBILE']"></h5>
                             </div>
                         </div>
 
@@ -180,7 +127,9 @@
                             </label>
 
                             <div class="col-md-8 text-left">
-                                <h5>pabula@jiajia.com</h5>
+                                <h5 ng-bind="memberDetail['MEMBER.EMAIL']"></h5>
+
+
                             </div>
                         </div>
 
@@ -190,7 +139,7 @@
                             </label>
 
                             <div class="col-md-8 text-left">
-                                <h5>1293</h5>
+                                <h5 ng-bind="memberDetail['MEMBER.POINT']"></h5>
                             </div>
                         </div>
 
@@ -199,22 +148,26 @@
                                 <span class="required"> * </span> 调整类型:
                             </label>
 
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="modify['shop_product_class.CLASS_NAME']"
-                                       placeholder="">
+                            <div class="col-md-8 text-left">
+                                <label class="radio-inline">
+                                    <input type="radio" name="types"  value="1" ng-model="changeType"> 新增
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="types"  value="0" ng-model="changeType"> 减少
+                                </label>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 调整数值:
+                                <span class="required" > * </span> 调整数值:
                             </label>
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control"
-                                       ng-model="modify['shop_product_class.CLASS_NAME']"
-                                       placeholder="">
+                                       ng-model="modifyvalue"
+                                       ng-blur="getDynamicBala()"
+                                >
                             </div>
                         </div>
 
@@ -224,34 +177,30 @@
                             </label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="modify['shop_product_class.CLASS_NAME']"
-                                       placeholder="">
+                                <input  name="compId"  class="form-control" ng-model="introduction">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 调整后积分:
+                                <span class="required"> * </span> 调整后余额:
                             </label>
 
                             <div class="col-md-8 text-left">
-                                <h5>1293</h5>
+                                <h5>{{afterModify}}</h5>
                             </div>
                         </div>
 
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info btn-outline" ng-click="modifyProductClass()">确定
+                    <button type="button" class="btn btn-info btn-outline" data-dismiss="modal" ng-click="saveAccount()">确定
                     </button>
                     <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
                     </button>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
 
 </div>

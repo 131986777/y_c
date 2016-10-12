@@ -7,7 +7,7 @@
                 <div class="form-inline form-group">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="输入登录ID" ng-model="loginId">
-                        <button type="submit" class="btn btn-default" ng-click="searchInfo(loginId)">搜索</button>
+                        <button type="submit" class="btn btn-default" ng-click="queryFinanceByLoginId(loginId)">搜索</button>
                     </div>
 
                     <div class="form-group  col-md-offset-2">
@@ -85,7 +85,7 @@
 
                                 <div class="col-md-8 text-left form-inline">
                                     <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="请输入会员ID" ng-model="memberId">
+                                        <input type="text" class="form-control" placeholder="请输入会员登录ID" ng-model="memberId">
                                     </div>
 
                                     <!--调用根据ID查询用户信息的API：/member/member/getById-->
@@ -103,7 +103,7 @@
                                 </label>
 
                                 <div class="col-md-8 text-left">
-                                    <h5 ng-bind="privateInfo['MEMBER.USER_NAME']"></h5>
+                                    <h5 ng-bind="memberDetail['MEMBER.USER_NAME']"></h5>
                                 </div>
                             </div>
 
@@ -113,7 +113,7 @@
                                 </label>
 
                                 <div class="col-md-8 text-left">
-                                    <h5 ng-bind="privateInfo['MEMBER.MOBILE']"></h5>
+                                    <h5 ng-bind="memberDetail['MEMBER.MOBILE']"></h5>
                                 </div>
                             </div>
 
@@ -123,7 +123,7 @@
                                 </label>
 
                                 <div class="col-md-8 text-left">
-                                    <h5 ng-bind="privateInfo['member.EMAIL']"></h5>
+                                    <h5 ng-bind="memberDetail['MEMBER.EMAIL']"></h5>
 
 
                                 </div>
@@ -135,7 +135,7 @@
                                 </label>
 
                                 <div class="col-md-8 text-left">
-                                    <h5 ng-bind="accountList['MEMBER_ACCOUNT.BALANCE']"></h5>
+                                    <h5 ng-bind="memberDetail['MEMBER.BALANCE']"></h5>
                                 </div>
                             </div>
 
@@ -146,10 +146,10 @@
 
                                 <div class="col-md-8 text-left">
                                     <label class="radio-inline">
-                                        <input type="radio" name="types"  value="1" ng-model="value"> 新增
+                                        <input type="radio" name="types"  value="1" ng-model="changeType"> 新增
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="types"  value="0" ng-model="value"> 减少
+                                        <input type="radio" name="types"  value="0" ng-model="changeType"> 减少
                                     </label>
                                 </div>
                             </div>
@@ -173,8 +173,7 @@
                                 </label>
 
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control"
-                                           placeholder="请输入调整的原因">
+                                    <input  name="compId"  class="form-control" ng-model="introduction">
                                 </div>
                             </div>
 
@@ -191,7 +190,7 @@
                         </form>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-info btn-outline" data-dismiss="modal" ng-click="saveAccount(accountList,balanceList)">确定
+                        <button type="button" class="btn btn-info btn-outline" data-dismiss="modal" ng-click="saveAccount()">确定
                         </button>
                         <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
                         </button>
