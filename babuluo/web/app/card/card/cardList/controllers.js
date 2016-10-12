@@ -10,6 +10,7 @@ AndSellMainModule.controller('cardListController', function ($scope, $stateParam
     // };
     // $scope.initLoad();
     $scope.cardAdd = {};
+    $scope.isFaceValue = false;
 
     $scope.bindData = function (response) {
         $scope.cardList = response.data;
@@ -46,7 +47,7 @@ AndSellMainModule.controller('cardListController', function ($scope, $stateParam
             return;
         }
         $scope.cardAdd['MEMBER_CARD.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
-        if ($scope.IS_FACE_VALUE == false) {
+        if ($scope.isFaceValue == false) {
             $scope.cardAdd['MEMBER_CARD.IS_FACE_VALUE'] = -1;
             $scope.cardAdd['MEMBER_CARD.FACE_VALUE'] = 0;
         } else {
@@ -59,7 +60,6 @@ AndSellMainModule.controller('cardListController', function ($scope, $stateParam
         if ($scope.isNull($scope.cardAdd['MEMBER_CARD.FREEZE_BALANCE'])) {
             $scope.cardAdd['MEMBER_CARD.FREEZE_BALANCE'] = 0;
         }
-        console.log($scope.cardAdd);
         cardFactory.addMemberCard($scope.cardAdd).get({}, function (response) {
             if (response.extraData.state == 'true') {
                 $("#cardList").modal('hide');
@@ -82,7 +82,7 @@ AndSellMainModule.controller('cardListController', function ($scope, $stateParam
         $scope.cardAdd['MEMBER_CARD.CARD_NO'] = undefined;
         $scope.cardAdd['MEMBER_CARD.BALANCE'] = undefined;
         $scope.cardAdd['MEMBER_CARD.FREEZE_BALANCE'] = undefined;
-        $scope.IS_FACE_VALUE = false;
+        $scope.isFaceValue = false;
         $scope.memberId = undefined;
         $scope.memberDetail = {};
     };
