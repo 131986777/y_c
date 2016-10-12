@@ -26,7 +26,7 @@
                             </option>
                         </select>
                     </div> <!-- select-center  -->
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#balance">调整资金</button>
+                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#balance" ng-click = empty()>调整资金</button>
             </div>
             </div>
         </div>
@@ -52,7 +52,9 @@
                     <td ng-bind="balanceInfo['FINANCE_LIST.LOGIN_ID']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>
-                    <td class="text-right" ng-bind="balanceInfo['FINANCE_LIST.CHANGE_VALUE']"></td>
+                    <td class="text-right">
+                        <font color="red" name="hello">{{balanceInfo['FINANCE_LIST.CHANGE_VALUE']}}</font>
+                    </td>
                     <td class="text-right" ng-bind="balanceInfo['FINANCE_LIST.BALANCE']"></td>
                 </tr>
                 </tbody>
@@ -73,7 +75,8 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true"></button>
+                                aria-hidden="true">
+                        </button>
                         <h4 class="modal-title">调整资金</h4>
                     </div>
                     <div class="modal-body form-body text-right">
@@ -146,10 +149,10 @@
 
                                 <div class="col-md-8 text-left">
                                     <label class="radio-inline">
-                                        <input type="radio" name="types"  value="1" ng-model="changeType"> 新增
+                                        <input type="radio" name="types"  value="1" ng-model="changeType" ng-click="delete()"> 新增
                                     </label>
                                     <label class="radio-inline">
-                                        <input type="radio" name="types"  value="0" ng-model="changeType"> 减少
+                                        <input type="radio" name="types"  value="0" ng-model="changeType" ng-click="delete()"> 减少
                                     </label>
                                 </div>
                             </div>
@@ -198,6 +201,4 @@
                 </div>
             </div>
         </div>
-
 </div>
-<!-- END CONTENT -->
