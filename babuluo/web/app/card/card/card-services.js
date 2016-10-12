@@ -83,5 +83,18 @@ AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
             }
         });
     };
-
+    this.getUIDByLOGINID = function (form) {
+        return $resource(baseURL + '/member/member/getUIDByLOGINID', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+    this.getUIDByMobile = function (form) {
+        return $resource(baseURL + '/member/member/getUIDByMobile', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
 });
