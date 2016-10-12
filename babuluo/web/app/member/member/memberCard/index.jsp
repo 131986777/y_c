@@ -28,24 +28,27 @@
                 <!-- END 导航标签 -->
             </div>
             <!--内容区-->
-            <div style="margin-top:50px;margin-left:100px">
+            <div class="row">
+                <div class="col-md-12">
 
-                <div style="width:500px;float:left"  ng-repeat="(key,item) in cardInfoList">
-                    <div>
-                        <label>卡号：</label><label>{{item['MEMBER_CARD.CARD_NO']}}</label>
-
-                        <label style="margin-left: 120px">{{item['MEMBER_CARD.CARD_NAME']}}</label>
+                    <div ng-repeat="cl in cardInfoList" class="card center-block pull-left" ng-style="cl['MEMBER_CARD.CARD_STYLE']">
+                        <div class="row cardTitle">
+                            <div class="col-md-8">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</div>
+                            <div class="col-md-4 text-right">{{cl['MEMBER_CARD.TYPE_NAME']}}</div>
+                        </div>
+                        <p class="balance"><span>余额</span>{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}</p>
+                        <p ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0" class="froze">
+                            （冻结{{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}}）</p>
+                        <div class="row cardFooter">
+                            <div class="col-md-4 nowrap">{{cl['MEMBER_CARD.ADD_DATETIME'] |FormatStrDate}}</div>
+                            <div class="col-md-4 nowrap text-right count">
+                                <span ng-show="cl['MEMBER_CARD.IS_FACE_VALUE']==1">面值{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</span>
+                            </div>
+                            <div class="col-md-4 text-right time nowrap">
+                                {{cl['MEMBER_CARD.SOURCE_NAME']}}
+                            </div>
+                        </div>
                     </div>
-                    <br>
-                    <label style="margin-left: 70px">{{cardTypeList[key]}}</label>
-                    <div style="margin-left: 200px">
-                        <label>余额：</label><label>{{item['MEMBER_CARD.BALANCE']}}</label><br>
-                        <label>冻结：</label><label>{{item['MEMBER_CARD.FREEZE_BALANCE']}}</label>
-                    </div>
-                    <div>
-                        <label>面值：</label><label>{{item['MEMBER_CARD.FACE_VALUE']}}</label>
-                    </div><br>
-                    <span>{{item['MEMBER_CARD.ADD_DATETIME']+cardSourceList[key]}}</span>
                 </div>
             </div>
         </div>

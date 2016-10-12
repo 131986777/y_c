@@ -19,65 +19,12 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
 
     $scope.shopAdd = {};
     $scope.shopEdited = {};
-    $scope.shopFilter = {};
 
-    $scope.initLoad = function () {
+    $scope.bindData = function (response) {
+        $scope.shopList = response.data;
+        $scope.districtList = response.extraData.districtList;
+        console.log(response);
 
-        $scope.deferLoad = $q.defer();
-        $scope.districtMap = new Map;
-
-        $scope.loadDistrict();
-        $scope.loadShopList();
-
-    };
-
-    $scope.loadDistrict = function () {
-        var form = {};
-        //目前serviceId都设为1
-        form['DISTRICT.service_id'] = 1;
-
-        districtFactory.getDistrictList(form).get({}, function (response) {
-            console.log(response);
-            $scope.districtList = response.data;
-            $scope.districtList.forEach(function (ele) {
-                $scope.districtMap.set(ele['DISTRICT.DISTRICT_ID'], ele['DISTRICT.DISTRICT_NAME']);
-            });
-            $scope.deferLoad.resolve(response);
-        }, null);
-    };
-
-    $scope.loadShopList = function () {
-        var form = {};
-        //目前serviceId都设为1
-        form['SHOP.SERVICE_ID'] = 1;
-        $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
-
-        $scope.promiseAll.then(function () {
-            shopFactory.getShopList(form).get({}, function (response) {
-                console.log(response);
-                $scope.shopList = response.data;
-            });
-        });
-    };
-
-    $scope.initLoad();
-
-    //根据区域筛选门店
-    $scope.filterShop = function () {
-        if ($scope.shopFilter['SHOP.DISTRICT_ID'] == "-1") {
-            $scope.loadShopList();
-            return;
-        }
-        //目前serviceId都设为1
-        $scope.shopFilter['SHOP.SERVICE_ID'] = 1;
-        $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
-
-        $scope.promiseAll.then(function () {
-            shopFactory.getShopListByDistrictId($scope.shopFilter).get({}, function (response) {
-                console.log(response);
-                $scope.shopList = response.data;
-            });
-        });
     };
 
     $scope.addShopList = function () {

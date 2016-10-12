@@ -11,11 +11,10 @@
                     </div>
                     <div class="col-sm-6" style="padding: 0px">
 
-                        <select ng-model="shopFilter['SHOP.DISTRICT_ID']"
-                                ng-init="shopFilter['SHOP.DISTRICT_ID']='-1'"
-                                class="nya-bs-select form-control " data-width="80px"
-                                ng-change="filterShop(shopFilter['SHOP.DISTRICT_ID'])">
-                            <option class="nya-bs-option" value="-1">
+                        <select ng-model="filter['SHOP.DISTRICT_ID']"
+                                ng-init="filter['SHOP.DISTRICT_ID']='null'"
+                                class="nya-bs-select form-control " data-width="80px">
+                            <option class="nya-bs-option" value="null">
                                 门店区域
                             </option>
                             <option class="nya-bs-option"
@@ -49,9 +48,9 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="sl in shopList">
+            <tr ng-repeat="sl in shopList|filter:{}">
                 <td ng-bind="sl['SHOP.SHOP_NAME']"></td>
-                <td ng-bind="districtMap.get(sl['SHOP.DISTRICT_ID'])"></td>
+                <td ng-bind="sl['SHOP.SHOP_DISTRICT_NAME']"></td>
                 <td><a class="table-link" ng-click="showMap(sl)">查看地图</a></td>
                 <td ng-bind="sl['SHOP.TELEPHONE']"></td>
                 <td>暂无</td>
@@ -67,6 +66,11 @@
             </tr>
             </tbody>
         </table>
+        <div page-bar
+             filter-obj="filter"
+             url="/shop/shop/queryAll"
+             callback="bindData(response)">
+        </div>
         <!-- BEGIN add modal -->
         <div class="modal fade" id="add" role="dialog" aria-labelledby="add">
             <div class="modal-dialog" aria-hidden="true">
