@@ -43,22 +43,9 @@ AndSellMainModule.controller('pointListController', function ($scope, $statePara
 
     //保存时更新账户余额
     $scope.saveAccount = function (){
-
-        //修改用户账户表--MEMBER_ACCOUNT
-        $scope.ModifyInfo = {};
-        $scope.ModifyInfo['MEMBER_ACCOUNT.POINT']=$scope.afterModify;
-        $scope.ModifyInfo['MEMBER_ACCOUNT.USER_ID']= $scope.memberDetail['MEMBER.USER_ID'];;
-        pointFactory.modMemberAccount($scope.ModifyInfo).get({}, function (response) {
-            if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-            }
-        });
-
         //修改积分详情表--FINANCE_LIST（添加操作记录）
         $scope.ModifyBalanceInfo = {};
-
-        $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.POINT']=$scope.afterModify;
+        $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.POINT'] = $scope.memberDetail['MEMBER.POINT'];
         $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.USER_ID']= $scope.memberDetail['MEMBER.USER_ID'];
         $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.SERVICE_ID']= $scope.memberDetail['MEMBER.SERVICE_ID'];
         $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.EVENT']= "手动更改";
@@ -79,6 +66,20 @@ AndSellMainModule.controller('pointListController', function ($scope, $statePara
         });
     }
 
+    $scope.empty = function (){
+        $scope.modifyvalue = null;
+        $scope.afterModify = null;
+        $scope.introduction = null;
+        $scope.memberDetail = null;
+        $scope.memberId = null;
+        $scope.changeType = null;
+    }
+
+    $scope.delete = function (){
+        $scope.modifyvalue = null;
+        $scope.afterModify = null;
+        $scope.introduction = null;
+    }
 });
 
 
