@@ -55,9 +55,9 @@
 
     <!-- cardList -->
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
 
-            <div ng-repeat="cl in cardList|filter:{}" class="card center-block" ng-style="cl['MEMBER_CARD.CARD_STYLE']">
+            <div ng-repeat="cl in cardList|filter:{}" class="card center-block pull-left" ng-style="cl['MEMBER_CARD.CARD_STYLE']">
                 <div class="row cardTitle">
                     <div class="col-md-8">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</div>
                     <div class="col-md-4 text-right">{{cl['MEMBER_CARD.TYPE_NAME']}}</div>

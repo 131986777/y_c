@@ -1,10 +1,10 @@
 .card{
     width: 480px;
     height: 220px;
-    margin-top: 20px;
     border-radius: 10px;
     color: #fff;
     position: relative;
+    margin: 20px 27px 0;
 }
 .balance{
     line-height: 124px;
