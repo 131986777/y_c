@@ -13,17 +13,17 @@ AndSellMainModule.controller('cardTypeController', function ($scope, $stateParam
            for ( var i=0;i<$scope.cardSourceList.length;i++){
 
 
-               $scope.sourceMap.set($scope.cardSourceList[i]['member_card_source.ID'],$scope.cardSourceList[i]['member_card_source.NAME']);
+               $scope.sourceMap.set($scope.cardSourceList[i]['MEMBER_CARD_SOURCE.ID'],$scope.cardSourceList[i]['MEMBER_CARD_SOURCE.NAME']);
 
 
-              // console.log("对象2为"+ $scope.sourceMap.get($scope.cardSourceList[i]['member_card_source.ID']));
+              // console.log("对象2为"+ $scope.sourceMap.get($scope.cardSourceList[i]['MEMBER_CARD_SOURCE.ID']));
 
            }
 
 
 
 
-           $scope.queryCardBySource($scope.cardSourceList[0]['member_card_source.ID']);
+           $scope.queryCardBySource($scope.cardSourceList[0]['MEMBER_CARD_SOURCE.ID']);
 
 
         }, null);
@@ -115,7 +115,7 @@ AndSellMainModule.controller('cardTypeController', function ($scope, $stateParam
     $scope.modifyCardTypeClick = function (item) {
         $scope.modify=clone(item);
         $scope.modifyId=item['MEMBER_CARD_TYPE.ID'];
-        console.log('修改ID为'+modifyId);
+
 
     };
 

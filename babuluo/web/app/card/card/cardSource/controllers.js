@@ -1,3 +1,4 @@
+
 AndSellMainModule.controller('cardSourceController', function ($scope, $stateParams, cardFactory, modalFactory) {
 
   modalFactory.setTitle('会员卡发布渠道');
@@ -12,7 +13,7 @@ AndSellMainModule.controller('cardSourceController', function ($scope, $statePar
   $scope.initLoad();
 
 
-  $scope.addCardSource = function () {
+    $scope.addCardSource = function () {
     console.log($scope.add);
 
     cardFactory.addCardSource($scope.add).get({}, function (response) {
@@ -24,9 +25,7 @@ AndSellMainModule.controller('cardSourceController', function ($scope, $statePar
         $scope.add='';
         $("#addSource").modal('hide');
         $scope.initLoad();
-
       }
-
     });
   };
 
