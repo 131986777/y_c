@@ -15,6 +15,7 @@ AndSellMainModule.controller('cardListController', function ($scope, $stateParam
         $scope.cardList = response.data;
         $scope.sourceList = response.extraData.sourceList;
         $scope.userDetailMap = response.extraData.userDetailMap;
+        $scope.typeMap = response.extraData.typeMap;
         $scope.typeListMap = response.extraData.typeListMap;
         console.log(response);
     };
@@ -50,7 +51,7 @@ AndSellMainModule.controller('cardListController', function ($scope, $stateParam
             $scope.cardAdd['MEMBER_CARD.FACE_VALUE'] = 0;
         } else {
             $scope.cardAdd['MEMBER_CARD.IS_FACE_VALUE'] = 1;
-            if ($scope.cardAdd['MEMBER_CARD.FACE_VALUE'] < $scope.cardAdd['MEMBER_CARD.BALANCE']) {
+            if ($scope.cardAdd['MEMBER_CARD.FACE_VALUE'] - $scope.cardAdd['MEMBER_CARD.BALANCE'] < 0) {
                 modalFactory.showAlert("可用余额不可大于面额！");
                 return;
             }
@@ -64,6 +65,10 @@ AndSellMainModule.controller('cardListController', function ($scope, $stateParam
                 $("#cardList").modal('hide');
                 $scope.clearForm();
                 $scope.$broadcast('pageBar.reload');
+            } else {
+                if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
+                    modalFactory.showShortAlert(response.msg);
+                }
             }
         }, null);
     };
