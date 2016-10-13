@@ -45,7 +45,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
             } else if (response.extraData.state == 'true') {
                 $("#add").modal('hide');
                 $scope.clearForm();
-                $scope.initLoad();
+                $scope.$broadcast('pageBar.reload');
             }
         });
     };
@@ -73,7 +73,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
             if (response.extraData.state == 'true') {
                 $('#edit').modal('hide');
                 modalFactory.showShortAlert('修改成功');
-                $scope.initLoad();
+                $scope.$broadcast('pageBar.reload');
             } else {
                 modalFactory.showShortAlert(response.msg);
             }
@@ -84,7 +84,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
         modalFactory.showAlert("确定关停门店：［" + sl['SHOP.SHOP_NAME'] + "］?", function () {
             shopFactory.delById(sl).get({}, function (response) {
                 if (response.extraData.state == 'true') {
-                    $scope.initLoad();
+                    $scope.$broadcast('pageBar.reload');
                 }
             });
         });

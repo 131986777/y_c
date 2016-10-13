@@ -60,7 +60,7 @@
                         修改
                     </a>
                     <a class="table-link" ng-click="delShopListById(sl)">
-                        关闭
+                        关停
                     </a>
                 </td>
             </tr>
