@@ -54,3 +54,17 @@ var filterTableFromList = function (list, tablename) {
 function moneyFormat(money) {
     return Number(money / 100).toFixed(2);
 }
+
+/*
+ *删除数组元素.
+ */
+Array.prototype.remove = function (b) {
+    var a = this.indexOf(b);
+    if (a
+        >= 0) {
+        this.splice(a, 1);
+        return true;
+    }
+    return false;
+};
+
