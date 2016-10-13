@@ -1,12 +1,12 @@
 <div class="table-operbar row">
-    <div class="table-toolbar">
+    <!--<div class="table-toolbar">-->
 
-        <div class="col-md-12 text-right">
-            <a show-modal id="#addSource" class="btn sbold green">
-                <i class="fa fa-plus"></i> 新增发卡渠道 </a>
-        </div>
-        
-    </div>
+        <!--<div class="col-md-12 text-right">-->
+            <!--<a show-modal id="#addSource" class="btn sbold green">-->
+                <!--<i class="fa fa-plus"></i> 新增发卡渠道 </a>-->
+        <!--</div>-->
+        <!---->
+    <!--</div>-->
     <div class="col-md-12">
         <div class="table-scrollable">
             <table class="table table-bordered table-hover table-striped">
@@ -14,27 +14,30 @@
                 <tr>
 
                     <!--<th class="col-md-2"> 发卡渠道编码</th>-->
-                    <th class="col-md-2"> 发卡渠道名称</th>
-                    <th class="col-md-3"> 发卡渠道介绍</th>
-
+                    <th class="col-md-3"> 商品</th>
+                    <th class="col-md-1"> 单位</th>
+                    <th class="col-md-2"> 仓库</th>
+                    <th class="col-md-1"> 实时库存</th>
+                    <th class="col-md-1"> 带锁库存</th>
+                    <th class="col-md-1"> 最后变更</th>
                     <th class="col-md-1 text-center"> 操作</th>
                 </tr>
                 </thead>
                 <tbody ng-cloak>
                 <tr ng-repeat="item in cardSourceList">
 
-                    <!--<td ng-bind="item['MEMBER_CARD_SOURCE.CARD']"></td>-->
-                    <td ng-bind="item['MEMBER_CARD_SOURCE.NAME']"></td>
-                    <td ng-bind="item['MEMBER_CARD_SOURCE.INTRO']"></td>
-                    <td class="text-center">
-                        <div >
-                            <a type="button" show-modal id="#modifySource"
-                               ng-click="modifyCardSourceClick(item)">修改</a>
-                            <a type="button" ng-click="deleteCardSource(item['MEMBER_CARD_SOURCE.ID'])">
-                                删除
-                            </a>
-                        </div>
-                    </td>
+                    <!--&lt;!&ndash;<td ng-bind="item['MEMBER_CARD_SOURCE.CARD']"></td>&ndash;&gt;-->
+                    <!--<td ng-bind="item['MEMBER_CARD_SOURCE.NAME']"></td>-->
+                    <!--<td ng-bind="item['MEMBER_CARD_SOURCE.INTRO']"></td>-->
+                    <!--<td class="text-center">-->
+                        <!--<div >-->
+                            <!--<a type="button" show-modal id="#modifySource"-->
+                               <!--ng-click="modifyCardSourceClick(item)">修改</a>-->
+                            <!--<a type="button" ng-click="deleteCardSource(item['MEMBER_CARD_SOURCE.ID'])">-->
+                                <!--删除-->
+                            <!--</a>-->
+                        <!--</div>-->
+                    <!--</td>-->
                 </tr>
                 </tbody>
             </table>

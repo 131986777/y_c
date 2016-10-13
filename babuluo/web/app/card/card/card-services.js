@@ -1,3 +1,4 @@
+
 AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
 
     this.getMemberCardList = function () {
@@ -25,14 +26,6 @@ AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
         });
     };
 
-    this.getCardListBySource = function (sourceID) {
-        return $resource(baseURL + '/member/cardType/getBySource?MEMBER_CARD_TYPE.CARD_SOURCE_ID=:ID', {'ID': sourceID}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-
     this.addCardSource = function (form) {
         return $resource(baseURL + '/member/cardSource/add', form, {
             'update': {
@@ -42,7 +35,7 @@ AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
     };
 
     this.delCardSource = function (id) {
-        return $resource(baseURL + '/member/cardSource/delById?member_card_source.ID=:ID', {'ID': id},{
+        return $resource(baseURL + '/member/cardSource/delById?MEMBER_CARD_SOURCE.ID=:ID', {'ID': id},{
             'update': {
                 method: 'PUT'
             }
@@ -57,6 +50,18 @@ AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
         });
     };
 
+
+    this.getCardListBySource = function (sourceID) {
+        console.log(456);
+        console.log('id为'+sourceID);
+        return $resource(baseURL + '/member/cardType/getBySource?MEMBER_CARD_TYPE.CARD_SOURCE_ID=:ID', {'ID': sourceID}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
+
     this.addCardType = function (form) {
         return $resource(baseURL + '/member/cardType/add', form, {
             'update': {
@@ -65,7 +70,7 @@ AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
         });
     };
     this.delCardType = function (id) {
-        return $resource(baseURL + '/member/cardType/delById?member_card_type.ID=:ID', {'ID': id},{
+        return $resource(baseURL + '/member/cardType/delById?MEMBER_CARD_TYPE.ID=:ID', {'ID': id},{
             'update': {
                 method: 'PUT'
             }
@@ -78,5 +83,18 @@ AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
             }
         });
     };
-
+    this.getUIDByLOGINID = function (form) {
+        return $resource(baseURL + '/member/member/getUIDByLOGINID', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+    this.getUIDByMobile = function (form) {
+        return $resource(baseURL + '/member/member/getUIDByMobile', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
 });

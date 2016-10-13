@@ -10,11 +10,13 @@ AndSellMainModule.controller('cardListController', function ($scope, $stateParam
     // };
     // $scope.initLoad();
     $scope.cardAdd = {};
+    $scope.isFaceValue = false;
 
     $scope.bindData = function (response) {
         $scope.cardList = response.data;
         $scope.sourceList = response.extraData.sourceList;
         $scope.userDetailMap = response.extraData.userDetailMap;
+        $scope.typeMap = response.extraData.typeMap;
         $scope.typeListMap = response.extraData.typeListMap;
         console.log(response);
     };
@@ -45,25 +47,28 @@ AndSellMainModule.controller('cardListController', function ($scope, $stateParam
             return;
         }
         $scope.cardAdd['MEMBER_CARD.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
-        if ($scope.IS_FACE_VALUE == false) {
+        if ($scope.isFaceValue == false) {
             $scope.cardAdd['MEMBER_CARD.IS_FACE_VALUE'] = -1;
             $scope.cardAdd['MEMBER_CARD.FACE_VALUE'] = 0;
         } else {
             $scope.cardAdd['MEMBER_CARD.IS_FACE_VALUE'] = 1;
-            if ($scope.cardAdd['MEMBER_CARD.FACE_VALUE'] < $scope.cardAdd['MEMBER_CARD.BALANCE']) {
+            if ($scope.cardAdd['MEMBER_CARD.FACE_VALUE'] - $scope.cardAdd['MEMBER_CARD.BALANCE'] < 0) {
                 modalFactory.showAlert("可用余额不可大于面额！");
                 return;
             }
         }
-        if ($scope.cardAdd['MEMBER_CARD.FREEZE_BALANCE'] == undefined) {
+        if ($scope.isNull($scope.cardAdd['MEMBER_CARD.FREEZE_BALANCE'])) {
             $scope.cardAdd['MEMBER_CARD.FREEZE_BALANCE'] = 0;
         }
-        console.log($scope.cardAdd);
         cardFactory.addMemberCard($scope.cardAdd).get({}, function (response) {
             if (response.extraData.state == 'true') {
                 $("#cardList").modal('hide');
                 $scope.clearForm();
                 $scope.$broadcast('pageBar.reload');
+            } else {
+                if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
+                    modalFactory.showShortAlert(response.msg);
+                }
             }
         }, null);
     };
@@ -77,9 +82,48 @@ AndSellMainModule.controller('cardListController', function ($scope, $stateParam
         $scope.cardAdd['MEMBER_CARD.CARD_NO'] = undefined;
         $scope.cardAdd['MEMBER_CARD.BALANCE'] = undefined;
         $scope.cardAdd['MEMBER_CARD.FREEZE_BALANCE'] = undefined;
-        $scope.IS_FACE_VALUE = false;
+        $scope.isFaceValue = false;
         $scope.memberId = undefined;
         $scope.memberDetail = {};
     };
 
+    $scope.query = function () {
+
+
+        $scope.Member = {};
+        if ($scope.isNotNull($scope.query['MEMBER_CARD.CARD_NO'])) {
+            $scope.filter['MEMBER_CARD.CARD_NO'] = $scope.query['MEMBER_CARD.CARD_NO'];
+        } else {
+            $scope.filter['MEMBER_CARD.CARD_NO'] = "null";
+        }
+        if ($scope.isNotNull($scope.query['MEMBER_CARD.MEMBER'])) {
+
+            $scope.Member['MEMBER.LOGIN_ID'] = $scope.query['MEMBER_CARD.MEMBER'];
+            $scope.Member['MEMBER.MOBILE'] = $scope.query['MEMBER_CARD.MEMBER'];
+            cardFactory.getUIDByLOGINID($scope.Member).get({}, function (response) {
+                if (response.data.length != 0) {
+                    console.log(response.data);
+                    $scope.filter['MEMBER_CARD.USER_ID'] = response.data[0]['MEMBER.USER_ID'];
+                } else {
+                    cardFactory.getUIDByMobile($scope.Member).get({}, function (response) {
+                        if (response.data.length != 0) {
+                            $scope.filter['MEMBER_CARD.USER_ID'] = response.data[0]['MEMBER.USER_ID'];
+                        } else {
+                            $scope.filter['MEMBER_CARD.USER_ID'] = -1;
+                        }
+                    }, null);
+                }
+            }, null);
+        } else {
+            $scope.filter['MEMBER_CARD.USER_ID'] = "null";
+        }
+    };
+
+    $scope.isNull = function (str) {
+        return str == null || str == '';
+    };
+
+    $scope.isNotNull = function (str) {
+        return !$scope.isNull(str);
+    };
 });

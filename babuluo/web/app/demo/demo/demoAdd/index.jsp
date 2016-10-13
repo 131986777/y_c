@@ -8,5 +8,5 @@
     <a ui-sref="demo-list"> demoList</a> <%-- 不带参数--%>
     <br>
     <a ui-sref="demo-list({params1:1,params2:2})"> demoListWithParams</a> <%-- 携带参数--%>
-
+　　
 </div>

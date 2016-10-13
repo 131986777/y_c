@@ -4,43 +4,28 @@ AndSellMainModule.controller('balanceListController', function ($scope, $statePa
 
     //获得所有资金明细
     $scope.bindData = function (response) {
+        $scope.balanceList ={};
+
         $scope.balanceList = response.data;
+        $scope.userDetailMap = response.extraData.userDetailMap;
+        $scope.userFininanceMap = response.extraData.userFininanceMap;
+        console.log(response);
     };
 
-    //根据用户ID查询用户个人信息以及账单流水信息
+    //根据用户ID查询用户个人信息
     $scope.queryById = function (memberId){
-        $scope.accountList = {};
-        $scope.privateInfo= {};
-        var form = {};
-        form['MEMBER_ACCOUNT.USER_ID']=memberId;
-         balanceFactory.queryMemberAccount(form).get({} ,function (response){
-             $scope.accountList = response.data[0];
-             $scope.privateInfo = response.extraData.member[0];
-             console.log(response);
-        });
+        /*balanceFactory.queryAll();*/
+        $scope.memberDetail = $scope.userDetailMap[memberId];
+
     }
-
-    //根据资金流向加载客户账单流水信息
-    $scope.getBalanceByType = function (balanceType) {
-        var newlist = [];
-        var list = $scope.balanceList;
-        for(var i=0 ;i<list.length;i++){
-            if(list[i]['FINANCE_LIST.CHANGE_TYPE'] ==balanceType){
-               newlist.push(list[i]);
-            }
-        }
-        $scope.balanceList = newlist;
-        console.log($scope.balanceList);
-    };
-
 
     //动态计算账户余额
     $scope.getDynamicBala = function (){
-        if($scope.value ==1){
-            $scope.afterModify = parseInt($scope.accountList['MEMBER_ACCOUNT.BALANCE'])+ parseInt($scope.modifyvalue);
+        if($scope.changeType ==1){
+            $scope.afterModify = (parseFloat($scope.memberDetail['MEMBER.BALANCE'])+ parseFloat($scope.modifyvalue)).toFixed(2);
         }
-        else if($scope.value ==0){
-            $scope.afterModify = parseInt($scope.accountList['MEMBER_ACCOUNT.BALANCE'])- parseInt($scope.modifyvalue);
+        else if($scope.changeType ==0){
+            $scope.afterModify = (parseFloat($scope.memberDetail['MEMBER.BALANCE'])- parseFloat($scope.modifyvalue)).toFixed(2);
         }
         else {
             alert("请输入变更类型");
@@ -48,35 +33,62 @@ AndSellMainModule.controller('balanceListController', function ($scope, $statePa
     }
 
     //保存时更新账户余额
-    $scope.saveAccount = function (accountList){
-        $scope.accountList['MEMBER_ACCOUNT.BALANCE']=$scope.afterModify;
-        balanceFactory.modMemberAccount($scope.accountList).get({}, function (response) {
+    $scope.saveAccount = function (){
 
+        //给资金明细表添加记录--FINANCE_LIST（添加操作记录）
+        $scope.ModifyBalanceInfo = {};
+        $scope.ModifyBalanceInfo['FINANCE_LIST.BALANCE']=$scope.memberDetail['MEMBER.BALANCE'];
+        $scope.ModifyBalanceInfo['FINANCE_LIST.USER_ID']= $scope.memberDetail['MEMBER.USER_ID'];
+        $scope.ModifyBalanceInfo['FINANCE_LIST.SERVICE_ID']= $scope.memberDetail['MEMBER.SERVICE_ID'];
+        $scope.ModifyBalanceInfo['FINANCE_LIST.EVENT']= "手动更改";
+        $scope.ModifyBalanceInfo['FINANCE_LIST.EVENT_INTRO']= $scope.introduction;
+        $scope.ModifyBalanceInfo['FINANCE_LIST.CHANGE_VALUE']= $scope.modifyvalue;
+        console.log($scope.ModifyBalanceInfo['FINANCE_LIST.CHANGE_VALUE']);
+        if($scope.changeType == 1){
+            $scope.ModifyBalanceInfo['FINANCE_LIST.CHANGE_TYPE']= 'increase';
+        }
+        else{
+            $scope.ModifyBalanceInfo['FINANCE_LIST.CHANGE_TYPE']= 'decrease';
+        }
+        balanceFactory.addFinanceList ($scope.ModifyBalanceInfo).get({}, function (response) {
             if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
             }
         });
+    }
 
-        /*balanceFactory.modMemberBalanceById (balanceList).get({}, function (response) {
-            console.log("======");
-            console.log(balanceList);
-            $scope.balanceList['FINANCE_LIST.BALANCE']=$scope.afterModify;
-            if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
+    //根据登录ID查询财务信息
+    $scope.queryFinanceByLoginId = function(loginId){
+        $scope.roundList =$scope.balanceList;
+        $scope.balanceList =[];
+        for(var i=0;i< $scope.roundList.length;i++){
+            if( $scope.roundList[i]['FINANCE_LIST.LOGIN_ID']==loginId){
+                console.log($scope.roundList[i]);
+                $scope.balanceList.push($scope.roundList[i]);
+
             }
-        });*/
+        }
     }
 
-
-
-    //根据登录ID查询客户信息
-    $scope.searchInfo = function (loginId){
-        var form={};
-        form['FINANCE_LIST.ID'] =loginId;
-        balanceFactory.getMemberData(form).get({} ,function (response){
-            $scope.balanceList = response.data;
-        });
+    $scope.delete = function (){
+        $scope.modifyvalue = null;
+        $scope.afterModify = null;
+        $scope.introduction = null;
     }
+
+    $scope.empty = function (){
+        $scope.modifyvalue = null;
+        $scope.afterModify = null;
+        $scope.introduction = null;
+        $scope.memberDetail = null;
+        $scope.memberId = null;
+        $scope.changeType = null;
+    }
+
+    /*$scope.initLoad = function (){
+        var node = document.getElementsByName("hello");
+        node.style.color = "black";
+    }
+    $scope.initLoad();*/
 });
