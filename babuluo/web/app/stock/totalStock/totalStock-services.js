@@ -1,4 +1,4 @@
-AndSellMainModule.service('stockFactory', function ($resource, baseURL) {
+AndSellMainModule.service('totalStockFactory', function ($resource, baseURL) {
 
     this.getStockList = function () {
         return $resource(baseURL + '/stock/realtime/queryAll', null, {

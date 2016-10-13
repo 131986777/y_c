@@ -1,11 +1,11 @@
-AndSellMainModule.controller('stockListController', function ($scope, shopFactory, stockFactory, modalFactory, $q) {
+AndSellMainModule.controller('totalStockController', function ($scope, shopFactory, totalStockFactory, modalFactory, $q) {
 
     modalFactory.setTitle('实时库存');
 
 
     $scope.initLoad = function () {
 
-        stockFactory.getStockList().get({}, function (response) {
+        totalStockFactory.getStockList().get({}, function (response) {
             console.log(response);
             $scope.stockList = response.data;
             $scope.storeMap= response.extraData.storeMap;
@@ -31,7 +31,7 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
         $scope.add['STORE.ADD_DATETIME']=new Date();  //add['STORE.IS_DEF']
         console.log($scope.add);
 
-        stockFactory.addStore($scope.add).get({}, function (response) {
+        totalStockFactory.addStore($scope.add).get({}, function (response) {
 
             if (response.code == 400) {
                 modalFactory.showShortAlert(response.msg);
@@ -61,7 +61,7 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
             $scope.modify['STORE.IS_DEF']=-1;
         }
 
-        stockFactory.modifyStore ($scope.modify).get({}, function (response) {
+        totalStockFactory.modifyStore ($scope.modify).get({}, function (response) {
             if (response.code == 400) {
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
@@ -75,7 +75,7 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
     $scope.deleteStore = function (id) {
 
         modalFactory.showAlert("确认删除吗?", function () {
-            stockFactory.delStoreById(id).get({}, function (res) {
+            totalStockFactory.delStoreById(id).get({}, function (res) {
                 if (res.extraData.state = 'true') {
                     modalFactory.showShortAlert("删除成功");
 
