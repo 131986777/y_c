@@ -27,7 +27,7 @@
                 <tr ng-repeat="item in storeList">
 
                     <!--&lt;!&ndash;<td ng-bind="item['MEMBER_CARD_SOURCE.CARD']"></td>&ndash;&gt;-->
-                    <td ng-bind="item['STORE.NAME']"></td>
+                    <td ></span><span ng-bind="item['STORE.NAME']"></span><span ng-if="item['STORE.IS_DEF']==1">(默认仓库)</td>
                     <td ng-bind="item['STORE.CODE']"></td>
                     <td class="text-center">
                         <div>
@@ -71,7 +71,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                            仓库编码
+                            <span class="required"> * </span> 仓库编码
                         </label>
 
                         <div class="col-md-8">
