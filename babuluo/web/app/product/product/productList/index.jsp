@@ -135,6 +135,7 @@
                     <td>
                         <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">修改</a>
 
+
                         <a show-modal id="#modifySkuPrice"
                            ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
                            ng-click="showModifySkuPrice(product)">改价</a>
@@ -142,6 +143,7 @@
                         <a ng-click="delProduct(product)">删除</a>
                     </td>
                 </tr>
+
 
                 <tr ng-class="table-tr-small" ng-if="product['SHOP_PRODUCT.SHOUSKULIST']"
                     ng-repeat-end="" ng-repeat=" sku in product['SHOP_PRODUCT.SKULIST'] ">
