@@ -1,0 +1,195 @@
+/*
+ * global style
+ */
+html {
+    font-size: 10px;
+}
+body {
+    font-family: "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
+    line-height: 1;
+}
+
+a:link,
+a:hover,
+a:visited {
+    text-decoration: none;
+}
+
+label {
+    margin-bottom: 0;
+
+    font-weight: normal;
+}
+p {
+    margin: 0;
+}
+
+.nav-top {
+    padding-top: 50px;
+}
+
+.nav-bottom {
+    padding-bottom: 60px;
+}
+
+.nav-action-bottom {
+    padding-bottom: 110px;
+}
+
+
+.bottom {
+    position: fixed;
+    bottom: 0;
+}
+
+.pull-right {
+    float: right;
+}
+
+.border {
+    @include border();
+}
+
+.border-bottom {
+    @include border(bottom);
+}
+
+.border-top {
+    @include border(top);
+}
+
+
+/*
+ * color
+ */
+.grey {
+    color: $colorGrey; }
+
+.bg-grey {
+    background-color: $colorGreyLight; }
+
+.red {
+    color: #EF4F4F; }
+
+.bg-red {
+    background-color: #EF4F4F; }
+
+.bg-white {
+    background-color: white;
+}
+
+.black {
+    color: #333;
+}
+
+.green {
+    color: $colorGreen;
+}
+.color-default {
+    color: $colorDefault;
+}
+/*
+ * weui_cells
+ */
+.weui_cells {
+    margin: 0 0 9px;
+}
+
+.weui_cells_access .weui_cell_ft::after {
+    width: 15px;
+    height: 15px;
+    top: 1px;
+}
+.weui-prompt-input {
+    padding: 4px 6px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    height: 2em;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 3px; }
+
+.weui-cell-tips {
+    padding-top: 0; }
+
+.weui-cell-tips::before {
+    border-top-width: 0; }
+
+.weui-cells-collapse .weui_cell_ft::after {
+    content: " ";
+    display: inline-block;
+    -webkit-transform: rotate(135deg);
+    -moz-transform: rotate(135deg);
+    -ms-transform: rotate(135deg);
+    transform: rotate(135deg);
+    height: 6px;
+    width: 6px;
+    border-width: 2px 2px 0 0;
+    border-color: #c8c8cd;
+    border-style: solid;
+    position: relative;
+    top: -4px;
+    margin-left: .3em;
+}
+
+.weui_input {
+    border: none;
+    height: auto;
+
+    line-height: 1;
+}
+
+/*
+ * Jquery weui
+ */
+.modal-content {
+    border: none;
+}
+
+
+.toolbar .title {
+    margin: 0;
+}
+/*
+ * Label
+ */
+.label {
+    padding: .2em .6em;
+
+    font-size: inherit;
+    font-weight: normal;
+    line-height: 1.4;
+}
+.label-default {
+    margin: 0 10px;
+
+    background-color: $colorDefault;
+}
+
+.label-outline {
+    @include border();
+
+    display: inline;
+
+    padding: .2em .6em;
+
+    text-align: center;
+    white-space: nowrap;
+
+    color: $colorBase;
+}
+.label-outline-default {
+    @include border(all, 1px, solid, $colorDefault);
+}
+
+.label-group {
+    .label,
+    .label-outline {
+        display: inline-block;
+    }
+
+    .label + .label,
+    .label-outline + .label-outline {
+        margin-left: .6em;
+    }
+}
