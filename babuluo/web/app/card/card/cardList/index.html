@@ -6,7 +6,8 @@
                 <div class="form-inline form-group">
                     <div class="form-group">
                         <label for="name" class="control-label">客户:</label>
-                        <input type="text" class="form-control" id="name" placeholder="登陆ID/手机号" ng-model="query['MEMBER_CARD.MEMBER']">
+                        <input type="text" class="form-control" id="name" placeholder="登陆ID/手机号"
+                               ng-model="query['MEMBER_CARD.MEMBER']">
                     </div>
                     <div class="form-group">
                         <label for="cardNum" class="control-label">卡号:</label>
@@ -61,7 +62,8 @@
     <div class="row">
         <div class="col-md-12">
 
-            <div ng-repeat="cl in cardList|filter:{}" class="card center-block pull-left" ng-style="cl['MEMBER_CARD.CARD_STYLE']" style="width:446px;height:228px;">
+            <div ng-repeat="cl in cardList|filter:{}" class="card center-block pull-left"
+                 ng-style="cl['MEMBER_CARD.CARD_STYLE']" style="width:446px;height:228px;">
                 <div class="row cardTitle">
                     <div class="col-md-8">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</div>
                     <div class="col-md-4 text-right">{{cl['MEMBER_CARD.TYPE_NAME']}}</div>

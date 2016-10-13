@@ -1,5 +1,4 @@
-
-<div class="page-content" >
+<div class="page-content">
 
     <div class="table-operbar">
         <div class="table-toolbar">
@@ -7,60 +6,61 @@
                 <div class="form-inline form-group">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="输入用户名" ng-model="loginId">
-                        <button type="submit" class="btn btn-default" ng-click="queryPointByLoginId(loginId)">搜索</button>
+                        <button type="submit" class="btn btn-default" ng-click="queryPointByLoginId(loginId)">搜索
+                        </button>
                     </div>
 
-                        <div class="form-group  col-md-offset-2">
-                            <label>筛选：</label>
-                            <select ng-model="filter['MEMBER_POINT_LIST.CHANGE_TYPE']"
-                                    ng-init="filter['MEMBER_POINT_LIST.CHANGE_TYPE']='null'"
-                                    class="nya-bs-select form-control">
-                                <option class="nya-bs-option" value="null">
-                                    来源
-                                </option>
-                                <option class="nya-bs-option" value="decrease">
-                                    支出
-                                </option>
-                                <option class="nya-bs-option" value="increase">
-                                    收入
-                                </option>
-                            </select>
-                        </div>
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#point" ng-click = empty()>调整积分</button>
+                    <div class="form-group  col-md-offset-2">
+                        <label>筛选：</label>
+                        <select ng-model="filter['MEMBER_POINT_LIST.CHANGE_TYPE']"
+                                ng-init="filter['MEMBER_POINT_LIST.CHANGE_TYPE']='null'"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="null">
+                                来源
+                            </option>
+                            <option class="nya-bs-option" value="decrease">
+                                支出
+                            </option>
+                            <option class="nya-bs-option" value="increase">
+                                收入
+                            </option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#point"
+                            ng-click=empty()>调整积分
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-
     <div>
-            <table class="table table-bordered table-hover table-striped">
-                <thead>
-                <tr>
-                    <th>会员编号</th>
-                    <th>用户名</th>
-                    <th>时间</th>
-                    <th>事件</th>
-                    <th>说明</th>
-                    <th class="text-center">积分</th>
-                    <th class="text-center">剩余积分</th>
-                </tr>
-                </thead>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th>会员编号</th>
+                <th>用户名</th>
+                <th>时间</th>
+                <th>事件</th>
+                <th>说明</th>
+                <th class="text-center">积分</th>
+                <th class="text-center">剩余积分</th>
+            </tr>
+            </thead>
 
-                <tbody ng-cloak>
-                <tr  ng-repeat='pointInfo in pointList'>
-                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.USER_ID' ]"></td>
-                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.LOGIN_ID' ]"></td>
-                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.ADD_DATETIME'] | FormatAllDate"></td>
-                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT' ]"></td>
-                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT_INTRO' ]"></td>
-                    <td class="text-center" ng-bind="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT' ]"></td>
-                    <td class="text-center" ng-bind="pointInfo['MEMBER_POINT_LIST.POINT' ]"></td>
-                </tr>
-                </tbody>
-            </table>
+            <tbody ng-cloak>
+            <tr ng-repeat='pointInfo in pointList'>
+                <td ng-bind="pointInfo['MEMBER_POINT_LIST.USER_ID' ]"></td>
+                <td ng-bind="pointInfo['MEMBER_POINT_LIST.LOGIN_ID' ]"></td>
+                <td ng-bind="pointInfo['MEMBER_POINT_LIST.ADD_DATETIME'] | FormatAllDate"></td>
+                <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT' ]"></td>
+                <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT_INTRO' ]"></td>
+                <td class="text-center" ng-bind="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT' ]"></td>
+                <td class="text-center" ng-bind="pointInfo['MEMBER_POINT_LIST.POINT' ]"></td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-
 
     <div page-bar
          filter-obj="filter"
@@ -68,11 +68,8 @@
          callback="bindData(response)">
     </div>
 
-
-
-
     <!--BEGIN 修正-->
-    <div class="modal fade" id="point" >
+    <div class="modal fade" id="point">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -94,7 +91,8 @@
 
                                 <!--调用根据ID查询用户信息的API：/member/member/getById-->
                                 <button type="submit" class="btn btn-default" ng-click="queryById(memberId)">查询</button>
-                                     <span class="help-block" ng-show="editForm.name.$error.required && !editForm.name.$pristine">
+                                <span class="help-block"
+                                      ng-show="editForm.name.$error.required && !editForm.name.$pristine">
                                          请先输入会员ID
                                      </span>
                             </div>
@@ -150,17 +148,19 @@
 
                             <div class="col-md-8 text-left">
                                 <label class="radio-inline">
-                                    <input type="radio" name="types"  value="1" ng-model="changeType" ng-click="delete()"> 新增
+                                    <input type="radio" name="types" value="1" ng-model="changeType"
+                                           ng-click="delete()"> 新增
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="types"  value="0" ng-model="changeType" ng-click="delete()"> 减少
+                                    <input type="radio" name="types" value="0" ng-model="changeType"
+                                           ng-click="delete()"> 减少
                                 </label>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                <span class="required" > * </span> 调整数值:
+                                <span class="required"> * </span> 调整数值:
                             </label>
 
                             <div class="col-md-8">
@@ -177,7 +177,7 @@
                             </label>
 
                             <div class="col-md-8">
-                                <input  name="compId"  class="form-control" ng-model="introduction">
+                                <input name="compId" class="form-control" ng-model="introduction">
                             </div>
                         </div>
 
@@ -194,7 +194,8 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-info btn-outline" data-dismiss="modal" ng-click="saveAccount()">确定
+                    <button type="button" class="btn btn-info btn-outline" data-dismiss="modal"
+                            ng-click="saveAccount()">确定
                     </button>
                     <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
                     </button>
