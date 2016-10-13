@@ -144,6 +144,7 @@
                     </td>
                 </tr>
 
+
                 <tr ng-class="table-tr-small" ng-if="product['SHOP_PRODUCT.SHOUSKULIST']"
                     ng-repeat-end="" ng-repeat=" sku in product['SHOP_PRODUCT.SKULIST'] ">
 
