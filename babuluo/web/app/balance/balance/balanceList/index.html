@@ -1,5 +1,4 @@
-
-<div class="page-content" >
+<div class="page-content">
 
     <div class="table-operbar">
         <div class="table-toolbar">
@@ -7,7 +6,8 @@
                 <div class="form-inline form-group">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="输入登录ID" ng-model="loginId">
-                        <button type="submit" class="btn btn-default" ng-click="queryFinanceByLoginId(loginId)">搜索</button>
+                        <button type="submit" class="btn btn-default" ng-click="queryFinanceByLoginId(loginId)">搜索
+                        </button>
                     </div>
 
                     <div class="form-group  col-md-offset-2">
@@ -26,8 +26,10 @@
                             </option>
                         </select>
                     </div> <!-- select-center  -->
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#balance" ng-click = empty()>调整资金</button>
-            </div>
+                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#balance"
+                            ng-click=empty()>调整资金
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -37,25 +39,27 @@
         <div class="table-scrollable">
             <table class="table table-striped table-hover">
                 <thead>
-                    <th > 时间</th>
-                    <th > 登录ID</th>
-                    <th > 事件</th>
-                    <th > 说明</th>
-                    <th class="text-right"> 金额</th>
-                    <th class="text-right"> 剩余金额</th>
+                <th> 时间</th>
+                <th> 登录ID</th>
+                <th> 事件</th>
+                <th> 说明</th>
+                <th class="text-right"> 金额</th>
+                <th class="text-right"> 剩余金额</th>
                 </tr>
                 </thead>
                 <tbody ng-cloak>
 
-                <tr  ng-repeat='balanceInfo in balanceList'>
-                    <td ng-bind="balanceInfo['FINANCE_LIST.ADD_DATETIME']"></td>
+                <tr ng-repeat='balanceInfo in balanceList'>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.ADD_DATETIME'] | FormatAllDate"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.LOGIN_ID']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>
                     <td class="text-right">
-                        <font color="red" name="hello">{{balanceInfo['FINANCE_LIST.CHANGE_VALUE']}}</font>
+                        <label class="control-label" style="color:red" name="hello">
+                            {{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}
+                        </label>
                     </td>
-                    <td class="text-right" ng-bind="balanceInfo['FINANCE_LIST.BALANCE']"></td>
+                    <td class="text-right" ng-bind="balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'"></td>
                 </tr>
                 </tbody>
             </table>
@@ -70,135 +74,139 @@
 
 
     <!-MODAL-->
-        <div class="modal fade" id="balance" >
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">
-                        </button>
-                        <h4 class="modal-title">调整资金</h4>
-                    </div>
-                    <div class="modal-body form-body text-right">
-                        <form class="form-horizontal">
-                            <div class="form-group row">
-                                <label class="col-md-3 control-label">
-                                    <span class="required"> * </span> 会员:
-                                </label>
+    <div class="modal fade" id="balance">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">
+                    </button>
+                    <h4 class="modal-title">调整资金</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+                    <form class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 会员:
+                            </label>
 
-                                <div class="col-md-8 text-left form-inline">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" placeholder="请输入会员登录ID" ng-model="memberId">
-                                    </div>
+                            <div class="col-md-8 text-left form-inline">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="请输入会员登录ID" ng-model="memberId">
+                                </div>
 
-                                    <!--调用根据ID查询用户信息的API：/member/member/getById-->
-                                    <button type="submit" class="btn btn-default" ng-click="queryById(memberId)">查询</button>
-                                     <span class="help-block" ng-show="editForm.name.$error.required && !editForm.name.$pristine">
+                                <!--调用根据ID查询用户信息的API：/member/member/getById-->
+                                <button type="submit" class="btn btn-default" ng-click="queryById(memberId)">查询</button>
+                                <span class="help-block"
+                                      ng-show="editForm.name.$error.required && !editForm.name.$pristine">
                                          请先输入会员ID
                                      </span>
-                                </div>
                             </div>
+                        </div>
 
 
-                            <div class="form-group row">
-                                <label class="col-md-3 control-label">
-                                    <span class="required"> * </span> 姓名:
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 姓名:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="memberDetail['MEMBER.USER_NAME']"></h5>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 手机:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="memberDetail['MEMBER.MOBILE']"></h5>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 邮箱:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="memberDetail['MEMBER.EMAIL']"></h5>
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 当前余额:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="memberDetail['MEMBER.BALANCE']"></h5>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 调整类型:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <label class="radio-inline">
+                                    <input type="radio" name="types" value="1" ng-model="changeType"
+                                           ng-click="delete()"> 新增
                                 </label>
-
-                                <div class="col-md-8 text-left">
-                                    <h5 ng-bind="memberDetail['MEMBER.USER_NAME']"></h5>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-md-3 control-label">
-                                    <span class="required"> * </span> 手机:
+                                <label class="radio-inline">
+                                    <input type="radio" name="types" value="0" ng-model="changeType"
+                                           ng-click="delete()"> 减少
                                 </label>
-
-                                <div class="col-md-8 text-left">
-                                    <h5 ng-bind="memberDetail['MEMBER.MOBILE']"></h5>
-                                </div>
                             </div>
+                        </div>
 
-                            <div class="form-group row">
-                                <label class="col-md-3 control-label">
-                                    <span class="required"> * </span> 邮箱:
-                                </label>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 调整数值:
+                            </label>
 
-                                <div class="col-md-8 text-left">
-                                    <h5 ng-bind="memberDetail['MEMBER.EMAIL']"></h5>
-
-
-                                </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control"
+                                       ng-model="modifyvalue"
+                                       ng-blur="getDynamicBala()"
+                                >
                             </div>
+                        </div>
 
-                            <div class="form-group row">
-                                <label class="col-md-3 control-label">
-                                    <span class="required"> * </span> 当前余额:
-                                </label>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 调整原因:
+                            </label>
 
-                                <div class="col-md-8 text-left">
-                                    <h5 ng-bind="memberDetail['MEMBER.BALANCE']"></h5>
-                                </div>
+                            <div class="col-md-8">
+                                <input name="compId" class="form-control" ng-model="introduction">
                             </div>
+                        </div>
 
-                            <div class="form-group row">
-                                <label class="col-md-3 control-label">
-                                    <span class="required"> * </span> 调整类型:
-                                </label>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 调整后余额:
+                            </label>
 
-                                <div class="col-md-8 text-left">
-                                    <label class="radio-inline">
-                                        <input type="radio" name="types"  value="1" ng-model="changeType" ng-click="delete()"> 新增
-                                    </label>
-                                    <label class="radio-inline">
-                                        <input type="radio" name="types"  value="0" ng-model="changeType" ng-click="delete()"> 减少
-                                    </label>
-                                </div>
+                            <div class="col-md-8 text-left">
+                                <h5>{{afterModify}}</h5>
                             </div>
+                        </div>
 
-                            <div class="form-group row">
-                                <label class="col-md-3 control-label">
-                                    <span class="required" > * </span> 调整数值:
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input type="text" class="form-control"
-                                           ng-model="modifyvalue"
-                                           ng-blur="getDynamicBala()"
-                                    >
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-md-3 control-label">
-                                    <span class="required"> * </span> 调整原因:
-                                </label>
-
-                                <div class="col-md-8">
-                                    <input  name="compId"  class="form-control" ng-model="introduction">
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label class="col-md-3 control-label">
-                                    <span class="required"> * </span> 调整后余额:
-                                </label>
-
-                                <div class="col-md-8 text-left">
-                                    <h5>{{afterModify}}</h5>
-                                </div>
-                            </div>
-
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-info btn-outline" data-dismiss="modal" ng-click="saveAccount()">确定
-                        </button>
-                        <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
-                        </button>
-                    </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-outline" data-dismiss="modal"
+                            ng-click="saveAccount()">确定
+                    </button>
+                    <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
 </div>
