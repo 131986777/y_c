@@ -5,17 +5,17 @@
 
     <div class="row" ng-show="showPageBar">
       <div class="col-md-12 form-inline  text-right">
-        <ul class="pager">
+        <ul class="pager" style="text-align: right">
           <li>共 {{totalCount}} 条，每页显示</li>
           <li style="padding-right: 20px;">
             <select ng-model="selectPageSize"
-                    ng-init="selectPageSize = 10;"
-                    class="nya-selectpicker bs-select form-control"
+                    ng-init="selectPageSize = '10'"
+                    class="nya-bs-select form-control"
                     data-width="80px">
-              <option value="10">10条</option>
-              <option value="30">30条</option>
-              <option value="50">50条</option>
-              <option value="100">100条</option>
+              <option class="nya-bs-option" value="10">10条</option>
+              <option class="nya-bs-option" value="30">30条</option>
+              <option class="nya-bs-option" value="50">50条</option>
+              <option class="nya-bs-option" value="100">100条</option>
             </select>
           </li>
           <li class="previous">

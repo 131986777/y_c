@@ -105,7 +105,7 @@ AndSellUI.directive('messageModal', function () {
         scope: {
             title: '@title', btnLeft: '@cancel', btnRight: '@confirm'
         },
-        templateUrl: "/AndSell/public/angular/template/modal.html",
+        templateUrl: "/AndSell/app/components/libs/angular/template/modal.html",
         restrict: 'EA',
         transclude: true,
         link: function postLink(scope, element, attrs) {
@@ -146,7 +146,7 @@ AndSellUI.directive('shortMessageModal', function ($timeout) {
         scope: {
             title: '@title'
         },
-        templateUrl: "/AndSell/public/angular/template/shortmodal.html",
+        templateUrl: "/AndSell/app/components/libs/angular/template/shortmodal.html",
         restrict: 'EA',
         transclude: true,
         link: function postLink(scope, element, attrs) {
@@ -184,7 +184,7 @@ AndSellUI.directive('showModal', function () {
 
 AndSellUI.directive('pageBar', function (http, baseURL) {
     return {
-        restrict: 'EA', templateUrl: '/AndSell/public/angular/template/pageBar.html', scope: {
+        restrict: 'EA', templateUrl: '/AndSell/app/components/libs/angular/template/pageBar.html', scope: {
             callback: '&', url: '@', filter: '=filterObj'
         }, controller: function ($scope) {
 
