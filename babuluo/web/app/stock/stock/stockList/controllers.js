@@ -1,7 +1,7 @@
-AndSellMainModule.controller('shopListController', function ($scope, shopFactory, districtFactory, modalFactory, $q) {
+AndSellMainModule.controller('stockListController', function ($scope, shopFactory, districtFactory, modalFactory, $q) {
 
     //设置页面Title
-    modalFactory.setTitle('门店管理');
+    modalFactory.setTitle('实时库存');
 
     modalFactory.setBottom(false);
 
@@ -19,12 +19,65 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
 
     $scope.shopAdd = {};
     $scope.shopEdited = {};
+    $scope.shopFilter = {};
 
-    $scope.bindData = function (response) {
-        $scope.shopList = response.data;
-        $scope.districtList = response.extraData.districtList;
-        console.log(response);
+    $scope.initLoad = function () {
 
+        $scope.deferLoad = $q.defer();
+        $scope.districtMap = new Map;
+
+        $scope.loadDistrict();
+        $scope.loadShopList();
+
+    };
+
+    $scope.loadDistrict = function () {
+        var form = {};
+        //目前serviceId都设为1
+        form['DISTRICT.service_id'] = 1;
+
+        districtFactory.getDistrictList(form).get({}, function (response) {
+            console.log(response);
+            $scope.districtList = response.data;
+            $scope.districtList.forEach(function (ele) {
+                $scope.districtMap.set(ele['DISTRICT.DISTRICT_ID'], ele['DISTRICT.DISTRICT_NAME']);
+            });
+            $scope.deferLoad.resolve(response);
+        }, null);
+    };
+
+    $scope.loadShopList = function () {
+        var form = {};
+        //目前serviceId都设为1
+        form['SHOP.SERVICE_ID'] = 1;
+        $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
+
+        $scope.promiseAll.then(function () {
+            shopFactory.getShopList(form).get({}, function (response) {
+                console.log(response);
+                $scope.shopList = response.data;
+            });
+        });
+    };
+
+    $scope.initLoad();
+
+    //根据区域筛选门店
+    $scope.filterShop = function () {
+        if ($scope.shopFilter['SHOP.DISTRICT_ID'] == "-1") {
+            $scope.loadShopList();
+            return;
+        }
+        //目前serviceId都设为1
+        $scope.shopFilter['SHOP.SERVICE_ID'] = 1;
+        $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
+
+        $scope.promiseAll.then(function () {
+            shopFactory.getShopListByDistrictId($scope.shopFilter).get({}, function (response) {
+                console.log(response);
+                $scope.shopList = response.data;
+            });
+        });
     };
 
     $scope.addShopList = function () {
@@ -45,7 +98,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
             } else if (response.extraData.state == 'true') {
                 $("#add").modal('hide');
                 $scope.clearForm();
-                $scope.$broadcast('pageBar.reload');
+                $scope.initLoad();
             }
         });
     };
@@ -73,7 +126,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
             if (response.extraData.state == 'true') {
                 $('#edit').modal('hide');
                 modalFactory.showShortAlert('修改成功');
-                $scope.$broadcast('pageBar.reload');
+                $scope.initLoad();
             } else {
                 modalFactory.showShortAlert(response.msg);
             }
@@ -84,7 +137,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
         modalFactory.showAlert("确定关停门店：［" + sl['SHOP.SHOP_NAME'] + "］?", function () {
             shopFactory.delById(sl).get({}, function (response) {
                 if (response.extraData.state == 'true') {
-                    $scope.$broadcast('pageBar.reload');
+                    $scope.initLoad();
                 }
             });
         });
@@ -115,7 +168,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert('新增成功');
-                $scope.$broadcast('pageBar.reload');
+                $scope.initLoad();
                 $scope.add['DISTRICT.DISTRICT_NAME'] = "";
             }
         });

@@ -34,11 +34,11 @@
                 <label class="control-label col-sm-1 right form-input-title">余额</label>
                 <div class="col-sm-1">
                     <label class="control-label">可用：</label>
-                    <label class="control-label" ng-bind="account['MEMBER_ACCOUNT.BALANCE']"></label>
+                    <label class="control-label" ng-bind="account['MEMBER_ACCOUNT.BALANCE'] | currency : '￥'"></label>
                 </div>
                 <div class="col-sm-1">
                     <label class="control-label">冻结：</label>
-                    <label class="control-label" ng-bind="account['MEMBER_ACCOUNT.FREEZE_BALANCE']"></label>
+                    <label class="control-label" ng-bind="account['MEMBER_ACCOUNT.FREEZE_BALANCE'] | currency : '￥'"></label>
                 </div>
             </div>
             <div class="form-group">

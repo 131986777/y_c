@@ -6,11 +6,15 @@
                 <div class="form-inline form-group">
                     <div class="form-group">
                         <label for="name" class="control-label">客户:</label>
-                        <input type="text" class="form-control" id="name" placeholder="登陆ID">
+                        <input type="text" class="form-control" id="name" placeholder="登陆ID/手机号" ng-model="query['MEMBER_CARD.MEMBER']">
                     </div>
                     <div class="form-group">
                         <label for="cardNum" class="control-label">卡号:</label>
-                        <input type="text" class="form-control" id="cardNum">
+                        <input type="text" class="form-control" id="cardNum" ng-model="query['MEMBER_CARD.CARD_NO']">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right" ng-click="query()">查询
+                        </button>
                     </div>
                     <label class="control-label">筛选：</label>
                     <select ng-model="filter['MEMBER_CARD.SOURCE_ID']"
@@ -70,8 +74,9 @@
                     <div class="col-md-4 nowrap text-right count">
                         <span ng-show="cl['MEMBER_CARD.IS_FACE_VALUE']==1">面值{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</span>
                     </div>
-                    <div class="col-md-4 text-right time nowrap">{{cl['MEMBER_CARD.ADD_DATETIME'] |
-                        FormatStrDate}}{{cl['MEMBER_CARD.SOURCE_NAME']}}
+                    <div class="col-md-4 text-right time nowrap">
+                        {{cl['MEMBER_CARD.ADD_DATETIME'] |FormatStrDate}}
+                        {{cl['MEMBER_CARD.SOURCE_NAME']}}
                     </div>
                 </div>
             </div>
@@ -187,9 +192,9 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox" ng-model="IS_FACE_VALUE" value="option">设置面额
+                                <input type="checkbox" id="inlineCheckbox" ng-model="isFaceValue" value="option">设置面额
                             </label>
-                            <div ng-show="IS_FACE_VALUE" class="col-md-8">
+                            <div ng-show="isFaceValue" class="col-md-8">
                                 <input type="text"
                                        ng-change="cardAdd['MEMBER_CARD.BALANCE']=cardAdd['MEMBER_CARD.FACE_VALUE']"
                                        class="form-control" ng-model="cardAdd['MEMBER_CARD.FACE_VALUE']"

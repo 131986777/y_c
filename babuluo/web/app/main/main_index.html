@@ -213,8 +213,13 @@
                     <div class="sub-menu-wrap dropdown-menu" role="menu">
                         <ul class="sub-menu ">
                             <li>
-                                <a href="#">
+                                <a ui-sref="storeList">
                                     仓库列表
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="stockList">
+                                    实时库存
                                 </a>
                             </li>
                         </ul>
@@ -502,6 +507,7 @@
 <script src="/AndSell/app/point/point-router.js"></script><!--demo相关路由中心-->
 <script src="/AndSell/app/card/card-router.js"></script><!--demo相关路由中心-->
 <script src="/AndSell/app/order/order-router.js"></script><!--demo相关路由中心-->
+<script src="/AndSell/app/stock/stock-router.js"></script><!--库存相关路由中心-->
 
 <!--############service集合区############-->
 <script src="/AndSell/app/product/product/product-services.js"></script><!--商品-->
@@ -514,6 +520,8 @@
 <script src="/AndSell/app/member/source/memberSource-services.js"></script><!--客户来源-->
 <script src="/AndSell/app/member/type/memberType-services.js"></script><!--客户类型-->
 <script src="/AndSell/app/member/group/memberGroup-services.js"></script><!--客户类型-->
+<script src="/AndSell/app/stock/stock/stock-services.js"></script><!--实时库存-->
+<script src="/AndSell/app/stock/store/store-services.js"></script><!--实时库存-->
 
 <script src="/AndSell/app/demo/demo/demo-services.js"></script><!--demo 示例使用-->
 <script src="/AndSell/app/demo/demo2/demo2-services.js"></script><!--demo2 示例使用-->
@@ -542,6 +550,8 @@
 <script src="/AndSell/app/member/group/groupList/controllers.js"></script><!--code客户类型 示例使用-->
 <script src="/AndSell/app/member/member/memberList/controllers.js"></script><!--会员 示例使用-->
 <script src="/AndSell/app/product/product/productModify/controllers.js"></script><!--商品修改-->
+<script src="/AndSell/app/stock/stock/stockList/controllers.js"></script><!--实时库存-->
+<script src="/AndSell/app/stock/store/storeList/controllers.js"></script><!--仓库列表-->
 
 <script src="/AndSell/app/point/point/pointList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/balance/balance/balanceList/controllers.js"></script><!--demoList 示例使用-->
