@@ -1,0 +1,133 @@
+.orderHead{
+    border-bottom: 1px solid rgb(169,167,171);
+}
+.orderHead .orderNum{
+    padding-top: 10px;
+    font-size: 18px;
+    font-weight: 400px;
+}
+.buttons a{
+    margin-right: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.orderState{
+    padding-top: 25px;
+    margin-bottom: 25px;
+}
+.orderState p{
+    font-size: 14px;
+    color: rgb(252,80,8);
+    padding-top: 3px;
+}
+.progressList{
+    list-style-type: none;
+    overflow: hidden;
+    padding: 0px;
+    background-color: rgb(238,238,238);
+    border-radius:10px;
+}
+.progressList .step{
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+.progressList .step-active{
+    color: #fff;
+    background-color: #83c44e;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.progressList .step-first{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.progressList .step-last{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px
+}
+.progressTime{
+    margin-bottom: 15px;
+}
+.progressTime ul{
+    overflow: hidden;
+}
+.progressTime li{
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+.items{
+    margin-bottom: 35px;
+}
+.items .itemInfo{
+    width: 100%;
+}
+.items li{
+    border-bottom : 1px solid rgb(169,167,171);
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.items .itemInfo td{
+    height: 80px;
+}
+.itemInfo .itemPic{
+    height:80px;
+    width: 80px;
+}
+.itemInfo .itemName{
+    padding-left: 20px;
+}
+.itemInfo .price{
+    width:80px;
+}
+
+.addr .title{
+    width: 80px;
+    font-weight: 400;
+}
+.edit h3{
+    font-size: 18px;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 20px;
+}
+.edit{
+    position: relative;
+    border-bottom: 1px solid rgb(169,167,171);
+}
+.editInfo{
+    margin-bottom: 15px;
+}
+.edit button{
+    position: absolute;
+    top: 5px;
+    right: 0;
+}
+.infoCheck{
+    margin-bottom: 30px;
+}
+.total .totalTable{
+    width: 255px;
+    margin: 0 0 0 auto;
+}
+.totalTable .title{
+    width: 80px;
+    font-weight: 400;
+    color: #757575;
+}
+.totalTable tr{
+    height: 31px;
+}
+.totalTable .totalSum{
+    height: 62px;
+}
+.totalSum .title{
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+.totalTable .num{
+    text-align: right;
+    color: rgb(252,80,8);
+}
+
