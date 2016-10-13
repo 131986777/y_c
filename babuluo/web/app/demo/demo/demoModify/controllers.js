@@ -1,8 +1,18 @@
-AndSellMainModule.controller('ModifyDemoController', function ($scope, $state, $stateParams, modalFactory, demoFactory) {
+AndSellMainModule.controller('ModifyDemoController', function ($scope, $state, $stateParams, classFactory,modalFactory, demoFactory) {
 
     //设置页面Title
     modalFactory.setTitle('ModifyDemo');
 
-    //这里写业务逻辑
+
+    //方法名可以随便写 参数必须为data
+    $scope.ss= function (data) {
+        console.log(11);
+        console.log(data);
+    }
+
+    $scope.ss2= function (data) {
+        console.log(22);
+        console.log(data);
+    }
 
 });

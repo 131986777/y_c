@@ -303,6 +303,62 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
     };
 });
 
+AndSellUI.directive('classSwitchModal', function (http, baseURL,classFactory) {
+    return {
+        restrict: 'EA',
+        templateUrl: '/AndSell/app/components/libs/angular/template/classSwitchModal.html',
+        scope: {
+            callback: '&'
+        },
+        controller: function ($scope) {
+
+            $scope.getInitData = function () {
+                classFactory.getPrdClassList().get({}, function (response) {
+                    $scope.classList=response.data;
+                });
+            }
+
+            $scope.selectItemList = new Array;
+            $scope.insertItem = function (item) {
+                if($scope.selectItemList.indexOf(item)<0){
+                    $scope.selectItemList.push(item);
+                }
+            }
+            $scope.removeItem = function (item) {
+                $scope.selectItemList.remove(item);
+            }
+        }
+    }
+});
+
+AndSellUI.directive('tagSwitchModal', function (http, baseURL,tagFactory) {
+    return {
+        restrict: 'EA',
+        templateUrl: '/AndSell/app/components/libs/angular/template/tagSwitchModal.html',
+        scope: {
+            callback: '&'
+        },
+        controller: function ($scope) {
+
+            $scope.getInitData = function () {
+                tagFactory.getPrdTagList().get({}, function (response) {
+                    $scope.tagList=response.data;
+                });
+            }
+
+            $scope.selectItemList = new Array;
+            $scope.insertItem = function (item) {
+                if($scope.selectItemList.indexOf(item)<0){
+                    $scope.selectItemList.push(item);
+                }
+            }
+            $scope.removeItem = function (item) {
+                $scope.selectItemList.remove(item);
+            }
+        }
+    }
+});
+
 /**
  *
  * 时间格式，精确到天
