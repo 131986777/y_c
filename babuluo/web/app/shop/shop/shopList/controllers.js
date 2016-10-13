@@ -115,7 +115,7 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert('新增成功');
-                $scope.initLoad();
+                $scope.$broadcast('pageBar.reload');
                 $scope.add['DISTRICT.DISTRICT_NAME'] = "";
             }
         });
