@@ -16,6 +16,7 @@ AndSellMainModule.controller('pointListController', function ($scope, $statePara
 
     //根据登录ID查询财务信息
     $scope.queryPointByLoginId = function(loginId){
+
         $scope.roundList =$scope.pointList;
         $scope.pointList =[];
         for(var i=0;i< $scope.roundList.length;i++){
