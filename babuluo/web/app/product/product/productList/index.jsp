@@ -91,6 +91,7 @@
                             </label>
                         </div>
                     </td>
+
                     <td>
                         <i ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
                            ng-click="product['SHOP_PRODUCT.SHOWSKULIST']=!product['SHOP_PRODUCT.SHOWSKULIST']"
