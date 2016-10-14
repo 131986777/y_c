@@ -3,11 +3,11 @@
         <div class="row">
             <!-- BEGIN 导航标签 -->
             <ul class="nav nav-tabs" style="margin-bottom: 0px; margin-left: 28px;">
-                <li class="active">
-                    <a> 分库存 </a>
+                <li >
+                    <a ui-sref="stockList"> 分库存 </a>
                 </li>
-                <li>
-                    <a ui-sref="totalStockList"> 总库存 </a>
+                <li class="active">
+                    <a> 总库存 </a>
                 </li>
 
 
@@ -17,17 +17,8 @@
     </div>
 
     <div class="col-md-12">
-        <div class="form-inline form-group">
-            <div class="form-group  ">
-                <select ng-model="filter['FINANCE_LIST.CHANGE_TYPE']"
-                        class="nya-bs-select form-control"
-                        ng-options="store.id as store.name for store in storeList">
-                    <option class="nya-bs-option" value="">
-                        所有仓库
-                    </option>
 
-                </select>
-            </div> <!-- select-center  -->
+        <div class="form-inline form-group">
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="商品编码" ng-model="loginId">
                 <button type="submit" class="btn btn-default" ng-click="queryFinanceByLoginId(loginId)">搜索
@@ -42,7 +33,7 @@
                         最后变更
                     </option>
                     <option class="nya-bs-option" value="null">
-                       锁定库存降序
+                        锁定库存降序
                     </option>
                     <option class="nya-bs-option" value="decrease">
                         锁定库存升序
@@ -57,7 +48,6 @@
             </div> <!-- select-center  -->
 
         </div>
-
         <div class="table-scrollable">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
@@ -66,7 +56,6 @@
                     <!--<th class="col-md-2"> 发卡渠道编码</th>-->
                     <th class="col-md-3"> 商品</th>
                     <th class="col-md-1"> 单位</th>
-                    <th class="col-md-2"> 仓库</th>
                     <th class="col-md-1"> 实时库存</th>
                     <th class="col-md-1"> 带锁库存</th>
                     <th class="col-md-1.5"> 最后变更</th>
@@ -74,13 +63,12 @@
                 </tr>
                 </thead>
                 <tbody ng-cloak>
-                <tr ng-repeat="item in stockList">
+                <tr ng-repeat="item in allStockList ">
                     <td ng-bind="item['STOCK_REALTIME.PID']"></td>   <!--商品ID-->
                     <td ng-bind="item['STOCK_REALTIME.SKU_ID']"></td> <!--规格ID-->
-                    <td >{{storeMap[(item['STOCK_REALTIME.STORE_ID'])]}}</td> <!--仓库-->
-                    <td ng-bind="item['STOCK_REALTIME.STOCK']"></td> <!--实时库存-->
-                    <td ng-bind="item['STOCK_REALTIME.LOCK_STOCK']"></td> <!--锁定库存-->
-                    <td ng-bind="item['STOCK_REALTIME.UPDATE_DATETIME']"></td> <!--最后变更-->
+                    <td ng-bind="item['.SUMSTOCK']"></td> <!--实时库存-->
+                    <td ng-bind="item['.LOCKSTOCK']"></td> <!--锁定库存-->
+                    <td ng-bind="item['.UPDATETIME']"></td> <!--最后变更-->
                     <td>明细</td>
                     <!--<td class="text-center">-->
                         <!--<div >-->
