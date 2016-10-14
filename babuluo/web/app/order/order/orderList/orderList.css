@@ -26,18 +26,18 @@
 .orderNav>li.active>a,
 .orderNav>li.active>a:focus,
 .orderNav>li.active>a:hover{
-    color: rgb(220,84,36);
+    color: #DC5424;
 
 }
 .orderNav>li>a>span{
-    color: rgb(220,84,36);
+    color: #DC5424;
 }
 .orderItem{
     margin-bottom: 20px;
-    border:1px solid rgb(169,167,171);
+    border:1px solid #A9A7AB;
 }
 .unfinished{
-    border: 1px solid rgb(220,84,36);
+    border: 1px solid #DC5424;
 }
 .product{
     overflow: hidden;
@@ -59,32 +59,32 @@
 }
 
 .pay,.pay:hover,.pay:focus{
-    background-color: rgb(252,80,8);
+    background-color: #FC5008;
     color: #fff;
 }
 .imformation{
     padding:25px 30px 10px 30px;
-    border-bottom: 1px solid rgb(169,167,171);
+    border-bottom: 1px solid #A9A7AB;
 }
 .orderUnpayed{
-    background-color: rgb(254,249,245);
-    border-bottom: 1px solid rgb(253,216,192);
+    background-color: #FEF9F5;
+    border-bottom: 1px solid #FDD8C0;
 }
 .unpayed{
-    color: rgb(252,80,8);
+    color: #FC5008;
     font-size: 18px;
 }
 .payed{
-    color: rgb(169,167,171);
+    color: #A9A7AB;
     font-size: 18px;
 }
 .details{
     padding-top: 15px;
     font-weight: 400;
-    color: rgb(164,162,161);
+    color: #A4A2A1;
 }
 .sum{
-    color: rgb(164,162,161);
+    color: #A4A2A1;
 }
 .sum span{
     font-size: 30px;
@@ -92,7 +92,7 @@
 }
 
 .itemColor{
-    color: rgb(169,167,171);
+    color: #A9A7AB;
     font-size: 12px;
 }
 .buttons button{
