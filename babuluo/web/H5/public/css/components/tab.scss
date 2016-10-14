@@ -1,0 +1,25 @@
+.tab-default {
+    background-color: #fff;
+
+    .weui_navbar {
+        &::after {
+            display: none;
+        }
+    }
+
+    .weui_navbar_item {
+        color: $colorBase;
+        background-color: #fff;
+
+        &::after {
+            display: none;
+        }
+    }
+
+    .weui_bar_item_on {
+        @include border(bottom, 2px, solid, $colorDefault);
+
+        color: $colorDefault;
+        background-color: #fff;
+    }
+}
