@@ -3,21 +3,37 @@ AndSellMainModule.controller('totalStockController', function ($scope, shopFacto
     modalFactory.setTitle('实时库存');
 
 
-    $scope.initLoad = function () {
+    // $scope.initLoad = function () {
+    //
+    //     totalStockFactory.getTotalStockList().get({}, function (response) {
+    //         console.log(response);
+    //         $scope.allStockList = response.data;
+    //
+    //     }, null);
+    //
+    //
+    //   //  console.log($scope.storeMap.get('1'));
+    // };
 
-        totalStockFactory.getTotalStockList().get({}, function (response) {
-            console.log(response);
-            $scope.allStockList = response.data;
+    $scope.bindData = function (response) {
 
-        }, null);
-
-
-      //  console.log($scope.storeMap.get('1'));
+        console.log(response);
+        $scope.allStockList = response.data;
     };
 
-    $scope.initLoad();
+    //根据商品id查询
+    $scope.queryStockById = function(PId){
+        //alert(PId);
+        $scope.roundList =$scope.allStockList;
+        $scope.allStockList =[];
+        for(var i=0;i< $scope.roundList.length;i++){
+            if( $scope.roundList[i]['STOCK_REALTIME.PID']==PId){
+                $scope.allStockList.push($scope.roundList[i]);
 
+            }
+        }
 
+    }
     $scope.addStore = function () {
         if ($scope.IS_DEF){
             $scope.add['STORE.IS_DEF']=1;

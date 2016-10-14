@@ -20,28 +20,28 @@
 
         <div class="form-inline form-group">
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="商品编码" ng-model="loginId">
-                <button type="submit" class="btn btn-default" ng-click="queryFinanceByLoginId(loginId)">搜索
+                <input type="text" class="form-control" placeholder="商品编码" ng-model="pId">
+                <button type="submit" class="btn btn-default" ng-click="queryStockById(pId)">搜索
                 </button>
             </div>
 
             <div class="form-group  col-md-offset-2">
-                <select ng-model="filter['FINANCE_LIST.CHANGE_TYPE']"
-                        ng-init="filter['FINANCE_LIST.CHANGE_TYPE']='null'"
+                <select ng-model="filter['STOCK_REALTIME.ORDER']"
+                        ng-init="filter['STOCK_REALTIME.ORDER']='MAX(UPDATE_DATETIME) DESC'"
                         class="nya-bs-select form-control">
-                    <option class="nya-bs-option" value="increase">
-                        最后变更
+                    <option class="nya-bs-option" value="MAX(UPDATE_DATETIME) DESC">
+                        最后更新
                     </option>
-                    <option class="nya-bs-option" value="null">
+                    <option class="nya-bs-option" value="LOCK_STOCK DESC">
                         锁定库存降序
                     </option>
-                    <option class="nya-bs-option" value="decrease">
+                    <option class="nya-bs-option" value="LOCK_STOCK ASC">
                         锁定库存升序
                     </option>
-                    <option class="nya-bs-option" value="increase">
+                    <option class="nya-bs-option" value="STOCK DESC">
                         实时库存降序
                     </option>
-                    <option class="nya-bs-option" value="increase">
+                    <option class="nya-bs-option" value="STOCK ASC">
                         实时库存升序
                     </option>
                 </select>
@@ -83,6 +83,11 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div page-bar
+         filter-obj="filter"
+         url="/stock/realtime/queryBySkuId"
+         callback="bindData(response)">
     </div>
 </div>
 

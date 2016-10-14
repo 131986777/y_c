@@ -1,12 +1,13 @@
 AndSellMainModule.service('stockFactory', function ($resource, baseURL) {
 
-    this.getStockList = function () {
-        return $resource(baseURL + '/stock/realtime/queryAll', null, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    // this.getStockList = function (id) {
+    //     console.log(123+'---'+id);
+    //     return $resource(baseURL + '/stock/realtime/queryAll?STOCK_REALTIME.STORE_ID=:ID', {'ID': id}, {
+    //         'update': {
+    //             method: 'PUT'
+    //         }
+    //     });
+    // };
 
     // this.getShopListByDistrictId = function (form) {
     //     return $resource(baseURL + '/shop/shop/getByDistrictId', form, {
