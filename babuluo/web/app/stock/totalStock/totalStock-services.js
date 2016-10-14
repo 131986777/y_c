@@ -1,7 +1,7 @@
 AndSellMainModule.service('totalStockFactory', function ($resource, baseURL) {
 
-    this.getStockList = function () {
-        return $resource(baseURL + '/stock/realtime/queryAll', null, {
+    this.getTotalStockList = function () {
+        return $resource(baseURL + '/stock/realtime/queryBySkuId', null, {
             'update': {
                 method: 'PUT'
             }

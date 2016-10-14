@@ -5,12 +5,9 @@ AndSellMainModule.controller('totalStockController', function ($scope, shopFacto
 
     $scope.initLoad = function () {
 
-        totalStockFactory.getStockList().get({}, function (response) {
+        totalStockFactory.getTotalStockList().get({}, function (response) {
             console.log(response);
-            $scope.stockList = response.data;
-            $scope.storeMap= response.extraData.storeMap;
-            console.log( $scope.storeMap);
-            console.log($scope.storeMap[1008]);
+            $scope.allStockList = response.data;
 
         }, null);
 

@@ -9,8 +9,10 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
             console.log(response);
             $scope.stockList = response.data;
             $scope.storeMap= response.extraData.storeMap;
+
+            $scope.storeList= response.extraData.storeArray;
             console.log( $scope.storeMap);
-            console.log($scope.storeMap[1008]);
+            console.log($scope.storeList);
 
         }, null);
 

@@ -63,13 +63,13 @@
                 </tr>
                 </thead>
                 <tbody ng-cloak>
-                <tr ng-repeat="item in stockList">
-                    <!--<td ng-bind="item['STOCK_REALTIME.PID']"></td>   &lt;!&ndash;商品ID&ndash;&gt;-->
-                    <!--<td ng-bind="item['STOCK_REALTIME.SKU_ID']"></td> &lt;!&ndash;规格ID&ndash;&gt;-->
-                    <!--<td ng-bind="item['STOCK_REALTIME.STOCK']"></td> &lt;!&ndash;实时库存&ndash;&gt;-->
-                    <!--<td ng-bind="item['STOCK_REALTIME.LOCK_STOCK']"></td> &lt;!&ndash;锁定库存&ndash;&gt;-->
-                    <!--<td ng-bind="item['STOCK_REALTIME.UPDATE_DATETIME']"></td> &lt;!&ndash;最后变更&ndash;&gt;-->
-                    <!--<td>明细</td>-->
+                <tr ng-repeat="item in allStockList ">
+                    <td ng-bind="item['STOCK_REALTIME.PID']"></td>   <!--商品ID-->
+                    <td ng-bind="item['STOCK_REALTIME.SKU_ID']"></td> <!--规格ID-->
+                    <td ng-bind="item['.SUMSTOCK']"></td> <!--实时库存-->
+                    <td ng-bind="item['.LOCKSTOCK']"></td> <!--锁定库存-->
+                    <td ng-bind="item['.UPDATETIME']"></td> <!--最后变更-->
+                    <td>明细</td>
                     <!--<td class="text-center">-->
                         <!--<div >-->
                             <!--<a type="button" show-modal id="#modifySource"-->

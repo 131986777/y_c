@@ -20,9 +20,9 @@
         <div class="form-inline form-group">
             <div class="form-group  ">
                 <select ng-model="filter['FINANCE_LIST.CHANGE_TYPE']"
-                        ng-init="filter['FINANCE_LIST.CHANGE_TYPE']='null'"
-                        class="nya-bs-select form-control">
-                    <option class="nya-bs-option" value="null">
+                        class="nya-bs-select form-control"
+                        ng-options="store.id as store.name for store in storeList">
+                    <option class="nya-bs-option" value="">
                         所有仓库
                     </option>
 
