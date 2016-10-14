@@ -1,0 +1,77 @@
+.logo-wrap {
+    margin-bottom: 30px;
+
+    text-align: center;
+
+    .logo {
+        width: 57px;
+        height: 67px;
+    }
+}
+
+.user-wrap {
+    margin: 35px 22px;
+}
+.user {
+    .weui_cell {
+        padding: 13px 15px;
+
+        font-size: $fontSize;
+    }
+
+    .weui_label {
+        width: 65px;
+    }
+
+    .weui_cells_tips {
+        margin: 6px 0 20px;
+
+        font-size: $fontSizeSmall;
+        line-height: 1.5;
+    }
+    .weui_btn {
+        height: 45px;
+
+        font-size: $fontSize;
+
+        + .weui_btn {
+            margin-top: 20px;
+        }
+    }
+
+    .login-other,
+    .remember-me-wrap {
+        font-size: $fontSize;
+    }
+
+    .login-other {
+        padding: 20px 15px;
+    }
+
+    .check-wrap {
+        margin: 14px 15px 35px;
+
+        font-size: $fontSize;
+
+        color: $colorGrey;
+
+        .icon {
+            vertical-align: middle;
+        }
+    }
+}
+.sign-up {
+    .check-wrap {
+        margin: 20px 15px 24px;
+    }
+
+    .vcode-btn {
+        position: absolute;
+        right: 0;
+        top: 7px;
+
+        padding: 6px 12px;
+
+        border-radius: 4px;
+    }
+}

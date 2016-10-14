@@ -4,7 +4,6 @@ AndSellMainModule.controller('pointListController', function ($scope, $statePara
     modalFactory.setBottom(false);
 
     $scope.bindData = function (response) {
-        //console.log(response);
         $scope.pointList = response.data;
         $scope.userDetailMap = response.extraData.userDetailMap;
     };
@@ -20,7 +19,6 @@ AndSellMainModule.controller('pointListController', function ($scope, $statePara
         $scope.roundList =$scope.pointList;
         $scope.pointList =[];
         for(var i=0;i< $scope.roundList.length;i++){
-            console.log($scope.roundList[i]);
             if( $scope.roundList[i]['MEMBER_POINT_LIST.LOGIN_ID']==loginId){
                 $scope.pointList.push($scope.roundList[i]);
 
@@ -65,6 +63,7 @@ AndSellMainModule.controller('pointListController', function ($scope, $statePara
             } else if (response.extraData.state == 'true') {
             }
         });
+        window.location.reload();
     }
 
     $scope.empty = function (){

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app="orderAddress">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>收货/提货信息</title>
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet"
+          href="../../public/libs/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+    <link rel="stylesheet" href="../../public/css/style.css">
+    <link rel="stylesheet"
+          href="../../public/libs/weui/dist/css/jquery-weui.min.css">
+</head>
+
+<body class="order-address" ng-controller="OrderAddressCtrl">
+<div class="container-fluid">
+    <div class="row">
+        <div class="weui_cells weui_cells_form">
+            <div class="weui_cell">
+                <div class="weui_cell_hd">
+                    <label class="weui_label">收货人:</label>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_input" type="text"
+                           placeholder="请输入收货人">
+                </div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cell_hd">
+                    <label class="weui_label">联系方式:</label>
+                </div>
+
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_input" type="number"
+                           placeholder="请输入联系方式">
+                </div>
+            </div>
+
+            <div class="name weui_cell weui_cell_select">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <select class="weui_select" ng-model="addressType">
+                        <option value="0">提货方式</option>
+                        <option value="1">门店自提</option>
+                        <option value="2">快递收货</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui_cells" ng-cloak ng-show="addressType == 1">
+            <div class="store-name weui_cell weui_cell_select">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <select class="weui_select">
+                        <option selected value="0">选择提货门店</option>
+                        <option value="1">门店自提</option>
+                        <option value="2">快递收货</option>
+                    </select>
+                </div>
+            </div>
+            <div class="date weui_cell">
+                <div class="weui_cell_bd">
+                    <p class="title">
+                        选择提货时间：
+                    </p>
+                    <input class="datetime-picker weui_input" type="text"
+                           placeholder="请选择提货时间">
+                </div>
+            </div>
+        </div>
+
+        <div class="weui_cells" ng-cloak ng-show="addressType == 2">
+            <div class="weui_cell">
+                <div class="weui_cell_bd">
+                    <p class="title">
+                        所在地区：
+                    </p>
+                    <input class="weui_input" type="text" id='city-picker'
+                           value="江苏省 南京市" placeholder="请选择所在地区">
+                </div>
+            </div>
+
+            <div class="weui_cell">
+                <div class="weui_cell_bd weui_cell_primary">
+                    <p class="title">
+                        详细地址：
+                    </p>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" type="number"
+                               placeholder="街道、楼牌号等">
+                    </div>
+                </div>
+            </div>
+            <div class="date weui_cell">
+                <div class="weui_cell_bd">
+                    <p class="title">
+                        预计送达时间：
+                    </p>
+                    <input class="datetime-picker weui_input" type="text"
+                           placeholder="请选择预计送达时间">
+                </div>
+            </div>
+        </div>
+        <div class="weui_btn_area">
+            <button class="weui_btn" type="button">提交</button>
+        </div>
+    </div>
+</div>
+
+<script src="../../public/libs/weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="../../public/libs/angular/angular.min.js"></script>
+<script src="../../public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- weui -->
+<script src="../../public/libs/weui/dist/js/jquery-weui.min.js"></script>
+<script src="../../public/libs/weui/dist/js/city-picker.min.js"></script>
+<script>
+    $(".datetime-picker").datetimePicker({
+        title: '请选择时间',
+        min: (function() {
+            var minTime,
+                year,
+                month,
+                day,
+                minTimeString;
+
+            function formatNum(num) {
+                return num < 10 ? '0' + num : num;
+            }
+
+            minTime = new Date();
+            minTime.setDate(minTime.getDate() + 2); // 推迟2天
+            year = minTime.getFullYear();
+            month = formatNum(minTime.getMonth() + 1);
+            day = formatNum(minTime.getDate());
+            minTimeString = year + '-' + month + '-' + day;
+
+            return minTimeString;
+        })(),
+        times: function () {
+            return [  // 自定义的时间
+                {
+                    values: ['7:00-18:00']
+                }
+            ];
+        }
+    });
+
+    $("#city-picker").cityPicker({
+        title: "请选择所在地区"
+    });
+
+    var app = angular.module('orderAddress', []);
+    app.controller('OrderAddressCtrl', ['$scope', function($scope) {
+        $scope.addressType = '2';
+    }]);
+
+    app.directive('convertToNumber', function() {
+        return {
+            require: 'ngModel',
+            link: function(scope, element, attrs, ngModel) {
+                ngModel.$parsers.push(function(val) {
+                    return parseInt(val, 10);
+                });
+                ngModel.$formatters.push(function(val) {
+                    return '' + val;
+                });
+            }
+        };
+    });
+
+</script>
+</body>
+
+</html>
