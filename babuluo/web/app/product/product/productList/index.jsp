@@ -91,10 +91,11 @@
                             </label>
                         </div>
                     </td>
+
                     <td>
                         <i ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
-                           ng-click="product['SHOP_PRODUCT.SHOUSKULIST']=!product['SHOP_PRODUCT.SHOUSKULIST']"
-                           ng-class="{true:'glyphicon glyphicon-minus-sign green  btn-lg', false:'glyphicon glyphicon-plus-sign green btn-lg'}[product['SHOP_PRODUCT.SHOUSKULIST']]"></i>
+                           ng-click="product['SHOP_PRODUCT.SHOWSKULIST']=!product['SHOP_PRODUCT.SHOWSKULIST']"
+                           ng-class="{true:'glyphicon glyphicon-minus-sign green  btn-lg', false:'glyphicon glyphicon-plus-sign green btn-lg'}[product['SHOP_PRODUCT.SHOWSKULIST']]"></i>
                     </td>
 
                     <td class="text-left">
@@ -135,6 +136,7 @@
                     <td>
                         <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">修改</a>
 
+
                         <a show-modal id="#modifySkuPrice"
                            ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
                            ng-click="showModifySkuPrice(product)">改价</a>
@@ -143,7 +145,8 @@
                     </td>
                 </tr>
 
-                <tr ng-class="table-tr-small" ng-if="product['SHOP_PRODUCT.SHOUSKULIST']"
+
+                <tr ng-class="table-tr-small" ng-if="product['SHOP_PRODUCT.SHOWSKULIST']"
                     ng-repeat-end="" ng-repeat=" sku in product['SHOP_PRODUCT.SKULIST'] ">
 
                     <td></td>

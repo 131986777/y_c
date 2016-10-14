@@ -435,17 +435,6 @@ fc.directive('fusioncharts', ['$http', function ($http) {
     };
 }]);
 
-Array.prototype.remove = function (b) {
-    var a = this.indexOf(b);
-    if (a
-        >= 0) {
-        this.splice(a, 1);
-        return true;
-    }
-    return false;
-
-};
-
 jiaOrderService.factory("http", function ($http) {
     var _post = function (url, data) {
         return $http.post(url, $.param(data), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}});
