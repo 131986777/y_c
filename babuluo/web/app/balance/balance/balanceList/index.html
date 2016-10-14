@@ -54,10 +54,8 @@
                     <td ng-bind="balanceInfo['FINANCE_LIST.LOGIN_ID']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>
-                    <td class="text-right">
-                        <label class="control-label" style="color:red" name="hello">
-                            {{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}
-                        </label>
+                    <td class="text-right" style="color:red">
+                        {{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}
                     </td>
                     <td class="text-right" ng-bind="balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'"></td>
                 </tr>
