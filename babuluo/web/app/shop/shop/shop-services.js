@@ -8,14 +8,6 @@ AndSellMainModule.service('shopFactory', function ($resource, baseURL) {
         });
     };
 
-    this.getShopListByDistrictId = function (form) {
-        return $resource(baseURL + '/shop/shop/getByDistrictId', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-
     this.modShopListById = function (form) {
         return $resource(baseURL + '/shop/shop/modifyById', form, {
             'update': {
