@@ -15,4 +15,9 @@ AndSellMainModule.controller('ModifyDemoController', function ($scope, $state, $
         console.log(data);
     }
 
+    $scope.ss3= function (data) {
+        console.log(33);
+        console.log(data);
+    }
+
 });

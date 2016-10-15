@@ -184,9 +184,12 @@ AndSellUI.directive('showModal', function () {
 
 AndSellUI.directive('pageBar', function (http, baseURL) {
     return {
-        restrict: 'EA', templateUrl: '/AndSell/app/components/libs/angular/template/pageBar.html', scope: {
+        restrict: 'EA',
+        templateUrl: '/AndSell/app/components/libs/angular/template/pageBar.html',
+        scope: {
             callback: '&', url: '@', filter: '=filterObj'
-        }, controller: function ($scope) {
+        },
+        controller: function ($scope) {
 
             $scope.pageObject = {};
             $scope.initPageSize = 0;
@@ -235,6 +238,9 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
                 var pageForm = $scope.filter;
                 var obj = angular.copy(pageForm);
                 $scope.initPageSize = obj.initPageSize;
+                if (obj.selectPageSize != undefined) {
+                    $scope.selectPageSize = obj.selectPageSize;
+                }
                 if ($scope.initPageSize == 0 || $scope.initPageSize == undefined) {
                     obj.PAGE_SIZE = $scope.selectPageSize;
                 } else {
@@ -262,7 +268,8 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
                 });
             };
 
-        }, link: function (scope, element, attr) {
+        },
+        link: function (scope, element, attr) {
 
             scope.totalCount = 0;
             scope.pageSize = 10;
@@ -303,7 +310,7 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
     };
 });
 
-AndSellUI.directive('classSwitchModal', function (http, baseURL,classFactory) {
+AndSellUI.directive('classSwitchModal', function (http, baseURL, classFactory) {
     return {
         restrict: 'EA',
         templateUrl: '/AndSell/app/components/libs/angular/template/classSwitchModal.html',
@@ -314,24 +321,31 @@ AndSellUI.directive('classSwitchModal', function (http, baseURL,classFactory) {
 
             $scope.getInitData = function () {
                 classFactory.getPrdClassList().get({}, function (response) {
-                    $scope.classList=response.data;
+                    $scope.classList = response.data;
                 });
             }
 
             $scope.selectItemList = new Array;
             $scope.insertItem = function (item) {
-                if($scope.selectItemList.indexOf(item)<0){
+                if ($scope.selectItemList.indexOf(item) < 0) {
                     $scope.selectItemList.push(item);
                 }
             }
             $scope.removeItem = function (item) {
                 $scope.selectItemList.remove(item);
             }
+
+            $scope.setReturn = function () {
+                $scope.callback({data: $scope.selectItemList});
+                $scope.selectItemList = new Array;
+                $('#classSwitchModal').modal('hide');
+            }
+
         }
     }
 });
 
-AndSellUI.directive('tagSwitchModal', function (http, baseURL,tagFactory) {
+AndSellUI.directive('tagSwitchModal', function (http, baseURL, tagFactory) {
     return {
         restrict: 'EA',
         templateUrl: '/AndSell/app/components/libs/angular/template/tagSwitchModal.html',
@@ -342,18 +356,97 @@ AndSellUI.directive('tagSwitchModal', function (http, baseURL,tagFactory) {
 
             $scope.getInitData = function () {
                 tagFactory.getPrdTagList().get({}, function (response) {
-                    $scope.tagList=response.data;
+                    $scope.tagList = response.data;
                 });
             }
 
             $scope.selectItemList = new Array;
             $scope.insertItem = function (item) {
-                if($scope.selectItemList.indexOf(item)<0){
+                if ($scope.selectItemList.indexOf(item) < 0) {
                     $scope.selectItemList.push(item);
                 }
             }
             $scope.removeItem = function (item) {
                 $scope.selectItemList.remove(item);
+            }
+
+            $scope.setReturn = function () {
+                $scope.callback({data: $scope.selectItemList});
+                $scope.selectItemList = new Array;
+                $('#tagSwitchModal').modal('hide');
+            }
+
+        }
+    }
+});
+
+AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory, unitFactory, productFactory, tagFactory) {
+    return {
+        restrict: 'EA',
+        templateUrl: '/AndSell/app/components/libs/angular/template/productSwitchModal.html',
+        scope: {
+            callback: '&'
+        },
+        controller: function ($scope) {
+
+            $scope.getInitData = function () {
+                tagFactory.getPrdTagList().get({}, function (response) {
+                    $scope.tagList = response.data;
+                });
+                classFactory.getPrdClassList().get({}, function (response) {
+                    $scope.classList = response.data;
+                });
+                unitFactory.getPrdUnitList().get({}, function (response) {
+                    $scope.unitList = response.data;
+                });
+            }
+
+            $scope.skuList = new Array;
+
+            $scope.bindProductData = function (response) {
+                $scope.skuList = response.data;
+            }
+
+            $scope.selectItemList = new Array;
+
+            $scope.checkItem = function (item) {
+                if (item['SHOP_PRODUCT_SKU.IS_SELECT']) {
+                    $scope.insertItem(item);
+                } else {
+                    $scope.removeItem(item);
+                }
+            }
+
+            $scope.search = function () {
+                $scope.productFilter['SHOP_PRODUCT.SEARCH_CONTENT']= $scope.productFilterSearch;
+            }
+
+            $scope.existItem =  function (item) {
+                if ($scope.selectItemList.indexOf(item) < 0) {
+                    return true;
+                }
+                return false;
+            }
+
+            $scope.insertItem = function (item) {
+                if ($scope.selectItemList.indexOf(item) < 0) {
+                    $scope.selectItemList.push(item);
+                }
+            }
+
+
+            $scope.removeItem = function (item) {
+                if ($scope.selectItemList.indexOf(item) >= 0) {
+                    $scope.selectItemList.remove(item);
+                }
+            }
+
+            $scope.setReturn = function () {
+                $scope.callback({data: $scope.selectItemList});
+                $scope.selectItemList = new Array;
+                $scope.productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID']='null';
+                $scope.productFilterSearch='';
+                $('#productSwitchModal').modal('hide');
             }
         }
     }
