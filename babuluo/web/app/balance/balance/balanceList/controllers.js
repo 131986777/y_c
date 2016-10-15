@@ -5,18 +5,14 @@ AndSellMainModule.controller('balanceListController', function ($scope, $statePa
     //获得所有资金明细
     $scope.bindData = function (response) {
         $scope.balanceList ={};
-
         $scope.balanceList = response.data;
         $scope.userDetailMap = response.extraData.userDetailMap;
         $scope.userFininanceMap = response.extraData.userFininanceMap;
-        console.log(response);
     };
 
     //根据用户ID查询用户个人信息
     $scope.queryById = function (memberId){
-        /*balanceFactory.queryAll();*/
         $scope.memberDetail = $scope.userDetailMap[memberId];
-
     }
 
     //动态计算账户余额
@@ -43,7 +39,6 @@ AndSellMainModule.controller('balanceListController', function ($scope, $statePa
         $scope.ModifyBalanceInfo['FINANCE_LIST.EVENT']= "手动更改";
         $scope.ModifyBalanceInfo['FINANCE_LIST.EVENT_INTRO']= $scope.introduction;
         $scope.ModifyBalanceInfo['FINANCE_LIST.CHANGE_VALUE']= $scope.modifyvalue;
-        console.log($scope.ModifyBalanceInfo['FINANCE_LIST.CHANGE_VALUE']);
         if($scope.changeType == 1){
             $scope.ModifyBalanceInfo['FINANCE_LIST.CHANGE_TYPE']= 'increase';
         }
@@ -56,6 +51,7 @@ AndSellMainModule.controller('balanceListController', function ($scope, $statePa
             } else if (response.extraData.state == 'true') {
             }
         });
+        window.location.reload();
     }
 
     //根据登录ID查询财务信息
@@ -64,7 +60,6 @@ AndSellMainModule.controller('balanceListController', function ($scope, $statePa
         $scope.balanceList =[];
         for(var i=0;i< $scope.roundList.length;i++){
             if( $scope.roundList[i]['FINANCE_LIST.LOGIN_ID']==loginId){
-                console.log($scope.roundList[i]);
                 $scope.balanceList.push($scope.roundList[i]);
 
             }
@@ -86,9 +81,8 @@ AndSellMainModule.controller('balanceListController', function ($scope, $statePa
         $scope.changeType = null;
     }
 
-    /*$scope.initLoad = function (){
-        var node = document.getElementsByName("hello");
+    $scope.fun = function (){
+        var node = document.getElementById("hello");
         node.style.color = "black";
     }
-    $scope.initLoad();*/
 });

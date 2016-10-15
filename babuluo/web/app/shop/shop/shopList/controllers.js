@@ -81,13 +81,23 @@ AndSellMainModule.controller('shopListController', function ($scope, shopFactory
     };
 
     $scope.delShopListById = function (sl) {
-        modalFactory.showAlert("确定关停门店：［" + sl['SHOP.SHOP_NAME'] + "］?", function () {
+        if (sl['SHOP.IS_USE'] == "1") {
+            modalFactory.showAlert("确定关停门店：［" + sl['SHOP.SHOP_NAME'] + "］?", function () {
+                sl['SHOP.IS_USE'] = "-1";
+                shopFactory.delById(sl).get({}, function (response) {
+                    if (response.extraData.state == 'true') {
+                        modalFactory.showShortAlert("关停成功");
+                    }
+                });
+            });
+        } else {
+            sl['SHOP.IS_USE'] = "1";
             shopFactory.delById(sl).get({}, function (response) {
                 if (response.extraData.state == 'true') {
-                    $scope.$broadcast('pageBar.reload');
+                    modalFactory.showShortAlert("启用成功");
                 }
             });
-        });
+        }
     };
 
     /**

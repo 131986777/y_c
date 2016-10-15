@@ -12,5 +12,9 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/stock/store/storeList/index.html",
             controller: "storeListController"
         })
-        
+        .state("totalStockList", {
+            url: "/totalStockList",
+            templateUrl: "/AndSell/app/stock/totalStock/totalStockList/index.html",
+            controller: "totalStockController"
+        })
 });

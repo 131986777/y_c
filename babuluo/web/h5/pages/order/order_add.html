@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>新增订单</title>
+
+    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+
+    <link rel="stylesheet" href="../../public/css/style.css">
+</head>
+
+<body class="bg-grey nav-bottom">
+
+<div class="container-fluid order-add">
+    <div class="row">
+        <div class="weui_cells weui_cells_access">
+            <a class="order-address weui_cell" href="order_address.html">
+                <div class="detail weui_cell_bd weui_cell_primary">
+                    <p class="">提 货 人：刘华华 180****2088</p>
+                    <p class="">提货门店：莲花新城店</p>
+                    <p class="">提货时间：2016.08.23</p>
+                </div>
+                <div class="weui_cell_ft"></div>
+            </a>
+            <div class="dec"></div>
+        </div>
+
+        <div class="product-list weui_cells">
+            <div class="product-sale-wrap weui_cell">
+                <div class="product-sale weui_cell_bd">
+                    满200减20
+                </div>
+            </div>
+            <!-- BEGIN 商品信息-->
+            <div class="product-wrap weui_cell">
+                <div class="product-img-wrap weui_cell_hd">
+                    <img ng-src="" class="product-img">
+                </div>
+                <div class="content weui_cell_bd weui_cell_primary">
+                    <h5 class="product-name">
+                        美国无籽黑提无籽黑提美国无籽黑提无籽黑提
+                    </h5>
+                    <p class="product-cls">
+                        规格:100g
+                    </p>
+                    <p class="product-cls">
+                        编号：101005808
+                    </p>
+                </div>
+                <div class="ext weui_cell_ft">
+                    <p class="product-money">
+                        ￥96.00
+                    </p>
+                    <p class="product-num">
+                        &times;2
+                    </p>
+                </div>
+            </div>
+            <!-- END 商品信息-->
+        </div>
+
+        <div class="weui_cells weui_cells_access">
+            <div class="weui_cell">
+                <div class="weui_cell_bd">
+                    使用优惠券
+                </div>
+                <div class="weui_cell_ft weui_cell_primary">
+                    5元优惠券
+                </div>
+            </div>
+        </div>
+
+        <div class="weui_cells weui_cells_access">
+            <div class="weui_cell">
+                <div class="weui_cell_bd">
+                    使用积分
+                </div>
+                <div class="weui_cell_ft weui_cell_primary">
+                    200积分可用
+                </div>
+            </div>
+        </div>
+
+        <div class="payment-list weui_cells">
+            <div class="balance weui_cell">
+                <div class="icon-wrap weui_cell_bd">
+                    <i class="icon icon-balance"></i>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    余额支付
+                </div>
+                <div class="weui_cell_ft">
+                    <i class="icon icon-check"></i>
+                </div>
+            </div>
+            <div class="balance weui_cell">
+                <div class="icon-wrap weui_cell_bd">
+                    <i class="icon icon-alipay"></i>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    支付宝支付
+                </div>
+                <div class="weui_cell_ft">
+                    <i class="icon icon-checked"></i>
+                    <i class="icon icon-check"></i>
+                </div>
+            </div>
+            <div class="balance weui_cell">
+                <div class="icon-wrap weui_cell_bd">
+                    <i class="icon icon-unipay"></i>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    银联支付
+                </div>
+                <div class="weui_cell_ft">
+                    <i class="icon icon-check"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="payment-wrap action-bar-wrap">
+        <div class="action-bar border-top">
+            <div class="payment-info cell">
+                <p class="all">
+                    总计：<span class="money">￥96.00</span>
+                </p>
+                <p class="sale">(不含运费，已优惠已优惠已优惠已优惠</p>
+            </div>
+            <a class="payment-check" href="#">
+                提交订单
+            </a>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>
