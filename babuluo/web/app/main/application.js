@@ -434,7 +434,6 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
                 }
             }
 
-
             $scope.removeItem = function (item) {
                 if ($scope.selectItemList.indexOf(item) >= 0) {
                     $scope.selectItemList.remove(item);
