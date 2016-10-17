@@ -324,7 +324,7 @@
                     <div class="sub-menu-wrap sub-menu-2 dropdown-menu">
                         <ul class="sub-menu " role="menu">
                             <li>
-                                <a href="#">
+                                <a ui-sref="salesList">
                                     交易促销
                                 </a>
                             </li>
@@ -504,10 +504,9 @@
 <script src="/AndSell/app/product/product-router.js"></script><!--商品相关路由中心-->
 <script src="/AndSell/app/member/member-router.js"></script><!--会员相关路由中心-->
 <script src="/AndSell/app/shop/shop-router.js"></script><!--门店相关路由中心-->
-
-<script src="/AndSell/app/demo/demo-router.js"></script><!--demo相关路由中心-->
-<script src="/AndSell/app/balance/balance-router.js"></script><!--demo相关路由中心-->
-<script src="/AndSell/app/point/point-router.js"></script><!--demo相关路由中心-->
+<script src="/AndSell/app/sales/sales-router.js"></script><!--促销相关路由中心-->;
+<script src="/AndSell/app/balance/balance-router.js"></script><!--资金相关路由中心-->
+<script src="/AndSell/app/point/point-router.js"></script><!--积分相关路由中心-->
 <script src="/AndSell/app/card/card-router.js"></script><!--demo相关路由中心-->
 <script src="/AndSell/app/order/order-router.js"></script><!--demo相关路由中心-->
 <script src="/AndSell/app/stock/stock-router.js"></script><!--库存相关路由中心-->
@@ -524,13 +523,14 @@
 <script src="/AndSell/app/member/type/memberType-services.js"></script><!--客户类型-->
 <script src="/AndSell/app/member/group/memberGroup-services.js"></script><!--客户类型-->
 <script src="/AndSell/app/stock/stock/stock-services.js"></script><!--实时库存-->
+<script src="/AndSell/app/stock/store/store-services.js"></script><!--实时库存-->
+<script src="/AndSell/app/sales/sales/sales-services.js"></script><!--订单促销-->
+
 <script src="/AndSell/app/stock/totalStock/totalStock-services.js"></script><!--总库存-->
 <script src="/AndSell/app/stock/store/store-services.js"></script><!--仓库-->
 
-<script src="/AndSell/app/demo/demo/demo-services.js"></script><!--demo 示例使用-->
-<script src="/AndSell/app/demo/demo2/demo2-services.js"></script><!--demo2 示例使用-->
-<script src="/AndSell/app/point/point/point-services.js"></script><!--demo2 示例使用-->
-<script src="/AndSell/app/balance/balance/balance-services.js"></script><!--demo2 示例使用-->
+<script src="/AndSell/app/point/point/point-services.js"></script><!--积分使用-->
+<script src="/AndSell/app/balance/balance/balance-services.js"></script><!--资金使用-->
 <script src="/AndSell/app/card/card/card-services.js"></script><!--demo2 示例使用-->
 <script src="/AndSell/app/order/order/order-services.js"></script><!--demo2 示例使用-->
 
@@ -557,16 +557,13 @@
 <script src="/AndSell/app/stock/stock/stockList/controllers.js"></script><!--实时库存-->
 <script src="/AndSell/app/stock/totalStock/totalStockList/controllers.js"></script><!--总库存-->
 <script src="/AndSell/app/stock/store/storeList/controllers.js"></script><!--仓库列表-->
-
-<script src="/AndSell/app/point/point/pointList/controllers.js"></script><!--demoList 示例使用-->
-<script src="/AndSell/app/balance/balance/balanceList/controllers.js"></script><!--demoList 示例使用-->
+<script src="/AndSell/app/point/point/pointList/controllers.js"></script><!--积分展示使用-->
+<script src="/AndSell/app/balance/balance/balanceList/controllers.js"></script><!--资金展示使用-->
 <script src="/AndSell/app/card/card/cardList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/order/order/orderList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/order/order/orderDetail/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/card/card/cardType/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/card/card/cardSource/controllers.js"></script><!--demoList 示例使用-->
-<script src="/AndSell/app/demo/demo/demoAdd/controllers.js"></script><!--demoList 示例使用-->
-<script src="/AndSell/app/demo/demo/demoList/controllers.js"></script><!--demoList 示例使用-->
-<script src="/AndSell/app/demo/demo/demoModify/controllers.js"></script><!--demoModify 示例使用-->
+<script src="/AndSell/app/sales/sales/salesList/controllers.js"></script><!--订单促销示例使用-->
 </body>
 </html>
