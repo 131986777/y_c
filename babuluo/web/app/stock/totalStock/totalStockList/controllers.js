@@ -19,12 +19,13 @@ AndSellMainModule.controller('totalStockController', function ($scope, shopFacto
 
         console.log(response);
         $scope.allStockList = response.data;
+        $scope.storeQueryList= $scope.allStockList;
     };
 
     //根据商品id查询
     $scope.queryStockById = function(PId){
         //alert(PId);
-        $scope.roundList =$scope.allStockList;
+        $scope.roundList =$scope.storeQueryList;
         $scope.allStockList =[];
         for(var i=0;i< $scope.roundList.length;i++){
             if( $scope.roundList[i]['STOCK_REALTIME.PID']==PId){
@@ -81,6 +82,7 @@ AndSellMainModule.controller('totalStockController', function ($scope, shopFacto
                 $("#modifyStore").modal('hide');
                 modalFactory.showShortAlert("修改成功");
                 $scope.initLoad();
+
             }
         });
     };

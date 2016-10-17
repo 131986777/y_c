@@ -19,8 +19,7 @@ AndSellMainModule.controller('storeListController', function ($scope, $statePara
      }else{
        $scope.add['STORE.IS_DEF']=-1;
      }
-      $scope.add['STORE.IS_DEF']=1;
-      $scope.add['STORE.ADD_DATETIME']=new Date();  //add['STORE.IS_DEF']
+
     console.log($scope.add);
 
     storeFactory.addStore($scope.add).get({}, function (response) {
@@ -30,6 +29,7 @@ AndSellMainModule.controller('storeListController', function ($scope, $statePara
       } else if (response.extraData.state == 'true') {
         modalFactory.showShortAlert('新增成功');
         $scope.add='';
+        $scope.IS_DEF=false;
         $("#addStore").modal('hide');
         $scope.initLoad();
       }
