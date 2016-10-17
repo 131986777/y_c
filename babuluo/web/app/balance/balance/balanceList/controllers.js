@@ -56,7 +56,7 @@ AndSellMainModule.controller('balanceListController', function ($scope, $statePa
 
     //根据登录ID查询财务信息
     $scope.queryFinanceByLoginId = function(loginId){
-        $scope.roundList =$scope.balanceList;
+        $scope.roundList =$scope.balanceList.toString().toJSON();
         $scope.balanceList =[];
         for(var i=0;i< $scope.roundList.length;i++){
             if( $scope.roundList[i]['FINANCE_LIST.LOGIN_ID']==loginId){

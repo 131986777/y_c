@@ -32,16 +32,21 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
     };
     //根据商品id查询
     $scope.queryStockById = function(PId){
-       // alert(PId);
+      //  alert(PId);
         console.log($scope.storeQueryList);
         $scope.roundList = $scope.storeQueryList;
-        $scope.stockList =[];
-        for(var i=0;i< $scope.roundList.length;i++){
-            if( $scope.roundList[i]['STOCK_REALTIME.PID']==PId){
-                $scope.stockList.push($scope.roundList[i]);
+        if(PId==''||PId==null){
+            $scope.stockList=$scope.roundList;
+        }else {
+            $scope.stockList =[];
+            for(var i=0;i< $scope.roundList.length;i++){
+                if( $scope.roundList[i]['STOCK_REALTIME.PID']==PId){
+                    $scope.stockList.push($scope.roundList[i]);
 
+                }
             }
         }
+
 
     }
 
