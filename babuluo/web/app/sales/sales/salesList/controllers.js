@@ -4,12 +4,9 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     modalFactory.setBottom(false);
 
     $scope.bindData = function (response) {
-        //console.log(response);
+        console.log(response);
         $scope.salesList = response.data;
-       /* var jsonObj = JSON.parse($scope.salesList[6]['SALES.SALE_CONTENT1'].toString());//把字符串转成JSON对象
-        var jsonObj1 = JSON.parse($scope.salesList[6]['SALES.SALE_CONTENT2'].toString());//把字符串转成JSON对象
-        $scope.salesList[6]['SALES.SALE_CONTENT1'] = jsonObj;
-        $scope.salesList[6]['SALES.SALE_CONTENT2'] = jsonObj1;*/
+        $scope.productMap = response.extraData.productMap;
     };
 
 
@@ -79,14 +76,9 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
                         array.push("每满" + item['CONDITION_NUM'] + "元减" + item['SALE_CONTENT'] + "元");
                         break;
                     case '8':
-                        var num = item['SALE_CONTENT'];
-                        console.log(num);
-
-                        //var saleJson = JSON.parse(item['SALE_CONTENT'].toString());
-                        //console.log("+++++"+saleJson);
-                        //console.log(saleJson['Num']);
-                        array.push("1");
-                        //array.push("满" + item['CONDITION_NUM'] + "元减" + saleJson['Num'] + "个"+saleJson['ProId']+"商品");
+                        var saleJson = JSON.parse(item['SALE_CONTENT'].toString());
+                        var name = $scope.productMap[saleJson['ProId']];
+                        array.push("满" + item['CONDITION_NUM'] + "元送" + saleJson['Num'] + "件"+name);
                         break;
                     default:
                 }
@@ -94,9 +86,6 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
             })
             $scope.salesDetialList = middleArray;
         };
-
-
-
 
     $scope.changeState = function (form) {
         salesFactory.ModifySalesState(form).get({}, function (response) {});
