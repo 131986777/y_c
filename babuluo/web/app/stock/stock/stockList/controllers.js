@@ -24,16 +24,17 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
 
         console.log(response);
         $scope.stockList = response.data;
+        $scope.storeQueryList= $scope.stockList;
         $scope.storeMap= response.extraData.storeMap;
-
         $scope.storeList= response.extraData.storeArray;
-        console.log( $scope.storeMap);
-        console.log($scope.storeList);
+        // console.log( $scope.storeMap);
+        // console.log($scope.storeList);
     };
     //根据商品id查询
     $scope.queryStockById = function(PId){
        // alert(PId);
-        $scope.roundList =$scope.stockList;
+        console.log($scope.storeQueryList);
+        $scope.roundList = $scope.storeQueryList;
         $scope.stockList =[];
         for(var i=0;i< $scope.roundList.length;i++){
             if( $scope.roundList[i]['STOCK_REALTIME.PID']==PId){
