@@ -49,7 +49,10 @@
             </thead>
             <tbody>
             <tr ng-repeat="sl in shopList|filter:{}">
-                <td ng-bind="sl['SHOP.SHOP_NAME']"></td>
+                <td>
+                    <span ng-bind="sl['SHOP.SHOP_NAME']"></span>
+                    <span ng-show="sl['SHOP.IS_USE']==-1" style="color: red">(已关停)</span>
+                </td>
                 <td ng-bind="sl['SHOP.SHOP_DISTRICT_NAME']"></td>
                 <td><a class="table-link" ng-click="showMap(sl)">查看地图</a></td>
                 <td ng-bind="sl['SHOP.TELEPHONE']"></td>
@@ -59,8 +62,11 @@
                     <a class="table-link" data-toggle="modal" data-target="#edit" ng-click="getShopListById(sl)">
                         修改
                     </a>
-                    <a class="table-link" ng-click="delShopListById(sl)">
+                    <a class="table-link" ng-show="sl['SHOP.IS_USE']==1" ng-click="delShopListById(sl)">
                         关停
+                    </a>
+                    <a class="table-link" ng-show="sl['SHOP.IS_USE']==-1" ng-click="delShopListById(sl)">
+                        启用
                     </a>
                 </td>
             </tr>

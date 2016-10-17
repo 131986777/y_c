@@ -19,38 +19,53 @@
     <div class="col-md-12">
         <div class="form-inline form-group">
             <div class="form-group  ">
-                <select ng-model="filter['FINANCE_LIST.CHANGE_TYPE']"
-                        class="nya-bs-select form-control"
-                        ng-options="store.id as store.name for store in storeList">
-                    <option class="nya-bs-option" value="">
+                <select ng-model="filter['STOCK_REALTIME.STORE_ID']"
+                        ng-init="filter['STOCK_REALTIME.STORE_ID']='null'"
+                        class="nya-bs-select form-control">
+
+                    <option class="nya-bs-option" value="null">
+                        <!--ng-options="store.id as store.name for store in storeList"-->
                         所有仓库
+                    </option>
+                    <option class="nya-bs-option" ng-repeat="store in storeList"
+                            ng-bind="store.name"
+                            value="{{store.id}}">
+
                     </option>
 
                 </select>
             </div> <!-- select-center  -->
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="商品编码" ng-model="loginId">
-                <button type="submit" class="btn btn-default" ng-click="queryFinanceByLoginId(loginId)">搜索
+                <input type="text" class="form-control" placeholder="商品编码" ng-model="pId">
+                <button type="submit" class="btn btn-default" ng-click="queryStockById(pId)">搜索
                 </button>
             </div>
 
+
+            <!--<select ng-model="filter['SHOP_PRODUCT.ODRDER']"
+                    ng-init="filter['SHOP_PRODUCT.ODRDER'] = 'ORDER_NUM DESC'; "
+                    class="nya-bs-select">
+                <option class="nya-bs-option" value="ORDER_NUM DESC">排序号</option>
+                <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
+                <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
+            </select>-->
             <div class="form-group  col-md-offset-2">
-                <select ng-model="filter['FINANCE_LIST.CHANGE_TYPE']"
-                        ng-init="filter['FINANCE_LIST.CHANGE_TYPE']='null'"
+                <select ng-model="filter['STOCK_REALTIME.ORDER']"
+                        ng-init="filter['STOCK_REALTIME.ORDER']='UPDATE_DATETIME DESC'"
                         class="nya-bs-select form-control">
-                    <option class="nya-bs-option" value="increase">
-                        最后变更
+                    <option class="nya-bs-option" value="UPDATE_DATETIME DESC">
+                        最后更新
                     </option>
-                    <option class="nya-bs-option" value="null">
+                    <option class="nya-bs-option" value="LOCK_STOCK DESC">
                        锁定库存降序
                     </option>
-                    <option class="nya-bs-option" value="decrease">
+                    <option class="nya-bs-option" value="LOCK_STOCK ASC">
                         锁定库存升序
                     </option>
-                    <option class="nya-bs-option" value="increase">
+                    <option class="nya-bs-option" value="STOCK DESC">
                         实时库存降序
                     </option>
-                    <option class="nya-bs-option" value="increase">
+                    <option class="nya-bs-option" value="STOCK ASC">
                         实时库存升序
                     </option>
                 </select>
@@ -95,6 +110,11 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    <div page-bar
+         filter-obj="filter"
+         url="/stock/realtime/queryAll"
+         callback="bindData(response)">
     </div>
 </div>
 

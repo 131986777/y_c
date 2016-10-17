@@ -65,7 +65,7 @@ AndSellMainModule.controller('productModifyController', function ($scope, $state
         });
 
         //加载商品数据
-        productFactory.getProducById($stateParams.productId).get({}, function (response) {
+        productFactory.getProductById($stateParams.productId).get({}, function (response) {
             $scope.modify=response.data[0];
             $scope.skuList=response.extraData.SKU_LIST;
             initDefer_prd.resolve();

@@ -2,16 +2,22 @@ AndSellMainModule.controller('ModifyDemoController', function ($scope, $state, $
 
     //设置页面Title
     modalFactory.setTitle('ModifyDemo');
-
+    //无底边栏
+    modalFactory.setBottom(false);
 
     //方法名可以随便写 参数必须为data
-    $scope.ss= function (data) {
-        console.log(11);
+    $scope.classSwitch= function (data) {
+        console.log('class switch');
         console.log(data);
     }
 
-    $scope.ss2= function (data) {
-        console.log(22);
+    $scope.tagSwitch= function (data) {
+        console.log('class switch');
+        console.log(data);
+    }
+
+    $scope.prdSwitch= function (data) {
+        console.log('class switch');
         console.log(data);
     }
 

@@ -1,4 +1,4 @@
-<div class="modal fade text-left" id="classSwithModal" ng-init="getInitData()" tabindex="-1" aria-hidden="true"
+<div class="modal fade text-left" id="classSwitchModal" ng-init="getInitData()" tabindex="-1" aria-hidden="true"
      style="display: none;">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -58,7 +58,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" ng-click="callback({data:selectItemList})" class="btn green">确定</button>
+        <button type="button"  ng-click="setReturn()" class="btn green">确定</button>
         <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消</button>
       </div>
       <!-- /.modal-content -->

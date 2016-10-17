@@ -8,8 +8,16 @@ AndSellMainModule.service('productFactory', function ($resource, baseURL) {
         });
     };
 
-    this.getProducById = function (id) {
+    this.getProductById = function (id) {
         return $resource(baseURL + '/shop/product/getByIdWithSku?SHOP_PRODUCT.PRD_ID=:PRD_ID', {'PRD_ID': id}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
+    this.getAllProductSku = function () {
+        return $resource(baseURL + '/shop/product/sku/queryAllWithPrdInfo', {}, {
             'update': {
                 method: 'PUT'
             }
