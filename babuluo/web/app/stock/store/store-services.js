@@ -8,7 +8,7 @@ AndSellMainModule.service('storeFactory', function ($resource, baseURL) {
         });
     };
     this.delStoreById = function (form) {
-        return $resource(baseURL + '/store/store/delById', form, {
+        return $resource(baseURL + '/store/store/modifyIsDel', form, {
             'update': {
                 method: 'PUT'
             }

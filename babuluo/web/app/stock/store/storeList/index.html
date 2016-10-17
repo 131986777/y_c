@@ -33,7 +33,7 @@
                         <div>
                             <a type="button" show-modal id="#modifyStore"
                                ng-click="modifyStoreClick(item)">修改</a>
-                            <a type="button" ng-click="deleteStore(item)">
+                            <a type="button" ng-click="deleteStore(item)" ng-if="item['STORE.IS_DEF']==-1">
                                 删除
                             </a>
                         </div>
@@ -88,7 +88,8 @@
                         <div class="col-md-8 ">
                             <input type="checkbox" class="checkbox"
                                    ng-model="IS_DEF"
-                                   ng-init="IS_DEF=''"
+                                   ng-checked="IS_DEF"
+                                   ng-init="IS_DEF=false"
                                    placeholder=""></div>
                     </div>
 

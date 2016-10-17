@@ -68,7 +68,7 @@
                     <td ng-bind="item['STOCK_REALTIME.SKU_ID']"></td> <!--规格ID-->
                     <td ng-bind="item['.SUMSTOCK']"></td> <!--实时库存-->
                     <td ng-bind="item['.LOCKSTOCK']"></td> <!--锁定库存-->
-                    <td ng-bind="item['.UPDATETIME']"></td> <!--最后变更-->
+                    <td ng-bind="item['.UPDATETIME']|FormatAllDate"></td> <!--最后变更-->
                     <td>明细</td>
                     <!--<td class="text-center">-->
                         <!--<div >-->

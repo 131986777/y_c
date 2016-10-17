@@ -28,6 +28,7 @@ AndSellMainModule.controller('AddDemoController', function ($scope, $state, $sta
 
     $scope.delDemo = function (id) {
 
+
         //回调阻塞模态框提示 方法内处理回调
         modalFactory.showAlert("确定删除?", function () {
             //携带参数post请求

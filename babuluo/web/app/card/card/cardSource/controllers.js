@@ -23,6 +23,7 @@ AndSellMainModule.controller('cardSourceController', function ($scope, $statePar
       } else if (response.extraData.state == 'true') {
         modalFactory.showShortAlert('新增成功');
         $scope.add='';
+        $scope.IS_DEF=false;
         $("#addSource").modal('hide');
         $scope.initLoad();
       }
