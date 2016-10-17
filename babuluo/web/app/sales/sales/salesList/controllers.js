@@ -81,12 +81,11 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
                     case '8':
                         var num = item['SALE_CONTENT'];
                         console.log(num);
-
-                        //var saleJson = JSON.parse(item['SALE_CONTENT'].toString());
-                        //console.log("+++++"+saleJson);
-                        //console.log(saleJson['Num']);
-                        array.push("1");
-                        //array.push("满" + item['CONDITION_NUM'] + "元减" + saleJson['Num'] + "个"+saleJson['ProId']+"商品");
+                        console.log(JSON.parse(num));
+                        var saleJson = JSON.parse(item['SALE_CONTENT'].toString());
+                        console.log("+++++"+saleJson);
+                        console.log(saleJson['Num']);
+                        array.push("满" + item['CONDITION_NUM'] + "元送" + saleJson['Num'] + "个"+saleJson['ProId']+"商品");
                         break;
                     default:
                 }
@@ -94,9 +93,6 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
             })
             $scope.salesDetialList = middleArray;
         };
-
-
-
 
     $scope.changeState = function (form) {
         salesFactory.ModifySalesState(form).get({}, function (response) {});
