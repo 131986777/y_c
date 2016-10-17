@@ -6,8 +6,8 @@
         <a show-modal id="#productSwitchModal"> product </a>
 
         <%--方法名可以随便写 参数必须为data--%>
-        <class-switch-modal callback="ss(data)"></class-switch-modal>
-        <tag-switch-modal callback="ss2(data)"></tag-switch-modal>
-        <product-switch-modal callback="ss3(data)"></product-switch-modal>
+        <class-switch-modal callback="classSwitch(data)"></class-switch-modal>
+        <tag-switch-modal callback="tagSwitch(data)"></tag-switch-modal>
+        <product-switch-modal callback="prdSwitch(data)"></product-switch-modal>
 
 </div>
