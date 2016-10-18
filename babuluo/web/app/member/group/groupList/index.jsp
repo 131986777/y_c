@@ -3,16 +3,13 @@
 <div class="page-content">
 
     <%--在这里写样式--%>
-    <div class="col-sm-12">
+    <div class="col-md-12">
         <div class="page-operation-wrap">
             <div class="table-operbar row">
                 <div class="row">
 
-                    <div class="col-sm-2">
-                        <div class="col-sm-4" style="padding: 8px">
-                            <label>筛选:</label>
-                        </div>
-                        <div class="col-sm-6" style="padding: 0px">
+
+                        <div class="col-md-1" style="padding-bottom: 10px">
 
                             <select ng-model="groupFilter['MEMBER_CODE_TYPE.ID']"
                                     ng-init="groupFilter['MEMBER_CODE_TYPE.ID']='-1'"
@@ -29,8 +26,8 @@
                             </select>
                         </div>
 
-                    </div>
-                    <div class="col-sm-10 text-right">
+
+                    <div class="col-md-11 text-right">
                         <a show-modal id="#addMemberGroup" class="btn sbold green">
                             <i class="fa fa-plus"></i> 新增客户分组 </a>
                     </div>
@@ -39,8 +36,9 @@
                     <thead>
                     <tr>
 
-                        <th class="col-md-2"> 所属类型</th>
+
                         <th class="col-md-2"> 分组名称</th>
+                        <th class="col-md-2"> 所属类型</th>
                         <th class="col-md-3"> 分组介绍</th>
 
                         <th class="col-md-1 text-center"> 操作</th>
@@ -48,9 +46,8 @@
                     </thead>
                     <tbody ng-cloak>
                     <tr ng-repeat="item in MemberGroupList">
-
-                        <td ng-bind="typeMap.get(item['MEMBER_CODE_GROUP.TYPE_ID'])"></td>
                         <td ng-bind="item['MEMBER_CODE_GROUP.NAME']"></td>
+                        <td ng-bind="typeMap.get(item['MEMBER_CODE_GROUP.TYPE_ID'])"></td>
                         <td ng-bind="item['MEMBER_CODE_GROUP.INTRO']"></td>
                         <td class="text-center">
                             <a type="button" show-modal id="#modifyMemberGroup"
@@ -72,7 +69,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
+                    <button type="button" class="close" data-dimdiss="modal"
                             aria-hidden="true"></button>
                     <h4 class="modal-title">添加客户分组</h4>
                 </div>
@@ -126,7 +123,7 @@
                 <div class="modal-footer">
                     <button type="button" ng-click="addMemberGroup()" class="btn green">确定
                     </button>
-                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                    <button type="button" class="btn green  btn-outline" data-dimdiss="modal">取消
                     </button>
                 </div>
             </div>
@@ -142,7 +139,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
+                    <button type="button" class="close" data-dimdiss="modal"
                             aria-hidden="true"></button>
                     <h4 class="modal-title">修改客户分组</h4>
                 </div>
@@ -192,7 +189,7 @@
                 <div class="modal-footer">
                     <button type="button" ng-click="modifyMemberGroup()" class="btn green">确定
                     </button>
-                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                    <button type="button" class="btn green  btn-outline" data-dimdiss="modal">取消
                     </button>
                 </div>
 
