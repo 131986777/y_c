@@ -1,0 +1,181 @@
+<div class="table-operbar row">
+
+    <div class="col-md-12">
+
+
+        <div class="table-scrollable">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+
+
+                    <th class="col-md-1">优惠规则名称</th>
+                    <th class="col-md-1">优惠规则类型</th>
+                    <th class="col-md-2">优惠规则描述</th>
+                    <th class="col-md-1">面值</th>
+                    <th class="col-md-1 text-center"> 操作</th>
+                </tr>
+                </thead>
+                <tbody ng-cloak>
+                <tr ng-repeat="item in couponList">
+                    <td ng-bind="item['COUPON_RULE.NAME']"></td><!--规格名称-->
+                    <td ng-if="item['COUPON_RULE.TYPE']==1">减价</td> <!--规格类型-减-->
+                    <td ng-if="item['COUPON_RULE.TYPE']==2">打折</td> <!--规格类型-折-->
+                    <td ng-bind="item['COUPON_RULE.INTRO']"></td> <!--规则描述-->
+                    <td>
+                        <span ng-bind="item['COUPON_RULE.FACE_VALUE']"></span>
+                        <span ng-if="item['COUPON_RULE.TYPE']==1">元</span>
+                        <span ng-if="item['COUPON_RULE.TYPE']==2">折</span>
+                    </td> <!--面值-->
+                    <td>
+                        <a show-modal id="#couponDetail" class="btn sbold green" ng-click="detailClick(item)">明细</a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div page-bar
+         filter-obj="filter"
+         url="/coupon/rule/queryAll"
+         callback="bindData(response)">
+    </div>
+</div>
+
+<!--BEGIN 新增发卡渠道-->
+<div class="modal fade text-left" id="addSource" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">添加发卡渠道</h4>
+            </div>
+            <div class="modal-body form-body text-right">
+
+                <form class="form-horizontal">
+
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> * </span> 发卡渠道名称
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['MEMBER_CARD_SOURCE.NAME']"
+                                   ng-init="add['MEMBER_CARD_SOURCE.NAME']=''"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            发卡渠道介绍
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['MEMBER_CARD_SOURCE.INTRO']"
+                                   ng-init="add['MEMBER_CARD_SOURCE.INTRO']=''"
+                                   placeholder=""></div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="addCardSource()" class="btn green">确定
+                </button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 新增发卡渠道-->
+
+<!--BEGIN 优惠规则详情-->
+<div class="modal fade text-left" id="couponDetail" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">优惠规则详情</h4>
+            </div>
+
+            <div class="modal-body  text-left">
+
+                <div class="form-group row">
+                    <label class="col-md-3">
+                        优惠规则名称：
+                    </label>
+                    <span>{{detail['COUPON_RULE.NAME']}}</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        优惠规则类型:
+                    </label>
+                    <span ng-if="detail['COUPON_RULE.TYPE']==1">减价</span> <!--规格类型-减-->
+                    <span ng-if="detail['COUPON_RULE.TYPE']==2">打折</span> <!--规格类型-折-->
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        优惠规则描述:
+                    </label>
+                    <span ng-bind="detail['COUPON_RULE.INTRO']"></span> <!--规则描述-->
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>面值:</span>
+                    </label>
+                    <span ng-bind="detail['COUPON_RULE.FACE_VALUE']"></span>
+                    <span ng-if="detail['COUPON_RULE.TYPE']==1">元</span>
+                    <span ng-if="detail['COUPON_RULE.TYPE']==2">折</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>使用门槛：</span>
+                    </label>
+                    <span ng-if="detail['COUPON_RULE.CONDITION_PRICE']>0">满{{detail['COUPON_RULE.CONDITION_PRICE']}}使用</span>
+                </div>
+                <div class="form-group row" ng-if="detail['COUPON_RULE.TYPE']==2">
+                    <label class="col-md-3 control-label">
+                        <span>最高抵扣：</span>
+                    </label>
+                    <span >{{detail['COUPON_RULE.MAX_PRICE_LIMIT']}}元</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>每人限领：</span>
+                    </label>
+                    <span>{{detail['COUPON_RULE.EACH_MEMBER_LIMIT']}}张</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>状态：</span>
+                    </label>
+                    <span ng-if="detail['COUPON_RULE.STATE']==1">可用</span>
+                    <span ng-if="detail['COUPON_RULE.STATE']==2">不可用</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>添加时间：</span>
+                    </label>
+                    <span>{{detail['COUPON_RULE.ADD_DATIME']|FormatAllDate}}</span>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">确定
+                </button>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 修改发卡渠道-->
