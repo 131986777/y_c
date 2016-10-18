@@ -56,36 +56,94 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
                 array.push(salesObj6);
             }
 
-
-        array.forEach(function(item){
+        array.forEach(function(item ){
             var array = new Array();
-                switch (form['SALES.ID']) {
+            var saleJson = JSON.parse(item['SALE_CONTENT'].toString());
+            var name = $scope.productMap[saleJson['ProId']];
+            switch (form['SALES.SALE_TARGET']){
+             case '订单':
+                 switch (form['SALES.CONDITION_TYPE']){
+                     case '1':
+                         switch (form['SALES.SALE_TYPE']){
+                             case '1':
+                                 array= putParaTogether("满",item['CONDITION_NUM'],"元减",item['SALE_CONTENT'],"元");
+                                 break;
+                             case 2:
+                                 array= putParaTogether("满",item['CONDITION_NUM'],"元打",item['SALE_CONTENT'],"折");
+                                 break;
+                             case 3:
+                                 array= putParaTogether("满",item['CONDITION_NUM'],"元送",saleJson['Num'],"件",name);
+                                 break;
+                             case 4:
+                                 array= putParaTogether("满",item['CONDITION_NUM'],"元送",saleJson['Num'],"张",name);
+                                 break;
+                             default:
+                         }
+                     case 2:
+                         switch (form['SALES.SALE_TYPE']){
+                             case '1':
+                                 array= putParaTogether("每满",item['CONDITION_NUM'],"元减",item['SALE_CONTENT'],"元");
+                                 break;
+                             case 2:
+                                 array= putParaTogether("每满",item['CONDITION_NUM'],"元打",item['SALE_CONTENT'],"折");
+                                 break;
+                             case 3:
+                                 array= putParaTogether("每满",item['CONDITION_NUM'],"元送",saleJson['Num'],"件",name);
+                                 break;
+                             case 4:
+                                 array= putParaTogether("满",item['CONDITION_NUM'],"元送",saleJson['Num'],"张",name);
+                                 break;
+                             default:
+                         }
+                     default:
+                 }
+            case '商品':
+                switch (form['SALES.CONDITION_TYPE']){
                     case '1':
-                        array.push("满" + item['CONDITION_NUM'] + "元减" + item['SALE_CONTENT'] + "元");
-                        break;
+                        switch (form['SALES.SALE_TYPE']){
+                            case '1':
+                                array= putParaTogether("满",item['CONDITION_NUM'],"件减",item['SALE_CONTENT'],"元");
+                                break;
+                            case '2':
+                                array= putParaTogether("满",item['CONDITION_NUM'],"件打",item['SALE_CONTENT'],"折");
+                                break;
+                            case '3':
+                                array= putParaTogether("满",item['CONDITION_NUM'],"件送",saleJson['Num'],"件",name);
+                                break;
+                            case '4':
+                                array= putParaTogether("满",item['CONDITION_NUM'],"件送",saleJson['Num'],"张",name);
+                                break;
+                            default:
+                        }
                     case '2':
-                        array.push("满" + item['CONDITION_NUM'] + "元打" + item['SALE_CONTENT'] + "折");
-                        break;
-                    case '3':
-                        array.push ("满" + item['CONDITION_NUM'] + "件减" + item['SALE_CONTENT'] + "元");
-                        break;
-                    case '4':
-                        array.push("满" + item['CONDITION_NUM'] + "件打" + item['SALE_CONTENT'] + "折");
-                        break;
-                    case '5':
-                        array.push("每满" + item['CONDITION_NUM'] + "元减" + item['SALE_CONTENT'] + "元");
-                        break;
-                    case '8':
-                        var saleJson = JSON.parse(item['SALE_CONTENT'].toString());
-                        var name = $scope.productMap[saleJson['ProId']];
-                        array.push("满" + item['CONDITION_NUM'] + "元送" + saleJson['Num'] + "件"+name);
-                        break;
+                        switch (form['SALES.SALE_TYPE']){
+                            case '1':
+                                array= putParaTogether("每满",item['CONDITION_NUM'],"件减",item['SALE_CONTENT'],"元");
+                                break;
+                            case '2':
+                                array= putParaTogether("每满",item['CONDITION_NUM'],"件打",item['SALE_CONTENT'],"折");
+                                break;
+                            case '3':
+                                array= putParaTogether("满",item['CONDITION_NUM'],"件送",saleJson['Num'],"件",name);
+                                break;
+                            case '4':
+                                array= putParaTogether("满",item['CONDITION_NUM'],"件送",saleJson['Num'],"张",name);
+                                break;
+                            default:
+                        }
                     default:
-                }
-                middleArray.push(array);
-            })
+         }
+                default:
+         middleArray.push(array);
+         }
+    });
             $scope.salesDetialList = middleArray;
         };
+
+    $scope.putTogether = function(para){
+
+    }
+
 
     //根据ID修改优惠状态（停用or启用）
     $scope.changeState = function (form) {
@@ -123,6 +181,14 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         salesFactory.ModifySalesState(form).get({}, function (response) {});
         window.location.reload();
     };
+
+    function putParaTogether(){
+        var array = new Array();
+        for(var i =0; i<arguments.length; i++){
+            array.push(arguments[i])
+        }
+        return array;
+    }
 });
 
 
