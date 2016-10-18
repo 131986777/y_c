@@ -6,6 +6,7 @@ AndSellMainModule.controller('ruleListController', function ($scope, $stateParam
   $scope.bindData = function (response) {
     console.log(123456);
     console.log(response);
+      $scope.couponList={};
     $scope.couponList = response.data;
 
   };
@@ -13,30 +14,23 @@ AndSellMainModule.controller('ruleListController', function ($scope, $stateParam
     $scope.detail=item;
   }
 
-  /*  $scope.addStore = function () {
-     if ($scope.IS_DEF){
-       $scope.add['STORE.IS_DEF']=1;
-     }else{
-       $scope.add['STORE.IS_DEF']=-1;
-     }
-
-    console.log($scope.add);
-
-    storeFactory.addStore($scope.add).get({}, function (response) {
+    $scope.addRule = function () {
+        console.log($scope.add);
+        couponFactory.addCouponRule($scope.add).get({}, function (response) {
 
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);
+
       } else if (response.extraData.state == 'true') {
         modalFactory.showShortAlert('新增成功');
         $scope.add='';
-        $scope.IS_DEF=false;
-        $("#addStore").modal('hide');
-        $scope.initLoad();
+          $("#addRule").modal('hide');
+
       }
     });
   };
 
-  $scope.modifyStoreClick = function (item) {
+  /*$scope.modifyStoreClick = function (item) {
 
     $scope.modify=clone(item);
     $scope.modifyId=item['STORE.ID'];

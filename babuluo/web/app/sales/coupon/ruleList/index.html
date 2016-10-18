@@ -1,5 +1,13 @@
 <div class="table-operbar row">
 
+    <div class="table-toolbar">
+
+        <div class="col-md-12 text-right">
+            <a show-modal id="#addRule" class="btn sbold green">
+                <i class="fa fa-plus"></i> 新增规则</a>
+        </div>
+
+    </div>
     <div class="col-md-12">
 
 
@@ -23,12 +31,13 @@
                     <td ng-if="item['COUPON_RULE.TYPE']==2">打折</td> <!--规格类型-折-->
                     <td ng-bind="item['COUPON_RULE.INTRO']"></td> <!--规则描述-->
                     <td>
-                        <span ng-bind="item['COUPON_RULE.FACE_VALUE']"></span>
-                        <span ng-if="item['COUPON_RULE.TYPE']==1">元</span>
-                        <span ng-if="item['COUPON_RULE.TYPE']==2">折</span>
+                        <span ng-if="item['COUPON_RULE.TYPE']==1" >{{(item['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}元</span>
+                        <span ng-if="item['COUPON_RULE.TYPE']==2">{{(item['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}折</span>
                     </td> <!--面值-->
                     <td>
                         <a show-modal id="#couponDetail" class="btn sbold green" ng-click="detailClick(item)">明细</a>
+                        <a show-modal id="#couponMod" class="btn sbold green" ng-click="modifyClick(item)">修改</a>
+                        <a show-modal  class="btn sbold green" ng-click="stopClick(item)">停用</a>
                     </td>
 
                 </tr>
@@ -43,15 +52,15 @@
     </div>
 </div>
 
-<!--BEGIN 新增发卡渠道-->
-<div class="modal fade text-left" id="addSource" tabindex="-1" aria-hidden="true"
+<!--BEGIN 新增优惠规则-->
+<div class="modal fade text-left" id="addRule" tabindex="-1" aria-hidden="true"
      style="display: none;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"
                         aria-hidden="true"></button>
-                <h4 class="modal-title">添加发卡渠道</h4>
+                <h4 class="modal-title">添加优惠规则</h4>
             </div>
             <div class="modal-body form-body text-right">
 
@@ -59,31 +68,91 @@
 
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                            <span class="required"> * </span> 发卡渠道名称
+                            <span class="required"> * </span> 优惠规则名称
                         </label>
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="add['MEMBER_CARD_SOURCE.NAME']"
-                                   ng-init="add['MEMBER_CARD_SOURCE.NAME']=''"
+                                   ng-model="add['COUPON_RULE.NAME']"
+                                   ng-init="add['COUPON_RULE.NAME']=''"
                                    placeholder=""></div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                            发卡渠道介绍
+                            优惠规则类型
+                        </label>
+
+                        <div class="col-md-8">
+                            <select ng-model="add['COUPON_RULE.TYPE']"
+                                    ng-init="add['COUPON_RULE.TYPE']='1'"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value='1'>减价</option>
+                                <option class="nya-bs-option" value='2'>打折</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 优惠规则描述 </span>
                         </label>
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
-                                   ng-model="add['MEMBER_CARD_SOURCE.INTRO']"
-                                   ng-init="add['MEMBER_CARD_SOURCE.INTRO']=''"
+                                   ng-model="add['COUPON_RULE.INTRO']"
+                                   ng-init="add['COUPON_RULE.INTRO']=''"
                                    placeholder=""></div>
                     </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 面值 </span>
+                        </label>
 
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['COUPON_RULE.FACE_VALUE']"
+                                   ng-init="add['COUPON_RULE.FACE_VALUE']=''"
+                                   placeholder="请直接输入数字"></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 使用门槛 </span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['COUPON_RULE.CONDITION_PRICE']"
+                                   ng-init="add['COUPON_RULE.CONDITION_PRICE']=''"
+                                   placeholder="请直接输入数字">
+                        </div>
+                    </div>
+                    <div class="form-group row" ng-if="add['COUPON_RULE.TYPE']=='2'">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 最高抵扣 </span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['COUPON_RULE.MAX_PRICE_LIMIT']"
+                                   ng-init="add['COUPON_RULE.MAX_PRICE_LIMIT']=''"
+                                   placeholder="请直接输入数字">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 每人限领 </span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['COUPON_RULE.EACH_MEMBER_LIMIT']"
+                                   ng-init="add['COUPON_RULE.EACH_MEMBER_LIMIT']=''"
+                                   placeholder="请直接输入数字">
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" ng-click="addCardSource()" class="btn green">确定
+                <button type="button" ng-click="addRule()" class="btn green">确定
                 </button>
                 <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
                 </button>
@@ -131,21 +200,20 @@
                     <label class="col-md-3 control-label">
                         <span>面值:</span>
                     </label>
-                    <span ng-bind="detail['COUPON_RULE.FACE_VALUE']"></span>
-                    <span ng-if="detail['COUPON_RULE.TYPE']==1">元</span>
-                    <span ng-if="detail['COUPON_RULE.TYPE']==2">折</span>
+                    <span ng-if="detail['COUPON_RULE.TYPE']==1">{{(detail['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}元</span>
+                    <span ng-if="detail['COUPON_RULE.TYPE']==2">{{(detail['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}折</span>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 control-label">
                         <span>使用门槛：</span>
                     </label>
-                    <span ng-if="detail['COUPON_RULE.CONDITION_PRICE']>0">满{{detail['COUPON_RULE.CONDITION_PRICE']}}使用</span>
+                    <span ng-if="detail['COUPON_RULE.CONDITION_PRICE']>0">订单满{{(detail['COUPON_RULE.CONDITION_PRICE']/100).toFixed(2)}}元使用</span>
                 </div>
                 <div class="form-group row" ng-if="detail['COUPON_RULE.TYPE']==2">
                     <label class="col-md-3 control-label">
                         <span>最高抵扣：</span>
                     </label>
-                    <span >{{detail['COUPON_RULE.MAX_PRICE_LIMIT']}}元</span>
+                    <span >{{(detail['COUPON_RULE.MAX_PRICE_LIMIT']/100).toFixed(2)}}元</span>
                 </div>
                 <div class="form-group row">
                     <label class="col-md-3 control-label">
