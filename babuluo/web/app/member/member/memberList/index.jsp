@@ -211,7 +211,7 @@
                             <div class="modal-footer">
                                 <button class="btn btn-primary" type="submit"
                                         ng-click="addMemberList()">
-                                    保存
+                                    确定
                                 </button>
                                 <button class="btn btn-default"
                                         data-dismiss="modal" ng-click="clearForm()">
