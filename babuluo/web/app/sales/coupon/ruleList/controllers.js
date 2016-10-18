@@ -25,7 +25,7 @@ AndSellMainModule.controller('ruleListController', function ($scope, $stateParam
         modalFactory.showShortAlert('新增成功');
         $scope.add='';
           $("#addRule").modal('hide');
-
+          $scope.$broadcast('pageBar.reload');
       }
     });
   };
@@ -52,18 +52,30 @@ AndSellMainModule.controller('ruleListController', function ($scope, $stateParam
       } else if (response.extraData.state == 'true') {
         $("#couponMod").modal('hide');
         modalFactory.showShortAlert("修改成功");
-        $scope.initLoad();
+          $scope.$broadcast('pageBar.reload');
       }
     });
   };
 
-  $scope.stopCoupon = function (id) {
+  $scope.stopCoupon = function (item) {
 
     modalFactory.showAlert("确认停用吗?", function () {
-      couponFactory.delStoreById(id).get({}, function (res) {
+      couponFactory.stopSouponById(item).get({}, function (res) {
         if (res.extraData.state = 'true') {
           modalFactory.showShortAlert("停用成功");
+            $scope.$broadcast('pageBar.reload');
+        }
+      });
+    });
 
+  } ; //delCoupon
+  $scope.delCoupon = function (item) {
+
+    modalFactory.showAlert("确认删除吗?", function () {
+      couponFactory.delSouponById(item).get({}, function (res) {
+        if (res.extraData.state = 'true') {
+          modalFactory.showShortAlert("删除成功");
+          $scope.$broadcast('pageBar.reload');
         }
       });
     });

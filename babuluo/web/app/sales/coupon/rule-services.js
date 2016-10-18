@@ -17,7 +17,20 @@ AndSellMainModule.service('couponFactory', function ($resource, baseURL) {
                 method: 'PUT'
             }
         });
+    };//stopSouponById
+    this.stopSouponById = function (form) {
+        return $resource(baseURL + '/coupon/rule/modifyIsDel', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
     };
-
+    this.delSouponById = function (form) {
+        return $resource(baseURL + '/coupon/rule/delById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
 
 });

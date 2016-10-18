@@ -35,9 +35,10 @@
                         <span ng-if="item['COUPON_RULE.TYPE']==2">{{(item['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}折</span>
                     </td> <!--面值-->
                     <td>
-                        <a show-modal id="#couponDetail" class="btn sbold green" ng-click="detailClick(item)">明细</a>
+                        <!--<a show-modal id="#couponDetail" class="btn sbold green" ng-click="detailClick(item)">明细</a>-->
                         <a show-modal id="#couponMod" class="btn sbold green" ng-click="modifyClick(item)">修改</a>
-                        <a show-modal  class="btn sbold green" ng-click="stopCoupon(item['COUPON_RULE.ID'])">停用</a>
+                        <a show-modal  class="btn sbold green" ng-click="stopCoupon(item)">停用</a>
+                        <a show-modal  class="btn sbold green" ng-click="delCoupon(item)">删除</a>
                     </td>
 
                 </tr>
