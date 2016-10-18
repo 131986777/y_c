@@ -1,0 +1,98 @@
+<div class="page-content">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="name" class="col-sm-1 control-label">名称：</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="desc" class="col-sm-1 control-label">描述：</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" id="desc">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox">每满
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-1">规则：</div>
+            <div class="ruler col-sm-8">
+
+                <!-- 满减 -->
+                <div class="manjian radio">
+                    <label>
+                        <input type="radio" name="promation" id="promation1" value="option1" checked="checked">
+                        满减
+                    </label>
+                    <div class="content">
+                        <div class="detail">
+                            订单金额满￥<input class="" type="text">，立减￥<input type="text" name="">
+                        </div>
+                        <a class="addItem" href="javascript:;">+添加区间</a>
+                    </div>
+                </div>
+
+                <!-- 满折 -->
+                <div class="manzhe radio">
+                    <label>
+                        <input type="radio" name="promation" id="promation2" value="option2">
+                        满折
+                    </label>
+                    <div class="content hidden">
+                        <div class="detail">
+                            订单金额满￥<input class="" type="text">，打<input type="text" name="">折
+                        </div>
+                        <a class="addItem" href="javascript:;">+添加区间</a>
+                    </div>
+                </div>
+
+
+                <!-- 满赠（商品） -->
+                <div class="manzeng-product radio">
+                    <label>
+                        <input type="radio" name="promation" id="promation3" value="option3">
+                        满赠（商品）
+                    </label>
+                    <div class="content hidden">
+                        <div class="detail">
+                            订单金额满￥<input class="" type="text">，获赠品<input type="text" name="">件
+                            <span><a href="#">选择赠送商品</a></span>
+                        </div>
+                        <a class="addItem" href="javascript:;">+添加区间</a>
+                    </div>
+                </div>
+
+
+
+                <div class="manzeng-ticket radio">
+                    <label>
+                        <input type="radio" name="promation" id="promation4" value="option4">
+                        满赠（优惠券）
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+                            <div class="detail">
+                                订单金额满￥<input class="" type="text">，获赠优惠券<input type="text" name="">张
+                                <span><a href="#">选择赠送优惠券</a></span>
+                            </div>
+                        </div>
+                        <a class="addItem" href="javascript:;">+添加区间</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript">
+
+
+
+</script>
