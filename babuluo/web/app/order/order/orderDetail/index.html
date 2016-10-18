@@ -91,47 +91,55 @@
                             </div>
                         </div>
                     </div><!-- 日志 -->
-                    <div class="panel panel-default">
+                    <div class="panel panel-default remark">
                         <div class="panel-heading text-center">
-                            <h4 class="panel-title ">
-                                <a class="collapsed" data-toggle="collapse" href="#remark">
-                                    订单备注信息<span class="caret"></span>
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#remark">
+                                    订单备注信息
                                 </a>
                             </h4>
                         </div>
-                        <div id="remark" class="panel-collapse collapse">
+                        <div id="remark" class="panel-collapse collapse in">
                             <div class="panel-body">
                                 <ul>
-                                    <li>需退货</li>
+                                    <li>需退货。</li>
                                 </ul>
-                                <button class="btn btn-sm btn-info pull-right">修改</button>
+                                <button class="btn btn-detail pull-right">修改</button>
                             </div>
                         </div>
-                    </div><!-- 订单备注 -->
+                    </div>
                 </div>
                 <div class="items"> <!-- 商品列 -->
                     <ul class="list-unstyled">
                         <li>
                             <table class="itemInfo">
                                 <tr>
-                                    <td class="itemPic">
-                                        <img src="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_b.jpg" style="width: 100%;height: 100%;">
+                                    <td class="itemForm">
+                                        <img class="pull-left" src="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_b.jpg">
+                                        <p class="itemNum">P32543465646</p>
+                                        <p class="itemName">智能收音机</p>
+                                        <p class="itemColor">颜色分类:淡蓝色</p>
                                     </td>
-                                    <td class="itemName">智能收音机</td>
-                                    <td class="price" >199元</td>
-                                    <td class="text-right">这里是备注信息</td>
+                                    <td class="price text-center">199元 x <span class="itemCount">1</span></td>
+                                    <td class="remark text-right">
+                                        <p class="pull-right" title="这里是备注啊啊这里是备注啊啊这里是备注啊啊这里是备注">这里是备注啊啊这里是备注啊啊这里是备注啊啊这里是</p>
+                                    </td>
                                 </tr>
                             </table>
                         </li>
                         <li>
                             <table class="itemInfo">
                                 <tr>
-                                    <td class="itemPic">
-                                        <img src="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_b.jpg" style="width: 100%;height: 100%;">
+                                    <td class="itemForm">
+                                        <img class="pull-left" src="https://farm4.staticflickr.com/3894/15008518202_b016d7d289_b.jpg">
+                                        <p class="itemNum">P32543465646</p>
+                                        <p class="itemName">智能收音机</p>
+                                        <p class="itemColor">颜色分类:淡蓝色</p>
                                     </td>
-                                    <td class="itemName">智能收音机</td>
-                                    <td class="price" >199元</td>
-                                    <td class="text-right">这里是备注信息</td>
+                                    <td class="price text-center">199元 x <span class="itemCount">1</span></td>
+                                    <td class="remark text-right">
+                                        <p class="pull-right" title="这里是备注啊啊这里是备注啊啊这里是备注啊啊这里是备注">这里是备注啊啊这里是备注啊啊这里是备注啊啊这里是</p>
+                                    </td>
                                 </tr>
                             </table>
                         </li>
@@ -154,9 +162,13 @@
                                     <td class="title">收货地址：</td>
                                     <td>江苏省 南京市 浦口区 高新技术开发区 流芳路8号 xx公司</td>
                                 </tr>
+                                <tr>
+                                    <td class="title">提&nbsp&nbsp货&nbsp&nbsp码：</td>
+                                    <td>32432545454</td>
+                                </tr>
                             </table>
                         </div>
-                        <button class="btn btn panel-default">修改</button>
+                        <button class="btn btn-detail panel-default">修改</button>
                     </div>
                     <div class="edit editway">
                         <h3>支付方式及送货时间</h3>
@@ -171,7 +183,7 @@
                                     <td>不限送货时间</td>
                                 </tr>
                             </table>
-                            <button class="btn btn panel-default">修改</button>
+                            <button class="btn btn-detail panel-default">修改</button>
                         </div>
                     </div>
                     <div class="edit editbill">
@@ -192,7 +204,7 @@
                                 </tr>
                             </table>
                         </div>
-                        <button class="btn btn panel-default">修改</button>
+                        <button class="btn btn-detail panel-default">修改</button>
                     </div>
                 </div>
             </div>
@@ -224,157 +236,5 @@
     </div>
 
 
-    <div page-bar
-         filter-obj="filter"
-         url="/shop/product/queryAll"
-         callback="bindData(response)">
-    </div>
-
-
-    <!-MODAL-->
-    <!--<div class="modal fade" id="cardType">-->
-    <!--<div class="modal-dialog">-->
-    <!--<div class="modal-content">-->
-    <!--<div class="modal-header">-->
-    <!--<button type="button" class="close" data-dismiss="modal"-->
-    <!--aria-hidden="true"></button>-->
-    <!--<h4 class="modal-title">会员卡信息</h4>-->
-    <!--</div>-->
-    <!--<div class="modal-body form-body text-right">-->
-    <!--<form class="form-horizontal">-->
-    <!--<div class="form-group row">-->
-    <!--<label class="col-md-3 control-label">-->
-    <!--名称-->
-    <!--</label>-->
-
-    <!--<div class="col-md-8">-->
-    <!--<input type="text" class="form-control" placeholder=""-->
-    <!--ng-model="add['MEMBER_CARD_TYPE.NAME']"-->
-    <!--ng-init="add['MEMBER_CARD_TYPE.NAME']=''">-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="form-group row">-->
-    <!--<label class="col-md-3 control-label">-->
-    <!--描述-->
-    <!--</label>-->
-
-    <!--<div class="col-md-8">-->
-    <!--<input type="text" class="form-control" placeholder=""-->
-    <!--ng-model="add['MEMBER_CARD_TYPE.INTRO']"-->
-    <!--ng-init="add['MEMBER_CARD_TYPE.INTRO']=''">-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="form-group row">-->
-    <!--<label class="col-md-3 control-label">-->
-    <!--背景色-->
-    <!--</label>-->
-
-    <!--<div class="col-md-8">-->
-    <!--<div class="row">-->
-    <!--<div class="col-md-4">-->
-    <!--<input type="text" class="form-control" placeholder=""-->
-    <!--ng-model="add['MEMBER_CARD_TYPE.BG_COLOR']"-->
-    <!--ng-init="add['MEMBER_CARD_TYPE.BG_COLOR']=''">-->
-    <!--</div>-->
-    <!--<div class="col-md-8">-->
-    <!--<div class="center-block">-->
-    <!--<div class="color" style="background-color: #31C552" ng-click="selectCardColor('#31C552')"></div>-->
-    <!--<div class="color" style="background-color: #199B93" ng-click="selectCardColor('#199B93')"></div>-->
-    <!--<div class="color" style="background-color: #EF5B5B" ng-click="selectCardColor('#EF5B5B')"></div>-->
-    <!--<div class="color" style="background-color: #A90807" ng-click="selectCardColor('#A90807')"></div>-->
-    <!--<div class="color" style="background-color: #3679E1" ng-click="selectCardColor('#3679E1')"></div>-->
-    <!--</div>-->
-    <!--<div class="center-block">-->
-    <!--<div class="color" style="background-color: #8C56B2" ng-click="selectCardColor('#8C56B2')"></div>-->
-    <!--<div class="color" style="background-color: #E19318" ng-click="selectCardColor('#E19318')"></div>-->
-    <!--<div class="color" style="background-color: #CCCA12" ng-click="selectCardColor('#CCCA12')"></div>-->
-    <!--<div class="color" style="background-color: #C7C7C7" ng-click="selectCardColor('#C7C7C7')"></div>-->
-    <!--<div class="color" style="background-color: #303133" ng-click="selectCardColor('#303133')"></div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="form-group row">-->
-    <!--<label class="col-md-3 control-label">-->
-    <!--发卡渠道-->
-    <!--</label>-->
-
-    <!--<div class="col-md-8">-->
-    <!--<select class="form-control" ng-model="add['MEMBER_CARD_TYPE.CARD_SOURCE_ID']"-->
-    <!--ng-init="add['MEMBER_CARD_TYPE.CARD_SOURCE_ID']='-1'"-->
-    <!--ng-options="item['member_card_source.ID'] as item['member_card_source.NAME'] for item in cardSourceList">-->
-    <!--<option value="">&#45;&#45;请选择&#45;&#45;</option>-->
-    <!--</select>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--<div class="form-group row">-->
-    <!--<label class="col-md-3 control-label">-->
-    <!--起始卡号-->
-    <!--</label>-->
-
-    <!--<div class="col-md-8">-->
-    <!--<input type="text" class="form-control" placeholder=""-->
-    <!--ng-model="add['MEMBER_CARD_TYPE.BEGIN_CARD_ID']"-->
-    <!--ng-init="add['MEMBER_CARD_TYPE.BEGIN_CARD_ID']=''">-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--</form>-->
-    <!--</div>-->
-    <!--<div class="modal-footer">-->
-    <!--<button type="button" class="btn btn-info btn-outline" ng-click="addCardType()">确定-->
-    <!--</button>-->
-    <!--<button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消-->
-    <!--</button>-->
-    <!--</div>-->
-    <!--</div> &lt;!&ndash; modal-content&ndash;&gt;-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--渠道-->
-    <!--   <div class="modal fade" id="channel">
-           <div class="modal-dialog">
-               <div class="modal-content">
-                   <div class="modal-header">
-                       <button type="button" class="close" data-dismiss="modal"
-                               aria-hidden="true"></button>
-                       <h4 class="modal-title">渠道信息</h4>
-                   </div>
-                   <div class="modal-body form-body text-right">
-                       <div class="form-horizontal">
-                           <div class="form-group row">
-                               <label class="col-md-3 control-label">
-                                   名称
-                               </label>
-
-                               <div class="col-md-8">
-                                   <input type="text" class="form-control" placeholder="">
-                               </div>
-                           </div>
-
-                           <div class="form-group row">
-                               <label class="col-md-3 control-label">
-                                   描述
-                               </label>
-
-                               <div class="col-md-8">
-                                   <input type="text" class="form-control" placeholder="">
-                               </div>
-                           </div>
-                           <div class="modal-footer">
-                               <button type="button" class="btn btn-info btn-outline" ng-click="modifyProductClass()">确定
-                               </button>
-                               <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
-                               </button>
-                           </div>
-                       </div>
-                   </div> &lt;!&ndash; modal-content&ndash;&gt;
-               </div>
-           </div>
-       </div>-->
 </div>
 </div>
