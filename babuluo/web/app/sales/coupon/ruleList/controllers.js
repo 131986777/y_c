@@ -6,6 +6,7 @@ AndSellMainModule.controller('ruleListController', function ($scope, $stateParam
   $scope.bindData = function (response) {
     console.log(123456);
     console.log(response);
+      $scope.couponList={};
     $scope.couponList = response.data;
 
   };
@@ -13,69 +14,72 @@ AndSellMainModule.controller('ruleListController', function ($scope, $stateParam
     $scope.detail=item;
   }
 
-  /*  $scope.addStore = function () {
-     if ($scope.IS_DEF){
-       $scope.add['STORE.IS_DEF']=1;
-     }else{
-       $scope.add['STORE.IS_DEF']=-1;
-     }
-
-    console.log($scope.add);
-
-    storeFactory.addStore($scope.add).get({}, function (response) {
+    $scope.addRule = function () {
+        console.log($scope.add);
+        couponFactory.addCouponRule($scope.add).get({}, function (response) {
 
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);
+
       } else if (response.extraData.state == 'true') {
         modalFactory.showShortAlert('新增成功');
         $scope.add='';
-        $scope.IS_DEF=false;
-        $("#addStore").modal('hide');
-        $scope.initLoad();
+          $("#addRule").modal('hide');
+          $scope.$broadcast('pageBar.reload');
       }
     });
   };
+  $scope.modifyClick = function (item) {
 
-  $scope.modifyStoreClick = function (item) {
+    $scope.mod=clone(item);
+    $scope.mod['COUPON_RULE.ID']=item['COUPON_RULE.ID'];
+    if (item['COUPON_RULE.TYPE']==1){
+      $scope.mod['COUPON_RULE.FACE_VALUE']=(item['COUPON_RULE.FACE_VALUE']/100).toFixed(2);
+    }else{
+      $scope.mod['COUPON_RULE.FACE_VALUE']=(item['COUPON_RULE.FACE_VALUE']/10).toFixed(1);
+    }
 
-    $scope.modify=clone(item);
-    $scope.modifyId=item['STORE.ID'];
-    //console.log('删除ID为'+modifyId);
+
+    $scope.mod['COUPON_RULE.CONDITION_PRICE']=(item['COUPON_RULE.CONDITION_PRICE']/100).toFixed(2);
+    $scope.mod['COUPON_RULE.MAX_PRICE_LIMIT']=(item['COUPON_RULE.MAX_PRICE_LIMIT']/100).toFixed(2);
 
   };
 
-  $scope.modifyStore = function () {
-    $scope.modify['STORE.ID'] =  $scope.modifyId;
-
-    if ($scope.modifyIsDef){
-      $scope.modify['STORE.IS_DEF']=1;
-    }else{
-      $scope.modify['STORE.IS_DEF']=-1;
-    }
-
-    storeFactory.modifyStore ($scope.modify).get({}, function (response) {
+  $scope.modRule = function () {
+    couponFactory.modifyCoupon($scope.mod).get({}, function (response) {
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);
       } else if (response.extraData.state == 'true') {
-        $("#modifyStore").modal('hide');
+        $("#couponMod").modal('hide');
         modalFactory.showShortAlert("修改成功");
-        $scope.initLoad();
+          $scope.$broadcast('pageBar.reload');
       }
     });
   };
 
-  $scope.deleteStore = function (id) {
+  $scope.stopCoupon = function (item) {
 
-    modalFactory.showAlert("确认删除吗?", function () {
-      storeFactory.delStoreById(id).get({}, function (res) {
+    modalFactory.showAlert("确认停用吗?", function () {
+      couponFactory.stopSouponById(item).get({}, function (res) {
         if (res.extraData.state = 'true') {
-          modalFactory.showShortAlert("删除成功");
-
-          $scope.initLoad();
+          modalFactory.showShortAlert("停用成功");
+            $scope.$broadcast('pageBar.reload');
         }
       });
     });
 
-  }*/
+  } ; //delCoupon
+  $scope.delCoupon = function (item) {
+
+    modalFactory.showAlert("确认删除吗?", function () {
+      couponFactory.delSouponById(item).get({}, function (res) {
+        if (res.extraData.state = 'true') {
+          modalFactory.showShortAlert("删除成功");
+          $scope.$broadcast('pageBar.reload');
+        }
+      });
+    });
+
+  }
 
 });
