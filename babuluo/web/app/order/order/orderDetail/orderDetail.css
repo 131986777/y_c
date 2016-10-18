@@ -57,6 +57,9 @@
     width: 20%;
     text-align: center;
 }
+.info .remark h4{
+    color: red;
+}
 .items{
     margin-bottom: 35px;
 }
@@ -70,16 +73,23 @@
 }
 .items .itemInfo td{
     height: 80px;
+    width: 33.3%
 }
-.itemInfo .itemPic{
-    height:80px;
+.items .itemInfo .itemForm img{
+    margin-right: 10px;
     width: 80px;
+    height: 80px;
 }
-.itemInfo .itemName{
-    padding-left: 20px;
+.items .itemInfo .itemForm .itemColor{
+    margin-bottom: 0;
 }
-.itemInfo .price{
-    width:80px;
+.itemInfo .remark p{
+    width: 100px;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0;
+    color: red;
 }
 
 .addr .title{
@@ -129,5 +139,9 @@
 .totalTable .num{
     text-align: right;
     color: #FC5008;
+}
+.btn-detail{
+    background-color: rgb(17,136,255);
+    color: #fff;
 }
 
