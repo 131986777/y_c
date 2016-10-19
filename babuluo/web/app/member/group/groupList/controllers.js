@@ -1,16 +1,16 @@
 AndSellMainModule.controller('MemberGroupController', function ($scope, $stateParams, memberGroupFactory, modalFactory) {
 
-    $scope.MemberType = [];
+
     modalFactory.setTitle('客户分组管理');
 
-    $scope.initLoad = function () {
+    $scope.bindData = function (response) {
+
+        console.log(response.data);
+        $scope.MemberGroupList = response.data;
+        console.log('1233'+ $scope.MemberGroupList);
+    };
+    $scope.init= function () {
         $scope.typeMap = new Map;
-
-        memberGroupFactory.getMemberGroupList().get({}, function (repsonse) {
-            console.log(repsonse.data);
-            $scope.MemberGroupList = repsonse.data;
-        }, null);
-
         memberGroupFactory.getMemberTypeList().get({}, function (response) {
             console.log("返回的类型列表" + response.data);
 
@@ -22,22 +22,7 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
 
         }, null);
     };
-
-    //根据类型ID筛选分组
-    $scope.filterGroup = function (id) {
-        console.log("id为" + id);
-        if ($scope.groupFilter['MEMBER_CODE_TYPE.ID'] == "-1") {
-            // $scope.loadShopList();
-            return;
-        } else {
-            memberGroupFactory.getMemberGroupListByType(id).get({}, function (repsonse) {
-                console.log(repsonse.data);
-                $scope.MemberGroupList = repsonse.data;
-            }, null);
-        }
-
-    };
-    $scope.initLoad();
+    $scope.init();
 
     $scope.addMemberGroup = function () {
         console.log($scope.add);
@@ -50,7 +35,7 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
                 modalFactory.showShortAlert('新增成功');
                 $scope.add = '';
                 $("#addMemberGroup").modal('hide');
-                $scope.initLoad();
+                $scope.$broadcast('pageBar.reload');
 
             }
 
@@ -72,7 +57,7 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
 
                 modalFactory.showShortAlert("修改成功");
                 $("#modifyMemberGroup").modal('hide');
-                $scope.initLoad();
+                $scope.$broadcast('pageBar.reload');
             }
         });
     };
@@ -83,7 +68,7 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
             memberGroupFactory.delMemberGroup(id).get({}, function (res) {
                 if (res.extraData.state = 'true') {
                     modalFactory.showShortAlert("删除成功");
-                    $scope.initLoad();
+                    $scope.$broadcast('pageBar.reload');
                 }
             });
         });
