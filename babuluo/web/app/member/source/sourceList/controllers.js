@@ -12,7 +12,7 @@ AndSellMainModule.controller('MemberSourceController', function ($scope, $stateP
     $scope.initLoad();
 
     $scope.addMemberClass = function () {
-        console.log($scope.add);
+       // console.log($scope.add);
         $scope.add['MEMBER_CODE_SOURCE.SERVICE_ID'] = 1;
         $scope.add['MEMBER_CODE_SOURCE.IS_SYS'] = -1;
         memberSourceFactory.addMemberSource($scope.add).get({}, function (response) {

@@ -4,8 +4,8 @@ AndSellMainModule.controller('ruleListController', function ($scope, $stateParam
   modalFactory.setTitle('优惠券规则列表');
 
   $scope.bindData = function (response) {
-    console.log(123456);
-    console.log(response);
+   // console.log(123456);
+    //console.log(response);
       $scope.couponList={};
     $scope.couponList = response.data;
 
@@ -15,7 +15,7 @@ AndSellMainModule.controller('ruleListController', function ($scope, $stateParam
   }
 
     $scope.addRule = function () {
-        console.log($scope.add);
+       // console.log($scope.add);
         couponFactory.addCouponRule($scope.add).get({}, function (response) {
 
       if (response.code == 400) {

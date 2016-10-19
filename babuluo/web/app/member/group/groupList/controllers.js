@@ -5,14 +5,14 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
 
     $scope.bindData = function (response) {
 
-        console.log(response.data);
+       // console.log(response.data);
         $scope.MemberGroupList = response.data;
-        console.log('1233'+ $scope.MemberGroupList);
+       // console.log('1233'+ $scope.MemberGroupList);
     };
     $scope.init= function () {
         $scope.typeMap = new Map;
         memberGroupFactory.getMemberTypeList().get({}, function (response) {
-            console.log("返回的类型列表" + response.data);
+          //  console.log("返回的类型列表" + response.data);
 
             $scope.MemberTypeList = response.data;
             $scope.MemberTypeList.forEach(function (ele) {
@@ -25,7 +25,7 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
     $scope.init();
 
     $scope.addMemberGroup = function () {
-        console.log($scope.add);
+       // console.log($scope.add);
         $scope.add['MEMBER_CODE_Group.SERVICE_ID'] = 1;
         memberGroupFactory.addMemberGroup($scope.add).get({}, function (response) {
 
@@ -43,8 +43,8 @@ AndSellMainModule.controller('MemberGroupController', function ($scope, $statePa
     };
 
     $scope.modifyMemberGroupClick = function (item) {
-        console.log(item);
-        console.log($scope.MemberTypeList);
+       // console.log(item);
+        //console.log($scope.MemberTypeList);
         $scope.modify = clone(item);
     };
 

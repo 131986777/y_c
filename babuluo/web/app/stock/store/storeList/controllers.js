@@ -5,7 +5,7 @@ AndSellMainModule.controller('storeListController', function ($scope, $statePara
 
   $scope.initLoad = function () {
     storeFactory.getStoreList().get({}, function (repsonce) {
-      console.log(repsonce);
+     // console.log(repsonce);
       $scope.storeList = repsonce.data;
     }, null);
   };
@@ -20,7 +20,7 @@ AndSellMainModule.controller('storeListController', function ($scope, $statePara
        $scope.add['STORE.IS_DEF']=-1;
      }
 
-    console.log($scope.add);
+  //  console.log($scope.add);
 
     storeFactory.addStore($scope.add).get({}, function (response) {
 
