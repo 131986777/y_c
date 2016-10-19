@@ -45,7 +45,7 @@
                     </tr>
                     </thead>
                     <tbody ng-cloak>
-                    <tr ng-repeat="item in MemberGroupList">
+                    <tr ng-repeat="item in MemberGroupList|filter">
                         <td ng-bind="item['MEMBER_CODE_GROUP.NAME']"></td>
                         <td ng-bind="typeMap.get(item['MEMBER_CODE_GROUP.TYPE_ID'])"></td>
                         <td ng-bind="item['MEMBER_CODE_GROUP.INTRO']"></td>

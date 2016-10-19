@@ -26,7 +26,10 @@
                 </thead>
                 <tbody ng-cloak>
                 <tr ng-repeat="item in couponList">
-                    <td ng-bind="item['COUPON_RULE.NAME']"></td><!--规格名称-->
+                    <td>
+                        <span ng-bind="item['COUPON_RULE.NAME']"></span>
+                        <span ng-show="item['COUPON_RULE.STATE']==-1" style="color: red">(已停用)</span>
+                    </td><!--规格名称-->
                     <td ng-if="item['COUPON_RULE.TYPE']==1">减价</td> <!--规格类型-减-->
                     <td ng-if="item['COUPON_RULE.TYPE']==2">打折</td> <!--规格类型-折-->
                     <td ng-bind="item['COUPON_RULE.INTRO']"></td> <!--规则描述-->
@@ -34,11 +37,12 @@
                         <span ng-if="item['COUPON_RULE.TYPE']==1" >{{(item['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}元</span>
                         <span ng-if="item['COUPON_RULE.TYPE']==2">{{(item['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}折</span>
                     </td> <!--面值-->
-                    <td>
+                    <td class="text-center">
                         <!--<a show-modal id="#couponDetail" class="btn sbold green" ng-click="detailClick(item)">明细</a>-->
-                        <a show-modal id="#couponMod" class="btn sbold green" ng-click="modifyClick(item)">修改</a>
-                        <a show-modal  class="btn sbold green" ng-click="stopCoupon(item)">停用</a>
-                        <a show-modal  class="btn sbold green" ng-click="delCoupon(item)">删除</a>
+                        <a show-modal id="#couponMod"  ng-click="modifyClick(item)">修改</a>
+                        <a show-modal ng-click="delCoupon(item)">删除</a>
+                        <a show-modal ng-if="item['COUPON_RULE.STATE']==1"  ng-click="stopCoupon(item)">停用</a>
+                        <a show-modal ng-if="item['COUPON_RULE.STATE']==-1" ng-click="stopCoupon(item)">启用</a>
                     </td>
 
                 </tr>
@@ -106,6 +110,8 @@
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
                             <span class="required"> 面值 </span>
+                            <span ng-bind="add['COUPON_RULE.TYPE']==1?'（元）':'（折）'"></span>
+                            <!--<span ng-if="mod['COUPON_RULE.TYPE']==2">（折）</span>-->
                         </label>
 
                         <div class="col-md-8">
@@ -214,8 +220,9 @@
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
                             <span class="required"> 面值 </span>
-                            <span ng-if="mod['COUPON_RULE.TYPE']==1">（元）</span>
-                            <span ng-if="mod['COUPON_RULE.TYPE']==2">（折）</span>
+                            <span ng-bind="mod['COUPON_RULE.TYPE']==1?'（元）':'（折）'"></span>
+                           <!-- <span ng-if="mod['COUPON_RULE.TYPE']==1">（元）</span>
+                            <span ng-if="mod['COUPON_RULE.TYPE']==2">（折）</span>-->
                         </label>
 
                         <div class="col-md-8">

@@ -23,7 +23,8 @@ AndSellMainModule.controller('ruleListController', function ($scope, $stateParam
 
       } else if (response.extraData.state == 'true') {
         modalFactory.showShortAlert('新增成功');
-        $scope.add='';
+        $scope.add={};
+        $scope.add['COUPON_RULE.TYPE']='1';
           $("#addRule").modal('hide');
           $scope.$broadcast('pageBar.reload');
       }
@@ -59,14 +60,26 @@ AndSellMainModule.controller('ruleListController', function ($scope, $stateParam
 
   $scope.stopCoupon = function (item) {
 
-    modalFactory.showAlert("确认停用吗?", function () {
-      couponFactory.stopSouponById(item).get({}, function (res) {
-        if (res.extraData.state = 'true') {
-          modalFactory.showShortAlert("停用成功");
-            $scope.$broadcast('pageBar.reload');
-        }
+      if(item['COUPON_RULE.STATE']==1){
+          modalFactory.showAlert("确认停用吗?", function () {
+              item['COUPON_RULE.STATE']=-1;
+              couponFactory.stopSouponById(item).get({}, function (res) {
+              if (res.extraData.state = 'true') {
+                  modalFactory.showShortAlert("停用成功");
+                  $scope.$broadcast('pageBar.reload');
+              }
+          });
       });
-    });
+      } else{
+          item['COUPON_RULE.STATE']=1;
+          couponFactory.stopSouponById(item).get({}, function (res) {
+              if (res.extraData.state = 'true') {
+                  modalFactory.showShortAlert("启用成功");
+                  $scope.$broadcast('pageBar.reload');
+              }
+          });
+      }
+
 
   } ; //delCoupon
   $scope.delCoupon = function (item) {
