@@ -31,6 +31,7 @@ AndSellMainModule.service('couponFactory', function ($resource, baseURL) {
                 method: 'PUT'
             }
         });
+
     };
 
 });
