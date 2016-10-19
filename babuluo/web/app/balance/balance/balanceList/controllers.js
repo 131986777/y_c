@@ -56,18 +56,19 @@ AndSellMainModule.controller('balanceListController', function ($scope, $statePa
 
     //根据登录ID查询财务信息
     $scope.queryFinanceByLoginId = function(loginId){
-        if(loginId == null){
-            $scope.searchlist = null;
-        }
-        console.log($scope.balanceList);
-        $scope.roundList =$scope.searchlist;
-        $scope.balanceList =[];
-        for(var i=0;i< $scope.roundList.length;i++){
-            if( $scope.roundList[i]['FINANCE_LIST.LOGIN_ID']==loginId){
-                $scope.balanceList.push($scope.roundList[i]);
-
+        console.log(loginId);
+        if(loginId == null||loginId == ''){
+            $scope.balanceList = $scope.searchlist ;
+        }else {
+            $scope.roundList =$scope.searchlist;
+            $scope.balanceList =[];
+            for(var i=0;i< $scope.roundList.length;i++){
+                if( $scope.roundList[i]['FINANCE_LIST.LOGIN_ID']==loginId){
+                    $scope.balanceList.push($scope.roundList[i]);
+                }
             }
         }
+        return $scope.balanceList;
     }
 
     $scope.delete = function (){
