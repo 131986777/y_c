@@ -12,10 +12,10 @@
                         <div class="col-md-1" style="padding-bottom: 10px">
 
                             <select ng-model="groupFilter['MEMBER_CODE_TYPE.ID']"
-                                    ng-init="groupFilter['MEMBER_CODE_TYPE.ID']='-1'"
+                                    ng-init="groupFilter['MEMBER_CODE_TYPE.ID']='null'"
                                     class="nya-bs-select form-control " data-width="80px"
                                     ng-change="filterGroup(groupFilter['MEMBER_CODE_TYPE.ID'])">
-                                <option class="nya-bs-option" value="-1">
+                                <option class="nya-bs-option" value="null">
                                     所属类型
                                 </option>
                                 <option class="nya-bs-option"
@@ -88,6 +88,9 @@
                                 <select ng-model="add['MEMBER_CODE_GROUP.TYPE_ID']"
                                         ng-init="add['MEMBER_CODE_GROUP.TYPE_ID']='-1'"
                                         class="nya-bs-select form-control">
+                                    <option value="-1">
+                                        选择所属类型
+                                    </option>
                                     <option class="nya-bs-option" ng-repeat="item in MemberTypeList "
                                             ng-bind="item['MEMBER_CODE_TYPE.NAME']"
                                             value="{{item['MEMBER_CODE_TYPE.ID']}}">
