@@ -67,77 +67,99 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
                          switch (form['SALES.SALE_TYPE']){
                              case '1':
                                  array= putParaTogether("满",item['CONDITION_NUM'],"元减",item['SALE_CONTENT'],"元");
+                                 middleArray.push(array);
                                  break;
-                             case 2:
+                             case '2':
                                  array= putParaTogether("满",item['CONDITION_NUM'],"元打",item['SALE_CONTENT'],"折");
+                                 middleArray.push(array);
                                  break;
-                             case 3:
+                             case '3':
                                  array= putParaTogether("满",item['CONDITION_NUM'],"元送",saleJson['Num'],"件",name);
+                                 middleArray.push(array);
                                  break;
-                             case 4:
+                             case '4':
                                  array= putParaTogether("满",item['CONDITION_NUM'],"元送",saleJson['Num'],"张",name);
+                                 middleArray.push(array);
                                  break;
                              default:
                          }
-                     case 2:
+                         break;
+                     case '2':
                          switch (form['SALES.SALE_TYPE']){
                              case '1':
                                  array= putParaTogether("每满",item['CONDITION_NUM'],"元减",item['SALE_CONTENT'],"元");
+                                 middleArray.push(array);
                                  break;
-                             case 2:
+                             case '2':
                                  array= putParaTogether("每满",item['CONDITION_NUM'],"元打",item['SALE_CONTENT'],"折");
+                                 middleArray.push(array);
                                  break;
-                             case 3:
+                             case '3':
                                  array= putParaTogether("每满",item['CONDITION_NUM'],"元送",saleJson['Num'],"件",name);
+                                 middleArray.push(array);
                                  break;
-                             case 4:
+                             case '4':
                                  array= putParaTogether("满",item['CONDITION_NUM'],"元送",saleJson['Num'],"张",name);
+                                 middleArray.push(array);
                                  break;
                              default:
                          }
+                         break;
                      default:
                  }
-            case '商品':
+                 break;
+              case '商品':
                 switch (form['SALES.CONDITION_TYPE']){
                     case '1':
                         switch (form['SALES.SALE_TYPE']){
                             case '1':
                                 array= putParaTogether("满",item['CONDITION_NUM'],"件减",item['SALE_CONTENT'],"元");
+                                middleArray.push(array);
                                 break;
                             case '2':
                                 array= putParaTogether("满",item['CONDITION_NUM'],"件打",item['SALE_CONTENT'],"折");
+                                middleArray.push(array);
                                 break;
                             case '3':
                                 array= putParaTogether("满",item['CONDITION_NUM'],"件送",saleJson['Num'],"件",name);
+                                middleArray.push(array);
                                 break;
                             case '4':
                                 array= putParaTogether("满",item['CONDITION_NUM'],"件送",saleJson['Num'],"张",name);
+                                middleArray.push(array);
                                 break;
                             default:
                         }
+                        break;
                     case '2':
                         switch (form['SALES.SALE_TYPE']){
                             case '1':
                                 array= putParaTogether("每满",item['CONDITION_NUM'],"件减",item['SALE_CONTENT'],"元");
+                                middleArray.push(array);
                                 break;
                             case '2':
                                 array= putParaTogether("每满",item['CONDITION_NUM'],"件打",item['SALE_CONTENT'],"折");
+                                middleArray.push(array);
                                 break;
                             case '3':
                                 array= putParaTogether("满",item['CONDITION_NUM'],"件送",saleJson['Num'],"件",name);
+                                middleArray.push(array);
                                 break;
                             case '4':
                                 array= putParaTogether("满",item['CONDITION_NUM'],"件送",saleJson['Num'],"张",name);
+                                middleArray.push(array);
                                 break;
                             default:
                         }
+                        break;
                     default:
-         }
-                default:
-         middleArray.push(array);
-         }
+                }
+                break;
+              default:
+            }
     });
             $scope.salesDetialList = middleArray;
+        console.log($scope.salesDetialList);
         };
 
     $scope.putTogether = function(para){
