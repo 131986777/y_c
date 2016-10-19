@@ -33,7 +33,7 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
     //根据商品id查询
     $scope.queryStockById = function(PId){
       //  alert(PId);
-        console.log($scope.storeQueryList);
+       // console.log($scope.storeQueryList);
         $scope.roundList = $scope.storeQueryList;
         if(PId==''||PId==null){
             $scope.stockList=$scope.roundList;
@@ -61,7 +61,7 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
         }
         $scope.add['STORE.IS_DEF']=1;
         $scope.add['STORE.ADD_DATETIME']=new Date();  //add['STORE.IS_DEF']
-        console.log($scope.add);
+       // console.log($scope.add);
 
         stockFactory.addStore($scope.add).get({}, function (response) {
 
