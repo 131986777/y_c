@@ -28,7 +28,7 @@
                 <tr ng-repeat="item in couponList">
                     <td>
                         <span ng-bind="item['COUPON_RULE.NAME']"></span>
-                        <span ng-show="item['COUPON_RULE.STATE']==-1" style="color: red">(已关停)</span>
+                        <span ng-show="item['COUPON_RULE.STATE']==-1" style="color: red">(已停用)</span>
                     </td><!--规格名称-->
                     <td ng-if="item['COUPON_RULE.TYPE']==1">减价</td> <!--规格类型-减-->
                     <td ng-if="item['COUPON_RULE.TYPE']==2">打折</td> <!--规格类型-折-->

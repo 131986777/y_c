@@ -19,6 +19,8 @@ AndSellMainModule.service('couponFactory', function ($resource, baseURL) {
         });
     };//stopSouponById
     this.stopSouponById = function (form) {
+        console.log(123);
+        console.log(form);
         return $resource(baseURL + '/coupon/rule/modifyIsStop', form, {
             'update': {
                 method: 'PUT'
