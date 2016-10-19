@@ -16,18 +16,19 @@ AndSellMainModule.controller('pointListController', function ($scope, $statePara
 
     //根据登录ID查询财务信息
     $scope.queryPointByLoginId = function(loginId){
-        if(loginId == null){
-            $scope.searchList == null;
-        }
-        $scope.roundList =$scope.searchList;
         $scope.pointList =[];
-        for(var i=0;i< $scope.roundList.length;i++){
-            if( $scope.roundList[i]['MEMBER_POINT_LIST.LOGIN_ID']==loginId){
-                $scope.pointList.push($scope.roundList[i]);
-
+        if(loginId == null||loginId == ''){
+            $scope.pointList = $scope.searchList ;
+        }
+        else{
+            $scope.roundList =$scope.searchList;
+            for(var i=0;i< $scope.roundList.length;i++){
+                if( $scope.roundList[i]['MEMBER_POINT_LIST.LOGIN_ID']==loginId){
+                    $scope.pointList.push($scope.roundList[i]);
+                }
             }
         }
-
+        return $scope.pointList;
     }
 
     //动态计算账户余额
