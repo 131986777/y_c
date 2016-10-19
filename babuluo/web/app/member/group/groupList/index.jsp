@@ -9,22 +9,21 @@
                 <div class="row">
 
 
-                        <div class="col-md-1" style="padding-bottom: 10px">
+                    <div class="col-md-1" style="padding-bottom: 10px">
 
-                            <select ng-model="groupFilter['MEMBER_CODE_TYPE.ID']"
-                                    ng-init="groupFilter['MEMBER_CODE_TYPE.ID']='-1'"
-                                    class="nya-bs-select form-control " data-width="80px"
-                                    ng-change="filterGroup(groupFilter['MEMBER_CODE_TYPE.ID'])">
-                                <option class="nya-bs-option" value="-1">
-                                    所属类型
-                                </option>
-                                <option class="nya-bs-option"
-                                        ng-repeat="value in MemberTypeList"
-                                        ng-bind="value['MEMBER_CODE_TYPE.NAME']"
-                                        value="{{value['MEMBER_CODE_TYPE.ID']}}">
-                                </option>
-                            </select>
-                        </div>
+                        <select ng-model="filter['MEMBER_CODE_GROUP.TYPE_ID']"
+                                ng-init="filter['MEMBER_CODE_GROUP.TYPE_ID']='null'"
+                                class="nya-bs-select form-control " data-width="80px">
+                            <option class="nya-bs-option" value="null">
+                                所属类型
+                            </option>
+                            <option class="nya-bs-option"
+                                    ng-repeat="value in MemberTypeList"
+                                    ng-bind="value['MEMBER_CODE_TYPE.NAME']"
+                                    value="{{value['MEMBER_CODE_TYPE.ID']}}">
+                            </option>
+                        </select>
+                    </div>
 
 
                     <div class="col-md-11 text-right">
@@ -45,7 +44,7 @@
                     </tr>
                     </thead>
                     <tbody ng-cloak>
-                    <tr ng-repeat="item in MemberGroupList|filter">
+                    <tr ng-repeat="item in MemberGroupList">
                         <td ng-bind="item['MEMBER_CODE_GROUP.NAME']"></td>
                         <td ng-bind="typeMap.get(item['MEMBER_CODE_GROUP.TYPE_ID'])"></td>
                         <td ng-bind="item['MEMBER_CODE_GROUP.INTRO']"></td>
@@ -62,6 +61,12 @@
             </div>
         </div>
     </div>
+    <div page-bar
+         filter-obj="filter"
+         url="/member/group/queryAll"
+         callback="bindData(response)">
+    </div>
+
 
     <!--BEGIN 新增客户分组-->
     <div class="modal fade text-left" id="addMemberGroup" tabindex="-1" aria-hidden="true"
@@ -123,8 +128,9 @@
                 <div class="modal-footer">
                     <button type="button" ng-click="addMemberGroup()" class="btn green">确定
                     </button>
-                    <button type="button" class="btn green  btn-outline" data-dimdiss="modal">取消
+                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
                     </button>
+
                 </div>
             </div>
             <!-- /.modal-content -->
@@ -189,7 +195,7 @@
                 <div class="modal-footer">
                     <button type="button" ng-click="modifyMemberGroup()" class="btn green">确定
                     </button>
-                    <button type="button" class="btn green  btn-outline" data-dimdiss="modal">取消
+                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
                     </button>
                 </div>
 
