@@ -1,29 +1,30 @@
 <div class="page-content">
     <form class="form-horizontal">
         <div class="form-group">
-            <label for="name" class="col-sm-1 control-label">名称：</label>
+            <label  class="col-sm-1 control-label">名称：</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="name">
+                <input type="text" class="form-control" ng-model="salesInfo['SALES.NAME']">
             </div>
         </div>
         <div class="form-group">
-            <label for="desc" class="col-sm-1 control-label">描述：</label>
+            <label  class="col-sm-1 control-label">描述：</label>
             <div class="col-sm-2">
-                <input type="text" class="form-control" id="desc">
+                <input type="text" class="form-control" ng-model="salesInfo['SALES.INTRO']">
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-offset-1 col-sm-10">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox">每满
+                <div class=" pull-left">
+                    <label class="checkbox">
+                        <input id="meiman" type="checkbox" ng-model="salesInfo['SALES.INTRO']">每满
                     </label>
                 </div>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-1">规则：</div>
-            <div class="ruler col-sm-8">
+
+            <div class="manjian-ruler col-sm-8">
 
                 <!-- 满减 -->
                 <div class="manjian radio">
@@ -47,7 +48,7 @@
                 <!-- 满折 -->
                 <div class="manzhe radio">
                     <label>
-                        <input type="radio" name="promation" id="promation2" value="option2">
+                        <input type="radio" name="promation"  value="option2">
                         满折
                     </label>
                     <div class="content hidden">
@@ -67,7 +68,7 @@
                 <!-- 满赠（商品） -->
                 <div class="manzeng-product radio">
                     <label>
-                        <input type="radio" name="promation" id="promation3" value="option3">
+                        <input type="radio" name="promation"  value="option3">
                         满赠（商品）
                     </label>
                     <div class="content hidden">
@@ -88,7 +89,7 @@
 
                 <div class="manzeng-ticket radio">
                     <label>
-                        <input type="radio" name="promation" id="promation4" value="option4">
+                        <input type="radio" name="promation"  value="option4">
                         满赠（优惠券）
                     </label>
                     <div class="content hidden">
@@ -107,6 +108,83 @@
                     </div>
                 </div>
             </div>
+            <div class="meimanjian-ruler col-sm-8 hidden">
+
+                <!-- 满减 -->
+                <div class="manjian radio">
+                    <label>
+                        <input type="radio" name="promation"  value="option1" >
+                        每满减
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+
+                            <div class="detail">
+                                订单金额每满￥<input class="" type="text">，立减￥<input type="text" name="">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 满折 -->
+                <div class="manzhe radio">
+                    <label>
+                        <input type="radio" name="promation"  value="option2">
+                        每满折
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+
+                            <div class="detail">
+                                订单金额每满￥<input class="" type="text">，打<input type="text" name="">折
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- 满赠（商品） -->
+                <div class="manzeng-product radio">
+                    <label>
+                        <input type="radio" name="promation" id="promation3" value="option3">
+                        每满赠（商品）
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+                            <div class="detail">
+                                订单金额每满￥<input class="" type="text">，获赠品<span><a href="#">（选择赠送商品）</a></span><input type="text" name="">件
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="manzeng-ticket radio">
+                    <label>
+                        <input type="radio" name="promation" id="promation4" value="option4">
+                        每满赠（优惠券）
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+
+                            <div class="detail">
+                                订单金额每满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
         </div>
-    </form>
+</div>
+</form>
+</div>
+
+
+
 </div>
