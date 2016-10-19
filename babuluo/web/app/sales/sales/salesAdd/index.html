@@ -32,8 +32,13 @@
                         满减
                     </label>
                     <div class="content">
-                        <div class="detail">
-                            订单金额满￥<input class="" type="text">，立减￥<input type="text" name="">
+                        <div class="detailBox">
+                            <div class="template hidden">
+                                订单金额满￥<input class="" type="text">，立减￥<input type="text" name=""><a class="itemDel">删除</a>
+                            </div>
+                            <div class="detail">
+                                订单金额满￥<input class="" type="text">，立减￥<input type="text" name="">
+                            </div>
                         </div>
                         <a class="addItem" href="javascript:;">+添加区间</a>
                     </div>
@@ -46,8 +51,13 @@
                         满折
                     </label>
                     <div class="content hidden">
-                        <div class="detail">
-                            订单金额满￥<input class="" type="text">，打<input type="text" name="">折
+                        <div class="detailBox">
+                            <div class="template hidden">
+                                订单金额满￥<input class="" type="text">，打<input type="text" name="">折<a class="itemDel">删除</a>
+                            </div>
+                            <div class="detail">
+                                订单金额满￥<input class="" type="text">，打<input type="text" name="">折
+                            </div>
                         </div>
                         <a class="addItem" href="javascript:;">+添加区间</a>
                     </div>
@@ -61,9 +71,14 @@
                         满赠（商品）
                     </label>
                     <div class="content hidden">
-                        <div class="detail">
-                            订单金额满￥<input class="" type="text">，获赠品<input type="text" name="">件
-                            <span><a href="#">选择赠送商品</a></span>
+                        <div class="detailBox">
+                            <div class="template hidden">
+                                订单金额满￥<input class="" type="text">，获赠品<span><a href="#">（选择赠送商品）</a></span><input type="text" name="">件
+                                <a class="itemDel">删除</a>
+                            </div>
+                            <div class="detail">
+                                订单金额满￥<input class="" type="text">，获赠品<span><a href="#">（选择赠送商品）</a></span><input type="text" name="">件
+                            </div>
                         </div>
                         <a class="addItem" href="javascript:;">+添加区间</a>
                     </div>
@@ -78,11 +93,16 @@
                     </label>
                     <div class="content hidden">
                         <div class="detailBox">
+                            <div class="template hidden">
+                                订单金额满￥<input class="" type="text">，获赠优惠券<input type="text" name="">张。
+                                <span><a href="#">（选择赠送优惠券）</a></span>
+                                <a class="itemDel">删除</a>
+                            </div>
                             <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠优惠券<input type="text" name="">张
-                                <span><a href="#">选择赠送优惠券</a></span>
+                                订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
                             </div>
                         </div>
+
                         <a class="addItem" href="javascript:;">+添加区间</a>
                     </div>
                 </div>
@@ -90,9 +110,3 @@
         </div>
     </form>
 </div>
-
-<script type="text/javascript">
-
-
-
-</script>
