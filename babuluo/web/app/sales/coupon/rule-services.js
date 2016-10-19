@@ -19,14 +19,14 @@ AndSellMainModule.service('couponFactory', function ($resource, baseURL) {
         });
     };//stopSouponById
     this.stopSouponById = function (form) {
-        return $resource(baseURL + '/coupon/rule/modifyIsDel', form, {
+        return $resource(baseURL + '/coupon/rule/modifyIsStop', form, {
             'update': {
                 method: 'PUT'
             }
         });
     };
     this.delSouponById = function (form) {
-        return $resource(baseURL + '/coupon/rule/delById', form, {
+        return $resource(baseURL + '/coupon/rule/modifyIsDel', form, {
             'update': {
                 method: 'PUT'
             }

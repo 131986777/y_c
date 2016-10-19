@@ -23,7 +23,8 @@ AndSellMainModule.controller('ruleListController', function ($scope, $stateParam
 
       } else if (response.extraData.state == 'true') {
         modalFactory.showShortAlert('新增成功');
-        $scope.add='';
+        $scope.add={};
+        $scope.add['COUPON_RULE.TYPE']='1';
           $("#addRule").modal('hide');
           $scope.$broadcast('pageBar.reload');
       }
