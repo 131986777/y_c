@@ -4,8 +4,8 @@ AndSellMainModule.controller('balanceListController', function ($scope, $statePa
 
     //获得所有资金明细
     $scope.bindData = function (response) {
-        $scope.balanceList ={};
         $scope.balanceList = response.data;
+        $scope.searchlist = response.data
         $scope.userDetailMap = response.extraData.userDetailMap;
         $scope.userFininanceMap = response.extraData.userFininanceMap;
     };
@@ -51,12 +51,16 @@ AndSellMainModule.controller('balanceListController', function ($scope, $statePa
             } else if (response.extraData.state == 'true') {
             }
         });
-        window.location.reload();
+        $scope.$broadcast('pageBar.reload');
     }
 
     //根据登录ID查询财务信息
     $scope.queryFinanceByLoginId = function(loginId){
-        $scope.roundList =$scope.balanceList.toString().toJSON();
+        if(loginId == null){
+            $scope.searchlist = null;
+        }
+        console.log($scope.balanceList);
+        $scope.roundList =$scope.searchlist;
         $scope.balanceList =[];
         for(var i=0;i< $scope.roundList.length;i++){
             if( $scope.roundList[i]['FINANCE_LIST.LOGIN_ID']==loginId){

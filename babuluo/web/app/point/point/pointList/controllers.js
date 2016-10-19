@@ -5,6 +5,7 @@ AndSellMainModule.controller('pointListController', function ($scope, $statePara
 
     $scope.bindData = function (response) {
         $scope.pointList = response.data;
+        $scope.searchList = response.data;
         $scope.userDetailMap = response.extraData.userDetailMap;
     };
 
@@ -15,8 +16,10 @@ AndSellMainModule.controller('pointListController', function ($scope, $statePara
 
     //根据登录ID查询财务信息
     $scope.queryPointByLoginId = function(loginId){
-
-        $scope.roundList =$scope.pointList;
+        if(loginId == null){
+            $scope.searchList == null;
+        }
+        $scope.roundList =$scope.searchList;
         $scope.pointList =[];
         for(var i=0;i< $scope.roundList.length;i++){
             if( $scope.roundList[i]['MEMBER_POINT_LIST.LOGIN_ID']==loginId){
@@ -63,7 +66,7 @@ AndSellMainModule.controller('pointListController', function ($scope, $statePara
             } else if (response.extraData.state == 'true') {
             }
         });
-        window.location.reload();
+        $scope.$broadcast('pageBar.reload');
     }
 
     $scope.empty = function (){
