@@ -110,7 +110,6 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
             stockFactory.delStoreById(id).get({}, function (res) {
                 if (res.extraData.state = 'true') {
                     modalFactory.showShortAlert("删除成功");
-
                     $scope.initLoad();
                 }
             });
