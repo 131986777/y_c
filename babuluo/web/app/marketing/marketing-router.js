@@ -7,7 +7,7 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("couponRule", {
             url: "/couponRule",
-            templateUrl: "/AndSell/app/marketing/coupon/ruleList/index.html",
+            templateUrl: "/AndSell/app/marketing/coupon/rule/ruleList/index.html",
             controller: "ruleListController"
         })
         .state("salesAdd", {
