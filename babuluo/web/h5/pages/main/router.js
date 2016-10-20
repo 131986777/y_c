@@ -13,9 +13,15 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
             controller: "H5.PrdDetailController"
         })
         .state("cart", {
-        url: "/cart",
-        templateUrl: "/AndSell/h5/pages/cart/index.html",
-        controller: "H5.CartController"
-    })
+            url: "/cart",
+            templateUrl: "/AndSell/h5/pages/cart/index.html",
+            controller: "H5.CartController"
+        })
+        .state("order-add", {
+            url: "/orderAdd",
+            params: {SKU_IDS: '1060'},
+            templateUrl: "/AndSell/h5/pages/order/add/index.html",
+            controller: "H5.OrderAddController"
+        })
 
 });

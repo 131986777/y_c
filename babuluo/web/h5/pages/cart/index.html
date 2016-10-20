@@ -20,7 +20,7 @@
              ng-show="!sku.isSelect"></i>
         </div>
         <div class="product-detail weui_cell_bd">
-          <img ng-src="" class="product-img">
+          <img ng-src="sku['SHOP_PRODUCT.CMP']" class="product-img">
           <h5 class="product-name" ng-bind="sku['SHOP_PRODUCT.PRD_NAME']">
           </h5>
           <p class="product-cls" ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
@@ -70,7 +70,7 @@
         </p>
         <p class="sale">(不含运费)</p>
       </div>
-      <a class="payment-check" href="../order/order_add.html">
+      <a class="payment-check" ng-click="addOrder()">
         去结算
         <span class="product-num">(2件)</span>
       </a>

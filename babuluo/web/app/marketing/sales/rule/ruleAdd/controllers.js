@@ -1,5 +1,8 @@
-AndSellMainModule.controller('salesAddController', function ($scope,$http, $stateParams, salesFactory, modalFactory) {
+AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $stateParams, salesFactory, modalFactory) {
     modalFactory.setBottom(true);
+
+
+
 
     $scope.memberId = $stateParams.id;
 

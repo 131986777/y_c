@@ -1,0 +1,99 @@
+<div class="page-content">
+    <div class="col-md-12">
+        <div class="table-scrollable">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th class="col-sm-2">促销规则名称</th>
+                    <th class="col-sm-1">促销针对</th>
+                    <th class="col-sm-3">促销规则详情</th>
+                    <th class="col-sm-2">添加时间</th>
+                    <th class="col-sm-1">状态</th>
+                    <th class="col-sm-2">操作</th>
+                    <th class="col-sm-3 text-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
+                                +新增 <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a ui-sref="salesRuleAdd({id:1})">订单促销</a></li>
+                                <li><a ui-sref="salesRuleAdd({id:2})">商品促销</a></li>
+                            </ul>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody ng-cloak>
+                <tr ng-repeat='salesInfo in salesList'>
+                    <td ng-bind="salesInfo['SALES.NAME']"></td>
+                    <td>
+                        <span ng-show="salesInfo['SALES.SALE_TARGET']==1">订单</span>
+                        <span ng-show="salesInfo['SALES.SALE_TARGET']==2">商品</span>
+                    </td>
+
+
+                    <td ng-bind="salesInfo['SALES.INTRO']"></td>
+                    <td ng-bind="salesInfo['SALES.ADD_DATETIME'] | FormatAllDate"></td>
+                    <td ng-bind="salesInfo['SALES.STATE'] | FormatState"></td>
+                    <td>
+                        <a data-toggle="modal" data-target="#balance" ng-click="queryByGivenInfo(salesInfo)">
+                            促销详情
+                        </a>
+                        <a class="table-link" ng-click="changeState(salesInfo)">
+                            <span ng-show="salesInfo['SALES.STATE'] == '1'">停用</span>
+                            <span ng-show="salesInfo['SALES.STATE'] == '-1'">启用</span>
+                        </a>
+                        <a ng-click="Delete(salesInfo)">
+                            删除
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div page-bar
+         filter-obj="filter"
+         url="/sales/sales/queryAll"
+         callback="bindData(response)">
+    </div>
+
+
+    <!--MODAL-->
+    <!--显示促销详情-->
+    <div class="modal fade" role="dialog" id="balance">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">
+                    </button>
+                    <h4 class="modal-title">促销规则详情</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+                    <table>
+                        <thead></thead>
+                        <tbody ng-cloak>
+                        <tr ng-repeat='item in salesDetialList'>
+                            <td ng-bind="item[0]"></td>
+                            <td ng-bind="item[1]"></td>
+                            <td ng-bind="item[2]"></td>
+                            <td ng-bind="item[3]"></td>
+                            <td ng-bind="item[4]"></td>
+                            <td ng-bind="item[5]"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-outline" data-dismiss="modal"
+                            ng-click="saveAccount()">确定
+                    </button>
+                    <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
