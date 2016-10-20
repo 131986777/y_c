@@ -1,0 +1,111 @@
+<div class="modal fade text-left" id="productItemSwitchModal" tabindex="-1" ng-init="getInitData()"
+     aria-hidden="true" style="display: none;">
+  <div class="modal-dialog  modal-lg" style="width: 70%">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+                aria-hidden="true"></button>
+        <h4 class="modal-title">选择商品</h4>
+      </div>
+      <div class="modal-body form-body text-right">
+        <div class="table-operbar row">
+          <div class="table-toolbar">
+            <div class="row">
+              <div class="col-md-3 form-inline text-left">
+                <span>
+                   筛选:
+                </span>
+                <select ng-model="productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID']"
+                        ng-init="productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID']='null'"
+                        class="nya-bs-select form-control input-small">
+                  <option  class="nya-bs-option" value="null">全部类别</option>
+                  <option class="nya-bs-option"
+                          ng-repeat="prdClass in classList"
+                          value="{{prdClass['SHOP_PRODUCT_CLASS.CLASS_ID']}}"
+                          ng-bind="prdClass['SHOP_PRODUCT_CLASS.CLASS_NAME']"></option>
+                </select>
+              </div>
+
+              <div class="col-md-7 form-inline" >
+                <input ng-model="productFilterSearch" type="text" class="form-control"
+                       placeholder="请输入 商品名称/编码/条码/规格 进行搜索">
+              </div>
+              <div class="col-md-2 form-inline">
+                <span class="btn btn-primary" ng-click="search()">查询</span>
+              </div>
+
+            </div>
+          </div>
+
+          <div style="margin-top: 15px">
+            <div class="table-scrollable">
+              <table class="table table-striped  table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th style="width: 30px;"> </th>
+                  <th class="col-md-5"> 商品名称</th>
+                  <th class="col-md-2"> 分类名称</th>
+                  <th class="col-md-3"> 编码</th>
+                  <th class="col-md-2"> 单位</th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="sku in skuList"
+                    ng-click="checkItem(sku)">
+                  <td>
+                    <div style="display: inline-block;">
+                      <div class="md-radio">
+                        <input type="radio" id="radio_sku_{{sku['SHOP_PRODUCT_SKU.SKU_ID']}}"
+                               value="{{sku['SHOP_PRODUCT_SKU.SKU_ID']}}"
+                               ng-model="sku.isSelect"
+                               name="selectProduct"
+                               class="md-radiobtn">
+                        <label for="radio_sku_{{sku['SHOP_PRODUCT_SKU.SKU_ID']}}">
+                          <span class="inc"></span>
+                          <span class="check"></span>
+                          <span class="box"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <img ng-src="{{sku['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.CMP']}}"
+                         class="img-thumbnail"
+                         style="height: 50px;width: 50px;float: left;padding: 0px;">
+                    <div style="padding-left: 60px;text-align: left">
+                      <a href="" class="font-dark">
+                        <span ng-bind="sku['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME']"></span>
+                        <br>
+                        <span ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']"></span>
+                      </a>
+                    </div>
+                  </td>
+                  <td style="text-align: left" ng-bind="sku['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.CLASS_NAME']"></td>
+                  <td style="text-align: left;" ng-bind="sku['SHOP_PRODUCT_SKU.PRD_SKU']"></td>
+                  <td style="text-align: center;" ng-bind="sku['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.UNIT_NAME']"></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div page-bar
+               filter-obj="productFilter"
+               ng-init="productFilter.selectPageSize='5'"
+               url="/shop/product/sku/queryAllWithPrdInfo"
+               callback="bindProductData(response)">
+          </div>
+
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn green" ng-click="setReturn()">确定
+        </button>
+        <button type="button" class="btn green  btn-outline" data-dismiss="modal"
+                >取消
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

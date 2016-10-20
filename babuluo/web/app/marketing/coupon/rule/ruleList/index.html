@@ -1,0 +1,378 @@
+<div class="page-content">
+
+
+    <div class="col-md-12">
+        <div class="page-operation-wrap">
+            <div class="row">
+                <div class="col-md-1" >
+                    <select ng-model="filter['COUPON_RULE.TYPE']"
+                            ng-init="filter['COUPON_RULE.TYPE']='null'"
+                            class="nya-bs-select form-control">
+
+                        <option class="nya-bs-option" value="null">
+                            <!--ng-options="store.id as store.name for store in storeList"-->
+                            优惠类型
+                        </option>
+                        <option class="nya-bs-option" value="1">减价</option>
+                        <option class="nya-bs-option" value="2">打折</option>
+
+                    </select>
+                </div> <!-- select-center  -->
+
+                <div class="col-md-11 text-right">
+                    <a show-modal id="#addRule" class="btn sbold green">
+                        <i class="fa fa-plus"></i>新增规则
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table-scrollable">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+
+
+                    <th class="col-md-1">优惠规则名称</th>
+                    <th class="col-md-1">优惠规则类型</th>
+                    <th class="col-md-2">优惠规则描述</th>
+                    <th class="col-md-1">面值</th>
+                    <th class="col-md-1 text-center"> 操作</th>
+                </tr>
+                </thead>
+                <tbody ng-cloak>
+                <tr ng-repeat="item in couponList">
+                    <td>
+                        <span ng-bind="item['COUPON_RULE.NAME']"></span>
+                        <span ng-show="item['COUPON_RULE.STATE']==-1" style="color: red">(已停用)</span>
+                    </td><!--规格名称-->
+                    <td ng-if="item['COUPON_RULE.TYPE']==1">减价</td> <!--规格类型-减-->
+                    <td ng-if="item['COUPON_RULE.TYPE']==2">打折</td> <!--规格类型-折-->
+                    <td ng-bind="item['COUPON_RULE.INTRO']"></td> <!--规则描述-->
+                    <td>
+                        <span ng-if="item['COUPON_RULE.TYPE']==1">{{(item['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}元</span>
+                        <span ng-if="item['COUPON_RULE.TYPE']==2">{{(item['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}折</span>
+                    </td> <!--面值-->
+                    <td class="text-center">
+                        <!--<a show-modal id="#couponDetail" class="btn sbold green" ng-click="detailClick(item)">明细</a>-->
+                        <a show-modal id="#couponMod" ng-click="modifyClick(item)">修改</a>
+                        <a show-modal ng-click="delCoupon(item)">删除</a>
+                        <a show-modal ng-if="item['COUPON_RULE.STATE']==1" ng-click="stopCoupon(item)">停用</a>
+                        <a show-modal ng-if="item['COUPON_RULE.STATE']==-1" ng-click="stopCoupon(item)">启用</a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div page-bar
+         filter-obj="filter"
+         url="/coupon/rule/queryAll"
+         callback="bindData(response)">
+    </div>
+</div>
+
+<!--BEGIN 新增优惠规则-->
+<div class="modal fade text-left" id="addRule" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">添加优惠规则</h4>
+            </div>
+            <div class="modal-body form-body text-right">
+
+                <form class="form-horizontal">
+
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> * </span> 优惠规则名称
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['COUPON_RULE.NAME']"
+                                   ng-init="add['COUPON_RULE.NAME']=''"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            优惠规则类型
+                        </label>
+
+                        <div class="col-md-8">
+                            <select ng-model="add['COUPON_RULE.TYPE']"
+                                    ng-init="add['COUPON_RULE.TYPE']='1'"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value='1'>减价</option>
+                                <option class="nya-bs-option" value='2'>打折</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 优惠规则描述 </span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['COUPON_RULE.INTRO']"
+                                   ng-init="add['COUPON_RULE.INTRO']=''"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 面值 </span>
+                            <span ng-bind="add['COUPON_RULE.TYPE']==1?'（元）':'（折）'"></span>
+                            <!--<span ng-if="mod['COUPON_RULE.TYPE']==2">（折）</span>-->
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['COUPON_RULE.FACE_VALUE']"
+                                   ng-init="add['COUPON_RULE.FACE_VALUE']=''"
+                                   placeholder="请直接输入数字"></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 使用门槛 </span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['COUPON_RULE.CONDITION_PRICE']"
+                                   ng-init="add['COUPON_RULE.CONDITION_PRICE']=''"
+                                   placeholder="请直接输入数字">
+                        </div>
+                    </div>
+                    <div class="form-group row" ng-if="add['COUPON_RULE.TYPE']=='2'">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 最高抵扣 </span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['COUPON_RULE.MAX_PRICE_LIMIT']"
+                                   ng-init="add['COUPON_RULE.MAX_PRICE_LIMIT']=''"
+                                   placeholder="请直接输入数字">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 每人限领 </span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['COUPON_RULE.EACH_MEMBER_LIMIT']"
+                                   ng-init="add['COUPON_RULE.EACH_MEMBER_LIMIT']=''"
+                                   placeholder="请直接输入数字">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="addRule()" class="btn green">确定
+                </button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 新增优惠规则-->
+<!--BEGIN 修改优惠规则-->
+<div class="modal fade text-left" id="couponMod" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">修改优惠规则</h4>
+            </div>
+            <div class="modal-body form-body text-right">
+
+                <form class="form-horizontal">
+
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> * </span> 优惠规则名称
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['COUPON_RULE.NAME']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            优惠规则类型
+                        </label>
+
+                        <div class="col-md-8">
+                            <select ng-model="mod['COUPON_RULE.TYPE']"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value='1'>减价</option>
+                                <option class="nya-bs-option" value='2'>打折</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 优惠规则描述 </span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['COUPON_RULE.INTRO']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 面值 </span>
+                            <span ng-bind="mod['COUPON_RULE.TYPE']==1?'（元）':'（折）'"></span>
+                            <!-- <span ng-if="mod['COUPON_RULE.TYPE']==1">（元）</span>
+                             <span ng-if="mod['COUPON_RULE.TYPE']==2">（折）</span>-->
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['COUPON_RULE.FACE_VALUE']">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 使用门槛 </span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['COUPON_RULE.CONDITION_PRICE']">
+                        </div>
+                    </div>
+                    <div class="form-group row" ng-if="mod['COUPON_RULE.TYPE']=='2'">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 最高抵扣 </span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['COUPON_RULE.MAX_PRICE_LIMIT']">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> 每人限领 </span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['COUPON_RULE.EACH_MEMBER_LIMIT']">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="modRule()" class="btn green">确定
+                </button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 修改优惠规则-->
+
+
+<!--BEGIN 优惠规则详情-->
+<div class="modal fade text-left" id="couponDetail" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">优惠规则详情</h4>
+            </div>
+
+            <div class="modal-body  text-left">
+
+                <div class="form-group row">
+                    <label class="col-md-3">
+                        优惠规则名称：
+                    </label>
+                    <span>{{detail['COUPON_RULE.NAME']}}</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        优惠规则类型:
+                    </label>
+                    <span ng-if="detail['COUPON_RULE.TYPE']==1">减价</span> <!--规格类型-减-->
+                    <span ng-if="detail['COUPON_RULE.TYPE']==2">打折</span> <!--规格类型-折-->
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        优惠规则描述:
+                    </label>
+                    <span ng-bind="detail['COUPON_RULE.INTRO']"></span> <!--规则描述-->
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>面值:</span>
+                    </label>
+                    <span ng-if="detail['COUPON_RULE.TYPE']==1">{{(detail['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}元</span>
+                    <span ng-if="detail['COUPON_RULE.TYPE']==2">{{(detail['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}折</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>使用门槛：</span>
+                    </label>
+                    <span ng-if="detail['COUPON_RULE.CONDITION_PRICE']>0">订单满{{(detail['COUPON_RULE.CONDITION_PRICE']/100).toFixed(2)}}元使用</span>
+                </div>
+                <div class="form-group row" ng-if="detail['COUPON_RULE.TYPE']==2">
+                    <label class="col-md-3 control-label">
+                        <span>最高抵扣：</span>
+                    </label>
+                    <span>{{(detail['COUPON_RULE.MAX_PRICE_LIMIT']/100).toFixed(2)}}元</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>每人限领：</span>
+                    </label>
+                    <span>{{detail['COUPON_RULE.EACH_MEMBER_LIMIT']}}张</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>状态：</span>
+                    </label>
+                    <span ng-if="detail['COUPON_RULE.STATE']==1">可用</span>
+                    <span ng-if="detail['COUPON_RULE.STATE']==2">不可用</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>添加时间：</span>
+                    </label>
+                    <span>{{detail['COUPON_RULE.ADD_DATIME']|FormatAllDate}}</span>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">确定
+                </button>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 优惠规则详情-->

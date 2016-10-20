@@ -451,6 +451,59 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
     }
 });
 
+AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFactory, unitFactory, productFactory, tagFactory) {
+    return {
+        restrict: 'EA',
+        templateUrl: '/AndSell/app/components/libs/angular/template/productItemSwitchModal.html',
+        scope: {
+            callback: '&'
+        },
+        controller: function ($scope) {
+
+            $scope.getInitData = function () {
+                tagFactory.getPrdTagList().get({}, function (response) {
+                    $scope.tagList = response.data;
+                });
+                classFactory.getPrdClassList().get({}, function (response) {
+                    $scope.classList = response.data;
+                });
+                unitFactory.getPrdUnitList().get({}, function (response) {
+                    $scope.unitList = response.data;
+                });
+            }
+
+            $scope.skuList = new Array;
+
+            $scope.bindProductData = function (response) {
+                $scope.skuList = response.data;
+            }
+
+            $scope.checkItem = function (item) {
+                $scope.selectItem=item;
+                //$scope.skuList.forEach(function (ele) {
+                //    if(ele['SHOP_PRODUCT_SKU.SKU_ID']==item['SHOP_PRODUCT_SKU.SKU_ID']){
+                //        ele.isSelect=true;
+                //    }
+                //    else{
+                //        ele.isSelect=false;
+                //    }
+                //});
+            }
+
+            $scope.search = function () {
+                $scope.productFilter['SHOP_PRODUCT.SEARCH_CONTENT']= $scope.productFilterSearch;
+            }
+
+            $scope.setReturn = function () {
+                $scope.callback({data: $scope.selectItem});
+                $scope.productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID']='null';
+                $scope.productFilterSearch='';
+                $('#productItemSwitchModal').modal('hide');
+            }
+        }
+    }
+});
+
 /**
  *
  * 时间格式，精确到天

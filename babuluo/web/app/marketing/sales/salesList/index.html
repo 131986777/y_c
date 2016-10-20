@@ -24,19 +24,22 @@
                 </tr>
                 </thead>
                 <tbody ng-cloak>
-                    <tr ng-repeat='salesInfo in salesList'>
+                <tr ng-repeat='salesInfo in salesList'>
                     <td ng-bind="salesInfo['SALES.NAME']"></td>
-                    <td ng-bind="salesInfo['SALES.SALE_TARGET']"></td>
+                    <td>
+                        <span ng-show="salesInfo['SALES.SALE_TARGET']==1">订单</span>
+                        <span ng-show="salesInfo['SALES.SALE_TARGET']==2">商品</span>
+                    </td>
                     <td ng-bind="salesInfo['SALES.INTRO']"></td>
                     <td ng-bind="salesInfo['SALES.ADD_DATETIME'] | FormatAllDate"></td>
-                    <td ng-bind="salesInfo['SALES.STATE']"></td>
+                    <td ng-bind="salesInfo['SALES.STATE'] | FormatState"></td>
                     <td>
                         <a data-toggle="modal" data-target="#balance" ng-click="queryByGivenInfo(salesInfo)">
                             促销详情
                         </a>
                         <a class="table-link" ng-click="changeState(salesInfo)">
-                            <span ng-show="salesInfo['SALES.STATE'] == '启用'">停用</span>
-                            <span ng-show="salesInfo['SALES.STATE'] == '停用'">启用</span>
+                            <span ng-show="salesInfo['SALES.STATE'] == '1'">停用</span>
+                            <span ng-show="salesInfo['SALES.STATE'] == '-1'">启用</span>
                         </a>
                         <a ng-click="Delete(salesInfo)">
                             删除
@@ -68,17 +71,17 @@
                 </div>
                 <div class="modal-body form-body text-right">
                     <table>
-                    <thead></thead>
-                    <tbody ng-cloak>
-                    <tr ng-repeat = 'item in salesDetialList'>
-                        <td ng-bind="item[0]"></td>
-                        <td ng-bind="item[1]"></td>
-                        <td ng-bind="item[2]"></td>
-                        <td ng-bind="item[3]"></td>
-                        <td ng-bind="item[4]"></td>
-                        <td ng-bind="item[5]"></td>
-                    </tr>
-                    </tbody>
+                        <thead></thead>
+                        <tbody ng-cloak>
+                        <tr ng-repeat='item in salesDetialList'>
+                            <td ng-bind="item[0]"></td>
+                            <td ng-bind="item[1]"></td>
+                            <td ng-bind="item[2]"></td>
+                            <td ng-bind="item[3]"></td>
+                            <td ng-bind="item[4]"></td>
+                            <td ng-bind="item[5]"></td>
+                        </tr>
+                        </tbody>
                     </table>
                 </div>
                 <div class="modal-footer">
@@ -92,7 +95,7 @@
         </div>
     </div>
     <!--新增促销-->
-    <div class="modal fade"  role="dialog" id="sale">
+    <div class="modal fade" role="dialog" id="sale">
         <div class="modal-dialog" aria-hidden="true">
             <div class="modal-content">
                 <div class="modal-header">
@@ -196,5 +199,5 @@
             </div>
         </div>
     </div>
-    </div>
+</div>
 </div>

@@ -159,7 +159,6 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
             }
     });
             $scope.salesDetialList = middleArray;
-        console.log($scope.salesDetialList);
         };
 
     $scope.putTogether = function(para){
@@ -169,41 +168,30 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
 
     //根据ID修改优惠状态（停用or启用）
     $scope.changeState = function (form) {
-        if(form['SALES.SALE_TARGET']=='订单'){
-            form['SALES.SALE_TARGET']=1;
-        }
-        else {
-            form['SALES.SALE_TARGET']=-1;
-        }
-        if(form['SALES.STATE']=='启用'){
+        if(form['SALES.STATE']=='1'){
             form['SALES.STATE']=-1;
+            modalFactory.showAlert("确定停用?", function () {
+                salesFactory.ModifySalesState(form).get({}, function (response) {
+                });
+            });
         }
         else {
             form['SALES.STATE']=1;
+                salesFactory.ModifySalesState(form).get({}, function (response) {
+                });
+                $scope.$broadcast('pageBar.reload');
         }
-        salesFactory.ModifySalesState(form).get({}, function (response) {});
-        window.location.reload();
+        $scope.$broadcast('pageBar.reload');
     };
 
     //根据ID删除优惠规则
     $scope.Delete = function (form) {
-        if(form['SALES.SALE_TARGET']=='订单'){
-            form['SALES.SALE_TARGET']=1;
-        }
-        else {
-            form['SALES.SALE_TARGET']=-1;
-        }
-        if(form['SALES.STATE']=='启用'){
-            form['SALES.STATE']=1;
-        }
-        else {
-            form['SALES.STATE']=-1;
-        }
         form['SALES.IS_DEL'] = 1;
-        salesFactory.ModifySalesState(form).get({}, function (response) {});
-        window.location.reload();
+        modalFactory.showAlert("确定删除?", function (){
+            salesFactory.ModifySalesState(form).get({}, function (response) {});
+            $scope.$broadcast('pageBar.reload');
+        })
     };
-
     function putParaTogether(){
         var array = new Array();
         for(var i =0; i<arguments.length; i++){

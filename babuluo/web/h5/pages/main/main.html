@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="AndSell.H5.Main" ng-controller="H5.MainController" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title ng-bind="title"></title>
+
+
+  <link rel="stylesheet" href="/AndSell/h5/public/libs/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/AndSell/h5/public/libs/weui/dist/lib/weui.min.css">
+  <link rel="stylesheet" href="/AndSell/h5/public/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+
+</head>
+<body class="home-index">
+
+<div><!-- BEGIN 内容 -->
+
+  <div class="row-content">
+    <div ui-view="" class="ng-scope"></div>
+  </div>
+
+</div> <!--END 内容-->
+
+<!-- BEGIN footer-nav -->
+<nav class="nav-fixed-bottom" ng-if="navShow" role="navigation">
+  <ul class="nav-list flexbox">
+    <li class="cell selected">
+      <a href="#">
+        <i class="icon icon-home"></i>
+        <p class="nav-txt">首页</p>
+      </a>
+    </li>
+    <li class="cell">
+      <a href="#">
+        <i class="icon icon-cart"></i>
+        <p class="nav-txt">购物车</p>
+      </a>
+    </li>
+    <li class="cell">
+      <a href="#">
+        <i class="icon icon-product-class"></i>
+        <p class="nav-txt">分类</p>
+      </a>
+    </li>
+    <li class="cell">
+      <a href="#">
+        <i class="icon icon-personal"></i>
+        <p class="nav-txt">我的</p>
+      </a>
+    </li>
+  </ul>
+</nav>
+<!-- END footer-nav -->
+</body>
+
+<!--############JS引用区############-->
+<script src="/AndSell/h5/public/libs/angular/angular.min.js"></script>
+<script src="/AndSell/h5/public/libs/angular/angular-sanitize.js"></script>
+<script src="/AndSell/h5/public/libs/angular/weui.js"></script>
+<script src="/AndSell/h5/public/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="/AndSell/h5/public/libs/angular-resource/angular-resource.min.js"></script>
+<script src="/AndSell/h5/public/libs/jquery/dist/jquery.min.js"></script>
+<script src="/AndSell/h5/public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/AndSell/h5/public/libs/weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="/AndSell/h5/public/libs/weui/dist/js/jquery-weui.min.js"></script>
+<script src="/AndSell/h5/public/libs/cookie.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+
+<!--importantJs -->
+<script src="/AndSell/h5/public/application.js"></script>
+<!--############通用方法区############-->
+<script src="/AndSell/h5/public/commonJs.js"> </script>
+
+
+<!--############ router ############-->
+<script src="router.js"> </script>
+
+
+<!--############ service ############-->
+<script src="../product/product-services.js"></script>
+
+
+<!--############ controller ############-->
+<script src="controller.js"> </script>
+<script src="../home/controller.js"> </script>
+<script src="../product/detail/controller.js"> </script>
+<script src="../cart/controller.js"> </script>
+
+
+</html>
