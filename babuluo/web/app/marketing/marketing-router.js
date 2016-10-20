@@ -7,7 +7,7 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("couponRule", {
             url: "/couponRule",
-            templateUrl: "/AndSell/app/marketing/coupon/ruleList/index.html",
+            templateUrl: "/AndSell/app/marketing/coupon/rule/ruleList/index.html",
             controller: "ruleListController"
         })
         .state("salesAdd", {
@@ -15,5 +15,10 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             params: {id: 0},
             templateUrl: "/AndSell/app/marketing/sales/salesAdd/index.html",
             controller: "salesAddController"
+        })
+        .state("bannerPosition", {
+            url: "/bannerPosition",
+            templateUrl: "/AndSell/app/marketing/banner/banner_position/index.html",
+            controller: "bannerPosController"
         })
 });
