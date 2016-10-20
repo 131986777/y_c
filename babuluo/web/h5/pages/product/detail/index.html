@@ -1,0 +1,141 @@
+<div class="bg-grey product-detail-page nav-bottom" ng-init="initData()">
+  <!-- BEGIN 商品详情图片 -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <!-- Slides -->
+      <div class="swiper-slide">Slide 1</div>
+      <div class="swiper-slide">Slide 2</div>
+      <div class="swiper-slide">Slide 3</div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+  <!-- END 商品详情图片 -->
+
+  <div class="weui_cells">
+    <div class="weui_cell">
+      <div class="basic-info weui_cell_bd weui_cell_primary">
+        <h4 class="name" ng-bind="product['SHOP_PRODUCT.PRD_NAME']">
+        </h4>
+        <p class="feature" ng-bind="product['SHOP_PRODUCT.SALES_TITLE']">
+        </p>
+        <p class="money">
+          <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
+                ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
+        <div ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']==undefined" class="money">
+        <span
+            ng-bind="skuData.minPrice | currency :'￥'"></span> -
+        <span
+            ng-bind="skuData.maxPrice | currency :'￥'"></span>
+
+        </div>
+        </p>
+        <p class="code" ng-bind="'商品编码 ：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
+        </p>
+      </div>
+    </div>
+    <div class="sale-info weui_cell">
+      <div class="weui_cell_hd">
+        促销信息:
+      </div>
+      <div class="weui_cell_bd weui_cell_primary">
+        <span class="label label-default">满减</span>
+        满200减20
+      </div>
+    </div>
+  </div>
+
+  <div class="weui_cells">
+
+    <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>0">
+      <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']+' : '"></div>
+      <div class="sku-list label-group weui_cell_bd">
+        <span class="sku-label {{currSkuSelectClassMap[1][item]}} label-outline"
+              ng-class="{true:'selected'}[currSkuContentSelectMap.name1==item]"
+              ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1']"
+              ng-click="checkContent(1,item)"
+              ng-bind="item"></span>
+      </div>
+    </div>
+
+    <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>1">
+      <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME2']+' : '"></div>
+      <div class="sku-list label-group weui_cell_bd">
+        <span class="sku-label  {{currSkuSelectClassMap[2][item]}} label-outline"
+              ng-class=" { true :'selected'}[currSkuContentSelectMap.name2==item] "
+              ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT2']"
+              ng-click="checkContent(2,item)"
+              ng-bind="item"></span>
+      </div>
+    </div>
+
+    <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>2">
+      <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']+' : '"></div>
+
+      <div class="sku-list label-group weui_cell_bd">
+        <span class="sku-label  {{currSkuSelectClassMap[3][item]}} label-outline"
+              ng-class=" { true :'selected'}[currSkuContentSelectMap.name3==item] "
+              ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT3']"
+              ng-click="checkContent(3,item)"
+              ng-bind="item"></span>
+      </div>
+    </div>
+
+
+    <div class="weui_cell">
+      <div class="weui_cell_hd">
+        数量：
+      </div>
+      <div class="weui_cell_bd">
+        <div class="product-num-wrap input-group">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="lessSize()">
+                      -
+                    </button>
+                </span>
+          <input class="form-control text-center" disabled="" type="text" ng-model="skuSize" ng-init="skuSize=1">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="skuSize=skuSize+1">
+                      +
+                    </button>
+                </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="weui_tab tab-default">
+    <div class="weui_navbar">
+      <a class="weui_navbar_item weui_bar_item_on" href="#tab1">
+        商品详情
+      </a>
+      <a class="weui_navbar_item" href="#tab2">
+        规格参数
+      </a>
+    </div>
+    <div class="weui_tab_bd">
+      <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
+        <span ng-bind-html="product['SHOP_PRODUCT.SHOP_DES']"></span>
+      </div>
+      <div id="tab2" class="weui_tab_bd_item">
+        <h1 class="doc-head">通讯录</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="product-action-wrap action-bar-wrap">
+    <div class="action-bar border-top">
+      <div class="icon-wrap">
+        <i class="icon icon-cart-small" ui-sref="cart"></i>
+        购物车
+      </div>
+      <div class="icon-wrap">
+        <!-- 已收藏 class="icon-collected" -->
+        <i class="icon icon-collect"></i>
+        收藏
+      </div>
+      <a class="add-to-cart cell" ng-click="addToCart()">
+        加入购物车
+      </a>
+    </div>
+  </div>
+</div>
