@@ -112,7 +112,7 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
         }
     }
 
-    // 根绝已选的规格 过滤剩余的sku列表
+    // 根据已选的规格 过滤剩余的sku列表
     $scope.filterSkuList = function () {
         var list = new Array;
         $scope.skuList.forEach(function (ele) {
