@@ -1,12 +1,12 @@
 AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
-        .state("salesList", {
-            url: "/salesList",
+        .state("salesRule", {
+            url: "/salesRule",
             templateUrl: "/AndSell/app/marketing/sales/salesList/index.html",
             controller: "salesListController"
         })
-        .state("couponList", {
-            url: "/couponList",
+        .state("couponRule", {
+            url: "/couponRule",
             templateUrl: "/AndSell/app/marketing/coupon/ruleList/index.html",
             controller: "ruleListController"
         })
