@@ -1,5 +1,5 @@
 
-AndSellMainModule.controller('ruleListController', function ($scope, $stateParams, couponFactory, modalFactory) {
+AndSellMainModule.controller('couponRuleListController', function ($scope, $stateParams, couponFactory, modalFactory) {
 
   modalFactory.setTitle('优惠券规则列表');
 
