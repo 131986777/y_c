@@ -1,0 +1,368 @@
+<div class="page-content">
+
+
+    <div class="col-md-12">
+        <div class="page-operation-wrap">
+            <div class="row">
+                <div class="col-md-1" >
+                    <select ng-model="filter['BANNER.POSITION']"
+                            ng-init="filter['BANNER.POSITION']=''"
+                            ng-options="item['BANNER_POSITION.ID'] as item['BANNER_POSITION.NAME'] for item in positionList "
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="">
+                            <!--ng-options="store.id as store.name for store in storeList"-->
+                            所属位置
+                        </option>
+                    </select>
+                </div> <!-- select-center  -->
+
+                <div class="col-md-11 text-right">
+                    <a show-modal id="#addBanner" class="btn sbold green">
+                        <i class="fa fa-plus"></i>新增横幅
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table-scrollable">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                    <th class="col-md-1">横幅名称</th>
+                    <th class="col-md-1">横幅描述</th>
+                    <th class="col-md-2">横幅位置</th>
+                    <th class="col-md-1 text-center"> 操作</th>
+                </tr>
+                </thead>
+                <tbody ng-cloak>
+                <tr ng-repeat="item in bannerList">
+                    <td>
+                        <span ng-bind="item['BANNER.NAME']"></span>
+                        <span ng-show="item['BANNER.STATE']==-1" style="color: red">(已停用)</span>
+                    </td><!--横幅名称-->
+                    <td ng-bind="item['BANNER.INTRO']"></td> <!--规则描述-->
+                    <td ng-bind="positionMap[item['BANNER.POSITION_ID']]"></td> <!--横幅位置-->
+                    <td class="text-center">
+                        <!--<a show-modal id="#couponDetail" class="btn sbold green" ng-click="detailClick(item)">明细</a>-->
+                        <a show-modal id="#modBanner" ng-click="modifyClick(item)">修改</a>
+                        <a show-modal ng-click="delBanner(item)">删除</a>
+                        <a show-modal ng-if="item['BANNER.STATE']==1" ng-click="stopBanner(item)">停用</a>
+                        <a show-modal ng-if="item['BANNER.STATE']==-1" ng-click="stopBanner(item)">启用</a>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div page-bar
+         filter-obj="filter"
+         url="/banner/banner/queryAll"
+         callback="bindData(response)">
+    </div>
+</div>
+
+<!--BEGIN 新增横幅-->
+<div class="modal fade text-left" id="addBanner" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">添加横幅</h4>
+            </div>
+            <div class="modal-body form-body text-right">
+
+                <form class="form-horizontal">
+
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> * </span>横幅名称
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['BANNER.NAME']"
+                                   ng-init="add['BANNER.NAME']=''"
+                                   placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            横幅描述
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['BANNER.INTRO']"
+                                   ng-init="add['BANNER.INTRO']=''"
+                                   placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            横幅位置
+                        </label>
+
+                        <div class="col-md-8">
+                            <select ng-model="add['BANNER.POSITION_ID']"
+                                    ng-init="add['BANNER.POSITION_ID']=''"
+                                    class="nya-bs-select form-control"
+                                    ng-options="item['BANNER_POSITION.ID'] as item['BANNER_POSITION.NAME'] for item in positionList ">
+                                <option class="nya-bs-option" value="">选择横幅位置</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                           图片
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['BANNER.PICTURE']"
+                                   ng-init="add['BANNER.PICTURE']=''"
+                                   placeholder="请输入图片路径"></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            链接
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['BANNER.URL']"
+                                   ng-init="add['BANNER.URL']=''"
+                                   placeholder="请输入超链接的URL">
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label class="col-md-3 control-label">
+                           开始时间
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['BANNER.BEGIN_DATETIME']"
+                                   ng-init="add['BANNER.BEGIN_DATETIME']=''"
+                                   placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label class="col-md-3 control-label">
+                            结束时间
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['BANNER.END_DATETIME']"
+                                   ng-init="add['BANNER.END_DATETIME']=''"
+                                   placeholder="">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="addBannerInfo()" class="btn green">确定
+                </button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 新增横幅-->
+<!--BEGIN 修改横幅-->
+<div class="modal fade text-left" id="modBanner" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">修改横幅信息</h4>
+            </div>
+            <div class="modal-body form-body text-right">
+
+                <form class="form-horizontal">
+
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> * </span>横幅名称
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['BANNER.NAME']">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            横幅描述
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['BANNER.INTRO']">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            横幅位置
+                        </label>
+
+                        <div class="col-md-8">
+                            <select ng-model="mod['BANNER.POSITION_ID']"
+                                    class="nya-bs-select form-control"
+                                    ng-options="item['BANNER_POSITION.ID'] as item['BANNER_POSITION.NAME'] for item in positionList ">
+                                <option class="nya-bs-option" value="">选择横幅位置</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            图片
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['BANNER.PICTURE']">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            链接
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['BANNER.URL']">
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label class="col-md-3 control-label">
+                            开始时间
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['BANNER.BEGIN_DATETIME']|FormatAllDate">
+                        </div>
+                    </div>
+                    <div class="form-group row" >
+                        <label class="col-md-3 control-label">
+                            结束时间
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['BANNER.END_DATETIME']|FormatAllDate">
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="modBannerInfo()" class="btn green">确定
+                </button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 修改横幅-->
+
+
+<!--BEGIN 优惠规则详情-->
+<div class="modal fade text-left" id="couponDetail" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">优惠规则详情</h4>
+            </div>
+
+            <div class="modal-body  text-left">
+
+                <div class="form-group row">
+                    <label class="col-md-3">
+                        优惠规则名称：
+                    </label>
+                    <span>{{detail['BANNER.NAME']}}</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        优惠规则类型:
+                    </label>
+                    <span ng-if="detail['BANNER.TYPE']==1">减价</span> <!--横幅类型-减-->
+                    <span ng-if="detail['BANNER.TYPE']==2">打折</span> <!--横幅类型-折-->
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        优惠规则描述:
+                    </label>
+                    <span ng-bind="detail['BANNER.INTRO']"></span> <!--规则描述-->
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>面值:</span>
+                    </label>
+                    <span ng-if="detail['BANNER.TYPE']==1">{{(detail['BANNER.FACE_VALUE']/100).toFixed(2)}}元</span>
+                    <span ng-if="detail['BANNER.TYPE']==2">{{(detail['BANNER.FACE_VALUE']/10).toFixed(1)}}折</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>使用门槛：</span>
+                    </label>
+                    <span ng-if="detail['BANNER.CONDITION_PRICE']>0">订单满{{(detail['BANNER.CONDITION_PRICE']/100).toFixed(2)}}元使用</span>
+                </div>
+                <div class="form-group row" ng-if="detail['BANNER.TYPE']==2">
+                    <label class="col-md-3 control-label">
+                        <span>最高抵扣：</span>
+                    </label>
+                    <span>{{(detail['BANNER.MAX_PRICE_LIMIT']/100).toFixed(2)}}元</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>每人限领：</span>
+                    </label>
+                    <span>{{detail['BANNER.EACH_MEMBER_LIMIT']}}张</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>状态：</span>
+                    </label>
+                    <span ng-if="detail['BANNER.STATE']==1">可用</span>
+                    <span ng-if="detail['BANNER.STATE']==2">不可用</span>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span>添加时间：</span>
+                    </label>
+                    <span>{{detail['BANNER.ADD_DATIME']|FormatAllDate}}</span>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">确定
+                </button>
+            </div>
+
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 优惠规则详情-->
