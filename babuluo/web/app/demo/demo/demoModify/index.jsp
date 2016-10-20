@@ -4,7 +4,7 @@
         <a show-modal id="#classSwitchModal"> class </a>
         <a show-modal id="#tagSwitchModal"> tag </a>
         <a show-modal id="#productSwitchModal"> product </a>
-        <a show-modal id="#productItemSwitchModal"> product </a>
+        <a show-modal id="#productItemSwitchModal"> product Item </a>
 
         <%--方法名可以随便写 参数必须为data--%>
         <class-switch-modal callback="classSwitch(data)"></class-switch-modal>
