@@ -101,4 +101,16 @@ AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, pr
         $scope.updateCartPrice();
     }
 
+    //结算
+    $scope.addOrder= function () {
+        var list=new Array;
+        $scope.skuList.forEach(function (ele) {
+            if(ele.isSelect){
+                list.push(ele['SHOP_PRODUCT_SKU.SKU_ID']);
+            }
+        });
+        console.log(list);
+        $state.go('order-add',{ SKU_IDS:list.toString()});
+    }
+
 });
