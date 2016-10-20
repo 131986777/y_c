@@ -1,6 +1,9 @@
 AndSellMainModule.controller('salesAddController', function ($scope,$http, $stateParams, salesFactory, modalFactory) {
     modalFactory.setBottom(true);
 
+
+
+
     $scope.memberId = $stateParams.id;
 
     /*function loadInputData(form){

@@ -30,6 +30,8 @@
                         <span ng-show="salesInfo['SALES.SALE_TARGET']==1">订单</span>
                         <span ng-show="salesInfo['SALES.SALE_TARGET']==2">商品</span>
                     </td>
+
+
                     <td ng-bind="salesInfo['SALES.INTRO']"></td>
                     <td ng-bind="salesInfo['SALES.ADD_DATETIME'] | FormatAllDate"></td>
                     <td ng-bind="salesInfo['SALES.STATE'] | FormatState"></td>
