@@ -1,7 +1,7 @@
 
-AndSellMainModule.controller('couponTypeController', function ($scope, $stateParams, couponFactory, modalFactory) {
+AndSellMainModule.controller('couponAddController', function ($scope, $stateParams, couponFactory, modalFactory) {
 
-  modalFactory.setTitle('促销管理');
+  modalFactory.setTitle('注册送券');
 
   $scope.bindData = function (response) {
    // console.log(123456);

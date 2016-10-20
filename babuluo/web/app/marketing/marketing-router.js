@@ -16,9 +16,14 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/marketing/sales/salesAdd/index.html",
             controller: "salesAddController"
         })
-        .state("couponType", {
-            url: "/couponType",
-            templateUrl: "/AndSell/app/marketing/coupon/couponType/index.html",
-            controller: "couponTypeController"
+        .state("salesManage", {
+            url: "/salesManage",
+            templateUrl: "/AndSell/app/marketing/sales/salesManage/index.html",
+            controller: "salesManageController"
+        })
+        .state("couponAdd", {
+            url: "/couponAdd",
+            templateUrl: "/AndSell/app/marketing/coupon/couponAdd/index.html",
+            controller: "couponAddController"
         })
 });
