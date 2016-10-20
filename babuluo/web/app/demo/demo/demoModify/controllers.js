@@ -12,12 +12,17 @@ AndSellMainModule.controller('ModifyDemoController', function ($scope, $state, $
     }
 
     $scope.tagSwitch= function (data) {
-        console.log('class switch');
+        console.log('tag switch');
         console.log(data);
     }
 
     $scope.prdSwitch= function (data) {
-        console.log('class switch');
+        console.log('prd switch');
+        console.log(data);
+    }
+
+    $scope.prdItemSwitch= function (data) {
+        console.log('prd item switch');
         console.log(data);
     }
 
