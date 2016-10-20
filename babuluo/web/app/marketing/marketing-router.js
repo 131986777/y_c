@@ -16,4 +16,9 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/marketing/sales/salesAdd/index.html",
             controller: "salesAddController"
         })
+        .state("bannerPosition", {
+            url: "/bannerPosition",
+            templateUrl: "/AndSell/app/marketing/banner/banner_position/index.html",
+            controller: "bannerPosController"
+        })
 });
