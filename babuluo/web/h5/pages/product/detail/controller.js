@@ -36,8 +36,9 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
             if (minPrice == 0 || minPrice > ele['SHOP_PRODUCT_SKU.REAL_PRICES']) {
                 minPrice = ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
             }
-            if (maxPrice == 0 || maxPrice < ele['SHOP_PRODUCT_SKU.REAL_PRICES'])
+            if (maxPrice == 0 || maxPrice < ele['SHOP_PRODUCT_SKU.REAL_PRICES']) {
                 maxPrice = ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
+            }
         });
         $scope.skuData.minPrice = minPrice;
         $scope.skuData.maxPrice = maxPrice;
@@ -186,16 +187,18 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
     $scope.skuSelectable = function () {
         var currSkuData = $scope.getPrdSkuData($scope.currSkuList);
         [1, 2, 3].forEach(function (index) {
-            $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT' + index].forEach(function (e) {
-                if ($scope.currSkuContentSelectMap['name' + index]
-                    == ''
-                    && currSkuData['SHOP_PRODUCT_SKU.SKU_CONTENT' + index].indexOf(e)
-                    < 0) {
-                    $scope.currSkuSelectClassMap[index][e] = cannotSelectCLass; //danger
-                } else {
-                    $scope.currSkuSelectClassMap[index][e] = ''; //danger
-                }
-            })
+            if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT' + index] != undefined) {
+                $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT' + index].forEach(function (e) {
+                    if ($scope.currSkuContentSelectMap['name' + index]
+                        == ''
+                        && currSkuData['SHOP_PRODUCT_SKU.SKU_CONTENT' + index].indexOf(e)
+                        < 0) {
+                        $scope.currSkuSelectClassMap[index][e] = cannotSelectCLass; //danger
+                    } else {
+                        $scope.currSkuSelectClassMap[index][e] = ''; //danger
+                    }
+                })
+            }
         });
     }
 
