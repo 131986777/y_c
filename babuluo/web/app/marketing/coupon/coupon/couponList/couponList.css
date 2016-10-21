@@ -45,22 +45,22 @@
     margin-right: 10px;
 }
 .coupon-wrap .buttons .note{
-    background: url(../../../components/images/index_06.png) no-repeat left center;
+    background: url(../../../../components/images/index_06.png) no-repeat left center;
 }
 .coupon-wrap .buttons .stop{
-    background: url(../../../components/images/index_11.png) no-repeat left center;
+    background: url(../../../../components/images/index_11.png) no-repeat left center;
 }
 .coupon-wrap .buttons .del{
-    background: url(../../../components/images/index_08.png) no-repeat left center;
+    background: url(../../../../components/images/index_08.png) no-repeat left center;
 }
 .coupon-wrap .buttons a.note:hover{
-    background: url(../../../components/images/icon_03.png) no-repeat left center;
+    background: url(../../../../components/images/icon_03.png) no-repeat left center;
 }
 .coupon-wrap .buttons a.stop:hover{
-    background: url(../../../components/images/icon_08.png) no-repeat left center;
+    background: url(../../../../components/images/icon_08.png) no-repeat left center;
 }
 .coupon-wrap .buttons a.del:hover{
-    background: url(../../../components/images/icon_05.png) no-repeat left center;
+    background: url(../../../../components/images/icon_05.png) no-repeat left center;
 }
 .coupon-list{
     padding-bottom: 20px;
@@ -77,7 +77,7 @@
 .coupon-content .coupon-head{
     color: #fff;
     height: 106px;
-    background: url(../../../components/images/coupon_01.png) no-repeat left center;
+    background: url(../../../../components/images/coupon_01.png) no-repeat left center;
 }
 .coupon-content .coupon-info,.coupon-content .coupon-desc{
     width: 390px;

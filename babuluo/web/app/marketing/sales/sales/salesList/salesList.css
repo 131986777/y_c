@@ -1,15 +1,15 @@
 .promotion-list{
-    width: 910px;
+    width: 815px;
     margin: 0 auto;
     padding-top: 30px;
 }
 .promotion-contain{
     border:1px solid rgb(192,192,192);
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     border-radius: 10px;
 }
 .promotion-wrap{
-    width: 840px;
+    width: 735px;
     margin: 0 auto;
     position: relative;
 }
@@ -18,7 +18,7 @@
     border-bottom: 1px solid rgb(229,231,233);
 }
 .promotion-head .head-title{
-    width: 696px;
+    width: 625px;
     margin: 0 auto;
     padding-top: 18px;
 }
@@ -49,26 +49,26 @@
     margin-right: 10px;
 }
 .promotion-head .buttons .note{
-    background: url(../../../components/images/index_06.png) no-repeat left center;
+    background: url(../../../../components/images/index_06.png) no-repeat left center;
 }
 .promotion-head .buttons .stop{
-    background: url(../../../components/images/index_11.png) no-repeat left center;
+    background: url(../../../../components/images/index_11.png) no-repeat left center;
 }
 .promotion-head .buttons .del{
-    background: url(../../../components/images/index_08.png) no-repeat left center;
+    background: url(../../../../components/images/index_08.png) no-repeat left center;
 }
 .promotion-head .buttons a.note:hover{
-    background: url(../../../components/images/icon_03.png) no-repeat left center;
+    background: url(../../../../components/images/icon_03.png) no-repeat left center;
 }
 .promotion-head .buttons a.stop:hover{
-    background: url(../../../components/images/icon_08.png) no-repeat left center;
+    background: url(../../../../components/images/icon_08.png) no-repeat left center;
 }
 .promotion-head .buttons a.del:hover{
-    background: url(../../../components/images/icon_05.png) no-repeat left center;
+    background: url(../../../../components/images/icon_05.png) no-repeat left center;
 }
 .promotion-content{
     position: relative;
-    padding-bottom: 50px;
+    padding-bottom: 20px;
     border-bottom: 1px solid rgb(229,231,233);
 }
 .promotion-content .addItem{
@@ -78,14 +78,17 @@
     background-color: rgb(17,136,255);
     color: #fff;
 }
+.promotion-wrap .buy-list{
+    padding-top: 13px;
+}
 .promotion-content .buy-text{
     font-size: 23px;
     position: absolute;
-    left: 130px;
-    top: 20px;
+    left: 95px;
+    top: 24px;
 }
 .promotion-content .buy-content,.promotion-footer{
-    padding-top: 23px;
+    padding-top: 16px;
     width: 472px;
     margin: 0 auto;
 }
@@ -116,7 +119,7 @@
 }
 .promotion-footer{
     position: relative;
-    padding-bottom: 56px;
+    padding-bottom: 20px;
 }
 .promotion-footer .man-text span{
     padding: 0 9px 0;
@@ -124,13 +127,12 @@
 .promotion-footer .zeng-text{
     position: absolute;
     left: 0;
-    top: 80px;
+    top: 60px;
     font-size: 16px;
 }
 .promotion-footer .man-content{
     width: 340px;
     margin: 0 auto;
-    margin-top: 20px;
 }
 .promotion-footer .zeng-text span{
     margin-left: 14px;

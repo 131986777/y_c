@@ -1,5 +1,5 @@
 
-AndSellMainModule.controller('salesManageController', function ($scope, $stateParams, salesFactory, modalFactory) {
+AndSellMainModule.controller('salesListController', function ($scope, $stateParams, salesFactory, modalFactory) {
 
   modalFactory.setTitle('促销管理');
 

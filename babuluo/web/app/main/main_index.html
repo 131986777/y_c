@@ -43,7 +43,8 @@
     <link href="/AndSell/app/card/card/cardType/cardType.css" rel="stylesheet">
     <link href="/AndSell/app/order/order/orderList/orderList.css" rel="stylesheet">
     <link href="/AndSell/app/order/order/orderDetail/orderDetail.css" rel="stylesheet">
-    <link href="/AndSell/app/marketing/coupon/couponType/couponType.css" rel="stylesheet">
+    <link href="/AndSell/app/marketing/coupon/coupon/couponList/couponList.css" rel="stylesheet">
+    <link href="/AndSell/app/marketing/sales/sales/salesList/salesList.css" rel="stylesheet">
 
 
 </head>
@@ -325,12 +326,12 @@
                     <div class="sub-menu-wrap sub-menu-3 dropdown-menu">
                         <ul class="sub-menu " role="menu">
                             <li>
-                                <a>
+                                <a ui-sref="salesList">
                                     交易促销
                                 </a>
                             </li>
                             <li>
-                                <a>
+                                <a ui-sref="couponList">
                                     优惠券
                                 </a>
                             </li>
@@ -575,9 +576,10 @@
 <script src="/AndSell/app/stock/totalStock/totalStockList/controllers.js"></script><!--总库存-->
 <script src="/AndSell/app/stock/store/storeList/controllers.js"></script><!--仓库列表-->
 <script src="/AndSell/app/marketing/coupon/rule/ruleList/controllers.js"></script><!--优惠券列表-->
-<script src="/AndSell/app/marketing/coupon/couponType/controllers.js"></script><!--促销管理-->
-<script src="/AndSell/app/marketing/sales/salesList/controllers.js"></script><!--促销列表-->
-<script src="/AndSell/app/marketing/sales/salesAdd/controllers.js"></script><!--促销列表-->
+<script src="/AndSell/app/marketing/coupon/coupon/couponList/controllers.js"></script><!--优惠券列表-->
+<script src="/AndSell/app/marketing/sales/rule/ruleList/controllers.js"></script><!--促销列表-->
+<script src="/AndSell/app/marketing/sales/rule/ruleAdd/controllers.js"></script><!--促销列表-->
+<script src="/AndSell/app/marketing/sales/sales/salesList/controllers.js"></script><!--促销列表-->
 <script src="/AndSell/app/marketing/banner/banner_position/controllers.js"></script><!--横幅位置-->
 <script src="/AndSell/app/point/point/pointList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/balance/balance/balanceList/controllers.js"></script><!--demoList 示例使用-->
