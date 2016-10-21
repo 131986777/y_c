@@ -18,13 +18,11 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("couponList", {
             url: "/couponList",
-            params: {id: 0},
             templateUrl: "/AndSell/app/marketing/coupon/coupon/couponList/index.html",
             controller: "couponListController"
         })
         .state("salesList", {
             url: "/salesList",
-            params: {id: 0},
             templateUrl: "/AndSell/app/marketing/sales/sales/salesList/index.html",
             controller: "salesListController"
         })
