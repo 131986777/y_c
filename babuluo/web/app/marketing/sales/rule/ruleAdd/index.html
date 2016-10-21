@@ -1,4 +1,4 @@
-<div class="page-content">
+<div class="page-content" >
     <form class="form-horizontal">
         <div class="form-group">
             <label  class="col-sm-1 control-label">名称：</label>
@@ -16,30 +16,28 @@
             <div class="col-sm-offset-1 col-sm-10">
                 <div class=" pull-left">
                     <label class="checkbox">
-                        <input id="meiman" type="checkbox" ng-model="salesInfo['SALES.INTRO']">每满
+                        <input id="meiman" type="checkbox" ng-model="salesInfo['SALES.CONDITION_TYPE']">每满
                     </label>
                 </div>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" >
             <div class="col-sm-1">规则：</div>
-
-            <div class="manjian-ruler col-sm-8">
+                <div class="manjian-ruler col-sm-8" >
 
                 <!-- 满减 -->
                 <div class="manjian radio">
                     <label>
-                        <input type="radio" name="promation" id="promation1" value="option1" checked="checked">
+                        <input type="radio" name="promation" id="promation1"  value="1" ng-model="salesInfo['SALES.SALE_TYPE']" checked>
                         满减
                     </label>
-                    <div class="content">
+                    <div class="content hidden">
                         <div class="detailBox">
-                            <div class="template hidden">
-                                订单金额满￥<input class="" type="text">，立减￥<input type="text" name=""><a class="itemDel">删除</a>
+                            <div class="detai ">
+                                订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >，立减￥
+                                         <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']">
                             </div>
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text">，立减￥<input type="text" name="">
-                            </div>
+
                         </div>
                         <a class="addItem" href="javascript:;">+添加区间</a>
                     </div>
@@ -48,7 +46,7 @@
                 <!-- 满折 -->
                 <div class="manzhe radio">
                     <label>
-                        <input type="radio" name="promation"  value="option2">
+                        <input type="radio" name="promation"  value="2" value="1" ng-model="salesInfo['SALES.SALE_TYPE']">
                         满折
                     </label>
                     <div class="content hidden">
@@ -57,7 +55,8 @@
                                 订单金额满￥<input class="" type="text">，打<input type="text" name="">折<a class="itemDel">删除</a>
                             </div>
                             <div class="detail">
-                                订单金额满￥<input class="" type="text">，打<input type="text" name="">折
+                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
+                                        打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT1']">折
                             </div>
                         </div>
                         <a class="addItem" href="javascript:;">+添加区间</a>
@@ -68,17 +67,21 @@
                 <!-- 满赠（商品） -->
                 <div class="manzeng-product radio">
                     <label>
-                        <input type="radio" name="promation"  value="option3">
+                        <input type="radio" name="promation"  value="3" ng-model="salesInfo['SALES.SALE_TYPE']">
                         满赠（商品）
                     </label>
                     <div class="content hidden">
                         <div class="detailBox">
-                            <div class="template hidden">
-                                订单金额满￥<input class="" type="text">，获赠品<span><a href="#">（选择赠送商品）</a></span><input type="text" name="">件
-                                <a class="itemDel">删除</a>
-                            </div>
                             <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠品<span><a href="#">（选择赠送商品）</a></span><input type="text" name="">件
+                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM']">件
+                                    <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
+                            </div>
+
+                            <div class="template hidden">
+                                订单金额满￥<input class="" type="text">，获赠品  <span><a href="#" > </a>{{productname}}</a></span><input type="text" name="">件
+                                <a class="itemDel">删除</a>
                             </div>
                         </div>
                         <a class="addItem" href="javascript:;">+添加区间</a>
@@ -86,10 +89,10 @@
                 </div>
 
 
-
+                <!-- 满赠（优惠券） -->
                 <div class="manzeng-ticket radio">
                     <label>
-                        <input type="radio" name="promation"  value="option4">
+                        <input type="radio" name="promation"  value="4" ng-model="salesInfo['SALES.SALE_TYPE']">
                         满赠（优惠券）
                     </label>
                     <div class="content hidden">
@@ -108,9 +111,7 @@
                     </div>
                 </div>
             </div>
-
-
-            <div class="meimanjian-ruler col-sm-8 hidden">
+                <div class="meimanjian-ruler col-sm-8 hidden">
 
                 <!-- 满减 -->
                 <div class="manjian radio">
@@ -183,10 +184,6 @@
                 </div>
             </div>
         </div>
-</div>
-</form>
-</div>
 
-
-
+    </form>
 </div>
