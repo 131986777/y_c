@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group" >
+        <div class="form-group" ng-show="memberId==1">
             <div class="col-sm-1">规则：</div>
                 <div class="manjian-ruler col-sm-8" >
 
@@ -37,36 +37,7 @@
                                 订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >，立减￥
                                          <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']">
                             </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detai ">
-                                订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >，立减￥
-                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']"><a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detai ">
-                                订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >，立减￥
-                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']"><a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detai ">
-                                订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >，立减￥
-                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']"><a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detai ">
-                                订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >，立减￥
-                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']"><a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detai ">
-                                订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >，立减￥
-                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']"><a class="itemDel">删除</a>
-                            </div>
+
                         </div>
                         <a class="addItem" href="javascript:;">+添加区间</a>
                     </div>
@@ -80,39 +51,12 @@
                     </label>
                     <div class="content hidden">
                         <div class="detailBox">
+                            <div class="template hidden">
+                                订单金额满￥<input class="" type="text">，打<input type="text" name="">折<a class="itemDel">删除</a>
+                            </div>
                             <div class="detail">
                                 订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
                                         打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT1']">折
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                             <div class="detail">
-                                 订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
-                                打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT1']">折<a class="itemDel">删除</a>
-                             </div>
-                         </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
-                                打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT1']">折<a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
-                                打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT1']">折<a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
-                                打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT1']">折<a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
-                                打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT1']">折<a class="itemDel">删除</a>
                             </div>
                         </div>
                         <a class="addItem" href="javascript:;">+添加区间</a>
@@ -134,49 +78,9 @@
                                 <input type="text" name="" ng-model="salesInfo['SALES.PRONUM']">件
                                     <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
                             </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
-                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
-                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM']">件
-                                <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
-                                <a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
-                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
-                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM']">件
-                                <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
-                                <a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
-                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
-                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM']">件
-                                <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
-                                <a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
-                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
-                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM']">件
-                                <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
-                                <a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
-                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
-                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM']">件
-                                <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
+
+                            <div class="template hidden">
+                                订单金额满￥<input class="" type="text">，获赠品  <span><a href="#" > </a>{{productname}}</a></span><input type="text" name="">件
                                 <a class="itemDel">删除</a>
                             </div>
                         </div>
@@ -193,40 +97,16 @@
                     </label>
                     <div class="content hidden">
                         <div class="detailBox">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                            <div class="template hidden">
+                                订单金额满￥<input class="" type="text">，获赠优惠券<input type="text" name="">张。
+                                <span><a href="#">（选择赠送优惠券）</a></span>
                                 <a class="itemDel">删除</a>
                             </div>
-                        </div>
-                        <div class="detailBox hidden">
                             <div class="detail">
                                 订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
-                                <a class="itemDel">删除</a>
                             </div>
                         </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
-                                <a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
-                                <a class="itemDel">删除</a>
-                            </div>
-                        </div>
-                        <div class="detailBox hidden">
-                            <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
-                                <a class="itemDel">删除</a>
-                            </div>
-                        </div>
+
                         <a class="addItem" href="javascript:;">+添加区间</a>
                     </div>
                 </div>
@@ -304,6 +184,5 @@
                 </div>
             </div>
         </div>
-
     </form>
 </div>

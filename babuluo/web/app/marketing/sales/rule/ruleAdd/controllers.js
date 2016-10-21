@@ -19,23 +19,27 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
 
     //设置页面Bottom触发事件
     modalFactory.setBottom(true, function () {
-        //if ($scope.salesInfo['SALES.NAME'] == undefined ||salesInfo['SALES.INTRO']) {
-            //modalFactory.showAlert("请填写完整信息");
-            //return;
-        //}
-        //else{
-        var form = $scope.bindData($scope.salesInfo);
-        console.log($scope.salesInfo);
-        salesFactory.AddSales (form).get({}, function (response) {
+        if ($scope.salesInfo['SALES.NAME'] == undefined ||$scope.salesInfo['SALES.INTRO'] == undefined) {
+            modalFactory.showAlert("请填写完整信息");
+            return;
+        }
+        else{
+            var form = $scope.bindData($scope.salesInfo);
+            salesFactory.AddSales (form).get({}, function (response) {
                 if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
                     modalFactory.showShortAlert(response.msg);
                 } else if (response.extraData.state == 'true') {
                     modalFactory.showShortAlert("保存成功");
+                    $scope.empty();
                     $scope.$broadcast('pageBar.reload');
                 }
             });
-        //}
+        }
     });
+    
+    $scope.empty = function () {
+        $scope.salesInfo = {};
+}
 
     $scope.prdItemSwitch= function (data) {
         $scope.product = data['SHOP_PRODUCT_SKU.PRD_ID'];
@@ -47,10 +51,12 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
                 if($('#meiman').is(":checked")){
                     $('.meimanjian-ruler').removeClass('hidden');
                     $('.manjian-ruler').addClass('hidden');
+                    $scope.empty();
                 }
                 else{
                     $('.meimanjian-ruler').addClass('hidden');
                     $('.manjian-ruler').removeClass('hidden');
+                    $scope.empty();
                 }
             }
         );
@@ -81,5 +87,6 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
                 $('.content').children('.addItem').removeClass('hidden');
             }
         });
+
     })
 });
