@@ -6,7 +6,6 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
     $scope.bindData = function(form){
         form['SALES.PROID'] = $scope.product;
         if(form['SALES.SALE_TYPE'] ==3||form['SALES.SALE_TYPE'] ==4){
-            form['SALES.SALE_CONTENT1'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
                                              +'"Num"'+':'+form['SALES.PRONUM']+'}';
         }
         if(form['SALES.CONDITION_TYPE'] ==true){
@@ -67,14 +66,20 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
 
         $('.addItem').on("click",function(){
             var a = $(this).parents('.content'),
-                b = a.find('.template').clone();
-            b.removeClass("template hidden").addClass("detail");
-            var c = a.find('.detailBox');
-            c.append(b);
-            $('.itemDel').on('click',function(){
-                $(this).parents('.detail').remove();
-
-            });
+                b = a.find('.hidden');
+            if(b.length==1){
+                b.eq(0).removeClass('hidden');
+                $(this).addClass('hidden');
+            }
+            else{
+                b.eq(0).removeClass('hidden');
+            }
+        });
+        $('.itemDel').click(function(){
+            $(this).parents('.detailBox').addClass('hidden');
+            if($(this).parents('.content').find('.hidden').length<6){
+                $('.content').children('.addItem').removeClass('hidden');
+            }
         });
     })
 });
