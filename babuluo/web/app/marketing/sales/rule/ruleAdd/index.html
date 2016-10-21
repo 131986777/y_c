@@ -1,5 +1,5 @@
 <div class="page-content" >
-    <form class="form-horizontal">
+    <form class="form-horizontal" >
         <div class="form-group">
             <label  class="col-sm-1 control-label">名称：</label>
             <div class="col-sm-2">
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="form-group" >
+        <div class="form-group" ng-show="memberId == 1" >
             <div class="col-sm-1">规则：</div>
                 <div class="manjian-ruler col-sm-8" >
 
@@ -280,6 +280,290 @@
                                 订单金额每满￥<input class="" type="text">，获赠品<span><a href="#">（选择赠送商品）</a></span><input type="text" name="">件
                             </div>
                         </div>
+                    </div>
+                </div>
+
+
+
+                <div class="manzeng-ticket radio">
+                    <label>
+                        <input type="radio" name="promation" id="promation4" value="option4">
+                        每满赠（优惠券）
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+
+                            <div class="detail">
+                                订单金额每满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group" ng-show="memberId == 2" >
+            <div class="col-sm-1">规则：</div>
+            <div class="manjian-ruler col-sm-8" >
+
+                <!-- 满减 -->
+                <div class="manjian radio">
+                    <label>
+                        <input type="radio" name="promation" id="promation1"  value="1" ng-model="salesInfo['SALES.SALE_TYPE']" checked>
+                        满减
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+                            <div class="detai ">
+                                购买数量满<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']">
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detai ">
+                                购买数量满<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM2']" >，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT2']"><a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detai ">
+                                购买数量满<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM3']" >，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT3']"><a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detai ">
+                                购买数量满<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM4']" >，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT4']"><a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detai ">
+                                购买数量满<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM5']" >，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT5']"><a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detai ">
+                                购买数量满<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM6']" >，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT6']"><a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <a class="addItem" href="javascript:;">+添加区间</a>
+                    </div>
+                </div>
+
+                <!-- 满折 -->
+                <div class="manzhe radio">
+                    <label>
+                        <input type="radio" name="promation"  value="2" ng-model="salesInfo['SALES.SALE_TYPE']">
+                        满折
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+                            <div class="detail">
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
+                                打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT1']">折
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM2']">，
+                                打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT2']">折<a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM3']">，
+                                打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT3']">折<a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM4']">，
+                                打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT4']">折<a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM5']">，
+                                打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT5']">折<a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM6']">，
+                                打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT6']">折<a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <a class="addItem" href="javascript:;">+添加区间</a>
+                    </div>
+                </div>
+
+
+                <!-- 满赠（商品） -->
+                <div class="manzeng-product radio">
+                    <label>
+                        <input type="radio" name="promation"  value="3" ng-model="salesInfo['SALES.SALE_TYPE']">
+                        满赠（商品）
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+                            <div class="detail">
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM1']">件
+                                <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM2']">，
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM2']">件
+                                <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
+                                <a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM3']">，
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM3']">件
+                                <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
+                                <a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM4']">，
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM4']">件
+                                <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
+                                <a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM5']">，
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM5']">件
+                                <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
+                                <a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM6']">，
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM6']">件
+                                <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
+                                <a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <a class="addItem" href="javascript:;">+添加区间</a>
+                    </div>
+                </div>
+
+
+                <!-- 满赠（优惠券） -->
+                <div class="manzeng-ticket radio">
+                    <label>
+                        <input type="radio" name="promation"  value="4" ng-model="salesInfo['SALES.SALE_TYPE']">
+                        满赠（优惠券）
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+                            <div class="detail">
+                                购买数量满<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                                <a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                                <a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                                <a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                                <a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox hidden">
+                            <div class="detail">
+                                购买数量满<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                                <a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <a class="addItem" href="javascript:;">+添加区间</a>
+                    </div>
+                </div>
+            </div>
+            <div class="meimanjian-ruler col-sm-8 hidden">
+
+                <!-- 满减 -->
+                <div class="manjian radio">
+                    <label>
+                        <input type="radio" name="promation"  value="option1" >
+                        每满减
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+
+                            <div class="detail">
+                                订单金额每满￥<input class="" type="text">，立减￥<input type="text" name="">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 满折 -->
+                <div class="manzhe radio">
+                    <label>
+                        <input type="radio" name="promation"  value="option2">
+                        每满折
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+
+                            <div class="detail">
+                                订单金额每满￥<input class="" type="text">，打<input type="text" name="">折
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- 满赠（商品） -->
+                <div class="manzeng-product radio">
+                    <label>
+                        <input type="radio" name="promation" id="promation3" value="option3">
+                        每满赠（商品）
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+                            <div class="detail">
+                                订单金额每满￥<input class="" type="text">，获赠品<span><a href="#">（选择赠送商品）</a></span><input type="text" name="">件
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -304,6 +588,8 @@
                 </div>
             </div>
         </div>
+
+
 
     </form>
 </div>

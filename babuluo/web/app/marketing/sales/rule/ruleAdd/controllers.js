@@ -1,7 +1,8 @@
 AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $stateParams, salesFactory, modalFactory) {
     modalFactory.setBottom(true);
 
-    $scope.memberId = $stateParams.id;
+    const num = $stateParams.id;
+    $scope.memberId = num;
 
     $scope.bindData = function(form){
         form['SALES.PROID'] = $scope.product;
@@ -30,7 +31,6 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
 
     //设置页面Bottom触发事件
     modalFactory.setBottom(true, function () {
-
         if ($scope.salesInfo['SALES.NAME'] == undefined ||$scope.salesInfo['SALES.INTRO'] == undefined) {
             modalFactory.showAlert("请填写完整信息");
             return;
