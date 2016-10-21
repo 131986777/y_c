@@ -49,22 +49,22 @@
     margin-right: 10px;
 }
 .promotion-head .buttons .note{
-    background: url(../../../components/images/index_06.png) no-repeat left center;
+    background: url(../../../../components/images/index_06.png) no-repeat left center;
 }
 .promotion-head .buttons .stop{
-    background: url(../../../components/images/index_11.png) no-repeat left center;
+    background: url(../../../../components/images/index_11.png) no-repeat left center;
 }
 .promotion-head .buttons .del{
-    background: url(../../../components/images/index_08.png) no-repeat left center;
+    background: url(../../../../components/images/index_08.png) no-repeat left center;
 }
 .promotion-head .buttons a.note:hover{
-    background: url(../../../components/images/icon_03.png) no-repeat left center;
+    background: url(../../../../components/images/icon_03.png) no-repeat left center;
 }
 .promotion-head .buttons a.stop:hover{
-    background: url(../../../components/images/icon_08.png) no-repeat left center;
+    background: url(../../../../components/images/icon_08.png) no-repeat left center;
 }
 .promotion-head .buttons a.del:hover{
-    background: url(../../../components/images/icon_05.png) no-repeat left center;
+    background: url(../../../../components/images/icon_05.png) no-repeat left center;
 }
 .promotion-content{
     position: relative;

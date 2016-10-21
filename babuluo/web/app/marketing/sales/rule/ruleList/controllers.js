@@ -61,7 +61,7 @@ AndSellMainModule.controller('salesRuleListController', function ($scope, $state
             var saleJson = JSON.parse(item['SALE_CONTENT'].toString());
             var name = $scope.productMap[saleJson['ProId']];
             switch (form['SALES.SALE_TARGET']) {
-                case '订单':
+                case '1':
                     switch (form['SALES.CONDITION_TYPE']) {
                         case '1':
                             switch (form['SALES.SALE_TYPE']) {
@@ -108,7 +108,7 @@ AndSellMainModule.controller('salesRuleListController', function ($scope, $state
                         default:
                     }
                     break;
-                case '商品':
+                case '2':
                     switch (form['SALES.CONDITION_TYPE']) {
                         case '1':
                             switch (form['SALES.SALE_TYPE']) {
@@ -142,11 +142,11 @@ AndSellMainModule.controller('salesRuleListController', function ($scope, $state
                                     middleArray.push(array);
                                     break;
                                 case '3':
-                                    array = putParaTogether("满", item['CONDITION_NUM'], "件送", saleJson['Num'], "件", name);
+                                    array = putParaTogether("每满", item['CONDITION_NUM'], "件送", saleJson['Num'], "件", name);
                                     middleArray.push(array);
                                     break;
                                 case '4':
-                                    array = putParaTogether("满", item['CONDITION_NUM'], "件送", saleJson['Num'], "张", name);
+                                    array = putParaTogether("每满", item['CONDITION_NUM'], "件送", saleJson['Num'], "张", name);
                                     middleArray.push(array);
                                     break;
                                 default:
@@ -160,10 +160,6 @@ AndSellMainModule.controller('salesRuleListController', function ($scope, $state
         });
         $scope.salesDetialList = middleArray;
     };
-
-    $scope.putTogether = function (para) {
-
-    }
 
 
     //根据ID修改优惠状态（停用or启用）
