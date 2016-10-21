@@ -6,7 +6,18 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
     $scope.bindData = function(form){
         form['SALES.PROID'] = $scope.product;
         if(form['SALES.SALE_TYPE'] ==3||form['SALES.SALE_TYPE'] ==4){
-                                             +'"Num"'+':'+form['SALES.PRONUM']+'}';
+            form['SALES.SALE_CONTENT1'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
+                                             +'"Num"'+':'+form['SALES.PRONUM1']+'}';
+            form['SALES.SALE_CONTENT2'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
+                                             +'"Num"'+':'+form['SALES.PRONUM2']+'}';
+            form['SALES.SALE_CONTENT3'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
+                                             +'"Num"'+':'+form['SALES.PRONUM3']+'}';
+            form['SALES.SALE_CONTENT4'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
+                                             +'"Num"'+':'+form['SALES.PRONUM4']+'}';
+            form['SALES.SALE_CONTENT5'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
+                                             +'"Num"'+':'+form['SALES.PRONUM5']+'}';
+            form['SALES.SALE_CONTENT6'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
+                                             +'"Num"'+':'+form['SALES.PRONUM6']+'}';
         }
         if(form['SALES.CONDITION_TYPE'] ==true){
             form['SALES.CONDITION_TYPE'] =2;
@@ -19,6 +30,7 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
 
     //设置页面Bottom触发事件
     modalFactory.setBottom(true, function () {
+
         if ($scope.salesInfo['SALES.NAME'] == undefined ||$scope.salesInfo['SALES.INTRO'] == undefined) {
             modalFactory.showAlert("请填写完整信息");
             return;
@@ -51,12 +63,10 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
                 if($('#meiman').is(":checked")){
                     $('.meimanjian-ruler').removeClass('hidden');
                     $('.manjian-ruler').addClass('hidden');
-                    $scope.empty();
                 }
                 else{
                     $('.meimanjian-ruler').addClass('hidden');
                     $('.manjian-ruler').removeClass('hidden');
-                    $scope.empty();
                 }
             }
         );
@@ -87,6 +97,5 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
                 $('.content').children('.addItem').removeClass('hidden');
             }
         });
-
     })
 });
