@@ -51,8 +51,15 @@ var filterTableFromList = function (list, tablename) {
     }
 };
 
+//处理商品价格
 function moneyFormat(money) {
     return Number(money / 100).toFixed(2);
+}
+
+//过滤时间后面的毫秒
+function getDate(dateStr){
+    var mydate=dateStr.slice(0,dateStr.indexOf("."));
+    return mydate;
 }
 
 /*

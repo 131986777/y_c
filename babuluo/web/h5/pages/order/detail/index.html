@@ -1,0 +1,114 @@
+<div class="check-out-page bg-grey" ng-init="initData()">
+  <header>
+    <div class="weui_cell">
+      <div class="weui_cell_hd">
+        <i class="icon icon-ok"></i>
+      </div>
+      <div class="weui_cell_bd">
+        <h4 class="suc-title">
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">订单待支付！</span>
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">订单已支付！待提货！</span>
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">订单已确认提货！</span>
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
+        </h4>
+        <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
+          请在30分钟之内完成付款，逾期订单将关闭
+        </p>
+      </div>
+    </div>
+  </header>
+  <div class="container-fluid">
+    <div class="order-info border-bottom row">
+      <div class="col-xs-12">
+        <p ng-bind="'下单编号：'+order['SHOP_ORDER.ORDER_NUM']">
+        </p>
+        <p ng-bind="'下单日期：'+order['SHOP_ORDER.DATETIME_ADD']">
+        </p>
+      </div>
+      <div class="col-xs-12">
+        <p ng-bind="'提货人：'+order['SHOP_ORDER.REC_CONTACT']">
+        </p>
+        <p ng-bind="'联系方式：'+order['SHOP_ORDER.REC_PHONE']">
+        </p>
+      </div>
+      <div class="col-xs-12">
+        <p>
+          提货时间：2016.08.23星期三
+        </p>
+        <p>
+          提货门店：莲花新城店
+        </p>
+        <p>
+          提货方式：自提
+        </p>
+        <p>
+          提货码：lhh20160823
+        </p>
+      </div>
+    </div>
+
+
+    <div class="product-list weui_cells">
+      <div class="weui_cell">
+        <div class="weui_cell_bd">
+          商品列表
+        </div>
+      </div>
+      <div class="product-wrap weui_cell" ng-repeat="detail in orderDetailList">
+        <div class="product-img-wrap weui_cell_hd">
+          <img class="product-img" ng-src="detail['SHOP_ORDER_INFO.IMG_URL']">
+        </div>
+        <div class="basic-info weui_cell_bd weui_cell_primary">
+          <h5 class="product-name" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']">
+          </h5>
+          <p class="product-cls" ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']">
+          </p>
+        </div>
+        <div class="ext weui_cell_ft">
+          <p class="product-money" ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'">
+          </p>
+          <p class="product-num" ng-bind="'X '+detail['SHOP_ORDER_INFO.COUNT']">
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment-info">
+      <p>
+        订单总额：<span ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
+      </p>
+      <p class="sale">
+        已优惠：<span ng-bind="order['SHOP_ORDER.PRICE_DISCOUNT'] | currency : '￥'"></span>
+      </p>
+      <p>
+        付款方式：<span ng-if="order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'">会员卡支付</span><span ng-if="order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'">微信支付</span>
+      </p>
+    </div>
+  </div>
+
+
+  <div class="action-bar-wrap" ng-if="order['SHOP_ORDER.STATE_ORDER']==1">
+    <div class="action-bar border-top">
+      <div class="cell">
+        <p class="all">
+          总计：<span  class="money" ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
+        </p>
+      </div>
+      <div class="btn-wrap" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
+        <a class="btn-cancel btn" ng-click="cancelOrder()">
+          取消订单
+        </a>
+        <a class="btn my-btn-default" ng-click="payNow()" >
+          立即付款
+        </a>
+      </div>
+
+      <div class="btn-wrap" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">
+        <a class="btn my-btn-default" ng-click="getPrdNow()" >
+          确认提货
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
