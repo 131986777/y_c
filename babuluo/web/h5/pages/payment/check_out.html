@@ -1,85 +1,66 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>支付</title>
-
-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
-    <link rel="stylesheet" href="../../public/css/style.css">
-</head>
-
-<body class="check-out-page bg-grey">
-<header>
+<div class="check-out-page bg-grey" ng-init="initData()">
+  <header>
     <div class="weui_cell">
-        <div class="weui_cell_hd">
-            <i class="icon icon-ok"></i>
-        </div>
-        <div class="weui_cell_bd">
-            <h4 class="suc-title">
-                提交订单成功
-            </h4>
-            <p>
-                请在30分钟之内完成付款，逾期订单将关闭
-            </p>
-        </div>
+      <div class="weui_cell_hd">
+        <i class="icon icon-ok"></i>
+      </div>
+      <div class="weui_cell_bd">
+        <h4 class="suc-title">
+          提交订单成功
+        </h4>
+        <p>
+          请在30分钟之内完成付款，逾期订单将关闭
+        </p>
+      </div>
     </div>
-</header>
-<div class="container-fluid ">
+  </header>
+  <div class="container-fluid">
     <div class="order-info border-bottom row">
-        <div class="col-xs-12">
-            <p>
-                订单编号：506090710000126548
-            </p>
-            <p>
-                下单日期：2016-08-23  11:36:45
-            </p>
-        </div>
-        <div class="col-xs-12">
-            <p>
-                提货人：刘华华
-            </p>
-            <p>
-                联系方式：18042112088
-            </p>
-        </div>
-        <div class="col-xs-12">
-            <p>
-                提货时间：2016.08.23星期三
-            </p>
-            <p>
-                提货门店：莲花新城店
-            </p>
-            <p>
-                提货方式：自提
-            </p>
-            <p>
-                提货码：lhh20160823
-            </p>
-        </div>
+      <div class="col-xs-12">
+        <p ng-bind="'下单编号：'+order['SHOP_ORDER.ORDER_NUM']">
+        </p>
+        <p ng-bind="'下单日期：'+order['SHOP_ORDER.DATETIME_ADD']">
+        </p>
+      </div>
+      <div class="col-xs-12">
+        <p ng-bind="'提货人：'+order['SHOP_ORDER.REC_CONTACT']">
+        </p>
+        <p ng-bind="'联系方式：'+order['SHOP_ORDER.REC_PHONE']">
+        </p>
+      </div>
+      <div class="col-xs-12">
+        <p>
+          提货时间：2016.08.23星期三
+        </p>
+        <p>
+          提货门店：莲花新城店
+        </p>
+        <p>
+          提货方式：自提
+        </p>
+        <p>
+          提货码：lhh20160823
+        </p>
+      </div>
     </div>
 
     <div class="payment-info">
-        <p class="">
-            订单总额：¥168
-        </p>
-        <p class="sale">
-            已优惠 ¥0.00
-        </p>
-        <p>
-            付款方式：余额支付
-        </p>
+      <p>
+        订单总额：<span ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
+      </p>
+      <p class="sale">
+        已优惠：<span ng-bind="order['SHOP_ORDER.PRICE_DISCOUNT'] | currency : '￥'"></span>
+      </p>
+      <p>
+        付款方式：<span ng-if="order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'">会员卡支付</span><span ng-if="order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'">微信支付</span>
+      </p>
     </div>
-</div>
+  </div>
 
-<div class="action-bar-wrap">
+  <div class="action-bar-wrap">
     <div class="action-bar border-top">
-        <a class="check cell open-popup" href="javascript:;"
-           data-target="#half">立即付款
-        </a>
+      <a class="check cell open-popup" ng-click="payNow()">立即付款
+      </a>
     </div>
+  </div>
 </div>
-
-</body>
-</html>

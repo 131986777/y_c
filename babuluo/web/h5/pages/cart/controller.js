@@ -46,12 +46,36 @@ AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, pr
         if (item['SHOP_PRODUCT_SKU.SIZE'] > 1) {
             item['SHOP_PRODUCT_SKU.SIZE']=item['SHOP_PRODUCT_SKU.SIZE']-1;
         }
+
+        //修改cookie
+        var cartSize = getCookie('cartSize');
+        if (cartSize == '') {
+            cartSize = {};
+        } else {
+            cartSize = JSON.parse(cartSize);
+        }
+        cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']]-=1;
+        console.log(cartSize);
+        setCookie('cartSize',JSON.stringify(cartSize));
+
         $scope.updateCartPrice();
     }
 
     //数量加
     $scope.moreSize = function (item) {
-            item['SHOP_PRODUCT_SKU.SIZE']=item['SHOP_PRODUCT_SKU.SIZE']+1;
+        item['SHOP_PRODUCT_SKU.SIZE']=item['SHOP_PRODUCT_SKU.SIZE']+1;
+
+        //修改cookie
+        var cartSize = getCookie('cartSize');
+        if (cartSize == '') {
+            cartSize = {};
+        } else {
+            cartSize = JSON.parse(cartSize);
+        }
+        cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']]+=1;
+        console.log(cartSize);
+        setCookie('cartSize',JSON.stringify(cartSize));
+
         $scope.updateCartPrice();
     }
 
@@ -77,13 +101,15 @@ AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, pr
     //修改购物车价格
     $scope.updateCartPrice= function () {
         var price=0;
+        var size =0;
         $scope.skuList.forEach(function (ele) {
            if(ele.isSelect){
                price+=ele['SHOP_PRODUCT_SKU.REAL_PRICES']*ele['SHOP_PRODUCT_SKU.SIZE'];
+               size+=ele['SHOP_PRODUCT_SKU.SIZE'];
            }
         });
-        console.log(price);
         $scope.totalPrice=price;
+        $scope.totalSize=size;
     }
 
     //选择商品

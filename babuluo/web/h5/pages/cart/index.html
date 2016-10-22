@@ -72,7 +72,7 @@
       </div>
       <a class="payment-check" ng-click="addOrder()">
         去结算
-        <span class="product-num">(2件)</span>
+        <span class="product-num" ng-bind="'('+totalSize+')件'"></span>
       </a>
     </div>
   </div>

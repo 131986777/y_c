@@ -51,6 +51,7 @@ var filterTableFromList = function (list, tablename) {
     }
 };
 
+//处理商品价格
 function moneyFormat(money) {
     return Number(money / 100).toFixed(2);
 }

@@ -23,5 +23,22 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/h5/pages/order/add/index.html",
             controller: "H5.OrderAddController"
         })
+        .state("order-success", {
+            url: "/orderSuccess",
+            params: {ORDER_ID: '1023'},
+            templateUrl: "/AndSell/h5/pages/payment/check_out.html",
+            controller: "H5.OrderSuccessController"
+        })
+        .state("pay-success", {
+            url: "/paySuccess",
+            templateUrl: "/AndSell/h5/pages/payment/check_out_success.html",
+            controller: "H5.PaySuccessController"
+        })
+        .state("order-detail", {
+            url: "/orderDetail",
+            params: {ORDER_ID: '1030'},
+            templateUrl: "/AndSell/h5/pages/order/detail/index.html",
+            controller: "H5.OrderDetailController"
+        })
 
 });
