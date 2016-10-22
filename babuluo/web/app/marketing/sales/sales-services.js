@@ -15,4 +15,12 @@ AndSellMainModule.service('salesFactory', function ($resource, baseURL) {
             }
         });
     };
+
+    this.querySalesById= function (form) {
+        return $resource(baseURL + '/sales/sales/getById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
 });
