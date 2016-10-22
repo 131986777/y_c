@@ -233,8 +233,7 @@ p {
 /* BEGIN icon */
 .icon {
   display: inline-block;
-  width: 20px;
-  height: 20px; }
+  }
 
 .icon-check {
   background: url("../img/icon.png") no-repeat 0 0;
