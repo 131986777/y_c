@@ -47,7 +47,7 @@ AndSellMainModule.controller('couponRuleListController', function ($scope, $stat
   };
 
   $scope.modRule = function () {
-    couponFactory.modifyCoupon($scope.mod).get({}, function (response) {
+    couponFactory.modifyCouponRule($scope.mod).get({}, function (response) {
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);
       } else if (response.extraData.state == 'true') {
@@ -63,7 +63,7 @@ AndSellMainModule.controller('couponRuleListController', function ($scope, $stat
       if(item['COUPON_RULE.STATE']==1){
           modalFactory.showAlert("确认停用吗?", function () {
               item['COUPON_RULE.STATE']=-1;
-              couponFactory.stopSouponById(item).get({}, function (res) {
+              couponFactory.stopCouponRuleById(item).get({}, function (res) {
               if (res.extraData.state = 'true') {
                   modalFactory.showShortAlert("停用成功");
                   $scope.$broadcast('pageBar.reload');
@@ -72,7 +72,7 @@ AndSellMainModule.controller('couponRuleListController', function ($scope, $stat
       });
       } else{
           item['COUPON_RULE.STATE']=1;
-          couponFactory.stopSouponById(item).get({}, function (res) {
+          couponFactory.stopCouponRuleById(item).get({}, function (res) {
               if (res.extraData.state = 'true') {
                   modalFactory.showShortAlert("启用成功");
                   $scope.$broadcast('pageBar.reload');
@@ -85,7 +85,7 @@ AndSellMainModule.controller('couponRuleListController', function ($scope, $stat
   $scope.delCoupon = function (item) {
 
     modalFactory.showAlert("确认删除吗?", function () {
-      couponFactory.delSouponById(item).get({}, function (res) {
+      couponFactory.delCouponRule(item).get({}, function (res) {
         if (res.extraData.state = 'true') {
           modalFactory.showShortAlert("删除成功");
           $scope.$broadcast('pageBar.reload');
