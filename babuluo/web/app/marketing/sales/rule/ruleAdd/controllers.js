@@ -1,69 +1,61 @@
 AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $stateParams, salesFactory, modalFactory) {
     modalFactory.setBottom(true);
 
+    const num = $stateParams.id;
+    $scope.memberId = num;
 
-
-
-    $scope.memberId = $stateParams.id;
-
-    /*function loadInputData(form){
+    $scope.bindData = function(form){
+        form['SALES.PROID'] = $scope.product;
+        if(form['SALES.SALE_TYPE'] ==3||form['SALES.SALE_TYPE'] ==4){
+            form['SALES.SALE_CONTENT1'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
+                                             +'"Num"'+':'+form['SALES.PRONUM1']+'}';
+            form['SALES.SALE_CONTENT2'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
+                                             +'"Num"'+':'+form['SALES.PRONUM2']+'}';
+            form['SALES.SALE_CONTENT3'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
+                                             +'"Num"'+':'+form['SALES.PRONUM3']+'}';
+            form['SALES.SALE_CONTENT4'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
+                                             +'"Num"'+':'+form['SALES.PRONUM4']+'}';
+            form['SALES.SALE_CONTENT5'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
+                                             +'"Num"'+':'+form['SALES.PRONUM5']+'}';
+            form['SALES.SALE_CONTENT6'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
+                                             +'"Num"'+':'+form['SALES.PRONUM6']+'}';
+        }
+        if(form['SALES.CONDITION_TYPE'] ==true){
+            form['SALES.CONDITION_TYPE'] =2;
+        }else {
+            form['SALES.CONDITION_TYPE'] =1;
+        }
         form['SALES.SALE_TARGET'] = $scope.memberId;
-        form['SALES.IS_DEL'] = -1;
-        form['SALES.STATE'] = 1;   //启用
         return form;
-    }*/
-
+    }
 
     //设置页面Bottom触发事件
     modalFactory.setBottom(true, function () {
-        //var form = loadInputData($scope.salesInfo);
-        console.log("++++++");
-        console.log($scope.salesInfo);
-        salesFactory.AddSales (form).get({}, function (response) {
-            if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-
-            }
-        });
-
-        //验证
-        /*if ($scope.memberData['MEMBER_INFO.TRUE_NAME'] == undefined) {
-         modalFactory.showAlert("真实姓名不能为空。");
-         return;
-         }
-         if ($scope.ADDR_SHENG != undefined && $scope.ADDR_SHENG != '') {
-
-         $scope.memberData['MEMBER_INFO.ADDR_SHENG']= $scope.ADDR_SHENG.p;
-         if ($scope.ADDR_SHI != undefined) {
-         $scope.memberData['MEMBER_INFO.ADDR_SHI'] = $scope.ADDR_SHI.n;
-         }
-         if ($scope.ADDR_XIAN != undefined) {
-         $scope.memberData['MEMBER_INFO.ADDR_XIAN']= $scope.ADDR_XIAN.s;
-         }
-         }
-         memberFactory.modMemberDataById($scope.memberData).get({}, function (response) {
-         if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
-         modalFactory.showShortAlert(response.msg);
-         } else if (response.extraData.state == 'true') {
-         modalFactory.showShortAlert("保存成功");
-         // $scope.modifyID = false;
-         $scope.initLoad();
-         }
-         });
-         // console.log('要提交的数据为'+$scope.memberData);
-
-         }, function () {
-         //取消事件
-         $scope.initLoad();*/
+        if ($scope.salesInfo['SALES.NAME'] == undefined ||$scope.salesInfo['SALES.INTRO'] == undefined) {
+            modalFactory.showAlert("请填写完整信息");
+            return;
+        }
+        else{
+            var form = $scope.bindData($scope.salesInfo);
+            salesFactory.AddSales (form).get({}, function (response) {
+                if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
+                    modalFactory.showShortAlert(response.msg);
+                } else if (response.extraData.state == 'true') {
+                    modalFactory.showShortAlert("保存成功");
+                    $scope.empty();
+                    $scope.$broadcast('pageBar.reload');
+                }
+            });
+        }
     });
+    
+    $scope.empty = function () {
+        $scope.salesInfo = {};
+}
 
-
-
-
-
-
-
+    $scope.prdItemSwitch= function (data) {
+        $scope.product = data['SHOP_PRODUCT_SKU.PRD_ID'];
+    }
 
     //前端Jquery逻辑
     $(function(){
@@ -90,17 +82,20 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
 
         $('.addItem').on("click",function(){
             var a = $(this).parents('.content'),
-                b = a.find('.template').clone();
-            b.removeClass("template hidden").addClass("detail");
-            var c = a.find('.detailBox');
-            c.append(b);
-            $('.itemDel').on('click',function(){
-                $(this).parents('.detail').remove();
-
-            });
+                b = a.find('.hidden');
+            if(b.length==1){
+                b.eq(0).removeClass('hidden');
+                $(this).addClass('hidden');
+            }
+            else{
+                b.eq(0).removeClass('hidden');
+            }
         });
-
-
+        $('.itemDel').click(function(){
+            $(this).parents('.detailBox').addClass('hidden');
+            if($(this).parents('.content').find('.hidden').length<6){
+                $('.content').children('.addItem').removeClass('hidden');
+            }
+        });
     })
-
 });

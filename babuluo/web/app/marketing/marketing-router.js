@@ -16,16 +16,6 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/marketing/sales/rule/ruleAdd/index.html",
             controller: "salesRuleAddController"
         })
-        .state("couponList", {
-            url: "/couponList",
-            templateUrl: "/AndSell/app/marketing/coupon/coupon/couponList/index.html",
-            controller: "couponListController"
-        })
-        .state("salesList", {
-            url: "/salesList",
-            templateUrl: "/AndSell/app/marketing/sales/sales/salesList/index.html",
-            controller: "salesListController"
-        })
         .state("bannerPosition", {
             url: "/bannerPosition",
             templateUrl: "/AndSell/app/marketing/banner/banner_position/index.html",
@@ -36,14 +26,19 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/marketing/banner/banner/index.html",
             controller: "bannerController"
         })
-        .state("couponAdd", {
-            url: "/couponAdd",
-            templateUrl: "/AndSell/app/marketing/coupon/couponAdd/index.html",
-            controller: "couponAddController"
+        .state("couponList", {
+            url: "/couponList",
+            templateUrl: "/AndSell/app/marketing/coupon/coupon/couponList/index.html",
+            controller: "couponListController"
         })
-        .state("salesManage", {
-            url: "/salesManage",
-            templateUrl: "/AndSell/app/marketing/sales/salesManage/index.html",
-            controller: "salesManageController"
+        .state("salesList", {
+            url: "/salesList",
+            templateUrl: "/AndSell/app/marketing/sales/sales/salesList/index.html",
+            controller: "salesListController"
+        })
+        .state("salesCoupon", {
+            url: "/salesCoupon",
+            templateUrl: "/AndSell/app/marketing/sales/sales/salesCoupon/index.html",
+            controller: "salesCouponController"
         })
 });

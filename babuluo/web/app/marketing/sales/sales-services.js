@@ -9,7 +9,6 @@ AndSellMainModule.service('salesFactory', function ($resource, baseURL) {
     };
 
     this.AddSales= function (form) {
-        console.log(form);
         return $resource(baseURL + '/sales/sales/add', form, {
             'update': {
                 method: 'PUT'
