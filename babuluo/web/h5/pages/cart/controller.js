@@ -1,7 +1,7 @@
 AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, productFactory, modalFactory) {
 
     modalFactory.setTitle('购物车');
-    modalFactory.setBottom(false);
+    modalFactory.setBottom(true);
 
     $scope.initData = function () {
 
