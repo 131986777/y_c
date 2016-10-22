@@ -55,7 +55,7 @@
   </div>
   <!-- END 商品列表-->
 
-  <div class="payment-wrap action-bar-wrap">
+  <div class="payment-wrap action-bar-wrap" style="bottom: 53px;">
     <div class="action-bar border-top">
       <div class="cart-icon-wrap" ng-init="checkAll=false"
            ng-click="checkAllPrd()">
@@ -72,7 +72,7 @@
       </div>
       <a class="payment-check" ng-click="addOrder()">
         去结算
-        <span class="product-num">(2件)</span>
+        <span class="product-num" ng-bind="'('+totalSize+')件'"></span>
       </a>
     </div>
   </div>
