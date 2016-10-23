@@ -145,6 +145,16 @@
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
+                                    地址：
+                                </label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" type="text"
+                                           name="addr" ng-model="shopAdd['SHOP.ADDR']"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
                                     开门时间：
                                 </label>
                                 <div class="col-sm-2">
@@ -279,6 +289,16 @@
                                 <a class="col-sm-2 control-label table-link" ng-click="choosePoint()">
                                     地图选点
                                 </a>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
+                                    地址：
+                                </label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" type="text"
+                                           name="addr" ng-model="shopEdited['SHOP.ADDR']"
+                                           required>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">
