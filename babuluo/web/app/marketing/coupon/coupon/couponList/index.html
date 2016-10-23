@@ -55,7 +55,7 @@
                                     <span>{{(item['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</span>
                                     <span class='couponType'>折<span/>
                                  </span>
-
+</span>
                             </div>
                             <!--  <div class="coupon-limit">最多折扣<span>12元</span></div>-->
                         </div>
@@ -72,9 +72,9 @@
                                 <span ng-if="item['COUPON.USE_TIME_CYCLE']==7">限定时间(每周日)</span>
                             </p>
                             <p class="limit-item">
-                                <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==1">限定商品使用({{parseArray(item['COUPON.TARGET_OBJ_ID']).length}}种)</span>
-                                <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==2">限定商品类别使用({{parseArray(item['COUPON.TARGET_OBJ_ID']).length}}种)</span>
-                                <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==3">限定商品标签使用({{parseArray(item['COUPON.TARGET_OBJ_ID']).length}}种)</span>
+                                <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==1">限定商品使用({{(item['COUPON.TARGET_OBJ_INFO'])}})</span>
+                                <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==2">限定商品类别使用({{(item['COUPON.TARGET_OBJ_INFO'])}})</span>
+                                <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==3">限定商品标签使用({{(item['COUPON.TARGET_OBJ_INFO'])}})</span>
                             </p>
                             <p class="coupon-detail">{{item['COUPON.RULE_INFO']['COUPON_RULE.INTRO']}}</p>
                             <!--<div class="coupon-footer text-right">
@@ -418,8 +418,8 @@
                             </label>
 
                             <div class="col-md-8">
-                                <select ng-model="modRuleId"
-                                        ng-init="modRuleId=''"
+                                <select ng-model="mod['COUPON.RULE_ID']"
+                                        ng-init="mod['COUPON.RULE_ID']=''"
                                         class="nya-bs-select form-control"
                                         ng-options="item['COUPON_RULE.ID'] as item['COUPON_RULE.NAME'] for item in ruleList">
                                     <option class="nya-bs-option" value="">选择优惠券规则</option>
