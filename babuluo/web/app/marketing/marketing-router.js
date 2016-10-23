@@ -41,4 +41,10 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/marketing/sales/sales/salesCoupon/index.html",
             controller: "salesCouponController"
         })
+        .state("ruleModify", {
+            url: "/ruleModify",
+            params: {id: 0},
+            templateUrl: "/AndSell/app/marketing/sales/rule/ruleModify/index.html",
+            controller: "salesRuleModifyController"
+        })
 });
