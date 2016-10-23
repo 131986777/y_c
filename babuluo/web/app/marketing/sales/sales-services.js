@@ -16,6 +16,14 @@ AndSellMainModule.service('salesFactory', function ($resource, baseURL) {
         });
     };
 
+    this.AddSalesPlan= function (form) {
+        return $resource(baseURL + '/sales/salesplan/add', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
     this.querySalesById= function (form) {
         return $resource(baseURL + '/sales/sales/getById', form, {
             'update': {
