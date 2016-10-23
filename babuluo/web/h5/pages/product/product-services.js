@@ -1,7 +1,7 @@
 AndSellH5MainModule.service('productFactory', function ($resource, baseURL) {
 
-    this.getProduct = function () {
-        return $resource(baseURL + '/shop/product/queryAll', null, {
+    this.getProduct = function (filter) {
+        return $resource(baseURL + '/shop/product/queryAll', filter, {
             'update': {
                 method: 'PUT'
             }

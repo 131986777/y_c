@@ -98,7 +98,7 @@ AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, pr
         setCookie('cartSize',JSON.stringify(cartSize));
     }
 
-    //修改购物车价格
+    //更新购物车价格
     $scope.updateCartPrice= function () {
         var price=0;
         var size =0;
@@ -135,7 +135,6 @@ AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, pr
                 list.push(ele['SHOP_PRODUCT_SKU.SKU_ID']);
             }
         });
-        console.log(list);
         $state.go('order-add',{ SKU_IDS:list.toString()});
     }
 
