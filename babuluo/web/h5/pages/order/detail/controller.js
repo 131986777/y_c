@@ -13,21 +13,7 @@ AndSellH5MainModule.controller('H5.OrderDetailController', function ($scope, $st
             $scope.orderDetailList=JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
             $scope.order=response.data[0];
             $scope.orderDetailList.forEach(function (ele) {
-                setContentsInfo(ele);
-                var contents = '';
-                if (ele['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
-                    contents +=' ';
-                    contents += ele['SHOP_ORDER_INFO.SKU_1_NAME'] + " : " + ele['SHOP_ORDER_INFO.SKU_3_VALUE'];
-                }
-                if (ele['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
-                    contents +=' ';
-                    contents += ele['SHOP_ORDER_INFO.SKU_2_NAME'] + " : " + ele['SHOP_ORDER_INFO.SKU_3_VALUE'];
-                }
-                if (ele['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
-                    contents +=' ';
-                    contents += ele['SHOP_ORDER_INFO.SKU_3_NAME'] + " : " + ele['SHOP_ORDER_INFO.SKU_3_VALUE'];
-                }
-                ele['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] = contents;
+                setContentsInfoForOrder(ele);
             });
             console.log($scope.orderDetailList);
         });

@@ -94,3 +94,21 @@ function setContentsInfo(sku) {
     sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO'] = contents;
 }
 
+//   get Sku  content info
+function setContentsInfoForOrder(sku) {
+    var contents = '';
+    if (sku['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
+        contents +=' ';
+        contents += sku['SHOP_ORDER_INFO.SKU_1_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_3_VALUE'];
+    }
+    if (sku['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
+        contents +=' ';
+        contents += sku['SHOP_ORDER_INFO.SKU_2_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_3_VALUE'];
+    }
+    if (sku['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
+        contents +=' ';
+        contents += sku['SHOP_ORDER_INFO.SKU_3_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_3_VALUE'];
+    }
+    sku['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] = contents;
+}
+

@@ -16,6 +16,15 @@ AndSellH5MainModule.service('orderFactory', function ($resource, baseURL) {
         });
     };
 
+    this.getOrder= function (filter) {
+        console.log(filter);
+        return $resource(baseURL + '/shop/order/queryAll', filter , {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
     this.cancelOrder= function (id) {
         return $resource(baseURL + '/shop/order/cancelOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
             'update': {
