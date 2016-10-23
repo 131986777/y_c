@@ -46,14 +46,6 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
         });
     }
 
-    //<span
-    // ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">订单待支付！</span>
-    // <span
-    // ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">订单待提货！</span>
-    // <span
-    // ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">订单已完成！</span>
-    // <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
-
     //订单详情跳转
     $scope.toDetail= function (id) {
         $state.go('order-detail',{ORDER_ID: id});

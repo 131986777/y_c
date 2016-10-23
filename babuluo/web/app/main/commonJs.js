@@ -56,6 +56,16 @@ function moneyFormat(money) {
     return Number(money / 100).toFixed(2);
 }
 
+//过滤时间后面的毫秒
+function getDate(dateStr){
+    if(dateStr!=undefined){
+        var mydate = dateStr.slice(0, dateStr.indexOf("."));
+        return mydate;
+    }else{
+        return undefined;
+    }
+}
+
 /*
  *删除数组元素.
  */
@@ -68,4 +78,23 @@ Array.prototype.remove = function (b) {
     }
     return false;
 };
+
+
+//   get Sku  content info
+function setContentsInfoForOrder(sku) {
+    var contents = '';
+    if (sku['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
+        contents +=' ';
+        contents += sku['SHOP_ORDER_INFO.SKU_1_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_3_VALUE'];
+    }
+    if (sku['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
+        contents +=' ';
+        contents += sku['SHOP_ORDER_INFO.SKU_2_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_3_VALUE'];
+    }
+    if (sku['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
+        contents +=' ';
+        contents += sku['SHOP_ORDER_INFO.SKU_3_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_3_VALUE'];
+    }
+    sku['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] = contents;
+}
 

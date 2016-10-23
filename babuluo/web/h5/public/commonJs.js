@@ -58,9 +58,14 @@ function moneyFormat(money) {
 
 //过滤时间后面的毫秒
 function getDate(dateStr){
-    var mydate=dateStr.slice(0,dateStr.indexOf("."));
-    return mydate;
+    if(dateStr!=undefined){
+        var mydate = dateStr.slice(0, dateStr.indexOf("."));
+        return mydate;
+    }else{
+        return undefined;
+    }
 }
+
 
 /*
  *删除数组元素.
