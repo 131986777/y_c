@@ -23,4 +23,19 @@ AndSellMainModule.service('salesFactory', function ($resource, baseURL) {
             }
         });
     };
+
+    this.queryProductById = function (form){
+        return $resource(baseURL + '/shop/product/getById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+    this.querySalesPlan = function (){
+        return $resource(baseURL + '/sales/salesplan/queryAll', null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
 });

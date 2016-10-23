@@ -9,11 +9,24 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     $scope.couponList = response.data;
 
   };
+
+  $scope.initLoad = function () {
+      salesFactory.querySalesPlan().get({}, function (response) {
+          console.log(response);
+          $scope.salesPlan = response.data;
+          console.log($scope.salesPlan[0]);
+          $scope.proClassInfo = response.extraData.proClassMap;
+          console.log($scope.proClassInfo);
+      })
+  };
+
+   $scope.initLoad();
+
   $scope.detailClick=function (item) {
     $scope.detail=item;
   }
 
-    $scope.addRule = function () {
+  $scope.addRule = function () {
        // console.log($scope.add);
         couponFactory.addCouponRule($scope.add).get({}, function (response) {
 
