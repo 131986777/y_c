@@ -290,7 +290,7 @@
                     <div class="col-md-12">
                         <div class="upload-img-tips"
                              ng-repeat="(key,imageFileUrl) in uploadImageFiles">
-                            <img ng-src="{{imageFileUrl}}"
+                            <img ng-src="{{FILE_SERVER_DOMAIN+imageFileUrl}}"
                                  class="img-responsive">
                             <div class="product-img-operator">
                                 <div class="operator-wrap top">
@@ -317,8 +317,8 @@
                         <div class="upload-img-wrap">
                             <label class="upload-img-tips" data-provides="fileinput">
                                 添加商品图册<br>（上限10张）
-                                <input class="hidden" type="file" file-model="images"
-                                       on-change="uploadImage(images)"
+                                <input class="hidden" type="file"
+                                       id="image" name='image' onchange="angular.element(this).scope().uploadImage(this)"
                                        multiple>
                             </label>
                         </div>
@@ -328,8 +328,9 @@
                 <div class="upload-file-wrap">
                     <label class="upload-btn" data-provides="fileinput">
                         上传附件
-                        <input class="hidden" type="file" on-change="uploadFile(upfile)"
-                               file-model="upfile" multiple>
+                        <input class="hidden"  type="file"
+                               id="file" name='file' onchange="angular.element(this).scope().uploadFile(this)"
+                               multiple>
                     </label>
 
 
