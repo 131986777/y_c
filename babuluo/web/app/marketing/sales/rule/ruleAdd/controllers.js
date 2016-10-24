@@ -4,21 +4,30 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
     const num = $stateParams.id;
     $scope.memberId = num;
 
+
+    $scope.proName = "（选择赠送商品）";
+
+    $scope.showProName = function () {
+        $scope.proName = $scope.product;
+        $scope.$broadcast('pageBar.reload');
+    }
+
+    var array = new Array();
+    $scope.saveCurrentInfo = function (num) {
+        var str = '{'+'"ProId"'+':'+$scope.product+',' +'"Num"'+':'+$scope.salesInfo['SALES.PRONUM'+num]+'}';
+        array.push(str);
+        $scope.salesInfo = array;
+    }
+
     $scope.bindData = function(form){
         form['SALES.PROID'] = $scope.product;
         if(form['SALES.SALE_TYPE'] ==3||form['SALES.SALE_TYPE'] ==4){
-            form['SALES.SALE_CONTENT1'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
-                                             +'"Num"'+':'+form['SALES.PRONUM1']+'}';
-            form['SALES.SALE_CONTENT2'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
-                                             +'"Num"'+':'+form['SALES.PRONUM2']+'}';
-            form['SALES.SALE_CONTENT3'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
-                                             +'"Num"'+':'+form['SALES.PRONUM3']+'}';
-            form['SALES.SALE_CONTENT4'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
-                                             +'"Num"'+':'+form['SALES.PRONUM4']+'}';
-            form['SALES.SALE_CONTENT5'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
-                                             +'"Num"'+':'+form['SALES.PRONUM5']+'}';
-            form['SALES.SALE_CONTENT6'] = '{'+'"ProId"'+':'+form['SALES.PROID']+','
-                                             +'"Num"'+':'+form['SALES.PRONUM6']+'}';
+            form['SALES.SALE_CONTENT1'] = $scope.salesInfo[0];
+            form['SALES.SALE_CONTENT2'] = $scope.salesInfo[1];
+            form['SALES.SALE_CONTENT3'] = $scope.salesInfo[2];
+            form['SALES.SALE_CONTENT4'] = $scope.salesInfo[3];
+            form['SALES.SALE_CONTENT5'] = $scope.salesInfo[4];
+            form['SALES.SALE_CONTENT6'] = $scope.salesInfo[5];
         }
         if(form['SALES.CONDITION_TYPE'] ==true){
             form['SALES.CONDITION_TYPE'] =2;
@@ -54,8 +63,12 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
 }
 
     $scope.prdItemSwitch= function (data) {
+        console.log(data);
         $scope.product = data['SHOP_PRODUCT_SKU.PRD_ID'];
+        $scope.productName = data['SHOP_PRODUCT_SKU.PRD_NAME'];
     }
+
+    $scope.queryProductById
 
     //前端Jquery逻辑
     $(function(){

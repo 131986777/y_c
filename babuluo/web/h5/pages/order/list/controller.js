@@ -1,15 +1,11 @@
-AndSellMainModule.controller('orderListController', function ($scope,$state, $stateParams, orderFactory, modalFactory) {
+AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $state, orderFactory,modalFactory) {
 
-    modalFactory.setTitle('订货单');
+    modalFactory.setTitle('订单列表');
     modalFactory.setBottom(false);
 
+
     $scope.initData= function () {
-        $scope.yy={
-            'background-color' : '#31C552'
-        };
-
         $scope.filterStateOrder('all');
-
     }
 
     $scope.filterStateOrder= function (type) {
@@ -39,38 +35,15 @@ AndSellMainModule.controller('orderListController', function ($scope,$state, $st
     }
 
     $scope.getOrder= function () {
-        $scope.orderSizeMap={
-            'pay':0,
-            'get':0,
-            'comment':0
-        }
         orderFactory.getOrder($scope.filter).get({}, function (response) {
             console.log(response);
             $scope.orderList=response.data;
             $scope.orderList.forEach(function (ele) {
-
-                ele['SHOP_ORDER.DATETIME_ADD']=getDate(ele['SHOP_ORDER.DATETIME_ADD']);
                 ele.details=JSON.parse(ele['SHOP_ORDER.ORDER_INFO']);
-                ele.details.forEach(function (item) {
-                    setContentsInfoForOrder(item);
-                });
-                console.log(ele);
-                if(ele['SHOP_ORDER.STATE_ORDER']==1&&ele['SHOP_ORDER.STATE_MONEY']==-1){
-                    $scope.orderSizeMap.pay+=1;
-                }else if(ele['SHOP_ORDER.STATE_ORDER']==1&&ele['SHOP_ORDER.STATE_MONEY']==1&&ele['SHOP_ORDER.STATE_DELIVERY']==-1){
-                    $scope.orderSizeMap.get+=1;
-                }else if(ele['SHOP_ORDER.STATE_ORDER']==1&&ele['SHOP_ORDER.STATE_MONEY']==1&&ele['SHOP_ORDER.STATE_DELIVERY']==1&&ele['SHOP_ORDER.STATE_COMMENT']==-1){
-                    $scope.orderSizeMap.comment+=1;
-                }
+                setContentsInfoForOrder(ele);
             });
             console.log($scope.orderList);
         });
-    }
-
-    //查询订单
-    $scope.searchOrder= function () {
-        $scope.filter['SHOP_ORDER.FILTER_CONTENT']=$scope.orderFilter;
-        $scope.getOrder();
     }
 
     //订单详情跳转

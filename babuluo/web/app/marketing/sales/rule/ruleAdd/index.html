@@ -130,16 +130,17 @@
                         <div class="detailBox">
                             <div class="detail">
                                 订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，
-                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
-                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM1']">件
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> {{proName}} </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM1']"
+                                       ng-focus="showProName()" ng-blur="saveCurrentInfo(1)">件
                                     <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
                             </div>
                         </div>
                         <div class="detailBox hidden">
                             <div class="detail">
                                 订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM2']">，
-                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
-                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM2']">件
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> {{proName}} </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM2']" ng-blur="saveCurrentInfo(2)">件
                                 <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
                                 <a class="itemDel">删除</a>
                             </div>
@@ -147,8 +148,8 @@
                         <div class="detailBox hidden">
                             <div class="detail">
                                 订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM3']">，
-                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
-                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM3']">件
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> {{proName}} </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM3']" ng-blur="saveCurrentInfo(3)">件
                                 <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
                                 <a class="itemDel">删除</a>
                             </div>
@@ -156,8 +157,8 @@
                         <div class="detailBox hidden">
                             <div class="detail">
                                 订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM4']">，
-                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
-                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM4']">件
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> {{proName}} </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM4']" ng-blur="saveCurrentInfo(4)">件
                                 <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
                                 <a class="itemDel">删除</a>
                             </div>
@@ -165,8 +166,8 @@
                         <div class="detailBox hidden">
                             <div class="detail">
                                 订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM5']">，
-                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
-                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM5']">件
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> {{proName}} </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM5']" ng-blur="saveCurrentInfo(5)"件
                                 <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
                                 <a class="itemDel">删除</a>
                             </div>
@@ -174,8 +175,8 @@
                         <div class="detailBox hidden">
                             <div class="detail">
                                 订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM6']">，
-                                获赠品<span> <a show-modal id="#productItemSwitchModal"> （选择赠送商品） </a></span>
-                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM6']">件
+                                获赠品<span> <a show-modal id="#productItemSwitchModal"> {{proName}} </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM6']" ng-blur="saveCurrentInfo(6)">件
                                 <product-item-switch-modal callback="prdItemSwitch(data)"></product-item-switch-modal>
                                 <a class="itemDel">删除</a>
                             </div>

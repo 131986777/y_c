@@ -3,28 +3,36 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
 
   modalFactory.setTitle('促销管理');
 
-  $scope.bindData = function (response) {
+    var planList=[{id:1,name:'单个商品促销'},
+        {id:2,name:'某个类别促销'},
+        {id:1,name:'某个标签促销'},
+        {id:1,name:'订单促销'}
+    ];
+    $scope.planList =  planList;
 
-      $scope.couponList={};
-    $scope.couponList = response.data;
-
+  $scope.initLoad = function () {
+      salesFactory.querySalesPlan().get({}, function (response) {
+          console.log(response);
+          $scope.salesPlan = response.data;
+          $scope.proClassInfo = response.extraData.proClassMap;
+          console.log($scope.proClassInfo);
+      })
   };
+
+   $scope.initLoad();
+
   $scope.detailClick=function (item) {
     $scope.detail=item;
   }
 
-    $scope.addRule = function () {
-       // console.log($scope.add);
-        couponFactory.addCouponRule($scope.add).get({}, function (response) {
-
+  $scope.addSalePlan = function (form) {
+      console.log(form);
+      salesFactory.AddSalesPlan(form).get({}, function (response) {
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);
-
       } else if (response.extraData.state == 'true') {
         modalFactory.showShortAlert('新增成功');
-        $scope.add={};
-        $scope.add['COUPON_RULE.TYPE']='1';
-          $("#addRule").modal('hide');
+          $("#addSalePlan").modal('hide');
           $scope.$broadcast('pageBar.reload');
       }
     });
@@ -93,5 +101,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     });
 
   }
+
+
 
 });

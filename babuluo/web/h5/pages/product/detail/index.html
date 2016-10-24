@@ -47,7 +47,7 @@
   <div class="weui_cells">
 
     <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>0">
-      <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']+' : '"></div>
+      <div class="weui_cell_hd" style="min-width: 40px;"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']+' : '"></div>
       <div class="sku-list label-group weui_cell_bd">
         <span class="sku-label {{currSkuSelectClassMap[1][item]}} label-outline"
               ng-class="{true:'selected'}[currSkuContentSelectMap.name1==item]"
@@ -58,7 +58,7 @@
     </div>
 
     <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>1">
-      <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME2']+' : '"></div>
+      <div class="weui_cell_hd" style="min-width: 40px;"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME2']+' : '"></div>
       <div class="sku-list label-group weui_cell_bd">
         <span class="sku-label  {{currSkuSelectClassMap[2][item]}} label-outline"
               ng-class=" { true :'selected'}[currSkuContentSelectMap.name2==item] "
@@ -69,7 +69,7 @@
     </div>
 
     <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>2">
-      <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']+' : '"></div>
+      <div class="weui_cell_hd" style="min-width: 40px;"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']+' : '"></div>
 
       <div class="sku-list label-group weui_cell_bd">
         <span class="sku-label  {{currSkuSelectClassMap[3][item]}} label-outline"
@@ -92,7 +92,8 @@
                       -
                     </button>
                 </span>
-          <input class="form-control text-center" disabled="" type="text" ng-model="skuSize" ng-init="skuSize=1">
+          <input class="form-control text-center" disabled="" type="text" ng-model="skuSize"
+                 ng-init="skuSize=1">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-click="skuSize=skuSize+1">
                       +
@@ -138,4 +139,5 @@
       </a>
     </div>
   </div>
+
 </div>

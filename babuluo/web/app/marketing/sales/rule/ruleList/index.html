@@ -30,15 +30,11 @@
                         <span ng-show="salesInfo['SALES.SALE_TARGET']==1">订单</span>
                         <span ng-show="salesInfo['SALES.SALE_TARGET']==2">商品</span>
                     </td>
-
-
                     <td ng-bind="salesInfo['SALES.INTRO']"></td>
                     <td ng-bind="salesInfo['SALES.ADD_DATETIME'] | FormatAllDate"></td>
                     <td ng-bind="salesInfo['SALES.STATE'] | FormatState"></td>
                     <td>
-                        <a data-toggle="modal" data-target="#balance" ng-click="queryByGivenInfo(salesInfo)">
-                            促销详情
-                        </a>
+                        <a ui-sref="ruleModify({id:salesInfo['SALES.ID']})">促销详情</a>
                         <a class="table-link" ng-click="changeState(salesInfo)">
                             <span ng-show="salesInfo['SALES.STATE'] == '1'">停用</span>
                             <span ng-show="salesInfo['SALES.STATE'] == '-1'">启用</span>
@@ -51,7 +47,6 @@
                 </tbody>
             </table>
         </div>
-
     </div>
     <div page-bar
          filter-obj="filter"
@@ -62,7 +57,7 @@
 
     <!--MODAL-->
     <!--显示促销详情-->
-    <div class="modal fade" role="dialog" id="balance">
+    <div class="modal fade" role="dialog" id="detailSaleList">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -72,23 +67,101 @@
                     <h4 class="modal-title">促销规则详情</h4>
                 </div>
                 <div class="modal-body form-body text-right">
-                    <table>
-                        <thead></thead>
-                        <tbody ng-cloak>
-                        <tr ng-repeat='item in salesDetialList'>
-                            <td ng-bind="item[0]"></td>
-                            <td ng-bind="item[1]"></td>
-                            <td ng-bind="item[2]"></td>
-                            <td ng-bind="item[3]"></td>
-                            <td ng-bind="item[4]"></td>
-                            <td ng-bind="item[5]"></td>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <form class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required">  </span> 名称:
+                            </label>
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="detailSaleList['SALES.NAME']"></h5>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                描述:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="detailSaleList['SALES.INTRO']"></h5>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 详情:
+                            </label>
+                            <div class="col-md-8">
+                                <table>
+                                    <tbody>
+                                        <tr ng-repeat="item in detailSaleListInfo">
+                                            <td ng-bind="item[0]"></td>
+                                            <td ng-bind="item[1]"></td>
+                                            <td ng-bind="item[2]"></td>
+                                            <td ng-bind="item[3]"></td>
+                                            <td ng-bind="item[4]"></td>
+                                            <td ng-bind="item[5]"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                               <!-- <table>
+                                    <tbody ng-cloak>
+                                    <tr ng-show="detailSaleListInfo[0][1]!=null">
+                                        <td ng-bind="detailSaleListInfo[0][0]"></td>
+                                        <td><textarea   ng-model="detailSaleListInfo[0][1]" ></textarea></td>
+                                        <td ng-bind="detailSaleListInfo[0][2]"></td>
+                                        <td><textarea  type="text"  ng-model="detailSaleListInfo[0][3]" ></textarea></td>
+                                        <td ng-bind="detailSaleListInfo[0][4]"></td>
+                                        <td ng-bind="detailSaleListInfo[0][5]"></td>
+                                    </tr>
+                                    <tr ng-show="detailSaleListInfo[1][1]!=null">
+                                        <td ng-bind="detailSaleListInfo[1][0]"></td>
+                                        <td><input ng-model="detailSaleListInfo[1][1]" ></td>
+                                        <td ng-bind="detailSaleListInfo[1][2]"></td>
+                                        <td><textarea  type="text"  ng-model="detailSaleListInfo[1][3]" ></textarea></td>
+                                        <td ng-bind="detailSaleListInfo[1][4]"></td>
+                                        <td ng-bind="detailSaleListInfo[1][5]"></td>
+                                    </tr>
+                                    <tr ng-show="detailSaleListInfo[2][1]!=null">
+                                        <td ng-bind="detailSaleListInfo[2][0]"></td>
+                                        <td><textarea   ng-model="detailSaleListInfo[2][1]" ></textarea></td>
+                                        <td ng-bind="detailSaleListInfo[2][2]"></td>
+                                        <td><textarea  type="text"  ng-model="detailSaleListInfo[2][3]" ></textarea></td>
+                                        <td ng-bind="detailSaleListInfo[2][4]"></td>
+                                        <td ng-bind="detailSaleListInfo[2][5]"></td>
+                                    </tr>
+                                    <tr ng-show="detailSaleListInfo[3][1]!=null">
+                                        <td ng-bind="detailSaleListInfo[3][0]"></td>
+                                        <td><textarea   ng-model="detailSaleListInfo[3][1]" ></textarea></td>
+                                        <td ng-bind="detailSaleListInfo[3][2]"></td>
+                                        <td><textarea  type="text"  ng-model="detailSaleListInfo[3][3]" ></textarea></td>
+                                        <td ng-bind="detailSaleListInfo[3][4]"></td>
+                                        <td ng-bind="detailSaleListInfo[3][5]"></td>
+                                    </tr>
+                                    <tr ng-show="detailSaleListInfo[4][1]!=null">
+                                        <td ng-bind="detailSaleListInfo[4][0]"></td>
+                                        <td><textarea   ng-model="detailSaleListInfo[4][1]" ></textarea></td>
+                                        <td ng-bind="detailSaleListInfo[4][2]"></td>
+                                        <td><textarea  type="text"  ng-model="detailSaleListInfo[4][3]" ></textarea></td>
+                                        <td ng-bind="detailSaleListInfo[4][4]"></td>
+                                        <td ng-bind="detailSaleListInfo[4][5]"></td>
+                                    </tr>
+                                    <tr ng-show="detailSaleListInfo[5][1]!=null">
+                                        <td ng-bind="detailSaleListInfo[5][0]"></td>
+                                        <td><textarea   ng-model="detailSaleListInfo[5][1]" ></textarea></td>
+                                        <td ng-bind="detailSaleListInfo[5][2]"></td>
+                                        <td><textarea  type="text"  ng-model="detailSaleListInfo[5][3]" ></textarea></td>
+                                        <td ng-bind="detailSaleListInfo[5][4]"></td>
+                                        <td ng-bind="detailSaleListInfo[5][5]"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>-->
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-info btn-outline" data-dismiss="modal"
-                            ng-click="saveAccount()">确定
+                            ng-click="saveSales()">确定
                     </button>
                     <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
                     </button>

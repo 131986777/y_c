@@ -1,17 +1,84 @@
-AndSellMainModule.controller('salesRuleListController', function ($scope, $stateParams, salesFactory, modalFactory) {
+AndSellMainModule.controller('salesRuleModifyController', function ($scope, $stateParams, salesFactory, modalFactory) {
 
-    modalFactory.setTitle('促销规则管理');
+    modalFactory.setTitle('促销规则详情');
+
+    modalFactory.setBottom(true);
+
+    //console.log($stateParams.id);
 
 
-    modalFactory.setBottom(false);
+    $scope.initLoad = function () {
+        console.log('+++');
+        var form = {};
+        form['SALES.ID'] =$stateParams.id;
+        salesFactory.querySalesById(form).get({}, function (response) {
+            console.log(response);
+            $scope.bindData(response);
+        });
+    }
 
+    $scope.initLoad();
     $scope.bindData = function (response) {
         console.log(response);
-        $scope.salesList = response.data;
-        $scope.productMap = response.extraData.productMap;
+        $scope.salesInfo = response.data[0];
     };
 
-    $scope.queryByGivenInfo = function (form) {
+    modalFactory.setBottom(true, function () {
+            salesFactory.ModifySalesState ($scope.salesInfo).get({}, function (response) {
+                if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
+                    modalFactory.showShortAlert(response.msg);
+                } else if (response.extraData.state == 'true') {
+                    modalFactory.showShortAlert("保存成功");
+                    $scope.empty();
+                    $scope.$broadcast('pageBar.reload');
+                }
+            });
+    });
+
+    //前端Jquery逻辑
+    $(function(){
+        $('.checkbox').click(function(){
+                if($('#meiman').is(":checked")){
+                    $('.meimanjian-ruler').removeClass('hidden');
+                    $('.manjian-ruler').addClass('hidden');
+                }
+                else{
+                    $('.meimanjian-ruler').addClass('hidden');
+                    $('.manjian-ruler').removeClass('hidden');
+                }
+            }
+        );
+
+        var len = $('.radio').length;
+        for(var i = 0 ; i<len;i++){
+            $('.radio').eq(i).click(function(){
+                //点击显示
+                $(this).children('.content').removeClass('hidden');
+                $(this).siblings().children('.content').addClass('hidden');
+            });
+        }
+
+        $('.addItem').on("click",function(){
+            var a = $(this).parents('.content'),
+                b = a.find('.hidden');
+            if(b.length==1){
+                b.eq(0).removeClass('hidden');
+                $(this).addClass('hidden');
+            }
+            else{
+                b.eq(0).removeClass('hidden');
+            }
+        });
+        $('.itemDel').click(function(){
+            $(this).parents('.detailBox').addClass('hidden');
+            if($(this).parents('.content').find('.hidden').length<6){
+                $('.content').children('.addItem').removeClass('hidden');
+            }
+        });
+    })
+
+
+    /*$scope.queryByGivenInfo = function (form) {
         var array = new Array();
         var middleArray = new Array();
         if (form['SALES.CONDITION_NUM1'] != null) {
@@ -232,7 +299,7 @@ AndSellMainModule.controller('salesRuleListController', function ($scope, $state
                 $scope.$broadcast('pageBar.reload');
             }
         });
-    };
+    };*/
 });
 
 

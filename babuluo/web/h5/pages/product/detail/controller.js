@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $state, $stateParams, productFactory, modalFactory) {
+AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $state, $stateParams, productFactory, modalFactory,weUI) {
 
     modalFactory.setTitle('商品详情');
     modalFactory.setBottom(false);
@@ -181,7 +181,7 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
     $scope.currSkuSelectClassMap = {1: [], 2: [], 3: []};
 
     //不可选的样式
-    var cannotSelectCLass = 'btn-danger';
+    var cannotSelectCLass = 'btn-disabled';
 
     //控制sku可选 和不可选的calss
     $scope.skuSelectable = function () {

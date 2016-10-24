@@ -15,4 +15,35 @@ AndSellMainModule.service('salesFactory', function ($resource, baseURL) {
             }
         });
     };
+
+    this.AddSalesPlan= function (form) {
+        return $resource(baseURL + '/sales/salesplan/add', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
+    this.querySalesById= function (form) {
+        return $resource(baseURL + '/sales/sales/getById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
+    this.queryProductById = function (form){
+        return $resource(baseURL + '/shop/product/getById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+    this.querySalesPlan = function (){
+        return $resource(baseURL + '/sales/salesplan/queryAll', null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
 });

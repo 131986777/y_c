@@ -40,5 +40,15 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/h5/pages/order/detail/index.html",
             controller: "H5.OrderDetailController"
         })
+        .state("prd-List", {
+            url: "/prdList",
+            templateUrl: "/AndSell/h5/pages/product/list/index.html",
+            controller: "H5.PrdListController"
+        })
+        .state("order-List", {
+            url: "/orderList",
+            templateUrl: "/AndSell/h5/pages/order/list/index.html",
+            controller: "H5.OrderListController"
+        })
 
 });
