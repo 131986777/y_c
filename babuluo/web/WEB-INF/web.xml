@@ -52,5 +52,18 @@
         <url-pattern>/api</url-pattern>
     </servlet-mapping>
 
+    <!--Hessian-->
+
+
+    <servlet>
+        <servlet-name>aliyun</servlet-name>
+        <servlet-class>connectALiYun.web.command.connectALiYun</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>aliyun</servlet-name>
+        <url-pattern>/aliYun</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

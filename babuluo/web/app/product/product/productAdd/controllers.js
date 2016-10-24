@@ -1,4 +1,4 @@
-AndSellMainModule.controller('productAddController', function ($scope, $state, productFactory, classFactory, unitFactory, tagFactory, modalFactory, $q) {
+AndSellMainModule.controller('productAddController', function ($http,$scope, $state, productFactory, classFactory, unitFactory, tagFactory, modalFactory,$q) {
 
     modalFactory.setTitle('商品新增');
 
@@ -21,6 +21,9 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
     $scope.product = {};
     $scope.product.tags = [];
     $scope.tempSaveSkuMap = new Map();
+    $scope.uploadImageFiles = [];
+    $scope.uploadFiles = [];
+    $scope.FILE_SERVER_DOMAIN = "http://babuluo-file.oss-cn-hangzhou.aliyuncs.com//";
 
     // UE 实例化
     var ue;
@@ -85,7 +88,8 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
             $scope.product.tags[0]['SHOP_PRODUCT_SKU.PRD_SKU'] = $scope.spuCode + '010101';
             initDefer_spuCode.resolve();
         });
-
+        console.log(789456);
+        connALiYun();
     };
     $scope.initLoad();
 
@@ -285,5 +289,139 @@ AndSellMainModule.controller('productAddController', function ($scope, $state, p
         };
         return object;
     }
+
+    function connALiYun() {
+        console.log('111111');
+        var actionUrl = "../../aliYun";
+
+        $http.post(actionUrl).success(function (response) {
+          /*  console.log(response);
+            serviceId=response.split(',')[0];
+            policy=response.split(',')[1];
+            signature=response.split(',')[2];*/
+           $scope.filePath=response.split(',')[0];
+            $scope. policy=response.split(',')[1];
+            $scope.signature=response.split(',')[2];
+        });
+
+    }
+
+    /*
+     *
+     * 上传商品的图片， 最多上传10个
+     * */
+    $scope.uploadImage = function (element) {
+
+        console.log('7895522');
+
+        _uploadFiles(element.files, $scope.uploadImageFiles,'image', 10, function () {
+            alert("商品图册最多只能添加10张！");
+
+        },function(successResponse){
+            console.log('上传图片成功');
+            console.log(successResponse);
+            $scope.uploadImageFiles.push(successResponse.url);
+        });
+
+
+
+    };
+
+    /*
+     *
+     * 上传商品的附件， 最多上传20个
+     * */
+    $scope.uploadFile = function (element) {
+        console.log('附件上传');
+        _uploadFiles(element.files, $scope.uploadFiles,'file', 20, function () {
+            alert("商品附件最多只能添加20个！");
+        },function (successResponse) {
+            console.log('上传附件成功');
+            console.log(successResponse);
+            $scope.uploadFiles.push(successResponse.url);
+        });
+    };
+
+   /* $scope.uploadImage=function (files, bindToList, maxSize, errCall) {
+        _uploadFiles(files, bindToList, 'image', maxSize, errCall);
+    }
+   */
+
+
+    var _uploadFiles = function (files, bindToList, type, maxSize, errCall,successCall) {
+
+        var maxLength = maxSize - bindToList.length;
+       // console.log(files.length);
+        for(index=0;index<files.length;index++){
+            if (index >= maxLength) {
+                errCall();
+                return;
+            }
+            //发送请求
+            _postFile( files[index],type).success(function (response) {
+                console.log(response);
+                var  state='"state\":\"SUCCESS",';
+                var  title='"title":'+'"'+fileName+'",';
+                var  original='"original":'+'"'+file.name+'",';
+                var  type='"type":'+'".'+fileSuffix+'",';
+
+                var index1=response.indexOf('<Key>');
+                var index2=response.indexOf('</Key>');
+                fileurl=response.substring(index1+5,index2);
+                var  url='"url":"'+fileurl+'",';
+                var  size='"size":"'+file.size+'"';
+                var json='{'+state+title+original+type+url+size+'}';
+                console.log('要返回的json字符串为'+json);
+                var jsonObj = JSON.parse(json);   //将字符串装换为json对象;
+                successCall(jsonObj);
+            } ).error(function(response){
+                 console.log(response);
+            });
+        }
+
+
+    };
+
+    var _postFile = function (file1, filetype) {
+        file = file1;
+
+      /*  var actionUrl = "../../aliYun";
+        var filePath,policy,signature;
+        $http.post(actionUrl).success(function (response) {
+            console.log(response);
+            filePath=response.split(',')[0];
+            policy=response.split(',')[1];
+            signature=response.split(',')[2];
+        });*/
+
+        /* var filePath = globalSetting.aliyun.filePath;
+         var policy = globalSetting.aliyun.policy;
+         var signature = globalSetting.aliyun.signature;
+         console.log('图片路径为' + filePath);*/
+
+
+        var fd = new FormData();
+        var date = new Date();
+        var tempArray = file.name.split('.');
+        fileSuffix = tempArray[tempArray.length - 1];     //文件后缀名
+        fileName = date.getTime() + (Math.round(Math.random() * 1000)).toString() + '.' + fileSuffix;    //文件名
+        fd.append('OSSAccessKeyId', 'LTAImVQlWKQXIQcD');
+        fd.append('policy', $scope.policy);
+        fd.append('Signature', $scope.signature);
+        if (filetype == 'image') {
+            fd.append('key', $scope.filePath + '/image/' + fileName);  //filePath为用户的ServiceId
+        } else {
+            fd.append('key', $scope.filePath + '/file/' + fileName);
+        }
+        fd.append('success_action_status', '201');
+        fd.append('file', file);              //'file'必须为表单的最后一个字段
+        var url2 = 'http://babuluo-file.oss-cn-hangzhou.aliyuncs.com';    //阿里云存储的地址
+
+        return $http.post(url2, fd, {
+            transformRequest: angular.identity, headers: {'Content-Type': undefined}
+        });
+
+
+    };
 
 });
