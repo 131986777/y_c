@@ -44,6 +44,10 @@
             <i class="icon icon-cart" ng-click="selectSKU(item['SHOP_PRODUCT.PRD_ID'])"></i>
           </div>
         </a>
+        <div class="weui-infinite-scroll" ng-show="hasNextPage">
+          <div class="infinite-preloader"></div>
+          正在加载...
+        </div>
       </div>
       <div id="tab2" class="weui_tab_bd_item">
         <h1 class="doc-head">通讯录</h1>
@@ -75,6 +79,12 @@
     </div>
   </div>
 
+
+
+
   <cart-modal id="cartPrdId" show="cartModalShow" callback="addToCartSuccess()"></cart-modal>
+
+
+
 
 </div>

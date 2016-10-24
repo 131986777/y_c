@@ -13,7 +13,6 @@
             </ul>
 
             <!-- 所有订单 -->
-
             <div class="form-group form-inline ">
                 <input type="text" class="form-control" ng-model="orderFilter" placeholder="输入商品名称/订单号">
                 <button type="submit" class="btn btn-default" ng-click="searchOrder()"><span class="glyphicon glyphicon-search"></span></button>
@@ -136,6 +135,12 @@
                             <button class="btn btn-default btn-block"  ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">申请售后</button>
                         </div>
                     </div>
+                </div>
+
+                <div page-bar
+                     filter-obj="filter"
+                     url="/shop/order/queryAll"
+                     callback="getOrder(response)">
                 </div>
 
             </div>

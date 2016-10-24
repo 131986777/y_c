@@ -3,9 +3,15 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(false);
 
-    $scope.filter = {};
 
     $scope.initData = function () {
+        $scope.filter = {
+            PAGE_SIZE : 10,
+            PN : 1
+        };
+        $scope.hasNextPage=true;
+        $scope.loading = false;  //状态标记
+        $scope.prdList = new Array;
         $scope.getPrd();
         $scope.getCartInfoInCookie();
     }
@@ -14,10 +20,18 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
     $scope.getPrd = function () {
         productFactory.getProduct($scope.filter).get({}, function (response) {
             console.log(response);
-            $scope.prdList = response.data;
+            Array.prototype.push.apply($scope.prdList,response.data);//数组合并
+            $scope.page=response.extraData.page;
+            if($scope.page.querySize>$scope.page.pageIndex*$scope.page.pageSize){
+                $scope.hasNextPage=true;
+            }else{
+                $scope.hasNextPage=false;
+            }
+            $scope.loading = false;
         });
     }
 
+    //查询商品
     $scope.searchPrd = function () {
         $scope.getPrd();
     }
@@ -49,7 +63,6 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
     $scope.getCartInfoInCookie = function () {
 
         $scope.skuList = new Array;
-
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
         if (cartInfo == '') {
@@ -59,9 +72,6 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
             cartInfo = JSON.parse(cartInfo);
             cartSize = JSON.parse(cartSize);
         }
-
-        console.log(cartInfo);
-        console.log(cartSize);
         if (cartInfo.length > 0) {
             var params = {};
             params['SHOP_PRODUCT_SKU.SKU_IDS'] = cartInfo.toString();
@@ -97,7 +107,6 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
         if (item['SHOP_PRODUCT_SKU.SIZE'] > 1) {
             item['SHOP_PRODUCT_SKU.SIZE'] = item['SHOP_PRODUCT_SKU.SIZE'] - 1;
         }
-
         //修改cookie
         var cartSize = getCookie('cartSize');
         if (cartSize == '') {
@@ -106,16 +115,13 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
             cartSize = JSON.parse(cartSize);
         }
         cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] -= 1;
-        console.log(cartSize);
         setCookie('cartSize', JSON.stringify(cartSize));
-
         $scope.updateCartPrice();
     }
 
     //数量加
     $scope.moreSize = function (item) {
         item['SHOP_PRODUCT_SKU.SIZE'] = item['SHOP_PRODUCT_SKU.SIZE'] + 1;
-
         //修改cookie
         var cartSize = getCookie('cartSize');
         if (cartSize == '') {
@@ -124,9 +130,7 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
             cartSize = JSON.parse(cartSize);
         }
         cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] += 1;
-        console.log(cartSize);
         setCookie('cartSize', JSON.stringify(cartSize));
-
         $scope.updateCartPrice();
     }
 
@@ -134,5 +138,20 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
     $scope.addToCartSuccess= function () {
         $scope.getCartInfoInCookie();
     }
+
+    //下拉更多商品
+    $scope.getMorePrd = function() {
+        $scope.filter.PN = $scope.page.pageIndex+1;
+        $scope.getPrd();
+    };
+
+    //下拉监听器
+    $(document.body).infinite().on("infinite", function() {
+        if($scope.loading) return;
+        $scope.loading = true;
+        if ($scope.hasNextPage) {
+            $scope.getMorePrd();
+        }
+    });
 
 });

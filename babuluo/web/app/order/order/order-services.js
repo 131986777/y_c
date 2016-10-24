@@ -25,6 +25,14 @@ AndSellMainModule.service('orderFactory', function ($resource, baseURL) {
         });
     };
 
+    this.getStateOrders= function () {
+        return $resource(baseURL + '/shop/order/getStateOrders', {} , {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
     this.cancelOrder= function (id) {
         return $resource(baseURL + '/shop/order/cancelOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
             'update': {
