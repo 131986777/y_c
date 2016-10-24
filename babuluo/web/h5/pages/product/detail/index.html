@@ -144,9 +144,6 @@
     <div class="weui_mask_transition" id="mask"></div>
     <div class="weui_actionsheet" id="weui_actionsheet">
       <div class="weui_actionsheet_menu">
-
-      </div>
-      <div class="action-bar">
         <div class="weui_cells">
           <div class="weui_cell">
             <div class="basic-info weui_cell_bd weui_cell_primary">
@@ -159,9 +156,9 @@
                 ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
               <div ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']==undefined" class="money">
         <span
-            ng-bind="skuData.minPrice | currency :'￥'"></span> -
+                ng-bind="skuData.minPrice | currency :'￥'"></span> -
         <span
-            ng-bind="skuData.maxPrice | currency :'￥'"></span>
+                ng-bind="skuData.maxPrice | currency :'￥'"></span>
 
               </div>
               </p>
@@ -238,7 +235,10 @@
             </div>
           </div>
         </div>
-        <div class="weui_actionsheet_cell cell ok" ng-click="addToCart()">加入购物车</div>
+      </div>
+      <div class="action-bar">
+
+        <div class="weui_actionsheet_cell cell ok add-to-cart" ng-click="addToCart()">加入购物车</div>
       </div>
     </div>
   </div>

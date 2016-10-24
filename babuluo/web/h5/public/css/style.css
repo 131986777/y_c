@@ -1349,3 +1349,6 @@ p {
 .product-list-page .weui_navbar_item{
   background-color : #fff;
 }
+.product-detail-page .weui_navbar{
+  z-index:0;
+}
