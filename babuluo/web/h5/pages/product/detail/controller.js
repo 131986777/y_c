@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $state, $stateParams, productFactory, modalFactory) {
+AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $state, $stateParams, productFactory, modalFactory,weUI) {
 
     modalFactory.setTitle('商品详情');
     modalFactory.setBottom(false);
@@ -248,6 +248,33 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
     $scope.lessSize = function () {
         if ($scope.skuSize > 1) {
             $scope.skuSize--;
+        }
+    }
+
+
+    var mask = $("#mask");
+    var weuiActionsheet = $("#weui_actionsheet");
+
+    $scope.chooseSku = function () {
+
+        weUI.toast.show("添加成功", "ok", 1200);
+
+        toggleActionSheet();
+
+        function toggleActionSheet() {
+
+            // 弹出商品选择框
+            mask.show().addClass('weui_fade_toggle').focus();
+
+            //加focus是为了触发一次页面的重排(reflow or layout thrashing),使mask的transition动画得以正常触发
+            weuiActionsheet.addClass("weui_actionsheet_toggle");
+
+            mask.click(function () {
+
+                // 隐藏商品选择框
+                mask.hide().removeClass('weui_fade_toggle');
+                weuiActionsheet.removeClass("weui_actionsheet_toggle");
+            });
         }
     }
 
