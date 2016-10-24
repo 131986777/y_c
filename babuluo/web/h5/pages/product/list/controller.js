@@ -132,7 +132,7 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
 
     //购物车添加成功
     $scope.addToCartSuccess= function () {
-        $scope.updateCartPrice();
+        $scope.getCartInfoInCookie();
     }
 
 });

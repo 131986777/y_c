@@ -83,6 +83,8 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
                         $scope.filterSkuList();
                         $scope.skuSelectable();
                         toggleActionSheet();
+                    }else{
+                        weUI.toast.error('未找到规格可用的商品');
                     }
                 });
 
