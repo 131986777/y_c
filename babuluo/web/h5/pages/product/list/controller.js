@@ -28,8 +28,9 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
     }
 
     //跳出弹出框选择sku
-    $scope.selectSKU = function (item) {
-        console.log('选择sku');
+    $scope.selectSKU = function (id) {
+        $scope.cartPrdId=id;
+        $scope.cartModalShow=true;
     }
 
     //更新购物车价格
@@ -126,6 +127,11 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
         console.log(cartSize);
         setCookie('cartSize', JSON.stringify(cartSize));
 
+        $scope.updateCartPrice();
+    }
+
+    //购物车添加成功
+    $scope.addToCartSuccess= function () {
         $scope.updateCartPrice();
     }
 

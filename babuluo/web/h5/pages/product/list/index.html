@@ -1,7 +1,8 @@
 <div class="bg-grey product-list-page" ng-init="initData()">
   <!-- BEGIN 商品搜索 -->
   <div class="search-bar flexbox">
-    <input class="search-input cell" type="search" ng-model="filter['SHOP_PRODUCT.PRD_NAME']" placeholder="输入菜品名称">
+    <input class="search-input cell" type="search" ng-model="filter['SHOP_PRODUCT.PRD_NAME']"
+           placeholder="输入菜品名称">
     <a class="icon-wrap cell fixed" ng-click="searchPrd()">
       <i class="icon icon-search"></i>
     </a>
@@ -24,25 +25,26 @@
       <a class="weui_navbar_item" href="#tab3">
         选项二
       </a>
-
     </div>
-    <div class="weui_tab_bd" ng-repeat="item in prdList">
+    <div class="weui_tab_bd">
       <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
-        <a class="product-wrap weui_cell">
-          <div class="weui_cell_hd"  ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
-            <img class="img" ng-bind="item['SHOP_PRODUCT.CMP']"  />
+        <a class="product-wrap weui_cell" ng-repeat="item in prdList">
+          <div class="weui_cell_hd" ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
+            <img class="img" ng-bind="item['SHOP_PRODUCT.CMP']"/>
           </div>
           <div class="weui_cell_bd">
-            <h5 class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"  ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
+            <h5 class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"
+                ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
             </h5>
-            <p class="money" >
-              <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']!=undefined" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥'"></span>
+            <p class="money">
+              <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']!=undefined"
+                    ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥'"></span>
               <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>
             </p>
-            <i class="icon icon-cart" ng-click="selectSKU(item)"></i>
+            <i class="icon icon-cart" ng-click="selectSKU(item['SHOP_PRODUCT.PRD_ID'])"></i>
           </div>
         </a>
-      </a>
+      </div>
       <div id="tab2" class="weui_tab_bd_item">
         <h1 class="doc-head">通讯录</h1>
       </div>
@@ -63,7 +65,7 @@
       </div>
       <div class="payment-info cell">
         <p class="all">
-          总计：<span class="money" ng-bind="totalPrice | currency : '￥'" ></span>
+          总计：<span class="money" ng-bind="totalPrice | currency : '￥'"></span>
         </p>
         <p class="sale">(不含运费){{totalSize}}</p>
       </div>
@@ -72,5 +74,7 @@
       </a>
     </div>
   </div>
+
+  <cart-modal id="cartPrdId" show="cartModalShow" callback="addToCartSuccess()"></cart-modal>
 
 </div>

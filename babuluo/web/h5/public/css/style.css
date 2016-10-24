@@ -212,7 +212,7 @@ p {
   border-radius: 3px; }
 
 .btn-disabled {
-  color: rgba(255, 255, 255, 0.6); }
+  background-color: rgb(204,204,204); }
 
 .btn-disabled.btn-default {
   color: #C9C9C9; }
@@ -1168,8 +1168,9 @@ p {
   border-radius: 0;
   width: 26px; }
 .product-detail-page .add-to-cart {
-  line-height: 49px;
-  background-color: #F36F1C; }
+  line-height: 38px;
+  background-color: #F36F1C;
+  color: #FFF;}
 
 /*# sourceMappingURL=style.css.map */
 

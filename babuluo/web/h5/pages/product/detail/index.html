@@ -47,7 +47,7 @@
   <div class="weui_cells">
 
     <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>0">
-      <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']+' : '"></div>
+      <div class="weui_cell_hd" style="min-width: 40px;"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']+' : '"></div>
       <div class="sku-list label-group weui_cell_bd">
         <span class="sku-label {{currSkuSelectClassMap[1][item]}} label-outline"
               ng-class="{true:'selected'}[currSkuContentSelectMap.name1==item]"
@@ -58,7 +58,7 @@
     </div>
 
     <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>1">
-      <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME2']+' : '"></div>
+      <div class="weui_cell_hd" style="min-width: 40px;"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME2']+' : '"></div>
       <div class="sku-list label-group weui_cell_bd">
         <span class="sku-label  {{currSkuSelectClassMap[2][item]}} label-outline"
               ng-class=" { true :'selected'}[currSkuContentSelectMap.name2==item] "
@@ -69,7 +69,7 @@
     </div>
 
     <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>2">
-      <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']+' : '"></div>
+      <div class="weui_cell_hd" style="min-width: 40px;"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']+' : '"></div>
 
       <div class="sku-list label-group weui_cell_bd">
         <span class="sku-label  {{currSkuSelectClassMap[3][item]}} label-outline"
@@ -92,7 +92,8 @@
                       -
                     </button>
                 </span>
-          <input class="form-control text-center" disabled="" type="text" ng-model="skuSize" ng-init="skuSize=1">
+          <input class="form-control text-center" disabled="" type="text" ng-model="skuSize"
+                 ng-init="skuSize=1">
                 <span class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-click="skuSize=skuSize+1">
                       +
@@ -130,7 +131,7 @@
       </div>
       <div class="icon-wrap">
         <!-- 已收藏 class="icon-collected" -->
-        <i class="icon icon-collect" ng-click="chooseSku()"></i>
+        <i class="icon icon-collect"></i>
         收藏
       </div>
       <a class="add-to-cart cell" ng-click="addToCart()">
@@ -138,110 +139,5 @@
       </a>
     </div>
   </div>
-
-  <!--BEGIN actionSheet-->
-  <div id="actionSheet_wrap">
-    <div class="weui_mask_transition" id="mask"></div>
-    <div class="weui_actionsheet" id="weui_actionsheet">
-      <div class="weui_actionsheet_menu">
-        <div class="weui_cells">
-          <div class="weui_cell">
-            <div class="basic-info weui_cell_bd weui_cell_primary">
-              <h4 class="name" ng-bind="product['SHOP_PRODUCT.PRD_NAME']">
-              </h4>
-              <p class="feature" ng-bind="product['SHOP_PRODUCT.SALES_TITLE']">
-              </p>
-              <p class="money">
-          <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
-                ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
-              <div ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']==undefined" class="money">
-        <span
-                ng-bind="skuData.minPrice | currency :'￥'"></span> -
-        <span
-                ng-bind="skuData.maxPrice | currency :'￥'"></span>
-
-              </div>
-              </p>
-              <p class="code" ng-bind="'商品编码 ：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
-              </p>
-            </div>
-          </div>
-          <div class="sale-info weui_cell">
-            <div class="weui_cell_hd">
-              促销信息:
-            </div>
-            <div class="weui_cell_bd weui_cell_primary">
-              <span class="label label-default">满减</span>
-              满200减20
-            </div>
-          </div>
-        </div>
-
-        <div class="weui_cells">
-
-          <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>0">
-            <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']+' : '"></div>
-            <div class="sku-list label-group weui_cell_bd">
-        <span class="sku-label {{currSkuSelectClassMap[1][item]}} label-outline"
-              ng-class="{true:'selected'}[currSkuContentSelectMap.name1==item]"
-              ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1']"
-              ng-click="checkContent(1,item)"
-              ng-bind="item"></span>
-            </div>
-          </div>
-
-          <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>1">
-            <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME2']+' : '"></div>
-            <div class="sku-list label-group weui_cell_bd">
-        <span class="sku-label  {{currSkuSelectClassMap[2][item]}} label-outline"
-              ng-class=" { true :'selected'}[currSkuContentSelectMap.name2==item] "
-              ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT2']"
-              ng-click="checkContent(2,item)"
-              ng-bind="item"></span>
-            </div>
-          </div>
-
-          <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>2">
-            <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']+' : '"></div>
-
-            <div class="sku-list label-group weui_cell_bd">
-        <span class="sku-label  {{currSkuSelectClassMap[3][item]}} label-outline"
-              ng-class=" { true :'selected'}[currSkuContentSelectMap.name3==item] "
-              ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT3']"
-              ng-click="checkContent(3,item)"
-              ng-bind="item"></span>
-            </div>
-          </div>
-
-
-          <div class="weui_cell">
-            <div class="weui_cell_hd">
-              数量：
-            </div>
-            <div class="weui_cell_bd">
-              <div class="product-num-wrap input-group">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-click="lessSize()">
-                      -
-                    </button>
-                </span>
-                <input class="form-control text-center" disabled="" type="text" ng-model="skuSize" ng-init="skuSize=1">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-click="skuSize=skuSize+1">
-                      +
-                    </button>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="action-bar">
-
-        <div class="weui_actionsheet_cell cell ok add-to-cart" ng-click="addToCart()">加入购物车</div>
-      </div>
-    </div>
-  </div>
-  <!--END actionSheet-->
 
 </div>
