@@ -294,6 +294,23 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
             $scope.signature=response.split(',')[2];
         });
     }
+    /**
+     * 设置商品封面
+     * 16.08.29
+     * ZHJ
+     */
+    $scope.setFirstImg = function (imageFileUrl){
+
+        for(var i = 0;i<$scope.uploadImageFiles.length;i++) {
+
+            if ($scope.uploadImageFiles[i] == imageFileUrl) {
+                $scope.uploadImageFilesIndex = i;
+                console.log($scope.uploadImageFilesIndex);
+                break;
+            }
+        }
+
+    };
 
     /**
      *  上传商品的图片， 最多上传10个

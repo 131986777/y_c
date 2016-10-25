@@ -288,9 +288,9 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <div class="upload-img-wrap"   ng-repeat="(key,imageFileUrl) in [1,2,3]">
-                            <div class="upload-img-tips">
-                                <img src="http://pic41.nipic.com/20140509/4746986_145156378323_2.jpg"
+                        <div class="upload-img-wrap"   ng-repeat="(key,imageFileUrl) in uploadImageFiles">
+                            <div class="">
+                                <img ng-src="{{FILE_SERVER_DOMAIN+imageFileUrl}}"
                                      class="img-responsive">
                                 <div class="product-img-operator">
                                     <div class="operator-wrap top">
@@ -343,13 +343,13 @@
 
                 <div class="form-group" ng-repeat="file in uploadFiles">
                     <div class="col-md-9">
-                        <a target="_blank" href="../../{{file.url}}">
+                        <a target="_blank" href="{{FILE_SERVER_DOMAIN+file.url}}">
                             {{file.original}}
                         </a>
                         <span class="text-remark" ng-bind="file.size | bytes"></span>
                     </div>
                     <div class="col-md-3 text-right">
-                        <a target="_blank" href="../../{{file.url}}" class="font-green">
+                        <a target="_blank" href="{{FILE_SERVER_DOMAIN+file.url}}" class="font-green">
                             <i class="fa fa-eye "></i>
                             查看
                         </a>
