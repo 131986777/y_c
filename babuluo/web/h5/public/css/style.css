@@ -1353,3 +1353,31 @@ p {
 .product-detail-page .weui_navbar{
   z-index:0;
 }
+.card-list{
+  padding: 14px 25px 53px;
+}
+.card-list .card-wrap{
+  width: 100%;
+  height: 156px;
+  border-radius: 10px;
+  position: relative;
+  color: #fff;
+  margin-bottom: 14px;
+}
+.card-wrap .card-head{
+  padding: 14px 17px 0;
+}
+.card-wrap .card-foot{
+  padding:20px 17px 14px;
+}
+.card-wrap .card-detail{
+  padding: 32px 17px 0;
+  font-size: 32px;
+
+}
+.card-wrap .card-detail span{
+  font-size: 16px;
+}
+.card-wrap .card-detail .froze{
+  font-size: 16px;
+}
