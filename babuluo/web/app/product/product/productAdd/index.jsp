@@ -288,37 +288,38 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <div class="upload-img-tips"
-                             ng-repeat="(key,imageFileUrl) in uploadImageFiles">
-                            <img ng-src="{{FILE_SERVER_DOMAIN+imageFileUrl}}"
-                                 class="img-responsive">
-                            <div class="product-img-operator">
-                                <div class="operator-wrap top">
-                                    <a type="button"
-                                       class="operator-close"
-                                       aria-label="Close"
-                                       ng-click="delImageFile(imageFileUrl)">
-                                        &times;
-                                    </a>
-                                </div>
-                                <div class="operator-wrap bottom text-center">
-                                    <a class="font-white" ng-model="showFirst"
-                                       ng-if="key==uploadImageFilesIndex">
-                                        封面图片
-                                    </a>
-                                    <a class="font-white" ng-click="setFirstImg(imageFileUrl)"
-                                       ng-model="cover='设为封面'" ng-if="key!=uploadImageFilesIndex">
-                                        设为封面
-                                    </a>
+                        <div class="upload-img-wrap"   ng-repeat="(key,imageFileUrl) in [1,2,3]">
+                            <div class="upload-img-tips">
+                                <img src="http://pic41.nipic.com/20140509/4746986_145156378323_2.jpg"
+                                     class="img-responsive">
+                                <div class="product-img-operator">
+                                    <div class="operator-wrap top">
+                                        <a type="button"
+                                           class="operator-close"
+                                           aria-label="Close"
+                                           ng-click="delImageFile(imageFileUrl)">
+                                            &times;
+                                        </a>
+                                    </div>
+                                    <div class="operator-wrap bottom text-center">
+                                        <a class="font-white" ng-model="showFirst"
+                                           ng-if="key==uploadImageFilesIndex">
+                                            封面图片
+                                        </a>
+                                        <a class="font-white" ng-click="setFirstImg(imageFileUrl)"
+                                           ng-if="key!=uploadImageFilesIndex">
+                                            设为封面
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="upload-img-wrap">
                             <label class="upload-img-tips" data-provides="fileinput">
                                 添加商品图册<br>（上限10张）
                                 <input class="hidden" type="file"
-                                       id="image" name='image' onchange="angular.element(this).scope().uploadImage(this)"
+                                       id="image" name='image'
+                                       onchange="angular.element(this).scope().uploadImage(this)"
                                        multiple>
                             </label>
                         </div>
@@ -328,8 +329,9 @@
                 <div class="upload-file-wrap">
                     <label class="upload-btn" data-provides="fileinput">
                         上传附件
-                        <input class="hidden"  type="file"
-                               id="file" name='file' onchange="angular.element(this).scope().uploadFile(this)"
+                        <input class="hidden" type="file"
+                               id="file" name='file'
+                               onchange="angular.element(this).scope().uploadFile(this)"
                                multiple>
                     </label>
 
@@ -354,17 +356,6 @@
                         <a ng-click="delUploadFile(file)" class="font-green">
                             <i class="fa fa-remove"></i>
                             删除
-                        </a>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-4 col-md-offset-1">
-                        <a ng-click="addProductSubmit()" ng-disabled="submitDisabled"
-                           ng-init="submitDisabled= false;" class="btn btn-default"
-                           ng-class="{true:'disabled'}[isSubmit]">保 存</a>
-                        <a type="button" href="product.jsp"
-                           class="btn">取 消
                         </a>
                     </div>
                 </div>
