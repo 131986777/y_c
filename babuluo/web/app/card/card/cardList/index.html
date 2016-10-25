@@ -70,7 +70,8 @@
                 </div>
                 <p class="balance"><span>余额</span>{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}</p>
                 <p ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0" class="froze">
-                    （冻结{{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}}）</p>
+                    （冻结{{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}}）
+                </p>
                 <div class="row cardFooter">
                     <div class="col-md-4 nowrap">{{cl['MEMBER_CARD.MEMBER_LOGIN_ID']}}</div>
                     <div class="col-md-4 nowrap text-right count">
