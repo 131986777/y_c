@@ -38,11 +38,6 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
     var initDefer_total = $q.all([initDefer_class.promise, initDefer_tag.promise, initDefer_unit.promise, initDefer_spuCode.promise]);
 
     initDefer_total.then(function () {
-        console.log('数据加载完毕');
-        console.log($scope.prdClssList);
-        console.log($scope.prdUnitList);
-        console.log($scope.prdTagList);
-        console.log($scope.spuCode);
         //开始监听规格变化
         $scope.addWatch();
     });
@@ -88,7 +83,7 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
             $scope.product.tags[0]['SHOP_PRODUCT_SKU.PRD_SKU'] = $scope.spuCode + '010101';
             initDefer_spuCode.resolve();
         });
-        console.log(789456);
+
         connALiYun();
     };
     $scope.initLoad();
@@ -291,15 +286,9 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
     }
 
     function connALiYun() {
-        console.log('111111');
         var actionUrl = "../../aliYun";
-
         $http.post(actionUrl).success(function (response) {
-          /*  console.log(response);
-            serviceId=response.split(',')[0];
-            policy=response.split(',')[1];
-            signature=response.split(',')[2];*/
-           $scope.filePath=response.split(',')[0];
+            $scope.filePath=response.split(',')[0];
             $scope. policy=response.split(',')[1];
             $scope.signature=response.split(',')[2];
         });
@@ -311,47 +300,28 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
      * 上传商品的图片， 最多上传10个
      * */
     $scope.uploadImage = function (element) {
-
-        console.log('7895522');
-
         _uploadFiles(element.files, $scope.uploadImageFiles,'image', 10, function () {
             alert("商品图册最多只能添加10张！");
-
         },function(successResponse){
-            console.log('上传图片成功');
-            console.log(successResponse);
             $scope.uploadImageFiles.push(successResponse.url);
         });
-
-
 
     };
 
     /*
-     *
      * 上传商品的附件， 最多上传20个
      * */
     $scope.uploadFile = function (element) {
-        console.log('附件上传');
         _uploadFiles(element.files, $scope.uploadFiles,'file', 20, function () {
             alert("商品附件最多只能添加20个！");
         },function (successResponse) {
-            console.log('上传附件成功');
-            console.log(successResponse);
             $scope.uploadFiles.push(successResponse.url);
         });
     };
 
-   /* $scope.uploadImage=function (files, bindToList, maxSize, errCall) {
-        _uploadFiles(files, bindToList, 'image', maxSize, errCall);
-    }
-   */
-
-
     var _uploadFiles = function (files, bindToList, type, maxSize, errCall,successCall) {
 
         var maxLength = maxSize - bindToList.length;
-       // console.log(files.length);
         for(index=0;index<files.length;index++){
             if (index >= maxLength) {
                 errCall();
@@ -384,22 +354,6 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
 
     var _postFile = function (file1, filetype) {
         file = file1;
-
-      /*  var actionUrl = "../../aliYun";
-        var filePath,policy,signature;
-        $http.post(actionUrl).success(function (response) {
-            console.log(response);
-            filePath=response.split(',')[0];
-            policy=response.split(',')[1];
-            signature=response.split(',')[2];
-        });*/
-
-        /* var filePath = globalSetting.aliyun.filePath;
-         var policy = globalSetting.aliyun.policy;
-         var signature = globalSetting.aliyun.signature;
-         console.log('图片路径为' + filePath);*/
-
-
         var fd = new FormData();
         var date = new Date();
         var tempArray = file.name.split('.');
@@ -420,8 +374,6 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
         return $http.post(url2, fd, {
             transformRequest: angular.identity, headers: {'Content-Type': undefined}
         });
-
-
     };
 
 });

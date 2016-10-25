@@ -5,12 +5,22 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
 
 
     $scope.initData= function () {
+
+
+        $scope.hasNextPage=true;
+        $scope.loading = false;  //状态标记
         $scope.filterStateOrder('all');
     }
 
     $scope.filterStateOrder= function (type) {
+
+        $scope.orderList=new Array;
+
         $scope.state=type;
-        $scope.filter={};
+        $scope.filter={
+            PAGE_SIZE : 4,
+            PN : 1
+        };
         if(type=='all'){
             //全部订单
         }else if(type=='end'){
@@ -37,12 +47,18 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
     $scope.getOrder= function () {
         orderFactory.getOrder($scope.filter).get({}, function (response) {
             console.log(response);
-            $scope.orderList=response.data;
+            Array.prototype.push.apply($scope.orderList,response.data);//数组合并
             $scope.orderList.forEach(function (ele) {
                 ele.details=JSON.parse(ele['SHOP_ORDER.ORDER_INFO']);
                 setContentsInfoForOrder(ele);
             });
-            console.log($scope.orderList);
+            $scope.page=response.extraData.page;
+            if($scope.page.querySize>$scope.page.pageIndex*$scope.page.pageSize){
+                $scope.hasNextPage=true;
+            }else{
+                $scope.hasNextPage=false;
+            }
+            $scope.loading = false;
         });
     }
 
@@ -50,5 +66,20 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
     $scope.toDetail= function (id) {
         $state.go('order-detail',{ORDER_ID: id});
     }
+
+    //下拉更多商品
+    $scope.getMoreOrder = function() {
+        $scope.filter.PN = $scope.page.pageIndex+1;
+        $scope.getOrder();
+    };
+
+    //下拉监听器
+    $(document.body).infinite().on("infinite", function() {
+        if($scope.loading) return;
+        $scope.loading = true;
+        if ($scope.hasNextPage) {
+            $scope.getMoreOrder();
+        }
+    });
 
 });

@@ -19,9 +19,9 @@
     </div>
 
 
-    <div class="weui_tab_bd" ng-repeat="order in orderList" ng-if="orderList.length>0">
+    <div class="weui_tab_bd">
       <div id="all" class="weui_tab_bd_item weui_tab_bd_item_active">
-        <div class="order-wrap weui_cells">
+        <div class="order-wrap weui_cells" ng-repeat="order in orderList" ng-if="orderList.length>0">
           <div class="weui_cell" ng-click="toDetail(order['SHOP_ORDER.ID'])">
             <div class="weui_cell_bd weui_cell_primary"
                  ng-bind="'订单编号 '+order['SHOP_ORDER.ORDER_NUM']">
@@ -85,8 +85,13 @@
             </div>
           </div>
         </div>
+        <div class="weui-infinite-scroll" ng-show="hasNextPage">
+          <div class="infinite-preloader"></div>
+          正在加载...
+        </div>
       </div>
     </div>
     <div class="weui_tab_bd" ng-if="orderList.length==0">暂无订单数据!</div>
+
   </div>
 </div>

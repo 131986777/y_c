@@ -33,6 +33,7 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
 
     //查询商品
     $scope.searchPrd = function () {
+        $scope.prdList = new Array;
         $scope.getPrd();
     }
 
