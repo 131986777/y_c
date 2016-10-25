@@ -212,7 +212,7 @@ p {
   border-radius: 3px; }
 
 .btn-disabled {
-  background-color: rgb(204,204,204); }
+  color: rgba(255, 255, 255, 0.6); }
 
 .btn-disabled.btn-default {
   color: #C9C9C9; }
@@ -989,7 +989,8 @@ p {
   font-size: 1.4rem; }
 .check-out-page .action-bar .all{
   font-size: 16px;
-  color: rgb(158,158,158); }
+  color: rgb(158,158,158);
+}
 .check-out-page .action-bar .money {
   color: #F36F1C; }
 .check-out-page .action-bar .btn-wrap {
@@ -1126,6 +1127,58 @@ p {
   margin: 0 auto;
   width: 320px;
   height: 240px; }
+.product-detail-page .weui_tab_bd{
+  background-color: rgb(248,244,244);
+}
+.product-detail-page .weui_tab_bd_item{
+  color: rgb(107,107,107);
+}
+.product-detail-page .review-nav{
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+.product-detail-page .review-nav .col{
+  height: 47px;
+  font-size: 16px;
+  border-left: 1px solid rgb(227,227,227);
+  padding-top: 5px;
+  color: rgb(107,107,107);
+}
+.product-detail-page .review-nav .col p{
+  padding-top: 5px;
+}
+.product-detail-page .review-nav .col span{
+  color: rgb(245,130,57);
+}
+.product-detail-page .review-wrap{
+  background-color: #fff;
+  margin-bottom: 7px;
+  position: relative;
+}
+.product-detail-page .review-wrap .review-content{
+  padding: 19px 28px;
+}
+.product-detail-page .review-wrap .review-head{
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+.product-detail-page .review-wrap .userName{
+  padding-left: 26px;
+}
+.product-detail-page .review-wrap .userTime{
+  color: rgb(177,177,177);
+}
+.product-detail-page .review-wrap .userIcon{
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 15px;
+  left: 28px;
+}
+.product-detail-page .review-wrap .review-detail{
+  font-size: 16px;
+  color: rgb(107,107,107);
+}
 .product-detail-page .weui_cell {
   line-height: 1;
   font-size: 14px;
@@ -1171,9 +1224,8 @@ p {
   border-radius: 0;
   width: 26px; }
 .product-detail-page .add-to-cart {
-  line-height: 38px;
-  background-color: #F36F1C;
-  color: #FFF;}
+  line-height: 49px;
+  background-color: #F36F1C; }
 
 /*# sourceMappingURL=style.css.map */
 
@@ -1214,14 +1266,14 @@ p {
 .home-nav{
   margin-bottom: 9px;
 }
-.col{
+.home-nav .col{
   border-left: 1px solid rgb(225,225,225);
 
 }
-.col p{
+.home-nav .col p{
   margin-top: 10px;
 }
-.limit{
+.home-index .limit{
   position: relative;
 }
 .limit button{
@@ -1351,10 +1403,7 @@ p {
   color: #fff;
 }
 .product-list-page .weui_navbar_item{
-  background-color : #fff;
-}
-.product-detail-page .weui_navbar{
-  z-index:0;
+  background-color: : #fff;
 }
 .card-list{
   padding: 14px 25px 53px;
