@@ -987,6 +987,9 @@ p {
   margin: 0 0 5px; }
 .check-out-page .action-bar {
   font-size: 1.4rem; }
+.check-out-page .action-bar .all{
+  font-size: 16px;
+  color: rgb(158,158,158); }
 .check-out-page .action-bar .money {
   color: #F36F1C; }
 .check-out-page .action-bar .btn-wrap {
@@ -1368,7 +1371,10 @@ p {
   padding: 14px 17px 0;
 }
 .card-wrap .card-foot{
-  padding:20px 17px 14px;
+  padding:20px 17px 0;
+  position: absolute;
+  bottom: 14px;
+  width: 100%;
 }
 .card-wrap .card-detail{
   padding: 32px 17px 0;
