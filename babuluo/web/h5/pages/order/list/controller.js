@@ -18,7 +18,7 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
 
         $scope.state=type;
         $scope.filter={
-            PAGE_SIZE : 4,
+            PAGE_SIZE : 5,
             PN : 1
         };
         if(type=='all'){
