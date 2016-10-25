@@ -1,28 +1,29 @@
 <div class="card-list">
-    <div class="card-wrap" style="background-color: rgb(225,147,25);">
+    <div ng-repeat="cl in cardList" class="card-wrap" ng-style="cl['MEMBER_CARD.CARD_STYLE']">
         <div class="card-head flexbox">
             <div class="cardNum cell">
-                No . 13995262 515
+                {{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}
             </div>
             <div class="cardType cell text-right">
-                金卡
+                {{cl['MEMBER_CARD.TYPE_NAME']}}
             </div>
         </div>
         <div class="card-detail text-center">
-            <span>余额</span>￥1988
-            <p class="froze">(冻结￥<span>19.89</span>)</p>
+            <span>余额</span>{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}
+            <p ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0" class="froze">
+                （冻结{{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}}）
+            </p>
         </div>
         <div class="card-foot flexbox">
             <div class="cardTime cell">
-                2016-09-26
+                {{cl['MEMBER_CARD.ADD_DATETIME'] |FormatStrDate}}
             </div>
             <div class="cardVal cell text-center">
-                ￥400
+                <span ng-show="cl['MEMBER_CARD.IS_FACE_VALUE']==1">{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</span>
             </div>
             <div class="cardSource cell text-right">
-                线下门店
+                {{cl['MEMBER_CARD.SOURCE_NAME']}}
             </div>
         </div>
-
     </div>
 </div>

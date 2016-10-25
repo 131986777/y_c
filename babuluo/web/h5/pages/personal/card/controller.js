@@ -10,6 +10,8 @@ AndSellH5MainModule.controller('H5.CardController', function ($scope, $state, mo
         personalFactory.getMemberCardByUserId(user).get({}, function (response) {
 
             console.log(response);
+
+            $scope.cardList = response.data;
         });
     };
     $scope.loadMemberCard();
