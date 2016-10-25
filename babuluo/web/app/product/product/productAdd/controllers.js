@@ -49,7 +49,7 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
 
         UE.delEditor('container');
         ue = UE.getEditor('container', {
-            initialFrameHeight: 300, initialFrameWidth: 900
+            initialFrameHeight: 500, initialFrameWidth: 900
         });
 
         //加载商品分类数据
@@ -285,6 +285,7 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
         return object;
     }
 
+    //阿里云连接
     function connALiYun() {
         var actionUrl = "../../aliYun";
         $http.post(actionUrl).success(function (response) {
@@ -292,33 +293,33 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
             $scope. policy=response.split(',')[1];
             $scope.signature=response.split(',')[2];
         });
-
     }
 
-    /*
-     *
-     * 上传商品的图片， 最多上传10个
-     * */
+    /**
+     *  上传商品的图片， 最多上传10个
+     **/
     $scope.uploadImage = function (element) {
         _uploadFiles(element.files, $scope.uploadImageFiles,'image', 10, function () {
             alert("商品图册最多只能添加10张！");
         },function(successResponse){
             $scope.uploadImageFiles.push(successResponse.url);
+            console.log(successResponse);
+            console.log($scope.uploadImageFiles);
         });
-
     };
 
-    /*
+    /**
      * 上传商品的附件， 最多上传20个
      * */
     $scope.uploadFile = function (element) {
         _uploadFiles(element.files, $scope.uploadFiles,'file', 20, function () {
             alert("商品附件最多只能添加20个！");
         },function (successResponse) {
-            $scope.uploadFiles.push(successResponse.url);
+            $scope.uploadFiles.push(successResponse);
         });
     };
 
+    //上传文件
     var _uploadFiles = function (files, bindToList, type, maxSize, errCall,successCall) {
 
         var maxLength = maxSize - bindToList.length;
