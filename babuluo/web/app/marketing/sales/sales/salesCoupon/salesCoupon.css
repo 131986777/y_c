@@ -66,7 +66,7 @@
     padding-bottom: 20px;
     overflow: hidden;
 }
-.coupon-content{
+.salesCoupon .coupon-content{
     width: 470px;
     height: 256px;
     border-radius: 8px;
@@ -74,32 +74,32 @@
     float: left;
 
 }
-.coupon-content .coupon-head{
+.salesCoupon .coupon-content .coupon-head{
     color: #fff;
     height: 106px;
     background: url(../../../../components/images/coupon_01.png) no-repeat left center;
 }
-.coupon-content .coupon-info,.coupon-content .coupon-desc{
+.salesCoupon .coupon-content .coupon-info,.coupon-content .coupon-desc{
     width: 390px;
     margin: 0 auto;
     position: relative;
     height: 150px;
 }
-.coupon-content .coupon-info .couponType{
+.salesCoupon .coupon-content .coupon-info .couponType{
     font-size: 26px;
     margin-bottom: 0;
     padding-top: 30px;
 }
-.coupon-content .coupon-info .couponValue{
+.salesCoupon .coupon-content .coupon-info .couponValue{
     position: absolute;
     top: 2px;
     right: 0px;
     text-align: right;
 }
-.coupon-info .couponValue {
+.salesCoupon .coupon-info .couponValue {
     font-size: 26px;
 }
-.coupon-info .couponValue span{
+.salesCoupon .coupon-info .couponValu.salesCoupon e span{
     font-size: 60px;
 }
 .coupon-content .coupon-info .coupon-limit{

@@ -1449,3 +1449,6 @@ p {
 .card-wrap .card-detail .froze{
   font-size: 16px;
 }
+.product-list-navbar{
+  z-index:0;
+}
