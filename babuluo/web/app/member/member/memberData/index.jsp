@@ -86,5 +86,17 @@
                     <input class="form-control" type="text" ng-model="memberData['MEMBER_INFO.ADDR']">
                 </div>
             </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">身份证</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" ng-model="memberData['MEMBER_INFO.ID_NUMBER']">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">生日</label>
+                <div class="col-sm-4">
+                    <input class="form-control" type="text" ng-model="memberData['MEMBER_INFO.BIRTHDAY']">
+                </div>
+            </div>
         </form>
     </div>
