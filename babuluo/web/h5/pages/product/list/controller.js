@@ -21,6 +21,7 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
         productFactory.getProduct($scope.filter).get({}, function (response) {
             console.log(response);
             Array.prototype.push.apply($scope.prdList,response.data);//数组合并
+            $scope.classList=response.extraData.classList;
             $scope.page=response.extraData.page;
             if($scope.page.querySize>$scope.page.pageIndex*$scope.page.pageSize){
                 $scope.hasNextPage=true;
@@ -40,6 +41,13 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
     //跳转至详情页
     $scope.toDetail = function (id) {
         $state.go('prd-detail', {PRD_ID: id});
+    }
+
+    //跳转至详情页
+    $scope.filterClass = function (classId) {
+        $scope.prdList = new Array;
+        $scope.filter['SHOP_PRODUCT.CLASS_ID']=classId;
+        $scope.getPrd();
     }
 
     //跳出弹出框选择sku

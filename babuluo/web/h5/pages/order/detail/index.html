@@ -45,6 +45,11 @@
           提货码：lhh20160823
         </p>
       </div>
+      <div class="col-xs-12">
+        <p ng-if="order['SHOP_ORDER.REMARK']!=undefined">
+          订单备注：<span ng-bind="order['SHOP_ORDER.REMARK']"></span>
+        </p>
+      </div>
     </div>
 
 

@@ -51,13 +51,11 @@
         <servlet-name>APIServlet</servlet-name>
         <url-pattern>/api</url-pattern>
     </servlet-mapping>
-
     <!--Hessian-->
-
 
     <servlet>
         <servlet-name>aliyun</servlet-name>
-        <servlet-class>connectALiYun.web.command.connectALiYun</servlet-class>
+        <servlet-class>com.pabula.ali.connectALiYun</servlet-class>
     </servlet>
 
     <servlet-mapping>
