@@ -46,4 +46,29 @@ AndSellMainModule.service('salesFactory', function ($resource, baseURL) {
             }
         });
     }
+
+    this.ModifySalesProduct = function (form){
+        return $resource(baseURL + '/sales/salesplan/modifyById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+
+    this.delSalePlanById  = function (form){
+        return $resource(baseURL + '/sales/salesplan/modifyById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+
+    this.stopSalePlanById  = function (form){
+        console.log(form);
+        return $resource(baseURL + '/sales/salesplan/modifyById', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
 });
