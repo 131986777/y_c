@@ -1241,13 +1241,25 @@ p {
   top: 15px;
   width: 100%;
 }
-.search-wrap input{
+
+.search-wrap .searchHolder{
   width: 70%;
   height: 40px;
-  padding-left: 40px;
   border-radius: 5px;
-  background:url("../img/search.png") left center no-repeat;
   background-color: rgba(117,113,113,0.3);
+  position: relative;
+
+}
+.search-wrap .icon-search{
+  display: inline-block;
+  width: 37px;
+  height: 37px;
+  background:url("../img/search.png") left center no-repeat;
+}
+.search-wrap input{
+  position: absolute;
+  top: 6px;
+  background-color: transparent;
   color: #fff;
   border:none;
   outline: none;
@@ -1255,22 +1267,23 @@ p {
 .search-wrap .shopName{
   display: inline-block;
   color: #fff;
-  width: 25%;
+  width: 30%;
   font-size: 16px;
-  height: 20px;
+  height: 30px;
+  padding-top: 5px;
   padding-left: 5px;
   overflow : hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.home-nav {
+.home-nav{
   margin-bottom: 9px;
 }
-.home-nav .col{
+.home-index .col{
   border-left: 1px solid rgb(225,225,225);
 
 }
-.home-nav .col p{
+.home-index .col p{
   margin-top: 10px;
 }
 .home-index .limit{
