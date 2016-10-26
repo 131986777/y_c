@@ -50,6 +50,7 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("order-List", {
             url: "/orderList",
+            params:{state:'all'},
             templateUrl: "/AndSell/h5/pages/order/list/index.html",
             controller: "H5.OrderListController"
         })

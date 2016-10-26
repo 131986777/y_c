@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $state, orderFactory,modalFactory) {
+AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $state, $stateParams,orderFactory,modalFactory) {
 
     modalFactory.setTitle('订单列表');
     modalFactory.setBottom(false);
@@ -9,7 +9,7 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
 
         $scope.hasNextPage=true;
         $scope.loading = false;  //状态标记
-        $scope.filterStateOrder('all');
+        $scope.filterStateOrder($stateParams.state);
     }
 
     $scope.filterStateOrder= function (type) {

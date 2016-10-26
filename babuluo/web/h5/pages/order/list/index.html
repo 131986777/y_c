@@ -68,11 +68,14 @@
               <span ng-bind="order['SHOP_ORDER.PRICE_FREIGHT'] | currency : '￥'"></span>
               <span ng-bind="' 元) '"></span>
             </div>
+
+          </div>
+
+          <div class="weui_cell">
             <div class="total-price weui_cell_bd weui_cell_primary">
               <span ng-bind="'下单时间 ： '+order['SHOP_ORDER.DATETIME_ADD']"></span>
             </div>
-          </div>
-
+            </div>
           <div class="weui_cell">
             <div class="act-btn-wrap weui_cell_bd weui_cell_primary">
               <a class="btn btn-plain-default btn-sm" href="#">
