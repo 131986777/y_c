@@ -66,7 +66,6 @@ AndSellMainModule.controller('productListController', function ($scope, productF
             modalFactory.showShortAlert("改价成功");
             $('#modifySkuPrice').modal('hide');
             modalFactory.reload();
-            console.log('222');
         });
     }
 

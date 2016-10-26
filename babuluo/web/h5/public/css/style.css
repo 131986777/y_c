@@ -1416,7 +1416,7 @@ p {
   color: #fff;
 }
 .product-list-page .weui_navbar_item{
-  background-color: : #fff;
+  background-color : #fff;
 }
 .card-list{
   padding: 14px 25px 53px;
@@ -1448,4 +1448,7 @@ p {
 }
 .card-wrap .card-detail .froze{
   font-size: 16px;
+}
+.product-list-navbar{
+  z-index:0;
 }

@@ -1,13 +1,14 @@
-AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state, productFactory, modalFactory) {
+AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,$stateParams, productFactory, modalFactory) {
 
     modalFactory.setTitle('商品列表');
-    modalFactory.setBottom(false);
+    modalFactory.setBottom(true);
 
 
     $scope.initData = function () {
         $scope.filter = {
             PAGE_SIZE : 10,
-            PN : 1
+            PN : 1,
+            'SHOP_PRODUCT.PRD_NAME':$stateParams.keyword
         };
         $scope.hasNextPage=true;
         $scope.loading = false;  //状态标记
