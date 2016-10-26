@@ -1,5 +1,7 @@
 AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
 
+    $urlRouterProvider.when('','/home');
+
     $stateProvider
         .state("home", {
             url: "/home",
@@ -42,6 +44,7 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("prd-List", {
             url: "/prdList",
+            params:{keyword:''},
             templateUrl: "/AndSell/h5/pages/product/list/index.html",
             controller: "H5.PrdListController"
         })

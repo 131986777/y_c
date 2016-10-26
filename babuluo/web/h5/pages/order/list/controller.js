@@ -50,8 +50,11 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
             Array.prototype.push.apply($scope.orderList,response.data);//数组合并
             $scope.orderList.forEach(function (ele) {
                 ele.details=JSON.parse(ele['SHOP_ORDER.ORDER_INFO']);
-                setContentsInfoForOrder(ele);
+                ele.details.forEach(function (item) {
+                    setContentsInfoForOrder(item);
+                });
             });
+            console.log($scope.orderList);
             $scope.page=response.extraData.page;
             if($scope.page.querySize>$scope.page.pageIndex*$scope.page.pageSize){
                 $scope.hasNextPage=true;
