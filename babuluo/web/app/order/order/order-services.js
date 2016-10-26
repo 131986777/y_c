@@ -57,4 +57,11 @@ AndSellMainModule.service('orderFactory', function ($resource, baseURL) {
         });
     }
 
+    this.modifyOrderRemark= function (form) {
+        return $resource(baseURL + '/shop/order/modifyOrderRemark', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
 });

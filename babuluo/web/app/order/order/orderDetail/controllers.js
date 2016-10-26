@@ -5,6 +5,7 @@ AndSellMainModule.controller('orderDetailController', function ($scope, $statePa
 
 
     $scope.initData= function () {
+        $scope.modify={};
         $scope.getOrder($stateParams.ORDER_ID);
     }
 
@@ -44,6 +45,19 @@ AndSellMainModule.controller('orderDetailController', function ($scope, $statePa
         orderFactory.payOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             alert('支付成功');
             $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+        });
+    }
+
+    $scope.remarkModifyClick= function () {
+        $scope.modify['SHOP_ORDER.ID']=$scope.order['SHOP_ORDER.ID'];
+        $scope.modify['SHOP_ORDER.REMARK']=$scope.order['SHOP_ORDER.REMARK'];
+    }
+
+    //备注修改
+    $scope.modifyOrderRemark= function () {
+        orderFactory.modifyOrderRemark($scope.modify).get({}, function (response) {
+            $scope.order['SHOP_ORDER.REMARK']=$scope.modify['SHOP_ORDER.REMARK'];
+            $('#modifyRemark').modal('hide');
         });
     }
 
