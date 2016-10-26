@@ -399,7 +399,7 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
                 unitFactory.getPrdUnitList().get({}, function (response) {
                     $scope.unitList = response.data;
                 });
-            }
+            };
 
             $scope.skuList = new Array;
 
