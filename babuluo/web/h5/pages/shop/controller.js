@@ -25,5 +25,10 @@ AndSellH5MainModule.controller('H5.ShopController', function ($scope, $state, $s
             $scope.shopList = response.data;
             $scope.shopListLength = response.data.length;
         });
-    }
+    };
+
+    $scope.allDistrict = function (districtName) {
+        $scope.districtName = districtName;
+        $scope.initLoad();
+    };
 });
