@@ -257,4 +257,9 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
             console.log(start.toISOString(), end.toISOString(), label);
         });
     });
+
+        $(".form_datetime").datetimepicker({
+            language:  'zh-CN',
+            format: 'yyyy-mm-dd hh:ii'});
+
 });
