@@ -187,4 +187,15 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
 
     }
 
+    $scope.mouseIsEnter=new Array();
+    $scope.mouseEnter=function(key){
+
+        $scope.mouseIsEnter[key]=true;
+
+    }
+    $scope.mouseleave=function(key){
+
+        $scope.mouseIsEnter[key]=false;
+    }
+
 });
