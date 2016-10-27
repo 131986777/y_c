@@ -181,7 +181,7 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
     $scope.currSkuSelectClassMap = {1: [], 2: [], 3: []};
 
     //不可选的样式
-    var cannotSelectCLass = 'btn-disabled';
+    var cannotSelectCLass = 'btn-disabled-sku';
 
     //控制sku可选 和不可选的calss
     $scope.skuSelectable = function () {

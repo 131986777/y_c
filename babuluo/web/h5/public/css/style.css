@@ -214,6 +214,9 @@ p {
 .btn-disabled {
   color: rgba(255, 255, 255, 0.6); }
 
+.btn-disabled-sku {
+  background-color: rgb(204,204,204); }
+
 .btn-disabled.btn-default {
   color: #C9C9C9; }
 
