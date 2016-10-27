@@ -18,7 +18,7 @@
     <link href="/AndSell/app/components/libs/iconfont/iconfont.css" rel="stylesheet">
 
 
-    <link href="/AndSell/app/components/libs/datepicker/daterangepicker-bs3.css" rel="stylesheet">
+    <link href="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
     <!--标签输入框样式-->
     <link href="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.css" rel="stylesheet">
@@ -414,7 +414,7 @@
                         </ul>
                         <ul class="sub-menu " role="menu">
                             <li>
-                                <a href="#">
+                                <a ui-sref="userList">
                                     员工
                                 </a>
                             </li>
@@ -509,8 +509,8 @@
 <script src="/AndSell/app/components/libs/bootstrap-fileinput/bootstrap-fileinput.js"></script>
 <script src="/AndSell/app/components/data-hover/data-hover.js"></script>
 <!--时间选择-->
-<script type="text/javascript" src="/AndSell/app/components/libs/datepicker/moment.min.js"></script>
-<script type="text/javascript" src="/AndSell/app/components/libs/datepicker/daterangepicker.js"></script>
+<script type="text/javascript" src="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.zh-CN.js"></script>
 <!--angularjs blockui-->
 <script src="/AndSell/app/components/libs/angular/angularBlockUI/angular-block-ui.js"></script>
 <script src="/AndSell/app/components/tree-list/tree-list.js"></script>
@@ -538,6 +538,7 @@
 <script src="/AndSell/app/order/order-router.js"></script><!--demo相关路由中心-->
 <script src="/AndSell/app/stock/stock-router.js"></script><!--库存相关路由中心-->
 <script src="/AndSell/app/marketing/marketing-router.js"></script><!--营销相关路由中心-->
+<script src="/AndSell/app/user/user-router.js"></script><!--管理员相关路由中心-->
 
 
 <!--############service集合区############-->
@@ -546,6 +547,7 @@
 <script src="/AndSell/app/product/product_tag/tag-services.js"></script><!--商品标签-->
 <script src="/AndSell/app/product/product_unit/unit-services.js"></script><!--商品单位-->
 <script src="/AndSell/app/shop/shop/shop-services.js"></script><!--门店-->
+<script src="/AndSell/app/user/user/user-services.js"></script><!--管理员-->
 <script src="/AndSell/app/shop/shop_district/district-services.js"></script><!--门店区域-->
 <script src="/AndSell/app/member/member/member-services.js"></script><!--会员 示例使用-->
 <script src="/AndSell/app/member/source/memberSource-services.js"></script><!--客户来源-->
@@ -572,6 +574,8 @@
 <script src="/AndSell/app/product/product_tag/tagList/controllers.js"></script><!--商品标签-->
 <script src="/AndSell/app/product/product_unit/unitList/controllers.js"></script><!--商品单位-->
 <script src="/AndSell/app/shop/shop/shopList/controllers.js"></script><!--门店-->
+<script src="/AndSell/app/user/user/userList/controllers.js"></script><!--管理员-->
+<script src="/AndSell/app/user/user/userAdd/controllers.js"></script><!--管理员-->
 <script src="/AndSell/app/shop/shop_district/districtList/controllers.js"></script><!--门店区域-->
 <script src="/AndSell/app/member/member/memberList/controllers.js"></script><!--会员 示例使用-->
 <script src="/AndSell/app/member/member/memberInfo/controllers.js"></script><!--会员 示例使用-->

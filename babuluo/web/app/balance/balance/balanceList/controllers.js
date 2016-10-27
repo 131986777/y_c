@@ -5,7 +5,7 @@ AndSellMainModule.controller('balanceListController', function ($scope, $statePa
     //获得所有资金明细
     $scope.bindData = function (response) {
         $scope.balanceList = response.data;
-        $scope.searchlist = response.data
+        $scope.searchlist = response.data;
         $scope.userDetailMap = response.extraData.userDetailMap;
         $scope.userFininanceMap = response.extraData.userFininanceMap;
     };

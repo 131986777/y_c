@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state,$stateParams,productFactory,orderFactory,modalFactory) {
+AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state, $stateParams, weUI, productFactory, orderFactory, modalFactory) {
 
     modalFactory.setTitle('新增订单');
     modalFactory.setBottom(false);
@@ -51,7 +51,7 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
         params['SHOP_ORDER.DETAILS']=JSON.stringify($scope.skuList);//sku信息
         orderFactory.addOrder(params).get({}, function (response) {
 
-            alert('下单成功');
+            weUI.toast.ok('下单成功');
 
             //成功之后删除购物车内容
             $scope.skuIds.split(',').forEach(function (ele) {

@@ -64,5 +64,9 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/h5/pages/personal/card/index.html",
             controller: "H5.CardController"
         })
-
+        .state("shopList", {
+            url: "/shopList",
+            templateUrl: "/AndSell/h5/pages/shop/index.html",
+            controller: "H5.ShopController"
+        })
 });

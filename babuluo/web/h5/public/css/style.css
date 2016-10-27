@@ -1452,6 +1452,75 @@ p {
 .card-wrap .card-detail .froze{
   font-size: 16px;
 }
-.product-list-navbar{
-  z-index:0;
+.shop-page .shop-select{
+  height: 40px;
+  background-color: #fff;
+
+}
+.shop-page .shop-select-wrap{
+  padding:0 10px 0;
+}
+.shop-page .shop-select .map-icon{
+  height: 18px;
+  width: 16px;
+  background:url("../img/shop_03.jpg");
+  margin-top: 11px;
+}
+.shop-page .shop-select-wrap .dropdown a{
+  font-size: 16px;
+  line-height: 40px;
+  color:#000;
+}
+.shop-page .shop-select-wrap .dropdown-menu{
+  min-width: 141px;
+  text-align: center;
+  left: 50%;
+  margin-left: -70px;
+  padding: 0;
+}
+.shop-page .shop-select-wrap .dropdown-menu li{
+  border-bottom: 1px solid rgb(204,204,204);
+  height: 40px;
+  font-size: 16px;
+  line-height: 40px;
+}
+.shop-page .shop-wrap{
+}
+.shop-page .shop-list p{
+  margin-bottom: 13px;
+}
+.shop-page .shop-list p.time{
+  margin-bottom: 0;
+}
+.shop-page .shop-list .shops{
+  background-color: #fff;
+  padding: 10px 10px;
+  margin-bottom: 10px;
+  position: relative;
+  color: #000;
+  display: block;
+}
+.shop-page .shop-list .shops .position-icon{
+  display: inline-block;
+  width: 10px;
+  height: 12px;
+  background: url("../img/shop_11.png");
+}
+.shop-page .shop-list .shops img{
+  margin-right: 10px;
+}
+.shop-page .shop-list .shops .time{
+  font-size: 12px;
+  color: rgb(124,124,124);
+}
+.shop-page .shop-list .shops .position{
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+.shop-page .shop-list .shops .time span{
+  color: rgb(244,111,26);
+}
+.shop-page .title{
+  padding:10px 10px;
 }

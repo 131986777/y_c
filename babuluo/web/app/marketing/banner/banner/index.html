@@ -145,10 +145,15 @@
                         </label>
 
                         <div class="col-md-8">
-                            <input type="text" class="form-control"
+                           <!-- <input type="text" class="form-control"
                                    ng-model="add['BANNER.BEGIN_DATETIME']"
                                    ng-init="add['BANNER.BEGIN_DATETIME']=''"
-                                   placeholder="">
+                                   placeholder="">-->
+                            <input type="datetime-local" class="form-control" id="startTime"/>
+                            <!--<input type="time"  class="col-md-4"  id="startTime"/>-->
+                        </div>
+                        <div class="col-md-8">
+
                         </div>
                     </div>
                     <div class="form-group row" >
@@ -157,10 +162,8 @@
                         </label>
 
                         <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="add['BANNER.END_DATETIME']"
-                                   ng-init="add['BANNER.END_DATETIME']=''"
-                                   placeholder="">
+
+                            <input type="datetime-local"  class="form-control" id="endTime"/>
                         </div>
                     </div>
 
@@ -252,18 +255,17 @@
                         </label>
 
                         <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="mod['BANNER.BEGIN_DATETIME']|FormatAllDate">
+                            <input type="datetime-local" value="{{modifyTime(mod['BANNER.BEGIN_DATETIME'])}}" class="form-control" id="mStartTime"/>
                         </div>
                     </div>
+
                     <div class="form-group row" >
                         <label class="col-md-3 control-label">
                             结束时间
                         </label>
 
                         <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="mod['BANNER.END_DATETIME']|FormatAllDate">
+                            <input type="datetime-local" value="{{modifyTime(mod['BANNER.END_DATETIME'])}}" class="form-control" id="mEndTime"/>
                         </div>
                     </div>
 
@@ -284,85 +286,6 @@
 
 
 <!--BEGIN 优惠规则详情-->
-<div class="modal fade text-left" id="couponDetail" tabindex="-1" aria-hidden="true"
-     style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-hidden="true"></button>
-                <h4 class="modal-title">优惠规则详情</h4>
-            </div>
 
-            <div class="modal-body  text-left">
-
-                <div class="form-group row">
-                    <label class="col-md-3">
-                        优惠规则名称：
-                    </label>
-                    <span>{{detail['BANNER.NAME']}}</span>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 control-label">
-                        优惠规则类型:
-                    </label>
-                    <span ng-if="detail['BANNER.TYPE']==1">减价</span> <!--横幅类型-减-->
-                    <span ng-if="detail['BANNER.TYPE']==2">打折</span> <!--横幅类型-折-->
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 control-label">
-                        优惠规则描述:
-                    </label>
-                    <span ng-bind="detail['BANNER.INTRO']"></span> <!--规则描述-->
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 control-label">
-                        <span>面值:</span>
-                    </label>
-                    <span ng-if="detail['BANNER.TYPE']==1">{{(detail['BANNER.FACE_VALUE']/100).toFixed(2)}}元</span>
-                    <span ng-if="detail['BANNER.TYPE']==2">{{(detail['BANNER.FACE_VALUE']/10).toFixed(1)}}折</span>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 control-label">
-                        <span>使用门槛：</span>
-                    </label>
-                    <span ng-if="detail['BANNER.CONDITION_PRICE']>0">订单满{{(detail['BANNER.CONDITION_PRICE']/100).toFixed(2)}}元使用</span>
-                </div>
-                <div class="form-group row" ng-if="detail['BANNER.TYPE']==2">
-                    <label class="col-md-3 control-label">
-                        <span>最高抵扣：</span>
-                    </label>
-                    <span>{{(detail['BANNER.MAX_PRICE_LIMIT']/100).toFixed(2)}}元</span>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 control-label">
-                        <span>每人限领：</span>
-                    </label>
-                    <span>{{detail['BANNER.EACH_MEMBER_LIMIT']}}张</span>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 control-label">
-                        <span>状态：</span>
-                    </label>
-                    <span ng-if="detail['BANNER.STATE']==1">可用</span>
-                    <span ng-if="detail['BANNER.STATE']==2">不可用</span>
-                </div>
-                <div class="form-group row">
-                    <label class="col-md-3 control-label">
-                        <span>添加时间：</span>
-                    </label>
-                    <span>{{detail['BANNER.ADD_DATIME']|FormatAllDate}}</span>
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn green  btn-outline" data-dismiss="modal">确定
-                </button>
-            </div>
-
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
 </div>
 <!--END 优惠规则详情-->
