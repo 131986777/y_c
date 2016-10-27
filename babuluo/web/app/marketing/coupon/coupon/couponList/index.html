@@ -86,7 +86,7 @@
                             <div ng-class="{'coupon-state-stop':item['COUPON.STOP']==-1,'coupon-state-over':item['COUPON.IsEnd']==1,'coupon-state':item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1}"></div>
                             <div class="coupon-footer text-right">
                                 <div class="buttons">
-                                    <a show-modal id="#modCoupon" ng-click="modCouponClick(item)" class="note" ng-if="mouseIsEnter[key]" ></a>
+                                    <a show-modal id="#modCoupon" ng-click="modCouponClick(item)" class="note" ng-if="mouseIsEnter[key]&&item['COUPON.IsEnd']==-1" ></a>
                                     <a ng-if="item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1&&mouseIsEnter[key]" class="stop" ng-click="stopCoupon(item)"></a>
                                     <a ng-if="item['COUPON.STOP']==-1&&item['COUPON.IsEnd']==-1&&mouseIsEnter[key]" class="start" ng-click="stopCoupon(item)"></a><!--启用-->
                                     <a class="del" ng-click="delCoupon(item)"></a>
