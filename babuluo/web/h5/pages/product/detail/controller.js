@@ -16,7 +16,11 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
             name1: '', name2: '', name3: ''
         }
 
-        productFactory.getProductAllInfoById($stateParams.PRD_ID).get({}, function (response) {
+        var params={};
+        params['SHOP_PRODUCT.PRD_ID']=$stateParams.PRD_ID;
+        params['STOCK_REALTIME.STORE_ID']=1050;
+
+        productFactory.getProductAllInfoById(params).get({}, function (response) {
             $scope.product = response.data[0];
             if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                 $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
@@ -205,6 +209,7 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
     //加入购物车
     $scope.addToCart = function () {
         if ($scope.sku != undefined) {
+            if($scope.sku['SHOP_PRODUCT_SKU.STOCK']>0){
             var cartInfo = getCookie('cartInfo');
             var cartSize = getCookie('cartSize');
             if (cartInfo == '') {
@@ -239,6 +244,9 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
 
             // get prd size in cart
             $scope.cartSize = cartInfo.length;
+            }else{
+                weUI.toast.error('该规格已售罄');
+            }
         } else {
             alert('请选择规格！');
         }

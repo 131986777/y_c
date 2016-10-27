@@ -1,18 +1,16 @@
-AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,$stateParams, productFactory, modalFactory) {
+AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state, $stateParams, productFactory, modalFactory) {
 
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(true);
 
-
     $scope.initData = function () {
         $scope.filter = {
-            PAGE_SIZE : 10,
-            PN : 1,
-            'SHOP_PRODUCT.PRD_NAME':$stateParams.keyword
+            PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'STOCK_REALTIME.STORE_ID' : 1050
         };
-        $scope.hasNextPage=true;
+        $scope.hasNextPage = true;
         $scope.loading = false;  //状态标记
         $scope.prdList = new Array;
+        $scope.storeId = 1050 ;
         $scope.getPrd();
         $scope.getCartInfoInCookie();
     }
@@ -21,13 +19,13 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
     $scope.getPrd = function () {
         productFactory.getProduct($scope.filter).get({}, function (response) {
             console.log(response);
-            Array.prototype.push.apply($scope.prdList,response.data);//数组合并
-            $scope.classList=response.extraData.classList;
-            $scope.page=response.extraData.page;
-            if($scope.page.querySize>$scope.page.pageIndex*$scope.page.pageSize){
-                $scope.hasNextPage=true;
-            }else{
-                $scope.hasNextPage=false;
+            Array.prototype.push.apply($scope.prdList, response.data);//数组合并
+            $scope.classList = response.extraData.classList;
+            $scope.page = response.extraData.page;
+            if ($scope.page.querySize > $scope.page.pageIndex * $scope.page.pageSize) {
+                $scope.hasNextPage = true;
+            } else {
+                $scope.hasNextPage = false;
             }
             $scope.loading = false;
         });
@@ -47,14 +45,14 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
     //跳转至详情页
     $scope.filterClass = function (classId) {
         $scope.prdList = new Array;
-        $scope.filter['SHOP_PRODUCT.CLASS_ID']=classId;
+        $scope.filter['SHOP_PRODUCT.CLASS_ID'] = classId;
         $scope.getPrd();
     }
 
     //跳出弹出框选择sku
     $scope.selectSKU = function (id) {
-        $scope.cartPrdId=id;
-        $scope.cartModalShow=true;
+        $scope.cartPrdId = id;
+        $scope.cartModalShow = true;
     }
 
     //更新购物车价格
@@ -107,7 +105,7 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
         });
         if ($scope.skuList.length > 0) {
             $state.go('order-add', {SKU_IDS: list.toString()});
-        }else{
+        } else {
             alert('至少选择一件商品');
         }
     }
@@ -145,19 +143,21 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
     }
 
     //购物车添加成功
-    $scope.addToCartSuccess= function () {
+    $scope.addToCartSuccess = function () {
         $scope.getCartInfoInCookie();
     }
 
     //下拉更多商品
-    $scope.getMorePrd = function() {
-        $scope.filter.PN = $scope.page.pageIndex+1;
+    $scope.getMorePrd = function () {
+        if ($scope.page != undefined) {
+            $scope.filter.PN = $scope.page.pageIndex + 1;
+        }
         $scope.getPrd();
     };
 
     //下拉监听器
-    $(document.body).infinite().on("infinite", function() {
-        if($scope.loading) return;
+    $(document.body).infinite().on("infinite", function () {
+        if ($scope.loading) return;
         $scope.loading = true;
         if ($scope.hasNextPage) {
             $scope.getMorePrd();
