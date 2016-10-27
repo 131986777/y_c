@@ -1,32 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>选择门店</title>
-    <link rel="stylesheet"
-          href="../../public/libs/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
-
-    <link rel="stylesheet" href="../../public/css/style.css">
-</head>
-<body>
-
 <div class="shop-page bg-grey">
 
     <div class="shop-select">
         <!-- 门店选择 -->
         <div class="shop-select-wrap">
             <div class="dropdown text-center">
-                <a id="dLabel" type="button" data-toggle="dropdown" ">
-                建邺区
-                <span class="caret"></span>
+                <a id="dLabel" type="button" data-toggle="dropdown">
+                    {{districtName}}
+                    <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
-                    <li>鼓楼区</li>
-                    <li>玄武区</li>
-                    <li>鼓楼区</li>
-                    <li>建邺区</li>
+                    <li ng-repeat="district in districtList"
+                        ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'],district['DISTRICT.DISTRICT_NAME'])">
+                        {{district['DISTRICT.DISTRICT_NAME']}}
+                    </li>
                 </ul>
                 <div class="map-icon pull-right"></div>
             </div>
@@ -69,45 +55,25 @@
                 全部店面
             </div>
             <div class="shop-list">
-                <a class="shops">
+                <a class="shops" ng-repeat="shop in shopList">
                     <img class="pull-left" src="../../public/img/shops_06.png">
-                    <p>莲花新城店</p>
-                    <p>建邺区莲花新城XX路XX栋</p>
-                    <p class="time">影业时间 7:30-19:30 电话<span> 025-3242343243</span></p>
-                    <div class="position">
-                        <i class="position-icon"></i>
-                        距离<span>1.5</span>公里
-                    </div>
-                </a>
-                <a class="shops">
-                    <img class="pull-left" src="../../public/img/shops_06.png">
-                    <p>莲花新城店</p>
-                    <p>建邺区莲花新城XX路XXx栋</p>
-                    <p class="time">影业时间 7:30-19:30 电话<span> 025-3242343243</span></p>
-                    <div class="position">
-                        <i class="position-icon"></i>
-                        距离<span>1.5</span>公里
-                    </div>
-                </a>
-                <a class="shops">
-                    <img class="pull-left" src="../../public/img/shops_06.png">
-                    <p>莲花新城店</p>
-                    <p>建邺区莲花新城XX路XX栋</p>
-                    <p class="time">影业时间 7:30-19:30 电话<span> 025-3242343243</span></p>
+                    <p ng-bind="shop['SHOP.SHOP_NAME']"></p>
+                    <p ng-bind="shop['SHOP.ADDR']"></p>
+                    <p class="time">营业时间 {{shop['SHOP.OPEN_TIME']}}-{{shop['SHOP.CLOSE_TIME']}}
+                        电话<span ng-bind="shop['SHOP.TELEPHONE']"> 025-3242343243</span>
+                    </p>
                     <div class="position">
                         <i class="position-icon"></i>
                         距离<span>1.5</span>公里
                     </div>
                 </a>
             </div>
+            <div class="shop-list" ng-if="shopListLength<=0">
+                <a class="shops">
+                    无门店
+                </a>
+            </div>
         </div>
 
     </div>
 </div>
-
-
-
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-<script src="../../public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
