@@ -47,6 +47,7 @@ AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, pr
             item['SHOP_PRODUCT_SKU.SIZE'] = item['SHOP_PRODUCT_SKU.SIZE'] - 1;
         }
 
+
         //修改cookie
         var cartSize = getCookie('cartSize');
         if (cartSize == '') {
