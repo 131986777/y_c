@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,$stateParams, productFactory, modalFactory) {
+AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,$stateParams, weUI,productFactory, modalFactory) {
 
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(true);
@@ -96,7 +96,6 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
         } else {
             $scope.updateCartPrice();
         }
-
     }
 
     //结算
@@ -108,7 +107,7 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
         if ($scope.skuList.length > 0) {
             $state.go('order-add', {SKU_IDS: list.toString()});
         }else{
-            alert('至少选择一件商品');
+            weUI.toast.error('至少选择一件商品');
         }
     }
 
