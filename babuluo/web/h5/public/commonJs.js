@@ -88,7 +88,7 @@ function setContentsInfo(sku) {
         contents +=' ';
         contents += sku['SHOP_PRODUCT_SKU.SKU_NAME1'] + " : " + sku['SHOP_PRODUCT_SKU.SKU_CONTENT1'];
     }
-    if (sku['SHOP_PRODUCT_SKU.SKU_CONTENT3'] != undefined) {
+    if (sku['SHOP_PRODUCT_SKU.SKU_CONTENT2'] != undefined) {
         contents +=' ';
         contents += sku['SHOP_PRODUCT_SKU.SKU_NAME2'] + " : " + sku['SHOP_PRODUCT_SKU.SKU_CONTENT2'];
     }
@@ -102,16 +102,16 @@ function setContentsInfo(sku) {
 //   get Sku  content info
 function setContentsInfoForOrder(sku) {
     var contents = '';
-    if (sku['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
+    if (sku['SHOP_ORDER_INFO.SKU_1_VALUE'] != undefined) {
         contents +=' ';
-        contents += sku['SHOP_ORDER_INFO.SKU_1_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_3_VALUE'];
+        contents += sku['SHOP_ORDER_INFO.SKU_1_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_1_VALUE'];
+    }
+    if (sku['SHOP_ORDER_INFO.SKU_2_VALUE'] != undefined) {
+        contents +=' , ';
+        contents += sku['SHOP_ORDER_INFO.SKU_2_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_2_VALUE'];
     }
     if (sku['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
-        contents +=' ';
-        contents += sku['SHOP_ORDER_INFO.SKU_2_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_3_VALUE'];
-    }
-    if (sku['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
-        contents +=' ';
+        contents +=' , ';
         contents += sku['SHOP_ORDER_INFO.SKU_3_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_3_VALUE'];
     }
     sku['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] = contents;

@@ -24,26 +24,26 @@
 
             <div class="order-act-wrap weui_cells weui_cells_access">
                 <div class="weui_cell">
-                    <div class="order-act-title weui_cell_bd weui_cell_primary">
+                    <div ui-sref="order-List({state:'all'})" class="order-act-title weui_cell_bd weui_cell_primary">
                         全部订单
                     </div>
                     <div class="weui_cell_ft"></div>
                 </div>
                 <div class="weui_cell no_access">
                     <div class="order-act weui_cell_bd weui_cell_primary flexbox">
-                        <a class="cell">
+                        <a class="cell" ui-sref="order-List({state:'end'})">
                             <i class="icon icon-order-ok"></i>
-                            <p class="order-act-txt">已完成</p>
+                            <p class="order-act-txt" >已完成</p>
                         </a>
-                        <a class="cell">
+                        <a class="cell" ui-sref="order-List({state:'pay'})">
                             <i class="icon icon-order-pay"></i>
                             <p class="order-act-txt">待付款</p>
                         </a>
-                        <a class="cell">
+                        <a class="cell" ui-sref="order-List({state:'get'})">
                             <i class="icon icon-order-deliver"></i>
                             <p class="order-act-txt">待自提</p>
                         </a>
-                        <a class="cell">
+                        <a class="cell" ui-sref="order-List({state:'comment'})">
                             <i class="icon icon-order-evaluate"></i>
                             <p class="order-act-txt">待评价</p>
                         </a>

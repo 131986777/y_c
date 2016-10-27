@@ -26,7 +26,8 @@ AndSellMainModule.service('couponFactory', function ($resource, baseURL) {
                 method: 'PUT'
             }
         });
-    };
+    };    //stopCouponById
+
     this.delCouponRule = function (form) {
         return $resource(baseURL + '/coupon/rule/modifyIsDel', form, {
             'update': {
@@ -55,6 +56,15 @@ AndSellMainModule.service('couponFactory', function ($resource, baseURL) {
     };
     this.deleteCoupon = function (form) {
         return $resource(baseURL + '/coupon/coupon/modIsDel', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+
+    };
+
+    this.stopCouponById = function (form) {
+        return $resource(baseURL + '/coupon/coupon/modifyIsStop', form, {
             'update': {
                 method: 'PUT'
             }

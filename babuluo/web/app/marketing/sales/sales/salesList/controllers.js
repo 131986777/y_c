@@ -5,15 +5,6 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     modalFactory.setBottom(false);
 
 
-    var planList=[{id:1,name:'单个商品促销'},
-        {id:2,name:'某个类别促销'},
-        {id:1,name:'某个标签促销'},
-        {id:1,name:'订单促销'}
-    ];
-
-    $scope.planList =  planList;
-
-
     $scope.getCurrentPro = function(item) {
         $scope.updatePlanForm = clone(item);
         if(item['SALES_PLAN.TARGET_OBJ_ID'] == null){
@@ -21,7 +12,6 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         }
         else{
             $scope.currentPro = item['SALES_PLAN.TARGET_OBJ_ID'].split(',');
-            console.log($scope.currentPro);
         }
     }
 
@@ -32,9 +22,11 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         for (var i = 0; i < data.length; i++) {
                 array.push(data[i]['SHOP_PRODUCT_SKU.PRD_ID']);
             }
-        for (var i = 0; i < addarray.length; i++) {
+        if(addarray != null){
+            for (var i = 0; i < addarray.length; i++) {
                 array.push(addarray[i]);
 
+            }
         }
 
         var result = [];
@@ -47,15 +39,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
             $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result;
             var form = {};
             form = $scope.updatePlanForm;
-            salesFactory.ModifySalesProduct(form). get({}, function (response) {
-                if (response.code == 400) {
-                    modalFactory.showShortAlert(response.msg);
-                } else if (response.extraData.state == 'true') {
-                    modalFactory.showShortAlert('新增成功');
-                    $("#addSalePlan").modal('hide');
-                    $scope.$broadcast('pageBar.reload');
-                }
-            })
+        $scope.save(form);
     }
 
     $scope.getCurrentClass = function(item) {
@@ -75,9 +59,11 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         for (var i = 0; i < data.length; i++) {
             array.push(data[i]['SHOP_PRODUCT_CLASS.CLASS_ID']);
         }
-        for (var i = 0; i < addarray.length; i++) {
+        if(addarray != null){
+            for (var i = 0; i < addarray.length; i++) {
                 array.push(addarray[i]);
             }
+        }
 
         var result = [];
         for(var i=0; i<array.length; i++){
@@ -89,15 +75,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result;
         var form = {};
         form = $scope.updatePlanForm;
-        salesFactory.ModifySalesProduct(form). get({}, function (response) {
-            if (response.code == 400) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert('新增成功');
-                $("#addSalePlan").modal('hide');
-                $scope.$broadcast('pageBar.reload');
-            }
-        })
+        $scope.save(form);
     }
 
     $scope.getCurrentTag = function(item) {
@@ -117,9 +95,13 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         for (var i = 0; i < data.length; i++) {
             array.push(data[i]['SHOP_TAG.TAG_ID']);
         }
-        for (var i = 0; i < addarray.length; i++) {
-            array.push(addarray[i]);
+
+        if(addarray != null){
+            for (var i = 0; i < addarray.length; i++) {
+                array.push(addarray[i]);
+            }
         }
+
         var result = [];
         for(var i=0; i<array.length; i++){
             if(result.indexOf(array[i])==-1){
@@ -130,16 +112,22 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result;
         var form = {};
         form = $scope.updatePlanForm;
+        $scope.save(form);
+
+    }
+
+    $scope.save = function (form){
         salesFactory.ModifySalesProduct(form). get({}, function (response) {
             if (response.code == 400) {
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert('新增成功');
                 $("#addSalePlan").modal('hide');
-                $scope.$broadcast('pageBar.reload');
+                $scope.initLoad();
             }
         })
     }
+
 
 
   $scope.initLoad = function () {
@@ -198,14 +186,14 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     $scope.initLoad();
 
   $scope.addSalePlan=function (form) {
-      console.log(form);
+      form['SALES_PLAN.TARGET_OBJ_TYPE'] = 1;
       salesFactory.AddSalesPlan(form).get({}, function (response) {
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);
       } else if (response.extraData.state == 'true') {
         modalFactory.showShortAlert('新增成功');
           $("#addSalePlan").modal('hide');
-          $scope.$broadcast('pageBar.reload');
+          $scope.initLoad();
       }
     });
   };
@@ -221,7 +209,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
       salesFactory.ModifySalesProduct(form).get({}, function (res) {
           if (res.extraData.state = 'true') {
               modalFactory.showShortAlert("修改成功");
-              $scope.$broadcast('pageBar.reload');
+              $scope.initLoad();
           }
       })
   };
@@ -233,7 +221,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
               salesFactory.stopSalePlanById(item).get({}, function (res) {
               if (res.extraData.state = 'true') {
                   modalFactory.showShortAlert("停用成功");
-                  $scope.$broadcast('pageBar.reload');
+                  $scope.initLoad();
               }
           });
       });
@@ -242,7 +230,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
           salesFactory.stopSalePlanById(item).get({}, function (res) {
               if (res.extraData.state = 'true') {
                   modalFactory.showShortAlert("启用成功");
-                  $scope.$broadcast('pageBar.reload');
+                  $scope.initLoad();
               }
           });
       }
@@ -254,9 +242,19 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         salesFactory.delSalePlanById(item).get({}, function (res) {
         if (res.extraData.state = 'true') {
           modalFactory.showShortAlert("删除成功");
-          $scope.$broadcast('pageBar.reload');
+            $scope.initLoad();;
         }
       });
     });
   }
+
+  $scope.empty = function () {
+      $scope.add = null;
+  }
+
+    $(document).ready(function() {
+        $('#birthday').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
 });

@@ -19,7 +19,20 @@ AndSellMainModule.controller('bannerController', function ($scope, $stateParams,
   }
 */
     $scope.addBannerInfo = function () {
-        // console.log($scope.add);
+
+        var startTime=document.getElementById("startTime").value;
+       // console.log(startTime);
+        startTime=startTime.replace("T"," ");
+        console.log(startTime);
+        $scope.add['BANNER.BEGIN_DATETIME']=startTime;  //开始时间
+
+
+
+        var endTime=document.getElementById("endTime").value;
+        endTime=endTime.replace("T"," ");
+        $scope.add['BANNER.END_DATETIME']=endTime;  //结束时间
+        console.log( $scope.add['BANNER.END_DATETIME']);
+
         bannerFactory.addBanner($scope.add).get({}, function (response) {
 
             if (response.code == 400) {
@@ -33,13 +46,46 @@ AndSellMainModule.controller('bannerController', function ($scope, $stateParams,
             }
         });
     };
+
+    $scope.modifyTime=function(timeStr){
+        console.log(123);
+        console.log(timeStr);
+        var temp =timeStr+'';
+        //console.log(typeof (temp));
+        temp = temp.replace(" ",'T');
+        console.log(temp);
+        return temp;
+    };
   $scope.modifyClick = function (item) {
 
     $scope.mod=clone(item);
+      var begintime=item['BANNER.BEGIN_DATETIME'];
+      $scope.beginDay=begintime.split(" ")[0];
+      $scope.beginTime=begintime.split(" ")[1];
+
+      var endtime=item['BANNER.END_DATETIME'];
+      $scope.endDay=endtime.split(" ")[0];
+      $scope.endTime=endtime.split(" ")[1];
+
 
   };
 
   $scope.modBannerInfo = function () {
+      var mstartTime=document.getElementById("mStartTime").value;
+      // console.log(startTime);
+      mstartTime=mstartTime.replace("T"," ");
+      console.log(mstartTime);
+      $scope.mod['BANNER.BEGIN_DATETIME']=mstartTime;  //开始时间
+
+
+
+      var mendTime=document.getElementById("mEndTime").value;
+      mendTime=mendTime.replace("T"," ");
+      $scope.mod['BANNER.END_DATETIME']=mendTime;  //结束时间
+      console.log( $scope.mod['BANNER.END_DATETIME']);
+
+
+
     bannerFactory.modifyBanner($scope.mod).get({}, function (response) {
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);

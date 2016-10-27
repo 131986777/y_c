@@ -214,6 +214,9 @@ p {
 .btn-disabled {
   color: rgba(255, 255, 255, 0.6); }
 
+.btn-disabled-sku {
+  background-color: rgb(204,204,204); }
+
 .btn-disabled.btn-default {
   color: #C9C9C9; }
 
@@ -1416,7 +1419,7 @@ p {
   color: #fff;
 }
 .product-list-page .weui_navbar_item{
-  background-color: : #fff;
+  background-color : #fff;
 }
 .card-list{
   padding: 14px 25px 53px;

@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $state, orderFactory,modalFactory) {
+AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $state, $stateParams,orderFactory,modalFactory) {
 
     modalFactory.setTitle('订单列表');
     modalFactory.setBottom(false);
@@ -9,7 +9,7 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
 
         $scope.hasNextPage=true;
         $scope.loading = false;  //状态标记
-        $scope.filterStateOrder('all');
+        $scope.filterStateOrder($stateParams.state);
     }
 
     $scope.filterStateOrder= function (type) {
@@ -50,8 +50,11 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
             Array.prototype.push.apply($scope.orderList,response.data);//数组合并
             $scope.orderList.forEach(function (ele) {
                 ele.details=JSON.parse(ele['SHOP_ORDER.ORDER_INFO']);
-                setContentsInfoForOrder(ele);
+                ele.details.forEach(function (item) {
+                    setContentsInfoForOrder(item);
+                });
             });
+            console.log($scope.orderList);
             $scope.page=response.extraData.page;
             if($scope.page.querySize>$scope.page.pageIndex*$scope.page.pageSize){
                 $scope.hasNextPage=true;
