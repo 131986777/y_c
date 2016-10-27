@@ -19,12 +19,16 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
 
     };
 
+
+
+
+
     /*$scope.parseJson=function (data) {
      data=JSON.parse(data);
 
      return data;
      }*/
-    $scope.weekData = [
+    /*$scope.weekData = [
         {id: '1', name: '星期一'},
         {id: '2', name: '星期二'},
         {id: '3', name: '星期三'},
@@ -32,12 +36,12 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
         {id: '5', name: '星期五'},
         {id: '6', name: '星期六'},
         {id: '7', name: '星期日'},
-    ];
-    /* $scope.parseArray=function (data) {
+    ];*/
+     $scope.parseArray=function (data) {
      var array=data.split(',');
 
      return array;
-     }*/
+     }
     var targetObjArray = new Array();
     //方法名可以随便写 参数必须为data
     $scope.classSwitch = function (data) {
@@ -79,36 +83,57 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
     $scope.detailClick = function (item) {
         $scope.detail = item;
     }
-
+   /* $scope.Monday = "";
+    $scope.Tuesday = "";
+    $scope.Wednesday = "";
+    $scope.Thursday = "";
+    $scope.Friday = "";
+    $scope.Saturday = "";
+    $scope.Sunday = "";*/
     $scope.addCoupon = function () {
+       // console.log($scope.weekData);
+
+
+        $scope.add['COUPON.USE_TIME_CYCLE']=$scope.Monday+','+$scope.Tuesday+','+$scope.Wednesday+','+$scope.Thursday+','+$scope.Friday
+            +','+$scope.Saturday+','+$scope.Sunday;
 
         $scope.add['COUPON.TARGET_OBJ_ID'] = targetObjArray;   //数据库中会以逗号隔开
-        couponFactory.addCouponInfo($scope.add).get({}, function (response) {
+     couponFactory.addCouponInfo($scope.add).get({}, function (response) {
 
-            if (response.code == 400) {
-                modalFactory.showShortAlert(response.msg);
+     if (response.code == 400) {
+     modalFactory.showShortAlert(response.msg);
 
-            } else if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert('新增成功');
-                $scope.add = {};
+     } else if (response.extraData.state == 'true') {
+     modalFactory.showShortAlert('新增成功');
+     $scope.add = {};
 
-                $("#addCoupon").modal('hide');
-                $scope.$broadcast('pageBar.reload');
-            }
-        });
-    };
+     $("#addCoupon").modal('hide');
+     $scope.$broadcast('pageBar.reload');
+     }
+     });
+};
 
     $scope.modCouponClick = function (item) {
 
         $scope.mod = clone(item);
         console.log('----' + $scope.mod);
-
+        console.log($scope.mod['COUPON.USE_TIME_CYCLE']);
+        var time=$scope.parseArray($scope.mod['COUPON.USE_TIME_CYCLE']);
+        $scope.mMonday=time[0];
+        console.log('星期一'+ $scope.mMonday);
+        $scope.mTuesday=time[1];
+        $scope.mWednesday=time[2];
+        $scope.mThursday=time[3];
+        $scope.mFriday=time[4];
+        $scope.mSaturday=time[5];
+        $scope.mSunday=time[6];
 
     };
 
     $scope.modCoupon = function () {
 
-
+        $scope.mod['COUPON.USE_TIME_CYCLE']=$scope.mMonday+','+$scope.mTuesday+','+$scope.mWednesday+','+$scope.mThursday+','+$scope.mFriday
+            +','+$scope.mSaturday+','+$scope.mSunday;
         $scope.mod['COUPON.TARGET_OBJ_ID'] = targetObjArray;   //数据库中会以逗号隔开
         couponFactory.modifyCoupon($scope.mod).get({}, function (response) {
             if (response.code == 400) {
@@ -125,10 +150,10 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
 
     $scope.stopCoupon = function (item) {
 
-        if (item['COUPON_RULE.STATE'] == 1) {
+        if (item['COUPON.STATE'] == 1) {
             modalFactory.showAlert("确认停用吗?", function () {
-                item['COUPON_RULE.STATE'] = -1;
-                couponFactory.stopSouponById(item).get({}, function (res) {
+                item['COUPON.STATE'] = -1;
+                couponFactory.stopCouponById(item).get({}, function (res) {
                     if (res.extraData.state = 'true') {
                         modalFactory.showShortAlert("停用成功");
                         $scope.$broadcast('pageBar.reload');
@@ -136,12 +161,14 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
                 });
             });
         } else {
-            item['COUPON_RULE.STATE'] = 1;
-            couponFactory.stopSouponById(item).get({}, function (res) {
-                if (res.extraData.state = 'true') {
-                    modalFactory.showShortAlert("启用成功");
-                    $scope.$broadcast('pageBar.reload');
-                }
+            modalFactory.showAlert("确认启用吗?", function () {
+                item['COUPON.STATE'] = 1;
+                couponFactory.stopCouponById(item).get({}, function (res) {
+                    if (res.extraData.state = 'true') {
+                        modalFactory.showShortAlert("启用成功");
+                        $scope.$broadcast('pageBar.reload');
+                    }
+                });
             });
         }
 
