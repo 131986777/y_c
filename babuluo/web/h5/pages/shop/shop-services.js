@@ -7,6 +7,7 @@ AndSellH5MainModule.service('shopFactory', function ($resource, baseURL) {
             }
         });
     };
+
     this.getShopListByStrict = function (form) {
         return $resource(baseURL + '/shop/shop/getShopByDistrict', form, {
             'update': {
@@ -14,4 +15,13 @@ AndSellH5MainModule.service('shopFactory', function ($resource, baseURL) {
             }
         });
     };
+
+    this.getShopById = function (id) {
+        return $resource(baseURL + '/shop/shop/getById?SHOP.SHOP_ID=:ID', {ID:id}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
 });
