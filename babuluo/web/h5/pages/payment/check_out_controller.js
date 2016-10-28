@@ -9,6 +9,7 @@ AndSellH5MainModule.controller('H5.OrderSuccessController', function ($scope, $s
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
             $scope.order = response.data[0];
         });
+        $scope.shop = getCookie('currentShopInfo');
     }
 
     //支付

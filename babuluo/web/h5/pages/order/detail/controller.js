@@ -5,6 +5,7 @@ AndSellH5MainModule.controller('H5.OrderDetailController', function ($scope, $st
 
     $scope.initData = function () {
         $scope.getOrder($stateParams.ORDER_ID);
+        $scope.shop = getCookie('currentShopInfo');
     }
 
     $scope.getOrder = function (id) {

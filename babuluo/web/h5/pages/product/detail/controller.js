@@ -18,7 +18,7 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
 
         var params={};
         params['SHOP_PRODUCT.PRD_ID']=$stateParams.PRD_ID;
-        params['STOCK_REALTIME.STORE_ID']=1050;
+        params['STOCK_REALTIME.STORE_ID']=getCookie('currentShopInfo')['SHOP.REPOS_ID'];
 
         productFactory.getProductAllInfoById(params).get({}, function (response) {
             $scope.product = response.data[0];

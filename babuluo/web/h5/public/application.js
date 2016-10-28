@@ -38,7 +38,7 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
         restrict: 'EA',
         templateUrl: '/AndSell/h5/public/template/cart.html',
         scope: {
-            callback: '&',id: '= id',show: '= show'
+            callback: '&',id: '= id',storeId : '=storeId',show: '= show'
         },
         controller: function ($scope) {
 
@@ -74,7 +74,10 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
                     name1: '', name2: '', name3: ''
                 }
 
-                productFactory.getProductAllInfoById($scope.id).get({}, function (response) {
+                var params={};
+                params['STOCK_REALTIME.STORE_ID']=$scope.storeId;
+                params['SHOP_PRODUCT.PRD_ID']=$scope.id;
+                productFactory.getProductAllInfoById(params).get({}, function (response) {
                     $scope.product = response.data[0];
                     if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                         $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
@@ -266,6 +269,7 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
             //加入购物车
             $scope.addToCart = function () {
                 if ($scope.sku != undefined) {
+                    if($scope.sku['SHOP_PRODUCT_SKU.STOCK']>0){
                     var cartInfo = getCookie('cartInfo');
                     var cartSize = getCookie('cartSize');
                     if (cartInfo == '') {
@@ -296,6 +300,9 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
                     weUI.toast.ok('已加入到购物车');
 
                     $scope.setReturn();
+                    }else{
+                        weUI.toast.error('该商品已售罄！');
+                    }
                 } else {
                     weUI.toast.info('请选择规格！');
                 }
@@ -305,6 +312,15 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
             $scope.lessSize = function () {
                 if ($scope.skuSize > 1) {
                     $scope.skuSize--;
+                }
+            }
+
+            //数量减
+            $scope.moreSize = function () {
+                if ($scope.skuSize > $scope.sku['SHOP_PRODUCT_SKU']) {
+                    $scope.skuSize++;
+                }else{
+                    weUI.toast.ok('已达到该商品最大库存数');
                 }
             }
 
