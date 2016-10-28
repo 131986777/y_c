@@ -3,8 +3,6 @@ AndSellMainModule.controller('MemberAccountController', function ($scope, $state
     //设置页面Title
     modalFactory.setTitle('客户账户');
 
-    modalFactory.setBottom(true);
-
     $scope.memberId = $stateParams.id;
     console.log("这是客户的id：" + $scope.memberId);
 

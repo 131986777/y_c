@@ -5,14 +5,9 @@ AndSellMainModule.controller('userListController', function ($scope, userFactory
 
     modalFactory.setBottom(false);
 
-    $scope.shopAdd = {};
-    $scope.shopEdited = {};
-
     $scope.bindData = function (response) {
         $scope.userList = response.data;
-        $scope.districtList = response.extraData.districtList;
         console.log(response);
-
     };
 
 

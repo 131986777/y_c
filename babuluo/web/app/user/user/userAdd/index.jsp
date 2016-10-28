@@ -12,7 +12,7 @@
                     登录帐号
                 </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" ng-model="userAdd['MEMBER.USER_NAME']">
+                    <input class="form-control" type="text" ng-model="userAdd['USER.LOGIN_ID']">
                 </div>
             </div>
             <div class="form-group">
@@ -21,7 +21,7 @@
                     密码
                 </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="password" ng-model="userAdd['MEMBER.MOBILE']">
+                    <input class="form-control" type="password" ng-model="userAdd['USER.LOGIN_PWD']">
                 </div>
             </div>
             <div class="form-group">
@@ -30,7 +30,7 @@
                     确认密码
                 </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="password" ng-model="userAdd['MEMBER.MOBILE']">
+                    <input class="form-control" type="password" ng-model="userAdd['USER.LOGIN_PWD_AGAIN']">
                 </div>
             </div>
             <div class="form-group">
@@ -39,7 +39,7 @@
                     姓名
                 </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" ng-model="userAdd['MEMBER.EMAIL']">
+                    <input class="form-control" type="text" ng-model="userAdd['USER.REAL_NAME']">
                 </div>
             </div>
             <div class="form-group">
@@ -48,19 +48,19 @@
                     手机号
                 </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" ng-model="userAdd['MEMBER.EMAIL']">
+                    <input class="form-control" type="text" ng-model="userAdd['USER.MOBILE']">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-1 right form-input-title">邮箱</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" ng-model="userAdd['MEMBER.EMAIL']">
+                    <input class="form-control" type="text" ng-model="userAdd['USER.MAIL']">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-1 right form-input-title">QQ</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" ng-model="userAdd['MEMBER.REMARK']">
+                    <input class="form-control" type="text" ng-model="userAdd['USER.QQ']">
                 </div>
             </div>
         </form>

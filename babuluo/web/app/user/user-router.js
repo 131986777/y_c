@@ -11,4 +11,10 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/user/user/userAdd/index.jsp",
             controller: "userAddController"
         })
+        .state("userModify", {
+            url: "/userModify",
+            params: {id: 0},
+            templateUrl: "/AndSell/app/user/user/userModify/index.jsp",
+            controller: "userModifyController"
+        })
 });
