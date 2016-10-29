@@ -17,4 +17,20 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/user/user/userModify/index.jsp",
             controller: "userModifyController"
         })
+        .state("roleList", {
+            url: "/roleList",
+            templateUrl: "/AndSell/app/user/role/roleList/index.jsp",
+            controller: "roleListController"
+        })
+        .state("roleAdd", {
+            url: "/roleAdd",
+            templateUrl: "/AndSell/app/user/role/roleAdd/index.jsp",
+            controller: "roleAddController"
+        })
+        .state("roleModify", {
+            url: "/roleModify",
+            params: {id: 0},
+            templateUrl: "/AndSell/app/user/role/roleModify/index.jsp",
+            controller: "roleModifyController"
+        })
 });

@@ -24,6 +24,8 @@ AndSellMainModule.controller('userAddController', function ($scope, $state, user
             if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert("添加成功");
                 $state.go('userList');
+            }else {
+                modalFactory.showShortAlert(response.msg);
             }
         });
 
