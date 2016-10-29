@@ -69,26 +69,10 @@
                             </thead>
                             <tbody>
                             <td>
-                                <div class="col-sm-3" style="margin-top: 10px;margin-bottom: 10px">
-                                    <input ng-model="product.setSku"
-                                           ng-init="product.setSku=false;" type="checkbox">
-                                    管理员
-                                </div> <div class="col-sm-3" style="margin-top: 10px;margin-bottom: 10px">
-                                    <input ng-model="product.setSku"
-                                           ng-init="product.setSku=false;" type="checkbox">
-                                    管理员
-                                </div> <div class="col-sm-3" style="margin-top: 10px;margin-bottom: 10px">
-                                    <input ng-model="product.setSku"
-                                           ng-init="product.setSku=false;" type="checkbox">
-                                    管理员
-                                </div> <div class="col-sm-3" style="margin-top: 10px;margin-bottom: 10px">
-                                    <input ng-model="product.setSku"
-                                           ng-init="product.setSku=false;" type="checkbox">
-                                    管理员
-                                </div> <div class="col-sm-3" style="margin-top: 10px;margin-bottom: 10px">
-                                    <input ng-model="product.setSku"
-                                           ng-init="product.setSku=false;" type="checkbox">
-                                    管理员
+                                <div ng-repeat="role in roleList" class="col-sm-3"
+                                     style="margin-top: 10px;margin-bottom: 10px">
+                                    <input ng-model="role['USER_ROLE.CHECKED']" type="checkbox">
+                                    <span ng-bind="role['USER_ROLE.ROLE_NAME']"></span>
                                 </div>
                             </td>
                             </tbody>

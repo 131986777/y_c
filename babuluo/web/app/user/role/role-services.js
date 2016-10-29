@@ -14,6 +14,13 @@ AndSellMainModule.service('roleFactory', function ($resource, baseURL) {
             }
         });
     };
+    this.getRole = function (form) {
+        return $resource(baseURL + '/user/role/queryAll', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
     this.getRoleById = function (form) {
         return $resource(baseURL + '/user/role/getById', form, {
             'update': {
