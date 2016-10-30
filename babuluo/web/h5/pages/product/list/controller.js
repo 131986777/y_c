@@ -7,7 +7,7 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
     $scope.initData = function () {
         $scope.STORE_ID = getCookie('currentShopInfo')['SHOP.REPOS_ID'];
         $scope.filter = {
-            PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID
+            PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'SHOP_PRODUCT.CLASS_ID': $stateParams.classId,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID
         };
         $scope.hasNextPage=true;
         $scope.loading = false;  //状态标记

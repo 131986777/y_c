@@ -11,12 +11,12 @@
   <div class="weui_tab">
     <div class="product-list-navbar weui_navbar">
       <a class="weui_navbar_item "
-         ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] ==undefined]"
+         ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] == undefined]"
          ng-click="filterClass(undefined)" >
        全部分类
       </a>
       <a class="weui_navbar_item"  ng-repeat="class  in classList"
-         ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] ==class['SHOP_PRODUCT_CLASS.CLASS_ID']]"
+         ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] == class['SHOP_PRODUCT_CLASS.CLASS_ID']]"
          ng-click="filterClass(class['SHOP_PRODUCT_CLASS.CLASS_ID'])"
          ng-bind="class['SHOP_PRODUCT_CLASS.CLASS_NAME']">
       </a>

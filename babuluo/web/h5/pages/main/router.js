@@ -44,7 +44,7 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("prd-List", {
             url: "/prdList",
-            params:{keyword:''},
+            params:{keyword:'',classId: undefined},
             templateUrl: "/AndSell/h5/pages/product/list/index.html",
             controller: "H5.PrdListController"
         })
