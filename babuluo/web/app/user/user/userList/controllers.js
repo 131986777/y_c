@@ -5,14 +5,9 @@ AndSellMainModule.controller('userListController', function ($scope, userFactory
 
     modalFactory.setBottom(false);
 
-    $scope.shopAdd = {};
-    $scope.shopEdited = {};
-
     $scope.bindData = function (response) {
         $scope.userList = response.data;
-        $scope.districtList = response.extraData.districtList;
         console.log(response);
-
     };
 
 
@@ -24,6 +19,8 @@ AndSellMainModule.controller('userListController', function ($scope, userFactory
                     console.log(response);
                     if (response.extraData.state == 'true') {
                         modalFactory.showShortAlert("停用成功");
+                    }else {
+                        modalFactory.showShortAlert(response.msg);
                     }
                 });
             });
@@ -32,6 +29,8 @@ AndSellMainModule.controller('userListController', function ($scope, userFactory
             userFactory.modifyState(user).get({}, function (response) {
                 if (response.extraData.state == 'true') {
                     modalFactory.showShortAlert("启用成功");
+                }else {
+                    modalFactory.showShortAlert(response.msg);
                 }
             });
         }

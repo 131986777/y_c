@@ -59,10 +59,10 @@
                 <td ng-bind="user['USER.REG_DATETIME'] | FormatStrDate"></td>
                 <td ng-bind="user['USER.STATE'] | FormatState"></td>
                 <td>
-                    <a class="table-link">
+                    <a class="table-link" ui-sref="userModify({id:user['USER.UID']})">
                         修改
                     </a>
-                    <a class="table-link"  ng-click="modifyState(user)">
+                    <a class="table-link" ng-click="modifyState(user)">
                         <span ng-show="user['USER.STATE']==1">停用</span>
                         <span ng-show="user['USER.STATE']==-1">启用</span>
                     </a>

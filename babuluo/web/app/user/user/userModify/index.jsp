@@ -12,26 +12,15 @@
                     登录帐号
                 </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" ng-model="userAdd['USER.LOGIN_ID']">
+                    <input disabled class="form-control" type="text" ng-model="userModify['USER.LOGIN_ID']">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-1 right form-input-title">
-                    <span class="icon-required">*</span>
-                    密码
                 </label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="password" ng-model="userAdd['USER.LOGIN_PWD']">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-sm-1 right form-input-title">
-                    <span class="icon-required">*</span>
-                    确认密码
-                </label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="password" ng-model="userAdd['USER.LOGIN_PWD_AGAIN']">
-                </div>
+                <a ng-click="initPWD()" class=" col-sm-1 left-align form-input-title">
+                    重置密码
+                </a>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-1 right form-input-title">
@@ -39,7 +28,7 @@
                     姓名
                 </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" ng-model="userAdd['USER.REAL_NAME']">
+                    <input class="form-control" type="text" ng-model="userModify['USER.REAL_NAME']">
                 </div>
             </div>
             <div class="form-group">
@@ -48,19 +37,19 @@
                     手机号
                 </label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" ng-model="userAdd['USER.MOBILE']">
+                    <input class="form-control" type="text" ng-model="userModify['USER.MOBILE']">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-1 right form-input-title">邮箱</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" ng-model="userAdd['USER.MAIL']">
+                    <input class="form-control" type="text" ng-model="userModify['USER.MAIL']">
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-1 right form-input-title">QQ</label>
                 <div class="col-sm-4">
-                    <input class="form-control" type="text" ng-model="userAdd['USER.QQ']">
+                    <input class="form-control" type="text" ng-model="userModify['USER.QQ']">
                 </div>
             </div>
         </form>
@@ -80,9 +69,9 @@
                             </thead>
                             <tbody>
                             <td>
-                                <div ng-repeat="role in roleList" class="col-sm-3" style="margin-top: 10px;margin-bottom: 10px">
-                                    <input ng-model="role['USER_ROLE.CHECKED']"
-                                           ng-init="role['USER_ROLE.CHECKED']=false;" type="checkbox">
+                                <div ng-repeat="role in roleList" class="col-sm-3"
+                                     style="margin-top: 10px;margin-bottom: 10px">
+                                    <input ng-model="role['USER_ROLE.CHECKED']" type="checkbox">
                                     <span ng-bind="role['USER_ROLE.ROLE_NAME']"></span>
                                 </div>
                             </td>

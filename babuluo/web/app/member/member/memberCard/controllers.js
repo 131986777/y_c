@@ -3,7 +3,7 @@ AndSellMainModule.controller('MemberCardController', function ($scope, $state, $
     //设置页面Title
     modalFactory.setTitle('客户会员卡信息');
 
-    modalFactory.setBottom(true);
+    modalFactory.setBottom(false);
 
     $scope.memberId = $stateParams.id;
     console.log("这是客户的id：" + $scope.memberId);
