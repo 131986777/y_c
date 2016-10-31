@@ -1,6 +1,6 @@
 <div class="page-content">
     <!-- BEGIN 促销项列表 -->
-    <a show-modal id="#addSalePlan" class="btn sbold green pull-right" ng-focus="empty()">
+    <a show-modal id="#addSalePlan" class="btn sbold green pull-right">
         <i class="fa fa-plus"></i>新增促销计划
    </a>
     <div class="promotion-list" ng-repeat="item in salesPlan">
@@ -26,7 +26,10 @@
                 </div> <!-- END head -->
 
                 <div class="promotion-content">
-                    <button class="addItem btn"  data-toggle="modal" id="#productSwitchModal" show-modal ng-click="getCurrentPro(item)">添加商品</button>
+                    <button class="addItem btn"  data-toggle="modal" id="#productSwitchModal"
+                            show-modal ng-click="getCurrentPro(item)" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length > 0">修改商品</button>
+                    <button class="addItem btn"  data-toggle="modal" id="#productSwitchModal"
+                            show-modal ng-click="getCurrentPro(item)" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length ==null">添加商品</button>
                     <span class="buy-text">买</span>
                     <div class="buy-content" ng-repeat="pro in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
                         <div class="buy-list">
@@ -37,13 +40,18 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product-total">>>共
-                        <span class="itemNum" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length > 0">
+                    <div class="product-total" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length >0">
+                        >>共
+                        <span class="itemNum" >
                             {{((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length}}
                         </span>件商品参与</div>
-                        <span class="itemNum" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length == 0">
+                </div>
+                <div class="product-total" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length ==null">
+                >>共
+                        <span class="itemNum">
                             0
-                        </span>件商品参与</div>
+                        </span>件商品参与
+                </div>
                 </div><!-- promotion content -->
 
                 <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
@@ -368,10 +376,10 @@
                             <label class="col-md-3 control-label">
                                 <span></span>促销名称
                             </label>
-                            <div class="col-md-8">
+                            <div class="col-md-8" >
                                 <input type="text" class="form-control"
                                        ng-model="add['SALES_PLAN.NAME']"
-                                       ng-init="add['SALES_PLAN.NAME']=''">
+                                       ng-init="add['SALES_PLAN.NAME']=''" ng-blur="validate(add['SALES_PLAN.NAME'])">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -442,9 +450,7 @@
                     <button type="button" class="btn green  btn-outline" data-dismiss="modal" ng-click="empty(add)">取消</button>
                 </div>
             </div>
-            <!-- /.modal-content -->
         </div>
-        <!-- /.modal-dialog -->
     </div>
 </div>
 </div>

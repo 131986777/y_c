@@ -225,6 +225,10 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
       })
   };
 
+    $scope.validate = function (item){
+        alert(item);
+    }
+
   $scope.stopSalesPlan = function (item) {
       if(item['SALES_PLAN.STATE']==1){
           modalFactory.showAlert("确认停用吗?", function () {
