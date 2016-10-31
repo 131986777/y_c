@@ -5,6 +5,15 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     modalFactory.setBottom(false);
 
 
+    var salePlanMap=[{id:1,name:'单件商品促销'},
+        {id:2,name:'按商品类别促销'},
+        {id:1,name:'按商品标签促销'}
+    ];
+
+
+    $scope.salePlanMap = salePlanMap
+
+
     $scope.getCurrentPro = function(item) {
         $scope.updatePlanForm = clone(item);
         if(item['SALES_PLAN.TARGET_OBJ_ID'] == null){
@@ -139,6 +148,8 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
           $scope.proClassInfo = response.extraData.proClassMap;
           //商品的ID和名称的Map
           $scope.productMap = response.extraData.productMap;
+          //得到促销规则的ID和类型的Map
+          $scope.salesTypeMap = response.extraData.salesTypeMap;
           //获得促销规则的ID和详细信息的Map
           $scope.salesMap = response.extraData.salesMap;
           //获得促销规则详情
@@ -186,7 +197,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     $scope.initLoad();
 
   $scope.addSalePlan=function (form) {
-      form['SALES_PLAN.TARGET_OBJ_TYPE'] = 1;
+      console.log(form);
       salesFactory.AddSalesPlan(form).get({}, function (response) {
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);
@@ -249,8 +260,12 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
   };
 
     $scope.show = function () {
-        alert($scope.add['SALES_PLAN.SALE_ID']);
-
+        var id = $scope.add['SALES_PLAN.SALE_ID'];
+        if($scope.salesTypeMap[id] == 3){
+            $scope.showCont = true;
+        }else {
+            $scope.showCont = false;
+        }
     }
 
   $scope.empty = function () {

@@ -37,7 +37,13 @@
                             </div>
                         </div>
                     </div>
-                    <div class="product-total">>>共<span class="itemNum">{{((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length}}</span>件商品参与</div>
+                    <div class="product-total">>>共
+                        <span class="itemNum" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length > 0">
+                            {{((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length}}
+                        </span>件商品参与</div>
+                        <span class="itemNum" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length == 0">
+                            0
+                        </span>件商品参与</div>
                 </div><!-- promotion content -->
 
                 <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
@@ -393,15 +399,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
+                        <div class="form-group row" ng-show="showCont">>
                             <label class="col-md-3 control-label">
                                 选择促销规则
                             </label>
                             <div class="col-md-8">
-                                <select ng-model="add['SALES_PLAN.SALE_ID']"
-                                        ng-init="add['SALES_PLAN.SALE_ID']=''"
+                                <select ng-model="add['SALES_PLAN.TARGET_OBJ_TYPE']"
+                                        ng-init="add['SALES_PLAN.TARGET_OBJ_TYPE']='-1'"
                                         class="nya-bs-select form-control"
-                                        ng-options="item['SALES.ID'] as item['SALES.NAME'] for item in salesList">
+                                        ng-options="item['id'] as item['name'] for item in salePlanMap">
                                     <option class="nya-bs-option" value="">选择促销规则</option>
                                 </select>
                             </div>
