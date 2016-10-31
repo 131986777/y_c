@@ -44,7 +44,7 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("prd-List", {
             url: "/prdList",
-            params:{keyword:''},
+            params:{keyword:'',classId: undefined},
             templateUrl: "/AndSell/h5/pages/product/list/index.html",
             controller: "H5.PrdListController"
         })
@@ -64,5 +64,9 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/h5/pages/personal/card/index.html",
             controller: "H5.CardController"
         })
-
+        .state("shopList", {
+            url: "/shopList",
+            templateUrl: "/AndSell/h5/pages/shop/index.html",
+            controller: "H5.ShopController"
+        })
 });

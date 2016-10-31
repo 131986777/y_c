@@ -5,14 +5,14 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
 
 
     $scope.initData = function () {
+        $scope.STORE_ID = getCookie('currentShopInfo')['SHOP.REPOS_ID'];
         $scope.filter = {
-            PAGE_SIZE : 10,
-            PN : 1,
-            'SHOP_PRODUCT.PRD_NAME':$stateParams.keyword
+            PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'SHOP_PRODUCT.CLASS_ID': $stateParams.classId,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID
         };
         $scope.hasNextPage=true;
         $scope.loading = false;  //状态标记
         $scope.prdList = new Array;
+        $scope.storeId = $scope.STORE_ID ;
         $scope.getPrd();
         $scope.getCartInfoInCookie();
     }
@@ -108,7 +108,7 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
         if ($scope.skuList.length > 0) {
             $state.go('order-add', {SKU_IDS: list.toString()});
         }else{
-            alert('至少选择一件商品');
+            weUI.toast.error('至少选择一件商品');
         }
     }
 

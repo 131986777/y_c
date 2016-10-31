@@ -1,5 +1,6 @@
 AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
 
+
     /**
      * 这里设置所有的跳转路径
      */
@@ -31,5 +32,33 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/demo/demo/demoOrder/index.jsp",
             controller: "OrderDemoController"
         })
+
+
+    $stateProvider.state("home", {
+            url: "/home",
+            views: {
+                "": {
+                    template: "<h1>HELLO!</h1>"
+                },
+                "chart": {
+                    template: "chart"
+                },
+                "data": {
+                    template: "data"
+                }
+            }
+        })
+        .state("index", {
+            url: "/index",
+            views: {
+                "": {
+                    template: "<h1>HELLO!</h1>"
+                },
+                "data": {
+                    template: "data-index"
+                }
+            }
+        })
+
 
 });

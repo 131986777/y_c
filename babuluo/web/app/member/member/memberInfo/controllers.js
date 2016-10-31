@@ -3,8 +3,6 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
     //设置页面Title
     modalFactory.setTitle('客户信息');
 
-    modalFactory.setBottom(true);
-
     $scope.memberId = $stateParams.id;
     console.log("这是客户的id：" + $scope.memberId);
 
@@ -27,7 +25,7 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
                 modalFactory.showShortAlert("无该客户");
             }
             var form = {};
-            form['member.USER_ID'] = $scope.memberId;
+            form['MEMBER.USER_ID'] = $scope.memberId;
 
             memberFactory.getMemberListById(form).get({}, function (response) {
                 $scope.memberInfo = response.data[0];
@@ -62,11 +60,14 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
 
     //重置密码
     $scope.initPWD = function () {
-        $scope.memberInfo['MEMBER.LOGIN_PWD'] = "A123456";
         modalFactory.showAlert("确定将密码重置为【 A123456 】吗？", function () {
+            $scope.memberInfo = {};
+            $scope.memberInfo['MEMBER.USER_ID'] = $scope.memberId;
+            $scope.memberInfo['MEMBER.LOGIN_PWD'] = "A123456";
             memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
                 if (response.extraData.state == 'true') {
                     modalFactory.showShortAlert("密码重置成功");
+                    $scope.initLoad();
                 } else {
                     modalFactory.showShortAlert(response.msg);
                 }
@@ -77,11 +78,14 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
     //解除微信
     $scope.unBindWX = function () {
         modalFactory.showAlert("确定解除微信绑定吗？", function () {
+            $scope.memberInfo = {};
+            $scope.memberInfo['MEMBER.USER_ID'] = $scope.memberId;
             $scope.memberInfo['MEMBER.WX_OPENID'] = "{$null}";
             memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
                 if (response.extraData.state == 'true') {
                     $scope.memberInfo['MEMBER.WX_OPENID'] = undefined;
                     modalFactory.showShortAlert("解绑成功");
+                    $scope.initLoad();
                 } else {
                     modalFactory.showShortAlert(response.msg);
                 }
@@ -92,11 +96,14 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
     //解除QQ
     $scope.unBindQQ = function () {
         modalFactory.showAlert("确定解除QQ绑定吗？", function () {
+            $scope.memberInfo = {};
+            $scope.memberInfo['MEMBER.USER_ID'] = $scope.memberId;
             $scope.memberInfo['MEMBER.QQ_OPENID'] = "{$null}";
             memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
                 if (response.extraData.state == 'true') {
                     $scope.memberInfo['MEMBER.QQ_OPENID'] = undefined;
                     modalFactory.showShortAlert("解绑成功");
+                    $scope.initLoad();
                 } else {
                     modalFactory.showShortAlert(response.msg);
                 }

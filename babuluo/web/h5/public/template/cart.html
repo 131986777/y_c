@@ -6,12 +6,14 @@
       <div class="weui_cells">
         <div class="weui_cell">
           <div class="basic-info weui_cell_bd weui_cell_primary">
-            <h4 class="name" ng-bind="product['SHOP_PRODUCT.PRD_NAME']">
+            <h4 class="name">
+              <span  ng-bind="product['SHOP_PRODUCT.PRD_NAME']"></span>
+              <span  ng-if="sku['SHOP_PRODUCT_SKU.STOCK']==0">售罄</span>
             </h4>
             <p class="feature" ng-bind="product['SHOP_PRODUCT.SALES_TITLE']">
             </p>
             <p class="money">
-          <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
+              <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
                 ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
             <div ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']==undefined" class="money">
         <span ng-bind="skuData.minPrice | currency :'￥'"></span> -
@@ -83,7 +85,7 @@
               <input class="form-control text-center" disabled="" type="text" ng-model="skuSize"
                      ng-init="skuSize=1">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" ng-click="skuSize=skuSize+1">
+                    <button class="btn btn-default" type="button" ng-click="moreSize()">
                       +
                     </button>
                 </span>

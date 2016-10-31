@@ -20,23 +20,16 @@ AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, pr
             cartSize = JSON.parse(cartSize);
         }
 
-        console.log(cartInfo);
-        console.log(cartSize);
         if (cartInfo.length > 0) {
             var params = {};
             params['SHOP_PRODUCT_SKU.SKU_IDS'] = cartInfo.toString();
             productFactory.getProductSkuBySkuIds(params).get({}, function (response) {
-                console.log(response);
                 $scope.skuList = response.data;
                 $scope.skuList.forEach(function (ele) {
                     setContentsInfo(ele);
                     ele['SHOP_PRODUCT_SKU.SIZE'] = cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
                     ele.isSelect = false;
                 });
-                //var skuMap=new Map;
-                //response.data.forEach(function (ele) {
-                //    skuMap.put(ele['SHOP_PRODUCT_SKU.SKU_ID'],ele);
-                //});
             })
         }
     }
@@ -55,7 +48,6 @@ AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, pr
             cartSize = JSON.parse(cartSize);
         }
         cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] -= 1;
-        console.log(cartSize);
         setCookie('cartSize', JSON.stringify(cartSize));
 
         $scope.updateCartPrice();
@@ -73,7 +65,6 @@ AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, pr
             cartSize = JSON.parse(cartSize);
         }
         cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] += 1;
-        console.log(cartSize);
         setCookie('cartSize', JSON.stringify(cartSize));
 
         $scope.updateCartPrice();

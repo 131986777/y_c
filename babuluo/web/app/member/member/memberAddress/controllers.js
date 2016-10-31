@@ -3,7 +3,7 @@ AndSellMainModule.controller('MemberAddressController', function ($scope, $state
     //设置页面Title
     modalFactory.setTitle('客户收件地址');
 
-    modalFactory.setBottom(true);
+    modalFactory.setBottom(false);
 
     $scope.memberId = $stateParams.id;
     console.log("这是客户的id：" + $scope.memberId);

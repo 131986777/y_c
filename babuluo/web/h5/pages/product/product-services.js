@@ -8,8 +8,8 @@ AndSellH5MainModule.service('productFactory', function ($resource, baseURL) {
         });
     };
 
-    this.getProductAllInfoById = function (id) {
-        return $resource(baseURL + '/shop/product/getByIdWithAllInfoForAgent?SHOP_PRODUCT.PRD_ID=:PRD_ID', {'PRD_ID': id}, {
+    this.getProductAllInfoById = function (form) {
+        return $resource(baseURL + '/shop/product/getByIdWithAllInfoForAgent', form, {
             'update': {
                 method: 'PUT'
             }
@@ -24,7 +24,12 @@ AndSellH5MainModule.service('productFactory', function ($resource, baseURL) {
         });
     };
 
-
-
+    this.queryByStoreAndSkus = function (form) {
+        return $resource(baseURL + '/stock/realtime/queryByStoreAndSku', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
 
 });

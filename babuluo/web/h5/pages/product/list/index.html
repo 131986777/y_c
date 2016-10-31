@@ -11,12 +11,12 @@
   <div class="weui_tab">
     <div class="product-list-navbar weui_navbar">
       <a class="weui_navbar_item "
-         ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] ==undefined]"
+         ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] == undefined]"
          ng-click="filterClass(undefined)" >
        全部分类
       </a>
       <a class="weui_navbar_item"  ng-repeat="class  in classList"
-         ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] ==class['SHOP_PRODUCT_CLASS.CLASS_ID']]"
+         ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] == class['SHOP_PRODUCT_CLASS.CLASS_ID']]"
          ng-click="filterClass(class['SHOP_PRODUCT_CLASS.CLASS_ID'])"
          ng-bind="class['SHOP_PRODUCT_CLASS.CLASS_NAME']">
       </a>
@@ -28,8 +28,10 @@
             <img class="img" ng-bind="item['SHOP_PRODUCT.CMP']"/>
           </div>
           <div class="weui_cell_bd">
-            <h5 class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"
+            <h5 class="name"
                 ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
+              <span ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></span>
+              <span ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0">售罄</span>
             </h5>
             <p class="money">
               <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']!=undefined"
@@ -60,7 +62,7 @@
     <div class="action-bar border-top">
       <div class="icon-wrap">
         <i class="icon icon-cart-small"></i>
-        <i class="cartNum" ng-bind="totalSize"></i>
+        <span class="cartNum" ng-bind="totalSize"></span>
       </div>
       <div class="payment-info cell">
         <p class="all">
@@ -74,6 +76,6 @@
     </div>
   </div>
 
-  <cart-modal id="cartPrdId" show="cartModalShow" callback="addToCartSuccess()"></cart-modal>
+  <cart-modal id="cartPrdId" storeId="storeId" show="cartModalShow" callback="addToCartSuccess()"></cart-modal>
 
 </div>
