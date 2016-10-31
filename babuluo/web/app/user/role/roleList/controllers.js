@@ -1,7 +1,7 @@
 AndSellMainModule.controller('roleListController', function ($scope, roleFactory, modalFactory) {
 
     //设置页面Title
-    modalFactory.setTitle('角色管理');
+    modalFactory.setTitle('角色权限管理');
 
     modalFactory.setBottom(false);
 
