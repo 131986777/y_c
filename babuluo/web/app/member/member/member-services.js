@@ -108,4 +108,13 @@ AndSellMainModule.service('memberFactory', function ($resource, baseURL) {
         });
     };
 
+    this.addMemberCoupon = function (form) {
+        return $resource(baseURL + '/member/coupon/add', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
+
 });

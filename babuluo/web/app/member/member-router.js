@@ -55,5 +55,9 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/member/group/groupList/index.jsp",
             controller: "MemberGroupController"
         })
-
+        .state("memberCouponList", {
+            url: "/memberCouponList",
+            templateUrl: "/AndSell/app/member/member/memberCoupon/index.html",
+            controller: "MemberCoupon"
+        })
 });

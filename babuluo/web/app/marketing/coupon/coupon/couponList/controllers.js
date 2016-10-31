@@ -12,13 +12,12 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
             // console.log('面值为：'+item['COUPON.RULE_ID']);//['COUPON_RULE.FACE_VALUE']
             //{"COUPON_RULE.TYPE":"1","COUPON_RULE.FACE_VALUE":"4500","COUPON_RULE.STATE":"1","COUPON_RULE.MAX_PRICE_LIMIT":"0","COUPON_RULE.ADD_DATIME":"2016-10-20 02:28:42.0","COUPON_RULE.IS_DEL":"-1","COUPON_RULE.NAME":"会员专享","COUPON_RULE.EACH_MEMBER_LIMIT":"4","COUPON_RULE.CONDITION_PRICE":"54000","COUPON_RULE.INTRO":"会员专享","COUPON_RULE.ID":"1025"}
             console.log('对象为：' + item['COUPON.TARGET_OBJ_ID']);//['COUPON_RULE.FACE_VALUE']
-        })
+        });
         $scope.ruleList = response.extraData.ruleList;
         $scope.ruleMap = response.extraData.ruleMap;
 
 
     };
-
 
 
 
@@ -73,8 +72,8 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
         console.log('prd switch');
         console.log(data);
         data.forEach(function (ele) {
-            console.log(ele['SHOP_PRODUCT_SKU.PRD_ID'])
-            targetObjArray.push(ele['SHOP_PRODUCT_SKU.PRD_ID']);
+            console.log(ele['SHOP_PRODUCT_SKU.SKU_ID'])
+            targetObjArray.push(ele['SHOP_PRODUCT_SKU.SKU_ID']);
         });
 
 
@@ -90,27 +89,29 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
     $scope.Friday = "";
     $scope.Saturday = "";
     $scope.Sunday = "";*/
+
     $scope.addCoupon = function () {
-       // console.log($scope.weekData);
+        console.log($scope.from);
+        console.log($scope.add['COUPON.END_DATETIME']);
 
-
-        $scope.add['COUPON.USE_TIME_CYCLE']=$scope.Monday+','+$scope.Tuesday+','+$scope.Wednesday+','+$scope.Thursday+','+$scope.Friday
-            +','+$scope.Saturday+','+$scope.Sunday;
+       $scope.add['COUPON.USE_TIME_CYCLE'] = $scope.Monday + ',' + $scope.Tuesday + ',' + $scope.Wednesday + ',' + $scope.Thursday + ',' + $scope.Friday
+            + ',' + $scope.Saturday + ',' + $scope.Sunday;
 
         $scope.add['COUPON.TARGET_OBJ_ID'] = targetObjArray;   //数据库中会以逗号隔开
-     couponFactory.addCouponInfo($scope.add).get({}, function (response) {
+        console.log($scope.add);
+        couponFactory.addCouponInfo($scope.add).get({}, function (response) {
 
-     if (response.code == 400) {
-     modalFactory.showShortAlert(response.msg);
+            if (response.code == 400) {
+                modalFactory.showShortAlert(response.msg);
 
-     } else if (response.extraData.state == 'true') {
-     modalFactory.showShortAlert('新增成功');
-     $scope.add = {};
+            } else if (response.extraData.state == 'true') {
+                modalFactory.showShortAlert('新增成功');
+                $scope.add = {};
 
-     $("#addCoupon").modal('hide');
-     $scope.$broadcast('pageBar.reload');
-     }
-     });
+                $("#addCoupon").modal('hide');
+                $scope.$broadcast('pageBar.reload');
+            }
+        });
 };
 
     $scope.modCouponClick = function (item) {
@@ -197,5 +198,44 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
 
         $scope.mouseIsEnter[key]=false;
     }
+
+    $('#start_hour').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        startView: 2,
+        format: 'yyyy/mm/dd hh:ii',
+        todayBtn: 'linked'
+        /* }).on('click', function (ev) {
+         $("#start_hour").datetimepicker("setEndDate", $("#end_hour").val());
+         });*/
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+
+    $('#end_hour').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        format: 'yyyy/mm/dd hh:ii',
+        todayBtn: 'linked',
+        /* }).on('click', function (ev) {
+         $("#end_hour").datetimepicker("setStartDate", $("#start_hour").val());
+         });*/
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
 
 });
