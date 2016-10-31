@@ -2,7 +2,7 @@
     <!-- BEGIN 促销项列表 -->
     <a show-modal id="#addSalePlan" class="btn sbold green pull-right">
         <i class="fa fa-plus"></i>新增促销计划
-   </a>
+    </a>
     <div class="promotion-list" ng-repeat="item in salesPlan">
         <!--BENGIN 商品促销 -->
         <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==1">
@@ -13,7 +13,7 @@
                         <div class="time-range">{{item['SALES_PLAN.BEGIN_DATETIME']|FormatAllDate}} 至 {{item['SALES_PLAN.END_DATETIME']}}</div>
                     </div><!-- 标题 -->
                     <div class="buttons">
-                        <a show-modal id="#detailClick" ng-click="detailClick(item)" class="note"></a>
+                        <!--<a show-modal id="#detailClick" ng-click="detailClick(item)" class="note"></a>-->
                         <a ng-click="stopSalesPlan(item)" class="stop"></a>
                         <a ng-click="delSalesPlan(item)" class="del"></a>
                     </div><!-- 图标 -->
@@ -47,63 +47,13 @@
                         </span>件商品参与</div>
                 </div>
                 <div class="product-total" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length ==null">
-                >>共
+                    >>共
                         <span class="itemNum">
                             0
                         </span>件商品参与
                 </div>
-                </div><!-- promotion content -->
+            </div><!-- promotion content -->
 
-                <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
-                    <div class="man-text">满<span>{{auto[0]}}</span>个</div>
-                    <div class="man-content">
-                        <div class="product-item">
-                            <img class="pull-left" src="../components/images/index_18.png">
-                            <p class="itemName">{{auto[1]}}</p>
-                            <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
-                        </div>
-                    </div>
-                    <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
-                </div><!-- promotion footer -->
-            </div><!-- promotion-wrap -->
-        </div>
-        <!-- END 商品促销 -->
-
-        <!--BENGIN 商品类促销 -->
-        <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==2">
-            <div class="promotion-wrap">
-                <div class="promotion-head">
-                    <div class="head-title">
-                        <div class="main-title">{{item['SALES_PLAN.INTRO']}}</div>
-                        <div class="time-range">{{item['SALES_PLAN.BEGIN_DATETIME']|FormatAllDate}} 至 {{item['SALES_PLAN.END_DATETIME']}}</div>
-                    </div><!-- 标题 -->
-                    <div class="buttons">
-                        <a show-modal id="#detailClick" ng-click="detailClick(item)" class="note"></a>
-                        <a ng-click="stopSalesPlan(item)" class="stop"></a>
-                        <a ng-click="delSalesPlan(item)" class="del"></a>
-                    </div><!-- 图标 -->
-                    <div class="marks" ng-show="item['SALES_PLAN.STATE']==1">
-                        <img src="../components/images/index_03.png">
-                    </div><!-- 分类标记 -->
-                    <div class="marks" ng-show="item['SALES_PLAN.STATE']==-1">
-                        <img src="../components/images/index_01.png">
-                    </div><!-- 分类标记 -->
-                </div> <!-- END head -->
-                <div class="promotion-content">
-                    <button class="addItem btn"  data-toggle="modal" id="#classSwitchModal" show-modal ng-click="getCurrentClass(item)">添加类别</button>
-                    <span class="buy-text">买</span>
-                    <div class="buy-content" ng-repeat="pro in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
-                        <div class="buy-list">
-                            <div class="product-item">
-                                <img class="pull-left" src="../components/images/index_18.png">
-                                <p class="itemName">{{proClassInfo[pro]}}</p>
-                                <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="product-total">>>共<span class="itemNum">{{((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length}}</span>类商品参与</div>
-                    </div>
-                </div> <!-- promotion-content -->
             <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
                 <div class="man-text">满<span>{{auto[0]}}</span>个</div>
                 <div class="man-content">
@@ -113,37 +63,94 @@
                         <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
                     </div>
                 </div>
-                <div class="zeng-text">赠 x{{auto[2]}}<span></span></div>
+                <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
             </div><!-- promotion footer -->
-            </div>
-        <!-- END 商品类促销 -->
+        </div>
+    <!-- END 商品促销 -->
 
-        <!--BENGIN 满减折扣 -->
-        <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==-1">
-            <div class="promotion-wrap">
-                <div class="promotion-head">
-                    <div class="head-title">
-                        <div class="main-title">
-                            <span ng-show="item['salesClass'] == 1">订单减价促销</span>
-                            <span ng-show="item['salesClass'] == 2">订单打折促销</span>
+    <!--BENGIN 商品类促销 -->
+        <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==2">
+        <div class="promotion-wrap">
+            <div class="promotion-head">
+                <div class="head-title">
+                    <div class="main-title">{{item['SALES_PLAN.INTRO']}}</div>
+                    <div class="time-range">{{item['SALES_PLAN.BEGIN_DATETIME']|FormatAllDate}} 至 {{item['SALES_PLAN.END_DATETIME']}}</div>
+                </div><!-- 标题 -->
+                <div class="buttons">
+                   <!-- <a show-modal id="#detailClick" ng-click="detailClick(item)" class="note"></a>-->
+                    <a ng-click="stopSalesPlan(item)" class="stop"></a>
+                    <a ng-click="delSalesPlan(item)" class="del"></a>
+                </div><!-- 图标 -->
+                <div class="marks" ng-show="item['SALES_PLAN.STATE']==1">
+                    <img src="../components/images/index_03.png">
+                </div><!-- 分类标记 -->
+                <div class="marks" ng-show="item['SALES_PLAN.STATE']==-1">
+                    <img src="../components/images/index_01.png">
+                </div><!-- 分类标记 -->
+            </div> <!-- END head -->
+            <div class="promotion-content">
+                <button class="addItem btn"  data-toggle="modal" id="#classSwitchModal"
+                        show-modal ng-click="getCurrentClass(item)"
+                        ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length > 0"
+                >修改类别</button>
+                <button class="addItem btn"  data-toggle="modal" id="#classSwitchModal"
+                        show-modal ng-click="getCurrentClass(item)"
+                        ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length  == null"
+                >添加类别</button>
+                <span class="buy-text">买</span>
+                <div class="buy-content" ng-repeat="pro in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
+                    <div class="buy-list">
+                        <div class="product-item">
+                            <img class="pull-left" src="../components/images/index_18.png">
+                            <p class="itemName">{{proClassInfo[pro]}}</p>
+                            <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
                         </div>
-                        <div class="time-range">{{item['SALES_PLAN.BEGIN_DATETIME']|FormatAllDate}} 至 {{item['SALES_PLAN.END_DATETIME']}}</div>
-                    </div><!-- 标题 -->
-                    <div class="buttons">
-                        <a href="#" class="note"></a>
-                        <a ng-click="stopSalesPlan(item)" class="stop"></a>
-                        <a ng-click="delSalesPlan(item)" class="del"></a>
-                    </div><!-- 图标 -->
-                    <div class="marks" ng-show="item['SALES_PLAN.STATE']==1">
-                        <img src="../components/images/index_03.png">
-                    </div><!-- 分类标记 -->
-                    <div class="marks" ng-show="item['SALES_PLAN.STATE']==-1">
-                        <img src="../components/images/index_01.png">
-                    </div> <!-- END promotion-head -->
-                <div class="promotion-content">
+                    </div>
+                </div>
+                <div class="product-total">>>共<span class="itemNum">{{((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length}}</span>类商品参与</div>
+            </div>
+        </div> <!-- promotion-content -->
+        <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
+            <div class="man-text">满<span>{{auto[0]}}</span>个</div>
+            <div class="man-content">
+                <div class="product-item">
+                    <img class="pull-left" src="../components/images/index_18.png">
+                    <p class="itemName">{{auto[1]}}</p>
+                    <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
+                </div>
+            </div>
+            <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
+        </div><!-- promotion footer -->
+    </div>
+    <!-- END 商品类促销 -->
+
+    <!--BENGIN 满减折扣 -->
+        <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==-1">
+        <div class="promotion-wrap">
+            <div class="promotion-head">
+                <div class="head-title">
+                    <div class="main-title">
+                        <span ng-show="item['salesClass'] == 1">订单减价促销</span>
+                        <span ng-show="item['salesClass'] == 2">订单打折促销</span>
+                        <span ng-show="item['salesClass'] == 3">订单满送</span>
+                    </div>
+                    <div class="time-range">{{item['SALES_PLAN.BEGIN_DATETIME']|FormatAllDate}} 至 {{item['SALES_PLAN.END_DATETIME']}}</div>
+                </div><!-- 标题 -->
+                <div class="buttons">
+                    <!--<a href="#" class="note"></a>-->
+                    <a ng-click="stopSalesPlan(item)" class="stop"></a>
+                    <a ng-click="delSalesPlan(item)" class="del"></a>
+                </div><!-- 图标 -->
+                <div class="marks" ng-show="item['SALES_PLAN.STATE']==1">
+                    <img src="../components/images/index_03.png">
+                </div><!-- 分类标记 -->
+                <div class="marks" ng-show="item['SALES_PLAN.STATE']==-1">
+                    <img src="../components/images/index_01.png">
+                </div> <!-- END promotion-head -->
+                <div class="promotion-content" ng-show="item['salesClass'] == 1">
                     <div class="coupon-list text-center" >
                         <ul class="list-unstyled" ng-repeat="auto in item['salesInfo']">
-                            <li ng-show="item['salesClass'] == 1">
+                            <li>
                                 <img class="pull-left" src="../components/images/index_21.png">
                                 <div class="coupon-detail">
                                     <p>满￥<span>{{auto[0]}}</span></p>
@@ -157,54 +164,32 @@
                                     <p>打￥<span>{{auto[1]}}</span>折</p>
                                 </div>
                             </li>
+                            <li ng-show="item['salesClass'] == 3">
+                                <img class="pull-left" src="../components/images/index_25.png">
+                                <div class="coupon-detail">
+                                    <p>满￥<span>{{auto[0]}}</span></p>
+                                    <p>打￥<span>{{auto[1]}}</span>折</p>
+                                </div>
+                            </li>
                         </ul>
                     </div>
                 </div>
-            </div>
-        </div>
-            </div>
-        <!-- END 满减折扣 -->
-
-        <!--BENGIN 添加标签促销 -->
-        <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==3">
-            <div class="promotion-wrap">
-                <div class="promotion-head">
-                    <div class="head-title">
-                        <div class="main-title">{{item['SALES_PLAN.INTRO']}}</div>
-                        <div class="time-range">{{item['SALES_PLAN.BEGIN_DATETIME']|FormatAllDate}} 至 {{item['SALES_PLAN.END_DATETIME']}}</div>
-                    </div><!-- 标题 -->
-                    <div class="buttons">
-                        <a href="#" class="note"></a>
-                        <a ng-click="stopSalesPlan(item)" class="stop"></a>
-                        <a ng-click="delSalesPlan(item)" class="del"></a>
-                    </div><!-- 图标 -->
-                    <div class="marks" ng-show="item['SALES_PLAN.STATE']==1">
-                        <img src="../components/images/index_03.png">
-                    </div><!-- 分类标记 -->
-                    <div class="marks" ng-show="item['SALES_PLAN.STATE']==-1">
-                        <img src="../components/images/index_01.png">
-                    </div><!-- 分类标记 -->
-                </div> <!-- END head -->
-
-                <div class="promotion-content">
-                    <button class="addItem btn"  data-toggle="modal" id="#tagSwitchModal" show-modal ng-click="getCurrentTag(item)">添加标签</button>
-                    <span class="buy-text">买</span>
-                    <div class="buy-content">
-                        <div class="buy-list">
-                            <div class="form-group form-inline" ng-repeat="tag in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
-                                <span>{{tagMap[tag]}}</span>
-                            </div>
-<!--
-                            <span class="btn btn-default">促销</span>
--->
-                        </div>
-
+                <div class="promotion-content" ng-show="item['salesClass'] == 2">
+                    <div class="coupon-list text-center" >
+                        <ul class="list-unstyled" ng-repeat="auto in item['salesInfo']">
+                            <li ng-show="item['salesClass'] == 2">
+                                <img class="pull-left" src="../components/images/index_23.png">
+                                <div class="coupon-detail">
+                                    <p>满￥<span>{{auto[0]}}</span></p>
+                                    <p>打￥<span>{{auto[1]}}</span>折</p>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                </div><!-- promotion content -->
-
-                <div class="promotion-footer">
+                </div>
+                <div class="promotion-content" ng-show="item['salesClass'] == 3">
                     <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
-                        <div class="man-text">满<span>{{auto[0]}}</span>个</div>
+                        <div class="man-text">满<span>{{auto[0]}}</span>元</div>
                         <div class="man-content">
                             <div class="product-item">
                                 <img class="pull-left" src="../components/images/index_18.png">
@@ -213,245 +198,299 @@
                             </div>
                         </div>
                         <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END 满减折扣 -->
+
+    <!--BENGIN 添加标签促销 -->
+        <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==3">
+        <div class="promotion-wrap">
+            <div class="promotion-head">
+                <div class="head-title">
+                    <div class="main-title">{{item['SALES_PLAN.INTRO']}}</div>
+                    <div class="time-range">{{item['SALES_PLAN.BEGIN_DATETIME']|FormatAllDate}} 至 {{item['SALES_PLAN.END_DATETIME']}}</div>
+                </div><!-- 标题 -->
+                <div class="buttons">
+                    <!--<a href="#" class="note"></a>-->
+                    <a ng-click="stopSalesPlan(item)" class="stop"></a>
+                    <a ng-click="delSalesPlan(item)" class="del"></a>
+                </div><!-- 图标 -->
+                <div class="marks" ng-show="item['SALES_PLAN.STATE']==1">
+                    <img src="../components/images/index_03.png">
+                </div><!-- 分类标记 -->
+                <div class="marks" ng-show="item['SALES_PLAN.STATE']==-1">
+                    <img src="../components/images/index_01.png">
+                </div><!-- 分类标记 -->
+            </div> <!-- END head -->
+
+            <div class="promotion-content">
+                <button class="addItem btn"  data-toggle="modal" id="#tagSwitchModal" show-modal ng-click="getCurrentTag(item)">添加标签</button>
+                <span class="buy-text">买</span>
+                <div class="buy-content">
+                    <div class="buy-list">
+                        <div class="form-group form-inline" ng-repeat="tag in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
+                            <span>{{tagMap[tag]}}</span>
+                        </div>
+                        <!--
+                                                    <span class="btn btn-default">促销</span>
+                        -->
+                    </div>
+
+                </div>
+            </div><!-- promotion content -->
+
+            <div class="promotion-footer">
+                <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
+                    <div class="man-text">满<span>{{auto[0]}}</span>个</div>
+                    <div class="man-content">
+                        <div class="product-item">
+                            <img class="pull-left" src="../components/images/index_18.png">
+                            <p class="itemName">{{auto[1]}}</p>
+                            <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
+                        </div>
+                    </div>
+                    <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
                 </div><!-- promotion footer -->
             </div>
         </div>
         <!-- END 添加类促销 -->
     </div>
-    </div>
+
     <class-switch-modal callback="classSwitch(data)"></class-switch-modal>
     <tag-switch-modal callback="tagSwitch(data)"></tag-switch-modal>
     <product-switch-modal callback="prdSwitch(data)"></product-switch-modal>
-    <!-- END 促销列表项 -->
+<!-- END 促销列表项 -->
 
     <div class="modal fade text-left" id="detailClick" tabindex="-1" aria-hidden="true"
-         style="display: none;z-index: 1049">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-hidden="true"></button>
-                    <h4 class="modal-title">修改促销计划</h4>
-                </div>
-                <div class="modal-body form-body text-right">
+     style="display: none;z-index: 1049">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">修改促销计划</h4>
+            </div>
+            <div class="modal-body form-body text-right">
 
-                    <form class="form-horizontal">
+                <form class="form-horizontal">
 
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required"> * </span>促销方案名称
-                            </label>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> * </span>促销方案名称
+                        </label>
 
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="detaileInfo['SALES_PLAN.NAME']">
-                            </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="detaileInfo['SALES_PLAN.NAME']">
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                促销方案描述
-                            </label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            促销方案描述
+                        </label>
 
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="detaileInfo['SALES_PLAN.INTRO']"
-                                ></div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="detaileInfo['SALES_PLAN.INTRO']"
+                            ></div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">促销计划类型</span>
+                        </label>
+
+                        <div class="col-md-4">
+                            <select ng-model="detaileInfo['SALES_PLAN.TARGET_OBJ_TYPE']"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value='1'>商品</option>
+                                <option class="nya-bs-option" value='2'>商品类别</option>
+                                <option class="nya-bs-option" value='3'>优惠券</option>
+                                <option class="nya-bs-option" value='4'>商品标签</option>
+                            </select>
                         </div>
+                        <div class="col-md-4">
+                            <a data-toggle="modal" ng-if="detaileInfo['SALES_PLAN.TARGET_OBJ_TYPE']==1"
+                               data-target="#productSwitchModal">请选择商品</a>
+                            <a data-toggle="modal" ng-if="detaileInfo['SALES_PLAN.TARGET_OBJ_TYPE']==2"
+                               data-target="#classSwitchModal">请选择商品类别</a>
+                            <a data-toggle="modal" ng-if="detaileInfo['SALES_PLAN.TARGET_OBJ_TYPE']==4"
+                               data-target="#tagSwitchModal">请选择商品标签</a>
 
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">促销计划类型</span>
-                            </label>
-
-                            <div class="col-md-4">
-                                <select ng-model="detaileInfo['SALES_PLAN.TARGET_OBJ_TYPE']"
-                                        class="nya-bs-select form-control">
-                                    <option class="nya-bs-option" value='1'>商品</option>
-                                    <option class="nya-bs-option" value='2'>商品类别</option>
-                                    <option class="nya-bs-option" value='3'>优惠券</option>
-                                    <option class="nya-bs-option" value='4'>商品标签</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <a data-toggle="modal" ng-if="detaileInfo['SALES_PLAN.TARGET_OBJ_TYPE']==1"
-                                   data-target="#productSwitchModal">请选择商品</a>
-                                <a data-toggle="modal" ng-if="detaileInfo['SALES_PLAN.TARGET_OBJ_TYPE']==2"
-                                   data-target="#classSwitchModal">请选择商品类别</a>
-                                <a data-toggle="modal" ng-if="detaileInfo['SALES_PLAN.TARGET_OBJ_TYPE']==4"
-                                   data-target="#tagSwitchModal">请选择商品标签</a>
-
-                            </div>
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">选择促销规则</span>
-                            </label>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">选择促销规则</span>
+                        </label>
 
-                            <div class="col-md-8">
-                                <select class="form-control"
-                                        ng-model="detaileInfo['SALES_PLAN.SALE_ID']"
-                                        ng-options="item['SALES.ID'] as item['SALES.NAME'] for item in salesList">
-                                </select>
-                            </div>
+                        <div class="col-md-8">
+                            <select class="form-control"
+                                    ng-model="detaileInfo['SALES_PLAN.SALE_ID']"
+                                    ng-options="item['SALES.ID'] as item['SALES.NAME'] for item in salesList">
+                            </select>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">方案开始时间</span>
-                            </label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">方案开始时间</span>
+                        </label>
 
-                            <div class="col-md-8">
-                                <input size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime">
-                                <!--<div >-->
-                                    <!--<form class="form-horizontal">-->
-                                        <!--<fieldset>-->
-                                            <!--<div class="control-group">-->
-                                                <!--<div class="controls">-->
-                                                    <!--<div class="input-prepend input-group">-->
-                                                        <!--<span class="add-on input-group-addon">-->
-                                                            <!--<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>-->
-                                                        <!--</span>-->
-                                                        <!--<input type="text" readonly style="width: 330px" name="birthday"-->
-                                                               <!--id="birthday" class="form-control" value="03/18/2013"-->
-                                                               <!--ng-init="detaileInfo['SALES_PLAN.BEGIN_DATETIME']"-->
-                                                               <!--ng-model="detaileInfo['SALES_PLAN.BEGIN_DATETIME']"/>-->
-                                                    <!--</div>-->
-                                                <!--</div>-->
-                                            <!--</div>-->
-                                        <!--</fieldset>-->
-                                    <!--</form>-->
-                                <!--</div>-->
-                            </div>
+                        <div class="col-md-8">
+                            <input size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime">
+                            <!--<div >-->
+                            <!--<form class="form-horizontal">-->
+                            <!--<fieldset>-->
+                            <!--<div class="control-group">-->
+                            <!--<div class="controls">-->
+                            <!--<div class="input-prepend input-group">-->
+                            <!--<span class="add-on input-group-addon">-->
+                            <!--<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>-->
+                            <!--</span>-->
+                            <!--<input type="text" readonly style="width: 330px" name="birthday"-->
+                            <!--id="birthday" class="form-control" value="03/18/2013"-->
+                            <!--ng-init="detaileInfo['SALES_PLAN.BEGIN_DATETIME']"-->
+                            <!--ng-model="detaileInfo['SALES_PLAN.BEGIN_DATETIME']"/>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</fieldset>-->
+                            <!--</form>-->
+                            <!--</div>-->
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">方案结束时间</span>
-                            </label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">方案结束时间</span>
+                        </label>
 
-                            <div class="col-md-8">
-                                <div >
-                                    <form class="form-horizontal">
-                                        <fieldset>
-                                            <div class="control-group">
-                                                <div class="controls">
-                                                    <div class="input-prepend input-group">
+                        <div class="col-md-8">
+                            <div >
+                                <form class="form-horizontal">
+                                    <fieldset>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <div class="input-prepend input-group">
                                                         <span class="add-on input-group-addon">
                                                             <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>
                                                         </span>
-                                                        <input type="text" readonly style="width: 330px" name="birthday"
-                                                               id="birthdayDate" class="form-control" value="03/18/2013"
-                                                               ng-init="detaileInfo['SALES_PLAN.END_DATETIME']"
-                                                               ng-model="detaileInfo['SALES_PLAN.END_DATETIME']"/>
-                                                    </div>
+                                                    <input type="text" readonly style="width: 330px" name="birthday"
+                                                           id="birthdayDate" class="form-control" value="03/18/2013"
+                                                           ng-init="detaileInfo['SALES_PLAN.END_DATETIME']"
+                                                           ng-model="detaileInfo['SALES_PLAN.END_DATETIME']"/>
                                                 </div>
                                             </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
+                                        </div>
+                                    </fieldset>
+                                </form>
                             </div>
-                            </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" ng-click="modSalePlan(detaileInfo)" class="btn green" data-dismiss="modal">确定</button>
-                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消</button>
-                </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <!-- /.modal-content -->
+            <div class="modal-footer">
+                <button type="button" ng-click="modSalePlan(detaileInfo)" class="btn green" data-dismiss="modal">确定</button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消</button>
+            </div>
         </div>
-        <!-- /.modal-dialog -->
+        <!-- /.modal-content -->
     </div>
+    <!-- /.modal-dialog -->
+</div>
     <div class="modal fade text-left" id="addSalePlan" tabindex="-1" aria-hidden="true"
-         style="display: none;z-index: 1049">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-hidden="true"></button>
-                    <h4 class="modal-title">添加促销计划</h4>
-                </div>
-                <div class="modal-body form-body text-right">
-                    <form class="form-horizontal">
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span></span>促销名称
-                            </label>
-                            <div class="col-md-8" >
-                                <input type="text" class="form-control"
-                                       ng-model="add['SALES_PLAN.NAME']"
-                                       ng-init="add['SALES_PLAN.NAME']=''" ng-blur="validate(add['SALES_PLAN.NAME'])">
-                            </div>
+     style="display: none;z-index: 1049">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">添加促销计划</h4>
+            </div>
+            <div class="modal-body form-body text-right">
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span></span>促销名称
+                        </label>
+                        <div class="col-md-8" >
+                            <input type="text" class="form-control"
+                                   ng-model="add['SALES_PLAN.NAME']"
+                                   ng-init="add['SALES_PLAN.NAME']='' ">
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                促销内容描述
-                            </label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            促销内容描述
+                        </label>
 
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="add['SALES_PLAN.INTRO']"
-                                       ng-init="add['SALES_PLAN.INTRO']=''"
-                                       placeholder=""></div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['SALES_PLAN.INTRO']"
+                                   ng-init="add['SALES_PLAN.INTRO']=''"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            选择促销规则
+                        </label>
+                        <div class="col-md-8">
+                            <select ng-model="add['SALES_PLAN.SALE_ID']"
+                                    ng-init="add['SALES_PLAN.SALE_ID']=''"
+                                    class="nya-bs-select form-control"
+                                    ng-options="item['SALES.ID'] as item['SALES.NAME'] for item in salesList" ng-change="show()">
+                                <option class="nya-bs-option" value="">选择促销规则</option>
+                            </select>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                选择促销规则
-                            </label>
-                            <div class="col-md-8">
-                                <select ng-model="add['SALES_PLAN.SALE_ID']"
-                                        ng-init="add['SALES_PLAN.SALE_ID']=''"
-                                        class="nya-bs-select form-control"
-                                        ng-options="item['SALES.ID'] as item['SALES.NAME'] for item in salesList" ng-change="show()">
-                                    <option class="nya-bs-option" value="">选择促销规则</option>
-                                </select>
-                            </div>
-                        </div>
+                    </div>
 
-                        <div class="form-group row" ng-show="showCont">>
-                            <label class="col-md-3 control-label">
-                                选择促销规则
-                            </label>
-                            <div class="col-md-8">
-                                <select ng-model="add['SALES_PLAN.TARGET_OBJ_TYPE']"
-                                        ng-init="add['SALES_PLAN.TARGET_OBJ_TYPE']='-1'"
-                                        class="nya-bs-select form-control"
-                                        ng-options="item['id'] as item['name'] for item in salePlanMap">
-                                    <option class="nya-bs-option" value="">选择促销规则</option>
-                                </select>
-                            </div>
+                    <div class="form-group row" ng-show="showCont">>
+                        <label class="col-md-3 control-label">
+                            选择促销规则
+                        </label>
+                        <div class="col-md-8">
+                            <select ng-model="add['SALES_PLAN.TARGET_OBJ_TYPE']"
+                                    ng-init="add['SALES_PLAN.TARGET_OBJ_TYPE']='-1'"
+                                    class="nya-bs-select form-control"
+                                    ng-options="item['id'] as item['name'] for item in salePlanMap">
+                                <option class="nya-bs-option" value="">选择促销规则</option>
+                            </select>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">促销方案开始时间</span>
-                            </label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="add['SALES_PLAN.BEGIN_DATETIME']"
-                                       ng-init="add['SALES_PLAN.BEGIN_DATETIME']=''"
-                                       placeholder="">
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">促销方案开始时间</span>
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['SALES_PLAN.BEGIN_DATETIME']"
+                                   ng-init="add['SALES_PLAN.BEGIN_DATETIME']=''"
+                                   placeholder="">
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">促销方案结束时间</span>
-                            </label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">促销方案结束时间</span>
+                        </label>
 
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="add['SALES_PLAN.END_DATETIME']"
-                                       ng-init="add['SALES_PLAN.END_DATETIME']=''"
-                                       placeholder="">
-                            </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['SALES_PLAN.END_DATETIME']"
+                                   ng-init="add['SALES_PLAN.END_DATETIME']=''"
+                                   placeholder="">
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" ng-click="addSalePlan(add)" class="btn green">确定</button>
-                    <button type="button" class="btn green  btn-outline" data-dismiss="modal" ng-click="empty(add)">取消</button>
-                </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="addSalePlan(add)" class="btn green">确定</button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal" ng-click="empty(add)">取消</button>
             </div>
         </div>
     </div>
 </div>
 </div>
-
+</div>

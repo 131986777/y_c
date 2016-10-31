@@ -40,7 +40,11 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
 
     //设置页面Bottom触发事件
     modalFactory.setBottom(true, function () {
-        if ($scope.salesInfo['SALES.NAME'] == undefined ||$scope.salesInfo['SALES.INTRO'] == undefined) {
+        if($scope.salesInfo == undefined){
+            modalFactory.showAlert("请填写完整信息");
+        }
+        else if ($scope.salesInfo['SALES.NAME'] == undefined) {
+            alert('+++');
             modalFactory.showAlert("请填写完整信息");
             return;
         }
