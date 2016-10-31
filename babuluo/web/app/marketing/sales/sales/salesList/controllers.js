@@ -246,11 +246,17 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         }
       });
     });
-  }
+  };
+
+    $scope.show = function () {
+        alert($scope.add['SALES_PLAN.SALE_ID']);
+
+    }
 
   $scope.empty = function () {
       $scope.add = null;
   }
+
 
     $(document).ready(function() {
         $('#birthday').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
@@ -258,8 +264,9 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         });
     });
 
-        $(".form_datetime").datetimepicker({
-            language:  'zh-CN',
-            format: 'yyyy-mm-dd hh:ii'});
-
+    $(document).ready(function() {
+        $('#birthdayDate').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
 });
