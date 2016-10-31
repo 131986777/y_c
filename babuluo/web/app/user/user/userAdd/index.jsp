@@ -75,7 +75,10 @@
                         <table class="table table-bordered table-hover table-striped">
                             <thead>
                             <tr>
-                                <th class="col-sm-10">角色列表</th>
+                                <th class="col-sm-10">
+                                    <span class="col-sm-10">角色列表</span>
+                                    <a ui-sref="roleList">角色权限管理</a>
+                                </th>
                             </tr>
                             </thead>
                             <tbody>
