@@ -81,6 +81,10 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
 
     $scope.detailClick = function (item) {
         $scope.detail = item;
+        console.log(item);
+        $scope.detailArray= item.split(' ');
+        console.log('qwe');
+        console.log($scope.detailArray);
     }
    /* $scope.Monday = "";
     $scope.Tuesday = "";
@@ -91,9 +95,10 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
     $scope.Sunday = "";*/
 
     $scope.addCoupon = function () {
-        console.log($scope.from);
-        console.log($scope.add['COUPON.END_DATETIME']);
+        console.log($scope.from);  //add['COUPON.BEGIN_DATETIME']
 
+       $scope.add['COUPON.BEGIN_DATETIME']=$scope.from;
+        $scope.add['COUPON.END_DATETIME']=$scope.to;
        $scope.add['COUPON.USE_TIME_CYCLE'] = $scope.Monday + ',' + $scope.Tuesday + ',' + $scope.Wednesday + ',' + $scope.Thursday + ',' + $scope.Friday
             + ',' + $scope.Saturday + ',' + $scope.Sunday;
 

@@ -388,8 +388,8 @@
                                  data-date="10/11/2012"
                                  language="zh-CN"
                                  data-date-format="yyyy-mm-dd">
-                                <input id="start_hour" type="text" class="form-control " placeholder="时间组件暂时无法直接使用"
-                                       name="from" ng-model="add['COUPON.BEGIN_DATETIME']" data-date-format="yyyy/mm/dd hh:ii">
+                                <input id="start_hour" type="text" class="form-control " placeholder=""
+                                       name="from" ng-model="from" data-date-format="yyyy/mm/dd hh:ii">
                             </div>
                         </div>
                 <div class="form-group row">
@@ -397,9 +397,13 @@
                         <span class="required">方案结束时间</span>
                     </label>
 
-                    <div class="col-md-8 ">
-                        <input id="end_hour" type="text" class="form-control " placeholder="暂时无法使用"
-                               name="to" ng-model="add['COUPON.END_DATETIME']" data-date-format="yyyy/mm/dd hh:ii">
+                    <div
+                            class="input-group input-daterange col-md-8 "
+                            data-date="10/11/2012"
+                            language="zh-CN"
+                            data-date-format="yyyy-mm-dd">
+                        <input id="end_hour" type="text" class="form-control " placeholder=""
+                               name="to" ng-model="to" data-date-format="yyyy/mm/dd hh:ii">
                     </div>
                 </div>
                 <!--<div class="input-group input-daterange col-md-12 "
@@ -595,7 +599,11 @@
                 </div>
 
                 <div class="modal-body form-body text-left">
-                 <span>{{detail}}</span>
+                    <!--<div ng-repeat="item in detailArray">
+                        <span>{{item}}</span>
+                    </div>-->
+                    <span>{{detail}}</span>
+
                 </div>
                 <div class="modal-footer">
 
