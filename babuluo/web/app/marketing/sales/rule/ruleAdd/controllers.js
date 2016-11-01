@@ -34,6 +34,7 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
         }else {
             form['SALES.CONDITION_TYPE'] =1;
         }
+        console.log('scopID:'+$scope.memberId);
         form['SALES.SALE_TARGET'] = $scope.memberId;
         return form;
     }

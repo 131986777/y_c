@@ -113,7 +113,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                           位置高度
+                            位置高度
                         </label>
 
                         <div class="col-md-8">
@@ -134,16 +134,23 @@
                                    placeholder="请直接输入数字">
                         </div>
                     </div>
-                    <div class="form-group row" >
+                    <div class="form-group row">
                         <label class="col-md-3 control-label">
-                           位置代码
+                            位置代码
                         </label>
 
                         <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="add['BANNER_POSITION.CODE']"
-                                   ng-init="add['BANNER_POSITION.CODE']=''"
-                                   placeholder="">
+                            <!-- <input type="text" class="form-control"
+                                    ng-model="add['BANNER_POSITION.CODE']"
+                                    ng-init="add['BANNER_POSITION.CODE']=''"
+                                    placeholder="">-->
+                            <textarea
+                                    ng-model="add['BANNER_POSITION.CODE']"
+                                    ng-init="add['BANNER_POSITION.CODE']=''"
+                                    class="form-control"
+                                    placeholder="">
+
+                            </textarea>
                         </div>
                     </div>
 
@@ -228,14 +235,15 @@
                                    ng-model="mod['BANNER_POSITION.LENGTH']">
                         </div>
                     </div>
-                    <div class="form-group row" >
+                    <div class="form-group row">
                         <label class="col-md-3 control-label">
                             位置代码
                         </label>
 
                         <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="mod['BANNER_POSITION.CODE']">
+                            <textarea class="form-control"
+                                      ng-model="mod['BANNER_POSITION.CODE']">
+                                </textarea>
                         </div>
                     </div>
 
