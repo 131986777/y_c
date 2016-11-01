@@ -81,10 +81,7 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
 
     $scope.detailClick = function (item) {
         $scope.detail = item;
-        console.log(item);
-        $scope.detailArray= item.split(' ');
-        console.log('qwe');
-        console.log($scope.detailArray);
+
     }
    /* $scope.Monday = "";
     $scope.Tuesday = "";
