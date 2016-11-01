@@ -35,12 +35,16 @@
         <p>
           提货时间：2016.08.23星期三
         </p>
-        <p ng-bind="'提货门店：'+shop['SHOP.SHOP_NAME']">
+        <p ng-bind="'提货门店：'+order['SHOP_ORDER.SHOP_NAME']">
         </p>
         <p>
           提货方式：自提
         </p>
+        <p ng-bind="'提货码：'+order['SHOP_ORDER.REC_CHECKCODE']">
+
+        </p>
       </div>
+
       <div class="col-xs-12">
         <p ng-if="order['SHOP_ORDER.REMARK']!=undefined">
           订单备注：<span ng-bind="order['SHOP_ORDER.REMARK']"></span>

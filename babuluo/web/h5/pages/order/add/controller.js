@@ -27,6 +27,9 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
             });
             $scope.updateCartPrice();
         });
+
+        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
+
     }
 
     //计算订单价格  未做优惠促销等逻辑
@@ -48,6 +51,8 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
         params['SHOP_ORDER.REC_CONTACT']='帅比琪';//收货人
         params['SHOP_ORDER.REC_PHONE']='13257915508';//联系电话
         params['SHOP_ORDER.UID']=1000;//所属会员
+        params['SHOP_ORDER.SHOP_NAME']=$scope.shop['SHOP.SHOP_NAME'];//门店信息
+        params['SHOP_ORDER.SHOP_ID']=$scope.shop['SHOP.SHOP_ID'];//门店ID
         params['SHOP_ORDER.DETAILS']=JSON.stringify($scope.skuList);//sku信息
         orderFactory.addOrder(params).get({}, function (response) {
 

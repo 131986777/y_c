@@ -5,8 +5,6 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
 
 
     $scope.initData= function () {
-
-
         $scope.hasNextPage=true;
         $scope.loading = false;  //状态标记
         $scope.filterStateOrder($stateParams.state);

@@ -317,7 +317,7 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
 
             //数量减
             $scope.moreSize = function () {
-                if ($scope.skuSize > $scope.sku['SHOP_PRODUCT_SKU']) {
+                if ($scope.skuSize < $scope.sku['SHOP_PRODUCT_SKU.STOCK']) {
                     $scope.skuSize++;
                 }else{
                     weUI.toast.ok('已达到该商品最大库存数');

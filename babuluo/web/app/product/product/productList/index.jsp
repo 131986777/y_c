@@ -30,15 +30,16 @@
                     <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
                     <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
                 </select>
+                <div class="btn-group ">
+                    <a ui-sref="productAdd">
+                        <button id="sample_editable_1_new" class="btn sbold green">
+                            <i class="fa fa-plus"></i> 新增商品
+                        </button>
+                    </a>
+                </div>
+
             </div>
 
-            <div class="btn-group ">
-                <a ui-sref="productAdd">
-                    <button id="sample_editable_1_new" class="btn sbold green">
-                        <i class="fa fa-plus"></i> 新增商品
-                    </button>
-                </a>
-            </div>
 
         </div>
         <%--筛选功能--%>
