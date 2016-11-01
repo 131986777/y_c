@@ -54,8 +54,14 @@
                 <td ng-bind="pointInfo['MEMBER_POINT_LIST.ADD_DATETIME'] | FormatAllDate"></td>
                 <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT' ]"></td>
                 <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT_INTRO' ]"></td>
-                <td class="text-center" ng-bind="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT' ]"></td>
-                <td class="text-center" ng-bind="pointInfo['MEMBER_POINT_LIST.POINT' ]"></td>
+                <td class="text-center">
+                    <span style="color:black" ng-show="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']>0">{{pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']}}</span>
+                    <span style="color:red" ng-show="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']<=0">{{pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']}}</span>
+                </td>
+                <td class="text-center">
+                    <span style="color:black" ng-show="pointInfo['MEMBER_POINT_LIST.POINT']>0">{{pointInfo['MEMBER_POINT_LIST.POINT']}}</span>
+                    <span style="color:red" ng-show="pointInfo['MEMBER_POINT_LIST.POINT']<=0">{{pointInfo['MEMBER_POINT_LIST.POINT']}}</span>
+                </td>
             </tr>
             </tbody>
         </table>

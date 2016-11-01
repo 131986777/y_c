@@ -5,6 +5,15 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     modalFactory.setBottom(false);
 
 
+    var salePlanMap=[{id:1,name:'单件商品促销'},
+        {id:2,name:'按商品类别促销'},
+        {id:1,name:'按商品标签促销'}
+    ];
+
+
+    $scope.salePlanMap = salePlanMap
+
+
     $scope.getCurrentPro = function(item) {
         $scope.updatePlanForm = clone(item);
         if(item['SALES_PLAN.TARGET_OBJ_ID'] == null){
@@ -16,6 +25,26 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     }
 
     $scope.prdSwitch = function (data) {
+        var array = new Array();
+
+        for (var i = 0; i < data.length; i++) {
+            array.push(data[i]['SHOP_PRODUCT_SKU.PRD_ID']);
+        }
+
+        var result = [];
+        for(var i=0; i<array.length; i++){
+            if(result.indexOf(array[i])==-1){
+                result.push(array[i])
+            }
+        }
+        //插入促销商品
+        $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result;
+        var form = {};
+        form = $scope.updatePlanForm;
+        $scope.save(form);
+    }
+
+    /*$scope.prdSwitch = function (data) {
         var array = new Array();
         var addarray = $scope.currentPro;
 
@@ -40,7 +69,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
             var form = {};
             form = $scope.updatePlanForm;
         $scope.save(form);
-    }
+    }*/
 
     $scope.getCurrentClass = function(item) {
         $scope.updatePlanForm = clone(item);
@@ -129,7 +158,6 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     }
 
 
-
   $scope.initLoad = function () {
       salesFactory.querySalesPlan().get({}, function (response) {
           console.log(response);
@@ -139,6 +167,8 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
           $scope.proClassInfo = response.extraData.proClassMap;
           //商品的ID和名称的Map
           $scope.productMap = response.extraData.productMap;
+          //得到促销规则的ID和类型的Map
+          $scope.salesTypeMap = response.extraData.salesTypeMap;
           //获得促销规则的ID和详细信息的Map
           $scope.salesMap = response.extraData.salesMap;
           //获得促销规则详情
@@ -164,6 +194,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
                               }
                           }
                           ele['salesInfo'] = $scope.salesDetailInfo;
+                          ele['salesClass'] = item['SALES.SALE_TYPE'];
                       }
                       else if(item['SALES.SALE_TYPE'] == 1||item['SALES.SALE_TYPE'] == 2){
                           for(var i =1;i<=6;i++){
@@ -186,16 +217,22 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     $scope.initLoad();
 
   $scope.addSalePlan=function (form) {
-      form['SALES_PLAN.TARGET_OBJ_TYPE'] = 1;
-      salesFactory.AddSalesPlan(form).get({}, function (response) {
-      if (response.code == 400) {
-        modalFactory.showShortAlert(response.msg);
-      } else if (response.extraData.state == 'true') {
-        modalFactory.showShortAlert('新增成功');
-          $("#addSalePlan").modal('hide');
-          $scope.initLoad();
+      console.log($scope.add);
+      if($scope.add['SALES_PLAN.NAME'] == ''||$scope.add['SALES_PLAN.INTRO'] == ''
+                                            ||$scope.add['SALES_PLAN.SALE_ID']==''){
+          alert('请输入完整信息');
       }
-    });
+      else{
+          salesFactory.AddSalesPlan(form).get({}, function (response) {
+              if (response.code == 400) {
+                  modalFactory.showShortAlert(response.msg);
+              } else if (response.extraData.state == 'true') {
+                  modalFactory.showShortAlert('新增成功');
+                  $("#addSalePlan").modal('hide');
+                  $scope.initLoad();
+              }
+          });
+      }
   };
 
 
@@ -246,11 +283,21 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         }
       });
     });
-  }
+  };
+
+    $scope.show = function () {
+        var id = $scope.add['SALES_PLAN.SALE_ID'];
+        if($scope.salesTypeMap[id] == 3){
+            $scope.showCont = true;
+        }else {
+            $scope.showCont = false;
+        }
+    }
 
   $scope.empty = function () {
       $scope.add = null;
   }
+
 
     $(document).ready(function() {
         $('#birthday').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
@@ -258,8 +305,9 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         });
     });
 
-        $(".form_datetime").datetimepicker({
-            language:  'zh-CN',
-            format: 'yyyy-mm-dd hh:ii'});
-
+    $(document).ready(function() {
+        $('#birthdayDate').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
 });

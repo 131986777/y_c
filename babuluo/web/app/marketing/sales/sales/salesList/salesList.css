@@ -83,10 +83,10 @@
     padding-top: 13px;
 }
 .promotion-content .buy-text{
-    font-size: 23px;
+    font-size: 15px;
     position: absolute;
     left: 95px;
-    top: 24px;
+    top: -1px;
 }
 .promotion-content .buy-content,.promotion-footer{
     padding-top: 16px;
