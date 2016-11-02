@@ -4,40 +4,46 @@
     <div class="table-operbar row" ng-cloak>
         <div class="table-toolbar">
             <%--筛选功能--%>
-            <div class="row">
-
-                <select ng-model="filter['SHOP_PRODUCT.IS_SALE']"
-                        ng-init="filter['SHOP_PRODUCT.IS_SALE'] = 'null'"
-                        class="nya-bs-select ">
-                    <option class="nya-bs-option" value="null">所有商品</option>
-                    <option class="nya-bs-option" value="1">上架</option>
-                    <option class="nya-bs-option" value="-1">下架</option>
-                </select>
-
-                <select ng-model="filter['SHOP_PRODUCT.TAG_ID']"
-                        ng-init="filter['SHOP_PRODUCT.TAG_ID'] = 'null'"
-                        class="nya-bs-select">
-                    <option class="nya-bs-option" value="null">全部标签</option>
-                    <option class="nya-bs-option" ng-repeat="tag in tagList"
-                            ng-bind="tag['SHOP_TAG.TAG']"
-                            value="'{{tag['SHOP_TAG.TAG_ID']}}'"></option>
-                </select>
-
-                <select ng-model="filter['SHOP_PRODUCT.ODRDER']"
-                        ng-init="filter['SHOP_PRODUCT.ODRDER'] = 'ORDER_NUM DESC'; "
-                        class="nya-bs-select">
-                    <option class="nya-bs-option" value="ORDER_NUM DESC">排序号</option>
-                    <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
-                    <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
-                </select>
-                <div class="btn-group ">
+            <div class="row col-sm-12">
+                <div class="form-inline form-group">
+                    <div class="form-group">
+                        <label for="name" class="control-label">商品名称:</label>
+                        <input type="text" class="form-control" id="name" placeholder="商品名称"
+                               ng-model="query['SHOP_PRODUCT.PRD_NAME']">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right" ng-click="query()">查询
+                        </button>
+                    </div>
+                    <label class="control-label">筛选：</label>
+                    <select ng-model="filter['SHOP_PRODUCT.IS_SALE']"
+                            ng-init="filter['SHOP_PRODUCT.IS_SALE'] = 'null'"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="null">所有商品</option>
+                        <option class="nya-bs-option" value="1">上架</option>
+                        <option class="nya-bs-option" value="-1">下架</option>
+                    </select>
+                    <select ng-model="filter['SHOP_PRODUCT.TAG_ID']"
+                            ng-init="filter['SHOP_PRODUCT.TAG_ID'] = 'null'"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="null">全部标签</option>
+                        <option class="nya-bs-option" ng-repeat="tag in tagList"
+                                ng-bind="tag['SHOP_TAG.TAG']"
+                                value="'{{tag['SHOP_TAG.TAG_ID']}}'"></option>
+                    </select>
+                    <select ng-model="filter['SHOP_PRODUCT.ODRDER']"
+                            ng-init="filter['SHOP_PRODUCT.ODRDER'] = 'ORDER_NUM DESC'; "
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="ORDER_NUM DESC">排序号</option>
+                        <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
+                        <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
+                    </select>
                     <a ui-sref="productAdd">
-                        <button id="sample_editable_1_new" class="btn sbold green">
+                        <button id="sample_editable_1_new" class="btn btn-default pull-right">
                             <i class="fa fa-plus"></i> 新增商品
                         </button>
                     </a>
                 </div>
-
             </div>
 
 

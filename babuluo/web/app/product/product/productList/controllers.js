@@ -69,4 +69,9 @@ AndSellMainModule.controller('productListController', function ($scope, productF
         });
     }
 
+    $scope.query = function () {
+
+        $scope.filter['SHOP_PRODUCT.PRD_NAME'] = $scope.query['SHOP_PRODUCT.PRD_NAME'];
+    };
+
 });
