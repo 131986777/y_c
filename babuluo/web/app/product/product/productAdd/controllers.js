@@ -111,7 +111,7 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
     $scope.changeSettingSku = function () {
 
         $scope.hasSkuAttrCount = 0;
-        $scope.product.skuName1 = '重量';
+        $scope.product.skuName1 = '商品规格';
         $scope.product.skuName2 = '';
         $scope.product.skuName3 = '';
     };

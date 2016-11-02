@@ -1,6 +1,6 @@
 var AndSellRouter = angular.module('AndSell.Router', ['ui.router']);
 var AndSellService = angular.module('AndSell.Service', ['ngResource']);
-var AndSellUI = angular.module('AndSell.UI', ['ngSanitize','weUI']);
+var AndSellUI = angular.module('AndSell.UI', ['ngSanitize','weUI','ui.bootstrap']);
 var AndSellData = angular.module("AndSell.data", []);
 var AndSellH5MainModule = angular.module('AndSell.H5.Main', ['AndSell.Service', 'AndSell.Router', 'AndSell.UI']);
 

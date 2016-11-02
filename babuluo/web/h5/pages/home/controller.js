@@ -8,6 +8,8 @@ AndSellH5MainModule.controller('H5.HomeController', function ($scope, $state, we
         $state.go('prd-List', {keyword: $scope.prdKeyword});
     }
 
+    var slides;
+
     $scope.initData = function () {
         var id = getCookie('currentShop');
         console.log(id);
@@ -22,6 +24,26 @@ AndSellH5MainModule.controller('H5.HomeController', function ($scope, $state, we
                 }
             });
         }
+        // 设置轮播图图片间隔
+              $scope.myInterval = 4000;
+               // 轮播图数据初始化
+              $scope.slides = new Array;
+              // 添加轮播图源
+              $scope.slides.push({ image: 'http://img1.gtimg.com/9/910/91061/9106175_980x1200_960.jpg'});
+              $scope.slides.push({ image: 'http://files.15w.com/image/2015/0621/14348708842995.png'});
+
+        $('#carousel-generic').hammer().on('swipeleft', function(){
+            $(this).carousel('next');
+        });
+
+        $('#carousel-generic').hammer().on('swiperight', function(){
+            $(this).carousel('prev');
+        });
     }
+
+    //$scope.ssss= function () {
+    //    $scope.slides.push({ image: 'http://a.hiphotos.baidu.com/zhidao/pic/item/37d3d539b6003af352b41be2372ac65c1038b622.jpg'});
+    //
+    //}
 
 });
