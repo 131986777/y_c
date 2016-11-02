@@ -7,7 +7,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
 
     var salePlanMap=[{id:1,name:'单件商品促销'},
         {id:2,name:'按商品类别促销'},
-        {id:1,name:'按商品标签促销'}
+        {id:3,name:'按商品标签促销'}
     ];
 
 
@@ -83,16 +83,16 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
 
     $scope.classSwitch = function(data){
         var array = new Array();
-        var addarray = $scope.currentClass;
+        //var addarray = $scope.currentClass;
 
         for (var i = 0; i < data.length; i++) {
             array.push(data[i]['SHOP_PRODUCT_CLASS.CLASS_ID']);
         }
-        if(addarray != null){
+        /*if(addarray != null){
             for (var i = 0; i < addarray.length; i++) {
                 array.push(addarray[i]);
             }
-        }
+        }*/
 
         var result = [];
         for(var i=0; i<array.length; i++){
@@ -119,17 +119,17 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
 
     $scope.tagSwitch = function (data) {
         var array = new Array();
-        var addarray = $scope.currentTag;
+        //var addarray = $scope.currentTag;
 
         for (var i = 0; i < data.length; i++) {
             array.push(data[i]['SHOP_TAG.TAG_ID']);
         }
 
-        if(addarray != null){
+        /*if(addarray != null){
             for (var i = 0; i < addarray.length; i++) {
                 array.push(addarray[i]);
             }
-        }
+        }*/
 
         var result = [];
         for(var i=0; i<array.length; i++){
@@ -150,7 +150,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
             if (response.code == 400) {
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert('新增成功');
+                modalFactory.showShortAlert('修改成功');
                 $("#addSalePlan").modal('hide');
                 $scope.initLoad();
             }
@@ -180,21 +180,21 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
               $scope.salesList.forEach(function(item){
                   if(ele['SALES_PLAN.SALE_ID'] == item['SALES.ID']){
                       var totalArray = new Array();
-                      if(item['SALES.SALE_TYPE'] == 3){
-                          for(var i =1;i<=6;i++){
-                              if(item['SALES.CONDITION_NUM'+i] != null){
-                                  var jsonInfo = item['SALES.SALE_CONTENT'+i].toString();
+                      if(item['SALES.SALE_TYPE'] == 3) {
+                          for (var i = 1; i <= 6; i++) {
+                              if (item['SALES.CONDITION_NUM' + i] != null) {
+                                  var jsonInfo = item['SALES.SALE_CONTENT' + i].toString();
                                   var info = JSON.parse(jsonInfo);
                                   var array = new Array();
-                                  array.push(item['SALES.CONDITION_NUM'+i]);
+                                  array.push(item['SALES.CONDITION_NUM' + i]);
                                   array.push($scope.productMap[info['ProId']]);
                                   array.push(info['Num']);
                                   totalArray.push(array);
                                   $scope.salesDetailInfo = totalArray;
                               }
+                              ele['salesInfo'] = $scope.salesDetailInfo;
+                              ele['salesClass'] = item['SALES.SALE_TYPE'];
                           }
-                          ele['salesInfo'] = $scope.salesDetailInfo;
-                          ele['salesClass'] = item['SALES.SALE_TYPE'];
                       }
                       else if(item['SALES.SALE_TYPE'] == 1||item['SALES.SALE_TYPE'] == 2){
                           for(var i =1;i<=6;i++){

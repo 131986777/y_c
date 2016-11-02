@@ -6,8 +6,8 @@
                     +新增 <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a ui-sref="salesRuleAdd({id:1})">订单促销</a></li>
-                    <li><a ui-sref="salesRuleAdd({id:2})">商品促销</a></li>
+                    <li><a ui-sref="salesRuleAdd({id:1,serviceId:1})">订单促销</a></li>
+                    <li><a ui-sref="salesRuleAdd({id:2,serviceId:1})">商品促销</a></li>
                 </ul>
             </div>
         </div>
@@ -94,18 +94,6 @@
                                 <span class="required"> * </span> 详情:
                             </label>
                             <div class="col-md-8">
-                                <!--<table>
-                                    <tbody>
-                                        <tr ng-repeat="item in detailSaleListInfo">
-                                            <td ng-bind="item[0]"></td>
-                                            <td ng-bind="item[1]"></td>
-                                            <td ng-bind="item[2]"></td>
-                                            <td ng-bind="item[3]"></td>
-                                            <td ng-bind="item[4]"></td>
-                                            <td ng-bind="item[5]"></td>
-                                        </tr>
-                                    </tbody>
-                                </table>-->
                                 <table>
                                     <tbody ng-cloak>
                                     <tr ng-show="detailSaleListInfo[0][1]!=null">

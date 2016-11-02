@@ -1,40 +1,33 @@
 AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $stateParams, salesFactory, modalFactory) {
     modalFactory.setBottom(true);
 
-    const num = $stateParams.id;
-    $scope.memberId = num;
-
-
+    $scope.memberId = $stateParams.id;
+    $scope. serviceId = $stateParams.serviceId;
     $scope.proName = "（选择赠送商品）";
-
-    $scope.showProName = function () {
-        $scope.proName = $scope.product;
-        $scope.$broadcast('pageBar.reload');
-    }
 
     var array = new Array();
     $scope.saveCurrentInfo = function (num) {
         var str = '{'+'"ProId"'+':'+$scope.product+',' +'"Num"'+':'+$scope.salesInfo['SALES.PRONUM'+num]+'}';
         array.push(str);
-        $scope.salesInfo = array;
+        $scope.salesDetailInfo = array;
     }
 
     $scope.bindData = function(form){
+        form['SALES.SERVICE_ID'] = $scope.serviceId;
         form['SALES.PROID'] = $scope.product;
         if(form['SALES.SALE_TYPE'] ==3||form['SALES.SALE_TYPE'] ==4){
-            form['SALES.SALE_CONTENT1'] = $scope.salesInfo[0];
-            form['SALES.SALE_CONTENT2'] = $scope.salesInfo[1];
-            form['SALES.SALE_CONTENT3'] = $scope.salesInfo[2];
-            form['SALES.SALE_CONTENT4'] = $scope.salesInfo[3];
-            form['SALES.SALE_CONTENT5'] = $scope.salesInfo[4];
-            form['SALES.SALE_CONTENT6'] = $scope.salesInfo[5];
+            form['SALES.SALE_CONTENT1'] = $scope.salesDetailInfo[0];
+            form['SALES.SALE_CONTENT2'] = $scope.salesDetailInfo[1];
+            form['SALES.SALE_CONTENT3'] = $scope.salesDetailInfo[2];
+            form['SALES.SALE_CONTENT4'] = $scope.salesDetailInfo[3];
+            form['SALES.SALE_CONTENT5'] = $scope.salesDetailInfo[4];
+            form['SALES.SALE_CONTENT6'] = $scope.salesDetailInfo[5];
         }
         if(form['SALES.CONDITION_TYPE'] ==true){
             form['SALES.CONDITION_TYPE'] =2;
         }else {
             form['SALES.CONDITION_TYPE'] =1;
         }
-        console.log('scopID:'+$scope.memberId);
         form['SALES.SALE_TARGET'] = $scope.memberId;
         return form;
     }
@@ -43,15 +36,12 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
     modalFactory.setBottom(true, function () {
         if($scope.salesInfo == undefined){
             modalFactory.showAlert("请填写完整信息");
-        }
-        else if ($scope.salesInfo['SALES.NAME'] == undefined) {
-            alert('+++');
-            modalFactory.showAlert("请填写完整信息");
-            return;
+            $scope.empty();
         }
         else{
             var form = $scope.bindData($scope.salesInfo);
             salesFactory.AddSales (form).get({}, function (response) {
+                console.log(form);
                 if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
                     modalFactory.showShortAlert(response.msg);
                 } else if (response.extraData.state == 'true') {
@@ -64,16 +54,16 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
     });
     
     $scope.empty = function () {
-        $scope.salesInfo = {};
+        $scope.salesInfo = null;
 }
 
     $scope.prdItemSwitch= function (data) {
         console.log(data);
-        $scope.product = data['SHOP_PRODUCT_SKU.PRD_ID'];
-        $scope.productName = data['SHOP_PRODUCT_SKU.PRD_NAME'];
+        $scope.productName = data['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'];
+        console.log($scope.productName);
+        $('.A').text($scope.productName);
     }
 
-    $scope.queryProductById
 
     //前端Jquery逻辑
     $(function(){
@@ -97,6 +87,15 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
                 $(this).siblings().children('.content').addClass('hidden');
             });
         }
+
+
+
+        $('.text').click(function(){
+                $(this).text($scope.productName);
+                console.log($(this).html());
+            });
+
+
 
         $('.addItem').on("click",function(){
             var a = $(this).parents('.content'),

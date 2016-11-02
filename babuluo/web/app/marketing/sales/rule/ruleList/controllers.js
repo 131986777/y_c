@@ -9,6 +9,8 @@ AndSellMainModule.controller('salesRuleListController', function ($scope, $state
         console.log(response);
         $scope.salesList = response.data;
         $scope.productMap = response.extraData.productMap;
+        $scope.productList = response.extraData.productList;
+
     };
 
     $scope.queryByGivenInfo = function (form) {
@@ -161,7 +163,7 @@ AndSellMainModule.controller('salesRuleListController', function ($scope, $state
         var jointList = {};
         $scope.detailSaleListInfo = middleArray;
         jointList['SALES.ID'] = form['SALES.ID'];
-        jointList['SALES. SALE_TYPE'] = form['SALES.SALE_TYPE'];
+        jointList['SALES.SALE_TYPE'] = form['SALES.SALE_TYPE'];
         jointList['SALES.NAME'] = form['SALES.NAME'];
         jointList['SALES.INTRO'] = form['SALES.INTRO'];
         jointList['SALES.SALE_TARGET'] = form['SALES.SALE_TARGET'];
@@ -215,16 +217,26 @@ AndSellMainModule.controller('salesRuleListController', function ($scope, $state
     }
 
     $scope.saveSales = function () {
-        console.log($scope.detailSaleListInfo);
-        for(var i=0;i<$scope.detailSaleListInfo.length;i++){
-            var conditionStr = 'SALES.CONDITION_NUM'+(i+1);
-            var contentStr = 'SALES.SALE_CONTENT'+(i+1);
-            if($scope.detailSaleListInfo['SALES. SALE_TYPE'] ==3 ||$scope.detailSaleListInfo['SALES. SALE_TYPE'] ==4){
+        for(var i=0;i<$scope.detailSaleListInfo.length;i++) {
+            var conditionStr = 'SALES.CONDITION_NUM' + (i + 1);
+            var contentStr = 'SALES.SALE_CONTENT' + (i + 1);
+            if ($scope.detailSaleList['SALES.SALE_TYPE'] == 3 || $scope.detailSaleList['SALES.SALE_TYPE'] == 4) {
+                var name = $scope.detailSaleListInfo[i][5];
+                $scope.productList.forEach(function(ele){
+                    if(ele['SHOP_PRODUCT.PRD_NAME'] == name){
+                        proId = ele['SHOP_PRODUCT.PRD_ID']
+                    }
+                })
+                var str = '{' + '"ProId"' + ':' + proId + ','
+                    + '"Num"' + ':' + $scope.detailSaleListInfo[i][3] + '}';
+                $scope.detailSaleList[contentStr] = str;
+                $scope.detailSaleList[conditionStr] = $scope.detailSaleListInfo[i][1];
 
-            }
+            } else {
                 $scope.detailSaleList[conditionStr] = $scope.detailSaleListInfo[i][1];
                 $scope.detailSaleList[contentStr] = $scope.detailSaleListInfo[i][3];
             }
+        }
         salesFactory.ModifySalesState($scope.detailSaleList).get({}, function (response) {
             console.log($scope.detailSaleList);
             if (response.extraData.state == 'true') {
