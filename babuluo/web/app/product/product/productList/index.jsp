@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="page-content">
+<div class="page-content" ng-init="initData()">
 
     <div class="table-operbar row" ng-cloak>
         <div class="table-toolbar">
@@ -12,7 +12,7 @@
                                ng-model="query['SHOP_PRODUCT.PRD_NAME']">
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-default pull-right" ng-click="query()">查询
+                        <button type="button" class="btn btn-default pull-right" ng-click="queryPrdName()">查询
                         </button>
                     </div>
                     <label class="control-label">筛选：</label>

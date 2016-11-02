@@ -14,6 +14,7 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("productList",{
             url: "/productList",
+            params: {keyword:''},
             templateUrl: "/AndSell/app/product/product/productList/index.jsp",
             controller: "productListController"
         })

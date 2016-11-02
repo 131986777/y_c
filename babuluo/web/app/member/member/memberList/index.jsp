@@ -1,76 +1,69 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="page-content">
+<div class="page-content" ng-init="initData()">
 
     <%--在这里写样式--%>
     <div class="col-sm-12">
         <div class="page-operation-wrap">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="col-sm-1" style="padding-top: 8px;text-align: right">
-                        筛选:
-                    </div>
-                    <div class="col-sm-2">
 
-                        <select ng-model="filter['MEMBER.CODE_ID']"
-                                ng-init="filter['MEMBER.CODE_ID']='null'"
-                                class="nya-bs-select form-control " data-width="80px">
-                            <option class="nya-bs-option" value="null">
-                                客户来源
-                            </option>
-                            <option class="nya-bs-option"
-                                    ng-repeat="value in sourceList"
-                                    ng-bind="value['MEMBER_CODE_SOURCE.NAME']"
-                                    value="{{value['MEMBER_CODE_SOURCE.CODE']}}">
-                            </option>
-                        </select>
+            <div class="row col-sm-12">
+                <div class="form-inline form-group">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" placeholder="登陆ID/用户名/手机号"
+                               ng-model="queryContent">
                     </div>
-                    <div class="col-sm-2">
-
-                        <select ng-model="filter['MEMBER.TYPE_ID']"
-                                ng-init="filter['MEMBER.TYPE_ID']='null'"
-                                class="nya-bs-select form-control " data-width="80px"
-                                ng-change="loadGroupByType(1,filter['MEMBER.TYPE_ID'])">
-                            <option class="nya-bs-option" value="null">
-                                客户类型
-                            </option>
-                            <option class="nya-bs-option"
-                                    ng-repeat="value in typeList"
-                                    ng-bind="value['MEMBER_CODE_TYPE.NAME']"
-                                    value="{{value['MEMBER_CODE_TYPE.ID']}}">
-                            </option>
-                        </select>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right" ng-click="queryMember()">查询
+                        </button>
                     </div>
-                    <div class="col-sm-2">
-                        <select ng-model="filter['MEMBER.GROUP_ID']"
-                                ng-init="filter['MEMBER.GROUP_ID']='null'"
-                                class="nya-bs-select form-control " data-width="80px">
-                            <option class="nya-bs-option" value="null">
-                                客户分组
-                            </option>
-                            <option class="nya-bs-option"
-                                    ng-repeat="value in groupListById"
-                                    ng-bind="value['MEMBER_CODE_GROUP.NAME']"
-                                    value="{{value['MEMBER_CODE_GROUP.ID']}}">
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col-sm-1" style="padding-top: 8px;text-align: right">
-                        排序:
-                    </div>
-                    <div class="col-sm-2">
-                        <select ng-model="filter['MEMBER.REG_DATETIME']"
-                                ng-init="filter['MEMBER.REG_DATETIME']='REG_DATETIME DESC'"
-                                class="nya-bs-select form-control" data-width="80px">
-                            <option class="nya-bs-option" value="REG_DATETIME DESC">
-                                注册时间↓
-                            </option>
-                            <option class="nya-bs-option" value="REG_DATETIME ASC">
-                                注册时间↑
-                            </option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-sm-6 text-right">
+                    <label class="control-label">筛选：</label>
+                    <select ng-model="filter['MEMBER.CODE_ID']"
+                            ng-init="filter['MEMBER.CODE_ID']='null'"
+                            class="nya-bs-select form-control " data-width="80px">
+                        <option class="nya-bs-option" value="null">
+                            客户来源
+                        </option>
+                        <option class="nya-bs-option"
+                                ng-repeat="value in sourceList"
+                                ng-bind="value['MEMBER_CODE_SOURCE.NAME']"
+                                value="{{value['MEMBER_CODE_SOURCE.CODE']}}">
+                        </option>
+                    </select>
+                    <select ng-model="filter['MEMBER.TYPE_ID']"
+                            ng-init="filter['MEMBER.TYPE_ID']='null'"
+                            class="nya-bs-select form-control " data-width="80px"
+                            ng-change="loadGroupByType(1,filter['MEMBER.TYPE_ID'])">
+                        <option class="nya-bs-option" value="null">
+                            客户类型
+                        </option>
+                        <option class="nya-bs-option"
+                                ng-repeat="value in typeList"
+                                ng-bind="value['MEMBER_CODE_TYPE.NAME']"
+                                value="{{value['MEMBER_CODE_TYPE.ID']}}">
+                        </option>
+                    </select>
+                    <select ng-model="filter['MEMBER.GROUP_ID']"
+                            ng-init="filter['MEMBER.GROUP_ID']='null'"
+                            class="nya-bs-select form-control " data-width="80px">
+                        <option class="nya-bs-option" value="null">
+                            客户分组
+                        </option>
+                        <option class="nya-bs-option"
+                                ng-repeat="value in groupListById"
+                                ng-bind="value['MEMBER_CODE_GROUP.NAME']"
+                                value="{{value['MEMBER_CODE_GROUP.ID']}}">
+                        </option>
+                    </select>
+                    <label class="control-label">排序：</label>
+                    <select ng-model="filter['MEMBER.REG_DATETIME']"
+                            ng-init="filter['MEMBER.REG_DATETIME']='REG_DATETIME DESC'"
+                            class="nya-bs-select form-control" data-width="80px">
+                        <option class="nya-bs-option" value="REG_DATETIME DESC">
+                            注册时间↓
+                        </option>
+                        <option class="nya-bs-option" value="REG_DATETIME ASC">
+                            注册时间↑
+                        </option>
+                    </select>
                     <a type="button" class="btn btn-default" data-toggle="modal" data-target="#add">
                         新增客户
                     </a>

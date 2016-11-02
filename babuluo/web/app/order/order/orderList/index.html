@@ -119,11 +119,11 @@
                     <div class="product">
                         <div class="productList pull-left">
                             <ul class="list-unstyled">
-                                <li>
-                                    <div class="productInfo "  ng-repeat=" detail in order.details ">
+                                <li ng-repeat=" detail in order.details">
+                                    <div class="productInfo">
                                         <img class="pull-left" ng-src="detail['SHOP_ORDER_INFO.IMG_URL']" style="width: 80px;height: 80px;">
-                                        <p class="itemName" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']">智能收音机</p>
-                                        <p class="itemPrice" ><span  ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span> 元 x <span class="itemNum" ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span></p>
+                                        <p class="itemName" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']"></p>
+                                        <p class="itemPrice" ><span ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span> 元 x <span class="itemNum" ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span></p>
                                         <p class="itemColor" ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']"></p>
                                     </div>
                                 </li>

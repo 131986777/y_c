@@ -8,6 +8,10 @@ AndSellMainModule.controller('orderListController', function ($scope, $state, $s
             'background-color': '#31C552'
         };
         $scope.filterStateOrder('all');
+        if($stateParams.keyword!=''){
+            $scope.orderFilter = $stateParams.keyword;
+            $scope.searchOrder();
+        }
 
     }
 
