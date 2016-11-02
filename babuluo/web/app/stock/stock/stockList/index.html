@@ -90,8 +90,8 @@
                 </thead>
                 <tbody ng-cloak>
                 <tr ng-repeat="item in stockList">
-                    <td ng-bind="item['STOCK_REALTIME.PID']"></td>   <!--商品ID-->
-                    <td ng-bind="item['STOCK_REALTIME.SKU_ID']"></td> <!--规格ID-->
+                    <td ng-bind="item['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品ID-->
+                    <td ng-bind="item['STOCK_REALTIME.UNIT']"></td> <!--规格ID-->
                     <td >{{storeMap[(item['STOCK_REALTIME.STORE_ID'])]}}</td> <!--仓库-->
                     <td ng-bind="item['STOCK_REALTIME.STOCK']"></td> <!--实时库存-->
                     <td ng-bind="item['STOCK_REALTIME.LOCK_STOCK']"></td> <!--锁定库存-->
@@ -117,117 +117,3 @@
          callback="bindData(response)">
     </div>
 </div>
-
-<!--BEGIN 新增发卡渠道-->
-<div class="modal fade text-left" id="addSource" tabindex="-1" aria-hidden="true"
-     style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-hidden="true"></button>
-                <h4 class="modal-title">添加发卡渠道</h4>
-            </div>
-            <div class="modal-body form-body text-right">
-
-                <form class="form-horizontal">
-
-                    <div class="form-group row">
-                        <label class="col-md-3 control-label">
-                            <span class="required"> * </span> 发卡渠道名称
-                        </label>
-
-                        <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="add['MEMBER_CARD_SOURCE.NAME']"
-                                   ng-init="add['MEMBER_CARD_SOURCE.NAME']=''"
-                                   placeholder=""></div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 control-label">
-                            发卡渠道介绍
-                        </label>
-
-                        <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="add['MEMBER_CARD_SOURCE.INTRO']"
-                                   ng-init="add['MEMBER_CARD_SOURCE.INTRO']=''"
-                                   placeholder=""></div>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" ng-click="addCardSource()" class="btn green">确定
-                </button>
-                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
-                </button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!--END 新增发卡渠道-->
-
-<!--BEGIN 修改发卡渠道-->
-<div class="modal fade text-left" id="modifySource" tabindex="-1" aria-hidden="true"
-     style="display: none;">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal"
-                        aria-hidden="true"></button>
-                <h4 class="modal-title">修改发卡渠道</h4>
-            </div>
-
-            <div class="modal-body form-body text-right">
-
-                <form class="form-horizontal">
-
-
-                    <!--<div class="form-group row">-->
-                        <!--<label class="col-md-3 control-label">-->
-                            <!--发卡渠道编码-->
-                        <!--</label>-->
-
-                        <!--<div class="col-md-8">-->
-                            <!--<input type="text" class="form-control"-->
-                                   <!--ng-model="modify['MEMBER_CARD_SOURCE.CARD']"-->
-                                   <!--disabled></div>-->
-                    <!--</div>-->
-                    <div class="form-group row">
-                        <label class="col-md-3 control-label">
-                            <span class="required"> * </span> 发卡渠道名称
-                        </label>
-
-                        <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="modify['MEMBER_CARD_SOURCE.NAME']"
-                                   placeholder=""></div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-3 control-label">
-                            发卡渠道介绍
-                        </label>
-
-                        <div class="col-md-8" >
-                            <input type="text" class="form-control"
-                                   ng-model="modify['MEMBER_CARD_SOURCE.INTRO']"
-                                   placeholder=""></div>
-                    </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" ng-click="modifyCardSource()" class="btn green">确定
-                </button>
-                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
-                </button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!--END 修改发卡渠道-->

@@ -26,7 +26,7 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
         $scope.stockList = response.data;
         $scope.storeQueryList= $scope.stockList;
         $scope.storeMap= response.extraData.storeMap;
-        $scope.storeList= response.extraData.storeArray;
+        $scope.storeList= response.extraData.storeList;
         // console.log( $scope.storeMap);
         // console.log($scope.storeList);
     };
