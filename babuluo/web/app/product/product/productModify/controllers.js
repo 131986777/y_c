@@ -134,6 +134,7 @@ AndSellMainModule.controller('productModifyController', function ($http,$scope, 
         form['SHOP_PRODUCT.TAG_ID'] = $scope.selectTagIds.toString();
 
         var uploadImageArray=new Array();
+
         for(var i = 0;i<$scope.uploadImageFiles.length;i++) {
             if(i== $scope.uploadImageFilesIndex ){
                 console.log("封面图片为"+i);
@@ -143,11 +144,33 @@ AndSellMainModule.controller('productModifyController', function ($http,$scope, 
             }
 
         }
-        form['SHOP_PRODUCT.P1']=uploadImageArray[0];
+        form['SHOP_PRODUCT.P1']='{$null}';
+        form['SHOP_PRODUCT.P2']='{$null}';
+        form['SHOP_PRODUCT.P3']='{$null}';
+        form['SHOP_PRODUCT.P4']='{$null}';
+        form['SHOP_PRODUCT.P5']='{$null}';
+        //先将所有的置为空，再重新赋值
+        console.log("长度2为"+uploadImageArray.length);
+        for (var i = 0; i < uploadImageArray.length; i++) {
+            if (i == 0)
+                form['SHOP_PRODUCT.P1'] = uploadImageArray[0];
+            if (i == 1) {
+                console.log(2);
+                form['SHOP_PRODUCT.P2'] = uploadImageArray[1];
+            }
+            if (i == 2)
+                form['SHOP_PRODUCT.P3'] = uploadImageArray[2];
+            if (i == 3)
+                form['SHOP_PRODUCT.P4'] = uploadImageArray[3];
+            if (i == 4)
+                form['SHOP_PRODUCT.P5'] = uploadImageArray[4];
+        }
+       /* form['SHOP_PRODUCT.P1']=uploadImageArray[0];
         form['SHOP_PRODUCT.P2']=uploadImageArray[1];
         form['SHOP_PRODUCT.P3']=uploadImageArray[2];
         form['SHOP_PRODUCT.P4']=uploadImageArray[3];
-        form['SHOP_PRODUCT.P5']=uploadImageArray[4];
+        form['SHOP_PRODUCT.P5']=uploadImageArray[4];*/
+        console.log('wenfd'+form['SHOP_PRODUCT.P5']);
         productFactory.modifyProduct(form).get({}, function (response) {
             if(response.code==0){
                 modalFactory.showShortAlert("保存成功");
@@ -211,6 +234,7 @@ AndSellMainModule.controller('productModifyController', function ($http,$scope, 
      */
     $scope.delImageFile=function (key) {
         $scope.uploadImageFiles.splice(key,1);
+        console.log("长度为"+$scope.uploadImageFiles.length);
     }
 
     /**
