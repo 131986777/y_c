@@ -1,13 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="page-content" ng-init="initData()">
 
+    <div class="col-md-12">
     <div class="table-operbar row" ng-cloak>
         <div class="table-toolbar">
             <%--筛选功能--%>
-            <div class="row col-sm-12">
+
                 <div class="form-inline form-group">
                     <div class="form-group">
-                        <label for="name" class="control-label">商品名称:</label>
+                        <%--<label for="name" class="control-label">商品名称:</label>--%>
                         <input type="text" class="form-control" id="name" placeholder="商品名称"
                                ng-model="query['SHOP_PRODUCT.PRD_NAME']">
                     </div>
@@ -15,7 +16,7 @@
                         <button type="button" class="btn btn-default pull-right" ng-click="queryPrdName()">查询
                         </button>
                     </div>
-                    <label class="control-label">筛选：</label>
+                    <%--<label class="control-label">筛选：</label>--%>
                     <select ng-model="filter['SHOP_PRODUCT.IS_SALE']"
                             ng-init="filter['SHOP_PRODUCT.IS_SALE'] = 'null'"
                             class="nya-bs-select form-control">
@@ -43,31 +44,30 @@
                             <i class="fa fa-plus"></i> 新增商品
                         </button>
                     </a>
-                </div>
-            </div>
 
+            </div>
 
         </div>
         <%--筛选功能--%>
     </div>
-
+    </div>
     <div class="col-md-12">
         <div class="table-scrollable">
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
                     <th style="width: 30px">
-                        <div class="md-checkbox" style="margin-left: 10px">
-                            <input type="checkbox" id="checkbox_all"
-                                   ng-model="checkAllProduct"
-                                   ng-change="checkedAllProduct(checkAllProduct)"
-                                   class="md-check">
-                            <label for="checkbox_all">
-                                <span class="inc"></span>
-                                <span class="check"></span>
-                                <span class="box"></span>
-                            </label>
-                        </div>
+                        <%--<div class="md-checkbox" style="margin-left: 10px">--%>
+                            <%--<input type="checkbox" id="checkbox_all"--%>
+                                   <%--ng-model="checkAllProduct"--%>
+                                   <%--ng-change="checkedAllProduct(checkAllProduct)"--%>
+                                   <%--class="md-check">--%>
+                            <%--<label for="checkbox_all">--%>
+                                <%--<span class="inc"></span>--%>
+                                <%--<span class="check"></span>--%>
+                                <%--<span class="box"></span>--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
                     </th>
                     <th style="width: 20px">&nbsp;</th>
                     <th class="text-left"> 商品名称</th>
@@ -83,20 +83,20 @@
 
                 <tr ng-repeat-start='product in productList'>
                     <td>
-                        <div class="md-checkbox"
-                             style="margin-left: 10px">
-                            <input type="checkbox"
-                                   id="checkbox_parent_{{product['SHOP_PRODUCT.PRD_ID']}}"
-                                   ng-model="product.checkedParent"
-                                   ng-change="checkProduct(product)"
-                                   name="checkProduct"
-                                   class="md-check">
-                            <label for="checkbox_parent_{{product['SHOP_PRODUCT.PRD_ID']}}">
-                                <span class="inc"></span>
-                                <span class="check"></span>
-                                <span class="box"></span>
-                            </label>
-                        </div>
+                        <%--<div class="md-checkbox"--%>
+                             <%--style="margin-left: 10px">--%>
+                            <%--<input type="checkbox"--%>
+                                   <%--id="checkbox_parent_{{product['SHOP_PRODUCT.PRD_ID']}}"--%>
+                                   <%--ng-model="product.checkedParent"--%>
+                                   <%--ng-change="checkProduct(product)"--%>
+                                   <%--name="checkProduct"--%>
+                                   <%--class="md-check">--%>
+                            <%--<label for="checkbox_parent_{{product['SHOP_PRODUCT.PRD_ID']}}">--%>
+                                <%--<span class="inc"></span>--%>
+                                <%--<span class="check"></span>--%>
+                                <%--<span class="box"></span>--%>
+                            <%--</label>--%>
+                        <%--</div>--%>
                     </td>
 
                     <td>
@@ -114,7 +114,7 @@
 
                         <div style="padding-left: 70px">
 
-                                    <span class="label label-info" style="margin-left: 5px"
+                                    <span class="label label-info " style="margin-left: 5px"
                                           ng-repeat="tag in product['SHOP_PRODUCT.TAG']"
                                           ng-bind="tag"> </span>
 
