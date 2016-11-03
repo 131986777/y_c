@@ -292,7 +292,7 @@
                             <div  ng-class="{'upload-img-content':true,'operator-chosen':key==uploadImageFilesIndex}">
 
                                 <img ng-src="{{FILE_SERVER_DOMAIN+imageFileUrl}}"
-                                     class="img-responsive">
+                                     class="img-responsive" ng-click="setFirstImg(imageFileUrl)">
                                 <div class="product-img-operator">
                                     <div class="operator-wrap top">
                                         <a type="button"
@@ -307,7 +307,7 @@
                                            ng-if="key==uploadImageFilesIndex">
                                             封面图片
                                         </a>
-                                        <a class="font-white" ng-click="setFirstImg(imageFileUrl)"
+                                        <a class="font-white"
                                            ng-if="key!=uploadImageFilesIndex">
                                             设为封面
                                         </a>

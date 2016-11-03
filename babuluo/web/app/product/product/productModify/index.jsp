@@ -176,7 +176,7 @@
                         <div class="upload-img-wrap"   ng-repeat="(key,imageFileUrl) in uploadImageFiles">
                             <div  ng-class="{'upload-img-content':true,'operator-chosen':key==uploadImageFilesIndex}">
 
-                                <img ng-src="{{FILE_SERVER_DOMAIN+imageFileUrl}}"
+                                <img ng-src="{{FILE_SERVER_DOMAIN +imageFileUrl}}"
                                      class="img-responsive">
                                 <div class="product-img-operator">
                                     <div class="operator-wrap top">

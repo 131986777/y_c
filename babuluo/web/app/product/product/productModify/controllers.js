@@ -1,5 +1,7 @@
 AndSellMainModule.controller('productModifyController', function ($http,$scope, $state, $stateParams,productFactory, classFactory, unitFactory, tagFactory, modalFactory, $q) {
 
+    $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
+
     modalFactory.setTitle('商品修改');
 
     modalFactory.setBottom(true, function () {
@@ -25,7 +27,7 @@ AndSellMainModule.controller('productModifyController', function ($http,$scope, 
 
     $scope.uploadImageFiles = [];
     $scope.uploadImageFilesIndex=0;
-    $scope.FILE_SERVER_DOMAIN = "http://babuluo-file.oss-cn-hangzhou.aliyuncs.com//";
+    //$scope.FILE_SERVER_DOMAIN = "http://babuluo-file.oss-cn-hangzhou.aliyuncs.com//";
 
     var ue;//editor
     insertHtml = function(html) {
