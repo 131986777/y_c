@@ -19,6 +19,7 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
         $scope.skuIds=$stateParams.SKU_IDS;
         var params = {};
         params['SHOP_PRODUCT_SKU.SKU_IDS'] = $scope.skuIds;
+        params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         productFactory.getProductSkuBySkuIds(params).get({}, function (response) {
             console.log(response);
             $scope.skuList = response.data;

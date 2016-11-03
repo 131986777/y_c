@@ -85,6 +85,7 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
         if (cartInfo.length > 0) {
             var params = {};
             params['SHOP_PRODUCT_SKU.SKU_IDS'] = cartInfo.toString();
+            params['STOCK_REALTIME.STORE_ID'] = $scope.STORE_ID;
             productFactory.getProductSkuBySkuIds(params).get({}, function (response) {
                 console.log(response);
                 $scope.skuList = response.data;
