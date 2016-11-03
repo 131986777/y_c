@@ -80,7 +80,8 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
     }
 
     $scope.detailClick = function (item) {
-        $scope.detail = item;
+       // $scope.detail = item;
+        $scope.detailArray=item.split("<br>");
 
     }
    /* $scope.Monday = "";
@@ -109,7 +110,15 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
             } else if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert('新增成功');
                 $scope.add = {};
-
+                $scope.Monday=0;
+                $scope.Tuesday=0;
+                $scope.Wednesday=0;
+                $scope.Thursday=0;
+                $scope.Friday=0;
+                $scope.Saturday=0;
+                $scope.Sunday=0;
+                $scope.from="";
+                $scope.to="";
                 $("#addCoupon").modal('hide');
                 $scope.$broadcast('pageBar.reload');
             }
@@ -238,7 +247,7 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
             $scope[$this.attr('ng-model')] = _this.value;
         });
     });
-    $('#defaultForm')
+   /* $('#defaultForm')
         .bootstrapValidator({
             message: '输入不符合要求',
             feedbackIcons: {
@@ -310,8 +319,8 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
                             message: '周期不能为空'
                         },
                     }
-                },
-                from: {
+                }
+              /!*  from: {
                     validators: {
                         notEmpty: {
                             message: '周期不能为空'
@@ -324,7 +333,7 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
                             message: '周期不能为空'
                         },
                     }
-                }
+                }*!/
             }
         })
         .on('success.form.bv', function(e) {
@@ -332,5 +341,5 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
             var $form = $(e.target);
             var bv = $form.data('bootstrapValidator');
              });
-
+*/
 });
