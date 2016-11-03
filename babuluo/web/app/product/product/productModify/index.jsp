@@ -187,22 +187,22 @@
                                             &times;
                                         </a>
                                     </div>
-                                    <div class="operator-wrap bottom text-center">
-                                        <a class="font-white" ng-model="showFirst"
-                                           ng-if="key==uploadImageFilesIndex">
-                                            封面图片
-                                        </a>
-                                        <a class="font-white" ng-click="setFirstImg(imageFileUrl)"
-                                           ng-if="key!=uploadImageFilesIndex">
-                                            设为封面
-                                        </a>
-                                    </div>
+                                    <%--<div class="operator-wrap bottom text-center">--%>
+                                        <%--<a class="font-white" ng-model="showFirst"--%>
+                                           <%--ng-if="key==uploadImageFilesIndex">--%>
+                                            <%--封面图片--%>
+                                        <%--</a>--%>
+                                        <%--<a class="font-white" ng-click="setFirstImg(imageFileUrl)"--%>
+                                           <%--ng-if="key!=uploadImageFilesIndex">--%>
+                                            <%--设为封面--%>
+                                        <%--</a>--%>
+                                    <%--</div>--%>
                                 </div>
                             </div>
                         </div>
                         <div class="upload-img-wrap">
                             <label class="upload-img-tips" data-provides="fileinput">
-                                添加商品图册<br>（上限10张）
+                                添加商品图册<br>（上限6张）
                                 <input class="hidden" type="file"
                                        id="image" name='image'
                                        onchange="angular.element(this).scope().uploadImage(this)"

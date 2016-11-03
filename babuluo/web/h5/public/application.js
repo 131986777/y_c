@@ -4,7 +4,7 @@ var AndSellUI = angular.module('AndSell.UI', ['ngSanitize','weUI','ui.bootstrap'
 var AndSellData = angular.module("AndSell.data", []);
 var AndSellH5MainModule = angular.module('AndSell.H5.Main', ['AndSell.Service', 'AndSell.Router', 'AndSell.UI']);
 
-AndSellService.constant('baseURL', 'http://10.0.0.47:8081/AndSell/bubu');
+AndSellService.constant('baseURL', 'http://locahost:8080/AndSell/bubu');
 
 AndSellUI.directive('stringToNumber', function () {
     return {
