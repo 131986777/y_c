@@ -58,8 +58,8 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
         }
         var params=$scope.order;
         params['SHOP_ORDER.TYPE']=1;//订货单
-        params['SHOP_ORDER.REC_CONTACT']='帅比琪';//收货人
-        params['SHOP_ORDER.REC_PHONE']='13257915508';//联系电话
+        params['SHOP_ORDER.REC_CONTACT']=$scope.PickupPerson.man;//收货人
+        params['SHOP_ORDER.REC_PHONE']=$scope.PickupPerson.phone;//联系电话
         params['SHOP_ORDER.UID']=1000;//所属会员
         params['SHOP_ORDER.SHOP_NAME']=$scope.shop['SHOP.SHOP_NAME'];//门店信息
         params['SHOP_ORDER.SHOP_ID']=$scope.shop['SHOP.SHOP_ID'];//门店ID

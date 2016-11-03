@@ -9,14 +9,7 @@ AndSellH5MainModule.controller('H5.OrderAddAddressController', function ($scope,
         $scope.pickupTime = getNowFormatDate();
         $scope.PickupPerson = {};
 
-        $scope.shopMap = new Map;
-        orderFactory.getShop().get({}, function (response) {
-            $scope.shopList = response.data;
-            $scope.shopList.forEach(function (ele) {
-                $scope.shopMap.set(ele['SHOP.SHOP_ID'], ele['SHOP.SHOP_NAME']);
-            });
-            $scope.shop = $scope.shopMap.get(JSON.parse(getCookie('currentShopInfo'))['SHOP.SHOP_ID']);
-        });
+        $scope.shop = JSON.parse(getCookie('currentShopInfo'))['SHOP.SHOP_NAME'];
     };
 
     $scope.submit = function () {
