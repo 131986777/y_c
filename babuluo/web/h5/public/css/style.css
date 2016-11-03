@@ -476,8 +476,8 @@ p {
 .action-bar .icon {
   display: block;
   margin: 0 auto;
-  width: 25px;
-  height: 25px; }
+  width: 20px;
+  height: 20px; }
 .action-bar a {
   border: 0;
   color: #fff;
@@ -661,7 +661,7 @@ p {
 .shopping-cart .product-sale {
   margin-left: 15px;
   padding-left: 25px;
-  padding-right: 5px;
+  padding-right: 20px;
   font-size: 12px;
   line-height: 2;
   background: url("../img/icon.png") no-repeat 0 -21px;
@@ -735,6 +735,8 @@ p {
   font-size: 12px;
   color: #a4a4a4; }
 .shopping-cart .payment-wrap .payment-check {
+  height: 45px;
+  line-height: 45px;
   width: 123px;
   color: white;
   background-color: #F36F1C;
@@ -1101,32 +1103,36 @@ p {
   border: 1px solid #D9D9D9;
   margin: 5px;
   padding: 0;
-  height: 100px;
+  height: 78px;
   font-size: 18px;
   -webkit-align-items: flex-start;
   -webkit-box-align: start;
   align-items: flex-start; }
 .product-list-page .product-wrap .img {
-  margin-right: 9px;
-  width: 100px;
-  height: 100px; }
+  margin-right: 13px;
+  width: 76px;
+  height: 76px; }
 .product-list-page .product-wrap .name {
   overflow: hidden;
-  margin: 5px 15px 25px 0;
+  margin: 5px 15px 13px 0;
   height: 2.5em;
   line-height: 1.4;
   font-weight: normal;
   color: #444; }
 .product-list-page .product-wrap .money {
+  font-size: 16px;
   color: #F36F1C;
   padding-right: 50px; }
 .product-list-page .product-wrap .icon-cart {
   position: absolute;
-  right: 15px;
-  bottom: 15px;
+  right: 8px;
+  bottom: 5px;
   width: 30px;
   height: 30px; }
-
+.product-list-page .icon-cart{
+  background: url("../img/icon.png") no-repeat -120px -60px;
+  background-size: 207px 158px;
+}
 .product-detail-page .swiper-container {
   margin: 0 auto;
   width: 320px;
@@ -1148,7 +1154,8 @@ p {
   padding-top: 5px;
   color: rgb(107,107,107);
 }
-.product-detail-page .weui_navbar{
+.product-detail-page .weui_navbar,
+.product-list-page .weui_navbar{
   z-index:1;
 }
 .product-detail-page .review-nav .col span{
@@ -1187,56 +1194,60 @@ p {
   line-height: 1;
   font-size: 14px;
   color: #a4a4a4; }
-.product-detail-page .basic-info .name,
-.product-detail-page .basic-info .money {
+ .basic-info .name,
+ .basic-info .money {
   font-size: 18px; }
-.product-detail-page .basic-info .feature,
-.product-detail-page .basic-info .money,
-.product-detail-page .basic-info .code {
+ .basic-info .feature,
+ .basic-info .money,
+ .basic-info .code {
   margin: 12px 0 0; }
-.product-detail-page .basic-info .feature,
-.product-detail-page .basic-info .money {
+ .basic-info .feature,
+.basic-info .money {
   color: #F36F1C; }
-.product-detail-page .basic-info .name {
+ .basic-info .name {
   margin: 5px 0 0;
   color: #444; }
-.product-detail-page .basic-info .code {
+ .basic-info .code {
   font-size: 12px; }
-.product-detail-page .sale-info,
-.product-detail-page .sku-info {
+ .sale-info,
+ .sku-info {
   padding: 12px 15px; }
-.product-detail-page .sale-info {
+ .sale-info {
   font-size: 12px; }
-.product-detail-page .sku-info .sku-label {
+ .sku-info .sku-label {
   padding: 0 15px;
   font-size: 12px;
   line-height: 2; }
-.product-detail-page .sku-info .sku-label.selected {
+ .sku-info .sku-label.selected {
   background-image: url("../img/sku_selected.png");
   background-position: bottom right;
   background-repeat: no-repeat;
   background-size: 16px 16px; }
-.product-detail-page .product-num-wrap {
+.product-num-wrap {
   width: 104px;
   height: 26px; }
-.product-detail-page .product-num-wrap .btn,
-.product-detail-page .product-num-wrap .form-control {
+ .product-num-wrap .btn,
+ .product-num-wrap .form-control {
   padding: 0;
   height: 26px;
   z-index: 0; }
-.product-detail-page .product-num-wrap .btn {
+ .product-num-wrap .btn {
   border-radius: 0;
   width: 26px; }
-.product-detail-page .add-to-cart {
+ .add-to-cart {
+   color: #fff;
   line-height: 49px;
   background-color: #F36F1C; }
+ .product-list-page .add-to-cart{
+   line-height: 26px;
+ }
+.weui_actionsheet_menu .weui_cells{
+  margin-bottom: 0;
+}
 
 /*# sourceMappingURL=style.css.map */
 
 /*首页样式*/
-.home-index a{
-  color: black;
-}
 .serch-wrap{
   position: relative;
 }

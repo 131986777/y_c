@@ -3,7 +3,7 @@
   <div class="search-wrap weui_cells">
     <a href="#"><img src="../../public/img/head.png" style="height: auto;width: 100%;"></a>
     <div class="search-content">
-      <span class="shopName" ui-sref="shopList" ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
+      <span class="shopName" ui-sref="shopList" ng-bind="shopInfo['SHOP.SHOP_NAME']"> ></span>
       <div class="searchHolder pull-right">
         <i class="icon-search" ng-click="searchPrd()"></i>
         <input type="text" ng-model="prdKeyword" placeholder="输入商品名">
@@ -25,10 +25,10 @@
 
   <!-- BEGIN 导航 -->
   <div class="home-nav flexbox text-center">
-    <a class="col cell" ui-sref="prd-List">
-      <img src="../../public/img/nav1.jpg">
+    <div class="col cell" ui-sref="prd-List">
+      <a><img src="../../public/img/nav1.jpg"></a>
       <p>全部菜品</p>
-    </a>
+    </div>
     <div class="col cell" ui-sref="prd-List({classId:1103})">
       <a ><img src="../../public/img/nav2.jpg"></a>
       <p>爆款菜品</p>
@@ -37,10 +37,10 @@
       <a ><img src="../../public/img/nav3.jpg"></a>
       <p>新品上市</p>
     </div>
-    <a class="col cell" ui-sref="order-List">
-      <img src="../../public/img/nav4.png">
+    <div class="col cell" ui-sref="order-List">
+      <a><img src="../../public/img/nav4.png"></a>
       <p>我的订单</p>
-    </a>
+    </div>
   </div>
   <!-- END 导航 -->
 
