@@ -72,8 +72,8 @@
                     <%--</th>--%>
                     <th style="width: 20px">&nbsp;</th>
                     <th class="text-left"> 商品名称</th>
-                    <th style="width: 120px" class="text-left"> 编码</th>
-                    <th style="width: 60px" class="text-left"> 单位</th>
+                    <th style="width: 120px" class="text-center"> 编码</th>
+                    <th style="width: 60px" class="text-center"> 单位</th>
                     <th style="width: 100px" class="text-left"> 市场价</th>
                     <th style="width: 100px" class="text-left"> 成本价</th>
                     <th style="width: 60px" class="text-center"> 状态</th>
@@ -107,9 +107,9 @@
                     </td>
 
                     <td class="text-left">
-                        <a href="productDetail.jsp">
+                        <a  ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">
                             <img class="img-thumbnail"
-                                 ng-src=""
+                                 ng-src="{{FILE_SERVER_DOMAIN+product['SHOP_PRODUCT.CMP']}}"
                                  style="height: 60px;width: 60px;float: left">
                         </a>
 
@@ -139,16 +139,12 @@
                                 class="label"
                                 ng-class="{true:'label-success', false:'label-danger'}[product['SHOP_PRODUCT.IS_SALE']==1]"
                                 ng-bind="product['SHOP_PRODUCT.IS_SALE']==1?'正在销售':'下架停售'"></span></a>
-
                     </td>
                     <td>
                         <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">修改</a>
-
-
                         <a show-modal id="#modifySkuPrice"
                            ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
                            ng-click="showModifySkuPrice(product)">改价</a>
-
                         <a ng-click="delProduct(product)">删除</a>
                     </td>
                 </tr>
