@@ -2,7 +2,6 @@
 <div class="page-content" ng-init="initData()">
 
     <%--在这里写样式--%>
-
     <div class="page-operation-wrap">
 
         <div class="row col-sm-12">
