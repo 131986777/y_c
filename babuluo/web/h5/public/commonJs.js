@@ -117,3 +117,35 @@ function setContentsInfoForOrder(sku) {
     sku['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] = contents;
 }
 
+
+/**
+ * 判断一个对象是否为空
+ * @param e
+ * @author yhx
+ */
+function isEmptyObject(e) {
+    var t;
+    for (t in e)
+        return !1;
+    return !0
+}
+
+/**
+ * 得到当前日期 yyyy-MM-dd
+ * @returns {string}
+ */
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    return year + seperator1 + month + seperator1 + strDate;
+}
+

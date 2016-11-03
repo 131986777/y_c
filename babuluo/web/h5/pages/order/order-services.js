@@ -49,4 +49,12 @@ AndSellH5MainModule.service('orderFactory', function ($resource, baseURL) {
         });
     }
 
+    this.getShop= function (id) {
+        return $resource(baseURL + '/shop/shop/queryAll', {}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+
 })
