@@ -3,6 +3,7 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state("orderList", {
             url: "/orderList",
+            params: {keyword: ''},
             templateUrl: "/AndSell/app/order/order/orderList/index.html",
             controller: "orderListController"
         })

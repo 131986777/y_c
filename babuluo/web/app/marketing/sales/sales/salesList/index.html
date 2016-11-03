@@ -31,27 +31,28 @@
                     <button class="addItem btn"  data-toggle="modal" id="#productSwitchModal"
                             show-modal ng-click="getCurrentPro(item)" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length ==null">添加商品</button>
                     <span class="buy-text">买</span>
-                    <div class="buy-content" ng-repeat="pro in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
-                        <div class="buy-list">
+                    <div class="buy-content" >
+                        <div class="buy-list" ng-repeat="pro in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
                             <div class="product-item">
                                 <img class="pull-left" src="../components/images/index_18.png">
                                 <p class="itemName">{{productMap[pro]}}</p>
                                 <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="product-total" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length >0">
-                        >>共
+                        <div class="product-total" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length >0">
+                            >>共
                         <span class="itemNum" >
                             {{((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length}}
-                        </span>件商品参与</div>
-                </div>
-                <div class="product-total" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length ==null">
-                    >>共
+                        </span>件商品参与
+                        </div>
+                    </div>
+
+                    <div class="product-total" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length ==null">
+                        >>共
                         <span class="itemNum">
                             0
                         </span>件商品参与
-                </div>
+                    </div>
             </div><!-- promotion content -->
 
             <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
@@ -65,6 +66,7 @@
                 </div>
                 <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
             </div><!-- promotion footer -->
+        </div>
         </div>
     <!-- END 商品促销 -->
 
@@ -258,13 +260,14 @@
         </div>
         <!-- END 添加类促销 -->
     </div>
+    </div>
 
-    <class-switch-modal callback="classSwitch(data)"></class-switch-modal>
-    <tag-switch-modal callback="tagSwitch(data)"></tag-switch-modal>
-    <product-switch-modal callback="prdSwitch(data)"></product-switch-modal>
+        <class-switch-modal callback="classSwitch(data)"></class-switch-modal>
+        <tag-switch-modal callback="tagSwitch(data)"></tag-switch-modal>
+        <product-switch-modal callback="prdSwitch(data)"></product-switch-modal>
 <!-- END 促销列表项 -->
 
-    <div class="modal fade text-left" id="detailClick" tabindex="-1" aria-hidden="true"
+        <div class="modal fade text-left" id="detailClick" tabindex="-1" aria-hidden="true"
      style="display: none;z-index: 1049">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -401,7 +404,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-    <div class="modal fade text-left" id="addSalePlan" tabindex="-1" aria-hidden="true"
+        <div class="modal fade text-left" id="addSalePlan" tabindex="-1" aria-hidden="true"
      style="display: none;z-index: 1049">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -491,6 +494,5 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 </div>

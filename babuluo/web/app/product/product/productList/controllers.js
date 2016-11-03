@@ -1,11 +1,20 @@
-AndSellMainModule.controller('productListController', function ($scope, productFactory, modalFactory) {
+AndSellMainModule.controller('productListController', function ($scope, $stateParams,productFactory, modalFactory) {
 
     modalFactory.setTitle('商品列表');
 
     modalFactory.setBottom(false);
 
-    $scope.bindData = function (response) {
+    $scope.initData=function () {
+        $scope.query={
+            'SHOP_PRODUCT.PRD_NAME':$stateParams.keyword
+        }
+        $scope.filter={};
+        if($stateParams.keyword!=''){
+            $scope.queryPrdName();
+        }
+    }
 
+    $scope.bindData = function (response) {
         $scope.productList = response.data;
         $scope.tagList = response.extraData.tagList;
         console.log($scope.productList);
@@ -68,5 +77,10 @@ AndSellMainModule.controller('productListController', function ($scope, productF
             modalFactory.reload();
         });
     }
+
+    $scope.queryPrdName = function () {
+
+        $scope.filter['SHOP_PRODUCT.PRD_NAME'] = $scope.query['SHOP_PRODUCT.PRD_NAME'];
+    };
 
 });

@@ -1,13 +1,20 @@
-AndSellMainModule.controller('memberListController', function ($scope, memberFactory, memberGroupFactory, modalFactory, $q) {
+AndSellMainModule.controller('memberListController', function ($scope, memberFactory, $stateParams, memberGroupFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('客户管理');
 
     modalFactory.setBottom(false);
 
-    $scope.memberAdd = {};
-    $scope.memberEdited = {};
-    $scope.memberFilter = {};
+    $scope.initData = function () {
+        $scope.memberAdd = {};
+        $scope.memberEdited = {};
+        $scope.filter = {};
+        $scope.queryContent = '';
+        if ($stateParams.keyword != '') {
+            $scope.queryContent = $stateParams.keyword;
+            $scope.queryMember();
+        }
+    };
 
     $scope.bindData = function (response) {
 
@@ -23,13 +30,13 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
 
 
     //根据类型加载客户分组
-    $scope.loadGroupByType = function (what,id) {
+    $scope.loadGroupByType = function (what, id) {
 
         memberGroupFactory.getMemberGroupListByType(id).get({}, function (repsonse) {
             console.log(repsonse.data);
-            if (what==1){
+            if (what == 1) {
                 $scope.groupListById = repsonse.data;
-            }else if (what==2){
+            } else if (what == 2) {
                 $scope.groupListByTypeId = repsonse.data;
             }
 
@@ -98,6 +105,11 @@ AndSellMainModule.controller('memberListController', function ($scope, memberFac
         $scope.memberAdd['MEMBER.MOBILE'] = undefined;
         $scope.memberAdd['MEMBER.TYPE_ID'] = "-1";
         $scope.memberAdd['MEMBER.GROUP_ID'] = "-1";
+    };
+
+    $scope.queryMember = function () {
+        $scope.filter['MEMBER.QUERY_CONTENT'] = $scope.queryContent;
+
     };
 });
 
