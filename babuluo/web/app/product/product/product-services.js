@@ -87,6 +87,8 @@ AndSellMainModule.service('productFactory', function ($resource, baseURL) {
         });
     };
 
+
+
     /*this.addProduct = function (id) {
      return $resource(baseURL
      + '-service/shop/product/comment/getById?shop_product_comment.COMMENT_ID=:COMMENT_ID', {'COMMENT_ID': id}, {
