@@ -4,7 +4,7 @@ var AndSellUI = angular.module('AndSell.UI', ['ngSanitize','weUI','ui.bootstrap'
 var AndSellData = angular.module("AndSell.data", []);
 var AndSellH5MainModule = angular.module('AndSell.H5.Main', ['AndSell.Service', 'AndSell.Router', 'AndSell.UI']);
 
-AndSellService.constant('baseURL', 'http://localhost:8080/AndSell/bubu');
+AndSellService.constant('baseURL', 'http://10.0.0.47:8081/AndSell/bubu');
 
 AndSellUI.directive('stringToNumber', function () {
     return {
@@ -78,6 +78,7 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
                 params['STOCK_REALTIME.STORE_ID']=$scope.storeId;
                 params['SHOP_PRODUCT.PRD_ID']=$scope.id;
                 productFactory.getProductAllInfoById(params).get({}, function (response) {
+                    console.log(response);
                     $scope.product = response.data[0];
                     if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                         $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
