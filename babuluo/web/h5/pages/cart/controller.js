@@ -3,6 +3,8 @@ AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, pr
     modalFactory.setTitle('购物车');
     modalFactory.setBottom(true);
 
+    $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
+
     $scope.initData = function () {
 
         $scope.getCartInfoInCookie();

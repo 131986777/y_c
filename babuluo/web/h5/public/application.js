@@ -83,6 +83,11 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
                     if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                         $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
                         $scope.skuData = $scope.getPrdSkuData($scope.skuList);
+
+                        if($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length>0){
+                            $scope.checkContent(1,$scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
+                        }
+
                         $scope.getPriceArea();
                         $scope.filterSkuList();
                         $scope.skuSelectable();

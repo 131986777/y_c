@@ -61,7 +61,7 @@
       </div>
       <div class="product-wrap weui_cell" ng-repeat="detail in orderDetailList">
         <div class="product-img-wrap weui_cell_hd">
-          <img class="product-img" ng-src="detail['SHOP_ORDER_INFO.IMG_URL']">
+          <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}">
         </div>
         <div class="basic-info weui_cell_bd weui_cell_primary">
           <h5 class="product-name" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']">
