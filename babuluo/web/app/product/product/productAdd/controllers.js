@@ -24,7 +24,7 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
     $scope.uploadImageFiles = [];
     $scope.uploadFiles = [];
     $scope.uploadImageFilesIndex=0;
-    $scope.FILE_SERVER_DOMAIN = "http://babuluo-file.oss-cn-hangzhou.aliyuncs.com//";
+    $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
     // UE 实例化
     var ue;
