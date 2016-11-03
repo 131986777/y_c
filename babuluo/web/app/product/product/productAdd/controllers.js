@@ -23,6 +23,7 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
     $scope.tempSaveSkuMap = new Map();
     $scope.uploadImageFiles = [];
     $scope.uploadFiles = [];
+    $scope.uploadImageFilesIndex=0;
     $scope.FILE_SERVER_DOMAIN = "http://babuluo-file.oss-cn-hangzhou.aliyuncs.com//";
 
     // UE 实例化
@@ -98,6 +99,23 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
         form['SHOP_PRODUCT.SHOP_DES'] = ue.getContent();
         form['SHOP_PRODUCT.TAG_ID'] = $scope.selectTagIds.toString();
         form['SkuListData'] = JSON.stringify($scope.product.tags);
+
+        var uploadImageArray=new Array();
+        for(var i = 0;i<$scope.uploadImageFiles.length;i++) {
+             if(i== $scope.uploadImageFilesIndex ){
+                 console.log("封面图片为"+i);
+                 form['SHOP_PRODUCT.CMP']=$scope.uploadImageFiles[i];
+             }else {
+                 uploadImageArray.push($scope.uploadImageFiles[i]);
+             }
+
+        }
+        form['SHOP_PRODUCT.P1']=uploadImageArray[0];
+        form['SHOP_PRODUCT.P2']=uploadImageArray[1];
+        form['SHOP_PRODUCT.P3']=uploadImageArray[2];
+        form['SHOP_PRODUCT.P4']=uploadImageArray[3];
+        form['SHOP_PRODUCT.P5']=uploadImageArray[4];
+
         productFactory.addProduct(form).get({}, function (response) {
             if(response.code==0){
                 modalFactory.showShortAlert("保存成功");
@@ -311,13 +329,19 @@ AndSellMainModule.controller('productAddController', function ($http,$scope, $st
         }
 
     };
+    /**
+     * 删除商品图片
+     */
+    $scope.delImageFile=function (key) {
+        $scope.uploadImageFiles.splice(key,1);
+    }
 
     /**
-     *  上传商品的图片， 最多上传10个
+     *  上传商品的图片， 最多上传6个
      **/
     $scope.uploadImage = function (element) {
-        _uploadFiles(element.files, $scope.uploadImageFiles,'image', 10, function () {
-            alert("商品图册最多只能添加10张！");
+        _uploadFiles(element.files, $scope.uploadImageFiles,'image', 6, function () {
+            alert("商品图册最多只能添加6张！");
         },function(successResponse){
             $scope.uploadImageFiles.push(successResponse.url);
             console.log(successResponse);

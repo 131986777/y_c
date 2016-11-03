@@ -1,7 +1,4 @@
-'use strict';
-
-angular.module('product')
-    .controller('AddProductController', function ($scope, http, uploadManage, utils, loadData) {
+angular.module('product').controller('AddProductController', function ($scope, http, uploadManage, utils, loadData) {
         // UE 实例化
         var ue = UE.getEditor('container', {
             initialFrameHeight: 300,
@@ -598,7 +595,7 @@ angular.module('product')
          *
          * 上传商品的图片， 最多上传10个
          * */
-        $scope.uploadImage = function (files) {
+        $scope.uploadImages = function (files) {
             uploadManage.uploadImage(files, $scope.uploadImageFiles, 10, function () {
                 $scope.alert("商品图册最多只能添加10张！");
             });

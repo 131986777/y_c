@@ -21,7 +21,7 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
         })
         .state("order-add", {
             url: "/orderAdd",
-            params: {SKU_IDS: '1060'},
+            params: {SKU_IDS: '1060',pickupPerson:{}},
             templateUrl: "/AndSell/h5/pages/order/add/index.html",
             controller: "H5.OrderAddController"
         })
@@ -68,5 +68,11 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
             url: "/shopList",
             templateUrl: "/AndSell/h5/pages/shop/index.html",
             controller: "H5.ShopController"
+        })
+        .state("orderAddAddress", {
+            url: "/orderAddAddress",
+            params: {SKU_IDS: '1060'},
+            templateUrl: "/AndSell/h5/pages/order/addAddress/index.html",
+            controller: "H5.OrderAddAddressController"
         })
 });
