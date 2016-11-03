@@ -3,12 +3,13 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(true);
 
+    $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
         $scope.STORE_ID = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         $scope.storeId=$scope.STORE_ID;
         $scope.filter = {
-            PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'SHOP_PRODUCT.CLASS_ID': $stateParams.classId,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID
+            PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'SHOP_PRODUCT.ODRDER':'ORDER_NUM DESC','SHOP_PRODUCT.CLASS_ID': $stateParams.classId,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID
         };
         $scope.hasNextPage=true;
         $scope.loading = false;  //状态标记

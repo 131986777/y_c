@@ -7,9 +7,14 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
 
     $scope.initData = function () {
 
-        var mySwiper = new Swiper('.swiper-container', {
-            pagination: '.swiper-pagination', paginationClickable: true
-        })
+        //var mySwiper = new Swiper('.swiper-container', {
+        //    pagination: '.swiper-pagination', paginationClickable: true
+        //})
+
+        // 设置轮播图图片间隔
+        $scope.myInterval = 4000;
+        // 轮播图数据初始化
+        $scope.slides = new Array;
 
         // current sku select map
         $scope.currSkuContentSelectMap = {
@@ -19,9 +24,9 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
         var params={};
         params['SHOP_PRODUCT.PRD_ID']=$stateParams.PRD_ID;
         params['STOCK_REALTIME.STORE_ID']=getCookie('currentShopInfo')['SHOP.REPOS_ID'];
-
         productFactory.getProductAllInfoById(params).get({}, function (response) {
             $scope.product = response.data[0];
+            $scope.setPrdPicBanner($scope.product);
             if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                 $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
                 $scope.skuData = $scope.getPrdSkuData($scope.skuList);
@@ -30,6 +35,23 @@ AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $stat
                 $scope.skuSelectable();
             }
         });
+    }
+
+    $scope.setPrdPicBanner= function (prd) {
+        // 添加轮播图源
+        if(prd['SHOP_PRODUCT.CMP']!=undefined){
+            $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.CMP']});
+        }  if(prd['SHOP_PRODUCT.P1']!=undefined){
+            $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P1']});
+        } if(prd['SHOP_PRODUCT.P2']!=undefined){
+            $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P2']});
+        } if(prd['SHOP_PRODUCT.P3']!=undefined){
+            $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P3']});
+        } if(prd['SHOP_PRODUCT.P4']!=undefined){
+            $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P4']});
+        } if(prd['SHOP_PRODUCT.P5']!=undefined){
+            $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P5']});
+        }
     }
 
     //获取价格区间

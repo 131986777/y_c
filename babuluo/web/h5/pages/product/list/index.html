@@ -25,7 +25,7 @@
       <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
         <a class="product-wrap weui_cell" ng-repeat="item in prdList">
           <div class="weui_cell_hd" ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
-            <img class="img" ng-bind="item['SHOP_PRODUCT.CMP']"/>
+            <img class="img" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"/>
           </div>
           <div class="weui_cell_bd">
             <h5 class="name"
