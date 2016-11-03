@@ -47,7 +47,7 @@
                     <div ng-class="{'coupon-head':item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1,'coupon-head-disabled':item['COUPON.STOP']==-1||item['COUPON.IsEnd']==1}">
                         <div class="coupon-info">
                             <p class='couponType'>{{item['COUPON.NAME']}}</p>
-                            <p class="couponTime">有效期至<span>{{item['COUPON.END_DATETIME']|FormatAllDate}}</span></p>
+                            <p class="couponTime" ng-if="item['COUPON.END_DATETIME']!=null">有效期至<span>{{item['COUPON.END_DATETIME']|FormatAllDate}}</span></p>
                             <div class="couponValue">
                                 <span ng-if="item['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
                                     <span>{{(item['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}</span>
@@ -359,34 +359,26 @@
                             </label>
 
                             <div class="col-md-8 text-left form-inline">
-                                <label>
+
                                      <input type="checkbox" ng-model="Monday" ng-true-value="1"
-                                       ng-init="Monday='0'" name="dates">星期一
-                                </label>
-                                <label>
+                                       ng-init="Monday='0'" name="dates" ng-checked="Monday==1">星期一&nbsp;&nbsp;
                                     <input type="checkbox" ng-model="Tuesday" ng-true-value="2"
-                                       ng-init="Tuesday='0'" name="dates">星期二
-                                </label>
-                                <label>
+                                       ng-init="Tuesday='0'" name="dates" ng-checked="Tuesday==2">星期二&nbsp;&nbsp;
+
                                     <input type="checkbox" ng-model="Wednesday" ng-true-value="3"
-                                       ng-init="Wednesday='0'" name="dates">星期三
-                                </label>
-                                <label>
+                                       ng-init="Wednesday='0'" name="dates" ng-checked="Wednesday==3">星期三&nbsp;&nbsp;
+
                                     <input type="checkbox" ng-model="Thursday" ng-true-value="4"
-                                       ng-init="Thursday='0'" name="dates">星期四
-                                        </label>
-                                <label>
+                                       ng-init="Thursday='0'" name="dates" ng-checked="Thursday==4">星期四<br>
+
                                     <input type="checkbox" ng-model="Friday" ng-true-value="5"
-                                       ng-init="Friday='0'" name="dates">星期五
-                                </label>
-                                <label>
+                                       ng-init="Friday='0'" name="dates" ng-checked="Friday==5">星期五&nbsp;&nbsp;
+
                                     <input type="checkbox" ng-model="Saturday" ng-true-value="6"
-                                       ng-init="Saturday='0'" name="dates">星期六
-                                </label>
-                                <label>
+                                       ng-init="Saturday='0'" name="dates" ng-checked="Saturday==6">星期六&nbsp;&nbsp;
+
                                     <input type="checkbox" ng-model="Sunday" ng-true-value="7"
-                                       ng-init="Sunday='0'" name="dates">星期日
-                                </label>
+                                       ng-init="Sunday='0'" name="dates" ng-checked="Sunday==7">星期日
 
                             </div>
                         </div>
@@ -427,11 +419,11 @@
                     <span class="input-group-addon">至 </span>
                     <input id="end_hour" type="text" class="form-control" placeholder="截止时间"
                            name="to" ng-model="to" data-date-format="yyyy/mm/dd hh:ii"></div>-->
-                        <div class="form-group">
-                            <div class="col-lg-9 col-lg-offset-3">
-                                <button type="submit" class="btn btn-primary">Sign up</button>
-                            </div>
-                        </div>
+                        <!--<div class="form-group">-->
+                            <!--<div class="col-lg-9 col-lg-offset-3">-->
+                                <!--<button type="submit" class="btn btn-primary">Sign up</button>-->
+                            <!--</div>-->
+                        <!--</div>-->
                 </form>
             </div>
             <div class="modal-footer">
@@ -616,10 +608,10 @@
                 </div>
 
                 <div class="modal-body form-body text-left">
-                    <!--<div ng-repeat="item in detailArray">
+                    <div ng-repeat="item in detailArray">
                         <span>{{item}}</span>
-                    </div>-->
-                    <span>{{detail}}</span>
+                    </div>
+                    <!--<span>{{detail}}</span>-->
 
 
                 </div>
