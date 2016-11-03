@@ -5,6 +5,10 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
 
     $scope.initData= function () {
 
+        $scope.PickupPerson = $stateParams.pickupPerson;
+        console.log($scope.PickupPerson);
+        $scope.EmptyPick = isEmptyObject($scope.PickupPerson);
+
         $scope.order={};
         $scope.cartInfo = getCookie('cartInfo');
         $scope.cartSize = getCookie('cartSize');
@@ -47,6 +51,11 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
 
     //提交订单
     $scope.commitOrder= function () {
+
+        if(isEmptyObject($scope.PickupPerson)){
+            weUI.toast.error('请填写提货信息');
+            return;
+        }
         var params=$scope.order;
         params['SHOP_ORDER.TYPE']=1;//订货单
         params['SHOP_ORDER.REC_CONTACT']='帅比琪';//收货人
