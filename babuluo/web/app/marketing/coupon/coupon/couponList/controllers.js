@@ -238,6 +238,99 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
             $scope[$this.attr('ng-model')] = _this.value;
         });
     });
+    $('#defaultForm')
+        .bootstrapValidator({
+            message: '输入不符合要求',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                couponTitle: {
+                    message: 'The username is not valid',
+                    validators: {
+                        notEmpty: {
+                            message: '请输入有效值'
+                        },
+                    }
+                },
+                couponNum: {
+                    validators: {
+                        notEmpty: {
+                            message: '请输入有效值'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_\.]+$/,
+                            message: '仅包含数字及字母'
+                        }
+                    }
+                },
+                rule: {
+                    validators: {
+                        notEmpty: {
+                            message: '请选择规则'
+                        },
 
+                    }
+                },
+                object: {
+                    validators: {
+                        notEmpty: {
+                            message: '请选择对象'
+                        },
+
+                    }
+                },
+                couponCount: {
+                    validators: {
+                        notEmpty: {
+                            message: '请输入有效值'
+                        },
+                        regexp: {
+                            regexp: /^[1-9]\d*$/,
+                            message: '仅包含数字'
+                        }
+                    }
+                },
+                limit: {
+                    validators: {
+                        notEmpty: {
+                            message: '请输入有效值'
+                        },
+                        regexp: {
+                            regexp: /^[1-9]\d*$/,
+                            message: '仅包含数字'
+                        }
+                    }
+                },
+                dates: {
+                    validators: {
+                        notEmpty: {
+                            message: '周期不能为空'
+                        },
+                    }
+                },
+                from: {
+                    validators: {
+                        notEmpty: {
+                            message: '周期不能为空'
+                        },
+                    }
+                },
+                to: {
+                    validators: {
+                        notEmpty: {
+                            message: '周期不能为空'
+                        },
+                    }
+                }
+            }
+        })
+        .on('success.form.bv', function(e) {
+            e.preventDefault();
+            var $form = $(e.target);
+            var bv = $form.data('bootstrapValidator');
+             });
 
 });

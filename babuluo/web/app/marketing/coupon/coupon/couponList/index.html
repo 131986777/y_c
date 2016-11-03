@@ -261,7 +261,7 @@
                 </div>
                 <div class="modal-body form-body text-right">
 
-                    <form class="form-horizontal">
+                    <form id="defaultForm" class="form-horizontal">
 
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
@@ -272,7 +272,7 @@
                                 <input type="text" class="form-control"
                                        ng-model="add['COUPON.NAME']"
                                        ng-init="add['COUPON.NAME']=''"
-                                       placeholder=""></div>
+                                       placeholder="" name="couponTitle"></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
@@ -283,7 +283,7 @@
                                 <input type="text" class="form-control"
                                        ng-model="add['COUPON.CODE']"
                                        ng-init="add['COUPON.CODE']=''"
-                                       placeholder=""></div>
+                                       placeholder="" name="couponNum"></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
@@ -338,7 +338,7 @@
                                 <input type="number" class="form-control"
                                        ng-model="add['COUPON.NUM_LIMIT']"
                                        ng-init="add['COUPON.NUM_LIMIT']=''"
-                                       placeholder="请直接输入数字">
+                                       placeholder="请直接输入数字" name="couponCount">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -350,7 +350,7 @@
                                 <input type="number" class="form-control"
                                        ng-model="add['COUPON.USE_TIME_LIMIT']"
                                        ng-init="add['COUPON.USE_TIME_LIMIT']=''"
-                                       placeholder="请直接输入数字">
+                                       placeholder="请直接输入数字" name="couponCount">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -358,23 +358,35 @@
                                 <span class="required">使用周期</span>
                             </label>
 
-                            <div class="col-md-8 text-left">
-
-
-                                <input type="checkbox" ng-model="Monday" ng-true-value="1"
-                                       ng-init="Monday='0'">星期一&nbsp;&nbsp;
-                                <input type="checkbox" ng-model="Tuesday" ng-true-value="2"
-                                       ng-init="Tuesday='0'">星期二&nbsp;&nbsp;
-                                <input type="checkbox" ng-model="Wednesday" ng-true-value="3"
-                                       ng-init="Wednesday='0'">星期三&nbsp;&nbsp;
-                                <input type="checkbox" ng-model="Thursday" ng-true-value="4"
-                                       ng-init="Thursday='0'">星期四&nbsp;&nbsp;<br>
-                                <input type="checkbox" ng-model="Friday" ng-true-value="5"
-                                       ng-init="Friday='0'">星期五&nbsp;&nbsp;
-                                <input type="checkbox" ng-model="Saturday" ng-true-value="6"
-                                       ng-init="Saturday='0'">星期六&nbsp;&nbsp;
-                                <input type="checkbox" ng-model="Sunday" ng-true-value="7"
-                                       ng-init="Sunday='0'">星期日
+                            <div class="col-md-8 text-left form-inline">
+                                <label>
+                                     <input type="checkbox" ng-model="Monday" ng-true-value="1"
+                                       ng-init="Monday='0'" name="dates">星期一
+                                </label>
+                                <label>
+                                    <input type="checkbox" ng-model="Tuesday" ng-true-value="2"
+                                       ng-init="Tuesday='0'" name="dates">星期二
+                                </label>
+                                <label>
+                                    <input type="checkbox" ng-model="Wednesday" ng-true-value="3"
+                                       ng-init="Wednesday='0'" name="dates">星期三
+                                </label>
+                                <label>
+                                    <input type="checkbox" ng-model="Thursday" ng-true-value="4"
+                                       ng-init="Thursday='0'" name="dates">星期四
+                                        </label>
+                                <label>
+                                    <input type="checkbox" ng-model="Friday" ng-true-value="5"
+                                       ng-init="Friday='0'" name="dates">星期五
+                                </label>
+                                <label>
+                                    <input type="checkbox" ng-model="Saturday" ng-true-value="6"
+                                       ng-init="Saturday='0'" name="dates">星期六
+                                </label>
+                                <label>
+                                    <input type="checkbox" ng-model="Sunday" ng-true-value="7"
+                                       ng-init="Sunday='0'" name="dates">星期日
+                                </label>
 
                             </div>
                         </div>
@@ -415,6 +427,11 @@
                     <span class="input-group-addon">至 </span>
                     <input id="end_hour" type="text" class="form-control" placeholder="截止时间"
                            name="to" ng-model="to" data-date-format="yyyy/mm/dd hh:ii"></div>-->
+                        <div class="form-group">
+                            <div class="col-lg-9 col-lg-offset-3">
+                                <button type="submit" class="btn btn-primary">Sign up</button>
+                            </div>
+                        </div>
                 </form>
             </div>
             <div class="modal-footer">
