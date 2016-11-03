@@ -2,7 +2,7 @@
 <div class="page-content" ng-init="initData()">
 
     <%--在这里写样式--%>
-    <div class="col-sm-12">
+
         <div class="page-operation-wrap">
 
             <div class="row col-sm-12">
@@ -12,7 +12,8 @@
                                ng-model="queryContent">
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-default pull-right" ng-click="queryMember()">查询
+                        <button type="button" class="btn btn-default pull-right"
+                                ng-click="queryMember()">查询
                         </button>
                     </div>
                     <label class="control-label">筛选：</label>
@@ -221,4 +222,5 @@
              url="/member/member/queryAll"
              callback="bindData(response)">
         </div>
-    </div>
+
+</div>
