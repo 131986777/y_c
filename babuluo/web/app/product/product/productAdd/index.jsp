@@ -288,8 +288,8 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <div class="upload-img-wrap"   ng-repeat="(key,imageFileUrl) in uploadImageFiles">
-                            <div class="">
+                        <div class="upload-img-wrap "   ng-repeat="(key,imageFileUrl) in uploadImageFiles">
+                            <div class="upload-img-content">
                                 <img ng-src="{{FILE_SERVER_DOMAIN+imageFileUrl}}"
                                      class="img-responsive">
                                 <div class="product-img-operator">
