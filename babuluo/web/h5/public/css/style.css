@@ -1423,13 +1423,13 @@ p {
 }
 
 .product-list-page .icon-wrap .cartNum{
-  background: url("../img/list1.png") no-repeat;
-  padding-top: 13px;
-  width: 19px;
-  height: 33px;
+  background: url("../img/list1.jpg") no-repeat;
+  padding-top: 1px;
+  width: 14px;
+  height: 14px;
   position: absolute;
-  top: -18px;
-  right: -10px;
+  top: -5px;
+  right: -9px;
   color: #fff;
 }
 .product-list-page .weui_navbar_item{
