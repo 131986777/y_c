@@ -288,8 +288,9 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <div class="upload-img-wrap "   ng-repeat="(key,imageFileUrl) in uploadImageFiles">
-                            <div class="upload-img-content">
+                        <div class="upload-img-wrap"   ng-repeat="(key,imageFileUrl) in uploadImageFiles">
+                            <div  ng-class="{'upload-img-content':true,'operator-chosen':key==uploadImageFilesIndex}">
+
                                 <img ng-src="{{FILE_SERVER_DOMAIN+imageFileUrl}}"
                                      class="img-responsive">
                                 <div class="product-img-operator">
@@ -297,7 +298,7 @@
                                         <a type="button"
                                            class="operator-close"
                                            aria-label="Close"
-                                           ng-click="delImageFile(imageFileUrl)">
+                                           ng-click="delImageFile(key)">
                                             &times;
                                         </a>
                                     </div>
