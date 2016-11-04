@@ -10,7 +10,7 @@
                     <div class="form-group">
                         <%--<label for="name" class="control-label">商品名称:</label>--%>
                         <input type="text" class="form-control" id="name" placeholder="商品名称"
-                               ng-model="query['SHOP_PRODUCT.PRD_NAME']">
+                               ng-model="query['SHOP_PRODUCT.PRD_NAME']" ng-keyup="queryKeyUp($event)" >
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-default pull-right"
@@ -101,9 +101,13 @@
                     <%--</td>--%>
 
                     <td>
-                        <i ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
+                        <%--<a >--%>
+                        <a ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
+                           href=""
+                           style="text-decoration:none;color: #26344B"
                            ng-click="product['SHOP_PRODUCT.SHOWSKULIST']=!product['SHOP_PRODUCT.SHOWSKULIST']"
-                           ng-class="{true:'glyphicon glyphicon-minus-sign green  btn-lg', false:'glyphicon glyphicon-plus-sign green btn-lg'}[product['SHOP_PRODUCT.SHOWSKULIST']]"></i>
+                           ng-class="{true:'glyphicon glyphicon-minus-sign green  btn-lg', false:'glyphicon glyphicon-plus-sign green btn-lg'}[product['SHOP_PRODUCT.SHOWSKULIST']]"></a>
+                        <%--</a>--%>
                     </td>
 
                     <td class="text-left">
@@ -136,17 +140,17 @@
                     <td></td>
 
                     <td>
-                        <a ng-click="product['SHOP_PRODUCT.IS_SALE']=product['SHOP_PRODUCT.IS_SALE']*-1;changeProductSaleState(product)"><span
+                        <a  ng-click="changeProductSaleState(product)"
                                 class="label"
                                 ng-class="{true:'label-success', false:'label-danger'}[product['SHOP_PRODUCT.IS_SALE']==1]"
-                                ng-bind="product['SHOP_PRODUCT.IS_SALE']==1?'正在销售':'下架停售'"></span></a>
+                                ng-bind="product['SHOP_PRODUCT.IS_SALE']==1?'正在销售':'下架停售'"></a>
                     </td>
                     <td>
                         <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">修改</a>
-                        <a show-modal id="#modifySkuPrice"
+                        <a href="" show-modal id="#modifySkuPrice"
                            ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
                            ng-click="showModifySkuPrice(product)">改价</a>
-                        <a ng-click="delProduct(product)">删除</a>
+                        <a href="" ng-click="delProduct(product)">删除</a>
                     </td>
                 </tr>
 
@@ -177,17 +181,14 @@
                         class="text-left"></td>
 
                     <td>
-                        <a ng-click="sku['SHOP_PRODUCT_SKU.IS_SALE']=sku['SHOP_PRODUCT_SKU.IS_SALE']*-1;changeSkuSaleState(sku)">
-                                    <span
+                              <a ng-click="changeSkuSaleState(sku)"
                                             class="label"
                                             ng-class="{true:'label-success', false:'label-danger'}[sku['SHOP_PRODUCT_SKU.IS_SALE']==1]"
-                                            ng-bind="sku['SHOP_PRODUCT_SKU.IS_SALE']==1?'正在销售':'下架停售'"></span>
-                        </a>
-
+                                            ng-bind="sku['SHOP_PRODUCT_SKU.IS_SALE']==1?'正在销售':'下架停售'"></a>
                     </td>
                     <td>
 
-                        <a ng-click="delSku(sku)">删除</a>
+                        <a href="" ng-click="delSku(sku)">删除</a>
                     </td>
                 </tr>
 
@@ -215,21 +216,21 @@
                     <h4 class="modal-title">设置商品价格</h4>
                 </div>
 
-                <div class="form-body ">
+                <div class="form-body " style="padding: 20px">
 
-                    <div class="form-group row">
-                        <div class="col-md-2">
-                            <img style="width: 40px; height: 40px;"
-                                 ng-src="{{modifyProduct['SHOP_PRODUCT.CMP']}}">
+                    <div class="form-group row" >
+                        <div class="col-md-1" style="margin-left: 10px;margin-right: 10px">
+                            <img style="width: 80px; height: 80px;"
+                                 ng-src="{{FILE_SERVER_DOMAIN+modifyProduct['SHOP_PRODUCT.CMP']}}">
                         </div>
-                        <div class="col-md-10">
-                            <span ng-bind="modifyProduct['SHOP_PRODUCT.PRD_NAME']"></span>
+                        <div class="col-md-9">
+                            <h3  ng-bind="modifyProduct['SHOP_PRODUCT.PRD_NAME']"></h3>
                         </div>
 
                     </div>
 
-                    <div class="form-group">
-                        <table class="table table-striped table-hover">
+                    <div class="form-group" style="margin-top: 10px">
+                        <table class="table table-bordered table-hover table-striped">
 
                             <thead>
                             <tr>

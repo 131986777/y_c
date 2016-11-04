@@ -75,7 +75,7 @@
                         <option value="member">搜客户</option>
                     </select>
                 </div>
-                <input class="form-control" ng-model="searchContent" type="text">
+                <input class="form-control" ng-model="searchContent" type="text"  ng-keyup="queryKeyUp($event)">
                 <div class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-click="search()">
                         搜索
