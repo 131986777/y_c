@@ -36,6 +36,14 @@
                                 ng-bind="tag['SHOP_TAG.TAG']"
                                 value="'{{tag['SHOP_TAG.TAG_ID']}}'"></option>
                     </select>
+                    <select ng-model="filter['SHOP_PRODUCT.CLASS_ID']"
+                            ng-init="filter['SHOP_PRODUCT.CLASS_ID'] = 'null'"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="null">全部分类</option>
+                        <option class="nya-bs-option" ng-repeat="prdClass in classList"
+                                ng-bind="prdClass['SHOP_PRODUCT_CLASS.CLASS_NAME']"
+                                value="'{{prdClass['SHOP_PRODUCT_CLASS.CLASS_ID']}}'"></option>
+                    </select>
                     <select ng-model="filter['SHOP_PRODUCT.ODRDER']"
                             ng-init="filter['SHOP_PRODUCT.ODRDER'] = 'ORDER_NUM DESC'; "
                             class="nya-bs-select form-control">
@@ -77,11 +85,12 @@
                     <th style="width: 20px">&nbsp;</th>
                     <th class="text-left"> 商品名称</th>
                     <th style="width: 120px" class="text-center"> 编码</th>
-                    <th style="width: 60px" class="text-center"> 单位</th>
-                    <th style="width: 100px" class="text-center"> 市场价</th>
-                    <th style="width: 100px" class="text-center"> 成本价</th>
-                    <th style="width: 60px" class="text-center"> 状态</th>
-                    <th style="width: 120px" class="text-center"> 操作</th>
+                    <th style="width: 120px" class="text-center"> 所属分类</th>
+                    <th style="width: 120px" class="text-center"> 单位</th>
+                    <th style="width: 120px" class="text-center"> 市场价</th>
+                    <th style="width: 120px" class="text-center"> 成本价</th>
+                    <th style="width: 120px" class="text-center"> 状态</th>
+                    <th style="width: 180px" class="text-center"> 操作</th>
                 </tr>
                 </thead>
                 <tbody ng-cloak class="text-center" style="vertical-align: middle">
@@ -138,6 +147,7 @@
 
                     <td ng-bind="product['SHOP_PRODUCT.PRD_SPU']"></td>
 
+                    <td ng-bind="product['SHOP_PRODUCT.CLASS_NAME']"></td>
                     <td ng-bind="product['SHOP_PRODUCT.UNIT_NAME']"></td>
 
                     <td></td>
@@ -177,6 +187,7 @@
 
                     <td ng-bind="sku['SHOP_PRODUCT_SKU.PRD_SKU']"></td>
 
+                    <td></td>
                     <td></td>
 
                     <td ng-bind="sku['SHOP_PRODUCT_SKU.PRICE'] | currency :'￥'"
@@ -223,43 +234,42 @@
                 <div class="form-body " style="padding: 20px">
 
                     <div class="form-group row" >
-                        <div class="col-md-1" style="margin-left: 10px;margin-right: 10px">
-                            <img style="width: 80px; height: 80px;"
+                        <div class="col-md-1" style="margin-left: 20px;margin-right: 50px">
+                            <img style="width: 100px; height: 100px;"
                                  ng-src="{{FILE_SERVER_DOMAIN+modifyProduct['SHOP_PRODUCT.CMP']}}">
                         </div>
                         <div class="col-md-9">
                             <h3  ng-bind="modifyProduct['SHOP_PRODUCT.PRD_NAME']"></h3>
+                            <h5  ng-bind="'所属分类 ： '+modifyProduct['SHOP_PRODUCT.CLASS_NAME']"></h5>
+                            <h5  ng-bind="'单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位 ： '+modifyProduct['SHOP_PRODUCT.UNIT_NAME']"></h5>
                         </div>
 
                     </div>
 
-                    <div class="form-group" style="margin-top: 10px">
+                    <div class="form-group" style="margin-top: 10px;padding-left: 30px;padding-right: 30px">
                         <table class="table table-bordered table-hover table-striped">
 
                             <thead>
                             <tr>
-                                <th class="text-left"> sku名称</th>
-                                <th style="width: 100px" class="text-left"> 市场价</th>
-                                <th style="width: 100px" class="text-left"> 成本价</th>
+                                <th class="text-left" style="padding-left: 20px"> sku名称</th>
+                                <th style="width: 100px" class="text-center"> 市场价</th>
+                                <th style="width: 100px" class="text-center"> 成本价</th>
                             </tr>
                             </thead>
                             <tbody ng-cloak>
                             <tr ng-repeat=" sku in modifyProduct['SHOP_PRODUCT.SKULIST'] ">
 
-                                <td class="text-left">
+                                <td class="text-left" style="padding-left: 20px"  ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
 
-                                    <div style="padding-left: 70px"
-                                         ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
-                                    </div>
                                 </td>
 
-                                <td class="text-left">
+                                <td class="text-center">
                                     <span ng-click="addToChangeList(sku)" ng-show="!sku.isChange"
                                           ng-bind="sku['SHOP_PRODUCT_SKU.PRICE'] | currency :'￥'"></span>
                                     <input type="text" ng-show="sku.isChange" class="form-control"
                                            ng-model="sku['SHOP_PRODUCT_SKU.PRICE']">
                                 </td>
-                                <td class="text-left">
+                                <td class="text-center">
                                     <span ng-click="addToChangeList(sku)" ng-show="!sku.isChange"
                                           ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
                                     <input type="text" ng-show="sku.isChange" class="form-control"

@@ -29,6 +29,7 @@ AndSellMainModule.controller('productListController', function ($scope, $statePa
     $scope.bindData = function (response) {
         $scope.productList = response.data;
         $scope.tagList = response.extraData.tagList;
+        $scope.classList = response.extraData.classList;
         console.log(response);
     };
 
