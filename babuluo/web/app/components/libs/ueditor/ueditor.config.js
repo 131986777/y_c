@@ -269,7 +269,7 @@
         //当输入的字符数超过该值时，保存一次现场
         //,maxInputCount:1
 
-        //autoHeightEnabled
+        ,autoHeightEnabled:false
         // 是否自动长高,默认true
         //,autoHeightEnabled:true
 

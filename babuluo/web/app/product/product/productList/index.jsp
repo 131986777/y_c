@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="page-content" ng-init="initData()">
 
-    <div class="col-md-12" style="margin-top: 30px">
+    <div class="col-md-12" style="margin-top: 20px">
         <div class="table-operbar row" ng-cloak>
             <div class="table-toolbar">
                 <%--筛选功能--%>
@@ -107,7 +107,7 @@
                     </td>
 
                     <td class="text-left">
-                        <a  ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">
+                        <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">
                             <img class="img-thumbnail"
                                  ng-src="{{FILE_SERVER_DOMAIN+product['SHOP_PRODUCT.CMP']}}"
                                  style="height: 60px;width: 60px;float: left">
@@ -118,11 +118,12 @@
                                     <span class="label label-info "
                                           ng-repeat="tag in product['SHOP_PRODUCT.TAG']"
                                           ng-bind="tag"> </span>
-
                             <br>
-                            <a href="productDetail.jsp?prdId={{product.prdId}}"
+                            <div style="margin-top: 5px">
+                            <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})"
+
                                ng-bind="product['SHOP_PRODUCT.PRD_NAME']"
-                               class="font-dark"></a>
+                               class="font-dark"></a></div>
                         </div>
                     </td>
 
