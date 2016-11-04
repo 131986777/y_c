@@ -11,6 +11,7 @@
                     <div class="form-group">
                         <%--<label for="name" class="control-label">商品名称:</label>--%>
                         <input type="text" class="form-control" id="name" placeholder="商品名称"
+                               ng-keyup="queryKeyUp($event)"
                                ng-model="query['SHOP_PRODUCT.PRD_NAME']">
                     </div>
                     <div class="form-group">
