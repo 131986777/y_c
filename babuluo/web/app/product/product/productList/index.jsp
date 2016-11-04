@@ -235,7 +235,7 @@
 
                     <div class="form-group row" >
                         <div class="col-md-1" style="margin-left: 20px;margin-right: 50px">
-                            <img style="width: 100px; height: 100px;"
+                            <img  style="width: 100px; height: 100px"
                                  ng-src="{{FILE_SERVER_DOMAIN+modifyProduct['SHOP_PRODUCT.CMP']}}">
                         </div>
                         <div class="col-md-9">
