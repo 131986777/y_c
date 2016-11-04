@@ -1,5 +1,4 @@
 .card{
-    width: 480px;
     height: 210px;
     margin-top: 20px;
     border-radius: 20px;
@@ -7,7 +6,7 @@
     position: relative;
 }
 .balance{
-    line-height: 130px;
+    line-height: 118px;
     text-align: center;
     font-size: 38px;
     position: relative;

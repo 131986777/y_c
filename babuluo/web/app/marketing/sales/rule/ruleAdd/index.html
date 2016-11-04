@@ -1,5 +1,5 @@
 <div class="page-content" >
-    <form class="form-horizontal" >
+    <form class="form-horizontal" style="padding-top:25px;" >
         <div class="form-group">
             <label  class="col-sm-1 control-label">名称：</label>
             <div class="col-sm-2">
@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-1 col-sm-10">
+            <div class="col-sm-offset-1 col-sm-10" style="padding-left:35px">
                 <div class=" pull-left">
                     <label class="checkbox">
                         <input id="meiman" type="checkbox" ng-model="salesInfo['SALES.CONDITION_TYPE']">每满
@@ -22,16 +22,15 @@
             </div>
         </div>
         <div class="form-group" ng-show="memberId == 1" >
-            <div class="col-sm-1">规则：</div>
+            <label  class="col-sm-1 control-label">规则：</label>
                 <div class="manjian-ruler col-sm-8" >
-
                 <!-- 满减 -->
                 <div class="manjian radio">
                     <label>
-                        <input type="radio" name="promation" id="promation1"  value="1" ng-model="salesInfo['SALES.SALE_TYPE']" checked>
+                        <input type="radio" name="promation"   value="1" checked>
                         满减
                     </label>
-                    <div class="content hidden">
+                    <div class="content">
                         <div class="detailBox">
                             <div class="detai ">
                                 订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']">，立减￥
@@ -68,7 +67,7 @@
                                 <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT6']"><a class="itemDel">删除</a>
                             </div>
                         </div>
-                        <a class="addItem" href="javascript:;">+添加区间</a>
+                        <button class="btn btn-sm btn-default addItem" href="javascript:;"><i class="fa fa-plus"></i>添加区间</button>
                     </div>
                 </div>
 
@@ -115,7 +114,7 @@
                                 打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT6']">折<a class="itemDel">删除</a>
                             </div>
                         </div>
-                        <a class="addItem" href="javascript:;">+添加区间</a>
+                        <button class="btn btn-sm btn-default addItem" href="javascript:;"><i class="fa fa-plus"></i>添加区间</button>
                     </div>
                 </div>
 
@@ -180,7 +179,7 @@
                                 <a class="itemDel">删除</a>
                             </div>
                         </div>
-                        <a class="addItem" href="javascript:;">+添加区间</a>
+                        <button class="btn btn-sm btn-default addItem" href="javascript:;"><i class="fa fa-plus"></i>添加区间</button>
                     </div>
                 </div>
 
@@ -227,19 +226,19 @@
                                 <a class="itemDel">删除</a>
                             </div>
                         </div>
-                        <a class="addItem" href="javascript:;">+添加区间</a>
+                        <button class="btn btn-sm btn-default addItem" href="javascript:;"><i class="fa fa-plus"></i>添加区间</button>
                     </div>
                 </div>
             </div>
                 <div class="meimanjian-ruler col-sm-8 hidden">
 
-                <!-- 满减 -->
+                <!-- 每满减 -->
                 <div class="manjian radio">
                     <label>
-                        <input type="radio" name="promation"  value="option1" >
+                        <input type="radio" name="mpromation"  value="option1" checked >
                         每满减
                     </label>
-                    <div class="content hidden">
+                    <div class="content">
                         <div class="detailBox">
 
                             <div class="detail">
@@ -250,10 +249,10 @@
                     </div>
                 </div>
 
-                <!-- 满折 -->
+                <!-- 每满折 -->
                 <div class="manzhe radio">
                     <label>
-                        <input type="radio" name="promation"  value="option2">
+                        <input type="radio" name="mpromation"  value="option2">
                         每满折
                     </label>
                     <div class="content hidden">
@@ -268,10 +267,10 @@
                 </div>
 
 
-                <!-- 满赠（商品） -->
+                <!-- 每满赠（商品） -->
                 <div class="manzeng-product radio">
                     <label>
-                        <input type="radio" name="promation" id="promation3" value="option3">
+                        <input type="radio" name="mpromation"  value="option3">
                         每满赠（商品）
                     </label>
                     <div class="content hidden">
@@ -287,7 +286,7 @@
 
                 <div class="manzeng-ticket radio">
                     <label>
-                        <input type="radio" name="promation" id="promation4" value="option4">
+                        <input type="radio" name="mpromation"  value="option4">
                         每满赠（优惠券）
                     </label>
                     <div class="content hidden">
@@ -310,10 +309,10 @@
                 <!-- 满减 -->
                 <div class="manjian radio">
                     <label>
-                        <input type="radio" name="promation" id="promation1"  value="1" ng-model="salesInfo['SALES.SALE_TYPE']" checked>
+                        <input type="radio" name="promation1"  value="1" ng-model="salesInfo['SALES.SALE_TYPE']" checked>
                         满减
                     </label>
-                    <div class="content hidden">
+                    <div class="content">
                         <div class="detailBox">
                             <div class="detai ">
                                 购买数量满<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >件，立减￥
@@ -350,14 +349,14 @@
                                 <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT6']"><a class="itemDel">删除</a>
                             </div>
                         </div>
-                        <a class="addItem" href="javascript:;">+添加区间</a>
+                        <button class="btn btn-sm btn-default addItem" href="javascript:;"><i class="fa fa-plus"></i>添加区间</button>
                     </div>
                 </div>
 
                 <!-- 满折 -->
                 <div class="manzhe radio">
                     <label>
-                        <input type="radio" name="promation"  value="2" ng-model="salesInfo['SALES.SALE_TYPE']">
+                        <input type="radio" name="promation1"  value="2" ng-model="salesInfo['SALES.SALE_TYPE']">
                         满折
                     </label>
                     <div class="content hidden">
@@ -397,7 +396,7 @@
                                 打<input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT6']">折<a class="itemDel">删除</a>
                             </div>
                         </div>
-                        <a class="addItem" href="javascript:;">+添加区间</a>
+                        <button class="btn btn-sm btn-default addItem" href="javascript:;"><i class="fa fa-plus"></i>添加区间</button>
                     </div>
                 </div>
 
@@ -405,7 +404,7 @@
                 <!-- 满赠（商品） -->
                 <div class="manzeng-product radio">
                     <label>
-                        <input type="radio" name="promation"  value="3" ng-model="salesInfo['SALES.SALE_TYPE']">
+                        <input type="radio" name="promation1"  value="3" ng-model="salesInfo['SALES.SALE_TYPE']">
                         满赠（商品）
                     </label>
                     <div class="content hidden">
@@ -462,7 +461,7 @@
                                 <a class="itemDel">删除</a>
                             </div>
                         </div>
-                        <a class="addItem" href="javascript:;">+添加区间</a>
+                        <button class="btn btn-sm btn-default addItem" href="javascript:;"><i class="fa fa-plus"></i>添加区间</button>
                     </div>
                 </div>
 
@@ -470,7 +469,7 @@
                 <!-- 满赠（优惠券） -->
                 <div class="manzeng-ticket radio">
                     <label>
-                        <input type="radio" name="promation"  value="4" ng-model="salesInfo['SALES.SALE_TYPE']">
+                        <input type="radio" name="promation1"  value="4" ng-model="salesInfo['SALES.SALE_TYPE']">
                         满赠（优惠券）
                     </label>
                     <div class="content hidden">
@@ -509,7 +508,7 @@
                                 <a class="itemDel">删除</a>
                             </div>
                         </div>
-                        <a class="addItem" href="javascript:;">+添加区间</a>
+                        <button class="btn btn-sm btn-default addItem" href="javascript:;"><i class="fa fa-plus"></i>添加区间</button>
                     </div>
                 </div>
             </div>
@@ -518,10 +517,10 @@
                 <!-- 满减 -->
                 <div class="manjian radio">
                     <label>
-                        <input type="radio" name="promation"  value="option1" >
+                        <input type="radio" name="mpromation1"  value="option1"  checked>
                         每满减
                     </label>
-                    <div class="content hidden">
+                    <div class="content">
                         <div class="detailBox">
 
                             <div class="detail">
@@ -535,7 +534,7 @@
                 <!-- 满折 -->
                 <div class="manzhe radio">
                     <label>
-                        <input type="radio" name="promation"  value="option2">
+                        <input type="radio" name="mpromation1"  value="option2">
                         每满折
                     </label>
                     <div class="content hidden">
@@ -553,7 +552,7 @@
                 <!-- 满赠（商品） -->
                 <div class="manzeng-product radio">
                     <label>
-                        <input type="radio" name="promation" id="promation3" value="option3">
+                        <input type="radio" name="mpromation1"  value="option3">
                         每满赠（商品）
                     </label>
                     <div class="content hidden">
@@ -570,7 +569,7 @@
 
                 <div class="manzeng-ticket radio">
                     <label>
-                        <input type="radio" name="promation" id="promation4" value="option4">
+                        <input type="radio" name="mpromation1" value="option4">
                         每满赠（优惠券）
                     </label>
                     <div class="content hidden">

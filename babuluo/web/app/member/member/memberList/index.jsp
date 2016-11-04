@@ -5,7 +5,7 @@
     <div class="table-toolbar" style="padding:14px 0;">
         <div class="row">
             <div class="form-inline form-group">
-                <div class="col-md-4">
+                <div class="col-md-3">
                 <div class="form-group">
                     <input type="text" class="form-control" id="name" placeholder="登陆ID/用户名/手机号"
                            ng-model="queryContent">
@@ -16,7 +16,7 @@
                     </button>
                 </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-7">
                 <label class="control-label">筛选：</label>
                 <select ng-model="filter['MEMBER.CODE_ID']"
                         ng-init="filter['MEMBER.CODE_ID']='null'"
@@ -55,8 +55,7 @@
                             value="{{value['MEMBER_CODE_GROUP.ID']}}">
                     </option>
                 </select>
-                </div>
-                <div class="col-md-3 text-right">
+
                 <label class="control-label">排序：</label>
                 <select ng-model="filter['MEMBER.REG_DATETIME']"
                         ng-init="filter['MEMBER.REG_DATETIME']='REG_DATETIME DESC'"
@@ -68,6 +67,8 @@
                         注册时间↑
                     </option>
                 </select>
+                </div>
+                <div class="col-md-2 text-right">
                 <a type="button" class="btn btn-default" data-toggle="modal" data-target="#add">
                     <i class="fa fa-plus"></i>新增客户
                 </a>
