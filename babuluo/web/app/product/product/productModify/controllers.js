@@ -128,8 +128,8 @@ AndSellMainModule.controller('productModifyController', function ($http,$scope, 
 
     $scope.modifyProductSubmit = function () {
         $scope.modify['SHOP_PRODUCT.KEYWORD'] = getTabInputText($scope.keyword);
-        $scope.modify['SHOP_PRODUCT.CLASS_ID'] = $scope.modify['SHOP_PRODUCT_CLASS.CLASS_ID'];
-        $scope.modify['SHOP_PRODUCT.UNIT_ID'] = $scope.modify['SHOP_UNIT.UNIT_ID'];
+        $scope.modify['SHOP_PRODUCT.CLASS_ID'] = $scope.modify['SHOP_PRODUCT.CLASS_ID'];
+        $scope.modify['SHOP_PRODUCT.UNIT_ID'] = $scope.modify['SHOP_PRODUCT.UNIT_ID'];
         var form = $scope.modify;
         form['SHOP_PRODUCT.SERVICE_ID'] = 1;
         form['SHOP_PRODUCT.SHOP_DES'] = ue.getContent();

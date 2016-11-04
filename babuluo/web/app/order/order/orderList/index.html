@@ -16,11 +16,11 @@
             <div class="form-group form-inline ">
                 <input type="text" class="form-control" ng-model="orderFilter" placeholder="输入商品名称/订单号">
                 <button type="submit" class="btn btn-default" ng-click="searchOrder()"><span class="glyphicon glyphicon-search"></span></button>
-                <a class="collapsed" data-toggle="collapse"  href="#term" style="padding-left: 10px;color: rgb(51,51,51);">更多筛选条件<span class="caret"></span></a>
-                <div class="btn-group pull-right">
-                    <button type="button" class="btn btn-default">打印订单</button>
-                    <button type="button" class="btn btn-default"><i class="fa fa-plus"></i>新增订货单</button>
-                </div>
+                <!--<a class="collapsed" data-toggle="collapse"  href="#term" style="padding-left: 10px;color: rgb(51,51,51);">更多筛选条件<span class="caret"></span></a>-->
+                <!--<div class="btn-group pull-right">-->
+                    <!--<button type="button" class="btn btn-default">打印订单</button>-->
+                    <!--<button type="button" class="btn btn-default">+ 新增订货单</button>-->
+                <!--</div>-->
             </div>
             <!-- 筛选框 -->
             <div id="term" class="panel-collapse collapse">
@@ -100,7 +100,7 @@
             </div>
             <!-- content -->
             <div class="orders" >
-                <div class="orderItem " ng-repeat=" order in orderList" ng-class="{true:'unfinished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1]">
+                <div class="orderItem " ng-repeat=" order in orderList" ng-class="{true:'unfinished'}[!(order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1)]">
                     <div class="imformation orderUnpayed">
                         <div class="unpayed"  ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">等待付款</div>
                         <div class="payed"  ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">等待提货</div>
@@ -130,9 +130,9 @@
                             </ul>
                         </div>
                         <div class="buttons pull-right">
-                            <button class="btn btn-block pay" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">立即支付</button>
+                            <!--<button class="btn btn-block pay" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">立即支付</button>-->
                             <button class="btn btn-detail btn-block" ng-click="toDetail(order['SHOP_ORDER.ID'])">订单详情</button>
-                            <button class="btn btn-default btn-block"  ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">申请售后</button>
+                            <!--<button class="btn btn-default btn-block"  ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">申请售后</button>-->
                         </div>
                     </div>
                 </div>
