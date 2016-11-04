@@ -1257,6 +1257,17 @@ p {
  .product-num-wrap .btn {
   border-radius: 0;
   width: 26px; }
+  .cart-product-num-wrap {
+  width: 104px;
+  height: 26px; }
+ .cart-product-num-wrap .btn,
+ .cart-product-num-wrap .form-control {
+  padding: 0;
+  height: 26px;
+  z-index: 0; }
+ .cart-product-num-wrap .btn {
+  border-radius: 0;
+  width: 26px; }
  .add-to-cart {
    color: #fff;
   line-height: 49px;
