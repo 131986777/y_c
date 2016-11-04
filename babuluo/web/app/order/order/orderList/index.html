@@ -100,7 +100,7 @@
             </div>
             <!-- content -->
             <div class="orders" >
-                <div class="orderItem unfinished" ng-repeat=" order in orderList">
+                <div class="orderItem " ng-repeat=" order in orderList" ng-class="{true:'unfinished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1]">
                     <div class="imformation orderUnpayed">
                         <div class="unpayed"  ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">等待付款</div>
                         <div class="payed"  ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">等待提货</div>
