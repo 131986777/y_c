@@ -37,7 +37,7 @@
                     <th class="col-md-1">优惠规则名称</th>
                     <th class="col-md-1">优惠规则类型</th>
                     <th class="col-md-2">优惠规则描述</th>
-                    <th class="col-md-1">面值</th>
+                    <th class="col-md-1 text-center">面值</th>
                     <th class="col-md-1 text-center"> 操作</th>
                 </tr>
                 </thead>
@@ -50,7 +50,7 @@
                     <td ng-if="item['COUPON_RULE.TYPE']==1">减价</td> <!--规格类型-减-->
                     <td ng-if="item['COUPON_RULE.TYPE']==2">打折</td> <!--规格类型-折-->
                     <td ng-bind="item['COUPON_RULE.INTRO']"></td> <!--规则描述-->
-                    <td>
+                    <td class="text-center">
                         <span ng-if="item['COUPON_RULE.TYPE']==1">{{(item['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}元</span>
                         <span ng-if="item['COUPON_RULE.TYPE']==2">{{(item['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}折</span>
                     </td> <!--面值-->

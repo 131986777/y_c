@@ -6,10 +6,10 @@
         <div class="table-toolbar">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <a show-modal id="#addDistrict" class="btn sbold green"> <i
+                    <a show-modal id="#addDistrict" class="btn btn-default sbold green"> <i
                             class="fa fa-plus"></i> 新增区域 </a>
-                    <a href="#" class="btn green btn-outline">
-                        排序 </a>
+                    <%--<a href="#" class="btn green btn-outline">--%>
+                        <%--排序 </a>--%>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                             {{value['DISTRICT.DISTRICT_NAME']}}
                         </td>
 
-                        <td class="col-md-2">
+                        <td class="col-md-2 text-right">
                             <a show-modal id="#modifyDistrict"
                                ng-click="modifyDistrictNameClick(value)">修改</a>
                             <a ng-click="delDistrict(value)">删除</a>

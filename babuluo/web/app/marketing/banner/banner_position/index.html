@@ -4,25 +4,32 @@
     <div class="col-md-12">
         <div class="page-operation-wrap">
             <div class="row">
-                <!--<div class="col-md-1" >
-                    <select ng-model="filter['BANNER_POSITION.TYPE']"
-                            ng-init="filter['BANNER_POSITION.TYPE']='null'"
+                <div class="col-md-2" >
+                    <select ng-model="filter['BANNER.POSITION']"
+                            ng-init="filter['BANNER.POSITION']=''"
+                            ng-options="item['BANNER_POSITION.ID'] as item['BANNER_POSITION.NAME'] for item in positionList "
                             class="nya-bs-select form-control">
-
-                        <option class="nya-bs-option" value="null">
-                            &lt;!&ndash;ng-options="store.id as store.name for store in storeList"&ndash;&gt;
-                            优惠类型
+                        <option class="nya-bs-option" value="">
+                            <!--ng-options="store.id as store.name for store in storeList"-->
+                            所属位置
                         </option>
-                        <option class="nya-bs-option" value="1">减价</option>
-                        <option class="nya-bs-option" value="2">打折</option>
-
                     </select>
-                </div> &lt;!&ndash; select-center  &ndash;&gt;-->
-
-                <div class="col-md-12 text-right">
-                    <a show-modal id="#addRule" class="btn sbold green">
-                        <i class="fa fa-plus"></i>新增横幅位置
-                    </a>
+                </div> <!-- select-center  -->
+                <div class="col-md-offset-3 col-md-4">
+                    <label class="control-label">排序：</label>
+                    <select class="nya-bs-select">
+                        <option class="nya-bs-option" value="null">
+                            位置
+                        </option>
+                        <option class="nya-bs-option" value="2">
+                            名称
+                        </option>
+                    </select >
+                </div>
+                <div class="col-md-3 text-right">
+                    <button show-modal id="#addBanner" class="btn btn-default sbold green">
+                        <i class="fa fa-plus"></i>新增横幅
+                    </button>
                 </div>
             </div>
 

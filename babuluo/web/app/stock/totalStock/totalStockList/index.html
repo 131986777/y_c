@@ -15,8 +15,9 @@
     </div>
     <div class="col-md-12">
         <div class="form-inline form-group">
-            <div class="table-operbar row">
-                <div class="form-inline form-group col-sm-12">
+            <div class="table-operbar">
+                <div class="form-inline row">
+                    <div class="col-md-4">
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="商品编码" ng-model="pId">
                     </div>
@@ -25,6 +26,8 @@
                                 ng-click="queryStockById(pId)">查询
                         </button>
                     </div>
+                    </div>
+                    <div class="col-md-5">
                     <label class="control-label">筛选：</label>
                     <select ng-model="filter['STOCK_REALTIME.ORDER']"
                             ng-init="filter['STOCK_REALTIME.ORDER']='MAX(UPDATE_DATETIME) DESC'"
@@ -45,6 +48,7 @@
                             实时库存升序
                         </option>
                     </select>
+                </div>
                 </div>
             </div>
         </div>

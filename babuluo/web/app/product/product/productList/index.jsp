@@ -7,7 +7,7 @@
                 <%--筛选功能--%>
 
                 <div class="form-inline form-group">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                     <div class="form-group">
                         <%--<label for="name" class="control-label">商品名称:</label>--%>
                         <input type="text" class="form-control" id="name" placeholder="商品名称"
@@ -21,14 +21,15 @@
                     </div>
                     </div>
                     <%--<label class="control-label">筛选：</label>--%>
-                    <div class="col-md-5">
-                    <select ng-model="filter['SHOP_PRODUCT.IS_SALE']"
+                    <div class="col-md-6">
+                        <label class="control-label">筛选：</label>
+                        <select ng-model="filter['SHOP_PRODUCT.IS_SALE']"
                             ng-init="filter['SHOP_PRODUCT.IS_SALE'] = 'null'"
                             class="nya-bs-select form-control">
-                        <option class="nya-bs-option" value="null">所有商品</option>
-                        <option class="nya-bs-option" value="1">上架</option>
-                        <option class="nya-bs-option" value="-1">下架</option>
-                    </select>
+                            <option class="nya-bs-option" value="null">所有商品</option>
+                            <option class="nya-bs-option" value="1">上架</option>
+                            <option class="nya-bs-option" value="-1">下架</option>
+                        </select>
                     <select ng-model="filter['SHOP_PRODUCT.TAG_ID']"
                             ng-init="filter['SHOP_PRODUCT.TAG_ID'] = 'null'"
                             class="nya-bs-select form-control">
@@ -45,13 +46,14 @@
                                 ng-bind="prdClass['SHOP_PRODUCT_CLASS.CLASS_NAME']"
                                 value="'{{prdClass['SHOP_PRODUCT_CLASS.CLASS_ID']}}'"></option>
                     </select>
-                    <select ng-model="filter['SHOP_PRODUCT.ODRDER']"
+                        <label class="control-label">排序：</label>
+                        <select ng-model="filter['SHOP_PRODUCT.ODRDER']"
                             ng-init="filter['SHOP_PRODUCT.ODRDER'] = 'ORDER_NUM DESC'; "
                             class="nya-bs-select form-control">
-                        <option class="nya-bs-option" value="ORDER_NUM DESC">排序号</option>
-                        <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
-                        <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
-                    </select>
+                            <option class="nya-bs-option" value="ORDER_NUM DESC">排序号</option>
+                            <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
+                            <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
+                        </select>
                     </div>
                     <a ui-sref="productAdd" class="col-md-3 pull-right">
                         <button id="sample_editable_1_new" class="btn btn-default pull-right">
@@ -84,7 +86,7 @@
                     <%--</div>--%>
                     <%--</th>--%>
                     <th style="width: 20px">&nbsp;</th>
-                    <th class="text-left"> 商品名称</th>
+                    <th class="text-left" style="width:340px"> 商品名称</th>
                     <th style="width: 120px" class="text-center"> 编码</th>
                     <th style="width: 120px" class="text-center"> 所属分类</th>
                     <th style="width: 120px" class="text-center"> 单位</th>

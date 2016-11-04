@@ -1,16 +1,53 @@
 <div class="page-content">
     <div class="col-md-12">
-        <div class="col-sm-12 text-right">
-            <div class="btn-group">
-                <button type="button" class="btn btn-default" data-toggle="dropdown">
-                    +新增 <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a ui-sref="salesRuleAdd({id:1,serviceId:1})">订单促销</a></li>
-                    <li><a ui-sref="salesRuleAdd({id:2,serviceId:1})">商品促销</a></li>
-                </ul>
+        <div class="table-toolbar" style="padding: 14px 0;">
+
+            <div class="form-inline row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" placeholder="规则名称">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right">查询
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <label class="control-label">筛选：</label>
+                    <select class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="null">促销针对</option>
+                        <option class="nya-bs-option" value="1">商品</option>
+                        <option class="nya-bs-option" value="-1">订单</option>
+                    </select>
+                    <select class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="null">状态</option>
+                        <option class="nya-bs-option" value="2">启用</option>
+                        <option class="nya-bs-option" value="1">停用</option>
+                    </select>
+                    <label class="control-label">排序：</label>
+                    <select ng-model="filter['SHOP_PRODUCT.ODRDER']"
+                            ng-init="filter['SHOP_PRODUCT.ODRDER'] = 'ORDER_NUM DESC'; "
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="ORDER_NUM DESC">排序号</option>
+                        <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
+                        <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
+                    </select>
+                </div>
+                <div class="col-md-2 text-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" data-toggle="dropdown">
+                            +新增 <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a ui-sref="salesRuleAdd({id:1,serviceId:1})">订单促销</a></li>
+                            <li><a ui-sref="salesRuleAdd({id:2,serviceId:1})">商品促销</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
+
         </div>
+
         <div class="table-scrollable">
             <table class="table table-bordered table-hover table-striped">
                 <thead>

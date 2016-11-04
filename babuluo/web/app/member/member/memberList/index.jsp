@@ -99,7 +99,7 @@
             <td ng-bind="ml['MEMBER.CODE_NAME']" class="text-center"></td>
             <td ng-bind="ml['MEMBER.REG_DATETIME'] | FormatAllDate" class="text-center"></td>
             <td ng-bind="ml['MEMBER.USE_STATE'] | FormatState" class="text-center"></td>
-            <td>
+            <td class="text-center">
                 <a class="table-link" ui-sref="memberInfo({id:ml['MEMBER.USER_ID']})">
                     客户详情
                 </a>
