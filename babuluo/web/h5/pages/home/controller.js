@@ -32,13 +32,13 @@ AndSellH5MainModule.controller('H5.HomeController', function ($scope, $state, we
               $scope.slides.push({ image: 'http://img1.gtimg.com/9/910/91061/9106175_980x1200_960.jpg'});
               $scope.slides.push({ image: 'http://files.15w.com/image/2015/0621/14348708842995.png'});
 
-        $('#carousel-generic').hammer().on('swipeleft', function(){
-            $(this).carousel('next');
-        });
-
-        $('#carousel-generic').hammer().on('swiperight', function(){
-            $(this).carousel('prev');
-        });
+        //$('#carousel-generic').hammer().on('swipeleft', function(){
+        //    $(this).carousel('next');
+        //});
+        //
+        //$('#carousel-generic').hammer().on('swiperight', function(){
+        //    $(this).carousel('prev');
+        //});
     }
 
     //$scope.ssss= function () {

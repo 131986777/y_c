@@ -23,15 +23,16 @@
     </div>
     <div class="weui_tab_bd">
       <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
-        <a class="product-wrap weui_cell" ng-repeat="item in prdList">
-          <div class="weui_cell_hd" ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
-            <img class="img" ng-bind="item['SHOP_PRODUCT.CMP']"/>
+        <a class="product-wrap weui_cell " ng-repeat="item in prdList" ng-class="{true:'soldout'}[item['SHOP_PRODUCT.HAS_STOCK']==0]">
+          <div class="weui_cell_hd " ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
+            <img class="img " ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"/>
+            <i></i>
           </div>
           <div class="weui_cell_bd">
             <h5 class="name"
                 ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
               <span ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></span>
-              <span ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0">售罄</span>
+              <!--<span >售罄</span>-->
             </h5>
             <p class="money">
               <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']!=undefined"
@@ -68,7 +69,7 @@
         <p class="all">
           总计：<span class="money" ng-bind="totalPrice | currency : '￥'"></span>
         </p>
-        <p class="sale">(不含运费){{totalSize}}</p>
+        <!--<p class="sale">(不含运费){{totalSize}}</p>-->
       </div>
       <a class="payment-check" ng-click="addOrder()">
         提交订单

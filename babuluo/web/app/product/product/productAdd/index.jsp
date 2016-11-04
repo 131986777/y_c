@@ -112,7 +112,7 @@
                 </div>
 
                 <div class="alert alert-grey clearfix">
-                    <label class="col-md-2">
+                    <label class="col-md-6">
                         <input ng-model="product.setSku"
                                ng-init="product.setSku=false;" ng-change="changeSettingSku()"
                                type="checkbox">
@@ -238,7 +238,7 @@
                             <tbody>
                             <tr ng-repeat="(key,tag) in product.tags">
                                 <td ng-bind="key + 1"></td>
-                                <td ng-if="!product.setSku">无</td>
+                                <td ng-if="!product.setSku">商品规格</td>
                                 <td ng-if="product.setSku"
                                     ng-bind="tag['SHOP_PRODUCT_SKU.SKU_CONTENT1']"></td>
                                 <td ng-if="hasSkuAttrCount>=1"
@@ -302,16 +302,16 @@
                                             &times;
                                         </a>
                                     </div>
-                                    <div class="operator-wrap bottom text-center">
-                                        <a class="font-white" ng-model="showFirst"
-                                           ng-if="key==uploadImageFilesIndex">
-                                            封面图片
-                                        </a>
-                                        <a class="font-white"
-                                           ng-if="key!=uploadImageFilesIndex">
-                                            设为封面
-                                        </a>
-                                    </div>
+                                    <%--<div class="operator-wrap bottom text-center">--%>
+                                        <%--<a class="font-white" ng-model="showFirst"--%>
+                                           <%--ng-if="key==uploadImageFilesIndex">--%>
+                                            <%--封面图片--%>
+                                        <%--</a>--%>
+                                        <%--<a class="font-white"--%>
+                                           <%--ng-if="key!=uploadImageFilesIndex">--%>
+                                            <%--设为封面--%>
+                                        <%--</a>--%>
+                                    <%--</div>--%>
                                 </div>
                             </div>
                         </div>

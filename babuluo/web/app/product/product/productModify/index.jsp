@@ -187,16 +187,16 @@
                                             &times;
                                         </a>
                                     </div>
-                                    <div class="operator-wrap bottom text-center">
-                                        <a class="font-white" ng-model="showFirst"
-                                           ng-if="key==uploadImageFilesIndex">
-                                            封面图片
-                                        </a>
-                                        <a class="font-white" ng-click="setFirstImg(imageFileUrl)"
-                                           ng-if="key!=uploadImageFilesIndex">
-                                            设为封面
-                                        </a>
-                                    </div>
+                                    <%--<div class="operator-wrap bottom text-center">--%>
+                                        <%--<a class="font-white" ng-model="showFirst"--%>
+                                           <%--ng-if="key==uploadImageFilesIndex">--%>
+                                            <%--封面图片--%>
+                                        <%--</a>--%>
+                                        <%--<a class="font-white" ng-click="setFirstImg(imageFileUrl)"--%>
+                                           <%--ng-if="key!=uploadImageFilesIndex">--%>
+                                            <%--设为封面--%>
+                                        <%--</a>--%>
+                                    <%--</div>--%>
                                 </div>
                             </div>
                         </div>

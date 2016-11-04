@@ -64,4 +64,18 @@
     </servlet-mapping>
 
 
+    <!--<servlet>-->
+        <!--<description>WXPayResult</description>-->
+        <!--<display-name>WXPayResult</display-name>-->
+        <!--<servlet-name>WXPayResult</servlet-name>-->
+        <!--<servlet-class></servlet-class>-->
+    <!--</servlet>-->
+
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>WXPayResult</servlet-name>-->
+        <!--<url-pattern>/wxpay</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+
 </web-app>

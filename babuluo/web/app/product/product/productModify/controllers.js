@@ -67,7 +67,7 @@ AndSellMainModule.controller('productModifyController', function ($http,$scope, 
         UE.delEditor('container');
         // UE 实例化
         ue = UE.getEditor('container', {
-            initialFrameHeight: 300, initialFrameWidth: 900
+            initialFrameHeight: 500, initialFrameWidth: 900
         });
 
         //加载商品数据

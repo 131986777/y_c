@@ -3,6 +3,7 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
     modalFactory.setTitle('订单列表');
     modalFactory.setBottom(false);
 
+    $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
     $scope.initData= function () {
         $scope.hasNextPage=true;

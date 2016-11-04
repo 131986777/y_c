@@ -1,13 +1,24 @@
 <div class="bg-grey product-detail-page nav-bottom" ng-init="initData()">
   <!-- BEGIN 商品详情图片 -->
   <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <!-- Slides -->
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
+
+    <div id="carousel-generic">
+      <carousel interval="myInterval">
+        <slide ng-repeat="slide in slides" active="slide.active">
+          <img ng-src="{{slide.image}}" style="margin:auto;">
+          <div class="carousel-caption">
+            <p>{{slide.text}}</p>
+          </div>
+        </slide>
+      </carousel>
     </div>
-    <div class="swiper-pagination"></div>
+    <!--<div class="swiper-wrapper">-->
+      <!--&lt;!&ndash; Slides &ndash;&gt;-->
+      <!--<div class="swiper-slide">Slide 1</div>-->
+      <!--<div class="swiper-slide">Slide 2</div>-->
+      <!--<div class="swiper-slide">Slide 3</div>-->
+    <!--</div>-->
+    <!--<div class="swiper-pagination"></div>-->
   </div>
   <!-- END 商品详情图片 -->
 

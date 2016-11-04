@@ -3,6 +3,8 @@ AndSellH5MainModule.controller('H5.OrderDetailController', function ($scope, $st
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
 
+    $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
+
     $scope.initData = function () {
         $scope.getOrder($stateParams.ORDER_ID);
         $scope.shop = getCookie('currentShopInfo');

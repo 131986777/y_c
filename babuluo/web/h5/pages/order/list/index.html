@@ -40,7 +40,7 @@
           <div ng-click="toDetail(order['SHOP_ORDER.ID'])">
             <div class="product-wrap weui_cell" ng-repeat="detail in order.details">
               <div class="product-img-wrap weui_cell_hd">
-                <img class="product-img" ng-src="detail['SHOP_ORDER_DETAIL.IMG_URL']">
+                <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}">
               </div>
               <div class="basic-info weui_cell_bd weui_cell_primary">
                 <h5 class="product-name" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']">
@@ -64,9 +64,9 @@
             <div class="total-price weui_cell_bd weui_cell_primary">
               <span ng-bind="'共'+order.details.length+'件商品 合计:'"></span>
               <span ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
-              <span ng-bind="' (含运费 '"></span>
-              <span ng-bind="order['SHOP_ORDER.PRICE_FREIGHT'] | currency : '￥'"></span>
-              <span ng-bind="' 元) '"></span>
+              <!--<span ng-bind="' (含运费 '"></span>-->
+              <!--<span ng-bind="order['SHOP_ORDER.PRICE_FREIGHT'] | currency : '￥'"></span>-->
+              <!--<span ng-bind="' 元) '"></span>-->
             </div>
 
           </div>

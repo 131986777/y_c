@@ -1,21 +1,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="page-content" ng-init="initData()">
 
-    <div class="table-operbar row" ng-cloak>
-        <div class="table-toolbar">
-            <%--筛选功能--%>
-            <div class="row col-sm-12">
+    <div class="col-md-12" style="margin-top: 30px">
+        <div class="table-operbar row" ng-cloak>
+            <div class="table-toolbar">
+                <%--筛选功能--%>
+
                 <div class="form-inline form-group">
                     <div class="form-group">
-                        <label for="name" class="control-label">商品名称:</label>
+                        <%--<label for="name" class="control-label">商品名称:</label>--%>
                         <input type="text" class="form-control" id="name" placeholder="商品名称"
                                ng-model="query['SHOP_PRODUCT.PRD_NAME']">
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-default pull-right" ng-click="queryPrdName()">查询
+                        <button type="button" class="btn btn-default pull-right"
+                                ng-click="queryPrdName()">查询
                         </button>
                     </div>
-                    <label class="control-label">筛选：</label>
+                    <%--<label class="control-label">筛选：</label>--%>
                     <select ng-model="filter['SHOP_PRODUCT.IS_SALE']"
                             ng-init="filter['SHOP_PRODUCT.IS_SALE'] = 'null'"
                             class="nya-bs-select form-control">
@@ -43,61 +45,60 @@
                             <i class="fa fa-plus"></i> 新增商品
                         </button>
                     </a>
+
                 </div>
+
             </div>
-
-
+            <%--筛选功能--%>
         </div>
-        <%--筛选功能--%>
-    </div>
 
-    <div class="col-md-12">
+
         <div class="table-scrollable">
-            <table class="table table-striped table-hover">
+            <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-                    <th style="width: 30px">
-                        <div class="md-checkbox" style="margin-left: 10px">
-                            <input type="checkbox" id="checkbox_all"
-                                   ng-model="checkAllProduct"
-                                   ng-change="checkedAllProduct(checkAllProduct)"
-                                   class="md-check">
-                            <label for="checkbox_all">
-                                <span class="inc"></span>
-                                <span class="check"></span>
-                                <span class="box"></span>
-                            </label>
-                        </div>
-                    </th>
+                    <%--<th style="width: 30px">--%>
+                    <%--<div class="md-checkbox" style="margin-left: 10px">--%>
+                    <%--<input type="checkbox" id="checkbox_all"--%>
+                    <%--ng-model="checkAllProduct"--%>
+                    <%--ng-change="checkedAllProduct(checkAllProduct)"--%>
+                    <%--class="md-check">--%>
+                    <%--<label for="checkbox_all">--%>
+                    <%--<span class="inc"></span>--%>
+                    <%--<span class="check"></span>--%>
+                    <%--<span class="box"></span>--%>
+                    <%--</label>--%>
+                    <%--</div>--%>
+                    <%--</th>--%>
                     <th style="width: 20px">&nbsp;</th>
                     <th class="text-left"> 商品名称</th>
-                    <th style="width: 120px" class="text-left"> 编码</th>
-                    <th style="width: 60px" class="text-left"> 单位</th>
-                    <th style="width: 100px" class="text-left"> 市场价</th>
-                    <th style="width: 100px" class="text-left"> 成本价</th>
+                    <th style="width: 120px" class="text-center"> 编码</th>
+                    <th style="width: 60px" class="text-center"> 单位</th>
+                    <th style="width: 100px" class="text-center"> 市场价</th>
+                    <th style="width: 100px" class="text-center"> 成本价</th>
                     <th style="width: 60px" class="text-center"> 状态</th>
                     <th style="width: 120px" class="text-center"> 操作</th>
                 </tr>
                 </thead>
-                <tbody ng-cloak>
+                <tbody ng-cloak class="text-center" style="vertical-align: middle">
 
                 <tr ng-repeat-start='product in productList'>
-                    <td>
-                        <div class="md-checkbox"
-                             style="margin-left: 10px">
-                            <input type="checkbox"
-                                   id="checkbox_parent_{{product['SHOP_PRODUCT.PRD_ID']}}"
-                                   ng-model="product.checkedParent"
-                                   ng-change="checkProduct(product)"
-                                   name="checkProduct"
-                                   class="md-check">
-                            <label for="checkbox_parent_{{product['SHOP_PRODUCT.PRD_ID']}}">
-                                <span class="inc"></span>
-                                <span class="check"></span>
-                                <span class="box"></span>
-                            </label>
-                        </div>
-                    </td>
+                    <%--<td>--%>
+                    <%--<div class="md-checkbox"--%>
+                    <%--style="margin-left: 10px">--%>
+                    <%--<input type="checkbox"--%>
+                    <%--id="checkbox_parent_{{product['SHOP_PRODUCT.PRD_ID']}}"--%>
+                    <%--ng-model="product.checkedParent"--%>
+                    <%--ng-change="checkProduct(product)"--%>
+                    <%--name="checkProduct"--%>
+                    <%--class="md-check">--%>
+                    <%--<label for="checkbox_parent_{{product['SHOP_PRODUCT.PRD_ID']}}">--%>
+                    <%--<span class="inc"></span>--%>
+                    <%--<span class="check"></span>--%>
+                    <%--<span class="box"></span>--%>
+                    <%--</label>--%>
+                    <%--</div>--%>
+                    <%--</td>--%>
 
                     <td>
                         <i ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
@@ -106,15 +107,15 @@
                     </td>
 
                     <td class="text-left">
-                        <a href="productDetail.jsp">
+                        <a  ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">
                             <img class="img-thumbnail"
-                                 ng-src=""
+                                 ng-src="{{FILE_SERVER_DOMAIN+product['SHOP_PRODUCT.CMP']}}"
                                  style="height: 60px;width: 60px;float: left">
                         </a>
 
                         <div style="padding-left: 70px">
 
-                                    <span class="label label-info" style="margin-left: 5px"
+                                    <span class="label label-info "
                                           ng-repeat="tag in product['SHOP_PRODUCT.TAG']"
                                           ng-bind="tag"> </span>
 
@@ -138,16 +139,12 @@
                                 class="label"
                                 ng-class="{true:'label-success', false:'label-danger'}[product['SHOP_PRODUCT.IS_SALE']==1]"
                                 ng-bind="product['SHOP_PRODUCT.IS_SALE']==1?'正在销售':'下架停售'"></span></a>
-
                     </td>
                     <td>
                         <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">修改</a>
-
-
                         <a show-modal id="#modifySkuPrice"
                            ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
                            ng-click="showModifySkuPrice(product)">改价</a>
-
                         <a ng-click="delProduct(product)">删除</a>
                     </td>
                 </tr>
@@ -156,7 +153,7 @@
                 <tr ng-class="table-tr-small" ng-if="product['SHOP_PRODUCT.SHOWSKULIST']"
                     ng-repeat-end="" ng-repeat=" sku in product['SHOP_PRODUCT.SKULIST'] ">
 
-                    <td></td>
+                    <%--<td></td>--%>
                     <td></td>
 
                     <td class="text-left">
@@ -196,9 +193,7 @@
                 </tbody>
             </table>
         </div>
-
     </div>
-
 
     <div page-bar
          filter-obj="filter"

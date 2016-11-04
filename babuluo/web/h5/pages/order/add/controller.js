@@ -3,6 +3,8 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
     modalFactory.setTitle('新增订单');
     modalFactory.setBottom(false);
 
+    $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
+
     $scope.initData= function () {
 
         $scope.PickupPerson = $stateParams.pickupPerson;

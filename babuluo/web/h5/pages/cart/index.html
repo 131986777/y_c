@@ -2,14 +2,14 @@
   <!-- BEGIN 商品列表-->
   <div class="row">
     <div class="product-list weui_cells">
-      <div class="product-sale-wrap weui_cell">
-        <div class="product-select-wrap weui_cell_hd">
-          <i class="icon icon-check"></i>
-        </div>
-        <div class="product-sale weui_cell_bd">
-          满200减20
-        </div>
-      </div>
+      <!--<div class="product-sale-wrap weui_cell">-->
+        <!--<div class="product-select-wrap weui_cell_hd">-->
+          <!--<i class="icon icon-check"></i>-->
+        <!--</div>-->
+        <!--<div class="product-sale weui_cell_bd">-->
+          <!--满200减20-->
+        <!--</div>-->
+      <!--</div>-->
       <!-- BEGIN 商品信息-->
       <div class="product-wrap weui_cell" ng-repeat="sku in skuList">
         <div class="product-select-wrap weui_cell_hd"
@@ -20,7 +20,7 @@
              ng-show="!sku.isSelect"></i>
         </div>
         <div class="product-detail weui_cell_bd">
-          <img ng-src="sku['SHOP_PRODUCT.CMP']" class="product-img">
+          <img ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}" class="product-img">
           <h5 class="product-name" ng-bind="sku['SHOP_PRODUCT.PRD_NAME']">
           </h5>
           <p class="product-cls" ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">

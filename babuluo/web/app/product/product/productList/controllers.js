@@ -1,8 +1,14 @@
 AndSellMainModule.controller('productListController', function ($scope, $stateParams,productFactory, modalFactory) {
 
     modalFactory.setTitle('商品列表');
-
     modalFactory.setBottom(false);
+
+    $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
+
+    $scope.queryPrdName = function () {
+
+        $scope.filter['SHOP_PRODUCT.PRD_NAME'] = $scope.query['SHOP_PRODUCT.PRD_NAME'];
+    };
 
     $scope.initData=function () {
         $scope.query={
@@ -17,8 +23,7 @@ AndSellMainModule.controller('productListController', function ($scope, $statePa
     $scope.bindData = function (response) {
         $scope.productList = response.data;
         $scope.tagList = response.extraData.tagList;
-        console.log($scope.productList);
-
+        console.log(response);
     };
 
     //改变商品上下架状态
@@ -77,10 +82,5 @@ AndSellMainModule.controller('productListController', function ($scope, $statePa
             modalFactory.reload();
         });
     }
-
-    $scope.queryPrdName = function () {
-
-        $scope.filter['SHOP_PRODUCT.PRD_NAME'] = $scope.query['SHOP_PRODUCT.PRD_NAME'];
-    };
 
 });

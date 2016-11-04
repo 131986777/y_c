@@ -46,4 +46,142 @@ AndSellH5MainModule.controller('H5.OrderSuccessController', function ($scope, $s
     //
     //}
 
+
+    //微信支付相关
+    //$scope.wxScanPayPath = '';
+    //$scope.wxScanPayMoney = 0;
+    //$scope.wxScanPayOutTradeNo = '';
+    //
+    //$scope.unifiedOrder = function () {
+    //    if ($scope.wxScanPayMoney != 0) {
+    //        var url = "../../do?action=weixin!CAjaxWXpayUnifiedOrder";
+    //        $scope.data = {
+    //            product_id: $scope.wxScanPayOrderID + '',
+    //            body: $scope.wxScanPayOrderID + '',
+    //            fee: $scope.wxScanPayMoney + '',
+    //            ifWeb: 'true'
+    //        }
+    //        //                alert($scope.data.fee);
+    //        http.post(url, $scope.data, function (response) {
+    //            console.log(response);
+    //            if (response.code == 0) {
+    //                $scope.wxScanPayOutTradeNo = response.data.out_trade_no;
+    //
+    //                if (typeof WeixinJSBridge == "undefined") {
+    //                    if (document.addEventListener) {
+    //                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    //                    } else if (document.attachEvent) {
+    //                        document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+    //                        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    //                    }
+    //                } else {
+    //                    onBridgeReady(response.extraData);
+    //                }
+    //
+    //            } else {
+    //                alert("调用微信支付失败，失败原因:" + response.msg);
+    //            }
+    //        });
+    //    }
+    //}
+    //
+    //var getResult;
+    //
+    ///**
+    // * 微信支付JSAPI调用
+    // * * @param postData
+    // */
+    //function onBridgeReady(postData) {
+    //
+    //    var post = JSON.parse(postData);
+    //
+    //    WeixinJSBridge.invoke(
+    //        'getBrandWCPayRequest', {
+    //            "appId": post.appId,
+    //            "timeStamp": post.timeStamp,
+    //            "nonceStr": post.nonceStr,
+    //            "package": post.package,
+    //            "signType": post.signType,
+    //            "paySign": post.paySign
+    //        },
+    //        function (res) {
+    //
+    //
+    //            if (res.err_msg == "get_brand_wcpay_request:ok") {
+    //                //							weUI.dialog.alert("提示","正在查询支付结果,请稍等");
+    //                $scope.wxPayInfo = "正在查询支付结果,请稍等...";
+    //                $scope.queryWXPayResult();
+    //
+    //                //                            getResult = setInterval(function () {
+    //                //                               $scope.$apply($scope.queryWXPayResult);
+    //                //                            }, 2000);
+    //            } else {
+    //                alert("支付失败，请重新下单");
+    //                //                            location.href = "/ui/shop/payresult.jsp?oid=" + oid;
+    //            }    // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+    //        }
+    //    );
+    //}
+    //
+    //$scope.queryWXPayResult = function () {
+    //
+    //    $scope.pay = {
+    //        out_trade_no: $scope.wxScanPayOutTradeNo
+    //    }
+    //    var url = "../../do?action=weixin!CAjaxWXpayQuery";
+    //
+    //    http.post(url, $scope.pay, function (response) {
+    //        if (response.code == 0) {
+    //            if (response.msg == 'SUCCESS') {
+    //                $scope.WXPaySuccess();
+    //                clearInterval(getResult);
+    //            } else if (response.msg == 'SUCCESS_OTHERS') {
+    //                $scope.wxScanPayMoney = 0;
+    //                $scope.wxScanPayOutTradeNo = '';
+    //                clearInterval(getResult);
+    //                window.location.reload();
+    //            }
+    //        } else {
+    //            alert("支付失败或订单异常");
+    //            clearInterval(getResult);
+    //        }
+    //    });
+    //}
+    //
+
+    //
+    //$scope.WXPaySuccess = function () {
+    //
+    //    //            console.log($scope.wxScanPayMoney);
+    //
+    //    var url = "../../do?action=pay.fundflow!CAjaxAddFundFlowByOrderPay";
+    //    var payFormData = {};
+    //
+    //    payFormData.memberId = $scope.wxScanPayMemberID;
+    //    payFormData.orderId = $scope.wxScanPayOrderID;
+    //    payFormData.advancePayMoney = 0;
+    //    payFormData.rebatePayMoney = 0;
+    //    payFormData.payDatetime = '<%=DateUtil.getCurrentDay("yyyy-MM-dd")%>';
+    //    payFormData.offlinePayMoney = 0;
+    //    payFormData.offlinePayAccountId = '';
+    //    payFormData.remark = '';
+    //    payFormData.fileUrlLength = 0;
+    //    payFormData.fileUrls = '';
+    //    payFormData.wxPayFee = $scope.wxScanPayMoney;
+    //    http.post(url, payFormData, function (response) {
+    //        console.log(response);
+    //        if (response.code == 0) {
+    //            $scope.wxPayInfo = "订单支付成功!!!";
+    //            $scope.wxScanPayMoney = 0;
+    //            $scope.wxScanPayOutTradeNo = '';
+    //            window.location = "../order/orderList.jsp";
+    //        } else {
+    //            alert(response.msg);
+    //        }
+    //    });
+    //
+    //};
+
+
+
 })

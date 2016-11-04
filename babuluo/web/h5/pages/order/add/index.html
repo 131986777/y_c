@@ -24,7 +24,7 @@
             <!-- BEGIN 商品信息-->
             <div class="product-wrap weui_cell" ng-repeat="sku in skuList">
                 <div class="product-img-wrap weui_cell_hd">
-                    <img ng-src="sku['SHOP_PRODUCT.CMP']" class="product-img">
+                    <img ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}" class="product-img">
                 </div>
                 <div class="content weui_cell_bd weui_cell_primary">
                     <h5 class="product-name" ng-bind="sku['SHOP_PRODUCT.PRD_NAME']">
