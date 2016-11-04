@@ -25,6 +25,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     }
 
     $scope.prdSwitch = function (data) {
+        console.log(data);
         var array = new Array();
 
         for (var i = 0; i < data.length; i++) {
@@ -175,6 +176,11 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
           $scope.salesList = response.extraData.salesList;
           //获得商品标签的ID和名称的Map
           $scope.tagMap = response.extraData.tagMap;
+          //获得商品标签的ID和促销针对的Map
+          $scope.salesTarget = response.extraData.salesTarget;
+
+          //获得sku列表
+          $scope.skuList = response.extraData.skuList;
 
           $scope.salesPlan.forEach(function(ele){
               $scope.salesList.forEach(function(item){
@@ -212,18 +218,25 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
                   }
               })
           })
+
+
       })
   };
     $scope.initLoad();
 
-  $scope.addSalePlan=function (form) {
+  $scope.addSalePlan=function () {
       console.log($scope.add);
       if($scope.add['SALES_PLAN.NAME'] == ''||$scope.add['SALES_PLAN.INTRO'] == ''
                                             ||$scope.add['SALES_PLAN.SALE_ID']==''){
           alert('请输入完整信息');
       }
       else{
-          salesFactory.AddSalesPlan(form).get({}, function (response) {
+          var id = $scope.add['SALES_PLAN.SALE_ID'];
+          if($scope.salesTarget[id] == 1){
+              $scope.add['SALES_PLAN.TARGET_OBJ_TYPE'] =-1;
+              console.log($scope.add);
+          }
+          salesFactory.AddSalesPlan($scope.add).get({}, function (response) {
               if (response.code == 400) {
                   modalFactory.showShortAlert(response.msg);
               } else if (response.extraData.state == 'true') {

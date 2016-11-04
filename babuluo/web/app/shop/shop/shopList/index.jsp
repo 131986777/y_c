@@ -4,35 +4,27 @@
     <%--在这里写样式--%>
     <div class="col-sm-12">
         <div class="page-operation-wrap">
-            <div class="row">
-                <div class="col-sm-2">
-                    <div class="col-sm-3" style="padding: 8px">
-                        <label>筛选：</label>
-                    </div>
-                    <div class="col-sm-6" style="padding: 0px">
-
-                        <select ng-model="filter['SHOP.DISTRICT_ID']"
-                                ng-init="filter['SHOP.DISTRICT_ID']='null'"
-                                class="nya-bs-select form-control " data-width="80px">
-                            <option class="nya-bs-option" value="null">
-                                门店区域
-                            </option>
-                            <option class="nya-bs-option"
-                                    ng-repeat="value in districtList"
-                                    ng-bind="value['DISTRICT.DISTRICT_NAME']"
-                                    value="{{value['DISTRICT.DISTRICT_ID']}}">
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col-sm-3" style="padding: 0px">
-                    </div>
-                </div>
-                <div class="col-sm-10 text-right">
-                    <a type="button" class="btn btn-default" data-toggle="modal" data-target="#add">
+            <div class="table-operbar row">
+                <div class="form-inline form-group col-sm-12">
+                    <label class="control-label">筛选：</label>
+                    <select ng-model="filter['SHOP.DISTRICT_ID']"
+                            ng-init="filter['SHOP.DISTRICT_ID']='null'"
+                            class="nya-bs-select form-control " data-width="80px">
+                        <option class="nya-bs-option" value="null">
+                            门店区域
+                        </option>
+                        <option class="nya-bs-option"
+                                ng-repeat="value in districtList"
+                                ng-bind="value['DISTRICT.DISTRICT_NAME']"
+                                value="{{value['DISTRICT.DISTRICT_ID']}}">
+                        </option>
+                    </select>
+                    <a type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#add">
                         新增门店
                     </a>
                 </div>
             </div>
+
         </div>
 
         <table class="table table-bordered table-hover table-striped">

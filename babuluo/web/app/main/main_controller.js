@@ -15,9 +15,13 @@ AndSellMainModule.controller('MainController', function ($scope, $state, modalFa
         }
     });
 
+    $scope.queryKeyUp = function (e) {
+        if(window.event?e.keyCode:e.which==13){
+            $scope.search();
+        }
+    };
+
     $scope.search = function () {
-        console.log($scope.searchType);
-        console.log($scope.searchContent);
         switch ($scope.searchType) {
             case 'product':
                 $state.go('productList', {keyword: $scope.searchContent});

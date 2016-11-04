@@ -48,6 +48,8 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
         $scope.order['SHOP_ORDER.PRICE_PRD']=price;
 
         //todo  加入其他优惠和出促销的等过滤
+
+
         $scope.order['SHOP_ORDER.PRICE_OVER']=price;
     }
 

@@ -2,10 +2,10 @@
 <div class="page-content" ng-init="initData()">
 
     <%--在这里写样式--%>
-    <div class="page-operation-wrap">
-
-        <div class="row col-sm-12">
+    <div class="table-toolbar" style="padding:14px 0;">
+        <div class="row">
             <div class="form-inline form-group">
+                <div class="col-md-4">
                 <div class="form-group">
                     <input type="text" class="form-control" id="name" placeholder="登陆ID/用户名/手机号"
                            ng-model="queryContent">
@@ -15,6 +15,8 @@
                             ng-click="queryMember()">查询
                     </button>
                 </div>
+                </div>
+                <div class="col-md-5">
                 <label class="control-label">筛选：</label>
                 <select ng-model="filter['MEMBER.CODE_ID']"
                         ng-init="filter['MEMBER.CODE_ID']='null'"
@@ -53,6 +55,8 @@
                             value="{{value['MEMBER_CODE_GROUP.ID']}}">
                     </option>
                 </select>
+                </div>
+                <div class="col-md-3 text-right">
                 <label class="control-label">排序：</label>
                 <select ng-model="filter['MEMBER.REG_DATETIME']"
                         ng-init="filter['MEMBER.REG_DATETIME']='REG_DATETIME DESC'"
@@ -65,8 +69,9 @@
                     </option>
                 </select>
                 <a type="button" class="btn btn-default" data-toggle="modal" data-target="#add">
-                    新增客户
+                    <i class="fa fa-plus"></i>新增客户
                 </a>
+            </div>
             </div>
         </div>
     </div>
@@ -76,23 +81,23 @@
         <tr>
             <th class="col-sm-2">登陆账号</th>
             <th class="col-sm-2">用户名</th>
-            <th class="col-sm-1">手机号码</th>
-            <th class="col-sm-1">客户分组</th>
-            <th class="col-sm-1">来源</th>
-            <th class="col-sm-2">注册时间</th>
-            <th class="col-sm-1">状态</th>
-            <th class="col-sm-2">操作</th>
+            <th class="col-sm-1 text-center">手机号码</th>
+            <th class="col-sm-1 text-center">客户分组</th>
+            <th class="col-sm-1 text-center">来源</th>
+            <th class="col-sm-2 text-center">注册时间</th>
+            <th class="col-sm-1 text-center">状态</th>
+            <th class="col-sm-2 text-center">操作</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="ml in memberList|filter:{}">
             <td ng-bind="ml['MEMBER.LOGIN_ID']"></td>
             <td ng-bind="ml['MEMBER.USER_NAME']"></td>
-            <td ng-bind="ml['MEMBER.MOBILE']"></td>
-            <td ng-bind="ml['MEMBER.GROUP_NAME']"></td>
-            <td ng-bind="ml['MEMBER.CODE_NAME']"></td>
-            <td ng-bind="ml['MEMBER.REG_DATETIME'] | FormatAllDate"></td>
-            <td ng-bind="ml['MEMBER.USE_STATE'] | FormatState"></td>
+            <td ng-bind="ml['MEMBER.MOBILE']" class="text-center"></td>
+            <td ng-bind="ml['MEMBER.GROUP_NAME']" class="text-center"></td>
+            <td ng-bind="ml['MEMBER.CODE_NAME']" class="text-center"></td>
+            <td ng-bind="ml['MEMBER.REG_DATETIME'] | FormatAllDate" class="text-center"></td>
+            <td ng-bind="ml['MEMBER.USE_STATE'] | FormatState" class="text-center"></td>
             <td>
                 <a class="table-link" ui-sref="memberInfo({id:ml['MEMBER.USER_ID']})">
                     客户详情

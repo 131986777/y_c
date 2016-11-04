@@ -39,7 +39,7 @@
                     ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥'"></span>
               <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>
             </p>
-            <i class="icon icon-cart" ng-click="selectSKU(item['SHOP_PRODUCT.PRD_ID'])"></i>
+            <i class="icon icon-cart" ng-if="item['SHOP_PRODUCT.HAS_STOCK']!=0" ng-click="selectSKU(item['SHOP_PRODUCT.PRD_ID'])"></i>
           </div>
         </a>
         <div class="weui-infinite-scroll" ng-show="hasNextPage">
