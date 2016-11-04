@@ -2,14 +2,14 @@
   <!-- BEGIN 商品列表-->
   <div class="row">
     <div class="product-list weui_cells">
-      <div class="product-sale-wrap weui_cell">
-        <div class="product-select-wrap weui_cell_hd">
-          <i class="icon icon-check"></i>
-        </div>
-        <div class="product-sale weui_cell_bd">
-          满200减20
-        </div>
-      </div>
+      <!--<div class="product-sale-wrap weui_cell">-->
+        <!--<div class="product-select-wrap weui_cell_hd">-->
+          <!--<i class="icon icon-check"></i>-->
+        <!--</div>-->
+        <!--<div class="product-sale weui_cell_bd">-->
+          <!--满200减20-->
+        <!--</div>-->
+      <!--</div>-->
       <!-- BEGIN 商品信息-->
       <div class="product-wrap weui_cell" ng-repeat="sku in skuList">
         <div class="product-select-wrap weui_cell_hd"
@@ -27,10 +27,13 @@
           </p>
           <p class="product-money" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
           </p>
-          <div class="product-num-wrap input-group"
-              >
+
+          <a class="del-wrap" ng-click="delShopCart(sku)">
+            <i class="icon icon-del"></i>
+          </a>
+          <div class="product-num-wrap input-group">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"
+                            <button class="btn btn-muted" type="button"
                                     ng-click="lessSize(sku)">
                               -
                             </button>
@@ -39,15 +42,12 @@
                    ng-change="updateCartPrice()"
                    ng-model="sku['SHOP_PRODUCT_SKU.SIZE']">
                         <span class="input-group-btn">
-                            <button class="btn btn-default"  type="button"
+                            <button class="btn btn-muted" type="button"
                                     ng-click="moreSize(sku)">
                               +
                             </button>
                         </span>
           </div>
-          <a class="del-wrap" ng-click="delShopCart(sku)">
-            <i class="icon icon-del"></i>
-          </a>
         </div>
       </div>
       <!-- END 商品信息-->
@@ -68,7 +68,7 @@
         <p class="all" ng-init="totalPrice=0">
           总计：<span class="money" ng-bind="totalPrice | currency :'￥'"></span>
         </p>
-        <p class="sale">(不含运费)</p>
+        <!--<p class="sale">(不含运费)</p>-->
       </div>
       <a class="payment-check" ng-click="addOrder()">
         去结算

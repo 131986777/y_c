@@ -23,22 +23,23 @@
     </div>
     <div class="weui_tab_bd">
       <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
-        <a class="product-wrap weui_cell" ng-repeat="item in prdList">
-          <div class="weui_cell_hd" ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
-            <img class="img" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"/>
+        <a class="product-wrap weui_cell " ng-repeat="item in prdList" ng-class="{true:'soldout'}[item['SHOP_PRODUCT.HAS_STOCK']==0]">
+          <div class="weui_cell_hd " ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
+            <img class="img " ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"/>
+            <i></i>
           </div>
           <div class="weui_cell_bd">
             <h5 class="name"
                 ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
               <span ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></span>
-              <span ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0">售罄</span>
+              <!--<span >售罄</span>-->
             </h5>
             <p class="money">
               <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']!=undefined"
                     ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥'"></span>
               <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>
             </p>
-            <i class="icon icon-cart" ng-click="selectSKU(item['SHOP_PRODUCT.PRD_ID'])"></i>
+            <i class="icon icon-cart" ng-if="item['SHOP_PRODUCT.HAS_STOCK']!=0" ng-click="selectSKU(item['SHOP_PRODUCT.PRD_ID'])"></i>
           </div>
         </a>
         <div class="weui-infinite-scroll" ng-show="hasNextPage">
