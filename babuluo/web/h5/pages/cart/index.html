@@ -27,10 +27,13 @@
           </p>
           <p class="product-money" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
           </p>
-          <div class="product-num-wrap input-group"
-              >
+
+          <a class="del-wrap" ng-click="delShopCart(sku)">
+            <i class="icon icon-del"></i>
+          </a>
+          <div class="product-num-wrap input-group">
                         <span class="input-group-btn">
-                            <button class="btn btn-default" type="button"
+                            <button class="btn btn-muted" type="button"
                                     ng-click="lessSize(sku)">
                               -
                             </button>
@@ -39,15 +42,12 @@
                    ng-change="updateCartPrice()"
                    ng-model="sku['SHOP_PRODUCT_SKU.SIZE']">
                         <span class="input-group-btn">
-                            <button class="btn btn-default"  type="button"
+                            <button class="btn btn-muted" type="button"
                                     ng-click="moreSize(sku)">
                               +
                             </button>
                         </span>
           </div>
-          <a class="del-wrap" ng-click="delShopCart(sku)">
-            <i class="icon icon-del"></i>
-          </a>
         </div>
       </div>
       <!-- END 商品信息-->

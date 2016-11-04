@@ -121,7 +121,7 @@
                             <ul class="list-unstyled">
                                 <li ng-repeat=" detail in order.details">
                                     <div class="productInfo">
-                                        <img class="pull-left" ng-src="detail['SHOP_ORDER_INFO.IMG_URL']" style="width: 80px;height: 80px;">
+                                        <img class="pull-left" ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}" style="width: 80px;height: 80px;">
                                         <p class="itemName" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']"></p>
                                         <p class="itemPrice" ><span ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span> 元 x <span class="itemNum" ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span></p>
                                         <p class="itemColor" ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']"></p>

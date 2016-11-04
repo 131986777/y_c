@@ -3,6 +3,8 @@ AndSellMainModule.controller('orderListController', function ($scope, $state, $s
     modalFactory.setTitle('订货单');
     modalFactory.setBottom(false);
 
+    $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
+
     $scope.initData = function () {
         $scope.yy = {
             'background-color': '#31C552'

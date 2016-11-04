@@ -1244,6 +1244,9 @@ p {
   background-repeat: no-repeat;
   background-size: 16px 16px; }
 .product-num-wrap {
+  position: absolute;
+  right: 15px;
+  top: 75px;
   width: 104px;
   height: 26px; }
  .product-num-wrap .btn,

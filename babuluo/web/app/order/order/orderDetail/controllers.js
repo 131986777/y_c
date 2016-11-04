@@ -3,6 +3,7 @@ AndSellMainModule.controller('orderDetailController', function ($scope, $statePa
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
 
+    $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
     $scope.initData= function () {
         $scope.modify={};

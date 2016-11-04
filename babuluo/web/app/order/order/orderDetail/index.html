@@ -137,7 +137,7 @@
               <table class="itemInfo">
                 <tr>
                   <td class="itemForm">
-                    <img class="pull-left" ng-src="detail['SHOP_ORDER_INFO.IMG_URL']"
+                    <img class="pull-left" ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}"
                          style="width: 80px;height: 80px;">
                     <p class="itemNum" ng-bind="detail['SHOP_ORDER_INFO.SKU']"></p>
                     <p class="itemName" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']"></p>
