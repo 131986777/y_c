@@ -74,13 +74,13 @@
                     <th class="text-left"> 商品名称</th>
                     <th style="width: 120px" class="text-center"> 编码</th>
                     <th style="width: 60px" class="text-center"> 单位</th>
-                    <th style="width: 100px" class="text-left"> 市场价</th>
-                    <th style="width: 100px" class="text-left"> 成本价</th>
+                    <th style="width: 100px" class="text-center"> 市场价</th>
+                    <th style="width: 100px" class="text-center"> 成本价</th>
                     <th style="width: 60px" class="text-center"> 状态</th>
                     <th style="width: 120px" class="text-center"> 操作</th>
                 </tr>
                 </thead>
-                <tbody ng-cloak>
+                <tbody ng-cloak class="text-center" style="vertical-align: middle">
 
                 <tr ng-repeat-start='product in productList'>
                     <%--<td>--%>
@@ -115,7 +115,7 @@
 
                         <div style="padding-left: 70px">
 
-                                    <span class="label label-info " style="margin-left: 5px"
+                                    <span class="label label-info "
                                           ng-repeat="tag in product['SHOP_PRODUCT.TAG']"
                                           ng-bind="tag"> </span>
 
