@@ -1,8 +1,10 @@
 <div class="page-content">
     <!-- BEGIN 促销项列表 -->
-    <a show-modal id="#addSalePlan" class="btn sbold green pull-right">
+    <div class="table-toolbar">
+    <button show-modal id="#addSalePlan" class="btn btn-default sbold green pull-right">
         <i class="fa fa-plus"></i>新增促销计划
-    </a>
+    </button>
+    </div>
     <div class="promotion-list" ng-repeat="item in salesPlan">
         <!--BENGIN 商品促销 -->
         <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==1">

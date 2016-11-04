@@ -81,6 +81,7 @@
 }
 .promotion-wrap .buy-list{
     padding-top: 13px;
+    overflow:hidden;
 }
 .promotion-content .buy-text{
     font-size: 20px;

@@ -25,8 +25,7 @@
                 <div  id="newTab">
                     <div class="row"> <!-- cardList   $scope.cardList-->
                         <div class="col-md-6">
-                            <div  class="card center-block" ng-repeat="item in cardListLeft">
-                                <div style="background-color: {{item['MEMBER_CARD_TYPE.BG_COLOR']}}">
+                            <div  class="card center-block" ng-repeat="item in cardListLeft" style="background-color: {{item['MEMBER_CARD_TYPE.BG_COLOR']}} ">
                                     <div class="row cardTitle">
                                         <div class="col-md-7">{{item['MEMBER_CARD_TYPE.BEGIN_CARD_ID']}}</div>
                                         <!--起始卡号：10000-->
@@ -46,46 +45,33 @@
                                         <div class="col-md-4 text-right cardDesc">{{item['MEMBER_CARD_TYPE.INTRO']}}
                                         </div>
                                     </div>
-                                </div>
-
-
-                                <div>
-
-                                </div>
                             </div>
                         </div> <!-- left -->
 
                         <div class="col-md-6">
 
-                            <div class="card center-block" ng-repeat="item in cardListRight">
-                                <div style="background-color: {{item['MEMBER_CARD_TYPE.BG_COLOR']}}">
-                                    <div class="row cardTitle">
+                            <div class="card center-block" ng-repeat="item in cardListRight" style="background-color: {{item['MEMBER_CARD_TYPE.BG_COLOR']}}">
+                                <div class="row cardTitle">
                                         <div class="col-md-7">{{item['MEMBER_CARD_TYPE.BEGIN_CARD_ID']}}</div>
                                         <!--起始卡号：10000-->
                                         <div class="col-md-5 text-right">{{sourceMap.get(item['MEMBER_CARD_TYPE.CARD_SOURCE_ID'])}}
                                         </div>   <!--电话预约发卡-->
-                                    </div>
-                                    <p class="balance">{{item['MEMBER_CARD_TYPE.NAME']}}</p>
-                                    <div class="row cardFooter">
+                                </div>
+                                <p class="balance">{{item['MEMBER_CARD_TYPE.NAME']}}</p>
+                                <div class="row cardFooter">
                                         <!--<div class="col-md-8">发卡数:22232</div>-->
-                                        <div class="col-md-8">
-                                            <a type="button" data-toggle="modal" data-target="#modifyCardType"
+                                    <div class="col-md-8">
+                                        <a type="button" data-toggle="modal" data-target="#modifyCardType"
                                                ng-click="modifyCardTypeClick(item)" style="color: #FFFFFF">修改</a>
-                                            <a type="button" ng-click="deleteCardType(item['MEMBER_CARD_TYPE.ID'])" style="color: #FFFFFF">
+                                        <a type="button" ng-click="deleteCardType(item['MEMBER_CARD_TYPE.ID'])" style="color: #FFFFFF">
                                                 删除
-                                            </a>
-                                        </div>
-                                        <div class="col-md-4 text-right cardDesc">{{item['MEMBER_CARD_TYPE.INTRO']}}
-                                        </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4 text-right cardDesc">{{item['MEMBER_CARD_TYPE.INTRO']}}
                                     </div>
                                 </div>
-
-
-                                <div>
-
-
-                                </div> <!-- right -->
                             </div>
+                        </div> <!-- right -->
 
                         </div>
 

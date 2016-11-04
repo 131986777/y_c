@@ -1,24 +1,22 @@
 <div class="page-content couponList">
     <div class="table-operbar">
         <div class="table-toolbar">
-            <div class="row">
                 <div class="form-inline form-group">
 
                     <select ng-model="filter['COUPON.RULE_ID']"
                             ng-init="filter['COUPON.RULE_ID']=''"
-                            class="nya-bs-select form-control pull-left">
+                            class="nya-bs-select form-control">
                         <option class="nya-bs-option" value="">选择优惠券规则</option>
                         <option ng-repeat="item in ruleList" ng-bind="item['COUPON_RULE.NAME']"
                                 value="{{item['COUPON_RULE.ID']}}"></option>
 
                     </select>
 
-                    <a show-modal id="#addCoupon" class="btn sbold green pull-right">
+                    <button show-modal id="#addCoupon" class="btn btn-default sbold green pull-right">
                         <i class="fa fa-plus"></i>领取优惠券
-                    </a>
+                    </button>
 
                 </div>
-            </div><!-- row end -->
         </div>
     </div>
 
