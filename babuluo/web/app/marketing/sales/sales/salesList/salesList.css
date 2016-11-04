@@ -67,6 +67,7 @@
 .promotion-head .buttons a.del:hover{
     background: url(../../../../components/images/icon_05.png) no-repeat left center;
 }
+
 .promotion-content{
     position: relative;
     padding-bottom: 20px;
