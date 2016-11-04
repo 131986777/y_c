@@ -9,51 +9,49 @@
                 <li class="active">
                     <a> 总库存 </a>
                 </li>
-
-
             </ul>
             <!-- END 导航标签 -->
         </div>
     </div>
-
     <div class="col-md-12">
-
         <div class="form-inline form-group">
-            <div class="form-group">
-                <input type="text" class="form-control" placeholder="商品编码" ng-model="pId">
-                <button type="submit" class="btn btn-default" ng-click="queryStockById(pId)">搜索
-                </button>
+            <div class="table-operbar row">
+                <div class="form-inline form-group col-sm-12">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="商品编码" ng-model="pId">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right"
+                                ng-click="queryStockById(pId)">查询
+                        </button>
+                    </div>
+                    <label class="control-label">筛选：</label>
+                    <select ng-model="filter['STOCK_REALTIME.ORDER']"
+                            ng-init="filter['STOCK_REALTIME.ORDER']='MAX(UPDATE_DATETIME) DESC'"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="MAX(UPDATE_DATETIME) DESC">
+                            最后更新
+                        </option>
+                        <option class="nya-bs-option" value="LOCK_STOCK DESC">
+                            锁定库存降序
+                        </option>
+                        <option class="nya-bs-option" value="LOCK_STOCK ASC">
+                            锁定库存升序
+                        </option>
+                        <option class="nya-bs-option" value="STOCK DESC">
+                            实时库存降序
+                        </option>
+                        <option class="nya-bs-option" value="STOCK ASC">
+                            实时库存升序
+                        </option>
+                    </select>
+                </div>
             </div>
-
-            <div class="form-group  col-md-offset-2">
-                <select ng-model="filter['STOCK_REALTIME.ORDER']"
-                        ng-init="filter['STOCK_REALTIME.ORDER']='MAX(UPDATE_DATETIME) DESC'"
-                        class="nya-bs-select form-control">
-                    <option class="nya-bs-option" value="MAX(UPDATE_DATETIME) DESC">
-                        最后更新
-                    </option>
-                    <option class="nya-bs-option" value="LOCK_STOCK DESC">
-                        锁定库存降序
-                    </option>
-                    <option class="nya-bs-option" value="LOCK_STOCK ASC">
-                        锁定库存升序
-                    </option>
-                    <option class="nya-bs-option" value="STOCK DESC">
-                        实时库存降序
-                    </option>
-                    <option class="nya-bs-option" value="STOCK ASC">
-                        实时库存升序
-                    </option>
-                </select>
-            </div> <!-- select-center  -->
-
         </div>
         <div class="table-scrollable">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-
-                    <!--<th class="col-md-2"> 发卡渠道编码</th>-->
                     <th class="col-md-3"> 商品</th>
                     <th class="col-md-1"> 单位</th>
                     <th class="col-md-1"> 实时库存</th>
