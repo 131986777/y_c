@@ -159,11 +159,9 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
     }
 
 
-  $scope.initLoad = function () {
-      salesFactory.querySalesPlan().get({}, function (response) {
+  $scope.bindData = function (response) {
           console.log(response);
           $scope.salesPlan = response.data;
-
           //商品类别的ID和名称的Map
           $scope.proClassInfo = response.extraData.proClassMap;
           //商品的ID和名称的Map
@@ -184,7 +182,6 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
           $scope.skuMap = response.extraData.skuMap;
           $scope.skuInfoMap = response.extraData.skuInfoMap;
           $scope.proAndSkuInfoMap = response.extraData.proAndSkuInfoMap;
-          console.log($scope.skuMap[1178]);
 
 
           $scope.salesPlan.forEach(function(ele){
@@ -198,8 +195,9 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
                                   var info = JSON.parse(jsonInfo);
                                   var array = new Array();
                                   array.push(item['SALES.CONDITION_NUM' + i]);
-                                  array.push($scope.productMap[info['ProId']]);
+                                  array.push($scope.proAndSkuInfoMap[info['ProId']]);
                                   array.push(info['Num']);
+                                  array.push($scope.skuInfoMap[info['ProId']]);
                                   totalArray.push(array);
                                   $scope.salesDetailInfo = totalArray;
                               }
@@ -223,9 +221,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
                   }
               })
           })
-      })
   };
-    $scope.initLoad();
 
   $scope.addSalePlan=function () {
       $scope.add['SALES_PLAN.BEGIN_DATETIME'] = $scope.from;
@@ -247,8 +243,8 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
               } else if (response.extraData.state == 'true') {
                   modalFactory.showShortAlert('新增成功');
                   $("#addSalePlan").modal('hide');
-                  $scope.initLoad();
               }
+              $scope.$broadcast('pageBar.reload');
           });
       }
   };
@@ -264,8 +260,8 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
       salesFactory.ModifySalesProduct(form).get({}, function (res) {
           if (res.extraData.state = 'true') {
               modalFactory.showShortAlert("修改成功");
-              $scope.initLoad();
           }
+          $scope.$broadcast('pageBar.reload');
       })
   };
 
@@ -276,8 +272,8 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
               salesFactory.stopSalePlanById(item).get({}, function (res) {
               if (res.extraData.state = 'true') {
                   modalFactory.showShortAlert("停用成功");
-                  $scope.initLoad();
               }
+                  $scope.$broadcast('pageBar.reload');
           });
       });
       } else{
@@ -285,8 +281,8 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
           salesFactory.stopSalePlanById(item).get({}, function (res) {
               if (res.extraData.state = 'true') {
                   modalFactory.showShortAlert("启用成功");
-                  $scope.initLoad();
               }
+              $scope.$broadcast('pageBar.reload');
           });
       }
   } ;
@@ -297,8 +293,8 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
         salesFactory.delSalePlanById(item).get({}, function (res) {
         if (res.extraData.state = 'true') {
           modalFactory.showShortAlert("删除成功");
-            $scope.initLoad();;
         }
+            $scope.$broadcast('pageBar.reload');
       });
     });
   };

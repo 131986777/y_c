@@ -1,10 +1,35 @@
 <div class="page-content">
     <!-- BEGIN 促销项列表 -->
     <div class="table-toolbar">
-    <button show-modal id="#addSalePlan" class="btn btn-default sbold green pull-right">
+        <button show-modal id="#addSalePlan" class="btn btn-default sbold green pull-right">
         <i class="fa fa-plus"></i>新增促销计划
     </button>
     </div>
+
+    <!-- select-center  -->
+    <div style="width: 150px">
+        <label>筛选:</label>
+        <select ng-model="filter['SALES_PLAN.TARGET_OBJ_TYPE']"
+                ng-init="filter['SALES_PLAN.TARGET_OBJ_TYPE']='null'"
+                class="nya-bs-select form-control">
+            <option class="nya-bs-option" value="null">
+                类别
+            </option>
+            <option class="nya-bs-option" value="1">
+                商品
+            </option>
+            <option class="nya-bs-option" value="2">
+                商品类别
+            </option>
+            <option class="nya-bs-option" value="3">
+                标签
+            </option>
+            <option class="nya-bs-option" value="-1">
+                订单
+            </option>
+        </select>
+    </div> <!-- select-center END -->
+
     <div class="promotion-list" ng-repeat="item in salesPlan">
     <!--BENGIN 商品促销 -->
         <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==1">
@@ -40,7 +65,8 @@
                                 <p class="itemName">{{proAndSkuInfoMap[pro]}}</p>
                                 <p class="itemDesc">【{{skuMap[pro][0]}}：{{skuMap[pro][1]}}
                                                     <span ng-if="skuMap[pro][2] != ''&&skuMap[pro][2] != null">，{{skuMap[pro][2]}}：{{skuMap[pro][3]}}</span>
-                                                    <span ng-if="skuMap[pro][4] != ''&&skuMap[pro][4] != null">，{{skuMap[pro][4]}}：{{skuMap[pro][5]}}</span>】</p>
+                                                    <span ng-if="skuMap[pro][4] != ''&&skuMap[pro][4] != null">，{{skuMap[pro][4]}}：{{skuMap[pro][5]}}</span>】
+                                </p>
                             </div>
                         </div>
                         <div class="product-total" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length >0">
@@ -58,7 +84,10 @@
                     <div class="product-item">
                         <img class="pull-left" src="../components/images/index_18.png">
                         <p class="itemName">{{auto[1]}}</p>
-                        <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
+                        <p class="itemDesc">【{{auto[3][0]}}：{{auto[3][1]}}
+                                            <span ng-if="auto[3][2]!=''&& auto[3][2]!=null"> ，{{auto[3][2]}}：{{auto[3][3]}}】</span>
+                                            <span ng-if="auto[3][4]!=''&& auto[3][4]!=null"> ，{{auto[3][4]}}：{{auto[3][5]}}</span>】
+                        </p>
                     </div>
                 </div>
                 <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
@@ -145,15 +174,15 @@
             </div><!-- END promotion-head -->
             <div class="promotion-content">
                 <div class="coupon-list text-center" >
-                        <ul class="list-unstyled" ng-repeat="auto in item['salesInfo']">
-                            <li ng-show="item['salesClass'] == 1">
+                        <ul class="list-unstyled" >
+                            <li ng-show="item['salesClass'] == 1" ng-repeat="auto in item['salesInfo']">
                                 <img class="pull-left" src="../components/images/index_21.png">
                                 <div class="coupon-detail" >
                                     <p>满￥<span>{{auto[0]}}</span></p>
                                     <p>减￥<span>{{auto[1]}}</span></p>
                                 </div>
                             </li>
-                            <li ng-show="item['salesClass'] == 2">
+                            <li ng-show="item['salesClass'] == 2" ng-repeat="auto in item['salesInfo']">
                                 <img class="pull-left" src="../components/images/index_23.png">
                                 <div class="coupon-detail">
                                     <p>满￥<span>{{auto[0]}}</span></p>
@@ -164,7 +193,7 @@
                     </div>
             </div>
             <div class="promotion-footer" ng-repeat="auto in item['salesInfo']" ng-if="item['salesClass'] == 3">
-                    <div class="man-text">满<span>{{auto[0]}}</span>个</div>
+                    <div class="man-text">满<span>{{auto[0]}}</span>元</div>
                     <div class="man-content">
                         <div class="product-item">
                             <img class="pull-left" src="../components/images/index_18.png">
@@ -228,6 +257,12 @@
         </div>
         <!-- END 添加类促销 -->
     </div>
+    </div>
+
+    <div page-bar
+         filter-obj="filter"
+         url="/sales/salesplan/queryAll"
+         callback="bindData(response)">
     </div>
 
         <class-switch-modal callback="classSwitch(data)"></class-switch-modal>
