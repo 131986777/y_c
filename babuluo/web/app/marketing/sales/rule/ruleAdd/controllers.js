@@ -1,5 +1,6 @@
 AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $stateParams, salesFactory, modalFactory) {
     modalFactory.setBottom(true);
+    modalFactory.setTitle('新增促销规则');
 
     $scope.memberId = $stateParams.id;
     $scope. serviceId = $stateParams.serviceId;
@@ -61,7 +62,11 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
         console.log(data);
         $scope.productName = data['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'];
         console.log($scope.productName);
-        $('.A').text($scope.productName);
+        $('span').click(function(){
+            var _this = $(this);
+            _this.text($scope.productName);
+            console.log($(this).html());
+        });
     }
 
 
@@ -86,14 +91,7 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
                 $(this).children('.content').removeClass('hidden');
                 $(this).siblings().children('.content').addClass('hidden');
             });
-        }
-
-
-
-        $('.text').click(function(){
-                $(this).text($scope.productName);
-                console.log($(this).html());
-            });
+        };
 
 
 

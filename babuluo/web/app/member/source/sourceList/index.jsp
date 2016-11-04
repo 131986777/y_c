@@ -2,9 +2,9 @@
 <div class="table-operbar row">
     <div class="table-toolbar">
 
-        <div class="col-md-12 text-right" >
-            <a   show-modal id="#addMember" class="btn sbold green" >
-                <i class="fa fa-plus"></i> 新增客户来源 </a>
+        <div class="text-right" >
+            <button   show-modal id="#addMember" class="btn btn-default sbold green" >
+                <i class="fa fa-plus"></i> 新增客户来源 </button>
         </div>
     </div>
     <div class="col-md-12">

@@ -99,6 +99,9 @@
     margin-bottom: 10px;
     width:126px;
 }
+.buttons .btn.focus,.buttons  .btn:focus, .buttons .btn:hover{
+    color:#fff;
+}
 .btn-detail{
     background-color: rgb(17,136,255);
     color:#fff;

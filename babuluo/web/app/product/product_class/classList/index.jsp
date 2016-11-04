@@ -6,10 +6,9 @@
         <div class="table-toolbar">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <a show-modal id="#addClass" class="btn sbold green"> <i
-                            class="fa fa-plus"></i> 新增分类 </a>
-                    <a href="productClassOrder.jsp" class="btn green btn-outline">
-                        排序 </a>
+                    <button show-modal id="#addClass" class="btn btn-default sbold green"> <i class="fa fa-plus"></i> 新增分类 </button>
+                    <%--<a href="productClassOrder.jsp" class="btn green btn-outline">--%>
+                        <%--排序 </a>--%>
                 </div>
             </div>
         </div>
@@ -28,7 +27,7 @@
                             {{value['SHOP_PRODUCT_CLASS.CLASS_NAME']}}
                         </td>
 
-                        <td class="col-md-2">
+                        <td class="col-md-2 text-right">
                             <a show-modal id="#modifyClass"
                                ng-click="modifyClssNameClick(value)">修改</a>
                             <a ng-click="delProductClass(value['SHOP_PRODUCT_CLASS.CLASS_ID'])">删除</a>

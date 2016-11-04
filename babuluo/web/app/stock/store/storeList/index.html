@@ -1,9 +1,10 @@
 <div class="table-operbar row">
     <div class="table-toolbar">
-
-        <div class="col-md-12 text-right">
-            <a show-modal id="#addStore" class="btn sbold green">
-                <i class="fa fa-plus"></i> 新增仓库</a>
+        <div class="row">
+            <div class="col-md-12 text-right">
+                 <button show-modal id="#addStore" class="btn btn-default sbold green">
+                     <i class="fa fa-plus"></i> 新增仓库</button>
+            </div>
         </div>
 
     </div>
@@ -18,7 +19,7 @@
                     <!--<th class="col-md-2"> 单位</th>-->
                     <!--<th class="col-md-2"> 仓库</th>-->
                     <th class="col-md-1"> 仓库名称</th>
-                    <th class="col-md-2"> 仓库编码</th>
+                    <th class="col-md-2 text-center"> 仓库编码</th>
                     <!--<th class="col-md-2"> 最后变更</th>-->
                     <th class="col-md-1 text-center"> 操作</th>
                 </tr>
@@ -28,7 +29,7 @@
 
                     <!--&lt;!&ndash;<td ng-bind="item['MEMBER_CARD_SOURCE.CARD']"></td>&ndash;&gt;-->
                     <td ></span><span ng-bind="item['STORE.NAME']"></span><span ng-if="item['STORE.IS_DEF']==1">(默认仓库)</td>
-                    <td ng-bind="item['STORE.CODE']"></td>
+                    <td ng-bind="item['STORE.CODE']" class="text-center"></td>
                     <td class="text-center">
                         <div>
                             <a type="button" show-modal id="#modifyStore"

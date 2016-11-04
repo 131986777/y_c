@@ -6,8 +6,8 @@
         <div class="table-toolbar">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <a show-modal id="#addUnit" class="btn sbold green"> <i
-                            class="fa fa-plus"></i> 新增单位 </a>
+                    <button show-modal id="#addUnit" class="btn btn-default sbold green"> <i
+                            class="fa fa-plus"></i> 新增单位 </button>
                 </div>
             </div>
         </div>
@@ -26,7 +26,7 @@
                             {{value['SHOP_UNIT.UNIT_NAME']}}
                         </td>
 
-                        <td class="col-md-2">
+                        <td class="col-md-2 text-right">
                             <a show-modal id="#modifyUnit"
                                ng-click="modifyUnitNameClick(value)">修改</a>
                             <a ng-click="delProductUnit(value['SHOP_UNIT.UNIT_ID'])">删除</a>

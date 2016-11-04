@@ -3,21 +3,24 @@
 
     <div class="col-md-12" style="margin-top: 20px">
         <div class="table-operbar row" ng-cloak>
-            <div class="table-toolbar">
+            <div class="table-toolbar row">
                 <%--筛选功能--%>
 
                 <div class="form-inline form-group">
+                    <div class="col-md-4">
                     <div class="form-group">
                         <%--<label for="name" class="control-label">商品名称:</label>--%>
                         <input type="text" class="form-control" id="name" placeholder="商品名称"
-                               ng-model="query['SHOP_PRODUCT.PRD_NAME']" ng-keyup="queryKeyUp($event)" >
+                               ng-model="query['SHOP_PRODUCT.PRD_NAME']">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-default pull-right"
                                 ng-click="queryPrdName()">查询
                         </button>
                     </div>
+                    </div>
                     <%--<label class="control-label">筛选：</label>--%>
+                    <div class="col-md-5">
                     <select ng-model="filter['SHOP_PRODUCT.IS_SALE']"
                             ng-init="filter['SHOP_PRODUCT.IS_SALE'] = 'null'"
                             class="nya-bs-select form-control">
@@ -40,7 +43,8 @@
                         <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
                         <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
                     </select>
-                    <a ui-sref="productAdd">
+                    </div>
+                    <a ui-sref="productAdd" class="col-md-3 pull-right">
                         <button id="sample_editable_1_new" class="btn btn-default pull-right">
                             <i class="fa fa-plus"></i> 新增商品
                         </button>

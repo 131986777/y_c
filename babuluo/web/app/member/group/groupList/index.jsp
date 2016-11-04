@@ -5,11 +5,11 @@
     <%--在这里写样式--%>
     <div class="col-md-12">
         <div class="page-operation-wrap">
-            <div class="table-operbar row">
-                <div class="row">
+            <div class="table-operbar ">
+                <div class="table-toolbar" style="padding:14px 0;">
 
-
-                    <div class="col-md-1" style="padding-bottom: 10px">
+                    <div class="row">
+                    <div class="col-md-2">
 
                         <select ng-model="filter['MEMBER_CODE_GROUP.TYPE_ID']"
                                 ng-init="filter['MEMBER_CODE_GROUP.TYPE_ID']='null'"
@@ -26,9 +26,10 @@
                     </div>
 
 
-                    <div class="col-md-11 text-right">
-                        <a show-modal id="#addMemberGroup" class="btn sbold green">
-                            <i class="fa fa-plus"></i> 新增客户分组 </a>
+                    <div class="col-md-10 text-right">
+                        <button show-modal id="#addMemberGroup" class="btn btn-default sbold green">
+                            <i class="fa fa-plus"></i> 新增客户分组 </button>
+                    </div>
                     </div>
                 </div>
                 <table class="table table-bordered table-hover table-striped">
