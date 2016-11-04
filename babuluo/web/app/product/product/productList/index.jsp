@@ -1,15 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="page-content" ng-init="initData()">
 
-    <div class="col-md-12" style="margin-top: 20px">
+    <div class="col-md-12" style="margin-top: 30px">
         <div class="table-operbar row" ng-cloak>
-            <div class="table-toolbar">
+            <div class="table-toolbar row">
                 <%--筛选功能--%>
 
                 <div class="form-inline form-group">
+                    <div class="col-md-4">
                     <div class="form-group">
                         <%--<label for="name" class="control-label">商品名称:</label>--%>
-                        <input type="text" class="form-control" id="name" placeholder="商品名称"
+                        <input type="text" class="form-control" id="name" placeholder="输入商品名称"
                                ng-model="query['SHOP_PRODUCT.PRD_NAME']">
                     </div>
                     <div class="form-group">
@@ -17,7 +18,9 @@
                                 ng-click="queryPrdName()">查询
                         </button>
                     </div>
+                    </div>
                     <%--<label class="control-label">筛选：</label>--%>
+                    <div class="col-md-5">
                     <select ng-model="filter['SHOP_PRODUCT.IS_SALE']"
                             ng-init="filter['SHOP_PRODUCT.IS_SALE'] = 'null'"
                             class="nya-bs-select form-control">
@@ -40,7 +43,8 @@
                         <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
                         <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
                     </select>
-                    <a ui-sref="productAdd">
+                    </div>
+                    <a ui-sref="productAdd" class="col-md-3 pull-right">
                         <button id="sample_editable_1_new" class="btn btn-default pull-right">
                             <i class="fa fa-plus"></i> 新增商品
                         </button>
@@ -107,7 +111,7 @@
                     </td>
 
                     <td class="text-left">
-                        <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">
+                        <a  ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">
                             <img class="img-thumbnail"
                                  ng-src="{{FILE_SERVER_DOMAIN+product['SHOP_PRODUCT.CMP']}}"
                                  style="height: 60px;width: 60px;float: left">
@@ -118,12 +122,11 @@
                                     <span class="label label-info "
                                           ng-repeat="tag in product['SHOP_PRODUCT.TAG']"
                                           ng-bind="tag"> </span>
-                            <br>
-                            <div style="margin-top: 5px">
-                            <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})"
 
+                            <br>
+                            <p href="productDetail.jsp?prdId={{product.prdId}}"
                                ng-bind="product['SHOP_PRODUCT.PRD_NAME']"
-                               class="font-dark"></a></div>
+                               class="font-dark"></p>
                         </div>
                     </td>
 

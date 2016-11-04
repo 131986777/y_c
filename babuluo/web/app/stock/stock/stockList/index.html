@@ -77,26 +77,25 @@
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-
                     <!--<th class="col-md-2"> 发卡渠道编码</th>-->
                     <th class="col-md-3"> 商品</th>
-                    <th class="col-md-1"> 单位</th>
-                    <th class="col-md-2"> 仓库</th>
-                    <th class="col-md-1"> 实时库存</th>
-                    <th class="col-md-1"> 带锁库存</th>
-                    <th class="col-md-1.5"> 最后变更</th>
+                    <th class="col-md-1 text-center"> 单位</th>
+                    <th class="col-md-2 text-center"> 仓库</th>
+                    <th class="col-md-1 text-center"> 实时库存</th>
+                    <th class="col-md-1 text-center"> 带锁库存</th>
+                    <th class="col-md-1.5 text-center"> 最后变更</th>
                     <th class="col-md-1 text-center"> 操作</th>
                 </tr>
                 </thead>
                 <tbody ng-cloak>
                 <tr ng-repeat="item in stockList">
                     <td ng-bind="item['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品ID-->
-                    <td ng-bind="item['STOCK_REALTIME.UNIT']"></td> <!--规格ID-->
-                    <td >{{storeMap[(item['STOCK_REALTIME.STORE_ID'])]}}</td> <!--仓库-->
-                    <td ng-bind="item['STOCK_REALTIME.STOCK']"></td> <!--实时库存-->
-                    <td ng-bind="item['STOCK_REALTIME.LOCK_STOCK']"></td> <!--锁定库存-->
-                    <td ng-bind="item['STOCK_REALTIME.UPDATE_DATETIME']|FormatAllDate"></td> <!--最后变更-->
-                    <td>明细</td>
+                    <td ng-bind="item['STOCK_REALTIME.UNIT']" class="text-center"></td> <!--规格ID-->
+                    <td  class="text-center">{{storeMap[(item['STOCK_REALTIME.STORE_ID'])]}}</td> <!--仓库-->
+                    <td ng-bind="item['STOCK_REALTIME.STOCK']" class="text-center"></td> <!--实时库存-->
+                    <td ng-bind="item['STOCK_REALTIME.LOCK_STOCK']" class="text-center"></td> <!--锁定库存-->
+                    <td ng-bind="item['STOCK_REALTIME.UPDATE_DATETIME']|FormatAllDate" class="text-center"></td> <!--最后变更-->
+                    <td class="text-center">明细</td>
                     <!--<td class="text-center">-->
                         <!--<div >-->
                             <!--<a type="button" show-modal id="#modifySource"-->

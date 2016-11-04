@@ -6,10 +6,10 @@
         <div class="table-toolbar">
             <div class="row">
                 <div class="col-md-12 text-right">
-                    <a show-modal id="#addTag" class="btn sbold green"> <i
-                            class="fa fa-plus"></i> 新增标签 </a>
-                    <a href="productTagOrder.jsp" class="btn green btn-outline">
-                        排序 </a>
+                    <button show-modal id="#addTag" class="btn btn-default sbold green"> <i
+                            class="fa fa-plus"></i> 新增标签 </button>
+                    <%--<a href="productTagOrder.jsp" class="btn green btn-outline">--%>
+                        <%--排序 </a>--%>
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
                             {{value['SHOP_TAG.TAG']}}
                         </td>
 
-                        <td class="col-md-2">
+                        <td class="col-md-2 text-right">
                             <a show-modal id="#modifyTag"
                                ng-click="modifyTagNameClick(value)">修改</a>
                             <a ng-click="delProductTag(value['SHOP_TAG.TAG_ID'])">删除</a>
