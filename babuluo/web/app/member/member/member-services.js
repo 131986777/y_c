@@ -115,6 +115,14 @@ AndSellMainModule.service('memberFactory', function ($resource, baseURL) {
             }
         });
     };
+    this.modCouponLeft= function (form) {
+        console.log("数量2为"+form['COUPON.NUM_LEFT']);
+        return $resource(baseURL + '/coupon/coupon/modLeftNum', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
 
 
 });
