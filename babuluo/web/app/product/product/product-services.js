@@ -87,7 +87,14 @@ AndSellMainModule.service('productFactory', function ($resource, baseURL) {
         });
     };
 
+    this.modifyPrdsTag = function (form) {
+        return $resource(baseURL+'/shop/product/setTag',form,{
+            'update':{
+                method:'PUT'
+            }
+        });
 
+    }
 
     /*this.addProduct = function (id) {
      return $resource(baseURL
