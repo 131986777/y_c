@@ -54,7 +54,7 @@
                     <div class="buy-content" >
                         <div class="buy-list" ng-repeat="pro in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
                             <div class="product-item">
-                                <img class="pull-left" src="../components/images/index_18.png">
+                                <img class="pull-left" ng-src="{{urlMap[pro]}}">
                                 <p class="itemName">{{proAndSkuInfoMap[pro]}}</p>
                                 <p class="itemDesc">【{{skuMap[pro][0]}}：{{skuMap[pro][1]}}
                                                     <span ng-if="skuMap[pro][2] != ''&&skuMap[pro][2] != null">，{{skuMap[pro][2]}}：{{skuMap[pro][3]}}</span>
@@ -72,20 +72,23 @@
             </div><!-- promotion content -->
 
                 <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
-                <div class="man-text">满<span>{{auto[0]}}</span>个</div>
-                <div class="man-content">
-                    <div class="product-item">
-                        <img class="pull-left" src="../components/images/index_18.png">
-                        <p class="itemName">{{auto[1]}}</p>
-                        <p class="itemDesc">【{{auto[3][0]}}：{{auto[3][1]}}
+                    <div class="man-text">满<span>{{auto[0]}}</span>个</div>
+                        <div class="man-content" >
+                            <div class="product-item" ng-if="salesClass == 3">
+                                <img class="pull-left" ng-src="auto[4]">
+                                <p class="itemName">{{auto[1]}}</p>
+                                <p class="itemDesc">【{{auto[3][0]}}：{{auto[3][1]}}
                                             <span ng-if="auto[3][2]!=''&& auto[3][2]!=null"> ，{{auto[3][2]}}：{{auto[3][3]}}】</span>
                                             <span ng-if="auto[3][4]!=''&& auto[3][4]!=null"> ，{{auto[3][4]}}：{{auto[3][5]}}</span>】
-                        </p>
-                    </div>
+                                </p>
+                        </div>
+                            <div class="product-item" ng-if="salesClass == 4">
+                                <p class="itemName">{{auto[1]}}</p>
+                            </div>
+                        </div>
+                    <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
                 </div>
-                <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
             </div><!-- promotion footer -->
-        </div>
         </div>
     <!-- END 商品促销 -->
 
@@ -122,9 +125,7 @@
                 <div class="buy-content" ng-repeat="pro in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
                     <div class="buy-list">
                         <div class="product-item">
-                            <img class="pull-left" src="../components/images/index_18.png">
                             <p class="itemName">{{proClassInfo[pro]}}</p>
-                            <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
                         </div>
                     </div>
                     <div class="product-total">>>共<span class="itemNum">{{((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length}}</span>类商品参与</div>
@@ -135,10 +136,16 @@
         <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
             <div class="man-text">满<span>{{auto[0]}}</span>个</div>
             <div class="man-content">
-                <div class="product-item">
-                    <img class="pull-left" src="../components/images/index_18.png">
+                <div class="product-item" ng-if="item['salesClass'] == 3">
+                    <img class="pull-left" ng-src="auto[4]">
                     <p class="itemName">{{auto[1]}}</p>
-                    <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
+                    <p class="itemDesc">【{{auto[3][0]}}：{{auto[3][1]}}
+                        <span ng-if="auto[3][2]!=''&& auto[3][2]!=null"> ，{{auto[3][2]}}：{{auto[3][3]}}】</span>
+                        <span ng-if="auto[3][4]!=''&& auto[3][4]!=null"> ，{{auto[3][4]}}：{{auto[3][5]}}</span>】
+                    </p>
+                </div>
+                <div class="product-item" ng-if="item['salesClass'] == 4">
+                    <p class="itemName">{{auto[1]}}</p>
                 </div>
             </div>
             <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
@@ -190,13 +197,25 @@
                     <div class="man-text">满<span>{{auto[0]}}</span>元</div>
                     <div class="man-content">
                         <div class="product-item">
-                            <img class="pull-left" src="../components/images/index_18.png">
+                            <img class="pull-left" ng-src="{{auto[4]}}">
                             <p class="itemName">{{auto[1]}}</p>
-                            <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
+                            <p class="itemDesc">【{{auto[3][0]}}：{{auto[3][1]}}
+                                <span ng-if="auto[3][2]!=''&& auto[3][2]!=null"> ，{{auto[3][2]}}：{{auto[3][3]}}】</span>
+                                <span ng-if="auto[3][4]!=''&& auto[3][4]!=null"> ，{{auto[3][4]}}：{{auto[3][5]}}</span>】
+                            </p>
                         </div>
                     </div>
                     <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
-                </div><!-- promotion footer -->
+                </div>
+                <div class="promotion-footer" ng-repeat="auto in item['salesInfo']" ng-if="item['salesClass'] == 4">
+                    <div class="man-text">满<span>{{auto[0]}}</span>元</div>
+                    <div class="man-content">
+                        <div class="product-item">
+                            <p class="itemName">{{auto[1]}}</p>
+                        </div>
+                    </div>
+                    <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
+                </div><!-- promotion footer --><!-- promotion footer -->
         </div>
     </div>
     <!-- END 满减折扣 -->
@@ -223,8 +242,12 @@
             </div> <!-- END head -->
 
             <div class="promotion-content">
-                <button class="addItem btn"  data-toggle="modal" id="#tagSwitchModal" show-modal ng-click="getCurrentTag(item)">添加标签</button>
-                <span class="buy-text">买</span>
+                <button class="addItem btn"  data-toggle="modal" id="#tagSwitchModal"
+                        show-modal ng-click="getCurrentTag(item)" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length > 0">修改标签</button>
+                <button class="addItem btn"  data-toggle="modal" id="#tagSwitchModal"
+                        show-modal ng-click="getCurrentTag(item)" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length == 0">添加标签</button>
+
+                <!--<span class="buy-text">买</span>-->
                 <div class="buy-content">
                     <div class="buy-list">
                         <div class="form-group form-inline" ng-repeat="tag in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
@@ -238,11 +261,19 @@
             <div class="promotion-footer">
                 <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
                     <div class="man-text">满<span>{{auto[0]}}</span>个</div>
-                    <div class="man-content">
+                        <div class="man-content"ng-if="salesClass == 3">
                         <div class="product-item">
-                            <img class="pull-left" src="../components/images/index_18.png">
+                            <img class="pull-left" ng-src="auto[4]">
                             <p class="itemName">{{auto[1]}}</p>
-                            <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
+                            <p class="itemDesc">【{{auto[3][0]}}：{{auto[3][1]}}
+                                <span ng-if="auto[3][2]!=''&& auto[3][2]!=null"> ，{{auto[3][2]}}：{{auto[3][3]}}】</span>
+                                <span ng-if="auto[3][4]!=''&& auto[3][4]!=null"> ，{{auto[3][4]}}：{{auto[3][5]}}</span>】
+                            </p>
+                        </div>
+                    </div>
+                        <div class="man-content"ng-if="salesClass == 4">
+                        <div class="product-item">
+                            <p class="itemName">{{auto[1]}}</p>
                         </div>
                     </div>
                     <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
@@ -342,25 +373,6 @@
 
                         <div class="col-md-8">
                             <input size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime">
-                            <!--<div >-->
-                            <!--<form class="form-horizontal">-->
-                            <!--<fieldset>-->
-                            <!--<div class="control-group">-->
-                            <!--<div class="controls">-->
-                            <!--<div class="input-prepend input-group">-->
-                            <!--<span class="add-on input-group-addon">-->
-                            <!--<i class="glyphicon glyphicon-calendar fa fa-calendar"></i>-->
-                            <!--</span>-->
-                            <!--<input type="text" readonly style="width: 330px" name="birthday"-->
-                            <!--id="birthday" class="form-control" value="03/18/2013"-->
-                            <!--ng-init="detaileInfo['SALES_PLAN.BEGIN_DATETIME']"-->
-                            <!--ng-model="detaileInfo['SALES_PLAN.BEGIN_DATETIME']"/>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--</fieldset>-->
-                            <!--</form>-->
-                            <!--</div>-->
                         </div>
                     </div>
                     <div class="form-group row">
