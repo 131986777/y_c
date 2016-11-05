@@ -24,7 +24,7 @@ AndSellMainModule.controller('bannerPosController', function ($scope, $statePara
             } else if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert('新增成功');
                 $scope.add = {};
-                $("#addRule").modal('hide');
+                $("#addPos").modal('hide');
                 $scope.$broadcast('pageBar.reload');
             }
         });
