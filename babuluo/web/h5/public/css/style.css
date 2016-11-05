@@ -977,6 +977,9 @@ p {
 .check-out-page .product-money,
 .check-out-page .product-num {
   color: #444; }
+.check-out-page .product-money {
+  font-size:10px;
+}
 .check-out-page .product-name {
   overflow: hidden;
   margin: 0;
@@ -1163,6 +1166,10 @@ p {
 .product-detail-page .weui_tab_bd_item{
   color: rgb(107,107,107);
 }
+.product-detail-page .weui_tab_bd_item img{
+  width: 100%;
+  height: auto;
+}
 .product-detail-page .review-nav{
   margin-bottom: 10px;
   background-color: #fff;
@@ -1332,7 +1339,10 @@ p {
 }
 .home-index .col{
   border-left: 1px solid rgb(225,225,225);
-
+}
+.home-index .col img{
+  width: 50px;
+  height:50px;
 }
 .home-index .col p{
   margin-top: 10px;
@@ -1358,20 +1368,23 @@ p {
   bottom: 98px;
 }
 .product-wrap .headTitle{
-  font-size: 28px;
+  font-size: 20px;
   background-color: rgb(51,51,51);
   color: #fff;
   text-align: center;
-  height: 70px;
-  line-height: 70px;
+  height: 40px;
+  line-height: 40px;
 }
 .product-special .special-head,
 .product-list .item .item-title{
   font-size: 22px;
-  line-height: 65px;
+  line-height: 60px;
   margin-bottom: 0;
   text-align: center;
-  height: 65px;
+  height: 60px;
+}
+.product-special .special-head .weui_cell{
+  padding-top:0;
 }
 .special-content ul{
   margin-bottom: 0;
