@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-sm-12 text-right">
                     <a ui-sref="roleAdd" type="button" class="btn btn-default">
-                        新增角色
+                        <i class="fa fa-plus"></i>新增角色
                     </a>
                 </div>
             </div>

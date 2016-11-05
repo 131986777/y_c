@@ -1,10 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="page-content">
-
-    <%--在这里写样式--%>
-        <div class="page-operation-wrap" style="margin-top:0;">
-            <div class="table-operbar row">
-                <div class="form-inline col-sm-12">
+    <div class="table-content">
+        <%--在这里写样式--%>
+            <div class="table-toolbar">
+                <div class="form-inline">
                     <label class="control-label">筛选：</label>
                     <select ng-model="filter['SHOP.DISTRICT_ID']"
                             ng-init="filter['SHOP.DISTRICT_ID']='null'"
@@ -24,7 +23,6 @@
                 </div>
             </div>
 
-        </div>
 
         <table class="table table-bordered table-hover table-striped">
             <thead>
@@ -33,9 +31,9 @@
                 <th>区域</th>
                 <th>地理位置</th>
                 <th>电话</th>
-                <th>门店管理员</th>
-                <th>创建时间</th>
-                <th>操作</th>
+                <th class="text-center">门店管理员</th>
+                <th class="text-center">创建时间</th>
+                <th class="text-center">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -46,10 +44,10 @@
                 </td>
                 <td ng-bind="sl['SHOP.SHOP_DISTRICT_NAME']"></td>
                 <td><a class="table-link" ng-click="showMap(sl)">查看地图</a></td>
-                <td ng-bind="sl['SHOP.TELEPHONE']"></td>
-                <td>暂无</td>
-                <td ng-bind="sl['SHOP.ADD_DATETIME'] | FormatStrDate"></td>
-                <td>
+                <td ng-bind="sl['SHOP.TELEPHONE']" ></td>
+                <td class="text-center">暂无</td>
+                <td ng-bind="sl['SHOP.ADD_DATETIME'] | FormatStrDate" class="text-center"></td>
+                <td class="text-center">
                     <a class="table-link" data-toggle="modal" data-target="#edit" ng-click="getShopListById(sl)">
                         修改
                     </a>
@@ -68,321 +66,322 @@
              url="/shop/shop/queryAll"
              callback="bindData(response)">
         </div>
-        <!-- BEGIN add modal -->
-        <div class="modal fade" id="add" role="dialog" aria-labelledby="add">
-            <div class="modal-dialog" aria-hidden="true">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button class="close" type="button" data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h3 class="modal-title">
-                            新增门店
-                        </h3>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" name="editForm"
-                              ng-submit="addShop()" novalidate>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    <span class="required" style="color: red"> * </span>门店名称：
-                                </label>
-                                <div class="col-sm-7">
-                                    <input class="form-control" type="text"
-                                           name="name" ng-model="shopAdd['SHOP.SHOP_NAME']"
-                                           required>
-                                </div>
+    </div>
+    <!-- BEGIN add modal -->
+    <div class="modal fade" id="add" role="dialog" aria-labelledby="add">
+        <div class="modal-dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title">
+                        新增门店
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" name="editForm"
+                          ng-submit="addShop()" novalidate>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="required" style="color: red"> * </span>门店名称：
+                            </label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text"
+                                       name="name" ng-model="shopAdd['SHOP.SHOP_NAME']"
+                                       required>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    <span class="required" style="color: red"> * </span>电话：
-                                </label>
-                                <div class="col-sm-7">
-                                    <input class="form-control" type="text"
-                                           name="telephone" ng-model="shopAdd['SHOP.TELEPHONE']"
-                                           required>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="required" style="color: red"> * </span>电话：
+                            </label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text"
+                                       name="telephone" ng-model="shopAdd['SHOP.TELEPHONE']"
+                                       required>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    <span class="required" style="color: red"> * </span>区域：
-                                </label>
-                                <div class="col-sm-7">
-                                    <select ng-model="shopAdd['SHOP.DISTRICT_ID']"
-                                            ng-init="shopAdd['SHOP.DISTRICT_ID']='-1'"
-                                            class="nya-bs-select form-control"
-                                            ng-change="addDistrictModal(shopAdd['SHOP.DISTRICT_ID'])">
-                                        <option class="nya-bs-option" value="-1">
-                                            选择门店区域
-                                        </option>
-                                        <option class="nya-bs-option" ng-repeat="value in districtList"
-                                                ng-bind="value['DISTRICT.DISTRICT_NAME']"
-                                                value="{{value['DISTRICT.DISTRICT_ID']}}">
-                                        </option>
-                                        <option class="nya-bs-option" value="-100">
-                                            ----添加门店区域----
-                                        </option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="required" style="color: red"> * </span>区域：
+                            </label>
+                            <div class="col-sm-7">
+                                <select ng-model="shopAdd['SHOP.DISTRICT_ID']"
+                                        ng-init="shopAdd['SHOP.DISTRICT_ID']='-1'"
+                                        class="nya-bs-select form-control"
+                                        ng-change="addDistrictModal(shopAdd['SHOP.DISTRICT_ID'])">
+                                    <option class="nya-bs-option" value="-1">
+                                        选择门店区域
+                                    </option>
+                                    <option class="nya-bs-option" ng-repeat="value in districtList"
+                                            ng-bind="value['DISTRICT.DISTRICT_NAME']"
+                                            value="{{value['DISTRICT.DISTRICT_ID']}}">
+                                    </option>
+                                    <option class="nya-bs-option" value="-100">
+                                        ----添加门店区域----
+                                    </option>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    地理位置：
-                                </label>
-                                <a class="col-sm-2 control-label table-link" ng-click="choosePoint()">
-                                    地图选点
-                                </a>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                地理位置：
+                            </label>
+                            <a class="col-sm-2 control-label table-link" ng-click="choosePoint()">
+                                地图选点
+                            </a>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                地址：
+                            </label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text"
+                                       name="addr" ng-model="shopAdd['SHOP.ADDR']"
+                                       required>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    地址：
-                                </label>
-                                <div class="col-sm-7">
-                                    <input class="form-control" type="text"
-                                           name="addr" ng-model="shopAdd['SHOP.ADDR']"
-                                           required>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                开门时间：
+                            </label>
+                            <div class="col-sm-2">
+                                <select ng-model="open_time_hour"
+                                        ng-init="open_time_hour='0'"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option"
+                                            ng-repeat="hour in hourList"
+                                            ng-bind="hour"
+                                            value="{{hour}}">
+                                    </option>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    开门时间：
-                                </label>
-                                <div class="col-sm-2">
-                                    <select ng-model="open_time_hour"
-                                            ng-init="open_time_hour='0'"
-                                            class="nya-bs-select form-control">
-                                        <option class="nya-bs-option"
-                                                ng-repeat="hour in hourList"
-                                                ng-bind="hour"
-                                                value="{{hour}}">
-                                        </option>
-                                    </select>
-                                </div>
-                                <label class="col-sm-1 control-label">时</label>
-                                <div class="col-sm-2">
-                                    <select ng-model="open_time_min"
-                                            ng-init="open_time_min='00'"
-                                            class="nya-bs-select form-control">
-                                        <option class="nya-bs-option"
-                                                ng-repeat="min in minList"
-                                                ng-bind="min"
-                                                value="{{min}}">
-                                        </option>
-                                    </select>
-                                </div>
-                                <label class="col-sm-1 control-label">分</label>
+                            <label class="col-sm-1 control-label">时</label>
+                            <div class="col-sm-2">
+                                <select ng-model="open_time_min"
+                                        ng-init="open_time_min='00'"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option"
+                                            ng-repeat="min in minList"
+                                            ng-bind="min"
+                                            value="{{min}}">
+                                    </option>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    关门时间：
-                                </label>
-                                <div class="col-sm-2">
-                                    <select ng-model="close_time_hour"
-                                            ng-init="close_time_hour='0'"
-                                            class="nya-bs-select form-control">
-                                        <option class="nya-bs-option"
-                                                ng-repeat="hour in hourList"
-                                                ng-bind="hour"
-                                                value="{{hour}}">
-                                        </option>
-                                    </select>
-                                </div>
-                                <label class="col-sm-1 control-label">时</label>
-                                <div class="col-sm-2">
-                                    <select ng-model="close_time_min"
-                                            ng-init="close_time_min='00'"
-                                            class="nya-bs-select form-control">
-                                        <option class="nya-bs-option"
-                                                ng-repeat="min in minList"
-                                                ng-bind="min"
-                                                value="{{min}}">
-                                        </option>
-                                    </select>
-                                </div>
-                                <label class="col-sm-1 control-label">分</label>
+                            <label class="col-sm-1 control-label">分</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                关门时间：
+                            </label>
+                            <div class="col-sm-2">
+                                <select ng-model="close_time_hour"
+                                        ng-init="close_time_hour='0'"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option"
+                                            ng-repeat="hour in hourList"
+                                            ng-bind="hour"
+                                            value="{{hour}}">
+                                    </option>
+                                </select>
                             </div>
+                            <label class="col-sm-1 control-label">时</label>
+                            <div class="col-sm-2">
+                                <select ng-model="close_time_min"
+                                        ng-init="close_time_min='00'"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option"
+                                            ng-repeat="min in minList"
+                                            ng-bind="min"
+                                            value="{{min}}">
+                                    </option>
+                                </select>
+                            </div>
+                            <label class="col-sm-1 control-label">分</label>
+                        </div>
 
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit"
-                                        ng-click="addShopList()">
-                                    保存
-                                </button>
-                                <button class="btn btn-default"
-                                        data-dismiss="modal" ng-click="clearForm()">
-                                    关闭
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit"
+                                    ng-click="addShopList()">
+                                保存
+                            </button>
+                            <button class="btn btn-default"
+                                    data-dismiss="modal" ng-click="clearForm()">
+                                关闭
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- END add modal -->
-        <!-- BEGIN edit modal -->
-        <div class="modal fade" id="edit" role="dialog" aria-labelledby="edit">
-            <div class="modal-dialog" aria-hidden="true">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button class="close" type="button" data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h3 class="modal-title">
-                            修改门店信息
-                        </h3>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal" name="editForm"
-                              ng-submit="commitEdit()" novalidate>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    <span class="required" style="color: red"> * </span>门店名称：
-                                </label>
-                                <div class="col-sm-7">
-                                    <input class="form-control" type="text"
-                                           name="name" ng-model="shopEdited['SHOP.SHOP_NAME']" required>
-                                </div>
+    </div>
+    <!-- END add modal -->
+    <!-- BEGIN edit modal -->
+    <div class="modal fade" id="edit" role="dialog" aria-labelledby="edit">
+        <div class="modal-dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title">
+                        修改门店信息
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" name="editForm"
+                          ng-submit="commitEdit()" novalidate>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="required" style="color: red"> * </span>门店名称：
+                            </label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text"
+                                       name="name" ng-model="shopEdited['SHOP.SHOP_NAME']" required>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    <span class="required" style="color: red"> * </span>电话：
-                                </label>
-                                <div class="col-sm-7">
-                                    <input class="form-control" type="text"
-                                           name="telephone" ng-model="shopEdited['SHOP.TELEPHONE']">
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="required" style="color: red"> * </span>电话：
+                            </label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text"
+                                       name="telephone" ng-model="shopEdited['SHOP.TELEPHONE']">
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    <span class="required" style="color: red"> * </span>区域：
-                                </label>
-                                <div class="col-sm-7">
-                                    <select ng-model="shopEdited['SHOP.DISTRICT_ID']"
-                                            ng-init="shopEdited['SHOP.DISTRICT_ID']='-1'"
-                                            class="nya-bs-select form-control"
-                                            ng-change="addDistrictModal(shopEdited['SHOP.DISTRICT_ID'])">
-                                        <option class="nya-bs-option"
-                                                ng-repeat="value in districtList"
-                                                ng-bind="value['DISTRICT.DISTRICT_NAME']"
-                                                value="{{value['DISTRICT.DISTRICT_ID']}}">
-                                        </option>
-                                        <option class="nya-bs-option" value="-100">
-                                            ----添加门店区域----
-                                        </option>
-                                    </select>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                <span class="required" style="color: red"> * </span>区域：
+                            </label>
+                            <div class="col-sm-7">
+                                <select ng-model="shopEdited['SHOP.DISTRICT_ID']"
+                                        ng-init="shopEdited['SHOP.DISTRICT_ID']='-1'"
+                                        class="nya-bs-select form-control"
+                                        ng-change="addDistrictModal(shopEdited['SHOP.DISTRICT_ID'])">
+                                    <option class="nya-bs-option"
+                                            ng-repeat="value in districtList"
+                                            ng-bind="value['DISTRICT.DISTRICT_NAME']"
+                                            value="{{value['DISTRICT.DISTRICT_ID']}}">
+                                    </option>
+                                    <option class="nya-bs-option" value="-100">
+                                        ----添加门店区域----
+                                    </option>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    地理位置：
-                                </label>
-                                <a class="col-sm-2 control-label table-link" ng-click="choosePoint()">
-                                    地图选点
-                                </a>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                地理位置：
+                            </label>
+                            <a class="col-sm-2 control-label table-link" ng-click="choosePoint()">
+                                地图选点
+                            </a>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                地址：
+                            </label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text"
+                                       name="addr" ng-model="shopEdited['SHOP.ADDR']"
+                                       required>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    地址：
-                                </label>
-                                <div class="col-sm-7">
-                                    <input class="form-control" type="text"
-                                           name="addr" ng-model="shopEdited['SHOP.ADDR']"
-                                           required>
-                                </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                开门时间：
+                            </label>
+                            <div class="col-sm-2">
+                                <select ng-model="edit_open_time_hour"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option"
+                                            ng-repeat="hour in hourList"
+                                            ng-bind="hour"
+                                            value="{{hour}}">
+                                    </option>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    开门时间：
-                                </label>
-                                <div class="col-sm-2">
-                                    <select ng-model="edit_open_time_hour"
-                                            class="nya-bs-select form-control">
-                                        <option class="nya-bs-option"
-                                                ng-repeat="hour in hourList"
-                                                ng-bind="hour"
-                                                value="{{hour}}">
-                                        </option>
-                                    </select>
-                                </div>
-                                <label class="col-sm-1 control-label">时</label>
-                                <div class="col-sm-2">
-                                    <select ng-model="edit_open_time_min"
-                                            class="nya-bs-select form-control">
-                                        <option class="nya-bs-option"
-                                                ng-repeat="min in minList"
-                                                ng-bind="min"
-                                                value="{{min}}">
-                                        </option>
-                                    </select>
-                                </div>
-                                <label class="col-sm-1 control-label">分</label>
+                            <label class="col-sm-1 control-label">时</label>
+                            <div class="col-sm-2">
+                                <select ng-model="edit_open_time_min"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option"
+                                            ng-repeat="min in minList"
+                                            ng-bind="min"
+                                            value="{{min}}">
+                                    </option>
+                                </select>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">
-                                    关门时间：
-                                </label>
-                                <div class="col-sm-2">
-                                    <select ng-model="edit_close_time_hour"
-                                            class="nya-bs-select form-control">
-                                        <option class="nya-bs-option"
-                                                ng-repeat="hour in hourList"
-                                                ng-bind="hour"
-                                                value="{{hour}}">
-                                        </option>
-                                    </select>
-                                </div>
-                                <label class="col-sm-1 control-label">时</label>
-                                <div class="col-sm-2">
-                                    <select ng-model="edit_close_time_min"
-                                            class="nya-bs-select form-control">
-                                        <option class="nya-bs-option"
-                                                ng-repeat="min in minList"
-                                                ng-bind="min"
-                                                value="{{min}}">
-                                        </option>
-                                    </select>
-                                </div>
-                                <label class="col-sm-1 control-label">分</label>
+                            <label class="col-sm-1 control-label">分</label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                关门时间：
+                            </label>
+                            <div class="col-sm-2">
+                                <select ng-model="edit_close_time_hour"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option"
+                                            ng-repeat="hour in hourList"
+                                            ng-bind="hour"
+                                            value="{{hour}}">
+                                    </option>
+                                </select>
                             </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">
-                                    保存
-                                </button>
-                                <button class="btn btn-default"
-                                        data-dismiss="modal">
-                                    关闭
-                                </button>
+                            <label class="col-sm-1 control-label">时</label>
+                            <div class="col-sm-2">
+                                <select ng-model="edit_close_time_min"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option"
+                                            ng-repeat="min in minList"
+                                            ng-bind="min"
+                                            value="{{min}}">
+                                    </option>
+                                </select>
                             </div>
-                        </form>
-                    </div>
+                            <label class="col-sm-1 control-label">分</label>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">
+                                保存
+                            </button>
+                            <button class="btn btn-default"
+                                    data-dismiss="modal">
+                                关闭
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- END edit modal -->
-        <!-- BEGIN showMap modal -->
-        <div class="modal fade" id="showMap" role="dialog">
-            <div class="modal-dialog" aria-hidden="true">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button class="close" type="button" data-dismiss="modal"
-                                aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h3 class="modal-title">
-                            门店位置地图
-                        </h3>
-                    </div>
-                    <div id="allmap"></div>
-                    <div class="modal-footer">
-                        <button class="btn btn-default"
-                                data-dismiss="modal">
-                            关闭
-                        </button>
-                    </div>
+    </div>
+    <!-- END edit modal -->
+    <!-- BEGIN showMap modal -->
+    <div class="modal fade" id="showMap" role="dialog">
+        <div class="modal-dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title">
+                        门店位置地图
+                    </h3>
+                </div>
+                <div id="allmap"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-default"
+                            data-dismiss="modal">
+                        关闭
+                    </button>
                 </div>
             </div>
         </div>
+    </div>
     <!-- END showMap modal -->
     <!-- BEGIN choosePoint modal -->
     <div class="modal fade" id="choosePoint" role="dialog">

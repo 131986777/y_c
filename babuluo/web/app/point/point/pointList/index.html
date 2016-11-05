@@ -1,86 +1,87 @@
 <div class="page-content">
-
-    <div class="table-operbar">
-        <div class="table-toolbar">
-            <div class="row">
-                <div class="form-inline form-group">
-                    <div class="form-group col-md-5">
-                        <input type="text" class="form-control" placeholder="输入用户名" ng-model="loginId">
-                        <button type="submit" class="btn btn-default" ng-click="queryPointByLoginId(loginId)">搜索
-                        </button>
-                    </div>
-                    <div class="form-group col-md-5">
-                        <label>筛选：</label>
-                        <select ng-model="filter['MEMBER_POINT_LIST.CHANGE_TYPE']"
-                                ng-init="filter['MEMBER_POINT_LIST.CHANGE_TYPE']='null'"
-                                class="nya-bs-select form-control">
-                            <option class="nya-bs-option" value="null">
-                                来源
-                            </option>
-                            <option class="nya-bs-option" value="decrease">
-                                支出
-                            </option>
-                            <option class="nya-bs-option" value="increase">
-                                收入
-                            </option>
-                        </select>
-                    </div>
-                    <div class="col-md-2">
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#point"
-                            ng-click=empty()>调整积分
-                    </button>
+    <div class="table-content">
+        <div class="table-operbar">
+            <div class="table-toolbar">
+                <div class="row">
+                    <div class="form-inline form-group">
+                        <div class="form-group col-md-5">
+                            <input type="text" class="form-control" placeholder="输入用户名" ng-model="loginId">
+                            <button type="submit" class="btn btn-default" ng-click="queryPointByLoginId(loginId)">搜索
+                            </button>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label>筛选：</label>
+                            <select ng-model="filter['MEMBER_POINT_LIST.CHANGE_TYPE']"
+                                    ng-init="filter['MEMBER_POINT_LIST.CHANGE_TYPE']='null'"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value="null">
+                                    来源
+                                </option>
+                                <option class="nya-bs-option" value="decrease">
+                                    支出
+                                </option>
+                                <option class="nya-bs-option" value="increase">
+                                    收入
+                                </option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-default pull-right" data-toggle="modal"
+                                    data-target="#point"
+                                    ng-click=empty()>调整积分
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div>
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>会员编号</th>
+                    <th>用户名</th>
+                    <th>时间</th>
+                    <th>事件</th>
+                    <th>说明</th>
+                    <th class="text-center">积分</th>
+                    <th class="text-center">剩余积分</th>
+                </tr>
+                </thead>
+
+                <tbody ng-cloak>
+                <tr ng-repeat='pointInfo in pointList'>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.USER_ID' ]"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.LOGIN_ID' ]"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.ADD_DATETIME'] | FormatAllDate"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT' ]"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT_INTRO' ]"></td>
+                    <td class="text-center">
+                        <span style="color:black" ng-show="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']>0">{{pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']}}</span>
+                        <span style="color:red" ng-show="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']<=0">{{pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']}}</span>
+                    </td>
+                    <td class="text-center">
+                        <span style="color:black" ng-show="pointInfo['MEMBER_POINT_LIST.POINT']>0">{{pointInfo['MEMBER_POINT_LIST.POINT']}}</span>
+                        <span style="color:red" ng-show="pointInfo['MEMBER_POINT_LIST.POINT']<=0">{{pointInfo['MEMBER_POINT_LIST.POINT']}}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div page-bar
+             filter-obj="filter"
+             url="/member/point/queryAll"
+             callback="bindData(response)">
+        </div>
     </div>
-
-    <div>
-        <table class="table table-bordered table-hover table-striped">
-            <thead>
-            <tr>
-                <th>会员编号</th>
-                <th>用户名</th>
-                <th>时间</th>
-                <th>事件</th>
-                <th>说明</th>
-                <th class="text-center">积分</th>
-                <th class="text-center">剩余积分</th>
-            </tr>
-            </thead>
-
-            <tbody ng-cloak>
-            <tr ng-repeat='pointInfo in pointList'>
-                <td ng-bind="pointInfo['MEMBER_POINT_LIST.USER_ID' ]"></td>
-                <td ng-bind="pointInfo['MEMBER_POINT_LIST.LOGIN_ID' ]"></td>
-                <td ng-bind="pointInfo['MEMBER_POINT_LIST.ADD_DATETIME'] | FormatAllDate"></td>
-                <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT' ]"></td>
-                <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT_INTRO' ]"></td>
-                <td class="text-center">
-                    <span style="color:black" ng-show="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']>0">{{pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']}}</span>
-                    <span style="color:red" ng-show="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']<=0">{{pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']}}</span>
-                </td>
-                <td class="text-center">
-                    <span style="color:black" ng-show="pointInfo['MEMBER_POINT_LIST.POINT']>0">{{pointInfo['MEMBER_POINT_LIST.POINT']}}</span>
-                    <span style="color:red" ng-show="pointInfo['MEMBER_POINT_LIST.POINT']<=0">{{pointInfo['MEMBER_POINT_LIST.POINT']}}</span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div page-bar
-         filter-obj="filter"
-         url="/member/point/queryAll"
-         callback="bindData(response)">
-    </div>
-
     <!--BEGIN 修正-->
     <div class="modal fade" id="point">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button"  class="close" data-dismiss="modal"
+                    <button type="button" class="close" data-dismiss="modal"
                             aria-hidden="true"></button>
                     <h4 class="modal-title">调整会员积分</h4>
                 </div>
