@@ -140,7 +140,6 @@
                             </label>
                         </div>
                     </td>
-
                     <td>
                         <a ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
                            href=""
