@@ -15,7 +15,7 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
         });
         $scope.ruleList = response.extraData.ruleList;
         $scope.ruleMap = response.extraData.ruleMap;
-
+        //$scope.from='2016-11-05';
 
     };
 
@@ -93,6 +93,7 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
     $scope.Sunday = "";*/
 
     $scope.addCoupon = function () {
+
         console.log($scope.from);  //add['COUPON.BEGIN_DATETIME']
 
        $scope.add['COUPON.BEGIN_DATETIME']=$scope.from;
@@ -124,7 +125,7 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
             }
         });
 };
-
+$scope.mod={};
     $scope.modCouponClick = function (item) {
 
         $scope.mod = clone(item);
@@ -140,10 +141,16 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
         $scope.mSaturday=time[5];
         $scope.mSunday=time[6];
 
+        $scope.mBeginTime=item['COUPON.BEGIN_DATETIME'];
+        $scope.mEndTime=item['COUPON.END_DATETIME'];
+
     };
 
     $scope.modCoupon = function () {
-
+        console.log('开始时间');
+        $scope.mod['COUPON.BEGIN_DATETIME']=$scope.mBeginTime;
+        $scope.mod['COUPON.END_DATETIME']= $scope.mEndTime;
+        console.log($scope.mod['COUPON.BEGIN_DATETIME']);
         $scope.mod['COUPON.USE_TIME_CYCLE']=$scope.mMonday+','+$scope.mTuesday+','+$scope.mWednesday+','+$scope.mThursday+','+$scope.mFriday
             +','+$scope.mSaturday+','+$scope.mSunday;
         $scope.mod['COUPON.TARGET_OBJ_ID'] = targetObjArray;   //数据库中会以逗号隔开
@@ -231,6 +238,44 @@ AndSellMainModule.controller('couponListController', function ($scope, $statePar
 
 
     $('#end_hour').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        format: 'yyyy/mm/dd hh:ii',
+        todayBtn: 'linked',
+        /* }).on('click', function (ev) {
+         $("#end_hour").datetimepicker("setStartDate", $("#start_hour").val());
+         });*/
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+    $('#mstart_hour').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        startView: 2,
+        format: 'yyyy/mm/dd hh:ii',
+        todayBtn: 'linked'
+        /* }).on('click', function (ev) {
+         $("#start_hour").datetimepicker("setEndDate", $("#end_hour").val());
+         });*/
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+
+    $('#mend_hour').datetimepicker({
         language: 'zh-CN',
         autoclose: true,
         todayHighlight: true,
