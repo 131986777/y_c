@@ -1,45 +1,40 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="page-content" >
+<div class="page-content">
+    <div class="table-content">
+        <div class="table-operbar">
+            <div class="table-toolbar text-right">
+                <button id="sample_editable_1_new" class="btn btn-default">
+                    <i class="fa fa-plus"></i> 新增商品
+                </button>
+            </div>
 
-    <div class="table-operbar row">
 
-        <div class="table-toolbar">
-            <div class="row">
-                <div class="col-md-12 text-right">
-                    <button show-modal id="#addClass" class="btn btn-default sbold green"> <i class="fa fa-plus"></i> 新增分类 </button>
-                    <%--<a href="productClassOrder.jsp" class="btn green btn-outline">--%>
-                        <%--排序 </a>--%>
+            <div class="multi-menu multi-menu-bordered" ng-cloak>
+
+                <div class="table-scrollable">
+                    <table class="table table-striped table-hover">
+
+                        <tbody ng-cloak>
+
+                        <tr ng-repeat=" value in productClassList">
+                            <td class="text-left">
+                                <i class="fa fa-folder-o"></i>
+                                {{value['SHOP_PRODUCT_CLASS.CLASS_NAME']}}
+                            </td>
+
+                            <td class="text-right">
+                                <a show-modal id="#modifyClass"
+                                   ng-click="modifyClssNameClick(value)">修改</a>
+                                <a ng-click="delProductClass(value['SHOP_PRODUCT_CLASS.CLASS_ID'])">删除</a>
+                            </td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
-
-        <div class="col-md-12 multi-menu multi-menu-bordered" ng-cloak>
-
-            <div class="table-scrollable">
-                <table class="table table-striped table-hover">
-
-                    <tbody ng-cloak>
-
-                    <tr ng-repeat=" value in productClassList">
-                        <td class="col-md-10" style="text-align: left">
-                            <i class="fa fa-folder-o"></i>
-                            {{value['SHOP_PRODUCT_CLASS.CLASS_NAME']}}
-                        </td>
-
-                        <td class="col-md-2 text-right">
-                            <a show-modal id="#modifyClass"
-                               ng-click="modifyClssNameClick(value)">修改</a>
-                            <a ng-click="delProductClass(value['SHOP_PRODUCT_CLASS.CLASS_ID'])">删除</a>
-                        </td>
-
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
     </div>
 
 

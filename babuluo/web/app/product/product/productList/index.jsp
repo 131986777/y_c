@@ -1,12 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="page-content" ng-init="initData()">
 
-    <div class="col-md-12" style="margin-top: 20px">
-        <div class="table-operbar row" ng-cloak>
-            <div class="table-toolbar row">
+    <div class="table-content" >
+        <div class="table-operbar" ng-cloak>
+            <div class="table-toolbar">
                 <%--筛选功能--%>
 
-                <div class="form-inline form-group">
+                <div class="form-inline row">
                     <div class="col-md-3">
                     <div class="form-group">
                         <%--<label for="name" class="control-label">商品名称:</label>--%>

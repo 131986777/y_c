@@ -1,68 +1,72 @@
 <div class="page-content">
-
-    <div class="table-operbar">
-        <div class="table-toolbar">
-            <div class="row col-sm-12">
-                <div class="form-inline form-group">
-                    <div class="form-group">
-                        <label for="name" class="control-label">客户:</label>
-                        <input type="text" class="form-control" id="name" placeholder="登陆ID/手机号"
-                               ng-model="query['MEMBER_CARD.MEMBER']">
+    <div class="table-content">
+        <div class="table-operbar">
+            <div class="table-toolbar">
+                <div class="form-inline row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="name" class="control-label">客户:</label>
+                            <input type="text" class="form-control" id="name" placeholder="登陆ID/手机号"
+                                   ng-model="query['MEMBER_CARD.MEMBER']">
+                        </div>
+                        <div class="form-group">
+                            <label for="cardNum" class="control-label">卡号:</label>
+                            <input type="text" class="form-control" id="cardNum"
+                                   ng-model="query['MEMBER_CARD.CARD_NO']">
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default pull-right" ng-click="query()">查询
+                            </button>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="cardNum" class="control-label">卡号:</label>
-                        <input type="text" class="form-control" id="cardNum" ng-model="query['MEMBER_CARD.CARD_NO']">
+                    <div class="col-md-5">
+                        <label class="control-label">筛选：</label>
+                        <select ng-model="filter['MEMBER_CARD.SOURCE_ID']"
+                                ng-init="filter['MEMBER_CARD.SOURCE_ID']='null'"
+                                ng-change="queryTypeBySourceId(filter['MEMBER_CARD.SOURCE_ID'])"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="null">
+                                所有渠道
+                            </option>
+                            <option class="nya-bs-option"
+                                    ng-repeat="value in sourceList"
+                                    ng-bind="value['MEMBER_CARD_SOURCE.NAME']"
+                                    value="{{value['MEMBER_CARD_SOURCE.ID']}}">
+                            </option>
+                        </select>
+                        <select ng-model="filter['MEMBER_CARD.TYPE_ID']"
+                                ng-init="filter['MEMBER_CARD.TYPE_ID']='null'"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="null">
+                                所有类型
+                            </option>
+                            <option class="nya-bs-option"
+                                    ng-repeat="value in typeList"
+                                    ng-bind="value['MEMBER_CARD_TYPE.NAME']"
+                                    value="{{value['MEMBER_CARD_TYPE.ID']}}">
+                            </option>
+                        </select>
+                        <label class="control-label">排序：</label>
+                        <select ng-model="filter['MEMBER_CARD.ADD_DATETIME']"
+                                ng-init="filter['MEMBER_CARD.ADD_DATETIME']='ADD_DATETIME DESC'"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="ADD_DATETIME DESC">开卡时间↓</option>
+                            <option class="nya-bs-option" value="ADD_DATETIME ASC">开卡时间↑</option>
+                        </select>
                     </div>
-                    <div class="form-group">
-                        <button type="button" class="btn btn-default pull-right" ng-click="query()">查询
+                    <div class="col-md-1 text-right">
+                        <button type="button" class="btn btn-default" data-toggle="modal"
+                                data-target="#cardList"><i class="fa fa-plus"></i>开卡
                         </button>
                     </div>
-                    <label class="control-label">筛选：</label>
-                    <select ng-model="filter['MEMBER_CARD.SOURCE_ID']"
-                            ng-init="filter['MEMBER_CARD.SOURCE_ID']='null'"
-                            ng-change="queryTypeBySourceId(filter['MEMBER_CARD.SOURCE_ID'])"
-                            class="nya-bs-select form-control">
-                        <option class="nya-bs-option" value="null">
-                            所有渠道
-                        </option>
-                        <option class="nya-bs-option"
-                                ng-repeat="value in sourceList"
-                                ng-bind="value['MEMBER_CARD_SOURCE.NAME']"
-                                value="{{value['MEMBER_CARD_SOURCE.ID']}}">
-                        </option>
-                    </select>
-                    <select ng-model="filter['MEMBER_CARD.TYPE_ID']"
-                            ng-init="filter['MEMBER_CARD.TYPE_ID']='null'"
-                            class="nya-bs-select form-control">
-                        <option class="nya-bs-option" value="null">
-                            所有类型
-                        </option>
-                        <option class="nya-bs-option"
-                                ng-repeat="value in typeList"
-                                ng-bind="value['MEMBER_CARD_TYPE.NAME']"
-                                value="{{value['MEMBER_CARD_TYPE.ID']}}">
-                        </option>
-                    </select>
-                    <label class="control-label">排序：</label>
-                    <select ng-model="filter['MEMBER_CARD.ADD_DATETIME']"
-                            ng-init="filter['MEMBER_CARD.ADD_DATETIME']='ADD_DATETIME DESC'"
-                            class="nya-bs-select form-control">
-                        <option class="nya-bs-option" value="ADD_DATETIME DESC">开卡时间↓</option>
-                        <option class="nya-bs-option" value="ADD_DATETIME ASC">开卡时间↑</option>
-                    </select>
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal"
-                            data-target="#cardList"><i class="fa fa-plus"></i>开卡
-                    </button>
                 </div>
-            </div><!-- row end -->
+            </div>
         </div>
-    </div>
 
-    <!-- cardList -->
-    <div class="row">
-        <div class="col-md-12">
+        <!-- cardList -->
+        <div class="cardList-wrap">
 
-            <div ng-repeat="cl in cardList|filter:{}" class="card center-block pull-left"
+            <div ng-repeat="cl in cardList|filter:{}" class="card pull-left"
                  ng-style="cl['MEMBER_CARD.CARD_STYLE']" style="width:446px;height:228px;">
                 <div class="row cardTitle">
                     <div class="col-md-8">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</div>
@@ -84,14 +88,14 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    <div page-bar
-         filter-obj="filter"
-         url="/member/membercard/queryAll"
-         callback="bindData(response)">
-    </div>
 
+        <div page-bar
+             filter-obj="filter"
+             url="/member/membercard/queryAll"
+             callback="bindData(response)">
+        </div>
+    </div>
 
     <!-MODAL-->
     <div class="modal fade" id="cardList">
