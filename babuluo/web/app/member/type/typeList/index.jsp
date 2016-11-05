@@ -1,14 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%--<h1>Hello Word！</h1>--%>
-<div class="table-operbar row">
-    <div class="table-toolbar">
-
-        <div class="text-right" >
+<div class="table-content">
+<div class="table-operbar">
+    <div class="table-toolbar text-right">
             <button   show-modal id="#addMemberType" class="btn btn-default sbold green" >
                 <i class="fa fa-plus"></i> 新增客户类型 </>
-        </div>
     </div>
-    <div class="col-md-12">
         <div class="table-scrollable">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
@@ -38,9 +35,8 @@
                 </tbody>
             </table>
         </div>
-    </div>
 </div>
-
+</div>
 <!--BEGIN 新增客户类型-->
 <div class="modal fade text-left" id="addMemberType" tabindex="-1" aria-hidden="true"
      style="display: none;">

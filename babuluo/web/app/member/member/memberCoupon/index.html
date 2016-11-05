@@ -1,24 +1,24 @@
 <div class="page-content couponList">
+    <div class="table-content">
     <div class="table-operbar">
         <div class="table-toolbar">
-            <div class="row">
-                <div class="form-inline form-group">
-
-                    <select ng-model="filter['MEMBER_COUPON.COUPON_ID']"
+                <div class="form-inline row">
+                    <div class="col-md-2">
+                        <select ng-model="filter['MEMBER_COUPON.COUPON_ID']"
                             ng-init="filter['MEMBER_COUPON.COUPON_ID']=''"
                             class="nya-bs-select form-control pull-left">
-                        <option class="nya-bs-option" value="">选择优惠券名称</option>
-                        <option ng-repeat="item in couponData" ng-bind="item['COUPON.NAME']"
+                            <option class="nya-bs-option" value="">选择优惠券名称</option>
+                            <option ng-repeat="item in couponData" ng-bind="item['COUPON.NAME']"
                                 value="{{item['COUPON.ID']}}"></option>
 
-                    </select>
-
-                    <button show-modal id="#addCoupon" class="btn btn-default sbold green pull-right">
+                        </select>
+                    </div>
+                    <div class="col-md-3 pull-right text-right">
+                        <button show-modal id="#addCoupon" class="btn btn-default sbold green pull-right">
                         领取优惠券
-                    </button>
-
+                        </button>
+                    </div>
                 </div>
-            </div><!-- row end -->
         </div>
     </div>
 
@@ -109,6 +109,7 @@
          filter-obj="filter"
          url="/member/coupon/queryAll"
          callback="bindData(response)">
+    </div>
     </div>
     <!--<class-switch-modal callback="classSwitch(data)"></class-switch-modal>
     <tag-switch-modal callback="tagSwitch(data)"></tag-switch-modal>

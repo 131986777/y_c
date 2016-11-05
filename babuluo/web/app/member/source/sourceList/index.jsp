@@ -1,13 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="table-operbar row">
-    <div class="table-toolbar">
-
-        <div class="text-right" >
-            <button   show-modal id="#addMember" class="btn btn-default sbold green" >
-                <i class="fa fa-plus"></i> 新增客户来源 </button>
+<div class="table-content">
+    <div class="table-operbar">
+        <div class="table-toolbar text-right">
+            <button show-modal id="#addMember" class="btn btn-default sbold green">
+                <i class="fa fa-plus"></i> 新增客户来源
+            </button>
         </div>
-    </div>
-    <div class="col-md-12">
         <div class="table-scrollable">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
@@ -23,17 +21,17 @@
                 <tbody ng-cloak>
                 <tr ng-repeat="item in MemberSourceList">
 
-                    <td ng-bind="item['MEMBER_CODE_SOURCE.CODE']" ></td>
+                    <td ng-bind="item['MEMBER_CODE_SOURCE.CODE']"></td>
                     <td ng-bind="item['MEMBER_CODE_SOURCE.NAME']"></td>
                     <td ng-bind="item['MEMBER_CODE_SOURCE.INTRO']"></td>
-                    <td class="text-center" >
-                            <div ng-show="item['MEMBER_CODE_SOURCE.IS_SYS']==-1">
-                        <a type="button" show-modal id="#modifyMember"
-                           ng-click="modifyMemberSourceClick(item)">修改</a>
-                        <a type="button" ng-click="deleteMember(item['MEMBER_CODE_SOURCE.CODE'])" >
-                            删除
-                        </a>
-                            </div>
+                    <td class="text-center">
+                        <div ng-show="item['MEMBER_CODE_SOURCE.IS_SYS']==-1">
+                            <a type="button" show-modal id="#modifyMember"
+                               ng-click="modifyMemberSourceClick(item)">修改</a>
+                            <a type="button" ng-click="deleteMember(item['MEMBER_CODE_SOURCE.CODE'])">
+                                删除
+                            </a>
+                        </div>
                     </td>
                 </tr>
                 </tbody>
@@ -83,7 +81,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                           客户来源介绍
+                            客户来源介绍
                         </label>
 
                         <div class="col-md-8">
@@ -125,7 +123,7 @@
 
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                             客户来源编码
+                            客户来源编码
                         </label>
 
                         <div class="col-md-8">

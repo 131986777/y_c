@@ -541,10 +541,7 @@
                         </label>
 
                         <div class="col-md-8 text-left">
-                            <!-- <select class="form-control"
-                                     ng-model="mod['COUPON.USE_TIME_CYCLE']"
-                                     ng-options="item.id as item.name for item in weekData">
-                             <!--</select>&ndash;&gt;   mod['COUPON.USE_TIME_CYCLE']-->
+
                             <input type="checkbox" ng-model="mMonday" ng-true-value="1"
                                    ng-checked="mMonday==1">星期一&nbsp;&nbsp;
                             <input type="checkbox" ng-model="mTuesday" ng-true-value="2"
@@ -566,23 +563,39 @@
                         <label class="col-md-3 control-label">
                             <span class="required">方案开始时间</span>
                         </label>
+                        <div
+                                class="input-group input-daterange col-md-8 "
+                                data-date="10/11/2016"
+                                language="zh-CN"
+                                data-date-format="yyyy-mm-dd">
+                            <input id="mstart_hour" type="text" class="form-control "
+                                   name="from" ng-model="mBeginTime" data-date-format="yyyy/mm/dd hh:ii">
+                        </div>
 
-                        <div class="col-md-8">
+                      <!--  <div class="col-md-8">
                             <input type="text" class="form-control"
                                    ng-init="mod['COUPON.BEGIN_DATETIME']=mod['COUPON.BEGIN_DATETIME']|FormatAllDate"
                                    ng-model="mod['COUPON.BEGIN_DATETIME']">
-                        </div>
+                        </div>-->
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
                             <span class="required">方案结束时间</span>
                         </label>
+                        <div
+                                class="input-group input-daterange col-md-8 "
+                                data-date="10/11/2016"
+                                language="zh-CN"
+                                data-date-format="yyyy-mm-dd">
+                            <input id="mend_hour" type="text" class="form-control " placeholder=""
+                                   name="to" ng-model="mEndTime" data-date-format="yyyy/mm/dd hh:ii">
+                        </div>
 
-                        <div class="col-md-8">
+                       <!-- <div class="col-md-8">
                             <input type="text" class="form-control"
                                    ng-model="mod['COUPON.END_DATETIME']"
                             >
-                        </div>
+                        </div>-->
                     </div>
                 </form>
             </div>

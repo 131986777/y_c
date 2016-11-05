@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="page-content" ng-init="initData()">
-
+<div class="table-content">
     <%--在这里写样式--%>
     <div class="table-toolbar" style="padding:14px 0;">
         <div class="row">
@@ -114,6 +114,7 @@
         </tr>
         </tbody>
     </table>
+
     <!-- BEGIN add modal -->
     <div class="modal fade" id="add" role="dialog" aria-labelledby="add">
         <div class="modal-dialog" aria-hidden="true">
@@ -227,5 +228,5 @@
          url="/member/member/queryAll"
          callback="bindData(response)">
     </div>
-
+</div>
 </div>
