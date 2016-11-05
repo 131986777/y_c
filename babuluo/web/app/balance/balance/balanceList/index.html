@@ -1,9 +1,8 @@
 <div class="page-content">
-
-    <div class="table-operbar">
-        <div class="table-toolbar">
-            <div class="row">
-                <div class="form-inline form-group">
+    <div class="table-content">
+        <div class="table-operbar">
+            <div class="table-toolbar">
+                <div class="form-inline row">
                     <div class="form-group col-md-5">
                         <input type="text" class="form-control" placeholder="输入登录ID" ng-model="loginId">
                         <button type="submit" class="btn btn-default" ng-click="queryFinanceByLoginId(loginId)">搜索
@@ -26,17 +25,16 @@
                         </select>
                     </div> <!-- select-center  -->
                     <div class="col-md-2">
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#balance"
-                            ng-click=empty()>调整资金
-                    </button>
+                        <button type="button" class="btn btn-default pull-right" data-toggle="modal"
+                                data-target="#balance"
+                                ng-click=empty()>调整资金
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="col-md-12">
         <div class="table-scrollable">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
@@ -68,13 +66,12 @@
             </table>
         </div>
 
+        <div page-bar
+             filter-obj="filter"
+             url="/member/balance/getAllBalanceList"
+             callback="bindData(response)">
+        </div>
     </div>
-    <div page-bar
-         filter-obj="filter"
-         url="/member/balance/getAllBalanceList"
-         callback="bindData(response)">
-    </div>
-
 
     <!-MODAL-->
     <div class="modal fade" id="balance">
