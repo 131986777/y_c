@@ -406,20 +406,7 @@
                                name="to" ng-model="to" >
                     </div>
                 </div>
-                <!--<div class="input-group input-daterange col-md-12 "
-                     data-date="10/11/2012"
-                     language="zh-CN"
-                     data-date-format="yyyy-mm-dd">
-                    <input id="start_hour" type="text" class="form-control " placeholder="开始时间"
-                           name="from" ng-model="from" data-date-format="yyyy/mm/dd hh:ii">
-                    <span class="input-group-addon">至 </span>
-                    <input id="end_hour" type="text" class="form-control" placeholder="截止时间"
-                           name="to" ng-model="to" data-date-format="yyyy/mm/dd hh:ii"></div>-->
-                        <!--<div class="form-group">-->
-                            <!--<div class="col-lg-9 col-lg-offset-3">-->
-                                <!--<button type="submit" class="btn btn-primary">Sign up</button>-->
-                            <!--</div>-->
-                        <!--</div>-->
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -496,10 +483,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <!--   <input type="text" class="form-control"
-                                      ng-model="mod['COUPON.NAME']"
-                                      ng-init="mod['COUPON.NAME']=''"
-                                      placeholder="">-->
+
                             <a data-toggle="modal" ng-if="mod['COUPON.TARGET_OBJ_TYPE']==1"
                                data-target="#productSwitchModal">请选择商品</a>
                             <a data-toggle="modal" ng-if="mod['COUPON.TARGET_OBJ_TYPE']==2"
@@ -566,11 +550,7 @@
                                    name="from" ng-model="mBeginTime" >
                         </div>
 
-                      <!--  <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-init="mod['COUPON.BEGIN_DATETIME']=mod['COUPON.BEGIN_DATETIME']|FormatAllDate"
-                                   ng-model="mod['COUPON.BEGIN_DATETIME']">
-                        </div>-->
+
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
@@ -583,11 +563,7 @@
                                    name="to" ng-model="mEndTime" >
                         </div>
 
-                       <!-- <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="mod['COUPON.END_DATETIME']"
-                            >
-                        </div>-->
+
                     </div>
                 </form>
             </div>
