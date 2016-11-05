@@ -7,11 +7,11 @@ AndSellMainModule.controller('MemberCoupon', function ($scope, $state, $statePar
 
         $scope.userDetailMap = response.extraData.userDetailMap;
         $scope.couponData=response.extraData.couponList;
-        console.log('优惠券');
-        console.log($scope.couponData);
-        console.log($scope.userDetailMap);
+      //  console.log('优惠券');
+      //  console.log($scope.couponData);
+       // console.log($scope.userDetailMap);
         $scope.couponList=response.data;
-        console.log($scope.couponList);
+     //   console.log($scope.couponList);
     };
     $scope.queryMemberById = function (memberId) {
         $scope.memberDetail = $scope.userDetailMap[memberId];

@@ -6,48 +6,50 @@
             <div class="table-toolbar row">
                 <%--筛选功能--%>
 
-                <div class="form-inline form-group">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <%--<label for="name" class="control-label">商品名称:</label>--%>
-                            <input type="text" class="form-control" id="name" placeholder="商品名称"
-                                   ng-keyup="queryKeyUp($event)"
-                                   ng-model="query['SHOP_PRODUCT.PRD_NAME']">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default pull-right"
-                                    ng-click="queryPrdName()">查询
-                            </button>
-                        </div>
+                <div class="form-inline row">
+                    <div class="col-md-3">
+                    <div class="form-group">
+                        <%--<label for="name" class="control-label">商品名称:</label>--%>
+                        <input type="text" class="form-control" id="name" placeholder="商品名称"
+                               ng-keyup="queryKeyUp($event)"
+                               ng-model="query['SHOP_PRODUCT.PRD_NAME']">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right"
+                                ng-click="queryPrdName()">查询
+                        </button>
+                    </div>
                     </div>
                     <%--<label class="control-label">筛选：</label>--%>
-                    <div class="col-md-5">
+                    <div class="col-md-6">
+                        <label class="control-label">筛选：</label>
                         <select ng-model="filter['SHOP_PRODUCT.IS_SALE']"
-                                ng-init="filter['SHOP_PRODUCT.IS_SALE'] = 'null'"
-                                class="nya-bs-select form-control">
+                            ng-init="filter['SHOP_PRODUCT.IS_SALE'] = 'null'"
+                            class="nya-bs-select form-control">
                             <option class="nya-bs-option" value="null">所有商品</option>
                             <option class="nya-bs-option" value="1">上架</option>
                             <option class="nya-bs-option" value="-1">下架</option>
                         </select>
-                        <select ng-model="filter['SHOP_PRODUCT.TAG_ID']"
-                                ng-init="filter['SHOP_PRODUCT.TAG_ID'] = 'null'"
-                                class="nya-bs-select form-control">
-                            <option class="nya-bs-option" value="null">全部标签</option>
-                            <option class="nya-bs-option" ng-repeat="tag in tagList"
-                                    ng-bind="tag['SHOP_TAG.TAG']"
-                                    value="'{{tag['SHOP_TAG.TAG_ID']}}'"></option>
-                        </select>
-                        <select ng-model="filter['SHOP_PRODUCT.CLASS_ID']"
-                                ng-init="filter['SHOP_PRODUCT.CLASS_ID'] = 'null'"
-                                class="nya-bs-select form-control">
-                            <option class="nya-bs-option" value="null">全部分类</option>
-                            <option class="nya-bs-option" ng-repeat="prdClass in classList"
-                                    ng-bind="prdClass['SHOP_PRODUCT_CLASS.CLASS_NAME']"
-                                    value="'{{prdClass['SHOP_PRODUCT_CLASS.CLASS_ID']}}'"></option>
-                        </select>
+                    <select ng-model="filter['SHOP_PRODUCT.TAG_ID']"
+                            ng-init="filter['SHOP_PRODUCT.TAG_ID'] = 'null'"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="null">全部标签</option>
+                        <option class="nya-bs-option" ng-repeat="tag in tagList"
+                                ng-bind="tag['SHOP_TAG.TAG']"
+                                value="'{{tag['SHOP_TAG.TAG_ID']}}'"></option>
+                    </select>
+                    <select ng-model="filter['SHOP_PRODUCT.CLASS_ID']"
+                            ng-init="filter['SHOP_PRODUCT.CLASS_ID'] = 'null'"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="null">全部分类</option>
+                        <option class="nya-bs-option" ng-repeat="prdClass in classList"
+                                ng-bind="prdClass['SHOP_PRODUCT_CLASS.CLASS_NAME']"
+                                value="'{{prdClass['SHOP_PRODUCT_CLASS.CLASS_ID']}}'"></option>
+                    </select>
+                        <label class="control-label">排序：</label>
                         <select ng-model="filter['SHOP_PRODUCT.ODRDER']"
-                                ng-init="filter['SHOP_PRODUCT.ODRDER'] = 'ADD_DATETIME DESC'; "
-                                class="nya-bs-select form-control">
+                            ng-init="filter['SHOP_PRODUCT.ODRDER'] = 'ORDER_NUM DESC'; "
+                            class="nya-bs-select form-control">
                             <option class="nya-bs-option" value="ORDER_NUM DESC">排序号</option>
                             <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
                             <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
@@ -109,7 +111,7 @@
                         </div>
                     </th>
                     <th style="width: 20px">&nbsp;</th>
-                    <th class="text-left"> 商品名称</th>
+                    <th class="text-left" style="width:340px"> 商品名称</th>
                     <th style="width: 120px" class="text-center"> 编码</th>
                     <th style="width: 120px" class="text-center"> 所属分类</th>
                     <th style="width: 120px" class="text-center"> 单位</th>
@@ -210,6 +212,7 @@
                            ng-bind="sku['SHOP_PRODUCT_SKU.IS_SALE']==1?'正在销售':'下架停售'"></a>
                     </td>
                     <td>
+
                         <a href="" ng-click="delSku(sku)">删除</a>
                     </td>
                 </tr>

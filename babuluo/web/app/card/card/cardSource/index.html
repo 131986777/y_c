@@ -1,33 +1,27 @@
-<div class="table-operbar row">
-    <div class="table-toolbar">
-
-        <div class="text-right">
+<div class="table-content">
+    <div class="table-operbar">
+        <div class="table-toolbar text-right">
             <button show-modal id="#addSource" class="btn btn-default sbold green">
-                <i class="fa fa-plus"></i> 新增发卡渠道 </button>
+                <i class="fa fa-plus"></i> 新增发卡渠道
+            </button>
         </div>
-        
-    </div>
-    <div class="col-md-12">
         <div class="table-scrollable">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <tr>
-
                     <!--<th class="col-md-2"> 发卡渠道编码</th>-->
                     <th class="col-md-2"> 发卡渠道名称</th>
                     <th class="col-md-3"> 发卡渠道介绍</th>
-
                     <th class="col-md-1 text-center"> 操作</th>
                 </tr>
                 </thead>
                 <tbody ng-cloak>
                 <tr ng-repeat="item in cardSourceList">
-
                     <!--<td ng-bind="item['MEMBER_CARD_SOURCE.CARD']"></td>-->
                     <td ng-bind="item['MEMBER_CARD_SOURCE.NAME']"></td>
                     <td ng-bind="item['MEMBER_CARD_SOURCE.INTRO']"></td>
                     <td class="text-center">
-                        <div >
+                        <div>
                             <a type="button" show-modal id="#modifySource"
                                ng-click="modifyCardSourceClick(item)">修改</a>
                             <a type="button" ng-click="deleteCardSource(item['MEMBER_CARD_SOURCE.ID'])">
@@ -41,7 +35,6 @@
         </div>
     </div>
 </div>
-
 <!--BEGIN 新增发卡渠道-->
 <div class="modal fade text-left" id="addSource" tabindex="-1" aria-hidden="true"
      style="display: none;">
@@ -111,14 +104,14 @@
 
 
                     <!--<div class="form-group row">-->
-                        <!--<label class="col-md-3 control-label">-->
-                            <!--发卡渠道编码-->
-                        <!--</label>-->
+                    <!--<label class="col-md-3 control-label">-->
+                    <!--发卡渠道编码-->
+                    <!--</label>-->
 
-                        <!--<div class="col-md-8">-->
-                            <!--<input type="text" class="form-control"-->
-                                   <!--ng-model="modify['MEMBER_CARD_SOURCE.CARD']"-->
-                                   <!--disabled></div>-->
+                    <!--<div class="col-md-8">-->
+                    <!--<input type="text" class="form-control"-->
+                    <!--ng-model="modify['MEMBER_CARD_SOURCE.CARD']"-->
+                    <!--disabled></div>-->
                     <!--</div>-->
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
@@ -135,7 +128,7 @@
                             发卡渠道介绍
                         </label>
 
-                        <div class="col-md-8" >
+                        <div class="col-md-8">
                             <input type="text" class="form-control"
                                    ng-model="modify['MEMBER_CARD_SOURCE.INTRO']"
                                    placeholder=""></div>

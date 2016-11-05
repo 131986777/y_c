@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="page-operation-wrap">
             <div class="row">
-                <div class="col-md-1" >
+                <div class="col-md-2" >
                     <select ng-model="filter['BANNER.POSITION']"
                             ng-init="filter['BANNER.POSITION']=''"
                             ng-options="item['BANNER_POSITION.ID'] as item['BANNER_POSITION.NAME'] for item in positionList "
@@ -15,11 +15,21 @@
                         </option>
                     </select>
                 </div> <!-- select-center  -->
-
-                <div class="col-md-11 text-right">
-                    <a show-modal id="#addBanner" class="btn sbold green">
+                <div class="col-md-offset-3 col-md-4">
+                <label class="control-label">排序：</label>
+                <select class="nya-bs-select">
+                    <option class="nya-bs-option" value="null">
+                        位置
+                    </option>
+                    <option class="nya-bs-option" value="2">
+                        名称
+                    </option>
+                </select >
+            </div>
+                <div class="col-md-3 text-right">
+                    <button show-modal id="#addBanner" class="btn btn-default sbold green">
                         <i class="fa fa-plus"></i>新增横幅
-                    </a>
+                    </button>
                 </div>
             </div>
 

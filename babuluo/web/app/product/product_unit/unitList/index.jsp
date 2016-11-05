@@ -1,44 +1,38 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="page-content" >
+<div class="page-content">
+    <div class="table-content">
+        <div class="table-operbar">
+            <div class="table-toolbar text-right">
+                <button show-modal id="#addUnit" class="btn btn-default sbold green"><i
+                        class="fa fa-plus"></i> 新增单位
+                </button>
+            </div>
 
-    <div class="table-operbar row">
 
-        <div class="table-toolbar">
-            <div class="row">
-                <div class="col-md-12 text-right">
-                    <button show-modal id="#addUnit" class="btn btn-default sbold green"> <i
-                            class="fa fa-plus"></i> 新增单位 </button>
+            <div class="multi-menu multi-menu-bordered" ng-cloak>
+
+                <div class="table-scrollable">
+                    <table class="table table-striped table-hover">
+                        <tbody ng-cloak>
+                        <tr ng-repeat=" value in productUnitList">
+                            <td class="text-left">
+                                <i class="fa fa-folder-o"></i>
+                                {{value['SHOP_UNIT.UNIT_NAME']}}
+                            </td>
+
+                            <td class="text-right">
+                                <a show-modal id="#modifyUnit"
+                                   ng-click="modifyUnitNameClick(value)">修改</a>
+                                <a ng-click="delProductUnit(value['SHOP_UNIT.UNIT_ID'])">删除</a>
+                            </td>
+
+                        </tr>
+
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-
-
-        <div class="col-md-12 multi-menu multi-menu-bordered" ng-cloak>
-           
-            <div class="table-scrollable">
-                <table class="table table-striped table-hover">
-
-                    <tbody ng-cloak>
-
-                    <tr ng-repeat=" value in productUnitList">
-                        <td class="col-md-10" style="text-align: left">
-                            <i class="fa fa-folder-o"></i>
-                            {{value['SHOP_UNIT.UNIT_NAME']}}
-                        </td>
-
-                        <td class="col-md-2 text-right">
-                            <a show-modal id="#modifyUnit"
-                               ng-click="modifyUnitNameClick(value)">修改</a>
-                            <a ng-click="delProductUnit(value['SHOP_UNIT.UNIT_ID'])">删除</a>
-                        </td>
-
-                    </tr>
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
     </div>
 
 

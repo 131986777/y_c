@@ -58,16 +58,30 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
         $scope.salesInfo = null;
 }
 
-    $scope.prdItemSwitch= function (data) {
-        console.log(data);
-        $scope.productName = data['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'];
-        console.log($scope.productName);
-        $('span').click(function(){
-            var _this = $(this);
-            _this.text($scope.productName);
-            console.log($(this).html());
-        });
+    $scope.getNum = function (num){
+       $scope.num = num;
     }
+
+    $scope.prdItemSwitch= function (data) {
+        $scope.productName = data['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'];
+        if($scope.num == 1){
+            $('.A').text($scope.productName);
+        }
+        else if($scope.num == 2){
+            $('.B').text($scope.productName);
+        }
+        else if($scope.num == 3){
+            $('.C').text($scope.productName);
+        }
+        else if($scope.num == 4){
+            $('.D').text($scope.productName);
+        }else if($scope.num == 5){
+            $('.E').text($scope.productName);
+        }
+        else if($scope.num == 6){
+            $('.F').text($scope.productName);
+        }
+    };
 
 
     //前端Jquery逻辑

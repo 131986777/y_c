@@ -2,10 +2,10 @@
 <div class="page-content">
 
     <%--在这里写样式--%>
-    <div class="col-sm-12">
-        <div class="page-operation-wrap">
-            <div class="table-operbar row">
-                <div class="form-inline form-group col-sm-12">
+
+            <div class="table-toolbar" style="padding:14px 0;">
+                <div class="form-inline row">
+                    <div class="col-md-4">
                     <div class="form-group">
                         <input type="text" class="form-control" id="name" placeholder="登陆账号/姓名/手机号"
                                ng-model="queryContent">
@@ -15,6 +15,8 @@
                                 ng-click="query()">查询
                         </button>
                     </div>
+                    </div>
+                    <div class="col-md-5">
                     <label class="control-label">筛选：</label>
                     <select ng-model="filter['USER.STATE']"
                             ng-init="filter['USER.STATE'] = 'null'"
@@ -29,14 +31,17 @@
                         <option class="nya-bs-option" value="REG_DATETIME DESC">注册时间 ↓</option>
                         <option class="nya-bs-option" value="REG_DATETIME ASC">注册时间 ↑</option>
                     </select>
+                    </div>
+                    <div class="col-md-3 text-right">
                     <a ui-sref="userAdd">
                         <button id="sample_editable_1_new" class="btn btn-default pull-right">
                             <i class="fa fa-plus"></i> 新增员工
                         </button>
                     </a>
+                    </div>
                 </div>
             </div>
-        </div>
+
 
         <table class="table table-bordered table-hover table-striped">
             <thead>
@@ -45,9 +50,9 @@
                 <th>姓名</th>
                 <th>手机号</th>
                 <th>邮箱</th>
-                <th>注册时间</th>
-                <th>状态</th>
-                <th>操作</th>
+                <th class="text-center">注册时间</th>
+                <th class="text-center">状态</th>
+                <th class="text-center">操作</th>
             </tr>
             </thead>
             <tbody>
@@ -58,9 +63,9 @@
                 <td ng-bind="user['USER.REAL_NAME']"></td>
                 <td ng-bind="user['USER.MOBILE']"></td>
                 <td ng-bind="user['USER.MAIL']"></td>
-                <td ng-bind="user['USER.REG_DATETIME'] | FormatStrDate"></td>
-                <td ng-bind="user['USER.STATE'] | FormatState"></td>
-                <td>
+                <td ng-bind="user['USER.REG_DATETIME'] | FormatStrDate" class="text-center"></td>
+                <td ng-bind="user['USER.STATE'] | FormatState" class="text-center"></td>
+                <td class="text-center">
                     <a class="table-link" ui-sref="userModify({id:user['USER.UID']})">
                         修改
                     </a>
@@ -77,5 +82,4 @@
              url="/user/user/queryAll"
              callback="bindData(response)">
         </div>
-    </div>
 </div>

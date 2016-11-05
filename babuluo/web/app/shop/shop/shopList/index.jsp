@@ -2,10 +2,9 @@
 <div class="page-content">
 
     <%--在这里写样式--%>
-    <div class="col-sm-12">
-        <div class="page-operation-wrap">
+        <div class="page-operation-wrap" style="margin-top:0;">
             <div class="table-operbar row">
-                <div class="form-inline form-group col-sm-12">
+                <div class="form-inline col-sm-12">
                     <label class="control-label">筛选：</label>
                     <select ng-model="filter['SHOP.DISTRICT_ID']"
                             ng-init="filter['SHOP.DISTRICT_ID']='null'"
@@ -19,9 +18,9 @@
                                 value="{{value['DISTRICT.DISTRICT_ID']}}">
                         </option>
                     </select>
-                    <a type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#add">
-                        新增门店
-                    </a>
+                    <button type="button" class="btn btn-default pull-right" data-toggle="modal" data-target="#add">
+                        <i class="fa fa-plus"></i>新增门店
+                    </button>
                 </div>
             </div>
 
@@ -384,7 +383,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <!-- END showMap modal -->
     <!-- BEGIN choosePoint modal -->
     <div class="modal fade" id="choosePoint" role="dialog">

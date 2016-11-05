@@ -27,17 +27,20 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
         $scope.storeQueryList= $scope.stockList;
         $scope.storeMap= response.extraData.storeMap;
         $scope.storeList= response.extraData.storeList;
+        $scope.productMap=response.extraData.prdMap;
         // console.log( $scope.storeMap);
         // console.log($scope.storeList);
     };
     //根据商品id查询
-    $scope.queryStockById = function(PId){
+    $scope.queryStockById = function(pName){
       //  alert(PId);
        // console.log($scope.storeQueryList);
+
         $scope.roundList = $scope.storeQueryList;
-        if(PId==''||PId==null){
+        if(pName==''||pName==null){
             $scope.stockList=$scope.roundList;
         }else {
+            var PId=$scope.productMap[pName];
             $scope.stockList =[];
             for(var i=0;i< $scope.roundList.length;i++){
                 if( $scope.roundList[i]['STOCK_REALTIME.PID']==PId){
@@ -71,7 +74,7 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
                 modalFactory.showShortAlert('新增成功');
                 $scope.add='';
                 $("#addStore").modal('hide');
-                $scope.initLoad();
+                $scope.$broadcast('pageBar.reload');
             }
         });
     };
@@ -99,7 +102,7 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
             } else if (response.extraData.state == 'true') {
                 $("#modifyStore").modal('hide');
                 modalFactory.showShortAlert("修改成功");
-                $scope.initLoad();
+                $scope.$broadcast('pageBar.reload');
             }
         });
     };
@@ -110,7 +113,7 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
             stockFactory.delStoreById(id).get({}, function (res) {
                 if (res.extraData.state = 'true') {
                     modalFactory.showShortAlert("删除成功");
-                    $scope.initLoad();
+                    $scope.$broadcast('pageBar.reload');
                 }
             });
         });

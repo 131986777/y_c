@@ -2,11 +2,11 @@
     <div class="table-operbar">
         <div class="table-toolbar">
             <ul class="orderNav  nav-justified list-unstyled ">
-                <li  ng-class="{true:'first active'}[state=='all']" ng-click="filterStateOrder('all')"><a >所有订单</a></li>
-                <li  ng-class="{true:'first active'}[state=='end']" ng-click="filterStateOrder('end')"><a >已完成</a></li>
-                <li  ng-class="{true:'first active'}[state=='pay']" ng-click="filterStateOrder('pay')"><a >待付款<span ng-if="orderSizeMap.pay>0" ng-bind="'('+orderSizeMap.pay+')'"></span></a></li>
-                <li  ng-class="{true:'first active'}[state=='get']" ng-click="filterStateOrder('get')"><a >待提货<span ng-if="orderSizeMap.get>0" ng-bind="'('+orderSizeMap.get+')'"></span></a></li>
-                <li ng-class="{true:'first active'}[state=='comment']" ng-click="filterStateOrder('comment')"><a >待评价<span ng-if="orderSizeMap.comment>0" ng-bind="'('+orderSizeMap.comment+')'"></span></a></li>
+                <li  ng-class="{true:' active'}[state=='all']" ng-click="filterStateOrder('all')" class="first"><a >所有订单</a></li>
+                <li  ng-class="{true:' active'}[state=='end']" ng-click="filterStateOrder('end')"><a >已完成</a></li>
+                <li  ng-class="{true:' active'}[state=='pay']" ng-click="filterStateOrder('pay')"><a >待付款<span ng-if="orderSizeMap.pay>0" ng-bind="'('+orderSizeMap.pay+')'"></span></a></li>
+                <li  ng-class="{true:' active'}[state=='get']" ng-click="filterStateOrder('get')"><a >待提货<span ng-if="orderSizeMap.get>0" ng-bind="'('+orderSizeMap.get+')'"></span></a></li>
+                <li ng-class="{true:' active'}[state=='comment']" ng-click="filterStateOrder('comment')"><a >待评价<span ng-if="orderSizeMap.comment>0" ng-bind="'('+orderSizeMap.comment+')'"></span></a></li>
                 <!--<li><a href="#">待发货(<span>2</span>)</a></li>-->
                 <!--<li><a href="#">待收货(<span>2</span>)</a></li>-->
                 </li>

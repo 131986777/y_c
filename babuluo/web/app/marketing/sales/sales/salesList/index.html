@@ -1,12 +1,30 @@
 <div class="page-content">
     <!-- BEGIN 促销项列表 -->
-    <div class="table-toolbar">
-    <button show-modal id="#addSalePlan" class="btn btn-default sbold green pull-right">
-        <i class="fa fa-plus"></i>新增促销计划
-    </button>
+    <div class="table-toolbar row">
+        <div class="col-md-10 form-inline">
+            <label class="control-label">筛选：</label>
+            <select ng-model="filter['STOCK_REALTIME.ORDER']"
+                    ng-init="filter['STOCK_REALTIME.ORDER']='UPDATE_DATETIME DESC'"
+                    class="nya-bs-select form-control">
+                <option class="nya-bs-option" value="UPDATE_DATETIME DESC">
+                    类型
+                </option>
+                <option class="nya-bs-option" value="LOCK_STOCK DESC">
+                    位置
+                </option>
+            </select>
+        </div>
+        <div class="col-md-2 text-right">
+            <button show-modal id="#addSalePlan" class="btn btn-default sbold green pull-right"><i class="fa fa-plus"></i>新增促销计划
+            </button>
+        </div>
     </div>
+
+    <!-- select-center  -->
+
+
     <div class="promotion-list" ng-repeat="item in salesPlan">
-        <!--BENGIN 商品促销 -->
+    <!--BENGIN 商品促销 -->
         <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==1">
             <div class="promotion-wrap">
                 <div class="promotion-head">
@@ -32,13 +50,16 @@
                             show-modal ng-click="getCurrentPro(item)" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length > 0">修改商品</button>
                     <button class="addItem btn"  data-toggle="modal" id="#productSwitchModal"
                             show-modal ng-click="getCurrentPro(item)" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length ==null">添加商品</button>
-                    <span class="buy-text">买</span>
+                    <span class="buy-text" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length >0">买</span>
                     <div class="buy-content" >
                         <div class="buy-list" ng-repeat="pro in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
                             <div class="product-item">
                                 <img class="pull-left" src="../components/images/index_18.png">
-                                <p class="itemName">{{productMap[pro]}}</p>
-                                <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
+                                <p class="itemName">{{proAndSkuInfoMap[pro]}}</p>
+                                <p class="itemDesc">【{{skuMap[pro][0]}}：{{skuMap[pro][1]}}
+                                                    <span ng-if="skuMap[pro][2] != ''&&skuMap[pro][2] != null">，{{skuMap[pro][2]}}：{{skuMap[pro][3]}}</span>
+                                                    <span ng-if="skuMap[pro][4] != ''&&skuMap[pro][4] != null">，{{skuMap[pro][4]}}：{{skuMap[pro][5]}}</span>】
+                                </p>
                             </div>
                         </div>
                         <div class="product-total" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length >0">
@@ -48,22 +69,18 @@
                         </span>件商品参与
                         </div>
                     </div>
-
-                    <div class="product-total" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length ==null">
-                        >>共
-                        <span class="itemNum">
-                            0
-                        </span>件商品参与
-                    </div>
             </div><!-- promotion content -->
 
-            <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
+                <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
                 <div class="man-text">满<span>{{auto[0]}}</span>个</div>
                 <div class="man-content">
                     <div class="product-item">
                         <img class="pull-left" src="../components/images/index_18.png">
                         <p class="itemName">{{auto[1]}}</p>
-                        <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
+                        <p class="itemDesc">【{{auto[3][0]}}：{{auto[3][1]}}
+                                            <span ng-if="auto[3][2]!=''&& auto[3][2]!=null"> ，{{auto[3][2]}}：{{auto[3][3]}}】</span>
+                                            <span ng-if="auto[3][4]!=''&& auto[3][4]!=null"> ，{{auto[3][4]}}：{{auto[3][5]}}</span>】
+                        </p>
                     </div>
                 </div>
                 <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
@@ -110,8 +127,9 @@
                             <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
                         </div>
                     </div>
+                    <div class="product-total">>>共<span class="itemNum">{{((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length}}</span>类商品参与</div>
                 </div>
-                <div class="product-total">>>共<span class="itemNum">{{((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length}}</span>类商品参与</div>
+
             </div>
         </div> <!-- promotion-content -->
         <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
@@ -130,14 +148,10 @@
 
     <!--BENGIN 满减折扣 -->
         <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==-1">
-        <div class="promotion-wrap">
+            <div class="promotion-wrap">
             <div class="promotion-head">
                 <div class="head-title">
-                    <div class="main-title">
-                        <span ng-show="item['salesClass'] == 1">订单减价促销</span>
-                        <span ng-show="item['salesClass'] == 2">订单打折促销</span>
-                        <span ng-show="item['salesClass'] == 3">订单满送</span>
-                    </div>
+                    <div class="main-title">{{item['SALES_PLAN.INTRO']}}</div>
                     <div class="time-range">{{item['SALES_PLAN.BEGIN_DATETIME']|FormatAllDate}} 至 {{item['SALES_PLAN.END_DATETIME']}}</div>
                 </div><!-- 标题 -->
                 <div class="buttons">
@@ -150,38 +164,19 @@
                 </div><!-- 分类标记 -->
                 <div class="marks" ng-show="item['SALES_PLAN.STATE']==-1">
                     <img src="../components/images/index_01.png">
-                </div> <!-- END promotion-head -->
-                <div class="promotion-content" ng-show="item['salesClass'] == 1">
-                    <div class="coupon-list text-center" >
-                        <ul class="list-unstyled" ng-repeat="auto in item['salesInfo']">
-                            <li>
+                </div>
+            </div><!-- END promotion-head -->
+            <div class="promotion-content" ng-if="item['salesClass'] != 3">
+                <div class="coupon-list text-center" >
+                        <ul class="list-unstyled" >
+                            <li ng-show="item['salesClass'] == 1" ng-repeat="auto in item['salesInfo']">
                                 <img class="pull-left" src="../components/images/index_21.png">
-                                <div class="coupon-detail">
+                                <div class="coupon-detail" >
                                     <p>满￥<span>{{auto[0]}}</span></p>
                                     <p>减￥<span>{{auto[1]}}</span></p>
                                 </div>
                             </li>
-                            <li ng-show="item['salesClass'] == 2">
-                                <img class="pull-left" src="../components/images/index_23.png">
-                                <div class="coupon-detail">
-                                    <p>满￥<span>{{auto[0]}}</span></p>
-                                    <p>打￥<span>{{auto[1]}}</span>折</p>
-                                </div>
-                            </li>
-                            <li ng-show="item['salesClass'] == 3">
-                                <img class="pull-left" src="../components/images/index_25.png">
-                                <div class="coupon-detail">
-                                    <p>满￥<span>{{auto[0]}}</span></p>
-                                    <p>打￥<span>{{auto[1]}}</span>折</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="promotion-content" ng-show="item['salesClass'] == 2">
-                    <div class="coupon-list text-center" >
-                        <ul class="list-unstyled" ng-repeat="auto in item['salesInfo']">
-                            <li ng-show="item['salesClass'] == 2">
+                            <li ng-show="item['salesClass'] == 2" ng-repeat="auto in item['salesInfo']">
                                 <img class="pull-left" src="../components/images/index_23.png">
                                 <div class="coupon-detail">
                                     <p>满￥<span>{{auto[0]}}</span></p>
@@ -190,21 +185,18 @@
                             </li>
                         </ul>
                     </div>
-                </div>
-                <div class="promotion-content" ng-show="item['salesClass'] == 3">
-                    <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
-                        <div class="man-text">满<span>{{auto[0]}}</span>元</div>
-                        <div class="man-content">
-                            <div class="product-item">
-                                <img class="pull-left" src="../components/images/index_18.png">
-                                <p class="itemName">{{auto[1]}}</p>
-                                <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
-                            </div>
-                        </div>
-                        <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
-                    </div>
-                </div>
             </div>
+            <div class="promotion-footer" ng-repeat="auto in item['salesInfo']" ng-if="item['salesClass'] == 3">
+                    <div class="man-text">满<span>{{auto[0]}}</span>元</div>
+                    <div class="man-content">
+                        <div class="product-item">
+                            <img class="pull-left" src="../components/images/index_18.png">
+                            <p class="itemName">{{auto[1]}}</p>
+                            <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
+                        </div>
+                    </div>
+                    <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
+                </div><!-- promotion footer -->
         </div>
     </div>
     <!-- END 满减折扣 -->
@@ -238,9 +230,6 @@
                         <div class="form-group form-inline" ng-repeat="tag in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
                             <span>{{tagMap[tag]}}</span>
                         </div>
-                        <!--
-                                                    <span class="btn btn-default">促销</span>
-                        -->
                     </div>
 
                 </div>
@@ -262,6 +251,12 @@
         </div>
         <!-- END 添加类促销 -->
     </div>
+    </div>
+
+    <div page-bar
+         filter-obj="filter"
+         url="/sales/salesplan/queryAll"
+         callback="bindData(response)">
     </div>
 
         <class-switch-modal callback="classSwitch(data)"></class-switch-modal>
@@ -469,11 +464,13 @@
                         <label class="col-md-3 control-label">
                             <span class="required">促销方案开始时间</span>
                         </label>
-                        <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="add['SALES_PLAN.BEGIN_DATETIME']"
-                                   ng-init="add['SALES_PLAN.BEGIN_DATETIME']=''"
-                                   placeholder="">
+                        <div
+                                class="input-group input-daterange col-md-8 "
+                                data-date="10/11/2012"
+                                language="zh-CN"
+                                data-date-format="yyyy-mm-dd">
+                            <input id="start_hour" type="text" class="form-control " placeholder=""
+                                   name="from" ng-model="from" data-date-format="yyyy/mm/dd hh:ii" style="">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -481,11 +478,13 @@
                             <span class="required">促销方案结束时间</span>
                         </label>
 
-                        <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="add['SALES_PLAN.END_DATETIME']"
-                                   ng-init="add['SALES_PLAN.END_DATETIME']=''"
-                                   placeholder="">
+                        <div
+                                class="input-group input-daterange col-md-8 "
+                                data-date="10/11/2012"
+                                language="zh-CN"
+                                data-date-format="yyyy-mm-dd">
+                            <input id="end_hour" type="text" class="form-control " placeholder=""
+                                   name="to" ng-model="to" data-date-format="yyyy/mm/dd hh:ii">
                         </div>
                     </div>
                 </form>
