@@ -10,7 +10,7 @@ var FILE_SERVER_DOMAIN = "http://babuluo-file.oss-cn-hangzhou.aliyuncs.com//";
  * @param myObj
  * @returns {*}
  */
-    function clone(myObj) {
+function clone(myObj) {
     if (typeof(myObj) != 'object' || myObj == null) return myObj;
     var newObj = {};
     for (var i in myObj) {
@@ -57,11 +57,11 @@ function moneyFormat(money) {
 }
 
 //过滤时间后面的毫秒
-function getDate(dateStr){
-    if(dateStr!=undefined){
+function getDate(dateStr) {
+    if (dateStr != undefined) {
         var mydate = dateStr.slice(0, dateStr.indexOf("."));
         return mydate;
-    }else{
+    } else {
         return undefined;
     }
 }
@@ -71,30 +71,38 @@ function getDate(dateStr){
  */
 Array.prototype.remove = function (b) {
     var a = this.indexOf(b);
-    if (a
-        >= 0) {
+    if (a >= 0) {
         this.splice(a, 1);
         return true;
     }
     return false;
 };
 
-
 //   get Sku  content info
 function setContentsInfoForOrder(sku) {
     var contents = '';
     if (sku['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
-        contents +=' ';
+        contents += ' ';
         contents += sku['SHOP_ORDER_INFO.SKU_1_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_3_VALUE'];
     }
     if (sku['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
-        contents +=' ';
+        contents += ' ';
         contents += sku['SHOP_ORDER_INFO.SKU_2_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_3_VALUE'];
     }
     if (sku['SHOP_ORDER_INFO.SKU_3_VALUE'] != undefined) {
-        contents +=' ';
+        contents += ' ';
         contents += sku['SHOP_ORDER_INFO.SKU_3_NAME'] + " : " + sku['SHOP_ORDER_INFO.SKU_3_VALUE'];
     }
     sku['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] = contents;
 }
 
+//list to map   by  key
+function listToMap(list, key) {
+    var map = new Map;
+    list.forEach(function (ele) {
+        if (ele[key] != undefined) {
+            map.set(ele[key], ele);
+        }
+    });
+    return map;
+}

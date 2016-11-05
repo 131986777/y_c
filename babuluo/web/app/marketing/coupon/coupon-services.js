@@ -1,5 +1,13 @@
 AndSellMainModule.service('couponFactory', function ($resource, baseURL) {
 
+    this.getCouponList = function (){
+        return $resource(baseURL + '/coupon/coupon/queryAll',null, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
     this.addCouponRule = function (form) {
         console.log('新增数据');
         console.log(form);

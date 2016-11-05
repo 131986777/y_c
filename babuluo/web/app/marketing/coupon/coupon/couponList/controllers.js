@@ -141,8 +141,8 @@ $scope.mod={};
         $scope.mSaturday=time[5];
         $scope.mSunday=time[6];
 
-        $scope.mBeginTime=item['COUPON.BEGIN_DATETIME'];
-        $scope.mEndTime=item['COUPON.END_DATETIME'];
+        $scope.mBeginTime=(item['COUPON.BEGIN_DATETIME']).split('.')[0];  //2016-11-10 15:30:00.0
+        $scope.mEndTime=item['COUPON.END_DATETIME'].split('.')[0];
 
     };
 
@@ -223,7 +223,7 @@ $scope.mod={};
         todayHighlight: true,
         weekStart: 1,
         startView: 2,
-        format: 'yyyy/mm/dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii',
         todayBtn: 'linked'
         /* }).on('click', function (ev) {
          $("#start_hour").datetimepicker("setEndDate", $("#end_hour").val());
@@ -242,7 +242,7 @@ $scope.mod={};
         autoclose: true,
         todayHighlight: true,
         weekStart: 1,
-        format: 'yyyy/mm/dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii',
         todayBtn: 'linked',
         /* }).on('click', function (ev) {
          $("#end_hour").datetimepicker("setStartDate", $("#start_hour").val());
@@ -261,7 +261,7 @@ $scope.mod={};
         todayHighlight: true,
         weekStart: 1,
         startView: 2,
-        format: 'yyyy/mm/dd hh:ii',
+        format: 'yyyy-mm-d hh:ii',
         todayBtn: 'linked'
         /* }).on('click', function (ev) {
          $("#start_hour").datetimepicker("setEndDate", $("#end_hour").val());
@@ -279,7 +279,7 @@ $scope.mod={};
         autoclose: true,
         todayHighlight: true,
         weekStart: 1,
-        format: 'yyyy/mm/dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii',
         todayBtn: 'linked',
         /* }).on('click', function (ev) {
          $("#end_hour").datetimepicker("setStartDate", $("#start_hour").val());

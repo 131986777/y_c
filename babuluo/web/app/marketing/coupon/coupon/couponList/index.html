@@ -1,56 +1,54 @@
 <div class="page-content couponList">
-    <di class="table-content">
-        <div class="table-operbar">
-            <div class="table-toolbar">
-                <div class="form-inline row">
-                    <div class="col-md-2">
-                        <select ng-model="filter['COUPON.RULE_ID']"
-                                ng-init="filter['COUPON.RULE_ID']=''"
-                                class="nya-bs-select form-control">
-                            <option class="nya-bs-option" value="">选择优惠券规则</option>
-                            <option ng-repeat="item in ruleList" ng-bind="item['COUPON_RULE.NAME']"
-                                    value="{{item['COUPON_RULE.ID']}}"></option>
+    <div class="table-operbar">
+        <div class="table-toolbar">
+            <div class="row">
+                <div class="form-inline form-group">
 
-                        </select>
-                    </div>
-                    <div class="col-md-2 pull-right text-right">
-                        <button show-modal id="#addCoupon" class="btn btn-default sbold green pull-right">
-                            <i class="fa fa-plus"></i>新增优惠券
-                        </button>
-                    </div>
+                    <select ng-model="filter['COUPON.RULE_ID']"
+                            ng-init="filter['COUPON.RULE_ID']=''"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="">选择优惠券规则</option>
+                        <option ng-repeat="item in ruleList" ng-bind="item['COUPON_RULE.NAME']"
+                                value="{{item['COUPON_RULE.ID']}}"></option>
+
+                    </select>
+
+                    <button show-modal id="#addCoupon" class="btn btn-default sbold green pull-right">
+                        <i class="fa fa-plus"></i>新增优惠券
+                    </button>
                     <!-- <button type="button" class="btn btn-default pull-right" data-toggle="modal"
                              data-target="#cardList">+ 开卡
                      </button>-->
                 </div>
-            </div>
+            </div><!-- row end -->
         </div>
+    </div>
 
-        <div class="coupon-page">
+    <div class="coupon-page">
 
-            <div class="coupon-wrap">
-                <!-- <div class="coupon-header">
-                 <div class="header-title">
-                 <div class="main-title">注册送券（10月）</div>
-                 <div class="time-range">2016/10/1 上午12：20：00 至 2016/10/30 上午12：00：00</div>
-                 </div>&lt;!&ndash; 标题 &ndash;&gt;
-                 <div class="buttons">
-                 <a href="#" class="note"></a>
-                 <a href="#" class="stop"></a>
-                 <a href="#" class="del"></a>
-                 </div>&lt;!&ndash; 图标 &ndash;&gt;
-                 <div class="marks"><img src="../components/images/index_03.png"></div>&lt;!&ndash; 分类标记 &ndash;&gt;
-                 </div>-->
-                <!--END head-->
+        <div class="coupon-wrap">
+            <!-- <div class="coupon-header">
+             <div class="header-title">
+             <div class="main-title">注册送券（10月）</div>
+             <div class="time-range">2016/10/1 上午12：20：00 至 2016/10/30 上午12：00：00</div>
+             </div>&lt;!&ndash; 标题 &ndash;&gt;
+             <div class="buttons">
+             <a href="#" class="note"></a>
+             <a href="#" class="stop"></a>
+             <a href="#" class="del"></a>
+             </div>&lt;!&ndash; 图标 &ndash;&gt;
+             <div class="marks"><img src="../components/images/index_03.png"></div>&lt;!&ndash; 分类标记 &ndash;&gt;
+             </div>-->
+            <!--END head-->
 
-                <div class="coupon-list">
-                    <div class="coupon-content" ng-repeat="(key,item) in couponList" ng-mouseenter="mouseEnter(key)"
-                         ng-mouseleave="mouseleave(key)">
-                        <div ng-class="{'coupon-head':item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1,'coupon-head-disabled':item['COUPON.STOP']==-1||item['COUPON.IsEnd']==1}">
-                            <div class="coupon-info">
-                                <p class='couponType'>{{item['COUPON.NAME']}}</p>
-                                <p class="couponTime" ng-if="item['COUPON.END_DATETIME']!=null">有效期至<span>{{item['COUPON.END_DATETIME']|FormatAllDate}}</span>
-                                </p>
-                                <div class="couponValue">
+            <div class="coupon-list">
+                <div class="coupon-content" ng-repeat="(key,item) in couponList" ng-mouseenter="mouseEnter(key)"
+                     ng-mouseleave="mouseleave(key)">
+                    <div ng-class="{'coupon-head':item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1,'coupon-head-disabled':item['COUPON.STOP']==-1||item['COUPON.IsEnd']==1}">
+                        <div class="coupon-info">
+                            <p class='couponType'>{{item['COUPON.NAME']}}</p>
+                            <p class="couponTime" ng-if="item['COUPON.END_DATETIME']!=null">有效期至<span>{{item['COUPON.END_DATETIME']|FormatAllDate}}</span></p>
+                            <div class="couponValue">
                                 <span ng-if="item['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
                                     <span>{{(item['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}</span>
                                     <span class='couponType'>元</span>
@@ -59,199 +57,195 @@
                                     <span>{{(item['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</span>
                                     <span class='couponType'>折<span/>
                                  </span></span>
-                                </div>
-                                <!--  <div class="coupon-limit">最多折扣<span>12元</span></div>-->
                             </div>
+                            <!--  <div class="coupon-limit">最多折扣<span>12元</span></div>-->
                         </div>
-                        <div ng-class="{'border':item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1,'border-disabled':item['COUPON.STOP']==-1||item['COUPON.IsEnd']==1}"></div>
-                        <div ng-class="{'coupon-contain':item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1,'coupon-contain-disabled':item['COUPON.STOP']==-1||item['COUPON.IsEnd']==1}">
-                            <div class="coupon-desc">
-                                <p class="limit-time">
-                                    <span>限定时间(每周</span>
-                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
-                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
-                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
-                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
-                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
-                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
-                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
-                                    <span>)</span>
-                                </p>
-                                <p class="limit-item">
-                                    <!--<span ng-if="item['COUPON.TARGET_OBJ_TYPE']==1">限定商品使用({{(item['COUPON.TARGET_OBJ_INFO'])}})</span>
-                                    <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==2">限定商品类别使用({{(item['COUPON.TARGET_OBJ_INFO'])}})</span>
-                                    <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==3">限定商品标签使用({{(item['COUPON.TARGET_OBJ_INFO'])}})</span>-->
+                    </div>
+                    <div ng-class="{'border':item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1,'border-disabled':item['COUPON.STOP']==-1||item['COUPON.IsEnd']==1}"></div>
+                    <div ng-class="{'coupon-contain':item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1,'coupon-contain-disabled':item['COUPON.STOP']==-1||item['COUPON.IsEnd']==1}">
+                        <div class="coupon-desc">
+                            <p class="limit-time">
+                                <span>限定时间(每周</span>
+                                <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
+                                <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
+                                <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
+                                <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
+                                <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
+                                <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
+                                <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
+                                <span>)</span>
+                            </p>
+                            <p class="limit-item">
+                                <!--<span ng-if="item['COUPON.TARGET_OBJ_TYPE']==1">限定商品使用({{(item['COUPON.TARGET_OBJ_INFO'])}})</span>
+                                <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==2">限定商品类别使用({{(item['COUPON.TARGET_OBJ_INFO'])}})</span>
+                                <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==3">限定商品标签使用({{(item['COUPON.TARGET_OBJ_INFO'])}})</span>-->
                                 <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==1">限定商品使用
-                                  <a data-toggle="modal" data-target="#detail" class="btn sbold green"
-                                     ng-click="detailClick(item['COUPON.TARGET_OBJ_INFO'])">
-                                      查看详情
+                                  <a data-toggle="modal" data-target="#detail" class="btn sbold green" ng-click="detailClick(item['COUPON.TARGET_OBJ_INFO'])">
+                                    查看详情
                                   </a>
                                 </span>
                                 <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==2">限定商品类别使用
-                                 <a data-toggle="modal" data-target="#detail" class="btn sbold green"
-                                    ng-click="detailClick(item['COUPON.TARGET_OBJ_INFO'])">
-                                     查看详情
-                                 </a></span>
+                                 <a data-toggle="modal" data-target="#detail" class="btn sbold green" ng-click="detailClick(item['COUPON.TARGET_OBJ_INFO'])">
+                                    查看详情
+                                  </a></span>
                                 <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==3">限定商品标签使用
-                                  <a data-toggle="modal" data-target="#detail" class="btn sbold green"
-                                     ng-click="detailClick(item['COUPON.TARGET_OBJ_INFO'])">
-                                      查看详情
+                                  <a data-toggle="modal" data-target="#detail" class="btn sbold green" ng-click="detailClick(item['COUPON.TARGET_OBJ_INFO'])">
+                                    查看详情
                                   </a>
                                 </span>
-                                </p>
-                                <p class="coupon-detail">
-                                    {{item['COUPON.RULE_INFO']['COUPON_RULE.INTRO']}}(剩余{{item['COUPON.NUM_LEFT']}}张)</p>
-                                <!--<div class="coupon-footer text-right">
-                                    限量300张，每人限领1张
-                                </div>-->
-                                <!--停用/过期-->
-                                <div ng-class="{'coupon-state-stop':item['COUPON.STOP']==-1,'coupon-state-over':item['COUPON.IsEnd']==1,'coupon-state':item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1}"></div>
-                                <div class="coupon-footer text-right">
-                                    <div class="buttons">
-                                        <a show-modal id="#modCoupon" ng-click="modCouponClick(item)" class="note"
-                                           ng-if="mouseIsEnter[key]&&item['COUPON.IsEnd']==-1"></a>
-                                        <a ng-if="item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1&&mouseIsEnter[key]"
-                                           class="stop" ng-click="stopCoupon(item)"></a>
-                                        <a ng-if="item['COUPON.STOP']==-1&&item['COUPON.IsEnd']==-1&&mouseIsEnter[key]"
-                                           class="start" ng-click="stopCoupon(item)"></a><!--启用-->
-                                        <a class="del" ng-click="delCoupon(item)"></a>
-                                    </div><!-- 图标 -->
-                                </div>
+                            </p>
+                            <p class="coupon-detail">
+                                {{item['COUPON.RULE_INFO']['COUPON_RULE.INTRO']}}(剩余{{item['COUPON.NUM_LEFT']}}张)</p>
+                            <!--<div class="coupon-footer text-right">
+                                限量300张，每人限领1张
+                            </div>-->
+                            <!--停用/过期-->
+                            <div ng-class="{'coupon-state-stop':item['COUPON.STOP']==-1,'coupon-state-over':item['COUPON.IsEnd']==1,'coupon-state':item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1}"></div>
+                            <div class="coupon-footer text-right">
+                                <div class="buttons">
+                                    <a show-modal id="#modCoupon" ng-click="modCouponClick(item)" class="note"
+                                       ng-if="mouseIsEnter[key]&&item['COUPON.IsEnd']==-1"></a>
+                                    <a ng-if="item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1&&mouseIsEnter[key]"
+                                       class="stop" ng-click="stopCoupon(item)"></a>
+                                    <a ng-if="item['COUPON.STOP']==-1&&item['COUPON.IsEnd']==-1&&mouseIsEnter[key]"
+                                       class="start" ng-click="stopCoupon(item)"></a><!--启用-->
+                                    <a class="del" ng-click="delCoupon(item)"></a>
+                                </div><!-- 图标 -->
                             </div>
                         </div>
                     </div>
-                    <!--   <div class="coupon-content">
-                           <div class="coupon-head">
-                               <div class="coupon-info">
-                                   <p class='couponType'>优惠券名称</p>
-                                   <p class="couponTime">有效期至<span>方案结束时间</span></p>
-                                   <div class="couponValue"><span>面值</span>元</div>
-                               </div>
-                           </div>
-                           <div class="coupon-contain">
-                               <div class="coupon-desc">
-                                   <p class="limit-item">限定商品使用（<span>302</span>种）</p>
-                                   <p class="coupon-detail">优惠券信息描述优惠券信息</p>
-                                   <div class="coupon-footer text-right">
-                                       <div class="buttons">
-                                           <a href="#" class="note"></a>
-                                           <a href="#" class="stop"></a>
-                                       </div>&lt;!&ndash; 图标 &ndash;&gt;
-                                   </div>
-                               </div>
-                           </div>
-                       </div>-->
-
-                    <!--   <div class="coupon-content">
-                           <div class="coupon-head">
-                               <div class="coupon-info">
-                                   <p class='couponType'>注册打折券</p>
-                                   <p class="couponTime">有效期至<span>2016&#45;&#45;10&#45;&#45;15</span></p>
-                                   <div class="couponValue"><span>8.2</span>折</div>
-                                   <div class="coupon-limit">最多折扣<span>12元</span></div>
-                               </div>
-                           </div>
-                           <div class="coupon-contain">
-                               <div class="coupon-desc">
-                                   <p class="limit-time">限定时间（<span>每周四</span>）</p>
-                                   <p class="limit-item">限定商品使用（<span>302</span>种）</p>
-                                   <p class="coupon-detail">优惠券信息描述优惠券信息</p>
-                                   <div class="coupon-footer text-right">
-                                       限量300张，每人限领1张
-                                   </div>
-                               </div>
-                           </div>
-                       </div>-->
                 </div>
+                <!--   <div class="coupon-content">
+                       <div class="coupon-head">
+                           <div class="coupon-info">
+                               <p class='couponType'>优惠券名称</p>
+                               <p class="couponTime">有效期至<span>方案结束时间</span></p>
+                               <div class="couponValue"><span>面值</span>元</div>
+                           </div>
+                       </div>
+                       <div class="coupon-contain">
+                           <div class="coupon-desc">
+                               <p class="limit-item">限定商品使用（<span>302</span>种）</p>
+                               <p class="coupon-detail">优惠券信息描述优惠券信息</p>
+                               <div class="coupon-footer text-right">
+                                   <div class="buttons">
+                                       <a href="#" class="note"></a>
+                                       <a href="#" class="stop"></a>
+                                   </div>&lt;!&ndash; 图标 &ndash;&gt;
+                               </div>
+                           </div>
+                       </div>
+                   </div>-->
 
+                <!--   <div class="coupon-content">
+                       <div class="coupon-head">
+                           <div class="coupon-info">
+                               <p class='couponType'>注册打折券</p>
+                               <p class="couponTime">有效期至<span>2016&#45;&#45;10&#45;&#45;15</span></p>
+                               <div class="couponValue"><span>8.2</span>折</div>
+                               <div class="coupon-limit">最多折扣<span>12元</span></div>
+                           </div>
+                       </div>
+                       <div class="coupon-contain">
+                           <div class="coupon-desc">
+                               <p class="limit-time">限定时间（<span>每周四</span>）</p>
+                               <p class="limit-item">限定商品使用（<span>302</span>种）</p>
+                               <p class="coupon-detail">优惠券信息描述优惠券信息</p>
+                               <div class="coupon-footer text-right">
+                                   限量300张，每人限领1张
+                               </div>
+                           </div>
+                       </div>
+                   </div>-->
             </div>
-            <!-- <div class="coupon-wrap">
-                 <div class="coupon-header">
-                     <div class="header-title">
-                         <div class="main-title">注册送券（10月）</div>
-                         <div class="time-range">2016/10/1 上午12：20：00 至 2016/10/30 上午12：00：00</div>
-                     </div>&lt;!&ndash; 标题 &ndash;&gt;
-                     <div class="buttons">
-                         <a href="#" class="note"></a>
-                         <a href="#" class="stop"></a>
-                         <a href="#" class="del"></a>
-                     </div>&lt;!&ndash; 图标 &ndash;&gt;
-                     <div class="marks"><img src="../components/images/index_01.png"></div>&lt;!&ndash; 分类标记 &ndash;&gt;
-                 </div> &lt;!&ndash; END head &ndash;&gt;
 
-                 <div class="coupon-list">
-                     <div class="coupon-content">
-                         <div class="coupon-head">
-                             <div class="coupon-info">
-                                 <p class='couponType'>注册打折券</p>
-                                 <p class="couponTime">有效期至<span>2016&#45;&#45;10&#45;&#45;15</span></p>
-                                 <div class="couponValue"><span>8.2</span>折</div>
-                                 <div class="coupon-limit">最多折扣<span>12元</span></div>
-                             </div>
-                         </div>
-                         <div class="coupon-contain">
-                             <div class="coupon-desc">
-                                 <p class="limit-time">限定时间（<span>每周四</span>）</p>
-                                 <p class="limit-item">限定商品使用（<span>302</span>种）</p>
-                                 <p class="coupon-detail">优惠券信息描述优惠券信息</p>
-                                 <div class="coupon-footer text-right">
-                                     限量300张，每人限领1张
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="coupon-content">
-                         <div class="coupon-head">
-                             <div class="coupon-info">
-                                 <p class='couponType'>代金券</p>
-                                 <p class="couponTime">有效期至<span>2016&#45;&#45;10&#45;&#45;15</span></p>
-                                 <div class="couponValue"><span>8</span>元</div>
-                             </div>
-                         </div>
-                         <div class="coupon-contain">
-                             <div class="coupon-desc">
-                                 <p class="limit-item">限定商品使用（<span>302</span>种）</p>
-                                 <p class="coupon-detail">优惠券信息描述优惠券信息</p>
-                                 <div class="coupon-footer text-right">
-                                     已作废
-                                 </div>
-                             </div>
+        </div>
+        <!-- <div class="coupon-wrap">
+             <div class="coupon-header">
+                 <div class="header-title">
+                     <div class="main-title">注册送券（10月）</div>
+                     <div class="time-range">2016/10/1 上午12：20：00 至 2016/10/30 上午12：00：00</div>
+                 </div>&lt;!&ndash; 标题 &ndash;&gt;
+                 <div class="buttons">
+                     <a href="#" class="note"></a>
+                     <a href="#" class="stop"></a>
+                     <a href="#" class="del"></a>
+                 </div>&lt;!&ndash; 图标 &ndash;&gt;
+                 <div class="marks"><img src="../components/images/index_01.png"></div>&lt;!&ndash; 分类标记 &ndash;&gt;
+             </div> &lt;!&ndash; END head &ndash;&gt;
+
+             <div class="coupon-list">
+                 <div class="coupon-content">
+                     <div class="coupon-head">
+                         <div class="coupon-info">
+                             <p class='couponType'>注册打折券</p>
+                             <p class="couponTime">有效期至<span>2016&#45;&#45;10&#45;&#45;15</span></p>
+                             <div class="couponValue"><span>8.2</span>折</div>
+                             <div class="coupon-limit">最多折扣<span>12元</span></div>
                          </div>
                      </div>
-                     <div class="coupon-content">
-                         <div class="coupon-head">
-                             <div class="coupon-info">
-                                 <p class='couponType'>注册打折券</p>
-                                 <p class="couponTime">有效期至<span>2016&#45;&#45;10&#45;&#45;15</span></p>
-                                 <div class="couponValue"><span>8.2</span>折</div>
-                                 <div class="coupon-limit">最多折扣<span>12元</span></div>
+                     <div class="coupon-contain">
+                         <div class="coupon-desc">
+                             <p class="limit-time">限定时间（<span>每周四</span>）</p>
+                             <p class="limit-item">限定商品使用（<span>302</span>种）</p>
+                             <p class="coupon-detail">优惠券信息描述优惠券信息</p>
+                             <div class="coupon-footer text-right">
+                                 限量300张，每人限领1张
                              </div>
                          </div>
-                         <div class="coupon-contain">
-                             <div class="coupon-desc">
-                                 <p class="limit-time">长期可用</p>
-                                 <p class="limit-item">全场通用</p>
-                                 <p class="coupon-detail">优惠券信息描述优惠券信息</p>
-                                 <div class="coupon-footer text-right">
-                                     限量300张，每人限领1张
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                     <div class="coupon-content couponAdd text-center">
-                         <a href="">+优惠券</a>
                      </div>
                  </div>
-
+                 <div class="coupon-content">
+                     <div class="coupon-head">
+                         <div class="coupon-info">
+                             <p class='couponType'>代金券</p>
+                             <p class="couponTime">有效期至<span>2016&#45;&#45;10&#45;&#45;15</span></p>
+                             <div class="couponValue"><span>8</span>元</div>
+                         </div>
+                     </div>
+                     <div class="coupon-contain">
+                         <div class="coupon-desc">
+                             <p class="limit-item">限定商品使用（<span>302</span>种）</p>
+                             <p class="coupon-detail">优惠券信息描述优惠券信息</p>
+                             <div class="coupon-footer text-right">
+                                 已作废
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="coupon-content">
+                     <div class="coupon-head">
+                         <div class="coupon-info">
+                             <p class='couponType'>注册打折券</p>
+                             <p class="couponTime">有效期至<span>2016&#45;&#45;10&#45;&#45;15</span></p>
+                             <div class="couponValue"><span>8.2</span>折</div>
+                             <div class="coupon-limit">最多折扣<span>12元</span></div>
+                         </div>
+                     </div>
+                     <div class="coupon-contain">
+                         <div class="coupon-desc">
+                             <p class="limit-time">长期可用</p>
+                             <p class="limit-item">全场通用</p>
+                             <p class="coupon-detail">优惠券信息描述优惠券信息</p>
+                             <div class="coupon-footer text-right">
+                                 限量300张，每人限领1张
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+                 <div class="coupon-content couponAdd text-center">
+                     <a href="">+优惠券</a>
+                 </div>
              </div>
-         -->
-        </div>
-        <div page-bar
-             filter-obj="filter"
-             url="/coupon/coupon/queryAll"
-             callback="bindData(response)">
-        </div>
-    </di>
+
+         </div>
+     -->
+    </div>
+    <div page-bar
+         filter-obj="filter"
+         url="/coupon/coupon/queryAll"
+         callback="bindData(response)">
+    </div>
     <class-switch-modal callback="classSwitch(data)"></class-switch-modal>
     <tag-switch-modal callback="tagSwitch(data)"></tag-switch-modal>
     <product-switch-modal callback="prdSwitch(data)"></product-switch-modal>
@@ -366,24 +360,24 @@
 
                             <div class="col-md-8 text-left form-inline">
 
-                                <input type="checkbox" ng-model="Monday" ng-true-value="1"
+                                     <input type="checkbox" ng-model="Monday" ng-true-value="1"
                                        ng-init="Monday='0'" name="dates" ng-checked="Monday==1">星期一&nbsp;&nbsp;
-                                <input type="checkbox" ng-model="Tuesday" ng-true-value="2"
+                                    <input type="checkbox" ng-model="Tuesday" ng-true-value="2"
                                        ng-init="Tuesday='0'" name="dates" ng-checked="Tuesday==2">星期二&nbsp;&nbsp;
 
-                                <input type="checkbox" ng-model="Wednesday" ng-true-value="3"
+                                    <input type="checkbox" ng-model="Wednesday" ng-true-value="3"
                                        ng-init="Wednesday='0'" name="dates" ng-checked="Wednesday==3">星期三&nbsp;&nbsp;
 
-                                <input type="checkbox" ng-model="Thursday" ng-true-value="4"
+                                    <input type="checkbox" ng-model="Thursday" ng-true-value="4"
                                        ng-init="Thursday='0'" name="dates" ng-checked="Thursday==4">星期四<br>
 
-                                <input type="checkbox" ng-model="Friday" ng-true-value="5"
+                                    <input type="checkbox" ng-model="Friday" ng-true-value="5"
                                        ng-init="Friday='0'" name="dates" ng-checked="Friday==5">星期五&nbsp;&nbsp;
 
-                                <input type="checkbox" ng-model="Saturday" ng-true-value="6"
+                                    <input type="checkbox" ng-model="Saturday" ng-true-value="6"
                                        ng-init="Saturday='0'" name="dates" ng-checked="Saturday==6">星期六&nbsp;&nbsp;
 
-                                <input type="checkbox" ng-model="Sunday" ng-true-value="7"
+                                    <input type="checkbox" ng-model="Sunday" ng-true-value="7"
                                        ng-init="Sunday='0'" name="dates" ng-checked="Sunday==7">星期日
 
                             </div>
@@ -394,226 +388,228 @@
                             </label>
 
                             <div
-                                    class="input-group input-daterange col-md-8 "
-                                    data-date="10/11/2012"
-                                    language="zh-CN"
-                                    data-date-format="yyyy-mm-dd">
+                                 class="input-group input-daterange col-md-8 "
+                                 data-date="10/11/2012"
+                                 language="zh-CN"
+                                 data-date-format="yyyy-mm-dd">
                                 <input id="start_hour" type="text" class="form-control " placeholder=""
                                        name="from" ng-model="from" data-date-format="yyyy/mm/dd hh:ii">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">方案结束时间</span>
-                            </label>
+                <div class="form-group row">
+                    <label class="col-md-3 control-label">
+                        <span class="required">方案结束时间</span>
+                    </label>
 
-                            <div
-                                    class="input-group input-daterange col-md-8 "
-                                    data-date="10/11/2012"
-                                    language="zh-CN"
-                                    data-date-format="yyyy-mm-dd">
-                                <input id="end_hour" type="text" class="form-control " placeholder=""
-                                       name="to" ng-model="to" data-date-format="yyyy/mm/dd hh:ii">
-                            </div>
-                        </div>
-                        <!--<div class="input-group input-daterange col-md-12 "
-                             data-date="10/11/2012"
-                             language="zh-CN"
-                             data-date-format="yyyy-mm-dd">
-                            <input id="start_hour" type="text" class="form-control " placeholder="开始时间"
-                                   name="from" ng-model="from" data-date-format="yyyy/mm/dd hh:ii">
-                            <span class="input-group-addon">至 </span>
-                            <input id="end_hour" type="text" class="form-control" placeholder="截止时间"
-                                   name="to" ng-model="to" data-date-format="yyyy/mm/dd hh:ii"></div>-->
+                    <div
+                            class="input-group input-daterange col-md-8 "
+                            data-date="10/11/2012"
+                            language="zh-CN"
+                            data-date-format="yyyy-mm-dd">
+                        <input id="end_hour" type="text" class="form-control " placeholder=""
+                               name="to" ng-model="to" data-date-format="yyyy/mm/dd hh:ii">
+                    </div>
+                </div>
+                <!--<div class="input-group input-daterange col-md-12 "
+                     data-date="10/11/2012"
+                     language="zh-CN"
+                     data-date-format="yyyy-mm-dd">
+                    <input id="start_hour" type="text" class="form-control " placeholder="开始时间"
+                           name="from" ng-model="from" data-date-format="yyyy/mm/dd hh:ii">
+                    <span class="input-group-addon">至 </span>
+                    <input id="end_hour" type="text" class="form-control" placeholder="截止时间"
+                           name="to" ng-model="to" data-date-format="yyyy/mm/dd hh:ii"></div>-->
                         <!--<div class="form-group">-->
-                        <!--<div class="col-lg-9 col-lg-offset-3">-->
-                        <!--<button type="submit" class="btn btn-primary">Sign up</button>-->
+                            <!--<div class="col-lg-9 col-lg-offset-3">-->
+                                <!--<button type="submit" class="btn btn-primary">Sign up</button>-->
+                            <!--</div>-->
                         <!--</div>-->
-                        <!--</div>-->
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" ng-click="addCoupon()" class="btn green">确定
-                    </button>
-                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
-                    </button>
-                </div>
+                </form>
             </div>
-            <!-- /.modal-content -->
+            <div class="modal-footer">
+                <button type="button" ng-click="addCoupon()" class="btn green">确定
+                </button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                </button>
+            </div>
         </div>
-        <!-- /.modal-dialog -->
+        <!-- /.modal-content -->
     </div>
-    <div class="modal fade text-left" id="modCoupon" tabindex="-1" aria-hidden="true"
-         style="display: none;z-index: 1049">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-hidden="true"></button>
-                    <h4 class="modal-title">修改优惠券信息</h4>
-                </div>
-                <div class="modal-body form-body text-right">
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade text-left" id="modCoupon" tabindex="-1" aria-hidden="true"
+     style="display: none;z-index: 1049">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">修改优惠券信息</h4>
+            </div>
+            <div class="modal-body form-body text-right">
 
-                    <form class="form-horizontal">
+                <form class="form-horizontal">
 
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required"> * </span>优惠券名称
-                            </label>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> * </span>优惠券名称
+                        </label>
 
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="mod['COUPON.NAME']">
-                            </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['COUPON.NAME']">
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                优惠券编码
-                            </label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            优惠券编码
+                        </label>
 
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="mod['COUPON.CODE']"
-                                ></div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['COUPON.CODE']"
+                            ></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            对应规则
+                        </label>
+
+                        <div class="col-md-8">
+                            <select ng-model="mod['COUPON.RULE_ID']"
+                                    ng-init="mod['COUPON.RULE_ID']=''"
+                                    class="nya-bs-select form-control"
+                                    ng-options="item['COUPON_RULE.ID'] as item['COUPON_RULE.NAME'] for item in ruleList">
+                                <option class="nya-bs-option" value="">选择优惠券规则</option>
+
+                            </select>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                对应规则
-                            </label>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">限定使用对象</span>
+                        </label>
 
-                            <div class="col-md-8">
-                                <select ng-model="mod['COUPON.RULE_ID']"
-                                        ng-init="mod['COUPON.RULE_ID']=''"
-                                        class="nya-bs-select form-control"
-                                        ng-options="item['COUPON_RULE.ID'] as item['COUPON_RULE.NAME'] for item in ruleList">
-                                    <option class="nya-bs-option" value="">选择优惠券规则</option>
-
-                                </select>
-                            </div>
+                        <div class="col-md-4">
+                            <select ng-model="mod['COUPON.TARGET_OBJ_TYPE']"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value='-1'>不限定</option>
+                                <option class="nya-bs-option" value='1'>商品</option>
+                                <option class="nya-bs-option" value='2'>商品类别</option>
+                                <option class="nya-bs-option" value='3'>商品标签</option>
+                            </select>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">限定使用对象</span>
-                            </label>
+                        <div class="col-md-4">
+                            <!--   <input type="text" class="form-control"
+                                      ng-model="mod['COUPON.NAME']"
+                                      ng-init="mod['COUPON.NAME']=''"
+                                      placeholder="">-->
+                            <a data-toggle="modal" ng-if="mod['COUPON.TARGET_OBJ_TYPE']==1"
+                               data-target="#productSwitchModal">请选择商品</a>
+                            <a data-toggle="modal" ng-if="mod['COUPON.TARGET_OBJ_TYPE']==2"
+                               data-target="#classSwitchModal">请选择商品类别</a>
+                            <a data-toggle="modal" ng-if="mod['COUPON.TARGET_OBJ_TYPE']==3"
+                               data-target="#tagSwitchModal">请选择商品标签</a>
 
-                            <div class="col-md-4">
-                                <select ng-model="mod['COUPON.TARGET_OBJ_TYPE']"
-                                        class="nya-bs-select form-control">
-                                    <option class="nya-bs-option" value='-1'>不限定</option>
-                                    <option class="nya-bs-option" value='1'>商品</option>
-                                    <option class="nya-bs-option" value='2'>商品类别</option>
-                                    <option class="nya-bs-option" value='3'>商品标签</option>
-                                </select>
-                            </div>
-                            <div class="col-md-4">
-                                <!--   <input type="text" class="form-control"
-                                          ng-model="mod['COUPON.NAME']"
-                                          ng-init="mod['COUPON.NAME']=''"
-                                          placeholder="">-->
-                                <a data-toggle="modal" ng-if="mod['COUPON.TARGET_OBJ_TYPE']==1"
-                                   data-target="#productSwitchModal">请选择商品</a>
-                                <a data-toggle="modal" ng-if="mod['COUPON.TARGET_OBJ_TYPE']==2"
-                                   data-target="#classSwitchModal">请选择商品类别</a>
-                                <a data-toggle="modal" ng-if="mod['COUPON.TARGET_OBJ_TYPE']==3"
-                                   data-target="#tagSwitchModal">请选择商品标签</a>
-
-                            </div>
                         </div>
+                    </div>
 
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">发行总量(张)</span>
-                            </label>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">发行总量(张)</span>
+                        </label>
 
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="mod['COUPON.NUM_LIMIT']"
-                                >
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">使用期限(天)</span>
-                            </label>
-
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="mod['COUPON.USE_TIME_LIMIT']">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">使用周期</span>
-                            </label>
-
-                            <div class="col-md-8 text-left">
-
-                                <input type="checkbox" ng-model="mMonday" ng-true-value="1"
-                                       ng-checked="mMonday==1">星期一&nbsp;&nbsp;
-                                <input type="checkbox" ng-model="mTuesday" ng-true-value="2"
-                                       ng-checked="mTuesday==2">星期二&nbsp;&nbsp;
-                                <input type="checkbox" ng-model="mWednesday" ng-true-value="3"
-                                       ng-checked="mWednesday==3">星期三&nbsp;&nbsp;
-                                <input type="checkbox" ng-model="mThursday" ng-true-value="4"
-                                       ng-checked="mThursday==4">星期四&nbsp;&nbsp;<br>
-                                <input type="checkbox" ng-model="mFriday" ng-true-value="5"
-                                       ng-checked="mFriday==5">星期五&nbsp;&nbsp;
-                                <input type="checkbox" ng-model="mSaturday" ng-true-value="6"
-                                       ng-checked="mSaturday==6">星期六&nbsp;&nbsp;
-                                <input type="checkbox" ng-model="mSunday" ng-true-value="7"
-                                       ng-checked="mSunday==7">星期日
-
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">方案开始时间</span>
-                            </label>
-                            <div class="input-group input-daterange col-md-8 "
-                                 language="zh-CN"
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['COUPON.NUM_LIMIT']"
                             >
-                                <input id="mstart_hour" type="text" class="form-control "
-                                       name="from" ng-model="mBeginTime"/>
-                            </div>
-
-                            <!--  <div class="col-md-8">
-                                  <input type="text" class="form-control"
-                                         ng-init="mod['COUPON.BEGIN_DATETIME']=mod['COUPON.BEGIN_DATETIME']|FormatAllDate"
-                                         ng-model="mod['COUPON.BEGIN_DATETIME']">
-                              </div>-->
                         </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required">方案结束时间</span>
-                            </label>
-                            <div
-                                    class="input-group input-daterange col-md-8 "
-                                    data-date="10/11/2016"
-                                    language="zh-CN"
-                                    data-date-format="yyyy-mm-dd">
-                                <input id="mend_hour" type="text" class="form-control " placeholder=""
-                                       name="to" ng-model="mEndTime" data-date-format="yyyy/mm/dd hh:ii">
-                            </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">使用期限(天)</span>
+                        </label>
 
-                            <!-- <div class="col-md-8">
-                                 <input type="text" class="form-control"
-                                        ng-model="mod['COUPON.END_DATETIME']"
-                                 >
-                             </div>-->
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['COUPON.USE_TIME_LIMIT']">
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" ng-click="modCoupon()" class="btn green">确定
-                    </button>
-                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
-                    </button>
-                </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">使用周期</span>
+                        </label>
+
+                        <div class="col-md-8 text-left">
+
+                            <input type="checkbox" ng-model="mMonday" ng-true-value="1"
+                                   ng-checked="mMonday==1">星期一&nbsp;&nbsp;
+                            <input type="checkbox" ng-model="mTuesday" ng-true-value="2"
+                                   ng-checked="mTuesday==2">星期二&nbsp;&nbsp;
+                            <input type="checkbox" ng-model="mWednesday" ng-true-value="3"
+                                   ng-checked="mWednesday==3">星期三&nbsp;&nbsp;
+                            <input type="checkbox" ng-model="mThursday" ng-true-value="4"
+                                   ng-checked="mThursday==4">星期四&nbsp;&nbsp;<br>
+                            <input type="checkbox" ng-model="mFriday" ng-true-value="5"
+                                   ng-checked="mFriday==5">星期五&nbsp;&nbsp;
+                            <input type="checkbox" ng-model="mSaturday" ng-true-value="6"
+                                   ng-checked="mSaturday==6">星期六&nbsp;&nbsp;
+                            <input type="checkbox" ng-model="mSunday" ng-true-value="7"
+                                   ng-checked="mSunday==7">星期日
+
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">方案开始时间</span>
+                        </label>
+                        <div
+                                class="input-group input-daterange col-md-8 "
+                                data-date="10/11/2016"
+                                language="zh-CN"
+                                data-date-format="yyyy-mm-dd">
+                            <input id="mstart_hour" type="text" class="form-control "
+                                   name="from" ng-model="mBeginTime" data-date-format="yyyy/mm/dd hh:ii">
+                        </div>
+
+                      <!--  <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-init="mod['COUPON.BEGIN_DATETIME']=mod['COUPON.BEGIN_DATETIME']|FormatAllDate"
+                                   ng-model="mod['COUPON.BEGIN_DATETIME']">
+                        </div>-->
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">方案结束时间</span>
+                        </label>
+                        <div
+                                class="input-group input-daterange col-md-8 "
+                                data-date="10/11/2016"
+                                language="zh-CN"
+                                data-date-format="yyyy-mm-dd">
+                            <input id="mend_hour" type="text" class="form-control " placeholder=""
+                                   name="to" ng-model="mEndTime" data-date-format="yyyy/mm/dd hh:ii">
+                        </div>
+
+                       <!-- <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="mod['COUPON.END_DATETIME']"
+                            >
+                        </div>-->
+                    </div>
+                </form>
             </div>
-            <!-- /.modal-content -->
+            <div class="modal-footer">
+                <button type="button" ng-click="modCoupon()" class="btn green">确定
+                </button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                </button>
+            </div>
         </div>
-        <!-- /.modal-dialog -->
+        <!-- /.modal-content -->
     </div>
+    <!-- /.modal-dialog -->
+</div>
     <div class="modal fade text-left" id="detail" tabindex="-1" aria-hidden="true"
          style="display: none;z-index: 1049">
         <div class="modal-dialog">
