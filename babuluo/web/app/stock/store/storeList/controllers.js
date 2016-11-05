@@ -3,14 +3,12 @@ AndSellMainModule.controller('storeListController', function ($scope, $statePara
 
   modalFactory.setTitle('仓库列表');
 
-  $scope.initLoad = function () {
-    storeFactory.getStoreList().get({}, function (repsonce) {
-     // console.log(repsonce);
-      $scope.storeList = repsonce.data;
-    }, null);
+  $scope.bindData = function (response) {
+    $scope.storeList = response.data;
+
   };
 
-  $scope.initLoad();
+
 
 
     $scope.addStore = function () {
@@ -31,7 +29,7 @@ AndSellMainModule.controller('storeListController', function ($scope, $statePara
         $scope.add='';
         $scope.IS_DEF=false;
         $("#addStore").modal('hide');
-        $scope.initLoad();
+        $scope.$broadcast('pageBar.reload');
       }
     });
   };
@@ -59,7 +57,7 @@ AndSellMainModule.controller('storeListController', function ($scope, $statePara
       } else if (response.extraData.state == 'true') {
         $("#modifyStore").modal('hide');
         modalFactory.showShortAlert("修改成功");
-        $scope.initLoad();
+        $scope.$broadcast('pageBar.reload');
       }
     });
   };
@@ -70,8 +68,7 @@ AndSellMainModule.controller('storeListController', function ($scope, $statePara
       storeFactory.delStoreById(id).get({}, function (res) {
         if (res.extraData.state = 'true') {
           modalFactory.showShortAlert("删除成功");
-
-          $scope.initLoad();
+          $scope.$broadcast('pageBar.reload');
         }
       });
     });
