@@ -94,5 +94,4 @@ AndSellMainModule.controller('salesCouponController', function ($scope, $statePa
     });
 
   }
-
 });

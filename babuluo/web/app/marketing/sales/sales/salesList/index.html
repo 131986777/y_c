@@ -1,28 +1,34 @@
 <div class="page-content">
     <!-- BEGIN 促销项列表 -->
-    <div class="table-toolbar row">
-        <div class="col-md-10 form-inline">
-            <label class="control-label">筛选：</label>
-            <select ng-model="filter['STOCK_REALTIME.ORDER']"
-                    ng-init="filter['STOCK_REALTIME.ORDER']='UPDATE_DATETIME DESC'"
-                    class="nya-bs-select form-control">
-                <option class="nya-bs-option" value="UPDATE_DATETIME DESC">
-                    类型
-                </option>
-                <option class="nya-bs-option" value="LOCK_STOCK DESC">
-                    位置
-                </option>
-            </select>
-        </div>
-        <div class="col-md-2 text-right">
+    <div class="table-toolbar">
         <button show-modal id="#addSalePlan" class="btn btn-default sbold green pull-right">
         <i class="fa fa-plus"></i>新增促销计划
     </button>
-        </div>
     </div>
 
     <!-- select-center  -->
-
+    <div style="width: 150px">
+        <label>筛选:</label>
+        <select ng-model="filter['SALES_PLAN.TARGET_OBJ_TYPE']"
+                ng-init="filter['SALES_PLAN.TARGET_OBJ_TYPE']='null'"
+                class="nya-bs-select form-control">
+            <option class="nya-bs-option" value="null">
+                类别
+            </option>
+            <option class="nya-bs-option" value="1">
+                商品
+            </option>
+            <option class="nya-bs-option" value="2">
+                商品类别
+            </option>
+            <option class="nya-bs-option" value="3">
+                标签
+            </option>
+            <option class="nya-bs-option" value="-1">
+                订单
+            </option>
+        </select>
+    </div> <!-- select-center END -->
 
     <div class="promotion-list" ng-repeat="item in salesPlan">
     <!--BENGIN 商品促销 -->
@@ -125,25 +131,31 @@
                         <div class="product-item">
                             <img class="pull-left" src="../components/images/index_18.png">
                             <p class="itemName">{{proClassInfo[pro]}}</p>
-                            <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
                         </div>
                     </div>
-                    <div class="product-total">>>共<span class="itemNum">{{((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length}}</span>类商品参与</div>
                 </div>
-
+                <div class="product-total" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length >0">
+                    >>共
+                        <span class="itemNum" >
+                            {{((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length}}
+                        </span>件商品参与
+                </div>
             </div>
         </div> <!-- promotion-content -->
-        <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
-            <div class="man-text">满<span>{{auto[0]}}</span>个</div>
-            <div class="man-content">
-                <div class="product-item">
-                    <img class="pull-left" src="../components/images/index_18.png">
-                    <p class="itemName">{{auto[1]}}</p>
-                    <p class="itemDesc">【版本：标准版，颜色：淡蓝色】</p>
+            <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
+                <div class="man-text">满<span>{{auto[0]}}</span>个</div>
+                <div class="man-content">
+                    <div class="product-item">
+                        <img class="pull-left" src="../components/images/index_18.png">
+                        <p class="itemName">{{auto[1]}}</p>
+                        <p class="itemDesc">【{{auto[3][0]}}：{{auto[3][1]}}
+                            <span ng-if="auto[3][2]!=''&& auto[3][2]!=null"> ，{{auto[3][2]}}：{{auto[3][3]}}】</span>
+                            <span ng-if="auto[3][4]!=''&& auto[3][4]!=null"> ，{{auto[3][4]}}：{{auto[3][5]}}</span>】
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
-        </div><!-- promotion footer -->
+                <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
+            </div><!-- promotion footer -->
     </div>
     <!-- END 商品类促销 -->
 
@@ -167,7 +179,7 @@
                     <img src="../components/images/index_01.png">
                 </div>
             </div><!-- END promotion-head -->
-            <div class="promotion-content" ng-if="item['salesClass'] != 3">
+            <div class="promotion-content">
                 <div class="coupon-list text-center" >
                         <ul class="list-unstyled" >
                             <li ng-show="item['salesClass'] == 1" ng-repeat="auto in item['salesInfo']">

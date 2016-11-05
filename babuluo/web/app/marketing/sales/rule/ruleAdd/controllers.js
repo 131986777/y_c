@@ -83,6 +83,11 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
         }
     };
 
+    $scope.couponItemSwitch= function (data) {
+        console.log('coupon item switch');
+        console.log(data);
+    }
+
 
     //前端Jquery逻辑
     $(function(){

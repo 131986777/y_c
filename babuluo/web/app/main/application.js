@@ -451,6 +451,49 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
     }
 });
 
+//优惠券模态框
+AndSellUI.directive('couponItemSwitchModal', function (http, baseURL,couponFactory) {
+    return {
+        restrict: 'EA',
+        templateUrl: '/AndSell/app/components/libs/angular/template/couponItemSwitchModal.html',
+        scope: {
+            callback: '&'
+        },
+        controller: function ($scope) {
+
+            $scope.getInitData = function () {
+                couponFactory.getCouponList().get({}, function (response) {
+                    $scope.couponList = response.data;
+                });
+            };
+
+            $scope.couponList = new Array;
+
+            $scope.bindCouponData = function (response) {
+                console.log(response);
+                $scope.couponList = response.data;
+            }
+
+
+            $scope.selectItemList = new Array;
+            $scope.insertItem = function (item) {
+                if ($scope.selectItemList.indexOf(item) < 0) {
+                    $scope.selectItemList.push(item);
+                }
+            }
+            $scope.removeItem = function (item) {
+                $scope.selectItemList.remove(item);
+            }
+
+            $scope.setReturn = function () {
+                $scope.callback({data: $scope.selectItemList});
+                $scope.selectItemList = new Array;
+                $('#couponItemSwitchModal').modal('hide');
+            }
+        }
+    }
+});
+
 AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFactory, unitFactory, productFactory, tagFactory) {
     return {
         restrict: 'EA',
