@@ -4,7 +4,7 @@
         <div class="table-operbar">
             <div class="table-toolbar text-right">
                 <button id="sample_editable_1_new" class="btn btn-default">
-                    <i class="fa fa-plus"></i> 新增商品
+                    <i class="fa fa-plus"></i> 新增商品分类
                 </button>
             </div>
 

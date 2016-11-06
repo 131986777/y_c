@@ -4,13 +4,18 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
 
     $scope.memberId = $stateParams.id;
     $scope. serviceId = $stateParams.serviceId;
-    $scope.proName = "（选择赠送商品）";
 
     var array = new Array();
     $scope.saveCurrentInfo = function (num) {
-        var str = '{'+'"ProId"'+':'+$scope.product+',' +'"Num"'+':'+$scope.salesInfo['SALES.PRONUM'+num]+'}';
+        if(salesInfo['SALES.SALE_TYPE'] == 3){
+            var str = '{'+'"ProId"'+':'+$scope.productId+',' +'"Num"'+':'+$scope.salesInfo['SALES.PRONUM'+num]+'}';
+        }else {
+            var str = '{'+'"ProId"'+':'+$scope.couponId+',' +'"Num"'+':'+$scope.salesInfo['SALES.PRONUM'+num]+'}';
+
+        }
         array.push(str);
         $scope.salesDetailInfo = array;
+        console.log(array);
     }
 
     $scope.bindData = function(form){
@@ -35,12 +40,15 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
 
     //设置页面Bottom触发事件
     modalFactory.setBottom(true, function () {
+        console.log($scope.salesInfo);
+        alert('+++');
         if($scope.salesInfo == undefined){
             modalFactory.showAlert("请填写完整信息");
             $scope.empty();
         }
         else{
             var form = $scope.bindData($scope.salesInfo);
+            console.log($scope.salesInfo);
             salesFactory.AddSales (form).get({}, function (response) {
                 console.log(form);
                 if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
@@ -63,6 +71,7 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
     }
 
     $scope.prdItemSwitch= function (data) {
+        $scope.productId = data['SHOP_PRODUCT_SKU.SKU_ID'];
         $scope.productName = data['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'];
         if($scope.num == 1){
             $('.A').text($scope.productName);
@@ -82,6 +91,20 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
             $('.F').text($scope.productName);
         }
     };
+
+    $scope.couponItemSwitch= function (data) {
+        console.log(data);
+        $scope.couponId = data['COUPON.ID'];
+        $scope.couponName = data['COUPON.NAME'];
+        var tag = $scope.num;
+        $("#"+tag).text('1');
+        console.log($("#"+tag).html());
+
+
+
+        console.log(data);
+
+    }
 
 
     //前端Jquery逻辑

@@ -1,4 +1,4 @@
-<div class="modal fade text-left" id="classSwitchModal" ng-init="getInitData()" tabindex="-1" aria-hidden="true"
+<div class="modal fade text-left" id="couponItemSwitchModal" ng-init="getInitData()" tabindex="-1" aria-hidden="true"
      style="display: none;">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -21,11 +21,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat=" item in classList ">
+                <tr ng-repeat=" item in couponList ">
                   <td style="text-align:left"
-                      value="item['SHOP_PRODUCT_CLASS.CLASS_ID']"
+                      value="item['COUPON.ID']"
                       ng-click="insertItem(item)"
-                      ng-bind="item['SHOP_PRODUCT_CLASS.CLASS_NAME']"></td>
+                      ng-bind="item['COUPON.NAME']"></td>
                 </tr>
                 </tbody>
               </table>
@@ -46,9 +46,9 @@
                 <tbody>
                 <tr ng-repeat=" item in selectItemList ">
                   <td style="text-align:left"
-                      value="item['SHOP_PRODUCT_CLASS.CLASS_ID']"
+                      value="item['COUPON.ID']]"
                       ng-click="removeItem(item)"
-                      ng-bind="item['SHOP_PRODUCT_CLASS.CLASS_NAME']">
+                      ng-bind="item['COUPON.NAME']">
                   </td>
                 </tr>
                 </tbody>

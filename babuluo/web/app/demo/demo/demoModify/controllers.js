@@ -26,4 +26,9 @@ AndSellMainModule.controller('ModifyDemoController', function ($scope, $state, $
         console.log(data);
     }
 
+    $scope.couponItemSwitch= function (data) {
+        console.log('coupon item switch');
+        console.log(data);
+    }
+
 });

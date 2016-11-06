@@ -177,10 +177,13 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
           //获得商品标签的ID和促销针对的Map
           $scope.salesTarget = response.extraData.salesTarget;
 
+          //获得优惠券信息
+          $scope.couponMap = response.extraData.couponMap;
+
           //获得sku列表
           $scope.skuList = response.extraData.skuList;
           $scope.skuMap = response.extraData.skuMap;
-          $scope.skuInfoMap = response.extraData.skuInfoMap;
+          $scope.urlMap = response.extraData.urlMap;
           $scope.proAndSkuInfoMap = response.extraData.proAndSkuInfoMap;
 
 
@@ -188,7 +191,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
               $scope.salesList.forEach(function(item){
                   if(ele['SALES_PLAN.SALE_ID'] == item['SALES.ID']){
                       var totalArray = new Array();
-                      if(item['SALES.SALE_TYPE'] == 3) {
+                      if(item['SALES.SALE_TYPE'] == 3 ) {
                           for (var i = 1; i <= 6; i++) {
                               if (item['SALES.CONDITION_NUM' + i] != null) {
                                   var jsonInfo = item['SALES.SALE_CONTENT' + i].toString();
@@ -197,7 +200,24 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
                                   array.push(item['SALES.CONDITION_NUM' + i]);
                                   array.push($scope.proAndSkuInfoMap[info['ProId']]);
                                   array.push(info['Num']);
-                                  array.push($scope.skuInfoMap[info['ProId']]);
+                                  array.push($scope.skuMap[info['ProId']]);
+                                  array.push($scope.urlMap[info['ProId']]);
+                                  totalArray.push(array);
+                                  $scope.salesDetailInfo = totalArray;
+                              }
+                              ele['salesInfo'] = $scope.salesDetailInfo;
+                              ele['salesClass'] = item['SALES.SALE_TYPE'];
+                          }
+                      }
+                      else if(item['SALES.SALE_TYPE'] == 4){
+                          for (var i = 1; i <= 6; i++) {
+                              if (item['SALES.CONDITION_NUM' + i] != null) {
+                                  var jsonInfo = item['SALES.SALE_CONTENT' + i].toString();
+                                  var info = JSON.parse(jsonInfo);
+                                  var array = new Array();
+                                  array.push(item['SALES.CONDITION_NUM' + i]);
+                                  array.push($scope.couponMap[info['ProId']]);
+                                  array.push(info['Num']);
                                   totalArray.push(array);
                                   $scope.salesDetailInfo = totalArray;
                               }

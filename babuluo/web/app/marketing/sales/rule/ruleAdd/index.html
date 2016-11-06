@@ -193,37 +193,62 @@
                     <div class="content hidden">
                         <div class="detailBox">
                             <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，获赠优惠券
+                                <span ng-click="getNum('A')">
+                                    <a show-modal id="#couponItemSwitchModal" id="A"> （选择赠送优惠券） </a>
+                                    <coupon-item-switch-modal callback="couponItemSwitch(data)"></coupon-item-switch-modal>
+                                </span>
+                                <input type="text" name="" ng-model="salesInfo[salesInfo['SALES.PRONUM1']]" ng-blur="saveCurrentInfo(1)">张。
                             </div>
                         </div>
                         <div class="detailBox hidden">
                             <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
-                                <a class="itemDel">删除</a>
+                                订单金额满￥<input class="" type="text">，获赠优惠券
+                                <span>
+                                    <a show-modal id="#couponItemSwitchModal"> （选择赠送优惠券） </a>
+                                    <coupon-item-switch-modal callback="couponItemSwitch(data)"></coupon-item-switch-modal>
+                                </span>
+                                <input type="text" name="">张。
                             </div>
                         </div>
                         <div class="detailBox hidden">
                             <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
-                                <a class="itemDel">删除</a>
+                                订单金额满￥<input class="" type="text">，获赠优惠券
+                                <span>
+                                    <a show-modal id="#couponItemSwitchModal"> （选择赠送优惠券） </a>
+                                    <coupon-item-switch-modal callback="couponItemSwitch(data)"></coupon-item-switch-modal>
+                                </span>
+                                <input type="text" name="">张。
                             </div>
                         </div>
                         <div class="detailBox hidden">
                             <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
-                                <a class="itemDel">删除</a>
+                                订单金额满￥<input class="" type="text">，获赠优惠券
+                                <span>
+                                    <a show-modal id="#couponItemSwitchModal"> （选择赠送优惠券） </a>
+                                    <coupon-item-switch-modal callback="couponItemSwitch(data)"></coupon-item-switch-modal>
+                                </span>
+                                <input type="text" name="">张。
                             </div>
                         </div>
                         <div class="detailBox hidden">
                             <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
-                                <a class="itemDel">删除</a>
+                                订单金额满￥<input class="" type="text">，获赠优惠券
+                                <span>
+                                    <a show-modal id="#couponItemSwitchModal"> （选择赠送优惠券） </a>
+                                    <coupon-item-switch-modal callback="couponItemSwitch(data)"></coupon-item-switch-modal>
+                                </span>
+                                <input type="text" name="">张。
                             </div>
                         </div>
                         <div class="detailBox hidden">
                             <div class="detail">
-                                订单金额满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
-                                <a class="itemDel">删除</a>
+                                订单金额满￥<input class="" type="text">，获赠优惠券
+                                <span>
+                                    <a show-modal id="#couponItemSwitchModal"> （选择赠送优惠券） </a>
+                                    <coupon-item-switch-modal callback="couponItemSwitch(data)"></coupon-item-switch-modal>
+                                </span>
+                                <input type="text" name="">张。
                             </div>
                         </div>
                         <button class="btn btn-sm btn-default addItem" href="javascript:;"><i class="fa fa-plus"></i>添加区间</button>
