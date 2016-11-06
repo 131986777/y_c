@@ -523,14 +523,6 @@ AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFact
 
             $scope.checkItem = function (item) {
                 $scope.selectItem=item;
-                //$scope.skuList.forEach(function (ele) {
-                //    if(ele['SHOP_PRODUCT_SKU.SKU_ID']==item['SHOP_PRODUCT_SKU.SKU_ID']){
-                //        ele.isSelect=true;
-                //    }
-                //    else{
-                //        ele.isSelect=false;
-                //    }
-                //});
             }
 
             $scope.search = function () {
@@ -546,6 +538,122 @@ AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFact
         }
     }
 });
+
+//树形结构
+AndSellUI.directive('treeList', function () {
+    return {
+        restrict: 'EA',
+        templateUrl: '/AndSell/app/components/libs/angular/template/tree.html',
+        scope: {
+            callback: '&', tree: '= tree'
+        },
+        controller: function ($scope) {
+
+            $scope.$watch('tree', function () {
+                if($scope.tree!=undefined)
+                $scope.treeData();
+            });
+
+            // 多级菜单初始化
+            $scope.multiMenuInit = function () {
+                function setSubmenu(menu) {
+                    if(menu!= undefined)
+                        if (menu.childList ) {
+                            menu.showSubmenu = false; // 默认子菜单隐藏
+                        }
+                }
+
+                setSubmenu($scope.firstMenu);
+                setSubmenu($scope.secondMenu);
+                setSubmenu($scope.thirdMenu);
+                setSubmenu($scope.fourthMenu);
+                setSubmenu($scope.fifthMenu);
+            };
+
+            $scope.treeData= function () {
+
+                var tree=$scope.tree;
+                var root = {};
+                root[tree.keyId]=tree.rootId;
+                root[tree.keyPId]=tree.rootId;
+                root[tree.keyName]='';
+
+                $scope.keyName=tree.keyName;
+                $scope.keyId=tree.keyId;
+                $scope.keyPId=tree.keyPId;
+
+                $scope.multimenuList = [];
+                var list = new Array;
+                list.push(root);
+                tree.lists.forEach(function (element) {
+                    list.push(element);
+                });
+
+                $scope.multimenuList_origin = convertListWithParent(list,tree.keyPId,tree.keyId, tree.rootId);
+                $scope.multimenuList = [];
+                angular.copy($scope.multimenuList_origin, $scope.multimenuList);
+            }
+
+            /**
+             * parentColumn   这个是表示一个对象指向父类的那个id的属性名
+             *
+             * parentKey  这是表示id 的属性名
+             * */
+            var convertListWithParent = function (list, parentColumn, parentKey, rootId) {
+
+                if (rootId == undefined) {
+                    rootId = 0;
+                }
+
+                var map = new Map();
+                var result = [];
+                list.forEach(function (ele) {
+                    map.set(ele[parentKey], ele);
+                });
+                list.forEach(function (ele) {
+                    var parentId = ele[parentColumn];
+                    if (parentId == rootId) {
+                        result.push(ele);
+                    } else {
+                        var parent = map.get(parentId);
+                        if (parent != undefined) {
+                            if (parent.childList == undefined) {
+                                parent.childList = [];
+                            }
+                            parent.childList.push(ele);
+                        }
+                    }
+                });
+                return result;
+            };
+
+            // 子菜单的展开和关闭功能
+            $scope.toggleMenu = function (menu) {
+                menu.showSubmenu = !menu.showSubmenu;
+                // 点击展开按钮时，菜单不会关闭
+                $(".dropdown-menu").on("click", "[data-stopPropagation]", function (menu) {
+                    menu.stopPropagation();
+                });
+            };
+
+            $scope.changeBtn = function (Menu) {
+                $scope.parentName = Menu[keyName];
+                $scope.add[keyId] = Menu[keyId];
+            }
+
+            // Popover 初始化
+            $(function () {
+                $('[data-toggle="popover"]').popover()
+            });
+
+            $scope.setReturn= function (item) {
+                $scope.callback({data:item});
+            }
+
+        }
+    }
+});
+
 
 AndSellService.filter('bytes', function () {
     return function (bytes, precision) {
