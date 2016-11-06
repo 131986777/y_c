@@ -36,7 +36,7 @@
                         <option class="nya-bs-option" value="null">全部标签</option>
                         <option class="nya-bs-option" ng-repeat="tag in tagList"
                                 ng-bind="tag['SHOP_TAG.TAG']"
-                                value="'{{tag['SHOP_TAG.TAG_ID']}}'"></option>
+                                value="{{tag['SHOP_TAG.TAG_ID']}}"></option>
                     </select>
                     <select ng-model="filter['SHOP_PRODUCT.CLASS_ID']"
                             ng-init="filter['SHOP_PRODUCT.CLASS_ID'] = 'null'"
@@ -44,11 +44,12 @@
                         <option class="nya-bs-option" value="null">全部分类</option>
                         <option class="nya-bs-option" ng-repeat="prdClass in classList"
                                 ng-bind="prdClass['SHOP_PRODUCT_CLASS.CLASS_NAME']"
-                                value="'{{prdClass['SHOP_PRODUCT_CLASS.CLASS_ID']}}'"></option>
+                                value="{{prdClass['SHOP_PRODUCT_CLASS.CLASS_ID']}}"></option>
+                        <option class="nya-bs-option" value="0">未分类</option>
                     </select>
                         <label class="control-label">排序：</label>
                         <select ng-model="filter['SHOP_PRODUCT.ODRDER']"
-                            ng-init="filter['SHOP_PRODUCT.ODRDER'] = 'ORDER_NUM DESC'; "
+                            ng-init="filter['SHOP_PRODUCT.ODRDER'] = 'ADD_DATETIME DESC'; "
                             class="nya-bs-select form-control">
                             <option class="nya-bs-option" value="ORDER_NUM DESC">排序号</option>
                             <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
@@ -167,7 +168,8 @@
                         </div>
                     </td>
                     <td ng-bind="product['SHOP_PRODUCT.PRD_SPU']"></td>
-                    <td ng-bind="product['SHOP_PRODUCT.CLASS_NAME']"></td>
+                    <td> <span ng-bind="product['SHOP_PRODUCT.CLASS_NAME']" ng-if="product['SHOP_PRODUCT.CLASS_NAME']!=undefined"></span>
+                        <span ng-if="product['SHOP_PRODUCT.CLASS_NAME']==undefined">未分类</span></td>
                     <td ng-bind="product['SHOP_PRODUCT.UNIT_NAME']"></td>
                     <td></td>
                     <td></td>
