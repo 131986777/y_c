@@ -1482,7 +1482,8 @@ p {
 .product-list-page .weui_navbar_item{
   background-color : #fff;
 }
-.card-list{
+.card-list,
+.coupon-list{
   padding: 14px 25px 53px;
 }
 .card-list .card-wrap{
@@ -1512,6 +1513,76 @@ p {
 }
 .card-wrap .card-detail .froze{
   font-size: 16px;
+}
+/*优惠券*/
+.coupon-list .coupon-wrap{
+  width: 100%;
+  position: relative;
+  color: #fff;
+  margin-bottom: 14px;
+
+}
+.coupon-list .coupon-wrap .coupon-head{
+  height: 45px;
+  background-color: rgb(255,151,50);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.coupon-list .coupon-wrap .head-disabled{
+  background-color: rgb(250,248,248);
+  color: rgb(180,180,180);
+}
+.coupon-list .coupon-wrap .coupon-info{
+  padding:0 15px ;
+  position: relative;
+  font-size: 10px;
+}
+.coupon-list .coupon-wrap .coupon-info .couponType{
+  font-size: 18px;
+  padding-top: 10px;
+}
+.coupon-list .coupon-info .coupon-value{
+  position: absolute;
+  top: 5px;
+  right: 15px;
+}
+.coupon-list .coupon-info .coupon-value span{
+  font-size: 34px;
+}
+.coupon-list .coupon-info .coupon-value .valueType{
+  font-size: 20px;
+}
+.coupon-wrap .coupon-detail{
+  background-color: rgb(255,249,244);
+  height: 90px;
+  color: rgb(96,96,96);
+}
+.coupon-wrap .detail-disabled{
+  background-color: #fff;
+  color: rgb(180,180,180);
+}
+.coupon-wrap .coupon-detail .coupon-desc{
+  padding: 0 15px;
+}
+.coupon-wrap .coupon-detail .couponCount{
+  color: rgb(189,188,187);
+  padding-top: 20px;
+  font-size: 8px;
+}
+.coupon-wrap .coupon-detail .limit-time{
+  padding-top: 18px;
+}
+.coupon-wrap .coupon-detail .limit-class{
+  font-size: 8px;
+  padding-top: 5px;
+}
+.coupon-wrap .coupon-state{
+  width: 117px;
+  height: 63px;
+  background:url('../img/state.png');
+  position: absolute;
+  top: 50px;
+  right: 10px;
 }
 .shop-page .shop-select{
   height: 40px;
