@@ -47,7 +47,6 @@
             src="http://webapi.amap.com/maps?v=1.3&key=ef5bbbdf7bca82910095f043224c0138&plugin=AMap.Autocomplete"></script>
 
     <!--############单页面Css区 以后要切换时注入############-->
-    <link href="/AndSell/app/product/product/productAdd/product.css" rel="stylesheet">
     <link href="/AndSell/app/shop/shop/shopList/shopList.css" rel="stylesheet">
     <link href="/AndSell/app/card/card/cardList/cardList.css" rel="stylesheet">
     <link href="/AndSell/app/card/card/cardType/cardType.css" rel="stylesheet">
@@ -168,12 +167,12 @@
                     <div class="sub-menu-wrap sub-menu-2  dropdown-menu" role="menu">
                         <ul class="sub-menu " role="menu">
                             <li class="">
-                                <a ui-sref="productAdd">
+                                <a ui-sref="product/product/productAdd">
                                     商品录入
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="productList">
+                                <a ui-sref="product/product/productList">
                                     商品列表
                                 </a>
                             </li>
@@ -181,17 +180,17 @@
                         </ul>
                         <ul class="sub-menu " role="menu">
                             <li>
-                                <a ui-sref="productClassList">
+                                <a ui-sref="product/class/list">
                                     商品分类
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="productTagList">
+                                <a ui-sref="product/tag/tagList">
                                     商品标签
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="productUnitList">
+                                <a ui-sref="product/unit/unitList">
                                     商品单位
                                 </a>
                             </li>
@@ -209,6 +208,11 @@
                             <li>
                                 <a ui-sref="orderList">
                                     订货单
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="selfOrderList">
+                                    提货单
                                 </a>
                             </li>
                             <li>
@@ -473,10 +477,11 @@
 
 <!--############JS引用区############-->
 
+<script src="/AndSell/app/components/libs/jquery/dist/jquery.min.js"></script>
 <script src="/AndSell/app/components/libs/angular/angular.min.js"></script>
 <script src="/AndSell/app/components/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="/AndSell/app/components/libs/ocLazyLoad.min.js"></script>
 <script src="/AndSell/app/components/libs/angular-resource/angular-resource.min.js"></script>
-<script src="/AndSell/app/components/libs/jquery/dist/jquery.min.js"></script>
 <script src="/AndSell/app/components/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/AndSell/app/components/libs/angular/nya-bootstrap-select.js"></script>
 <script src="/AndSell/app/components/libs/bootstrap-fileinput/bootstrap-fileinput.js"></script>
@@ -537,7 +542,7 @@
 <script src="/AndSell/app/product/product/product-services.js"></script><!--商品-->
 <script src="/AndSell/app/product/product_class/class-services.js"></script><!--商品分类-->
 <script src="/AndSell/app/product/product_tag/tag-services.js"></script><!--商品标签-->
-<script src="/AndSell/app/product/product_unit/unit-services.js"></script><!--商品单位-->
+<script src="/AndSell/app/product/unit/service.js"></script><!--商品单位-->
 <script src="/AndSell/app/shop/shop/shop-services.js"></script><!--门店-->
 <script src="/AndSell/app/user/user/user-services.js"></script><!--管理员-->
 <script src="/AndSell/app/user/role/role-services.js"></script><!--管理员-->
@@ -561,12 +566,6 @@
 
 <!--############controller集合区(以后尝试 切换时注入)############-->
 <script src="main_controller.js"></script>
-<script src="/AndSell/app/product/product/productAdd/controllers.js"></script><!--商品新增-->
-<script src="/AndSell/app/product/product/productList/controllers.js"></script><!--商品列表-->
-<script src="/AndSell/app/product/product_class/classList/controllers.js"></script><!--商品分类-->
-<script src="/AndSell/app/product/product_class/classOrder/controllers.js"></script><!--商品分类-->
-<script src="/AndSell/app/product/product_tag/tagList/controllers.js"></script><!--商品标签-->
-<script src="/AndSell/app/product/product_unit/unitList/controllers.js"></script><!--商品单位-->
 <script src="/AndSell/app/shop/shop/shopList/controllers.js"></script><!--门店-->
 <script src="/AndSell/app/user/user/userList/controllers.js"></script><!--管理员-->
 <script src="/AndSell/app/user/user/userAdd/controllers.js"></script><!--管理员-->

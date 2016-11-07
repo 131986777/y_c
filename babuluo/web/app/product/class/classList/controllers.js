@@ -1,4 +1,4 @@
-AndSellMainModule.controller('classListController', function ($scope, $stateParams, classFactory, modalFactory) {
+angular.module('AndSell.Main').controller('product_class_classList_Controller', function ($scope, $stateParams, classFactory, modalFactory) {
 
   modalFactory.setTitle('商品分类管理');
 

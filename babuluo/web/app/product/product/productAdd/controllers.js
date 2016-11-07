@@ -1,11 +1,11 @@
-AndSellMainModule.controller('productAddController', function ($http,$scope, $state, productFactory, classFactory, unitFactory, tagFactory, modalFactory,$q) {
+angular.module('AndSell.Main').controller('product_product_productAdd_Controller', function ($http,$scope, $state, productFactory, classFactory, unitFactory, tagFactory, modalFactory,$q) {
 
     modalFactory.setTitle('商品新增');
 
     modalFactory.setBottom(true, function () {
         $scope.addProductSubmit();
     }, function () {
-        $state.go('productList');
+        $state.go('product/product/productList');
     });
 
     /**

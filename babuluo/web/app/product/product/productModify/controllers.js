@@ -1,4 +1,4 @@
-AndSellMainModule.controller('productModifyController', function ($http,$scope, $state, $stateParams,productFactory, classFactory, unitFactory, tagFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('product_product_productModify_Controller', function ($http,$scope, $state, $stateParams,productFactory, classFactory, unitFactory, tagFactory, modalFactory, $q) {
 
     $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
@@ -7,7 +7,7 @@ AndSellMainModule.controller('productModifyController', function ($http,$scope, 
     modalFactory.setBottom(true, function () {
         $scope.modifyProductSubmit();
     }, function () {
-        $state.go('productList');
+        $state.go('product/product/productList');
     });
 
     /**

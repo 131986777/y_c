@@ -1,10 +1,9 @@
-AndSellMainModule.controller('unitListController', function ($scope, $stateParams, unitFactory, modalFactory) {
+angular.module('AndSell.Main').controller('product_unit_unitList_Controller', function ($scope, $stateParams, unitFactory, modalFactory) {
 
   modalFactory.setTitle('商品单位管理');
 
   $scope.initLoad = function () {
     unitFactory.getPrdUnitList().get({}, function (repsonce) {
-      console.log(repsonce);
       $scope.productUnitList = repsonce.data;
     }, null);
   };
@@ -58,3 +57,4 @@ AndSellMainModule.controller('unitListController', function ($scope, $stateParam
   }
 
 });
+

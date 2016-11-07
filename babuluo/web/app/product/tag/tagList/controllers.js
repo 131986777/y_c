@@ -1,4 +1,4 @@
-AndSellMainModule.controller('tagListController', function ($scope, $stateParams, tagFactory, modalFactory) {
+angular.module('AndSell.Main').controller('product_tag_tagList_Controller', function ($scope, $stateParams, tagFactory, modalFactory) {
 
   modalFactory.setTitle('商品标签管理');
 

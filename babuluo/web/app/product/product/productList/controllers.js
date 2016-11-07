@@ -1,4 +1,4 @@
-AndSellMainModule.controller('productListController', function ($scope, $stateParams, productFactory, modalFactory) {
+angular.module('AndSell.Main').controller('product_product_productList_Controller', function ($scope, $stateParams, productFactory, modalFactory) {
 
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(false);

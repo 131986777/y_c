@@ -1,15 +1,12 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="page-content" ng-init="initData()">
 
     <div class="col-md-12" style="margin-top: 20px">
         <div class="table-operbar row" ng-cloak>
             <div class="table-toolbar row">
-                <%--筛选功能--%>
 
                 <div class="form-inline row">
                     <div class="col-md-3">
                     <div class="form-group">
-                        <%--<label for="name" class="control-label">商品名称:</label>--%>
                         <input type="text" class="form-control" id="name" placeholder="商品名称"
                                ng-keyup="queryKeyUp($event)"
                                ng-model="query['SHOP_PRODUCT.PRD_NAME']">
@@ -20,7 +17,6 @@
                         </button>
                     </div>
                     </div>
-                    <%--<label class="control-label">筛选：</label>--%>
                     <div class="col-md-6">
                         <label class="control-label">筛选：</label>
                         <select ng-model="filter['SHOP_PRODUCT.IS_SALE']"
@@ -56,7 +52,7 @@
                             <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
                         </select>
                     </div>
-                    <a ui-sref="productAdd" class="col-md-2 pull-right">
+                    <a ui-sref="product/product/productAdd" class="col-md-2 pull-right">
                         <button id="sample_editable_1_new" class="btn btn-default pull-right">
                             <i class="fa fa-plus"></i> 新增商品
                         </button>
@@ -90,7 +86,6 @@
                 </div>
 
             </div>
-            <%--筛选功能--%>
         </div>
 
 
@@ -150,7 +145,7 @@
                     </td>
 
                     <td class="text-left">
-                        <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">
+                        <a ui-sref="product/product/productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">
                             <img class="img-thumbnail"
                                  ng-src="{{FILE_SERVER_DOMAIN+product['SHOP_PRODUCT.CMP']}}"
                                  style="height: 60px;width: 60px;float: left">
@@ -161,7 +156,7 @@
                                           ng-bind="tag"> </span>
                             <br>
                         <div style="margin-top: 5px">
-                            <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})"
+                            <a ui-sref="product/product/productModify({productId:product['SHOP_PRODUCT.PRD_ID']})"
                                style="text-decoration:none;color: #26344B;font-size: 14px"
                                    ng-bind="product['SHOP_PRODUCT.PRD_NAME']"
                                    class="font-dark"></a></div>
@@ -180,7 +175,7 @@
                            ng-bind="product['SHOP_PRODUCT.IS_SALE']==1?'正在销售':'下架停售'"></a>
                     </td>
                     <td>
-                        <a ui-sref="productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">修改</a>
+                        <a ui-sref="product/product/productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">修改</a>
                         <a href="" show-modal id="#modifySkuPrice"
                            ng-if="product['SHOP_PRODUCT.SKULIST'][0]!=undefined"
                            ng-click="showModifySkuPrice(product)">改价</a>
@@ -231,7 +226,6 @@
 
     <tag-switch-modal callback="setPrdsTag(data)"></tag-switch-modal>
 
-    <%--修改商品价格--%>
     <div class="modal fade text-left" id="modifySkuPrice" ng-enter="submitModifySkuPrice()"
          tabindex="-1"
          aria-hidden="true" style="display: none;">
@@ -303,13 +297,9 @@
                             data-dismiss="modal">取消
                     </button>
                 </div>
-
-                <!-- /.modal-content -->
             </div>
-            <!-- /.modal-dialog -->
         </div>
     </div>
-    <%--结束修改--%>
 </div>
 
 

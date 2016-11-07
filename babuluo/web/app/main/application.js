@@ -1,4 +1,4 @@
-var AndSellRouter = angular.module('AndSell.Router', ['ui.router']);
+var AndSellRouter = angular.module('AndSell.Router', ['ui.router', 'oc.lazyLoad']);
 var AndSellService = angular.module('AndSell.Service', ['ngResource']);
 var AndSellUI = angular.module('AndSell.UI', ['nya.bootstrap.select', 'ngTagsInput', 'AndSell.Service']);
 var AndSellMainModule = angular.module('AndSell.Main', ['AndSell.Service', 'AndSell.Router', 'AndSell.UI']);

@@ -1,4 +1,4 @@
-AndSellMainModule.service('unitFactory', function ($resource, baseURL) {
+angular.module('AndSell.Main').service('unitFactory', function ($resource, baseURL) {
 
       this.getPrdUnitList = function () {
         return $resource(baseURL + '/shop/product/unit/queryAll', null, {

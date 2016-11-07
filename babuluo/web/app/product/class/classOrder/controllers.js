@@ -1,4 +1,4 @@
-AndSellMainModule.controller('classOrderController', function ($scope,modalFactory,classFactory) {
+angular.module('AndSell.Main').controller('product_class_classOrder_Controller', function ($scope,modalFactory,classFactory) {
 
     modalFactory.setTitle('商品分类列表');
     modalFactory.setBottom(false);
