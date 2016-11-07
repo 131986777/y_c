@@ -1,5 +1,5 @@
 
-angular.module('AndSell.Main').controller('sales_sales_salesList_Controller', function ($scope, $stateParams, salesFactory, modalFactory) {
+angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Controller', function ($scope, $stateParams, salesFactory, modalFactory) {
 
     modalFactory.setTitle('促销管理');
     modalFactory.setBottom(false);

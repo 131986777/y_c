@@ -4,6 +4,7 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
     modalFactory.setBottom(false);
 
     $scope.bindData = function (response) {
+        console.log(response);
         $scope.pointList = response.data;
         $scope.searchList = response.data;
         $scope.userDetailMap = response.extraData.userDetailMap;

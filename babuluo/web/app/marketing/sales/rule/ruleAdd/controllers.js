@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('sales_rule_ruleAdd_Controller', function ($scope,$http, $stateParams, salesFactory, modalFactory) {
+angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controller', function ($scope,$http, $stateParams, salesFactory, modalFactory) {
     modalFactory.setBottom(true);
     modalFactory.setTitle('新增促销规则');
 
