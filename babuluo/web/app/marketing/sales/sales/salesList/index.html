@@ -4,15 +4,14 @@
     <div class="table-toolbar row">
         <div class="col-md-10 form-inline">
             <label class="control-label">筛选：</label>
-            <select ng-model="filter['STOCK_REALTIME.ORDER']"
-                    ng-init="filter['STOCK_REALTIME.ORDER']='UPDATE_DATETIME DESC'"
+            <select ng-model="filter['SALES_PLAN.TARGET_OBJ_TYPE']"
+                    ng-init="filter['SALES_PLAN.TARGET_OBJ_TYPE']='null'"
                     class="nya-bs-select form-control">
-                <option class="nya-bs-option" value="UPDATE_DATETIME DESC">
-                    类型
-                </option>
-                <option class="nya-bs-option" value="LOCK_STOCK DESC">
-                    位置
-                </option>
+                <option class="nya-bs-option" value="null">类型</option>
+                <option class="nya-bs-option" value="1">单件商品促销</option>
+                <option class="nya-bs-option" value="2">商品类促销</option>
+                <option class="nya-bs-option" value="3">标签促销</option>
+                <option class="nya-bs-option" value="-1">订单促销</option>
             </select>
         </div>
         <div class="col-md-2 text-right">
@@ -75,7 +74,7 @@
                 <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
                     <div class="man-text">满<span>{{auto[0]}}</span>个</div>
                         <div class="man-content" >
-                            <div class="product-item" ng-if="salesClass == 3">
+                            <div class="product-item" ng-if="item['salesClass'] == 3">
                                 <img class="pull-left" ng-src="auto[4]">
                                 <p class="itemName">{{auto[1]}}</p>
                                 <p class="itemDesc">【{{auto[3][0]}}：{{auto[3][1]}}
@@ -83,7 +82,7 @@
                                             <span ng-if="auto[3][4]!=''&& auto[3][4]!=null"> ，{{auto[3][4]}}：{{auto[3][5]}}</span>】
                                 </p>
                         </div>
-                            <div class="product-item" ng-if="salesClass == 4">
+                            <div class="product-item" ng-if="item['salesClass'] == 4">
                                 <p class="itemName">{{auto[1]}}</p>
                             </div>
                         </div>
@@ -174,7 +173,7 @@
                     <img src="../components/images/index_01.png">
                 </div>
             </div><!-- END promotion-head -->
-            <div class="promotion-content" ng-if="item['salesClass'] != 3">
+            <div class="promotion-content"  ng-if="item['salesClass'] == 1||item['salesClass'] == 2">
                 <div class="coupon-list text-center" >
                         <ul class="list-unstyled" >
                             <li ng-show="item['salesClass'] == 1" ng-repeat="auto in item['salesInfo']">
@@ -208,7 +207,7 @@
                     </div>
                     <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
                 </div>
-                <div class="promotion-footer" ng-repeat="auto in item['salesInfo']" ng-if="item['salesClass'] == 4">
+            <div class="promotion-footer" ng-repeat="auto in item['salesInfo']" ng-if="item['salesClass'] == 4">
                     <div class="man-text">满<span>{{auto[0]}}</span>元</div>
                     <div class="man-content">
                         <div class="product-item">
@@ -244,9 +243,9 @@
 
             <div class="promotion-content">
                 <button class="addItem btn"  data-toggle="modal" id="#tagSwitchModal"
-                        show-modal ng-click="getCurrentTag(item)" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length > 0">修改标签</button>
+                        show-modal ng-click="getCurrentTag(item)" ng-if="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length > 0">修改标签</button>
                 <button class="addItem btn"  data-toggle="modal" id="#tagSwitchModal"
-                        show-modal ng-click="getCurrentTag(item)" ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length == 0">添加标签</button>
+                        show-modal ng-click="getCurrentTag(item)" ng-if="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length  == null">添加标签</button>
 
                 <!--<span class="buy-text">买</span>-->
                 <div class="buy-content">
@@ -262,7 +261,7 @@
             <div class="promotion-footer">
                 <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
                     <div class="man-text">满<span>{{auto[0]}}</span>个</div>
-                        <div class="man-content"ng-if="salesClass == 3">
+                        <div class="man-content"ng-if="item['salesClass'] == 3">
                         <div class="product-item">
                             <img class="pull-left" ng-src="auto[4]">
                             <p class="itemName">{{auto[1]}}</p>
@@ -272,7 +271,7 @@
                             </p>
                         </div>
                     </div>
-                        <div class="man-content"ng-if="salesClass == 4">
+                        <div class="man-content"ng-if="item['salesClass'] == 4">
                         <div class="product-item">
                             <p class="itemName">{{auto[1]}}</p>
                         </div>
@@ -281,7 +280,7 @@
                 </div><!-- promotion footer -->
             </div>
         </div>
-        <!-- END 添加类促销 -->
+        <!-- END 添加标签促销 -->
     </div>
     </div>
 
@@ -345,6 +344,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
+
                             <a data-toggle="modal" ng-if="detaileInfo['SALES_PLAN.TARGET_OBJ_TYPE']==1"
                                data-target="#productSwitchModal">请选择商品</a>
                             <a data-toggle="modal" ng-if="detaileInfo['SALES_PLAN.TARGET_OBJ_TYPE']==2"
