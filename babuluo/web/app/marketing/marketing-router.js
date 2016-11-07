@@ -1,4 +1,4 @@
-AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
+/*AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state("salesRule", {
             url: "/salesRule",
@@ -47,4 +47,13 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/app/marketing/sales/rule/ruleModify/index.html",
             controller: "salesRuleModifyController"
         })
-});
+});*/
+
+
+//促销规则列表
+$import('sales/rule/ruleList',undefined,true);
+//促销计划列表
+$import('sales/sales/salesList');
+//新增促销计划
+$import('sales/rule/ruleAdd',{id: 0,serviceId: 1},true);
+

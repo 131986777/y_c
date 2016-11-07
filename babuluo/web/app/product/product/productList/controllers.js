@@ -32,6 +32,18 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
         $scope.productMap =listToMap($scope.productList,'SHOP_PRODUCT.PRD_ID');
         $scope.tagList = response.extraData.tagList;
         $scope.classList = response.extraData.classList;
+        $scope.classMap = response.extraData.classMap;
+
+        //获取数据
+        var data={
+            keyName : 'SHOP_PRODUCT_CLASS.CLASS_NAME',
+            keyId : 'SHOP_PRODUCT_CLASS.CLASS_ID',
+            keyPId : 'SHOP_PRODUCT_CLASS.PARENT_CLASS_ID',
+            rootId : 0,
+            lists : $scope.classList
+        }
+        $scope.tree=data;
+
     };
 
     //改变商品上下架状态
@@ -113,12 +125,38 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
         });
     }
 
+    $scope.setPrdClass= function (data) {
+        if($scope.getCheckIdList().length==0){
+            modalFactory.showShortAlert('至少勾选一个！');
+            return;
+        }
+        modalFactory.showAlert("确定移动这些商品至分类 ： "+data['SHOP_PRODUCT_CLASS.CLASS_NAME']+" 吗?", function () {
+            var param = {};
+            param['SHOP_PRODUCT.CLASS_ID'] = data['SHOP_PRODUCT_CLASS.CLASS_ID'];
+            param['SHOP_PRODUCT.PRD_ID'] = $scope.getCheckIdList().toString();
+            productFactory.modifyPrdsClass(param).get({}, function (response) {
+                if (response.code == 0) {
+                    $('#setPrdClassModal').modal('hide');
+                    $scope.checkedList.forEach(function (ele) {
+                        ele['SHOP_PRODUCT.CLASS_ID'] = data['SHOP_PRODUCT_CLASS.CLASS_ID'];
+                        ele['SHOP_PRODUCT.CLASS_NAME'] = $scope.classMap[data['SHOP_PRODUCT_CLASS.CLASS_ID']];
+                    })
+                    modalFactory.showShortAlert('分类设置成功');
+                }
+            });
+        });
+    }
+
     /**
      * 多选处理
      **/
 
     //批量设置标签
     $scope.setPrdsTag = function (data) {
+        if($scope.getCheckIdList().length==0){
+            modalFactory.showShortAlert('至少勾选一个！');
+            return;
+        }
         var tagIdList = new Array;
         var tagList = new Array;
         data.forEach(function (ele) {
@@ -138,11 +176,19 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
 
     //批量上下架
     $scope.changeProductsSaleState = function (state) {
+        if($scope.getCheckIdList().length==0){
+            modalFactory.showShortAlert('至少勾选一个！');
+            return;
+        }
         $scope.changeProductSaleState($scope.getCheckIdList().toString(), state);
     }
 
     //批量删除
     $scope.delProducts = function () {
+        if($scope.getCheckIdList().length==0){
+            modalFactory.showShortAlert('至少勾选一个！');
+            return;
+        }
         $scope.delProduct($scope.getCheckIdList().toString());
     }
 

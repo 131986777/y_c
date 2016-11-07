@@ -220,6 +220,11 @@
                                     退货单
                                 </a>
                             </li>
+                            <li>
+                                <a href="#">
+                                    线下订单
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
@@ -305,12 +310,12 @@
                     <div class="sub-menu-wrap sub-menu-1 dropdown-menu">
                         <ul class="sub-menu" role="menu">
                             <li>
-                                <a ui-sref="balanceList">
+                                <a ui-sref="balance/balance/balanceList">
                                     资金明细
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="pointList">
+                                <a ui-sref="point/point/pointList">
                                     积分明细
                                 </a>
                             </li>
@@ -328,7 +333,7 @@
                         <ul class="sub-menu " role="menu">
 
                             <li>
-                                <a ui-sref="salesList">
+                                <a ui-sref="sales/sales/salesList">
                                     交易促销
                                 </a>
                             </li>
@@ -358,7 +363,7 @@
                         </ul>
                         <ul class="sub-menu " role="menu">
                             <li>
-                                <a ui-sref="salesRule">
+                                <a ui-sref="sales/rule/ruleList">
                                     促销规则
                                 </a>
                             </li>
@@ -591,16 +596,9 @@
 <script src="/AndSell/app/stock/store/storeList/controllers.js"></script><!--仓库列表-->
 <script src="/AndSell/app/marketing/coupon/rule/ruleList/controllers.js"></script><!--优惠券列表-->
 <script src="/AndSell/app/marketing/coupon/coupon/couponList/controllers.js"></script><!--优惠券列表-->
-<script src="/AndSell/app/marketing/sales/sales/salesList/controllers.js"></script><!--促销列表-->
-<script src="/AndSell/app/marketing/sales/sales/salesList/controllers.js"></script><!--促销列表-->
 <script src="/AndSell/app/marketing/sales/sales/salesCoupon/controllers.js"></script><!--注册送券-->
-<script src="/AndSell/app/marketing/sales/rule/ruleAdd/controllers.js"></script><!--促销列表-->
-<script src="/AndSell/app/marketing/sales/rule/ruleList/controllers.js"></script><!--促销列表-->
-<script src="/AndSell/app/marketing/sales/rule/ruleModify/controllers.js"></script><!--促销规则修改-->
 <script src="/AndSell/app/marketing/banner/banner_position/controllers.js"></script><!--横幅位置-->
 <script src="/AndSell/app/marketing/banner/banner/controllers.js"></script><!--横幅位置-->
-<script src="/AndSell/app/point/point/pointList/controllers.js"></script><!--demoList 示例使用-->
-<script src="/AndSell/app/balance/balance/balanceList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/card/card/cardList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/order/order/orderList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/order/order/orderDetail/controllers.js"></script><!--demoList 示例使用-->

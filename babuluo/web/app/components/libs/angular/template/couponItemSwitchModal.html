@@ -43,10 +43,10 @@
                 <thead>
                 <tr>
                   <th style="width: 30px;"> </th>
-                  <th class="col-md-5"> 优惠券名称</th>
-                  <th class="col-md-2"> 优惠券面值</th>
+                  <th class="col-md-3"> 优惠券名称</th>
+                  <th class="col-md-3"> 优惠券面值</th>
                   <th class="col-md-3"> 开始时间</th>
-                  <th class="col-md-2"> 结束时间</th>
+                  <th class="col-md-3"> 结束时间</th>
                 </tr>
                 </thead>
 
@@ -65,7 +65,7 @@
                     </div>
                   </td>
                   <td style="text-align: left" ng-bind="coupon['COUPON.NAME']"></td>
-                  <td style="text-align: left" ng-bind="coupon['COUPON.RULE_INFO']['COUPON_RULE.NAME']"></td>
+                  <td style="text-align: left" ng-bind="coupon['COUPON.RULE_INFO']['COUPON_RULE.INTRO']"></td>
                   <td style="text-align: left;" ng-bind="coupon['COUPON.BEGIN_DATETIME']"></td>
                   <td style="text-align: center;" ng-bind="coupon['COUPON.END_DATETIME']"></td>
                 </tr>

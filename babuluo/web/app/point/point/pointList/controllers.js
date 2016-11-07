@@ -1,4 +1,4 @@
-AndSellMainModule.controller('pointListController', function ($scope, $stateParams, pointFactory, modalFactory) {
+angular.module('AndSell.Main').controller('point_point_pointList_Controller', function ($scope, $stateParams, pointFactory, modalFactory) {
 
     modalFactory.setTitle('积分管理');
     modalFactory.setBottom(false);
