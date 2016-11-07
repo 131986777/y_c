@@ -1,4 +1,4 @@
-AndSellMainModule.controller('salesRuleListController', function ($scope, $stateParams, salesFactory, modalFactory) {
+angular.module('AndSell.Main').controller('sales_rule_ruleList_Controller', function ($scope, $stateParams, salesFactory, modalFactory) {
 
     modalFactory.setTitle('促销规则管理');
 

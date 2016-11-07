@@ -1,4 +1,4 @@
-AndSellMainModule.controller('balanceListController', function ($scope, $stateParams, balanceFactory, modalFactory) {
+angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function ($scope, $stateParams, balanceFactory, modalFactory) {
     modalFactory.setTitle('资金明细');
     modalFactory.setBottom(false);
 
