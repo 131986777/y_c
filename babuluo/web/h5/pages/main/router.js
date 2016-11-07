@@ -48,6 +48,12 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/h5/pages/product/list/index.html",
             controller: "H5.PrdListController"
         })
+        .state("prd-List-tag", {
+            url: "/prdListTag",
+            params:{tagId:1023},
+            templateUrl: "/AndSell/h5/pages/product/tagPrdList/index.html",
+            controller: "H5.PrdListTagController"
+        })
         .state("order-List", {
             url: "/orderList",
             params:{state:'all'},

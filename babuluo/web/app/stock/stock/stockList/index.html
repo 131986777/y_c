@@ -31,15 +31,13 @@
                     <div class="col-md-5">
                     <label class="control-label">筛选：</label>
                     <select ng-model="filter['STOCK_REALTIME.STORE_ID']"
-                            ng-init="filter['STOCK_REALTIME.STORE_ID']='null'"
-                            class="nya-bs-select form-control">
-                        <option class="nya-bs-option" value="null">
+                            ng-init="filter['STOCK_REALTIME.STORE_ID']=''"
+                            class="nya-bs-select form-control"
+                            ng-options="store['STORE.ID'] as store['STORE.NAME'] for store in storeList">
+                        <option class="nya-bs-option" value="">
                             所有仓库
                         </option>
-                        <option class="nya-bs-option" ng-repeat="store in storeList"
-                                ng-bind="store.name"
-                                value="{{store.id}}">
-                        </option>
+
                     </select>
                     <select ng-model="filter['STOCK_REALTIME.ORDER']"
                             ng-init="filter['STOCK_REALTIME.ORDER']='UPDATE_DATETIME DESC'"

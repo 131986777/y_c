@@ -7,11 +7,8 @@ AndSellMainModule.controller('MemberCoupon', function ($scope, $state, $statePar
 
         $scope.userDetailMap = response.extraData.userDetailMap;
         $scope.couponData=response.extraData.couponList;
-      //  console.log('优惠券');
-      //  console.log($scope.couponData);
-       // console.log($scope.userDetailMap);
         $scope.couponList=response.data;
-     //   console.log($scope.couponList);
+
     };
     $scope.queryMemberById = function (memberId) {
         $scope.memberDetail = $scope.userDetailMap[memberId];
@@ -32,9 +29,11 @@ AndSellMainModule.controller('MemberCoupon', function ($scope, $state, $statePar
     $scope.add['MEMBER_COUPON.EXPIRED_TIME'] = '';
 
     $scope.addMemberCoupon = function () {
+       // console.log($scope.memberId);
+        if($scope.memberId==undefined||$scope.memberId==''){
+            modalFactory.showShortAlert('请输入登录名称！');
+        }else{
 
-        //addMemberCoupon
-       // console.log($scope.coupon['COUPON.ID']);
         $scope.add['MEMBER_COUPON.COUPON_ID'] = $scope.coupon['COUPON.ID'];
         $scope.add['MEMBER_COUPON.EXPIRED_TIME'] = $scope.coupon['COUPON.END_DATETIME'];
         $scope.add['MEMBER_COUPON.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
@@ -65,6 +64,7 @@ AndSellMainModule.controller('MemberCoupon', function ($scope, $state, $statePar
          }
 
          });
+        }
     };
 
     $scope.parseArray=function (data) {

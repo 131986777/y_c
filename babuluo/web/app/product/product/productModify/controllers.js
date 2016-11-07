@@ -73,9 +73,7 @@ AndSellMainModule.controller('productModifyController', function ($http,$scope, 
         //加载商品数据
         productFactory.getProductById($stateParams.productId).get({}, function (response) {
             $scope.modify=response.data[0];
-            console.log("商品详情");
             console.log($scope.modify);
-
             if($scope.modify['SHOP_PRODUCT.CMP']!=null){
                 $scope.uploadImageFiles.push($scope.modify['SHOP_PRODUCT.CMP']);
             }
@@ -144,7 +142,6 @@ AndSellMainModule.controller('productModifyController', function ($http,$scope, 
             }else {
                 uploadImageArray.push($scope.uploadImageFiles[i]);
             }
-
         }
         form['SHOP_PRODUCT.P1']='{$null}';
         form['SHOP_PRODUCT.P2']='{$null}';
