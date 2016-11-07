@@ -5,148 +5,14 @@
         <!-- BEGIN CONTENT BODY -->
         <div class="page-content">
 
-
             <div class="table-operbar row">
 
-                <div class="table-toolbar">
-                    <div class="row">
-                        <div class="col-md-12 text-right">
-                            <a data-toggle="modal" href="#addClass" class="btn sbold green"> <i
-                                    class="fa fa-plus"></i> 新增分类 </a>
-                            <a href="" class="btn green btn-outline"> 排序 </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!--新下拉组件  16.08.22  BY ZHJ and BYX-->
-                <div class="col-md-12 multi-menu multi-menu-bordered" ng-cloak>
-                    <div class="first-menu">
-                        <div class="first-menu-item" ng-init="multiMenuInit()"
-                             ng-repeat="(key, firstMenu) in multimenuList">
-                            <div class="item" ng-show="key">
-                                <i class="fa" ng-click="toggleMenu(firstMenu)"
-                                   ng-class="firstMenu.showSubmenu ? 'fa-angle-up' : 'fa-angle-down'"
-                                   data-stopPropagation="true" ng-show="firstMenu.childList"></i>
-                                <i class="fa" ng-show="!firstMenu.childList"></i>
-                                <span ng-bind="firstMenu['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
-
-                                <span class="pull-right" >
-                                    <a data-toggle="modal" href="#modifyClass"
-                                       ng-click="pclass2change(firstMenu['SHOP_PRODUCT_CLASS.CLASS_NAME'],firstMenu['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID'],firstMenu['SHOP_PRODUCT_CLASS.CLASS_ID'])">修改</a>
-                                    <a ng-click="delProductClass(firstMenu['SHOP_PRODUCT_CLASS.CLASS_ID'])">删除</a>
-                                </span>
-
-                            </div>
-
-                            <div class="second-menu" ng-show="firstMenu.showSubmenu">
-                                <div class="second-menu-item"
-                                     ng-repeat="(key, secondMenu) in firstMenu.childList">
-                                    <div class="item">
-                                        <i class="fa" ng-click="toggleMenu(secondMenu)"
-                                           ng-class="secondMenu.showSubmenu ? 'fa-angle-up' : 'fa-angle-down'"
-                                           data-stopPropagation="true" ng-show="secondMenu.childList"></i>
-                                        <i class="fa" ng-show="!secondMenu.childList"></i>
-                                        <span ng-bind="secondMenu['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
-
-                                        <span class="pull-right">
-                                            <a data-toggle="modal"
-                                               href="#modifyClass"
-                                               ng-click="pclass2change(secondMenu['SHOP_PRODUCT_CLASS.CLASS_NAME'],secondMenu['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID'],secondMenu['SHOP_PRODUCT_CLASS.CLASS_ID'])">修改</a>
-                                            <a ng-click="delProductClass(secondMenu['SHOP_PRODUCT_CLASS.CLASS_ID'])">删除</a>
-                                        </span>
-                                    </div>
-
-                                    <div class="third-menu" ng-show="secondMenu.showSubmenu">
-                                        <div class="third-menu-item"
-                                             ng-repeat="(key, thirdMenu) in secondMenu.childList">
-                                            <div class="item">
-                                                <i class="fa" ng-click="toggleMenu(thirdMenu)"
-                                                   ng-class="thirdMenu.showSubmenu ? 'fa-angle-up' : 'fa-angle-down'"
-                                                   data-stopPropagation="true" ng-show="thirdMenu.childList"></i>
-                                                <i class="fa" ng-show="!thirdMenu.childList"></i>
-                                                <span ng-bind="thirdMenu['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
-
-                                                <span class="pull-right">
-                                                    <a data-toggle="modal"
-                                                       href="#modifyClass"
-                                                       ng-click="pclass2change(thirdMenu['SHOP_PRODUCT_CLASS.CLASS_NAME'],thirdMenu['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID'],thirdMenu['SHOP_PRODUCT_CLASS.CLASS_ID'])">修改</a>
-                                                    <a ng-click="delProductClass(thirdMenu['SHOP_PRODUCT_CLASS.CLASS_ID'])">删除</a>
-                                                </span>
-                                            </div>
-
-                                            <div class="fourth-menu" ng-show="thirdMenu.showSubmenu">
-                                                <div class="fourth-menu-item"
-                                                     ng-repeat="(key, fourthMenu) in thirdMenu.childList">
-                                                    <div class="item">
-                                                        <i class="fa" ng-click="toggleMenu(fourthMenu)"
-                                                           ng-class="fourthMenu.showSubmenu ? 'fa-angle-up' : 'fa-angle-down'"
-                                                           data-stopPropagation="true" ng-show="fourthMenu.childList"></i>
-                                                        <i class="fa"
-                                                           ng-show="!fourthMenu.childList"></i>
-                                                        <span ng-bind="fourthMenu['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
-                                                        <span class="pull-right">
-                                                            <a data-toggle="modal"
-                                                               href="#modifyClass"
-                                                               ng-click="pclass2change(fourthMenu['SHOP_PRODUCT_CLASS.CLASS_NAME'],fourthMenu['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID'],fourthMenu['SHOP_PRODUCT_CLASS.CLASS_ID'])">修改</a>
-                                                            <a ng-click="delProductClass(fourthMenu['SHOP_PRODUCT_CLASS.CLASS_ID'])">删除</a>
-                                                        </span>
-                                                    </div>
-
-                                                    <div class="fifth-menu" ng-show="fourthMenu.showSubmenu">
-                                                        <div class="fifth-menu-item"
-                                                             ng-repeat="(key, fifthMenu) in fourthMenu.childList">
-                                                            <div class="item">
-                                                                <i class="fa"
-                                                                   ng-click="toggleMenu(fifthMenu)"
-                                                                   ng-class="fifthMenu.showSubmenu ? 'fa-angle-up' : 'fa-angle-down'"
-                                                                   data-stopPropagation="true" ng-show="fifthMenu.childList"></i>
-                                                                <i class="fa"
-                                                                   ng-show="!fifthMenu.childList"></i>
-                                                                <span ng-bind="fifthMenu['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
-
-                                                                <span class="pull-right">
-                                                                    <a data-toggle="modal"
-                                                                       href="#modifyClass"
-                                                                       ng-click="pclass2change(fifthMenu['SHOP_PRODUCT_CLASS.CLASS_NAME'],fifthMenu['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID'],fifthMenu['SHOP_PRODUCT_CLASS.CLASS_ID'])">修改</a>
-                                                                    <a ng-click="delProductClass(fifthMenu['SHOP_PRODUCT_CLASS.CLASS_ID'])">删除</a>
-                                                                </span>
-                                                            </div>
-
-                                                            <div class="sixth-menu" ng-show="fifthMenu.showSubmenu">
-                                                                <div class="sixth-menu-item"
-                                                                     ng-repeat="(key, sixthMenu) in fifthMenu.childList">
-                                                                    <div class="item">
-                                                                        <i class="fa"></i>
-                                                                        <span ng-bind="sixthMenu['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
-
-                                                                        <span class="pull-right">
-                                                                            <a data-toggle="modal"
-                                                                               href="#modifyClass"
-                                                                               ng-click="pclass2change(sixthMenu['SHOP_PRODUCT_CLASS.CLASS_NAME'],sixthMenu['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID'],sixthMenu['SHOP_PRODUCT_CLASS.CLASS_ID'])">修改</a>
-                                                                            <a ng-click="delProductClass(sixthMenu['SHOP_PRODUCT_CLASS.CLASS_ID'])">删除</a>
-                                                                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                <tree-list tree="tree" callback="click(data)"></tree-list>
 
             </div>
 
-
         </div>
         <!-- END CONTENT -->
-
     </div>
     <!-- END 内容区 -->
 

@@ -25,6 +25,7 @@
                                     ng-bind="value['SHOP_PRODUCT_CLASS.CLASS_NAME']"
                                     value="{{value['SHOP_PRODUCT_CLASS.CLASS_ID']}}">
                             </option>
+                            <option class="nya-bs-option" value="0">未分类</option>
                         </select>
                     </div>
                     <label class="col-md-2 control-label">
