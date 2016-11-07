@@ -74,28 +74,31 @@
                     <th class="col-md-2"> 仓库</th>
                     <th class="col-md-1"> 实时库存</th>
                     <th class="col-md-1"> 带锁库存</th>
-                    <th class="col-md-1.5"> 最后变更</th>
+                    <th class="col-md-1.5">最后变更</th>
+                    <th class="col-md-1">渠道</th>
                     <th class="col-md-1 text-center"> 操作</th>
                 </tr>
                 </thead>
                 <tbody ng-cloak>
                 <tr ng-repeat="item in stockList">
                     <td ng-bind="item['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品ID-->
-                    <td ng-bind="item['STOCK_REALTIME.UNIT']"></td> <!--规格ID-->
+                    <td ng-bind="item['STOCK_REALTIME.UNIT']"></td> <!--单位-->
                     <td>{{storeMap[(item['STOCK_REALTIME.STORE_ID'])]}}</td> <!--仓库-->
                     <td ng-bind="item['STOCK_REALTIME.STOCK']"></td> <!--实时库存-->
                     <td ng-bind="item['STOCK_REALTIME.LOCK_STOCK']"></td> <!--锁定库存-->
                     <td ng-bind="item['STOCK_REALTIME.UPDATE_DATETIME']|FormatAllDate"></td> <!--最后变更-->
-                    <td>明细</td>
-                    <!--<td class="text-center">-->
-                    <!--<div >-->
-                    <!--<a type="button" show-modal id="#modifySource"-->
-                    <!--ng-click="modifyCardSourceClick(item)">修改</a>-->
-                    <!--<a type="button" ng-click="deleteCardSource(item['MEMBER_CARD_SOURCE.ID'])">-->
-                    <!--删除-->
-                    <!--</a>-->
-                    <!--</div>-->
-                    <!--</td>-->
+                    <td><span ng-if="item['STOCK_REALTIME.PRD_REMARK']=='onLine'">线上</span>
+                        <span ng-if="item['STOCK_REALTIME.PRD_REMARK']=='offLine'">线下</span></td>
+                    <td>
+                    <div >
+                        <a type="button">
+                            明细
+                        </a>&nbsp;&nbsp;
+                        <a ng-if="item['STOCK_REALTIME.PRD_REMARK']=='onLine'" type="button" show-modal id="#modifyStock"
+                           ng-click="modifyStockClick(item)">修改</a>
+
+                    </div>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -107,3 +110,56 @@
          callback="bindData(response)">
     </div>
 </div>
+
+<!--BEGIN 修改库存信息-->
+<div class="modal fade text-left" id="modifyStock" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">修改库存信息</h4>
+            </div>
+
+            <div class="modal-body form-body text-right">
+
+                <form class="form-horizontal">
+
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">实时库存</span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="modify['STOCK_REALTIME.STOCK']"
+                            ></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                           锁定库存
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="modify['STOCK_REALTIME.LOCK_STOCK']"
+                                ></div>
+                    </div>
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="modifyStock()" class="btn green">确定
+                </button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 修改发卡渠道-->

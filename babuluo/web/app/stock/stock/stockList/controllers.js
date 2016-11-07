@@ -1,25 +1,9 @@
-AndSellMainModule.controller('stockListController', function ($scope, shopFactory, stockFactory, modalFactory, $q) {
+AndSellMainModule.controller('stockListController', function ($scope,  stockFactory, modalFactory, $q) {
 
     modalFactory.setTitle('实时库存');
 
 
-   /* $scope.initLoad = function () {
 
-        stockFactory.getStockList().get({}, function (response) {
-            console.log(response);
-            $scope.stockList = response.data;
-            $scope.storeMap= response.extraData.storeMap;
-
-            $scope.storeList= response.extraData.storeArray;
-            console.log( $scope.storeMap);
-            console.log($scope.storeList);
-
-        }, null);
-
-
-      //  console.log($scope.storeMap.get('1'));
-    };
-*/
     $scope.bindData = function (response) {
 
         console.log(response);
@@ -53,61 +37,34 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
 
     }
 
-    //$scope.initLoad();
 
 
-    $scope.addStore = function () {
-        if ($scope.IS_DEF){
-            $scope.add['STORE.IS_DEF']=1;
-        }else{
-            $scope.add['STORE.IS_DEF']=-1;
-        }
-        $scope.add['STORE.IS_DEF']=1;
-        $scope.add['STORE.ADD_DATETIME']=new Date();  //add['STORE.IS_DEF']
-       // console.log($scope.add);
 
-        stockFactory.addStore($scope.add).get({}, function (response) {
 
-            if (response.code == 400) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert('新增成功');
-                $scope.add='';
-                $("#addStore").modal('hide');
-                $scope.$broadcast('pageBar.reload');
-            }
-        });
-    };
 
-    $scope.modifyStoreClick = function (item) {
+    $scope.modify={};
+    $scope.modifyStockClick = function (item) {
 
         $scope.modify=clone(item);
-        $scope.modifyId=item['STORE.ID'];
-        //console.log('删除ID为'+modifyId);
+
 
     };
 
-    $scope.modifyStore = function () {
-        $scope.modify['STORE.ID'] =  $scope.modifyId;
+    $scope.modifyStock = function () {
 
-        if ($scope.modifyIsDef){
-            $scope.modify['STORE.IS_DEF']=1;
-        }else{
-            $scope.modify['STORE.IS_DEF']=-1;
-        }
 
-        stockFactory.modifyStore ($scope.modify).get({}, function (response) {
+        stockFactory.modStockOnLine ($scope.modify).get({}, function (response) {
             if (response.code == 400) {
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {
-                $("#modifyStore").modal('hide');
+                $("#modifyStock").modal('hide');
                 modalFactory.showShortAlert("修改成功");
                 $scope.$broadcast('pageBar.reload');
             }
         });
     };
 
-    $scope.deleteStore = function (id) {
+ /*   $scope.deleteStore = function (id) {
 
         modalFactory.showAlert("确认删除吗?", function () {
             stockFactory.delStoreById(id).get({}, function (res) {
@@ -118,6 +75,6 @@ AndSellMainModule.controller('stockListController', function ($scope, shopFactor
             });
         });
 
-    }
+    }*/
 });
 
