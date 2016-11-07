@@ -51,9 +51,9 @@
 
 
 //促销规则列表
-$import('sales/rule/ruleList',undefined,true);
+$import('marketing/sales/rule/ruleList');
 //促销计划列表
-$import('sales/sales/salesList');
+$import('marketing/sales/sales/salesList',undefined,true);
 //新增促销计划
-$import('sales/rule/ruleAdd',{id: 0,serviceId: 1},true);
+$import('marketing/sales/rule/ruleAdd',{id: '0',serviceId: '1'},true);
 
