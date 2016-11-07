@@ -4,33 +4,29 @@
             <div class="form-inline row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="name" placeholder="规则名称">
+                        <input type="text" class="form-control" id="name" placeholder="规则名称" ng-model="name">
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-default pull-right">查询
+                        <button type="button" class="btn btn-default pull-right" ng-click="queryByName(name)">查询
                         </button>
                     </div>
                 </div>
 
                 <div class="col-md-6">
                     <label class="control-label">筛选：</label>
-                    <select class="nya-bs-select form-control">
-                        <option class="nya-bs-option" value="null">促销针对</option>
-                        <option class="nya-bs-option" value="1">商品</option>
-                        <option class="nya-bs-option" value="-1">订单</option>
-                    </select>
-                    <select class="nya-bs-select form-control">
-                        <option class="nya-bs-option" value="null">状态</option>
-                        <option class="nya-bs-option" value="2">启用</option>
-                        <option class="nya-bs-option" value="1">停用</option>
-                    </select>
-                    <label class="control-label">排序：</label>
-                    <select ng-model="filter['SHOP_PRODUCT.ODRDER']"
-                            ng-init="filter['SHOP_PRODUCT.ODRDER'] = 'ORDER_NUM DESC'; "
+                    <select ng-model="filter['SALES.SALE_TARGET']"
+                            ng-init="filter['SALES.SALE_TARGET'] = 'null'"
                             class="nya-bs-select form-control">
-                        <option class="nya-bs-option" value="ORDER_NUM DESC">排序号</option>
-                        <option class="nya-bs-option" value="ADD_DATETIME DESC">添加时间 ↓</option>
-                        <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
+                        <option class="nya-bs-option" value="null">促销针对</option>
+                        <option class="nya-bs-option" value="1">订单</option>
+                        <option class="nya-bs-option" value="2">商品</option>
+                    </select>
+                    <select ng-model="filter['SALES.STATE']"
+                            ng-init="filter['SALES.STATE'] = 'null'";
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="null">状态</option>
+                        <option class="nya-bs-option" value="1">启用</option>
+                        <option class="nya-bs-option" value="-1">停用</option>
                     </select>
                 </div>
                 <div class="col-md-2 text-right">

@@ -467,27 +467,16 @@ AndSellUI.directive('couponItemSwitchModal', function (http, baseURL,couponFacto
                 });
             };
 
-            $scope.couponList = new Array;
-
             $scope.bindCouponData = function (response) {
-                console.log(response);
                 $scope.couponList = response.data;
             }
 
-
-            $scope.selectItemList = new Array;
-            $scope.insertItem = function (item) {
-                if ($scope.selectItemList.indexOf(item) < 0) {
-                    $scope.selectItemList.push(item);
-                }
-            }
-            $scope.removeItem = function (item) {
-                $scope.selectItemList.remove(item);
+            $scope.checkItem = function (item) {
+                $scope.selectItem=item;
             }
 
             $scope.setReturn = function () {
-                $scope.callback({data: $scope.selectItemList});
-                $scope.selectItemList = new Array;
+                $scope.callback({data: $scope.selectItem});
                 $('#couponItemSwitchModal').modal('hide');
             }
         }

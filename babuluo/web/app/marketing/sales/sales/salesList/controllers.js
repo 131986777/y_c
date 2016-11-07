@@ -262,6 +262,7 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
                   modalFactory.showShortAlert(response.msg);
               } else if (response.extraData.state == 'true') {
                   modalFactory.showShortAlert('新增成功');
+                  $scope.empty();
                   $("#addSalePlan").modal('hide');
               }
               $scope.$broadcast('pageBar.reload');
@@ -330,6 +331,8 @@ AndSellMainModule.controller('salesListController', function ($scope, $statePara
 
   $scope.empty = function () {
       $scope.add = null;
+      $scope.from = null;
+      $scope.to = null;
   }
 
     $('#start_hour').datetimepicker({
