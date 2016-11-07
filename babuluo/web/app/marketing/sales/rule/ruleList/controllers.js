@@ -8,8 +8,10 @@ AndSellMainModule.controller('salesRuleListController', function ($scope, $state
     $scope.bindData = function (response) {
         console.log(response);
         $scope.salesList = response.data;
+        $scope.roundList = response.data;
         $scope.productMap = response.extraData.productMap;
         $scope.productList = response.extraData.productList;
+        $scope.skuMap = response.extraData.skuMap;
 
     };
 
@@ -60,7 +62,10 @@ AndSellMainModule.controller('salesRuleListController', function ($scope, $state
         array.forEach(function (item) {
             var array = new Array();
             var saleJson = JSON.parse(item['SALE_CONTENT'].toString());
-            var name = $scope.productMap[saleJson['ProId']];
+            //skuId和prdId的Map
+            var prdId = $scope.skuMap[saleJson['ProId']];
+            var name = $scope.productMap[prdId];
+            console.log(name);
             switch (form['SALES.SALE_TARGET']) {
                 case '1':
                     switch (form['SALES.CONDITION_TYPE']) {
@@ -214,6 +219,21 @@ AndSellMainModule.controller('salesRuleListController', function ($scope, $state
             array.push(arguments[i])
         }
         return array;
+    }
+
+    $scope.queryByName = function (name){
+        alert(name);
+        if(name == null||name == ''){
+            $scope.salesList = $scope.roundList;
+        }else {
+            $scope.salesList =[];
+            $scope.roundList.forEach(function(ele){
+                if( ele['SALES.NAME'] == name){
+                    $scope.salesList.push(ele);
+                }
+            })
+        }
+        return $scope.salesList;
     }
 
     $scope.saveSales = function () {
