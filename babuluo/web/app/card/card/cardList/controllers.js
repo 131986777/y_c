@@ -1,14 +1,7 @@
-AndSellMainModule.controller('cardListController', function ($scope, $stateParams, cardFactory, modalFactory) {
+angular.module('AndSell.Main').controller('card_card_cardList_Controller', function ($scope, $stateParams, cardFactory, modalFactory) {
 
     modalFactory.setTitle('已开会员卡');
 
-    // $scope.initLoad = function () {
-    //     cardFactory.getMemberCardList().get({}, function (response) {
-    //         console.log(response);
-    //         $scope.cardList = response.data;
-    //     }, null);
-    // };
-    // $scope.initLoad();
     $scope.cardAdd = {};
     $scope.isFaceValue = false;
 

@@ -1,4 +1,4 @@
-AndSellMainModule.controller('memberListController', function ($scope, memberFactory, $stateParams, memberGroupFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('member_member_memberList_Controller', function ($scope, memberFactory, $stateParams, memberGroupFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('客户管理');
