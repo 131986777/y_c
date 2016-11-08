@@ -1,4 +1,4 @@
-AndSellMainModule.controller('userModifyController', function ($scope, $state, $stateParams, userFactory, roleFactory, modalFactory) {
+angular.module('AndSell.Main').controller('user_user_userModify_Controller', function ($scope, $state, $stateParams, userFactory, roleFactory, modalFactory) {
 
     //设置页面Title
     modalFactory.setTitle('修改员工账号');
@@ -73,14 +73,14 @@ AndSellMainModule.controller('userModifyController', function ($scope, $state, $
             console.log(response);
             if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert("修改成功");
-                $state.go('userList');
+                $state.go('user/user/userList');
             } else {
                 modalFactory.showShortAlert(response.msg);
             }
         });
     }, function () {
         //取消事件
-        $state.go('userList');
+        $state.go('user/user/userList');
     });
 
     $scope.isNull = function (str) {

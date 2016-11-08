@@ -1,4 +1,4 @@
-AndSellMainModule.controller('MemberTypeController', function ($scope, $stateParams, memberTypeFactory, modalFactory) {
+angular.module('AndSell.Main').controller('member_type_typeList_Controller', function ($scope, $stateParams, memberTypeFactory, modalFactory) {
 
 
     modalFactory.setTitle('客户类型管理');

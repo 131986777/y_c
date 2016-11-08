@@ -61,12 +61,19 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
             return;
         }
         var params=$scope.order;
-        params['SHOP_ORDER.TYPE']=1;//订货单
+        params['SHOP_ORDER.TYPE']=$scope.PickupPerson.type;//订货单
         params['SHOP_ORDER.REC_CONTACT']=$scope.PickupPerson.man;//收货人
         params['SHOP_ORDER.REC_PHONE']=$scope.PickupPerson.phone;//联系电话
         params['SHOP_ORDER.UID']=1000;//所属会员
-        params['SHOP_ORDER.SHOP_NAME']=$scope.shop['SHOP.SHOP_NAME'];//门店信息
-        params['SHOP_ORDER.SHOP_ID']=$scope.shop['SHOP.SHOP_ID'];//门店ID
+        if($scope.PickupPerson.type==1){
+            params['SHOP_ORDER.REC_ADDR']=$scope.PickupPerson.shengshi+$scope.PickupPerson.address;//收货地址
+            params['SHOP_ORDER.GET_PRD_DATETIME']=$scope.PickupPerson.getTime;//送货时间
+        }else{
+            params['SHOP_ORDER.SHOP_NAME']=$scope.shop['SHOP.SHOP_NAME'];//门店信息
+            params['SHOP_ORDER.SHOP_ID']=$scope.shop['SHOP.SHOP_ID'];//门店ID
+            params['SHOP_ORDER.GET_PRD_DATETIME']=$scope.PickupPerson.time;//提货时间
+        }
+
         params['SHOP_ORDER.DETAILS']=JSON.stringify($scope.skuList);//sku信息
         orderFactory.addOrder(params).get({}, function (response) {
 

@@ -1,12 +1,6 @@
 AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
 
-    $stateProvider
-
-        .state("cardList", {
-            url: "/cardList",
-            templateUrl: "/AndSell/app/card/card/cardList/index.html",
-            controller: "cardListController"
-        })
+   /* $stateProvider
         .state("cardType", {
             url: "/cardType",
             templateUrl: "/AndSell/app/card/card/cardType/index.html",
@@ -16,7 +10,11 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
             url: "/cardSource",
             templateUrl: "/AndSell/app/card/card/cardSource/index.html",
             controller: "cardSourceController"
-        })
+        })*/
 
 
 });
+
+$import('card/card/cardList',undefined,true);
+$import('card/card/cardType');
+$import('card/card/cardSource');

@@ -1,4 +1,4 @@
-AndSellMainModule.controller('userAddController', function ($scope, $state, userFactory, roleFactory, modalFactory) {
+angular.module('AndSell.Main').controller('user_user_userAdd_Controller', function ($scope, $state, userFactory, roleFactory, modalFactory) {
 
     //设置页面Title
     modalFactory.setTitle('新增员工账号');
@@ -46,7 +46,7 @@ AndSellMainModule.controller('userAddController', function ($scope, $state, user
             console.log(response);
             if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert("添加成功");
-                $state.go('userList');
+                $state.go('user/user/userList');
             } else {
                 modalFactory.showShortAlert(response.msg);
             }
@@ -54,7 +54,7 @@ AndSellMainModule.controller('userAddController', function ($scope, $state, user
 
     }, function () {
         //取消事件
-        $state.go('userList');
+        $state.go('user/user/userList');
     });
 
     $scope.isNull = function (str) {

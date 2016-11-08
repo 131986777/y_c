@@ -26,9 +26,9 @@
                 <div class="manjian-ruler col-sm-8" >
                 <!-- 满减 -->
                 <div class="manjian radio">
-                    <label >
+                    <label>
                         <input type="radio" name="promation"  ng-model="salesInfo['SALES.SALE_TYPE']"
-                               ng-init="salesInfo['SALES.SALE_TYPE'] = 1" checked value = 1>
+                               ng-init="salesInfo['SALES.SALE_TYPE'] = 1"  value = 1 checked ng-click="enEmpty()">
                         满减
                     </label>
                     <div class="content">
@@ -253,9 +253,9 @@
                     </label>
                     <div class="content">
                         <div class="detailBox">
-
                             <div class="detail">
-                                订单金额每满￥<input class="" type="text">，立减￥<input type="text" name="">。
+                                订单金额每满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，立减￥
+                                <input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT1']">。
                             </div>
                         </div>
 
@@ -272,7 +272,8 @@
                         <div class="detailBox">
 
                             <div class="detail">
-                                订单金额每满￥<input class="" type="text">，打<input type="text" name="">折。
+                                订单金额每满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']">，打
+                                            <input type="text" name="" ng-model="salesInfo['SALES.SALE_CONTENT1']">折。
                             </div>
                         </div>
 
@@ -289,7 +290,9 @@
                     <div class="content hidden">
                         <div class="detailBox">
                             <div class="detail">
-                                订单金额每满￥<input class="" type="text">，获赠品<span><a href="#">（选择赠送商品）</a></span><input type="text" name="">件。
+                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']" >，
+                                获赠品<span ng-click="getNum(7)"> <a data-toggle="modal" data-target="#productItemSwitchModal"  id="A7"> （选择赠送商品） </a></span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM1']" ng-blur="saveCurrentInfo(7)">件。
                             </div>
                         </div>
                     </div>
@@ -304,9 +307,12 @@
                     </label>
                     <div class="content hidden">
                         <div class="detailBox">
-
                             <div class="detail">
-                                订单金额每满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                                订单金额满￥<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，获赠优惠券
+                                <span ng-click="getNum(7)">
+                                    <a a data-toggle="modal" data-target="#couponItemSwitchModal" id="B7"> （选择赠送优惠券） </a>
+                                </span>
+                                <input type="text" name="" ng-model="salesInfo['SALES.PRONUM1']" ng-blur="saveCurrentInfo(7)">张。
                             </div>
                         </div>
 
@@ -315,14 +321,15 @@
                 </div>
             </div>
         </div>
-        <div class="form-group" ng-if="memberId == 2" >
+        <div class="form-group" ng-show="memberId == 2" >
             <div class="col-sm-1">规则：</div>
             <div class="manjian-ruler col-sm-8" >
 
                 <!-- 满减 -->
                 <div class="manjian radio">
                     <label>
-                        <input type="radio" name="promation1"  value="1" ng-model="salesInfo['SALES.SALE_TYPE']" checked>
+                        <input type="radio" name="promation"  ng-model="salesInfo['SALES.SALE_TYPE']"
+                               ng-init="salesInfo['SALES.SALE_TYPE'] = 1" checked value = 1>
                         满减
                     </label>
                     <div class="content">
@@ -551,73 +558,76 @@
             </div>
             <div class="meimanjian-ruler col-sm-8 hidden">
 
-                <!-- 满减 -->
+                <!-- 每满减 -->
                 <div class="manjian radio">
                     <label>
-                        <input type="radio" name="mpromation1"  value="option1"  checked>
+                        <input type="radio" name="promation1"  value="1" ng-model="salesInfo['SALES.SALE_TYPE']" checked>
                         每满减
                     </label>
-                    <div class="content">
+                    <div class="content hidden">
                         <div class="detailBox">
-
-                            <div class="detail">
-                                订单金额每满￥<input class="" type="text">，立减￥<input type="text" name="">。
+                            <div class="detai ">
+                                购买数量满<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >件，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']">。
                             </div>
                         </div>
-
                     </div>
                 </div>
 
-                <!-- 满折 -->
+                <!-- 每满折 -->
                 <div class="manzhe radio">
                     <label>
-                        <input type="radio" name="mpromation1"  value="option2">
+                        <input type="radio" name="promation1"  value="2" ng-model="salesInfo['SALES.SALE_TYPE']" >
                         每满折
                     </label>
                     <div class="content hidden">
                         <div class="detailBox">
-
-                            <div class="detail">
-                                订单金额每满￥<input class="" type="text">，打<input type="text" name="">折。
+                            <div class="detai ">
+                                购买数量满<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >件，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']">。
                             </div>
                         </div>
-
                     </div>
                 </div>
 
 
-                <!-- 满赠（商品） -->
+                <!-- 每满赠（商品） -->
                 <div class="manzeng-product radio">
                     <label>
-                        <input type="radio" name="mpromation1"  value="option3">
+                        <input type="radio" name="promation1"  value="3" ng-model="salesInfo['SALES.SALE_TYPE']" >
                         每满赠（商品）
                     </label>
                     <div class="content hidden">
-                        <div class="detailBox">
+                        <div class="detailBox" >
                             <div class="detail">
-                                订单金额每满￥<input class="" type="text">，获赠品<span><a href="#">（选择赠送商品）</a></span><input type="text" name="">件。
-                            </div>
+                        购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']" >件，
+                        获赠品<span ng-click="getNum(7)">
+                                        <a data-toggle="modal" data-target="#productItemSwitchModal"  id="C7"> （选择赠送商品） </a>
+                                    </span>
+                             <input type="text" name="" ng-model="salesInfo['SALES.PRONUM1']" ng-blur="saveCurrentInfo(1)">件。
+                        <a class="itemDel"></a>
                         </div>
-
+                        </div>
                     </div>
                 </div>
 
 
-
+                <!-- 每满赠（优惠券 -->
                 <div class="manzeng-ticket radio">
                     <label>
-                        <input type="radio" name="mpromation1" value="option4">
+                        <input type="radio" name="promation1"  value="4" ng-model="salesInfo['SALES.SALE_TYPE']" >
                         每满赠（优惠券）
                     </label>
                     <div class="content hidden">
                         <div class="detailBox">
-
                             <div class="detail">
-                                订单金额每满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                                购买数量满<input class="" type="text" ng-model="salesInfo['SALES.CONDITION_NUM1']">，获赠优惠券
+                                <span ng-click="getNum(7)">
+                                    <a a data-toggle="modal" data-target="#couponItemSwitchModal" id="D7"> （选择赠送优惠券） </a>
+                                </span>
+                                <input type="text" name="" ng-model="salesInfo[salesInfo['SALES.PRONUM1']]" ng-blur="saveCurrentInfo(1)">张。
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

@@ -69,7 +69,6 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
 }
     //清空部分表单信息
     $scope.enEmpty = function (){
-        $scope.salesInfo = null;
     }
 
     $scope.getNum = function (num){
@@ -82,12 +81,16 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
             $scope.productName = data['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'];
             var num = $scope.num;
             $("#A"+num).text($scope.productName);
+            data = null;
+            $scope.$broadcast('pageBar.reload');
         }
         else {
             $scope.productId = data['SHOP_PRODUCT_SKU.SKU_ID'];
             $scope.productName = data['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'];
             var num = $scope.num;
             $("#C"+num).text($scope.productName);
+            data = null;
+            $scope.$broadcast('pageBar.reload');
         }
 
     };

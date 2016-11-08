@@ -1,8 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="page-content">
     <div class="table-content">
-        <%--在这里写样式--%>
-
         <div class="table-toolbar" style="padding:14px 0;">
             <div class="form-inline row">
                 <div class="col-md-4">
@@ -33,7 +30,7 @@
                     </select>
                 </div>
                 <div class="col-md-3 text-right">
-                    <a ui-sref="userAdd">
+                    <a ui-sref="user/user/userAdd">
                         <button id="sample_editable_1_new" class="btn btn-default pull-right">
                             <i class="fa fa-plus"></i> 新增员工
                         </button>
@@ -66,7 +63,7 @@
                 <td ng-bind="user['USER.REG_DATETIME'] | FormatStrDate" class="text-center"></td>
                 <td ng-bind="user['USER.STATE'] | FormatState" class="text-center"></td>
                 <td class="text-center">
-                    <a class="table-link" ui-sref="userModify({id:user['USER.UID']})">
+                    <a class="table-link" ui-sref="user/user/userModify({id:user['USER.UID']})">
                         修改
                     </a>
                     <a class="table-link" ng-click="modifyState(user)">

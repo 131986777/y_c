@@ -1,4 +1,4 @@
-AndSellMainModule.controller('cardTypeController', function ($scope, $stateParams, cardFactory, modalFactory) {
+angular.module('AndSell.Main').controller('card_card_cardType_Controller', function ($scope, $stateParams, cardFactory, modalFactory) {
 
     modalFactory.setTitle('会员卡类型');
 

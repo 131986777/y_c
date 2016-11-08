@@ -11,7 +11,7 @@ AndSellH5MainModule.controller('H5.OrderAddAddressController', function ($scope,
 
         $scope.shop = JSON.parse(getCookie('currentShopInfo'))['SHOP.SHOP_NAME'];
 
-        document.getElementById('city-picker').value='江苏省 南京市';
+        document.getElementById('city-picker').value='江苏省 南京市 ';
 
     };
 
@@ -22,7 +22,9 @@ AndSellH5MainModule.controller('H5.OrderAddAddressController', function ($scope,
             time: $scope.pickupTime,
             shop: $scope.shop,
             type: $scope.addressType,
-
+            shengshi:document.getElementById('city-picker').value,
+            address:$scope.address,
+            getTime:document.getElementById('datetime-picker').value
         };
 
         console.log($scope.PickupPerson);

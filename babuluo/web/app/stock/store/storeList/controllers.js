@@ -1,5 +1,5 @@
 
-AndSellMainModule.controller('storeListController', function ($scope, $stateParams, storeFactory, modalFactory) {
+angular.module('AndSell.Main').controller('stock_store_storeList_Controller', function ($scope, $stateParams, storeFactory, modalFactory) {
 
   modalFactory.setTitle('仓库列表');
 

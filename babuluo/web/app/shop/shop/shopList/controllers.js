@@ -1,4 +1,4 @@
-AndSellMainModule.controller('shopListController', function ($scope, shopFactory, districtFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('shop_shop_shopList_Controller', function ($scope, shopFactory, districtFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('门店管理');

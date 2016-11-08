@@ -1,4 +1,4 @@
-AndSellMainModule.controller('MemberSourceController', function ($scope, $stateParams, memberSourceFactory, modalFactory) {
+angular.module('AndSell.Main').controller('member_source_sourceList_Controller', function ($scope, $stateParams, memberSourceFactory, modalFactory) {
 
 
     modalFactory.setTitle('客户来源管理');

@@ -1,4 +1,4 @@
-AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $stateParams, memberFactory, memberSourceFactory, memberTypeFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('member_member_memberInfo_Controller', function ($scope, $state, $stateParams, memberFactory, memberSourceFactory, memberTypeFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('客户信息');
@@ -138,7 +138,7 @@ AndSellMainModule.controller('MemberInfoController', function ($scope, $state, $
         });
     }, function () {
         //取消事件
-        $scope.initLoad();
+        $state.go('member/member/memberList');
     });
 });
 

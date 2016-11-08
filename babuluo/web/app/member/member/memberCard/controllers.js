@@ -1,4 +1,4 @@
-AndSellMainModule.controller('MemberCardController', function ($scope, $state, $stateParams, memberFactory, memberSourceFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('member_member_memberCard_Controller', function ($scope, $state, $stateParams, memberFactory, memberSourceFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('客户会员卡信息');
