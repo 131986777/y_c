@@ -1,36 +1,19 @@
-<!DOCTYPE html>
-<html lang="zh-CN"  ng-app="login">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>登录</title>
-
-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
-
-    <link rel="stylesheet" href="../../public/css/style.css">
-</head>
-
-<body>
-
 <div class="user-wrap user">
     <div class="logo-wrap">
         <img class="logo" src="../../public/img/login_logo.png">
     </div>
-
-
     <div>
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
                     <input class="weui_input" type="text" name="phone" id="account"
-                           placeholder="账号">
+                           placeholder="账号" ng-model="memberInfo['LOGIN_ID']">
                 </div>
             </div>
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
                     <input class="weui_input" type="text" name="password"
-                           id="password" placeholder="密码">
+                           id="password" placeholder="密码" ng-model="memberInfo['PWD']">
                 </div>
             </div>
         </div>
@@ -45,10 +28,10 @@
             </a>
         </div>
         <div class="weui_btn_area">
-            <button class="weui_btn my-btn-default" type="submit">登录</button>
+            <button class="weui_btn my-btn-default" type="submit" ng-click="login()">登录</button>
         </div>
         <div class="login-other">
-            <a class="btn-link" href="signup.html">
+            <a class="btn-link" ui-sref="userRegister">
                 免费注册
             </a>
             <a class="btn-link pull-right" href="#">
@@ -57,15 +40,4 @@
         </div>
     </div>
 </div>
-<script src="../../public/libs/angular/angular.min.js"></script>
-<script src="../../public/components/check/check.js"></script>
-<script>
-    var app = angular.module('login', ['myCheck']);
-    app.controller('LoginCtrl', function() {
-
-    });
-</script>
-
-</body>
-</html>
 
