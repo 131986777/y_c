@@ -16,12 +16,4 @@ AndSellH5MainModule.service('userFactory', function ($resource, baseURL) {
         });
     };
 
-    this.getShopById = function (id) {
-        return $resource(baseURL + '/shop/shop/getById?SHOP.SHOP_ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-
 });
