@@ -81,4 +81,9 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/h5/pages/order/addAddress/index.html",
             controller: "H5.OrderAddAddressController"
         })
+        .state("couponList", {
+            url: "/couponList",
+            templateUrl: "/AndSell/h5/pages/coupon/list/index.html",
+            controller: "H5.CouponController"
+        })
 });
