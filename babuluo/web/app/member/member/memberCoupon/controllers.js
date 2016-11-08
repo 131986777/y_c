@@ -1,4 +1,4 @@
-AndSellMainModule.controller('MemberCoupon', function ($scope, $state, $stateParams, memberFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('member/member/memberCoupon_Controller', function ($scope, $state, $stateParams, memberFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('客户优惠券');

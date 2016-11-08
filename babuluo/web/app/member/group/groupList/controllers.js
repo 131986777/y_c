@@ -1,4 +1,4 @@
-AndSellMainModule.controller('MemberGroupController', function ($scope, $stateParams, memberGroupFactory, modalFactory) {
+angular.module('AndSell.Main').controller('member_group_groupList_Controller', function ($scope, $stateParams, memberGroupFactory, modalFactory) {
 
 
     modalFactory.setTitle('客户分组管理');

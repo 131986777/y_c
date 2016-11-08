@@ -1,4 +1,4 @@
-AndSellMainModule.controller('totalStockController', function ($scope, shopFactory, totalStockFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('stock_totalStock_totalStockList_Controller', function ($scope, shopFactory, totalStockFactory, modalFactory, $q) {
 
     modalFactory.setTitle('实时库存');
 
