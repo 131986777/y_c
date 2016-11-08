@@ -12,6 +12,7 @@
             ng-if="orderSizeMap.get>0" ng-bind="'('+orderSizeMap.get+')'"></span></a></li>
         <li ng-class="{true:' active'}[state=='comment']" ng-click="filterStateOrder('comment')"><a>待评价<span
             ng-if="orderSizeMap.comment>0" ng-bind="'('+orderSizeMap.comment+')'"></span></a></li>
+        <li ng-class="{true:' active'}[state=='cancel']" ng-click="filterStateOrder('cancel')"><a>已取消</a></li>
       </ul>
 
       <ul class="orderNav  nav-justified list-unstyled " ng-if="orderType==1">
@@ -28,8 +29,8 @@
         </li>
         <li ng-class="{true:' active'}[state=='comment']" ng-click="filterStateOrder('comment')"><a>待评价<span
             ng-if="orderSizeMap.comment>0" ng-bind="'('+orderSizeMap.comment+')'"></span></a></li>
+        <li ng-class="{true:' active'}[state=='cancel']" ng-click="filterStateOrder('cancel')">已取消</li>
       </ul>
-
       <!-- 所有订单 -->
       <div class="form-group form-inline ">
         <input type="text" class="form-control" ng-model="orderFilter" placeholder="输入商品名称/订单号">

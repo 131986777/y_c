@@ -117,11 +117,17 @@
         </a>
       </div>
 
-      <div class="btn-wrap" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">
+      <div class="btn-wrap" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.TYPE']=='1'">
         <a class="btn my-btn-default" ng-click="getPrdNow()" >
-          确认提货
+          确认收货
         </a>
       </div>
+      <div class="btn-wrap" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&order['SHOP_ORDER.TYPE']=='3'">
+        <a class="btn my-btn-default" ng-click="commentOrder()" >
+          评价订单
+        </a>
+      </div>
+
     </div>
   </div>
 

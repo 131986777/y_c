@@ -33,7 +33,7 @@ AndSellH5MainModule.controller('H5.OrderDetailController', function ($scope, $st
     //确认提货
     $scope.getPrdNow = function () {
         orderFactory.deliveryOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
-            weUI.toast.ok('提货成功');
+            weUI.toast.ok('收货成功');
             $scope.getOrder($scope.order['SHOP_ORDER.ID']);
         });
     }
@@ -44,6 +44,11 @@ AndSellH5MainModule.controller('H5.OrderDetailController', function ($scope, $st
             weUI.toast.ok('支付成功');
             $scope.getOrder($scope.order['SHOP_ORDER.ID']);
         });
+    }
+
+    //评价订单
+    $scope.commentOrder = function () {
+
     }
 
 
