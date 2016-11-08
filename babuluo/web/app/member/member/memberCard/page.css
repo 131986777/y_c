@@ -1,0 +1,43 @@
+.cardList-wrap{
+    overflow:hidden;
+    width: 1020px;
+    margin: 0 auto;
+}
+.card{
+    border-radius: 10px;
+    color: #fff;
+    position: relative;
+    margin: 20px 44px 0px;
+}
+.balance{
+    line-height: 124px;
+    text-align: center;
+    font-size: 38px;
+    position: relative;
+}
+.balance span{
+    color: rgb(240,231,231);
+    font-size: 18px;
+    padding-bottom: 2px;
+}
+.froze{
+    color: rgb(240,231,231);
+    font-size: 16px;
+    position: absolute;
+    right: 130px;
+    top: 64px;
+}
+.cardTitle{
+    padding: 14px 20px 0 20px;
+    font-size: 22px;
+}
+.cardFooter{
+    padding: 0 20px 5px 20px;
+    font-size: 14px;
+}
+.nowrap{
+    white-space: nowrap;
+    text-overflow:ellipsis;
+    overflow: hidden;
+}
+

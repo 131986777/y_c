@@ -46,10 +46,7 @@
     <script type="text/javascript"
             src="http://webapi.amap.com/maps?v=1.3&key=ef5bbbdf7bca82910095f043224c0138&plugin=AMap.Autocomplete"></script>
 
-    <!--############单页面Css区 以后要切换时注入############-->
-    <link href="/AndSell/app/card/card/cardType/cardType.css" rel="stylesheet">
-    <link href="/AndSell/app/marketing/coupon/coupon/couponList/couponList.css" rel="stylesheet">
-    <link href="/AndSell/app/marketing/sales/sales/salesCoupon/salesCoupon.css" rel="stylesheet">
+
 
 </head>
 
@@ -229,12 +226,12 @@
                     <div class="sub-menu-wrap dropdown-menu" role="menu">
                         <ul class="sub-menu ">
                             <li>
-                                <a ui-sref="storeList">
+                                <a ui-sref="stock/store/storeList">
                                     仓库列表
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="stockList">
+                                <a ui-sref="stock/stock/stockList">
                                     实时库存
                                 </a>
                             </li>
@@ -255,17 +252,17 @@
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="memberSourceList">
+                                <a ui-sref="member/source/sourceList">
                                     客户来源
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="memberGroupList">
+                                <a ui-sref="member/group/groupList">
                                     客户分组
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="memberTypeList">
+                                <a ui-sref="member/type/typeList">
                                     客户类型
                                 </a>
                             </li>
@@ -273,7 +270,7 @@
 
                         <ul class="sub-menu" role="menu">
                             <li>
-                                <a ui-sref="memberCouponList">
+                                <a ui-sref="member/member/memberCoupon">
                                     客户优惠券
                                 </a>
                                 <a ui-sref="card/card/cardList">
@@ -281,12 +278,12 @@
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="cardType">
+                                <a ui-sref="card/card/cardType">
                                     会员卡类型
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="cardSource">
+                                <a ui-sref="card/card/cardSource">
                                     发卡渠道
                                 </a>
                             </li>
@@ -330,7 +327,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="couponList">
+                                <a ui-sref="marketing/coupon/coupon/couponList">
                                     优惠券
                                 </a>
                             </li>
@@ -343,12 +340,12 @@
 
                         <ul class="sub-menu " role="menu">
                             <li>
-                                <a ui-sref="banner">
+                                <a ui-sref="marketing/banner/banner">
                                     横幅
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="bannerPosition">
+                                <a ui-sref="marketing/banner/banner_position">
                                     横幅位置
                                 </a>
                             </li>
@@ -360,7 +357,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a ui-sref="couponRule">
+                                <a ui-sref="marketing/coupon/rule/ruleList">
                                     优惠券规则
                                 </a>
                             </li>
@@ -563,20 +560,7 @@
 
 <!--############controller集合区(以后尝试 切换时注入)############-->
 <script src="main_controller.js"></script>
-<script src="/AndSell/app/member/member/memberCoupon/controllers.js"></script><!--会员优惠券使用-->
-<script src="/AndSell/app/member/source/sourceList/controllers.js"></script><!--code客户来源 示例使用-->
-<script src="/AndSell/app/member/type/typeList/controllers.js"></script><!--code客户类型 示例使用-->
-<script src="/AndSell/app/member/group/groupList/controllers.js"></script><!--code客户类型 示例使用-->
-<script src="/AndSell/app/stock/stock/stockList/controllers.js"></script><!--实时库存-->
-<script src="/AndSell/app/stock/totalStock/totalStockList/controllers.js"></script><!--总库存-->
-<script src="/AndSell/app/stock/store/storeList/controllers.js"></script><!--仓库列表-->
-<script src="/AndSell/app/marketing/coupon/rule/ruleList/controllers.js"></script><!--优惠券列表-->
-<script src="/AndSell/app/marketing/coupon/coupon/couponList/controllers.js"></script><!--优惠券列表-->
-<script src="/AndSell/app/marketing/sales/sales/salesCoupon/controllers.js"></script><!--注册送券-->
-<script src="/AndSell/app/marketing/banner/banner_position/controllers.js"></script><!--横幅位置-->
-<script src="/AndSell/app/marketing/banner/banner/controllers.js"></script><!--横幅位置-->
-<script src="/AndSell/app/card/card/cardType/controllers.js"></script><!--demoList 示例使用-->
-<script src="/AndSell/app/card/card/cardSource/controllers.js"></script><!--demoList 示例使用-->
+
 <script src="/AndSell/app/demo/demo/demoAdd/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/demo/demo/demoList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/demo/demo/demoModify/controllers.js"></script><!--demoModify 示例使用-->

@@ -1221,31 +1221,31 @@ p {
   line-height: 1;
   font-size: 14px;
   color: #a4a4a4; }
- .basic-info .name,
- .basic-info .money {
+.basic-info .name,
+.basic-info .money {
   font-size: 18px; }
- .basic-info .feature,
- .basic-info .money,
- .basic-info .code {
+.basic-info .feature,
+.basic-info .money,
+.basic-info .code {
   margin: 12px 0 0; }
- .basic-info .feature,
+.basic-info .feature,
 .basic-info .money {
   color: #F36F1C; }
- .basic-info .name {
+.basic-info .name {
   margin: 5px 0 0;
   color: #444; }
- .basic-info .code {
+.basic-info .code {
   font-size: 12px; }
- .sale-info,
- .sku-info {
+.sale-info,
+.sku-info {
   padding: 12px 15px; }
- .sale-info {
+.sale-info {
   font-size: 12px; }
- .sku-info .sku-label {
+.sku-info .sku-label {
   padding: 0 15px;
   font-size: 12px;
   line-height: 2; }
- .sku-info .sku-label.selected {
+.sku-info .sku-label.selected {
   background-image: url("../img/sku_selected.png");
   background-position: bottom right;
   background-repeat: no-repeat;
@@ -1256,32 +1256,32 @@ p {
   top: 75px;
   width: 104px;
   height: 26px; }
- .product-num-wrap .btn,
- .product-num-wrap .form-control {
+.product-num-wrap .btn,
+.product-num-wrap .form-control {
   padding: 0;
   height: 26px;
   z-index: 0; }
- .product-num-wrap .btn {
+.product-num-wrap .btn {
   border-radius: 0;
   width: 26px; }
-  .cart-product-num-wrap {
+.cart-product-num-wrap {
   width: 104px;
   height: 26px; }
- .cart-product-num-wrap .btn,
- .cart-product-num-wrap .form-control {
+.cart-product-num-wrap .btn,
+.cart-product-num-wrap .form-control {
   padding: 0;
   height: 26px;
   z-index: 0; }
- .cart-product-num-wrap .btn {
+.cart-product-num-wrap .btn {
   border-radius: 0;
   width: 26px; }
- .add-to-cart {
-   color: #fff;
+.add-to-cart {
+  color: #fff;
   line-height: 49px;
   background-color: #F36F1C; }
- .product-list-page .add-to-cart{
-   line-height: 26px;
- }
+.product-list-page .add-to-cart{
+  line-height: 26px;
+}
 .weui_actionsheet_menu .weui_cells{
   margin-bottom: 0;
 }
@@ -1347,21 +1347,58 @@ p {
 .home-index .col p{
   margin-top: 10px;
 }
-.home-index .limit{
+.home-index .limit,
+.home-index .group{
   position: relative;
 }
-.limit button{
+.home-index .limit-desc{
   position: absolute;
-  left: 60px;
-  bottom: 35px;
+  top: 40px;
+  left: 30px;
+  line-height: 1.5;
 }
-.limit .time{
+.home-index .group-desc{
   position: absolute;
-  left: 33%;
-  bottom: 17%;
-  font-size: 2em;
+  top: 40px;
+  right: 30px;
+  line-height: 1.5;
+}
+.home-index .desc-text .title{
+  font-size: 16px;
+}
+.home-index .desc-text .text{
+  color: rgb(179,179,179);
+  font-size: 10px;
+}
+.home-index .desc-text .price{
+  font-size: 12px;
+}
+.home-index .desc-text .price .cur-price{
+  font-size: 16px;
+  color: rgb(244,116,26);
+}
+.home-index .desc-text .price del{
+  color: rgb(179,179,179);
+}
+.home-index .desc-text .btn-buy{
+  background-color: rgb(244,116,26);
+  color: #fff;
+  font-size: 12px;
+  border-radius: 5px;
+}
+/*.home-index .limit .time{
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  margin-left: -36px;
+}*/
+.home-index .desc-text .limit-time{
+  color: rgb(241,116,26);
+  font-size: 12px;
+  padding-left: 21px;
+  background:url("../img/time.png") no-repeat left center;
+}
 
-}
 .group button{
   position: absolute;
   left: 271px;
@@ -1687,4 +1724,62 @@ p {
   background-color: rgb(244,244,244);
   padding: 10px 15px;
   resize: none;
+}
+.balance-wrap{
+  padding: 10px 15px 0;
+  background-color: #F36F1C;
+  color: #fff;
+}
+.balance-wrap .title{
+  font-size: 16px;
+  padding: 15px 0;
+}
+.balance-wrap .count{
+  font-size: 70px;
+  padding-bottom: 15px;
+  font-weight: 500;
+}
+.balance-detail{
+  background-color: #fff;
+}
+.balance-detail .dropdown{
+  padding: 10px 15px;
+}
+.balance-detail .dropdown a{
+  font-size: 16px;
+  color: #000;
+}
+.balance-detail .dropdown-menu{
+  min-width: 105px;
+  text-align: center;
+  padding: 0;
+}
+.balance-detail .dropdown-menu li{
+  height: 38px;
+  line-height: 38px;
+  border-bottom: 1px solid rgb(204,204,204);
+  font-size: 16px;
+}
+.balance-table .balance-term{
+  border-top: 1px solid #d9d9d9;
+}
+.balance-table .balance-term p{
+  color: #000;
+  line-height: 1.5;
+}
+.balance-table .balance-term .balance-time{
+  color: rgb(180,180,180);
+}
+.balance-table .balance-term .balance-count{
+  font-weight: bold;
+}
+.reminder{
+  font-size: 12px;
+  padding: 20px 15px;
+  color: rgb(180,180,180);
+  line-height: 1.5;
+}
+.recharge .weui_select{
+  height: 22px;
+  line-height: 22px;
 }

@@ -45,28 +45,28 @@
     margin-right: 10px;
 }
 .coupon-wrap .buttons .note{
-    background: url(../../../../components/images/index_06.png) no-repeat left center;
+    background: url(../../../components/images/index_06.png) no-repeat left center;
 }
 .coupon-wrap .buttons .stop{
-    background: url(../../../../components/images/index_11.png) no-repeat left center;
+    background: url(../../../components/images/index_11.png) no-repeat left center;
 }
 .coupon-wrap .buttons .del{
-    background: url(../../../../components/images/index_08.png) no-repeat left center;
+    background: url(../../../components/images/index_08.png) no-repeat left center;
 }
 .coupon-wrap .buttons .start{
-    background: url(../../../../components/images/coupon-icon_07.png) no-repeat left center;
+    background: url(../../../components/images/coupon-icon_07.png) no-repeat left center;
 }
 .coupon-wrap .buttons a.note:hover{
-    background: url(../../../../components/images/icon_03.png) no-repeat left center;
+    background: url(../../../components/images/icon_03.png) no-repeat left center;
 }
 .coupon-wrap .buttons a.stop:hover{
-    background: url(../../../../components/images/icon_08.png) no-repeat left center;
+    background: url(../../../components/images/icon_08.png) no-repeat left center;
 }
 .coupon-wrap .buttons a.del:hover{
-    background: url(../../../../components/images/icon_05.png) no-repeat left center;
+    background: url(../../../components/images/icon_05.png) no-repeat left center;
 }
 .coupon-wrap .buttons a.start:hover{
-    background: url(../../../../components/images/coupon-icon_03.png) no-repeat left center;
+    background: url(../../../components/images/coupon-icon_03.png) no-repeat left center;
 }
 .coupon-list{
     padding-bottom: 20px;
@@ -127,11 +127,11 @@
 }
 .couponList .border{
     height: 2px;
-    background:url(../../../../components/images/coupon-01.png) no-repeat left center;
+    background:url(../../../components/images/coupon-01.png) no-repeat left center;
 }
 .couponList .border-disabled{
     height: 2px;
-    background:url(../../../../components/images/coupon-02.png) no-repeat left center;
+    background:url(../../../components/images/coupon-02.png) no-repeat left center;
 }
 .couponList .coupon-content .coupon-contain{
     height: 150px;
@@ -148,7 +148,7 @@
 .couponList .coupon-desc .coupon-state-stop{
     height: 62px;
     width: 116px;
-    background:url(../../../../components/images/coupon-icon_11.png) no-repeat;
+    background:url(../../../components/images/coupon-icon_11.png) no-repeat;
     position: absolute;
     right: 0;
     top: 25px;
@@ -156,7 +156,7 @@
 .couponList .coupon-desc .coupon-state-over{
     height: 62px;
     width: 116px;
-    background:url(../../../../components/images/coupon-icon_14.png) no-repeat;
+    background:url(../../../components/images/coupon-icon_14.png) no-repeat;
     position: absolute;
     right: 0;
     top: 25px;

@@ -1,14 +1,16 @@
 .card {
-    max-width: 411px;
-    height: 210px;
-    margin-top: 20px;
-    border-radius: 20px;
+    border-radius: 10px;
     color: #fff;
     position: relative;
+    margin: 20px 44px 0px;
 }
-
+.cardList-wrap{
+    overflow:hidden;
+    width: 1020px;
+    margin: 0 auto;
+}
 .balance {
-    line-height: 118px;
+    line-height: 138px;
     text-align: center;
     font-size: 38px;
     position: relative;

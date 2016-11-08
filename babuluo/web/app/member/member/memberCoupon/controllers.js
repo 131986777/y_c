@@ -1,4 +1,4 @@
-AndSellMainModule.controller('MemberCoupon', function ($scope, $state, $stateParams, memberFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('member_member_memberCoupon_Controller', function ($scope, $state, $stateParams, memberFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('客户优惠券');
@@ -8,6 +8,7 @@ AndSellMainModule.controller('MemberCoupon', function ($scope, $state, $statePar
         $scope.userDetailMap = response.extraData.userDetailMap;
         $scope.couponData=response.extraData.couponList;
         $scope.couponList=response.data;
+        console.log($scope.couponList);
 
     };
     $scope.queryMemberById = function (memberId) {
@@ -32,6 +33,8 @@ AndSellMainModule.controller('MemberCoupon', function ($scope, $state, $statePar
        // console.log($scope.memberId);
         if($scope.memberId==undefined||$scope.memberId==''){
             modalFactory.showShortAlert('请输入登录名称！');
+        }else if($scope.memberDetail==undefined){
+            modalFactory.showShortAlert('请先查询相关信息');
         }else{
 
         $scope.add['MEMBER_COUPON.COUPON_ID'] = $scope.coupon['COUPON.ID'];
@@ -68,9 +71,13 @@ AndSellMainModule.controller('MemberCoupon', function ($scope, $state, $statePar
     };
 
     $scope.parseArray=function (data) {
-        var array=data.split(',');
+        console.log(456);
+      if (data!=undefined){
+          data=data.split(',');
+      }
 
-        return array;
+
+        return data;
     }
 
 
