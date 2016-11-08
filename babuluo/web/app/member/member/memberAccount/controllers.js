@@ -1,4 +1,4 @@
-AndSellMainModule.controller('MemberAccountController', function ($scope, $state, $stateParams, memberGroupFactory, memberFactory, memberSourceFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('member_member_memberAccount_Controller', function ($scope, $state, $stateParams, memberGroupFactory, memberFactory, memberSourceFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('客户账户');
@@ -40,7 +40,7 @@ AndSellMainModule.controller('MemberAccountController', function ($scope, $state
         });
     }, function () {
         //取消事件
-        $scope.initLoad();
+        $state.go('member/member/memberList');
     });
 
 });
