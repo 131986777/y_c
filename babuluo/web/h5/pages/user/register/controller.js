@@ -23,7 +23,7 @@ AndSellH5MainModule.controller('H5.UserRegisterController', function ($scope, $s
                 alert(response.msg);
             } else {
                 alert('注册成功');
-                $state.go('userLogin');
+                $state.go('accountLogin');
             }
         });
     }
