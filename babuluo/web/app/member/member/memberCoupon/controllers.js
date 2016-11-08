@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('member/member/memberCoupon_Controller', function ($scope, $state, $stateParams, memberFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('member_member_memberCoupon_Controller', function ($scope, $state, $stateParams, memberFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('客户优惠券');
@@ -8,6 +8,7 @@ angular.module('AndSell.Main').controller('member/member/memberCoupon_Controller
         $scope.userDetailMap = response.extraData.userDetailMap;
         $scope.couponData=response.extraData.couponList;
         $scope.couponList=response.data;
+        console.log($scope.couponList);
 
     };
     $scope.queryMemberById = function (memberId) {
