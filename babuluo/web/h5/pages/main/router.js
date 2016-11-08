@@ -86,4 +86,14 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/h5/pages/coupon/list/index.html",
             controller: "H5.CouponController"
         })
+        .state("userReg", {
+            url: "/userReg",
+            templateUrl: "/AndSell/h5/pages/user/register/index.html",
+            controller: "H5.UserRegisterController"
+        })
+        .state("accountLogin", {
+            url: "/accountLogin",
+            templateUrl: "/AndSell/h5/pages/user/accountLogin/index.html",
+            controller: "H5.UserAccountLoginController"
+        })
 });

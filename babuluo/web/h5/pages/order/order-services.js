@@ -18,7 +18,7 @@ AndSellH5MainModule.service('orderFactory', function ($resource, baseURL) {
 
     this.getOrder= function (filter) {
         console.log(filter);
-        return $resource(baseURL + '/shop/order/queryAll', filter , {
+        return $resource(baseURL + '/shop/order/queryAllForAgent', filter , {
             'update': {
                 method: 'PUT'
             }
@@ -41,8 +41,17 @@ AndSellH5MainModule.service('orderFactory', function ($resource, baseURL) {
             }
         });
     }
+
     this.deliveryOrder= function (id) {
         return $resource(baseURL + '/shop/order/deliveryOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+
+    this.getOrder= function (id) {
+        return $resource(baseURL + '/shop/order/getOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
             'update': {
                 method: 'PUT'
             }

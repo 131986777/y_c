@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $state, $stateParams,orderFactory,modalFactory) {
+AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $state, $stateParams,orderFactory,modalFactory,weUI) {
 
     modalFactory.setTitle('订单列表');
     modalFactory.setBottom(false);
@@ -26,24 +26,28 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
             $scope.filter['SHOP_ORDER.STATE_ORDER']=1;
             $scope.filter['SHOP_ORDER.STATE_MONEY']=1;
             $scope.filter['SHOP_ORDER.STATE_DELIVERY']=1
+            $scope.filter['SHOP_ORDER.STATE_OUT']=1
+            $scope.filter['SHOP_ORDER.STATE_SEND']=1
         }else if(type=='pay'){
             $scope.filter['SHOP_ORDER.STATE_ORDER']=1;
             $scope.filter['SHOP_ORDER.STATE_MONEY']=-1;
         }else if(type=='get'){
             $scope.filter['SHOP_ORDER.STATE_ORDER']=1;
             $scope.filter['SHOP_ORDER.STATE_MONEY']=1;
-            $scope.filter['SHOP_ORDER.STATE_DELIVERY']=-1
         }else if(type=='comment'){
             //待评价订单
             $scope.filter['SHOP_ORDER.STATE_ORDER']=1;
             $scope.filter['SHOP_ORDER.STATE_MONEY']=1;
             $scope.filter['SHOP_ORDER.STATE_DELIVERY']=1
+            $scope.filter['SHOP_ORDER.STATE_OUT']=1
+            $scope.filter['SHOP_ORDER.STATE_SEND']=1
             $scope.filter['SHOP_ORDER.STATE_COMMENT']=-1;
         }
         $scope.getOrder();
     }
 
     $scope.getOrder= function () {
+        $scope.filter['SHOP_ORDER.UID']=1044;
         orderFactory.getOrder($scope.filter).get({}, function (response) {
             console.log(response);
             Array.prototype.push.apply($scope.orderList,response.data);//数组合并
@@ -74,6 +78,16 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
         $scope.filter.PN = $scope.page.pageIndex+1;
         $scope.getOrder();
     };
+
+    //取消订单
+    $scope.cancelOrder = function (id) {
+        weUI.dialog.confirm('提示 ',' 确认取消该订单嘛? ', function () {
+            orderFactory.cancelOrder(id).get({}, function () {
+                weUI.toast.ok('取消订单成功');
+                $scope.initData();
+            });
+        })
+    }
 
     //下拉监听器
     $(document.body).infinite().on("infinite", function() {

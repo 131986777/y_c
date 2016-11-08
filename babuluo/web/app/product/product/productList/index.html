@@ -50,18 +50,16 @@
                             <option class="nya-bs-option" value="ADD_DATETIME ASC">添加时间 ↑</option>
                         </select>
                     </div>
-                    <a ui-sref="product/product/productAdd" class="col-md-2 pull-right">
-                        <button id="sample_editable_1_new" class="btn btn-default pull-right">
+
+                    <div  class="col-md-3 btn-group">
+                        <button ui-sref="product/product/productAdd" id="sample_editable_1_new" class="btn btn-default pull-right">
                             <i class="fa fa-plus"></i> 新增商品
                         </button>
-                    </a>
-
-                    <div class="btn-group col-md-1">
-                        <button class="btn green  btn-outline dropdown-toggle"
+                        <button class="btn btn-default pull-right  green  btn-outline dropdown-toggle"
                                 data-toggle="dropdown">操作
                             <i class="fa fa-angle-down"></i>
                         </button>
-                        <ul class="dropdown-menu pull-right" style="min-width: 120px;">
+                        <ul class="dropdown-menu pull-right" style="min-width: 60px;left:86px;">
                             <li>
                                 <a ng-click="changeProductsSaleState(false)">
                                     上架</a>
@@ -84,7 +82,12 @@
                             </li>
 
                         </ul>
-                    </div>
+
+                    </>
+
+                    <!--<div class="btn-group col-md-1">-->
+                        <!---->
+                    <!--</div>-->
                 </div>
 
             </div>

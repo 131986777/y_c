@@ -11,7 +11,7 @@
         待付款
       </a>
       <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[state=='get']" ng-click="filterStateOrder('get')">
-        待自提
+        待收货
       </a>
       <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[state=='comment']" ng-click="filterStateOrder('comment')">
         待评价
@@ -21,18 +21,44 @@
 
     <div class="weui_tab_bd">
       <div id="all" class="weui_tab_bd_item weui_tab_bd_item_active">
-        <div class="order-wrap weui_cells" ng-repeat="order in orderList" ng-if="orderList.length>0">
+        <div class="order-wrap weui_cells" ng-repeat="order in orderList" ng-if="orderList.length>0"
+             >
           <div class="weui_cell" ng-click="toDetail(order['SHOP_ORDER.ID'])">
             <div class="weui_cell_bd weui_cell_primary"
                  ng-bind="'订单编号 '+order['SHOP_ORDER.ORDER_NUM']">
             </div>
             <div class="order-state weui_cell_ft">
-              <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">待付款</span>
+              <div ng-if="order['SHOP_ORDER.TYPE']=='1'">
+                <span
+                     ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
+                  等待付款
+                </span>
+                <span
+                     ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">
+                  等待出库
+                </span>
+                <span
+                     ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==-1">
+                  等待发货
+                </span>
+                <span
+                     ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1">
+                  已完成
+                </span>
+                <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消</span>
+              </div>
+
+              <div ng-if="order['SHOP_ORDER.TYPE']=='3'">
+
+                <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">待付款</span>
               <span
                   ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">待自提</span>
               <span
                   ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">已完成</span>
-              <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消</span>
+                <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消</span>
+              </div>
+
+
             </div>
           </div>
 
@@ -78,15 +104,17 @@
             </div>
           <div class="weui_cell">
             <div class="act-btn-wrap weui_cell_bd weui_cell_primary">
-              <a class="btn btn-plain-default btn-sm" href="#">
-                <span
-                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">去付款</span>
-                <span
-                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">确认提货</span>
-                <span
-                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">评价订单</span>
-                <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">再来一单</span>
-              </a>
+              <div class="btn btn-plain-default btn-sm" >
+
+                <span ng-click="toDetail(order['SHOP_ORDER.ID'])" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">支付订单</span>
+
+                <span ng-click="toDetail(order['SHOP_ORDER.ID'])" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.TYPE']=='1'">确认收货</span>
+
+                <span ng-click="toDetail(order['SHOP_ORDER.ID'])" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&order['SHOP_ORDER.TYPE']=='3'">评价订单</span>
+
+                <span ng-click="cancelOrder(order['SHOP_ORDER.ID'])" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.STATE_OUT']==-1||order['SHOP_ORDER.STATE_DELIVERY']==-1))">取消订单</span>
+
+              </div>
             </div>
           </div>
         </div>

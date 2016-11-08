@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('H5.CouponController', function ($scope, $state, couponFactory, modalFactory) {
+AndSellH5MainModule.controller('H5.CouponController', function ($scope, $state, couponFactory, modalFactory) {
 
     modalFactory.setTitle('领券中心');
     // modalFactory.setBottom(true);

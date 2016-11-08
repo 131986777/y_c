@@ -153,7 +153,7 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
             } else if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert('修改成功');
                 $("#addSalePlan").modal('hide');
-                $scope.initLoad();
+                $scope.$broadcast('pageBar.reload');
             }
         })
     }
