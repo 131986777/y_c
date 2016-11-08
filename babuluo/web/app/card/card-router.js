@@ -16,5 +16,5 @@ AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
 });
 
 $import('card/card/cardList',undefined,true);
-$import('card/card/cardType');
+$import('card/card/cardType',undefined,true);
 $import('card/card/cardSource');
