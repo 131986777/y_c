@@ -10,6 +10,9 @@ AndSellH5MainModule.controller('H5.OrderAddAddressController', function ($scope,
         $scope.PickupPerson = {};
 
         $scope.shop = JSON.parse(getCookie('currentShopInfo'))['SHOP.SHOP_NAME'];
+
+        document.getElementById('city-picker').value='江苏省 南京市';
+
     };
 
     $scope.submit = function () {
@@ -17,7 +20,9 @@ AndSellH5MainModule.controller('H5.OrderAddAddressController', function ($scope,
             man: $scope.man,
             phone: $scope.phone,
             time: $scope.pickupTime,
-            shop: $scope.shop
+            shop: $scope.shop,
+            type: $scope.addressType,
+
         };
 
         console.log($scope.PickupPerson);
@@ -49,7 +54,7 @@ AndSellH5MainModule.controller('H5.OrderAddAddressController', function ($scope,
          times: function () {
              return [  // 自定义的时间
                  {
-                     values: ['7:00-18:00']
+                     values: ['7:00-12:00','12:00-18:00']
                  }
              ];
          }
