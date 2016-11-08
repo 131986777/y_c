@@ -3,17 +3,7 @@ angular.module('AndSell.Main').controller('stock_totalStock_totalStockList_Contr
     modalFactory.setTitle('实时库存');
 
 
-    // $scope.initLoad = function () {
-    //
-    //     totalStockFactory.getTotalStockList().get({}, function (response) {
-    //         console.log(response);
-    //         $scope.allStockList = response.data;
-    //
-    //     }, null);
-    //
-    //
-    //   //  console.log($scope.storeMap.get('1'));
-    // };
+
 
     $scope.bindData = function (response) {
 

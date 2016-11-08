@@ -1,5 +1,5 @@
 
-AndSellMainModule.controller('couponRuleListController', function ($scope, $stateParams, couponFactory, modalFactory) {
+angular.module('AndSell.Main').controller('marketing_coupon_rule_ruleList_Controller', function ($scope, $stateParams, couponFactory, modalFactory) {
 
   modalFactory.setTitle('优惠券规则列表');
 

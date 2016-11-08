@@ -1,4 +1,4 @@
-AndSellMainModule.controller('couponListController', function ($scope, $stateParams, couponFactory, modalFactory) {
+angular.module('AndSell.Main').controller('marketing_coupon_coupon_couponList_Controller', function ($scope, $stateParams, couponFactory, modalFactory) {
 
     modalFactory.setTitle('优惠券管理');
 
