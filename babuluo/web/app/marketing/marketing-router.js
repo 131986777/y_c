@@ -56,8 +56,9 @@ $import('marketing/sales/rule/ruleList');
 $import('marketing/sales/sales/salesList',undefined,true);
 //新增促销计划
 $import('marketing/sales/rule/ruleAdd',{id: '0',serviceId: '1'},true);
+$import('marketing/sales/sales/salesCoupon',undefined,true);
 
 $import('marketing/coupon/rule/ruleList');
 $import('marketing/banner/banner_position');
 $import('marketing/banner/banner');
-$import('marketing/coupon/coupon/couponList');
+$import('marketing/coupon/coupon/couponList',undefined,true);

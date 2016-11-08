@@ -2,7 +2,8 @@ $import('member/member/memberList');
 $import('member/source/sourceList');
 $import('member/type/typeList');
 $import('member/group/groupList');
-$import('member/member/memberCoupon');
+
+$import('member/member/memberCoupon',undefined,true);
 
 $import('member/member/memberInfo',{id: ''});
 $import('member/member/memberData',{id: ''});
