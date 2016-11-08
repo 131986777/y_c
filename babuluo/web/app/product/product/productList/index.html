@@ -1,9 +1,7 @@
 <div class="page-content" ng-init="initData()">
-
-    <div class="col-md-12" style="margin-top: 20px">
-        <div class="table-operbar row" ng-cloak>
-            <div class="table-toolbar row">
-
+    <div class="table-content">
+        <div class="table-operbar" ng-cloak>
+            <div class="table-toolbar">
                 <div class="form-inline row">
                     <div class="col-md-3">
                     <div class="form-group">
@@ -157,7 +155,7 @@
                         <div style="padding-left: 70px">
                             <span class="label label-info "
                                           ng-repeat="tag in product['SHOP_PRODUCT.TAG']"
-                                          ng-bind="tag"> </span>
+                                          ng-bind="tag" style="margin-right: 5px;"> </span>
                             <br>
                         <div style="margin-top: 5px">
                             <a ui-sref="product/product/productModify({productId:product['SHOP_PRODUCT.PRD_ID']})"
@@ -227,9 +225,8 @@
          url="/shop/product/queryAll"
          callback="bindData(response)">
     </div>
-
     <tag-switch-modal callback="setPrdsTag(data)"></tag-switch-modal>
-
+</div>
     <div class="modal fade text-left" id="setPrdClassModal" tabindex="-1" aria-hidden="true"
          style="display: none;">
         <div class="modal-dialog">

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>账户余额</title>
+	<link rel="stylesheet"
+	href="../../public/libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+	<link rel="stylesheet" href="../../public/css/style.css">
+</head>
+<body class="bg-grey">
+	<!-- 余额部分 -->
+	<div class="balance-wrap">
+		<p class="title">余额账户(元)</p>
+		<p class="count">173.63</p>
+	</div>
+	<div class="main-entry weui_cells weui_cells_access">
+		<a class="weui_cell">
+			<div class="weui_cell_bd weui_cell_primary">
+				充值
+			</div>
+			<div class="weui_cell_ft"></div>
+		</a>
+	</div>
+
+	<!-- 收支明细 -->
+	<div class="balance-detail">
+		<div class="dropdown">
+			<a type="button" data-toggle="dropdown" ">
+				收支明细
+				<span class="caret"></span>
+			</a>
+			<ul class="dropdown-menu">
+				<li>收支明细</li>
+				<li>支出</li>
+				<li>收入</li>
+			</ul>
+		</div>
+		<div class="balance-table">
+			<div class="balance-term">
+				<a class="weui_cell">
+					<div class="weui_cell_bd weui_cell_primary">
+						<p>在线支付</p>
+						<p>余额：173.60</p>
+					</div>
+					<div class="weui_cell_ft">
+						<p class="balance-time">2016-11-01</p>
+						<p class="balance-count">-2.40</p>
+					</div>
+				</a>
+			</div>
+			<div class="balance-term">
+				<a class="weui_cell">
+					<div class="weui_cell_bd weui_cell_primary">
+						<p>在线支付</p>
+						<p>余额：173.60</p>
+					</div>
+					<div class="weui_cell_ft">
+						<p class="balance-time">2016-11-01</p>
+						<p class="balance-count">+7.40</p>
+					</div>
+				</a>
+			</div>
+		</div>	
+	</div>
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="../../public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

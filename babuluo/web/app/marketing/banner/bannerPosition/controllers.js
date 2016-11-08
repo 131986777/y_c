@@ -1,5 +1,5 @@
 
-AndSellMainModule.controller('bannerPosController', function ($scope, $stateParams, bannerFactory, modalFactory) {
+angular.module('AndSell.Main').controller('marketing_banner_bannerPosition_Controller', function ($scope, $stateParams, bannerFactory, modalFactory) {
 
   modalFactory.setTitle('横幅位置列表');
 
