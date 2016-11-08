@@ -1,4 +1,4 @@
-AndSellMainModule.controller('roleListController', function ($scope, roleFactory, modalFactory) {
+angular.module('AndSell.Main').controller('user_role_roleList_Controller', function ($scope, roleFactory, modalFactory) {
 
     //设置页面Title
     modalFactory.setTitle('角色权限管理');
