@@ -51,9 +51,9 @@
                     <th class="col-sm-2">促销规则名称</th>
                     <th class="col-sm-2">促销针对</th>
                     <th class="col-sm-3">促销规则详情</th>
-                    <th class="col-sm-2">添加时间</th>
-                    <th class="col-sm-1">状态</th>
-                    <th class="col-sm-2">操作</th>
+                    <th class="col-sm-2 text-center">添加时间</th>
+                    <th class="col-sm-1 text-center">状态</th>
+                    <th class="col-sm-2 text-center">操作</th>
                 </tr>
                 </thead>
                 <tbody ng-cloak>
@@ -64,9 +64,9 @@
                         <span ng-show="salesInfo['SALES.SALE_TARGET']==2">商品</span>
                     </td>
                     <td ng-bind="salesInfo['SALES.INTRO']"></td>
-                    <td ng-bind="salesInfo['SALES.ADD_DATETIME'] | FormatAllDate"></td>
-                    <td ng-bind="salesInfo['SALES.STATE'] | FormatState"></td>
-                    <td>
+                    <td ng-bind="salesInfo['SALES.ADD_DATETIME'] | FormatAllDate" class="text-center"></td>
+                    <td ng-bind="salesInfo['SALES.STATE'] | FormatState" class="text-center"></td>
+                    <td class="text-center">
                         <a data-toggle="modal" data-target="#detailSaleList" ng-click="queryByGivenInfo(salesInfo)">
                             促销详情
                         </a>
