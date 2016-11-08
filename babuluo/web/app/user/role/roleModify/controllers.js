@@ -1,4 +1,4 @@
-AndSellMainModule.controller('roleModifyController', function ($scope, $state, $stateParams, roleFactory, modalFactory) {
+AndSellMainModule.controller('user_role_roleModify_Controller', function ($scope, $state, $stateParams, roleFactory, modalFactory) {
 
     //设置页面Title
     modalFactory.setTitle('修改角色信息');
@@ -30,14 +30,14 @@ AndSellMainModule.controller('roleModifyController', function ($scope, $state, $
             console.log(response);
             if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert("修改成功");
-                $state.go('roleList');
+                $state.go('user/role/roleList');
             } else {
                 modalFactory.showShortAlert(response.msg);
             }
         });
     }, function () {
         //取消事件
-        $state.go('roleList');
+        $state.go('user/role/roleList');
     });
 
     $scope.isNull = function (str) {

@@ -1,4 +1,4 @@
-AndSellMainModule.controller('districtListController', function ($scope, $stateParams, districtFactory, modalFactory) {
+angular.module('AndSell.Main').controller('shop_shop_district_districtList_Controller', function ($scope, $stateParams, districtFactory, modalFactory) {
 
     modalFactory.setTitle('区域管理');
 
