@@ -1,11 +1,9 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="page-content">
-    <%--在这里写样式--%>
     <div class="col-sm-12">
         <div class="page-operation-wrap">
             <div class="row">
                 <div class="col-sm-12 text-right">
-                    <a ui-sref="roleAdd" type="button" class="btn btn-default">
+                    <a ui-sref="user/role/roleAdd" type="button" class="btn btn-default">
                         <i class="fa fa-plus"></i>新增角色
                     </a>
                 </div>
@@ -25,7 +23,7 @@
                 <td ng-bind="role['USER_ROLE.ROLE_NAME']"></td>
                 <td ng-bind="role['USER_ROLE.INTRO']"></td>
                 <td>
-                    <a class="table-link" ui-sref="roleModify({id:role['USER_ROLE.ID']})">
+                    <a class="table-link" ui-sref="user/role/roleModify({id:role['USER_ROLE.ID']})">
                         修改
                     </a>
                     <a class="table-link" ng-click="delRole(role)">

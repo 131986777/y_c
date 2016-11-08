@@ -1,4 +1,4 @@
-AndSellMainModule.controller('roleAddController', function ($scope, $state, roleFactory, modalFactory) {
+AndSellMainModule.controller('user_role_roleAdd_Controller', function ($scope, $state, roleFactory, modalFactory) {
 
     //设置页面Title
     modalFactory.setTitle('新增员工角色');
@@ -15,7 +15,7 @@ AndSellMainModule.controller('roleAddController', function ($scope, $state, role
             console.log(response);
             if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert("添加成功");
-                $state.go('roleList');
+                $state.go('user/role/roleList');
             } else {
                 modalFactory.showShortAlert(response.msg);
             }
@@ -23,7 +23,7 @@ AndSellMainModule.controller('roleAddController', function ($scope, $state, role
 
     }, function () {
         //取消事件
-        $state.go('roleList');
+        $state.go('user/role/roleList');
     });
 
     $scope.isNull = function (str) {

@@ -1,4 +1,4 @@
-AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $stateParams, salesFactory, modalFactory) {
+angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controller', function ($scope,$http, $stateParams, salesFactory, modalFactory) {
     modalFactory.setBottom(true);
     modalFactory.setTitle('新增促销规则');
 
@@ -7,15 +7,15 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
 
     var array = new Array();
     $scope.saveCurrentInfo = function (num) {
-        if(salesInfo['SALES.SALE_TYPE'] == 3){
+        if($scope.salesInfo['SALES.SALE_TYPE'] == 3){
             var str = '{'+'"ProId"'+':'+$scope.productId+',' +'"Num"'+':'+$scope.salesInfo['SALES.PRONUM'+num]+'}';
         }else {
+            console.log($scope.salesInfo['SALES.PRONUM'+num]);
             var str = '{'+'"ProId"'+':'+$scope.couponId+',' +'"Num"'+':'+$scope.salesInfo['SALES.PRONUM'+num]+'}';
-
         }
         array.push(str);
         $scope.salesDetailInfo = array;
-        console.log(array);
+        console.log($scope.salesDetailInfo);
     }
 
     $scope.bindData = function(form){
@@ -38,17 +38,18 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
         return form;
     }
 
+
     //设置页面Bottom触发事件
     modalFactory.setBottom(true, function () {
+        console.log($scope.salesInfo['SALES.SALE_CONTENT1']);
         console.log($scope.salesInfo);
-        alert('+++');
         if($scope.salesInfo == undefined){
             modalFactory.showAlert("请填写完整信息");
             $scope.empty();
         }
         else{
             var form = $scope.bindData($scope.salesInfo);
-            console.log($scope.salesInfo);
+            console.log(form);
             salesFactory.AddSales (form).get({}, function (response) {
                 console.log(form);
                 if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
@@ -61,49 +62,52 @@ AndSellMainModule.controller('salesRuleAddController', function ($scope,$http, $
             });
         }
     });
-    
+
+ //清空所有表单信息
     $scope.empty = function () {
         $scope.salesInfo = null;
 }
+    //清空部分表单信息
+    $scope.enEmpty = function (){
+    }
 
     $scope.getNum = function (num){
-       $scope.num = num;
+        $scope.num = num;
     }
 
     $scope.prdItemSwitch= function (data) {
-        $scope.productId = data['SHOP_PRODUCT_SKU.SKU_ID'];
-        $scope.productName = data['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'];
-        if($scope.num == 1){
-            $('.A').text($scope.productName);
+        if($scope.memberId==1){
+            $scope.productId = data['SHOP_PRODUCT_SKU.SKU_ID'];
+            $scope.productName = data['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'];
+            var num = $scope.num;
+            $("#A"+num).text($scope.productName);
+            data = null;
+            $scope.$broadcast('pageBar.reload');
         }
-        else if($scope.num == 2){
-            $('.B').text($scope.productName);
+        else {
+            $scope.productId = data['SHOP_PRODUCT_SKU.SKU_ID'];
+            $scope.productName = data['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'];
+            var num = $scope.num;
+            $("#C"+num).text($scope.productName);
+            data = null;
+            $scope.$broadcast('pageBar.reload');
         }
-        else if($scope.num == 3){
-            $('.C').text($scope.productName);
-        }
-        else if($scope.num == 4){
-            $('.D').text($scope.productName);
-        }else if($scope.num == 5){
-            $('.E').text($scope.productName);
-        }
-        else if($scope.num == 6){
-            $('.F').text($scope.productName);
-        }
+
     };
 
     $scope.couponItemSwitch= function (data) {
-        console.log(data);
-        $scope.couponId = data['COUPON.ID'];
-        $scope.couponName = data['COUPON.NAME'];
-        var tag = $scope.num;
-        $("#"+tag).text('1');
-        console.log($("#"+tag).html());
-
-
-
-        console.log(data);
-
+        if($scope.memberId==1){
+            console.log(data);
+            $scope.couponId = data['COUPON.ID'];
+            $scope.couponName = data['COUPON.NAME'];
+            var tag = $scope.num;
+            $("#B"+tag).text($scope.couponName);
+        }else {
+            $scope.couponId = data['COUPON.ID'];
+            $scope.couponName = data['COUPON.NAME'];
+            var tag = $scope.num;
+            $("#D"+tag).text($scope.couponName);
+        }
     }
 
 

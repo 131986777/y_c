@@ -1,4 +1,4 @@
-AndSellMainModule.controller('userListController', function ($scope, userFactory, modalFactory) {
+angular.module('AndSell.Main').controller('user_user_userList_Controller', function ($scope, userFactory, modalFactory) {
 
     //设置页面Title
     modalFactory.setTitle('员工管理');

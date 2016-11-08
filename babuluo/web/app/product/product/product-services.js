@@ -93,6 +93,14 @@ AndSellMainModule.service('productFactory', function ($resource, baseURL) {
                 method:'PUT'
             }
         });
+    }
+
+    this.modifyPrdsClass = function (form) {
+        return $resource(baseURL+'/shop/product/setPrdClass',form,{
+            'update':{
+                method:'PUT'
+            }
+        });
 
     }
 

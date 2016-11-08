@@ -1,4 +1,4 @@
-AndSellMainModule.controller('orderDetailController', function ($scope, $stateParams, orderFactory, modalFactory) {
+angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', function ($scope, $stateParams, orderFactory, modalFactory) {
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);

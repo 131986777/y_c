@@ -1,4 +1,4 @@
-AndSellMainModule.controller('orderListController', function ($scope, $state, $stateParams, orderFactory, modalFactory) {
+angular.module('AndSell.Main').controller('order_order_orderList_Controller', function ($scope, $state, $stateParams, orderFactory, modalFactory) {
 
     modalFactory.setTitle('订货单');
     modalFactory.setBottom(false);
@@ -9,7 +9,12 @@ AndSellMainModule.controller('orderListController', function ($scope, $state, $s
         $scope.yy = {
             'background-color': '#31C552'
         };
+
+        $scope.filter = {};
         $scope.filterStateOrder('all');
+        if($stateParams.orderType!='0'){
+            $scope.filter['SHOP_ORDER.TYPE'] = $stateParams.orderType;
+        }
         if($stateParams.keyword!=''){
             $scope.orderFilter = $stateParams.keyword;
             $scope.searchOrder();
@@ -19,7 +24,7 @@ AndSellMainModule.controller('orderListController', function ($scope, $state, $s
 
     $scope.filterStateOrder = function (type) {
         $scope.state = type;
-        $scope.filter = {};
+
         if (type == 'all') {
             //全部订单
         } else if (type == 'end') {
@@ -67,7 +72,7 @@ AndSellMainModule.controller('orderListController', function ($scope, $state, $s
 
     //订单详情跳转
     $scope.toDetail = function (id) {
-        $state.go('order-detail', {ORDER_ID: id});
+        $state.go('order/order/orderDetail', {ORDER_ID: id});
     }
 
 });

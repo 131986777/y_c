@@ -1,13 +1,3 @@
-AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
 
-    $stateProvider
-
-        .state("pointList", {
-            url: "/pointList",
-            templateUrl: "/AndSell/app/point/point/pointList/index.html",
-            controller: "pointListController"
-        })
-
-
-
-});
+//资金明细列表
+$import('point/point/pointList');

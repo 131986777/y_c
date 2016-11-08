@@ -80,6 +80,10 @@
                                 <a show-modal id="#tagSwitchModal">
                                     设置标签</a>
                             </li>
+                            <li>
+                                <a show-modal id="#setPrdClassModal">
+                                    设置分类</a>
+                            </li>
 
                         </ul>
                     </div>
@@ -225,6 +229,28 @@
     </div>
 
     <tag-switch-modal callback="setPrdsTag(data)"></tag-switch-modal>
+
+    <div class="modal fade text-left" id="setPrdClassModal" tabindex="-1" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true"></button>
+                    <h4 class="modal-title">设置商品分类</h4>
+                </div>
+                <div class="modal-body form-body">
+
+                    <tree-list tree="tree" callback="setPrdClass(data)"></tree-list>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
 
     <div class="modal fade text-left" id="modifySkuPrice" ng-enter="submitModifySkuPrice()"
          tabindex="-1"
