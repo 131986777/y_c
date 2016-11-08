@@ -1,8 +1,7 @@
 
-AndSellMainModule.controller('cardSourceController', function ($scope, $stateParams, cardFactory, modalFactory) {
+angular.module('AndSell.Main').controller('card_card_cardSource_Controller', function ($scope, $stateParams, cardFactory, modalFactory) {
 
   modalFactory.setTitle('会员卡发布渠道');
-
   $scope.initLoad = function () {
     cardFactory.getCardSourceList().get({}, function (repsonce) {
       console.log(repsonce);
