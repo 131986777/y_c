@@ -122,8 +122,8 @@
                         ng-show="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length  == null"
                 >添加类别</button>
                 <span class="buy-text">买</span>
-                <div class="buy-content" ng-repeat="pro in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
-                    <div class="buy-list">
+                <div class="buy-content" >
+                    <div class="buy-list" ng-repeat="pro in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
                         <div class="product-item">
                             <p class="itemName">{{proClassInfo[pro]}}</p>
                         </div>
@@ -251,7 +251,7 @@
                 <div class="buy-content">
                     <div class="buy-list">
                         <div class="form-group form-inline" ng-repeat="tag in (item['SALES_PLAN.TARGET_OBJ_ID']).split(',')">
-                            <span>{{tagMap[tag]}}</span>
+                            <span class="tag">{{tagMap[tag]}}</span>
                         </div>
                     </div>
 

@@ -9,4 +9,4 @@ $import('member/member/memberInfo',{id: ''});
 $import('member/member/memberData',{id: ''});
 $import('member/member/memberAccount',{id: ''});
 $import('member/member/memberAddress',{id: ''});
-$import('member/member/memberCard',{id: ''});
+$import('member/member/memberCard',{id: ''},true);
