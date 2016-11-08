@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>充值</title>
+	<link rel="stylesheet"
+	href="../../public/libs/bootstrap/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+	<link rel="stylesheet" href="../../public/css/style.css">
+</head>
+<body class="recharge">
+	<div class="weui_cells weui_cells_form">
+            <div class="weui_cell">
+                <div class="weui_cell_hd">
+                    <label class="weui_label">金额(元):</label>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_input" type="text"
+                           placeholder="请输入充值金额">
+                </div>
+            </div>
+
+            <div class="weui_cell">
+                <div class="weui_cell_hd">
+                    <label class="weui_label">充值方式:</label>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <select class="weui_select" ng-model="addressType">
+                        <option value="0">微信</option>
+                        <option value="1">支付宝</option>
+                    </select>
+                
+                </div>
+            </div>
+
+
+        </div>
+
+        <div class="reminder">
+        	<p>温馨提示：</p>
+        	<p>1、充值成功后，余额可能存在延迟现象，一般1到5分钟内到账，如有问题，请咨询客服；</p>
+        	<p>2、充值金额输入值不许是不小于10且不大于50000的正整数；</p>
+        	<p>3、您只能用储蓄卡进行充值，如遇到任何支付问题可以查看在线支付帮助；</p>
+        	<p>4、充值完成后，您可以进入账户充值记录页面进行查看余额充值状态。</p>
+        </div>
+
+        <div class="weui_btn_area">
+        <button class="weui_btn my-btn-default" type="submit">立即充值</button>
+    </div>
+
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<script src="../../public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+</body>
+</html>
