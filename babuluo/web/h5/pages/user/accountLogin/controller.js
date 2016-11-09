@@ -9,7 +9,7 @@ AndSellH5MainModule.controller('H5.UserAccountLoginController', function ($scope
                 alert(response.msg);
              } else{
                 alert('登录成功');
-                $state.go('home');
+                $state.go('pages/home');
             }
         });
     }

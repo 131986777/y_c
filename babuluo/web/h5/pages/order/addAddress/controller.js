@@ -28,7 +28,7 @@ AndSellH5MainModule.controller('H5.OrderAddAddressController', function ($scope,
         };
 
         console.log($scope.PickupPerson);
-        $state.go('order-add', {pickupPerson: $scope.PickupPerson, SKU_IDS: $stateParams.SKU_IDS});
+        $state.go('pages/order/add', {pickupPerson: $scope.PickupPerson, SKU_IDS: $stateParams.SKU_IDS});
     };
 
      $(".datetime-picker").datetimePicker({

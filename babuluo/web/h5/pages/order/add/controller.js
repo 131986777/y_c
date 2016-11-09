@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state, $stateParams, weUI, productFactory, orderFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', function ($scope, $state, $stateParams, weUI, productFactory, orderFactory, modalFactory) {
 
     modalFactory.setTitle('新增订单');
     modalFactory.setBottom(false);
@@ -151,7 +151,7 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
             setCookie('cartSize',JSON.stringify($scope.cartSize));
             setCookie('cartInfo',JSON.stringify($scope.cartInfo));
 
-            $state.go('order-success',{ORDER_ID:response.extraData.ORDER_ID});
+            $state.go('pages/payment/check_out',{ORDER_ID:response.extraData.ORDER_ID});
 
         });
     }

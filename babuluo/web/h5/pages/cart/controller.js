@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, productFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function ($scope, $state, productFactory, modalFactory) {
 
     modalFactory.setTitle('购物车');
     modalFactory.setBottom(true);
@@ -130,7 +130,7 @@ AndSellH5MainModule.controller('H5.CartController', function ($scope, $state, pr
                     list.push(ele['SHOP_PRODUCT_SKU.SKU_ID']);
                 }
             });
-            $state.go('order-add', {SKU_IDS: list.toString()});
+            $state.go('pages/order/add', {SKU_IDS: list.toString()});
         } else {
             alert('至少选择一项');
         }

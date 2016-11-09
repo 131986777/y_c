@@ -5,7 +5,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
     //商品搜索
     $scope.searchPrd = function () {
-        $state.go('prd-List', {keyword: $scope.prdKeyword});
+        $state.go('pages/product/list', {keyword: $scope.prdKeyword});
     }
 
     $scope.initData = function () {

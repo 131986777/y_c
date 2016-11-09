@@ -28,19 +28,19 @@
 <nav class="nav-fixed-bottom" ng-if="navShow" role="navigation" ng-init="currentPage='sy'">
   <ul class="nav-list flexbox">
     <li class="cell" ng-class="{true:'selected'}[currentPage=='sy']">
-      <a ui-sref="home" ng-click="currentPage='sy'">
+      <a ui-sref="pages/home" ng-click="currentPage='sy'">
         <i class="icon icon-home"></i>
         <p class="nav-txt">首页</p>
       </a>
     </li>
     <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']">
-      <a ui-sref="cart"  ng-click="currentPage='cart'">
+      <a ui-sref="pages/cart"  ng-click="currentPage='cart'">
         <i class="icon icon-cart"></i>
         <p class="nav-txt">购物车</p>
       </a>
     </li>
     <li class="cell"  ng-class="{true:'selected'}[currentPage=='fl']">
-      <a ui-sref="prd-List" ng-click="currentPage='fl'">
+      <a ui-sref="pages/product/list" ng-click="currentPage='fl'">
         <i class="icon icon-product-class"></i>
         <p class="nav-txt">分类</p>
       </a>
@@ -100,15 +100,6 @@
 
 <!--############ controller ############-->
 <script src="controller.js"> </script>
-<!--<script src="../home/controller.js"> </script>-->
-<script src="../product/detail/controller.js"> </script>
-<script src="../cart/controller.js"> </script>
-<script src="../order/add/controller.js"> </script>
-<script src="../payment/check_out_controller.js"> </script>
-<script src="../payment/check_out_success_controller.js"> </script>
-<script src="../order/detail/controller.js"> </script>
-<script src="../product/list/controller.js"> </script>
-<script src="../order/list/controller.js"> </script>
 <script src="../personal/controller.js"> </script>
 <script src="../personal/card/controller.js"> </script>
 <script src="../shop/controller.js"> </script>

@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $state, $stateParams,orderFactory,modalFactory,weUI) {
+angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', function ($scope, $state, $stateParams,orderFactory,modalFactory,weUI) {
 
     modalFactory.setTitle('订单列表');
     modalFactory.setBottom(false);
@@ -70,7 +70,7 @@ AndSellH5MainModule.controller('H5.OrderListController', function ($scope, $stat
 
     //订单详情跳转
     $scope.toDetail= function (id) {
-        $state.go('order-detail',{ORDER_ID: id});
+        $state.go('pages/order/detail',{ORDER_ID: id});
     }
 
     //下拉更多商品

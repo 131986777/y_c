@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,$stateParams, productFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function ($scope, $state,$stateParams, productFactory, modalFactory) {
 
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(true);
@@ -42,7 +42,7 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
 
     //跳转至详情页
     $scope.toDetail = function (id) {
-        $state.go('prd-detail', {PRD_ID: id});
+        $state.go('pages/product/detail', {PRD_ID: id});
     }
 
     //跳转至详情页
@@ -108,7 +108,7 @@ AndSellH5MainModule.controller('H5.PrdListController', function ($scope, $state,
             list.push(ele['SHOP_PRODUCT_SKU.SKU_ID']);
         });
         if ($scope.skuList.length > 0) {
-            $state.go('order-add', {SKU_IDS: list.toString()});
+            $state.go('pages/order/add', {SKU_IDS: list.toString()});
         }else{
             weUI.toast.error('至少选择一件商品');
         }

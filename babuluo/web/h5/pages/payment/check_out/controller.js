@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.OrderSuccessController', function ($scope, $state, $stateParams, productFactory, orderFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_payment_check_out_Controller', function ($scope, $state, $stateParams, productFactory, orderFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('下单成功');
     modalFactory.setBottom(false);
@@ -17,7 +17,7 @@ AndSellH5MainModule.controller('H5.OrderSuccessController', function ($scope, $s
             orderFactory.payOrder({'SHOP_ORDER.ID': $stateParams.ORDER_ID}).get({}, function (response) {
                 if (response.code == 0) {
                     weUI.toast.ok('支付成功');
-                    $state.go('order-detail', {ORDER_ID: $stateParams.ORDER_ID});
+                    $state.go('pages/order/detail', {ORDER_ID: $stateParams.ORDER_ID});
                 } else {
                     weUI.toast.error(response.msg);
                 }

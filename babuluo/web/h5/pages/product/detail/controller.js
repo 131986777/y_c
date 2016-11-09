@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.PrdDetailController', function ($scope, $state, $stateParams, productFactory, modalFactory,weUI) {
+angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function ($scope, $state, $stateParams, productFactory, modalFactory,weUI) {
 
     modalFactory.setTitle('商品详情');
     modalFactory.setBottom(false);
