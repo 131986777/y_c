@@ -6,11 +6,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
     $scope.initData = function () {
 
         $scope.addressType = '1';
-        $scope.pickupTime = getNowFormatDate();
         $scope.PickupPerson = {};
 
         $scope.shop = JSON.parse(getCookie('currentShopInfo'))['SHOP.SHOP_NAME'];
-
+        document.getElementById('datetime-picker').value = getNowFormatDate();
         document.getElementById('city-picker').value='江苏省 南京市 ';
 
     };
@@ -19,7 +18,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
         $scope.PickupPerson = {
             man: $scope.man,
             phone: $scope.phone,
-            time: $scope.pickupTime,
             shop: $scope.shop,
             type: $scope.addressType,
             shengshi:document.getElementById('city-picker').value,
@@ -27,8 +25,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
             getTime:document.getElementById('datetime-picker').value
         };
 
-        console.log($scope.PickupPerson);
-        $state.go('pages/order/add', {pickupPerson: $scope.PickupPerson, SKU_IDS: $stateParams.SKU_IDS});
+        $state.go('pages/order/add', {pickupPerson: JSON.stringify($scope.PickupPerson), SKU_IDS: $stateParams.SKU_IDS});
     };
 
      $(".datetime-picker").datetimePicker({

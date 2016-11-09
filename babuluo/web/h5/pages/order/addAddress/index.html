@@ -26,34 +26,22 @@
                     <div class="weui_cell_bd weui_cell_primary">
                         <select class="weui_select" ng-model="addressType">
                             <option value="0">提货方式</option>
-                            <option value="1">门店自提</option>
-                            <option value="2">快递收货</option>
+                            <option value="3">门店自提</option>
+                            <option value="1">快递收货</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            <div class="weui_cells" ng-cloak ng-show="addressType == 1">
-                <div class="store-name weui_cell weui_cell_select">
+            <div class="weui_cells" ng-cloak >
+                <div class="store-name weui_cell weui_cell_select" ng-show="addressType == 3">
                     <div class="weui_cell_bd weui_cell_primary">
                         <select class="weui_select">
                             <option selected value="0">{{shop}}</option>
                         </select>
                     </div>
                 </div>
-                <div class="date weui_cell">
-                    <div class="weui_cell_bd">
-                        <p class="title">
-                            选择提货时间：
-                        </p>
-                        <input class="datetime-picker weui_input" type="text"
-                               ng-model="pickupTime" placeholder="请选择提货时间">
-                    </div>
-                </div>
-            </div>
-
-            <div class="weui_cells" ng-cloak ng-show="addressType == 2">
-                <div class="weui_cell">
+                <div class="weui_cell"  ng-show="addressType == 1">
                     <div class="weui_cell_bd">
                         <p class="title">
                             所在地区：
@@ -63,27 +51,33 @@
                     </div>
                 </div>
 
-                <div class="weui_cell">
+                <div class="weui_cell"  ng-show="addressType == 1">
                     <div class="weui_cell_bd weui_cell_primary">
                         <p class="title">
                             详细地址：
                         </p>
                         <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="number"
+                            <input class="weui_input" type="text"
                                    placeholder="街道、楼牌号等">
                         </div>
                     </div>
                 </div>
                 <div class="date weui_cell">
                     <div class="weui_cell_bd">
-                        <p class="title">
+                        <p class="title"  ng-show="addressType == 1">
                             预计送达时间：
                         </p>
+                        <p class="title"  ng-show="addressType == 3">
+                            选择提货时间：
+                        </p>
                         <input class="datetime-picker weui_input" type="text"
+                               id="datetime-picker"
                                value="" placeholder="请选择预计送达时间">
                     </div>
                 </div>
+
             </div>
+
             <div class="weui_btn_area">
                 <button class="weui_btn" type="button" ng-click="submit()">提交</button>
             </div>

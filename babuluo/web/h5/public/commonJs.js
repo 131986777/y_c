@@ -150,6 +150,12 @@ function getNowFormatDate() {
     return year + seperator1 + month + seperator1 + strDate;
 }
 
+var noUndefinedAndNull = function (x) {
+    if(x==undefined){
+        return "";
+    }else return x;
+}
+
 var replaceAll = function (str,s1, s2) {
     return str.replace(new RegExp(s1, "gm"), s2);
 }
