@@ -49,6 +49,14 @@ AndSellMainModule.service('orderFactory', function ($resource, baseURL) {
         });
     }
 
+    this.sendOrder= function (id) {
+        return $resource(baseURL + '/shop/order/sendOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+
     this.payOrder= function (params) {
         return $resource(baseURL + '/shop/order/payOrder',params, {
             'update': {

@@ -37,10 +37,18 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
         });
     }
 
-    //取消订单
+    //出库订单
     $scope.outOrder= function () {
         orderFactory.outOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             alert('订单出库成功');
+            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+        });
+    }
+
+   //发货订单
+    $scope.sendOrder= function () {
+        orderFactory.sendOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
+            alert('订单发货成功');
             $scope.getOrder($scope.order['SHOP_ORDER.ID']);
         });
     }
