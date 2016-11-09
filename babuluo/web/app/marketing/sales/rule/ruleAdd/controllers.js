@@ -84,7 +84,7 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
             $scope.salesInfo['SALES.SALE_CONTENT1'] = null;
             $scope.salesInfo['SALES.CONDITION_NUM1'] = null;
             $scope.salesInfo['SALES.PRONUM1'] = null;
-            for( var i =1;i<=6;i++){
+            for( var i =1;i<=7;i++){
                 $("#A"+i).text('（选择赠送商品）');
                 $("#B"+i).text('（选择赠送优惠券）');
                 $("#C"+i).text('（选择赠送商品）');
@@ -113,8 +113,8 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
             var num = $scope.num;
             $("#C"+num).text($scope.productName);
             data = null;
+            $scope.$broadcast('pageBar.reload');
         }
-
     };
 
     $scope.couponItemSwitch= function (data) {
@@ -124,11 +124,15 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
             $scope.couponName = data['COUPON.NAME'];
             var tag = $scope.num;
             $("#B"+tag).text($scope.couponName);
+            data = null;
+            $scope.$broadcast('pageBar.reload');
         }else {
             $scope.couponId = data['COUPON.ID'];
             $scope.couponName = data['COUPON.NAME'];
             var tag = $scope.num;
             $("#D"+tag).text($scope.couponName);
+            data = null;
+            $scope.$broadcast('pageBar.reload');
         }
     }
 
