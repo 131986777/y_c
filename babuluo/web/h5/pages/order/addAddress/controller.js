@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.OrderAddAddressController', function ($scope, $state, $stateParams, weUI, orderFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller', function ($scope, $state, $stateParams, weUI, orderFactory, modalFactory) {
 
     modalFactory.setTitle('收货/提货信息');
     modalFactory.setBottom(false);

@@ -55,7 +55,8 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
             templateUrl: "/AndSell/h5/pages/order/list/index.html",
             controller: "H5.OrderListController"
         })
-        .state("personal", {
+        //
+        /*.state("personal", {
             url: "/personal",
             templateUrl: "/AndSell/h5/pages/personal/index.html",
             controller: "H5.PersonalController"
@@ -90,7 +91,16 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
             url: "/accountLogin",
             templateUrl: "/AndSell/h5/pages/user/accountLogin/index.html",
             controller: "H5.UserAccountLoginController"
-        })
+        })*/
 });
 
 $import('pages/home');
+
+$import('pages/personal');
+$import('pages/personal/card');
+$import('pages/personal/coupon');
+$import('pages/shop');
+$import('pages/order/addAddress');
+$import('pages/coupon/list');
+$import('pages/user/register');
+$import('pages/user/accountLogin');
