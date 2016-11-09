@@ -12,7 +12,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         var id = getCookie('currentShop');
         if (id == undefined || id.trim() == '') {
             weUI.toast.info('请先选择门店');
-            $state.go('shopList');
+            $state.go('pages/shop');
         } else {
             shopFactory.getShopById(id).get({}, function (response) {
                 $scope.shopInfo = response.data[0];

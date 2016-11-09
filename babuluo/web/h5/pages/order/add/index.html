@@ -1,7 +1,7 @@
 <div class="container-fluid order-add" ng-init="initData()">
     <div class="row">
         <div class="weui_cells weui_cells_access">
-            <a class="order-address weui_cell" ui-sref="orderAddAddress({SKU_IDS:skuIds})">
+            <a class="order-address weui_cell" ui-sref="pages/order/addAddress({SKU_IDS:skuIds})">
                 <div ng-show="!EmptyPick&&PickupPerson.type==3" class="detail weui_cell_bd weui_cell_primary">
                 <p class="">提 货 人：{{PickupPerson.man}}</p>
                 <p class="">手机号码：{{PickupPerson.phone}}</p>

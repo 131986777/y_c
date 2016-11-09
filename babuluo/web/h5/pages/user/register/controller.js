@@ -23,7 +23,7 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
                 alert(response.msg);
             } else {
                 alert('注册成功');
-                $state.go('accountLogin');
+                $state.go('pages/user/accountLogin');
             }
         });
     }
