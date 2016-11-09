@@ -5,7 +5,7 @@
     <div id="carousel-generic">
       <carousel interval="myInterval">
         <slide ng-repeat="slide in slides" active="slide.active">
-          <img ng-src="{{slide.image}}" style="margin:auto;">
+          <img ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800" style="margin:auto;">
           <div class="carousel-caption">
             <p>{{slide.text}}</p>
           </div>
