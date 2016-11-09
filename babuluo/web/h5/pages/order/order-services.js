@@ -50,7 +50,7 @@ AndSellH5MainModule.service('orderFactory', function ($resource, baseURL) {
         });
     }
 
-    this.getOrder= function (id) {
+    this.getOrderById= function (id) {
         return $resource(baseURL + '/shop/order/getOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
             'update': {
                 method: 'PUT'

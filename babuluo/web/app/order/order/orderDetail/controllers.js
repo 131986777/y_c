@@ -7,7 +7,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
 
     $scope.initData= function () {
         $scope.modify={};
-        $scope.getOrder($stateParams.ORDER_ID);
+        $scope.getOrderById($stateParams.ORDER_ID);
     }
 
     $scope.getOrder= function (id) {
@@ -32,7 +32,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
     $scope.cancelOrder= function () {
         orderFactory.cancelOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             alert('取消订单成功');
-            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
         });
     }
 
@@ -40,7 +40,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
     $scope.outOrder= function () {
         orderFactory.outOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             alert('订单出库成功');
-            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
         });
     }
 
@@ -48,7 +48,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
     $scope.getPrdNow= function () {
         orderFactory.deliveryOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             alert('提货成功');
-            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
         });
     }
 
@@ -56,7 +56,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
     $scope.payNow= function () {
         orderFactory.payOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             alert('支付成功');
-            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
         });
     }
 
