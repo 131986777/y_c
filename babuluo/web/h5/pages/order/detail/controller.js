@@ -11,7 +11,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     }
 
     $scope.getOrder = function (id) {
-        orderFactory.getById(id).get({}, function (response) {
+        orderFactory.getOrderById(id).get({}, function (response) {
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
             $scope.orderDetailList = JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
             $scope.order = response.data[0];
@@ -32,7 +32,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     //确认提货
     $scope.getPrdNow = function () {
-        orderFactory.getOrderById($scope.order['SHOP_ORDER.ID']).get({}, function () {
+        orderFactory.acceptOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             weUI.toast.ok('收货成功');
             $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
         });
