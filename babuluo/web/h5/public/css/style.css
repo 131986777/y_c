@@ -1104,8 +1104,7 @@ p {
   padding-bottom: 53px;}
 .product-list-page .product-wrap {
   position: relative;
-  border: 1px solid #D9D9D9;
-  margin: 5px;
+  background-color: #fff;
   padding: 0;
   height: 78px;
   font-size: 18px;

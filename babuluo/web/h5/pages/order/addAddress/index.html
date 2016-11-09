@@ -26,14 +26,14 @@
                     <div class="weui_cell_bd weui_cell_primary">
                         <select class="weui_select" ng-model="addressType">
                             <option value="0">提货方式</option>
-                            <option value="3">门店自提</option>
-                            <option value="1">快递收货</option>
+                            <option value="1">门店自提</option>
+                            <option value="2">快递收货</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            <div class="weui_cells" ng-cloak ng-show="addressType == 3">
+            <div class="weui_cells" ng-cloak ng-show="addressType == 1">
                 <div class="store-name weui_cell weui_cell_select">
                     <div class="weui_cell_bd weui_cell_primary">
                         <select class="weui_select">
@@ -52,7 +52,7 @@
                 </div>
             </div>
 
-            <div class="weui_cells" ng-cloak ng-show="addressType == 1">
+            <div class="weui_cells" ng-cloak ng-show="addressType == 2">
                 <div class="weui_cell">
                     <div class="weui_cell_bd">
                         <p class="title">
@@ -69,8 +69,7 @@
                             详细地址：
                         </p>
                         <div class="weui_cell_bd weui_cell_primary">
-                            <input class="weui_input" type="text"
-                                   ng-model="address"
+                            <input class="weui_input" type="number"
                                    placeholder="街道、楼牌号等">
                         </div>
                     </div>
@@ -81,7 +80,6 @@
                             预计送达时间：
                         </p>
                         <input class="datetime-picker weui_input" type="text"
-                               id="datetime-picker"
                                value="" placeholder="请选择预计送达时间">
                     </div>
                 </div>
