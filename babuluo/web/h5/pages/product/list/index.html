@@ -32,7 +32,6 @@
             <h5 class="name"
                 ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
               <span ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></span>
-              <!--<span >售罄</span>-->
             </h5>
             <p class="money">
               <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']!=undefined"
@@ -40,6 +39,7 @@
               <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>
             </p>
             <i class="icon icon-cart" ng-if="item['SHOP_PRODUCT.HAS_STOCK']!=0" ng-click="selectSKU(item['SHOP_PRODUCT.PRD_ID'])"></i>
+            <!--<i class="icon-out"></i>  告罄样式-->
           </div>
         </a>
         <div class="weui-infinite-scroll" ng-show="hasNextPage">

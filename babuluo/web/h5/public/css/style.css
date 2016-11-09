@@ -1105,14 +1105,14 @@ p {
 .product-list-page .product-wrap {
   position: relative;
   background-color: #fff;
-  padding: 5px;
-  height: 78px;
+  padding: 6px;
+  height: 88px;
   font-size: 18px;
   -webkit-align-items: flex-start;
   -webkit-box-align: start;
   align-items: flex-start; }
 .product-list-page .product-wrap .img {
-  margin-right: 13px;
+  margin-right: 16px;
   width: 76px;
   height: 76px; }
 .product-list-page .soldout img{
@@ -1124,8 +1124,8 @@ p {
   height: 36px;
   background: url('../img/soldout.png') no-repeat;
   position: absolute;
-  top: 33px;
-  right: 7px;
+  top: 45px;
+  right: 10px;
 }
 .product-list-page .product-wrap .name {
   overflow: hidden;
