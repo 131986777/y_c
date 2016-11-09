@@ -271,7 +271,7 @@
 
                 <h4 class="form-title">
                     商品图片
-                    <small>(商品详情图片建议尺寸：960*960)</small>
+                    <small>(点击选择封面图片，建议尺寸：960*960)</small>
                 </h4>
 
                 <div class="form-group">
@@ -293,15 +293,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="upload-img-wrap">
-                            <label class="upload-img-tips" data-provides="fileinput">
+                        <label class="upload-img-wrap">
+                            <div class="upload-img-tips" data-provides="fileinput">
                                 添加商品图册<br>（上限6张）
                                 <input class="hidden" type="file"
                                        id="image" name='image'
                                        onchange="angular.element(this).scope().uploadImage(this)"
                                        multiple>
-                            </label>
-                        </div>
+                            </div>
+                        </label>
                     </div>
                 </div>
 
