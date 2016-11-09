@@ -53,13 +53,12 @@
                 <tbody>
                 <tr ng-repeat=" coupon in couponList"
                     ng-click="checkItem(coupon)">
-
                   <td>
                     <div style="display: inline-block;">
                       <div class="md-radio">
                         <input type="radio" id="{{['COUPON.ID']}}"
                                value="{{['COUPON.ID']}}"
-                               class="md-radiobtn">
+                               class="md-radiobtn" name="name">
                         </label>
                       </div>
                     </div>
@@ -86,8 +85,7 @@
       <div class="modal-footer">
         <button type="button" class="btn green" ng-click="setReturn()">确定
         </button>
-        <button type="button" class="btn green  btn-outline" data-dismiss="modal"
-        >取消
+        <button type="button" class="btn green  btn-outline" data-dismiss="modal" ng-click="cancel()">取消
         </button>
       </div>
     </div>

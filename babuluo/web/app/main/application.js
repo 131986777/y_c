@@ -479,6 +479,10 @@ AndSellUI.directive('couponItemSwitchModal', function (http, baseURL,couponFacto
                 $scope.callback({data: $scope.selectItem});
                 $('#couponItemSwitchModal').modal('hide');
             }
+            $scope.cancel = function () {
+                $scope.callback({data: null});
+                $('#couponItemSwitchModal').modal('hide');
+            }
         }
     }
 });
@@ -522,6 +526,10 @@ AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFact
                 $scope.callback({data: $scope.selectItem});
                 $scope.productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID']='null';
                 $scope.productFilterSearch='';
+                $('#productItemSwitchModal').modal('hide');
+            }
+            $scope.cancel = function () {
+                $scope.callback({data: null});
                 $('#productItemSwitchModal').modal('hide');
             }
         }
