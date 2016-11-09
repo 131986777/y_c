@@ -125,7 +125,7 @@
                 <span >评价订单</span>
 
               </div>
- <div class="btn btn-plain-default btn-sm"  ng-click="toDetail(order['SHOP_ORDER.ID'])" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.STATE_OUT']==-1||order['SHOP_ORDER.STATE_DELIVERY']==-1))" >
+ <div class="btn btn-plain-default btn-sm"  ng-click="toDetail(order['SHOP_ORDER.ID'])" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(((order['SHOP_ORDER.STATE_MONEY']==-1||order['SHOP_ORDER.OUT']==-1)&&order['SHOP_ORDER.TYPE']=='3')||((order['SHOP_ORDER.STATE_MONEY']==-1||order['SHOP_ORDER.OUT']==-1)&&order['SHOP_ORDER.TYPE']=='1'))" >
 
                 <span >取消订单</span>
 

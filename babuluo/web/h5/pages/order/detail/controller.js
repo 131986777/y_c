@@ -18,7 +18,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             $scope.orderDetailList.forEach(function (ele) {
                 setContentsInfoForOrder(ele);
             });
-            console.log($scope.orderDetailList);
         });
     }
 
@@ -26,7 +25,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     $scope.cancelOrder = function () {
         orderFactory.cancelOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             weUI.toast.ok('取消订单成功');
-            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
+            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
         });
     }
 
@@ -34,7 +33,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     $scope.getPrdNow = function () {
         orderFactory.acceptOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             weUI.toast.ok('收货成功');
-            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
+            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
         });
     }
 
@@ -42,7 +41,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     $scope.payNow = function () {
         orderFactory.payOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             weUI.toast.ok('支付成功');
-            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
+            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
         });
     }
 
