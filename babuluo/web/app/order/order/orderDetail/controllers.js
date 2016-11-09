@@ -18,6 +18,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
             response.data[0]['SHOP_ORDER.DATETIME_SEND']=getDate(response.data[0]['SHOP_ORDER.DATETIME_SEND']);
             response.data[0]['SHOP_ORDER.DATETIME_DELIVERY']=getDate(response.data[0]['SHOP_ORDER.DATETIME_DELIVERY']);
             response.data[0]['SHOP_ORDER.DATETIME_COMMENT']=getDate(response.data[0]['SHOP_ORDER.DATETIME_COMMENT']);
+            response.data[0]['SHOP_ORDER.DATETIME_ACCEPT']=getDate(response.data[0]['SHOP_ORDER.DATETIME_ACCEPT']);
             $scope.orderDetailList=JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
             $scope.order=response.data[0];
             $scope.orderType = $scope.order['SHOP_ORDER.TYPE'];
