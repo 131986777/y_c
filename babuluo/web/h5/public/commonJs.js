@@ -194,7 +194,6 @@ function routerPath(base, path, param, css) {
             return $ocLazyLoad.load(loadItemList)
         }
     }
-    console.log(router);
     return router;
 }
 
