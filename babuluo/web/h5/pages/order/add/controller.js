@@ -68,13 +68,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         params['SHOP_ORDER.UID']=1000;//所属会员
         if($scope.PickupPerson.type==1){
             params['SHOP_ORDER.REC_TYPE']=1;//收货方式为快递
-            params['SHOP_ORDER.REC_ADDR']=$scope.PickupPerson.shengshi+$scope.PickupPerson.address;//收货地址
+            params['SHOP_ORDER.REC_ADDR']=noUndefinedAndNull($scope.PickupPerson.shengshi)+noUndefinedAndNull($scope.PickupPerson.address);//收货地址
             params['SHOP_ORDER.GET_PRD_DATETIME']=$scope.PickupPerson.getTime;//送货时间
         }else{
             params['SHOP_ORDER.REC_TYPE']=2;//收货方式为自提
             params['SHOP_ORDER.SHOP_NAME']=$scope.shop['SHOP.SHOP_NAME'];//门店信息
             params['SHOP_ORDER.SHOP_ID']=$scope.shop['SHOP.SHOP_ID'];//门店ID
-            params['SHOP_ORDER.GET_PRD_DATETIME']=$scope.PickupPerson.getTime;//提货时间
+            params['SHOP_ORDER.GET_PRD_DATETIME']=noUndefinedAndNull($scope.PickupPerson.getTime);//提货时间
         }
 
         params['SHOP_ORDER.DETAILS']=JSON.stringify($scope.skuList);//sku信息
