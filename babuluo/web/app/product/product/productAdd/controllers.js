@@ -120,7 +120,7 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
         productFactory.addProduct(form).get({}, function (response) {
             if(response.code==0){
                 modalFactory.showShortAlert("保存成功");
-                $state.go("productList");
+                $state.go("product/product/productList");
             }else{
                 modalFactory.showShortAlert(response.msg);
             }

@@ -222,7 +222,6 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
     }
 
     $scope.queryByName = function (name){
-        alert(name);
         if(name == null||name == ''){
             $scope.salesList = $scope.roundList;
         }else {

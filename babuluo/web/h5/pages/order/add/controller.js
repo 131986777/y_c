@@ -69,7 +69,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         params['SHOP_ORDER.TYPE']=$scope.PickupPerson.type;//订货单
         params['SHOP_ORDER.REC_CONTACT']=$scope.PickupPerson.man;//收货人
         params['SHOP_ORDER.REC_PHONE']=$scope.PickupPerson.phone;//联系电话
-        params['SHOP_ORDER.UID']=1000;//所属会员
+        params['SHOP_ORDER.UID']=1044;//所属会员
         if($scope.PickupPerson.type==1){
             params['SHOP_ORDER.REC_TYPE']=1;//收货方式为快递
             params['SHOP_ORDER.REC_ADDR']=noUndefinedAndNull($scope.PickupPerson.shengshi)+noUndefinedAndNull($scope.PickupPerson.address);//收货地址

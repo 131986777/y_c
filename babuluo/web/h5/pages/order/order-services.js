@@ -32,9 +32,8 @@ AndSellH5MainModule.service('orderFactory', function ($resource, baseURL) {
         });
     }
 
-    this.payOrder= function (params) {
-        console.log(params);
-        return $resource(baseURL + '/shop/order/payOrder',params, {
+    this.payOrder= function (id) {
+        return $resource(baseURL + '/shop/order/payOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
             'update': {
                 method: 'PUT'
             }

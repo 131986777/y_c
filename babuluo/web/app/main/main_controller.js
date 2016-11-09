@@ -24,16 +24,16 @@ AndSellMainModule.controller('MainController', function ($scope, $state, modalFa
     $scope.search = function () {
         switch ($scope.searchType) {
             case 'product':
-                $state.go('productList', {keyword: $scope.searchContent});
+                $state.go('product/product/productList', {keyword: $scope.searchContent});
                 break;
             case 'order':
-                $state.go('orderList', {keyword: $scope.searchContent});
+                $state.go('order/order/orderList', {keyword: $scope.searchContent});
                 break;
-            case 'returnOrder':
-                $state.go('prd-List', {keyword: $scope.searchContent});
-                break;
+            //case 'returnOrder':
+            //    $state.go('prd-List', {keyword: $scope.searchContent});
+            //    break;
             case 'member':
-                $state.go('memberList', {keyword: $scope.searchContent});
+                $state.go('member/member/memberList', {keyword: $scope.searchContent});
                 break;
         }
     }

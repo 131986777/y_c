@@ -99,7 +99,7 @@
                         <button class="btn"
                                 ng-repeat="item in prdTagList"
                                 ng-bind="item['SHOP_TAG.TAG']"
-                                style="margin-right:10px;min-width: 100px"
+                                style="margin:10px 10px 10px 0;min-width: 100px"
                                 ng-init="tag[item['SHOP_TAG.TAG_ID']]=false"
                                 ng-class="{true:'btn-primary', false:'btn-default'}[tag[item['SHOP_TAG.TAG_ID']]]"
                                 ng-click="selectTagButton(item['SHOP_TAG.TAG_ID'],item['SHOP_TAG.TAG'])">
@@ -157,8 +157,7 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
-                        <script id="container"  type="text/plain">
-                        </script>
+                        <script id="container"  type="text/plain"></script>
                     </div>
                 </div>
 
@@ -169,11 +168,28 @@
 
                 <div class="form-group">
                     <div class="col-md-12">
+                        <!--<div class="upload-img-wrap"   ng-repeat="(key,imageFileUrl) in uploadImageFiles">-->
+                            <!--<div  ng-class="{'upload-img-content':true,'operator-chosen':key==uploadImageFilesIndex}">-->
+
+                                <!--<img ng-src="{{FILE_SERVER_DOMAIN +imageFileUrl}}"-->
+                                     <!--class="img-responsive">-->
+                                <!--<div class="product-img-operator">-->
+                                    <!--<div class="operator-wrap top">-->
+                                        <!--<a type="button"-->
+                                           <!--class="operator-close"-->
+                                           <!--aria-label="Close"-->
+                                           <!--ng-click="delImageFile(key)">-->
+                                            <!--&times;-->
+                                        <!--</a>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
                         <div class="upload-img-wrap"   ng-repeat="(key,imageFileUrl) in uploadImageFiles">
                             <div  ng-class="{'upload-img-content':true,'operator-chosen':key==uploadImageFilesIndex}">
 
-                                <img ng-src="{{FILE_SERVER_DOMAIN +imageFileUrl}}"
-                                     class="img-responsive">
+                                <img ng-src="{{FILE_SERVER_DOMAIN+imageFileUrl}}"
+                                     class="img-responsive" ng-click="setFirstImg(imageFileUrl)">
                                 <div class="product-img-operator">
                                     <div class="operator-wrap top">
                                         <a type="button"
@@ -198,22 +214,22 @@
                     </div>
                 </div>
 
-                    <label class="upload-btn" data-provides="fileinput">
-                        上传附件
-                        <input class="hidden" type="file" on-change="uploadFile(upfile)"
-                               file-model="upfile" multiple>
-                    </label>
+                    <!--<label class="upload-btn" data-provides="fileinput">-->
+                        <!--上传附件-->
+                        <!--<input class="hidden" type="file" on-change="uploadFile(upfile)"-->
+                               <!--file-model="upfile" multiple>-->
+                    <!--</label>-->
 
-                <div class="form-group">
-                    <div class="col-md-4 col-md-offset-1">
-                        <a ng-click="addProductSubmit()" ng-disabled="submitDisabled"
-                           ng-init="submitDisabled= false;" class="btn btn-default"
-                           ng-class="{true:'disabled'}[isSubmit]">保 存</a>
-                        <a type="button" href="product.jsp"
-                           class="btn">取 消
-                        </a>
-                    </div>
-                </div>
+                <!--<div class="form-group">-->
+                    <!--<div class="col-md-4 col-md-offset-1">-->
+                        <!--<a ng-click="addProductSubmit()" ng-disabled="submitDisabled"-->
+                           <!--ng-init="submitDisabled= false;" class="btn btn-default"-->
+                           <!--ng-class="{true:'disabled'}[isSubmit]">保 存</a>-->
+                        <!--<a type="button" href="product.jsp"-->
+                           <!--class="btn">取 消-->
+                        <!--</a>-->
+                    <!--</div>-->
+                <!--</div>-->
             </form>
         </div>
     </div>

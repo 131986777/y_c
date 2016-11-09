@@ -97,6 +97,24 @@ function setContentsInfoForOrder(sku) {
     sku['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] = contents;
 }
 
+//   get Sku  content info
+function setContentsInfoForOrder_OFFLINE(sku) {
+    var contents = '';
+    if (sku['SHOP_ORDER_INFO_OFFLINE.SKU_1_VALUE'] != undefined) {
+        contents += ' ';
+        contents += sku['SHOP_ORDER_INFO_OFFLINE.SKU_1_NAME'] + " : " + sku['SHOP_ORDER_INFO_OFFLINE.SKU_1_VALUE'];
+    }
+    if (sku['SHOP_ORDER_INFO_OFFLINE.SKU_2_VALUE'] != undefined) {
+        contents += ' ';
+        contents += sku['SHOP_ORDER_INFO_OFFLINE.SKU_2_NAME'] + " : " + sku['SHOP_ORDER_INFO_OFFLINE.SKU_2_VALUE'];
+    }
+    if (sku['SHOP_ORDER_INFO_OFFLINE.SKU_3_VALUE'] != undefined) {
+        contents += ' ';
+        contents += sku['SHOP_ORDER_INFO_OFFLINE.SKU_3_NAME'] + " : " + sku['SHOP_ORDER_INFO_OFFLINE.SKU_3_VALUE'];
+    }
+    sku['SHOP_ORDER_INFO_OFFLINE.SKU_CONTENT_INFO'] = contents;
+}
+
 //list to map   by  key
 function listToMap(list, key) {
     var map = new Map;

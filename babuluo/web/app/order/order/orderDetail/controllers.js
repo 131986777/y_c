@@ -18,6 +18,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
             response.data[0]['SHOP_ORDER.DATETIME_SEND']=getDate(response.data[0]['SHOP_ORDER.DATETIME_SEND']);
             response.data[0]['SHOP_ORDER.DATETIME_DELIVERY']=getDate(response.data[0]['SHOP_ORDER.DATETIME_DELIVERY']);
             response.data[0]['SHOP_ORDER.DATETIME_COMMENT']=getDate(response.data[0]['SHOP_ORDER.DATETIME_COMMENT']);
+            response.data[0]['SHOP_ORDER.DATETIME_ACCEPT']=getDate(response.data[0]['SHOP_ORDER.DATETIME_ACCEPT']);
             $scope.orderDetailList=JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
             $scope.order=response.data[0];
             $scope.orderType = $scope.order['SHOP_ORDER.TYPE'];
@@ -36,7 +37,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
         });
     }
 
-    //取消订单
+    //出库订单
     $scope.outOrder= function () {
         orderFactory.outOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             alert('订单出库成功');
@@ -44,8 +45,16 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
         });
     }
 
+   //发货订单
+    $scope.sendOrder= function () {
+        orderFactory.sendOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
+            alert('订单发货成功');
+            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+        });
+    }
+
     //确认提货
-    $scope.getPrdNow= function () {
+    $scope.deliveryOrder= function () {
         orderFactory.deliveryOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             alert('提货成功');
             $scope.getOrder($scope.order['SHOP_ORDER.ID']);
