@@ -1,4 +1,4 @@
-<div class="page-content">
+<div class="page-content" style="margin-bottom: 50px">
     <!-- BEGIN FORM-->
     <div class="table-operbar row" ng-cloak>
         <div class="col-md-12">
@@ -305,39 +305,6 @@
                     </div>
                 </div>
 
-                <div class="upload-file-wrap">
-                    <label class="upload-btn" data-provides="fileinput">
-                        上传附件
-                        <input class="hidden" type="file"
-                               id="file" name='file'
-                               onchange="angular.element(this).scope().uploadFile(this)"
-                               multiple>
-                    </label>
-
-
-            <span class="pull-right">
-                附件最大20M，支持格式：PDF、Word、Excel、Txt、JPG、PNG、BMP、GIF、RAR、ZIP
-            </span>
-                </div>
-
-                <div class="form-group" ng-repeat="file in uploadFiles">
-                    <div class="col-md-9">
-                        <a target="_blank" href="{{FILE_SERVER_DOMAIN+file.url}}">
-                            {{file.original}}
-                        </a>
-                        <span class="text-remark" ng-bind="file.size | bytes"></span>
-                    </div>
-                    <div class="col-md-3 text-right">
-                        <a target="_blank" href="{{FILE_SERVER_DOMAIN+file.url}}" class="font-green">
-                            <i class="fa fa-eye "></i>
-                            查看
-                        </a>
-                        <a ng-click="delUploadFile(file)" class="font-green">
-                            <i class="fa fa-remove"></i>
-                            删除
-                        </a>
-                    </div>
-                </div>
             </form>
         </div>
     </div>

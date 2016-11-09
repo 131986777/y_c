@@ -33,6 +33,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                     ele['SHOP_PRODUCT_SKU.SIZE'] = cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
                     ele.isSelect = false;
                 });
+                $scope.checkAllPrd();
             })
         }
     }
