@@ -27,7 +27,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         params['SHOP_PRODUCT_SKU.SKU_IDS'] = $scope.skuIds;
         params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         productFactory.getProductSkuBySkuIds(params).get({}, function (response) {
-            console.log(response);
+            console.log(456);
+            console.log(response.data);
             $scope.skuList = response.data;
             $scope.skuList.forEach(function (ele) {
                 ele['SHOP_PRODUCT_SKU.SIZE']=$scope.cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
@@ -39,6 +40,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
     }
 
+
     //计算订单价格  未做优惠促销等逻辑
     $scope.updateCartPrice= function () {
         var price=0;
@@ -46,6 +48,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             price+=ele['SHOP_PRODUCT_SKU.REAL_PRICES']*ele['SHOP_PRODUCT_SKU.SIZE'];
         });
         $scope.order['SHOP_ORDER.PRICE_PRD']=price;
+
+        $scope.totalMoney=price;    //使用优惠券时，传给优惠券的总价 By cxy
 
         //todo  加入其他优惠和出促销的等过滤
 
@@ -95,6 +99,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             $state.go('pages/payment/check_out',{ORDER_ID:response.extraData.ORDER_ID});
 
         });
+    }
+
+    $scope.goCoupon=function(){
+        $state.go('pages/order/addCoupon',{PRODUCTS:JSON.stringify($scope.skuList),MONEY:$scope.totalMoney});
     }
 
 
