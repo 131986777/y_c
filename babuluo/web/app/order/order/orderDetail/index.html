@@ -79,41 +79,50 @@
             <div class="unpayed" ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消</div>
           </div>
           <div class="orderProgress">
-            <ul class="progressList">
-              <li class="step step-first"
+            <ul class="progressList" ng-if="order['SHOP_ORDER.TYPE']=='1'">
+              <li class="step-6 step-first"
                   ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1]">
                 下单
               </li>
-              <li class="step"
+              <li class="step-6"
                   ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
                 付款
               </li>
-              <li class="step"
-                  ng-if="orderType=='1'"
+              <li class="step-6"
                   ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
                 出库
               </li>
-              <li class="step"
-                  ng-if="orderType=='1'"
+              <li class="step-6"
                   ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1]">
                 发货
               </li>
-              <li class="step"
-                  ng-if="orderType=='1'"
+              <li class="step-6"
                   ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1]">
                 收货
               </li>
-              <li class="step"
-                  ng-if="orderType=='3'"
+              <li class="step-6 step-last"
+                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
+                交易成功
+              </li>
+            </ul>
+            <ul class="progressList" ng-if="order['SHOP_ORDER.TYPE']=='3'">
+              <li class="step-5 step-first"
+                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                下单
+              </li>
+              <li class="step-5"
+                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
+                付款
+              </li>
+              <li class="step-5"
                   ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
                 捡货
               </li>
-              <li class="step"
-                  ng-if="orderType=='3'"
+              <li class="step-5"
                   ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
                 提货
               </li>
-              <li class="step step-last"
+              <li class="step-5 step-last"
                   ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
                 交易成功
               </li>
