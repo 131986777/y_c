@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function ($scope, $state, productFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function ($scope, $state, productFactory,weUI,modalFactory) {
 
     modalFactory.setTitle('购物车');
     modalFactory.setBottom(true);
@@ -128,7 +128,12 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             var list = new Array;
             $scope.skuList.forEach(function (ele) {
                 if (ele.isSelect) {
-                    list.push(ele['SHOP_PRODUCT_SKU.SKU_ID']);
+                    if(ele['SHOP_PRODUCT_SKU.STOCK']>0){
+                        list.push(ele['SHOP_PRODUCT_SKU.SKU_ID']);
+                    }else{
+                        weUI.toast.error('存在售罄商品');
+                        return;
+                    }
                 }
             });
             $state.go('pages/order/add', {SKU_IDS: list.toString()});
