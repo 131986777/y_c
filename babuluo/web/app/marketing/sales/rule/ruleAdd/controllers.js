@@ -10,12 +10,10 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
         if($scope.salesInfo['SALES.SALE_TYPE'] == 3){
             var str = '{'+'"ProId"'+':'+$scope.productId+',' +'"Num"'+':'+$scope.salesInfo['SALES.PRONUM'+num]+'}';
         }else {
-            console.log($scope.salesInfo['SALES.PRONUM'+num]);
             var str = '{'+'"ProId"'+':'+$scope.couponId+',' +'"Num"'+':'+$scope.salesInfo['SALES.PRONUM'+num]+'}';
         }
         array.push(str);
         $scope.salesDetailInfo = array;
-        console.log($scope.salesDetailInfo);
     }
 
     $scope.bindData = function(form){
@@ -41,37 +39,62 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
 
     //设置页面Bottom触发事件
     modalFactory.setBottom(true, function () {
-        console.log($scope.salesInfo['SALES.SALE_CONTENT1']);
         console.log($scope.salesInfo);
         if($scope.salesInfo == undefined){
             modalFactory.showAlert("请填写完整信息");
             $scope.empty();
         }
-        else{
+        else if($scope.salesInfo['SALES.NAME'] == undefined || $scope.salesInfo['SALES.INTRO'] == undefined) {
+            modalFactory.showShortAlert("请填写完整信息");
+        }
+        else if($scope.salesInfo['SALES.CONDITION_NUM1'] == undefined){
+            modalFactory.showShortAlert("请填写完整信息");
+        }
+        else {
+            var num = $scope.num;
             var form = $scope.bindData($scope.salesInfo);
-            console.log(form);
             salesFactory.AddSales (form).get({}, function (response) {
-                console.log(form);
                 if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
                     modalFactory.showShortAlert(response.msg);
                 } else if (response.extraData.state == 'true') {
                     modalFactory.showShortAlert("保存成功");
                     $scope.empty();
-                    $scope.$broadcast('pageBar.reload');
+                    setTimeout($scope.delay(),3000);
                 }
             });
         }
     });
+
+    $scope.delay = function (){
+        window.history.go(-1);
+    }
 
  //清空所有表单信息
     $scope.empty = function () {
         $scope.salesInfo = null;
 }
     //清空部分表单信息
-    $scope.enEmpty = function (){
+    $scope.enEmpty = function (num) {
+        if(num ==1 ||num ==2){
+            $scope.salesInfo['SALES.SALE_CONTENT1'] = null;
+            $scope.salesInfo['SALES.CONDITION_NUM1'] = null;
+            $scope.salesInfo['SALES.PRONUM1'] = null;
+        }
+        else if(num == 3 || num ==4){
+            $scope.salesInfo['SALES.SALE_CONTENT1'] = null;
+            $scope.salesInfo['SALES.CONDITION_NUM1'] = null;
+            $scope.salesInfo['SALES.PRONUM1'] = null;
+            for( var i =1;i<=6;i++){
+                $("#A"+i).text('（选择赠送商品）');
+                $("#B"+i).text('（选择赠送优惠券）');
+                $("#C"+i).text('（选择赠送商品）');
+                $("#D"+i).text('（选择赠送优惠券）');
+            }
+        }
     }
 
-    $scope.getNum = function (num){
+
+        $scope.getNum = function (num){
         $scope.num = num;
     }
 
@@ -90,7 +113,6 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
             var num = $scope.num;
             $("#C"+num).text($scope.productName);
             data = null;
-            $scope.$broadcast('pageBar.reload');
         }
 
     };

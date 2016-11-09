@@ -53,13 +53,12 @@
                 <tbody>
                 <tr ng-repeat=" coupon in couponList"
                     ng-click="checkItem(coupon)">
-
                   <td>
                     <div style="display: inline-block;">
                       <div class="md-radio">
                         <input type="radio" id="{{['COUPON.ID']}}"
                                value="{{['COUPON.ID']}}"
-                               class="md-radiobtn">
+                               class="md-radiobtn" name="name">
                         </label>
                       </div>
                     </div>
