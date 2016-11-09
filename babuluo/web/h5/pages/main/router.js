@@ -1,8 +1,5 @@
-AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.when('','/pages/home');
-
-});
+$when('','/pages/home');
 
 $import('pages/home');
 $import('pages/product/detail',{PRD_ID: '1242'});

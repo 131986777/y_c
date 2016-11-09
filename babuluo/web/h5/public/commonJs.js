@@ -192,6 +192,12 @@ function routerPath(base, path, param, css) {
     return router;
 }
 
+function $when(from,to){
+    AndSellH5MainModule.config(function ($urlRouterProvider) {
+        $urlRouterProvider.when(from,to);
+    });
+}
+
 function $import(path,param,css){
     AndSellH5MainModule.config(function ($stateProvider) {
         $stateProvider.state(path,routerPath(basePath,path,param,css))
