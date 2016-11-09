@@ -7,17 +7,20 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
 
     $scope.initData= function () {
         $scope.modify={};
-        $scope.getOrder($stateParams.ORDER_ID);
+        $scope.getOrderById($stateParams.ORDER_ID);
     }
 
     $scope.getOrder= function (id) {
         orderFactory.getById(id).get({}, function (response) {
             response.data[0]['SHOP_ORDER.DATETIME_ADD']=getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
             response.data[0]['SHOP_ORDER.DATETIME_PAY']=getDate(response.data[0]['SHOP_ORDER.DATETIME_PAY']);
+            response.data[0]['SHOP_ORDER.DATETIME_OUT']=getDate(response.data[0]['SHOP_ORDER.DATETIME_OUT']);
+            response.data[0]['SHOP_ORDER.DATETIME_SEND']=getDate(response.data[0]['SHOP_ORDER.DATETIME_SEND']);
             response.data[0]['SHOP_ORDER.DATETIME_DELIVERY']=getDate(response.data[0]['SHOP_ORDER.DATETIME_DELIVERY']);
             response.data[0]['SHOP_ORDER.DATETIME_COMMENT']=getDate(response.data[0]['SHOP_ORDER.DATETIME_COMMENT']);
             $scope.orderDetailList=JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
             $scope.order=response.data[0];
+            $scope.orderType = $scope.order['SHOP_ORDER.TYPE'];
             $scope.orderDetailList.forEach(function (ele) {
                 setContentsInfoForOrder(ele);
             });
@@ -29,7 +32,15 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
     $scope.cancelOrder= function () {
         orderFactory.cancelOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             alert('取消订单成功');
-            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
+        });
+    }
+
+    //取消订单
+    $scope.outOrder= function () {
+        orderFactory.outOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
+            alert('订单出库成功');
+            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
         });
     }
 
@@ -37,7 +48,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
     $scope.getPrdNow= function () {
         orderFactory.deliveryOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             alert('提货成功');
-            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
         });
     }
 
@@ -45,7 +56,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
     $scope.payNow= function () {
         orderFactory.payOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             alert('支付成功');
-            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
         });
     }
 

@@ -25,8 +25,8 @@ AndSellMainModule.service('orderFactory', function ($resource, baseURL) {
         });
     };
 
-    this.getStateOrders= function () {
-        return $resource(baseURL + '/shop/order/getStateOrders', {} , {
+    this.getStateOrders= function (params) {
+        return $resource(baseURL + '/shop/order/getStateOrders', params , {
             'update': {
                 method: 'PUT'
             }
@@ -35,6 +35,14 @@ AndSellMainModule.service('orderFactory', function ($resource, baseURL) {
 
     this.cancelOrder= function (id) {
         return $resource(baseURL + '/shop/order/cancelOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+
+    this.outOrder= function (id) {
+        return $resource(baseURL + '/shop/order/outOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
             'update': {
                 method: 'PUT'
             }

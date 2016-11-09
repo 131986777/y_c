@@ -6,7 +6,7 @@ AndSellH5MainModule.controller('H5.OrderDetailController', function ($scope, $st
     $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
-        $scope.getOrder($stateParams.ORDER_ID);
+        $scope.getOrderById($stateParams.ORDER_ID);
         $scope.shop = getCookie('currentShopInfo');
     }
 
@@ -26,15 +26,15 @@ AndSellH5MainModule.controller('H5.OrderDetailController', function ($scope, $st
     $scope.cancelOrder = function () {
         orderFactory.cancelOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             weUI.toast.ok('取消订单成功');
-            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
         });
     }
 
     //确认提货
     $scope.getPrdNow = function () {
         orderFactory.deliveryOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
-            weUI.toast.ok('提货成功');
-            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            weUI.toast.ok('收货成功');
+            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
         });
     }
 
@@ -42,8 +42,13 @@ AndSellH5MainModule.controller('H5.OrderDetailController', function ($scope, $st
     $scope.payNow = function () {
         orderFactory.payOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             weUI.toast.ok('支付成功');
-            $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
         });
+    }
+
+    //评价订单
+    $scope.commentOrder = function () {
+
     }
 
 

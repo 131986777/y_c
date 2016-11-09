@@ -8,7 +8,7 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
     $scope.initData= function () {
 
         $scope.PickupPerson = $stateParams.pickupPerson;
-        console.log($scope.PickupPerson);
+
         $scope.EmptyPick = isEmptyObject($scope.PickupPerson);
 
         $scope.order={};
@@ -109,6 +109,7 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
         //todo  加入其他优惠和出促销的等过滤
 
 
+        $scope.order['SHOP_ORDER.PRICE_ORDER']=price;
         $scope.order['SHOP_ORDER.PRICE_OVER']=price;
     }
 
@@ -125,9 +126,11 @@ AndSellH5MainModule.controller('H5.OrderAddController', function ($scope, $state
         params['SHOP_ORDER.REC_PHONE']=$scope.PickupPerson.phone;//联系电话
         params['SHOP_ORDER.UID']=1000;//所属会员
         if($scope.PickupPerson.type==1){
+            params['SHOP_ORDER.REC_TYPE']=1;//收货方式为快递
             params['SHOP_ORDER.REC_ADDR']=$scope.PickupPerson.shengshi+$scope.PickupPerson.address;//收货地址
             params['SHOP_ORDER.GET_PRD_DATETIME']=$scope.PickupPerson.getTime;//送货时间
         }else{
+            params['SHOP_ORDER.REC_TYPE']=2;//收货方式为自提
             params['SHOP_ORDER.SHOP_NAME']=$scope.shop['SHOP.SHOP_NAME'];//门店信息
             params['SHOP_ORDER.SHOP_ID']=$scope.shop['SHOP.SHOP_ID'];//门店ID
             params['SHOP_ORDER.GET_PRD_DATETIME']=$scope.PickupPerson.time;//提货时间
