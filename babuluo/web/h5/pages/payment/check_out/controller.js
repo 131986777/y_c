@@ -14,7 +14,7 @@ angular.module('AndSell.H5.Main').controller('pages_payment_check_out_Controller
     //支付
     $scope.payNow = function () {
         weUI.dialog.alert("提示","确认支付该订单", function () {
-            orderFactory.payOrder({'SHOP_ORDER.ID': $stateParams.ORDER_ID}).get({}, function (response) {
+            orderFactory.payOrder( $stateParams.ORDER_ID).get({}, function (response) {
                 if (response.code == 0) {
                     weUI.toast.ok('支付成功');
                     $state.go('pages/order/detail', {ORDER_ID: $stateParams.ORDER_ID});

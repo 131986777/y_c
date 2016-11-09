@@ -25,6 +25,7 @@ AndSellMainModule.service('orderFactory', function ($resource, baseURL) {
         });
     };
 
+
     this.getStateOrders= function (params) {
         return $resource(baseURL + '/shop/order/getStateOrders', params , {
             'update': {

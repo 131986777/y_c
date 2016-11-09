@@ -54,7 +54,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
     }
 
     //确认提货
-    $scope.getPrdNow= function () {
+    $scope.deliveryOrder= function () {
         orderFactory.deliveryOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
             alert('提货成功');
             $scope.getOrder($scope.order['SHOP_ORDER.ID']);
