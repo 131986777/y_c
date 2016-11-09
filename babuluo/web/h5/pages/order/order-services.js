@@ -8,7 +8,7 @@ AndSellH5MainModule.service('orderFactory', function ($resource, baseURL) {
         });
     };
 
-    this.getById= function (id) {
+    this.getOrderById= function (id) {
         return $resource(baseURL + '/shop/order/getById?SHOP_ORDER.ID=:ID', {ID:id}, {
             'update': {
                 method: 'PUT'
@@ -17,7 +17,6 @@ AndSellH5MainModule.service('orderFactory', function ($resource, baseURL) {
     };
 
     this.getOrder= function (filter) {
-        console.log(filter);
         return $resource(baseURL + '/shop/order/queryAllForAgent', filter , {
             'update': {
                 method: 'PUT'
@@ -33,9 +32,8 @@ AndSellH5MainModule.service('orderFactory', function ($resource, baseURL) {
         });
     }
 
-    this.payOrder= function (params) {
-        console.log(params);
-        return $resource(baseURL + '/shop/order/payOrder',params, {
+    this.payOrder= function (id) {
+        return $resource(baseURL + '/shop/order/payOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
             'update': {
                 method: 'PUT'
             }
@@ -50,7 +48,7 @@ AndSellH5MainModule.service('orderFactory', function ($resource, baseURL) {
         });
     }
 
-    this.getOrderById= function (id) {
+    this.acceptOrder= function (id) {
         return $resource(baseURL + '/shop/order/getOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
             'update': {
                 method: 'PUT'

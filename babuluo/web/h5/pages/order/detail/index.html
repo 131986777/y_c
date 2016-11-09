@@ -5,10 +5,19 @@
         <i class="icon icon-ok"></i>
       </div>
       <div class="weui_cell_bd">
-        <h4 class="suc-title">
+        <h4 class="suc-title" ng-if="order['SHOP_ORDER.TYPE']=='3'">
           <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">订单待支付！</span>
-          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">订单待提货！</span>
-          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">订单已完成！</span>
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">订单待分拣！</span>
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">订单待提货！</span>
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">订单已完成！</span>
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
+        </h4>
+        <h4 class="suc-title" ng-if="order['SHOP_ORDER.TYPE']=='1'">
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">订单待支付！</span>
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">订单待出库！</span>
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==-1">订单待发货！</span>
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==-1">订单待收货！</span>
+          <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&order['SHOP_ORDER.STATE_ACCEPT']==-1">订单已完成！</span>
           <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
         </h4>
         <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
@@ -108,7 +117,7 @@
           总计：<span  class="money" ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
         </p>
       </div>
-      <div class="btn-wrap" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
+      <div class="btn-wrap" ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(((order['SHOP_ORDER.STATE_MONEY']==-1||order['SHOP_ORDER.OUT']==-1)&&order['SHOP_ORDER.TYPE']=='3')||((order['SHOP_ORDER.STATE_MONEY']==-1||order['SHOP_ORDER.OUT']==-1)&&order['SHOP_ORDER.TYPE']=='1'))">
         <a class="btn-cancel btn" ng-click="cancelOrder()">
           取消订单
         </a>

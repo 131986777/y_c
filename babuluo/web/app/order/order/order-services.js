@@ -25,6 +25,7 @@ AndSellMainModule.service('orderFactory', function ($resource, baseURL) {
         });
     };
 
+
     this.getStateOrders= function (params) {
         return $resource(baseURL + '/shop/order/getStateOrders', params , {
             'update': {
@@ -43,6 +44,14 @@ AndSellMainModule.service('orderFactory', function ($resource, baseURL) {
 
     this.outOrder= function (id) {
         return $resource(baseURL + '/shop/order/outOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+
+    this.sendOrder= function (id) {
+        return $resource(baseURL + '/shop/order/sendOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
             'update': {
                 method: 'PUT'
             }

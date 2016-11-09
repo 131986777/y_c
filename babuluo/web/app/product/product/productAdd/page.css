@@ -89,7 +89,7 @@
 .product-img-operator .operator-close {
     float: right;
     margin-right: 5px;
-    color: white;
+    color: #000;
 }
 .upload-file-wrap {
     background-color: #f0f0f0;

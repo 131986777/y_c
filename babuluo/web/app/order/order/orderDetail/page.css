@@ -27,9 +27,14 @@
     background-color: #eee;
     border-radius:10px;
 }
-.progressList .step{
+.progressList .step-5{
     float: left;
     width: 20%;
+    text-align: center;
+}
+.progressList .step-6{
+    float: left;
+    width: 16.6%;
     text-align: center;
 }
 .progressList .step-active{
@@ -51,9 +56,14 @@
 .progressTime ul{
     overflow: hidden;
 }
-.progressTime li{
+.progressTime .step-5{
     float: left;
     width: 20%;
+    text-align: center;
+}
+.progressTime .step-6{
+    float: left;
+    width: 16.6%;
     text-align: center;
 }
 .info .remark h4{
