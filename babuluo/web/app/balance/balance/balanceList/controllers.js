@@ -4,6 +4,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
 
     //获得所有资金明细
     $scope.bindData = function (response) {
+        console.log(response);
         $scope.balanceList = response.data;
         $scope.searchlist = response.data;
         $scope.userDetailMap = response.extraData.userDetailMap;
