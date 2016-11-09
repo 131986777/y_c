@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.UserRegisterController', function ($scope, $state, $stateParams, userFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', function ($scope, $state, $stateParams, userFactory, modalFactory) {
 
     modalFactory.setBottom(true);
 

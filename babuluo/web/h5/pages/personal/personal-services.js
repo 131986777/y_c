@@ -7,5 +7,13 @@ AndSellH5MainModule.service('personalFactory', function ($resource, baseURL) {
             }
         });
     };
+    this.getCouponListByUser= function (form) {
+        return $resource(baseURL + '/member/coupon/getCouponByUserId', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+
 
 });

@@ -7,6 +7,13 @@ AndSellH5MainModule.service('couponFactory', function ($resource, baseURL) {
             }
         });
     };
+    this.queryCouponListByUser= function (form) {
+        return $resource(baseURL + '/member/coupon/getCouponByUserId', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
     this.addMemberCoupon = function (form) {
         return $resource(baseURL + '/member/coupon/add', form, {
             'update': {
