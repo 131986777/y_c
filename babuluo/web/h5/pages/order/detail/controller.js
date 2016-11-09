@@ -32,7 +32,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     //确认提货
     $scope.getPrdNow = function () {
-        orderFactory.deliveryOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
+        orderFactory.getOrderById($scope.order['SHOP_ORDER.ID']).get({}, function () {
             weUI.toast.ok('收货成功');
             $scope.getOrderById($scope.order['SHOP_ORDER.ID']);
         });

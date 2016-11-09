@@ -46,7 +46,11 @@
             <!--<p><span class="leftTime">13分</span>后订单被关闭</p></div>-->
             <div ng-if="orderType=='3'">
               <div class="payed"
-                   ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">
+                   ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">
+                等待分捡
+              </div>
+              <div class="payed"
+                   ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">
                 等待提货
               </div>
               <div class="payed"
@@ -62,6 +66,10 @@
               <div class="payed"
                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==-1">
                 等待发货
+              </div>
+              <div class="payed"
+                   ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==-1">
+                等待收货
               </div>
               <div class="payed"
                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1">
@@ -91,12 +99,22 @@
                 发货
               </li>
               <li class="step"
+                  ng-if="orderType=='1'"
+                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1]">
+                收货
+              </li>
+              <li class="step"
                   ng-if="orderType=='3'"
-                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
+                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
+                捡货
+              </li>
+              <li class="step"
+                  ng-if="orderType=='3'"
+                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
                 提货
               </li>
               <li class="step step-last"
-                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&order['SHOP_ORDER.STATE_COMMENT']==1]">
+                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
                 交易成功
               </li>
             </ul>
@@ -108,15 +126,24 @@
                   ng-bind="order['SHOP_ORDER.DATETIME_ADD']"></li>
               <li ng-if="order['SHOP_ORDER.DATETIME_PAY']!=undefined"
                   ng-bind="order['SHOP_ORDER.DATETIME_PAY']"></li>
+
               <li ng-if="order['SHOP_ORDER.DATETIME_OUT']!=undefined"
                   ng-if="orderType=='1'"
                   ng-bind="order['SHOP_ORDER.DATETIME_OUT']"></li>
               <li ng-if="order['SHOP_ORDER.DATETIME_SEND']!=undefined"
                   ng-if="orderType=='1'"
                   ng-bind="order['SHOP_ORDER.DATETIME_SEND']"></li>
+              <li ng-if="order['SHOP_ORDER.DATETIME_ACCEPT']!=undefined"
+                  ng-if="orderType=='1'"
+                  ng-bind="order['SHOP_ORDER.DATETIME_ACCEPT']"></li>
+
+              <li ng-if="order['SHOP_ORDER.DATETIME_OUT']!=undefined"
+                  ng-if="orderType=='3'"
+                  ng-bind="order['SHOP_ORDER.DATETIME_OUT']"></li>
               <li ng-if="order['SHOP_ORDER.DATETIME_DELIVERY']!=undefined"
                   ng-if="orderType=='3'"
                   ng-bind="order['SHOP_ORDER.DATETIME_DELIVERY']"></li>
+
               <li ng-if="order['SHOP_ORDER.DATETIME_COMMENT']!=undefined"
                   ng-bind="order['SHOP_ORDER.DATETIME_COMMENT']"></li>
             </ul>

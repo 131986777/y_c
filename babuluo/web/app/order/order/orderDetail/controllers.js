@@ -7,7 +7,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
 
     $scope.initData= function () {
         $scope.modify={};
-        $scope.getOrderById($stateParams.ORDER_ID);
+        $scope.getOrder($stateParams.ORDER_ID);
     }
 
     $scope.getOrder= function (id) {
