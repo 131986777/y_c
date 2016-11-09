@@ -3,7 +3,7 @@
 $import('product/product/productAdd',undefined,true);
 
 //商品修改
-$import('product/product/productModify', {productId: undefined});
+$import('product/product/productModify', {productId: undefined},true);
 
 //商品列表
 $import('product/product/productList',{keyword:''});

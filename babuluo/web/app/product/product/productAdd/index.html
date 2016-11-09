@@ -100,7 +100,7 @@
                         <button class="btn"
                                 ng-repeat="item in prdTagList"
                                 ng-bind="item['SHOP_TAG.TAG']"
-                                style="margin-right:10px;min-width: 100px"
+                                style="margin:10px 10px 10px 0;min-width: 100px"
                                 ng-init="tag[item['SHOP_TAG.TAG_ID']]=false"
                                 ng-class="{true:'btn-primary', false:'btn-default'}[tag[item['SHOP_TAG.TAG_ID']]]"
                                 ng-click="selectTagButton(item['SHOP_TAG.TAG_ID'],item['SHOP_TAG.TAG'])">
