@@ -2,6 +2,7 @@
 
 var PRODUCT_DEFAULT_IMG = "/uploads/images/product.png";
 var FILE_SERVER_DOMAIN = "http://babuluo-file.oss-cn-hangzhou.aliyuncs.com//";
+var basePath='/AndSell/h5/';
 
 <!--############通用方法区############-->
 
@@ -149,3 +150,50 @@ function getNowFormatDate() {
     return year + seperator1 + month + seperator1 + strDate;
 }
 
+var replaceAll = function (str,s1, s2) {
+    return str.replace(new RegExp(s1, "gm"), s2);
+}
+
+function routerPath(base, path, param, css) {
+    var url =base+path;
+
+    var controller = {
+        name: 'app', insertBefore: '#app-level', files: [url + '/controller.js']
+    };
+
+    var pageCss = {
+        name: 'app', insertBefore: '#app-level', files: [url + '/page.css']
+    };
+
+    var loadItemList = new Array;
+    if (css != undefined&&css==true) {
+        loadItemList.push(pageCss);
+    }
+    loadItemList.push(controller);
+
+    var router = {};
+    router.url = "/" + path;
+    if (param != undefined) {
+        var p='';
+        for (var s in param) {
+            p+='/:'+s;
+        }
+        router.url += p;
+        router.params = (param);
+    }
+    router.controller =  replaceAll( path+"/",'/','_') + "Controller";
+    router.templateUrl = url + "/index.html";
+    router.resolve = {
+        loadServiceAndController: function ($ocLazyLoad) {
+            return $ocLazyLoad.load(loadItemList)
+        }
+    }
+    console.log(router);
+    return router;
+}
+
+function $import(path,param,css){
+    AndSellH5MainModule.config(function ($stateProvider) {
+        $stateProvider.state(path,routerPath(basePath,path,param,css))
+    });
+}

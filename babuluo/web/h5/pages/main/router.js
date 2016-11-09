@@ -1,13 +1,8 @@
 AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
 
-    $urlRouterProvider.when('','/home');
+    //$urlRouterProvider.when('','/pages/home');
 
     $stateProvider
-        .state("home", {
-            url: "/home",
-            templateUrl: "/AndSell/h5/pages/home/index.html",
-            controller: "H5.HomeController"
-        })
         .state("prd-detail", {
             url: "/PrdDetail",
             params: {PRD_ID: 1242},
@@ -97,3 +92,5 @@ AndSellH5MainModule.config(function ($stateProvider, $urlRouterProvider) {
             controller: "H5.UserAccountLoginController"
         })
 });
+
+$import('pages/home');

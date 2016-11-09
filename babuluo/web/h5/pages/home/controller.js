@@ -1,4 +1,4 @@
-AndSellH5MainModule.controller('H5.HomeController', function ($scope, $state, weUI, modalFactory, shopFactory) {
+angular.module('AndSell.H5.Main').controller('pages_home_Controller', function ($scope, $state, weUI, modalFactory, shopFactory) {
 
     modalFactory.setTitle('主页');
     modalFactory.setBottom(true);

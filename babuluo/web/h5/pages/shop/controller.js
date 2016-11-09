@@ -43,7 +43,7 @@ AndSellH5MainModule.controller('H5.ShopController', function ($scope, $state, $s
         }
         $scope.cookieShopIdList.push(shop['SHOP.SHOP_ID']);
         setCookie('recentShopList',$scope.cookieShopIdList.toString());
-        $state.go('home');
+        $state.go('pages/home');
     }
 
     $scope.chooseDistrict = function (districtId, districtName) {
