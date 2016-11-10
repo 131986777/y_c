@@ -71,16 +71,16 @@
             </div>
         </div>
 
-        <div class="weui_cells weui_cells_access">
-            <div class="weui_cell">
-                <div class="weui_cell_bd">
-                    使用积分
-                </div>
-                <div class="weui_cell_ft weui_cell_primary">
-                    200积分可用
-                </div>
-            </div>
-        </div>
+        <!--<div class="weui_cells weui_cells_access">-->
+            <!--<div class="weui_cell">-->
+                <!--<div class="weui_cell_bd">-->
+                    <!--使用积分-->
+                <!--</div>-->
+                <!--<div class="weui_cell_ft weui_cell_primary">-->
+                    <!--200积分可用-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <div class="payment-list weui_cells" ng-init="order['SHOP_ORDER.PAY_TYPE']='ACCOUNT'">
             <div class="balance weui_cell" ng-click="order['SHOP_ORDER.PAY_TYPE']='ACCOUNT'">
@@ -117,7 +117,7 @@
                 <p class="all">
                     总计：<span class="money" ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
                 </p>
-                <p class="sale">(已优惠)</p>
+                <p class="sale">( 已优惠 0 元 )</p>
             </div>
             <a class="payment-check" ng-click="commitOrder()">
                 提交订单
