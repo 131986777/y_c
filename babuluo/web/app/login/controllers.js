@@ -11,9 +11,9 @@ angular.module('AndSell.Main').controller('user_user_userList_Controller', funct
         form['PWD'] = $scope.PWD;
         loginFactory.login(form).get({'withCredentials': true}, function (response) {
             if (response.code == 400) {
-                weUI.toast.error(response.msg);
+               modalFactory.showShortAlert(response.msg);
             } else {
-                weUI.toast.info('登录成功');
+                modalFactory.showShortAlert("登录成功");
                 $state.go('pages/home');
             }
         });
