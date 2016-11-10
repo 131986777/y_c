@@ -40,7 +40,7 @@ AndSellMainModule.controller('MainController', function ($scope, $state, modalFa
 
     $scope.logout= function () {
         userFactory.logOut().get({}, function (response) {
-            window.location.href='http://localhost:8081/AndSell/app/login/index.html';
+            window.location.href='../login/index.html';
         });
     }
 
