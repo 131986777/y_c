@@ -84,6 +84,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         params['SHOP_ORDER.DETAILS']=JSON.stringify($scope.skuList);//sku信息
         orderFactory.addOrder(params).get({}, function (response) {
 
+            if(response.code==0){
             weUI.toast.ok('下单成功');
 
             //成功之后删除购物车内容
@@ -97,7 +98,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             setCookie('cartInfo',JSON.stringify($scope.cartInfo));
 
             $state.go('pages/payment/check_out',{ORDER_ID:response.extraData.ORDER_ID});
-
+                }else{
+                weUI.toast.ok(response.msg);
+            }
         });
     }
 
