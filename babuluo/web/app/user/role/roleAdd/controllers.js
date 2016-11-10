@@ -3,7 +3,50 @@ angular.module('AndSell.Main').controller('user_role_roleAdd_Controller', functi
     //设置页面Title
     modalFactory.setTitle('新增员工角色');
 
-    $scope.roleAdd = {};
+
+    $scope.initLoad = function () {
+
+        $scope.roleAdd = {};
+        $scope.appChooseList = [];
+        $scope.loadAPPs();
+    };
+
+
+    $scope.loadAPPs = function () {
+
+        //加载权限App类型
+        roleFactory.getAppClass().get({}, function (response) {
+            console.log(response);
+            $scope.roleClassList = response.data;
+            $scope.roleClassList.forEach(function (ele) {
+                ele.childList = $scope.filterParentAuth(ele['APP_CLASS.ID']);
+            });
+        });
+    };
+
+    $scope.filterParentAuth = function (id) {
+
+        var returnValue = new Array;
+        var form = {};
+        form['APP.CLASS_ID'] = id;
+        roleFactory.getAppByClass(form).get({}, function (response) {
+            response.data.forEach(function (ele) {
+                returnValue.push(ele);
+            });
+        });
+        return returnValue;
+    };
+
+    $scope.initLoad();
+
+    $scope.addAppIntoList = function (value, checked) {
+        if (checked == true) {
+            $scope.appChooseList.push(value);
+        } else {
+            $scope.appChooseList.remove(value);
+        }
+        console.log($scope.appChooseList);
+    };
 
     //设置页面Bottom触发事件
     modalFactory.setBottom(true, function () {
@@ -11,6 +54,9 @@ angular.module('AndSell.Main').controller('user_role_roleAdd_Controller', functi
             modalFactory.showShortAlert("请填写角色名");
             return;
         }
+
+        $scope.roleAdd['ROLE_MAP_APP'] = $scope.appChooseList;
+        console.log($scope.roleAdd);
         roleFactory.addRole($scope.roleAdd).get({}, function (response) {
             console.log(response);
             if (response.extraData.state == 'true') {
