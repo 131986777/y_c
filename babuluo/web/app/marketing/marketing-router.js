@@ -59,6 +59,6 @@ $import('marketing/sales/rule/ruleAdd',{id: '0',serviceId: '1'},true);
 $import('marketing/sales/sales/salesCoupon',undefined,true);
 
 $import('marketing/coupon/rule/ruleList');
-$import('marketing/banner/banner_position');
+$import('marketing/banner/bannerPosition');
 $import('marketing/banner/banner');
 $import('marketing/coupon/coupon/couponList',undefined,true);

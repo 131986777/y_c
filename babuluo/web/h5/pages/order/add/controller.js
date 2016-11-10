@@ -110,7 +110,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
     $scope.descCoupon=function () {
         orderFactory.deleteCoupon($scope.memberCouponId).get({}, function (response) {
-
+            if(response.code==0){
+                console.log('删除成功');
+            }
 
         });
     }
