@@ -1,4 +1,4 @@
-AndSellMainModule.controller('user_role_roleModify_Controller', function ($scope, $state, $stateParams, roleFactory, modalFactory) {
+angular.module('AndSell.Main').controller('user_role_roleModify_Controller', function ($scope, $state, $stateParams, roleFactory, modalFactory) {
 
     //设置页面Title
     modalFactory.setTitle('修改角色信息');

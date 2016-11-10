@@ -1,5 +1,5 @@
 
-AndSellMainModule.controller('salesCouponController', function ($scope, $stateParams, salesFactory, modalFactory) {
+angular.module('AndSell.Main').controller('salesCouponController', function ($scope, $stateParams, salesFactory, modalFactory) {
 
   modalFactory.setTitle('注册送券');
 

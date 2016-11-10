@@ -4,7 +4,7 @@ angular.module('AndSell.H5.Main').controller('pages_payment_check_out_Controller
     modalFactory.setBottom(false);
 
     $scope.initData = function () {
-        orderFactory.getOrderById($stateParams.ORDER_ID).get({}, function (response) {
+        orderFactory.getOrderById($stateParams.ORDER_ID).get({'withCredentials': true}, function (response) {
             console.log(response);
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
             $scope.order = response.data[0];
