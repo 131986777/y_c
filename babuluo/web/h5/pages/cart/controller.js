@@ -21,7 +21,6 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             cartInfo = JSON.parse(cartInfo);
             cartSize = JSON.parse(cartSize);
         }
-
         if (cartInfo.length > 0) {
             var params = {};
             params['SHOP_PRODUCT_SKU.SKU_IDS'] = cartInfo.toString();
@@ -36,6 +35,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                 $scope.checkAllPrd();
             })
         }
+        $scope.updateCartPrice();
     }
 
     //数量减
@@ -46,7 +46,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
 
         //修改cookie
         var cartSize = getCookie('cartSize');
-        if (cartSize == '') {
+        if (cartSize == ''||cartSize==undefined) {
             cartSize = {};
         } else {
             cartSize = JSON.parse(cartSize);
@@ -63,7 +63,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
 
         //修改cookie
         var cartSize = getCookie('cartSize');
-        if (cartSize == '') {
+        if (cartSize == ''||cartSize==undefined) {
             cartSize = {};
         } else {
             cartSize = JSON.parse(cartSize);
@@ -79,7 +79,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
         $scope.skuList.remove(sku);
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
-        if (cartInfo == '') {
+        if (cartInfo == ''||cartInfo == undefined) {
             cartInfo = new Array;
             cartSize = {};
         } else {
@@ -97,12 +97,13 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
     $scope.updateCartPrice = function () {
         var price = 0;
         var size = 0;
+        if($scope.skuList!=undefined){
         $scope.skuList.forEach(function (ele) {
             if (ele.isSelect) {
                 price += ele['SHOP_PRODUCT_SKU.REAL_PRICES'] * ele['SHOP_PRODUCT_SKU.SIZE'];
                 size += ele['SHOP_PRODUCT_SKU.SIZE'];
             }
-        });
+        });}
         $scope.totalPrice = price;
         $scope.totalSize = size;
     }
