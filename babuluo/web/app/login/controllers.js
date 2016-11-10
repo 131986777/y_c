@@ -1,22 +1,15 @@
-angular.module('AndSell.Main').controller('user_user_userList_Controller', function ($scope, loginFactory, modalFactory) {
-
-    //设置页面Title
-    modalFactory.setTitle('登录');
-
-    modalFactory.setBottom(false);
+angular.module('app',[]).controller('login_Controller', function ($scope,$http) {
 
     $scope.login = function () {
-        var form = {};
-        form['LOGIN_ID'] = $scope.loginId;
-        form['PWD'] = $scope.PWD;
-        loginFactory.login(form).get({'withCredentials': true}, function (response) {
+
+        ajaxPost('http://localhost:8081/AndSell/bubu/login/login','LOGIN_ID='+$scope.userName+'&PWD='+$scope.password, function (response) {
             if (response.code == 400) {
-                weUI.toast.error(response.msg);
+              alert(response.msg);
             } else {
-                weUI.toast.info('登录成功');
-                $state.go('pages/home');
+                window.location.href='http://localhost:8081/AndSell/app/main/main_index.html';
             }
         });
+
     }
 });
 
