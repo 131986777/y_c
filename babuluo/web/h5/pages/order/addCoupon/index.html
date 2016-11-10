@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>可用优惠券</title>
-    <link rel="stylesheet"
-          href="../../../public/libs/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../public/libs/weui/dist/lib/weui.min.css">
-    <link rel="stylesheet" href="../../../public/css/style.css">
-</head>
-<body>
-<div class="coupon-list">
-    <div class="coupon-wrap" ng-repeat="(key,item) in memberCouponList">
+<div class="coupon-list" ng-repeat="(key,item) in useableList"  >
+
+        <input type="radio" name="radio"  ng-click="checkItem(item)">
+        <div class="coupon-wrap" >
         <div class="coupon-head">
             <div class="coupon-info">
                 <p class="couponType">{{item['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME']}}</p>
@@ -30,7 +20,6 @@
                 </div>
             </div>
         </div> <!-- END coupon-head -->
-
         <div class="coupon-detail">
             <div class="coupon-desc">
                 <p class="limit-time"><span>限定时间(每周</span>
@@ -62,34 +51,15 @@
                 </p>
             </div>
         </div>
-    </div>
-    <!-- <div class="coupon-wrap">
-         <div class="coupon-head head-disabled">
-             <div class="coupon-info">
-                 <p class="couponType">周末优惠</p>
-                 <p class="couponTime">有效期至2017-2-18 18:55:00</p>
-                 <div class="coupon-value">
-                     <span>40</span>
-                     <span class="valueType">元</span>
-                 </div>
-             </div>
-         </div> &lt;!&ndash; END coupon-head &ndash;&gt;
+       </div>
 
-         <div class="coupon-detail detail-disabled">
-             <div class="coupon-desc">
-                 <p class="limit-time">限定时间（每周<span>一 四</span>）</p>
-                 <p class="limit-class">限定<span>商品类别</span>使用</p>
-                 <p class="couponCount">(剩余1000张)
-                     <a class="pull-right" style="color:rgb(255,151,50)">立即领取</a>
-                 </p>
-                 <div class="coupon-state"></div>
-             </div>
-         </div>
-     </div>-->
+</div>
+
+<div  style="position:fixed;bottom: 0; ">
+    <button class="btn btn-default " ng-click="returnData()">
+            确定
+        </button>
+
 </div>
 
 
-<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-<script src="../../../public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
-</html>

@@ -1519,7 +1519,7 @@ p {
 }
 .card-list,
 .coupon-list{
-  padding: 14px 25px 53px;
+  padding: 5px 25px 0;
 }
 .card-list .card-wrap{
   width: 100%;
