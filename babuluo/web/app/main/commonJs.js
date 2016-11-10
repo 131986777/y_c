@@ -167,6 +167,12 @@ function routerPath(base, path, param, css) {
     return router;
 }
 
+function $when(from,to){
+    AndSellMainModule.config(function ($urlRouterProvider) {
+        $urlRouterProvider.when(from,to);
+    });
+}
+
 function $import(path,param,css){
     AndSellMainModule.config(function ($stateProvider) {
         $stateProvider.state(path,routerPath(basePath,path,param,css))

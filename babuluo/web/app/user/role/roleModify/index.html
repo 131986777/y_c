@@ -31,27 +31,27 @@
                         <table class="table table-bordered table-hover table-striped">
                             <thead>
                             <tr>
-                                <th class="col-md-2"> 授权目标</th>
-                                <th class="col-md-10"> 目标详细</th>
+                                <th class="col-md-2"> 应用分类</th>
+                                <th class="col-md-10"> 授权应用</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="item in pFirstAuthList">
-                                <td style="text-align:center;font-size: 14px" ng-bind="item.auth_NAME"></td>
+                            <tr ng-repeat="item in roleClassList">
+                                <td style="text-align:center;font-size: 14px" ng-bind="item['APP_CLASS.NAME']"></td>
                                 <td style="text-align:left">
                                     <div class="col-md-3" ng-repeat="value in item.childList">
-                                        <div class="md-checkbox" ng-if="value.STATE==2"
+                                        <div class="md-checkbox" ng-if="value['APP.STATE']==1"
                                              style="margin-left: 10px;margin-top: 15px;margin-bottom: 15px">
                                             <input type="checkbox"
-                                                   id="{{value.AUTH_ID}}"
-                                                   disabled="true"
-                                                   ng-model="value.ifcheck"
+                                                   id="{{value['APP.ID']}}"
+                                                   ng-model="value['APP.CHECKED']"
+                                                   ng-change="addAppIntoList(value,value['APP.CHECKED'])"
                                                    class="md-check">
-                                            <label for="{{value.AUTH_ID}}">
+                                            <label for="{{value['APP.ID']}}">
                                                 <span class="inc"></span>
                                                 <span class="check"></span>
                                                 <span class="box"></span>
-                                                {{value.AUTH_NAME}}
+                                                {{value['APP.NAME']}}
                                             </label>
                                         </div>
                                     </div>

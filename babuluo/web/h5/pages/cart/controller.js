@@ -14,7 +14,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
     $scope.getCartInfoInCookie = function () {
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
-        if (cartInfo == '') {
+        if (cartInfo == ''||cartInfo ==undefined) {
             cartInfo = new Array;
             cartSize = {};
         } else {

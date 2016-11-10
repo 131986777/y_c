@@ -61,7 +61,7 @@
 
     <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>0">
       <div class="weui_cell_hd" style="min-width: 40px;"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']+' : '"></div>
-      <div class="sku-list label-group weui_cell_bd">
+      <div class="sku-list label-group weui_cell_bd" style="margin-left: 10px">
         <span class="sku-label {{currSkuSelectClassMap[1][item]}} label-outline"
               ng-class="{true:'selected'}[currSkuContentSelectMap.name1==item]"
               ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1']"
