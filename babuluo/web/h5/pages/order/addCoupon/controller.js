@@ -134,11 +134,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
             var faceValue = $scope.selectItem['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'];
             var type = $scope.selectItem['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE'];
             if (type == 1) {   //减价
-                $scope.money = $scope.totalMoney - (faceValue / 100).toFixed(2);
+                $scope.money =(faceValue / 100).toFixed(2);
             } else if (type == 2) {  //打折
-                $scope.money = $scope.totalMoney * (faceValue / 10).toFixed(1);
+                $scope.money = $scope.totalMoney * (1-(faceValue / 10).toFixed(1));
             }
-            console.log('总价'+$scope.money);
+            console.log('减价'+$scope.money);
             $state.go('pages/order/add',{MONEY:$scope.money,COUPON_ID:$scope.selectItem['.MAX_ID']});
         }
 
