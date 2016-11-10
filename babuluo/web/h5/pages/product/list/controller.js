@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function ($scope, $state,$stateParams, productFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function (weUI,$scope, $state,$stateParams, productFactory, modalFactory) {
 
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(true);
@@ -72,11 +72,10 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
 
     //得到购物车信息
     $scope.getCartInfoInCookie = function () {
-
         $scope.skuList = new Array;
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
-        if (cartInfo == '') {
+        if (cartInfo == ''||cartInfo==undefined) {
             cartInfo = new Array;
             cartSize = {};
         } else {
@@ -98,15 +97,17 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         } else {
             $scope.updateCartPrice();
         }
-
     }
 
     //结算
     $scope.addOrder = function () {
+        alert(1);
         var list = new Array;
         $scope.skuList.forEach(function (ele) {
             list.push(ele['SHOP_PRODUCT_SKU.SKU_ID']);
         });
+        alert(2);
+        alert($scope.skuList.length);
         if ($scope.skuList.length > 0) {
             $state.go('pages/order/add', {SKU_IDS: list.toString()});
         }else{

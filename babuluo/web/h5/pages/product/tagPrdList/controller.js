@@ -85,7 +85,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_tagPrdList_Controlle
         $scope.skuList = new Array;
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
-        if (cartInfo == '') {
+        if (cartInfo == ''||cartInfo==undefined) {
             cartInfo = new Array;
             cartSize = {};
         } else {

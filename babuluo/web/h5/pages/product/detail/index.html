@@ -46,22 +46,22 @@
         </p>
       </div>
     </div>
-    <div class="sale-info weui_cell">
-      <div class="weui_cell_hd">
-        促销信息:
-      </div>
-      <div class="weui_cell_bd weui_cell_primary">
-        <span class="label label-default">满减</span>
-        满200减20
-      </div>
-    </div>
+    <!--<div class="sale-info weui_cell">-->
+      <!--<div class="weui_cell_hd">-->
+        <!--促销信息:-->
+      <!--</div>-->
+      <!--<div class="weui_cell_bd weui_cell_primary">-->
+        <!--<span class="label label-default">满减</span>-->
+        <!--满200减20-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 
   <div class="weui_cells">
 
     <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>0">
       <div class="weui_cell_hd" style="min-width: 40px;"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']+' : '"></div>
-      <div class="sku-list label-group weui_cell_bd">
+      <div class="sku-list label-group weui_cell_bd" style="margin-left: 10px">
         <span class="sku-label {{currSkuSelectClassMap[1][item]}} label-outline"
               ng-class="{true:'selected'}[currSkuContentSelectMap.name1==item]"
               ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1']"
