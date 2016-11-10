@@ -1,6 +1,3 @@
 
-AndSellMainModule.config(function ($stateProvider, $urlRouterProvider) {
-
-});
-
+$when('','order/order/orderList//1');
 

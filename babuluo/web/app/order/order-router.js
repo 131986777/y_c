@@ -1,5 +1,5 @@
 
-$import('order/order/orderList',{keyword: '',orderType:'0'},true);
+$import('order/order/orderList',{keyword: '',orderType:'1'},true);
 
 $import('order/order/offlineOrderList',{keyword: ''},true);
 

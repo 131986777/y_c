@@ -27,8 +27,11 @@ angular.module('AndSell.Main').controller('member_group_groupList_Controller', f
     $scope.addMemberGroup = function () {
        // console.log($scope.add);
         $scope.add['MEMBER_CODE_Group.SERVICE_ID'] = 1;
+        if($scope.add['MEMBER_CODE_GROUP.TYPE_ID'] =='-1'){
+            modalFactory.showShortAlert('所属类型不为空');
+            return;
+        }
         memberGroupFactory.addMemberGroup($scope.add).get({}, function (response) {
-
             if (response.code == 400) {
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {

@@ -35,4 +35,25 @@ AndSellMainModule.service('roleFactory', function ($resource, baseURL) {
             }
         });
     };
+    this.getAppClass = function (form) {
+        return $resource(baseURL + '/ape/app/class/queryAll', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+    this.getAppByClass = function (form) {
+        return $resource(baseURL + '/ape/app/app/getByClass', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
+    this.getAppListByRole = function (form) {
+        return $resource(baseURL + '/role/app/getByRoleId', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
 });

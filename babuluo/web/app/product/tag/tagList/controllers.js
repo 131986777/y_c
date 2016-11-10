@@ -11,8 +11,13 @@ angular.module('AndSell.Main').controller('product_tag_tagList_Controller', func
   $scope.initLoad();
 
   $scope.addProductTag = function () {
+
     console.log($scope.add);
     $scope.add['SHOP_TAG.SERVICE_ID'] = 1;
+    if ($scope.add['SHOP_TAG.TAG'] == '') {
+      modalFactory.showShortAlert("请填写标签名称");
+      return;
+    }
     tagFactory.addPrdTag($scope.add).get({}, function (response) {
       $("#addTag").modal('hide');
       if ( response.code == 400) {
@@ -24,6 +29,7 @@ angular.module('AndSell.Main').controller('product_tag_tagList_Controller', func
       }
 
     });
+
   };
 
   $scope.modifyTagNameClick = function (item) {

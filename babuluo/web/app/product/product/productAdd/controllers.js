@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('product_product_productAdd_Controller', function ($http,$scope, $state, productFactory, classFactory, unitFactory, tagFactory, modalFactory,$q) {
+angular.module('AndSell.Main').controller('product_product_productAdd_Controller', function ($http, $scope, $state, productFactory, classFactory, unitFactory, tagFactory, modalFactory, $q) {
 
     modalFactory.setTitle('商品新增');
 
@@ -23,8 +23,8 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
     $scope.tempSaveSkuMap = new Map();
     $scope.uploadImageFiles = [];
     $scope.uploadFiles = [];
-    $scope.uploadImageFilesIndex=0;
-    $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
+    $scope.uploadImageFilesIndex = 0;
+    $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     // UE 实例化
     var ue;
@@ -90,6 +90,11 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
     $scope.initLoad();
 
     $scope.addProductSubmit = function () {
+        console.log($scope.tagList);
+        if ($scope.add['SHOP_PRODUCT.PRD_NAME'] == undefined) {
+            modalFactory.showShortAlert("请填写商品名称");
+            return;
+        }
         $scope.add['SHOP_PRODUCT.KEYWORD'] = getTabInputText($scope.keyword);
         $scope.add['SHOP_PRODUCT.CLASS_ID'] = $scope.add['SHOP_PRODUCT_CLASS.CLASS_ID'];
         $scope.add['SHOP_PRODUCT.UNIT_ID'] = $scope.add['SHOP_UNIT.UNIT_ID'];
@@ -101,27 +106,27 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
         form['SHOP_PRODUCT.TAG_ID'] = $scope.selectTagIds.toString();
         form['SkuListData'] = JSON.stringify($scope.product.tags);
 
-        var uploadImageArray=new Array();
-        for(var i = 0;i<$scope.uploadImageFiles.length;i++) {
-             if(i== $scope.uploadImageFilesIndex ){
-                 console.log("封面图片为"+i);
-                 form['SHOP_PRODUCT.CMP']=$scope.uploadImageFiles[i];
-             }else {
-                 uploadImageArray.push($scope.uploadImageFiles[i]);
-             }
+        var uploadImageArray = new Array();
+        for (var i = 0; i < $scope.uploadImageFiles.length; i++) {
+            if (i == $scope.uploadImageFilesIndex) {
+                console.log("封面图片为" + i);
+                form['SHOP_PRODUCT.CMP'] = $scope.uploadImageFiles[i];
+            } else {
+                uploadImageArray.push($scope.uploadImageFiles[i]);
+            }
 
         }
-        form['SHOP_PRODUCT.P1']=uploadImageArray[0];
-        form['SHOP_PRODUCT.P2']=uploadImageArray[1];
-        form['SHOP_PRODUCT.P3']=uploadImageArray[2];
-        form['SHOP_PRODUCT.P4']=uploadImageArray[3];
-        form['SHOP_PRODUCT.P5']=uploadImageArray[4];
+        form['SHOP_PRODUCT.P1'] = uploadImageArray[0];
+        form['SHOP_PRODUCT.P2'] = uploadImageArray[1];
+        form['SHOP_PRODUCT.P3'] = uploadImageArray[2];
+        form['SHOP_PRODUCT.P4'] = uploadImageArray[3];
+        form['SHOP_PRODUCT.P5'] = uploadImageArray[4];
 
         productFactory.addProduct(form).get({}, function (response) {
-            if(response.code==0){
+            if (response.code == 0) {
                 modalFactory.showShortAlert("保存成功");
                 $state.go("product/product/productList");
-            }else{
+            } else {
                 modalFactory.showShortAlert(response.msg);
             }
         });
@@ -308,19 +313,20 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
     function connALiYun() {
         var actionUrl = "../../aliYun";
         $http.post(actionUrl).success(function (response) {
-            $scope.filePath=response.split(',')[0];
-            $scope. policy=response.split(',')[1];
-            $scope.signature=response.split(',')[2];
+            $scope.filePath = response.split(',')[0];
+            $scope.policy = response.split(',')[1];
+            $scope.signature = response.split(',')[2];
         });
     }
+
     /**
      * 设置商品封面
      * 16.08.29
      * ZHJ
      */
-    $scope.setFirstImg = function (imageFileUrl){
+    $scope.setFirstImg = function (imageFileUrl) {
 
-        for(var i = 0;i<$scope.uploadImageFiles.length;i++) {
+        for (var i = 0; i < $scope.uploadImageFiles.length; i++) {
 
             if ($scope.uploadImageFiles[i] == imageFileUrl) {
                 $scope.uploadImageFilesIndex = i;
@@ -333,17 +339,17 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
     /**
      * 删除商品图片
      */
-    $scope.delImageFile=function (key) {
-        $scope.uploadImageFiles.splice(key,1);
+    $scope.delImageFile = function (key) {
+        $scope.uploadImageFiles.splice(key, 1);
     }
 
     /**
      *  上传商品的图片， 最多上传6个
      **/
     $scope.uploadImage = function (element) {
-        _uploadFiles(element.files, $scope.uploadImageFiles,'image', 6, function () {
+        _uploadFiles(element.files, $scope.uploadImageFiles, 'image', 6, function () {
             alert("商品图册最多只能添加6张！");
-        },function(successResponse){
+        }, function (successResponse) {
             $scope.uploadImageFiles.push(successResponse.url);
             console.log(successResponse);
             console.log($scope.uploadImageFiles);
@@ -354,41 +360,41 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
      * 上传商品的附件， 最多上传20个
      * */
     $scope.uploadFile = function (element) {
-        _uploadFiles(element.files, $scope.uploadFiles,'file', 20, function () {
+        _uploadFiles(element.files, $scope.uploadFiles, 'file', 20, function () {
             alert("商品附件最多只能添加20个！");
-        },function (successResponse) {
+        }, function (successResponse) {
             $scope.uploadFiles.push(successResponse);
         });
     };
 
     //上传文件
-    var _uploadFiles = function (files, bindToList, type, maxSize, errCall,successCall) {
+    var _uploadFiles = function (files, bindToList, type, maxSize, errCall, successCall) {
 
         var maxLength = maxSize - bindToList.length;
-        for(index=0;index<files.length;index++){
+        for (index = 0; index < files.length; index++) {
             if (index >= maxLength) {
                 errCall();
                 return;
             }
             //发送请求
-            _postFile( files[index],type).success(function (response) {
+            _postFile(files[index], type).success(function (response) {
                 console.log(response);
-                var  state='"state\":\"SUCCESS",';
-                var  title='"title":'+'"'+fileName+'",';
-                var  original='"original":'+'"'+file.name+'",';
-                var  type='"type":'+'".'+fileSuffix+'",';
+                var state = '"state\":\"SUCCESS",';
+                var title = '"title":' + '"' + fileName + '",';
+                var original = '"original":' + '"' + file.name + '",';
+                var type = '"type":' + '".' + fileSuffix + '",';
 
-                var index1=response.indexOf('<Key>');
-                var index2=response.indexOf('</Key>');
-                fileurl=response.substring(index1+5,index2);
-                var  url='"url":"'+fileurl+'",';
-                var  size='"size":"'+file.size+'"';
-                var json='{'+state+title+original+type+url+size+'}';
-                console.log('要返回的json字符串为'+json);
+                var index1 = response.indexOf('<Key>');
+                var index2 = response.indexOf('</Key>');
+                fileurl = response.substring(index1 + 5, index2);
+                var url = '"url":"' + fileurl + '",';
+                var size = '"size":"' + file.size + '"';
+                var json = '{' + state + title + original + type + url + size + '}';
+                console.log('要返回的json字符串为' + json);
                 var jsonObj = JSON.parse(json);   //将字符串装换为json对象;
                 successCall(jsonObj);
-            } ).error(function(response){
-                 console.log(response);
+            }).error(function (response) {
+                console.log(response);
             });
         }
 
