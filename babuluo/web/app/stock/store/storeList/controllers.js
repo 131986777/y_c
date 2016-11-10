@@ -38,7 +38,6 @@ angular.module('AndSell.Main').controller('stock_store_storeList_Controller', fu
 
     $scope.modify=clone(item);
     $scope.modifyId=item['STORE.ID'];
-    //console.log('删除ID为'+modifyId);
 
   };
 
@@ -50,7 +49,6 @@ angular.module('AndSell.Main').controller('stock_store_storeList_Controller', fu
     }else{
       $scope.modify['STORE.IS_DEF']=-1;
     }
-
     storeFactory.modifyStore ($scope.modify).get({}, function (response) {
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);

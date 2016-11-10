@@ -12,6 +12,10 @@ angular.module('AndSell.Main').controller('product_unit_unitList_Controller', fu
   $scope.addProductUnit = function () {
     console.log($scope.add);
     $scope.add['SHOP_UNIT.SERVICE_ID'] = 1;
+    if ($scope.add['SHOP_UNIT.UNIT_NAME'] == '') {
+      modalFactory.showShortAlert("请填写单位名称");
+      return;
+    }
     unitFactory.addPrdUnit($scope.add).get({}, function (response) {
       $("#addUnit").modal('hide');
       console.log(response);

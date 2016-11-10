@@ -8,30 +8,25 @@
         <h4 class="modal-title">选择商品</h4>
       </div>
       <div class="modal-body form-body text-right">
-        <div class="table-operbar row">
+        <div class="table-operbar">
           <div class="table-toolbar">
-            <div class="row">
-              <div class="col-md-3 form-inline text-left">
-                <span>
+            <div class="form-inline row">
+              <div class="col-md-3 text-left">
                    筛选:
-                </span>
                 <select ng-model="productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID']"
                         ng-init="productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID']='null'"
-                        class="nya-bs-select form-control input-small">
-                  <option  class="nya-bs-option" value="null">全部类别</option>
-                  <option class="nya-bs-option"
-                          ng-repeat="prdClass in classList"
+                        class="input-small">
+                  <option  value="null">全部类别</option>
+                  <option ng-repeat="prdClass in classList"
                           value="{{prdClass['SHOP_PRODUCT_CLASS.CLASS_ID']}}"
                           ng-bind="prdClass['SHOP_PRODUCT_CLASS.CLASS_NAME']"></option>
                 </select>
               </div>
 
-              <div class="col-md-7 form-inline" >
+              <div class="col-md-9  text-right" >
                 <input ng-model="productFilterSearch" type="text" class="form-control"
                        placeholder="请输入 商品名称/编码/条码/规格 进行搜索">
-              </div>
-              <div class="col-md-2 form-inline">
-                <span class="btn btn-primary" ng-click="search()">查询</span>
+                <span class="btn btn-default" ng-click="search()">查询</span>
               </div>
 
             </div>
