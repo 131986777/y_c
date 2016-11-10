@@ -9,7 +9,6 @@ angular.module('app',[]).controller('login_Controller', function ($scope,$http) 
                 window.location.href='http://localhost:8081/AndSell/app/main/main_index.html';
             }
         });
-
     }
 });
 
