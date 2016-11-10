@@ -4,7 +4,8 @@ $when('','/pages/home');
 $import('pages/home');
 $import('pages/product/detail',{PRD_ID: '1242'});
 $import('pages/cart');
-$import('pages/order/add',{SKU_IDS: '1060',pickupPerson:'{}'});
+$import('pages/order/add',{SKU_IDS: '1060',pickupPerson:'{}',MONEY:'0',COUPON_ID:'0'});
+
 $import('pages/payment/check_out',{ORDER_ID: '1023'});
 $import('pages/payment/check_out_success');
 $import('pages/order/detail',{ORDER_ID: '1030'});

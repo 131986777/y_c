@@ -5,6 +5,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
     $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
+    $scope.money=$stateParams.MONEY   //优惠券返回的价格
+    $scope.memberCouponId=$stateParams.COUPON_ID;      //  要删除的id
+
     $scope.initData= function () {
 
         $scope.PickupPerson = JSON.parse($stateParams.pickupPerson);
@@ -27,7 +30,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         params['SHOP_PRODUCT_SKU.SKU_IDS'] = $scope.skuIds;
         params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         productFactory.getProductSkuBySkuIds(params).get({}, function (response) {
-            console.log(456);
+
             console.log(response.data);
             $scope.skuList = response.data;
             $scope.skuList.forEach(function (ele) {
@@ -87,6 +90,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             if(response.code==0){
             weUI.toast.ok('下单成功');
 
+                $scope.descCoupon();  //成功之后删除对应的优惠券
+
             //成功之后删除购物车内容
             $scope.skuIds.split(',').forEach(function (ele) {
                 $scope.cartInfo.remove(ele);
@@ -103,6 +108,15 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             }
         });
     }
+
+    $scope.descCoupon=function () {
+        orderFactory.deleteCoupon($scope.memberCouponId).get({}, function (response) {
+
+
+        });
+    }
+
+
 
     $scope.goCoupon=function(){
         $state.go('pages/order/addCoupon',{PRODUCTS:JSON.stringify($scope.skuList),MONEY:$scope.totalMoney});

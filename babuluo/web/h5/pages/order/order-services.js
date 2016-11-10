@@ -64,4 +64,12 @@ AndSellH5MainModule.service('orderFactory', function ($resource, baseURL) {
         });
     }
 
+    this.deleteCoupon= function (id) {
+        return $resource(baseURL + '/member/coupon/delById?MEMBER_COUPON.ID=:ID', {ID:id}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+
 })
