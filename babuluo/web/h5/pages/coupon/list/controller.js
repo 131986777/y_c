@@ -51,7 +51,7 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
         console.log(sum);
         console.log(count);
         if(sum!=undefined&&sum>=count){
-            alert('该优惠券的领取数量已经达到了上限，换张再领吧！');
+            weUI.toast.info('该优惠券的领取数量已经达到了上限，换张再领吧！');
         }
        else {
             $scope.add['MEMBER_COUPON.COUPON_ID'] = $scope.coupon['COUPON.ID'];
@@ -74,7 +74,7 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
 
                         } else if (response.extraData.state == 'true') {
 
-                            alert('领取成功!')
+                            weUI.toast.ok('领取成功!')
                             $scope.initData();
                             $scope.add = '';
 

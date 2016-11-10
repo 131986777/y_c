@@ -40,7 +40,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
         // console.log(couponList.length);
         if ($scope.memberCouponList.length <= 0) {
-            alert("无可用优惠券！");
+            weUI.toast.info("无可用优惠券！");
         } else {
             $scope.memberCouponList.forEach(function (ele) {
                 var targetObjArray = ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_ID'];  //限定对象数组

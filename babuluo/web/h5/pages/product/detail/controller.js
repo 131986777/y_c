@@ -144,7 +144,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
             $scope.filterSkuList();
             $scope.skuSelectable();
         } else {
-            alert('该规格不存在！或者已下架');
+            weUI.toast.error('该规格不存在！或者已下架');
         }
     }
 
@@ -186,7 +186,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
             $scope.sku = $scope.currSkuList[0];
             $scope.skuSize = 1;
         } else if ($scope.currSkuList.length == 0 && $scope.SkuContentCheckComplete()) {
-            alert('该规格不存在！或者已下架');
+            weUI.toast.info('该规格不存在！或者已下架');
             $scope.checkContent($scope.lastCheck.num, $scope.lastCheck.content);
         } else {
             $scope.sku = undefined;
@@ -272,7 +272,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
             setCookie('cartSize', JSON.stringify(cartSize));
             setCookie('cartInfo', JSON.stringify(cartInfo));
 
-            alert('已加入到购物车');
+                weUI.toast.ok('已加入到购物车');
 
             // get prd size in cart
             $scope.cartSize = cartInfo.length;
@@ -280,7 +280,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
                 weUI.toast.error('该规格已售罄');
             }
         } else {
-            alert('请选择规格！');
+            weUI.toast.info('请选择规格！');
         }
     }
 
