@@ -27,8 +27,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         params['SHOP_PRODUCT_SKU.SKU_IDS'] = $scope.skuIds;
         params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         productFactory.getProductSkuBySkuIds(params).get({}, function (response) {
-            console.log(456);
-            console.log(response.data);
             $scope.skuList = response.data;
             $scope.skuList.forEach(function (ele) {
                 ele['SHOP_PRODUCT_SKU.SIZE']=$scope.cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
@@ -69,7 +67,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         params['SHOP_ORDER.TYPE']=$scope.PickupPerson.type;//订货单
         params['SHOP_ORDER.REC_CONTACT']=$scope.PickupPerson.man;//收货人
         params['SHOP_ORDER.REC_PHONE']=$scope.PickupPerson.phone;//联系电话
-        params['SHOP_ORDER.UID']=1044;//所属会员
         if($scope.PickupPerson.type==1){
             params['SHOP_ORDER.REC_TYPE']=1;//收货方式为快递
             params['SHOP_ORDER.REC_ADDR']=noUndefinedAndNull($scope.PickupPerson.shengshi)+noUndefinedAndNull($scope.PickupPerson.address);//收货地址

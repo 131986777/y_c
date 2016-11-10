@@ -16,4 +16,20 @@ AndSellH5MainModule.service('userFactory', function ($resource, baseURL) {
         });
     };
 
+    this.isLogin = function () {
+        return $resource(baseURL+'/login/isLogin',{},{
+           'update':{
+               method:'PUT'
+           }
+        });
+    }
+
+    this.loginOut = function () {
+        return $resource(baseURL+'/login/logout',{},{
+           'update':{
+               method:'PUT'
+           }
+        });
+    }
+
 });

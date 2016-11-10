@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function ($scope, $state, $stateParams, productFactory, modalFactory,weUI) {
+angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function (userFactory,$scope, $state, $stateParams, productFactory, modalFactory,weUI) {
 
     modalFactory.setTitle('商品详情');
     modalFactory.setBottom(false);
@@ -38,6 +38,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
                 $scope.skuSelectable();
             }
         });
+
     }
 
     $scope.setPrdPicBanner= function (prd) {
@@ -55,6 +56,13 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         } if(prd['SHOP_PRODUCT.P5']!=undefined){
             $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P5']});
         }
+        $('#carousel-generic').hammer().on('swipeleft', function(){
+            $(this).carousel('next');
+        });
+
+        $('#carousel-generic').hammer().on('swiperight', function(){
+            $(this).carousel('prev');
+        });
     }
 
     //获取价格区间
@@ -71,7 +79,6 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         });
         $scope.skuData.minPrice = minPrice;
         $scope.skuData.maxPrice = maxPrice;
-        console.log($scope.skuData);
     }
 
     //get product sku data by sku list

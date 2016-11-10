@@ -55,7 +55,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
     }
 
     $scope.getOrder= function () {
-        $scope.filter['SHOP_ORDER.UID']=1044;
+        //$scope.filter['SHOP_ORDER.UID']=1044;
         orderFactory.getOrder($scope.filter).get({}, function (response) {
             console.log(response);
             Array.prototype.push.apply($scope.orderList,response.data);//数组合并

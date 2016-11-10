@@ -6,7 +6,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
     $scope.districtName = "全部区域";
 
     $scope.initLoad = function () {
-        shopFactory.getShopList().get({}, function (response) {
+        shopFactory.getShopList().get({'withCredentials': true}, function (response) {
             $scope.shopList = response.data;
             $scope.shopListLength = response.data.length;
             $scope.districtList = response.extraData.districtList;
@@ -22,7 +22,10 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
 
     $scope.getRecentShopList = function () {
         var recentShopList=new Array;
+        $scope.cookieShopIdList=new Array;
+        if(getCookie('recentShopList')!=undefined)
         $scope.cookieShopIdList=getCookie('recentShopList').split(',');
+
         $scope.cookieShopIdList.forEach(function (ele) {
             if($scope.shopMap.get(ele)!=undefined){
                 recentShopList.push($scope.shopMap.get(ele));

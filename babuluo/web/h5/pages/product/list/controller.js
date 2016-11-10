@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function ($scope, $state,$stateParams, productFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function (weUI,$scope, $state,$stateParams, productFactory, modalFactory) {
 
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(true);
@@ -6,7 +6,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
-        $scope.STORE_ID = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
+        $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         $scope.storeId=$scope.STORE_ID;
         $scope.filter = {
             PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'SHOP_PRODUCT.ODRDER':'ORDER_NUM DESC','SHOP_PRODUCT.CLASS_ID': $stateParams.classId,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID
@@ -20,7 +20,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
 
     //获取商品列表
     $scope.getPrd = function () {
-        productFactory.getProduct($scope.filter).get({}, function (response) {
+        productFactory.getProduct($scope.filter).get({'withCredentials': true}, function (response) {
             console.log(response);
             Array.prototype.push.apply($scope.prdList,response.data);//数组合并
             $scope.classList=response.extraData.classList;
@@ -72,16 +72,15 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
 
     //得到购物车信息
     $scope.getCartInfoInCookie = function () {
-
         $scope.skuList = new Array;
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
-        if (cartInfo == '') {
+        if (cartInfo == ''||cartInfo==undefined) {
             cartInfo = new Array;
             cartSize = {};
         } else {
-            cartInfo = JSON.parse(cartInfo);
-            cartSize = JSON.parse(cartSize);
+            cartInfo = ToJson(cartInfo);
+            cartSize = ToJson(cartSize);
         }
         if (cartInfo.length > 0) {
             var params = {};
@@ -98,15 +97,17 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         } else {
             $scope.updateCartPrice();
         }
-
     }
 
     //结算
     $scope.addOrder = function () {
+        alert(1);
         var list = new Array;
         $scope.skuList.forEach(function (ele) {
             list.push(ele['SHOP_PRODUCT_SKU.SKU_ID']);
         });
+        alert(2);
+        alert($scope.skuList.length);
         if ($scope.skuList.length > 0) {
             $state.go('pages/order/add', {SKU_IDS: list.toString()});
         }else{
@@ -124,7 +125,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         if (cartSize == '') {
             cartSize = {};
         } else {
-            cartSize = JSON.parse(cartSize);
+            cartSize = ToJson(cartSize);
         }
         cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] -= 1;
         setCookie('cartSize', JSON.stringify(cartSize));
@@ -139,7 +140,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         if (cartSize == '') {
             cartSize = {};
         } else {
-            cartSize = JSON.parse(cartSize);
+            cartSize = ToJson(cartSize);
         }
         cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] += 1;
         setCookie('cartSize', JSON.stringify(cartSize));

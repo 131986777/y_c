@@ -1,18 +1,32 @@
-angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller', function ($scope, $state, $stateParams, userFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller', function ($http, $scope, $state, $stateParams, userFactory, modalFactory, weUI) {
 
-    modalFactory.setBottom(true);
+    modalFactory.setTitle('登录');
+    modalFactory.setBottom(false);
 
-    $scope.login = function (){
+    $scope.login = function () {
         var form = $scope.memberInfo;
-        userFactory.login(form).get({}, function (response) {
+        //ajaxPost(baseURL+'/login/login','LOGIN_ID=pabula&PWD=A123456', function (response) {
+        //    console.log(response);
+        //});
+        //$http.post(baseURL + '/login/login', $.param({
+        //    'LOGIN_ID': 'pabula',
+        //    'PWD': 'A123456'
+        //}), {
+        //    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        //    'withCredentials': true
+        //}).success(function (data) {
+        //    console.log(data);
+        //});
+        userFactory.login(form).get({'withCredentials': true}, function (response) {
             if (response.code == 400) {
-                alert(response.msg);
-             } else{
-                alert('登录成功');
+                weUI.toast.error(response.msg);
+            } else {
+                weUI.toast.info('登录成功');
                 $state.go('pages/home');
             }
         });
     }
+
 });
 
 

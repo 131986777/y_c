@@ -3,6 +3,7 @@
 var PRODUCT_DEFAULT_IMG = "/uploads/images/product.png";
 var FILE_SERVER_DOMAIN = "http://babuluo-file.oss-cn-hangzhou.aliyuncs.com//";
 var basePath='/AndSell/h5/';
+var baseURL='http://localhost:8081/AndSell/bubu';
 
 <!--############通用方法区############-->
 
@@ -190,8 +191,27 @@ function routerPath(base, path, param, css) {
     router.controller =  replaceAll( path+"/",'/','_') + "Controller";
     router.templateUrl = url + "/index.html";
     router.resolve = {
-        loadServiceAndController: function ($ocLazyLoad) {
-            return $ocLazyLoad.load(loadItemList)
+        loadServiceAndController: function ($ocLazyLoad,userFactory,$state,weUI) {
+            var filtertList=[
+                'pages/product/list',
+                'pages/product/tagPrdList',
+                'pages/home',
+                'pages/product/detail',
+                'pages/cart',
+                'pages/user/accountLogin',
+                'pages/shop',
+                'pages/user/accountLogin',
+                'pages/user/register'
+            ];
+            if(filtertList.indexOf(path)<0){
+                userFactory.isLogin().get({'withCredentials': true}, function (response) {
+                    if (response.code != 0) {
+                        weUI.toast.error('请先登录');
+                        $state.go('pages/user/accountLogin');
+                    }
+                });
+            }
+            return $ocLazyLoad.load(loadItemList);
         }
     }
     return router;
@@ -204,7 +224,13 @@ function $when(from,to){
 }
 
 function $import(path,param,css){
-    AndSellH5MainModule.config(function ($stateProvider) {
-        $stateProvider.state(path,routerPath(basePath,path,param,css))
-    });
+
+        AndSellH5MainModule.config(function ($stateProvider) {
+            $stateProvider.state(path,routerPath(basePath,path,param,css))
+        });
+}
+
+function ToJson(str){
+    var json = (new Function("return " + str))();
+    return json;
 }
