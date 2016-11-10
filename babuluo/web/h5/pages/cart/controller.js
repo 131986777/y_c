@@ -12,7 +12,6 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
     }
 
     $scope.getCartInfoInCookie = function () {
-        alert(1);
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
         if (cartInfo == ''||cartInfo ==undefined) {
@@ -22,14 +21,11 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             cartInfo = JSON.parse(cartInfo);
             cartSize = JSON.parse(cartSize);
         }
-        alert(32);
         if (cartInfo.length > 0) {
-            alert(222);
             var params = {};
             params['SHOP_PRODUCT_SKU.SKU_IDS'] = cartInfo.toString();
             params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
             productFactory.getProductSkuBySkuIds(params).get({}, function (response) {
-                alert(3);
                 $scope.skuList = response.data;
                 $scope.skuList.forEach(function (ele) {
                     setContentsInfo(ele);
@@ -39,7 +35,6 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                 $scope.checkAllPrd();
             })
         }
-        alert(344);
         $scope.updateCartPrice();
     }
 
@@ -111,7 +106,6 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
         });}
         $scope.totalPrice = price;
         $scope.totalSize = size;
-        alert(5);
     }
 
     //选择商品
