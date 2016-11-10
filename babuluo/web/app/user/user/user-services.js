@@ -28,4 +28,14 @@ AndSellMainModule.service('userFactory', function ($resource, baseURL) {
             }
         });
     };
+
+    this.logOut = function () {
+        return $resource(baseURL+'/login/logout',{},{
+            'update':{
+                method:'PUT'
+            }
+        });
+    }
+
+
 });

@@ -1,4 +1,4 @@
-AndSellMainModule.controller('MainController', function ($scope, $state, modalFactory) {
+AndSellMainModule.controller('MainController', function ($scope, $state, modalFactory,userFactory) {
 
     $scope.searchContent = "";
     //逻辑
@@ -36,6 +36,12 @@ AndSellMainModule.controller('MainController', function ($scope, $state, modalFa
                 $state.go('member/member/memberList', {keyword: $scope.searchContent});
                 break;
         }
+    }
+
+    $scope.logout= function () {
+        userFactory.logOut().get({}, function (response) {
+            window.location.href='http://localhost:8081/AndSell/app/login/index.html';
+        });
     }
 
 });
