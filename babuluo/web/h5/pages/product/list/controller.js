@@ -6,7 +6,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
-        $scope.STORE_ID = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
+        $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         $scope.storeId=$scope.STORE_ID;
         $scope.filter = {
             PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'SHOP_PRODUCT.ODRDER':'ORDER_NUM DESC','SHOP_PRODUCT.CLASS_ID': $stateParams.classId,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID
@@ -80,8 +80,8 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
             cartInfo = new Array;
             cartSize = {};
         } else {
-            cartInfo = JSON.parse(cartInfo);
-            cartSize = JSON.parse(cartSize);
+            cartInfo = ToJson(cartInfo);
+            cartSize = ToJson(cartSize);
         }
         if (cartInfo.length > 0) {
             var params = {};
@@ -124,7 +124,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         if (cartSize == '') {
             cartSize = {};
         } else {
-            cartSize = JSON.parse(cartSize);
+            cartSize = ToJson(cartSize);
         }
         cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] -= 1;
         setCookie('cartSize', JSON.stringify(cartSize));
@@ -139,7 +139,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         if (cartSize == '') {
             cartSize = {};
         } else {
-            cartSize = JSON.parse(cartSize);
+            cartSize = ToJson(cartSize);
         }
         cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] += 1;
         setCookie('cartSize', JSON.stringify(cartSize));
