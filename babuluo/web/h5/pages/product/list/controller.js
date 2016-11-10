@@ -20,7 +20,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
 
     //获取商品列表
     $scope.getPrd = function () {
-        productFactory.getProduct($scope.filter).get({}, function (response) {
+        productFactory.getProduct($scope.filter).get({'withCredentials': true}, function (response) {
             console.log(response);
             Array.prototype.push.apply($scope.prdList,response.data);//数组合并
             $scope.classList=response.extraData.classList;

@@ -3,6 +3,7 @@
 var PRODUCT_DEFAULT_IMG = "/uploads/images/product.png";
 var FILE_SERVER_DOMAIN = "http://babuluo-file.oss-cn-hangzhou.aliyuncs.com//";
 var basePath='/AndSell/h5/';
+var baseURL='http://localhost:8081/AndSell/bubu';
 
 <!--############通用方法区############-->
 
@@ -190,11 +191,76 @@ function routerPath(base, path, param, css) {
     router.controller =  replaceAll( path+"/",'/','_') + "Controller";
     router.templateUrl = url + "/index.html";
     router.resolve = {
-        loadServiceAndController: function ($ocLazyLoad) {
-            return $ocLazyLoad.load(loadItemList)
+        loadServiceAndController: function ($ocLazyLoad,userFactory,$state,weUI) {
+            var filtertList=[
+                'pages/product/list',
+                'pages/product/tagPrdList',
+                'pages/home',
+                'pages/product/detail',
+                'pages/cart',
+                'pages/user/accountLogin',
+                'pages/shop',
+                'pages/user/accountLogin',
+                'pages/user/register'
+            ];
+            if(filtertList.indexOf(path)<0){
+                userFactory.isLogin().get({'withCredentials': true}, function (response) {
+                    if (response.code != 0) {
+                        weUI.toast.error('请先登录');
+                        $state.go('pages/user/accountLogin');
+                    }
+                });
+            }
+            return $ocLazyLoad.load(loadItemList);
         }
     }
     return router;
+}
+
+// ajax 对象
+function ajaxObject() {
+    var xmlHttp;
+    try {
+        // Firefox, Opera 8.0+, Safari
+        xmlHttp = new XMLHttpRequest();
+    }
+    catch (e) {
+        // Internet Explorer
+        try {
+            xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e) {
+            try {
+                xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {
+                alert("您的浏览器不支持AJAX！");
+                return false;
+            }
+        }
+    }
+    return xmlHttp;
+}
+
+// ajax post请求：
+function ajaxPost ( url , data , fnSucceed , fnFail , fnLoading ) {
+    var ajax = ajaxObject();
+    ajax.open( "post" , url , true );
+    ajax.setRequestHeader( "Content-Type" , "application/x-www-form-urlencoded" );
+    ajax.withCredentials = true; //支持跨域发送cookies
+    ajax.onreadystatechange = function () {
+        if( ajax.readyState == 4 ) {
+            if( ajax.status == 200 ) {
+                fnSucceed( ajax.responseText );
+            }
+            else {
+                fnFail( "HTTP请求错误！错误码："+ajax.status );
+            }
+        }
+        else {
+            //fnLoading();
+        }
+    }
+    ajax.send( data );
+
 }
 
 function $when(from,to){
@@ -204,7 +270,8 @@ function $when(from,to){
 }
 
 function $import(path,param,css){
-    AndSellH5MainModule.config(function ($stateProvider) {
-        $stateProvider.state(path,routerPath(basePath,path,param,css))
-    });
+
+        AndSellH5MainModule.config(function ($stateProvider) {
+            $stateProvider.state(path,routerPath(basePath,path,param,css))
+        });
 }
