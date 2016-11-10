@@ -278,7 +278,7 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
                     if($scope.sku['SHOP_PRODUCT_SKU.STOCK']>0){
                     var cartInfo = getCookie('cartInfo');
                     var cartSize = getCookie('cartSize');
-                    if (cartInfo == '') {
+                    if (cartInfo == ''||cartInfo==undefined) {
                         cartInfo = new Array;
                         cartSize = {};
                     } else {
