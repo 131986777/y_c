@@ -1,4 +1,4 @@
-AndSellMainModule.controller('user_role_roleAdd_Controller', function ($scope, $state, roleFactory, modalFactory) {
+angular.module('AndSell.Main').controller('user_role_roleAdd_Controller', function ($scope, $state, roleFactory, modalFactory) {
 
     //设置页面Title
     modalFactory.setTitle('新增员工角色');
