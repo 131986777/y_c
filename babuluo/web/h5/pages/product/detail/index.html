@@ -101,14 +101,14 @@
       <div class="weui_cell_bd">
         <div class="cart-product-num-wrap input-group">
                 <span class="input-group-btn">
-                    <button class="btn btn-default btn-muted" type="button" ng-click="lessSize()">
+                    <button class="btn" type="button" ng-click="lessSize()">
                       -
                     </button>
                 </span>
           <input class="form-control text-center" disabled="" type="text" ng-model="skuSize"
                  ng-init="skuSize=1">
                 <span class="input-group-btn">
-                    <button class="btn btn-default btn-muted" type="button" ng-click="skuSize=skuSize+1">
+                    <button class="btn" type="button" ng-click="skuSize=skuSize+1">
                       +
                     </button>
                 </span>
@@ -369,11 +369,11 @@
         <i class="icon icon-cart-small" ui-sref="pages/cart"></i>
         购物车
       </div>
-      <div class="icon-wrap">
-        <!-- 已收藏 class="icon-collected" -->
-        <i class="icon icon-collect"></i>
-        收藏
-      </div>
+      <!--<div class="icon-wrap">-->
+        <!--&lt;!&ndash; 已收藏 class="icon-collected" &ndash;&gt;-->
+        <!--<i class="icon icon-collect"></i>-->
+        <!--收藏-->
+      <!--</div>-->
       <a class="add-to-cart cell" ng-click="addToCart()">
         加入购物车
       </a>
