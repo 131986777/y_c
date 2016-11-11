@@ -139,7 +139,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             });
             $state.go('pages/order/add', {SKU_IDS: list.toString()});
         } else {
-            alert('至少选择一项');
+            weUI.toast.info('至少选择一项');
         }
     }
 

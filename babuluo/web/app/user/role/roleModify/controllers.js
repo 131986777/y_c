@@ -93,6 +93,7 @@ angular.module('AndSell.Main').controller('user_role_roleModify_Controller', fun
             return;
         }
         $scope.roleModify['ROLE_MAP_APP'] = $scope.appChooseList;
+        console.log($scope.roleModify['ROLE_MAP_APP']);
         roleFactory.modRoleById($scope.roleModify).get({}, function (response) {
             console.log(response);
             if (response.extraData.state == 'true') {

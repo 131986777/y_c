@@ -33,20 +33,20 @@
                     <span>)</span>
                 <p class="limit-class">
                     <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用
-                        （{{detailData(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}}）
+                        ({{detailData(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
                                  <!-- <a data-toggle="modal" data-target="#detail" class="btn sbold green" ng-click="detailClick(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])">
                                     查看详情
                                   </a>-->
                                 </span>
                     <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==2">特定商品类别使用
-                               （{{detailData(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}}）
+                               ({{detailData(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
                     </span>
                     <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==3">特定商品标签使用
-                                （{{detailData(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}}）
+                                ({{detailData(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
                                 </span>
                 </p>
                 <p class="couponCount">每人限领{{item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.EACH_MEMBER_LIMIT']}}张
-                    （已领{{item['.NUM_COUPON']}}张）
+                    (已领{{item['.NUM_COUPON']}}张)
                     <!--<a class="pull-right" style="color:rgb(255,151,50)" ng-click="addCoupon(item)">立即领取</a>-->
                 </p>
             </div>

@@ -38,6 +38,7 @@ public class BBLSMSUtil {
 
 
 
+
         String smsContent = "【云厨1站】 您的验证码：" + randomStr;
 
         SendMessage(phone, smsContent);
@@ -48,6 +49,8 @@ public class BBLSMSUtil {
 
 
     public static void main(String[] args) {
+
+
 
         xmlEntity xmlentity=new xmlEntity();
         String xml=null;

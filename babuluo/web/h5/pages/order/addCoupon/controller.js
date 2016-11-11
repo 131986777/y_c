@@ -3,7 +3,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
     modalFactory.setTitle('可用优惠券');
    // modalFactory.setBottom(true);
 
-    console.log(789);
 
     $scope.orderList = JSON.parse($stateParams.PRODUCTS);     //所有的订单信息
     $scope.totalMoney = Math.round($stateParams.MONEY);       //目前订单的总价
@@ -31,16 +30,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
     $scope.judgeUsableCoupon = function () {
 
-        //console.log(456);
-
         var week=new Date().getDay();     //得到的今日的星期
         if(week=0){
             week=7;
         }
 
-        // console.log(couponList.length);
         if ($scope.memberCouponList.length <= 0) {
-            alert("无可用优惠券！");
+            weUI.toast.info("无可用优惠券！");
         } else {
             $scope.memberCouponList.forEach(function (ele) {
                 var targetObjArray = ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_ID'];  //限定对象数组
@@ -80,10 +76,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
                         }
                         if (ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE'] == 3) {   //限定标签
 
-                            for (i = 0; i < $scope.orderList.length; i++) {   //遍历订单中的每一个商品
+                            for (var i = 0; i < $scope.orderList.length; i++) {   //遍历订单中的每一个商品
                                 console.log($scope.orderList[i]['SHOP_PRODUCT.TAG_ID']);
                                 var tagIdArray = $scope.orderList[i]['SHOP_PRODUCT.TAG_ID'].split(',');
-                                for (j = 0; j < tagIdArray.length; j++) {
+                                for (var j = 0; j < tagIdArray.length; j++) {
                                     if (targetObjArray.indexOf(tagIdArray[j]) != -1) {         //商品的标签ID有多个，只要有一个在限定数组中即可
                                         if (i == $scope.orderList.length - 1) {
                                             $scope.useableList.push(ele);
@@ -95,18 +91,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
 
                             }
-
                         }
                         if (ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE'] == -1) {   //不限定
                             console.log('不限定');
                             $scope.useableList.push(ele);
 
-                        }//
-
+                        }
                     }
-
-
-
                 }
 
             })
@@ -119,10 +110,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
     $scope.initData();
 
     $scope.checkItem = function (item) {
-        console.log(item);
         $scope.selectItem=item;
-
-
 
     }
 
@@ -134,11 +122,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
             var faceValue = $scope.selectItem['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'];
             var type = $scope.selectItem['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE'];
             if (type == 1) {   //减价
-                $scope.money = $scope.totalMoney - (faceValue / 100).toFixed(2);
+                $scope.money =(faceValue / 100).toFixed(2);
             } else if (type == 2) {  //打折
-                $scope.money = $scope.totalMoney * (faceValue / 10).toFixed(1);
+                $scope.money = $scope.totalMoney * (1-(faceValue / 10).toFixed(1));
             }
-            console.log('总价'+$scope.money);
+            console.log('减价'+$scope.money);
             $state.go('pages/order/add',{MONEY:$scope.money,COUPON_ID:$scope.selectItem['.MAX_ID']});
         }
 

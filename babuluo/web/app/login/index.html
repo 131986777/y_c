@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>AndSell Login</title>
+
+      <link rel="stylesheet" href="page.css">
+</head>
+
+<body ng-app="app" ng-controller="login_Controller">
+
+<div class="container">
+  <div class="sky">
+    <div class="login">
+        <div class="logo_show">
+            <img src="../components/images/product_logo.png" alt="">
+            <span>电商 门店 运营</span>
+        </div>
+        <form  class="login_form">
+            <input type="text" ng-model="userName" class="username">
+            <img src="../components/images/login_username.png" alt="" style="position: absolute;left:13px;top:17px">
+            <input type="password"  ng-model="password" class="password">
+            <img src="../components/images/login_password.png" alt="" style="position: absolute;left:13px;top:100px">
+            <a href="" class="register">注册账号</a>
+            <a href="" class="forget">找回密码</a>
+            <input type="submit" ng-click="login()" class="submit" value="登陆">
+        </form>
+        <p class="copyright"><span class="company_info">南京拨浪鼓信息科技</span><span class="tel">400-6565-747</span></p>
+    </div>
+    <div class="stars"></div>
+    <div class="stars1"></div>
+    <div class="stars2"></div>
+    <div class="shooting-stars"></div>
+  </div>
+</div>
+
+<script src="../main/commonJs.js"></script>
+<script src="/AndSell/app/components/libs/jquery/dist/jquery.min.js"></script>
+<script src="/AndSell/app/components/libs/angular/angular.min.js"></script>
+<script src="controllers.js"></script>
+<script src="login-services.js"></script>
+
+</body>
+</html>

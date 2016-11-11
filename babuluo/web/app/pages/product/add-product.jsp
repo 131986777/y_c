@@ -378,7 +378,7 @@
                        ng-init="product.price = 0.00;">
             </div>
             <label class="control-label col-md-1 right">
-                成本价
+                售价价
             </label>
             <div class="col-md-2">
                 <input class="form-control" ng-model="product.cost"
