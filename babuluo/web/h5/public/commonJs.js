@@ -36,6 +36,19 @@ function getTabInputText(values) {
     return list.toString();
 }
 
+
+//list to map   by  key
+function listToMap(list, key) {
+    var map = new Map;
+    list.forEach(function (ele) {
+        if (ele[key] != undefined) {
+            map.set(ele[key], ele);
+        }
+    });
+    return map;
+}
+
+
 var filterTableFromList = function (list, tablename) {
     if (list != undefined) {
         list.forEach(function (ele) {
