@@ -5,7 +5,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
 
     $scope.orderList = JSON.parse($stateParams.PRODUCTS);     //所有的订单信息
-    $scope.totalMoney = Math.round($stateParams.MONEY);       //目前订单的总价
+    $scope.totalMoney =$stateParams.MONEY;       //目前订单的总价
     console.log($scope.orderList);
     console.log('总价为' + $scope.totalMoney);
 
@@ -115,19 +115,28 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
     }
 
     $scope.returnData=function () {
-        $scope.money=$scope.totalMoney;
+        $scope.money=0;
        //console.log($scope.selectItem);
         if ($scope.selectItem!=undefined) {
             //读取到选中的优惠券的面值
             var faceValue = $scope.selectItem['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'];
             var type = $scope.selectItem['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE'];
-            if (type == 1) {   //减价
+            if (type == '1') {   //减价
                 $scope.money =(faceValue / 100).toFixed(2);
-            } else if (type == 2) {  //打折
-                $scope.money = $scope.totalMoney * (1-(faceValue / 10).toFixed(1));
+            } else if (type == '2') {  //打折
+                console.log(456);
+                console.log($scope.totalMoney);
+                console.log(faceValue);
+                $scope.money = $scope.totalMoney * (1-(faceValue / 100).toFixed(1));
             }
             console.log('减价'+$scope.money);
-            $state.go('pages/order/add',{MONEY:$scope.money,COUPON_ID:$scope.selectItem['.MAX_ID']});
+            var obj=new Map();
+            obj.set('MONEY',$scope.money.toFixed(2));
+            obj.set('COUPON_ID',$scope.selectItem['MEMBER_COUPON.COUPON_ID']);
+            obj.set('COUPON_NAME',$scope.selectItem['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME']);
+            var json=JSON.stringify(obj);
+            console.log(json);
+           $state.go('pages/order/add',{'COUPON_INFO':json});
         }
 
     }
