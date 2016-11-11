@@ -22,8 +22,7 @@
                 <my-check item="agree"></my-check>
                 七天免登录
             </label>
-
-            <a class="btn-link pull-right" ui-sref=" pages/security/resetPwd">
+            <a class="btn-link pull-right" ui-sref="pages/security/resetPwd({LOGIN_ID:memberInfo['LOGIN_ID']})">
                 忘记密码？
             </a>
         </div>
@@ -31,7 +30,7 @@
             <button class="weui_btn my-btn-default" type="submit" ng-click="login()">登录</button>
         </div>
         <div class="login-other">
-            <a class="btn-link" ui-sref="userReg">
+            <a class="btn-link" ui-sref="pages/user/register">
                 免费注册
             </a>
             <a class="btn-link pull-right" href="#">

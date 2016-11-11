@@ -179,7 +179,6 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
 
           //获得优惠券信息
           $scope.couponMap = response.extraData.couponMap;
-
           //获得sku列表
           $scope.skuList = response.extraData.skuList;
           $scope.skuMap = response.extraData.skuMap;
