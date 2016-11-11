@@ -455,7 +455,7 @@ p {
   right: 0;
   height: 48px;
   background-color: #fff;
-  z-index: 1; }
+  z-index: 5; }
 
 .action-bar {
   height: 100%;
