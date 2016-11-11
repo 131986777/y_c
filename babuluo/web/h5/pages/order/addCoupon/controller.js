@@ -116,6 +116,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
     $scope.returnData=function () {
         $scope.money=0;
+        var json ='';
        //console.log($scope.selectItem);
         if ($scope.selectItem!=undefined) {
             //读取到选中的优惠券的面值
@@ -137,10 +138,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
                 'ID':$scope.selectItem['.MAX_ID']
             };
 
-            var json=JSON.stringify(obj);
-            console.log(json);
-           $state.go('pages/order/add',{'COUPON_INFO':json,'SKU_IDS': $stateParams.SKU_IDS,'pickupPerson':$stateParams.pickupPerson});
+            json=JSON.stringify(obj);
         }
+        $state.go('pages/order/add',{'COUPON_INFO':json,'SKU_IDS': $stateParams.SKU_IDS,'pickupPerson':$stateParams.pickupPerson});
 
     }
 
