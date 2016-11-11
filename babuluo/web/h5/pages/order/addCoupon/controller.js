@@ -116,6 +116,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
     $scope.returnData=function () {
         $scope.money=0;
+        var json ='';
        //console.log($scope.selectItem);
         if ($scope.selectItem!=undefined) {
             //读取到选中的优惠券的面值
@@ -127,17 +128,19 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
                 console.log(456);
                 console.log($scope.totalMoney);
                 console.log(faceValue);
-                $scope.money = $scope.totalMoney * (1-(faceValue / 100).toFixed(1));
+                $scope.money = ($scope.totalMoney * (1-(faceValue / 100).toFixed(1))).toFixed(2);
             }
             console.log('减价'+$scope.money);
-            var obj=new Map();
-            obj.set('MONEY',$scope.money.toFixed(2));
-            obj.set('COUPON_ID',$scope.selectItem['MEMBER_COUPON.COUPON_ID']);
-            obj.set('COUPON_NAME',$scope.selectItem['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME']);
-            var json=JSON.stringify(obj);
-            console.log(json);
-           $state.go('pages/order/add',{'COUPON_INFO':json});
+            var obj={
+                'MONEY':$scope.money,
+                'COUPON_ID':$scope.selectItem['MEMBER_COUPON.COUPON_ID'],
+                'COUPON_NAME':$scope.selectItem['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME'],
+                'ID':$scope.selectItem['.MAX_ID']
+            };
+
+            json=JSON.stringify(obj);
         }
+        $state.go('pages/order/add',{'COUPON_INFO':json,'SKU_IDS': $stateParams.SKU_IDS,'pickupPerson':$stateParams.pickupPerson});
 
     }
 

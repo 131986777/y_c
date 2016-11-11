@@ -6,7 +6,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
     $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
     $scope.money=$stateParams.MONEY   //优惠券返回的价格
-    $scope.memberCouponId=$stateParams.COUPON_ID;      //  要删除的id
+   // $scope.memberCouponId=$stateParams.COUPON_ID;      //  要删除的id
 
     $scope.initData= function () {
 
@@ -25,6 +25,15 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             $scope.cartSize = JSON.parse($scope.cartSize);
         }
 
+        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
+
+
+        $scope.COUPON_INFO=$stateParams.COUPON_INFO;
+        if($stateParams.COUPON_INFO!=''){
+            $scope.coupon=JSON.parse($stateParams.COUPON_INFO);
+            console.log($scope.coupon);
+        }
+
         $scope.skuIds=$stateParams.SKU_IDS;
         var params = {};
         params['SHOP_PRODUCT_SKU.SKU_IDS'] = $scope.skuIds;
@@ -36,27 +45,30 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             $scope.skuList.forEach(function (ele) {
                 ele['SHOP_PRODUCT_SKU.SIZE']=$scope.cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
             });
+
             $scope.updateCartPrice();
         });
 
-        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
 
     }
 
 
     //计算订单价格  未做优惠促销等逻辑
     $scope.updateCartPrice= function () {
-        var price=0;
+        var price = 0;
         $scope.skuList.forEach(function (ele) {
-            price+=ele['SHOP_PRODUCT_SKU.REAL_PRICES']*ele['SHOP_PRODUCT_SKU.SIZE'];
+            price += ele['SHOP_PRODUCT_SKU.REAL_PRICES'] * ele['SHOP_PRODUCT_SKU.SIZE'];
         });
-        $scope.order['SHOP_ORDER.PRICE_PRD']=price;
+        $scope.order['SHOP_ORDER.PRICE_PRD'] = price;
 
-        $scope.totalMoney=price;    //使用优惠券时，传给优惠券的总价 By cxy
+        $scope.totalMoney = price;    //使用优惠券时，传给优惠券的总价 By cxy
 
         //todo  加入其他优惠和出促销的等过滤
 
-
+        if ($scope.coupon != undefined) {
+            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = $scope.coupon.MONEY;
+            price-=$scope.coupon.MONEY;
+        }
         $scope.order['SHOP_ORDER.PRICE_ORDER']=price;
         $scope.order['SHOP_ORDER.PRICE_OVER']=price;
     }
@@ -88,10 +100,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
             if(response.code==0){
             weUI.toast.ok('下单成功');
-
-                $scope.descCoupon();  //成功之后删除对应的优惠券
-
-            //成功之后删除购物车内容
+                //成功之后删除购物车内容
             $scope.skuIds.split(',').forEach(function (ele) {
                 $scope.cartInfo.remove(ele);
                 if($scope.cartSize[ele]!=undefined){
@@ -101,6 +110,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             setCookie('cartSize',JSON.stringify($scope.cartSize));
             setCookie('cartInfo',JSON.stringify($scope.cartInfo));
 
+            $scope.descCoupon($scope.coupon.ID);
+
             $state.go('pages/payment/check_out',{ORDER_ID:response.extraData.ORDER_ID});
                 }else{
                 weUI.toast.ok(response.msg);
@@ -108,8 +119,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         });
     }
 
-    $scope.descCoupon=function () {
-        orderFactory.deleteCoupon($scope.memberCouponId).get({}, function (response) {
+    $scope.descCoupon=function (id) {
+        console.log('删除');
+        console.log(id);
+        orderFactory.deleteCoupon(id).get({}, function (response) {
             if(response.code==0){
                 console.log('删除成功');
             }
@@ -120,7 +133,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
 
     $scope.goCoupon=function(){
-        $state.go('pages/order/addCoupon',{PRODUCTS:JSON.stringify($scope.skuList),MONEY:$scope.totalMoney});
+        $state.go('pages/order/addCoupon',{PRODUCTS:JSON.stringify($scope.skuList),MONEY:$scope.totalMoney,'SKU_IDS': $stateParams.SKU_IDS,'pickupPerson':$stateParams.pickupPerson});
     }
 
 
