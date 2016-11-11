@@ -1,7 +1,7 @@
 AndSellH5MainModule.service('userFactory', function ($resource, baseURL) {
 
     this.newUserReg = function (form) {
-        return $resource(baseURL + '/member/member/add',form, {
+        return $resource(baseURL + '/member/member/reg',form, {
             'update': {
                 method: 'PUT'
             }
@@ -29,6 +29,14 @@ AndSellH5MainModule.service('userFactory', function ($resource, baseURL) {
            'update':{
                method:'PUT'
            }
+        });
+    }
+
+    this.sendVerificationCode = function (form) {
+        return $resource(baseURL+'/sys/sms/reg',form,{
+            'update':{
+                method:'PUT'
+            }
         });
     }
 
