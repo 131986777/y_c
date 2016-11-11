@@ -117,6 +117,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
     }
 
     $scope.descCoupon=function () {
+        console.log('删除');
+        console.log($scope.coupon.ID);
         orderFactory.deleteCoupon($scope.coupon.ID).get({}, function (response) {
             if(response.code==0){
                 console.log('删除成功');
