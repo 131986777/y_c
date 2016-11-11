@@ -10,8 +10,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
             $scope.shopList = response.data;
             $scope.shopListLength = response.data.length;
             $scope.districtList = response.extraData.districtList;
-
-           var shopMap = new Map;
+            var shopMap = new Map();
             $scope.shopList.forEach(function (ele) {
                 shopMap.set(ele['SHOP.SHOP_ID'],ele);
             });
@@ -23,9 +22,9 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
     $scope.getRecentShopList = function () {
         var recentShopList=new Array;
         $scope.cookieShopIdList=new Array;
-        if(getCookie('recentShopList')!=undefined)
-        $scope.cookieShopIdList=getCookie('recentShopList').split(',');
-
+        if(getCookie('recentShopList')!=undefined) {
+            $scope.cookieShopIdList = getCookie('recentShopList').split(',');
+        }
         $scope.cookieShopIdList.forEach(function (ele) {
             if($scope.shopMap.get(ele)!=undefined){
                 recentShopList.push($scope.shopMap.get(ele));
@@ -46,7 +45,9 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
         }
         $scope.cookieShopIdList.push(shop['SHOP.SHOP_ID']);
         setCookie('recentShopList',$scope.cookieShopIdList.toString());
+
         $state.go('pages/home');
+
     }
 
     $scope.chooseDistrict = function (districtId, districtName) {
