@@ -63,10 +63,14 @@
         <div class="weui_cells weui_cells_access">
             <div class="weui_cell" ng-click="goCoupon()">
                 <div class="weui_cell_bd">
-                    使用优惠券
+                    <span ng-if="COUPON_INFO!=''" ng-bind="coupon.COUPON_NAME"></span>
+                    <span ng-if="COUPON_INFO==''">使用优惠券</span>
+
                 </div>
                 <div class="weui_cell_ft weui_cell_primary">
-                    未使用
+                    <span ng-if="COUPON_INFO!=''" >已选择</span>
+                    <span ng-if="COUPON_INFO==''">未使用</span>
+
                 </div>
             </div>
         </div>
@@ -117,7 +121,7 @@
                 <p class="all">
                     总计：<span class="money" ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
                 </p>
-                <p class="sale">( 已优惠 0 元 )</p>
+                <p class="sale" ng-if="COUPON_INFO!=''">( 已优惠 {{coupon.MONEY}} 元 )</p>
             </div>
             <a class="payment-check" ng-click="commitOrder()">
                 提交订单

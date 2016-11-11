@@ -18,7 +18,7 @@ $import('pages/personal/card');
 $import('pages/personal/coupon');
 $import('pages/shop');
 $import('pages/order/addAddress',{SKU_IDS: '1060'});
-$import('pages/order/addCoupon',{PRODUCTS:'{}',MONEY:'0'});
+$import('pages/order/addCoupon',{SKU_IDS: '1060',pickupPerson:'{}',PRODUCTS:'{}',MONEY:'0'});
 $import('pages/coupon/list');
 $import('pages/user/register');
 $import('pages/user/accountLogin',{LOGIN_ID:'pabula'});
