@@ -4,7 +4,7 @@ var AndSellUI = angular.module('AndSell.UI', ['nya.bootstrap.select', 'ngTagsInp
 var AndSellMainModule = angular.module('AndSell.Main', ['AndSell.Service', 'AndSell.Router', 'AndSell.UI']);
 
 var AndSellData = angular.module("AndSell.data", []);
-AndSellService.constant('baseURL', 'http://localhost:8080/AndSell/bubu');
+AndSellService.constant('baseURL', '/AndSell/bubu');
 
 AndSellService.factory("http", function ($http) {
     var _post = function (url, data) {
