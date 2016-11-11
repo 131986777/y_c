@@ -7,6 +7,7 @@ angular.module('AndSell.Main').controller('user_user_userList_Controller', funct
 
     $scope.bindData = function (response) {
         $scope.userList = response.data;
+        $scope.shopList = response.extraData.shopList;
         console.log(response);
     };
 
