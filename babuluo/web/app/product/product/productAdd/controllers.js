@@ -95,6 +95,12 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
             modalFactory.showShortAlert("请填写商品名称");
             return;
         }
+        console.log($scope.tags1);
+        console.log($scope.tags1.length);
+        if ($scope.tags1.length<1) {
+            modalFactory.showShortAlert("至少包含一种规格");
+            return;
+        }
         $scope.add['SHOP_PRODUCT.KEYWORD'] = getTabInputText($scope.keyword);
         $scope.add['SHOP_PRODUCT.CLASS_ID'] = $scope.add['SHOP_PRODUCT_CLASS.CLASS_ID'];
         $scope.add['SHOP_PRODUCT.UNIT_ID'] = $scope.add['SHOP_UNIT.UNIT_ID'];
@@ -294,8 +300,8 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
         object['SHOP_PRODUCT_SKU.SKU_CONTENT2'] = '';
         object['SHOP_PRODUCT_SKU.SKU_NAME3'] = '';
         object['SHOP_PRODUCT_SKU.SKU_CONTENT3'] = '';
-        object['SHOP_PRODUCT_SKU.PRICE'] = '';
-        object['SHOP_PRODUCT_SKU.REAL_PRICES'] = '';
+        object['SHOP_PRODUCT_SKU.PRICE'] = 0;
+        object['SHOP_PRODUCT_SKU.REAL_PRICES'] = 0;
         object.isDel = false;
 
         object.hashCode = function () {

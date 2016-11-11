@@ -15,6 +15,16 @@
                 </div>
                 <div class="col-md-5">
                     <label class="control-label">筛选：</label>
+                    <select ng-model="filter['USER.SHOP_ID']"
+                            ng-init="filter['USER.SHOP_ID'] = 'null'; "
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="null">所有门店</option>
+                        <option class="nya-bs-option"
+                                ng-repeat="value in shopList"
+                                ng-bind="value['SHOP.SHOP_NAME']"
+                                value="{{value['SHOP.SHOP_ID']}}">
+                        </option>
+                    </select>
                     <select ng-model="filter['USER.STATE']"
                             ng-init="filter['USER.STATE'] = 'null'"
                             class="nya-bs-select form-control">
@@ -47,6 +57,7 @@
                 <th>姓名</th>
                 <th>手机号</th>
                 <th>邮箱</th>
+                <th>所属门店</th>
                 <th class="text-center">注册时间</th>
                 <th class="text-center">状态</th>
                 <th class="text-center">操作</th>
@@ -60,6 +71,7 @@
                 <td ng-bind="user['USER.REAL_NAME']"></td>
                 <td ng-bind="user['USER.MOBILE']"></td>
                 <td ng-bind="user['USER.MAIL']"></td>
+                <td ng-bind="user['USER.SHOP_NAME']"></td>
                 <td ng-bind="user['USER.REG_DATETIME'] | FormatStrDate" class="text-center"></td>
                 <td ng-bind="user['USER.STATE'] | FormatState" class="text-center"></td>
                 <td class="text-center">

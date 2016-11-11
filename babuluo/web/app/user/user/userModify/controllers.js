@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('user_user_userModify_Controller', function ($scope, $state, $stateParams, userFactory, roleFactory, modalFactory) {
+angular.module('AndSell.Main').controller('user_user_userModify_Controller', function ($scope, $state, $stateParams, shopFactory, userFactory, roleFactory, modalFactory) {
 
     //设置页面Title
     modalFactory.setTitle('修改员工账号');
@@ -18,18 +18,27 @@ angular.module('AndSell.Main').controller('user_user_userModify_Controller', fun
             $scope.userModify = response.data[0];
             $scope.roleList = response.extraData.roleList;
             //解析
-            if($scope.isNotNull($scope.userModify['USER.ROLE_ID_LIST'])){
+            if ($scope.isNotNull($scope.userModify['USER.ROLE_ID_LIST'])) {
                 var result = $scope.userModify['USER.ROLE_ID_LIST'].split(",");
-                for(var i=0;i<result.length;i++){
+                for (var i = 0; i < result.length; i++) {
                     $scope.roleList.forEach(function (ele) {
-                        if (ele['USER_ROLE.ID']==result[i]){
+                        if (ele['USER_ROLE.ID'] == result[i]) {
                             ele['USER_ROLE.CHECKED'] = true;
                         }
                     });
                 }
             }
         });
+
+        $scope.getShopList();
     };
+
+    $scope.getShopList = function () {
+        shopFactory.getShopList().get({}, function (response) {
+            $scope.shopList = response.data;
+        });
+    };
+
     $scope.initLoad();
 
     //重置密码

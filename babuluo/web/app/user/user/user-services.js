@@ -29,6 +29,14 @@ AndSellMainModule.service('userFactory', function ($resource, baseURL) {
         });
     };
 
+    this.isLogin = function () {
+        return $resource(baseURL+'/login/isLogin',{},{
+            'update':{
+                method:'PUT'
+            }
+        });
+    }
+
     this.logOut = function () {
         return $resource(baseURL+'/login/logout',{},{
             'update':{

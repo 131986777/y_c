@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('user_user_userAdd_Controller', function ($scope, $state, userFactory, roleFactory, modalFactory) {
+angular.module('AndSell.Main').controller('user_user_userAdd_Controller', function ($scope, $state, shopFactory, userFactory, roleFactory, modalFactory) {
 
     //设置页面Title
     modalFactory.setTitle('新增员工账号');
@@ -10,6 +10,13 @@ angular.module('AndSell.Main').controller('user_user_userAdd_Controller', functi
         roleFactory.getRole().get({}, function (response) {
             console.log(response);
             $scope.roleList = response.data;
+        });
+        $scope.getShopList();
+    };
+
+    $scope.getShopList = function () {
+        shopFactory.getShopList().get({}, function (response) {
+            $scope.shopList = response.data;
         });
     };
     $scope.initLoad();
