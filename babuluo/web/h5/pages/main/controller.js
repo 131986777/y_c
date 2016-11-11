@@ -3,6 +3,7 @@ AndSellH5MainModule.controller('H5.MainController', function ($scope, $state, mo
     //逻辑
     $scope.$on('title', function (event, data) {
         $scope.title = data;
+        updateWxTitle($scope.title);
     });
 
     //nav-Bottom 初始化
