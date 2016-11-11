@@ -57,7 +57,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
                             }
 
-                        }
+                        }   //
                         if (ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE'] == 2) {   //限定类别
 
                             for (i = 0; i < $scope.orderList.length; i++) {   //遍历订单中的每一个商品

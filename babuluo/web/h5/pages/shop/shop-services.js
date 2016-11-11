@@ -23,5 +23,12 @@ AndSellH5MainModule.service('shopFactory', function ($resource, baseURL) {
             }
         });
     };
+    this.getBannerList = function () {
+        return $resource(baseURL + '/banner/banner/getAllData', {}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
 
 });
