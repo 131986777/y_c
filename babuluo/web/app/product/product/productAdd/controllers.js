@@ -127,15 +127,15 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
         form['SHOP_PRODUCT.P3'] = uploadImageArray[2];
         form['SHOP_PRODUCT.P4'] = uploadImageArray[3];
         form['SHOP_PRODUCT.P5'] = uploadImageArray[4];
-        //
-        //productFactory.addProduct(form).get({}, function (response) {
-        //    if (response.code == 0) {
-        //        modalFactory.showShortAlert("保存成功");
-        //        $state.go("product/product/productList");
-        //    } else {
-        //        modalFactory.showShortAlert(response.msg);
-        //    }
-        //});
+
+        productFactory.addProduct(form).get({}, function (response) {
+            if (response.code == 0) {
+                modalFactory.showShortAlert("保存成功");
+                $state.go("product/product/productList");
+            } else {
+                modalFactory.showShortAlert(response.msg);
+            }
+        });
     };
 
     $scope.changeSettingSku = function () {

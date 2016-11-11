@@ -160,7 +160,15 @@ function routerPath(base, path, param, css) {
     router.controller =  replaceAll( path+"/",'/','_') + "Controller";
     router.templateUrl = url + "/index.html";
     router.resolve = {
-        loadServiceAndController: function ($ocLazyLoad) {
+        loadServiceAndController: function ($ocLazyLoad,userFactory) {
+
+                userFactory.isLogin().get({'withCredentials': true}, function (response) {
+                    if (response.code != 0) {
+                        window.location.href='../login/index.html';
+                    }
+                });
+
+
             return $ocLazyLoad.load(loadItemList)
         }
     }
