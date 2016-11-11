@@ -16,6 +16,16 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $scope.prdList = new Array;
         $scope.getPrd();
         $scope.getCartInfoInCookie();
+
+        //下拉监听器
+        $(document.body).infinite().on("infinite", function() {
+            if($scope.loading) return;
+            $scope.loading = true;
+            if ($scope.hasNextPage) {
+                $scope.getMorePrd();
+            }
+        });
+
     }
 
     //获取商品列表
@@ -155,13 +165,8 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $scope.getPrd();
     };
 
-    //下拉监听器
-    $(document.body).infinite().on("infinite", function() {
-        if($scope.loading) return;
-        $scope.loading = true;
-        if ($scope.hasNextPage) {
-            $scope.getMorePrd();
-        }
-    });
+    $scope.$on('destroy',function(){
+        $(document.body).infinite().off("infinite");
+    })
 
 });
