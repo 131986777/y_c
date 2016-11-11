@@ -39,6 +39,18 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
             modalFactory.showAlert("未选择客户");
             return;
         }
+        if($scope.cardAdd['MEMBER_CARD.SOURCE_ID']=='null'){
+            modalFactory.showAlert("请选择发卡渠道");
+            return;
+        }
+        if($scope.cardAdd['MEMBER_CARD.TYPE_ID']=='null'){
+            modalFactory.showAlert("请选择卡类型");
+            return;
+        }
+        if($scope.cardAdd['MEMBER_CARD.BALANCE']<0){
+            modalFactory.showAlert("金额不能小于0");
+            return;
+        }
         $scope.cardAdd['MEMBER_CARD.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
         if ($scope.isFaceValue == false) {
             $scope.cardAdd['MEMBER_CARD.IS_FACE_VALUE'] = -1;
