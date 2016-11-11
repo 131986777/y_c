@@ -5,13 +5,13 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
     $scope.checkPwd = function (){
         var pwd= $scope.memberInfo['MEMBER.LOGIN_PWD'];
         var length = pwd.toString().length;
-        if(length < 11){
+        if(length < 6){
             weUI.toast.info('密码长度应大于6');
         }
     }
 
     $scope.checkPassword  = function (){
-        if($scope.memberInfo['LOGIN_PWD'] != $scope.memberInfo['password']){
+        if($scope.memberInfo['MEMBER.LOGIN_PWD'] != $scope.memberInfo['MEMBER.password']){
             weUI.toast.error('两次面不一致，请检查密码');
         }
     }
@@ -21,12 +21,24 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
         var length = phoneNum.toString().length;
         if(length != 11){
             weUI.toast.info('请输入正确的手机号码');
+            return;
+
         }
     }
     $scope.reg = function (){
+        $scope.ckeckPhone();
         $scope.checkPwd();
+        $scope.checkPassword();
         var form = $scope.memberInfo;
+
+
+        form = {};
+        form[''] = value;
+        form[''] = value;
+        form['ID'] = value;
+
         userFactory.newUserReg(form).get({}, function (response) {
+            console.log(response);
             if (response.code == 400) {
                 weUI.toast.error(response.msg);
             } else {
@@ -37,6 +49,7 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
     }
 
     $scope.sendSms = function (){
+
         var form = {};
         form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
         userFactory.sendVerificationCode(form).get({}, function (response) {
