@@ -214,7 +214,8 @@ function routerPath(base, path, param, css) {
                 'pages/user/accountLogin',
                 'pages/shop',
                 'pages/user/accountLogin',
-                'pages/user/register'
+                'pages/user/register',
+                'pages/security/resetPwd'
             ];
             if(filtertList.indexOf(path)<0){
                 userFactory.isLogin().get({'withCredentials': true}, function (response) {
