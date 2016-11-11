@@ -111,7 +111,7 @@
                 <div class="alert alert-grey clearfix">
                     <label class="col-md-6">
                         <input ng-model="product.setSku"
-                               ng-init="product.setSku=false;" ng-change="changeSettingSku()"
+                               ng-init="product.setSku=true;" ng-change="changeSettingSku()"
                                type="checkbox">
                         设置商品多规格
                     </label>
@@ -126,7 +126,7 @@
                                 <div class="col-md-2">
                                     <input type="text"
                                            class="form-control text-center"
-                                           ng-init="product.skuName1 = '规格1';"
+                                           ng-init="product.skuName1 = '商品规格';"
                                            ng-model="product.skuName1"
                                            focus-select
                                            placeholder="规格1"

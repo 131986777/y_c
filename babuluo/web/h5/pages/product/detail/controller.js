@@ -3,7 +3,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
     modalFactory.setTitle('商品详情');
     modalFactory.setBottom(false);
 
-    $scope.prdSkuMap = new Map;
+    $scope.prdSkuMap = new Map();
 
     $scope.initData = function () {
 
