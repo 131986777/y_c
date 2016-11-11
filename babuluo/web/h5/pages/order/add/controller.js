@@ -25,6 +25,15 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             $scope.cartSize = JSON.parse($scope.cartSize);
         }
 
+        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
+
+
+        $scope.COUPON_INFO=$stateParams.COUPON_INFO;
+        if($stateParams.COUPON_INFO!=''){
+            $scope.coupon=JSON.parse($stateParams.COUPON_INFO);
+            console.log($scope.coupon);
+        }
+
         $scope.skuIds=$stateParams.SKU_IDS;
         var params = {};
         params['SHOP_PRODUCT_SKU.SKU_IDS'] = $scope.skuIds;
@@ -36,16 +45,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             $scope.skuList.forEach(function (ele) {
                 ele['SHOP_PRODUCT_SKU.SIZE']=$scope.cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
             });
+
             $scope.updateCartPrice();
         });
 
-        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
-        $scope.COUPON_INFO=$stateParams.COUPON_INFO;
-        if($stateParams.COUPON_INFO!=''){
-            $scope.coupon=JSON.parse($stateParams.COUPON_INFO);
-            console.log($scope.coupon);
-        }
-        $scope.updateCartPrice();
+
     }
 
 
