@@ -23,4 +23,4 @@ $import('pages/coupon/list');
 $import('pages/user/register');
 $import('pages/user/accountLogin');
 $import('pages/account/balance');
-$import('pages/security/resetPwd',{LOGIN_ID:'pabula'});
+$import('pages/security/resetPwd');
