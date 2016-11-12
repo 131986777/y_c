@@ -7,14 +7,14 @@
     <div class="weui_cells weui_cells_form">
         <div class="weui_cell">
             <div class="weui_cell_bd">
-                <input class="weui_input" type="tel" placeholder="手机号" ng-model="memberInfo['MEMBER.LOGIN_ID']" ng-blur="ckeckPhone()">
+                <input class="weui_input" type="tel" placeholder="手机号" ng-init="memberInfo['MEMBER.LOGIN_ID'] =''" ng-model="memberInfo['MEMBER.LOGIN_ID']" ng-blur="ckeckPhone()">
             </div>
         </div>
 
         <div class="weui_cell">
             <div class="weui_cell_bd weui_cell_primary">
                 <input class="weui_input" type="tel" placeholder="验证码" ng-model="memberInfo['MEMBER.CHECKCODE']">
-                <a class="vcode-btn btn-gray" href="javascript:;" ng-click="sendSms()">发送验证码</a>
+                <a class="vcode-btn btn-gray" href="javascript:;" ng-click="sendSms(this)">免费获取验证码</a>
             </div>
         </div>
 
@@ -36,6 +36,9 @@
             <my-check item="agree"></my-check>
             同意注册协议
         </label>
+        <a class="btn-link pull-right" ui-sref="pages/user/accountLogin">
+            已有账号，直接登录
+        </a>
     </div>
     <div class="weui_btn_area">
         <button class="weui_btn my-btn-default" type="submit" ng-click="reg()">注册</button>
