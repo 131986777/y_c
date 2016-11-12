@@ -51,8 +51,9 @@ angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Contr
     }
 
     $scope.sendSms = function (){
-        var form = {};
-        form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
+        var form ={}
+        form['MEMBER.LOGIN_ID'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
+        console.log(form);
         securityFactory.sendVerificationCode(form).get({}, function (response) {
             if (response.code == 400) {
                 weUI.toast.error(response.msg);

@@ -22,16 +22,25 @@ angular.module('AndSell.H5.Main').controller('pages_account_balance_Controller',
             }
         })
         $scope.ckeckedList = array;
+        $scope.balanceList = $scope.ckeckedList;
     }
 
     $scope.chooseType = function (type){
-        var array = new Array();
-        $scope.ckeckedList.forEach(function (ele) {
-            if(ele['FINANCE_LIST.CHANGE_TYPE'] == type){
-                array.push(ele);
-            }
-        })
-        $scope.ckeckedList = array;
+        console.log(type);
+        if(type == 'null'){
+            $scope.ckeckedList = $scope.balanceList;
+        }
+        else{
+            var array = new Array();
+            $scope.ckeckedList = $scope.balanceList;
+            $scope.ckeckedList.forEach(function (ele) {
+                if(ele['FINANCE_LIST.CHANGE_TYPE'] == type){
+                    array.push(ele);
+                }
+            })
+            $scope.ckeckedList = array;
+        }
+        return $scope.ckeckedList;
     }
 });
 

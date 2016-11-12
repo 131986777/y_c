@@ -51,7 +51,6 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
             modalFactory.showShortAlert("请填写完整信息");
         }
         else {
-            var num = $scope.num;
             var form = $scope.bindData($scope.salesInfo);
             salesFactory.AddSales (form).get({}, function (response) {
                 if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
@@ -65,9 +64,6 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
         }
     });
 
-    $scope.delay = function (){
-        window.history.go(-1);
-    }
 
  //清空所有表单信息
     $scope.empty = function () {
@@ -93,8 +89,8 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
         }
     }
 
-
-        $scope.getNum = function (num){
+    //前台传参
+    $scope.getNum = function (num){
         $scope.num = num;
     }
 

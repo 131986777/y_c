@@ -3,17 +3,16 @@
 	<!-- 余额部分 -->
 	<div class="balance-wrap">
 		<p class="title">余额账户(元)</p>
-		<p class="count">{{ckeckedList[0]['FINANCE_LIST.BALANCE'] | currency : '￥'}}</p>
+		<p class="count">{{balanceList[0]['FINANCE_LIST.BALANCE'] | currency : '￥'}}</p>
 	</div>
 	<div class="main-entry weui_cells weui_cells_access">
 		<a class="weui_cell">
-			<div class="weui_cell_bd weui_cell_primary">
+			<div class="weui_cell_bd weui_cell_primary" ui-sref="pages/account/recharge">
 				充值
 			</div>
 			<div class="weui_cell_ft"></div>
 		</a>
 	</div>
-
 	<!-- 收支明细 -->
 	<div class="balance-detail">
 		<div class="dropdown">
@@ -22,7 +21,7 @@
 				<span class="caret"></span>
 			</a>
 			<ul class="dropdown-menu">
-				<li >收支明细</li>
+				<li ng-click = "chooseType('null')">收支明细</li>
 				<li ng-click="chooseType('decrease')">支出</li>
 				<li ng-click="chooseType('increase')">收入</li>
 			</ul>

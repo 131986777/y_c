@@ -18,9 +18,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_coupon_Controller',
     $scope.initData();
 
     $scope.detailData= function (data) {
-        // $scope.detail = item;
-       // $scope.detailArray=item.split("<br>");
-        console.log(data);
+
         var str=data.replace(/<br>/g," ");
         return str;
 

@@ -54,11 +54,11 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                     $scope.timer=$interval(function(){
                         if(currentTime>startTime&&currentTime<endTime){   //如果当前时间在活动时间内
                             currentTime+=1000;
-                            fomtime(endTime-startTime);
+                            fomtime(endTime-startTime,ele);
                         }else{
                             $interval.cancel($scope.timer);
                         }
-                    },1000);   //间隔2秒定时执行
+                    },1000);   //间隔1秒定时执行
 
                 }
                 if (ele['BANNER.POSITION_ID']==1014){    //  团购
@@ -83,12 +83,12 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     }
 
    //以毫秒为单位
-   var fomtime = function(date){
+   var fomtime = function(date,item){
         var d=new Date(new Date(date)-new Date());
-        $scope.day=d.getDate();
-        $scope.hour=d.getHours();
-        $scope.minute=d.getMinutes();
-        $scope.second=d.getSeconds();
+       item.day=d.getDate();
+       item.hour=d.getHours();
+       item.minute=d.getMinutes();
+       item.second=d.getSeconds();
 
     }
 

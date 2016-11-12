@@ -6,7 +6,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
     $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
     $scope.money=$stateParams.MONEY   //优惠券返回的价格
-    $scope.memberCouponId=$stateParams.COUPON_ID;      //  要删除的id
+   // $scope.memberCouponId=$stateParams.COUPON_ID;      //  要删除的id
 
     $scope.initData= function () {
 
@@ -100,10 +100,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
             if(response.code==0){
             weUI.toast.ok('下单成功');
-
-                $scope.descCoupon();  //成功之后删除对应的优惠券
-
-            //成功之后删除购物车内容
+                //成功之后删除购物车内容
             $scope.skuIds.split(',').forEach(function (ele) {
                 $scope.cartInfo.remove(ele);
                 if($scope.cartSize[ele]!=undefined){
@@ -112,7 +109,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             });
             setCookie('cartSize',JSON.stringify($scope.cartSize));
             setCookie('cartInfo',JSON.stringify($scope.cartInfo));
-            $scope.descCoupon();
+
+            $scope.descCoupon($scope.coupon.ID);
+
             $state.go('pages/payment/check_out',{ORDER_ID:response.extraData.ORDER_ID});
                 }else{
                 weUI.toast.ok(response.msg);
@@ -120,10 +119,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         });
     }
 
-    $scope.descCoupon=function () {
+    $scope.descCoupon=function (id) {
         console.log('删除');
-        console.log($scope.coupon.ID);
-        orderFactory.deleteCoupon($scope.coupon.ID).get({}, function (response) {
+        console.log(id);
+        orderFactory.deleteCoupon(id).get({}, function (response) {
             if(response.code==0){
                 console.log('删除成功');
             }
