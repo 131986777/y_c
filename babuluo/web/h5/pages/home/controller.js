@@ -85,12 +85,12 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
    //以毫秒为单位
    var fomtime = function(date,item){
-        var d=new Date(new Date(date)-new Date());
-      // console.log(d);
-       item.day=d.getDate();
-       item.hour=d.getHours();
-       item.minute=d.getMinutes();
-       item.second=d.getSeconds();
+
+       // item.day=parseInt(date/(24*60*60*1000));
+       // console.log(item.day);
+       item.hour=parseInt(date/(60*60*1000));
+       item.minute=parseInt((date-item.hour*60*60*1000)/(60*1000));
+       item.second=parseInt((date-item.hour*60*60*1000-item.minute*60*1000)/1000);
 
     }
 
