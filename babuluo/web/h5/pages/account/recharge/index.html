@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>充值</title>
-	<link rel="stylesheet"
-	href="../../public/libs/bootstrap/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
-	<link rel="stylesheet" href="../../public/css/style.css">
-</head>
-<body class="recharge">
+<div class="recharge">
 	<div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_hd">
@@ -17,7 +6,7 @@
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
                     <input class="weui_input" type="text"
-                           placeholder="请输入充值金额">
+                           placeholder="请输入充值金额" ng-model="balanceInfo['CHANGE_VALUE']">
                 </div>
             </div>
 
@@ -46,10 +35,6 @@
         </div>
 
         <div class="weui_btn_area">
-        <button class="weui_btn my-btn-default" type="submit">立即充值</button>
+        <button class="weui_btn my-btn-default" type="submit" ng-click="updateBalance()">立即充值</button>
     </div>
-
-	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-	<script src="../../public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
+</div>

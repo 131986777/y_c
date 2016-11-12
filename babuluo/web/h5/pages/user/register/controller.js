@@ -59,7 +59,7 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
     }
 
     $scope.sendSms = function (){
-        $scope.settime();
+        //$scope.settime();
         /*输入项验证*/
         if($scope.memberInfo['MEMBER.LOGIN_ID'] == ''){
             weUI.toast.error('请输入手机号');

@@ -211,7 +211,6 @@ function routerPath(base, path, param, css) {
                 'pages/home',
                 'pages/product/detail',
                 'pages/cart',
-                'pages/user/accountLogin',
                 'pages/shop',
                 'pages/user/accountLogin',
                 'pages/user/register',
