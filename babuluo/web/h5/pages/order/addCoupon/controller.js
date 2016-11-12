@@ -50,7 +50,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
                                     break;
                                 }
                                 if (i == $scope.orderList.length - 1) {
-                                    console.log('商品');
+                                   // console.log('商品');
                                     $scope.useableList.push(ele);
                                 }
 
@@ -66,7 +66,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
                                     break;
                                 }
                                 if (i == $scope.orderList.length - 1) {
-                                    console.log('类别');
+                                   // console.log('类别');
                                     $scope.useableList.push(ele);
                                 }
 
@@ -93,7 +93,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
                             }
                         }
                         if (ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE'] == -1) {   //不限定
-                            console.log('不限定');
+                           // console.log('不限定');
                             $scope.useableList.push(ele);
 
                         }
@@ -125,9 +125,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
             if (type == '1') {   //减价
                 $scope.money =(faceValue / 100).toFixed(2);
             } else if (type == '2') {  //打折
-                console.log(456);
-                console.log($scope.totalMoney);
-                console.log(faceValue);
+               // console.log(456);
+                //console.log($scope.totalMoney);
+               // console.log(faceValue);
                 $scope.money = ($scope.totalMoney * (1-(faceValue / 100).toFixed(1))).toFixed(2);
             }
             console.log('减价'+$scope.money);
