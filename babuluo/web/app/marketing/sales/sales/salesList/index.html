@@ -71,8 +71,8 @@
                     </div>
             </div><!-- promotion content -->
 
-                <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
-                    <div class="man-text">满<span>{{auto[0]}}</span>个</div>
+                <div class="promotion-footer" ng-repeat="auto in item['salesInfo']" ng-if="item['salesClass'] == 3||item['salesClass'] == 4">
+                    <div class="man-text">满<span>{{auto[0]}}</span>件</div>
                         <div class="man-content" >
                             <div class="product-item" ng-if="item['salesClass'] == 3">
                                 <img class="pull-left" ng-src="auto[4]">
@@ -88,13 +88,31 @@
                         </div>
                     <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
                 </div>
+                <div class="promotion-footer" ng-repeat="auto in item['salesInfo']" ng-if="item['salesClass'] == 1||item['salesClass'] == 2">
+                    <div class="man-content" >
+                        <div class="product-item" ng-if="item['salesClass'] == 1">
+                            <img class="pull-left" src="../components/images/index_21.png">
+                            <div class="coupon-detail" >
+                                <p>满<span>{{auto[0]}}</span>件</p>
+                                <p>减￥<span>{{auto[1]}}</span></p>
+                            </div>
+                        </div>
+                        <div class="product-item" ng-if="item['salesClass'] == 2">
+                            <img class="pull-left" src="../components/images/index_23.png">
+                            <div class="coupon-detail" >
+                                <p>满<span>{{auto[0]}}</span>件</p>
+                                <p>打<span>{{auto[1]}}</span>折</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div><!-- promotion footer -->
         </div>
     <!-- END 商品促销 -->
 
     <!--BENGIN 商品类促销 -->
         <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==2">
-        <div class="promotion-wrap">
+            <div class="promotion-wrap">
             <div class="promotion-head">
                 <div class="head-title">
                     <div class="main-title">{{item['SALES_PLAN.INTRO']}}</div>
@@ -132,8 +150,8 @@
                 </div>
 
             </div>
-        </div> <!-- promotion-content -->
-        <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
+         <!-- promotion-content -->
+            <div class="promotion-footer" ng-repeat="auto in item['salesInfo']" ng-if="item['salesClass'] == 3||item['salesClass'] == 4">
             <div class="man-text">满<span>{{auto[0]}}</span>个</div>
             <div class="man-content">
                 <div class="product-item" ng-if="item['salesClass'] == 3">
@@ -149,8 +167,28 @@
                 </div>
             </div>
             <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
-        </div><!-- promotion footer -->
+        </div>
+            <div class="promotion-footer" ng-repeat="auto in item['salesInfo']" ng-if="item['salesClass'] == 1||item['salesClass'] == 2">
+                <div class="man-content" >
+                    <div class="product-item" ng-if="item['salesClass'] == 1">
+                        <img class="pull-left" src="../components/images/index_21.png">
+                        <div class="coupon-detail" >
+                            <p>满<span>{{auto[0]}}</span>件</p>
+                            <p>减￥<span>{{auto[1]}}</span></p>
+                        </div>
+                    </div>
+                    <div class="product-item" ng-if="item['salesClass'] == 2">
+                        <img class="pull-left" src="../components/images/index_23.png">
+                        <div class="coupon-detail" >
+                            <p>满<span>{{auto[0]}}</span>件</p>
+                            <p>打<span>{{auto[1]}}</span>折</p>
+                        </div>
+                    </div>
+                </div>
+            <!-- promotion footer -->
     </div>
+        </div>
+        </div>
     <!-- END 商品类促销 -->
 
     <!--BENGIN 满减折扣 -->
@@ -217,13 +255,13 @@
                     <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
                 </div><!-- promotion footer --><!-- promotion footer -->
         </div>
-    </div>
+        </div>
     <!-- END 满减折扣 -->
 
     <!--BENGIN 添加标签促销 -->
         <div class="promotion-contain" ng-if="item['SALES_PLAN.TARGET_OBJ_TYPE']==3">
-        <div class="promotion-wrap">
-            <div class="promotion-head">
+            <div class="promotion-wrap">
+                <div class="promotion-head">
                 <div class="head-title">
                     <div class="main-title">{{item['SALES_PLAN.INTRO']}}</div>
                     <div class="time-range">{{item['SALES_PLAN.BEGIN_DATETIME']|FormatAllDate}} 至 {{item['SALES_PLAN.END_DATETIME']}}</div>
@@ -240,8 +278,7 @@
                     <img src="../components/images/index_01.png">
                 </div><!-- 分类标记 -->
             </div> <!-- END head -->
-
-            <div class="promotion-content">
+                <div class="promotion-content">
                 <button class="addItem btn"  data-toggle="modal" id="#tagSwitchModal"
                         show-modal ng-click="getCurrentTag(item)" ng-if="((item['SALES_PLAN.TARGET_OBJ_ID']).split(',')).length > 0">修改标签</button>
                 <button class="addItem btn"  data-toggle="modal" id="#tagSwitchModal"
@@ -257,9 +294,7 @@
 
                 </div>
             </div><!-- promotion content -->
-
-            <div class="promotion-footer">
-                <div class="promotion-footer" ng-repeat="auto in item['salesInfo']">
+                <div class="promotion-footer" ng-repeat="auto in item['salesInfo']" ng-if="item['salesClass'] == 3||item['salesClass'] == 4">
                     <div class="man-text">满<span>{{auto[0]}}</span>个</div>
                         <div class="man-content"ng-if="item['salesClass'] == 3">
                         <div class="product-item">
@@ -278,10 +313,27 @@
                     </div>
                     <div class="zeng-text">赠 x<span>{{auto[2]}}</span></div>
                 </div><!-- promotion footer -->
+                <div class="promotion-footer" ng-repeat="auto in item['salesInfo']" ng-if="item['salesClass'] == 1||item['salesClass'] == 2">
+                    <div class="man-content" >
+                        <div class="product-item" ng-if="item['salesClass'] == 1">
+                            <img class="pull-left" src="../components/images/index_21.png">
+                            <div class="coupon-detail" >
+                                <p>满<span>{{auto[0]}}</span>件</p>
+                                <p>减￥<span>{{auto[1]}}</span></p>
+                            </div>
+                        </div>
+                        <div class="product-item" ng-if="item['salesClass'] == 2">
+                            <img class="pull-left" src="../components/images/index_23.png">
+                            <div class="coupon-detail" >
+                                <p>满<span>{{auto[0]}}</span>件</p>
+                                <p>打<span>{{auto[1]}}</span>折</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- END 添加标签促销 -->
-    </div>
     </div>
 
     <div page-bar
@@ -455,7 +507,7 @@
                             <select ng-model="add['SALES_PLAN.SALE_ID']"
                                     ng-init="add['SALES_PLAN.SALE_ID']=''"
                                     class="nya-bs-select form-control"
-                                    ng-options="item['SALES.ID'] as item['SALES.NAME'] for item in salesList" ng-change="show()">
+                                    ng-options="item['SALES.ID'] as item['SALES.INTRO'] for item in salesList" ng-change="show()">
                                 <option class="nya-bs-option" value="">选择促销规则</option>
                             </select>
                         </div>

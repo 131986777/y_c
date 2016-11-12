@@ -21,22 +21,16 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
         var length = phoneNum.toString().length;
         if(length != 11){
             weUI.toast.info('请输入正确的手机号码');
-            return;
-
+            return false;
+        }
+        else{
+            return true;
         }
     }
     $scope.reg = function (){
-        $scope.ckeckPhone();
         $scope.checkPwd();
         $scope.checkPassword();
         var form = $scope.memberInfo;
-
-
-        form = {};
-        form[''] = value;
-        form[''] = value;
-        form['ID'] = value;
-
         userFactory.newUserReg(form).get({}, function (response) {
             console.log(response);
             if (response.code == 400) {
@@ -48,17 +42,45 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
         });
     }
 
-    $scope.sendSms = function (){
+    $scope.settime = function(item) {
+        var countdown=60;
+        if (countdown == 0) {
+            item.removeAttribute("disabled");
+            item.value="免费获取验证码";
+            countdown = 60;
+        } else {
+            item.setAttribute("disabled", true);
+            item.value="重新发送(" + countdown + ")";
+            countdown--;
+        }
+        setTimeout(function() {
+            settime(item)
+        },1000)
+    }
 
-        var form = {};
-        form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
-        userFactory.sendVerificationCode(form).get({}, function (response) {
-            if (response.code == 400) {
-                weUI.toast.error(response.msg);
-            } else {
-                weUI.toast.ok('请输入验证码');
+    $scope.sendSms = function (){
+        $scope.settime();
+        /*输入项验证*/
+        if($scope.memberInfo['MEMBER.LOGIN_ID'] == ''){
+            weUI.toast.error('请输入手机号');
+        }
+        else{
+            var flag= $scope.ckeckPhone();
+            if(flag == false){
+                weUI.toast.error('请输入正确手机号');
             }
-        });
+            else{
+                var form = {};
+                form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
+                userFactory.sendVerificationCode(form).get({}, function (response) {
+                    if (response.code == 400) {
+                        weUI.toast.error(response.msg);
+                    } else {
+                        weUI.toast.ok('请输入验证码');
+                    }
+                });
+            }
+        }
     }
 });
 

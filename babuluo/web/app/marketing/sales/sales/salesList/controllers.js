@@ -321,7 +321,7 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
 
     $scope.show = function () {
         var id = $scope.add['SALES_PLAN.SALE_ID'];
-        if($scope.salesTypeMap[id] == 3){
+        if($scope.salesTarget[id] == 2){
             $scope.showCont = true;
         }else {
             $scope.showCont = false;
