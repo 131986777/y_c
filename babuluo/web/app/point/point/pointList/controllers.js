@@ -62,7 +62,7 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
         else{
             $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.CHANGE_TYPE']= 'decrease';
         }
-        pointFactory.addFinanceList ($scope.ModifyBalanceInfo).get({}, function (response) {
+        pointFactory.addPointList ($scope.ModifyBalanceInfo).get({}, function (response) {
             if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
                 modalFactory.showShortAlert(response.msg);
             } else if (response.extraData.state == 'true') {

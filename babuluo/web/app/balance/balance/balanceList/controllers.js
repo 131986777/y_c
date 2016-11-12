@@ -14,6 +14,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
     //根据用户ID查询用户个人信息
     $scope.queryById = function (memberId){
         $scope.memberDetail = $scope.userDetailMap[memberId];
+        console.log($scope.memberDetail);
     }
 
     //动态计算账户余额

@@ -6,8 +6,8 @@ angular.module('AndSell.H5.Main').controller('pages_account_balance_Controller',
             console.log(response);
             $scope.balanceInfo = response.data;
             $scope.userInfo = response.extraData.userMap;
-            uid = getCookie('ANDSELLID')
-            loginId = $scope.userInfo[uid];
+            uid = getCookie('ANDSELLID');
+            loginId = $scope.userInfo[$scope.uid];
             $scope.bindData(loginId);
         })
     }
