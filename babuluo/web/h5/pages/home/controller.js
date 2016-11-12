@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_home_Controller', function ($interval,$scope, $state, weUI, modalFactory, shopFactory) {
+angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (productFactory,$interval,$scope, $state, weUI, modalFactory, shopFactory) {
 
     modalFactory.setTitle('主页');
     modalFactory.setBottom(true);
@@ -27,13 +27,45 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                 }
             });
         }
+
+        var params={}
+        params['SHOP_PRODUCT.TAG_ID']='1035,1036,1037';
+        productFactory.getProductByTag(params).get({}, function (response) {
+            if(response.code==0){
+                $scope.tagProductList=new Map();
+                response.data.forEach(function (ele) {
+                    if(ele['SHOP_PRODUCT.TAG_ID'].indexOf('1035')>0){
+                        if($scope.tagProductList.get('1035')!=undefined){
+                            $scope.tagProductList.put('1035',new Array[ele]);
+                        }
+                        var ne=$scope.tagProductList.get('1035').push(ele);
+                        $scope.tagProductList.put('1035',ne);
+                    }
+                    if(ele['SHOP_PRODUCT.TAG_ID'].indexOf('1036')>0){
+                        if($scope.tagProductList.get('1036')!=undefined){
+                            $scope.tagProductList.put('1036',new Array[ele]);
+                        }
+                        var ne=$scope.tagProductList.get('1036').push(ele);
+                        $scope.tagProductList.put('1036',ne);
+                    }
+                    if(ele['SHOP_PRODUCT.TAG_ID'].indexOf('1037')>0){
+                        if($scope.tagProductList.get('1037')!=undefined){
+                            $scope.tagProductList.put('1037',new Array[ele]);
+                        }
+                        var ne=$scope.tagProductList.get('1037').push(ele);
+                        $scope.tagProductList.put('1037',ne);
+                    }
+                });
+            }
+        });
+
         // 设置轮播图图片间隔
-              $scope.myInterval = 4000;
-               // 轮播图数据初始化
-              $scope.slides = new Array;
-              // 添加轮播图源
-              $scope.slides.push({ image: 'http://img1.gtimg.com/9/910/91061/9106175_980x1200_960.jpg'});
-              $scope.slides.push({ image: 'http://files.15w.com/image/2015/0621/14348708842995.png'});
+        $scope.myInterval = 4000;
+        // 轮播图数据初始化
+        $scope.slides = new Array;
+        // 添加轮播图源
+        $scope.slides.push({ image: 'http://img1.gtimg.com/9/910/91061/9106175_980x1200_960.jpg'});
+        $scope.slides.push({ image: 'http://files.15w.com/image/2015/0621/14348708842995.png'});
 
 
         shopFactory.getBannerList().get({}, function (response) {    //横幅列表
@@ -82,13 +114,13 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
     }
 
-   //以毫秒为单位
-   var fomtime = function(date,item){
+    //以毫秒为单位
+    var fomtime = function(date,item){
         var d=new Date(new Date(date)-new Date());
-       item.day=d.getDate();
-       item.hour=d.getHours();
-       item.minute=d.getMinutes();
-       item.second=d.getSeconds();
+        item.day=d.getDate();
+        item.hour=d.getHours();
+        item.minute=d.getMinutes();
+        item.second=d.getSeconds();
 
     }
 
