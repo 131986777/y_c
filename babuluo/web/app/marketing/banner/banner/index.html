@@ -132,10 +132,17 @@
                         </label>
 
                         <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="add['BANNER.PICTURE']"
-                                   ng-init="add['BANNER.PICTURE']=''"
-                                   placeholder="请输入图片路径"></div>
+                            <label>
+
+                                <input class="hidden" type="file"
+                                       id="image" name='image'
+                                       onchange="angular.element(this).scope().uploadImage(this)"
+                                       >
+                                <img ng-src="{{FILE_SERVER_DOMAIN+uploadImageFiles}}?x-oss-process=image/resize,m_fill,h_100,w_300"
+                                     class="img-responsive"  style="height:100%;width: 400px" alt="添加横幅图片">
+                            </label>
+
+                        </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
@@ -245,8 +252,19 @@
                         </label>
 
                         <div class="col-md-8">
-                            <input type="text" class="form-control"
-                                   ng-model="mod['BANNER.PICTURE']">
+                            <!--<input type="text" class="form-control"
+                                   ng-model="mod['BANNER.PICTURE']">-->
+                            <label>
+
+                                <input class="hidden" type="file"
+                                       id="image2" name='image'
+                                       onchange="angular.element(this).scope().uploadImage(this)"
+                                >
+                                <img ng-src="{{FILE_SERVER_DOMAIN+uploadImageFiles}}?x-oss-process=image/resize,m_fill,h_100,w_300"
+                                     class="img-responsive"  style="height:100%;width: 400px" alt="修改横幅图片">
+                            </label>
+
+
                         </div>
                     </div>
                     <div class="form-group row">

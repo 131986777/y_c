@@ -1,6 +1,7 @@
 angular.module('AndSell.H5.Main').controller('pages_home_Controller', function ($interval,$scope, $state, weUI, modalFactory, shopFactory) {
 
     modalFactory.setTitle('主页');
+    $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
     modalFactory.setBottom(true);
     $scope.homeList=new Array();
     $scope.limitList=new Array();
@@ -54,7 +55,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                     $scope.timer=$interval(function(){
                         if(currentTime>startTime&&currentTime<endTime){   //如果当前时间在活动时间内
                             currentTime+=1000;
-                            fomtime(endTime-startTime,ele);
+                            fomtime(endTime-currentTime,ele);
                         }else{
                             $interval.cancel($scope.timer);
                         }
@@ -85,6 +86,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
    //以毫秒为单位
    var fomtime = function(date,item){
         var d=new Date(new Date(date)-new Date());
+      // console.log(d);
        item.day=d.getDate();
        item.hour=d.getHours();
        item.minute=d.getMinutes();

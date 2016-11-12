@@ -3,7 +3,7 @@
   <div class="search-wrap weui_cells">
 
       <a ng-repeat="item in homeList" ng-href="{{item['BANNER.URL']}}">
-          <img ng-src="{{item['BANNER.PICTURE']}}" style="height: 240px;width: 100%;">
+          <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']}}" style="height: 240px;width: 100%;">
       </a>
 
     <div class="search-content">
@@ -39,7 +39,7 @@
 
   <!-- 限时抢购 -->
   <div class="limit" ng-repeat="item in limitList">
-    <img ng-src="{{item['BANNER.PICTURE']}}" style="height: 162px;width: 100%;">
+    <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']}}" style="height: 162px;width: 100%;">
     <div class="limit-desc">
       <div class="desc-text">
         <p class="title">阳澄湖大闸蟹蟹券</p>
@@ -58,7 +58,7 @@
 
   <!-- 团购 -->
   <div class="group" ng-repeat="item in groupList">
-    <img ng-src="{{item['BANNER.PICTURE']}}" style="height: 162px;width: 100%;">
+    <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']}}" style="height: 162px;width: 100%;">
     <div class="group-desc">
       <div class="desc-text">
         <p class="title">阳澄湖大闸蟹蟹券</p>
@@ -73,7 +73,7 @@
   <div class="product-wrap">
     <div class="headTitle">活动专区</div>
     <div class="product-content" ng-repeat="item in activityList">
-      <a ng-href="{{item['BANNER.URL']}}"><img ng-src="{{item['BANNER.PICTURE']}}" style="height: auto;width: 100%;"></a>
+      <a ng-href="{{item['BANNER.URL']}}"><img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']}}" style="height: auto;width: 100%;"></a>
     </div>
 
     <!-- BEGIN 今日推荐 -->
@@ -90,10 +90,10 @@
       <div class="special-content">
         <ul class="list-unstyled">
           <li class="first">
-            <a ng-repeat="item in recommendList" ng-href="{{item['BANNER.URL']}}"><img ng-src="{{item['BANNER.PICTURE']}}" class="weui_cells"></a>
+            <a ng-repeat="item in recommendList" ng-href="{{item['BANNER.URL']}}"><img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']}}" class="weui_cells"></a>
             <div class="thumbnail-list list-unstyled flexbox">
               <div class="cell" ng-repeat="item in recommThreeList">
-                <a ng-href="{{item['BANNER.URL']}}"><img class="thumbnail" ng-src="{{item['BANNER.PICTURE']}}"></a>
+                <a ng-href="{{item['BANNER.URL']}}"><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']}}"></a>
                 <div class="desc">
                   <p><a href="#">活开海胆120(赠芥末酱)</a></p>
                   <span class="price">￥159.00</span>
@@ -116,7 +116,7 @@
             </div>
           </li>
           <li>
-            <a ng-repeat="item in recommNineList" ng-href="{{item['BANNER.URL']}}"><img ng-src="{{item['BANNER.PICTURE']}}"></a>
+            <a ng-repeat="item in recommNineList" ng-href="{{item['BANNER.URL']}}"><img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']}}"></a>
           </li>
          <!-- <li>
             <a href="#"><img src="../../public/img/pic-6.png"></a>
