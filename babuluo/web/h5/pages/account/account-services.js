@@ -7,8 +7,16 @@ AndSellH5MainModule.service('balanceFactory', function ($resource, baseURL) {
         });
     }
 
+    this.queryAccountByUid = function (form){
+        return $resource(baseURL + '/member/account/querySimpleBalanceInfo',form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+
     this.updateFinanceList = function (form){
-        return $resource(baseURL + '/member/balance/modifyById',form, {
+        return $resource(baseURL + '/member/balance/add',form, {
             'update': {
                 method: 'PUT'
             }
