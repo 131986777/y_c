@@ -1,9 +1,9 @@
 <!--############通用变量区############-->
 
 var PRODUCT_DEFAULT_IMG = "/uploads/images/product.png";
-var FILE_SERVER_DOMAIN = "http://babuluo-file.oss-cn-hangzhou.aliyuncs.com//";
+var FILE_SERVER_DOMAIN = "http://bbl-upload.oss-cn-shanghai.aliyuncs.com/";
 var basePath='/AndSell/h5/';
-var baseURL='http://localhost:8081/AndSell/bubu';
+var baseURL='/AndSell/bubu';
 
 <!--############通用方法区############-->
 
