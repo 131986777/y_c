@@ -1,10 +1,12 @@
-package com;
+package com.bolanggu.bbl.mendian;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
+
+import com.bolanggu.bbl.ENV;
 import sun.net.www.protocol.http.HttpURLConnection;
 
 /**
@@ -12,8 +14,8 @@ import sun.net.www.protocol.http.HttpURLConnection;
  */
 public class httpPostJson {
 
-    public static String ERP_DOMAIN="http://58.240.110.186:98/BBL/";
-    public static String ERP_SIGN="F4EBA1DE727A41A91B5D10754BFBF657";
+    public static String ERP_DOMAIN= ENV.API_MENDIAN;
+    public static String ERP_SIGN= ENV.API_MENDIAN_CERT;
 
     public static String post(String webserviceUrl,String data){
         try {
