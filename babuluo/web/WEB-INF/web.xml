@@ -55,7 +55,7 @@
 
     <servlet>
         <servlet-name>aliyun</servlet-name>
-        <servlet-class>com.pabula.ali.connectALiYun</servlet-class>
+        <servlet-class>com.bolanggu.bbl.aliyun.connectALiYun</servlet-class>
     </servlet>
 
     <servlet-mapping>

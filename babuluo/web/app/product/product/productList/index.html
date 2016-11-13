@@ -152,7 +152,7 @@
                     <td class="text-left">
                         <a ui-sref="product/product/productModify({productId:product['SHOP_PRODUCT.PRD_ID']})">
                             <img class="img-thumbnail"
-                                 ng-src="{{FILE_SERVER_DOMAIN+product['SHOP_PRODUCT.CMP']}}"
+                                 ng-src="{{FILE_SERVER_DOMAIN+product['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_100,w_100"
                                  style="height: 60px;width: 60px;float: left">
                         </a>
                         <div style="padding-left: 70px">
@@ -268,7 +268,7 @@
                     <div class="form-group row">
                         <div class="col-md-1" style="margin-left: 20px;margin-right: 50px">
                             <img style="width: 100px; height: 100px"
-                                 ng-src="{{FILE_SERVER_DOMAIN+modifyProduct['SHOP_PRODUCT.CMP']}}">
+                                 ng-src="{{FILE_SERVER_DOMAIN+modifyProduct['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_100,w_100">
                         </div>
                         <div class="col-md-9">
                             <h3 ng-bind="modifyProduct['SHOP_PRODUCT.PRD_NAME']"></h3>

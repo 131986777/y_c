@@ -189,7 +189,7 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
         var tempArray = file.name.split('.');
         fileSuffix = tempArray[tempArray.length - 1];     //文件后缀名
         fileName = date.getTime()+ (Math.round(Math.random() * 1000)).toString() + '.' + fileSuffix;    //文件名
-        fd.append('OSSAccessKeyId', 'LTAImVQlWKQXIQcD');
+        fd.append('OSSAccessKeyId', 'LTAIEHpVQat6f83C');
         fd.append('policy', $scope.policy);
         fd.append('Signature', $scope.signature);
         if (filetype == 'image') {
@@ -197,7 +197,7 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
         }
         fd.append('success_action_status', '201');
         fd.append('file', file);              //'file'必须为表单的最后一个字段
-        var url2 = 'http://babuluo-file.oss-cn-hangzhou.aliyuncs.com';    //阿里云存储的地址
+        var url2 = 'http://bbl-upload.oss-cn-shanghai.aliyuncs.com';    //阿里云存储的地址
 
         return $http.post(url2, fd, {
             transformRequest: angular.identity, headers: {'Content-Type': undefined}
