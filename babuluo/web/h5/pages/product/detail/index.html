@@ -94,7 +94,7 @@
     </div>
 
 
-    <div class="weui_cell">
+    <div class="weui_cell"   ng-if="!noStore">
       <div class="weui_cell_hd">
         数量：
       </div>
@@ -363,7 +363,7 @@
     </div>
   </div>
 
-  <div class="product-action-wrap action-bar-wrap">
+  <div class="product-action-wrap action-bar-wrap" ng-if="!noStore">
     <div class="action-bar border-top">
       <div class="icon-wrap">
         <i class="icon icon-cart-small" ui-sref="pages/cart"></i>

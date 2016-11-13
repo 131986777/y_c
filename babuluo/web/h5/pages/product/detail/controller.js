@@ -23,19 +23,30 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
 
         var params={};
         params['SHOP_PRODUCT.PRD_ID']=$stateParams.PRD_ID;
+        if(getCookie('currentShopInfo')!=undefined)
         params['STOCK_REALTIME.STORE_ID']=getCookie('currentShopInfo')['SHOP.REPOS_ID'];
         productFactory.getProductAllInfoById(params).get({}, function (response) {
             $scope.product = response.data[0];
+            if($scope.product!=undefined){
             $scope.setPrdPicBanner($scope.product);
             if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                 $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
                 $scope.skuData = $scope.getPrdSkuData($scope.skuList);
+                console.log($scope.skuData);
                 if($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length>0){
                     $scope.checkContent(1,$scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
                 }
                 $scope.getPriceArea();
                 $scope.filterSkuList();
                 $scope.skuSelectable();
+                }
+
+                $scope.noStore=false;
+                if($scope.product['SHOP_PRODUCT.HAS_STOCK']==undefined){
+                    $scope.noStore=true;
+                }
+            }else{
+
             }
         });
 
