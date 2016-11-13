@@ -81,4 +81,12 @@ AndSellMainModule.service('orderFactory', function ($resource, baseURL) {
             }
         });
     }
+
+    this.scanOrder= function (id) {
+        return $resource(baseURL + '/shop/order/scanOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
 });

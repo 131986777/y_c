@@ -127,25 +127,25 @@
       <div class="orders">
         <div ng-if="orderType=='3'">
           <div class="orderItem " ng-repeat=" order in orderList"
-               ng-class="{true:'unfinished'}[!(order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1)]">
+               ng-class="{true:'unfinished'}[!((order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1)||(order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1)||(order['SHOP_ORDER.STATE_ORDER']==-1))]">
             <div class="imformation orderUnpayed">
-              <div class="unpayed"
+              <div class="payed"
                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
                 等待付款
               </div>
-              <div class="payed"
+              <div class="unpayed"
                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">
                 等待分拣
               </div>
-              <div class="payed"
+              <div class="unpayed"
                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">
                 等待提货
               </div>
               <div class="payed"
                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">
-                已完成
+                已提货
               </div>
-              <div class="unpayed" ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消</div>
+              <div class="payed" ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消</div>
               <div class="row">
                 <div class="details col-md-8">
                   <span class="time" ng-bind="order['SHOP_ORDER.DATETIME_ADD']"> | </span><span
@@ -192,17 +192,17 @@
 
         <div ng-if="orderType=='1'">
           <div class="orderItem " ng-repeat=" order in orderList"
-               ng-class="{true:'unfinished'}[!(order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1)]">
+               ng-class="{true:'unfinished'}[((order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1)||(order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==-1))]">
             <div class="imformation orderUnpayed">
-              <div class="unpayed"
+              <div class="payed"
                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
                 等待付款
               </div>
-              <div class="payed"
+              <div class="unpayed"
                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">
                 等待出库
               </div>
-              <div class="payed"
+              <div class="unpayed"
                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==-1">
                 等待发货
               </div>
@@ -214,7 +214,7 @@
                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1">
                 已完成
               </div>
-              <div class="unpayed" ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消</div>
+              <div class="payed" ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消</div>
               <div class="row">
                 <div class="details col-md-8">
                   <span class="time" ng-bind="order['SHOP_ORDER.DATETIME_ADD']"> | </span><span
