@@ -14,10 +14,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
         var member = {};
         member['MEMBER_COUPON.USER_ID'] = 1000;
-        personalFactory.getCouponListByUser(member).get({}, function (response) {
+        personalFactory.getCouponListByUser(member, function (response) {
             $scope.memberCouponList = response.data;       //客户的所有优惠券
-            console.log('客户的所有优惠券');
-            console.log($scope.memberCouponList);
             $scope.judgeUsableCoupon();
         });
     }

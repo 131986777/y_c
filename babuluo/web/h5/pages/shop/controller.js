@@ -6,7 +6,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
     $scope.districtName = "全部区域";
 
     $scope.initLoad = function () {
-        shopFactory.getShopList().get({'withCredentials': true}, function (response) {
+        shopFactory.getShopList({}, function (response) {
             $scope.shopList = response.data;
             $scope.shopListLength = response.data.length;
             $scope.districtList = response.extraData.districtList;
@@ -54,7 +54,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
         $scope.districtName = districtName;
         var form = {};
         form['SHOP.DISTRICT_ID'] = districtId;
-        shopFactory.getShopListByStrict(form).get({}, function (response) {
+        shopFactory.getShopListByStrict(form, function (response) {
             $scope.shopList = response.data;
             $scope.shopListLength = response.data.length;
         });

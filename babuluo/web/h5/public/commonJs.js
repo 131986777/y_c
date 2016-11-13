@@ -243,6 +243,32 @@ function $import(path,param,css){
         });
 }
 
+function $post($resource,url , init) {
+    return function (form, funcSuccess, funcFail) {
+        if (form == undefined) {
+            form = {};
+        }
+        if(init!=undefined){
+            init(form);
+        }
+        return $resource(baseURL + url, form, {
+            'update': {
+                method: 'PUT'
+            }
+        }).get({'withCredentials': true}, function (response) {
+            if (response.code == 0) {
+                if (funcSuccess != undefined) {
+                    funcSuccess(response);
+                }
+            } else {
+                if (funcFail != undefined) {
+                    funcFail(response);
+                }
+            }
+        });
+    }
+}
+
 function ToJson(str){
     var json = (new Function("return " + str))();
     return json;

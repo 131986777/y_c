@@ -1,46 +1,15 @@
-AndSellH5MainModule.service('productFactory', function ($resource, baseURL) {
+AndSellH5MainModule.service('productFactory', function ($resource) {
 
-    this.getProduct = function (filter) {
-        if(filter['SHOP_PRODUCT.ODRDER']==undefined){
-            filter['SHOP_PRODUCT.ODRDER']=='ADD_DATETIME DESC';
+    this.getProduct = $post($resource,'/shop/product/queryAllForAgent' ,function (filter) {
+        if (filter['SHOP_PRODUCT.ODRDER'] == undefined) {
+            filter['SHOP_PRODUCT.ODRDER'] == 'ADD_DATETIME DESC';
         }
-        return $resource(baseURL + '/shop/product/queryAllForAgent', filter, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    });
 
-    this.getProductByTag= function (form) {
-        return $resource(baseURL + '/shop/product/getByTagIds', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
+    this.getProductByTag = $post($resource,'/shop/product/getByTagIds');
 
-    this.getProductAllInfoById = function (form) {
-        return $resource(baseURL + '/shop/product/getByIdWithAllInfoForAgent', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getProductAllInfoById = $post($resource,'/shop/product/getByIdWithAllInfoForAgent');
 
-    this.getProductSkuBySkuIds = function (form) {
-        return $resource(baseURL + '/shop/product/getBySkuIdWithAllInfoForAgent', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-
-    this.queryByStoreAndSkus = function (form) {
-        return $resource(baseURL + '/stock/realtime/queryByStoreAndSku', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getProductSkuBySkuIds = $post($resource,'/shop/product/getBySkuIdWithAllInfoForAgent');
 
 });

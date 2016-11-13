@@ -25,7 +25,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             var params = {};
             params['SHOP_PRODUCT_SKU.SKU_IDS'] = cartInfo.toString();
             params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
-            productFactory.getProductSkuBySkuIds(params).get({}, function (response) {
+            productFactory.getProductSkuBySkuIds(params, function (response) {
                 $scope.skuList = response.data;
                 $scope.skuList.forEach(function (ele) {
                     setContentsInfo(ele);

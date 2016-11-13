@@ -77,8 +77,7 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
                 var params={};
                 params['STOCK_REALTIME.STORE_ID']=$scope.storeId;
                 params['SHOP_PRODUCT.PRD_ID']=$scope.id;
-                productFactory.getProductAllInfoById(params).get({}, function (response) {
-                    console.log(response);
+                productFactory.getProductAllInfoById(params, function (response) {
                     $scope.product = response.data[0];
                     if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                         $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];

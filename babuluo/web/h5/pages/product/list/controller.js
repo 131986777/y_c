@@ -30,8 +30,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
 
     //获取商品列表
     $scope.getPrd = function () {
-        productFactory.getProduct($scope.filter).get({'withCredentials': true}, function (response) {
-            console.log(response);
+        productFactory.getProduct($scope.filter, function (response) {
             Array.prototype.push.apply($scope.prdList,response.data);//数组合并
             $scope.classList=response.extraData.classList;
             $scope.page=response.extraData.page;
@@ -96,8 +95,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
             var params = {};
             params['SHOP_PRODUCT_SKU.SKU_IDS'] = cartInfo.toString();
             params['STOCK_REALTIME.STORE_ID'] = $scope.STORE_ID;
-            productFactory.getProductSkuBySkuIds(params).get({}, function (response) {
-                console.log(response);
+            productFactory.getProductSkuBySkuIds(params, function (response) {
                 $scope.skuList = response.data;
                 $scope.skuList.forEach(function (ele) {
                     ele['SHOP_PRODUCT_SKU.SIZE'] = cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];

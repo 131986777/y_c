@@ -1,17 +1,7 @@
-AndSellH5MainModule.service('securityFactory', function ($resource, baseURL) {
+AndSellH5MainModule.service('securityFactory', function ($resource) {
 
-    this.updataMemberInfo = function (form) {
-        return $resource(baseURL + '/member/member/updatePassword',form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
-    this.sendVerificationCode = function (form) {
-        return $resource(baseURL + '/member/member/queryphone', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
+    this.updataMemberInfo = $post($resource,'/member/member/updatePassword');
+
+    this.sendVerificationCode = $post($resource,'/member/member/queryphone');
+
 });

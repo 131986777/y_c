@@ -1,34 +1,11 @@
-AndSellH5MainModule.service('shopFactory', function ($resource, baseURL) {
+AndSellH5MainModule.service('shopFactory', function ($resource) {
 
-    this.getShopList = function () {
-        return $resource(baseURL + '/shop/shop/queryAll', {}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getShopList = $post($resource,'/shop/shop/queryAll');
 
-    this.getShopListByStrict = function (form) {
-        return $resource(baseURL + '/shop/shop/getShopByDistrict', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getShopListByStrict = $post($resource,'/shop/shop/getShopByDistrict');
 
-    this.getShopById = function (id) {
-        return $resource(baseURL + '/shop/shop/getById?SHOP.SHOP_ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-    this.getBannerList = function () {
-        return $resource(baseURL + '/banner/banner/getAllData', {}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getShopById = $post($resource,'/shop/shop/getById');
+
+    this.getBannerList = $post($resource,'/banner/banner/getAllData');
 
 });

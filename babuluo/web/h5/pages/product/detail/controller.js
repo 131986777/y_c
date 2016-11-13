@@ -25,7 +25,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         params['SHOP_PRODUCT.PRD_ID']=$stateParams.PRD_ID;
         if(getCookie('currentShopInfo')!=undefined)
         params['STOCK_REALTIME.STORE_ID']=getCookie('currentShopInfo')['SHOP.REPOS_ID'];
-        productFactory.getProductAllInfoById(params).get({}, function (response) {
+        productFactory.getProductAllInfoById(params, function (response) {
             $scope.product = response.data[0];
             if($scope.product!=undefined){
             $scope.setPrdPicBanner($scope.product);
@@ -45,8 +45,6 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
                 if($scope.product['SHOP_PRODUCT.HAS_STOCK']==undefined){
                     $scope.noStore=true;
                 }
-            }else{
-
             }
         });
 

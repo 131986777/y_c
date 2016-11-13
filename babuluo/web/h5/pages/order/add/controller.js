@@ -37,9 +37,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         var params = {};
         params['SHOP_PRODUCT_SKU.SKU_IDS'] = $scope.skuIds;
         params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
-        productFactory.getProductSkuBySkuIds(params).get({}, function (response) {
+        productFactory.getProductSkuBySkuIds(params, function (response) {
 
-            console.log(response.data);
             $scope.skuList = response.data;
             $scope.skuList.forEach(function (ele) {
                 ele['SHOP_PRODUCT_SKU.SIZE'] = $scope.cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
@@ -94,32 +93,31 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         }
 
         params['SHOP_ORDER.DETAILS'] = JSON.stringify($scope.skuList);//sku信息
-        orderFactory.addOrder(params).get({}, function (response) {
+        orderFactory.addOrder(params, function (response) {
 
-            if (response.code == 0) {
-                weUI.toast.ok('下单成功');
-                //成功之后删除购物车内容
-                $scope.skuIds.split(',').forEach(function (ele) {
-                    $scope.cartInfo.remove(ele);
-                    if ($scope.cartSize[ele] != undefined) {
-                        $scope.cartSize[ele] = 0;
-                    }
-                });
-                setCookie('cartSize', JSON.stringify($scope.cartSize));
-                setCookie('cartInfo', JSON.stringify($scope.cartInfo));
-
-                if ($scope.COUPON_INFO != '') {
-                    $scope.descCoupon($scope.coupon.ID);
+            weUI.toast.ok('下单成功');
+            //成功之后删除购物车内容
+            $scope.skuIds.split(',').forEach(function (ele) {
+                $scope.cartInfo.remove(ele);
+                if ($scope.cartSize[ele] != undefined) {
+                    $scope.cartSize[ele] = 0;
                 }
-                $state.go('pages/payment/check_out', {ORDER_ID: response.extraData.ORDER_ID});
-            } else {
-                weUI.toast.ok(response.msg);
+            });
+            setCookie('cartSize', JSON.stringify($scope.cartSize));
+            setCookie('cartInfo', JSON.stringify($scope.cartInfo));
+
+            if ($scope.COUPON_INFO != '') {
+                $scope.descCoupon($scope.coupon.ID);
             }
+            $state.go('pages/payment/check_out', {ORDER_ID: response.extraData.ORDER_ID});
+
+        }, function (response) {
+            weUI.toast.ok(response.msg);
         });
     }
 
     $scope.descCoupon = function (id) {
-        orderFactory.deleteCoupon(id).get({}, function (response) {
+        orderFactory.deleteCoupon({'MEMBER_COUPON.ID':id}, function (response) {
             if (response.code == 0) {
                 console.log('删除成功');
             }

@@ -1,75 +1,19 @@
-AndSellH5MainModule.service('orderFactory', function ($resource, baseURL) {
+AndSellH5MainModule.service('orderFactory', function ($resource) {
 
-    this.addOrder = function (order) {
-        return $resource(baseURL + '/shop/order/addOrderWithDetail', order, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.addOrder = $post($resource,'/shop/order/addOrderWithDetail');
 
-    this.getOrderById= function (id) {
-        return $resource(baseURL + '/shop/order/getById?SHOP_ORDER.ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getOrderById = $post($resource,'/shop/order/getById');
 
-    this.getOrder= function (filter) {
-        return $resource(baseURL + '/shop/order/queryAllForAgent', filter , {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getOrder = $post($resource,'/shop/order/queryAllForAgent');
 
-    this.cancelOrder= function (id) {
-        return $resource(baseURL + '/shop/order/cancelOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
+    this.cancelOrder = $post($resource,'/shop/order/cancelOrder');
 
-    this.payOrder= function (id) {
-        return $resource(baseURL + '/shop/order/payOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
+    this.payOrder = $post($resource,'/shop/order/payOrder');
 
-    this.deliveryOrder= function (id) {
-        return $resource(baseURL + '/shop/order/deliveryOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
+    this.deliveryOrder = $post($resource,'/shop/order/deliveryOrder');
 
-    this.acceptOrder= function (id) {
-        return $resource(baseURL + '/shop/order/getOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
+    this.acceptOrder = $post($resource,'/shop/order/getOrder');
 
-    this.getShop= function (id) {
-        return $resource(baseURL + '/shop/shop/queryAll', {}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
-
-    this.deleteCoupon= function (id) {
-        return $resource(baseURL + '/member/coupon/delById?MEMBER_COUPON.ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
+    this.deleteCoupon = $post($resource,'/member/coupon/delById');
 
 })

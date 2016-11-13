@@ -21,7 +21,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             weUI.toast.info('请先选择门店');
             $state.go('pages/shop');
         } else {
-            shopFactory.getShopById(id).get({}, function (response) {
+            shopFactory.getShopById({'SHOP.SHOP_ID':id}, function (response) {
                 $scope.shopInfo = response.data[0];
                 if ($scope.shopInfo != undefined) {
                     setCookie('currentShopInfo', JSON.stringify($scope.shopInfo));
@@ -31,7 +31,8 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
         var params = {}
         params['SHOP_PRODUCT.TAG_ID'] = '1035,1036,1037';
-        productFactory.getProductByTag(params).get({}, function (response) {
+        productFactory.getProductByTag(params, function (response) {
+            console.log(response);
             if (response.code == 0) {
                 $scope.tagProductList ={};
                 response.data.forEach(function (ele) {
@@ -81,7 +82,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         $scope.slides.push({image: 'http://img1.gtimg.com/9/910/91061/9106175_980x1200_960.jpg'});
         $scope.slides.push({image: 'http://files.15w.com/image/2015/0621/14348708842995.png'});
 
-        shopFactory.getBannerList().get({}, function (response) {    //横幅列表
+        shopFactory.getBannerList({}, function (response) {    //横幅列表
             console.log(response.data);
             var dataList = response.data;
 
