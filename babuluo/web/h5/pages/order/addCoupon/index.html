@@ -1,6 +1,8 @@
-<div class="coupon-list" ng-repeat="(key,item) in useableList"  >
+<div class="coupon-list" ng-repeat="(key,item) in useableList"  ng-click="checkItem(item)">
 
-        <input type="radio" name="radio"  ng-click="checkItem(item)">
+    <i class="icon "
+       ng-class="{true:' icon-checked',false:'icon-check'}[isSelect==item['MEMBER_COUPON.COUPON_ID']]"></i>
+
         <div class="coupon-wrap" >
         <div class="coupon-head">
             <div class="coupon-info">
