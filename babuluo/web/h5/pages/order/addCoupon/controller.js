@@ -110,8 +110,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
     $scope.initData();
 
     $scope.checkItem = function (item) {
+        $scope.isSelect = item['MEMBER_COUPON.COUPON_ID'];
+        console.log(item);
         $scope.selectItem=item;
-
     }
 
     $scope.returnData=function () {
