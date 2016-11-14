@@ -10,6 +10,8 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     $scope.recommendList = new Array();
     $scope.recommThreeList = new Array();
     $scope.recommNineList = new Array();
+    $scope.bakingList = new Array();
+    $scope.freezingList = new Array();
     //商品搜索
     $scope.searchPrd = function () {
         $state.go('pages/product/list', {keyword: $scope.prdKeyword});
@@ -115,12 +117,38 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                 if (ele['BANNER.POSITION_ID'] == 1016) {     //今日推荐
                     $scope.recommendList.push(ele);
                 }
-                if (ele['BANNER.POSITION_ID'] == 1017) {     //今日推荐三连排
+               /* if (ele['BANNER.POSITION_ID'] == 1017) {     //今日推荐三连排
                     $scope.recommThreeList.push(ele);
-                }
+                }*/
                 if (ele['BANNER.POSITION_ID'] == 1018) {     //今日推荐九宫格
                     $scope.recommNineList.push(ele);
                 }
+                if (ele['BANNER.POSITION_ID'] == 1019) {     //烘焙食品
+                    $scope.bakingList.push(ele);
+                }
+                if (ele['BANNER.POSITION_ID'] == 1020) {     //冷冻食品
+                    $scope.freezingList.push(ele);
+                }
+                if (ele['BANNER.END_DATETIME']==null&&ele['BANNER.BEGIN_DATETIME']==null){
+                    ele['is_show']=true;
+                }else if(ele['BANNER.BEGIN_DATETIME']!=null){
+                    var startTime = new Date(ele['BANNER.BEGIN_DATETIME'].split('.')[0]).getTime();    //开始时间
+                    var currentTime = new Date().getTime();      //当前时间 毫秒
+                    if(currentTime>startTime){
+                        if(ele['BANNER.BEGIN_DATETIME']==null){
+                            ele['is_show']=true;
+                        }
+                        else{
+                            var endTime = new Date(ele['BANNER.END_DATETIME'].split('.')[0]).getTime();      //结束时间
+                            if(currentTime<endTime){
+                                ele['is_show']=true;
+                            }
+                        }
+                    }
+                }
+
+
+
             })
 
         });
