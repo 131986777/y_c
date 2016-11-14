@@ -88,22 +88,28 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
                     $scope.wxPayInfo = "正在查询支付结果,请稍等...";
                     // $scope.queryWXPayResult();
 
-                    var formData = {
-                        OUT_TRADE_NO: unifiedJson.out_trade_no,
-                        ORDER_ID:$scope.order['SHOP_ORDER.ID'],
-                        TYPE:'ACCOUNT',
-                        CALLBACK:'-1',
-                        NOW_BALANCE:parseInt($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] * 100),
-                        UID:$scope.uid,
-                        FEE:parseInt($scope.balanceInfo['CHANGE_VALUE'] * 100)
-                    };
-                    alert(JSON.stringify(formData));
-                    orderFactory.queryWXPayResult(formData, function(res) {
-                        alert('queryWXPayResult');
-                        location.reload();
-                    }, function (res) {
-                        alert(res.msg);
-                    })
+
+                    try {
+                        var formData = {
+                            OUT_TRADE_NO: unifiedJson.out_trade_no,
+                            ORDER_ID:$scope.uid,
+                            TYPE:'ACCOUNT',
+                            CALLBACK:'-1',
+                            NOW_BALANCE:parseInt($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] * 100),
+                            UID:$scope.uid,
+                            FEE:parseInt($scope.balanceInfo['CHANGE_VALUE'] * 100)
+                        };
+                        alert(JSON.stringify(formData));
+                        orderFactory.queryWXPayResult(formData, function(res) {
+                            alert('queryWXPayResult');
+                            location.reload();
+                        }, function (res) {
+                            alert(res.msg);
+                        })
+                    } catch(err) {
+                        alert(err);
+                    }
+
                 } else {
                     alert("支付失败，请重试");
                 }
