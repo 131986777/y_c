@@ -37,4 +37,16 @@ public class ENV {
     //门店接口KEY
     public static String API_MENDIAN_CERT = "F4EBA1DE727A41A91B5D10754BFBF657";
 
+
+    /**
+     * 微信公众号配置信息
+     */
+
+    public static String WX_APPID = "wxece1674ea8bbdc0d";
+
+    public static String WX_MCHID = "1294154401";
+    public static String WX_KEY = "sy6zcif7m285u4htm311yytz6eyks7ce";
+    public static String WX_APPSECRET = "772467ba84f9fb91f579c2855725ddba";
+
+
 }
