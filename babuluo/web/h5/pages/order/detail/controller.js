@@ -80,7 +80,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 }, function (response) {
                     // weUI.toast.error(response.msg);
                     alert(response.msg);
-                };
+                });
             });
         }
     };
