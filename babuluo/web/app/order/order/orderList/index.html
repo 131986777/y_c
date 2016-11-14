@@ -9,7 +9,7 @@
         <li ng-class="{true:' active'}[state=='pay']" ng-click="filterStateOrder('pay')"><a href="">待付款<span
             ng-if="orderSizeMap.pay>0" ng-bind="'('+orderSizeMap.pay+')'"></span></a></li>
         <li ng-class="{true:' active'}[state=='out']" ng-click="filterStateOrder('out')"><a href="">待分拣<span
-            ng-if="orderSizeMap.get>0" ng-bind="'('+orderSizeMap.out+')'"></span></a></li>
+            ng-if="orderSizeMap.out>0" ng-bind="'('+orderSizeMap.out+')'"></span></a></li>
         <li ng-class="{true:' active'}[state=='get']" ng-click="filterStateOrder('get')"><a href="">待提货<span
             ng-if="orderSizeMap.get>0" ng-bind="'('+orderSizeMap.get+')'"></span></a></li>
         <li ng-class="{true:' active'}[state=='comment']" ng-click="filterStateOrder('comment')"><a href="">待评价<span

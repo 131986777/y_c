@@ -3,6 +3,13 @@ angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller
     modalFactory.setTitle('登录');
     modalFactory.setBottom(false);
 
+    $scope.myKeyup = function(e){
+        var keycode = window.event?e.keyCode:e.which;
+        if(keycode==13){
+            $scope.login();
+        }
+    };
+
     $scope.login = function () {
         var form = $scope.memberInfo;
         console.log(form);
