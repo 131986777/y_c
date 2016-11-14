@@ -92,12 +92,12 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
                             UID:$scope.uid,
                             FEE:parseInt($scope.balanceInfo['CHANGE_VALUE'] * 100)
                         };
-                        // alert(JSON.stringify(formData));
+                        alert(JSON.stringify(formData));
                         orderFactory.queryWXPayResult(formData, function(res) {
                             // alert('queryWXPayResult');
                             location.reload();
                         }, function (res) {
-                            // alert(res.msg);
+                            alert(res.msg);
                         })
                     } catch(err) {
                         alert(err);
