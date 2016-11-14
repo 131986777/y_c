@@ -77,7 +77,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                     // weUI.toast.ok('支付成功');
                     alert('支付成功');
                     $scope.getOrder($scope.order['SHOP_ORDER.ID']);
-                }), function (response) {
+                }, function (response) {
                     // weUI.toast.error(response.msg);
                     alert(response.msg);
                 };
