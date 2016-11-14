@@ -7,7 +7,7 @@
                   <a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">
                       <img
                               ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-                              style="height: 240px;width: 100%;">
+                              style="height: 197px;width: 100%;">
                   </a>
               </slide>
           </carousel>
@@ -28,19 +28,19 @@
   <!-- BEGIN 导航 -->
   <div class="home-nav flexbox text-center">
     <div class="col cell" ui-sref="pages/product/list">
-      <a><img src="../../public/img/nav1.jpg"></a>
+      <a><img src="../../public/img/icon-nav_01.png"></a>
       <p>全部菜品</p>
     </div>
     <div class="col cell" ui-sref="pages/product/tagPrdList({tagId:1024})">
-      <a><img src="../../public/img/nav2.jpg"></a>
+      <a><img src="../../public/img/icon-nav_02.png"></a>
       <p>爆款菜品</p>
     </div>
     <div class="col cell" ui-sref="pages/product/tagPrdList({tagId:1023})">
-      <a><img src="../../public/img/nav3.jpg"></a>
+      <a><img src="../../public/img/icon-nav_03.png"></a>
       <p>新品上市</p>
     </div>
     <div class="col cell" ui-sref="pages/order/list">
-      <a><img src="../../public/img/nav4.png"></a>
+      <a><img src="../../public/img/icon-nav_04.png"></a>
       <p>我的订单</p>
     </div>
   </div>
@@ -49,7 +49,7 @@
   <!-- 限时抢购 -->
   <div class="limit" ng-repeat="item in limitList" ng-if="item['is_show']==true" >
     <a ng-href="{{item['BANNER.URL']}}"><img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-         style="height: 162px;width: 100%;" ></a>
+         style="height: 167px;width: 100%;" ></a>
     <div class="limit-desc">
       <div class="desc-text">
         <!--<p class="title">阳澄湖大闸蟹蟹券</p>
@@ -70,17 +70,17 @@
   <!-- 团购 -->
   <div class="group" ng-repeat="item in groupList" ng-if="item['is_show']==true" >
     <a ng-href="{{item['BANNER.URL']}}"><img ng-if="item['is_show']==true" ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-         style="height: 162px;width: 100%;" ng-href="{{item['BANNER.URL']}}"></a>
-    <div class="group-desc">
-      <div class="desc-text">
+         style="height: 167px;width: 100%;" ng-href="{{item['BANNER.URL']}}"></a>
+    <!--<div class="group-desc">-->
+      <!--<div class="desc-text">-->
         <!--<p class="title">阳澄湖大闸蟹蟹券</p>-->
         <!--<p class="text">来自马来西亚的顶级美味</p>-->
         <!--<p class="price">现价<span class="cur-price">￥35.80</span>-->
           <!--<del class="pre-price">￥58.80</del>-->
         <!--</p>-->
-        <a class="btn btn-buy">立即抢购</a>
-      </div>
-    </div>
+        <!--<a class="btn btn-buy">立即抢购</a>-->
+      <!--</div>-->
+    <!--</div>-->
   </div>
 
   <!-- 活动专区 -->
@@ -97,7 +97,7 @@
       <div class="weui_cells weui_cells_access special-head">
         <a class="weui_cell" href="#">
           <div class="weui_cell_bd weui_cell_primary text-center">
-            <p>今日推荐</p>
+            <p><i class="icon-special"></i>今日推荐</p>
           </div>
           <div class="weui_cell_ft"></div>
         </a>
@@ -107,8 +107,7 @@
         <ul class="list-unstyled">
           <li class="first">
             <a ng-repeat="item in recommendList" ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true"><img
-                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-                class="weui_cells"></a>
+                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"></a>
             <div class="thumbnail-list list-unstyled flexbox">
 
 

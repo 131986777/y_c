@@ -6,4 +6,6 @@ AndSellH5MainModule.service('balanceFactory', function ($resource) {
 
     this.updateFinanceList = $post($resource,'/member/balance/add');
 
+
+    // this.addBalanceByWxPay = $post($resource, '/wx/pay/wxPayUndefinedOrder');
 });

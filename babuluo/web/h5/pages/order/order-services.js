@@ -18,5 +18,5 @@ AndSellH5MainModule.service('orderFactory', function ($resource) {
 
     this.wxPayUndefinedOrder = $post($resource, '/wx/pay/wxPayUndefinedOrder');
 
-    this.queryWXPayResult = $post($resource, '');
+    this.queryWXPayResult = $post($resource, '/wx/pay/wxpayCallback');
 })

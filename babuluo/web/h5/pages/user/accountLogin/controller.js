@@ -7,10 +7,17 @@ angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller
         var form = $scope.memberInfo;
         console.log(form);
         userFactory.login(form, function (response) {
+            console.log(response);
             weUI.toast.info('登录成功');
             $state.go('pages/home');
         }, function (response) {
-            weUI.toast.error(response.msg);
+            if(response.msg == "ISNEW"){
+                var id = $scope.memberInfo['LOGIN_ID'];
+                $state.go('pages/user/SetPassword' , {LOGIN_ID:id});
+            }else{
+                weUI.toast.error(response.msg);
+            }
+
         });
     }
 });
