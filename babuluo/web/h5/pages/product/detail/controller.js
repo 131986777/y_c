@@ -256,7 +256,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
             if($scope.sku['SHOP_PRODUCT_SKU.STOCK']>0){
             var cartInfo = getCookie('cartInfo');
             var cartSize = getCookie('cartSize');
-            if (cartInfo == '') {
+            if (cartInfo == ''||cartInfo==undefined) {
                 cartInfo = new Array;
                 cartSize = {};
             } else {
@@ -303,9 +303,13 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
     //数量减
     $scope.lessSize = function () {
         alert($scope.skuSize);
-        if ($scope.skuSize > 1) {
-            $scope.skuSize--;
+        if ($scope.skuSize > 0) {
+            $scope.skuSize = $scope.skuSize - 1;
         }
+    }
+
+    $scope.moreSize = function () {
+        $scope.skuSize = clone($scope.skuSize) + 1
     }
 
 });
