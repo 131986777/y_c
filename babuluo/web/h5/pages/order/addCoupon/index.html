@@ -10,7 +10,7 @@
                 <p class="couponTime" ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']!=null">有效期至<span>{{item['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']|FormatAllDate}}</span></span>
                 </p>
                 <div class="coupon-value">
-                      <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                    <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
                                     <span>{{(item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}</span>
                                     <span class='valueType'>元</span>
                                 </span>
