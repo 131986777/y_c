@@ -7,7 +7,7 @@
         <div class="weui_cell">
             <div class="weui_cell_bd weui_cell_primary">
                 <input class="weui_input" type="tel"
-                       placeholder="请输入接收验证码的手机号" ng-model="memberInfo['MEMBER.LOGIN_ID']" ng-blur="ckeckPhone()">
+                       placeholder="请输入手机号" ng-model="memberInfo['MEMBER.LOGIN_ID']" ng-blur="ckeckPhone()">
             </div>
         </div>
         <div class="weui_cell">
@@ -18,13 +18,13 @@
             </div>
         <div class="weui_cell">
             <div class="weui_cell_bd weui_cell_primary">
-                <input class="weui_input" type="text" name="password"
+                <input class="weui_input" type="password" name="password"
                        placeholder="新密码密码" ng-model="memberInfo['MEMBER.PWD']" ng-blur="checkPwd()">
             </div>
         </div>
         <div class="weui_cell">
             <div class="weui_cell_bd weui_cell_primary">
-                <input class="weui_input" type="text" name="password"
+                <input class="weui_input" type="password" name="password"
                        placeholder="确认密码" ng-model="memberInfo['MEMBER.password']" ng-blur="checkPassword()">
             </div>
         </div>
