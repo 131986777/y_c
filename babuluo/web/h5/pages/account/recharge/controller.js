@@ -9,15 +9,12 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
     $scope.queryAccount = function (uid){
         var form = {};
         form['MEMBER_ACCOUNT.USER_ID'] = uid;
-        balanceFactory.queryAccountByUid(form).get({}, function (response) {
-            if (response.code == 400) {
-                weUI.toast.error(response.msg);
-            } else {
-                console.log(response);
-                $scope.balanceInfo = response.data;
-                $scope.balance = $scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'];
-                $scope.serviceId = $scope.balanceInfo[0]['MEMBER_ACCOUNT.SERVICE_ID'];
-            }
+        balanceFactory.queryAccountByUid(form, function (response) {
+            $scope.balanceInfo = response.data;
+            $scope.balance = $scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'];
+            $scope.serviceId = $scope.balanceInfo[0]['MEMBER_ACCOUNT.SERVICE_ID'];
+        }, function (response) {
+            weUI.toast.error(response.msg);
         });
     }
 
@@ -36,14 +33,11 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
         form['FINANCE_LIST.BALANCE']=$scope.balance + $scope.balanceInfo['CHANGE_VALUE'];
 
 
-        balanceFactory.updateFinanceList(form).get({}, function (response) {
-            console.log(form);
-            if (response.code == 400) {
-                weUI.toast.error(response.msg);
-            } else {
-                weUI.toast.ok('充值成功');
-                $state.go('pages/account/balance');
-            }
+        balanceFactory.updateFinanceList(form, function (response) {
+            weUI.toast.ok('充值成功');
+            $state.go('pages/account/balance');
+        }, function (response) {
+            weUI.toast.error(response.msg);
         });
     }
 

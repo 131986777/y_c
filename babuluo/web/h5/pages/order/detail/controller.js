@@ -11,7 +11,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     }
 
     $scope.getOrder = function (id) {
-        orderFactory.getOrderById(id).get({}, function (response) {
+        orderFactory.getOrderById({'SHOP_ORDER.ID': id}, function (response) {
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
             $scope.orderDetailList = JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
             $scope.order = response.data[0];
@@ -24,13 +24,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     //取消订单
     $scope.cancelOrder = function () {
         weUI.dialog.alert("提示", "确认取消该订单", function () {
-            orderFactory.cancelOrder($scope.order['SHOP_ORDER.ID']).get({}, function (response) {
-                if (response.code == 0) {
-                    weUI.toast.ok('取消订单成功');
-                    $scope.getOrder($scope.order['SHOP_ORDER.ID']);
-                } else {
-                    weUI.toast.error(response.msg);
-                }
+            orderFactory.cancelOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
+                weUI.toast.ok('取消订单成功');
+                $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            }, function (response) {
+                weUI.toast.error(response.msg);
             });
         });
     }
@@ -38,7 +36,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     //确认提货
     $scope.getPrdNow = function () {
         weUI.dialog.alert("提示", "确认提货", function () {
-            orderFactory.acceptOrder($scope.order['SHOP_ORDER.ID']).get({}, function (response) {
+            orderFactory.acceptOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
                 if (response.code == 0) {
                     weUI.toast.ok('收货成功');
                     $scope.getOrder($scope.order['SHOP_ORDER.ID']);
@@ -52,14 +50,12 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     //立即支付
     $scope.payNow = function () {
         weUI.dialog.alert("提示", "确认支付该订单", function () {
-            orderFactory.payOrder($scope.order['SHOP_ORDER.ID']).get({}, function (response) {
-                if (response.code == 0) {
-                    weUI.toast.ok('支付成功');
-                    $scope.getOrder($scope.order['SHOP_ORDER.ID']);
-                } else {
-                    weUI.toast.error(response.msg);
-                }
-            });
+            orderFactory.payOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
+                weUI.toast.ok('支付成功');
+                $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            }), function (response) {
+                weUI.toast.error(response.msg);
+            };
         });
     }
 

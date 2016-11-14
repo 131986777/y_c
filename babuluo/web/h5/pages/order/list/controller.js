@@ -55,8 +55,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
     }
 
     $scope.getOrder= function () {
-        //$scope.filter['SHOP_ORDER.UID']=1044;
-        orderFactory.getOrder($scope.filter).get({}, function (response) {
+        orderFactory.getOrder($scope.filter, function (response) {
             console.log(response);
             Array.prototype.push.apply($scope.orderList,response.data);//数组合并
             $scope.orderList.forEach(function (ele) {
@@ -65,7 +64,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
                     setContentsInfoForOrder(item);
                 });
             });
-            console.log($scope.orderList);
             $scope.page=response.extraData.page;
             if($scope.page.querySize>$scope.page.pageIndex*$scope.page.pageSize){
                 $scope.hasNextPage=true;
@@ -90,7 +88,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
     //取消订单
     $scope.cancelOrder = function (id) {
         weUI.dialog.confirm('提示 ',' 确认取消该订单嘛? ', function () {
-            orderFactory.cancelOrder(id).get({}, function () {
+            orderFactory.cancelOrder({'SHOP_ORDER.ID':id}, function () {
                 weUI.toast.ok('取消订单成功');
                 $scope.initData();
             });

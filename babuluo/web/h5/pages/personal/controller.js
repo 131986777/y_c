@@ -4,7 +4,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
     modalFactory.setBottom(true);
 
     $scope.cancelLogin= function () {
-        userFactory.loginOut().get({'withCredentials': true}, function (response) {
+        userFactory.loginOut({}, function (response) {
             $state.go('pages/user/accountLogin');
         });
     }

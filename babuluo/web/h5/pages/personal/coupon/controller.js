@@ -9,9 +9,8 @@ angular.module('AndSell.H5.Main').controller('pages_personal_coupon_Controller',
 
         var member={};
         member['MEMBER_COUPON.USER_ID'] =1000;
-        personalFactory.getCouponListByUser(member).get({}, function (response) {
+        personalFactory.getCouponListByUser(member, function (response) {
             $scope.memberCouponList = response.data;
-            console.log($scope.memberCouponList);
         });
         }
 

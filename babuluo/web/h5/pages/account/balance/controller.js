@@ -2,8 +2,7 @@ angular.module('AndSell.H5.Main').controller('pages_account_balance_Controller',
 
 
     $scope.initLoad  = function (){
-        balanceFactory.queryAll().get({}, function (response) {
-            console.log(response);
+        balanceFactory.queryAll({}, function (response) {
             $scope.balanceInfo = response.data;
             $scope.userInfo = response.extraData.userMap;
             uid = getCookie('ANDSELLID');

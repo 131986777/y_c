@@ -39,14 +39,11 @@ angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Contr
         form[''] = value;
         form['ID'] = value;
 
-        userFactory.newUserReg(form).get({}, function (response) {
-            console.log(response);
-            if (response.code == 400) {
-                weUI.toast.error(response.msg);
-            } else {
-                weUI.toast.ok('注册成功');
-                $state.go('pages/user/accountLogin');
-            }
+        userFactory.newUserReg(form, function (response) {
+            weUI.toast.ok('注册成功');
+            $state.go('pages/user/accountLogin');
+        }, function (response) {
+            weUI.toast.error(response.msg);
         });
     }
 
@@ -54,12 +51,10 @@ angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Contr
         var form ={}
         form['MEMBER.LOGIN_ID'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
         console.log(form);
-        securityFactory.sendVerificationCode(form).get({}, function (response) {
-            if (response.code == 400) {
-                weUI.toast.error(response.msg);
-            } else {
-
-            }
+        securityFactory.sendVerificationCode(form, function (response) {
+            weUI.toast.ok('发送成功');
+        }, function (response) {
+            weUI.toast.error(response.msg);
         });
     }
 
@@ -68,13 +63,10 @@ angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Contr
         form['MEMBER.LOGIN_ID'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
         form['MEMBER.CHECKCODE'] = $scope.memberInfo['MEMBER.CHECKCODE'];
         form['MEMBER.PWD'] = $scope.memberInfo['MEMBER.PWD'];
-        console.log(form);
-        securityFactory.updataMemberInfo(form).get({}, function (response) {
-            if (response.code == 400) {
-                weUI.toast.error(response.msg);
-            } else {
-                weUI.toast.ok('密码修改成功');
-            }
+        securityFactory.updataMemberInfo(form, function (response) {
+            weUI.toast.ok('密码修改成功');
+        },function(response){
+            weUI.toast.error(response.msg);
         });
     }
 

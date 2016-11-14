@@ -1,43 +1,13 @@
-AndSellH5MainModule.service('userFactory', function ($resource, baseURL) {
+AndSellH5MainModule.service('userFactory', function ($resource) {
 
-    this.newUserReg = function (form) {
-        return $resource(baseURL + '/member/member/reg',form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.newUserReg = $post($resource,'/member/member/reg');
 
-    this.login = function (form){
-        return $resource(baseURL + '/login/login', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.login = $post($resource,'/login/login');
 
-    this.isLogin = function () {
-        return $resource(baseURL+'/login/isLogin',{},{
-           'update':{
-               method:'PUT'
-           }
-        });
-    }
+    this.isLogin = $post($resource,'/login/isLogin');
 
-    this.loginOut = function () {
-        return $resource(baseURL+'/login/logout',{},{
-           'update':{
-               method:'PUT'
-           }
-        });
-    }
+    this.loginOut = $post($resource,'/login/logout');
 
-    this.sendVerificationCode = function (form) {
-        return $resource(baseURL+'/sys/sms/reg',form,{
-            'update':{
-                method:'PUT'
-            }
-        });
-    }
+    this.sendVerificationCode = $post($resource,'/sys/sms/reg');
 
 });

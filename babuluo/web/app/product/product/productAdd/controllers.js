@@ -56,7 +56,7 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
         //加载商品分类数据
         classFactory.getPrdClassList().get({}, function (response) {
             $scope.prdClssList = response.data;
-            if ($scope.prdClssList.length > 1) {
+            if ($scope.prdClssList.length > 0) {
                 $scope.add['SHOP_PRODUCT_CLASS.CLASS_ID'] = $scope.prdClssList[0]['SHOP_PRODUCT_CLASS.CLASS_ID'];
             }
             initDefer_class.resolve();
@@ -71,7 +71,7 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
         //加载商品单位数据
         unitFactory.getPrdUnitList().get({}, function (response) {
             $scope.prdUnitList = response.data;
-            if ($scope.prdUnitList.length > 1) {
+            if ($scope.prdUnitList.length > 0) {
                 $scope.add['SHOP_UNIT.UNIT_ID'] = $scope.prdUnitList[0]['SHOP_UNIT.UNIT_ID'];
             }
             initDefer_unit.resolve();
