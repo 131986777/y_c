@@ -131,8 +131,11 @@ angular.module('AndSell.Main').controller('product_product_productModify_Control
         var form = $scope.modify;
         form['SHOP_PRODUCT.SERVICE_ID'] = 1;
         form['SHOP_PRODUCT.SHOP_DES'] = ue.getContent();
+        if(ue.getContent()==''){
+            form['SHOP_PRODUCT.SHOP_DES'] = '{$empty}';
+        }
         form['SHOP_PRODUCT.TAG_ID'] = $scope.selectTagIds.toString();
-
+        console.log(form);
         var uploadImageArray=new Array();
 
         for(var i = 0;i<$scope.uploadImageFiles.length;i++) {

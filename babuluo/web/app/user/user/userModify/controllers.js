@@ -47,6 +47,7 @@ angular.module('AndSell.Main').controller('user_user_userModify_Controller', fun
             var pwd = {};
             pwd['USER.UID'] = $stateParams.id;
             pwd['USER.LOGIN_PWD'] = "123456";
+            pwd['USER.MOBILE'] = $scope.userModify['USER.MOBILE'];
             userFactory.modUserByUID(pwd).get({}, function (response) {
                 console.log(response);
                 if (response.extraData.state == 'true') {

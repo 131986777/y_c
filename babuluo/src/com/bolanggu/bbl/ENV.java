@@ -47,11 +47,16 @@ public class ENV {
      * 微信公众号配置信息
      */
 
-    public static String WX_APPID = "wxece1674ea8bbdc0d";
+    public static String WX_APPID = "wx7c4d78e05a44115e";
+    public static String WX_APPSECRET = "4e204b8f9cf5a5c11457ffa40d891ffc";
 
-    public static String WX_MCHID = "1294154401";
-    public static String WX_KEY = "sy6zcif7m285u4htm311yytz6eyks7ce";
-    public static String WX_APPSECRET = "772467ba84f9fb91f579c2855725ddba";
+
+    /**
+     * 微信支付配置信息
+     */
+    public static String WX_MCHID = "1298356201";
+    public static String WX_KEY = "fdbnhlsh6gs79ro4lhr6vutmgnx0flfc";
+
 
 
     public static String WX_TOKEN_GRANT_TYPE = "client_credential";
