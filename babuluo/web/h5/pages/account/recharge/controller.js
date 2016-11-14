@@ -12,7 +12,7 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
         balanceFactory.queryAccountByUid(form, function (response) {
             console.log(response);
             $scope.balanceInfo = response.data;
-            $scope.serviceId = $scope.balanceInfo[0]['MEMBER_ACCOUNT.SERVICE_ID'];
+            // $scope.serviceId = $scope.balanceInfo[0]['MEMBER_ACCOUNT.SERVICE_ID'];
         }, function (response) {
             weUI.toast.error(response.msg);
         });
