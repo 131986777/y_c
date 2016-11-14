@@ -113,7 +113,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 }
             } else {
                 console.log(response);
-                onBridgeReady(response.extraData.returnMap);
+                onBridgeReady(response.extraData.unifiedOrderJsonResult);
             }
 
         }, function (res) {
@@ -174,11 +174,12 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
      */
     function onBridgeReady(postData) {
 
-        if (postData == null) {
-            alert('postData == null');
-        }
+        alert('onBridgeReady');
+        alert(postData);
+
 
         var post = JSON.parse(postData);
+
 
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest', {
@@ -190,9 +191,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 "paySign": post.paySign
             },
             function (res) {
+                alert(res.err_msg);
                 if (res.err_msg == "get_brand_wcpay_request:ok") {
                     $scope.wxPayInfo = "正在查询支付结果,请稍等...";
-                    $scope.queryWXPayResult();
+                    // $scope.queryWXPayResult();
                 } else {
                     alert("支付失败，请重新下单");
                 }
