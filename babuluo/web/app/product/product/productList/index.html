@@ -26,7 +26,7 @@
                         </select>
                     <select ng-model="filter['SHOP_PRODUCT.TAG_ID']"
                             ng-init="filter['SHOP_PRODUCT.TAG_ID'] = 'null'"
-                            class="nya-bs-select form-control">
+                            class="nya-bs-select form-control"  style="width: 100px">
                         <option class="nya-bs-option" value="null">全部标签</option>
                         <option class="nya-bs-option" ng-repeat="tag in tagList"
                                 ng-bind="tag['SHOP_TAG.TAG']"
@@ -55,7 +55,7 @@
                         <button ui-sref="product/product/productAdd" id="sample_editable_1_new" class="btn btn-default pull-right">
                             <i class="fa fa-plus"></i> 新增商品
                         </button>
-                        <button class="btn btn-default pull-right  green  btn-outline dropdown-toggle"
+                        <button class="btn btn-default  green  btn-outline dropdown-toggle pull-right"
                                 data-toggle="dropdown">操作
                             <i class="fa fa-angle-down"></i>
                         </button>

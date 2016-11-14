@@ -7,7 +7,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     $scope.initData = function () {
         $scope.getOrder($stateParams.ORDER_ID);
-        $scope.shop = getCookie('currentShopInfo');
+        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
 
         // initWxJsSdk();
     }
