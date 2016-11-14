@@ -35,6 +35,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
 
     $scope.initLoad();
 
+
     $scope.shopSelect= function (shop) {
         setCookie('currentShop',shop['SHOP.SHOP_ID']);
         if($scope.cookieShopIdList.indexOf(shop['SHOP.SHOP_ID'])>0){
