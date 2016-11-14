@@ -5,4 +5,5 @@ AndSellH5MainModule.service('personalFactory', function ($resource) {
     this.getCouponListByUser = $post($resource,'/member/coupon/getCouponByUserId');
 
     this.getPhone = $post($resource,'/member/member/getById');
+    this.getCoupon = $post($resource,'/member/coupon/querySumByUser');
 });

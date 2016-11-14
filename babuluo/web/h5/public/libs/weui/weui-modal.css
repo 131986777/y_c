@@ -1,7 +1,7 @@
 .toolbar {
     position: relative;
     width: 100%;
-    font-size: .85rem;
+    font-size: 1.85rem;
     line-height: 1.5;
     color: #3d4145;
     background: #f7f7f8;
@@ -34,7 +34,7 @@
     }
 }
 .toolbar .toolbar-inner {
-    height: 2.2rem;
+    height: 3.2rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -45,9 +45,9 @@
     display: block;
     width: 100%;
     padding: 0;
-    font-size: .85rem;
+    font-size: 1.85rem;
     font-weight: normal;
-    line-height: 2.2rem;
+    line-height: 3.2rem;
     color: #3d4145;
     text-align: center;
     white-space: nowrap;
@@ -57,7 +57,7 @@
     right: 0;
     box-sizing: border-box;
     height: 2.2rem;
-    line-height: 2.2rem;
+    line-height: 3.2rem;
     color: #04BE02;
     z-index: 1;
     padding: 0 .5rem;
@@ -73,7 +73,7 @@
     color: #3d4145;
     -webkit-transition-duration: .3s;
     transition-duration: .3s;
-    height: 13rem;
+    height: 25rem;
     background: #EFEFF4;
     -webkit-transform: translate3d(0, 100%, 0);
     transform: translate3d(0, 100%, 0);
@@ -131,7 +131,7 @@
     width: 100%;
     padding: 0;
     text-align: right;
-    font-size: 1rem;
+    font-size: 2rem;
     font-weight: normal;
     -webkit-mask-box-image: -webkit-linear-gradient(bottom, transparent, transparent 5%, white 20%, white 80%, transparent 95%, transparent);
     -webkit-mask-box-image: linear-gradient(to top, transparent, transparent 5%, white 20%, white 80%, transparent 95%, transparent);
@@ -297,7 +297,7 @@
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    max-width: 7rem;
+    max-width: 9rem;
 }
 .weui-picker-container .weui_cells {
     margin: 0;
