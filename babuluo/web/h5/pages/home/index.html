@@ -144,12 +144,13 @@
         </div>
 
         <ul class="list-unstyled">
-          <li ng-repeat="item in itemList.content" ng-if="item['is_show']==true">
-            <a ng-href="{{item['BANNER.URL']}}"  >
+           <li ng-repeat="item in itemList.content" ng-if="item['is_show']==true">
+              <a ng-href="{{item['BANNER.URL']}}"  >
               <img  ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}" class="weui_cells">
-            </a>
-            <ul class="thumbnail-list list-unstyled flexbox">
-              <li class="cell" ng-repeat=" item in tagProductList['1037']"
+              </a>
+
+              <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3005'">
+              <li class="cell" ng-repeat=" item in tagProductList['1036']"
                   ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
                 <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
                 <div class="desc">
@@ -158,6 +159,86 @@
                 </div>
               </li>
             </ul>
+              <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3006'">
+                  <li class="cell" ng-repeat=" item in tagProductList['1037']"
+                      ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                      <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                      <div class="desc">
+                          <p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>
+                          <span class="price" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                      </div>
+                  </li>
+              </ul>
+              <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3007'">
+                  <li class="cell" ng-repeat=" item in tagProductList['3000']"
+                      ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                      <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                      <div class="desc">
+                          <p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>
+                          <span class="price" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                      </div>
+                  </li>
+              </ul>
+              <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3008'">
+                  <li class="cell" ng-repeat=" item in tagProductList['3001']"
+                      ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                      <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                      <div class="desc">
+                          <p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>
+                          <span class="price" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                      </div>
+                  </li>
+              </ul>
+              <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3009'">
+                  <li class="cell" ng-repeat=" item in tagProductList['3004']"
+                      ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                      <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                      <div class="desc">
+                          <p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>
+                          <span class="price" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                      </div>
+                  </li>
+              </ul>
+              <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3010'">
+                  <li class="cell" ng-repeat=" item in tagProductList['3002']"
+                      ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                      <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                      <div class="desc">
+                          <p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>
+                          <span class="price" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                      </div>
+                  </li>
+              </ul>
+              <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3011'">
+                  <li class="cell" ng-repeat=" item in tagProductList['3003']"
+                      ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                      <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                      <div class="desc">
+                          <p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>
+                          <span class="price" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                      </div>
+                  </li>
+              </ul>
+              <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3012'">
+                  <li class="cell" ng-repeat=" item in tagProductList['3005']"
+                      ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                      <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                      <div class="desc">
+                          <p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>
+                          <span class="price" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                      </div>
+                  </li>
+              </ul>
+              <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3013'">
+                  <li class="cell" ng-repeat=" item in tagProductList['3006']"
+                      ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                      <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                      <div class="desc">
+                          <p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>
+                          <span class="price" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                      </div>
+                  </li>
+              </ul>
           </li>
         </ul>
       </div>
