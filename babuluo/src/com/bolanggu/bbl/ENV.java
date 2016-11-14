@@ -5,6 +5,11 @@ package com.bolanggu.bbl;
  */
 public class ENV {
 
+
+
+    //库存阀值
+    public static Double STOCK_OFF = 0.75;
+
     //阿里云KEY
     //public static String ALIYUN_KEY = "LTAImVQlWKQXIQcD";   //jiaorder测试的
     public static String ALIYUN_KEY = "LTAIEHpVQat6f83C";   //BBL客户的
