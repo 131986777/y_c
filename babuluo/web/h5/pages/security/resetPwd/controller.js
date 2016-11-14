@@ -1,9 +1,5 @@
 angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Controller', function ($scope, $state, $stateParams, securityFactory,$interval,userFactory,weUI) {
 
-    /*$scope.loginId = $stateParams.LOGIN_ID;
-    console.log($scope.loginId);*/
-
-
     $scope.checkPwd = function (){
         var pwd= $scope.memberInfo['MEMBER.PWD'];
         var length = pwd.toString().length;
@@ -23,7 +19,7 @@ angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Contr
         var length = phoneNum.toString().length;
         if(length != 11){
             weUI.toast.info('请输入正确的手机号码');
-            return;
+            return false;
 
         }
     }
@@ -45,29 +41,39 @@ angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Contr
 
 
     $scope.sendSms = function (){
-        $('.vcode-btn').fadeOut();
-        $('.vcode-time').fadeIn();
-        $scope.time = 60;
-        $scope.timer = $interval(function () {
-            if($scope.time==0){
-                $('.vcode-btn').fadeIn();
-                $('.vcode-time').fadeOut();
-                $scope.time=60;
-                $interval.cancel($scope.timer);
+        if ($scope.memberInfo['MEMBER.LOGIN_ID'] == '') {
+            weUI.toast.error('请输入手机号');
+        } else {
+            var flag = $scope.ckeckPhone();
+            if (flag == false) {
+                weUI.toast.error('请输入正确手机号');
             }
-            else {
-                $scope.time--;
-            }
-        }, 1000);
+          else {
+                $('.vcode-btn').fadeOut();
+                $('.vcode-time').fadeIn();
+                $scope.time = 60;
+                $scope.timer = $interval(function () {
+                    if($scope.time==0){
+                        $('.vcode-btn').fadeIn();
+                        $('.vcode-time').fadeOut();
+                        $scope.time=60;
+                        $interval.cancel($scope.timer);
+                    }
+                    else {
+                        $scope.time--;
+                    }
+                }, 1000);
 
-        var form ={};
-        form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
-        form['FLAG'] = 0;
-        securityFactory.sendVerificationCode(form, function (response) {
-            weUI.toast.ok('发送成功');
-        }, function (response) {
-            weUI.toast.error(response.msg);
-        });
+                var form ={};
+                form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
+                form['FLAG'] = 0;
+                securityFactory.sendVerificationCode(form, function (response) {
+                    weUI.toast.ok('发送成功');
+                }, function (response) {
+                    weUI.toast.error(response.msg);
+                });
+            }
+        }
     }
 
     $scope.updateInfo = function (){

@@ -1,8 +1,8 @@
 AndSellH5MainModule.service('balanceFactory', function ($resource) {
 
-    this.queryAll = $post($resource,'/member/balance/getAllBalanceList');
+    this.queryByUid = $post($resource,'/member/balance/getBalanceByUid');
 
-    this.queryAccountByUid = $post($resource,'/member/account/querySimpleBalanceInfo');
+    this.queryAccountByUid = $post($resource,'/member/account/queryAccountByUid');
 
     this.updateFinanceList = $post($resource,'/member/balance/add');
 
