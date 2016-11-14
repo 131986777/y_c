@@ -49,7 +49,7 @@
                                   </a>-->
                                 </span>
                 </p>
-                <p class="couponCount">每人限领{{item['COUPON.RULE_INFO']['COUPON_RULE.EACH_MEMBER_LIMIT']}}张（剩余{{item['COUPON.NUM_LEFT']}}张）
+                <p class="couponCount">每人限领{{item['COUPON.RULE_INFO']['COUPON_RULE.EACH_MEMBER_LIMIT']}}张（满{{(item['COUPON.RULE_INFO']['COUPON_RULE.CONDITION_PRICE']/100).toFixed(2)}}元可用）
                     <a class="pull-right" style="color:rgb(255,151,50)" ng-click="addCoupon(item)">立即领取</a>
                 </p>
             </div>
