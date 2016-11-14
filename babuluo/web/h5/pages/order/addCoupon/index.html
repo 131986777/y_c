@@ -10,7 +10,7 @@
                 <p class="couponTime" ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']!=null">有效期至<span>{{item['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']|FormatAllDate}}</span></span>
                 </p>
                 <div class="coupon-value">
-                      <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                    <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
                                     <span>{{(item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}</span>
                                     <span class='valueType'>元</span>
                                 </span>
@@ -57,16 +57,15 @@
 
 </div>
 
-<span ng-if="useableList.length==0" style="display: block; width: 200px; position: relative; left: 50%;margin-left: -100px; text-align: center; top: 300px; font-size: 18px; color:rgb(189,188,187); " >无可用优惠券!</span>
+<span class="no-coupon" ng-if="useableList.length==0"  >无可用优惠券!</span>
 
-<div  style="position:fixed;bottom: 0;right: 0; font-size: 0;">
-    <button class="btn btn-cancel " ng-click="returnOrder()" style="width: 61px; height: 49px; background-color: #a4a4a4; font-size: 18px; color:#ffffff; border-radius: 0px;">
+<div class="coupon-btn">
+    <button class="btn btn-cancel " ng-click="returnOrder()" >
         取消
     </button>
-    <button class="btn btn-default " ng-click="returnData()" style="width: 123px; height: 49px; background-color: #f36f1c; font-size: 18px; color:#ffffff; border-radius: 0px;">
+    <button class="btn btn-confirm btn-default " ng-click="returnData()" >
             确定
         </button>
-
 </div>
 
 

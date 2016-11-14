@@ -57,6 +57,9 @@
     }
 
 
+
+
+
     /**
      * 如果cookie 里面没有openid,
      */
@@ -100,6 +103,7 @@
                     data.put("MEMBER.WX_OPENID", openId);
                     new API().call("/AndSell/bubu/member/member/updateOpenID", data);
 
+                    response.addCookie(new Cookie("hasUpdateOpenId","1"));
                 }
             }
         }

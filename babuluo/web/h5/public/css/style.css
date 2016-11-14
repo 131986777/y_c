@@ -1296,7 +1296,9 @@ p {
   width: 100%;
   padding: 0 15px;
 }
-
+.search-wrap{
+  height: 240px;
+}
 .search-wrap .searchHolder{
   width: 70%;
   height: 32px;
@@ -1516,6 +1518,31 @@ p {
 }
 .product-list-page .weui_navbar_item{
   background-color : #fff;
+}
+.chose-shop{
+  height: 57px;
+  width: 100%;
+  background-color: rgba(0,0,0,0.6);
+  color: #fff;
+  position: fixed;
+  bottom:0;
+  left: 0;
+  z-index:3000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chose-shop .icon-shop{
+  display: inline-block;
+  background: url("../img/icon-shop.png");
+  height: 20px;
+  width: 23px;
+  margin-right: 5px;
+}
+.chose-shop .btn-chose{
+  color: #fff;
+
+  background-color:#f36f1c;
 }
 .card-list,
 .coupon-list{
@@ -1848,4 +1875,34 @@ p {
 .recharge .weui_select{
   height: 22px;
   line-height: 22px;
+}
+.no-coupon{
+  display: block;
+  width: 200px;
+  position: relative;
+  left: 50%;
+  margin-left: -100px;
+  text-align: center;
+  top: 300px;
+  ont-size: 18px;
+  color:rgb(189,188,187);
+}
+.coupon-btn{
+  position:fixed;
+  bottom: 0;
+  right: 0;
+  font-size: 0;
+}
+.coupon-btn button{
+  font-size: 18px;
+  color:#fff;
+  height: 49px;
+}
+.coupon-btn .btn-cancel{
+  width: 61px;
+  background-color: #a4a4a4;
+}
+.coupon-btn .btn-confirm{
+  width: 123px;
+  background-color: #f36f1c;
 }
