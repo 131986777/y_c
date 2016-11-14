@@ -673,7 +673,8 @@ p {
   margin: 0 15px 0 0; }
 .shopping-cart .product-wrap .product-detail {
   padding-right: 20px;
-  vertical-align: top; }
+  vertical-align: top;
+  width:100%;}
 .shopping-cart .product-wrap .product-img {
   width: 89px;
   height: 89px;
