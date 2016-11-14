@@ -32,7 +32,7 @@ angular.module('AndSell.Main').controller('member_member_memberCoupon_Controller
     $scope.addMemberCoupon = function () {
        // console.log($scope.memberId);
         if($scope.memberId==undefined||$scope.memberId==''){
-            modalFactory.showShortAlert('请输入登录名称！');
+            modalFactory.showShortAlert('请输入登录名称并查询相关信息！');
         }else if($scope.memberDetail==undefined){
             modalFactory.showShortAlert('请先查询相关信息');
         }else{
