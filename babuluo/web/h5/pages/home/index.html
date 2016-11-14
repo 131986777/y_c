@@ -41,8 +41,8 @@
 
   <!-- 限时抢购 -->
   <div class="limit" ng-repeat="item in limitList" ng-if="item['is_show']==true" >
-    <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-         style="height: 162px;width: 100%;">
+    <a ng-href="{{item['BANNER.URL']}}"><img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
+         style="height: 162px;width: 100%;" ></a>
     <div class="limit-desc">
       <div class="desc-text">
         <!--<p class="title">阳澄湖大闸蟹蟹券</p>
@@ -62,8 +62,8 @@
 
   <!-- 团购 -->
   <div class="group" ng-repeat="item in groupList" ng-if="item['is_show']==true" >
-    <img ng-if="item['is_show']==true" ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-         style="height: 162px;width: 100%;">
+    <a ng-href="{{item['BANNER.URL']}}"><img ng-if="item['is_show']==true" ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
+         style="height: 162px;width: 100%;" ng-href="{{item['BANNER.URL']}}"></a>
     <div class="group-desc">
       <div class="desc-text">
         <!--<p class="title">阳澄湖大闸蟹蟹券</p>-->
@@ -78,7 +78,7 @@
 
   <!-- 活动专区 -->
   <div class="product-wrap">
-    <div class="headTitle">活动专区</div>
+    <div class="headTitle" ng-if="activityList.length>0">活动专区</div>
     <div class="product-content" ng-repeat="item in activityList">
       <a ng-if="item['is_show']==true" ng-href="{{item['BANNER.URL']}}"><img
           ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
