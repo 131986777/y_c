@@ -54,4 +54,5 @@ public class ENV {
     public static String WX_APPSECRET = "772467ba84f9fb91f579c2855725ddba";
 
 
+    public static String WX_TOKEN_GRANT_TYPE = "client_credential";
 }

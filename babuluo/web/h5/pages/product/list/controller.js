@@ -58,6 +58,8 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     $scope.filterClass = function (classId) {
         $scope.prdList = new Array;
         $scope.filter['SHOP_PRODUCT.CLASS_ID']=classId;
+        $scope.filter['PAGE_SIZE']=10;
+        $scope.filter['PN']=1;
         $scope.getPrd();
     }
 

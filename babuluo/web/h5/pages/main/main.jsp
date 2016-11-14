@@ -29,20 +29,27 @@
     boolean cookieHasOpenId = false;
     String openId = "";
     String loginId = "";
-    for (Cookie cookie : cookies) {
-        if ("openId".equals(cookie.getName())) {
-            openId = cookie.getValue();
-            if (StrUtil.isNotNull(openId)) {
-                cookieHasOpenId = true;
-                break;
+    if(null != cookies){
+        for (Cookie cookie : cookies) {
+            if(null == cookies){
+                continue;
             }
-        }
 
-        if("ANDSELLID".equals(cookie.getName())) {
-            loginId = cookie.getValue();
-        }
+            if ("openId".equals(cookie.getName())) {
+                openId = cookie.getValue();
+                if (StrUtil.isNotNull(openId)) {
+                    cookieHasOpenId = true;
+                    break;
+                }
+            }
 
+            if("ANDSELLID".equals(cookie.getName())) {
+                loginId = cookie.getValue();
+            }
+
+        }
     }
+
 
     /**
      * 如果cookie 里面没有openid,
@@ -81,7 +88,7 @@
 
                 if (StrUtil.isNotNull(loginId)) {
 
-                    Map<String, String> data = new HashMap<String, String>();
+                    Map<String, String> data = new HashMap<String,String>();
 
                     data.put("MEMBER.USER_ID",loginId);
                     data.put("MEMBER.WX_OPENID", openId);
@@ -179,6 +186,10 @@
 <script src="/AndSell/h5/public/libs/cookie.js"></script>
 <script src="/AndSell/h5/public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/AndSell/h5/public/libs/swiper/swiper.jquery.min.js"></script>
+
+<%--微信js sdk--%>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
 
 <!--importantJs -->
 <script src="/AndSell/h5/public/application.js"></script>
