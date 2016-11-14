@@ -1,36 +1,39 @@
 angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', function ($scope, $state, couponFactory, personalFactory, modalFactory) {
 
     modalFactory.setTitle('领券中心');
-    // modalFactory.setBottom(true);
+    modalFactory.setBottom(false);
     $scope.couponSumMap = new Map();
 
     $scope.initData = function () {
-        couponFactory.getCouponList({}, function (response) {
+        console.log('初始化数据');
+        couponFactory.getCouponList().get({}, function (response) {
             $scope.couponList = response.data;
+            console.log($scope.couponList);
         });
         $scope.saveCouponNum();
 
-    }
+    };
 
     $scope.saveCouponNum = function () {
         var member = {};
-        member['MEMBER_COUPON.USER_ID'] = 1000;
-        personalFactory.getCouponListByUser(member, function (response) {
+        personalFactory.getCouponListByUser(member).get({}, function (response) {
             var memberCouponList = response.data;
+            console.log(memberCouponList);
             memberCouponList.forEach(function (ele) {
                 $scope.couponSumMap.set(ele['MEMBER_COUPON.COUPON_ID'], ele['.NUM_COUPON']);  //将客户所拥有的各优惠券的数量存在map中
             });
 
         });
-    }
+    };
 
     $scope.initData();
+
 
     $scope.detailClick = function (item) {
         // $scope.detail = item;
         $scope.detailArray = item.split("<br>");
 
-    }
+    };
 
     $scope.add = {};
     $scope.add['MEMBER_COUPON.COUPON_ID'] = '';
@@ -58,7 +61,7 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
             couponFactory.addMemberCoupon($scope.add, function (response) {
                 couponFactory.modCouponLeft($scope.coupon, function (response) {  //修改优惠券剩余数量
 
-                    weUI.toast.ok('领取成功!')
+                    weUI.toast.ok('领取成功!');
                     $scope.initData();
                     $scope.add = '';
 
@@ -68,17 +71,13 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
             }, function (response) {
                 modalFactory.showShortAlert(response.msg);
             });
-
-        }
-        ;
+        };
 
         $scope.parseArray = function (data) {
             if (data != undefined) {
                 data = data.split(',');
             }
-
             return data;
         }
-
     }
 });
