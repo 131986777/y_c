@@ -24,14 +24,16 @@
                 <tr ng-repeat="item in storeList">
 
                     <!--&lt;!&ndash;<td ng-bind="item['MEMBER_CARD_SOURCE.CARD']"></td>&ndash;&gt;-->
-                    <td></span><span ng-bind="item['STORE.NAME']"></span><span ng-if="item['STORE.IS_DEF']==1">(默认仓库)
+                    <td><span ng-bind="item['STORE.NAME']"></span>
+                        <span ng-if="item['STORE.IS_DEF']==1">(默认仓库)</span>
                     </td>
                     <td ng-bind="item['STORE.CODE']" class="text-center"></td>
                     <td class="text-center">
                         <div>
                             <a type="button" show-modal id="#modifyStore"
                                ng-click="modifyStoreClick(item)">修改</a>
-                            <a type="button" ng-click="deleteStore(item)" ng-if="item['STORE.IS_DEF']==-1">
+                            <a type="button" ng-click="deleteStore(item)"
+                               ng-if="item['STORE.IS_DEF']==-1&&item['STORE.CODE']!=99999">
                                 删除
                             </a>
                         </div>

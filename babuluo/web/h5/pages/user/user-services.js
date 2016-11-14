@@ -8,6 +8,6 @@ AndSellH5MainModule.service('userFactory', function ($resource) {
 
     this.loginOut = $post($resource,'/login/logout');
 
-    this.sendVerificationCode = $post($resource,'/sys/sms/reg');
+    this.sendVerificationCode = $post($resource,'/member/member/queryphone');
 
 });

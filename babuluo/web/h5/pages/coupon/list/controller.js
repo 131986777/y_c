@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', function ($scope, $state, couponFactory, personalFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', function ($scope, $state, couponFactory, personalFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('领券中心');
     modalFactory.setBottom(false);
@@ -6,7 +6,7 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
 
     $scope.initData = function () {
         console.log('初始化数据');
-        couponFactory.getCouponList().get({}, function (response) {
+        couponFactory.getCouponList({}, function (response) {
             $scope.couponList = response.data;
             console.log($scope.couponList);
         });
@@ -16,7 +16,7 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
 
     $scope.saveCouponNum = function () {
         var member = {};
-        personalFactory.getCouponListByUser(member).get({}, function (response) {
+        personalFactory.getCouponListByUser(member, function (response) {
             var memberCouponList = response.data;
             console.log(memberCouponList);
             memberCouponList.forEach(function (ele) {
@@ -29,11 +29,12 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
     $scope.initData();
 
 
-    $scope.detailClick = function (item) {
-        // $scope.detail = item;
-        $scope.detailArray = item.split("<br>");
+    $scope.detailData = function (data) {
 
-    };
+        var str = data.replace(/<br>/g, " ");
+        return str;
+
+    }
 
     $scope.add = {};
     $scope.add['MEMBER_COUPON.COUPON_ID'] = '';
@@ -71,13 +72,14 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
             }, function (response) {
                 modalFactory.showShortAlert(response.msg);
             });
-        };
-
-        $scope.parseArray = function (data) {
-            if (data != undefined) {
-                data = data.split(',');
-            }
-            return data;
         }
+    }
+
+
+    $scope.parseArray = function (data) {
+        if (data != undefined) {
+            data = data.split(',');
+        }
+        return data;
     }
 });
