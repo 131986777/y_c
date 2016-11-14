@@ -12,8 +12,12 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
     //  console.log(response);
       $scope.bannerList={};
       $scope.bannerList = response.data;
+      console.log(response.data);
       $scope.positionList= response.extraData.positionList;
       $scope.positionMap = response.extraData.positionMap;
+
+      $scope.tagList= response.extraData.tagList;
+      $scope.tagMap = response.extraData.tagMap;
 
 
   };
