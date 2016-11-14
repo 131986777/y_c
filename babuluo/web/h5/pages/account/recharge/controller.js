@@ -94,7 +94,7 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
                         };
                         alert(JSON.stringify(formData));
                         orderFactory.queryWXPayResult(formData, function(res) {
-                            // alert('queryWXPayResult');
+                            alert('queryWXPayResult');
                             location.reload();
                         }, function (res) {
                             alert(res.msg);
