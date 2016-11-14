@@ -199,7 +199,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                     var formData = {
                         OUT_TRADE_NO: unifiedJson.out_trade_no,
                         ORDER_ID:$scope.order['SHOP_ORDER.ID'],
-                        TYPE:'ORDER'
+                        TYPE:'ORDER',
+                        CALLBACK:'-1'
                     };
 
 
