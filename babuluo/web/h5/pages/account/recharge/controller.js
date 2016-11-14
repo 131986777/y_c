@@ -65,13 +65,9 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
      */
     function onBridgeReady(postData, unifiedJson) {
 
-        alert('onBridgeReady');
-        alert(postData);
-
-
+        // alert('onBridgeReady');
+        // alert(postData);
         var post = JSON.parse(postData);
-
-
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest', {
                 "appId": post.appId,
@@ -82,13 +78,10 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
                 "paySign": post.paySign
             },
             function (res) {
-                alert(JSON.stringify(res));
-                alert(res.err_msg);
+                // alert(JSON.stringify(res));
+                // alert(res.err_msg);
                 if (res.err_msg == "get_brand_wcpay_request:ok") {
                     $scope.wxPayInfo = "正在查询支付结果,请稍等...";
-                    // $scope.queryWXPayResult();
-
-
                     try {
                         var formData = {
                             OUT_TRADE_NO: unifiedJson.out_trade_no,
@@ -99,19 +92,20 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
                             UID:$scope.uid,
                             FEE:parseInt($scope.balanceInfo['CHANGE_VALUE'] * 100)
                         };
-                        alert(JSON.stringify(formData));
+                        // alert(JSON.stringify(formData));
                         orderFactory.queryWXPayResult(formData, function(res) {
-                            alert('queryWXPayResult');
+                            // alert('queryWXPayResult');
                             location.reload();
                         }, function (res) {
-                            alert(res.msg);
+                            // alert(res.msg);
                         })
                     } catch(err) {
                         alert(err);
                     }
 
                 } else {
-                    alert("支付失败，请重试");
+                    weUI.toast.error("支付失败，请重试");
+                    // alert("支付失败，请重试");
                 }
             }
         );
