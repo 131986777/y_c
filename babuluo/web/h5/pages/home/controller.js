@@ -19,17 +19,12 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     }
 
     $scope.initData = function () {
-        var id = getCookie('currentShop');
-        if (id == undefined || id.trim() == '') {
-            weUI.toast.info('请先选择门店');
-            $state.go('pages/shop');
-        } else {
-            shopFactory.getShopById({'SHOP.SHOP_ID': id}, function (response) {
-                $scope.shopInfo = response.data[0];
-                if ($scope.shopInfo != undefined) {
-                    setCookie('currentShopInfo', JSON.stringify($scope.shopInfo));
-                }
-            });
+
+        $scope.STORE_ID = 0 ;
+
+        if (getCookie('currentShop') != undefined) {
+            $scope.shopInfo= ToJson(getCookie('currentShopInfo'));
+            $scope.STORE_ID=$scope.shopInfo['SHOP.REPOS_ID'];
         }
 
         var params = {}
@@ -285,6 +280,11 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             / 1000);
 
     }
+
+    $scope.toShop= function () {
+        $state.go('pages/shop',{'FROM':window.location.href});
+    }
+
 
     $scope.$on('destroy', function () {
         $interval.cancel($scope.timer);
