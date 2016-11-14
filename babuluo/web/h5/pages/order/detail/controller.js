@@ -62,12 +62,12 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             var formData = {
                 PRODUCT_ID: $scope.order['SHOP_ORDER.ID'],
                 FEE: moneyToFee($scope.order['SHOP_ORDER.PRICE_OVER']),
-                BODY: '订单详情',
+                BODY: '订单' + $scope.order['SHOP_ORDER.ID'],
                 OPENID: openId,
                 IP: ip,
-                ORDER_ID:$scope.order['SHOP_ORDER.ID']
+                ORDER_ID: $scope.order['SHOP_ORDER.ID'],
+                TYPE:'ORDER'
             };
-
 
 
             wxPay(formData);
@@ -112,8 +112,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                     document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
                 }
             } else {
-                console.log(response);
-                onBridgeReady(response.extraData.returnMap);
+                onBridgeReady(response.extraData.unifiedOrderJsonResult, response.extraData.returnMap);
             }
 
         }, function (res) {
@@ -122,7 +121,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     }
 
 
-    function queryWxPayResult () {
+    function queryWxPayResult() {
 
     }
 
@@ -172,13 +171,14 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
      * 微信支付JSAPI调用
      * * @param postData
      */
-    function onBridgeReady(postData) {
+    function onBridgeReady(postData, unifiedJson) {
 
-        if (postData == null) {
-            alert('postData == null');
-        }
+        alert('onBridgeReady');
+        alert(postData);
+
 
         var post = JSON.parse(postData);
+
 
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest', {
@@ -190,11 +190,30 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 "paySign": post.paySign
             },
             function (res) {
+                alert(JSON.stringify(res));
+                alert(res.err_msg);
                 if (res.err_msg == "get_brand_wcpay_request:ok") {
                     $scope.wxPayInfo = "正在查询支付结果,请稍等...";
-                    $scope.queryWXPayResult();
+                    // $scope.queryWXPayResult();
+
+                    var formData = {
+                        OUT_TRADE_NO: unifiedJson.out_trade_no,
+                        ORDER_ID:$scope.order['SHOP_ORDER.ID'],
+                        TYPE:'ORDER',
+                        CALLBACK:'-1'
+                    };
+
+
+                    alert(JSON.stringify(formData));
+
+                    orderFactory.queryWXPayResult(formData, function(res) {
+                        alert('queryWXPayResult');
+                        location.reload();
+                    }, function (res) {
+                        alert(res.msg);
+                    })
                 } else {
-                    alert("支付失败，请重新下单");
+                    alert("支付失败，请重试");
                 }
             }
         );

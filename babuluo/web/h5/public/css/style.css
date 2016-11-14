@@ -1287,6 +1287,9 @@ p {
 /*# sourceMappingURL=style.css.map */
 
 /*首页样式*/
+::-moz-placeholder { color: #fff; }
+::-webkit-input-placeholder { color:#fff; }
+:-ms-input-placeholder { color:#fff; }
 .serch-wrap{
   position: relative;
 }
@@ -1304,7 +1307,7 @@ p {
   height: 32px;
   padding-left: 8px;
   border-radius: 5px;
-  background-color: rgba(117,113,113,0.3);
+  background-color: rgba(255,255,255,0.6);
   position: relative;
 
 }
@@ -1316,7 +1319,7 @@ p {
 }
 .search-wrap input{
   position: absolute;
-  top: 4px;
+  top: 5px;
   background-color: transparent;
   color: #fff;
   border:none;
