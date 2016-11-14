@@ -25,5 +25,7 @@ $import('pages/user/accountLogin');
 $import('pages/account/balance');
 $import('pages/account/recharge');
 $import('pages/security/resetPwd');
+$import('pages/user/SetPassword',{LOGIN_ID:'0'});
+
 
 
