@@ -1,4 +1,5 @@
 <div class="card-list">
+    <span ng-if="cardList.length==0" class="no-coupon">你暂无会员卡！</span>
     <div ng-repeat="cl in cardList" class="card-wrap" ng-style="cl['MEMBER_CARD.CARD_STYLE']">
         <div class="card-head flexbox">
             <div class="cardNum cell">
