@@ -65,7 +65,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 BODY: '订单' + $scope.order['SHOP_ORDER.ID'],
                 OPENID: openId,
                 IP: ip,
-                ORDER_ID: $scope.order['SHOP_ORDER.ID']
+                ORDER_ID: $scope.order['SHOP_ORDER.ID'],
+                TYPE:'ORDER'
             };
 
 
@@ -111,8 +112,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                     document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
                 }
             } else {
-                console.log(response);
-                onBridgeReady(response.extraData.unifiedOrderJsonResult);
+                onBridgeReady(response.extraData.unifiedOrderJsonResult, response.extraData.returnMap);
             }
 
         }, function (res) {
@@ -198,10 +198,15 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
                     var formData = {
                         OUT_TRADE_NO: unifiedJson.out_trade_no,
-                        ORDER_ID:$scope.order['SHOP_ORDER.ID']
+                        ORDER_ID:$scope.order['SHOP_ORDER.ID'],
+                        TYPE:'ACCOUNT'
                     };
+                    
 
-                    orderFactory.wxPayUndefinedOrder(formData, function(res) {
+                    alert(JSON.stringify(formData));
+
+                    orderFactory.queryWXPayResult(formData, function(res) {
+                        alert('queryWXPayResult');
                         window.location.reload();
                     })
                 } else {

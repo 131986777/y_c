@@ -23,6 +23,9 @@
     String reqXml = WXPay.getPostStr(request);
 
 
+    System.out.println("wxPayCallback.jsp 666");
+    System.out.println(reqXml);
+
     Map<String, String> payResultMap = WXPay.parseXmlToMap(reqXml);
 
     if (null != payResultMap) {
@@ -31,13 +34,15 @@
             if ("SUCCESS".equals(payResultMap.get("result_code"))) {
                 int orderId = StrUtil.getNotNullIntValue(payResultMap.get("out_trade_no"));
 
+
                 if (orderId > 0) {
                     /**
                      * 支付成功, 调用接口通知订单更新
                      */
-
+                    int fee = StrUtil.getNotNullIntValue(payResultMap.get("total_fee"));
                     Map<String, String> params = new HashMap<>();
                     params.put("OUT_TRADE_NO", orderId + "");
+                    params.put("FEE", fee + "");
                     params.put("CALLBACK", "1");
                     new API().call("/wx/pay/wxpayCallback", params);
                     result = true;
