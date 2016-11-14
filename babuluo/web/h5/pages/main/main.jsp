@@ -81,7 +81,7 @@
 
                 if (StrUtil.isNotNull(loginId)) {
 
-                    Map<String, String> data = new HashMap<String, String>();
+                    Map<String, String> data = new HashMap<>();
 
                     data.put("MEMBER.USER_ID",loginId);
                     data.put("MEMBER.WX_OPENID", openId);
@@ -179,6 +179,10 @@
 <script src="/AndSell/h5/public/libs/cookie.js"></script>
 <script src="/AndSell/h5/public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/AndSell/h5/public/libs/swiper/swiper.jquery.min.js"></script>
+
+<%--微信js sdk--%>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
 
 <!--importantJs -->
 <script src="/AndSell/h5/public/application.js"></script>
