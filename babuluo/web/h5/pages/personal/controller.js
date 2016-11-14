@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_personal_Controller', function (userFactory,$scope, $state, modalFactory,balanceFactory) {
+angular.module('AndSell.H5.Main').controller('pages_personal_Controller', function (userFactory,$scope, $state, personalFactory,modalFactory,weUI,balanceFactory) {
 
     modalFactory.setTitle('我的');
     modalFactory.setBottom(true);
@@ -29,10 +29,25 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
         });
     }
 
+    $scope.getPhone = function (uid) {
+        var form = {};
+        form['MEMBER.USER_ID'] = uid
+        personalFactory.getPhone(form, function (response) {
+            console.log(response);
+            $scope.phone = response.data[0]['MEMBER.MOBILE'];
+            console.log($scope.phone);
+        }, function (response) {
+            weUI.toast.error(response.msg);
+        });
+    }
+
     $scope.initLoad  = function () {
         $scope.uid = getCookie('ANDSELLID');
         $scope.queryAccount($scope.uid);
+        $scope.getPhone($scope.uid);
     }
 
     $scope.initLoad();
+    
+
 });

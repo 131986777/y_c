@@ -128,6 +128,21 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
+                            商品标签
+                        </label>
+
+                        <div class="col-md-8">
+                            <select ng-model="add['BANNER.TAG_ID']"
+                                    ng-init="add['BANNER.TAG_ID']=''"
+                                    class="nya-bs-select form-control"
+                                    ng-options="item['SHOP_TAG.TAG_ID'] as item['SHOP_TAG.TAG'] for item in tagList ">
+                                <option class="nya-bs-option" value="">选择商品标签</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
                            图片
                         </label>
 
@@ -242,6 +257,20 @@
                                     class="nya-bs-select form-control"
                                     ng-options="item['BANNER_POSITION.ID'] as item['BANNER_POSITION.NAME'] for item in positionList ">
                                 <option class="nya-bs-option" value="">选择横幅位置</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            商品标签
+                        </label>
+
+                        <div class="col-md-8">
+                            <select ng-model="mod['BANNER.TAG_ID']"
+                                    class="nya-bs-select form-control"
+                                    ng-options="item['SHOP_TAG.TAG_ID'] as item['SHOP_TAG.TAG'] for item in tagList ">
+                                <option class="nya-bs-option" value="">选择商品标签</option>
 
                             </select>
                         </div>

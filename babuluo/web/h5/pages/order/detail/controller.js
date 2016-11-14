@@ -56,7 +56,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
          * 如果是需要微信支付的类型
          * 调用微信统一下单的接口
          */
-        if ($scope.order['SHOP_ORDER.TYPE'] == '1') {
+        if ($scope.order['SHOP_ORDER.PAY_TYPE'] == 'WEIXIN') {
             var ip = getCookie('ip');
             var openId = getCookie('openId');
             var formData = {
@@ -69,10 +69,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 TYPE:'ORDER'
             };
 
-
             wxPay(formData);
 
-        } else if ($scope.order['SHOP_ORDER.TYPE'] == '3') {
+        } else if ($scope.order['SHOP_ORDER.PAY_TYPE'] == 'ACCOUNT') {
             weUI.dialog.alert("提示", "确认支付该订单", function () {
                 orderFactory.payOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
                     weUI.toast.ok('支付成功');
