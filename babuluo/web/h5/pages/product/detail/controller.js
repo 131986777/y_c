@@ -23,8 +23,10 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
 
         var params={};
         params['SHOP_PRODUCT.PRD_ID']=$stateParams.PRD_ID;
+        $scope.STORE_ID = 0 ;
         if(getCookie('currentShopInfo')!=undefined){
             params['STOCK_REALTIME.STORE_ID']=JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
+            $scope.STORE_ID=params['STOCK_REALTIME.STORE_ID'];
         }
         productFactory.getProductAllInfoById(params, function (response) {
             $scope.product = response.data[0];
@@ -292,6 +294,10 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         } else {
             weUI.toast.info('请选择规格！');
         }
+    }
+
+    $scope.toShop= function () {
+        $state.go('pages/shop',{'FROM':window.location.href});
     }
 
     //数量减

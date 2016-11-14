@@ -47,12 +47,18 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
         $scope.cookieShopIdList.push(shop['SHOP.SHOP_ID']);
         setCookie('recentShopList',$scope.cookieShopIdList.toString());
 
-        if($stateParams.FROM=='')
-            $state.go('pages/home');
-        else{
-            window.location.href=$stateParams.FROM;
-        }
+        shopFactory.getShopById({'SHOP.SHOP_ID':shop['SHOP.SHOP_ID']}, function (response) {
+            $scope.shopInfo = response.data[0];
+            if ($scope.shopInfo != undefined) {
+                setCookie('currentShopInfo', JSON.stringify($scope.shopInfo));
+            }
 
+            if($stateParams.FROM=='')
+                $state.go('pages/home');
+            else{
+                window.location.href=$stateParams.FROM;
+            }
+        });
     }
 
     $scope.chooseDistrict = function (districtId, districtName) {
