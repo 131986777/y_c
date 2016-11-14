@@ -1,0 +1,50 @@
+{
+  "aop": {},
+  "data": {},
+  "execute": {
+    "query": {
+      "CACHE": "redis",
+      "CACHE_RELOAD": "",
+      "CACHE_UPDATE": "",
+      "DB": "bubu",
+      "IS_BATCH": "",
+      "IS_ROLLBACK": "",
+      "SQL": {
+        "COLUMN": [
+          "*"
+        ],
+        "DB": "bubu",
+        "DESC": "",
+        "GROUP": "",
+        "HAVING": "",
+        "KV": [],
+        "LEFT_JOIN": [],
+        "LIMIT": "",
+        "ORDER": "",
+        "PAGE": "",
+        "SQL": "",
+        "TABLE": "",
+        "TYPE": "SELECT",
+        "VALUES": "",
+        "WHERE": []
+      }
+    }
+  },
+  "return": {
+    "param": {},
+    "row_column": [
+      "*"
+    ],
+    "row_column_filter": [],
+    "url": ""
+  },
+  "table": [
+    "aop_center"
+  ],
+  "validate": {
+    "def": {},
+    "isNull": {},
+    "isNum": {},
+    "length": 0
+  }
+}
