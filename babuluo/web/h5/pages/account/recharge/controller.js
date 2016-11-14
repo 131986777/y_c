@@ -37,7 +37,7 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
 
 
     function wxPay(formData) {
-        balanceFactory.addBalanceByWxPay(formData, function (response) {
+        orderFactory.wxPayUndefinedOrder(formData, function (response) {
 
             console.log(response);
             if (typeof WeixinJSBridge == "undefined") {
