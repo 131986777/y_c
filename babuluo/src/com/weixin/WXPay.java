@@ -76,6 +76,7 @@ public class WXPay {
         }
         //微信返回结果里面吗没有这个 为了订单查询方便人添加
         resultMap.put("out_trade_no", paramMap.get("out_trade_no"));
+        resultMap.put("resultXML", resultXML);
         return resultMap;
     }
 
