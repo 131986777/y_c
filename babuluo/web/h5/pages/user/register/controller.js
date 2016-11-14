@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', function ($scope, $state, $stateParams, userFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', function ($scope, $state, $stateParams, $interval,userFactory, modalFactory, weUI) {
 
     modalFactory.setBottom(true);
 
@@ -44,21 +44,6 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
 
 
     $scope.sendSms = function () {
-        $('.vcode-btn').fadeOut();
-        $('.vcode-time').fadeIn();
-        $scope.time = 60;
-        $scope.timer = $interval(function () {
-            if($scope.time==0){
-                $('.vcode-btn').fadeIn();
-                $('.vcode-time').fadeOut();
-                $scope.time=60;
-                $interval.cancel($scope.timer);
-            }
-            else {
-                $scope.time--;
-            }
-        }, 1000);
-
         if ($scope.memberInfo['MEMBER.LOGIN_ID'] == '') {
             weUI.toast.error('请输入手机号');
         } else {
@@ -66,6 +51,20 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
             if (flag == false) {
                 weUI.toast.error('请输入正确手机号');
             } else {
+                $('.vcode-btn').fadeOut();
+                $('.vcode-time').fadeIn();
+                $scope.time = 60;
+                $scope.timer = $interval(function () {
+                    if($scope.time==0){
+                        $('.vcode-btn').fadeIn();
+                        $('.vcode-time').fadeOut();
+                        $scope.time=60;
+                        $interval.cancel($scope.timer);
+                    }
+                    else {
+                        $scope.time--;
+                    }
+                }, 1000);
                 var form = {};
                 form['FLAG'] =1;
                 form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
