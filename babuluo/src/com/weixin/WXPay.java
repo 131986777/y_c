@@ -9,12 +9,9 @@ import com.pabula.fw.exception.DataAccessException;
 import com.tencent.common.MD5;
 import com.tencent.common.XMLParser;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -55,7 +52,7 @@ public class WXPay {
             e.printStackTrace();
         }
         paramMap.put("total_fee", fee + ""); //金额 以分为单位
-        paramMap.put("notify_url", WxPayConfig.WX_PAY_REBACK + "wxpay"); //回调地址
+        paramMap.put("notify_url", ENV.WX_PAY_RESULT_CALLBACK_URL); //回调地址
         paramMap.put("appid", ENV.WX_APPID); //appid
         paramMap.put("mch_id", ENV.WX_MCHID); //商户号
         paramMap.put("nonce_str", RandomUtil.getRandomStringByLength(32));  //随机码
@@ -81,6 +78,61 @@ public class WXPay {
     }
 
 
+    /**
+     * 从ioInput 里面获取参数信息
+     * @param request
+     * @return
+     */
+    public static String getPostStr(javax.servlet.http.HttpServletRequest request) {
+
+        BufferedInputStream bis = null;
+        StringBuffer reqXml = new StringBuffer();
+
+        try{
+            bis = new BufferedInputStream(request.getInputStream());
+            byte[] buff = new byte[1024];
+            int readSize = 0;
+            try {
+                while ((readSize = bis.read(buff, 0, 1)) != -1) {
+                    reqXml.append(new String(buff,0, readSize,"UTF-8"));
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                bis.close();
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("³öÏÖioÒì³£");
+        }
+        return reqXml.toString();
+    }
+
+
+    /**
+     * 把微信的xml结果转换成map
+     * @param xml
+     * @return
+     */
+    public static Map<String, Object> getWxPayResult(String xml) {
+
+        if (StrUtil.isNull(xml)) {
+            return null;
+        }
+        try {
+            Map<String, Object> result = XMLParser.getMapFromXML(xml);
+
+            return result;
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 
 
     public static void addUnifiedOrderData(Map<String, Object> resultMap, String resultXML, HashMap<String, String> paramMap) {
@@ -115,20 +167,17 @@ public class WXPay {
      * 订单查询
      *
      * @param out_trade_no
-     * @param appid
-     * @param mch_id
-     * @param key
      * @return
      */
-    public static Map<String, Object> queryOrder(String out_trade_no, String appid, String mch_id, String key) {
+    public static Map<String, Object> queryOrder(String out_trade_no) {
 
         HashMap<String, String> paramMap = new HashMap();
         paramMap.put("out_trade_no", out_trade_no);
-        paramMap.put("appid", appid);
-        paramMap.put("mch_id", mch_id);
+        paramMap.put("appid", ENV.WX_APPID);
+        paramMap.put("mch_id", ENV.WX_MCHID);
         paramMap.put("nonce_str", RandomUtil.getRandomStringByLength(32));
 
-        String checkSign = wxPaySign(paramMap, key);
+        String checkSign = wxPaySign(paramMap, ENV.WX_KEY);
         String params = wxPayUnifiedOrderPostXml(paramMap, checkSign);
         System.out.println("上传结果 ：" + params);
         String res = HttpUtil.sendHttpsPOST(WxPayConfig.WX_PAY_QUERYORDER, params);
