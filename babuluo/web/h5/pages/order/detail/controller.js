@@ -103,7 +103,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
             console.log(response);
             if (typeof WeixinJSBridge == "undefined") {
-                alert('WeixinJSBridge == null');
+                // alert('WeixinJSBridge == null');
                 if (document.addEventListener) {
                     document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
                 } else if (document.attachEvent) {
@@ -171,14 +171,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
      * * @param postData
      */
     function onBridgeReady(postData, unifiedJson) {
-
-        alert('onBridgeReady');
-        alert(postData);
-
-
+        // alert('onBridgeReady');
+        // alert(postData);
         var post = JSON.parse(postData);
-
-
         WeixinJSBridge.invoke(
             'getBrandWCPayRequest', {
                 "appId": post.appId,
@@ -189,30 +184,26 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 "paySign": post.paySign
             },
             function (res) {
-                alert(JSON.stringify(res));
-                alert(res.err_msg);
+                // alert(JSON.stringify(res));
+                // alert(res.err_msg);
                 if (res.err_msg == "get_brand_wcpay_request:ok") {
                     $scope.wxPayInfo = "正在查询支付结果,请稍等...";
-                    // $scope.queryWXPayResult();
-
                     var formData = {
                         OUT_TRADE_NO: unifiedJson.out_trade_no,
                         ORDER_ID:$scope.order['SHOP_ORDER.ID'],
                         TYPE:'ORDER',
                         CALLBACK:'-1'
                     };
-
-
-                    alert(JSON.stringify(formData));
-
+                    // alert(JSON.stringify(formData));
                     orderFactory.queryWXPayResult(formData, function(res) {
-                        alert('queryWXPayResult');
+                        // alert('queryWXPayResult');
                         location.reload();
                     }, function (res) {
                         alert(res.msg);
+                        location.reload();
                     })
                 } else {
-                    alert("支付失败，请重试");
+                    weUI.toast.error("支付失败，请重试");
                 }
             }
         );
