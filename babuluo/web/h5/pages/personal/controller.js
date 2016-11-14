@@ -40,11 +40,23 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
             weUI.toast.error(response.msg);
         });
     }
+    $scope.getCouponSum= function (uid) {
+        var form = {};
+        form['MEMBER_COUPON.USER_ID'] = uid
+        personalFactory.getCoupon(form, function (response) {
+            console.log(response);
+            $scope.coupon = response.data;
+
+        }, function (response) {
+            weUI.toast.error(response.msg);
+        });
+    }
 
     $scope.initLoad  = function () {
         $scope.uid = getCookie('ANDSELLID');
         $scope.queryAccount($scope.uid);
         $scope.getPhone($scope.uid);
+        $scope.getCouponSum($scope.uid);
     }
 
     $scope.initLoad();
