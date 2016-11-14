@@ -82,6 +82,7 @@ angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Contr
         form['MEMBER.PWD'] = $scope.memberInfo['MEMBER.PWD'];
         securityFactory.updataMemberInfo(form, function (response) {
             weUI.toast.ok('密码修改成功');
+            $state.go('pages/user/accountLogin');
         },function(response){
             weUI.toast.error(response.msg);
         });

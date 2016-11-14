@@ -55,7 +55,7 @@ angular.module('AndSell.H5.Main').controller('pages_user_SetPassword_Controller'
             weUI.toast.ok('密码修改成功');
         },function(response){
             weUI.toast.error(response.msg);
-            $state.go('pages/personal');
+            $state.go('pages/user/accountLogin');
         });
     }
 
