@@ -1,8 +1,17 @@
 <div class="recharge">
 	<div class="weui_cells weui_cells_form">
-            <div class="weui_cell">
+
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <label class="weui_label">当前金额:</label>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <span>{{balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] | currency : '￥'}}</span>
+            </div>
+        </div>
+        <div class="weui_cell">
                 <div class="weui_cell_hd">
-                    <label class="weui_label">金额(元):</label>
+                    <label class="weui_label">充值金额:</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
                     <input class="weui_input" type="text"
@@ -10,7 +19,7 @@
                 </div>
             </div>
 
-            <div class="weui_cell">
+        <div class="weui_cell">
                 <div class="weui_cell_hd">
                     <label class="weui_label">充值方式:</label>
                 </div>
@@ -19,21 +28,9 @@
                         <option value="0">微信</option>
                         <option value="1">支付宝</option>
                     </select>
-                
                 </div>
             </div>
-
-            <div class="weui_cell">
-            <div class="weui_cell_hd">
-                <label class="weui_label">余额(元):</label>
-            </div>
-            <div class="weui_cell_bd weui_cell_primary">
-                <span></span>
-            </div>
-        </div>
-
-
-        </div>
+    </div>
 
         <div class="reminder">
         	<p>温馨提示：</p>
