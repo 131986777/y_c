@@ -7,7 +7,7 @@
     <div class="weui_cells weui_cells_form">
         <div class="weui_cell">
             <div class="weui_cell_bd">
-                <input class="weui_input" type="tel" placeholder="手机号" ng-init="memberInfo['MEMBER.LOGIN_ID'] =''" ng-model="memberInfo['MEMBER.LOGIN_ID']" ng-blur="ckeckPhone()">
+                <input class="weui_input" type="tel" placeholder="手机号" ng-init="memberInfo['MEMBER.LOGIN_ID'] =''" ng-model="memberInfo['MEMBER.LOGIN_ID']" ng-blur="ckeckPhone()" ng-change="showColor()">
             </div>
         </div>
 

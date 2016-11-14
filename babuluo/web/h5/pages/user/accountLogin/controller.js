@@ -4,7 +4,9 @@ angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller
     modalFactory.setBottom(false);
 
     $scope.login = function () {
+        alert('+++');
         var form = $scope.memberInfo;
+        console.log(form);
         userFactory.login(form, function (response) {
             weUI.toast.info('登录成功');
             $state.go('pages/home');
@@ -12,7 +14,6 @@ angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller
             weUI.toast.error(response.msg);
         });
     }
-
 });
 
 
