@@ -8,11 +8,11 @@
                 </h5>
                 <div class="personal-info flexbox">
                     <div class="points cell">
-                        <span class="num">150</span>
+                        <span class="num">{{balanceInfo[0]['MEMBER_ACCOUNT.POINT']}}</span>
                         <p class="personal-info-txt">用户积分</p>
                     </div>
                     <div class="points cell">
-                        <span class="num">150</span>
+                        <span class="num">{{balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']}}</span>
                         <p class="personal-info-txt">账户余额</p>
                     </div>
                     <div class="points cell">
@@ -75,7 +75,7 @@
                 </a>
                 <a ui-sref="pages/account/balance" class="weui_cell">
                     <div class="weui_cell_hd">
-                        <i class="icon icon-membership-card"></i>
+                        <i class="icon icon-collected"></i>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
                         账户资金明细
@@ -84,10 +84,10 @@
                 </a>
                 <a ui-sref="pages/account/recharge" class="weui_cell">
                     <div class="weui_cell_hd">
-                        <i class="icon icon-membership-card"></i>
+                        <i class="icon icon-home"></i>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        充值
+                        账户充值
                     </div>
                     <div class="weui_cell_ft"></div>
                 </a>

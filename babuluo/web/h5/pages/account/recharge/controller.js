@@ -10,8 +10,8 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
         var form = {};
         form['MEMBER_ACCOUNT.USER_ID'] = uid;
         balanceFactory.queryAccountByUid(form, function (response) {
+            console.log(response);
             $scope.balanceInfo = response.data;
-            $scope.balance = $scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'];
             $scope.serviceId = $scope.balanceInfo[0]['MEMBER_ACCOUNT.SERVICE_ID'];
         }, function (response) {
             weUI.toast.error(response.msg);
@@ -19,7 +19,13 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
     }
 
     $scope.updateBalance  = function (){
+        if($scope.balanceInfo['CHANGE_VALUE'] = undefined){
+            weUI.toast.error('请输入充值金额');
+        }else if($scope.addressType = undefined){
+            weUI.toast.error('请选择充值方式');
+        }
         var form = {};
+        form['FINANCE_LIST.BALANCE'] = $scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'];
         form['FINANCE_LIST.SERVICE_ID'] =$scope.serviceId;
         form['FINANCE_LIST.USER_ID'] = $scope.uid;
         form['FINANCE_LIST.CHANGE_VALUE'] = $scope.balanceInfo['CHANGE_VALUE'];
@@ -30,17 +36,14 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
             form['FINANCE_LIST.EVENT'] = '支付宝充值';
         }
         form['FINANCE_LIST.CHANGE_TYPE'] = 'increase';
-        form['FINANCE_LIST.BALANCE']=$scope.balance + $scope.balanceInfo['CHANGE_VALUE'];
-
-
         balanceFactory.updateFinanceList(form, function (response) {
+            console.log(form);
             weUI.toast.ok('充值成功');
             $state.go('pages/account/balance');
         }, function (response) {
             weUI.toast.error(response.msg);
         });
     }
-
     $scope.initLoad();
 });
 
