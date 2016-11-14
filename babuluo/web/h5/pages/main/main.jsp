@@ -27,19 +27,16 @@
     String code = request.getParameter("code");
 
     boolean cookieHasOpenId = false;
+
     String openId = "";
     String loginId = "";
     if(null != cookies){
         for (Cookie cookie : cookies) {
-            if(null == cookies){
-                continue;
-            }
 
             if ("openId".equals(cookie.getName())) {
                 openId = cookie.getValue();
                 if (StrUtil.isNotNull(openId)) {
                     cookieHasOpenId = true;
-                    break;
                 }
             }
 
@@ -63,7 +60,7 @@
              * 根据code 获取openid
              */
 
-            String url = OAuthUtil.getURLByOAuth("http://localhost:8080/AndSell/h5/pages/main/main.jsp");
+            String url = OAuthUtil.getURLByOAuth("http://h5.bblycyz.com/AndSell/h5/pages/main/main.jsp");
 
 //            String url = "main.jsp?code=1234";
 
@@ -95,8 +92,6 @@
                     new API().call("/AndSell/bubu/member/member/updateOpenID", data);
 
                 }
-
-
             }
         }
     }
