@@ -23,6 +23,8 @@ public class Kucun {
         map.put("nodecode",meidianID);
         map.put("goodsCode",prdID);
 
+        System.err.println("MAP: " + map.toString());
+
         String returnStr = HttpClientUtil.doPost(url,map);
 
 
@@ -30,6 +32,10 @@ public class Kucun {
 
         return returnStr;
 
+    }
+
+    public static void main(String[] args) throws IOException {
+       tongbu();
     }
 
 
@@ -41,15 +47,16 @@ public class Kucun {
         API api = new API();
 
         try {
-            List<JSONObject> mendianObj = api.call("/shop/shop/queryAll").getData();
-            for(int i = 0;i<10;i++){
+//            List<JSONObject> mendianObj = api.call("/shop/shop/queryAll").getData();
+//            for(int i = 0;i<mendianObj.size();i++){
 
-                String mendianID = (String)mendianObj.get(i).get("SHOP.SHOP_ID");
+                //String mendianID = (String)mendianObj.get(i).get("SHOP.SHOP_ID");
+                String mendianID = "100012";
                 System.err.println("mendian: " + mendianID);
 
                 List<JSONObject> skuDatal = api.call("/shop/product/sku/queryAll").getData();
 
-                for(int j = 0;j<10;j++){
+                for(int j = 0;j<skuDatal.size();j++){
 
                     String prdID = (String)skuDatal.get(j).get("SHOP_PRODUCT_SKU.PRD_ID");
                     String mendianPRIID = (String)skuDatal.get(j).get("SHOP_PRODUCT_SKU.PRD_SKU");
@@ -58,18 +65,28 @@ public class Kucun {
                     String returnStr = run(mendianID,mendianPRIID);
                     JSONObject returnJSOn = JSONObject.parseObject(returnStr);
 
-                    ///  更新库存与价格
-                    HashMap map = new HashMap();
-                    map.put("SHOP_ID",mendianID);
-                    map.put("SKU_ID",skuID);
-                    map.put("PRD_ID",prdID);
-                    map.put("COUNT",returnJSOn.get("stockAmount"));
-                    map.put("PRICE",returnJSOn.getDouble("salePice")*100);
-                    api.call("/stock/realtime/updateStockAndPrice",map);
+                    if(returnJSOn.get("errMsg").equals("")){
+
+                        returnJSOn = (JSONObject)returnJSOn.getJSONArray("goodsInfos").get(0);
+
+                        ///  更新库存与价格
+                        HashMap map = new HashMap();
+                        map.put("SHOP_ID",mendianID);
+                        map.put("SKU_ID",mendianPRIID);
+                        map.put("PRD_ID",prdID);
+                        map.put("COUNT",returnJSOn.get("stockAmount"));
+                        map.put("PRICE",returnJSOn.getDouble("salePrice")*100);
+                        System.err.println("PPPP: " + returnJSOn.getDouble("salePrice")*100);
+                        api.call("/stock/realtime/updateStockAndPrice",map);
+                    }else{
+                        System.err.println("百年接口错误: " + returnStr);
+                    }
+
+
 
 
                 }
-            }
+//            }
         } catch (RuleException e) {
             e.printStackTrace();
         }
