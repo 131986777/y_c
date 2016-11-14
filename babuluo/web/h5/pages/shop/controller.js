@@ -46,7 +46,11 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
         $scope.cookieShopIdList.push(shop['SHOP.SHOP_ID']);
         setCookie('recentShopList',$scope.cookieShopIdList.toString());
 
-        $state.go('pages/home');
+        if($stateParams.FROM=='')
+            $state.go('pages/home');
+        else{
+            window.location.href=$stateParams.FROM;
+        }
 
     }
 
