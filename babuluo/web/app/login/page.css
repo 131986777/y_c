@@ -51,9 +51,11 @@
       margin-bottom: 30px;
       border-radius: 2px; }
       .login .login_form input.username {
-        background-image: url(../components/images/login_username.png); }
+        background-image: url(../components/images/login_username.png);
+        z-index:99999;}
       .login .login_form input.password {
         background-image: url(../components/images/login_password.png);
+        z-index:99999;
         margin-bottom: 0; }
     .login .login_form a {
       font-size: 14px;
