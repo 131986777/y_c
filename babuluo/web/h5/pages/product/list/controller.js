@@ -10,7 +10,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         if(getCookie('currentShopInfo')!=undefined){
             $scope.STORE_ID= ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']};
         $scope.filter = {
-            PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'SHOP_PRODUCT.CLASS_ID': $stateParams.classId,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID
+            PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'SHOP_PRODUCT.CLASS_ID': $stateParams.classId,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID,'SHOP_PRODUCT.REMARK':'offLine'
         };
         $scope.storeId=$scope.STORE_ID;
         $scope.hasNextPage=true;
