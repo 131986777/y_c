@@ -80,11 +80,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
         // 设置轮播图图片间隔
         $scope.myInterval = 4000;
-        // 轮播图数据初始化
-        $scope.slides = new Array;
-        // 添加轮播图源
-        $scope.slides.push({image: 'http://img1.gtimg.com/9/910/91061/9106175_980x1200_960.jpg'});
-        $scope.slides.push({image: 'http://files.15w.com/image/2015/0621/14348708842995.png'});
+
 
         shopFactory.getBannerList({}, function (response) {    //横幅列表
             console.log(response.data);
