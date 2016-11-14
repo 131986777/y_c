@@ -198,11 +198,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                     };
                     // alert(JSON.stringify(formData));
                     orderFactory.queryWXPayResult(formData, function(res) {
-                        alert(JSON.stringify(res));
-                         alert('queryWXPayResult');
+                        // alert(JSON.stringify(res));
+                        //  alert('queryWXPayResult');
                         location.reload();
                     }, function (res) {
-                        alert(res.msg);
+                        // alert(res.msg);
                         location.reload();
                     })
                 } else {

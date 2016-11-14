@@ -37,6 +37,9 @@
 
 
 
+
+
+
     String openId = "";
     String loginId = "";
     if(null != cookies){
@@ -110,6 +113,17 @@
     }
 
 
+
+    String path = request.getServletPath();
+
+
+    boolean hasMoreParam = request.getParameterNames().hasMoreElements();
+
+    if (!hasMoreParam) {
+        String url = "http://h5.bblycyz.com/AndSell/h5/pages/main/main.jsp".replace(path, path + "?t=1");
+        response.sendRedirect(url);
+        return;
+    }
 
 
 
