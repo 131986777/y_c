@@ -1,46 +1,39 @@
 angular.module('AndSell.H5.Main').controller('pages_account_balance_Controller', function ($scope, $state, $stateParams, balanceFactory) {
 
 
-    $scope.initLoad  = function (){
+    $scope.initLoad  = function () {
+        $scope.uid = getCookie('ANDSELLID');
+        $scope.queryFinanceListByUid($scope.uid);
+    }
 
-        balanceFactory.queryAll({}, function (response) {
+    $scope.queryFinanceListByUid = function(uid){
+        var form = {};
+        form['FINANCE_LIST.USER_ID'] = uid
+        balanceFactory.queryByUid(form, function (response) {
+            console.log(response);
             $scope.balanceInfo = response.data;
-            $scope.userInfo = response.extraData.userMap;
-            uid = getCookie('ANDSELLID');
-            loginId = $scope.userInfo[$scope.uid];
-            $scope.bindData(loginId);
+            $scope.typeInfo = $scope.balanceInfo;
         })
     }
 
     $scope.initLoad();
 
-    $scope.bindData = function (loginId){
-        var array = new Array();
-        $scope.balanceInfo.forEach(function(ele){
-            if(ele['FINANCE_LIST.LOGIN_ID'] == loginId){
-                array.push(ele);
-            }
-        })
-        $scope.ckeckedList = array;
-        $scope.balanceList = $scope.ckeckedList;
-    }
-
     $scope.chooseType = function (type){
         console.log(type);
         if(type == 'null'){
-            $scope.ckeckedList = $scope.balanceList;
+            $scope.balanceInfo = $scope.typeInfo;
         }
         else{
+            $scope.balanceInfo =[];
             var array = new Array();
-            $scope.ckeckedList = $scope.balanceList;
-            $scope.ckeckedList.forEach(function (ele) {
+            $scope.typeInfo.forEach(function (ele) {
                 if(ele['FINANCE_LIST.CHANGE_TYPE'] == type){
                     array.push(ele);
                 }
             })
-            $scope.ckeckedList = array;
+            $scope.balanceInfo = array;
         }
-        return $scope.ckeckedList;
+        return $scope.balanceInfo;
     }
 });
 

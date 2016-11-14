@@ -17,7 +17,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_tagPrdList_Controlle
         $scope.filter = {
             PAGE_SIZE: 10,
             PN: 1,
-            'SHOP_PRODUCT.ODRDER': 'ORDER_NUM DESC',
+            'SHOP_PRODUCT.ORDER': 'DATE DESC',
             'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
             'SHOP_PRODUCT.TAG_ID': $stateParams.tagId
         };

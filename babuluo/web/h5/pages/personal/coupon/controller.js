@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_personal_coupon_Controller', function ($scope, $state,  personalFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_personal_coupon_Controller', function ($scope, $state, personalFactory, modalFactory) {
 
     modalFactory.setTitle('可用优惠券');
     // modalFactory.setBottom(true);
@@ -6,35 +6,27 @@ angular.module('AndSell.H5.Main').controller('pages_personal_coupon_Controller',
 
     $scope.initData = function () {
         console.log('初始化数据');
-
-        var member={};
-        member['MEMBER_COUPON.USER_ID'] =1000;
-        personalFactory.getCouponListByUser(member, function (response) {
+        personalFactory.getCouponListByUser({}, function (response) {
             $scope.memberCouponList = response.data;
         });
-        }
+    }
 
     $scope.initData();
 
-    $scope.detailData= function (data) {
+    $scope.detailData = function (data) {
 
-        var str=data.replace(/<br>/g," ");
+        var str = data.replace(/<br>/g, " ");
         return str;
 
     }
 
 
-    $scope.parseArray=function (data) {
-        if(data!=undefined){
-           data=data.split(',');
+    $scope.parseArray = function (data) {
+        if (data != undefined) {
+            data = data.split(',');
         }
-
-
         return data;
     }
-
-
-
 
 
 });
