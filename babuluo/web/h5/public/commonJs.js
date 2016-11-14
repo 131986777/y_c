@@ -194,6 +194,7 @@ function routerPath(base, path, param, css) {
     }
     loadItemList.push(controller);
 
+
     var router = {};
     router.url = "/" + path;
     if (param != undefined) {
