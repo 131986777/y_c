@@ -17,4 +17,6 @@ AndSellH5MainModule.service('orderFactory', function ($resource) {
     this.deleteCoupon = $post($resource,'/member/coupon/delById');
 
     this.wxPayUndefinedOrder = $post($resource, '/wx/pay/wxPayUndefinedOrder');
+
+    this.queryWXPayResult = $post($resource, '');
 })

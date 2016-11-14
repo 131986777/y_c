@@ -7,7 +7,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     $scope.initData = function () {
         $scope.getOrder($stateParams.ORDER_ID);
-        $scope.shop = getCookie('currentShopInfo');
+        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
 
         // initWxJsSdk();
     }
@@ -57,8 +57,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
          * 调用微信统一下单的接口
          */
         if ($scope.order['SHOP_ORDER.TYPE'] == '1') {
-
-
             var ip = getCookie('ip');
             var openId = getCookie('openId');
             var formData = {
@@ -69,6 +67,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 IP: ip,
                 ORDER_ID:$scope.order['SHOP_ORDER.ID']
             };
+
+
 
             wxPay(formData);
 
@@ -104,6 +104,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
             console.log(response);
             if (typeof WeixinJSBridge == "undefined") {
+                alert('WeixinJSBridge == null');
                 if (document.addEventListener) {
                     document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
                 } else if (document.attachEvent) {
@@ -112,12 +113,17 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 }
             } else {
                 console.log(response);
-                // onBridgeReady(response.data);
+                onBridgeReady(response.extraData.returnMap);
             }
 
         }, function (res) {
             weUI.toast.error(res.msg);
         });
+    }
+
+
+    function queryWxPayResult () {
+
     }
 
     /**
@@ -167,6 +173,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
      * * @param postData
      */
     function onBridgeReady(postData) {
+
+        if (postData == null) {
+            alert('postData == null');
+        }
 
         var post = JSON.parse(postData);
 

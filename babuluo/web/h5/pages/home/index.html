@@ -131,14 +131,14 @@
 
     <!-- BEGIN 分类 -->
     <div class="product-list">
-      <div class="item">
+      <div class="item" ng-repeat="itemList in BannerList">
         <div class="item-title">
-          <span class="baked">烘焙食品</span>
+          <span class="baked">{{itemList.name}}</span>
         </div>
 
         <ul class="list-unstyled">
-          <li>
-            <a ng-href="{{item['BANNER.URL']}}" ng-repeat="item in bakingList" ng-if="item['is_show']==true">
+          <li ng-repeat="item in itemList.content" ng-if="item['is_show']==true">
+            <a ng-href="{{item['BANNER.URL']}}"  >
               <img  ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}" class="weui_cells">
             </a>
             <ul class="thumbnail-list list-unstyled flexbox">
@@ -154,26 +154,27 @@
           </li>
         </ul>
       </div>
-      <div class="item">
-        <div class="item-title">
-          <span class="meat">冷冻肉品</span>
-        </div>
-        <ul class="list-unstyled">
-          <li>
-            <a ng-href="{{item['BANNER.URL']}}" ng-repeat="item in freezingList" ng-if="item['is_show']==true"><img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}" class="weui_cells"></a>
-            <ul class="thumbnail-list list-unstyled flexbox">
-              <li class="cell" ng-repeat=" item in tagProductList['1036']"
-                  ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
-                <div class="desc">
-                  <p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>
-                  <span class="price" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+
+      <!--<div class="item">-->
+        <!--<div class="item-title">-->
+          <!--<span class="meat">冷冻肉品</span>-->
+        <!--</div>-->
+        <!--<ul class="list-unstyled">-->
+          <!--<li>-->
+            <!--<a ng-href="{{item['BANNER.URL']}}" ng-repeat="item in freezingList" ng-if="item['is_show']==true"><img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}" class="weui_cells"></a>-->
+            <!--<ul class="thumbnail-list list-unstyled flexbox">-->
+              <!--<li class="cell" ng-repeat=" item in tagProductList['1036']"-->
+                  <!--ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">-->
+                <!--<a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>-->
+                <!--<div class="desc">-->
+                  <!--<p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>-->
+                  <!--<span class="price" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>-->
+                <!--</div>-->
+              <!--</li>-->
+            <!--</ul>-->
+          <!--</li>-->
+        <!--</ul>-->
+      <!--</div>-->
     </div>
   </div>
 
