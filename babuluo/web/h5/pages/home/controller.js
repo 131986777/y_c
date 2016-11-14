@@ -178,7 +178,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
         });
         console.log(789);
-      console.log( $scope.BannerList);
+      //console.log( $scope.BannerList);
     }
 
     //以毫秒为单位
