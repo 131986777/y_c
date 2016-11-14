@@ -205,7 +205,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                     $scope.recommNineList.push(ele);
                 }
                 else {
-                    console.log(ele['BANNER.POSITION_ID']);
+                   // console.log(ele['BANNER.POSITION_ID']);
                     var flag = false;
                     for (i = 0; i < $scope.BannerList.length; i++) {
                         if ($scope.BannerList[i].id == ele['BANNER.POSITION_ID']) {
@@ -221,7 +221,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                         array.push(ele);
 
                         listItem = new Object();
-                        listItem.id = ele['BANNER.ID'];
+                        listItem.id = ele['BANNER.POSITION_ID'];
                         listItem.name = ele['BANNER.NAME'];
                         listItem.content = array;
 
