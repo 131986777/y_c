@@ -6,11 +6,13 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
-        $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
-        $scope.storeId=$scope.STORE_ID;
+        $scope.STORE_ID = 0 ;
+        if(getCookie('currentShopInfo')!=undefined){
+            $scope.STORE_ID= ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']};
         $scope.filter = {
             PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'SHOP_PRODUCT.CLASS_ID': $stateParams.classId,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID
         };
+        $scope.storeId=$scope.STORE_ID;
         $scope.hasNextPage=true;
         $scope.loading = false;  //状态标记
         $scope.prdList = new Array;
@@ -164,6 +166,11 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $scope.filter.PN = $scope.page.pageIndex+1;
         $scope.getPrd();
     };
+
+
+    $scope.toShop= function () {
+        $state.go('pages/shop',{'FROM':window.location.href});
+    }
 
     $scope.$on('destroy',function(){
         $(document.body).infinite().off("infinite");

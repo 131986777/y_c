@@ -1,5 +1,6 @@
 <body>
 <div class="coupon-list">
+    <span ng-if="memberCouponList.length==0" class="no-coupon">你暂无优惠券！</span>
     <div class="coupon-wrap" ng-repeat="(key,item) in memberCouponList">
         <div class="coupon-head">
             <div class="coupon-info">

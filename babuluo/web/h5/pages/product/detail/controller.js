@@ -250,7 +250,6 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
 
     //加入购物车
     $scope.addToCart = function () {
-        console.log($scope.skuSize);
         if ($scope.sku != undefined) {
             if($scope.sku['SHOP_PRODUCT_SKU.STOCK']>0){
             var cartInfo = getCookie('cartInfo');
@@ -292,6 +291,14 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
             }
         } else {
             weUI.toast.info('请选择规格！');
+        }
+    }
+
+    //数量减
+    $scope.lessSize = function () {
+        alert($scope.skuSize);
+        if ($scope.skuSize > 1) {
+            $scope.skuSize--;
         }
     }
 
