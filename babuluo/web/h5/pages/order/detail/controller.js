@@ -58,7 +58,17 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
          */
         if ($scope.order['SHOP_ORDER.TYPE'] == '1') {
 
-            var formData = {PRODUCT_ID:$scope.order['SHOP_ORDER.ID'], FEE:moneyToFee($scope.order['SHOP_ORDER.PRICE_OVER']), BODY:'THIS_IS_BODY', OPENID:getCookie('openId'), IP:'127.0.0.1'};
+
+            var ip = getCookie('ip');
+            var openId = getCookie('openId');
+            var formData = {
+                PRODUCT_ID: $scope.order['SHOP_ORDER.ID'],
+                FEE: moneyToFee($scope.order['SHOP_ORDER.PRICE_OVER']),
+                BODY: '订单详情',
+                OPENID: openId,
+                IP: ip,
+                ORDER_ID:$scope.order['SHOP_ORDER.ID']
+            };
 
             wxPay(formData);
 
@@ -75,7 +85,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     };
 
 
-
     //评价订单
     $scope.commentOrder = function () {
 
@@ -90,8 +99,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         return parseInt(money * 100);
     }
 
-    function wxPay (formData) {
-        orderFactory.wxPayUndefinedOrder(formData, function(response) {
+    function wxPay(formData) {
+        orderFactory.wxPayUndefinedOrder(formData, function (response) {
 
             console.log(response);
             if (typeof WeixinJSBridge == "undefined") {
@@ -106,7 +115,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 // onBridgeReady(response.data);
             }
 
-        }, function(res) {
+        }, function (res) {
             weUI.toast.error(res.msg);
         });
     }
@@ -118,20 +127,20 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
         wx.config({
             debug: true,
-            appId:'43434',
-            timestamp:'3232432432',
-            nonceStr:'432432',
-            signature:'4324324',
-            JsApiList:['chooseWXPay']
+            appId: '43434',
+            timestamp: '3232432432',
+            nonceStr: '432432',
+            signature: '4324324',
+            JsApiList: ['chooseWXPay']
         });
 
 
-        wx.ready(function() {
+        wx.ready(function () {
 
             console.log('ready');
         });
 
-        wx.error(function(res) {
+        wx.error(function (res) {
             alert(res);
         })
 
