@@ -10,8 +10,10 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     $scope.recommendList = new Array();
     $scope.recommThreeList = new Array();
     $scope.recommNineList = new Array();
-    $scope.bakingList = new Array();
-    $scope.freezingList = new Array();
+    // $scope.bakingList = new Array();
+    // $scope.freezingList = new Array();
+    //$scope.BannerListMap=new Map();
+    $scope.BannerList=new Array();
     //商品搜索
     $scope.searchPrd = function () {
         $state.go('pages/product/list', {keyword: $scope.prdKeyword});
@@ -124,12 +126,36 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                 if (ele['BANNER.POSITION_ID'] == 1018) {     //今日推荐九宫格
                     $scope.recommNineList.push(ele);
                 }
-                if (ele['BANNER.POSITION_ID'] == 1019) {     //烘焙食品
+                else{
+                   var flag=false;
+                    for(i=0;i<$scope.BannerList.length;i++){
+                        if ($scope.BannerList[i].id==ele['BANNER.POSITION_ID']){
+                            console.log(1);
+                            flag=true;
+                            var arrayList=$scope.BannerList[i].content;
+                            arrayList.push(ele);
+                        }
+                    }
+                    if(flag==false) {
+                        console.log(0);
+                        var array = new Array();
+                        array.push(ele);
+
+                        listItem = new Object();
+                        listItem.id = ele['BANNER.POSITION_ID'];
+                        listItem.name = ele['BANNER.NAME'];
+                        listItem.content = array;
+
+                        $scope.BannerList.push(listItem);
+                    }
+
+                }
+               /* if (ele['BANNER.POSITION_ID'] == 1019) {     //烘焙食品
                     $scope.bakingList.push(ele);
                 }
                 if (ele['BANNER.POSITION_ID'] == 1020) {     //冷冻食品
                     $scope.freezingList.push(ele);
-                }
+                }*/
                 if (ele['BANNER.END_DATETIME']==null&&ele['BANNER.BEGIN_DATETIME']==null){
                     ele['is_show']=true;
                 }else if(ele['BANNER.BEGIN_DATETIME']!=null){
@@ -152,8 +178,11 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
             })
 
-        });
 
+
+        });
+        console.log(789);
+      console.log( $scope.BannerList);
     }
 
     //以毫秒为单位

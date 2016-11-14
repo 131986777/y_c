@@ -49,25 +49,24 @@ angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Contr
                 weUI.toast.error('请输入正确手机号');
             }
           else {
-                $('.vcode-btn').fadeOut();
-                $('.vcode-time').fadeIn();
-                $scope.time = 60;
-                $scope.timer = $interval(function () {
-                    if($scope.time==0){
-                        $('.vcode-btn').fadeIn();
-                        $('.vcode-time').fadeOut();
-                        $scope.time=60;
-                        $interval.cancel($scope.timer);
-                    }
-                    else {
-                        $scope.time--;
-                    }
-                }, 1000);
-
                 var form ={};
                 form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
                 form['FLAG'] = 0;
                 securityFactory.sendVerificationCode(form, function (response) {
+                    $('.vcode-btn').fadeOut();
+                    $('.vcode-time').fadeIn();
+                    $scope.time = 60;
+                    $scope.timer = $interval(function () {
+                        if($scope.time==0){
+                            $('.vcode-btn').fadeIn();
+                            $('.vcode-time').fadeOut();
+                            $scope.time=60;
+                            $interval.cancel($scope.timer);
+                        }
+                        else {
+                            $scope.time--;
+                        }
+                    }, 1000);
                     weUI.toast.ok('发送成功');
                 }, function (response) {
                     weUI.toast.error(response.msg);

@@ -36,10 +36,11 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
     $scope.reg = function () {
         $scope.checkPwd();
         $scope.checkPassword();
+        var form = {};
         form['MEMBER.LOGIN_ID'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
         form['MEMBER.MOBILE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
         form['MEMBER.LOGIN_PWD'] = $scope.memberInfo['MEMBER.LOGIN_PWD'];
-        form['MEMBER.MEMBER.CHECKCODE'] = $scope.memberInfo['MEMBER.MEMBER.CHECKCODE'];
+        form['MEMBER.CHECKCODE'] = $scope.memberInfo['MEMBER.CHECKCODE'];
         userFactory.newUserReg(form, function (response) {
             weUI.toast.ok('注册成功');
             $state.go('pages/user/accountLogin');
@@ -62,6 +63,7 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
                 form['FLAG'] =1;
                 form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
                 userFactory.sendVerificationCode(form, function (response) {
+                    console.log(form);
                     $('.vcode-btn').fadeOut();
                     $('.vcode-time').fadeIn();
                     $scope.time = 60;
