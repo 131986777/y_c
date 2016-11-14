@@ -30,6 +30,13 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
 
     }
 
+    $scope.myKeyup = function(e){
+        var keycode = window.event?e.keyCode:e.which;
+        if(keycode==13){
+            $scope.getPrd();
+        }
+    };
+
     //获取商品列表
     $scope.getPrd = function () {
         productFactory.getProduct($scope.filter, function (response) {

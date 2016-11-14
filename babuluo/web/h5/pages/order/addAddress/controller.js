@@ -5,7 +5,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
 
     $scope.initData = function () {
 
-        $scope.addressType = '1';
+        $scope.addressType = '3';
         $scope.PickupPerson = {};
 
         $scope.shop = JSON.parse(getCookie('currentShopInfo'))['SHOP.SHOP_NAME'];
@@ -53,7 +53,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
          times: function () {
              return [  // 自定义的时间
                  {
-                     values: ['7:00-12:00','12:00-18:00']
+                     values: ['08:00-19:00',$scope.nextHours+'-19:00']
                  }
              ];
          }

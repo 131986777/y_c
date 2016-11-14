@@ -74,11 +74,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         } else if ($scope.order['SHOP_ORDER.PAY_TYPE'] == 'ACCOUNT') {
             weUI.dialog.alert("提示", "确认支付该订单", function () {
                 orderFactory.payOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
-                    weUI.toast.ok('支付成功');
+                    // weUI.toast.ok('支付成功');
+                    alert('支付成功');
                     $scope.getOrder($scope.order['SHOP_ORDER.ID']);
-                }), function (response) {
-                    weUI.toast.error(response.msg);
-                };
+                }, function (response) {
+                    // weUI.toast.error(response.msg);
+                    alert(response.msg);
+                });
             });
         }
     };
