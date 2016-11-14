@@ -29,7 +29,10 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
     $scope.reg = function () {
         $scope.checkPwd();
         $scope.checkPassword();
-        var form = $scope.memberInfo;
+        form['MEMBER.LOGIN_ID'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
+        form['MEMBER.MOBILE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
+        form['MEMBER.LOGIN_PWD'] = $scope.memberInfo['MEMBER.LOGIN_PWD'];
+        form['MEMBER.MEMBER.CHECKCODE'] = $scope.memberInfo['MEMBER.MEMBER.CHECKCODE'];
         userFactory.newUserReg(form, function (response) {
             weUI.toast.ok('注册成功');
             $state.go('pages/user/accountLogin');
@@ -38,25 +41,24 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
         });
     }
 
-    $scope.settime = function (item) {
-        var countdown = 60;
-        if (countdown == 0) {
-            item.removeAttribute("disabled");
-            item.value = "免费获取验证码";
-            countdown = 60;
-        } else {
-            item.setAttribute("disabled", true);
-            item.value = "重新发送(" + countdown + ")";
-            countdown--;
-        }
-        setTimeout(function () {
-            settime(item)
-        }, 1000)
-    }
+
 
     $scope.sendSms = function () {
-        //$scope.settime();
-        /*输入项验证*/
+        $('.vcode-btn').fadeOut();
+        $('.vcode-time').fadeIn();
+        $scope.time = 60;
+        $scope.timer = $interval(function () {
+            if($scope.time==0){
+                $('.vcode-btn').fadeIn();
+                $('.vcode-time').fadeOut();
+                $scope.time=60;
+                $interval.cancel($scope.timer);
+            }
+            else {
+                $scope.time--;
+            }
+        }, 1000);
+
         if ($scope.memberInfo['MEMBER.LOGIN_ID'] == '') {
             weUI.toast.error('请输入手机号');
         } else {
@@ -65,6 +67,7 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
                 weUI.toast.error('请输入正确手机号');
             } else {
                 var form = {};
+                form['FLAG'] =1;
                 form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
                 userFactory.sendVerificationCode(form, function (response) {
                     weUI.toast.ok('请输入验证码');
@@ -74,6 +77,10 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
             }
         }
     }
+
+    $scope.$on('destroy', function () {
+        $interval.cancel($scope.timer);
+    })
 });
 
 
