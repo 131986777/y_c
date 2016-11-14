@@ -5,9 +5,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_card_Controller', f
 
 
     $scope.loadMemberCard = function () {
-        var user = {};
-        user['MEMBER_CARD.USER_ID'] = 1000;
-        personalFactory.getMemberCardByUserId(user, function (response) {
+        personalFactory.getMemberCardByUserId({}, function (response) {
             $scope.cardList = response.data;
         });
     };
