@@ -673,7 +673,8 @@ p {
   margin: 0 15px 0 0; }
 .shopping-cart .product-wrap .product-detail {
   padding-right: 20px;
-  vertical-align: top; }
+  vertical-align: top;
+  width:100%;}
 .shopping-cart .product-wrap .product-img {
   width: 89px;
   height: 89px;
@@ -1450,6 +1451,9 @@ p {
   line-height: 50px;
   height: 50px;
 }
+.product-list .item li{
+  margin-bottom: 9px;
+}
 .product-list .item .item-title .baked{
   background: url("../img/icon-2.png") no-repeat left center;
 }
@@ -1698,6 +1702,11 @@ p {
 }
 .shop-page .shop-list p{
   margin-bottom: 13px;
+}
+.shop-page .shop-list .addrs{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 .shop-page .shop-list p.time{
   margin-bottom: 0;

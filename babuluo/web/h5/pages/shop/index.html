@@ -31,7 +31,7 @@
                 <a class="shops" ng-repeat="shop in recentShopList" ng-click="shopSelect(shop)">
                     <img class="pull-left" src="../../public/img/icon-shopLogo.png">
                     <p ng-bind="shop['SHOP.SHOP_NAME']"></p>
-                    <p class="time">{{shop['SHOP.ADDR']}}</p>
+                    <p>{{shop['SHOP.ADDR']}}</p>
                     <p class="time">营业时间 {{shop['SHOP.OPEN_TIME']}}-{{shop['SHOP.CLOSE_TIME']}}
                         电话<span ng-bind="shop['SHOP.TELEPHONE']"> 025-3242343243</span>
                     </p>
@@ -49,9 +49,9 @@
             </div>
             <div class="shop-list">
                 <a class="shops" ng-repeat="shop in shopList" ng-click="shopSelect(shop)">
-                    <img class="pull-left" src="../../public/img/icon-map_02.png">
+                    <img class="pull-left" src="../../public/img/icon-shopLogo.png">
                     <p ng-bind="shop['SHOP.SHOP_NAME']"></p>
-                    <p class="time">{{shop['SHOP.ADDR']}}</p>
+                    <p class="addrs">{{shop['SHOP.ADDR']}}</p>
                     <p class="time" style="margin-top: 5px">营业时间 {{shop['SHOP.OPEN_TIME']}}-{{shop['SHOP.CLOSE_TIME']}}
                         电话<span ng-bind="shop['SHOP.TELEPHONE']"> 025-3242343243</span>
                     </p>

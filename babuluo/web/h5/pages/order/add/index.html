@@ -3,16 +3,16 @@
         <div class="weui_cells weui_cells_access">
             <a class="order-address weui_cell" ui-sref="pages/order/addAddress({SKU_IDS:skuIds})">
                 <div ng-show="!EmptyPick&&PickupPerson.type==3" class="detail weui_cell_bd weui_cell_primary">
-                <p class="">提 货 人：{{PickupPerson.man}}</p>
-                <p class="">手机号码：{{PickupPerson.phone}}</p>
-                <p class="">提货门店：{{PickupPerson.shop}}</p>
-                <p class="">提货时间：{{PickupPerson.getTime}}</p>
+                    <p class="">提 货 人：{{PickupPerson.man}}</p>
+                    <p class="">手机号码：{{PickupPerson.phone}}</p>
+                    <p class="">提货门店：{{PickupPerson.shop}}</p>
+                    <p class="">提货时间：{{PickupPerson.getTime}}</p>
                 </div>
                 <div ng-show="!EmptyPick&&PickupPerson.type==1" class="detail weui_cell_bd weui_cell_primary">
-                <p class="">收 货 人：{{PickupPerson.man}}</p>
-                <p class="">手机号码：{{PickupPerson.phone}}</p>
-                <p class="">收货地址：{{PickupPerson.shengshi+' '+PickupPerson.address}}</p>
-                <!--<p class="">提货时间：{{PickupPerson.time}}</p>-->
+                    <p class="">收 货 人：{{PickupPerson.man}}</p>
+                    <p class="">手机号码：{{PickupPerson.phone}}</p>
+                    <p class="">收货地址：{{PickupPerson.shengshi+' '+PickupPerson.address}}</p>
+                    <!--<p class="">提货时间：{{PickupPerson.time}}</p>-->
                 </div>
                 <div ng-show="EmptyPick" class="detail weui_cell_bd weui_cell_primary">
                     请填写收货信息
@@ -24,9 +24,9 @@
 
         <div class="product-list weui_cells">
             <!--<div class="product-sale-wrap weui_cell">-->
-                <!--<div class="product-sale weui_cell_bd">-->
-                    <!--满200减20-->
-                <!--</div>-->
+            <!--<div class="product-sale weui_cell_bd">-->
+            <!--满200减20-->
+            <!--</div>-->
             <!--</div>-->
             <!-- BEGIN 商品信息-->
             <div class="product-wrap weui_cell" ng-repeat="sku in skuList">
@@ -51,12 +51,23 @@
             <!-- END 商品信息-->
         </div>
 
+        <!--<div class="weui_cells weui_cells_access">-->
+        <!--<div class="weui_cell">-->
+        <!--<div class="weui_cell_hd">备注：</div>-->
+        <!--<div class="weui_cell_bd">-->
+        <!--<input type="text" class="form-control" ng-model="order['SHOP_ORDER.REMARK']"-->
+        <!--placeholder="欢迎填写备注...">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
         <div class="weui_cells weui_cells_access">
             <div class="weui_cell">
-                <div class="weui_cell_hd">备注：</div>
-                <div class="weui_cell_bd">
-                    <input type="text" class="form-control" ng-model="order['SHOP_ORDER.REMARK']"
-                           placeholder="欢迎填写备注...">
+                <div class="weui_cell_hd">
+                    <label class="weui_label">备注:</label>
+                </div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input type="number" class="weui_input"
+                           placeholder="请填入备注信息" ng-model="order['SHOP_ORDER.REMARK']">
                 </div>
             </div>
         </div>
@@ -68,7 +79,7 @@
 
                 </div>
                 <div class="weui_cell_ft weui_cell_primary">
-                    <span ng-if="COUPON_INFO!=''" >已选择</span>
+                    <span ng-if="COUPON_INFO!=''">已选择</span>
                     <span ng-if="COUPON_INFO==''">未使用</span>
 
                 </div>
@@ -76,14 +87,14 @@
         </div>
 
         <!--<div class="weui_cells weui_cells_access">-->
-            <!--<div class="weui_cell">-->
-                <!--<div class="weui_cell_bd">-->
-                    <!--使用积分-->
-                <!--</div>-->
-                <!--<div class="weui_cell_ft weui_cell_primary">-->
-                    <!--200积分可用-->
-                <!--</div>-->
-            <!--</div>-->
+        <!--<div class="weui_cell">-->
+        <!--<div class="weui_cell_bd">-->
+        <!--使用积分-->
+        <!--</div>-->
+        <!--<div class="weui_cell_ft weui_cell_primary">-->
+        <!--200积分可用-->
+        <!--</div>-->
+        <!--</div>-->
         <!--</div>-->
 
         <div class="payment-list weui_cells" ng-init="order['SHOP_ORDER.PAY_TYPE']='ACCOUNT'">
