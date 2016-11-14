@@ -22,11 +22,20 @@
      */
 
 
+    /**
+     * 设置ip地址
+     */
+    String ip = request.getRemoteHost();
+    Cookie ipCookie = new Cookie("ip", ip);
+    response.addCookie(ipCookie);
+
     Cookie[] cookies = request.getCookies();
 
     String code = request.getParameter("code");
 
     boolean cookieHasOpenId = false;
+
+
 
     String openId = "";
     String loginId = "";
