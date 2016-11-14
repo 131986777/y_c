@@ -191,6 +191,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 "paySign": post.paySign
             },
             function (res) {
+                alert(JSON.stringify(res));
                 alert(res.err_msg);
                 if (res.err_msg == "get_brand_wcpay_request:ok") {
                     $scope.wxPayInfo = "正在查询支付结果,请稍等...";
