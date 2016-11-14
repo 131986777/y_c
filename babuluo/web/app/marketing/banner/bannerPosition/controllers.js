@@ -36,6 +36,7 @@ angular.module('AndSell.Main').controller('marketing_banner_bannerPosition_Contr
   };
 
   $scope.modBannerPosition = function () {
+      console.log($scope.mod);
     bannerFactory.modifyBannerPos($scope.mod).get({}, function (response) {
       if (response.code == 400) {
         modalFactory.showShortAlert(response.msg);
