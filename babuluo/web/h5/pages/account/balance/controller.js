@@ -8,10 +8,12 @@ angular.module('AndSell.H5.Main').controller('pages_account_balance_Controller',
 
     $scope.queryFinanceListByUid = function(uid){
         var form = {};
-        form['FINANCE_LIST.USER_ID'] = uid
+        form['FINANCE_LIST.USER_ID'] = uid;
         balanceFactory.queryByUid(form, function (response) {
             console.log(response);
             $scope.balanceInfo = response.data;
+            $scope.balance = $scope.balanceInfo[0]['FINANCE_LIST.BALANCE'];
+            console.log($scope.balance);
             $scope.typeInfo = $scope.balanceInfo;
         })
     }
