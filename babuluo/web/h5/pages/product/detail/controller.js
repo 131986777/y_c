@@ -23,8 +23,9 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
 
         var params={};
         params['SHOP_PRODUCT.PRD_ID']=$stateParams.PRD_ID;
-        if(getCookie('currentShopInfo')!=undefined)
-        params['STOCK_REALTIME.STORE_ID']=getCookie('currentShopInfo')['SHOP.REPOS_ID'];
+        if(getCookie('currentShopInfo')!=undefined){
+            params['STOCK_REALTIME.STORE_ID']=JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
+        }
         productFactory.getProductAllInfoById(params, function (response) {
             $scope.product = response.data[0];
             if($scope.product!=undefined){
