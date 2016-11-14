@@ -24,9 +24,11 @@
                         <div>
                             <a type="button" show-modal id="#modifySource"
                                ng-click="modifyCardSourceClick(item)">修改</a>
-                            <a type="button" ng-click="deleteCardSource(item['MEMBER_CARD_SOURCE.ID'])">
-                                删除
-                            </a>
+                            <a type="button" ng-click="deleteCardSource(item['MEMBER_CARD_SOURCE.ID'])"
+                                                ng-if="item['MEMBER_CARD_SOURCE.ID']!=999
+                                                     &&item['MEMBER_CARD_SOURCE.ID']!=1005
+                                                     &&item['MEMBER_CARD_SOURCE.ID']!=1006">
+                                删除</a>
                         </div>
                     </td>
                 </tr>

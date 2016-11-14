@@ -1,12 +1,14 @@
 package com.weixin;
 
-import com.pabula.common.util.IPUtil;
+import com.bolanggu.bbl.ENV;
+
 import com.pabula.common.util.RandomUtil;
 import com.pabula.common.util.SeqNumHelper;
 import com.pabula.common.util.StrUtil;
 import com.pabula.fw.exception.DataAccessException;
 import com.tencent.common.MD5;
 import com.tencent.common.XMLParser;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,6 +17,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -30,38 +33,33 @@ public class WXPay {
     /**
      * 统一下单
      *
-     * @param product_id
-     * @param body
-     * @param fee
-     * @param appid
-     * @param mch_id
-     * @param key
+     * @param product_id 商品id
+     * @param body       体
+     * @param fee        支付金额
      * @return
      */
-    public static Map<String, Object> unifiedOrder( String ifWeb, String openId, String product_id, String body, int fee,
-                                                   String appid, String mch_id, String key) {
+    public static Map<String, Object> unifiedOrder(String ip, String openId, String product_id, String body, int fee) {
 
         HashMap<String, String> paramMap = new HashMap();
-        if (ifWeb.equals("true")) {
-            paramMap.put("trade_type", "JSAPI");
-            paramMap.put("openid", openId);
-        } else
-            paramMap.put("trade_type", "NATIVE");
-        //paramMap.put("spbill_create_ip", IPUtil.getRemortIP(request)); //Ip
+
+        paramMap.put("trade_type", "JSAPI");
+        paramMap.put("openid", openId);
+
+        paramMap.put("spbill_create_ip", ip); //Ip
         paramMap.put("product_id", product_id); // 商品ID
         paramMap.put("body", body);         //描述
-        //try {
-        //    paramMap.put("out_trade_no", "1000" + SeqNumHelper.getNewSeqNum("andsell","order_wx_pay_flow_num")); //每次统一下单生成唯一流水号
-        //} catch (DataAccessException e) {
-        //    paramMap.put("out_trade_no", System.currentTimeMillis() + ""); //报错就用时间戳（唯一性） 防止这个参数没有值
-        //    e.printStackTrace();
-        //}
+        try {
+            paramMap.put("out_trade_no", "1000" + SeqNumHelper.getNewSeqNum("andsell", "order_wx_pay_flow_num")); //每次统一下单生成唯一流水号
+        } catch (DataAccessException e) {
+            paramMap.put("out_trade_no", System.currentTimeMillis() + ""); //报错就用时间戳（唯一性） 防止这个参数没有值
+            e.printStackTrace();
+        }
         paramMap.put("total_fee", fee + ""); //金额 以分为单位
         paramMap.put("notify_url", WxPayConfig.WX_PAY_REBACK + "wxpay"); //回调地址
-        paramMap.put("appid", appid); //appid
-        paramMap.put("mch_id", mch_id); //商户号
+        paramMap.put("appid", ENV.WX_APPID); //appid
+        paramMap.put("mch_id", ENV.WX_MCHID); //商户号
         paramMap.put("nonce_str", RandomUtil.getRandomStringByLength(32));  //随机码
-        String checkSign = wxPaySign(paramMap, key);
+        String checkSign = wxPaySign(paramMap, ENV.WX_KEY);
         System.out.println(paramMap);
         String resultXML = HttpUtil.sendHttpsPOST(WxPayConfig.WX_PAY_UNIFIEDORDER, wxPayUnifiedOrderPostXml(paramMap, checkSign));
 
@@ -82,7 +80,7 @@ public class WXPay {
     }
 
 
-    public static void addUnifiedOrderData( Map<String, Object> resultMap, String resultXML, HashMap<String, String> paramMap) {
+    public static void addUnifiedOrderData(Map<String, Object> resultMap, String resultXML, HashMap<String, String> paramMap) {
         Object returnCode = resultMap.get("return_code");
 
         if (resultMap != null) {
@@ -373,6 +371,14 @@ public class WXPay {
         }
 
         return map;
+    }
+
+
+    public static void main(String[] args) {
+
+
+//        unifiedOrder("127.0.0.1", "fdskfjdskfj;dsjfds", "3232", "body", 12300);
+
     }
 
 

@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Controller', function ($scope, $state, $stateParams, securityFactory,userFactory,weUI) {
+angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Controller', function ($scope, $state, $stateParams, securityFactory,$interval,userFactory,weUI) {
 
     /*$scope.loginId = $stateParams.LOGIN_ID;
     console.log($scope.loginId);*/
@@ -34,11 +34,6 @@ angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Contr
         var form = $scope.memberInfo;
 
 
-        form = {};
-        form[''] = value;
-        form[''] = value;
-        form['ID'] = value;
-
         userFactory.newUserReg(form, function (response) {
             weUI.toast.ok('注册成功');
             $state.go('pages/user/accountLogin');
@@ -47,10 +42,27 @@ angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Contr
         });
     }
 
+
+
     $scope.sendSms = function (){
-        var form ={}
-        form['MEMBER.LOGIN_ID'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
-        console.log(form);
+        $('.vcode-btn').fadeOut();
+        $('.vcode-time').fadeIn();
+        $scope.time = 60;
+        $scope.timer = $interval(function () {
+            if($scope.time==0){
+                $('.vcode-btn').fadeIn();
+                $('.vcode-time').fadeOut();
+                $scope.time=60;
+                $interval.cancel($scope.timer);
+            }
+            else {
+                $scope.time--;
+            }
+        }, 1000);
+
+        var form ={};
+        form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
+        form['FLAG'] = 0;
         securityFactory.sendVerificationCode(form, function (response) {
             weUI.toast.ok('发送成功');
         }, function (response) {
@@ -69,6 +81,10 @@ angular.module('AndSell.H5.' + 'Main').controller('pages_security_resetPwd_Contr
             weUI.toast.error(response.msg);
         });
     }
+
+    $scope.$on('destroy', function () {
+        $interval.cancel($scope.timer);
+    })
 
 });
 

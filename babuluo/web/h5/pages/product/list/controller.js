@@ -9,7 +9,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         $scope.storeId=$scope.STORE_ID;
         $scope.filter = {
-            PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'SHOP_PRODUCT.ODRDER':'ORDER_NUM DESC','SHOP_PRODUCT.CLASS_ID': $stateParams.classId,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID
+            PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'SHOP_PRODUCT.CLASS_ID': $stateParams.classId,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID
         };
         $scope.hasNextPage=true;
         $scope.loading = false;  //状态标记
@@ -58,6 +58,8 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     $scope.filterClass = function (classId) {
         $scope.prdList = new Array;
         $scope.filter['SHOP_PRODUCT.CLASS_ID']=classId;
+        $scope.filter['PAGE_SIZE']=10;
+        $scope.filter['PN']=1;
         $scope.getPrd();
     }
 

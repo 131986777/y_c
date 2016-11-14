@@ -4,6 +4,7 @@ angular.module('AndSell.Main').controller('stock_store_storeList_Controller', fu
   modalFactory.setTitle('仓库列表');
 
   $scope.bindData = function (response) {
+    console.log(response);
     $scope.storeList = response.data;
 
   };

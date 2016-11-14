@@ -1,8 +1,9 @@
 AndSellH5MainModule.service('productFactory', function ($resource) {
 
     this.getProduct = $post($resource,'/shop/product/queryAllForAgent' ,function (filter) {
-        if (filter['SHOP_PRODUCT.ODRDER'] == undefined) {
-            filter['SHOP_PRODUCT.ODRDER'] == 'ADD_DATETIME DESC';
+        console.log(filter['SHOP_PRODUCT.ORDER']);
+        if (filter['SHOP_PRODUCT.ORDER'] == undefined) {
+            filter['SHOP_PRODUCT.ORDER'] = 'ADD_DATETIME DESC';
         }
     });
 

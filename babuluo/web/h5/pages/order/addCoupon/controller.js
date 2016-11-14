@@ -140,6 +140,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
     }
 
+    $scope.returnOrder=function () {
+        $state.go('pages/order/add',{'COUPON_INFO':'','SKU_IDS': $stateParams.SKU_IDS,'pickupPerson':$stateParams.pickupPerson});
+    }
 
     $scope.detailData = function (data) {
 
