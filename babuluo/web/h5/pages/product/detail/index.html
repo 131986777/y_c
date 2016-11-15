@@ -101,15 +101,13 @@
       <div class="weui_cell_bd" ng-init="skuSize=1">
         <div class="cart-product-num-wrap input-group">
                 <span class="input-group-btn">
-                    <button class="btn" type="button" ng-click="skuSize=skuSize>1?skuSize-1:skuSize">
+                    <button class="btn" type="button" ng-click="skuSize=skuSize>1?skuSize-1:skuSize" ng-style='{"background-color":"#ccc","font-size":"24px"}'>
                       -
                     </button>
                 </span>
           <input class="form-control text-center" disabled="" type="text" ng-model="skuSize">
                 <span class="input-group-btn">
-                    <button class="btn" type="button" ng-click="skuSize=skuSize+1">
-                      +
-                    </button>
+                    <button class="btn" type="button" ng-click="skuSize=skuSize+1" ng-style='{"background-color":"#ccc","font-size":"24px"}'>+</button>
                 </span>
         </div>
       </div>
