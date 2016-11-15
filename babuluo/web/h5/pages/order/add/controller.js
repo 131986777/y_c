@@ -10,10 +10,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
     $scope.initData = function () {
 
-        $scope.cookiePickupPerson = getCookie("pickupPerson");
+        $scope.cookiePickupPerson = JSON.parse(getCookie("pickupPerson"));
         console.log($scope.cookiePickupPerson);
-
-        $scope.PickupPerson = JSON.parse($stateParams.pickupPerson);
 
         $scope.EmptyPick = isEmptyObject($scope.PickupPerson);
 

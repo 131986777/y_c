@@ -27,7 +27,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
         setCookie("pickupPerson", JSON.stringify($scope.PickupPerson));
 
         $state.go('pages/order/add', {
-            pickupPerson: JSON.stringify($scope.PickupPerson),
             SKU_IDS: $stateParams.SKU_IDS
         });
     };
