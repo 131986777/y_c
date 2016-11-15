@@ -37,6 +37,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
         var params = {}
         params['SHOP_PRODUCT.TAG_ID'] = '1036,1037,3000,3001,3002,3003,3004,3005,3006';
+        params['SHOP_PRODUCT.STORE_ID']=$scope.STORE_ID;
         productFactory.getProductByTag(params, function (response) {
             console.log(123);
             console.log(response);

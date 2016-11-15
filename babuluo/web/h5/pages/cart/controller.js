@@ -91,6 +91,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
         cartSize[sku['SHOP_PRODUCT_SKU.SKU_ID']] = 0;
         setCookie('cartInfo', JSON.stringify(cartInfo));
         setCookie('cartSize', JSON.stringify(cartSize));
+        $scope.updateCartPrice();
     }
 
     //更新购物车价格
