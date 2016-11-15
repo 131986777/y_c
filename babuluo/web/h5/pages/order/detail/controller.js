@@ -76,7 +76,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 orderFactory.payOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
                     // weUI.toast.ok('支付成功');
                     alert('支付成功');
-                    $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+                    $state.go("pages/personal");
+                    // $scope.getOrder($scope.order['SHOP_ORDER.ID']);
                 }, function (response) {
                     // weUI.toast.error(response.msg);
                     alert(response.msg);
@@ -122,51 +123,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     }
 
 
-    function queryWxPayResult() {
 
-    }
-
-    /**
-     * 初始化微信jssdk
-     */
-    function initWxJsSdk() {
-
-        wx.config({
-            debug: true,
-            appId: '43434',
-            timestamp: '3232432432',
-            nonceStr: '432432',
-            signature: '4324324',
-            JsApiList: ['chooseWXPay']
-        });
-
-
-        wx.ready(function () {
-
-            console.log('ready');
-        });
-
-        wx.error(function (res) {
-            alert(res);
-        })
-
-    }
-
-
-    function chooseWxPay(data) {
-
-        wx.chooseWXPay({
-            timestamp: 0,
-            nonceStr: '432432342',
-            package: '432432432',
-            signType: '432432',
-            paySign: '4345435',
-            success: function (res) {
-                // 支付成功后的回调函数
-            }
-        });
-
-    }
 
     /**
      * 微信支付JSAPI调用
@@ -200,7 +157,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                     orderFactory.queryWXPayResult(formData, function(res) {
                         // alert(JSON.stringify(res));
                         //  alert('queryWXPayResult');
-                        location.reload();
+                        // location.reload();
+                        $state.go("pages/personal");
+
                     }, function (res) {
                         // alert(res.msg);
                         location.reload();
