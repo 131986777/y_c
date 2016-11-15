@@ -13,7 +13,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         $scope.cookiePickupPerson = JSON.parse(getCookie("pickupPerson"));
         console.log($scope.cookiePickupPerson);
 
-        $scope.EmptyPick = isEmptyObject($scope.PickupPerson);
+        $scope.EmptyPick = isEmptyObject($scope.cookiePickupPerson);
 
         $scope.order = {};
         $scope.cartInfo = getCookie('cartInfo');
