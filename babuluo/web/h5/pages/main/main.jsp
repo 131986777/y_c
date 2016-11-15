@@ -25,7 +25,9 @@
     /**
      * 设置ip地址
      */
-    String ip = request.getRemoteHost();
+    //String ip = request.getRemoteHost();
+    String ip = request.getHeader("Host");  //上了nginx与tomcat集群后，要用这个获得
+
     Cookie ipCookie = new Cookie("ip", ip);
     response.addCookie(ipCookie);
 
