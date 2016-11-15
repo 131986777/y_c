@@ -51,7 +51,7 @@ public class Kucun {
 //            for(int i = 0;i<mendianObj.size();i++){
 
                 //String mendianID = (String)mendianObj.get(i).get("SHOP.SHOP_ID");
-                String mendianID = "100012";
+                String mendianID = "100015";    //08    //26    //36    //12    //15
                 System.err.println("mendian: " + mendianID);
 
                 List<JSONObject> skuDatal = api.call("/shop/product/sku/queryAll").getData();
@@ -75,8 +75,8 @@ public class Kucun {
                         map.put("SKU_ID",mendianPRIID);
                         map.put("PRD_ID",prdID);
                         map.put("COUNT",returnJSOn.get("stockAmount"));
-                        map.put("PRICE",returnJSOn.getDouble("salePrice")*100);
-                        System.err.println("PPPP: " + returnJSOn.getDouble("salePrice")*100);
+                        map.put("PRICE",returnJSOn.getDouble("salePrice"));
+                        System.err.println("PPPP: " + returnJSOn.getDouble("salePrice"));
                         api.call("/stock/realtime/updateStockAndPrice",map);
                     }else{
                         System.err.println("百年接口错误: " + returnStr);
