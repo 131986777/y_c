@@ -8,18 +8,17 @@
         </a>
     </div>
     <!-- END 商品搜索 -->
-    <div class="weui_tab" style="padding-top: 44px">
-        <div class="product-list-navbar weui_navbar" >
-            <a class="weui_navbar_item "
-               ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] == undefined]"
-               ng-click="filterClass(undefined)">
-                全部分类
-            </a>
-            <a class="weui_navbar_item item-tabs" ng-repeat="class  in classList"
-               ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] == class['SHOP_PRODUCT_CLASS.CLASS_ID']]"
-               ng-click="filterClass(class['SHOP_PRODUCT_CLASS.CLASS_ID'])">
+    <div class="weui_tab" style="padding-top: 44px;overflow: hidden;">
+        <div class="nav-class">
+            <div class="nav-links"
+                 ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] == undefined]"
+                 ng-click="filterClass(undefined)">全部分类
+            </div>
+            <div class="nav-links" ng-repeat="class  in classList"
+                 ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] == class['SHOP_PRODUCT_CLASS.CLASS_ID']]"
+                 ng-click="filterClass(class['SHOP_PRODUCT_CLASS.CLASS_ID'])">
                 <span ng-bind="class['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
-            </a>
+            </div>
         </div>
 
         <div class="weui_tab_bd bg-grey">
