@@ -18,7 +18,7 @@
       <span class="shopName" ui-sref="pages/shop" ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
       <div class="searchHolder pull-right">
         <i class="icon-search" ng-click="searchPrd()"></i>
-        <input type="text" ng-model="prdKeyword"  ng-keyup="myKeyup($event)" placeholder="输入商品名">
+        <input type="text" ng-model="prdKeyword"  ng-keyup="myKeyup($event)" placeholder="搜索商品">
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@
   <!-- BEGIN 导航 -->
   <div class="home-nav flexbox text-center">
     <div class="col cell" ui-sref="pages/product/list">
-      <a><img src="../../public/img/icon-nav_test.png" style="width: 50%;height: 50%"></a>
+      <a><img src="../../public/img/icon-nav_01.png" style="width: 50%;height: 50%"></a>
       <p>全部菜品</p>
     </div>
     <div class="col cell" ui-sref="pages/product/tagPrdList({tagId:1024})">

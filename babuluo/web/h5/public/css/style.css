@@ -671,7 +671,7 @@ p {
 }
 
 .tab-default .weui_navbar_item {
-    color: #444;
+    color: #959595;
     background-color: #fff;
 }
 
@@ -850,7 +850,16 @@ p {
 .shopping-cart .product-sale-wrap {
     font-size: 0;
 }
-
+ .btn-cart-less{
+    background-color:#fff;
+    font-size:24px;
+    color:rgb(204,204,204);
+}
+ .btn-cart-add{
+    background-color:#fff;
+    font-size:24px;
+    color:rgb(234,111,26);
+}
 .shopping-cart .product-sale {
     margin-left: 15px;
     padding-left: 25px;
@@ -917,6 +926,12 @@ p {
 .shopping-cart .product-wrap .product-num-wrap {
     width: 90px;
     height: 23px;
+    border: 1px solid rgb(219,219,219);
+}
+.shopping-cart .product-wrap .product-num-wrap input{
+    border: 1px solid rgb(219,219,219);
+    border-bottom: none;
+    outline:none;
 }
 
 .shopping-cart .product-wrap .product-num-wrap .btn,
@@ -1538,6 +1553,7 @@ background-color: #f4f4f4;
 margin-left: 95px;
 padding: 0;
 padding-bottom: 53px;
+    min-height: 700px;
 }
 
 .product-list-page .product-wrap {
@@ -1553,7 +1569,7 @@ align-items: flex-start;
 }
 
 .product-list-page .product-wrap .img {
-margin-right: 16px;
+margin-right: 14px;
 width: 78px;
 height: 78px;
 }
@@ -1624,6 +1640,13 @@ color: rgb(107, 107, 107);
 width: 100%;
 height: auto;
 }
+.product-detail-page .basic-info{
+    padding:0 3px 5px;
+}
+.product-detail-page .basic-info .money,
+.product-detail-page .basic-info .code{
+    margin-top: 12px;
+}
 
 .product-detail-page .review-nav {
 margin-bottom: 10px;
@@ -1688,21 +1711,29 @@ line-height: 1;
 font-size: 14px;
 color: #a4a4a4;
 }
-
+.basic-info{
+    padding: 20px 3px;
+}
+.basic-info img{
+    width:78px;
+    height: 78px;
+    float: left;
+    margin-right: 22px;
+}
 .basic-info .name,
 .basic-info .money {
 font-size: 18px;
 }
 
-.basic-info .feature,
-.basic-info .money,
-.basic-info .code {
-margin: 12px 0 0;
-}
+/*.basic-info .feature,*/
+/*.basic-info .money,*/
+/*.basic-info .code {*/
+/*margin: 12px 0 0;*/
+/*}*/
 
-.basic-info .feature,
 .basic-info .money {
 color: #F36F1C;
+    margin-top: 10px;
 }
 
 .basic-info .name {
@@ -1712,6 +1743,8 @@ color: #444;
 
 .basic-info .code {
 font-size: 12px;
+    margin-top: 3px;
+    color: #959595;
 }
 
 .sale-info,
@@ -1757,8 +1790,12 @@ background-size: 16px 16px;
 .cart-product-num-wrap {
     width: 104px;
     height: 26px;
+    border: 1px solid rgb(219,219,219);
 }
-
+.cart-product-num-wrap input{
+    border-top:none;
+    border-bottom:none;
+}
 .cart-product-num-wrap .btn,
 .cart-product-num-wrap .form-control {
     padding: 0;
