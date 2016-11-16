@@ -1508,7 +1508,7 @@ p {
     border-bottom: none;
 }
 .product-list-navbar > .weui_navbar_item {
-    border-top: 1px solid #D9D9D9;
+
     color: #444;
     height: 45px;
     line-height: 45px;
@@ -1516,7 +1516,14 @@ p {
     background-color: #fff;
     flex:0;
     -webkit-flex: 0;
-
+}
+.product-list-page .item-tabs span{
+    text-align: center;
+    display: block;
+    height: 45px;
+    width: 60px;
+    margin:0 auto;
+    border-top: 1px solid rgb(233,233,233);
 }
 .product-list-navbar > .weui_navbar_item::after {
 display: none;
@@ -1858,12 +1865,14 @@ background-size: 16px 16px;
     border-left: 1px solid rgb(225, 225, 225);
 }
 
-/*.home-index .col img{*/
-/*width: 50px;*/
-/*height:50px;*/
-/*}*/
+.home-index .col img{
+width: 50%;
+height:50%;
+}
 .home-index .col p {
+    color:#838181;
     margin-top: 10px;
+    font-size: 12px;
 }
 
 .home-index .limit,
@@ -1959,7 +1968,7 @@ background-size: 16px 16px;
     display: inline-block;
     width: 22px;
     height: 22px;
-    background: url("../img/icon-specail.png");
+    background: url("../img/icon-special.png") no-repeat;
     margin-right: 5px;
 }
 
@@ -1974,33 +1983,29 @@ background-size: 16px 16px;
 }
 
 .product-list .item .item-title span {
-    display: inline-block;
-    padding-left: 53px;
-    /*  border-bottom: 1px solid rgb(245,169,24);*/
-    line-height: 50px;
-    height: 50px;
+    border-bottom: 1px solid rgb(245,169,24);
+    padding: 0 15px 0;
 }
-
+.product-list .item .item-title .icon-class{
+    display: inline-block;
+    height: 22px;
+    width: 23px;
+    background: url("../img/icon-class.png") no-repeat left center;
+}
 .product-list .item li {
     margin-bottom: 9px;
 }
-
-.product-list .item .item-title .baked {
-    background: url("../img/icon-2.png") no-repeat left center;
-}
-
-.product-list .item .item-title .meat {
-    background: url("../img/icon-1.png") no-repeat left center;
-}
-
 .special-content .thumbnail-list .thumbnail,
 .product-list .item .thumbnail {
     border: none;
 }
-
+.product-list .thumbnail-list{
+    padding:0 5px 0;
+}
 .product-list .thumbnail-list .thumbnail {
     margin-bottom: 9px;
     height: auto;
+    padding:0 5px 0;
 }
 
 .product-special .special-content .thumbnail-list .desc,
@@ -2029,13 +2034,13 @@ background-size: 16px 16px;
 }
 
 .special-content > ul > li {
-    border-bottom: 2px solid rgb(245, 169, 24);
+    border-top: 2px solid rgb(245, 169, 24);
 }
 
-.special-content > ul > li.first {
-    border-bottom: 0;
-    margin-bottom: 10px;
-}
+/*.special-content > ul > li.first {*/
+    /*border-bottom: 0;*/
+    /*margin-bottom: 10px;*/
+/*}*/
 
 /*商品列表页面*/
 

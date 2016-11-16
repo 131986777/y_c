@@ -168,16 +168,16 @@
                 <p class="nav-txt">首页</p>
             </a>
         </li>
-        <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']">
-            <a ui-sref="pages/cart"  ng-click="currentPage='cart'">
-                <i class="icon icon-cart"></i>
-                <p class="nav-txt">购物车</p>
-            </a>
-        </li>
         <li class="cell"  ng-class="{true:'selected'}[currentPage=='fl']">
             <a ui-sref="pages/product/list" ng-click="currentPage='fl'">
                 <i class="icon icon-product-class"></i>
                 <p class="nav-txt">分类</p>
+            </a>
+        </li>
+        <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']">
+            <a ui-sref="pages/cart"  ng-click="currentPage='cart'">
+                <i class="icon icon-cart"></i>
+                <p class="nav-txt">购物车</p>
             </a>
         </li>
         <li class="cell" ng-class="{true:'selected'}[currentPage=='wd']">

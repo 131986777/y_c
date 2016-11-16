@@ -15,10 +15,10 @@
                ng-click="filterClass(undefined)">
                 全部分类
             </a>
-            <a class="weui_navbar_item" ng-repeat="class  in classList"
+            <a class="weui_navbar_item item-tabs" ng-repeat="class  in classList"
                ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] == class['SHOP_PRODUCT_CLASS.CLASS_ID']]"
-               ng-click="filterClass(class['SHOP_PRODUCT_CLASS.CLASS_ID'])"
-               ng-bind="class['SHOP_PRODUCT_CLASS.CLASS_NAME']">
+               ng-click="filterClass(class['SHOP_PRODUCT_CLASS.CLASS_ID'])">
+                <span ng-bind="class['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
             </a>
         </div>
 
