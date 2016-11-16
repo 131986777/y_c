@@ -1550,10 +1550,12 @@ background-color: #f4f4f4;
 }
 
 .product-list-page .weui_tab_bd {
-margin-left: 95px;
-padding: 0;
-padding-bottom: 53px;
+    margin-left: 95px;
+    padding: 0;
+    padding-bottom: 53px;
     min-height: 700px;
+    overflow: auto;
+    overflow-x:hidden;
 }
 
 .product-list-page .product-wrap {
@@ -1894,7 +1896,7 @@ background-size: 16px 16px;
 }
 
 .home-nav {
-    margin-bottom: 9px;
+    margin-bottom: 7px;
 }
 
 .home-index .col {

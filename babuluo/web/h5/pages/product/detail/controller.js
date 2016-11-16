@@ -76,7 +76,15 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
             $(this).carousel('prev');
         });
     }
-
+    var swiper = new Swiper('.swiper-container', {
+        paginationClickable: true,
+        spaceBetween: 300,
+        centeredSlides: true,
+        autoplay: 3500,
+        autoplayDisableOnInteraction: false,
+        observer:true,
+        observeParents:true
+    });
     //获取价格区间
     $scope.getPriceArea = function () {
         var minPrice = 0;
