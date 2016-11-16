@@ -6,8 +6,10 @@ angular.module('AndSell.H5.Main').controller('pages_personal_coupon_Controller',
 
     $scope.initData = function () {
         console.log('初始化数据');
+        weUI.toast.showLoading('正在加载');
         personalFactory.getCouponListByUser({}, function (response) {
             $scope.memberCouponList = response.data;
+            weUI.toast.hideLoading();
         });
     }
 

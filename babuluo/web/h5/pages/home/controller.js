@@ -11,10 +11,8 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     $scope.recommThreeList = new Array();
     $scope.recommNineList = new Array();
     $scope.BannerList = new Array();
-    var tagArray = new Array();
 
     $scope.myKeyup = function(e){
-        console.log(11111);
         var keycode = window.event?e.keyCode:e.which;
         if(keycode==13){
             $scope.searchPrd();

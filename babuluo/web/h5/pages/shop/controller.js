@@ -11,6 +11,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
     };
 
     $scope.getData=function () {
+        weUI.toast.showLoading('正在加载');
         shopFactory.getShopList($scope.filter, function (response) {
             $scope.shopList = response.data;
             $scope.shopListLength = response.data.length;
@@ -21,6 +22,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
             });
             $scope.shopMap=shopMap;
             $scope.getRecentShopList();
+            weUI.toast.hideLoading();
         });
     }
 
