@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory) {
+angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory,weUI) {
 
     modalFactory.setTitle('主页');
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;

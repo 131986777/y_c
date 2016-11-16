@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_personal_coupon_Controller', function ($scope, $state, personalFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_personal_coupon_Controller', function ($scope, $state, personalFactory, modalFactory,weUI) {
 
     modalFactory.setTitle('可用优惠券');
     // modalFactory.setBottom(true);

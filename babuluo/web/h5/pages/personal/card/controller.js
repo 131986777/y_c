@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_personal_card_Controller', function ($scope, $state, modalFactory, personalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_personal_card_Controller', function ($scope, $state, modalFactory, personalFactory,weUI) {
 
     modalFactory.setTitle('我的会员卡');
     modalFactory.setBottom(true);

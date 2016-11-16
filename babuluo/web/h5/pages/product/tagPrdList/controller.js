@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_product_tagPrdList_Controller', function ($scope, $state, $stateParams, productFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_product_tagPrdList_Controller', function ($scope, $state, $stateParams, productFactory, modalFactory,weUI) {
 
     modalFactory.setBottom(true);
 

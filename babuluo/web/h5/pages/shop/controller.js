@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function ($scope, $state, $stateParams, shopFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function ($scope, $state, $stateParams, shopFactory, modalFactory,weUI) {
 
     modalFactory.setTitle('门店列表');
     modalFactory.setBottom(false);

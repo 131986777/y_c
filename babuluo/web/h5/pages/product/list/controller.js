@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function (weUI,$scope, $state,$stateParams, productFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function (weUI,$scope, $state,$stateParams, productFactory, modalFactory,weUI) {
 
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(true);
