@@ -1,20 +1,31 @@
 <div ng-init="initData()">
   <!-- BEGIN 搜索 -->
   <div class="search-wrap weui_cells">
-      <div id="carousel-generic">
-          <carousel interval="myInterval">
-              <slide ng-repeat="item in homeList" active="item.active">
+      <!--<div id="carousel-generic">-->
+          <!--<carousel interval="myInterval">-->
+              <!--<slide ng-repeat="item in homeList" active="item.active">-->
+                  <!--<a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">-->
+                      <!--<img-->
+                              <!--ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"-->
+                              <!--style="height: 197px;width: 100%;">-->
+                  <!--</a>-->
+              <!--</slide>-->
+          <!--</carousel>-->
+      <!--</div>-->
+      <div class="swiper-container" style="height: 197px;width: 100%;">
+          <div class="swiper-wrapper">
+              <div class="swiper-slide" ng-repeat="item in homeList" active="item.active">
                   <a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">
                       <img
                               ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
                               style="height: 197px;width: 100%;">
                   </a>
-              </slide>
-          </carousel>
+              </div>
+
+          </div>
       </div>
 
-
-    <div class="search-content">
+    <div class="search-content" style="z-index: 1000">
       <span class="shopName" ui-sref="pages/shop" ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
       <div class="searchHolder pull-right">
         <i class="icon-search" ng-click="searchPrd()"></i>
@@ -27,7 +38,7 @@
   <!-- BEGIN 导航 -->
   <div class="home-nav flexbox text-center">
     <div class="col cell" ui-sref="pages/product/list">
-      <a><img src="../../public/img/icon-nav_01.png" style="width: 50%;height: 50%"></a>
+      <a><img src="../../public/img/icon-nav_01.png"></a>
       <p>全部菜品</p>
     </div>
     <div class="col cell" ui-sref="pages/product/tagPrdList({tagId:1024})">
@@ -138,8 +149,7 @@
     <div class="product-list">
       <div class="item" ng-repeat="itemList in BannerList">
         <div class="item-title">
-          <i class="icon-class"></i>
-            <span>{{itemList.name}}</span>
+            <i class="icon-class"></i><span>{{itemList.name}}</span>
         </div>
 
         <ul class="list-unstyled">
