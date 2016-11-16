@@ -4,7 +4,7 @@
     <div class="col-md-12">
         <div class="page-operation-wrap">
             <div class="row">
-                <div class="col-md-2" >
+                <div class="col-md-2">
                     <select ng-model="filter['BANNER.POSITION']"
                             ng-init="filter['BANNER.POSITION']=''"
                             ng-options="item['BANNER_POSITION.ID'] as item['BANNER_POSITION.NAME'] for item in positionList "
@@ -16,16 +16,16 @@
                     </select>
                 </div> <!-- select-center  -->
                 <div class="col-md-offset-3 col-md-4">
-                <label class="control-label">排序：</label>
-                <select class="nya-bs-select">
-                    <option class="nya-bs-option" value="null">
-                        位置
-                    </option>
-                    <option class="nya-bs-option" value="2">
-                        名称
-                    </option>
-                </select >
-            </div>
+                    <!--<label class="control-label">排序：</label>-->
+                    <!--<select class="nya-bs-select">-->
+                        <!--<option class="nya-bs-option" value="null">-->
+                            <!--位置-->
+                        <!--</option>-->
+                        <!--<option class="nya-bs-option" value="2">-->
+                            <!--名称-->
+                        <!--</option>-->
+                    <!--</select>-->
+                </div>
                 <div class="col-md-3 text-right">
                     <button show-modal id="#addBanner" class="btn btn-default sbold green">
                         <i class="fa fa-plus"></i>新增横幅
@@ -42,17 +42,23 @@
                     <th class="col-md-1">横幅名称</th>
                     <th class="col-md-1">横幅描述</th>
                     <th class="col-md-2">横幅位置</th>
+                    <th class="col-md-1">排序</th>
                     <th class="col-md-1 text-center"> 操作</th>
                 </tr>
                 </thead>
                 <tbody ng-cloak>
-                <tr ng-repeat="item in bannerList">
+                <tr ng-repeat="(key,item) in bannerList">
                     <td>
                         <span ng-bind="item['BANNER.NAME']"></span>
                         <span ng-show="item['BANNER.STATE']==-1" style="color: red">(已停用)</span>
                     </td><!--横幅名称-->
                     <td ng-bind="item['BANNER.INTRO']"></td> <!--规则描述-->
                     <td ng-bind="positionMap[item['BANNER.POSITION_ID']]"></td> <!--横幅位置-->
+                    <td class="text-center">
+                        <a ng-show="key!=0" ng-click="changeOrderNumUp(item,key)">↑</a>
+                        &nbsp;
+                        <a ng-if="key!=number" ng-click="changeOrderNumDown(item,key)">↓</a>
+                    </td> <!--横幅位置-->
                     <td class="text-center">
                         <!--<a show-modal id="#couponDetail" class="btn sbold green" ng-click="detailClick(item)">明细</a>-->
                         <a show-modal id="#modBanner" ng-click="modifyClick(item)">修改</a>
@@ -143,7 +149,7 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                           图片
+                            图片
                         </label>
 
                         <div class="col-md-8">
@@ -152,9 +158,9 @@
                                 <input class="hidden" type="file"
                                        id="image" name='image'
                                        onchange="angular.element(this).scope().uploadImage(this)"
-                                       >
+                                >
                                 <img ng-src="{{FILE_SERVER_DOMAIN+uploadImageFiles}}?x-oss-process=image/resize,m_fill,h_100,w_300"
-                                     class="img-responsive"  style="height:100%;width: 400px" alt="添加横幅图片">
+                                     class="img-responsive" style="height:100%;width: 400px" alt="添加横幅图片">
                             </label>
 
                         </div>
@@ -171,16 +177,16 @@
                                    placeholder="请输入超链接的URL">
                         </div>
                     </div>
-                    <div class="form-group row" >
+                    <div class="form-group row">
                         <label class="col-md-3 control-label">
-                           开始时间
+                            开始时间
                         </label>
 
                         <div class="col-md-8">
-                           <!-- <input type="text" class="form-control"
-                                   ng-model="add['BANNER.BEGIN_DATETIME']"
-                                   ng-init="add['BANNER.BEGIN_DATETIME']=''"
-                                   placeholder="">-->
+                            <!-- <input type="text" class="form-control"
+                                    ng-model="add['BANNER.BEGIN_DATETIME']"
+                                    ng-init="add['BANNER.BEGIN_DATETIME']=''"
+                                    placeholder="">-->
                             <input type="datetime-local" class="form-control" id="startTime"/>
                             <!--<input type="time"  class="col-md-4"  id="startTime"/>-->
                         </div>
@@ -188,14 +194,14 @@
 
                         </div>
                     </div>
-                    <div class="form-group row" >
+                    <div class="form-group row">
                         <label class="col-md-3 control-label">
                             结束时间
                         </label>
 
                         <div class="col-md-8">
 
-                            <input type="datetime-local"  class="form-control" id="endTime"/>
+                            <input type="datetime-local" class="form-control" id="endTime"/>
                         </div>
                     </div>
 
@@ -290,7 +296,7 @@
                                        onchange="angular.element(this).scope().uploadImage(this)"
                                 >
                                 <img ng-src="{{FILE_SERVER_DOMAIN+uploadImageFiles}}?x-oss-process=image/resize,m_fill,h_100,w_300"
-                                     class="img-responsive"  style="height:100%;width: 400px" alt="修改横幅图片">
+                                     class="img-responsive" style="height:100%;width: 400px" alt="修改横幅图片">
                             </label>
 
 
@@ -306,23 +312,25 @@
                                    ng-model="mod['BANNER.URL']">
                         </div>
                     </div>
-                    <div class="form-group row" >
+                    <div class="form-group row">
                         <label class="col-md-3 control-label">
                             开始时间
                         </label>
 
                         <div class="col-md-8">
-                            <input type="datetime-local" value="{{modifyTime(mod['BANNER.BEGIN_DATETIME'])}}" class="form-control" id="mStartTime"/>
+                            <input type="datetime-local" value="{{modifyTime(mod['BANNER.BEGIN_DATETIME'])}}"
+                                   class="form-control" id="mStartTime"/>
                         </div>
                     </div>
 
-                    <div class="form-group row" >
+                    <div class="form-group row">
                         <label class="col-md-3 control-label">
                             结束时间
                         </label>
 
                         <div class="col-md-8">
-                            <input type="datetime-local" value="{{modifyTime(mod['BANNER.END_DATETIME'])}}" class="form-control" id="mEndTime"/>
+                            <input type="datetime-local" value="{{modifyTime(mod['BANNER.END_DATETIME'])}}"
+                                   class="form-control" id="mEndTime"/>
                         </div>
                     </div>
 
