@@ -310,7 +310,6 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
 
     //数量减
     $scope.lessSize = function () {
-        alert($scope.skuSize);
         if ($scope.skuSize > 0) {
             $scope.skuSize = $scope.skuSize - 1;
         }
@@ -319,6 +318,17 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
     $scope.moreSize = function () {
         $scope.skuSize = clone($scope.skuSize) + 1
     }
+
+    var swiper = new Swiper('.swiper-container', {
+        paginationClickable: true,
+        spaceBetween: 300,
+        centeredSlides: true,
+        autoplay: 3500,
+        autoplayDisableOnInteraction: false,
+        observer:true,
+        observeParents:true
+    });
+
 
 });
 

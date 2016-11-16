@@ -1,43 +1,90 @@
+angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', function ($scope, $http, $stateParams, bannerFactory, modalFactory) {
 
-angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', function ($scope,$http, $stateParams, bannerFactory, modalFactory) {
-
-  modalFactory.setTitle('横幅列表');
-    $scope.uploadImageFiles ='';
+    modalFactory.setTitle('横幅列表');
+    $scope.uploadImageFiles = '';
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     connALiYun();
 
-  $scope.bindData = function (response) {
+    $scope.bindData = function (response) {
 
-    //  console.log(response);
-      $scope.bannerList={};
-      $scope.bannerList = response.data;
-      console.log(response.data);
-      $scope.positionList= response.extraData.positionList;
-      $scope.positionMap = response.extraData.positionMap;
+        $scope.bannerList = response.data;
+        $scope.number = response.extraData.page.pageSize - 1;
+        $scope.positionList = response.extraData.positionList;
+        $scope.positionMap = response.extraData.positionMap;
 
-      $scope.tagList= response.extraData.tagList;
-      $scope.tagMap = response.extraData.tagMap;
+        $scope.tagList = response.extraData.tagList;
+        $scope.tagMap = response.extraData.tagMap;
 
+    };
 
-  };
+    $scope.changeOrderNumUp = function (item, key) {
+
+        var temp = item['BANNER.ORDER_NUM'];
+        var formUp = {};
+        console.log(formUp);
+        formUp['BANNER.ID'] = item['BANNER.ID'];
+        formUp['BANNER.ORDER_NUM'] = $scope.bannerList[key - 1]['BANNER.ORDER_NUM'];
+        bannerFactory.bannerUpDown(formUp).get({}, function (response) {
+            if (response.extraData.state == 'true') {
+            } else {
+                $scope.$broadcast("to-short-modal", {message: response.msg});
+            }
+        });
+
+        var formDown = {};
+        formDown['BANNER.ID'] = $scope.bannerList[key - 1]['BANNER.ID'];
+        formDown['BANNER.ORDER_NUM'] = temp;
+        console.log(formDown);
+        bannerFactory.bannerUpDown(formDown).get({}, function (response) {
+            if (response.extraData.state == 'true') {
+            } else {
+                $scope.$broadcast("to-short-modal", {message: response.msg});
+            }
+        });
+        $scope.$broadcast('pageBar.reload');
+    };
+
+    $scope.changeOrderNumDown = function (item, key) {
+
+        var temp = item['BANNER.ORDER_NUM'];
+
+        var formDown = {};
+        formDown['BANNER.ID'] = item['BANNER.ID'];
+        formDown['BANNER.ORDER_NUM'] = $scope.bannerList[key + 1]['BANNER.ORDER_NUM'];
+        bannerFactory.bannerUpDown(formDown).get({}, function (response) {
+            if (response.extraData.state == 'true') {
+            } else {
+                $scope.$broadcast("to-short-modal", {message: response.msg});
+            }
+        });
+        var formUp = {};
+        formUp['BANNER.ID'] = $scope.bannerList[key + 1]['BANNER.ID'];
+        formUp['BANNER.ORDER_NUM'] = temp;
+        bannerFactory.bannerUpDown(formUp).get({}, function (response) {
+            if (response.extraData.state == 'true') {
+            } else {
+                $scope.$broadcast("to-short-modal", {message: response.msg});
+            }
+        });
+        $scope.$broadcast('pageBar.reload');
+    };
 
     $scope.addBannerInfo = function () {
-      //  console.log('add');
+        //  console.log('add');
 
-        $scope.add['BANNER.PICTURE']=$scope.uploadImageFiles;
-       //  console.log($scope.add['BANNER.PICTURE']);
-        var startTime=document.getElementById("startTime").value;
-        startTime=startTime.replace("T"," ");
-       // console.log(startTime);
-        $scope.add['BANNER.BEGIN_DATETIME']=startTime;  //开始时间
+        $scope.add['BANNER.PICTURE'] = $scope.uploadImageFiles;
+        //  console.log($scope.add['BANNER.PICTURE']);
+        var startTime = document.getElementById("startTime").value;
+        startTime = startTime.replace("T", " ");
+        // console.log(startTime);
+        $scope.add['BANNER.BEGIN_DATETIME'] = startTime;  //开始时间
 
 
-
-        var endTime=document.getElementById("endTime").value;
-        endTime=endTime.replace("T"," ");
-        $scope.add['BANNER.END_DATETIME']=endTime;  //结束时间
-      //  console.log( $scope.add['BANNER.END_DATETIME']);
+        var endTime = document.getElementById("endTime").value;
+        endTime = endTime.replace("T", " ");
+        $scope.add['BANNER.END_DATETIME'] = endTime;  //结束时间
+        //  console.log( $scope.add['BANNER.END_DATETIME']);
 
         bannerFactory.addBanner($scope.add).get({}, function (response) {
 
@@ -53,56 +100,55 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
         });
     };
 
-    $scope.modifyTime=function(timeStr){
-       // console.log(123);
-       // console.log(timeStr);
-        var temp =timeStr+'';
-        temp=temp.split('.')[0];
-        temp = temp.replace(" ",'T');
-       // console.log(temp);
+    $scope.modifyTime = function (timeStr) {
+        // console.log(123);
+        // console.log(timeStr);
+        var temp = timeStr + '';
+        temp = temp.split('.')[0];
+        temp = temp.replace(" ", 'T');
+        // console.log(temp);
         return temp;
     };
-  $scope.modifyClick = function (item) {
+    $scope.modifyClick = function (item) {
 
-      $scope.mod=clone(item);
-      $scope.uploadImageFiles=$scope.mod['BANNER.PICTURE'];
-
-
-  };
-
-  $scope.modBannerInfo = function () {
-      var mstartTime=document.getElementById("mStartTime").value;
-
-      mstartTime=mstartTime.replace("T"," ");
-
-      $scope.mod['BANNER.BEGIN_DATETIME']=mstartTime;  //开始时间
+        $scope.mod = clone(item);
+        $scope.uploadImageFiles = $scope.mod['BANNER.PICTURE'];
 
 
+    };
 
-      var mendTime=document.getElementById("mEndTime").value;
-      mendTime=mendTime.replace("T"," ");
-      $scope.mod['BANNER.END_DATETIME']=mendTime;  //结束时间
+    $scope.modBannerInfo = function () {
+        var mstartTime = document.getElementById("mStartTime").value;
+
+        mstartTime = mstartTime.replace("T", " ");
+
+        $scope.mod['BANNER.BEGIN_DATETIME'] = mstartTime;  //开始时间
 
 
-     $scope.mod['BANNER.PICTURE']=$scope.uploadImageFiles;
+        var mendTime = document.getElementById("mEndTime").value;
+        mendTime = mendTime.replace("T", " ");
+        $scope.mod['BANNER.END_DATETIME'] = mendTime;  //结束时间
 
-    bannerFactory.modifyBanner($scope.mod).get({}, function (response) {
-      if (response.code == 400) {
-        modalFactory.showShortAlert(response.msg);
-      } else if (response.extraData.state == 'true') {
-        $("#modBanner").modal('hide');
-        modalFactory.showShortAlert("修改成功");
-          $scope.$broadcast('pageBar.reload');
-      }
-    });
-  };
 
-    $scope.stopBanner= function (item) {
+        $scope.mod['BANNER.PICTURE'] = $scope.uploadImageFiles;
+
+        bannerFactory.modifyBanner($scope.mod).get({}, function (response) {
+            if (response.code == 400) {
+                modalFactory.showShortAlert(response.msg);
+            } else if (response.extraData.state == 'true') {
+                $("#modBanner").modal('hide');
+                modalFactory.showShortAlert("修改成功");
+                $scope.$broadcast('pageBar.reload');
+            }
+        });
+    };
+
+    $scope.stopBanner = function (item) {
 
         if (item['BANNER.STATE'] == 1) {
             modalFactory.showAlert("确认停用吗?", function () {
                 item['BANNER.STATE'] = -1;
-                bannerFactory.stopBannerById (item).get({}, function (res) {
+                bannerFactory.stopBannerById(item).get({}, function (res) {
                     if (res.extraData.state = 'true') {
                         modalFactory.showShortAlert("停用成功");
                         $scope.$broadcast('pageBar.reload');
@@ -111,7 +157,7 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
             });
         } else {
             item['BANNER.STATE'] = 1;
-            bannerFactory.stopBannerById (item).get({}, function (res) {
+            bannerFactory.stopBannerById(item).get({}, function (res) {
                 if (res.extraData.state = 'true') {
                     modalFactory.showShortAlert("启用成功");
                     $scope.$broadcast('pageBar.reload');
@@ -121,18 +167,18 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
 
 
     };
-  $scope.delBanner = function (item) {
+    $scope.delBanner = function (item) {
 
-    modalFactory.showAlert("确认删除吗?", function () {
-      bannerFactory.delBannerById(item).get({}, function (res) {
-        if (res.extraData.state = 'true') {
-          modalFactory.showShortAlert("删除成功");
-          $scope.$broadcast('pageBar.reload');
-        }
-      });
-    });
+        modalFactory.showAlert("确认删除吗?", function () {
+            bannerFactory.delBannerById(item).get({}, function (res) {
+                if (res.extraData.state = 'true') {
+                    modalFactory.showShortAlert("删除成功");
+                    $scope.$broadcast('pageBar.reload');
+                }
+            });
+        });
 
-  }
+    }
 
     //阿里云连接
     function connALiYun() {
@@ -143,61 +189,61 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
             $scope.signature = response.split(',')[2];
         });
     }
+
     /**
      *  上传商品的图片， 最多上传6个
      **/
     $scope.uploadImage = function (element) {
         _uploadFiles(element.files, $scope.uploadImageFiles, 'image', function (errResponse) {
-          //  console.log(errResponse);
+            //  console.log(errResponse);
         }, function (successResponse) {
-            $scope.uploadImageFiles=successResponse.url;
-           // console.log(successResponse);
-           // console.log($scope.uploadImageFiles);
+            $scope.uploadImageFiles = successResponse.url;
+            // console.log(successResponse);
+            // console.log($scope.uploadImageFiles);
         });
     };
-
 
 
     //上传文件
     var _uploadFiles = function (files, bindToList, type, errCall, successCall) {
 
-             //发送请求
-            _postFile(files, type).success(function (response) {
-               // console.log(response);
-                var state = '"state\":\"SUCCESS",';
-                var title = '"title":' + '"' + fileName + '",';
-                var original = '"original":' + '"' + file.name + '",';
-                var type = '"type":' + '".' + fileSuffix + '",';
+        //发送请求
+        _postFile(files, type).success(function (response) {
+            // console.log(response);
+            var state = '"state\":\"SUCCESS",';
+            var title = '"title":' + '"' + fileName + '",';
+            var original = '"original":' + '"' + file.name + '",';
+            var type = '"type":' + '".' + fileSuffix + '",';
 
-                var index1 = response.indexOf('<Key>');
-                var index2 = response.indexOf('</Key>');
-                fileurl = response.substring(index1 + 5, index2);
-                var url = '"url":"' + fileurl + '",';
-                var size = '"size":"' + file.size + '"';
-                var json = '{' + state + title + original + type + url + size + '}';
-                console.log('要返回的json字符串为' + json);
-                var jsonObj = JSON.parse(json);   //将字符串装换为json对象;
-                successCall(jsonObj);
-            }).error(function (response) {
-                errCall(response);
-            });
+            var index1 = response.indexOf('<Key>');
+            var index2 = response.indexOf('</Key>');
+            fileurl = response.substring(index1 + 5, index2);
+            var url = '"url":"' + fileurl + '",';
+            var size = '"size":"' + file.size + '"';
+            var json = '{' + state + title + original + type + url + size + '}';
+            console.log('要返回的json字符串为' + json);
+            var jsonObj = JSON.parse(json);   //将字符串装换为json对象;
+            successCall(jsonObj);
+        }).error(function (response) {
+            errCall(response);
+        });
 
 
     };
 
     var _postFile = function (file1, filetype) {
         file = file1[0];
-       // console.log(file);
+        // console.log(file);
         var fd = new FormData();
         var date = new Date();
         var tempArray = file.name.split('.');
         fileSuffix = tempArray[tempArray.length - 1];     //文件后缀名
-        fileName = date.getTime()+ (Math.round(Math.random() * 1000)).toString() + '.' + fileSuffix;    //文件名
+        fileName = date.getTime() + (Math.round(Math.random() * 1000)).toString() + '.' + fileSuffix;    //文件名
         fd.append('OSSAccessKeyId', 'LTAIEHpVQat6f83C');
         fd.append('policy', $scope.policy);
         fd.append('Signature', $scope.signature);
         if (filetype == 'image') {
-            fd.append('key', '10000/Banner'+ '/image/' + fileName);  //filePath为用户的ServiceId
+            fd.append('key', '10000/Banner' + '/image/' + fileName);  //filePath为用户的ServiceId
         }
         fd.append('success_action_status', '201');
         fd.append('file', file);              //'file'必须为表单的最后一个字段

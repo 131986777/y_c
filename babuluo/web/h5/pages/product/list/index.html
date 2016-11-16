@@ -1,9 +1,9 @@
 <div class="product-list-page" ng-init="initData()">
     <!-- BEGIN 商品搜索 -->
     <div class="search-bar flexbox navbar-fixed-top">
-        <input class="search-input cell bg-grey" type="search" ng-model="filter['SHOP_PRODUCT.PRD_NAME']"
+        <input class="search-input cell bg-grey" type="search"  ng-keyup="myKeyup($event)" ng-model="filter['SHOP_PRODUCT.PRD_NAME']"
                placeholder="输入菜品名">
-        <a class="icon-wrap cell fixed"  ng-keyup="myKeyup($event)" ng-click="searchPrd()">
+        <a class="icon-wrap cell fixed"  ng-click="searchPrd()">
             <i class="icon icon-search"></i>
         </a>
     </div>
@@ -44,10 +44,6 @@
                         <i class="icon-out" ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0"></i>
                     </div>
                 </a>
-                <div class="weui-infinite-scroll" ng-show="hasNextPage">
-                    <div class="infinite-preloader"></div>
-                    正在加载...
-                </div>
             </div>
             <div id="tab2" class="weui_tab_bd_item">
                 <h1 class="doc-head">通讯录</h1>

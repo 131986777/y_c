@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory) {
+angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory,weUI) {
 
     modalFactory.setTitle('主页');
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
@@ -249,28 +249,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                 }
 
             });
-
-
-           /* var params = {}
-            params['SHOP_PRODUCT.TAG_ID'] = tagArray.toString();
-            productFactory.getProductByTag(params, function (response) {
-                console.log(response);
-                if (response.code == 0) {
-
-                    response.data.forEach(function (ele) {
-                         dataList.forEach(function(banner){
-                              if(ele['SHOP_PRODUCT.TAG_ID'].indexOf(banner['BANNER.TAG_ID']) >= 0){
-                                  banner['PRODUCT_LIST']=
-
-                              }
-                         });
-
-
-                    });   //
-                }
-            });//*/
-
-
         });
 
     }
@@ -292,17 +270,18 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         $state.go('pages/shop',{'FROM':window.location.href});
     }
 
-
-    $scope.$on('destroy', function () {
+    $scope.$on('$destroy',function(){
         $interval.cancel($scope.timer);
     })
 
     var swiper = new Swiper('.swiper-container', {
-            paginationClickable: true,
-            spaceBetween: 300,
-            centeredSlides: true,
-            autoplay: 3500,
-            autoplayDisableOnInteraction: false
+        paginationClickable: true,
+        spaceBetween: 300,
+        centeredSlides: true,
+        autoplay: 3500,
+        autoplayDisableOnInteraction: false,
+        observer:true,
+        observeParents:true
     });
 
 });

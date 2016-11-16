@@ -1,405 +1,141 @@
 <div class="bg-grey product-detail-page" ng-init="initData()">
-    <!-- BEGIN 商品详情图片 -->
-    <!--<div class="swiper-container">-->
+  <!-- BEGIN 商品详情图片 -->
+  <div class="swiper-container" style="height: 197px;width: 100%;">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" ng-repeat="slide in slides">
+        <a >
+          <img
+              ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
+              style="height: 197px;width: 100%;">
+        </a>
+      </div>
 
-        <!--<div id="carousel-generic">-->
-            <!--<carousel interval="myInterval">-->
-                <!--<slide ng-repeat="slide in slides" active="slide.active">-->
-                    <!--<img ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800" style="margin:auto;">-->
-                    <!--<div class="carousel-caption">-->
-                        <!--<p>{{slide.text}}</p>-->
-                    <!--</div>-->
-                <!--</slide>-->
-            <!--</carousel>-->
-        <!--</div>-->
-        <!--<div class="swiper-wrapper">-->
-        <!--&lt;!&ndash; Slides &ndash;&gt;-->
-        <!--<div class="swiper-slide">Slide 1</div>-->
-        <!--<div class="swiper-slide">Slide 2</div>-->
-        <!--<div class="swiper-slide">Slide 3</div>-->
-        <!--</div>-->
-        <!--<div class="swiper-pagination"></div>-->
-    <!--</div>-->
-    <!-- END 商品详情图片 -->
-
-    <div class="swiper-container" style="height: 197px;width: 100%;">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide" ng-repeat="slide in slides">
-                <a >
-                    <img
-                            ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
-                            style="height: 197px;width: 100%;">
-                </ a>
-            </div>
-
-        </div>
     </div>
+  </div>
 
-    <div class="weui_cells">
-        <div class="weui_cell">
-            <div class="basic-info weui_cell_bd weui_cell_primary">
-                <h4 class="name">
-                    <span ng-bind="product['SHOP_PRODUCT.PRD_NAME']"></span>
-                    <span ng-if="sku['SHOP_PRODUCT_SKU.STOCK']==0" style="color: red">售罄</span>
-                </h4>
-                <p class="feature" ng-bind="product['SHOP_PRODUCT.SALES_TITLE']">
-                </p>
-                <p class="money">
+  <div class="weui_cells">
+    <div class="weui_cell">
+      <div class="basic-info weui_cell_bd weui_cell_primary">
+        <h4 class="name">
+          <span  ng-bind="product['SHOP_PRODUCT.PRD_NAME']"></span>
+          <span  ng-if="sku['SHOP_PRODUCT_SKU.STOCK']==0" style="color: red">售罄</span>
+        </h4>
+        <p class="feature" ng-bind="product['SHOP_PRODUCT.SALES_TITLE']">
+        </p>
+        <p class="money">
           <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
                 ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
-                <div ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']==undefined" class="money">
+        <div ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']==undefined" class="money">
         <span
-                ng-bind="skuData.minPrice | currency :'￥'"></span> -
-                    <span
-                            ng-bind="skuData.maxPrice | currency :'￥'"></span>
+            ng-bind="skuData.minPrice | currency :'￥'"></span> -
+        <span
+            ng-bind="skuData.maxPrice | currency :'￥'"></span>
 
-                </div>
-                </p>
-                <p class="code" ng-bind="'商品编码 ：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
-                </p>
-            </div>
         </div>
-        <!--<div class="sale-info weui_cell">-->
-        <!--<div class="weui_cell_hd">-->
-        <!--促销信息:-->
-        <!--</div>-->
-        <!--<div class="weui_cell_bd weui_cell_primary">-->
-        <!--<span class="label label-default">满减</span>-->
-        <!--满200减20-->
-        <!--</div>-->
-        <!--</div>-->
+        </p>
+        <p class="code" ng-bind="'商品编码 ：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
+        </p>
+      </div>
     </div>
+  </div>
 
-    <div class="weui_cells">
+  <div class="weui_cells">
 
-        <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>0">
-            <div class="weui_cell_hd" style="min-width: 40px;"
-                 ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']+' : '"></div>
-            <div class="sku-list label-group weui_cell_bd" style="margin-left: 10px">
+    <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>0">
+      <div class="weui_cell_hd" style="min-width: 40px;"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']+' : '"></div>
+      <div class="sku-list label-group weui_cell_bd" style="margin-left: 10px">
         <span class="sku-label {{currSkuSelectClassMap[1][item]}} label-outline"
               ng-class="{true:'selected'}[currSkuContentSelectMap.name1==item]"
               ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1']"
               ng-click="checkContent(1,item)"
               ng-bind="item"></span>
-            </div>
-        </div>
+      </div>
+    </div>
 
-        <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>1">
-            <div class="weui_cell_hd" style="min-width: 40px;"
-                 ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME2']+' : '"></div>
-            <div class="sku-list label-group weui_cell_bd">
+    <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>1">
+      <div class="weui_cell_hd" style="min-width: 40px;"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME2']+' : '"></div>
+      <div class="sku-list label-group weui_cell_bd">
         <span class="sku-label  {{currSkuSelectClassMap[2][item]}} label-outline"
               ng-class=" { true :'selected'}[currSkuContentSelectMap.name2==item] "
               ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT2']"
               ng-click="checkContent(2,item)"
               ng-bind="item"></span>
-            </div>
-        </div>
+      </div>
+    </div>
 
-        <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>2">
-            <div class="weui_cell_hd" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']+' : '"></div>
+    <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>2">
+      <div class="weui_cell_hd"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']+' : '"></div>
 
-            <div class="sku-list label-group weui_cell_bd">
+      <div class="sku-list label-group weui_cell_bd">
         <span class="sku-label  {{currSkuSelectClassMap[3][item]}} label-outline"
               ng-class=" { true :'selected'}[currSkuContentSelectMap.name3==item] "
               ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT3']"
               ng-click="checkContent(3,item)"
               ng-bind="item"></span>
-            </div>
-        </div>
+      </div>
+    </div>
 
 
-        <div class="weui_cell" ng-if="!noStore">
-            <div class="weui_cell_hd text-center" style="width: 62.3px;">
-                数量：
-            </div>
-            <div class="weui_cell_bd" ng-init="skuSize=1" style="margin-left: 10px">
-                <div class="cart-product-num-wrap input-group">
+    <div class="weui_cell"   ng-if="!noStore">
+      <div class="weui_cell_hd text-center" style="width: 62.3px;">
+        数量：
+      </div>
+      <div class="weui_cell_bd" ng-init="skuSize=1" style="margin-left: 10px">
+        <div class="cart-product-num-wrap input-group">
                 <span class="input-group-btn">
                     <button class="btn btn-cart-less" type="button" ng-click="skuSize=skuSize>1?skuSize-1:skuSize">
                       -
                     </button>
                 </span>
-                    <input class="form-control text-center" disabled="" type="text" ng-model="skuSize"
-                           style=" background-color: #fff;">
-                    <span class="input-group-btn">
-                    <button class="btn btn-cart-add" type="button" ng-click="skuSize=skuSize+1">
+          <input class="form-control text-center" disabled="" type="text" ng-model="skuSize" style=" background-color: #fff;">
+                <span class="input-group-btn">
+                    <button class="btn btn-cart-add" type="button" ng-click="skuSize=skuSize+1" >
                       +
                     </button>
                 </span>
-                </div>
-            </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <div class="weui_tab tab-default">
-        <div class="weui_navbar">
-            <a class="weui_navbar_item" href="#tab1">
-                商品详情
-            </a>
-            <!--<a class="weui_navbar_item" href="#tab2">-->
-            <!--商品评价-->
-            <!--</a>-->
-        </div>
-        <div class="weui_tab_bd">
-            <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
-                <span ng-bind-html="product['SHOP_PRODUCT.SHOP_DES']"></span>
-            </div>
-            <!--<div id="tab2" class="weui_tab_bd_item">-->
-            <!--<div class="review-nav flexbox">-->
-            <!--<a href="#review-all" class="col cell text-center" data-toggle="tab">-->
-            <!--<span>899</span>-->
-            <!--<p>全部</p>-->
-            <!--</a>-->
-            <!--<a href="#review-good" class="col cell text-center" data-toggle="tab">-->
-            <!--<span>453</span>-->
-            <!--<p>好评</p>-->
-            <!--</a>-->
-            <!--<a href="#review-middle" class="col cell text-center" data-toggle="tab">-->
-            <!--<span>45</span>-->
-            <!--<p>中评</p>-->
-            <!--</a>-->
-            <!--<a href="#review-bad" class="col cell text-center" data-toggle="tab">-->
-            <!--<span>3</span>-->
-            <!--<p>差评</p>-->
-            <!--</a>-->
-            <!--</div>-->
-            <!--<div class="tab-content">-->
-            <!--&lt;!&ndash;   全部评价 &ndash;&gt;-->
-            <!--<div id="review-all" class="tab-pane active">-->
-            <!--<div class="review-wrap">-->
-            <!--<div class="review-content">-->
-            <!--<div class="review-head flexbox">-->
-            <!--<div class="userName cell">-->
-            <!--吃遍美食-->
-            <!--<span class="item-star" style="margin-left: 8px;">五星好评</span>-->
-            <!--</div>-->
-            <!--<div class="userTime cell text-right">-->
-            <!--2016 09 29 14:52-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-detail">-->
-            <!--东西很好吃很新鲜，东西很好吃很新鲜，东西很好吃很新鲜。-->
-            <!--</div>-->
-            <!--<img class="userIcon" src="../../public/img/nav1.jpg">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-wrap">-->
-            <!--<div class="review-content">-->
-            <!--<div class="review-head flexbox">-->
-            <!--<div class="userName cell">-->
-            <!--吃遍美食-->
-            <!--<span class="item-star" style="margin-left: 8px;">五星好评</span>-->
-            <!--</div>-->
-            <!--<div class="userTime cell text-right">-->
-            <!--2016 09 29 14:52-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-detail">-->
-            <!--东西很好吃很新鲜，东西很好吃很新鲜，东西很好吃很新鲜。-->
-            <!--</div>-->
-            <!--<img class="userIcon" src="../../public/img/nav1.jpg">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-wrap">-->
-            <!--<div class="review-content">-->
-            <!--<div class="review-head flexbox">-->
-            <!--<div class="userName cell">-->
-            <!--吃遍美食-->
-            <!--<span class="item-star" style="margin-left: 8px;">五星好评</span>-->
-            <!--</div>-->
-            <!--<div class="userTime cell text-right">-->
-            <!--2016 09 29 14:52-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-detail">-->
-            <!--东西很好吃很新鲜，东西很好吃很新鲜，东西很好吃很新鲜。-->
-            <!--</div>-->
-            <!--<img class="userIcon" src="../../public/img/nav1.jpg">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; 好评 &ndash;&gt;-->
-            <!--<div id="review-good" class="tab-pane">-->
-            <!--<div class="review-wrap">-->
-            <!--<div class="review-content">-->
-            <!--<div class="review-head flexbox">-->
-            <!--<div class="userName cell">-->
-            <!--吃遍美-->
-            <!--</div>-->
-            <!--<div class="userTime cell text-right">-->
-            <!--2016 09 29 14:52-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-detail">-->
-            <!--东西很好吃很新鲜，东西很好吃很新鲜，东西很好吃很新鲜啊。-->
-            <!--</div>-->
-            <!--<img class="userIcon" src="../../public/img/nav1.jpg">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-wrap">-->
-            <!--<div class="review-content">-->
-            <!--<div class="review-head flexbox">-->
-            <!--<div class="userName cell">-->
-            <!--吃遍美-->
-            <!--</div>-->
-            <!--<div class="userTime cell text-right">-->
-            <!--2016 09 29 14:52-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-detail">-->
-            <!--东西很好吃很新鲜，东西很好吃很新鲜，东西很好吃很新鲜。-->
-            <!--</div>-->
-            <!--<img class="userIcon" src="../../public/img/nav1.jpg">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-wrap">-->
-            <!--<div class="review-content">-->
-            <!--<div class="review-head flexbox">-->
-            <!--<div class="userName cell">-->
-            <!--吃遍美-->
-            <!--</div>-->
-            <!--<div class="userTime cell text-right">-->
-            <!--2016 09 29 14:52-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-detail">-->
-            <!--东西很好吃很新鲜，东西很好吃很新鲜，东西很好吃很新鲜。-->
-            <!--</div>-->
-            <!--<img class="userIcon" src="../../public/img/nav1.jpg">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; 中评 &ndash;&gt;-->
-            <!--<div id="review-middle" class="tab-pane">-->
-            <!--<div class="review-wrap">-->
-            <!--<div class="review-content">-->
-            <!--<div class="review-head flexbox">-->
-            <!--<div class="userName cell">-->
-            <!--吃遍美食-->
-            <!--</div>-->
-            <!--<div class="userTime cell text-right">-->
-            <!--2016 09 29 14:52-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-detail">-->
-            <!--东西很一般很一般很一般。-->
-            <!--</div>-->
-            <!--<img class="userIcon" src="../../public/img/nav1.jpg">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-wrap">-->
-            <!--<div class="review-content">-->
-            <!--<div class="review-head flexbox">-->
-            <!--<div class="userName cell">-->
-            <!--吃遍美食-->
-            <!--</div>-->
-            <!--<div class="userTime cell text-right">-->
-            <!--2016 09 29 14:52-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-detail">-->
-            <!--东西很一般很一般很一般。-->
-            <!--</div>-->
-            <!--<img class="userIcon" src="../../public/img/nav1.jpg">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-wrap">-->
-            <!--<div class="review-content">-->
-            <!--<div class="review-head flexbox">-->
-            <!--<div class="userName cell">-->
-            <!--吃遍美食-->
-            <!--</div>-->
-            <!--<div class="userTime cell text-right">-->
-            <!--2016 09 29 14:52-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-detail">-->
-            <!--东西很一般很一般很一般。-->
-            <!--</div>-->
-            <!--<img class="userIcon" src="../../public/img/nav1.jpg">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--&lt;!&ndash; 差评 &ndash;&gt;-->
-            <!--<div id="review-bad" class="tab-pane">-->
-            <!--<div class="review-wrap">-->
-            <!--<div class="review-content">-->
-            <!--<div class="review-head flexbox">-->
-            <!--<div class="userName cell">-->
-            <!--吃遍美食-->
-            <!--</div>-->
-            <!--<div class="userTime cell text-right">-->
-            <!--2016 09 29 14:52-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-detail">-->
-            <!--东西很差很差很差很差很差很差。-->
-            <!--</div>-->
-            <!--<img class="userIcon" src="../../public/img/nav1.jpg">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-wrap">-->
-            <!--<div class="review-content">-->
-            <!--<div class="review-head flexbox">-->
-            <!--<div class="userName cell">-->
-            <!--吃遍美食-->
-            <!--</div>-->
-            <!--<div class="userTime cell text-right">-->
-            <!--2016 09 29 14:52-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-detail">-->
-            <!--东西很差很差很差很差很差。-->
-            <!--</div>-->
-            <!--<img class="userIcon" src="../../public/img/nav1.jpg">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-wrap">-->
-            <!--<div class="review-content">-->
-            <!--<div class="review-head flexbox">-->
-            <!--<div class="userName cell">-->
-            <!--吃遍美食-->
-            <!--</div>-->
-            <!--<div class="userTime cell text-right">-->
-            <!--2016 09 29 14:52-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--<div class="review-detail">-->
-            <!--东西很差很差很差很差很差。-->
-            <!--</div>-->
-            <!--<img class="userIcon" src="../../public/img/nav1.jpg">-->
-            <!--</div>-->
-            <!--</div>-->
-            <!--</div>-->
-
-            <!--</div>-->
-            <!--</div>-->
-        </div>
+  <div class="weui_tab tab-default">
+    <div class="weui_navbar">
+      <a class="weui_navbar_item" href="#tab1">
+        商品详情
+      </a>
+      <!--<a class="weui_navbar_item" href="#tab2">-->
+        <!--商品评价-->
+      <!--</a>-->
     </div>
-
-    <div class="product-action-wrap action-bar-wrap">
-        <div class="action-bar border-top">
-            <div class="icon-wrap">
-                <i class="icon icon-cart-small" ui-sref="pages/cart"></i>
-                购物车
-            </div>
-            <!--<div class="icon-wrap">-->
-            <!--&lt;!&ndash; 已收藏 class="icon-collected" &ndash;&gt;-->
-            <!--<i class="icon icon-collect"></i>-->
-            <!--收藏-->
-            <!--</div>-->
-            <a class="add-to-cart cell" ng-click="addToCart()">
-                加入购物车
-            </a>
-        </div>
+    <div class="weui_tab_bd">
+      <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
+        <span ng-bind-html="product['SHOP_PRODUCT.SHOP_DES']"></span>
+      </div>
     </div>
+  </div>
 
-    <!--选择页面遮罩-->
-    <div class="chose-shop" ng-if="STORE_ID==0">
-        <i class="icon-shop"></i>
-        <span>请先选择门店，即可在线购买！</span>
-        <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
+  <div class="product-action-wrap action-bar-wrap" >
+    <div class="action-bar border-top">
+      <div class="icon-wrap">
+        <i class="icon icon-cart-small" ui-sref="pages/cart"></i>
+        购物车
+      </div>
+      <!--<div class="icon-wrap">-->
+        <!--&lt;!&ndash; 已收藏 class="icon-collected" &ndash;&gt;-->
+        <!--<i class="icon icon-collect"></i>-->
+        <!--收藏-->
+      <!--</div>-->
+      <a class="add-to-cart cell" ng-click="addToCart()">
+        加入购物车
+      </a>
     </div>
+  </div>
+
+  <!--选择页面遮罩-->
+  <div class="chose-shop" ng-if="STORE_ID==0">
+    <i class="icon-shop"></i>
+    <span>请先选择门店，即可在线购买！</span>
+    <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
+  </div>
 
 </div>

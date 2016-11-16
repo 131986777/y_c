@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function (weUI,$scope, $state,$stateParams, productFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function (weUI,$scope, $state,$stateParams, productFactory, modalFactory,weUI) {
 
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(true);
@@ -182,7 +182,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $state.go('pages/shop',{'FROM':window.location.href});
     }
 
-    $scope.$on('destroy',function(){
+    $scope.$on('$destroy',function(){
         $(document.body).infinite().off("infinite");
     })
 

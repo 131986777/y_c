@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_account_balance_Controller', function ($scope, $state, $stateParams, balanceFactory) {
+angular.module('AndSell.H5.Main').controller('pages_account_balance_Controller', function ($scope, $state, $stateParams, balanceFactory,weUI) {
 
 
     $scope.initLoad  = function () {

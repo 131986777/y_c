@@ -117,7 +117,7 @@
                 </div>
               </form>
             </div>
-          </div><!-- row -->
+          </div>
           <div class="text-center">
             <button type="submit" class="btn btn-info btn-outline class">确定</button>
           </div> <!-- buttons row -->
@@ -148,12 +148,13 @@
               <div class="payed" ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消</div>
               <div class="row">
                 <div class="details col-md-8">
-                  <span class="time" ng-bind="order['SHOP_ORDER.DATETIME_ADD']"> | </span><span
-                    class="name"> {{order['SHOP_ORDER.REC_CONTACT']}} | </span><span
-                    class="orderNum"
+                  <span class="time" ng-bind="order['SHOP_ORDER.DATETIME_ADD']"> | </span>
+                  <span class="name"> {{order['SHOP_ORDER.REC_CONTACT']}} | </span>
+                  <span class="orderNum"
                     ng-bind="'订单号：'+order['SHOP_ORDER.ORDER_NUM']"> | </span><span
-                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'" class="payWay"> 微信支付</span><span
-                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'" class="payWay"> 会员卡支付</span>
+                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'" class="payWay"> 微信支付 | </span><span
+                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'" class="payWay"> 会员卡支付 | </span>
+                  <span ng-bind="order['SHOP_ORDER.SHOP_NAME']"></span>
                 </div>
                 <div class="sum col-md-4 text-right">
                   <p> 订单金额：<span ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span> 元

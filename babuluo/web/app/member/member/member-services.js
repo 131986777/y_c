@@ -25,6 +25,14 @@ AndSellMainModule.service('memberFactory', function ($resource, baseURL) {
         });
     };
 
+    this.resetPwd = function (form) {
+        return $resource(baseURL + '/member/member/resetPWD', form, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+
     this.addMemberList = function (form) {
         return $resource(baseURL + '/member/member/add', form, {
             'update': {

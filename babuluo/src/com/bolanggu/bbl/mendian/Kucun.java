@@ -45,6 +45,7 @@ public class Kucun {
 //        run("ddd","333");
 
 
+
         API api = new API();
 
         try {
@@ -69,6 +70,8 @@ public class Kucun {
                     list.add("100026");
                     list.add("100002");
                     list.add("100036");
+
+
 
                     for (int i = 0; i < list.size(); i++) {
                         String mendianID= list.get(i);

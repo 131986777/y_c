@@ -97,10 +97,10 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
                             // alert('queryWXPayResult');
                             location.reload();
                         }, function (res) {
-                            alert(res.msg);
+                            weUI.toast.error(res.msg);
                         })
                     } catch(err) {
-                        alert(err);
+                        weUI.toast.error(err);
                     }
 
                 } else {

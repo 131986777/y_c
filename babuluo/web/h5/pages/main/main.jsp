@@ -202,12 +202,6 @@
 <script src="/AndSell/h5/public/libs/weui/dist/lib/jquery-2.1.4.js"></script>
 <script src="/AndSell/h5/public/libs/weui/dist/js/jquery-weui.min.js"></script>
 <script src="/AndSell/h5/public/libs/weui/dist/js/city-picker.min.js"></script>
-<script src="/AndSell/h5/public/libs/banner/jquery.hammer.js"></script>
-<script src="/AndSell/h5/public/libs/banner/transition.js"></script>
-<script src="/AndSell/h5/public/libs/banner/angular-animate.js"></script>
-<script src="/AndSell/h5/public/libs/banner/hammer.js"></script>
-<script src="/AndSell/h5/public/libs/banner/ui-bootstrap-2.2.0.min.js"></script>
-<script src="/AndSell/h5/public/libs/banner/ui-bootstrap.js"></script>
 <script src="/AndSell/h5/public/libs/cookie.js"></script>
 <script src="/AndSell/h5/public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/AndSell/h5/public/libs/swiper/swiper.jquery.min.js"></script>
