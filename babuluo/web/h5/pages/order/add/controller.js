@@ -11,6 +11,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
     $scope.initData = function () {
 
         $scope.cookiePickupPerson = JSON.parse(getCookie("pickupPerson"));
+        $scope.cookiePickupPerson.getTime = setTime();
         console.log($scope.cookiePickupPerson);
 
         $scope.EmptyPick = isEmptyObject($scope.cookiePickupPerson);
@@ -69,6 +70,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         $scope.order['SHOP_ORDER.PRICE_ORDER'] = price;
         $scope.order['SHOP_ORDER.PRICE_OVER'] = price;
     }
+
+
 
     //提交订单
     $scope.commitOrder = function () {
@@ -139,5 +142,49 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             'pickupPerson': $stateParams.pickupPerson
         });
     }
+
+
+   function setTime () {
+        var fDate = new Date();
+
+        var ifToday = true;
+        var modeTime = true;
+        var ifEarly = false;
+        if (fDate.getHours() >= 19) {
+            ifToday = false;
+        } else if (fDate.getHours() == 18) {
+            if (fDate.getMinutes() >= 30) {
+                modeTime = false;
+            }
+        }
+        if (fDate.getHours() < 7) {
+            ifEarly = true;
+        } else if (fDate.getHours() == 7) {
+            if (fDate.getMinutes() < 30) {
+                ifEarly = true;
+            }
+        }
+
+        var fDate2 = new Date(fDate.getTime());
+        if (modeTime) {
+            fDate2 = new Date(fDate.getTime() + 30 * 60 * 1000);
+        }
+        var todDate =  fDate2.getFullYear() + "-" + ifLessTen((fDate2.getMonth() + 1)) + "-" + ifLessTen(fDate2.getDate()) + " " + ifLessTen(fDate2.getHours()) + ":" + ifLessTen(fDate2.getMinutes()) + "-19:00";
+
+        var fDate3 = new Date(fDate.getTime());
+        var todDate2 =  fDate3.getFullYear() + "-" + ifLessTen((fDate3.getMonth() + 1)) + "-" + ifLessTen(fDate3.getDate()) + " 08:00-19:00";
+
+        var nDate = new Date(fDate.getTime() + 24 * 60 * 60 * 1000);
+        var tmoDate =  nDate.getFullYear() + "-" + ifLessTen((nDate.getMonth() + 1)) + "-" + ifLessTen(nDate.getDate()) + " 08:00-19:00";
+
+        if(ifToday&&ifEarly){
+            return todDate2;
+        }else if(ifToday){
+            return todDate;
+        }else{
+            return tmoDate;
+        }
+    }
+
 
 });

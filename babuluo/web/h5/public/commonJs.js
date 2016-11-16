@@ -64,6 +64,13 @@ var filterTableFromList = function (list, tablename) {
     }
 };
 
+
+function ifLessTen(item){
+    if(item<10)
+        return '0'+item;
+    else return item;
+}
+
 //处理商品价格
 function moneyFormat(money) {
     return Number(money / 100).toFixed(2);
