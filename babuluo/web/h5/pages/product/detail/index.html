@@ -82,7 +82,7 @@
     </div>
 
     <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>2">
-      <div class="weui_cell_hd" style="min-width: 40px;"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']+' : '"></div>
+      <div class="weui_cell_hd"  ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']+' : '"></div>
 
       <div class="sku-list label-group weui_cell_bd">
         <span class="sku-label  {{currSkuSelectClassMap[3][item]}} label-outline"
@@ -95,10 +95,10 @@
 
 
     <div class="weui_cell"   ng-if="!noStore">
-      <div class="weui_cell_hd">
+      <div class="weui_cell_hd text-center" style="width: 62.3px;">
         数量：
       </div>
-      <div class="weui_cell_bd" ng-init="skuSize=1">
+      <div class="weui_cell_bd" ng-init="skuSize=1" style="margin-left: 10px">
         <div class="cart-product-num-wrap input-group">
                 <span class="input-group-btn">
                     <button class="btn" type="button" ng-click="skuSize=skuSize>1?skuSize-1:skuSize" ng-style='{"background-color":"#ccc","font-size":"24px"}'>
