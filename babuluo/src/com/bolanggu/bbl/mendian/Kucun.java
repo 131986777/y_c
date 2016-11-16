@@ -6,6 +6,7 @@ import com.pabula.common.util.HttpClientUtil;
 import com.pabula.fw.exception.RuleException;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,40 +52,46 @@ public class Kucun {
 //            for(int i = 0;i<mendianObj.size();i++){
 
                 //String mendianID = (String)mendianObj.get(i).get("SHOP.SHOP_ID");
-                String mendianID = "100015";    //08    //26    //36    //12    //15
-                System.err.println("mendian: " + mendianID);
+                //String mendianID = "100012";
+                //System.err.println("mendian: " + mendianID);
 
                 List<JSONObject> skuDatal = api.call("/shop/product/sku/queryAll").getData();
-
                 for(int j = 0;j<skuDatal.size();j++){
 
                     String prdID = (String)skuDatal.get(j).get("SHOP_PRODUCT_SKU.PRD_ID");
                     String mendianPRIID = (String)skuDatal.get(j).get("SHOP_PRODUCT_SKU.PRD_SKU");
                     String skuID = (String)skuDatal.get(j).get("SHOP_PRODUCT_SKU.SKU_ID");
 
-                    String returnStr = run(mendianID,mendianPRIID);
-                    JSONObject returnJSOn = JSONObject.parseObject(returnStr);
+                    List<String> list =new ArrayList<String >();
+                    list.add("100008");
+                    list.add("100015");
+                    list.add("100012");
+                    list.add("100026");
+                    list.add("100002");
+                    list.add("100036");
 
-                    if(returnJSOn.get("errMsg").equals("")){
+                    for (int i = 0; i < list.size(); i++) {
+                        String mendianID= list.get(i);
+                        String returnStr = run(mendianID,mendianPRIID);
+                        JSONObject returnJSOn = JSONObject.parseObject(returnStr);
 
-                        returnJSOn = (JSONObject)returnJSOn.getJSONArray("goodsInfos").get(0);
+                        if(returnJSOn.get("errMsg").equals("")){
 
-                        ///  更新库存与价格
-                        HashMap map = new HashMap();
-                        map.put("SHOP_ID",mendianID);
-                        map.put("SKU_ID",mendianPRIID);
-                        map.put("PRD_ID",prdID);
-                        map.put("COUNT",returnJSOn.get("stockAmount"));
-                        map.put("PRICE",returnJSOn.getDouble("salePrice"));
-                        System.err.println("PPPP: " + returnJSOn.getDouble("salePrice"));
-                        api.call("/stock/realtime/updateStockAndPrice",map);
-                    }else{
-                        System.err.println("百年接口错误: " + returnStr);
+                            returnJSOn = (JSONObject)returnJSOn.getJSONArray("goodsInfos").get(0);
+
+                            ///  更新库存与价格
+                            HashMap map = new HashMap();
+                            map.put("SHOP_ID",mendianID);
+                            map.put("SKU_ID",mendianPRIID);
+                            map.put("PRD_ID",prdID);
+                            map.put("COUNT",returnJSOn.get("stockAmount"));
+                            map.put("PRICE",returnJSOn.getDouble("salePrice"));
+                            System.err.println("PPPP: " + returnJSOn.getDouble("salePrice"));
+                            api.call("/stock/realtime/updateStockAndPrice",map);
+                        }else{
+                            System.err.println("百年接口错误: " + returnStr);
+                        }
                     }
-
-
-
-
                 }
 //            }
         } catch (RuleException e) {

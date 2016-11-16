@@ -6,9 +6,11 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
 
     $scope.initData = function () {
         console.log('初始化数据');
+        weUI.toast.showLoading('正在加载');
         couponFactory.getCouponList({}, function (response) {
             $scope.couponList = response.data;
             console.log($scope.couponList);
+
         });
         $scope.saveCouponNum();
 
@@ -22,7 +24,7 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
             memberCouponList.forEach(function (ele) {
                 $scope.couponSumMap.set(ele['MEMBER_COUPON.COUPON_ID'], ele['.NUM_COUPON']);  //将客户所拥有的各优惠券的数量存在map中
             });
-
+            weUI.toast.hideLoading();
         });
     };
 
@@ -55,7 +57,6 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
         } else {
             $scope.add['MEMBER_COUPON.COUPON_ID'] = $scope.coupon['COUPON.ID'];
             $scope.add['MEMBER_COUPON.EXPIRED_TIME'] = $scope.coupon['COUPON.END_DATETIME'];
-            $scope.add['MEMBER_COUPON.USER_ID'] = 1000;
 
             $scope.coupon['COUPON.NUM_LEFT'] = $scope.coupon['COUPON.NUM_LEFT'] - 1;
 

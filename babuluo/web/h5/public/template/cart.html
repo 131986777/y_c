@@ -6,21 +6,22 @@
       <div class="weui_cells">
         <div class="weui_cell">
           <div class="basic-info weui_cell_bd weui_cell_primary">
+            <img src="../../public/img/icon-shopLogo.png">
             <h4 class="name">
               <span  ng-bind="product['SHOP_PRODUCT.PRD_NAME']"></span>
               <span  ng-if="sku['SHOP_PRODUCT_SKU.STOCK']==0" style="color: red">售罄</span>
             </h4>
             <p class="feature" ng-bind="product['SHOP_PRODUCT.SALES_TITLE']">
             </p>
+            <p class="code" ng-bind="'商品编码 ：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
+            </p>
             <p class="money">
               <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
-                ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
+                    ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
             <div ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']==undefined" class="money">
-        <span ng-bind="skuData.minPrice | currency :'￥'"></span> -
-        <span ng-bind="skuData.maxPrice | currency :'￥'"></span>
+              <span ng-bind="skuData.minPrice | currency :'￥'"></span> -
+              <span ng-bind="skuData.maxPrice | currency :'￥'"></span>
             </div>
-            </p>
-            <p class="code" ng-bind="'商品编码 ：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
             </p>
           </div>
         </div>
@@ -77,16 +78,16 @@
             数量：
           </div>
           <div class="weui_cell_bd" style="margin-left: 10px">
-            <div class="cart-product-num-wrap input-group">
+            <div class="cart-product-num-wrap input-group" style="border: 1px solid rgb(219,219,219);">
                 <span class="input-group-btn">
-                    <button class="btn" type="button" ng-click="lessSize()" style="background-color:#ccc;font-size:24px">
+                    <button class="btn" type="button" ng-click="lessSize()" style="background-color:#fff;font-size:24px;color:rgb(204,204,204)">
                       -
                     </button>
                 </span>
               <input class="form-control text-center" disabled="" type="text" ng-model="skuSize"
-                     ng-init="skuSize=1">
+                     ng-init="skuSize=1"style="background-color: #fff;border-top:none;border-bottom:none">
                 <span class="input-group-btn">
-                    <button class="btn" type="button" ng-click="moreSize()" style="background-color:#ccc;font-size:24px">
+                    <button class="btn" type="button" ng-click="moreSize()" style="background-color:#fff;font-size:24px;color:rgb(234,111,26)">
                       +
                     </button>
                 </span>

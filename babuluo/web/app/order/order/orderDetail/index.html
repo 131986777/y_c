@@ -13,7 +13,7 @@
           <div ng-if="orderType=='3'">
 
             <button class="btn btn-default"
-                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==-1"
+                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(order['SHOP_ORDER.STATE_MONEY']==-1||order['SHOP_ORDER.STATE_OUT']==-1)"
                     ng-click="cancelOrder()">取消订单
             </button>
             <button class="btn btn-default"
