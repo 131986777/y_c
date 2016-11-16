@@ -270,8 +270,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         $state.go('pages/shop',{'FROM':window.location.href});
     }
 
-
-    $scope.$on('destroy', function () {
+    $scope.$on('$destroy',function(){
         $interval.cancel($scope.timer);
     })
 

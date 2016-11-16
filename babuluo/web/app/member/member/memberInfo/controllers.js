@@ -63,9 +63,8 @@ angular.module('AndSell.Main').controller('member_member_memberInfo_Controller',
         modalFactory.showAlert("确定将密码重置为【 A123456 】吗？", function () {
             $scope.memberInfo = {};
             $scope.memberInfo['MEMBER.USER_ID'] = $scope.memberId;
-            $scope.memberInfo['MEMBER.LOGIN_PWD'] = "A123456";
-            memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
-                if (response.extraData.state == 'true') {
+            memberFactory.resetPwd($scope.memberInfo).get({}, function (response) {
+                if (response.extraData.code == 0) {
                     modalFactory.showShortAlert("密码重置成功");
                     $scope.initLoad();
                 } else {
