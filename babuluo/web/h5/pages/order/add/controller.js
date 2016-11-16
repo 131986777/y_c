@@ -10,12 +10,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
     $scope.initData = function () {
 
-        $scope.cookiePickupPerson = getCookie("pickupPerson");
+        $scope.cookiePickupPerson = JSON.parse(getCookie("pickupPerson"));
         console.log($scope.cookiePickupPerson);
 
-        $scope.PickupPerson = JSON.parse($stateParams.pickupPerson);
-
-        $scope.EmptyPick = isEmptyObject($scope.PickupPerson);
+        $scope.EmptyPick = isEmptyObject($scope.cookiePickupPerson);
 
         $scope.order = {};
         $scope.cartInfo = getCookie('cartInfo');
@@ -75,24 +73,24 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
     //提交订单
     $scope.commitOrder = function () {
 
-        if (isEmptyObject($scope.PickupPerson)) {
+        if (isEmptyObject($scope.cookiePickupPerson)) {
             weUI.toast.error('请填写提货信息');
             return;
         }
         var params = $scope.order;
-        params['SHOP_ORDER.TYPE'] = $scope.PickupPerson.type;//订货单
-        params['SHOP_ORDER.REC_CONTACT'] = $scope.PickupPerson.man;//收货人
-        params['SHOP_ORDER.REC_PHONE'] = $scope.PickupPerson.phone;//联系电话
-        if ($scope.PickupPerson.type == 1) {
+        params['SHOP_ORDER.TYPE'] = $scope.cookiePickupPerson.type;//订货单
+        params['SHOP_ORDER.REC_CONTACT'] = $scope.cookiePickupPerson.man;//收货人
+        params['SHOP_ORDER.REC_PHONE'] = $scope.cookiePickupPerson.phone;//联系电话
+        if ($scope.cookiePickupPerson.type == 1) {
             params['SHOP_ORDER.REC_TYPE'] = 1;//收货方式为快递
-            params['SHOP_ORDER.REC_ADDR'] = noUndefinedAndNull($scope.PickupPerson.shengshi)
-                + noUndefinedAndNull($scope.PickupPerson.address);//收货地址
-            params['SHOP_ORDER.GET_PRD_DATETIME'] = $scope.PickupPerson.getTime;//送货时间
+            params['SHOP_ORDER.REC_ADDR'] = noUndefinedAndNull($scope.cookiePickupPerson.shengshi)
+                + noUndefinedAndNull($scope.cookiePickupPerson.address);//收货地址
+            params['SHOP_ORDER.GET_PRD_DATETIME'] = $scope.cookiePickupPerson.getTime;//送货时间
         } else {
             params['SHOP_ORDER.REC_TYPE'] = 2;//收货方式为自提
             params['SHOP_ORDER.SHOP_NAME'] = $scope.shop['SHOP.SHOP_NAME'];//门店信息
             params['SHOP_ORDER.SHOP_ID'] = $scope.shop['SHOP.SHOP_ID'];//门店ID
-            params['SHOP_ORDER.GET_PRD_DATETIME'] = noUndefinedAndNull($scope.PickupPerson.getTime);//提货时间
+            params['SHOP_ORDER.GET_PRD_DATETIME'] = noUndefinedAndNull($scope.cookiePickupPerson.getTime);//提货时间
         }
 
         params['SHOP_ORDER.DETAILS'] = JSON.stringify($scope.skuList);//sku信息

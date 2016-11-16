@@ -2,17 +2,17 @@
     <div class="row">
         <div class="weui_cells weui_cells_access">
             <a class="order-address weui_cell" ui-sref="pages/order/addAddress({SKU_IDS:skuIds})">
-                <div ng-show="!EmptyPick&&PickupPerson.type==3" class="detail weui_cell_bd weui_cell_primary">
-                    <p class="">提 货 人：{{PickupPerson.man}}</p>
-                    <p class="">手机号码：{{PickupPerson.phone}}</p>
-                    <p class="">提货门店：{{PickupPerson.shop}}</p>
-                    <p class="">提货时间：{{PickupPerson.getTime}}</p>
+                <div ng-show="!EmptyPick&&cookiePickupPerson.type==3" class="detail weui_cell_bd weui_cell_primary">
+                    <p class="">提 货 人：{{cookiePickupPerson.man}}</p>
+                    <p class="">手机号码：{{cookiePickupPerson.phone}}</p>
+                    <p class="">提货门店：{{cookiePickupPerson.shop}}</p>
+                    <p class="">提货时间：{{cookiePickupPerson.getTime}}</p>
                 </div>
-                <div ng-show="!EmptyPick&&PickupPerson.type==1" class="detail weui_cell_bd weui_cell_primary">
-                    <p class="">收 货 人：{{PickupPerson.man}}</p>
-                    <p class="">手机号码：{{PickupPerson.phone}}</p>
-                    <p class="">收货地址：{{PickupPerson.shengshi+' '+PickupPerson.address}}</p>
-                    <!--<p class="">提货时间：{{PickupPerson.time}}</p>-->
+                <div ng-show="!EmptyPick&&cookiePickupPerson.type==1" class="detail weui_cell_bd weui_cell_primary">
+                    <p class="">收 货 人：{{cookiePickupPerson.man}}</p>
+                    <p class="">手机号码：{{cookiePickupPerson.phone}}</p>
+                    <p class="">收货地址：{{cookiePickupPerson.shengshi+' '+cookiePickupPerson.address}}</p>
+                    <!--<p class="">提货时间：{{cookiePickupPerson.time}}</p>-->
                 </div>
                 <div ng-show="EmptyPick" class="detail weui_cell_bd weui_cell_primary">
                     请填写收货信息
@@ -66,7 +66,7 @@
                     <label class="weui_label">备注:</label>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <input type="number" class="weui_input"
+                    <input type="text" class="weui_input"
                            placeholder="请填入备注信息" ng-model="order['SHOP_ORDER.REMARK']">
                 </div>
             </div>

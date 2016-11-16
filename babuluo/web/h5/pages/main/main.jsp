@@ -25,7 +25,10 @@
     /**
      * 设置ip地址
      */
-    String ip = request.getRemoteHost();
+    //String ip = request.getRemoteHost();
+    //String ip = request.getHeader("Host");  //上了nginx与tomcat集群后，要用这个获得
+    String ip = request.getHeader("X-Real-IP");  //上了nginx与tomcat集群后，要用这个获得
+
     Cookie ipCookie = new Cookie("ip", ip);
     response.addCookie(ipCookie);
 
@@ -165,16 +168,16 @@
                 <p class="nav-txt">首页</p>
             </a>
         </li>
-        <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']">
-            <a ui-sref="pages/cart"  ng-click="currentPage='cart'">
-                <i class="icon icon-cart"></i>
-                <p class="nav-txt">购物车</p>
-            </a>
-        </li>
         <li class="cell"  ng-class="{true:'selected'}[currentPage=='fl']">
             <a ui-sref="pages/product/list" ng-click="currentPage='fl'">
                 <i class="icon icon-product-class"></i>
                 <p class="nav-txt">分类</p>
+            </a>
+        </li>
+        <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']">
+            <a ui-sref="pages/cart"  ng-click="currentPage='cart'">
+                <i class="icon icon-cart"></i>
+                <p class="nav-txt">购物车</p>
             </a>
         </li>
         <li class="cell" ng-class="{true:'selected'}[currentPage=='wd']">

@@ -6,7 +6,12 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
     $scope.districtName = "全部区域";
 
     $scope.initLoad = function () {
-        shopFactory.getShopList({}, function (response) {
+        $scope.filter = {};
+        $scope.getData();
+    };
+
+    $scope.getData=function () {
+        shopFactory.getShopList($scope.filter, function (response) {
             $scope.shopList = response.data;
             $scope.shopListLength = response.data.length;
             $scope.districtList = response.extraData.districtList;
@@ -17,7 +22,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
             $scope.shopMap=shopMap;
             $scope.getRecentShopList();
         });
-    };
+    }
 
     $scope.getRecentShopList = function () {
         var recentShopList=new Array;
@@ -63,16 +68,17 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
 
     $scope.chooseDistrict = function (districtId, districtName) {
         $scope.districtName = districtName;
-        var form = {};
-        form['SHOP.DISTRICT_ID'] = districtId;
-        shopFactory.getShopListByStrict(form, function (response) {
-            $scope.shopList = response.data;
-            $scope.shopListLength = response.data.length;
-        });
+        $scope.filter['SHOP.DISTRICT_ID'] = districtId;
+        $scope.getData();
+        // shopFactory.getShopList(form, function (response) {
+        //     $scope.shopList = response.data;
+        //     $scope.shopListLength = response.data.length;
+        // });
     };
 
     $scope.allDistrict = function (districtName) {
         $scope.districtName = districtName;
-        $scope.initLoad();
+        $scope.filter['SHOP.DISTRICT_ID'] = '';
+        $scope.getData();
     };
 });
