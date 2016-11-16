@@ -36,18 +36,14 @@
           <div class="product-num-wrap input-group">
                         <span class="input-group-btn">
                             <button class="btn btn-cart-less" type="button"
-                                    ng-click="lessSize(sku)">
-                              -
-                            </button>
+                                    ng-click="lessSize(sku)">-</button>
                         </span>
-            <input class="form-control text-center" type="text"
+            <input class="form-control text-center" type="text" disabled=""
                    ng-change="updateCartPrice()"
                    ng-model="sku['SHOP_PRODUCT_SKU.SIZE']">
                         <span class="input-group-btn">
                             <button class="btn btn-cart-add" type="button"
-                                    ng-click="moreSize(sku)">
-                              +
-                            </button>
+                                    ng-click="moreSize(sku)" style=" border-left: 1px solid rgb(219,219,219);">+</button>
                         </span>
           </div>
         </div>

@@ -43,14 +43,14 @@
 
       <div class="weui_cells">
         <div class="sku-info weui_cell" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>0">
-          <div class="weui_cell_hd" style="min-width: 40px;" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']+' : '" >
+          <div class="weui_cell_hd" style="min-width: 40px;color:#959595;font-size:10px" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']+' : '" >
           </div>
           <div class="sku-list label-group weui_cell_bd">
         <span class="sku-label {{currSkuSelectClassMap[1][item]}} label-outline"
               ng-class="{true:'selected'}[currSkuContentSelectMap.name1==item]"
               ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1']"
               ng-click="checkContent(1,item)"
-              ng-bind="item"></span>
+              ng-bind="item" style="margin-left: 10px"></span>
           </div>
         </div>
 
@@ -79,20 +79,20 @@
 
         <div class="weui_cell">
 
-          <div class="weui_cell_hd text-center" style="width: 62.3px;">
+          <div class="weui_cell_hd text-center" style="width: 53.4px;color:#959595;font-size:10px">
             数量：
           </div>
           <div class="weui_cell_bd" style="margin-left: 10px">
-            <div class="cart-product-num-wrap input-group" style="border: 1px solid rgb(219,219,219);">
+            <div class="cart-product-num-wrap input-group">
                 <span class="input-group-btn">
-                    <button class="btn" type="button" ng-click="lessSize()" style="background-color:#fff;font-size:24px;color:rgb(204,204,204)">
+                    <button class="btn btn-cart-less" type="button" ng-click="lessSize()" >
                       -
                     </button>
                 </span>
               <input class="form-control text-center" disabled="" type="text" ng-model="skuSize"
-                     ng-init="skuSize=1"style="background-color: #fff;border-top:none;border-bottom:none">
+                     ng-init="skuSize=1" style="background-color: #fff;">
               <span class="input-group-btn">
-                    <button class="btn" type="button" ng-click="moreSize()" style="background-color:#fff;font-size:24px;color:rgb(234,111,26)">
+                    <button class="btn btn-cart-add" type="button" ng-click="moreSize()" style=" border-left: 1px solid rgb(219,219,219);">
                       +
                     </button>
                 </span>
