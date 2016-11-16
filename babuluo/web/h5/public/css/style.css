@@ -2021,7 +2021,8 @@ height:50%;
 
 .product-list .item .item-title span {
     border-bottom: 1px solid rgb(245,169,24);
-    padding: 0 15px 0;
+    padding: 0 15px 5px;
+
 }
 .product-list .item .item-title .icon-class{
     display: inline-block;
