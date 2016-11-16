@@ -2,12 +2,17 @@
 <div id=" actionSheet_wrap " >
   <div class="weui_mask_transition" id="mask"></div>
   <div class="weui_actionsheet" id="weui_actionsheet">
+
     <div class="weui_actionsheet_menu">
       <div class="weui_cells">
+
         <div class="weui_cell">
           <div class="basic-info weui_cell_bd weui_cell_primary">
-            <img src="../../public/img/icon-shopLogo.png">
+
+
+            <img ng-src="http://bbl-upload.oss-cn-shanghai.aliyuncs.com/{{product['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
             <h4 class="name">
+
               <span  ng-bind="product['SHOP_PRODUCT.PRD_NAME']"></span>
               <span  ng-if="sku['SHOP_PRODUCT_SKU.STOCK']==0" style="color: red">售罄</span>
             </h4>
@@ -26,13 +31,13 @@
           </div>
         </div>
         <!--<div class="sale-info weui_cell">-->
-          <!--<div class="weui_cell_hd">-->
-            <!--促销信息:-->
-          <!--</div>-->
-          <!--<div class="weui_cell_bd weui_cell_primary">-->
-            <!--<span class="label label-default">满减</span>-->
-            <!--满200减20-->
-          <!--</div>-->
+        <!--<div class="weui_cell_hd">-->
+        <!--促销信息:-->
+        <!--</div>-->
+        <!--<div class="weui_cell_bd weui_cell_primary">-->
+        <!--<span class="label label-default">满减</span>-->
+        <!--满200减20-->
+        <!--</div>-->
         <!--</div>-->
       </div>
 
@@ -86,7 +91,7 @@
                 </span>
               <input class="form-control text-center" disabled="" type="text" ng-model="skuSize"
                      ng-init="skuSize=1"style="background-color: #fff;border-top:none;border-bottom:none">
-                <span class="input-group-btn">
+              <span class="input-group-btn">
                     <button class="btn" type="button" ng-click="moreSize()" style="background-color:#fff;font-size:24px;color:rgb(234,111,26)">
                       +
                     </button>
