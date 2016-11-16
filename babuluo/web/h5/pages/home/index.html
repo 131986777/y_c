@@ -1,17 +1,7 @@
 <div ng-init="initData()">
   <!-- BEGIN 搜索 -->
   <div class="search-wrap weui_cells">
-      <!--<div id="carousel-generic">-->
-          <!--<carousel interval="myInterval">-->
-              <!--<slide ng-repeat="item in homeList" active="item.active">-->
-                  <!--<a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">-->
-                      <!--<img-->
-                              <!--ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"-->
-                              <!--style="height: 197px;width: 100%;">-->
-                  <!--</a>-->
-              <!--</slide>-->
-          <!--</carousel>-->
-      <!--</div>-->
+
       <div class="swiper-container" style="height: 197px;width: 100%;">
           <div class="swiper-wrapper">
               <div class="swiper-slide" ng-repeat="item in homeList" active="item.active">

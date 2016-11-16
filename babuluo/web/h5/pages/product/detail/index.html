@@ -1,26 +1,17 @@
 <div class="bg-grey product-detail-page" ng-init="initData()">
   <!-- BEGIN 商品详情图片 -->
-  <div class="swiper-container">
+  <div class="swiper-container" style="height: 197px;width: 100%;">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" ng-repeat="slide in slides">
+        <a >
+          <img
+              ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
+              style="height: 197px;width: 100%;">
+        </a>
+      </div>
 
-    <div id="carousel-generic">
-      <carousel interval="myInterval">
-        <slide ng-repeat="slide in slides" active="slide.active">
-          <img ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800" style="margin:auto;">
-          <div class="carousel-caption">
-            <p>{{slide.text}}</p>
-          </div>
-        </slide>
-      </carousel>
     </div>
-    <!--<div class="swiper-wrapper">-->
-      <!--&lt;!&ndash; Slides &ndash;&gt;-->
-      <!--<div class="swiper-slide">Slide 1</div>-->
-      <!--<div class="swiper-slide">Slide 2</div>-->
-      <!--<div class="swiper-slide">Slide 3</div>-->
-    <!--</div>-->
-    <!--<div class="swiper-pagination"></div>-->
   </div>
-  <!-- END 商品详情图片 -->
 
   <div class="weui_cells">
     <div class="weui_cell">

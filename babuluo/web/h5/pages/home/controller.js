@@ -226,8 +226,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
                         $scope.BannerList.push(listItem);
                     }
-                    //tagArray.push(ele['BANNER.TAG_ID']);
-
                 }
 
                 if (ele['BANNER.END_DATETIME'] == null && ele['BANNER.BEGIN_DATETIME'] == null) {
@@ -249,27 +247,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                 }
 
             });
-
-
-           /* var params = {}
-            params['SHOP_PRODUCT.TAG_ID'] = tagArray.toString();
-            productFactory.getProductByTag(params, function (response) {
-                console.log(response);
-                if (response.code == 0) {
-
-                    response.data.forEach(function (ele) {
-                         dataList.forEach(function(banner){
-                              if(ele['SHOP_PRODUCT.TAG_ID'].indexOf(banner['BANNER.TAG_ID']) >= 0){
-                                  banner['PRODUCT_LIST']=
-
-                              }
-                         });
-
-
-                    });   //
-                }
-            });//*/
-
 
         });
 
@@ -302,7 +279,9 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         spaceBetween: 300,
         centeredSlides: true,
         autoplay: 3500,
-        autoplayDisableOnInteraction: false
+        autoplayDisableOnInteraction: false,
+        observer:true,
+        observeParents:true
     });
 
 });
