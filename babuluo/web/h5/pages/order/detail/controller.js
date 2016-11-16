@@ -79,10 +79,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                     weUI.toast.hideLoading();
                     weUI.toast.ok('支付成功');
                     $state.go("pages/personal");
-                    // $scope.getOrder($scope.order['SHOP_ORDER.ID']);
                 }, function (response) {
-                    // weUI.toast.error(response.msg);
-                    alert(response.msg);
+                    weUI.toast.hideLoading();
+                    weUI.toast.error(response.msg);
                 });
             });
         }

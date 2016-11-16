@@ -310,7 +310,6 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
 
     //数量减
     $scope.lessSize = function () {
-        alert($scope.skuSize);
         if ($scope.skuSize > 0) {
             $scope.skuSize = $scope.skuSize - 1;
         }

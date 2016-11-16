@@ -68,10 +68,10 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
                     $scope.add = '';
 
                 }, function (response) {
-                    modalFactory.showShortAlert(response.msg);
+                    weUI.toast.error(response.msg);
                 });
             }, function (response) {
-                modalFactory.showShortAlert(response.msg);
+                weUI.toast.error(response.msg);
             });
         }
     }

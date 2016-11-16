@@ -81,7 +81,7 @@ angular.module('AndSell.H5.Main').controller('pages_payment_check_out_Controller
                     }
 
                 } else {
-                    alert("调用微信支付失败，失败原因:" + response.msg);
+                    weUI.toast.error("调用微信支付失败，失败原因:" + response.msg);
                 }
             });
         }
@@ -118,7 +118,7 @@ angular.module('AndSell.H5.Main').controller('pages_payment_check_out_Controller
                     //                               $scope.$apply($scope.queryWXPayResult);
                     //                            }, 2000);
                 } else {
-                    alert("支付失败，请重新下单");
+                    weUI.toast.error("支付失败，请重新下单");
                     //                            location.href = "/ui/shop/payresult.jsp?oid=" + oid;
                 }    // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
             }
@@ -144,7 +144,7 @@ angular.module('AndSell.H5.Main').controller('pages_payment_check_out_Controller
                     window.location.reload();
                 }
             } else {
-                alert("支付失败或订单异常");
+                weUI.toast.error("支付失败或订单异常");
                 clearInterval(getResult);
             }
         });
@@ -178,7 +178,7 @@ angular.module('AndSell.H5.Main').controller('pages_payment_check_out_Controller
                 $scope.wxScanPayOutTradeNo = '';
                 window.location = "../order/orderList.jsp";
             } else {
-                alert(response.msg);
+                weUI.toast.error(response.msg);
             }
         });
 
