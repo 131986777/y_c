@@ -78,7 +78,7 @@
              * 根据code 获取openid
              */
 
-            String url = OAuthUtil.getURLByOAuth("http://h5.bblycyz.com/AndSell/h5/pages/main/main.jsp");
+            String url = OAuthUtil.getURLByOAuth("http://app.bblycyz.com/AndSell/h5/pages/main/main.jsp");
 
 //            String url = "main.jsp?code=1234";
 
@@ -123,7 +123,7 @@
     boolean hasMoreParam = request.getParameterNames().hasMoreElements();
 
     if (!hasMoreParam) {
-        String url = "http://h5.bblycyz.com/AndSell/h5/pages/main/main.jsp".replace(path, path + "?t=1");
+        String url = "http://app.bblycyz.com/AndSell/h5/pages/main/main.jsp".replace(path, path + "?t=1");
         response.sendRedirect(url);
         return;
     }

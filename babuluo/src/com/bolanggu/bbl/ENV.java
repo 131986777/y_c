@@ -57,7 +57,7 @@ public class ENV {
     public static String WX_MCHID = "1298356201";
     public static String WX_KEY = "fdbnhlsh6gs79ro4lhr6vutmgnx0flfc";
 
-    public static String WX_PAY_RESULT_CALLBACK_URL = "http://h5.bblycyz.com/AndSell/h5/pages/main/wxPayCallback.jsp";
+    public static String WX_PAY_RESULT_CALLBACK_URL = "http://app.bblycyz.com/AndSell/h5/pages/main/wxPayCallback.jsp";
 
 
     public static String WX_TOKEN_GRANT_TYPE = "client_credential";
