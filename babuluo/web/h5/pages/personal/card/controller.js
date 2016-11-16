@@ -5,9 +5,10 @@ angular.module('AndSell.H5.Main').controller('pages_personal_card_Controller', f
 
 
     $scope.loadMemberCard = function () {
+        weUI.toast.showLoading('正在加载');
         personalFactory.getMemberCardByUserId({}, function (response) {
             $scope.cardList = response.data;
-
+            weUI.toast.hideLoading();
         });
     };
     $scope.loadMemberCard();

@@ -26,7 +26,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     //取消订单
     $scope.cancelOrder = function () {
         weUI.dialog.alert("提示", "确认取消该订单", function () {
+            weUI.toast.showLoading('正在取消');
             orderFactory.cancelOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
+                weUI.toast.hideLoading();
                 weUI.toast.ok('取消订单成功');
                 $scope.getOrder($scope.order['SHOP_ORDER.ID']);
             }, function (response) {
@@ -51,7 +53,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     //立即支付
     $scope.payNow = function () {
-
         /**
          * 如果是需要微信支付的类型
          * 调用微信统一下单的接口
@@ -73,9 +74,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
         } else if ($scope.order['SHOP_ORDER.PAY_TYPE'] == 'ACCOUNT') {
             weUI.dialog.alert("提示", "确认支付该订单", function () {
+                weUI.toast.showLoading('正在支付');
                 orderFactory.payOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
-                    // weUI.toast.ok('支付成功');
-                    alert('支付成功');
+                    weUI.toast.hideLoading();
+                    weUI.toast.ok('支付成功');
                     $state.go("pages/personal");
                     // $scope.getOrder($scope.order['SHOP_ORDER.ID']);
                 }, function (response) {

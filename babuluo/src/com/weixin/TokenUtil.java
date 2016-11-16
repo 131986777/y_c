@@ -29,7 +29,7 @@ public class TokenUtil {
 	
 	private TokenUtil(){}
    
-	public static synchronized TokenUtil getInstance() {  
+	public static synchronized TokenUtil getInstance() {
 	    if (instance == null) {  
 	        instance = new TokenUtil();  
 	    }  

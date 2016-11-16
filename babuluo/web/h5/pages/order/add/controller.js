@@ -77,6 +77,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             weUI.toast.error('请填写提货信息');
             return;
         }
+
+        weUI.toast.showLoading('正在下单');
+
         var params = $scope.order;
         params['SHOP_ORDER.TYPE'] = $scope.cookiePickupPerson.type;//订货单
         params['SHOP_ORDER.REC_CONTACT'] = $scope.cookiePickupPerson.man;//收货人
@@ -95,6 +98,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
         params['SHOP_ORDER.DETAILS'] = JSON.stringify($scope.skuList);//sku信息
         orderFactory.addOrder(params, function (response) {
+
+            weUI.toast.hideLoading();
 
             weUI.toast.ok('下单成功');
             //成功之后删除购物车内容

@@ -30,6 +30,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_tagPrdList_Controlle
 
     //获取商品列表
     $scope.getPrd = function () {
+        weUI.toast.showLoading('正在加载');
         productFactory.getProduct($scope.filter, function (response) {
             Array.prototype.push.apply($scope.prdList, response.data);//数组合并
             $scope.page = response.extraData.page;
@@ -39,6 +40,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_tagPrdList_Controlle
                 $scope.hasNextPage = false;
             }
             $scope.loading = false;
+            weUI.toast.hideLoading();
         });
     }
 

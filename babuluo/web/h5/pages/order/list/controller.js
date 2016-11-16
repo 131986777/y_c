@@ -55,6 +55,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
     }
 
     $scope.getOrder= function () {
+        weUI.toast.showLoading('正在加载');
         orderFactory.getOrder($scope.filter, function (response) {
             console.log(response);
             Array.prototype.push.apply($scope.orderList,response.data);//数组合并
@@ -71,6 +72,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
                 $scope.hasNextPage=false;
             }
             $scope.loading = false;
+            weUI.toast.hideLoading();
         });
     }
 

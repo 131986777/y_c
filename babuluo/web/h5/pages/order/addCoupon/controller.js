@@ -11,9 +11,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
     $scope.initData = function () {
         console.log('初始化数据');
+        weUI.toast.showLoading('正在读取');
         personalFactory.getCouponListByUser({}, function (response) {
             $scope.memberCouponList = response.data;       //客户的所有优惠券
             $scope.judgeUsableCoupon();
+            weUI.toast.hideLoading();
         });
     };
 
