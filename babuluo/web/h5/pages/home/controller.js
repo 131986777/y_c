@@ -299,5 +299,13 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         $interval.cancel($scope.timer);
     })
 
+    var swiper = new Swiper('.swiper-container', {
+        paginationClickable: true,
+        spaceBetween: 300,
+        centeredSlides: true,
+        autoplay: 3500,
+        autoplayDisableOnInteraction: false
+    });
+
 });
 

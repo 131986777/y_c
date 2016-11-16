@@ -1903,13 +1903,13 @@ background-size: 16px 16px;
 }
 
 .home-index .col img{
-width: 50%;
-height:50%;
+width: 37px;
+height: 37px;
 }
 .home-index .col p {
     color:#838181;
     margin-top: 10px;
-    font-size: 12px;
+    font-size: 14px;
 }
 
 .home-index .limit,
