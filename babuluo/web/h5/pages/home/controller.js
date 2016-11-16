@@ -300,11 +300,11 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     })
 
     var swiper = new Swiper('.swiper-container', {
-        paginationClickable: true,
-        spaceBetween: 300,
-        centeredSlides: true,
-        autoplay: 3500,
-        autoplayDisableOnInteraction: false
+            paginationClickable: true,
+            spaceBetween: 300,
+            centeredSlides: true,
+            autoplay: 3500,
+            autoplayDisableOnInteraction: false
     });
 
 });
