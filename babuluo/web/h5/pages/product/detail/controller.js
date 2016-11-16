@@ -68,13 +68,13 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         } if(prd['SHOP_PRODUCT.P5']!=undefined){
             $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P5']});
         }
-        $('#carousel-generic').hammer().on('swipeleft', function(){
-            $(this).carousel('next');
-        });
-
-        $('#carousel-generic').hammer().on('swiperight', function(){
-            $(this).carousel('prev');
-        });
+        // $('#carousel-generic').hammer().on('swipeleft', function(){
+        //     $(this).carousel('next');
+        // });
+        //
+        // $('#carousel-generic').hammer().on('swiperight', function(){
+        //     $(this).carousel('prev');
+        // });
     }
     var swiper = new Swiper('.swiper-container', {
         paginationClickable: true,
