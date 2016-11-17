@@ -7,10 +7,6 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
 
     $scope.initData = function () {
 
-        //var mySwiper = new Swiper('.swiper-container', {
-        //    pagination: '.swiper-pagination', paginationClickable: true
-        //})
-
         // 设置轮播图图片间隔
         $scope.myInterval = 4000;
         // 轮播图数据初始化
@@ -51,6 +47,8 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
             }
         });
 
+        $scope.skuSize = 1;
+
     }
 
     $scope.setPrdPicBanner= function (prd) {
@@ -68,13 +66,6 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         } if(prd['SHOP_PRODUCT.P5']!=undefined){
             $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P5']});
         }
-        // $('#carousel-generic').hammer().on('swipeleft', function(){
-        //     $(this).carousel('next');
-        // });
-        //
-        // $('#carousel-generic').hammer().on('swiperight', function(){
-        //     $(this).carousel('prev');
-        // });
     }
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -318,7 +309,12 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
     }
 
     $scope.moreSize = function () {
-        $scope.skuSize = clone($scope.skuSize) + 1
+        if ($scope.skuSize < $scope.sku['SHOP_PRODUCT_SKU.STOCK']) {
+            $scope.skuSize = clone($scope.skuSize) + 1
+        }else{
+            weUI.toast.ok('已达到该商品最大库存数');
+        }
+
     }
 
     var swiper = new Swiper('.swiper-container', {

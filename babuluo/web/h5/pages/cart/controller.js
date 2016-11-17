@@ -42,23 +42,23 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
     $scope.lessSize = function (item) {
         if (item['SHOP_PRODUCT_SKU.SIZE'] > 1) {
             item['SHOP_PRODUCT_SKU.SIZE'] = item['SHOP_PRODUCT_SKU.SIZE'] - 1;
-        }
+            //修改cookie
+            var cartSize = getCookie('cartSize');
+            if (cartSize == ''||cartSize==undefined) {
+                cartSize = {};
+            } else {
+                cartSize = JSON.parse(cartSize);
+            }
+            cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] -= 1;
+            setCookie('cartSize', JSON.stringify(cartSize));
 
-        //修改cookie
-        var cartSize = getCookie('cartSize');
-        if (cartSize == ''||cartSize==undefined) {
-            cartSize = {};
-        } else {
-            cartSize = JSON.parse(cartSize);
+            $scope.updateCartPrice();
         }
-        cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] -= 1;
-        setCookie('cartSize', JSON.stringify(cartSize));
-
-        $scope.updateCartPrice();
     }
 
     //数量加
     $scope.moreSize = function (item) {
+        if(item['SHOP_PRODUCT_SKU.SIZE']<item['SHOP_PRODUCT_SKU.STOCK']){
         item['SHOP_PRODUCT_SKU.SIZE'] = item['SHOP_PRODUCT_SKU.SIZE'] + 1;
 
         //修改cookie
@@ -72,6 +72,9 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
         setCookie('cartSize', JSON.stringify(cartSize));
 
         $scope.updateCartPrice();
+        }else{
+            weUI.toast.ok('已达到该商品最大库存数');
+        }
     }
 
     //删除购物车商品
