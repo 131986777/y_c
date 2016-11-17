@@ -15,32 +15,11 @@ angular.module('AndSell.Main').controller('stock_stock_stockList_Controller', fu
         // console.log( $scope.storeMap);
         // console.log($scope.storeList);
     };
-    //根据商品id查询
+
+    //根据商品查询
     $scope.queryStockById = function(pName){
-      //  alert(PId);
-       // console.log($scope.storeQueryList);
-
-        $scope.roundList = $scope.storeQueryList;
-        if(pName==''||pName==null){
-            $scope.stockList=$scope.roundList;
-        }else {
-            var PId=$scope.productMap[pName];
-            $scope.stockList =[];
-            for(var i=0;i< $scope.roundList.length;i++){
-                if( $scope.roundList[i]['STOCK_REALTIME.PID']==PId){
-                    $scope.stockList.push($scope.roundList[i]);
-
-                }
-            }
-        }
-
-
-    }
-
-
-
-
-
+        $scope.filter['SHOP_PRODUCT.PRD_NAME'] = pName;
+    };
 
     $scope.modify={};
     $scope.modifyStockClick = function (item) {
