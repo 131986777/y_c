@@ -88,6 +88,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     };
 
 
+    $scope.toDetail= function (id) {
+        $state.go('pages/product/detail', {PRD_ID: id});
+    }
+
     //评价订单
     $scope.commentOrder = function () {
 

@@ -67,6 +67,11 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $state.go('pages/product/detail', {PRD_ID: id});
     }
 
+    $scope.toCart= function () {
+        modalFactory.setCurrentPage('cart');
+        $state.go('pages/cart');
+    }
+
     //跳转至详情页
     $scope.filterClass = function (classId) {
         $scope.prdList = new Array;

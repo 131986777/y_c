@@ -25,28 +25,28 @@
 </div> <!--END 内容-->
 
 <!-- BEGIN footer-nav -->
-<nav class="nav-fixed-bottom" ng-if="navShow" role="navigation" ng-init="currentPage='sy'">
+<nav class="nav-fixed-bottom" ng-if="navShow" role="navigation">
   <ul class="nav-list flexbox">
     <li class="cell" ng-class="{true:'selected'}[currentPage=='sy']">
-      <a ui-sref="pages/home" ng-click="currentPage='sy'">
+      <a ui-sref="pages/home" ng-click="toPage('sy')">
         <i class="icon icon-home"></i>
         <p class="nav-txt">首页</p>
       </a>
     </li>
     <li class="cell"  ng-class="{true:'selected'}[currentPage=='fl']">
-      <a ui-sref="pages/product/list" ng-click="currentPage='fl'">
+      <a ui-sref="pages/product/list" ng-click="toPage('fl')">
         <i class="icon icon-product-class"></i>
         <p class="nav-txt">分类</p>
       </a>
     </li>
     <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']">
-      <a ui-sref="pages/cart"  ng-click="currentPage='cart'">
+      <a ui-sref="pages/cart"  ng-click="toPage('cart')">
         <i class="icon icon-cart"></i>
         <p class="nav-txt">购物车</p>
       </a>
     </li>
     <li class="cell" ng-class="{true:'selected'}[currentPage=='wd']">
-      <a ui-sref="pages/personal" ng-click="currentPage='wd'">
+      <a ui-sref="pages/personal" ng-click="toPage('wd')">
         <i class="icon icon-personal"></i>
         <p class="nav-txt">我的</p>
       </a>

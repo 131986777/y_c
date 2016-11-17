@@ -21,7 +21,7 @@
              ng-show="!sku.isSelect"></i>
         </div>
         <div class="product-detail weui_cell_bd">
-          <img ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220" class="product-img">
+          <img ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])" ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220" class="product-img">
           <h5 class="product-name" ng-bind="sku['SHOP_PRODUCT.PRD_NAME']">
           </h5>
           <span ng-if="sku['SHOP_PRODUCT_SKU.STOCK']==0">售罄</span>

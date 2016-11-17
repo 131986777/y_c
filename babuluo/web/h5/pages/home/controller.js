@@ -253,7 +253,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
     }
 
-
     //以毫秒为单位
     var fomtime = function (date, item) {
 
@@ -283,6 +282,21 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         observer:true,
         observeParents:true
     });
+
+    $scope.toPrdList= function () {
+        modalFactory.setCurrentPage('fl');
+        $state.go('pages/product/list');
+    }
+
+    $scope.toPrdTagList= function (id) {
+        modalFactory.setCurrentPage('fl');
+        $state.go('pages/product/tagPrdList',{tagId:id});
+    }
+
+    $scope.toOrderList= function () {
+        modalFactory.setCurrentPage('wd');
+        $state.go('pages/order/list');
+    }
 
 });
 

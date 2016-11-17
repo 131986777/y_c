@@ -30,6 +30,10 @@ AndSellUI.service('modalFactory', function ($rootScope) {
         bottom.OnOffState = state;
         $rootScope.$broadcast("nav-bottom", bottom);
     };
+
+    this.setCurrentPage = function (currentPage) {
+        $rootScope.$broadcast("currentPage", currentPage);
+    };
 });
 
 //商品选择sku加入购物车

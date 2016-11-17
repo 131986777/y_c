@@ -301,6 +301,11 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         $state.go('pages/shop',{'FROM':window.location.href});
     }
 
+    $scope.toCart= function () {
+        modalFactory.setCurrentPage('cart');
+        $state.go('pages/cart');
+    }
+
     //数量减
     $scope.lessSize = function () {
         if ($scope.skuSize > 0) {

@@ -1,7 +1,6 @@
 AndSellH5MainModule.controller('H5.MainController', function ($scope, $state, modalFactory) {
 
-
-
+    $scope.currentPage='sy';
     //逻辑
     $scope.$on('title', function (event, data) {
         $scope.title = data;
@@ -12,4 +11,14 @@ AndSellH5MainModule.controller('H5.MainController', function ($scope, $state, mo
     $scope.$on('nav-bottom', function (event, data) {
         $scope.navShow = data.OnOffState;
     });
+
+    //低栏
+    $scope.$on('currentPage', function (event, data) {
+        $scope.currentPage = data;
+    });
+
+    $scope.toPage= function (page) {
+       $scope.currentPage=page;
+    }
+
 });
