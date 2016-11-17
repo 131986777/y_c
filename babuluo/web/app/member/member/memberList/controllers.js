@@ -52,7 +52,7 @@ angular.module('AndSell.Main').controller('member_member_memberList_Controller',
             return;
         }
         $scope.memberAdd['MEMBER.LOGIN_PWD'] = "A123456";
-        $scope.memberAdd['MEMBER.CODE_ID'] = "SYS";
+        $scope.memberAdd['MEMBER.CODE_ID'] = "PC";
         console.log($scope.memberAdd);
         memberFactory.addMemberList($scope.memberAdd).get({}, function (response) {
             if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
