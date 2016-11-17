@@ -17,11 +17,11 @@
                 <div class="form-inline row">
                     <div class="col-md-4">
                     <div class="form-group ">
-                        <input type="text" class="form-control" placeholder="商品名称" ng-model="pId">
+                        <input type="text" class="form-control" placeholder="商品名称" ng-model="pName">
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-default pull-right"
-                                ng-click="queryStockById(pId)">查询
+                                ng-click="queryStockById(pName)">查询
                         </button>
                     </div>
                     </div>
@@ -79,19 +79,21 @@
                 <tbody ng-cloak>
                 <tr ng-repeat="item in stockList">
                     <td ng-bind="item['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品ID-->
-                    <td ng-bind="item['STOCK_REALTIME.UNIT']" class="text-center"></td> <!--单位-->
+                    <td ng-bind="item['SHOP_UNIT.UNIT_NAME']" class="text-center"></td> <!--单位-->
                     <td class="text-center">{{storeMap[(item['STOCK_REALTIME.STORE_ID'])]}}</td> <!--仓库-->
                     <td ng-bind="item['STOCK_REALTIME.STOCK']" class="text-center"></td> <!--实时库存-->
                     <td ng-bind="item['STOCK_REALTIME.LOCK_STOCK']" class="text-center"></td> <!--锁定库存-->
                     <td ng-bind="item['STOCK_REALTIME.UPDATE_DATETIME']|FormatAllDate" class="text-center"></td> <!--最后变更-->
-                    <td class="text-center"><span ng-if="item['STOCK_REALTIME.PRD_REMARK']=='onLine'">线上</span>
-                        <span ng-if="item['STOCK_REALTIME.PRD_REMARK']=='offLine'">线下</span></td>
                     <td class="text-center">
-                    <div >
+                        <span ng-if="item['SHOP_PRODUCT.REMARK']=='onLine'">线上</span>
+                        <span ng-if="item['SHOP_PRODUCT.REMARK']=='offLine'">线下</span>
+                    </td>
+                    <td class="text-center">
+                    <div>
                         <a type="button">
                             明细
                         </a>&nbsp;&nbsp;
-                        <a ng-if="item['STOCK_REALTIME.PRD_REMARK']=='onLine'" type="button" show-modal id="#modifyStock"
+                        <a ng-if="item['SHOP_PRODUCT.REMARK']=='onLine'" type="button" show-modal id="#modifyStock"
                            ng-click="modifyStockClick(item)">修改</a>
 
                     </div>

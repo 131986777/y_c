@@ -9,7 +9,6 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
     $scope.bindData = function (response) {
 
         $scope.bannerList = response.data;
-        $scope.number = response.extraData.page.pageSize - 1;
         $scope.positionList = response.extraData.positionList;
         $scope.positionMap = response.extraData.positionMap;
 
@@ -22,7 +21,6 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
 
         var temp = item['BANNER.ORDER_NUM'];
         var formUp = {};
-        console.log(formUp);
         formUp['BANNER.ID'] = item['BANNER.ID'];
         formUp['BANNER.ORDER_NUM'] = $scope.bannerList[key - 1]['BANNER.ORDER_NUM'];
         bannerFactory.bannerUpDown(formUp).get({}, function (response) {
@@ -35,7 +33,6 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
         var formDown = {};
         formDown['BANNER.ID'] = $scope.bannerList[key - 1]['BANNER.ID'];
         formDown['BANNER.ORDER_NUM'] = temp;
-        console.log(formDown);
         bannerFactory.bannerUpDown(formDown).get({}, function (response) {
             if (response.extraData.state == 'true') {
             } else {
