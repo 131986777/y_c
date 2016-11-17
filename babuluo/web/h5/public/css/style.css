@@ -856,7 +856,7 @@ p {
      border-right: 1px solid rgb(219,219,219);
     background-color:#fff;
     font-size:22px;
-    color:rgb(204,204,204);
+
 }
  .shopping-cart .btn-cart-add{
     background-color:#fff;
@@ -955,13 +955,12 @@ p {
 .shopping-cart .product-wrap .product-num-wrap .btn,
 .shopping-cart .product-wrap .product-num-wrap .form-control {
     padding: 0;
-    /*height: 23px;*/
     z-index: 0;
 }
 
 .shopping-cart .product-wrap .product-num-wrap .btn {
     border-radius: 0;
-    width: 23px;
+    width: 25px;
 }
 
 .shopping-cart .payment-wrap {
@@ -1619,7 +1618,6 @@ position: absolute;
 top: 33px;
 right: 5px;
 }
-
 .product-list-page .product-wrap .name {
 overflow: hidden;
 margin: 5px 15px 13px 0;
