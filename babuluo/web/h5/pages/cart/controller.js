@@ -49,6 +49,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             } else {
                 cartSize = JSON.parse(cartSize);
             }
+
             cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] -= 1;
             setCookie('cartSize', JSON.stringify(cartSize));
 
