@@ -223,7 +223,7 @@ function routerPath(base, path, param, css) {
                 userFactory.isLogin({}, function (response) {
                 }, function (response) {
                     weUI.toast.error('请先登录');
-                    $state.go('pages/user/accountLogin');
+                    $state.go('pages/user/accountLogin',{'FROM':window.location.href});
                 });
             }
             return $ocLazyLoad.load(loadItemList);
