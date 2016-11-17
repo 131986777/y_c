@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', function ($scope, $state, $stateParams, weUI, productFactory, orderFactory, modalFactory,weUI) {
+angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', function ($scope, $state, $stateParams, weUI, productFactory, orderFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('新增订单');
     modalFactory.setBottom(false);
@@ -49,6 +49,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             $scope.updateCartPrice();
         });
 
+        $scope.commitClick = false;
+
     }
 
     //计算订单价格  未做优惠促销等逻辑
@@ -72,7 +74,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
     }
 
 
-
     //提交订单
     $scope.commitOrder = function () {
 
@@ -81,52 +82,57 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             return;
         }
 
-        weUI.toast.showLoading('正在下单');
+        if ($scope.commitClick) {
+            $scope.commitClick=false;
+            weUI.toast.showLoading('正在下单');
 
-        var params = $scope.order;
-        params['SHOP_ORDER.TYPE'] = $scope.cookiePickupPerson.type;//订货单
-        params['SHOP_ORDER.REC_CONTACT'] = $scope.cookiePickupPerson.man;//收货人
-        params['SHOP_ORDER.REC_PHONE'] = $scope.cookiePickupPerson.phone;//联系电话
-        if ($scope.cookiePickupPerson.type == 1) {
-            params['SHOP_ORDER.REC_TYPE'] = 1;//收货方式为快递
-            params['SHOP_ORDER.REC_ADDR'] = noUndefinedAndNull($scope.cookiePickupPerson.shengshi)
-                + noUndefinedAndNull($scope.cookiePickupPerson.address);//收货地址
-            params['SHOP_ORDER.GET_PRD_DATETIME'] = $scope.cookiePickupPerson.getTime;//送货时间
-        } else {
-            params['SHOP_ORDER.REC_TYPE'] = 2;//收货方式为自提
-            params['SHOP_ORDER.SHOP_NAME'] = $scope.shop['SHOP.SHOP_NAME'];//门店信息
-            params['SHOP_ORDER.SHOP_ID'] = $scope.shop['SHOP.SHOP_ID'];//门店ID
-            params['SHOP_ORDER.GET_PRD_DATETIME'] = noUndefinedAndNull($scope.cookiePickupPerson.getTime);//提货时间
-        }
-
-        params['SHOP_ORDER.DETAILS'] = JSON.stringify($scope.skuList);//sku信息
-        orderFactory.addOrder(params, function (response) {
-
-            weUI.toast.hideLoading();
-
-            weUI.toast.ok('下单成功');
-            //成功之后删除购物车内容
-            $scope.skuIds.split(',').forEach(function (ele) {
-                $scope.cartInfo.remove(ele);
-                if ($scope.cartSize[ele] != undefined) {
-                    $scope.cartSize[ele] = 0;
-                }
-            });
-            setCookie('cartSize', JSON.stringify($scope.cartSize));
-            setCookie('cartInfo', JSON.stringify($scope.cartInfo));
-
-            if ($scope.COUPON_INFO != '') {
-                $scope.descCoupon($scope.coupon.ID);
+            var params = $scope.order;
+            params['SHOP_ORDER.TYPE'] = $scope.cookiePickupPerson.type;//订货单
+            params['SHOP_ORDER.REC_CONTACT'] = $scope.cookiePickupPerson.man;//收货人
+            params['SHOP_ORDER.REC_PHONE'] = $scope.cookiePickupPerson.phone;//联系电话
+            if ($scope.cookiePickupPerson.type == 1) {
+                params['SHOP_ORDER.REC_TYPE'] = 1;//收货方式为快递
+                params['SHOP_ORDER.REC_ADDR'] = noUndefinedAndNull($scope.cookiePickupPerson.shengshi)
+                    + noUndefinedAndNull($scope.cookiePickupPerson.address);//收货地址
+                params['SHOP_ORDER.GET_PRD_DATETIME'] = $scope.cookiePickupPerson.getTime;//送货时间
+            } else {
+                params['SHOP_ORDER.REC_TYPE'] = 2;//收货方式为自提
+                params['SHOP_ORDER.SHOP_NAME'] = $scope.shop['SHOP.SHOP_NAME'];//门店信息
+                params['SHOP_ORDER.SHOP_ID'] = $scope.shop['SHOP.SHOP_ID'];//门店ID
+                params['SHOP_ORDER.GET_PRD_DATETIME'] = noUndefinedAndNull($scope.cookiePickupPerson.getTime);//提货时间
             }
-            $state.go('pages/payment/check_out', {ORDER_ID: response.extraData.ORDER_ID});
 
-        }, function (response) {
-            weUI.toast.ok(response.msg);
-        });
+            params['SHOP_ORDER.DETAILS'] = JSON.stringify($scope.skuList);//sku信息
+            orderFactory.addOrder(params, function (response) {
+
+                weUI.toast.hideLoading();
+
+                weUI.toast.ok('下单成功');
+                //成功之后删除购物车内容
+                $scope.skuIds.split(',').forEach(function (ele) {
+                    $scope.cartInfo.remove(ele);
+                    if ($scope.cartSize[ele] != undefined) {
+                        $scope.cartSize[ele] = 0;
+                    }
+                });
+                setCookie('cartSize', JSON.stringify($scope.cartSize));
+                setCookie('cartInfo', JSON.stringify($scope.cartInfo));
+
+                if ($scope.COUPON_INFO != '') {
+                    $scope.descCoupon($scope.coupon.ID);
+                }
+                $scope.commitClick=true;
+                $state.go('pages/payment/check_out', {ORDER_ID: response.extraData.ORDER_ID});
+
+            }, function (response) {
+                $scope.commitClick=true;
+                weUI.toast.error(response.msg);
+            });
+        }
     }
 
     $scope.descCoupon = function (id) {
-        orderFactory.deleteCoupon({'MEMBER_COUPON.ID':id}, function (response) {
+        orderFactory.deleteCoupon({'MEMBER_COUPON.ID': id}, function (response) {
             if (response.code == 0) {
                 console.log('删除成功');
             }
@@ -143,8 +149,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         });
     }
 
-
-   function setTime () {
+    function setTime() {
         var fDate = new Date();
 
         var ifToday = true;
@@ -169,22 +174,40 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         if (modeTime) {
             fDate2 = new Date(fDate.getTime() + 30 * 60 * 1000);
         }
-        var todDate =  fDate2.getFullYear() + "-" + ifLessTen((fDate2.getMonth() + 1)) + "-" + ifLessTen(fDate2.getDate()) + " " + ifLessTen(fDate2.getHours()) + ":" + ifLessTen(fDate2.getMinutes()) + "-19:00";
+        var todDate = fDate2.getFullYear()
+            + "-"
+            + ifLessTen((fDate2.getMonth() + 1))
+            + "-"
+            + ifLessTen(fDate2.getDate())
+            + " "
+            + ifLessTen(fDate2.getHours())
+            + ":"
+            + ifLessTen(fDate2.getMinutes())
+            + "-19:00";
 
         var fDate3 = new Date(fDate.getTime());
-        var todDate2 =  fDate3.getFullYear() + "-" + ifLessTen((fDate3.getMonth() + 1)) + "-" + ifLessTen(fDate3.getDate()) + " 08:00-19:00";
+        var todDate2 = fDate3.getFullYear()
+            + "-"
+            + ifLessTen((fDate3.getMonth() + 1))
+            + "-"
+            + ifLessTen(fDate3.getDate())
+            + " 08:00-19:00";
 
         var nDate = new Date(fDate.getTime() + 24 * 60 * 60 * 1000);
-        var tmoDate =  nDate.getFullYear() + "-" + ifLessTen((nDate.getMonth() + 1)) + "-" + ifLessTen(nDate.getDate()) + " 08:00-19:00";
+        var tmoDate = nDate.getFullYear()
+            + "-"
+            + ifLessTen((nDate.getMonth() + 1))
+            + "-"
+            + ifLessTen(nDate.getDate())
+            + " 08:00-19:00";
 
-        if(ifToday&&ifEarly){
+        if (ifToday && ifEarly) {
             return todDate2;
-        }else if(ifToday){
+        } else if (ifToday) {
             return todDate;
-        }else{
+        } else {
             return tmoDate;
         }
     }
-
 
 });
