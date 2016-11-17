@@ -10,6 +10,9 @@ angular.module('AndSell.H5.Main').controller('pages_personal_coupon_Controller',
         personalFactory.getCouponListByUser({}, function (response) {
             $scope.memberCouponList = response.data;
             weUI.toast.hideLoading();
+        }, function (response) {
+            weUI.toast.hideLoading();
+            weUI.toast.error(response.msg);
         });
     }
 

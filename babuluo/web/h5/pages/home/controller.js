@@ -37,23 +37,9 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         params['SHOP_PRODUCT.TAG_ID'] = '1036,1037,3000,3001,3002,3003,3004,3005,3006';
         params['SHOP_PRODUCT.STORE_ID']=$scope.STORE_ID;
         productFactory.getProductByTag(params, function (response) {
-            console.log(123);
-            console.log(response);
             if (response.code == 0) {
                 $scope.tagProductList = {};
                 response.data.forEach(function (ele) {
-                    console.log(ele['SHOP_PRODUCT.TAG_ID']);
-                  /*  if (ele['SHOP_PRODUCT.TAG_ID'].indexOf('1035') >= 0) {
-                        if ($scope.tagProductList['1035'] == undefined) {
-                            var ne = new Array;
-                            ne.push(ele);
-                            $scope.tagProductList['1035'] = ne;
-                        } else {
-                            var ne = $scope.tagProductList['1035'];
-                            ne.push(ele);
-                            $scope.tagProductList['1035'] = ne;
-                        }
-                    }*/
                     if (ele['SHOP_PRODUCT.TAG_ID'].indexOf('1036') >= 0) {
                         if ($scope.tagProductList['1036'] == undefined) {
                             var ne = new Array;
@@ -164,7 +150,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
 
         shopFactory.getBannerList({}, function (response) {    //横幅列表
-            console.log(response.data);
+
             var dataList = response.data;
 
             dataList.forEach(function (ele) {
@@ -215,7 +201,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                         }
                     }
                     if (flag == false) {
-                        console.log(0);
                         var array = new Array();
                         array.push(ele);
 
@@ -226,8 +211,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
                         $scope.BannerList.push(listItem);
                     }
-                    //tagArray.push(ele['BANNER.TAG_ID']);
-
                 }
 
                 if (ele['BANNER.END_DATETIME'] == null && ele['BANNER.BEGIN_DATETIME'] == null) {
@@ -252,7 +235,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         });
 
     }
-
 
     //以毫秒为单位
     var fomtime = function (date, item) {
@@ -283,6 +265,21 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         observer:true,
         observeParents:true
     });
+
+    $scope.toPrdList= function () {
+        modalFactory.setCurrentPage('fl');
+        $state.go('pages/product/list');
+    }
+
+    $scope.toPrdTagList= function (id) {
+        modalFactory.setCurrentPage('fl');
+        $state.go('pages/product/tagPrdList',{tagId:id});
+    }
+
+    $scope.toOrderList= function () {
+        modalFactory.setCurrentPage('wd');
+        $state.go('pages/order/list');
+    }
 
 });
 

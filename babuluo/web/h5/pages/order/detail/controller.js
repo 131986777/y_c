@@ -32,6 +32,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 weUI.toast.ok('取消订单成功');
                 $scope.getOrder($scope.order['SHOP_ORDER.ID']);
             }, function (response) {
+                weUI.toast.hideLoading();
                 weUI.toast.error(response.msg);
             });
         });
@@ -87,6 +88,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         }
     };
 
+
+    $scope.toDetail= function (id) {
+        $state.go('pages/product/detail', {PRD_ID: id});
+    }
 
     //评价订单
     $scope.commentOrder = function () {

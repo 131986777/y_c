@@ -12,11 +12,13 @@ angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller
 
     $scope.login = function () {
         var form = $scope.memberInfo;
-        console.log(form);
         userFactory.login(form, function (response) {
-            console.log(response);
             weUI.toast.info('登录成功');
-            $state.go('pages/home');
+            if($stateParams.FROM!=''){
+                window.location.href=$stateParams.FROM;
+            }else{
+                $state.go('pages/home');
+            }
         }, function (response) {
             if(response.msg == "ISNEW"){
                 var id = $scope.memberInfo['LOGIN_ID'];

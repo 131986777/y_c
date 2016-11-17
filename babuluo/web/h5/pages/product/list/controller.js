@@ -53,6 +53,9 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
             }
             $scope.loading = false;
             weUI.toast.hideLoading();
+        }, function (response) {
+            weUI.toast.hideLoading();
+            weUI.toast.error(response.msg);
         });
     }
 
@@ -65,6 +68,11 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     //跳转至详情页
     $scope.toDetail = function (id) {
         $state.go('pages/product/detail', {PRD_ID: id});
+    }
+
+    $scope.toCart= function () {
+        modalFactory.setCurrentPage('cart');
+        $state.go('pages/cart');
     }
 
     //跳转至详情页

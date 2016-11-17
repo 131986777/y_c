@@ -77,7 +77,7 @@
           商品列表
         </div>
       </div>
-      <div class="product-wrap weui_cell" ng-repeat="detail in orderDetailList">
+      <div class="product-wrap weui_cell" ng-repeat="detail in orderDetailList" ng-click="toDetail(detail['SHOP_ORDER_INFO.PRD_ID'])">
         <div class="product-img-wrap weui_cell_hd">
           <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}">
         </div>

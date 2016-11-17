@@ -127,6 +127,11 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
         $scope.updateCartPrice();
     }
 
+    //进入商品详情页
+    $scope.toDetail= function (pid) {
+        $state.go('pages/product/detail',{PRD_ID:pid});
+    }
+
     //结算
     $scope.addOrder = function () {
         if ($scope.totalSize > 0) {

@@ -59,7 +59,7 @@
 
     <div class="payment-wrap action-bar-wrap" style="margin-bottom: 51px;">
         <div class="action-bar border-top">
-            <div class="icon-wrap" ng-init="totalSize=0">
+            <div class="icon-wrap" ng-init="totalSize=0" ng-click="toCart()">
                 <i class="icon icon-cart-small"></i>
                 <span class="cartNum" ng-bind="totalSize"></span>
             </div>
@@ -67,7 +67,6 @@
                 <p class="all" ng-init="totalPrice=0">
                     总计：<span class="money" ng-bind="totalPrice | currency : '￥'" ></span>
                 </p>
-                <!--<p class="sale">(不含运费){{totalSize}}</p>-->
             </div>
             <a class="payment-check" ng-click="addOrder()">
                 提交订单

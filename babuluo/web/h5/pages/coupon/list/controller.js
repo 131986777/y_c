@@ -25,6 +25,9 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
                 $scope.couponSumMap.set(ele['MEMBER_COUPON.COUPON_ID'], ele['.NUM_COUPON']);  //将客户所拥有的各优惠券的数量存在map中
             });
             weUI.toast.hideLoading();
+        }, function (response) {
+            weUI.toast.hideLoading();
+            weUI.toast.error(response.msg);
         });
     };
 

@@ -9,6 +9,9 @@ angular.module('AndSell.H5.Main').controller('pages_personal_card_Controller', f
         personalFactory.getMemberCardByUserId({}, function (response) {
             $scope.cardList = response.data;
             weUI.toast.hideLoading();
+        }, function (response) {
+            weUI.toast.hideLoading();
+            weUI.toast.error(response.msg);
         });
     };
     $scope.loadMemberCard();

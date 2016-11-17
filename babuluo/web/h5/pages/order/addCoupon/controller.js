@@ -16,6 +16,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
             $scope.memberCouponList = response.data;       //客户的所有优惠券
             $scope.judgeUsableCoupon();
             weUI.toast.hideLoading();
+        }, function (response) {
+            weUI.toast.hideLoading();
+            weUI.toast.error(response.msg);
         });
     };
 
