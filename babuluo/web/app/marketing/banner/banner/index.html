@@ -57,7 +57,7 @@
                     <td class="text-center">
                         <a ng-show="key!=0" ng-click="changeOrderNumUp(item,key)">↑</a>
                         &nbsp;
-                        <a ng-if="key!=number" ng-click="changeOrderNumDown(item,key)">↓</a>
+                        <a ng-if="bannerList[key+1]!=undefined" ng-click="changeOrderNumDown(item,key)">↓</a>
                     </td> <!--横幅位置-->
                     <td class="text-center">
                         <!--<a show-modal id="#couponDetail" class="btn sbold green" ng-click="detailClick(item)">明细</a>-->
