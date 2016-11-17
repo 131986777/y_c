@@ -643,6 +643,7 @@ p {
 .search-bar {
     background-color: #fff;
     padding: 8px 20px;
+    z-index:1;
 }
 
 .search-bar .search-input {
@@ -860,15 +861,19 @@ p {
  .shopping-cart .btn-cart-add{
     background-color:#fff;
     font-size:22px;
-    /*color:rgb(234,111,26);*/
      color: #000;
 }
  .product-list-page .btn-cart-add,
- .product-list-page .btn-cart-add:hover{
+ .product-list-page .btn-cart-add:hover,
+ .product-detail-page .btn-cart-add,
+ .product-detail-page .btn-cart-add:hover{
      background-color:#fff;
      font-size:22px;
      color:rgb(234,111,26);
  }
+.product-detail-page .btn-cart-add{
+    border-left: 1px solid rgb(219,219,219);
+}
 .shopping-cart .product-sale {
     margin-left: 15px;
     padding-left: 25px;
@@ -2141,7 +2146,7 @@ height: 37px;
 
 .product-list-page .icon-wrap .cartNum {
     background: url("../img/icon-cartNum.png") no-repeat;
-    padding-top: 1px;
+    padding-top: 2px;
     width: 14px;
     height: 14px;
     position: absolute;
