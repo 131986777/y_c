@@ -11,10 +11,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
     $scope.initData = function () {
 
         $scope.cookiePickupPerson = JSON.parse(getCookie("pickupPerson"));
-        $scope.cookiePickupPerson.getTime = setTime();
+
         console.log($scope.cookiePickupPerson);
 
         $scope.EmptyPick = isEmptyObject($scope.cookiePickupPerson);
+        if(!$scope.EmptyPick){
+            $scope.cookiePickupPerson.getTime = setTime();
+        }
 
         $scope.order = {};
         $scope.cartInfo = getCookie('cartInfo');
