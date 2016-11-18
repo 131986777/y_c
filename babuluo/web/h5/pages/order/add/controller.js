@@ -52,7 +52,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             $scope.updateCartPrice();
         });
 
-        $scope.commitClick = false;
+        $scope.commitClick = true;
 
     }
 

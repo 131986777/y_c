@@ -344,6 +344,39 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
     }
 });
 
+AndSellService.factory("http", function ($http) {
+    var _post = function (url, data,funcSuccess,funcFail) {
+        return $http.post(url, $.param(data), {headers: {'Content-Type': 'application/x-www-form-urlencoded','withCredentials': true}}).success(function (response) {
+            if (response.code == 0) {
+                if (angular.isFunction(funcSuccess)) {
+                    if (funcSuccess != undefined) {
+                        funcSuccess(response);
+                    }
+                }
+            } else {
+                if (angular.isFunction(funcFail)) {
+                    if (funcFail != undefined) {
+                        funcFail(response);
+                    }
+                }
+            }
+        });
+    };
+    return {
+        post: function (url,init) {
+            return function (form, funcSuccess, funcFail) {
+                if (form == undefined) {
+                    form = {};
+                }
+                if (init != undefined&&angular.isFunction(init)) {
+                    init(form);
+                }
+                return _post(baseURL + url, form,funcSuccess,funcFail)
+            }
+        }
+    };
+});
+
 /**
  *
  * 时间格式，精确到天

@@ -223,7 +223,7 @@ function routerPath(base, path, param, css) {
                 userFactory.isLogin({}, function (response) {
                 }, function (response) {
                     weUI.toast.error('请先登录');
-                    $state.go('pages/user/accountLogin',{'FROM':window.location.href});
+                    $state.go('pages/user/accountLogin');
                 });
             }
             return $ocLazyLoad.load(loadItemList);
@@ -243,32 +243,6 @@ function $import(path, param, css) {
     AndSellH5MainModule.config(function ($stateProvider) {
         $stateProvider.state(path, routerPath(basePath, path, param, css))
     });
-}
-
-function $post($resource, url, init) {
-    return function (form, funcSuccess, funcFail) {
-        if (form == undefined) {
-            form = {};
-        }
-        if (init != undefined) {
-            init(form);
-        }
-        return $resource(baseURL + url, form, {
-            'update': {
-                method: 'PUT'
-            }
-        }).get({'withCredentials': true}, function (response) {
-            if (response.code == 0) {
-                if (funcSuccess != undefined) {
-                    funcSuccess(response);
-                }
-            } else {
-                if (funcFail != undefined) {
-                    funcFail(response);
-                }
-            }
-        });
-    }
 }
 
 function ToJson(str) {
