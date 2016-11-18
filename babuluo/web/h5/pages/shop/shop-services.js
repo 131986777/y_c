@@ -1,9 +1,9 @@
-AndSellH5MainModule.service('shopFactory', function ($resource) {
+AndSellH5MainModule.service('shopFactory', function (http) {
 
-    this.getShopList = $post($resource,'/shop/shop/queryAllByAgent');
+    this.getShopList = http.post('/shop/shop/queryAllByAgent');
 
-    this.getShopById = $post($resource,'/shop/shop/getById');
+    this.getShopById = http.post('/shop/shop/getById');
 
-    this.getBannerList = $post($resource,'/banner/banner/getAllData');
+    this.getBannerList = http.post('/banner/banner/getAllData');
 
 });

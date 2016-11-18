@@ -1,13 +1,13 @@
-AndSellH5MainModule.service('userFactory', function ($resource) {
+AndSellH5MainModule.service('userFactory', function (http) {
 
-    this.newUserReg = $post($resource,'/member/member/reg');
+    this.newUserReg = http.post('/member/member/reg');
 
-    this.login = $post($resource,'/login/login');
+    this.login = http.post('/login/login');
 
-    this.isLogin = $post($resource,'/login/isLogin');
+    this.isLogin = http.post('/login/isLogin');
 
-    this.loginOut = $post($resource,'/login/logout');
+    this.loginOut = http.post('/login/logout');
 
-    this.sendVerificationCode = $post($resource,'/member/member/queryphone');
+    this.sendVerificationCode = http.post('/member/member/queryphone');
 
 });

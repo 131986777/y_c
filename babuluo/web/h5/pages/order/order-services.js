@@ -1,22 +1,22 @@
-AndSellH5MainModule.service('orderFactory', function ($resource) {
+AndSellH5MainModule.service('orderFactory', function (http) {
 
-    this.addOrder = $post($resource,'/shop/order/addOrderWithDetail');
+    this.addOrder = http.post('/shop/order/addOrderWithDetail');
 
-    this.getOrderById = $post($resource,'/shop/order/getById');
+    this.getOrderById = http.post('/shop/order/getById');
 
-    this.getOrder = $post($resource,'/shop/order/queryAllForAgent');
+    this.getOrder = http.post('/shop/order/queryAllForAgent');
 
-    this.cancelOrder = $post($resource,'/shop/order/cancelOrder');
+    this.cancelOrder = http.post('/shop/order/cancelOrder');
 
-    this.payOrder = $post($resource,'/shop/order/payOrder');
+    this.payOrder = http.post('/shop/order/payOrder');
 
-    this.deliveryOrder = $post($resource,'/shop/order/deliveryOrder');
+    this.deliveryOrder = http.post('/shop/order/deliveryOrder');
 
-    this.acceptOrder = $post($resource,'/shop/order/getOrder');
+    this.acceptOrder = http.post('/shop/order/getOrder');
 
-    this.deleteCoupon = $post($resource,'/member/coupon/delById');
+    this.deleteCoupon = http.post('/member/coupon/delById');
 
-    this.wxPayUndefinedOrder = $post($resource, '/wx/pay/wxPayUndefinedOrder');
+    this.wxPayUndefinedOrder = http.post('/wx/pay/wxPayUndefinedOrder');
 
-    this.queryWXPayResult = $post($resource, '/wx/pay/wxpayCallback');
+    this.queryWXPayResult = http.post('/wx/pay/wxpayCallback');
 })

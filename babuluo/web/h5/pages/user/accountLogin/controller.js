@@ -12,9 +12,11 @@ angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller
 
     $scope.login = function () {
         var form = $scope.memberInfo;
+        weUI.toast.showLoading('正在登录');
         userFactory.login(form, function (response) {
+            weUI.toast.hideLoading();
             weUI.toast.info('登录成功');
-            if($stateParams.FROM!=''){
+            if($stateParams.FROM!=''&&$stateParams.FROM!=undefined&&$stateParams.FROM!='undefined'){
                 window.location.href=$stateParams.FROM;
             }else{
                 $state.go('pages/home');

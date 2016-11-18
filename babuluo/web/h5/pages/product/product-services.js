@@ -1,16 +1,15 @@
-AndSellH5MainModule.service('productFactory', function ($resource) {
+AndSellH5MainModule.service('productFactory', function ($resource,http) {
 
-    this.getProduct = $post($resource,'/shop/product/queryAllForAgent' ,function (filter) {
-        console.log(filter['SHOP_PRODUCT.ORDER']);
+    this.getProduct = http.post('/shop/product/queryAllForAgent' ,function (filter) {
         if (filter['SHOP_PRODUCT.ORDER'] == undefined) {
             filter['SHOP_PRODUCT.ORDER'] = 'ADD_DATETIME DESC';
         }
     });
 
-    this.getProductByTag = $post($resource,'/shop/product/getByTagIds');
+    this.getProductByTag = http.post('/shop/product/getByTagIds');
 
-    this.getProductAllInfoById = $post($resource,'/shop/product/getByIdWithAllInfoForAgent');
+    this.getProductAllInfoById = http.post('/shop/product/getByIdWithAllInfoForAgent');
 
-    this.getProductSkuBySkuIds = $post($resource,'/shop/product/getBySkuIdWithAllInfoForAgent');
+    this.getProductSkuBySkuIds = http.post('/shop/product/getBySkuIdWithAllInfoForAgent');
 
 });

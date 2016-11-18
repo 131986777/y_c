@@ -1,9 +1,9 @@
-AndSellH5MainModule.service('personalFactory', function ($resource) {
+AndSellH5MainModule.service('personalFactory', function (http) {
 
-    this.getMemberCardByUserId = $post($resource,'/member/membercard/getByUserId');
+    this.getMemberCardByUserId = http.post('/member/membercard/getByUserId');
 
-    this.getCouponListByUser = $post($resource,'/member/coupon/getCouponByUserId');
+    this.getCouponListByUser = http.post('/member/coupon/getCouponByUserId');
 
-    this.getPhone = $post($resource,'/member/member/getById');
-    this.getCoupon = $post($resource,'/member/coupon/querySumByUser');
+    this.getPhone = http.post('/member/member/getById');
+    this.getCoupon = http.post('/member/coupon/querySumByUser');
 });

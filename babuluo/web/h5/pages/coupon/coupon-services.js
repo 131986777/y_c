@@ -1,9 +1,9 @@
-AndSellH5MainModule.service('couponFactory', function ($resource) {
+AndSellH5MainModule.service('couponFactory', function (http) {
 
-    this.getCouponList = $post($resource,'/coupon/coupon/queryAllData');
+    this.getCouponList = http.post('/coupon/coupon/queryAllData');
 
-    this.addMemberCoupon = $post($resource,'/member/coupon/add');
+    this.addMemberCoupon = http.post('/member/coupon/add');
 
-    this.modCouponLeft = $post($resource,'/coupon/coupon/modLeftNum');
+    this.modCouponLeft = http.post('/coupon/coupon/modLeftNum');
 
 });
