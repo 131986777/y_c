@@ -4,9 +4,10 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
     modalFactory.setBottom(true);
 
     $scope.cancelLogin= function () {
+        weUI.dialog.alert("提示","是否确认退出", function () {
         userFactory.loginOut({}, function (response) {
             $state.go('pages/user/accountLogin');
-        });
+        });});
     }
     $scope.getSession = function () {
         userFactory.getSession().get({}, function (response) {

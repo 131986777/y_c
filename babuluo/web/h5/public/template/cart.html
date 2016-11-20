@@ -20,7 +20,7 @@
             </p>
             <p class="code" ng-bind="'商品编码 ：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
             </p>
-            <p class="code" >已选：30g &times 3
+            <p class="code"  ng-bind="'已选：'+sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
             </p>
             <p class="money">
               <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
