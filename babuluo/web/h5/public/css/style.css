@@ -1468,7 +1468,7 @@ p {
 
 .personal-index .header {
     padding: 17px 0 10px;
-    font-size: 12px;
+    font-size: 15px;
     text-align: center;
     background-color: #fff;
 }
@@ -1763,18 +1763,19 @@ font-size: 18px;
 
 .basic-info .money {
 color: #F36F1C;
-    margin-top: 10px;
+    font-size: 12px;
+    margin-top: 4px;
 }
 
 .basic-info .name {
-margin: 5px 0 0;
+margin: 0;
 color: #444;
 }
 
 .basic-info .code {
-font-size: 12px;
-    margin-top: 3px;
+    font-size: 12px;
     color: #959595;
+    margin-top: 4px;
 }
 
 .sale-info,
@@ -2646,4 +2647,7 @@ height: 37px;
 .coupon-btn .btn-confirm {
     width: 123px;
     background-color: #f36f1c;
+}
+.order-address .weui_cell{
+    height: 44px;
 }

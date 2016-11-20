@@ -20,6 +20,8 @@
             </p>
             <p class="code" ng-bind="'商品编码 ：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
             </p>
+            <p class="code" >已选：30g &times 3
+            </p>
             <p class="money">
               <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
                     ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
