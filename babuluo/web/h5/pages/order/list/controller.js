@@ -1,7 +1,7 @@
 angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', function ($scope, $state, $stateParams,orderFactory,modalFactory,weUI) {
 
     modalFactory.setTitle('订单列表');
-    modalFactory.setBottom(false);
+    modalFactory.setBottom(true);
 
     $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
