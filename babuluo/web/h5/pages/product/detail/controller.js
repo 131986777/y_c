@@ -302,7 +302,6 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
     }
 
     $scope.toCart= function () {
-        modalFactory.setCurrentPage('cart');
         $state.go('pages/cart');
     }
 

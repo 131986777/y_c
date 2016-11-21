@@ -31,6 +31,8 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         if (getCookie('currentShop') != undefined) {
             $scope.shopInfo= ToJson(getCookie('currentShopInfo'));
             $scope.STORE_ID=$scope.shopInfo['SHOP.REPOS_ID'];
+        }else{
+            $scope.toShop();
         }
 
         var params = {}
@@ -249,7 +251,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     }
 
     $scope.toShop= function () {
-        $state.go('pages/shop',{'FROM':window.location.href});
+        $state.go('pages/shop');
     }
 
     $scope.$on('$destroy',function(){
@@ -267,17 +269,14 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     });
 
     $scope.toPrdList= function () {
-        modalFactory.setCurrentPage('fl');
         $state.go('pages/product/list');
     }
 
     $scope.toPrdTagList= function (id) {
-        modalFactory.setCurrentPage('fl');
         $state.go('pages/product/tagPrdList',{tagId:id});
     }
 
     $scope.toOrderList= function () {
-        modalFactory.setCurrentPage('wd');
         $state.go('pages/order/list');
     }
 
