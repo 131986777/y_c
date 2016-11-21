@@ -228,6 +228,8 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
                 } else {
                     $scope.sku = undefined;
                 }
+                if($scope.sku!=undefined)
+                setContentsInfo($scope.sku);
             }
 
             //是否选了所有的规格项
