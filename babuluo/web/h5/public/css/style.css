@@ -1188,6 +1188,8 @@ p {
 }
 .order-address .head{
     padding:5px 15px;
+    font-size: 16px;
+    font-weight: 400;
 }
 .order-address .weui_btn {
     background-color: #F36F1C;
