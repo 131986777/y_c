@@ -2055,11 +2055,54 @@ height: 37px;
     padding: 0 15px 5px;
 
 }
-.product-list .item .item-title .icon-class{
+.icon-wrap{
+    height: 20px;
+    width: 20px;
+}
+.icon-luwei{
     display: inline-block;
-    height: 22px;
-    width: 23px;
-    background: url("../img/icon-class.png") no-repeat left center;
+    background: url("../img/icon_02.png") no-repeat -20px -0px;
+    background-size: 105px 42px;
+}
+.icon-shushi{
+    display: inline-block;
+    background: url("../img/icon_02.png") no-repeat -40px -0px;
+    background-size: 105px 42px;
+}
+.icon-peicai{
+    display: inline-block;
+    background: url("../img/icon_02.png") no-repeat -63px -0px;
+    background-size: 105px 42px;
+}
+.icon-fruit{
+     display: inline-block;
+     background: url("../img/icon_02.png") no-repeat -84px -0px;
+     background-size: 105px 42px;
+ }
+.icon-egg{
+    display: inline-block;
+    background: url("../img/icon_02.png") no-repeat 0px -20px;
+    background-size: 105px 42px;
+}
+.icon-dong{
+    display: inline-block;
+    background: url("../img/icon_02.png") no-repeat -23px -20px;
+    background-size: 105px 42px;
+}
+.icon-meat{
+    display: inline-block;
+    background: url("../img/icon_02.png") no-repeat -40px -20px;
+    background-size: 105px 42px;
+}
+.icon-wine{
+    display: inline-block;
+    background: url("../img/icon_02.png") no-repeat -63px -20px;
+    background-size: 105px 42px;
+}
+.icon-oil{
+    display: inline-block;
+    background: url("../img/icon_02.png") no-repeat -83px -20px;
+    background-size: 105px 42px;
 }
 .product-list .item li {
     margin-bottom: 9px;
