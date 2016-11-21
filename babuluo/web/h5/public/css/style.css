@@ -10,12 +10,14 @@
  */
 html {
     font-size: 10px;
+    height: 100%;
 }
 
 body {
     font-family: "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
     line-height: 1;
     padding-bottom: 53px;
+    height: 100%;
 }
 
 a:link,
@@ -313,12 +315,6 @@ p {
     width: 15px;
     height: 20px;
 }
-
-.icon-balance {
-    background: url("../img/icon.png") no-repeat -57px 0;
-    background-size: 200px 150px;
-}
-
 .icon-wepay {
     background: url("../img/icon.png") no-repeat -78px 0;
     background-size: 200px 150px;
@@ -370,35 +366,37 @@ p {
 }
 
 .icon-membership-card {
-    background: url("../img/icon.png") no-repeat -25px -120px;
-    background-size: 200px 150px;
+    background: url("../img/icon-personal.png") no-repeat -21px 0;
+    background-size: 96px 50px;
 }
-
+.icon-coupon{
+    background: url("../img/icon-personal.png") no-repeat -47px 0;
+    background-size: 96px 50px;
+}
 .icon-about {
     background: url("../img/icon.png") no-repeat -50px -120px;
     background-size: 200px 150px;
 }
-
-.icon-contact {
-    background: url("../img/icon.png") no-repeat -75px -120px;
+.icon-userpay{
+    background: url("../img/icon.png") no-repeat -57px 0;
     background-size: 200px 150px;
 }
-
-.icon-more {
-    background: url("../img/icon.png") no-repeat -100px -120px;
-    background-size: 200px 150px;
+.icon-balance{
+    background: url("../img/icon-personal.png") no-repeat -72px 0;
+    background-size: 96px 50px;
 }
-
-.icon-home {
-    background: url("../img/icon.png") no-repeat 0 -60px;
-    background-size: 200px 150px;
+.icon-recharge{
+    background: url("../img/icon-personal.png") no-repeat -72px -25px;
+    background-size: 96px 50px;
 }
-
 .icon-cart {
     background: url("../img/icon.png") no-repeat -30px -60px;
     background-size: 200px 150px;
 }
-
+.icon-home{
+    background: url("../img/icon.png") no-repeat 0 -60px;
+    background-size: 200px 150px;
+}
 .icon-product-class {
     background: url("../img/icon.png") no-repeat -60px -60px;
     background-size: 200px 150px;
@@ -1528,6 +1526,12 @@ p {
     width: 25px;
     height: 25px;
 }
+.recharge .icon{
+    display: inline-block;
+    margin-right: 10px;
+    width: 25px;
+    height: 25px;
+}
 .personal-index .weui_btn_area p{
     text-align: center;
     margin-top: 8px;
@@ -1594,8 +1598,7 @@ background-color: #f4f4f4;
 
 .product-list-page .weui_tab_bd {
     margin-left: 95px;
-    padding: 0;
-    padding-bottom: 53px;
+    padding: 0 0 107px;
     min-height: 700px;
     overflow: auto;
     overflow-x:hidden;
@@ -1895,10 +1898,12 @@ background-size: 16px 16px;
 }
 
 .search-wrap {
-    height: 197px;
     margin-bottom: 7px;
 }
-
+.search-wrap img{
+    min-height: 197px;
+    width:100%;
+}
 .search-wrap .searchHolder {
     width: 70%;
     height: 32px;
@@ -2085,7 +2090,7 @@ height: 37px;
     padding: 0 15px 5px;
 
 }
-.icon-wrap{
+.product-list .icon-wrap{
     height: 20px;
     width: 20px;
 }
@@ -2222,8 +2227,9 @@ height: 37px;
     line-height: 49px;
 }
 
-.product-list-page .icon-wrap .cartNum {
-    background: url("../img/icon-cartNum.png") no-repeat;
+.icon-wrap .cartNum {
+    background-color: #F36F1C;
+    border-radius: 7px;
     padding-top: 2px;
     width: 14px;
     height: 14px;
@@ -2232,7 +2238,9 @@ height: 37px;
     right: -7px;
     color: #fff;
 }
-
+.product-detail-page .cartNum{
+    right:-4px;
+}
 .chose-shop {
     height: 57px;
     width: 100%;
@@ -2727,4 +2735,12 @@ height: 37px;
     width: 123px;
     background-color: #f36f1c;
 }
+.orderout{
+    background: url("../img/icon-orderout.png") no-repeat;
+    background-size: 140px 147px;
+    position: relative;
+    top: 50%;
+    left:50%;
+    margin:-73.5px 0 0 -70px;
 
+}

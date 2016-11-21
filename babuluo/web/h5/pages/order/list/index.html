@@ -1,4 +1,4 @@
-<div class="bg-grey order-list-page" ng-init="initData()">
+<div class="bg-grey order-list-page" ng-init="initData()" style="height:100%">
   <div class="weui_tab tab-default">
     <div class="order-act- weui_navbar">
       <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[state=='all']" ng-click="filterStateOrder('all')">
@@ -20,6 +20,7 @@
 
 
     <div class="weui_tab_bd">
+      <div class="weui_tab_bd orderout" ng-if="orderList.length==0"></div>
       <div id="all" class="weui_tab_bd_item weui_tab_bd_item_active">
         <div class="order-wrap weui_cells" ng-repeat="order in orderList" ng-if="orderList.length>0"
              >
@@ -137,7 +138,7 @@
         </div>
       </div>
     </div>
-    <div class="weui_tab_bd" ng-if="orderList.length==0">暂无订单数据!</div>
+
 
   </div>
 </div>

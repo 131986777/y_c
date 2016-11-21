@@ -119,8 +119,9 @@
 
   <div class="product-action-wrap action-bar-wrap">
     <div class="action-bar border-top">
-      <div class="icon-wrap">
+      <div class="icon-wrap" ng-init="totalSize=0">
         <i class="icon icon-cart-small" ng-click="toCart()"></i>
+        <span class="cartNum" ng-bind="totalSize"></span>
         购物车
       </div>
       <!--<div class="icon-wrap">-->
