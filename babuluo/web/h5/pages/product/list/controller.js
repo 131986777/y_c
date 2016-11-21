@@ -1,4 +1,8 @@
-angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function (weUI, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main')
+    //.run(['$anchorScroll', function($anchorScroll) {
+    //    $anchorScroll.yOffset = 1150;
+    //}])
+    .controller('pages_product_list_Controller', function ($location, $anchorScroll, weUI, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(true);
@@ -12,7 +16,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $scope.STORE_ID = 0;
         if (getCookie('currentShopInfo') != undefined) {
             $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']
-        }else{
+        } else {
             $scope.toShop();
         }
         $scope.filter = {
@@ -22,6 +26,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
             'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
             'SHOP_PRODUCT.REMARK': 'offLine'
         }
+
         if ($stateParams.classId == '') {
             $stateParams.classId = undefined
         }
@@ -53,22 +58,39 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
 
     //获取商品列表
     $scope.getPrd = function () {
-        weUI.toast.showLoading('正在加载');
-        productFactory.getProduct($scope.filter, function (response) {
-            Array.prototype.push.apply($scope.prdList, response.data);//数组合并
-            $scope.classList = response.extraData.classList;
-            $scope.page = response.extraData.page;
-            if ($scope.page.querySize > $scope.page.pageIndex * $scope.page.pageSize) {
-                $scope.hasNextPage = true;
-            } else {
-                $scope.hasNextPage = false;
+        if (localStorage.getItem("PRD_LIST") != undefined) {
+            $scope.prdList = JSON.parse(localStorage.getItem("PRD_LIST"));
+            $scope.classList = JSON.parse(localStorage.getItem("CLASS_LIST"));
+            $scope.toAnchor(localStorage.getItem("ANCHOR_ID"));
+            if(localStorage.getItem("ANCHOR_PAGE")!=undefined){
+                $scope.filter['PN']=Number(localStorage.getItem("ANCHOR_PAGE"));
             }
+            $scope.page={
+                pageIndex:Number(localStorage.getItem("ANCHOR_PAGE")),
+                pageSize:10
+            }
+            localStorage.removeItem("PRD_LIST");
+            localStorage.removeItem("ANCHOR_ID");
+            localStorage.removeItem("ANCHOR_PAGE");
             $scope.loading = false;
-            weUI.toast.hideLoading();
-        }, function (response) {
-            weUI.toast.hideLoading();
-            weUI.toast.error(response.msg);
-        });
+        } else {
+            weUI.toast.showLoading('正在加载');
+            productFactory.getProduct($scope.filter, function (response) {
+                Array.prototype.push.apply($scope.prdList, response.data);//数组合并
+                $scope.classList = response.extraData.classList;
+                $scope.page = response.extraData.page;
+                if ($scope.page.querySize > $scope.page.pageIndex * $scope.page.pageSize) {
+                    $scope.hasNextPage = true;
+                } else {
+                    $scope.hasNextPage = false;
+                }
+                $scope.loading = false;
+                weUI.toast.hideLoading();
+            }, function (response) {
+                weUI.toast.hideLoading();
+                weUI.toast.error(response.msg);
+            });
+        }
     }
 
     //查询商品
@@ -77,8 +99,19 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $scope.getPrd();
     }
 
+    //跳转至之前的商品项
+    $scope.toAnchor = function (id) {
+        $anchorScroll.yOffset = 350;
+        $location.hash(id);
+        $anchorScroll();
+    }
+
     //跳转至详情页
     $scope.toDetail = function (id) {
+        localStorage.setItem("PRD_LIST", JSON.stringify($scope.prdList));
+        localStorage.setItem("CLASS_LIST",  JSON.stringify($scope.classList));
+        localStorage.setItem("ANCHOR_ID", id);
+        localStorage.setItem("ANCHOR_PAGE", $scope.page.pageIndex);
         $state.go('pages/product/detail', {PRD_ID: id});
     }
 
@@ -87,7 +120,6 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $state.go('pages/cart');
     }
 
-    //跳转至详情页
     $scope.filterClass = function (classId) {
         $scope.prdList = new Array;
         $scope.filter['SHOP_PRODUCT.CLASS_ID'] = classId;
@@ -195,6 +227,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     //下拉更多商品
     $scope.getMorePrd = function () {
         $scope.filter.PN = $scope.page.pageIndex + 1;
+        $scope.filter['PAGE_SIZE'] = 10;
         $scope.getPrd();
     };
 
