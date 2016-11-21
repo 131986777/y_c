@@ -15,7 +15,11 @@
     </div>
 
     <div class="search-content" style="z-index: 1000">
-      <span class="shopName" ui-sref="pages/shop" ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
+      <div class="shopName">
+        <span ui-sref="pages/shop" ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </div>
+
       <div class="searchHolder pull-right">
         <i class="icon-search" ng-click="searchPrd()"></i>
         <input type="text" ng-model="prdKeyword" ng-keyup="myKeyup($event)" placeholder="搜索商品">

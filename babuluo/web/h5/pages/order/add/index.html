@@ -1,6 +1,6 @@
-<div class="container-fluid order-add" ng-init="initData()">
+<div class="container-fluid order-add" ng-init="initData()" >
     <div class="row">
-        <div class="weui_cells weui_cells_access">
+        <div class="weui_cells weui_cells_access" style="margin-bottom: 0">
             <a class="order-address weui_cell" ui-sref="pages/order/addAddress({SKU_IDS:skuIds})">
                 <div ng-show="!EmptyPick&&cookiePickupPerson.type==3" class="detail weui_cell_bd weui_cell_primary">
                     <p class="">提 货 人：{{cookiePickupPerson.man}}</p>
@@ -14,8 +14,8 @@
                     <p class="">收货地址：{{cookiePickupPerson.shengshi+' '+cookiePickupPerson.address}}</p>
                     <!--<p class="">提货时间：{{cookiePickupPerson.time}}</p>-->
                 </div>
-                <div ng-show="EmptyPick" class="detail weui_cell_bd weui_cell_primary">
-                    请填写收货信息
+                <div ng-show="EmptyPick" class="detail weui_cell_bd weui_cell_primary" style="height: 92px;text-align: center;font-size: 16px;">
+                    <span class="glyphicon glyphicon-plus"></span>请填写收货信息
                 </div>
                 <div class="weui_cell_ft"></div>
             </a>

@@ -2,18 +2,19 @@
     <div class="container-fluid">
         <div class="row">
             <div class="weui_cells weui_cells_form">
+                <div class="head bg-grey">联系人：</div>
                 <div class="weui_cell">
                     <div class="weui_cell_hd">
-                        <label class="weui_label">收货人:</label>
+                        <label class="weui_label">收货人：</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
                         <input class="weui_input" type="text"
-                              ng-model="man" placeholder="请输入收货人">
+                              ng-model="man" placeholder="请输入收货人的姓名">
                     </div>
                 </div>
                 <div class="weui_cell">
                     <div class="weui_cell_hd">
-                        <label class="weui_label">联系方式:</label>
+                        <label class="weui_label">联系方式：</label>
                     </div>
 
                     <div class="weui_cell_bd weui_cell_primary">
@@ -21,10 +22,10 @@
                               ng-model="phone" placeholder="请输入联系方式">
                     </div>
                 </div>
-
+                    <div class="head bg-grey">详细信息：</div>
                     <div class="weui_cell">
                         <div class="weui_cell_hd">
-                            <label class="weui_label">提货方式:</label>
+                            <label class="weui_label">提货方式：</label>
                         </div>
                         <div class="weui_cell_bd weui_cell_primary">
                             <select class="weui_select" ng-model="addressType">
@@ -37,7 +38,7 @@
 
                 <div class="weui_cell">
                     <div class="weui_cell_hd">
-                        <label class="weui_label">所在门店:</label>
+                        <label class="weui_label">所在门店：</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
                         <div class="store-name weui_cell weui_cell_select" ng-show="addressType == 3">
