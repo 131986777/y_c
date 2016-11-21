@@ -1,7 +1,6 @@
 <div ng-init="initData()">
   <!-- BEGIN 搜索 -->
   <div class="search-wrap weui_cells">
-
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide" ng-repeat="item in homeList" active="item.active">
@@ -17,7 +16,6 @@
         <span ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
         <span class="glyphicon glyphicon-chevron-down"></span>
       </div>
-
       <div class="searchHolder pull-right">
         <i class="icon-search" ng-click="searchPrd()"></i>
         <input type="text" ng-model="prdKeyword" ng-keyup="myKeyup($event)" placeholder="搜索商品">

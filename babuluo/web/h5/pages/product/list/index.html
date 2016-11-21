@@ -35,7 +35,7 @@
                 ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
               <span ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></span>
             </h5>
-            <p class="money">
+            <p class="money"  ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
               <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']!=undefined"
                     ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥'"></span>
               <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>
