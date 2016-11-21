@@ -1927,7 +1927,30 @@ background-size: 16px 16px;
 .home-nav {
     margin-bottom: 7px;
 }
-
+.home-nav .nav-wrap{
+    width: 37px;
+    height: 37px;
+}
+.home-nav .icon-nav-all{
+    display: inline-block;
+    background: url('../img/icon-homenav.png') no-repeat 0 0;
+    background-size: 151px 37px;
+}
+.home-nav .icon-nav-bao{
+    display: inline-block;
+    background: url('../img/icon-homenav.png') no-repeat -38px 0;
+    background-size: 151px 37px;
+}
+.home-nav .icon-nav-xin{
+    display: inline-block;
+    background: url('../img/icon-homenav.png') no-repeat -76px 0;
+    background-size: 151px 37px;
+}
+.home-nav .icon-nav-order{
+    display: inline-block;
+    background: url('../img/icon-homenav.png') no-repeat -114px 0;
+    background-size: 151px 37px;
+}
 .home-index .col {
     padding-top: 8px;
     border-left: 1px solid rgb(225, 225, 225);
@@ -2032,13 +2055,6 @@ height: 37px;
     padding-top: 0;
 }
 
-.product-special .icon-special {
-    display: inline-block;
-    width: 22px;
-    height: 22px;
-    background: url("../img/icon-special.png") no-repeat;
-    margin-right: 5px;
-}
 
 .special-content ul {
     margin-bottom: 0;
@@ -2058,6 +2074,12 @@ height: 37px;
 .icon-wrap{
     height: 20px;
     width: 20px;
+}
+.icon-special{
+    display: inline-block;
+    background: url("../img/icon_02.png") no-repeat 0 -0;
+    background-size: 105px 42px;
+    margin-right: 8px;
 }
 .icon-luwei{
     display: inline-block;
