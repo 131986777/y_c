@@ -59,9 +59,10 @@
         <p class="all" ng-init="totalPrice=0">
           总计：<span class="money" ng-bind="totalPrice | currency : '￥'"></span>
         </p>
+        <p class="sale">(不含运费，已优惠<span>22</span>元)</p>
       </div>
       <a class="payment-check" ng-click="addOrder()">
-        提交订单
+        去结算
       </a>
     </div>
   </div>
