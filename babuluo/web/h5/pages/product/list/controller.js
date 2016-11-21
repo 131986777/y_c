@@ -194,5 +194,4 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     $scope.$on('$destroy',function(){
         $(document.body).infinite().off("infinite");
     })
-
 });

@@ -21,7 +21,7 @@ public class ENV {
     public static String ALIYUN_SERCT = "uZy8ypZNyiGBYT0RqcWbmb6L1bOGNn";       //BBL客户的
 
     //阿里云节点
-//public static String ALIYUN_POINT = "http://oss-cn-hangzhou.aliyuncs.com";        //jiaorder测试的
+    //public static String ALIYUN_POINT = "http://oss-cn-hangzhou.aliyuncs.com";        //jiaorder测试的
     public static String ALIYUN_POINT = "http://oss-cn-shanghai.aliyuncs.com";      //BBL客户的
 
     //OSS BUCKET

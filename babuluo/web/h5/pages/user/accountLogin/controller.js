@@ -22,6 +22,7 @@ angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller
                 $state.go('pages/home');
             }
         }, function (response) {
+            weUI.toast.hideLoading();
             if(response.msg == "ISNEW"){
                 var id = $scope.memberInfo['LOGIN_ID'];
                 $state.go('pages/user/SetPassword' , {LOGIN_ID:id});

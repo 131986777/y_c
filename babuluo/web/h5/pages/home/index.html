@@ -15,7 +15,11 @@
     </div>
 
     <div class="search-content" style="z-index: 1000">
-      <span class="shopName" ui-sref="pages/shop" ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
+      <div class="shopName">
+        <span ui-sref="pages/shop" ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
+        <span class="glyphicon glyphicon-chevron-down"></span>
+      </div>
+
       <div class="searchHolder pull-right">
         <i class="icon-search" ng-click="searchPrd()"></i>
         <input type="text" ng-model="prdKeyword" ng-keyup="myKeyup($event)" placeholder="搜索商品">
@@ -27,19 +31,19 @@
   <!-- BEGIN 导航 -->
   <div class="home-nav flexbox text-center">
     <div class="col cell" ng-click="toPrdList()">
-      <a><img src="../../public/img/icon-nav_01.png"></a>
+      <a class="nav-wrap icon-nav-all"></a>
       <p>全部菜品</p>
     </div>
     <div class="col cell"  ng-click="toPrdTagList(1024)">
-      <a><img src="../../public/img/icon-nav_02.png"></a>
+      <a class="nav-wrap icon-nav-bao"></a>
       <p>爆款菜品</p>
     </div>
     <div class="col cell"  ng-click="toPrdTagList(1023)">
-      <a><img src="../../public/img/icon-nav_03.png"></a>
+      <a class="nav-wrap icon-nav-xin"></a>
       <p>新品上市</p>
     </div>
     <div class="col cell" ng-click="toOrderList()">
-      <a><img src="../../public/img/icon-nav_04.png"></a>
+      <a class="nav-wrap icon-nav-order"></a>
       <p>我的订单</p>
     </div>
   </div>
@@ -86,7 +90,7 @@
       <div class="weui_cells weui_cells_access special-head">
         <a class="weui_cell" href="#">
           <div class="weui_cell_bd weui_cell_primary text-center">
-            <p><i class="icon-special"></i>今日推荐</p>
+            <p><i class="icon-wrap icon-special"></i>今日推荐</p>
           </div>
           <div class="weui_cell_ft"></div>
         </a>
@@ -124,7 +128,16 @@
     <div class="product-list">
       <div class="item" ng-repeat="itemList in BannerList">
         <div class="item-title">
-          <i class="icon-class"></i><span>{{itemList.name}}</span>
+          <i class="icon-wrap icon-luwei" ng-if="itemList.id=='1020'"></i>
+          <i class="icon-wrap icon-shushi" ng-if="itemList.id=='1019'"></i>
+          <i class="icon-wrap icon-peicai" ng-if="itemList.id=='1017'"></i>
+          <i class="icon-wrap icon-fruit" ng-if="itemList.id=='3000'"></i>
+          <i class="icon-wrap icon-egg" ng-if="itemList.id=='3001'"></i>
+          <i class="icon-wrap icon-dong" ng-if="itemList.id=='3003'"></i>
+          <i class="icon-wrap icon-meat" ng-if="itemList.id=='3002'"></i>
+          <i class="icon-wrap icon-wine" ng-if="itemList.id=='3004'"></i>
+          <i class="icon-wrap icon-oil" ng-if="itemList.id=='3005'"></i>
+          <span>{{itemList.name}}</span>
         </div>
         <ul class="list-unstyled">
           <li ng-repeat="item in itemList.content" ng-if="item['is_show']==true">
