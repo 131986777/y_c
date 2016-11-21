@@ -1185,11 +1185,23 @@ p {
     margin-bottom: 10px;
     line-height: 1;
 }
-
+.order-address .weui_input{
+    padding-top: 5px;
+}
+.order-address .head{
+    padding:5px 15px;
+}
 .order-address .weui_btn {
     background-color: #F36F1C;
 }
-
+.order-address .weui_cell{
+    height: 44px;
+}
+.order-address .glyphicon{
+    top:3px;
+    font-size: 22px;
+    left: -11px;
+}
 .order-list-page .tab-default .weui_navbar {
     background-color: #fff;
 }
@@ -1485,7 +1497,7 @@ p {
 
 .personal-index .personal-name {
     margin: 12px 0 27px;
-    font-size: 12px;
+    font-size: 15px;
 }
 
 .personal-index .order-act-wrap::before {
@@ -1510,14 +1522,16 @@ p {
     font-size: 12px;
     color: #444;
 }
-
 .personal-index .main-entry .icon {
     display: block;
     margin-right: 10px;
     width: 25px;
     height: 25px;
 }
-
+.personal-index .weui_btn_area p{
+    text-align: center;
+    margin-top: 8px;
+}
 /*.product-list-navbar {*/
     /*position: fixed;*/
     /*top: 44px;*/
@@ -2713,6 +2727,4 @@ height: 37px;
     width: 123px;
     background-color: #f36f1c;
 }
-.order-address .weui_cell{
-    height: 44px;
-}
+
