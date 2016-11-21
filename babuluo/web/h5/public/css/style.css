@@ -586,7 +586,7 @@ p {
 
 .action-bar .icon-wrap {
     position: relative;
-    margin: 0 15px;
+    margin: 0 12px;
     font-size: 10px;
 }
 
@@ -2201,10 +2201,10 @@ height: 37px;
 
 .product-list-page .payment-wrap .payment-info {
     margin: 0 8px;
-    line-height: 1.5;
+    line-height: 1.2;
     white-space: nowrap;
     overflow: hidden;
-    text-align: center;
+    text-align: left;
 }
 
 .product-list-page .payment-wrap .payment-info .all {
