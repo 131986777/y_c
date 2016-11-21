@@ -224,6 +224,7 @@ function routerPath(base, path, param, css) {
                 }, function (response) {
                     weUI.toast.error('请先登录');
                     $state.go('pages/user/accountLogin');
+                    return undefined;
                 });
             }
             return $ocLazyLoad.load(loadItemList);

@@ -1,29 +1,41 @@
-angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function (weUI,$scope, $state,$stateParams, productFactory, modalFactory,weUI) {
+angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function (weUI, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(true);
 
-    $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
+    $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
-        $scope.STORE_ID = 0 ;
-        if(getCookie('currentShopInfo')!=undefined){
-            $scope.STORE_ID= ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']};
+
+        modalFactory.setCurrentPage('fl');
+
+        $scope.STORE_ID = 0;
+        if (getCookie('currentShopInfo') != undefined) {
+            $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']
+        }else{
+            $scope.toShop();
+        }
         $scope.filter = {
-            PAGE_SIZE: 10, PN: 1, 'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,'STOCK_REALTIME.STORE_ID' : $scope.STORE_ID,'SHOP_PRODUCT.REMARK':'offLine'
-        };
-        if($stateParams.classId==''){$stateParams.classId=undefined}
-        $scope.filter['SHOP_PRODUCT.CLASS_ID']= $stateParams.classId;
-        $scope.storeId=$scope.STORE_ID;
-        $scope.hasNextPage=true;
+            PAGE_SIZE: 10,
+            PN: 1,
+            'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,
+            'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
+            'SHOP_PRODUCT.REMARK': 'offLine'
+        }
+        if ($stateParams.classId == '') {
+            $stateParams.classId = undefined
+        }
+        $scope.filter['SHOP_PRODUCT.CLASS_ID'] = $stateParams.classId;
+        $scope.storeId = $scope.STORE_ID;
+        $scope.hasNextPage = true;
         $scope.loading = false;  //状态标记
         $scope.prdList = new Array;
         $scope.getPrd();
         $scope.getCartInfoInCookie();
 
         //下拉监听器
-        $(document.body).infinite().on("infinite", function() {
-            if($scope.loading) return;
+        $(document.body).infinite().on("infinite", function () {
+            if ($scope.loading) return;
             $scope.loading = true;
             if ($scope.hasNextPage) {
                 $scope.getMorePrd();
@@ -32,9 +44,9 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
 
     }
 
-    $scope.myKeyup = function(e){
-        var keycode = window.event?e.keyCode:e.which;
-        if(keycode==13){
+    $scope.myKeyup = function (e) {
+        var keycode = window.event ? e.keyCode : e.which;
+        if (keycode == 13) {
             $scope.getPrd();
         }
     };
@@ -43,13 +55,13 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     $scope.getPrd = function () {
         weUI.toast.showLoading('正在加载');
         productFactory.getProduct($scope.filter, function (response) {
-            Array.prototype.push.apply($scope.prdList,response.data);//数组合并
-            $scope.classList=response.extraData.classList;
-            $scope.page=response.extraData.page;
-            if($scope.page.querySize>$scope.page.pageIndex*$scope.page.pageSize){
-                $scope.hasNextPage=true;
-            }else{
-                $scope.hasNextPage=false;
+            Array.prototype.push.apply($scope.prdList, response.data);//数组合并
+            $scope.classList = response.extraData.classList;
+            $scope.page = response.extraData.page;
+            if ($scope.page.querySize > $scope.page.pageIndex * $scope.page.pageSize) {
+                $scope.hasNextPage = true;
+            } else {
+                $scope.hasNextPage = false;
             }
             $scope.loading = false;
             weUI.toast.hideLoading();
@@ -70,7 +82,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $state.go('pages/product/detail', {PRD_ID: id});
     }
 
-    $scope.toCart= function () {
+    $scope.toCart = function () {
         modalFactory.setCurrentPage('cart');
         $state.go('pages/cart');
     }
@@ -78,16 +90,16 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     //跳转至详情页
     $scope.filterClass = function (classId) {
         $scope.prdList = new Array;
-        $scope.filter['SHOP_PRODUCT.CLASS_ID']=classId;
-        $scope.filter['PAGE_SIZE']=10;
-        $scope.filter['PN']=1;
+        $scope.filter['SHOP_PRODUCT.CLASS_ID'] = classId;
+        $scope.filter['PAGE_SIZE'] = 10;
+        $scope.filter['PN'] = 1;
         $scope.getPrd();
     }
 
     //跳出弹出框选择sku
     $scope.selectSKU = function (id) {
-        $scope.cartPrdId=id;
-        $scope.cartModalShow=true;
+        $scope.cartPrdId = id;
+        $scope.cartModalShow = true;
     }
 
     //更新购物车价格
@@ -107,7 +119,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $scope.skuList = new Array;
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
-        if (cartInfo == ''||cartInfo==undefined) {
+        if (cartInfo == '' || cartInfo == undefined) {
             cartInfo = new Array;
             cartSize = {};
         } else {
@@ -138,7 +150,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         });
         if ($scope.skuList.length > 0) {
             $state.go('pages/order/add', {SKU_IDS: list.toString()});
-        }else{
+        } else {
             weUI.toast.error('至少选择一件商品');
         }
     }
@@ -176,22 +188,21 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     }
 
     //购物车添加成功
-    $scope.addToCartSuccess= function () {
+    $scope.addToCartSuccess = function () {
         $scope.getCartInfoInCookie();
     }
 
     //下拉更多商品
-    $scope.getMorePrd = function() {
-        $scope.filter.PN = $scope.page.pageIndex+1;
+    $scope.getMorePrd = function () {
+        $scope.filter.PN = $scope.page.pageIndex + 1;
         $scope.getPrd();
     };
 
-
-    $scope.toShop= function () {
-        $state.go('pages/shop',{'FROM':window.location.href});
+    $scope.toShop = function () {
+        $state.go('pages/shop', {'FROM': window.location.href});
     }
 
-    $scope.$on('$destroy',function(){
+    $scope.$on('$destroy', function () {
         $(document.body).infinite().off("infinite");
     })
 });

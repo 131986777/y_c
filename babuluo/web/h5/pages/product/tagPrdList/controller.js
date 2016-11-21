@@ -12,6 +12,8 @@ angular.module('AndSell.H5.Main').controller('pages_product_tagPrdList_Controlle
             modalFactory.setTitle('新品上市');
         }
 
+        modalFactory.setCurrentPage('fl');
+
         $scope.STORE_ID = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         $scope.storeId = $scope.STORE_ID;
         $scope.filter = {

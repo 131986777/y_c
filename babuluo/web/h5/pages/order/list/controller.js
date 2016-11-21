@@ -8,6 +8,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
     $scope.initData= function () {
         $scope.hasNextPage=true;
         $scope.loading = false;  //状态标记
+        modalFactory.setCurrentPage('wd');
         $scope.filterStateOrder($stateParams.state);
     }
 
@@ -65,6 +66,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
                     setContentsInfoForOrder(item);
                 });
             });
+
             $scope.page=response.extraData.page;
             if($scope.page.querySize>$scope.page.pageIndex*$scope.page.pageSize){
                 $scope.hasNextPage=true;
