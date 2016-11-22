@@ -82,6 +82,7 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
                 var params={};
                 $scope.product={};
                 $scope.sku={};
+                weUI.toast.showLoading('加载商品数据');
                 params['STOCK_REALTIME.STORE_ID']=$scope.storeId;
                 params['SHOP_PRODUCT.PRD_ID']=$scope.id;
                 productFactory.getProductAllInfoById(params, function (response) {
