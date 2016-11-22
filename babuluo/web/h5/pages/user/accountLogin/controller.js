@@ -32,6 +32,15 @@ angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller
 
         });
     }
+
+    $scope.initData= function () {
+        var state = {
+            title: "main",
+            url: "#/pages/home"
+        };
+        window.history.pushState(state, "main", "#/pages/home");
+    }
+
 });
 
 
