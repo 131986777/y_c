@@ -85,6 +85,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
             weUI.toast.showLoading('正在加载');
             productFactory.getProduct($scope.filter, function (response) {
                 Array.prototype.push.apply($scope.prdList, response.data);//数组合并
+                weUI.toast.hideLoading();
                 $scope.classList = response.extraData.classList;
                 $scope.page = response.extraData.page;
                 if ($scope.page.querySize > $scope.page.pageIndex * $scope.page.pageSize) {
@@ -93,7 +94,6 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
                     $scope.hasNextPage = false;
                 }
                 $scope.loading = false;
-                weUI.toast.hideLoading();
             }, function (response) {
                 weUI.toast.hideLoading();
                 weUI.toast.error(response.msg);
