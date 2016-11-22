@@ -55,6 +55,8 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
             }
         });
 
+        $scope.getDataReady = false;
+
     }
 
     $scope.myKeyup = function (e) {
@@ -81,6 +83,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
             localStorage.removeItem("ANCHOR_ID");
             localStorage.removeItem("ANCHOR_PAGE");
             $scope.loading = false;
+            $scope.getDataReady = true;
         } else {
             weUI.toast.showLoading('正在加载');
             productFactory.getProduct($scope.filter, function (response) {
@@ -94,6 +97,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
                     $scope.hasNextPage = false;
                 }
                 $scope.loading = false;
+                $scope.getDataReady = true;
             }, function (response) {
                 weUI.toast.hideLoading();
                 weUI.toast.error(response.msg);

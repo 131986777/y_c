@@ -47,7 +47,7 @@
         </a>
 
       </div>
-      <div class="prdout" ng-if="prdList.length==0"></div>
+      <div ng-class="{true:'prdout'}[getDataReady]" ng-if="prdList.length==0"></div>
     </div>
   </div>
 

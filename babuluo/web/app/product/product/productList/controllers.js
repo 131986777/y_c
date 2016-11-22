@@ -164,7 +164,11 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
             tagList.push(ele['SHOP_TAG.TAG']);
         });
         var params = {};
+
         params['SHOP_PRODUCT.TAG_ID']=tagIdList.toString();
+        if(params['SHOP_PRODUCT.TAG_ID']==''){
+            params['SHOP_PRODUCT.TAG_ID']='{$null}';
+        }
         params['SHOP_PRODUCT.PRD_ID']=$scope.getCheckIdList().toString();
         productFactory.modifyPrdsTag(params).get({}, function (response) {
             $scope.checkedList.forEach(function (ele) {

@@ -10,6 +10,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
         $scope.loading = false;  //状态标记
         modalFactory.setCurrentPage('wd');
         $scope.filterStateOrder($stateParams.state);
+        $scope.getDataReady = false;
     }
 
     $scope.filterStateOrder= function (type) {
@@ -75,6 +76,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
             }
             $scope.loading = false;
             weUI.toast.hideLoading();
+            $scope.getDataReady = true;
         }, function (response) {
             weUI.toast.hideLoading();
             weUI.toast.error(response.msg);

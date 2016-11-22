@@ -20,7 +20,7 @@
 
 
     <div class="weui_tab_bd">
-      <div class="weui_tab_bd orderout" ng-if="orderList.length==0"></div>
+      <div class="weui_tab_bd"  ng-class="{true:'orderout'}[getDataReady]" ng-if="orderList.length==0"></div>
       <div id="all" class="weui_tab_bd_item weui_tab_bd_item_active">
         <div class="order-wrap weui_cells" ng-repeat="order in orderList" ng-if="orderList.length>0"
              >
