@@ -1903,7 +1903,7 @@ p {
     margin-bottom: 7px;
 }
 .search-wrap img{
-    min-height: 197px;
+    height: auto;
     width:100%;
 }
 .search-wrap .searchHolder {
@@ -1998,7 +1998,6 @@ p {
 .group img,
 .limit img{
     height: auto;
-    min-height: 167px;
     width:100%;
 }
 .home-index .limit,
