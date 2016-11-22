@@ -23,6 +23,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
 
 
     $scope.getCartInfoInCookie = function () {
+        $scope.skuList=new Array;
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
         if (cartInfo == '' || cartInfo == undefined) {

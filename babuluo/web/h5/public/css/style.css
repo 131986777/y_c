@@ -885,6 +885,7 @@ p {
 .shopping-cart .product-wrap {
     height: 133px;
     padding: 18px 15px;
+    background-color: #fff;
 }
 
 .shopping-cart .product-wrap .product-select-wrap {
@@ -1600,8 +1601,7 @@ p {
 
 .product-list-page .weui_tab_bd {
     margin-left: 95px;
-    padding: 0 0 107px;
-    min-height: 700px;
+    padding: 0 0 46px;
     overflow: auto;
     overflow-x:hidden;
 }
@@ -2762,5 +2762,24 @@ p {
     top: 50%;
     left:50%;
     margin:-73.5px 0 0 -70px;
-
+}
+.prdout{
+    height:140px;
+    width: 147px;
+    background: url('../img/prdListEmpty.png') no-repeat;
+    background-size: 140px 147px;
+    position: relative;
+    top:50%;
+    left:50%;
+    margin:-73.5px 0 0 -70px;
+}
+.cartout{
+    height:140px;
+    width: 147px;
+    background: url('../img/cartEmpty.png') no-repeat;
+    background-size: 140px 147px;
+    position: relative;
+    top:50%;
+    left:50%;
+    margin:-73.5px 0 0 -70px;
 }

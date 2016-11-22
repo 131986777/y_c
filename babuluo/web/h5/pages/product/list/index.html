@@ -1,4 +1,4 @@
-<div class="product-list-page" ng-init="initData()">
+<div class="product-list-page" ng-init="initData()" style="height:100%">
   <!-- BEGIN 商品搜索 -->
   <div class="search-bar flexbox navbar-fixed-top" ng-if="TAG_STATE==''">
     <input class="search-input cell bg-grey" type="search" ng-keyup="myKeyup($event)"
@@ -45,7 +45,9 @@
             <i class="icon-out" ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0"></i>
           </div>
         </a>
+
       </div>
+      <div class="prdout" ng-if="prdList.length==0"></div>
     </div>
   </div>
 
