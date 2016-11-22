@@ -297,6 +297,16 @@ function Map() {
     this.isEmpty = isEmpty;
 }
 
+//过滤时间后面的毫秒
+function getDate(dateStr) {
+    if (dateStr != undefined) {
+        var mydate = dateStr.slice(0, dateStr.indexOf("."));
+        return mydate;
+    } else {
+        return undefined;
+    }
+}
+
 var updateWxTitle = function (title) {
     // var body = document.getElementsByTagName('body')[0];
     // document.title = title;

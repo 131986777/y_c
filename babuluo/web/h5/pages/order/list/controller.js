@@ -65,6 +65,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
                 ele.details.forEach(function (item) {
                     setContentsInfoForOrder(item);
                 });
+                ele['SHOP_ORDER.DATETIME_ADD']=getDate(ele['SHOP_ORDER.DATETIME_ADD']);
             });
             $scope.page=response.extraData.page;
             if($scope.page.querySize>$scope.page.pageIndex*$scope.page.pageSize){
