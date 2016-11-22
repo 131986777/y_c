@@ -1986,7 +1986,12 @@ height: 37px;
     margin-top: 10px;
     font-size: 14px;
 }
-
+.group img,
+.limit img{
+    height: auto;
+    min-height: 167px;
+    width:100%;
+}
 .home-index .limit,
 .home-index .group {
     position: relative;
@@ -2081,12 +2086,16 @@ height: 37px;
     margin-bottom: 0;
 }
 
-.product-special .special-content ul li img,
-.product-list img {
+.product-special .special-content ul li img
+ {
     height: 188.5px;
     width: 100%;
 }
-
+.product-list img{
+    height:auto;
+    min-height: 188.5px;
+    width: 100%;
+}
 .product-list .item .item-title span {
     border-bottom: 1px solid rgb(245,169,24);
     padding: 0 15px 5px;

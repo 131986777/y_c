@@ -48,8 +48,7 @@
   <!-- 限时抢购 -->
   <div class="limit" ng-repeat="item in limitList" ng-if="item['is_show']==true">
     <a ng-href="{{item['BANNER.URL']}}"><img
-        ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-        style="min-height: 167px;width: 100%;"></a>
+        ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"></a>
     <div class="limit-desc">
       <div class="desc-text">
          <a class="btn btn-buy">立即抢购</a>
@@ -68,7 +67,6 @@
     <a ng-href="{{item['BANNER.URL']}}">
       <img ng-if="item['is_show']==true"
            ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-           style="min-height: 167px;width: 100%;"
            ng-href="{{item['BANNER.URL']}}"></a>
   </div>
 
