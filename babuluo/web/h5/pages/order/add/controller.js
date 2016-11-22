@@ -5,7 +5,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
-    $scope.money = $stateParams.MONEY   //优惠券返回的价格
+    $scope.money = $stateParams.MONEY;   //优惠券返回的价格
     // $scope.memberCouponId=$stateParams.COUPON_ID;      //  要删除的id
 
     $scope.initData = function () {
@@ -15,7 +15,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         console.log($scope.cookiePickupPerson);
 
         $scope.EmptyPick = isEmptyObject($scope.cookiePickupPerson);
-        if(!$scope.EmptyPick){
+        if (!$scope.EmptyPick) {
             $scope.cookiePickupPerson.getTime = setTime();
         }
 
@@ -66,7 +66,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
         $scope.totalMoney = price;    //使用优惠券时，传给优惠券的总价 By cxy
 
-        //todo  加入其他优惠和出促销的等过滤
+        //todo  加入其他优惠和促销的等过滤
 
         if ($scope.coupon != undefined) {
             $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = $scope.coupon.MONEY;
@@ -75,7 +75,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         $scope.order['SHOP_ORDER.PRICE_ORDER'] = price;
         $scope.order['SHOP_ORDER.PRICE_OVER'] = price;
     }
-
 
     //提交订单
     $scope.commitOrder = function () {
@@ -86,11 +85,17 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         }
 
         if ($scope.commitClick) {
-            $scope.commitClick=false;
+            $scope.commitClick = false;
             weUI.toast.showLoading('正在下单');
 
             var params = $scope.order;
             params['SHOP_ORDER.TYPE'] = $scope.cookiePickupPerson.type;//订货单
+            if ($scope.cookiePickupPerson.type
+                == 3
+                && $scope.order['SHOP_ORDER.PAY_TYPE']
+                == 'FACE') {
+                params['SHOP_ORDER.TYPE'] = 4;//自提付款单
+            }
             params['SHOP_ORDER.REC_CONTACT'] = $scope.cookiePickupPerson.man;//收货人
             params['SHOP_ORDER.REC_PHONE'] = $scope.cookiePickupPerson.phone;//联系电话
             if ($scope.cookiePickupPerson.type == 1) {
@@ -124,13 +129,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 if ($scope.COUPON_INFO != '') {
                     $scope.descCoupon($scope.coupon.ID);
                 }
-                $scope.commitClick=true;
+                $scope.commitClick = true;
                 //$state.go('pages/payment/check_out', {ORDER_ID: response.extraData.ORDER_ID});
                 $state.go('pages/order/detail', {ORDER_ID: response.extraData.ORDER_ID});
 
             }, function (response) {
                 weUI.toast.hideLoading();
-                $scope.commitClick=true;
+                $scope.commitClick = true;
                 weUI.toast.error(response.msg);
             });
         }

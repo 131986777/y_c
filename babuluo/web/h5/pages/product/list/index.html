@@ -1,6 +1,6 @@
 <div class="product-list-page" ng-init="initData()">
   <!-- BEGIN 商品搜索 -->
-  <div class="search-bar flexbox navbar-fixed-top">
+  <div class="search-bar flexbox navbar-fixed-top" ng-if="TAG_STATE==''">
     <input class="search-input cell bg-grey" type="search" ng-keyup="myKeyup($event)"
            ng-model="filter['SHOP_PRODUCT.PRD_NAME']"
            placeholder="输入菜品名">
@@ -9,8 +9,8 @@
     </a>
   </div>
   <!-- END 商品搜索 -->
-  <div class="weui_tab" style="padding-top: 44px;overflow: hidden;">
-    <div class="nav-class">
+  <div class="weui_tab" ng-class="{true:'list-padding'}[TAG_STATE=='']" >
+    <div class="nav-class" ng-if="TAG_STATE==''">
       <div class="nav-links"
            ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] == undefined]"
            ng-click="filterClass(undefined)">全部分类
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div class="weui_tab_bd bg-grey">
+    <div class="bg-grey" ng-class="{true:'weui_tab_bd',false:'weui_tab'}[TAG_STATE=='']">
       <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
         <a class="product-wrap weui_cell " ng-repeat="item in prdList" id="{{item['SHOP_PRODUCT.PRD_ID']}}">
           <div class="weui_cell_hd " ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
@@ -59,7 +59,7 @@
         <p class="all" ng-init="totalPrice=0">
           总计：<span class="money" ng-bind="totalPrice | currency : '￥'"></span>
         </p>
-        <p class="sale">(不含运费，已优惠<span>22</span>元)</p>
+        <p class="sale">(不含运费，已优惠 <span>0</span> 元)</p>
       </div>
       <a class="payment-check" ng-click="addOrder()">
         去结算

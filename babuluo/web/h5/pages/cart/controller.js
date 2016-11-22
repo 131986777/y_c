@@ -17,6 +17,11 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
 
     }
 
+    $scope.toDetail= function (id) {
+        $state.go('pages/product/detail', {PRD_ID: id});
+    }
+
+
     $scope.getCartInfoInCookie = function () {
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');

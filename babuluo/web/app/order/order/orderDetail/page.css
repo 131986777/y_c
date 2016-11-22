@@ -4,7 +4,7 @@
 .orderHead .orderNum{
     padding-top: 10px;
     font-size: 18px;
-    font-weight: 400px;
+    font-weight: 400;
 }
 .buttons a{
     margin-right: 10px;
@@ -26,6 +26,11 @@
     padding: 0px;
     background-color: #eee;
     border-radius:10px;
+}
+.progressList .step-4{
+    float: left;
+    width: 24%;
+    text-align: center;
 }
 .progressList .step-5{
     float: left;
@@ -55,6 +60,11 @@
 }
 .progressTime ul{
     overflow: hidden;
+}
+.progressTime .step-4{
+    float: left;
+    width: 25%;
+    text-align: center;
 }
 .progressTime .step-5{
     float: left;

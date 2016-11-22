@@ -1,8 +1,4 @@
-angular.module('AndSell.H5.Main')
-    //.run(['$anchorScroll', function($anchorScroll) {
-    //    $anchorScroll.yOffset = 1150;
-    //}])
-    .controller('pages_product_list_Controller', function ($location, $anchorScroll, weUI, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function ($location, $anchorScroll, weUI, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(true);
@@ -25,6 +21,18 @@ angular.module('AndSell.H5.Main')
             'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,
             'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
             'SHOP_PRODUCT.REMARK': 'offLine'
+        }
+
+        $scope.TAG_STATE=$stateParams.tagId;
+        if($stateParams.tagId!=''){
+
+            if ($stateParams.tagId == 1024) {
+                modalFactory.setTitle('爆款菜品');
+            } else {
+                modalFactory.setTitle('新品上市');
+            }
+
+            $scope.filter['SHOP_PRODUCT.TAG_ID']=$stateParams.tagId;
         }
 
         if ($stateParams.classId == '') {

@@ -25,8 +25,9 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     }
 
     $scope.initData = function () {
-
         $scope.STORE_ID = 0 ;
+
+        modalFactory.setCurrentPage('sy');
 
         if (getCookie('currentShop') != undefined) {
             $scope.shopInfo= ToJson(getCookie('currentShopInfo'));
@@ -273,7 +274,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     }
 
     $scope.toPrdTagList= function (id) {
-        $state.go('pages/product/tagPrdList',{tagId:id});
+        $state.go('pages/product/list',{tagId:id});
     }
 
     $scope.toOrderList= function () {
