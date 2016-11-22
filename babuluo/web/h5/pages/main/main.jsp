@@ -124,9 +124,10 @@
 
 <div><!-- BEGIN 内容 -->
 
-    <div class="row-content">
-        <div ui-view="" class="ng-scope"></div>
+    <div class="row-content" style="height:100%">
+        <div ui-view="" class="ng-scope" style="height:100%"></div>
     </div>
+
 
 </div> <!--END 内容-->
 
