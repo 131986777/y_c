@@ -8,7 +8,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
             userFactory.loginOut({}, function (response) {
                 $state.go('pages/user/accountLogin');
             });
-        },function(){
+        }, function () {
 
         });
     }
@@ -35,7 +35,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
 
     $scope.getPhone = function (uid) {
         var form = {};
-        form['MEMBER.USER_ID'] = uid
+        form['MEMBER.USER_ID'] = uid;
         personalFactory.getPhone(form, function (response) {
             console.log(response);
             $scope.phone = response.data[0]['MEMBER.MOBILE'];
@@ -61,9 +61,11 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
         modalFactory.setCurrentPage('wd');
 
         $scope.uid = getCookie('ANDSELLID');
-        $scope.queryAccount($scope.uid);
-        $scope.getPhone($scope.uid);
-        $scope.getCouponSum($scope.uid);
+        if ($scope.uid != undefined && $scope.uid != '') {
+            $scope.queryAccount($scope.uid);
+            $scope.getPhone($scope.uid);
+            $scope.getCouponSum($scope.uid);
+        }
     }
 
     $scope.initLoad();

@@ -222,7 +222,6 @@ function routerPath(base, path, param, css) {
             if (filtertList.indexOf(path) < 0) {
                 userFactory.isLogin({}, function (response) {
                 }, function (response) {
-                    weUI.toast.error('请先登录');
                     $state.go('pages/user/accountLogin');
                     return undefined;
                 });

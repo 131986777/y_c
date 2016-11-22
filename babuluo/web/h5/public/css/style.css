@@ -2242,6 +2242,11 @@ p {
     line-height: 49px;
 }
 
+.product-list-page .list-padding {
+    padding-top: 44px;
+    overflow: hidden;
+}
+
 .icon-wrap .cartNum {
     background-color: #F36F1C;
     border-radius: 7px;
