@@ -1,4 +1,4 @@
-<div ng-init="initData()">
+<div ng-init="initData()" style="padding-bottom: 53px">
   <!-- BEGIN 搜索 -->
   <div class="search-wrap weui_cells">
     <div class="swiper-container">
@@ -13,8 +13,8 @@
 
     <div class="search-content" style="z-index: 1000">
       <div ui-sref="pages/shop" class="shopName">
-        <span ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
-        <span class="glyphicon glyphicon-chevron-down"></span>
+        <span class="shop" spa ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
+        <span class="glyphicon glyphicon-chevron-down"  ></span>
       </div>
       <div class="searchHolder pull-right">
         <i class="icon-search" ng-click="searchPrd()"></i>

@@ -1944,7 +1944,16 @@ p {
     white-space: nowrap;
     text-align: center;
 }
-
+.search-wrap .shop{
+    display: inline-block;
+    width:64px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.search-wrap .glyphicon{
+    top:-3px;
+}
 .home-nav {
     margin-bottom: 7px;
 }
