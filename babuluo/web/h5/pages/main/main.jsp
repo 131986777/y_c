@@ -104,9 +104,8 @@
     }
 
 %>
-
 <!DOCTYPE html>
-<html lang="en"  ng-app="AndSell.H5.Main" ng-controller="H5.MainController" >
+<html lang="en"  ng-app="AndSell.H5.Main" ng-controller="H5.MainController">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
@@ -114,6 +113,7 @@
 
 
     <link rel="stylesheet" href="/AndSell/h5/public/libs/bootstrap/dist/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="/AndSell/h5/public/libs/weui/dist/css/jquery-weui.min.css">-->
     <link rel="stylesheet" href="/AndSell/h5/public/libs/weui/dist/lib/weui.css">
     <link rel="stylesheet" href="/AndSell/h5/public/css/style.css">
     <link rel="stylesheet" href="/AndSell/h5/public/libs/swiper/swiper.min.css">
@@ -122,12 +122,11 @@
 </head>
 <body class="home-index">
 
-<div><!-- BEGIN 内容 -->
+<div style="height:100%"><!-- BEGIN 内容 -->
 
     <div class="row-content" style="height:100%">
         <div ui-view="" class="ng-scope" style="height:100%"></div>
     </div>
-
 
 </div> <!--END 内容-->
 
@@ -178,9 +177,8 @@
 <script src="/AndSell/h5/public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/AndSell/h5/public/libs/swiper/swiper.jquery.min.js"></script>
 
-<%--微信js sdk--%>
+<!--微信js sdk-->
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-
 
 <!--importantJs -->
 <script src="/AndSell/h5/public/application.js"></script>
@@ -210,5 +208,6 @@
 <script src="controller.js"> </script>
 
 </html>
+
 
 

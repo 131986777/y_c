@@ -274,7 +274,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     }
 
     $scope.toPrdTagList= function (id) {
-        $state.go('pages/product/list',{tagId:id});
+        $state.go('pages/product/tagPrdList',{tagId:id});
     }
 
     $scope.toOrderList= function () {
