@@ -14,7 +14,6 @@ public class UpdateOrderPayServlet extends HttpServlet {
 
     public UpdateOrderPayServlet() {
         super();
-        System.out.println("ininin");
         updateOrderPayTrigger.init();
         updateOrderPayTrigger.start();
     }
