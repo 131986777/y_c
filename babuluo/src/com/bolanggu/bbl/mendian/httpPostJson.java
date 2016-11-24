@@ -1,5 +1,10 @@
 package com.bolanggu.bbl.mendian;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.pabula.api.API;
+import com.pabula.common.util.HttpClientUtil;
+import com.pabula.fw.exception.RuleException;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -7,6 +12,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import com.bolanggu.bbl.ENV;
+import java.util.HashMap;
+import java.util.Map;
 import sun.net.www.protocol.http.HttpURLConnection;
 
 /**
@@ -50,6 +57,32 @@ public class httpPostJson {
     }
 
     public static void main(String[] args) throws IOException {
-        //System.out.println(post());
+
+        //Map map = new HashMap<>();
+        //map.put("Sign",ENV.API_MENDIAN_CERT);
+        //String returnStr = HttpClientUtil.doPost(ENV.API_MENDIAN+"GetGoodsInfo",map);
+        //JSONArray array =(JSONArray)JSONObject.parseObject(returnStr).get("goodsInfos");
+        //API api=new API();
+        //for (int i=0; i< array.size();i++) {
+        //    JSONObject obj=array.getJSONObject(i);
+        //    Map sku = new HashMap<>();
+        //    sku.put("SHOP_PRODUCT_SKU.BAR_CODE",obj.get("baseBarCode"));
+        //    sku.put("SHOP_PRODUCT_SKU.PRD_SKU",obj.get("goodsCode"));
+        //    if(!obj.get("baseBarCode").equals("")&&obj.get("baseBarCode")!=null) {
+        //        try {
+        //            if (JSONObject.parseObject(
+        //                api.call("/shop/product/sku/modifyByPrdSku", sku).getReturnJSONStr())
+        //                .getInteger("code") == 0) {
+        //                System.out.println((i * 100 / array.size()) + "%  Success : " + sku.get(
+        //                    "SHOP_PRODUCT_SKU.PRD_SKU"));
+        //            } else {
+        //                System.out.println((i * 100 / array.size()) + "%  Fail : " + sku.get(
+        //                    "SHOP_PRODUCT_SKU.PRD_SKU"));
+        //            }
+        //        } catch (RuleException e) {
+        //            e.printStackTrace();
+        //        }
+        //    }
+        //}
     }
 }

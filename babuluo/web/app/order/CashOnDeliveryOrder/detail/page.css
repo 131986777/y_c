@@ -1,0 +1,166 @@
+.orderHead{
+    border-bottom: 1px solid #A9A7AB;
+}
+.orderHead .orderNum{
+    padding-top: 10px;
+    font-size: 18px;
+    font-weight: 400;
+}
+.buttons a{
+    margin-right: 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.orderState{
+    padding-top: 25px;
+    margin-bottom: 25px;
+}
+.orderState p{
+    font-size: 14px;
+    color: #FC5008;
+    padding-top: 3px;
+}
+.progressList{
+    list-style-type: none;
+    overflow: hidden;
+    padding: 0px;
+    background-color: #eee;
+    border-radius:10px;
+}
+.progressList .step-4{
+    float: left;
+    width: 24%;
+    text-align: center;
+}
+.progressList .step-5{
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+.progressList .step-6{
+    float: left;
+    width: 16.6%;
+    text-align: center;
+}
+.progressList .step-active{
+    color: #fff;
+    background-color: #83c44e;
+    border-radius:10px;
+}
+.progressList .step-first{
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.progressList .step-last{
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px
+}
+.progressTime{
+    margin-bottom: 15px;
+}
+.progressTime ul{
+    overflow: hidden;
+}
+.progressTime .step-4{
+    float: left;
+    width: 25%;
+    text-align: center;
+}
+.progressTime .step-5{
+    float: left;
+    width: 20%;
+    text-align: center;
+}
+.progressTime .step-6{
+    float: left;
+    width: 16.6%;
+    text-align: center;
+}
+.info .remark h4{
+    color: red;
+}
+.items{
+    margin-bottom: 35px;
+}
+.items .itemInfo{
+    width: 100%;
+}
+.items li{
+    border-bottom : 1px solid #A9A7AB;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.items .itemInfo td{
+    height: 80px;
+    width: 33.3%
+}
+.items .itemInfo .itemForm img{
+    margin-right: 10px;
+    width: 80px;
+    height: 80px;
+}
+.items .itemInfo .itemForm .itemColor{
+    margin-bottom: 0;
+}
+.itemInfo .remark p{
+    width: 100px;
+    overflow : hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 0;
+    color: red;
+}
+
+.addr .title{
+    width: 80px;
+    font-weight: 400;
+}
+.edit h3{
+    font-size: 18px;
+    font-weight: 400;
+    color: #333;
+    margin-bottom: 20px;
+}
+.edit{
+    position: relative;
+    border-bottom: 1px solid #A9A7AB;
+}
+.editInfo{
+    margin-bottom: 15px;
+}
+.edit button{
+    position: absolute;
+    top: 5px;
+    right: 0;
+}
+.infoCheck{
+    margin-bottom: 30px;
+}
+.total .totalTable{
+    width: 255px;
+    margin: 0 0 0 auto;
+}
+.totalTable .title{
+    width: 80px;
+    font-weight: 400;
+    color: #757575;
+}
+.totalTable tr{
+    height: 31px;
+}
+.totalTable .totalSum{
+    height: 62px;
+}
+.totalSum .title{
+    padding-top: 25px;
+    padding-bottom: 5px;
+}
+.totalTable .num{
+    text-align: right;
+    color: #FC5008;
+}
+.btn-detail{
+    background-color: rgb(17,136,255);
+    color: #fff;
+}
+
