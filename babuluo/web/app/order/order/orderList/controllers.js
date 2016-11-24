@@ -6,12 +6,7 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
-        $scope.yy = {
-            'background-color': '#31C552'
-        };
-
         $scope.filterStateOrder('out');
-
     }
 
     $scope.filterStateOrder = function (type) {
@@ -27,7 +22,7 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
             if ($stateParams.orderType == '1') {
                 modalFactory.setTitle('订货单');
             } else if ($stateParams.orderType == '3') {
-                modalFactory.setTitle('提货单');
+                modalFactory.setTitle('自提单');
             }
         }
         if (type == 'all') {

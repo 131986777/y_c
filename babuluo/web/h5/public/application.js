@@ -73,12 +73,16 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
 
             $scope.initData = function () {
                 $scope.show=false;
+                toggleActionSheet();
                 // current sku select map
                 $scope.currSkuContentSelectMap = {
                     name1: '', name2: '', name3: ''
                 }
 
                 var params={};
+                $scope.product={};
+                $scope.sku={};
+                weUI.toast.showLoading('加载商品数据');
                 params['STOCK_REALTIME.STORE_ID']=$scope.storeId;
                 params['SHOP_PRODUCT.PRD_ID']=$scope.id;
                 productFactory.getProductAllInfoById(params, function (response) {
@@ -90,12 +94,12 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
                         if($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length>0){
                             $scope.checkContent(1,$scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
                         }
-
                         $scope.getPriceArea();
                         $scope.filterSkuList();
                         $scope.skuSelectable();
-                        toggleActionSheet();
+                        weUI.toast.hideLoading();
                     }else{
+                        weUI.toast.hideLoading();
                         weUI.toast.error('未找到规格可用的商品');
                     }
                 });

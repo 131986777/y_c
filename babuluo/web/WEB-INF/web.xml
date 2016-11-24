@@ -64,6 +64,17 @@
     </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>updateOrderPay</servlet-name>
+        <servlet-class>com.task.servlet.UpdateOrderPayServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>updateOrderPay</servlet-name>
+        <url-pattern>/updateOrderPay34433232</url-pattern>
+    </servlet-mapping>
+
     <!--<servlet>-->
         <!--<description>WXPayResult</description>-->
         <!--<display-name>WXPayResult</display-name>-->

@@ -4,16 +4,7 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page import="java.util.Map" %>
 
-<%--
-  Created by IntelliJ IDEA.
-  User: sunsai
-  Date: 2016/11/14
-  Time: 上午10:05
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
-
 
 <%
     /**
@@ -38,12 +29,7 @@
 
     boolean cookieHasOpenId = false;
 
-
-
-
-
-
-    String openId = "";
+    String openId ;
     String loginId = "";
     if(null != cookies){
         for (Cookie cookie : cookies) {
@@ -62,10 +48,6 @@
         }
     }
 
-
-
-
-
     /**
      * 如果cookie 里面没有openid,
      */
@@ -80,8 +62,6 @@
 
             String url = OAuthUtil.getURLByOAuth("http://app.bblycyz.com/AndSell/h5/pages/main/main.jsp");
 
-//            String url = "main.jsp?code=1234";
-
             response.sendRedirect(url);
             return;
         } else {
@@ -90,9 +70,6 @@
 
             if (StrUtil.isNotNull(openId)) {
 
-
-                System.out.println("openId");
-                System.out.println(openId);
                 Cookie cook = new Cookie("openId", openId);
                 response.addCookie(cook);
 
@@ -115,8 +92,6 @@
         }
     }
 
-
-
     String path = request.getServletPath();
 
 
@@ -128,13 +103,9 @@
         return;
     }
 
-
-
 %>
-
-
 <!DOCTYPE html>
-<html lang="en"  ng-app="AndSell.H5.Main" ng-controller="H5.MainController" >
+<html lang="en"  ng-app="AndSell.H5.Main" ng-controller="H5.MainController">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
@@ -151,37 +122,37 @@
 </head>
 <body class="home-index">
 
-<div><!-- BEGIN 内容 -->
+<div style="height:100%"><!-- BEGIN 内容 -->
 
     <div class="row-content">
-        <div ui-view="" class="ng-scope"></div>
+        <div ui-view="" class="ng-scope" style="height:100%"></div>
     </div>
 
 </div> <!--END 内容-->
 
 <!-- BEGIN footer-nav -->
-<nav class="nav-fixed-bottom" ng-if="navShow" role="navigation" ng-init="currentPage='sy'">
-    <ul class="nav-list flexbox">
+<nav class="nav-fixed-bottom" ng-if="navShow" role="navigation">
+    <ul class="nav-list flexbox" style="padding: 6px 0">
         <li class="cell" ng-class="{true:'selected'}[currentPage=='sy']">
-            <a ui-sref="pages/home" ng-click="currentPage='sy'">
+            <a ui-sref="pages/home" ng-click="toPage('sy')">
                 <i class="icon icon-home"></i>
                 <p class="nav-txt">首页</p>
             </a>
         </li>
         <li class="cell"  ng-class="{true:'selected'}[currentPage=='fl']">
-            <a ui-sref="pages/product/list" ng-click="currentPage='fl'">
+            <a ui-sref="pages/product/list" ng-click="toPage('fl')">
                 <i class="icon icon-product-class"></i>
                 <p class="nav-txt">分类</p>
             </a>
         </li>
         <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']">
-            <a ui-sref="pages/cart"  ng-click="currentPage='cart'">
+            <a ui-sref="pages/cart"  ng-click="toPage('cart')">
                 <i class="icon icon-cart"></i>
                 <p class="nav-txt">购物车</p>
             </a>
         </li>
         <li class="cell" ng-class="{true:'selected'}[currentPage=='wd']">
-            <a ui-sref="pages/personal" ng-click="currentPage='wd'">
+            <a ui-sref="pages/personal" ng-click="toPage('wd')">
                 <i class="icon icon-personal"></i>
                 <p class="nav-txt">我的</p>
             </a>
@@ -206,9 +177,8 @@
 <script src="/AndSell/h5/public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/AndSell/h5/public/libs/swiper/swiper.jquery.min.js"></script>
 
-<%--微信js sdk--%>
+<!--微信js sdk-->
 <script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
-
 
 <!--importantJs -->
 <script src="/AndSell/h5/public/application.js"></script>
@@ -238,3 +208,6 @@
 <script src="controller.js"> </script>
 
 </html>
+
+
+

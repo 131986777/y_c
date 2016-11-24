@@ -23,6 +23,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
             $scope.shopMap=shopMap;
             $scope.getRecentShopList();
             weUI.toast.hideLoading();
+            weUI.toast.info('请选择门店');
         }, function (response) {
             weUI.toast.hideLoading();
             weUI.toast.error(response.msg);

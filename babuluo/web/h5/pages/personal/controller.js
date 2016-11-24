@@ -1,13 +1,16 @@
-angular.module('AndSell.H5.Main').controller('pages_personal_Controller', function (userFactory,$scope, $state, personalFactory,modalFactory,weUI,balanceFactory) {
+angular.module('AndSell.H5.Main').controller('pages_personal_Controller', function (userFactory, $scope, $state, personalFactory, modalFactory, weUI, balanceFactory) {
 
     modalFactory.setTitle('我的');
     modalFactory.setBottom(true);
 
-    $scope.cancelLogin= function () {
-        weUI.dialog.alert("提示","是否确认退出", function () {
-        userFactory.loginOut({}, function (response) {
-            $state.go('pages/user/accountLogin');
-        });});
+    $scope.cancelLogin = function () {
+        weUI.dialog.confirm("提示", "是否确认退出", function () {
+            userFactory.loginOut({}, function (response) {
+                $state.go('pages/user/accountLogin');
+            });
+        }, function () {
+
+        });
     }
     $scope.getSession = function () {
         userFactory.getSession().get({}, function (response) {
@@ -19,7 +22,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
         });
     }
 
-    $scope.queryAccount = function (uid){
+    $scope.queryAccount = function (uid) {
         var form = {};
         form['MEMBER_ACCOUNT.USER_ID'] = uid;
         balanceFactory.queryAccountByUid(form, function (response) {
@@ -32,7 +35,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
 
     $scope.getPhone = function (uid) {
         var form = {};
-        form['MEMBER.USER_ID'] = uid
+        form['MEMBER.USER_ID'] = uid;
         personalFactory.getPhone(form, function (response) {
             console.log(response);
             $scope.phone = response.data[0]['MEMBER.MOBILE'];
@@ -41,7 +44,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
             weUI.toast.error(response.msg);
         });
     }
-    $scope.getCouponSum= function (uid) {
+    $scope.getCouponSum = function (uid) {
         var form = {};
         form['MEMBER_COUPON.USER_ID'] = uid
         personalFactory.getCoupon(form, function (response) {
@@ -53,14 +56,18 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
         });
     }
 
-    $scope.initLoad  = function () {
+    $scope.initLoad = function () {
+
+        modalFactory.setCurrentPage('wd');
+
         $scope.uid = getCookie('ANDSELLID');
-        $scope.queryAccount($scope.uid);
-        $scope.getPhone($scope.uid);
-        $scope.getCouponSum($scope.uid);
+        if ($scope.uid != undefined && $scope.uid != '') {
+            $scope.queryAccount($scope.uid);
+            $scope.getPhone($scope.uid);
+            $scope.getCouponSum($scope.uid);
+        }
     }
 
     $scope.initLoad();
-    
 
 });

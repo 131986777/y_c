@@ -6,12 +6,24 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
+        $(".product-list").css("height",document.documentElement.clientHeight-100);
+        modalFactory.setCurrentPage('cart');
+
+        if(getCookie('currentShopInfo')==undefined){
+            $state.go('pages/shop');
+        }
 
         $scope.getCartInfoInCookie();
 
     }
 
+    $scope.toDetail= function (id) {
+        $state.go('pages/product/detail', {PRD_ID: id});
+    }
+
+
     $scope.getCartInfoInCookie = function () {
+        $scope.skuList=new Array;
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
         if (cartInfo == '' || cartInfo == undefined) {

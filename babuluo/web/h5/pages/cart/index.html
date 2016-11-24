@@ -1,8 +1,7 @@
-<div class="container-fluid shopping-cart" ng-init="initData()">
+<div class="shopping-cart" ng-init="initData()" style="padding-bottom: 46px">
 
   <!-- BEGIN 商品列表-->
-  <div class="row">
-    <div class="product-list weui_cells">
+    <div class="product-list weui_cells bg-grey" >
       <!--<div class="product-sale-wrap weui_cell">-->
         <!--<div class="product-select-wrap weui_cell_hd">-->
           <!--<i class="icon icon-check"></i>-->
@@ -12,6 +11,7 @@
         <!--</div>-->
       <!--</div>-->
       <!-- BEGIN 商品信息-->
+
       <div class="product-wrap weui_cell" ng-repeat="sku in skuList">
         <div class="product-select-wrap weui_cell_hd"
              ng-click="checkItem(sku)">
@@ -22,12 +22,12 @@
         </div>
         <div class="product-detail weui_cell_bd">
           <img ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])" ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220" class="product-img">
-          <h5 class="product-name" ng-bind="sku['SHOP_PRODUCT.PRD_NAME']">
+          <h5 class="product-name" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT.PRD_NAME']">
           </h5>
           <span ng-if="sku['SHOP_PRODUCT_SKU.STOCK']==0">售罄</span>
-          <p class="product-cls" ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
+          <p class="product-cls" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
           </p>
-          <p class="product-money" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+          <p class="product-money" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
           </p>
 
           <a class="del-wrap" ng-click="delShopCart(sku)">
@@ -48,9 +48,10 @@
           </div>
         </div>
       </div>
+      <div class="cartout" ng-if="skuList.length==0"></div>
       <!-- END 商品信息-->
     </div>
-  </div>
+
   <!-- END 商品列表-->
 
   <div class="payment-wrap action-bar-wrap" style="bottom: 51px;">

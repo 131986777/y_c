@@ -1,6 +1,6 @@
-<div class="container-fluid order-add" ng-init="initData()">
+<div class="container-fluid order-add" ng-init="initData()" >
     <div class="row">
-        <div class="weui_cells weui_cells_access">
+        <div class="weui_cells weui_cells_access" style="margin-bottom: 0">
             <a class="order-address weui_cell" ui-sref="pages/order/addAddress({SKU_IDS:skuIds})">
                 <div ng-show="!EmptyPick&&cookiePickupPerson.type==3" class="detail weui_cell_bd weui_cell_primary">
                     <p class="">提 货 人：{{cookiePickupPerson.man}}</p>
@@ -14,8 +14,8 @@
                     <p class="">收货地址：{{cookiePickupPerson.shengshi+' '+cookiePickupPerson.address}}</p>
                     <!--<p class="">提货时间：{{cookiePickupPerson.time}}</p>-->
                 </div>
-                <div ng-show="EmptyPick" class="detail weui_cell_bd weui_cell_primary">
-                    请填写收货信息
+                <div ng-show="EmptyPick" class="detail weui_cell_bd weui_cell_primary" style="height: 92px;text-align: center;font-size: 16px;line-height: 92px">
+                    <span class="glyphicon glyphicon-plus"></span>请填写收货信息
                 </div>
                 <div class="weui_cell_ft"></div>
             </a>
@@ -100,7 +100,7 @@
         <div class="payment-list weui_cells" ng-init="order['SHOP_ORDER.PAY_TYPE']='ACCOUNT'">
             <div class="balance weui_cell" ng-click="order['SHOP_ORDER.PAY_TYPE']='ACCOUNT'">
                 <div class="icon-wrap weui_cell_bd">
-                    <i class="icon icon-balance"></i>
+                    <i class="icon icon-userpay"></i>
                 </div>
                 <div class="weui_cell_bd weui_cell_primary">
                     会员卡支付
@@ -123,12 +123,12 @@
                        ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='WEIXIN']"></i>
                 </div>
             </div>
-            <!--<div class="balance weui_cell" ng-click="order['SHOP_ORDER.PAY_TYPE']='FACE'">-->
+            <!--<div class="balance weui_cell" ng-click="order['SHOP_ORDER.PAY_TYPE']='FACE'" ng-if="!EmptyPick&&(cookiePickupPerson.type==3)">-->
                 <!--<div class="icon-wrap weui_cell_bd">-->
                     <!--<i class="icon icon-unipay"></i>-->
                 <!--</div>-->
                 <!--<div class="weui_cell_bd weui_cell_primary">-->
-                    <!--货到付款-->
+                    <!--自提付款-->
                 <!--</div>-->
                 <!--<div class="weui_cell_ft">-->
                     <!--<i class="icon "-->

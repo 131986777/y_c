@@ -135,6 +135,9 @@ angular.module('AndSell.Main').controller('product_product_productModify_Control
             form['SHOP_PRODUCT.SHOP_DES'] = '{$empty}';
         }
         form['SHOP_PRODUCT.TAG_ID'] = $scope.selectTagIds.toString();
+        if(form['SHOP_PRODUCT.TAG_ID']==''){
+            form['SHOP_PRODUCT.TAG_ID']='{$null}';
+        }
         console.log(form);
         var uploadImageArray=new Array();
 
@@ -167,12 +170,6 @@ angular.module('AndSell.Main').controller('product_product_productModify_Control
             if (i == 4)
                 form['SHOP_PRODUCT.P5'] = uploadImageArray[4];
         }
-       /* form['SHOP_PRODUCT.P1']=uploadImageArray[0];
-        form['SHOP_PRODUCT.P2']=uploadImageArray[1];
-        form['SHOP_PRODUCT.P3']=uploadImageArray[2];
-        form['SHOP_PRODUCT.P4']=uploadImageArray[3];
-        form['SHOP_PRODUCT.P5']=uploadImageArray[4];*/
-        console.log('wenfd'+form['SHOP_PRODUCT.P5']);
         productFactory.modifyProduct(form).get({}, function (response) {
             if(response.code==0){
                 modalFactory.showShortAlert("保存成功");

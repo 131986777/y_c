@@ -96,6 +96,16 @@ angular.module('AndSell.Main').controller('marketing_coupon_coupon_couponList_Co
 
         console.log($scope.from);  //add['COUPON.BEGIN_DATETIME']
 
+        if($scope.add['COUPON.NAME']==""){
+            modalFactory.showShortAlert("请填写优惠券名称");
+            return;
+        }
+
+        if($scope.add['COUPON.RULE_ID']==""){
+            modalFactory.showShortAlert("请选择优惠券规则");
+            return;
+        }
+
        $scope.add['COUPON.BEGIN_DATETIME']=$scope.from;
         $scope.add['COUPON.END_DATETIME']=$scope.to;
        $scope.add['COUPON.USE_TIME_CYCLE'] = $scope.Monday + ',' + $scope.Tuesday + ',' + $scope.Wednesday + ',' + $scope.Thursday + ',' + $scope.Friday

@@ -1,18 +1,21 @@
 angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', function ($scope, $state, $stateParams,orderFactory,modalFactory,weUI) {
 
     modalFactory.setTitle('订单列表');
-    modalFactory.setBottom(false);
+    modalFactory.setBottom(true);
 
     $scope.FILE_SERVER_DOMAIN=FILE_SERVER_DOMAIN;
 
     $scope.initData= function () {
         $scope.hasNextPage=true;
         $scope.loading = false;  //状态标记
+        modalFactory.setCurrentPage('wd');
         $scope.filterStateOrder($stateParams.state);
+
+        $('.orders').css("height",document.documentElement.clientHeight-50);
     }
 
     $scope.filterStateOrder= function (type) {
-
+        $scope.getDataReady = false;
         $scope.orderList=new Array;
 
         $scope.state=type;
@@ -64,6 +67,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
                 ele.details.forEach(function (item) {
                     setContentsInfoForOrder(item);
                 });
+                ele['SHOP_ORDER.DATETIME_ADD']=getDate(ele['SHOP_ORDER.DATETIME_ADD']);
             });
             $scope.page=response.extraData.page;
             if($scope.page.querySize>$scope.page.pageIndex*$scope.page.pageSize){
@@ -73,6 +77,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
             }
             $scope.loading = false;
             weUI.toast.hideLoading();
+            $scope.getDataReady = true;
         }, function (response) {
             weUI.toast.hideLoading();
             weUI.toast.error(response.msg);

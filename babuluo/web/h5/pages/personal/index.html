@@ -11,7 +11,7 @@
                         <span class="num">{{balanceInfo[0]['MEMBER_ACCOUNT.POINT']}}</span>
                         <p class="personal-info-txt">用户积分</p>
                     </div>
-                    <div class="points cell">
+                    <div class="points cell" ui-sref="pages/account/balance">
                         <span class="num">{{balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']}}</span>
                         <p class="personal-info-txt">账户余额</p>
                     </div>
@@ -36,19 +36,20 @@
                 <div class="weui_cell no_access">
                     <div class="order-act weui_cell_bd weui_cell_primary flexbox">
                         <a class="cell" ui-sref="pages/order/list({state:'end'})">
-                            <i class="icon icon-order-ok"></i>
+                            <div class="icon icon-order-ok"><span class="order-num">10</span></div>
                             <p class="order-act-txt" >已完成</p>
                         </a>
                         <a class="cell" ui-sref="pages/order/list({state:'pay'})">
-                            <i class="icon icon-order-pay"></i>
+                            <div class="icon icon-order-pay"><span class="order-num">10</span> </div>
                             <p class="order-act-txt">待付款</p>
                         </a>
                         <a class="cell" ui-sref="pages/order/list({state:'get'})">
-                            <i class="icon icon-order-deliver"></i>
+                            <div class="icon icon-order-deliver"><span class="order-num">8</span></div>
+
                             <p class="order-act-txt">待自提</p>
                         </a>
                         <a class="cell" ui-sref="pages/order/list({state:'comment'})">
-                            <i class="icon icon-order-evaluate"></i>
+                            <div class="icon icon-order-evaluate"><span class="order-num">10</span></div>
                             <p class="order-act-txt">待评价</p>
                         </a>
                     </div>
@@ -68,7 +69,7 @@
                 </a>
                 <a ui-sref="pages/personal/coupon" class="weui_cell">
                     <div class="weui_cell_hd">
-                        <i class="icon icon-membership-card"></i>
+                        <i class="icon icon-coupon"></i>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
                         我的优惠券
@@ -77,7 +78,7 @@
                 </a>
                 <a ui-sref="pages/account/balance" class="weui_cell">
                     <div class="weui_cell_hd">
-                        <i class="icon icon-collected"></i>
+                        <i class="icon icon-balance"></i>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
                         资金明细
@@ -86,7 +87,7 @@
                 </a>
                 <a ui-sref="pages/account/recharge" class="weui_cell">
                     <div class="weui_cell_hd">
-                        <i class="icon icon-home"></i>
+                        <i class="icon icon-recharge"></i>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
                         账户充值
@@ -132,7 +133,9 @@
             </div>
             <div class="weui_btn_area">
                 <button class="weui_btn" type="button" ng-click="cancelLogin()" style="background-color: #fff;color: #000;font-size: 17px">退出登录</button>
+                <p>客服电话：<a href="tel:400-000-9185">400-000-9185</a></p>
             </div>
+
         </div>
     </main>
 

@@ -49,34 +49,41 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
      * 领取优惠券
      */
     $scope.addCoupon = function (item) {
-        $scope.coupon = item;
+        couponFactory.isLogin({}, function (response) {
+                if (response.extraData.state == "") {
+                    var sum = $scope.couponSumMap.get(item['COUPON.ID']);  //客户所拥有的当前优惠券的数量
+                    var count = item['COUPON.RULE_INFO']['COUPON_RULE.EACH_MEMBER_LIMIT'];  //该优惠券所允许的每人领取的最大数量
+                    console.log(sum);
+                    console.log(count);
+                    if (sum != undefined && sum >= count) {
+                        weUI.toast.info('该优惠券的领取数量已经达到了上限，换张再领吧！');
+                    } else {
+                        $scope.add['MEMBER_COUPON.COUPON_ID'] = item['COUPON.ID'];
+                        $scope.add['MEMBER_COUPON.EXPIRED_TIME'] = item['COUPON.END_DATETIME'];
 
-        var sum = $scope.couponSumMap.get($scope.coupon['COUPON.ID']);  //客户所拥有的当前优惠券的数量
-        var count = $scope.coupon['COUPON.RULE_INFO']['COUPON_RULE.EACH_MEMBER_LIMIT'];  //该优惠券所允许的每人领取的最大数量
-        console.log(sum);
-        console.log(count);
-        if (sum != undefined && sum >= count) {
-            weUI.toast.info('该优惠券的领取数量已经达到了上限，换张再领吧！');
-        } else {
-            $scope.add['MEMBER_COUPON.COUPON_ID'] = $scope.coupon['COUPON.ID'];
-            $scope.add['MEMBER_COUPON.EXPIRED_TIME'] = $scope.coupon['COUPON.END_DATETIME'];
+                        item['COUPON.NUM_LEFT'] = item['COUPON.NUM_LEFT'] - 1;
 
-            $scope.coupon['COUPON.NUM_LEFT'] = $scope.coupon['COUPON.NUM_LEFT'] - 1;
+                        couponFactory.addMemberCoupon($scope.add, function (response) {
+                            couponFactory.modCouponLeft(item, function (response) {  //修改优惠券剩余数量
 
-            couponFactory.addMemberCoupon($scope.add, function (response) {
-                couponFactory.modCouponLeft($scope.coupon, function (response) {  //修改优惠券剩余数量
+                                weUI.toast.ok('领取成功!');
+                                $scope.initData();
+                                $scope.add = '';
 
-                    weUI.toast.ok('领取成功!');
-                    $scope.initData();
-                    $scope.add = '';
-
-                }, function (response) {
-                    weUI.toast.error(response.msg);
-                });
+                            }, function (response) {
+                                weUI.toast.error(response.msg);
+                            });
+                        }, function (response) {
+                            weUI.toast.error(response.msg);
+                        });
+                    }
+                }
             }, function (response) {
-                weUI.toast.error(response.msg);
-            });
-        }
+
+                weUI.toast.error("请登陆后领取");
+                $state.go('pages/user/accountLogin', {FROM: ''});
+            }
+        );
     }
 
 
