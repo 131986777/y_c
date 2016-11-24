@@ -10,6 +10,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
         $scope.loading = false;  //状态标记
         modalFactory.setCurrentPage('wd');
         $scope.filterStateOrder($stateParams.state);
+
+        $('.orders').css("height",document.documentElement.clientHeight-50);
     }
 
     $scope.filterStateOrder= function (type) {

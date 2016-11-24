@@ -1,4 +1,4 @@
-<div class="bg-grey order-list-page" ng-init="initData()" style="height:100%">
+<div class="bg-grey order-list-page" ng-init="initData()">
   <div class="weui_tab tab-default">
     <div class="order-act- weui_navbar">
       <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[state=='all']"
@@ -24,7 +24,7 @@
     </div>
 
 
-    <div class="weui_tab_bd">
+    <div class="orders weui_tab_bd">
       <div class="weui_tab_bd" ng-class="{true:'orderout'}[getDataReady]"
            ng-if="orderList.length==0"></div>
       <div id="all" class="weui_tab_bd_item weui_tab_bd_item_active">
