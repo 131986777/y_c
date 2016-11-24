@@ -23,7 +23,7 @@ var orderLongPolling = (function(){
         xhr.responseType="text";
         xhr.onreadystatechange = function (e) {
             if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200){
-                if(JSON.parse(xhr.responseText).msg==="ok"){
+                if(JSON.parse(xhr.responseText).extraData.ifExistNoScanOrder==="true"){
                     playVoice(obj.voiceNode,obj.successVoicePath);
                 };
             }

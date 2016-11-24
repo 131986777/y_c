@@ -1,6 +1,6 @@
 angular.module('AndSell.H5.Main').controller('pages_account_balance_Controller', function ($scope, $state, $stateParams, balanceFactory,weUI) {
 
-
+    $scope.balanceDetail = "收支明细";
     $scope.initLoad  = function () {
         $scope.uid = getCookie('ANDSELLID');
         $scope.queryFinanceListByUid($scope.uid);
@@ -24,8 +24,15 @@ angular.module('AndSell.H5.Main').controller('pages_account_balance_Controller',
         console.log(type);
         if(type == 'null'){
             $scope.balanceInfo = $scope.typeInfo;
+            $scope.balanceDetail = "收支明细";
         }
         else{
+            if(type == 'decrease'){
+                $scope.balanceDetail = "支出";
+            }
+            if(type == 'increase'){
+                $scope.balanceDetail = "收入";
+            }
             $scope.balanceInfo =[];
             var array = new Array();
             $scope.typeInfo.forEach(function (ele) {

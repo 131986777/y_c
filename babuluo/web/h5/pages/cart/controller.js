@@ -7,11 +7,23 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
 
     $scope.initData = function () {
 
+        modalFactory.setCurrentPage('cart');
+
+        if(getCookie('currentShopInfo')==undefined){
+            $state.go('pages/shop');
+        }
+
         $scope.getCartInfoInCookie();
 
     }
 
+    $scope.toDetail= function (id) {
+        $state.go('pages/product/detail', {PRD_ID: id});
+    }
+
+
     $scope.getCartInfoInCookie = function () {
+        $scope.skuList=new Array;
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
         if (cartInfo == '' || cartInfo == undefined) {

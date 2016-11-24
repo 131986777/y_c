@@ -6,6 +6,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
+        modalFactory.setCurrentPage('wd');
         $scope.getOrder($stateParams.ORDER_ID);
         $scope.shop = JSON.parse(getCookie('currentShopInfo'));
 

@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function (userFactory,$scope, $state, $stateParams, productFactory, modalFactory,weUI) {
+angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function (userFactory, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('商品详情');
     modalFactory.setBottom(false);
@@ -17,56 +17,62 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
             name1: '', name2: '', name3: ''
         }
 
-        var params={};
-        params['SHOP_PRODUCT.PRD_ID']=$stateParams.PRD_ID;
-        $scope.STORE_ID = 0 ;
-        if(getCookie('currentShopInfo')!=undefined){
-            params['STOCK_REALTIME.STORE_ID']=JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
-            $scope.STORE_ID=params['STOCK_REALTIME.STORE_ID'];
+        var params = {};
+        params['SHOP_PRODUCT.PRD_ID'] = $stateParams.PRD_ID;
+        $scope.STORE_ID = 0;
+        if (getCookie('currentShopInfo') != undefined) {
+            params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
+            $scope.STORE_ID = params['STOCK_REALTIME.STORE_ID'];
         }
         productFactory.getProductAllInfoById(params, function (response) {
             $scope.product = response.data[0];
-            if($scope.product!=undefined){
-            $scope.setPrdPicBanner($scope.product);
-            if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
-                $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
-                $scope.skuData = $scope.getPrdSkuData($scope.skuList);
-                console.log($scope.skuData);
-                if($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length>0){
-                    $scope.checkContent(1,$scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
-                }
-                $scope.getPriceArea();
-                $scope.filterSkuList();
-                $scope.skuSelectable();
+            if ($scope.product != undefined) {
+                $scope.setPrdPicBanner($scope.product);
+                if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
+                    $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
+                    $scope.skuData = $scope.getPrdSkuData($scope.skuList);
+                    console.log($scope.skuData);
+                    if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length > 0) {
+                        $scope.checkContent(1, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
+                    }
+                    $scope.getPriceArea();
+                    $scope.filterSkuList();
+                    $scope.skuSelectable();
                 }
 
-                $scope.noStore=false;
-                if($scope.product['SHOP_PRODUCT.HAS_STOCK']==undefined){
-                    $scope.noStore=true;
+                $scope.noStore = false;
+                if ($scope.product['SHOP_PRODUCT.HAS_STOCK'] == undefined) {
+                    $scope.noStore = true;
                 }
             }
         });
 
         $scope.skuSize = 1;
-
+        $scope.caculCart();
     }
 
-    $scope.setPrdPicBanner= function (prd) {
+    $scope.setPrdPicBanner = function (prd) {
         // 添加轮播图源
-        if(prd['SHOP_PRODUCT.CMP']!=undefined){
-            $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.CMP']});
-        }  if(prd['SHOP_PRODUCT.P1']!=undefined){
-            $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P1']});
-        } if(prd['SHOP_PRODUCT.P2']!=undefined){
-            $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P2']});
-        } if(prd['SHOP_PRODUCT.P3']!=undefined){
-            $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P3']});
-        } if(prd['SHOP_PRODUCT.P4']!=undefined){
-            $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P4']});
-        } if(prd['SHOP_PRODUCT.P5']!=undefined){
-            $scope.slides.push({ image: FILE_SERVER_DOMAIN+prd['SHOP_PRODUCT.P5']});
+        if (prd['SHOP_PRODUCT.CMP'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.CMP']});
+        }
+        if (prd['SHOP_PRODUCT.P1'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.P1']});
+        }
+        if (prd['SHOP_PRODUCT.P2'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.P2']});
+        }
+        if (prd['SHOP_PRODUCT.P3'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.P3']});
+        }
+        if (prd['SHOP_PRODUCT.P4'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.P4']});
+        }
+        if (prd['SHOP_PRODUCT.P5'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.P5']});
         }
     }
+
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         paginationClickable: true,
@@ -74,10 +80,11 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         centeredSlides: true,
         autoplay: 4500,
         autoplayDisableOnInteraction: false,
-        observer:true,
-        observeParents:true,
-        autoplayDisableOnInteraction:false
+        observer: true,
+        observeParents: true,
+        autoplayDisableOnInteraction: false
     });
+
     //获取价格区间
     $scope.getPriceArea = function () {
         var minPrice = 0;
@@ -251,45 +258,61 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         });
     }
 
+    $scope.caculCart = function () {
+        var cartInfo = getCookie('cartInfo');
+        var cartSize = getCookie('cartSize');
+        if (cartInfo == '' || cartInfo == undefined) {
+            cartInfo = new Array;
+            cartSize = {};
+        } else {
+            cartSize = JSON.parse(cartSize);
+        }
+        var size = 0;
+        for (var prop in cartSize) {
+            if (cartSize.hasOwnProperty(prop)) {
+                size = size + Number(cartSize[prop]);
+            }
+        }
+        $scope.totalSize = size;
+    }
+
     //加入购物车
     $scope.addToCart = function () {
         if ($scope.sku != undefined) {
-            if($scope.sku['SHOP_PRODUCT_SKU.STOCK']>0){
-            var cartInfo = getCookie('cartInfo');
-            var cartSize = getCookie('cartSize');
-            if (cartInfo == ''||cartInfo==undefined) {
-                cartInfo = new Array;
-                cartSize = {};
-            } else {
-                cartInfo = JSON.parse(cartInfo);
-                cartSize = JSON.parse(cartSize);
-            }
+            if ($scope.sku['SHOP_PRODUCT_SKU.STOCK'] > 0) {
+                var cartInfo = getCookie('cartInfo');
+                var cartSize = getCookie('cartSize');
+                if (cartInfo == '' || cartInfo == undefined) {
+                    cartInfo = new Array;
+                    cartSize = {};
+                } else {
+                    cartInfo = JSON.parse(cartInfo);
+                    cartSize = JSON.parse(cartSize);
+                }
 
-            if (cartInfo.indexOf($scope.sku['SHOP_PRODUCT_SKU.SKU_ID']) < 0) {
-                cartInfo.push($scope.sku['SHOP_PRODUCT_SKU.SKU_ID']);
-            }
+                if (cartInfo.indexOf($scope.sku['SHOP_PRODUCT_SKU.SKU_ID']) < 0) {
+                    cartInfo.push($scope.sku['SHOP_PRODUCT_SKU.SKU_ID']);
+                }
 
-            //size in cookie
-            var size = cartSize[$scope.sku['SHOP_PRODUCT_SKU.SKU_ID']];
-            if (size != undefined) {
-                size += $scope.skuSize;
-            } else {
-                size = $scope.skuSize;
-            }
-            cartSize[$scope.sku['SHOP_PRODUCT_SKU.SKU_ID']] = size;
+                //size in cookie
+                var size = cartSize[$scope.sku['SHOP_PRODUCT_SKU.SKU_ID']];
+                if (size != undefined) {
+                    size += $scope.skuSize;
+                } else {
+                    size = $scope.skuSize;
+                }
+                cartSize[$scope.sku['SHOP_PRODUCT_SKU.SKU_ID']] = size;
 
-            console.log(JSON.stringify(cartInfo));
-            console.log(JSON.stringify(cartSize));
-
-            //加入购物车
-            setCookie('cartSize', JSON.stringify(cartSize));
-            setCookie('cartInfo', JSON.stringify(cartInfo));
+                //加入购物车
+                setCookie('cartSize', JSON.stringify(cartSize));
+                setCookie('cartInfo', JSON.stringify(cartInfo));
 
                 weUI.toast.ok('已加入到购物车');
 
-            // get prd size in cart
-            $scope.cartSize = cartInfo.length;
-            }else{
+                // get prd size in cart
+                $scope.cartSize = cartInfo.length;
+                $scope.caculCart();
+            } else {
                 weUI.toast.error('该规格已售罄');
             }
         } else {
@@ -297,18 +320,17 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         }
     }
 
-    $scope.toShop= function () {
-        $state.go('pages/shop',{'FROM':window.location.href});
+    $scope.toShop = function () {
+        $state.go('pages/shop', {'FROM': window.location.href});
     }
 
-    $scope.toCart= function () {
-        modalFactory.setCurrentPage('cart');
+    $scope.toCart = function () {
         $state.go('pages/cart');
     }
 
     //数量减
     $scope.lessSize = function () {
-        if ($scope.skuSize > 0) {
+        if ($scope.skuSize > 1) {
             $scope.skuSize = $scope.skuSize - 1;
         }
     }
@@ -316,7 +338,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
     $scope.moreSize = function () {
         if ($scope.skuSize < $scope.sku['SHOP_PRODUCT_SKU.STOCK']) {
             $scope.skuSize = clone($scope.skuSize) + 1
-        }else{
+        } else {
             weUI.toast.ok('已达到该商品最大库存数');
         }
 
@@ -328,10 +350,9 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         centeredSlides: true,
         autoplay: 3500,
         autoplayDisableOnInteraction: false,
-        observer:true,
-        observeParents:true
+        observer: true,
+        observeParents: true
     });
-
 
 });
 

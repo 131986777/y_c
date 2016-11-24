@@ -222,8 +222,8 @@ function routerPath(base, path, param, css) {
             if (filtertList.indexOf(path) < 0) {
                 userFactory.isLogin({}, function (response) {
                 }, function (response) {
-                    weUI.toast.error('请先登录');
                     $state.go('pages/user/accountLogin');
+                    return undefined;
                 });
             }
             return $ocLazyLoad.load(loadItemList);
@@ -295,6 +295,16 @@ function Map() {
     this.remove = remove;
     this.size = size;
     this.isEmpty = isEmpty;
+}
+
+//过滤时间后面的毫秒
+function getDate(dateStr) {
+    if (dateStr != undefined) {
+        var mydate = dateStr.slice(0, dateStr.indexOf("."));
+        return mydate;
+    } else {
+        return undefined;
+    }
 }
 
 var updateWxTitle = function (title) {

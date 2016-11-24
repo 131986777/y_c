@@ -1,48 +1,60 @@
-<div class="bg-grey product-list-page" ng-init="initData()">
+<div class="product-list-page" ng-init="initData()" style="height:100%">
 
   <!-- END 商品搜索 -->
   <div class="weui_tab">
-      <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
-        <a class="product-wrap weui_cell " ng-repeat="item in prdList" ng-class="{true:'soldout'}[item['SHOP_PRODUCT.HAS_STOCK']==0]">
+    <div class="bg-grey weui_tab">
+      <div class="weui_tab_bd_item weui_tab_bd_item_active">
+        <a class="product-wrap weui_cell " ng-repeat="item in prdList" id="{{item['SHOP_PRODUCT.PRD_ID']}}">
           <div class="weui_cell_hd " ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
-            <img class="img " ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"/>
+            <img class="img "
+                 ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"/>
             <i></i>
           </div>
           <div class="weui_cell_bd">
             <h5 class="name"
                 ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
               <span ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></span>
-              <!--<span >售罄</span>-->
             </h5>
-            <p class="money">
+            <p class="money"  ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
               <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']!=undefined"
                     ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥'"></span>
               <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>
             </p>
-            <i class="icon icon-cart" ng-if="item['SHOP_PRODUCT.HAS_STOCK']!=0" ng-click="selectSKU(item['SHOP_PRODUCT.PRD_ID'])"></i>
+            <i class="icon icon-cart" ng-if="item['SHOP_PRODUCT.HAS_STOCK']!=0"
+               ng-click="selectSKU(item['SHOP_PRODUCT.PRD_ID'])"></i>
+            <i class="icon-out" ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0"></i>
           </div>
         </a>
+
       </div>
+      <div ng-class="{true:'prdout'}[getDataReady]" ng-if="prdList.length==0"></div>
+    </div>
   </div>
 
-  <div class="payment-wrap action-bar-wrap" style="margin-bottom: 53px;">
+  <div class="payment-wrap action-bar-wrap" style="margin-bottom: 51px;">
     <div class="action-bar border-top">
-      <div class="icon-wrap">
+      <div class="icon-wrap" ng-init="totalSize=0" ng-click="toCart()">
         <i class="icon icon-cart-small"></i>
         <span class="cartNum" ng-bind="totalSize"></span>
       </div>
       <div class="payment-info cell">
-        <p class="all">
+        <p class="all" ng-init="totalPrice=0">
           总计：<span class="money" ng-bind="totalPrice | currency : '￥'"></span>
         </p>
-        <!--<p class="sale">(不含运费){{totalSize}}</p>-->
+        <p class="sale">(不含运费，已优惠 <span>0</span> 元)</p>
       </div>
       <a class="payment-check" ng-click="addOrder()">
-        提交订单
+        去结算
       </a>
     </div>
   </div>
 
-  <cart-modal  store-id="storeId" id="cartPrdId" show="cartModalShow" callback="addToCartSuccess()"></cart-modal>
-
+  <cart-modal store-id="storeId" id="cartPrdId" show="cartModalShow"
+              callback="addToCartSuccess()"></cart-modal>
+  <!--选择页面遮罩-->
+  <div class="chose-shop" ng-if="STORE_ID==0">
+    <i class="icon-shop"></i>
+    <span>请先选择门店，即可在线购买！</span>
+    <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
+  </div>
 </div>

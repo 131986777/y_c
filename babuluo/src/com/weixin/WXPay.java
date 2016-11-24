@@ -57,7 +57,7 @@ public class WXPay {
         paramMap.put("mch_id", ENV.WX_MCHID); //商户号
         paramMap.put("nonce_str", RandomUtil.getRandomStringByLength(32));  //随机码
         String checkSign = wxPaySign(paramMap, ENV.WX_KEY);
-        System.out.println(paramMap);
+
         String resultXML = HttpUtil.sendHttpsPOST(WxPayConfig.WX_PAY_UNIFIEDORDER, wxPayUnifiedOrderPostXml(paramMap, checkSign));
 
         Map<String, Object> resultMap = null;
@@ -103,7 +103,6 @@ public class WXPay {
             }
         }catch (IOException e) {
             e.printStackTrace();
-            System.out.println("³öÏÖioÒì³£");
         }
         return reqXml.toString();
     }

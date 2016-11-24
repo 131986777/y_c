@@ -1,25 +1,21 @@
-<div ng-init="initData()">
+<div ng-init="initData()" style="padding-bottom: 53px">
   <!-- BEGIN 搜索 -->
   <div class="search-wrap weui_cells">
-
-    <div class="swiper-container" style="height: 197px;width: 100%;">
+    <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide" ng-repeat="item in homeList" active="item.active">
           <a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">
-            <img
-                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-                style="height: 197px;width: 100%;">
+            <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
           </a>
         </div>
       </div>
     </div>
 
     <div class="search-content" style="z-index: 1000">
-      <div class="shopName">
-        <span ui-sref="pages/shop" ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
-        <span class="glyphicon glyphicon-chevron-down"></span>
+      <div ui-sref="pages/shop" class="shopName">
+        <span class="shop" spa ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
+        <span class="glyphicon glyphicon-chevron-down"  ></span>
       </div>
-
       <div class="searchHolder pull-right">
         <i class="icon-search" ng-click="searchPrd()"></i>
         <input type="text" ng-model="prdKeyword" ng-keyup="myKeyup($event)" placeholder="搜索商品">
@@ -52,8 +48,7 @@
   <!-- 限时抢购 -->
   <div class="limit" ng-repeat="item in limitList" ng-if="item['is_show']==true">
     <a ng-href="{{item['BANNER.URL']}}"><img
-        ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-        style="height: 167px;width: 100%;"></a>
+        ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"></a>
     <div class="limit-desc">
       <div class="desc-text">
          <a class="btn btn-buy">立即抢购</a>
@@ -72,7 +67,6 @@
     <a ng-href="{{item['BANNER.URL']}}">
       <img ng-if="item['is_show']==true"
            ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-           style="height: 167px;width: 100%;"
            ng-href="{{item['BANNER.URL']}}"></a>
   </div>
 
@@ -86,7 +80,7 @@
     </div>
 
     <!-- BEGIN 今日推荐 -->
-    <div class="product-special" style="font-size: 0;">
+    <div class="product-special" style="font-size: 0;" ng-if="recommendList.length>0||recommNineList.length>0">
       <div class="weui_cells weui_cells_access special-head">
         <a class="weui_cell" href="#">
           <div class="weui_cell_bd weui_cell_primary text-center">
@@ -101,7 +95,7 @@
           <li>
             <a ng-repeat="item in recommendList" ng-href="{{item['BANNER.URL']}}"
                ng-if="item['is_show']==true"><img
-                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"></a>
+                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}" style="min-height: 189px"></a>
             <div class="thumbnail-list list-unstyled flexbox">
               <div class="cell" ng-repeat=" item in tagProductList['1035']"
                    ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
@@ -144,7 +138,7 @@
             <a ng-href="{{item['BANNER.URL']}}">
               <img
                   ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-                  class="weui_cells">
+                  class="weui_cells" style="height: auto;">
             </a>
 
             <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='1020'">
