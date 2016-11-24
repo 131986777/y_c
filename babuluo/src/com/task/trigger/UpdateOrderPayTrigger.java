@@ -24,7 +24,7 @@ public class UpdateOrderPayTrigger {
     private boolean hasInit = false;
     private boolean hasStart = false;
 
-    private static final String CRONSTR = "0 */1 * * * ?";//每5分钟执行一次
+    private static final String CRONSTR = "0 */5 * * * ?";//每5分钟执行一次
 
     public UpdateOrderPayTrigger(){
         System.out.println("UpdateOrderPayTrigger");
