@@ -343,21 +343,25 @@ p {
 .icon-order-ok {
     background: url("../img/icon.png") no-repeat -100px -22px;
     background-size: 200px 150px;
+    position: relative;
 }
 
 .icon-order-pay {
     background: url("../img/icon.png") no-repeat -125px -22px;
     background-size: 200px 150px;
+    position: relative;
 }
 
 .icon-order-deliver {
     background: url("../img/icon.png") no-repeat -150px -22px;
     background-size: 200px 150px;
+    position: relative;
 }
 
 .icon-order-evaluate {
     background: url("../img/icon.png") no-repeat -175px -22px;
     background-size: 200px 150px;
+    position: relative;
 }
 
 .icon-safety {
@@ -1518,7 +1522,18 @@ p {
     width: 25px;
     height: 25px;
 }
-
+.personal-index .order-num{
+    display: inline-block;
+    position: absolute;
+    top: -6px;
+    right: -5px;
+    height: 16px;
+    width: 16px;
+    border-radius: 8px;
+    background-color:#F36F1C ;
+    color: #fff;
+    font-size: 12px;
+}
 .personal-index .order-act .order-act-txt {
     font-size: 12px;
     color: #444;
@@ -1601,7 +1616,7 @@ p {
 
 .product-list-page .weui_tab_bd {
     margin-left: 95px;
-    padding: 0 0 46px;
+    padding: 0 0 106px;
     overflow: auto;
     overflow-x:hidden;
 }
@@ -1819,12 +1834,6 @@ p {
     background-size: 16px 16px;
 }
 
-/*.product-num-wrap {*/
-/*position: absolute;*/
-/*right: 15px;*/
-/*top: 75px;*/
-/*width: 104px;*/
-/*height: 26px; }*/
 .product-num-wrap .btn,
 .product-num-wrap .form-control {
     padding: 0;
@@ -1892,6 +1901,7 @@ p {
 }
 
 .search-content {
+    z-index:1000;
     position: absolute;
     width: 100%;
     padding: 5px 15px 0;
@@ -1907,7 +1917,7 @@ p {
     width:100%;
 }
 .search-wrap .searchHolder {
-    width: 70%;
+    margin-left: 105px;
     height: 32px;
     padding-left: 8px;
     border-radius: 5px;
@@ -1933,26 +1943,17 @@ p {
 }
 
 .search-wrap .shopName {
-    display: inline-block;
+    display: block;
+    float: left;
     color: #fff;
-    width: 30%;
+    width:105px;
     font-size: 16px;
+    text-align: center;
     height: 30px;
     padding-top: 5px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    text-align: center;
-}
-.search-wrap .shop{
-    display: inline-block;
-    width:64px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
 }
 .search-wrap .glyphicon{
-    top:-3px;
+    top:3px;
 }
 .home-nav {
     margin-bottom: 7px;
@@ -2776,6 +2777,8 @@ p {
 .cartout{
     height:140px;
     width: 147px;
+    font-size: .9375em;
+    padding-top: 12.9em;
     background: url('../img/cartEmpty.png') no-repeat;
     background-size: 140px 147px;
     position: relative;
