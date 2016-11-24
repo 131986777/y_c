@@ -8,7 +8,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     $scope.initData = function () {
 
         modalFactory.setCurrentPage('fl');
-
+        $('#all-list').css('height',document.documentElement.clientHeight-40);
         $scope.STORE_ID = 0;
         if (getCookie('currentShopInfo') != undefined) {
             $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']

@@ -6,7 +6,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
-
+        $(".product-list").css("height",document.documentElement.clientHeight-100);
         modalFactory.setCurrentPage('cart');
 
         if(getCookie('currentShopInfo')==undefined){

@@ -8,6 +8,8 @@ angular.module('AndSell.H5.Main').controller('pages_product_tagPrdList_Controlle
 
         modalFactory.setCurrentPage('fl');
 
+        $('.baoPrd').css("height",document.documentElement.clientHeight);
+
         $scope.STORE_ID = 0;
         if (getCookie('currentShopInfo') != undefined) {
             $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']
