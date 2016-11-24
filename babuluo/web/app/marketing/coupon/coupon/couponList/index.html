@@ -65,7 +65,8 @@
                     <div ng-class="{'coupon-contain':item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1,'coupon-contain-disabled':item['COUPON.STOP']==-1||item['COUPON.IsEnd']==1}">
                         <div class="coupon-desc">
                             <p class="limit-time">
-                                <span>限定时间(每周</span>
+                                <span ng-if="item['COUPON.USE_TIME_CYCLE']=='0,0,0,0,0,0,0'">不限定使用时间</span>
+                                <span ng-if="item['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">限定时间(每周</span>
                                 <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
                                 <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
                                 <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
@@ -73,12 +74,15 @@
                                 <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
                                 <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
                                 <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
-                                <span>)</span>
+                                <span ng-if="item['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">)</span>
                             </p>
                             <p class="limit-item">
                                 <!--<span ng-if="item['COUPON.TARGET_OBJ_TYPE']==1">限定商品使用({{(item['COUPON.TARGET_OBJ_INFO'])}})</span>
                                 <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==2">限定商品类别使用({{(item['COUPON.TARGET_OBJ_INFO'])}})</span>
                                 <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==3">限定商品标签使用({{(item['COUPON.TARGET_OBJ_INFO'])}})</span>-->
+                                <span ng-if="item['COUPON.TARGET_OBJ_TYPE']=-1">
+                                    不限定使用对象
+                                </span>
                                 <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==1">限定商品使用
                                   <a data-toggle="modal" data-target="#detail" class="btn sbold green"
                                      ng-click="detailClick(item['COUPON.TARGET_OBJ_INFO'])">
@@ -98,7 +102,14 @@
                                 </span>
                             </p>
                             <p class="coupon-detail">
-                                {{item['COUPON.RULE_INFO']['COUPON_RULE.INTRO']}}(剩余{{item['COUPON.NUM_LEFT']}}张)</p>
+                                {{item['COUPON.RULE_INFO']['COUPON_RULE.INTRO']}}
+                                <span ng-if="item['COUPON.NUM_LIMIT']==0">
+                                    (领取张数无限制）
+                                </span>
+                                <span ng-if="item['COUPON.NUM_LIMIT']!=0">
+                                (剩余{{item['COUPON.NUM_LEFT']}}张)
+                                </span>
+                            </p>
                             <!--<div class="coupon-footer text-right">
                                 限量300张，每人限领1张
                             </div>-->
@@ -341,7 +352,7 @@
                                 <input type="number" class="form-control" min="0"
                                        ng-model="add['COUPON.NUM_LIMIT']"
                                        ng-init="add['COUPON.NUM_LIMIT']=''"
-                                       placeholder="请直接输入数字" name="couponCount">
+                                       placeholder="请直接输入数字，不填写则为无限制" name="couponCount">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -353,7 +364,7 @@
                                 <input type="number" class="form-control" min="0"
                                        ng-model="add['COUPON.USE_TIME_LIMIT']"
                                        ng-init="add['COUPON.USE_TIME_LIMIT']=''"
-                                       placeholder="请直接输入数字" name="couponCount">
+                                       placeholder="请直接输入数字，不填写则为无限制" name="couponCount">
                             </div>
                         </div>
                         <div class="form-group row">
