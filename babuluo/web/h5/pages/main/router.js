@@ -15,6 +15,7 @@ $import('pages/order/list', {state: 'all'});
 $import('pages/order/detail', {ORDER_ID: '1030'});
 $import('pages/order/addCoupon', {SKU_IDS: '1060', pickupPerson: '{}', PRODUCTS: '{}', MONEY: '0'});
 $import('pages/order/addAddress', {SKU_IDS: '1060'});
+$import('pages/order/CashOnDeliveryOrder');
 
 $import('pages/personal', {}, true);
 $import('pages/personal/card');

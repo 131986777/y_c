@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function ($location, $anchorScroll, weUI, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function ($location, $anchorScroll, weUI, $scope, $state, $stateParams, productFactory, modalFactory) {
 
     modalFactory.setTitle('商品列表');
     modalFactory.setBottom(true);
@@ -80,6 +80,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
                 pageSize:10
             }
             localStorage.removeItem("PRD_LIST");
+            localStorage.removeItem("CLASS_LIST");
             localStorage.removeItem("ANCHOR_ID");
             localStorage.removeItem("ANCHOR_PAGE");
             $scope.loading = false;
@@ -197,38 +198,6 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         } else {
             weUI.toast.error('至少选择一件商品');
         }
-    }
-
-    //数量减
-    $scope.lessSize = function (item) {
-        if (item['SHOP_PRODUCT_SKU.SIZE'] > 1) {
-            item['SHOP_PRODUCT_SKU.SIZE'] = item['SHOP_PRODUCT_SKU.SIZE'] - 1;
-        }
-        //修改cookie
-        var cartSize = getCookie('cartSize');
-        if (cartSize == '') {
-            cartSize = {};
-        } else {
-            cartSize = ToJson(cartSize);
-        }
-        cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] -= 1;
-        setCookie('cartSize', JSON.stringify(cartSize));
-        $scope.updateCartPrice();
-    }
-
-    //数量加
-    $scope.moreSize = function (item) {
-        item['SHOP_PRODUCT_SKU.SIZE'] = item['SHOP_PRODUCT_SKU.SIZE'] + 1;
-        //修改cookie
-        var cartSize = getCookie('cartSize');
-        if (cartSize == '') {
-            cartSize = {};
-        } else {
-            cartSize = ToJson(cartSize);
-        }
-        cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] += 1;
-        setCookie('cartSize', JSON.stringify(cartSize));
-        $scope.updateCartPrice();
     }
 
     //购物车添加成功

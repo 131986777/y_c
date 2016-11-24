@@ -6,12 +6,7 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
-        $scope.yy = {
-            'background-color': '#31C552'
-        };
-
         $scope.filterStateOrder('out');
-
     }
 
     $scope.filterStateOrder = function (type) {
@@ -28,17 +23,13 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
                 modalFactory.setTitle('订货单');
             } else if ($stateParams.orderType == '3') {
                 modalFactory.setTitle('自提单');
-            } else if ($stateParams.orderType == '4') {
-                modalFactory.setTitle('预定单');
             }
         }
         if (type == 'all') {
             //全部订单
         } else if (type == 'end') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            if ($scope.orderType != '4') {
-                $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
-            }
+            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
             $scope.filter['SHOP_ORDER.STATE_OUT'] = 1;
             if ($scope.orderType == '1') {
                 $scope.filter['SHOP_ORDER.STATE_SEND'] = 1
@@ -50,23 +41,19 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = -1;
         } else if (type == 'get') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            if ($scope.orderType != '4') {
-                $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
-            }
+            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
             $scope.filter['SHOP_ORDER.STATE_OUT'] = 1;
             $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = -1
         } else if (type == 'out') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            if ($scope.orderType != '4') {
-                $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
-            }
+            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
             $scope.filter['SHOP_ORDER.STATE_OUT'] = -1
         } else if (type == 'send') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
             $scope.filter['SHOP_ORDER.STATE_OUT'] = 1;
             $scope.filter['SHOP_ORDER.STATE_SEND'] = -1
-        } else if (type == 'accep  t') {
+        } else if (type == 'accept') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
             $scope.filter['SHOP_ORDER.STATE_OUT'] = 1;
@@ -76,9 +63,7 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = -1;
         } else if (type == 'comment') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            if ($scope.orderType != '4') {
-                $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
-            }
+            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
             $scope.filter['SHOP_ORDER.STATE_OUT'] = 1;
             //待评价订单
             if ($scope.orderType == '1') {
