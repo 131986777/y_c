@@ -2760,6 +2760,8 @@ p {
     background: url("../img/icon-orderout.png") no-repeat;
     background-size: 140px 147px;
     position: relative;
+    height: 140px;
+    width: 147px;
     top: 50%;
     left:50%;
     margin:-73.5px 0 0 -70px;
