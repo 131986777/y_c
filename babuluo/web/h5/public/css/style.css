@@ -2058,7 +2058,10 @@ p {
     left: 271px;
     bottom: 98px;
 }
-
+#all-list .weui_cell:before,
+.all-list .weui_cell:before{
+    border-top: 0;
+}
 .product-wrap .headTitle {
     font-size: 16px;
     background-color: rgb(51, 51, 51);
@@ -2767,6 +2770,9 @@ p {
     top:50%;
     left:50%;
     margin:-120px 0 0 -25px;
+}
+.all-list .prdout{
+    margin-left: -70px;
 }
 .cartout{
     height:140px;
