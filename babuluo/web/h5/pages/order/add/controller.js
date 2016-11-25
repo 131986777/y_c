@@ -131,7 +131,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 }
                 $scope.commitClick = true;
                 //$state.go('pages/payment/check_out', {ORDER_ID: response.extraData.ORDER_ID});
-                $state.go('pages/order/detail', {ORDER_ID: response.extraData.ORDER_ID});
+                $state.go('pages/order/detail', {ORDER_ID: response.extraData.ORDER_ID,FROM:'Add'});
 
             }, function (response) {
                 weUI.toast.hideLoading();
