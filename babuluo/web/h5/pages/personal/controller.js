@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_personal_Controller', function (userFactory, $scope, $state, personalFactory, modalFactory, weUI, balanceFactory) {
+angular.module('AndSell.H5.Main').controller('pages_personal_Controller', function (orderFactory,userFactory, $scope, $state, personalFactory, modalFactory, weUI, balanceFactory) {
 
     modalFactory.setTitle('我的');
     modalFactory.setBottom(true);
@@ -8,17 +8,12 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
             userFactory.loginOut({}, function (response) {
                 $state.go('pages/user/accountLogin');
             });
-        }, function () {
-
         });
     }
-    $scope.getSession = function () {
-        userFactory.getSession().get({}, function (response) {
-            if (response.code == 400) {
-                weUI.toast.error(response.msg);
-            } else {
-                console.log(response);
-            }
+
+    $scope.getOrderStates= function () {
+        orderFactory.getOrderStates({},function(response){
+            $scope.stateMap=response.extraData.stateMap;
         });
     }
 
@@ -48,9 +43,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
         var form = {};
         form['MEMBER_COUPON.USER_ID'] = uid
         personalFactory.getCoupon(form, function (response) {
-            console.log(response);
             $scope.coupon = response.data;
-
         }, function (response) {
             weUI.toast.error(response.msg);
         });
@@ -65,6 +58,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
             $scope.queryAccount($scope.uid);
             $scope.getPhone($scope.uid);
             $scope.getCouponSum($scope.uid);
+            $scope.getOrderStates();
         }
     }
 

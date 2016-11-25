@@ -19,4 +19,7 @@ AndSellH5MainModule.service('orderFactory', function (http) {
     this.wxPayUndefinedOrder = http.post('/wx/pay/wxPayUndefinedOrder');
 
     this.queryWXPayResult = http.post('/wx/pay/wxpayCallback');
+
+    this.getOrderStates = http.post('/shop/order/getStateOrdersForAgent')
+
 })

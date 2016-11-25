@@ -36,20 +36,20 @@
                 <div class="weui_cell no_access">
                     <div class="order-act weui_cell_bd weui_cell_primary flexbox">
                         <a class="cell" ui-sref="pages/order/list({state:'end'})">
-                            <div class="icon icon-order-ok"><span class="order-num">10</span></div>
+                            <div class="icon icon-order-ok"></div>
                             <p class="order-act-txt" >已完成</p>
                         </a>
                         <a class="cell" ui-sref="pages/order/list({state:'pay'})">
-                            <div class="icon icon-order-pay"><span class="order-num">10</span> </div>
+                            <div class="icon icon-order-pay"><span class="order-num" ng-if="stateMap.pay>0" ng-bind="stateMap.pay"></span> </div>
                             <p class="order-act-txt">待付款</p>
                         </a>
                         <a class="cell" ui-sref="pages/order/list({state:'get'})">
-                            <div class="icon icon-order-deliver"><span class="order-num">8</span></div>
+                            <div class="icon icon-order-deliver"><span class="order-num" ng-if="stateMap.get>0" ng-bind="stateMap.get"></span></div>
 
                             <p class="order-act-txt">待自提</p>
                         </a>
                         <a class="cell" ui-sref="pages/order/list({state:'comment'})">
-                            <div class="icon icon-order-evaluate"><span class="order-num">10</span></div>
+                            <div class="icon icon-order-evaluate"><span class="order-num" ng-if="stateMap.comment>0" ng-bind="stateMap.comment"></span></div>
                             <p class="order-act-txt">待评价</p>
                         </a>
                     </div>
