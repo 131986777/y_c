@@ -2,27 +2,32 @@
   <div class="weui_tab tab-default">
     <div class="order-act- weui_navbar">
       <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[state=='all']"
-         ng-click="filterStateOrder('all')">
+         ui-sref="pages/order/list({state:'all'})"
+         >
         全部
       </a>
       <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[state=='end']"
-         ng-click="filterStateOrder('end')">
+         ui-sref="pages/order/list({state:'end'})"
+         >
         已完成
       </a>
       <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[state=='pay']"
-         ng-click="filterStateOrder('pay')">
+         ui-sref="pages/order/list({state:'pay'})"
+         >
         待付款
       </a>
       <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[state=='get']"
-         ng-click="filterStateOrder('get')">
+         ui-sref="pages/order/list({state:'get'})"
+         >
         待收货
       </a>
       <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[state=='comment']"
-         ng-click="filterStateOrder('comment')">
+         ui-sref="pages/order/list({state:'comment'})"
+         >
         待评价
       </a>
     </div>
-
+    <!--ng-click="filterStateOrder('comment')"-->
 
     <div class="orders weui_tab_bd">
       <div  ng-class="{true:'orderout'}[getDataReady]"
