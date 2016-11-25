@@ -1788,17 +1788,8 @@ p {
 .basic-info .money {
     font-size: 18px;
 }
-
-/*.basic-info .feature,*/
-/*.basic-info .money,*/
-/*.basic-info .code {*/
-/*margin: 12px 0 0;*/
-/*}*/
-
 .basic-info .money {
     color: #F36F1C;
-    font-size: 12px;
-    margin-top: 4px;
 }
 
 .basic-info .name {
