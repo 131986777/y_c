@@ -71,6 +71,10 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         if (localStorage.getItem("PRD_LIST") != undefined) {
             $scope.prdList = JSON.parse(localStorage.getItem("PRD_LIST"));
             $scope.classList = JSON.parse(localStorage.getItem("CLASS_LIST"));
+            $scope.filter['SHOP_PRODUCT.CLASS_ID']=localStorage.getItem("CLASS_ID");
+            if(localStorage.getItem("CLASS_ID")=='undefined'){
+                $scope.filter['SHOP_PRODUCT.CLASS_ID']=undefined;
+            }
             $scope.toAnchor(localStorage.getItem("ANCHOR_ID"));
             if(localStorage.getItem("ANCHOR_PAGE")!=undefined){
                 $scope.filter['PN']=Number(localStorage.getItem("ANCHOR_PAGE"));
@@ -81,6 +85,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
             }
             localStorage.removeItem("PRD_LIST");
             localStorage.removeItem("CLASS_LIST");
+            localStorage.removeItem("CLASS_ID");
             localStorage.removeItem("ANCHOR_ID");
             localStorage.removeItem("ANCHOR_PAGE");
             $scope.loading = false;
@@ -123,6 +128,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     $scope.toDetail = function (id) {
         localStorage.setItem("PRD_LIST", JSON.stringify($scope.prdList));
         localStorage.setItem("CLASS_LIST",  JSON.stringify($scope.classList));
+        localStorage.setItem("CLASS_ID", clone($scope.filter['SHOP_PRODUCT.CLASS_ID']));
         localStorage.setItem("ANCHOR_ID", id);
         localStorage.setItem("ANCHOR_PAGE", $scope.page.pageIndex);
         $state.go('pages/product/detail', {PRD_ID: id});
