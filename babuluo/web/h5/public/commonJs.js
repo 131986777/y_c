@@ -36,6 +36,16 @@ function getTabInputText(values) {
     return list.toString();
 }
 
+//obj to array
+function objectToArray(object){
+    var tmp=[];
+    for(var key in object){
+        //key是属性,object[key]是值
+        tmp.push(object[key]);//往数组中放属性
+    }
+    return tmp;
+}
+
 //list to map   by  key
 function listToMap(list, key) {
     var map = new Map;
