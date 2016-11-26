@@ -31,7 +31,7 @@
           <span class="product-money" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
           </span>
           <!--原价-->
-          <span class="product-money del-line" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+          <span class="product-money del-line" ng-if="sku['isSale']" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
           </span>
 
           <a class="del-wrap" ng-click="delShopCart(sku)">

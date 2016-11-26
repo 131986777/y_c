@@ -44,6 +44,8 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                 $scope.skuList.forEach(function (ele) {
                     setContentsInfo(ele);
                     ele['SHOP_PRODUCT_SKU.SIZE'] = cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
+                    ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
+                    ele.isSale = false;
                     ele.isSelect = false;
                     skulistsForOrder.push({
                         'prdId':ele['SHOP_PRODUCT_SKU.PRD_ID'],
@@ -67,6 +69,10 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                 newPriceMap[ele['prdId']]=ele['price'];
             });
             $scope.skuList.forEach(function (ele) {
+                if(ele['SHOP_PRODUCT_SKU.REAL_PRICES']!=newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']]){
+                    //价格不一致 参与了促销
+                    ele.isSale = true;
+                }
                 ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']];
             });
             weUI.toast.hideLoading();
