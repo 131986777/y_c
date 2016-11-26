@@ -22,8 +22,12 @@
         <p class="feature" ng-bind="product['SHOP_PRODUCT.SALES_TITLE']">
         </p>
         <p class="money">
+          <!--现价-->
           <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
                 ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
+          <!--原价-->
+          <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
+                ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'" class="del-line"></span>
         <div ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']==undefined" class="money">
         <span
             ng-bind="skuData.minPrice | currency :'￥'"></span> -

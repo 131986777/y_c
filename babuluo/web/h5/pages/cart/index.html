@@ -27,8 +27,12 @@
           <span ng-if="sku['SHOP_PRODUCT_SKU.STOCK']==0">售罄</span>
           <p class="product-cls" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
           </p>
-          <p class="product-money" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
-          </p>
+          <!--现价-->
+          <span class="product-money" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+          </span>
+          <!--原价-->
+          <span class="product-money del-line" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+          </span>
 
           <a class="del-wrap" ng-click="delShopCart(sku)">
             <i class="icon icon-del"></i>
