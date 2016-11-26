@@ -30,22 +30,22 @@
         <!--现价-->
         <span class="product-money" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
           </span>
-        <!--原价-->
-        <span class="product-money del-line" ng-if="sku['isSale']" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
+          <!--原价-->
+          <span class="product-money del-line" ng-if="sku['isSale']" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
           </span>
 
-        <a class="del-wrap" ng-click="delShopCart(sku)">
-          <i class="icon icon-del"></i>
-        </a>
-        <div class="product-num-wrap input-group">
+          <a class="del-wrap" ng-click="delShopCart(sku)">
+            <i class="icon icon-del"></i>
+          </a>
+          <div class="product-num-wrap input-group">
                         <span class="input-group-btn">
                             <button class="btn btn-cart-less" type="button"
                                     ng-click="lessSize(sku)">-</button>
                         </span>
-          <input class="form-control text-center" type="text" disabled=""
-                 ng-change="updateCartPrice()"
-                 ng-model="sku['SHOP_PRODUCT_SKU.SIZE']">
-          <span class="input-group-btn">
+            <input class="form-control text-center" type="text" disabled=""
+                   ng-change="updateCartPrice()"
+                   ng-model="sku['SHOP_PRODUCT_SKU.SIZE']">
+                        <span class="input-group-btn">
                             <button class="btn btn-cart-add" type="button"
                                     ng-click="moreSize(sku)" style=" border-left: 1px solid rgb(219,219,219);">+</button>
                         </span>
@@ -56,10 +56,9 @@
       <div class="cartout" ng-if="skuList.length==0">
       </div>
       <!-- END 商品信息-->
+    </div>
 
-  </div>
-  <!--style="height: 600px"-->
-
+  <!-- END 商品列表-->
 
   <div class="payment-wrap action-bar-wrap" style="bottom: 51px;">
     <div class="action-bar border-top">
