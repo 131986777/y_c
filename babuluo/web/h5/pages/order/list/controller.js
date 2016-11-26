@@ -11,7 +11,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
         modalFactory.setCurrentPage('wd');
         $scope.filterStateOrder($stateParams.state);
 
-        $('.orders').css("height",document.documentElement.clientHeight-50);
+        $('.orders').css("min-height",document.documentElement.clientHeight-50);
     }
 
     $scope.filterStateOrder= function (type) {
@@ -113,5 +113,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
             $scope.getMoreOrder();
         }
     });
-
+    $scope.$on('$destroy', function () {
+        $(document.body).infinite().off("infinite");
+    })
 });

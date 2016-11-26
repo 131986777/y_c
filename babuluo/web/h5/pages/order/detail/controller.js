@@ -13,7 +13,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 title: "main",
                 url: "#/pages/order/list/all"
             };
-            window.history.pushState(state, "main", "#/pages/order/list/all");
+            window.history.pushState(state);
         }
         $scope.getOrder($stateParams.ORDER_ID);
         $scope.shop = JSON.parse(getCookie('currentShopInfo'));
