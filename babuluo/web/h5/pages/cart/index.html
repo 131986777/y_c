@@ -1,7 +1,7 @@
-<div class="shopping-cart bg-grey" ng-init="initData()"  style=" padding-bottom: 102px">
+<div class="shopping-cart bg-grey" ng-init="initData()"  style=" padding-bottom: 46px">
 
   <!-- BEGIN 商品列表-->
-    <div class="product-list weui_cells bg-grey" ng-if="skuList.length>0">
+    <div class="product-list weui_cells bg-grey" >
       <!--<div class="product-sale-wrap weui_cell">-->
         <!--<div class="product-select-wrap weui_cell_hd">-->
           <!--<i class="icon icon-check"></i>-->
@@ -52,14 +52,14 @@
           </div>
         </div>
       </div>
-    </div>
-  <!--style="height: 600px"-->
-    <div class=" haha weui_cells bg-grey" style="height: 600px" ng-if="skuList.length==0">
-      <div class="cartout" ></div>
+      <div class=" haha weui_cells bg-grey"  ng-if="skuList.length==0">
+         <div class="cartout" >
+         </div>
       <!-- END 商品信息-->
     </div>
+    </div>
+  <!--style="height: 600px"-->
 
-  <!-- END 商品列表-->
 
   <div class="payment-wrap action-bar-wrap" style="bottom: 51px;">
     <div class="action-bar border-top">
