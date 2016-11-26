@@ -69,7 +69,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                 newPriceMap[ele['prdId']]=ele['price'];
             });
             $scope.skuList.forEach(function (ele) {
-                if(ele['SHOP_PRODUCT_SKU.REAL_PRICES']!=newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']]){
+                if(ele['SHOP_PRODUCT_SKU.REAL_PRICES'] != newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']]){
                     //价格不一致 参与了促销
                     ele.isSale = true;
                 }
