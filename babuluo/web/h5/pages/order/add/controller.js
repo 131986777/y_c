@@ -39,37 +39,79 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         }
 
         $scope.skuIds = $stateParams.SKU_IDS;
+        weUI.toast.showLoading('正在查询促销条件');
         var params = {};
         params['SHOP_PRODUCT_SKU.SKU_IDS'] = $scope.skuIds;
         params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         productFactory.getProductSkuBySkuIds(params, function (response) {
-
             $scope.skuList = response.data;
+            var skulistsForOrder = new Array;
             $scope.skuList.forEach(function (ele) {
                 ele['SHOP_PRODUCT_SKU.SIZE'] = $scope.cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
+                ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
+                ele.isSelect = false;
+                ele.isSale = false;
+                skulistsForOrder.push({
+                    'prdId': ele['SHOP_PRODUCT_SKU.PRD_ID'],
+                    'num': ele['SHOP_PRODUCT_SKU.SIZE'],
+                    'price': ele['SHOP_PRODUCT_SKU.REAL_PRICES']
+                });
             });
-
-            $scope.updateCartPrice();
+            $scope.calculateSaleInfo(skulistsForOrder);
+            $scope.updateOrderPrice();
         });
 
         $scope.commitClick = true;
 
     }
 
+    //计算销售信息
+    $scope.calculateSaleInfo = function (list) {
+        orderFactory.calculateSale({'ORDER_PRD_LIST': JSON.stringify(list)}, function (response) {
+            var newPrdListInOrder = objectToArray(response.extraData.newOrder);
+            var newPriceMap = {};
+            newPrdListInOrder.forEach(function (ele) {
+                newPriceMap[ele['prdId']] = ele['price'];
+            });
+            $scope.skuList.forEach(function (ele) {
+                if (newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']] != undefined) {
+                    if (ele['SHOP_PRODUCT_SKU.REAL_PRICES']
+                        != newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']]) {
+                        //价格不一致 参与了促销
+                        ele.isSale = true;
+                    }
+                    ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']];
+                }
+            });
+            weUI.toast.hideLoading();
+            $scope.updateOrderPrice();
+        });
+    }
+
     //计算订单价格  未做优惠促销等逻辑
-    $scope.updateCartPrice = function () {
+    $scope.updateOrderPrice = function () {
         var price = 0;
+        var new_price = 0;
         $scope.skuList.forEach(function (ele) {
-            price += ele['SHOP_PRODUCT_SKU.REAL_PRICES'] * ele['SHOP_PRODUCT_SKU.SIZE'];
+            price += ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] * ele['SHOP_PRODUCT_SKU.SIZE'];
+            new_price += ele['SHOP_PRODUCT_SKU.REAL_PRICES'] * ele['SHOP_PRODUCT_SKU.SIZE'];
         });
         $scope.order['SHOP_ORDER.PRICE_PRD'] = price;
 
-        $scope.totalMoney = price;    //使用优惠券时，传给优惠券的总价 By cxy
+        var salePrice = price - new_price;
+        $scope.order['SHOP_ORDER.PRICE_SALE'] = salePrice; // 促销价格
+
+        $scope.totalMoney = new_price;    //使用优惠券时，传给优惠券的总价 By cxy
 
         //todo  加入其他优惠和促销的等过滤
+        $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = 0;
+        if (salePrice > 0) {
+            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += salePrice;
+            price -= salePrice;
+        }
 
         if ($scope.coupon != undefined) {
-            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = $scope.coupon.MONEY;
+            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += $scope.coupon.MONEY;
             price -= $scope.coupon.MONEY;
         }
         $scope.order['SHOP_ORDER.PRICE_ORDER'] = price;
@@ -131,7 +173,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 }
                 $scope.commitClick = true;
                 //$state.go('pages/payment/check_out', {ORDER_ID: response.extraData.ORDER_ID});
-                $state.go('pages/order/detail', {ORDER_ID: response.extraData.ORDER_ID});
+                $state.go('pages/order/detail', {
+                    ORDER_ID: response.extraData.ORDER_ID,
+                    FROM: 'Add'
+                });
 
             }, function (response) {
                 weUI.toast.hideLoading();

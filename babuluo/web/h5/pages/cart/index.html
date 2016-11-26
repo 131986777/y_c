@@ -1,7 +1,7 @@
-<div class="shopping-cart" ng-init="initData()" style="padding-bottom: 46px">
+<div class="shopping-cart bg-grey" ng-init="initData()"  style=" padding-bottom: 102px">
 
   <!-- BEGIN 商品列表-->
-    <div class="product-list weui_cells bg-grey" >
+    <div class="product-list weui_cells bg-grey" ng-if="skuList.length>0">
       <!--<div class="product-sale-wrap weui_cell">-->
         <!--<div class="product-select-wrap weui_cell_hd">-->
           <!--<i class="icon icon-check"></i>-->
@@ -27,8 +27,12 @@
           <span ng-if="sku['SHOP_PRODUCT_SKU.STOCK']==0">售罄</span>
           <p class="product-cls" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
           </p>
-          <p class="product-money" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
-          </p>
+          <!--现价-->
+          <span class="product-money" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+          </span>
+          <!--原价-->
+          <span class="product-money del-line" ng-if="sku['isSale']" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
+          </span>
 
           <a class="del-wrap" ng-click="delShopCart(sku)">
             <i class="icon icon-del"></i>
@@ -48,7 +52,10 @@
           </div>
         </div>
       </div>
-      <div class="cartout" ng-if="skuList.length==0"></div>
+    </div>
+  <!--style="height: 600px"-->
+    <div class=" haha weui_cells bg-grey" style="height: 600px" ng-if="skuList.length==0">
+      <div class="cartout" ></div>
       <!-- END 商品信息-->
     </div>
 

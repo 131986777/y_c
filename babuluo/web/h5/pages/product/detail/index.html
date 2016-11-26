@@ -1,4 +1,4 @@
-<div class="bg-grey product-detail-page" ng-init="initData()">
+<div class="bg-grey product-detail-page" ng-init="initData()" style="padding-bottom: 49px;">
   <!-- BEGIN 商品详情图片 -->
   <div class="swiper-container" style="height: 306px;width: 100%;">
     <div class="swiper-wrapper">
@@ -22,8 +22,12 @@
         <p class="feature" ng-bind="product['SHOP_PRODUCT.SALES_TITLE']">
         </p>
         <p class="money">
+          <!--现价-->
           <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
                 ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
+          <!--原价-->
+          <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
+                ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'" class="del-line"></span>
         <div ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']==undefined" class="money">
         <span
             ng-bind="skuData.minPrice | currency :'￥'"></span> -
