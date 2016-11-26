@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function ($scope, $state, productFactory, weUI, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function ($scope, $state,orderFactory, productFactory, weUI, modalFactory) {
 
     modalFactory.setTitle('购物车');
     modalFactory.setBottom(true);
@@ -34,20 +34,44 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             cartSize = JSON.parse(cartSize);
         }
         if (cartInfo.length > 0) {
+            weUI.toast.showLoading('正在查询促销条件');
             var params = {};
             params['SHOP_PRODUCT_SKU.SKU_IDS'] = cartInfo.toString();
             params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
             productFactory.getProductSkuBySkuIds(params, function (response) {
                 $scope.skuList = response.data;
+                var skulistsForOrder = new Array;
                 $scope.skuList.forEach(function (ele) {
                     setContentsInfo(ele);
                     ele['SHOP_PRODUCT_SKU.SIZE'] = cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
                     ele.isSelect = false;
+                    skulistsForOrder.push({
+                        'prdId':ele['SHOP_PRODUCT_SKU.PRD_ID'],
+                        'num':ele['SHOP_PRODUCT_SKU.SIZE'],
+                        'price':ele['SHOP_PRODUCT_SKU.REAL_PRICES']
+                    });
                 });
+                $scope.calculateSaleInfo(skulistsForOrder);
                 $scope.checkAllPrd();
             })
         }
         $scope.updateCartPrice();
+    }
+
+
+    $scope.calculateSaleInfo = function(list){
+        orderFactory.calculateSale({'ORDER_PRD_LIST':JSON.stringify(list)}, function (response) {
+            var newPrdListInOrder=objectToArray(response.extraData.newOrder);
+            var newPriceMap = {};
+            newPrdListInOrder.forEach(function (ele) {
+                newPriceMap[ele['prdId']]=ele['price'];
+            });
+            $scope.skuList.forEach(function (ele) {
+                ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']];
+            });
+            weUI.toast.hideLoading();
+            $scope.updateCartPrice();
+        });
     }
 
     //数量减

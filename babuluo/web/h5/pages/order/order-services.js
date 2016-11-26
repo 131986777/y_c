@@ -22,4 +22,6 @@ AndSellH5MainModule.service('orderFactory', function (http) {
 
     this.getOrderStates = http.post('/shop/order/getStateOrdersForAgent')
 
+    this.calculateSale = http.post('/sales/salesplan/calculateSale');
+
 })
