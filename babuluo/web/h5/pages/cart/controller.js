@@ -60,7 +60,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
         $scope.updateCartPrice();
     }
 
-
+    //计算销售信息
     $scope.calculateSaleInfo = function(list){
         orderFactory.calculateSale({'ORDER_PRD_LIST':JSON.stringify(list)}, function (response) {
             var newPrdListInOrder=objectToArray(response.extraData.newOrder);

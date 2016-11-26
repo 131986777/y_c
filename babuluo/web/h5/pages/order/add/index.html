@@ -1,4 +1,4 @@
-<div class="container-fluid order-add" ng-init="initData()" >
+<div class="container-fluid order-add" ng-init="initData()" style="padding-bottom: 55px" >
     <div class="row">
         <div class="weui_cells weui_cells_access" style="margin-bottom: 0">
             <a class="order-address weui_cell" ui-sref="pages/order/addAddress({SKU_IDS:skuIds})">
@@ -44,7 +44,7 @@
                 <div class="ext weui_cell_ft">
                     <span class="product-money" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
                     </span>
-                    <span class="product-money del-line" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+                    <span class="product-money del-line" ng-if="sku['isSale']"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
                     </span>
                     <p class="product-num" ng-bind="sku['SHOP_PRODUCT_SKU.SIZE']">
                     </p>
