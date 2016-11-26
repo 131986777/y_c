@@ -42,8 +42,10 @@
                     </p>
                 </div>
                 <div class="ext weui_cell_ft">
-                    <p class="product-money" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
-                    </p>
+                    <span class="product-money" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+                    </span>
+                    <span class="product-money del-line" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+                    </span>
                     <p class="product-num" ng-bind="sku['SHOP_PRODUCT_SKU.SIZE']">
                     </p>
                 </div>
