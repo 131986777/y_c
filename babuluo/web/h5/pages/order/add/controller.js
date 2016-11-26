@@ -102,7 +102,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         //todo  加入其他优惠和促销的等过滤
         $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = 0;
         if(salePrice>0){
-            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += salePrice;
+            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] +=   salePrice;
             price -= salePrice;
         }
 
