@@ -87,17 +87,27 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
     //计算订单价格  未做优惠促销等逻辑
     $scope.updateOrderPrice = function () {
         var price = 0;
+        var new_price = 0;
         $scope.skuList.forEach(function (ele) {
-            price += ele['SHOP_PRODUCT_SKU.REAL_PRICES'] * ele['SHOP_PRODUCT_SKU.SIZE'];
+            price += ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] * ele['SHOP_PRODUCT_SKU.SIZE'];
+            new_price += ele['SHOP_PRODUCT_SKU.REAL_PRICES'] * ele['SHOP_PRODUCT_SKU.SIZE'];
         });
         $scope.order['SHOP_ORDER.PRICE_PRD'] = price;
 
-        $scope.totalMoney = price;    //使用优惠券时，传给优惠券的总价 By cxy
+        var salePrice= price - new_price;
+        $scope.order['SHOP_ORDER.PRICE_SALE'] = salePrice; // 促销价格
+
+        $scope.totalMoney = new_price;    //使用优惠券时，传给优惠券的总价 By cxy
 
         //todo  加入其他优惠和促销的等过滤
+        $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = 0;
+        if(salePrice>0){
+            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += salePrice;
+            price -= salePrice;
+        }
 
         if ($scope.coupon != undefined) {
-            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = $scope.coupon.MONEY;
+            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += $scope.coupon.MONEY;
             price -= $scope.coupon.MONEY;
         }
         $scope.order['SHOP_ORDER.PRICE_ORDER'] = price;
