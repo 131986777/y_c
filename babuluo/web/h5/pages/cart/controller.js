@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function ($scope, $state,orderFactory, productFactory, weUI, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function ($scope, $state, orderFactory, productFactory, weUI, modalFactory) {
 
     modalFactory.setTitle('购物车');
     modalFactory.setBottom(true);
@@ -6,10 +6,15 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
-        $(".product-list").css("height",document.documentElement.clientHeight-100);
+        //$(".haha").css("height", document.documentElement.clientHeight - 100);
+        //var div=document.getElementById('haha');
+        //div.style.height = "250px";
+        //document.getElementById('cartout').style.cssText= 'height : 100 px';
+
+        $(".product-list").css("min-height", document.documentElement.clientHeight - 100);
         modalFactory.setCurrentPage('cart');
 
-        if(getCookie('currentShopInfo')==undefined){
+        if (getCookie('currentShopInfo') == undefined) {
             $state.go('pages/shop');
         }
 
@@ -17,13 +22,12 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
 
     }
 
-    $scope.toDetail= function (id) {
+    $scope.toDetail = function (id) {
         $state.go('pages/product/detail', {PRD_ID: id});
     }
 
-
     $scope.getCartInfoInCookie = function () {
-        $scope.skuList=new Array;
+        $scope.skuList = new Array;
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
         if (cartInfo == '' || cartInfo == undefined) {
@@ -48,9 +52,9 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                     ele.isSale = false;
                     ele.isSelect = false;
                     skulistsForOrder.push({
-                        'prdId':ele['SHOP_PRODUCT_SKU.PRD_ID'],
-                        'num':ele['SHOP_PRODUCT_SKU.SIZE'],
-                        'price':ele['SHOP_PRODUCT_SKU.REAL_PRICES']
+                        'prdId': ele['SHOP_PRODUCT_SKU.PRD_ID'],
+                        'num': ele['SHOP_PRODUCT_SKU.SIZE'],
+                        'price': ele['SHOP_PRODUCT_SKU.REAL_PRICES']
                     });
                 });
                 $scope.calculateSaleInfo(skulistsForOrder);
@@ -61,22 +65,27 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
     }
 
     //计算销售信息
-    $scope.calculateSaleInfo = function(list){
-        orderFactory.calculateSale({'ORDER_PRD_LIST':JSON.stringify(list)}, function (response) {
-            var newPrdListInOrder=objectToArray(response.extraData.newOrder);
+    $scope.calculateSaleInfo = function (list) {
+        orderFactory.calculateSale({'ORDER_PRD_LIST': JSON.stringify(list)}, function (response) {
+            var newPrdListInOrder = objectToArray(response.extraData.newOrder);
             var newPriceMap = {};
             newPrdListInOrder.forEach(function (ele) {
-                newPriceMap[ele['prdId']]=ele['price'];
+                newPriceMap[ele['prdId']] = ele['price'];
             });
+
             $scope.skuList.forEach(function (ele) {
-                if(ele['SHOP_PRODUCT_SKU.REAL_PRICES'] != newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']]){
-                    //价格不一致 参与了促销
-                    ele.isSale = true;
+                if (newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']] != undefined) {
+                    if (ele['SHOP_PRODUCT_SKU.REAL_PRICES']
+                        != newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']]) {
+                        //价格不一致 参与了促销
+                        ele.isSale = true;
+                    }
+                    ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']];
                 }
-                ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']];
             });
             weUI.toast.hideLoading();
             $scope.updateCartPrice();
+
         });
     }
 

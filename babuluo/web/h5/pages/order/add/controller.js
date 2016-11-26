@@ -50,10 +50,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 ele['SHOP_PRODUCT_SKU.SIZE'] = $scope.cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
                 ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
                 ele.isSelect = false;
+                ele.isSale = false;
                 skulistsForOrder.push({
-                    'prdId':ele['SHOP_PRODUCT_SKU.PRD_ID'],
-                    'num':ele['SHOP_PRODUCT_SKU.SIZE'],
-                    'price':ele['SHOP_PRODUCT_SKU.REAL_PRICES']
+                    'prdId': ele['SHOP_PRODUCT_SKU.PRD_ID'],
+                    'num': ele['SHOP_PRODUCT_SKU.SIZE'],
+                    'price': ele['SHOP_PRODUCT_SKU.REAL_PRICES']
                 });
             });
             $scope.calculateSaleInfo(skulistsForOrder);
@@ -65,19 +66,22 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
     }
 
     //计算销售信息
-    $scope.calculateSaleInfo = function(list){
-        orderFactory.calculateSale({'ORDER_PRD_LIST':JSON.stringify(list)}, function (response) {
-            var newPrdListInOrder=objectToArray(response.extraData.newOrder);
+    $scope.calculateSaleInfo = function (list) {
+        orderFactory.calculateSale({'ORDER_PRD_LIST': JSON.stringify(list)}, function (response) {
+            var newPrdListInOrder = objectToArray(response.extraData.newOrder);
             var newPriceMap = {};
             newPrdListInOrder.forEach(function (ele) {
-                newPriceMap[ele['prdId']]=ele['price'];
+                newPriceMap[ele['prdId']] = ele['price'];
             });
             $scope.skuList.forEach(function (ele) {
-                if(ele['SHOP_PRODUCT_SKU.REAL_PRICES'] != newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']]){
-                    //价格不一致 参与了促销
-                    ele.isSale = true;
+                if (newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']] != undefined) {
+                    if (ele['SHOP_PRODUCT_SKU.REAL_PRICES']
+                        != newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']]) {
+                        //价格不一致 参与了促销
+                        ele.isSale = true;
+                    }
+                    ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']];
                 }
-                ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']];
             });
             weUI.toast.hideLoading();
             $scope.updateOrderPrice();
@@ -94,15 +98,15 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         });
         $scope.order['SHOP_ORDER.PRICE_PRD'] = price;
 
-        var salePrice= price - new_price;
+        var salePrice = price - new_price;
         $scope.order['SHOP_ORDER.PRICE_SALE'] = salePrice; // 促销价格
 
         $scope.totalMoney = new_price;    //使用优惠券时，传给优惠券的总价 By cxy
 
         //todo  加入其他优惠和促销的等过滤
         $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = 0;
-        if(salePrice>0){
-            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] +=   salePrice;
+        if (salePrice > 0) {
+            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += salePrice;
             price -= salePrice;
         }
 
@@ -169,7 +173,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 }
                 $scope.commitClick = true;
                 //$state.go('pages/payment/check_out', {ORDER_ID: response.extraData.ORDER_ID});
-                $state.go('pages/order/detail', {ORDER_ID: response.extraData.ORDER_ID,FROM:'Add'});
+                $state.go('pages/order/detail', {
+                    ORDER_ID: response.extraData.ORDER_ID,
+                    FROM: 'Add'
+                });
 
             }, function (response) {
                 weUI.toast.hideLoading();
