@@ -928,7 +928,10 @@ p {
     margin: 0 0 4px;
     font-size: 14px;
 }
-
+.shopping-cart .product-wrap .del-line{
+    color: #a4a4a4;
+    text-decoration: line-through;
+}
 .shopping-cart .product-wrap .del-wrap {
     position: absolute;
     right: 15px;
@@ -1791,7 +1794,10 @@ p {
 .basic-info .money {
     color: #F36F1C;
 }
-
+.basic-info .money .del-line{
+    color:#e4e4e4;
+    text-decoration: line-through;
+}
 .basic-info .name {
     margin: 0;
     color: #444;
