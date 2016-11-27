@@ -38,7 +38,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             cartSize = JSON.parse(cartSize);
         }
         if (cartInfo.length > 0) {
-            weUI.toast.showLoading('正在查询促销条件');
+
             var params = {};
             params['SHOP_PRODUCT_SKU.SKU_IDS'] = cartInfo.toString();
             params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
@@ -66,6 +66,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
 
     //计算销售信息
     $scope.calculateSaleInfo = function (list) {
+        weUI.toast.showLoading('正在查询促销条件');
         orderFactory.calculateSale({'ORDER_PRD_LIST': JSON.stringify(list)}, function (response) {
             var newPrdListInOrder = objectToArray(response.extraData.newOrder);
             var newPriceMap = {};
@@ -85,7 +86,8 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             });
             weUI.toast.hideLoading();
             $scope.updateCartPrice();
-
+        }, function (response) {
+            weUI.toast.hideLoading();
         });
     }
 
