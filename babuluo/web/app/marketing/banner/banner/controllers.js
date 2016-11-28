@@ -119,6 +119,10 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
 
         mstartTime = mstartTime.replace("T", " ");
 
+        if($scope.mod['BANNER.URL']==''||$scope.mod['BANNER.URL']==undefined){
+           $scope.mod['BANNER.URL']='{$null}';
+        }
+
         $scope.mod['BANNER.BEGIN_DATETIME'] = mstartTime;  //开始时间
 
 
