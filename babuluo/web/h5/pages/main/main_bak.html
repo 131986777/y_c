@@ -43,7 +43,7 @@
       <a ui-sref="pages/cart"  ng-click="toPage('cart')" class="home-nav-cart">
         <i class="icon icon-cart"></i>
         <p class="nav-txt">购物车</p>
-        <span class="cartNum">13</span>
+        <span class="cartNum" ng-if="cartSize!=0" ng-bind="cartSize"></span>
       </a>
     </li>
     <li class="cell" ng-class="{true:'selected'}[currentPage=='wd']">

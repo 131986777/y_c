@@ -350,6 +350,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
                 // get prd size in cart
                 $scope.cartSize = cartInfo.length;
                 $scope.caculCart();
+                modalFactory.updateCart();
             } else {
                 weUI.toast.error('该规格已售罄');
             }

@@ -34,10 +34,14 @@ AndSellUI.service('modalFactory', function ($rootScope) {
     this.setCurrentPage = function (currentPage) {
         $rootScope.$broadcast("currentPage", currentPage);
     };
+
+    this.updateCart = function () {
+        $rootScope.$broadcast("updateCart");
+    };
 });
 
 //商品选择sku加入购物车
-AndSellUI.directive('cartModal', function (productFactory,weUI) {
+AndSellUI.directive('cartModal', function (productFactory,weUI,modalFactory) {
     return {
         restrict: 'EA',
         templateUrl: '/AndSell/h5/public/template/cart.html',
@@ -313,6 +317,7 @@ AndSellUI.directive('cartModal', function (productFactory,weUI) {
                     setCookie('cartInfo', JSON.stringify(cartInfo));
 
                     weUI.toast.ok('已加入到购物车');
+                    modalFactory.updateCart();
 
                     $scope.setReturn();
                     }else{
