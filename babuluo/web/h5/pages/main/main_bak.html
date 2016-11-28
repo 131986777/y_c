@@ -16,13 +16,13 @@
 </head>
 <body class="home-index">
 
-<div><!-- BEGIN 内容 -->
+<!-- BEGIN 内容 -->
 
   <div class="row-content">
     <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
   </div>
 
-</div> <!--END 内容-->
+<!--END 内容-->
 
 <!-- BEGIN footer-nav -->
 <nav class="nav-fixed-bottom" ng-if="navShow" role="navigation">
@@ -39,10 +39,11 @@
         <p class="nav-txt">分类</p>
       </a>
     </li>
-    <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']">
-      <a ui-sref="pages/cart"  ng-click="toPage('cart')">
+    <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']" >
+      <a ui-sref="pages/cart"  ng-click="toPage('cart')" class="home-nav-cart">
         <i class="icon icon-cart"></i>
         <p class="nav-txt">购物车</p>
+        <span class="cartNum">13</span>
       </a>
     </li>
     <li class="cell" ng-class="{true:'selected'}[currentPage=='wd']">
