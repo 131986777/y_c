@@ -389,7 +389,8 @@ AndSellService.factory("http", function ($http) {
  */
 AndSellUI.filter('FormatStrDate', function () {
     return function (input) {
-        var date = new Date(input);
+        var arr = input.split(/[- : \/]/);
+        var date = new Date(arr[0], arr[1]-1, arr[2]);
         var formatDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
         return formatDate;
     }
@@ -401,7 +402,8 @@ AndSellUI.filter('FormatStrDate', function () {
  */
 AndSellUI.filter('FormatAllDate', function () {
     return function (input) {
-        var date = new Date(input);
+        var arr = input.split(/[- : \/]/);
+        var date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
         var formatDate = date.getFullYear()
             + "-"
             + (date.getMonth() + 1)
