@@ -1956,6 +1956,21 @@ p {
 .search-wrap .glyphicon{
     top:3px;
 }
+.home-nav-cart{
+    position: relative;
+}
+.home-nav-cart .cartNum{
+    background-color: #F36F1C;
+    border-radius: 7px;
+    padding-top: 2px;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: -45px;
+    right: -19px;
+    color: #fff;
+    font-size: 10px;
+}
 .home-nav {
     margin-bottom: 7px;
 }
@@ -2397,15 +2412,16 @@ p {
 .coupon-wrap .coupon-detail .couponCount {
     color: rgb(189, 188, 187);
     padding-top: 20px;
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .coupon-wrap .coupon-detail .limit-time {
+    font-size: 16px;
     padding-top: 18px;
 }
 
 .coupon-wrap .coupon-detail .limit-class {
-    font-size: 8px;
+    font-size: 12px;
     padding-top: 5px;
 }
 
