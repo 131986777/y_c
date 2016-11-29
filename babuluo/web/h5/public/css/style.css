@@ -283,8 +283,9 @@ p {
     color: #fff;
 }
 
-.btn-link {
+.btn-link,.btn-link:focus, .btn-link:hover {
     color: #a4a4a4;
+    text-decoration: none;
 }
 
 .btn-plain-default {
