@@ -168,6 +168,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 setCookie('cartSize', JSON.stringify($scope.cartSize));
                 setCookie('cartInfo', JSON.stringify($scope.cartInfo));
 
+                modalFactory.updateCart();
+
                 if ($scope.COUPON_INFO != '') {
                     $scope.descCoupon($scope.coupon.ID);
                 }

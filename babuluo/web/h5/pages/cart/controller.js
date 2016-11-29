@@ -165,6 +165,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
         }
         $scope.totalPrice = price;
         $scope.totalSize = size;
+        modalFactory.updateCart();
     }
 
     //选择商品
