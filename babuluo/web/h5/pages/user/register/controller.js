@@ -23,16 +23,6 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
         }
     }
 
-    $scope.ckeckPhone = function () {
-        var phoneNum = $scope.memberInfo['MEMBER.LOGIN_ID'];
-        var length = phoneNum.toString().length;
-        if (length != 11) {
-            weUI.toast.info('请输入正确的手机号码');
-            return false;
-        } else {
-            return true;
-        }
-    }
     $scope.reg = function () {
         $scope.checkPwd();
         $scope.checkPassword();
@@ -55,7 +45,7 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
         if ($scope.memberInfo['MEMBER.LOGIN_ID'] == '') {
             weUI.toast.error('请输入手机号');
         } else {
-            var flag = $scope.ckeckPhone();
+            var flag = checkPhone($scope.memberInfo['MEMBER.LOGIN_ID']);
             if (flag == false) {
                 weUI.toast.error('请输入正确手机号');
             } else {

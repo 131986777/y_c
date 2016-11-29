@@ -194,6 +194,17 @@ var replaceAll = function (str, s1, s2) {
     return str.replace(new RegExp(s1, "gm"), s2);
 }
 
+
+var checkPhone = function (id) {
+    var phoneNum = id;
+    var length = phoneNum.toString().length;
+    if (length != 11) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 function routerPath(base, path, param, css) {
     var url = base + path;
 

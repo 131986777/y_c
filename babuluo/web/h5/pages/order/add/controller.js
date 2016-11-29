@@ -110,8 +110,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             price -= salePrice;
         }
 
-        if ($scope.coupon != undefined) {
-            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += $scope.coupon.MONEY;
+        if ($scope.coupon != undefined&&$scope.coupon.MONEY!=undefined) {
+            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += parseInt($scope.coupon.MONEY);
             price -= $scope.coupon.MONEY;
         }
         if(price<=0){
@@ -178,7 +178,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                     $scope.descCoupon($scope.coupon.ID);
                 }
                 $scope.commitClick = true;
-                //$state.go('pages/payment/check_out', {ORDER_ID: response.extraData.ORDER_ID});
                 $state.go('pages/order/detail', {
                     ORDER_ID: response.extraData.ORDER_ID,
                     FROM: 'Add'
