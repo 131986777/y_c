@@ -27,6 +27,7 @@ $import('pages/coupon/list');
 
 $import('pages/user/register');
 $import('pages/user/accountLogin', {FROM: ''});
+$import('pages/user/phoneLogin', {FROM: ''});
 $import('pages/user/SetPassword', {LOGIN_ID: '0'});
 
 $import('pages/account/balance');
