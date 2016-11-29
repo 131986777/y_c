@@ -99,8 +99,8 @@
         <!--</div>-->
         <!--</div>-->
 
-        <div class="payment-list weui_cells" ng-init="order['SHOP_ORDER.PAY_TYPE']='ACCOUNT'">
-            <div class="balance weui_cell" ng-click="order['SHOP_ORDER.PAY_TYPE']='ACCOUNT'">
+        <div class="payment-list weui_cells" >
+            <div class="balance weui_cell" ng-click="cardPay()">
                 <div class="icon-wrap weui_cell_bd">
                     <i class="icon icon-userpay"></i>
                 </div>
@@ -113,7 +113,7 @@
                        ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT']"></i>
                 </div>
             </div>
-            <div class="balance weui_cell" ng-click="order['SHOP_ORDER.PAY_TYPE']='WEIXIN'">
+            <div class="balance weui_cell" ng-click="wxPay()">
                 <div class="icon-wrap weui_cell_bd">
                     <i class="icon icon-wepay"></i>
                 </div>

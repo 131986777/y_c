@@ -12,4 +12,6 @@ AndSellH5MainModule.service('userFactory', function (http) {
 
     this.phoneLogin = http.post('/login/phoneLogin');
 
+    this.phoneSms = http.post('/sys/sms/login');
+
 });

@@ -83,7 +83,7 @@ function ifLessTen(item){
 
 //处理商品价格
 function moneyFormat(money) {
-    return Number(money / 100).toFixed(2);
+    return Number(money).toFixed(2);
 }
 
 //过滤时间后面的毫秒

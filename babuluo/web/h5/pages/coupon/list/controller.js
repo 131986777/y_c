@@ -2,7 +2,7 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
 
     modalFactory.setTitle('领券中心');
     modalFactory.setBottom(false);
-    $scope.couponSumMap = new Map();
+    $scope.couponSumMap = {};
 
     $scope.initData = function () {
         console.log('初始化数据');
@@ -18,12 +18,13 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
 
     $scope.saveCouponNum = function () {
         var member = {};
-        personalFactory.getCouponListByUser(member, function (response) {
+        personalFactory.getAllStateCouponListByUser(member, function (response) {
             var memberCouponList = response.data;
             console.log(memberCouponList);
             memberCouponList.forEach(function (ele) {
-                $scope.couponSumMap.set(ele['MEMBER_COUPON.COUPON_ID'], ele['.NUM_COUPON']);  //将客户所拥有的各优惠券的数量存在map中
+                $scope.couponSumMap[ele['MEMBER_COUPON.COUPON_ID']]=ele['.NUM_COUPON'];  //将客户所拥有的各优惠券的数量存在map中
             });
+            console.log($scope.couponSumMap);
             weUI.toast.hideLoading();
         }, function (response) {
             weUI.toast.hideLoading();
@@ -51,7 +52,7 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
     $scope.addCoupon = function (item) {
         couponFactory.isLogin({}, function (response) {
                 if (response.extraData.state == "") {
-                    var sum = $scope.couponSumMap.get(item['COUPON.ID']);  //客户所拥有的当前优惠券的数量
+                    var sum = $scope.couponSumMap[item['COUPON.ID']];  //客户所拥有的当前优惠券的数量
                     var count = item['COUPON.RULE_INFO']['COUPON_RULE.EACH_MEMBER_LIMIT'];  //该优惠券所允许的每人领取的最大数量
                     console.log(sum);
                     console.log(count);

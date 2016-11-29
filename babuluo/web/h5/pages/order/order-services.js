@@ -14,8 +14,6 @@ AndSellH5MainModule.service('orderFactory', function (http) {
 
     this.acceptOrder = http.post('/shop/order/getOrder');
 
-    this.deleteCoupon = http.post('/member/coupon/delById');
-
     this.wxPayUndefinedOrder = http.post('/wx/pay/wxPayUndefinedOrder');
 
     this.queryWXPayResult = http.post('/wx/pay/wxpayCallback');

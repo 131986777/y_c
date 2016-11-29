@@ -6,12 +6,12 @@
     <div class="weui_cells weui_cells_form">
       <div class="weui_cell">
         <div class="weui_cell_bd weui_cell_primary">
-          <input class="weui_input" type="tel" name="phone" id="phone" ng-model="memberInfo['MEMBER.LOGIN_ID']" placeholder="手机号" >
+          <input class="weui_input" type="tel" name="phone" id="phone" ng-model="memberInfo['PHONE']" placeholder="手机号" >
         </div>
       </div>
       <div class="weui_cell">
         <div class="weui_cell_bd weui_cell_primary">
-          <input class="weui_input" type="tel" placeholder="验证码" ng-model="memberInfo['MEMBER.CHECKCODE']">
+          <input class="weui_input" type="tel" placeholder="验证码" ng-model="memberInfo['RANDCODE']">
           <a class="vcode-btn btn-gray" href="javascript:;" ng-click="sendSms()">发送验证码</a>
           <div class="vcode-time" style="width: auto; height: 30px; background-color: rgb(247,247,247); line-height: 30px; color: rgb(192,192,192); position: absolute; top: 7px; right: 0px; padding-left: 10px; padding-right: 10px; display: none">
             <span type="text" ng-bind="time"></span>s后重新发送
@@ -19,12 +19,12 @@
         </div>
       </div>
     </div>
-    <div class="weui_cells_tips">
-      <span class="color-default">提示：</span>
-      未注册云厨一站的手机号，登陆时将自动注册，且代表
-      您已经同意
-      <span class="color-default">《用户协议》</span>
-    </div>
+    <!--<div class="weui_cells_tips">-->
+      <!--<span class="color-default">提示：</span>-->
+      <!--未注册云厨一站的手机号，登陆时将自动注册，且代表-->
+      <!--您已经同意-->
+      <!--<span class="color-default">《用户协议》</span>-->
+    <!--</div>-->
     <div class="weui_btn_area">
       <button class="weui_btn my-btn-default" ng-click="login()" type="submit">登录</button>
     </div>

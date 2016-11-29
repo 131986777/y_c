@@ -167,7 +167,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                         location.reload();
                     })
                 } else {
-                    weUI.toast.error("支付失败");
+                    //weUI.toast.error("支付失败");
                 }
             }
         );
