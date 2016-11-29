@@ -161,8 +161,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                         CALLBACK:'-1'
                     };
                     orderFactory.queryWXPayResult(formData, function(res) {
-                        $state.go("pages/personal");
-
+                        weUI.toast.ok('订单支付成功');
+                        $scope.getOrder($scope.order['SHOP_ORDER.ID']);
                     }, function (res) {
                         location.reload();
                     })
