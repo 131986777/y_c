@@ -146,7 +146,7 @@
                 <p class="all">
                     总计：<span class="money" ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
                 </p>
-                <p class="sale" ng-if="COUPON_INFO!=''">( 已优惠 {{coupon.MONEY}} 元 )</p>
+                <p class="sale" ng-if="onSalePrice!=0">( 已优惠 {{onSalePrice}} 元 )</p>
             </div>
             <a class="payment-check" ng-click="commitOrder()">
                 提交订单

@@ -97,7 +97,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             new_price += ele['SHOP_PRODUCT_SKU.REAL_PRICES'] * ele['SHOP_PRODUCT_SKU.SIZE'];
         });
         $scope.order['SHOP_ORDER.PRICE_PRD'] = price;
-
+        var prdPrice = price;
         var salePrice = price - new_price;
         $scope.order['SHOP_ORDER.PRICE_SALE'] = salePrice; // 促销价格
 
@@ -114,6 +114,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += $scope.coupon.MONEY;
             price -= $scope.coupon.MONEY;
         }
+        if(price<=0){
+            price=0.01;
+        }
+        $scope.onSalePrice=prdPrice-price;
         $scope.order['SHOP_ORDER.PRICE_ORDER'] = price;
         $scope.order['SHOP_ORDER.PRICE_OVER'] = price;
     }

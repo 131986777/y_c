@@ -104,6 +104,7 @@
     }
 
 %>
+
 <!DOCTYPE html>
 <html lang="en"  ng-app="AndSell.H5.Main" ng-controller="H5.MainController">
 <head>
@@ -122,13 +123,13 @@
 </head>
 <body class="home-index">
 
-<div style="height:100%"><!-- BEGIN 内容 -->
+<!-- BEGIN 内容 -->
 
-    <div class="row-content">
-        <div ui-view="" class="ng-scope" style="height:100%"></div>
-    </div>
+<div class="row-content">
+    <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
+</div>
 
-</div> <!--END 内容-->
+<!--END 内容-->
 
 <!-- BEGIN footer-nav -->
 <nav class="nav-fixed-bottom" ng-if="navShow" role="navigation">
@@ -145,10 +146,11 @@
                 <p class="nav-txt">分类</p>
             </a>
         </li>
-        <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']">
-            <a ui-sref="pages/cart"  ng-click="toPage('cart')">
+        <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']" >
+            <a ui-sref="pages/cart"  ng-click="toPage('cart')" class="home-nav-cart">
                 <i class="icon icon-cart"></i>
                 <p class="nav-txt">购物车</p>
+                <span class="cartNum" ng-if="cartSize!=0" ng-bind="cartSize"></span>
             </a>
         </li>
         <li class="cell" ng-class="{true:'selected'}[currentPage=='wd']">
@@ -208,6 +210,5 @@
 <script src="controller.js"> </script>
 
 </html>
-
 
 
