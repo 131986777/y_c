@@ -8,4 +8,8 @@ AndSellH5MainModule.service('couponFactory', function (http) {
 
     this.modCouponLeft = http.post('/coupon/coupon/modLeftNum');
 
+    this.deleteCoupon = http.post('/member/coupon/delById');
+
+    this.useCoupon = http.post('/member/coupon/useCoupon');
+
 });
