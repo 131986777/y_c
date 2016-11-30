@@ -28,9 +28,9 @@ angular.module('AndSell.H5.Main').controller('pages_product_tagPrdList_Controlle
         if($stateParams.tagId!=''){
 
             if ($stateParams.tagId == 1024) {
-                modalFactory.setTitle('爆款菜品');
+                modalFactory.setTitle('云厨商城');
             } else {
-                modalFactory.setTitle('新品上市');
+                modalFactory.setTitle('云厨商城');
             }
 
             $scope.filter['SHOP_PRODUCT.TAG_ID']=$stateParams.tagId;

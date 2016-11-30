@@ -1,6 +1,7 @@
 angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function (userFactory,orderFactory , $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
 
-    modalFactory.setTitle('商品详情');
+    // modalFactory.setTitle('商品详情');
+
     modalFactory.setBottom(false);
 
     $scope.prdSkuMap = new Map();
@@ -27,6 +28,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         productFactory.getProductAllInfoById(params, function (response) {
             $scope.product = response.data[0];
             if ($scope.product != undefined) {
+                modalFactory.setTitle($scope.product['SHOP_PRODUCT.PRD_NAME']+' - 云厨1站商城 - 十分钟吃饭，优质食品购买平台');
                 $scope.setPrdPicBanner($scope.product);
                 if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                     $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
