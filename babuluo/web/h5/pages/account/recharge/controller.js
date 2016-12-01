@@ -25,6 +25,7 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
         var formData = {
             TYPE:'ACCOUNT',
             FEE:parseInt($scope.balanceInfo['CHANGE_VALUE'] * 100),
+            NOW_BALANCE:parseInt($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] * 100),
             PRODUCT_ID: $scope.uid,
             BODY: '充值',
             OPENID: openId,

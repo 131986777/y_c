@@ -21,6 +21,10 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
             response.data[0]['SHOP_ORDER.DATETIME_ACCEPT']=getDate(response.data[0]['SHOP_ORDER.DATETIME_ACCEPT']);
             $scope.orderDetailList=JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
             $scope.order=response.data[0];
+            if($scope.order['SHOP_ORDER.ERP_REMARK']!=undefined&&$scope.order['SHOP_ORDER.ERP_REMARK']!='') {
+                $scope.order['SHOP_ORDER.ERP_NUM'] = JSON.parse($scope.order['SHOP_ORDER.ERP_REMARK']).orderCode;
+            }
+
             $scope.orderType = $scope.order['SHOP_ORDER.TYPE'];
             $scope.orderDetailList.forEach(function (ele) {
                 setContentsInfoForOrder(ele);
