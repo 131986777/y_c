@@ -1,34 +1,34 @@
-<div class="shopping-cart bg-grey" ng-init="initData()"  style=" padding-bottom: 102px">
+<div class="shopping-cart bg-grey" ng-init="initData()"  style=" padding-bottom: 90px">
 
   <!-- BEGIN 商品列表-->
-    <div class="product-list weui_cells bg-grey" ng-if="skuList.length>0">
-      <!--<div class="product-sale-wrap weui_cell">-->
-        <!--<div class="product-select-wrap weui_cell_hd">-->
-          <!--<i class="icon icon-check"></i>-->
-        <!--</div>-->
-        <!--<div class="product-sale weui_cell_bd">-->
-          <!--满200减20-->
-        <!--</div>-->
-      <!--</div>-->
-      <!-- BEGIN 商品信息-->
+  <div class="product-list weui_cells bg-grey" >
+    <!--<div class="product-sale-wrap weui_cell">-->
+    <!--<div class="product-select-wrap weui_cell_hd">-->
+    <!--<i class="icon icon-check"></i>-->
+    <!--</div>-->
+    <!--<div class="product-sale weui_cell_bd">-->
+    <!--满200减20-->
+    <!--</div>-->
+    <!--</div>-->
+    <!-- BEGIN 商品信息-->
 
-      <div class="product-wrap weui_cell" ng-repeat="sku in skuList">
-        <div class="product-select-wrap weui_cell_hd"
-             ng-click="checkItem(sku)">
-          <i class="icon icon-checked"
-             ng-show="sku.isSelect"></i>
-          <i class="icon icon-check"
-             ng-show="!sku.isSelect"></i>
-        </div>
-        <div class="product-detail weui_cell_bd">
-          <img ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])" ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220" class="product-img">
-          <h5 class="product-name" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT.PRD_NAME']">
-          </h5>
-          <span ng-if="sku['SHOP_PRODUCT_SKU.STOCK']==0">售罄</span>
-          <p class="product-cls" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
-          </p>
-          <!--现价-->
-          <span class="product-money" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+    <div class="product-wrap weui_cell" ng-repeat="sku in skuList">
+      <div class="product-select-wrap weui_cell_hd"
+           ng-click="checkItem(sku)">
+        <i class="icon icon-checked"
+           ng-show="sku.isSelect"></i>
+        <i class="icon icon-check"
+           ng-show="!sku.isSelect"></i>
+      </div>
+      <div class="product-detail weui_cell_bd">
+        <img ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])" ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220" class="product-img">
+        <h5 class="product-name" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT.PRD_NAME']">
+        </h5>
+        <span ng-if="sku['SHOP_PRODUCT_SKU.STOCK']==0">售罄</span>
+        <p class="product-cls" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
+        </p>
+        <!--现价-->
+        <span class="product-money" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
           </span>
           <!--原价-->
           <span class="product-money del-line" ng-if="sku['isSale']" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
@@ -49,13 +49,12 @@
                             <button class="btn btn-cart-add" type="button"
                                     ng-click="moreSize(sku)" style=" border-left: 1px solid rgb(219,219,219);">+</button>
                         </span>
-          </div>
         </div>
       </div>
     </div>
-  <!--style="height: 600px"-->
-    <div class=" haha weui_cells bg-grey" style="height: 600px" ng-if="skuList.length==0">
-      <div class="cartout" ></div>
+
+      <div class="cartout" ng-if="skuList.length==0">
+      </div>
       <!-- END 商品信息-->
     </div>
 

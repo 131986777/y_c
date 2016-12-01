@@ -38,6 +38,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
         if ($scope.memberCouponList.length <= 0) {
             weUI.toast.info("无可用优惠券！");
         } else {
+            console.log($scope.memberCouponList);
             $scope.memberCouponList.forEach(function (ele) {
                 var targetObjArray = ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_ID'];  //限定对象数组
                 var weekArray=ele['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'];    //优惠券的星期数组
@@ -102,6 +103,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
             })
 
+            console.log($scope.useableList);
         }
 
     }

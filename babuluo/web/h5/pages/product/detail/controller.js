@@ -1,6 +1,7 @@
-angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function (userFactory, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function (userFactory,orderFactory , $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
 
-    modalFactory.setTitle('商品详情');
+    // modalFactory.setTitle('商品详情');
+
     modalFactory.setBottom(false);
 
     $scope.prdSkuMap = new Map();
@@ -27,9 +28,22 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         productFactory.getProductAllInfoById(params, function (response) {
             $scope.product = response.data[0];
             if ($scope.product != undefined) {
+                modalFactory.setTitle($scope.product['SHOP_PRODUCT.PRD_NAME']+' - 云厨1站商城 - 十分钟吃饭，优质食品购买平台');
                 $scope.setPrdPicBanner($scope.product);
                 if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                     $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
+                    var skulistsForOrder = new Array;
+                    $scope.skuList.forEach(function (ele) {
+                        ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
+                        ele.isSale = false;
+                        ele.isSelect = false;
+                        skulistsForOrder.push({
+                            'prdId': ele['SHOP_PRODUCT_SKU.PRD_ID'],
+                            'num': 1,
+                            'price': ele['SHOP_PRODUCT_SKU.REAL_PRICES']
+                        });
+                    });
+                    $scope.calculateSaleInfo(skulistsForOrder);
                     $scope.skuData = $scope.getPrdSkuData($scope.skuList);
                     console.log($scope.skuData);
                     if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length > 0) {
@@ -84,6 +98,32 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         observeParents: true,
         autoplayDisableOnInteraction: false
     });
+
+    //计算销售信息
+    $scope.calculateSaleInfo = function (list) {
+        weUI.toast.showLoading('正在查询促销条件');
+        orderFactory.calculateSale({'ORDER_PRD_LIST': JSON.stringify(list)}, function (response) {
+            var newPrdListInOrder = objectToArray(response.extraData.newOrder);
+            var newPriceMap = {};
+            newPrdListInOrder.forEach(function (ele) {
+                newPriceMap[ele['prdId']] = ele['price'];
+            });
+
+            $scope.skuList.forEach(function (ele) {
+                if (newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']] != undefined) {
+                    if (ele['SHOP_PRODUCT_SKU.REAL_PRICES']
+                        != newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']]) {
+                        //价格不一致 参与了促销
+                        ele.isSale = true;
+                    }
+                    ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']];
+                }
+            });
+            weUI.toast.hideLoading();
+        }, function (response) {
+            weUI.toast.hideLoading();
+        });
+    }
 
     //获取价格区间
     $scope.getPriceArea = function () {
@@ -312,6 +352,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
                 // get prd size in cart
                 $scope.cartSize = cartInfo.length;
                 $scope.caculCart();
+                modalFactory.updateCart();
             } else {
                 weUI.toast.error('该规格已售罄');
             }

@@ -10,4 +10,8 @@ AndSellH5MainModule.service('userFactory', function (http) {
 
     this.sendVerificationCode = http.post('/member/member/queryphone');
 
+    this.phoneLogin = http.post('/login/phoneLogin');
+
+    this.phoneSms = http.post('/sys/sms/login');
+
 });

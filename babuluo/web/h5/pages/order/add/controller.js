@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', function ($scope, $state, $stateParams, weUI, productFactory, orderFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', function ($scope, $state,balanceFactory, $stateParams, weUI, couponFactory,productFactory, orderFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('新增订单');
     modalFactory.setBottom(false);
@@ -62,7 +62,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         });
 
         $scope.commitClick = true;
-
+        $scope.queryAccount();
     }
 
     //计算销售信息
@@ -97,8 +97,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             new_price += ele['SHOP_PRODUCT_SKU.REAL_PRICES'] * ele['SHOP_PRODUCT_SKU.SIZE'];
         });
         $scope.order['SHOP_ORDER.PRICE_PRD'] = price;
-
-        var salePrice = price - new_price;
+        var prdPrice = price;
+        var salePrice = moneyFormat(price - new_price);
         $scope.order['SHOP_ORDER.PRICE_SALE'] = salePrice; // 促销价格
 
         $scope.totalMoney = new_price;    //使用优惠券时，传给优惠券的总价 By cxy
@@ -106,16 +106,22 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         //todo  加入其他优惠和促销的等过滤
         $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = 0;
         if (salePrice > 0) {
-            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += salePrice;
             price -= salePrice;
         }
 
-        if ($scope.coupon != undefined) {
-            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += $scope.coupon.MONEY;
+        if ($scope.coupon != undefined&&$scope.coupon.MONEY!=undefined) {
             price -= $scope.coupon.MONEY;
         }
+
+        if(price<=0){
+            price=0.01;
+        }
+
+        $scope.onSalePrice=moneyFormat(prdPrice-price);
+        $scope.order['SHOP_ORDER.PRICE_DISCOUNT']= $scope.onSalePrice;
         $scope.order['SHOP_ORDER.PRICE_ORDER'] = price;
         $scope.order['SHOP_ORDER.PRICE_OVER'] = price;
+
     }
 
     //提交订单
@@ -152,6 +158,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 params['SHOP_ORDER.GET_PRD_DATETIME'] = noUndefinedAndNull($scope.cookiePickupPerson.getTime);//提货时间
             }
 
+            if($scope.coupon!=undefined){
+                params['SHOP_ORDER.COUPON_ID']=$scope.coupon.ID;
+            }
             params['SHOP_ORDER.DETAILS'] = JSON.stringify($scope.skuList);//sku信息
             orderFactory.addOrder(params, function (response) {
 
@@ -168,11 +177,12 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 setCookie('cartSize', JSON.stringify($scope.cartSize));
                 setCookie('cartInfo', JSON.stringify($scope.cartInfo));
 
-                if ($scope.COUPON_INFO != '') {
+                modalFactory.updateCart();
+                console.log($scope.coupon);
+                if ($scope.coupon != undefined) {
                     $scope.descCoupon($scope.coupon.ID);
                 }
                 $scope.commitClick = true;
-                //$state.go('pages/payment/check_out', {ORDER_ID: response.extraData.ORDER_ID});
                 $state.go('pages/order/detail', {
                     ORDER_ID: response.extraData.ORDER_ID,
                     FROM: 'Add'
@@ -186,8 +196,35 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         }
     }
 
+    $scope.cardPay= function () {
+        if($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']>=$scope.order['SHOP_ORDER.PRICE_OVER']){
+            $scope.order['SHOP_ORDER.PAY_TYPE']='ACCOUNT';
+        } else {
+            weUI.toast.info('会员卡余额不足，请先充值');
+        }
+    }
+
+    $scope.wxPay= function () {
+        $scope.order['SHOP_ORDER.PAY_TYPE']='WEIXIN';
+    }
+
+    $scope.queryAccount = function () {
+        var form = {};
+        balanceFactory.queryAccountByUid(form, function (response) {
+            console.log(response);
+            $scope.balanceInfo = response.data;
+            if($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']>=$scope.order['SHOP_ORDER.PRICE_OVER']) {
+                $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
+            }else{
+                $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
+            }
+        }, function (response) {
+            weUI.toast.error(response.msg);
+        });
+    }
+
     $scope.descCoupon = function (id) {
-        orderFactory.deleteCoupon({'MEMBER_COUPON.ID': id}, function (response) {
+        couponFactory.useCoupon({'MEMBER_COUPON.ID': id}, function (response) {
             if (response.code == 0) {
                 console.log('删除成功');
             }

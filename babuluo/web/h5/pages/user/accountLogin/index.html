@@ -18,17 +18,31 @@
             </div>
         </div>
         <div class="check-wrap">
-            <label class="remember">
-                <a class="btn-link" ui-sref="pages/user/register">
-                    注册
-                </a>
-            </label>
+            <!--<a class="remember">-->
+                <!--<label class="btn-link"-->
+                       <!--ng-init="autoLogin.isSelected = false"-->
+                       <!--ng-click="autoLogin.isSelected = !autoLogin.isSelected">-->
+                        <!--<i class="icon icon-checked"-->
+                           <!--ng-show="autoLogin.isSelected"></i>-->
+                        <!--<i class="icon icon-check"-->
+                           <!--ng-show="!autoLogin.isSelected"></i>-->
+                    <!--七天免登录-->
+                <!--</label>-->
+            <!--</a>-->
             <a class="btn-link pull-right" ui-sref="pages/security/resetPwd">
                 忘记密码？
             </a>
         </div>
         <div class="weui_btn_area">
             <button class="weui_btn my-btn-default" type="submit" ng-click="login()">登录</button>
+        </div>
+        <div class="login-other">
+            <a class="btn-link" ui-sref="pages/user/register">
+                免费注册
+            </a>
+            <a class="btn-link pull-right" ui-sref="pages/user/phoneLogin">
+                手机验证码登录
+            </a>
         </div>
     </div>
 </div>

@@ -13,7 +13,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 title: "main",
                 url: "#/pages/order/list/all"
             };
-            window.history.pushState(state);
+            window.history.pushState(state,"main","#/pages/order/list/all");
         }
         $scope.getOrder($stateParams.ORDER_ID);
         $scope.shop = JSON.parse(getCookie('currentShopInfo'));
@@ -161,13 +161,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                         CALLBACK:'-1'
                     };
                     orderFactory.queryWXPayResult(formData, function(res) {
-                        $state.go("pages/personal");
-
+                        weUI.toast.ok('订单支付成功');
+                        $scope.getOrder($scope.order['SHOP_ORDER.ID']);
                     }, function (res) {
                         location.reload();
                     })
                 } else {
-                    weUI.toast.error("支付失败");
+                    //weUI.toast.error("支付失败");
                 }
             }
         );

@@ -83,7 +83,7 @@ function ifLessTen(item){
 
 //处理商品价格
 function moneyFormat(money) {
-    return Number(money / 100).toFixed(2);
+    return Number(money).toFixed(2);
 }
 
 //过滤时间后面的毫秒
@@ -194,6 +194,17 @@ var replaceAll = function (str, s1, s2) {
     return str.replace(new RegExp(s1, "gm"), s2);
 }
 
+
+var checkPhone = function (id) {
+    var phoneNum = id;
+    var length = phoneNum.toString().length;
+    if (length != 11) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
 function routerPath(base, path, param, css) {
     var url = base + path;
 
@@ -228,6 +239,7 @@ function routerPath(base, path, param, css) {
         loadServiceAndController: function ($ocLazyLoad, userFactory, $state, weUI) {
             var filtertList = ['pages/product/list', 'pages/product/tagPrdList', 'pages/home',
                 'pages/product/detail', 'pages/cart', 'pages/shop', 'pages/user/accountLogin',
+                'pages/user/phoneLogin',
                 'pages/user/register', 'pages/security/resetPwd' ,'pages/user/SetPassword'];
             if (filtertList.indexOf(path) < 0) {
                 userFactory.isLogin({}, function (response) {

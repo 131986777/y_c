@@ -19,7 +19,6 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
 
     $scope.queryAccount = function (uid) {
         var form = {};
-        form['MEMBER_ACCOUNT.USER_ID'] = uid;
         balanceFactory.queryAccountByUid(form, function (response) {
             console.log(response);
             $scope.balanceInfo = response.data;
@@ -39,6 +38,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
             weUI.toast.error(response.msg);
         });
     }
+
     $scope.getCouponSum = function (uid) {
         var form = {};
         form['MEMBER_COUPON.USER_ID'] = uid

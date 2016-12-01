@@ -18,6 +18,7 @@ body {
     line-height: 1;
     padding-bottom: 53px;
     height: 100%;
+    overflow: hidden;
 }
 
 a:link,
@@ -283,8 +284,9 @@ p {
     color: #fff;
 }
 
-.btn-link {
+.btn-link,.btn-link:focus, .btn-link:hover {
     color: #a4a4a4;
+    text-decoration: none;
 }
 
 .btn-plain-default {
@@ -1956,6 +1958,21 @@ p {
 .search-wrap .glyphicon{
     top:3px;
 }
+.home-nav-cart{
+    position: relative;
+}
+.home-nav-cart .cartNum{
+    background-color: #F36F1C;
+    border-radius: 7px;
+    padding-top: 2px;
+    width: 14px;
+    height: 14px;
+    position: absolute;
+    top: -45px;
+    right: -19px;
+    color: #fff;
+    font-size: 10px;
+}
 .home-nav {
     margin-bottom: 7px;
 }
@@ -2397,15 +2414,16 @@ p {
 .coupon-wrap .coupon-detail .couponCount {
     color: rgb(189, 188, 187);
     padding-top: 20px;
-    font-size: 8px;
+    font-size: 12px;
 }
 
 .coupon-wrap .coupon-detail .limit-time {
+    font-size: 16px;
     padding-top: 18px;
 }
 
 .coupon-wrap .coupon-detail .limit-class {
-    font-size: 8px;
+    font-size: 12px;
     padding-top: 5px;
 }
 
@@ -2763,7 +2781,7 @@ p {
 .orderout{
     background: url("../img/icon-orderout.png") no-repeat;
     background-size: 140px 147px;
-    position: relative;
+    position: absolute;
     height: 140px;
     width: 147px;
     top: 50%;
@@ -2784,6 +2802,7 @@ p {
 .all-list .prdout{
     margin-left: -70px;
 }
+
 .cartout{
     height:140px;
     width: 147px;
@@ -2791,7 +2810,7 @@ p {
     padding-top: 12.9em;
     background: url('../img/cartEmpty.png') no-repeat;
     background-size: 140px 147px;
-    position: relative;
+    position: absolute;
     top:50%;
     left:50%;
     margin:-73.5px 0 0 -70px;
