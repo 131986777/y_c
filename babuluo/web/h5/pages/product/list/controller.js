@@ -4,9 +4,17 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     modalFactory.setBottom(true);
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
-
     $scope.initData = function () {
-
+        $("input").focus(function()
+        {
+            $('.test').css('visibility',"hidden");
+            $('.search-bar').css('position',"relative");
+            $('#nav-bottom').hide();
+        }).blur(function(){
+            $('.test').css('visibility',"visible");
+            $('.search-bar').css('position',"fixed");
+            $('#nav-bottom').show();
+        });
         modalFactory.setCurrentPage('fl');
         $('#all-list').css('min-height',document.documentElement.clientHeight-40);
         $scope.STORE_ID = 0;
