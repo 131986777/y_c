@@ -3,16 +3,19 @@
   <div style="margin: 0 auto;display: none;font-size: 0">
     <img src="../../public/img/icon-linkLogo.png" >
   </div>
-  <div class="search-bar flexbox navbar-fixed-top">
+  <form class="search-bar flexbox navbar-fixed-top">
     <input class="search-input cell bg-grey" type="search" ng-keyup="myKeyup($event)"
            ng-model="filter['SHOP_PRODUCT.PRD_NAME']"
-           placeholder="输入菜品名x">
+           placeholder="输入菜品名">
     <a class="icon-wrap cell fixed" ng-click="searchPrd()">
       <i class="icon icon-search"></i>
     </a>
-  </div>
+  </form>
   <!-- END 商品搜索 -->
-  <div class="weui_tab list-padding">
+    <div class="test-wrap bg-grey ">
+    <div class="test">
+  <div class="weui_tab list-padding bg-grey">
+      <div class="test">
     <div class="nav-class">
       <div class="nav-links"
            ng-class="{true:'weui_bar_item_on'}[filter['SHOP_PRODUCT.CLASS_ID'] == undefined]"
@@ -81,3 +84,5 @@
     <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
   </div>
 </div>
+</div>
+    </div>

@@ -10,15 +10,14 @@
  */
 html {
     font-size: 10px;
-    height: 100%;
+
 }
 
 body {
     font-family: "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
     line-height: 1;
     padding-bottom: 53px;
-    height: 100%;
-    overflow: hidden;
+
 }
 
 a:link,
@@ -1581,6 +1580,7 @@ p {
     top:44px;
     left: 0;
     bottom: 101px;
+    background-color: #fff;
     overflow-x: hidden;
     overflow-y: auto;
 }
