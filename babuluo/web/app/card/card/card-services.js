@@ -1,6 +1,13 @@
 
 AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
-
+    //根据用户输入的时间范围来查询记录
+    this.getCardMoneyGroupByRange = function (event,startDay,endDay) {
+        return $resource(baseURL+"/stat/member_card_money_group_by_range?EVENT=:EVENT&STARTDAY=:STARTDAY&ENDDAY=:ENDDAY",{'EVENT':event,'STARTDAY':startDay,'ENDDAY':endDay},{
+            'update':{
+                method:'PUT'
+            }
+        });
+    }
     this.getCardMoneyChangeRange = function () {
         return $resource(baseURL+"/stat/member_card_money_change_range",{},{
             'update':{
