@@ -1,9 +1,5 @@
-AndSellMainModule.service('pointFactory', function ($resource, baseURL) {
-    this.addPointList= function (form) {
-        return $resource(baseURL + '/member/point/add', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+AndSellMainModule.service('pointFactory', function (http) {
+
+    this.addPointList= http.post('/member/point/add');
+
 });

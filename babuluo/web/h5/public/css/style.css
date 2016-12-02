@@ -18,7 +18,7 @@ body {
     line-height: 1;
     padding-bottom: 53px;
     height: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 a:link,

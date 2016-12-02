@@ -7,47 +7,45 @@ var AndSellData = angular.module("AndSell.data", []);
 AndSellService.constant('baseURL', '/AndSell/bubu');
 
 AndSellService.factory("http", function ($http) {
-    var _post = function (url, data) {
-        return $http.post(url, $.param(data), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}});
-    };
-
-    var _get = function (url) {
-        return $http.get(url);
-    };
-
-    var _postFile = function (url, file) {
-        var fd = new FormData();
-        fd.append('file', file);
-        return $http.post(url, fd, {
-            transformRequest: angular.identity, headers: {'Content-Type': undefined}
+    var _post = function (url, data,funcSuccess,funcFail) {
+        return $http.post(url, $.param(data), {headers: {'Content-Type': 'application/x-www-form-urlencoded','withCredentials': true}}).success(function (response) {
+            if (response.code == 0) {
+                if (angular.isFunction(funcSuccess)) {
+                    if (funcSuccess != undefined) {
+                        funcSuccess(response);
+                    }
+                }
+            } else {
+                if (angular.isFunction(funcFail)) {
+                    if (funcFail != undefined) {
+                        funcFail(response);
+                    }
+                }
+            }
         });
     };
-
     return {
-        post: function (url, data, successCallback, errorCallback) {
-            return _post(url, data).success(function (result) {
+        post: function (url,init) {
+            return function (form, funcSuccess, funcFail) {
+                if (form == undefined) {
+                    form = {};
+                }
+                if (init != undefined&&angular.isFunction(init)) {
+                    init(form);
+                }
+                return _post(baseURL + url, form,funcSuccess,funcFail)
+            }
+        },
+        post_ori: function (url,param,func,error) {
+            return $http.post(url, $.param(param), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function (result) {
 
-                if (angular.isFunction(successCallback)) {
-                    successCallback(result);
+                if (angular.isFunction(func)) {
+                    func(result);
                 }
             }).error(function (err) {
-                if (angular.isFunction(errorCallback)) {
-                    errorCallback(err);
+                if (angular.isFunction(error)) {
+                    error(err);
                 }
-            });
-        }, get: function (url, successCallback, errorCallback) {
-            return _get(url).success(function (result) {
-                if (angular.isFunction(successCallback)) {
-                    successCallback(result);
-                }
-            }).error(function (err) {
-                if (angular.isFunction(errorCallback)) {
-                    errorCallback(err);
-                }
-            });
-        }, postFile: function (url, fileData, successCallback) {
-            return _postFile(url, fileData).success(function (response) {
-                successCallback(response);
             });
         }
     };
@@ -248,7 +246,7 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
                 }
                 obj.PN = $scope.currentPage;
                 var url = baseURL + $scope.url;
-                http.post(url, obj, function (data) {
+                http.post_ori(url, obj, function (data) {
                     if (data != undefined && data.data.length > 0) {
                         $scope.pageObject = data.data;
                         var tmp = parseInt(data.extraData.page.querySize
@@ -320,7 +318,7 @@ AndSellUI.directive('classSwitchModal', function (http, baseURL, classFactory) {
         controller: function ($scope) {
 
             $scope.getInitData = function () {
-                classFactory.getPrdClassList().get({}, function (response) {
+                classFactory.getPrdClassList({}, function (response) {
                     $scope.classList = response.data;
                 });
             }
@@ -355,7 +353,7 @@ AndSellUI.directive('tagSwitchModal', function (http, baseURL, tagFactory) {
         controller: function ($scope) {
 
             $scope.getInitData = function () {
-                tagFactory.getPrdTagList().get({}, function (response) {
+                tagFactory.getPrdTagList({}, function (response) {
                     $scope.tagList = response.data;
                 });
             }
@@ -390,13 +388,13 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
         controller: function ($scope) {
 
             $scope.getInitData = function () {
-                tagFactory.getPrdTagList().get({}, function (response) {
+                tagFactory.getPrdTagList({}, function (response) {
                     $scope.tagList = response.data;
                 });
-                classFactory.getPrdClassList().get({}, function (response) {
+                classFactory.getPrdClassList({}, function (response) {
                     $scope.classList = response.data;
                 });
-                unitFactory.getPrdUnitList().get({}, function (response) {
+                unitFactory.getPrdUnitList({}, function (response) {
                     $scope.unitList = response.data;
                 });
             };
@@ -462,7 +460,7 @@ AndSellUI.directive('couponItemSwitchModal', function (http, baseURL,couponFacto
         controller: function ($scope) {
 
             $scope.getInitData = function () {
-                couponFactory.getCouponList().get({}, function (response) {
+                couponFactory.getCouponList({}, function (response) {
                     $scope.couponList = response.data;
                 });
             };
@@ -497,13 +495,13 @@ AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFact
         controller: function ($scope) {
 
             $scope.getInitData = function () {
-                tagFactory.getPrdTagList().get({}, function (response) {
+                tagFactory.getPrdTagList({}, function (response) {
                     $scope.tagList = response.data;
                 });
-                classFactory.getPrdClassList().get({}, function (response) {
+                classFactory.getPrdClassList({}, function (response) {
                     $scope.classList = response.data;
                 });
-                unitFactory.getPrdUnitList().get({}, function (response) {
+                unitFactory.getPrdUnitList({}, function (response) {
                     $scope.unitList = response.data;
                 });
             }

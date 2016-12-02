@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('user_role_roleModify_Controller', function ($scope, $state, $stateParams, roleFactory, modalFactory,$q) {
+angular.module('AndSell.Main').controller('user_role_roleModify_Controller', function ($scope, $state, $stateParams, roleFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('修改角色信息');
@@ -15,7 +15,7 @@ angular.module('AndSell.Main').controller('user_role_roleModify_Controller', fun
         //加载角色信息
         var user = {};
         user['USER_ROLE.ID'] = $stateParams.id;
-        roleFactory.getRoleById(user).get({}, function (response) {
+        roleFactory.getRoleById(user, function (response) {
             $scope.roleModify = response.data[0];
         });
 
@@ -30,8 +30,7 @@ angular.module('AndSell.Main').controller('user_role_roleModify_Controller', fun
     $scope.loadAPPs = function () {
 
         //加载权限App类型
-        roleFactory.getAppClass().get({}, function (response) {
-            console.log(response);
+        roleFactory.getAppClass({}, function (response) {
             $scope.roleClassList = response.data;
             $scope.roleClassList.forEach(function (ele) {
                 ele.childList = $scope.filterParentAuth(ele['APP_CLASS.ID']);
@@ -44,7 +43,7 @@ angular.module('AndSell.Main').controller('user_role_roleModify_Controller', fun
         var returnValue = new Array;
         var form = {};
         form['APP.CLASS_ID'] = id;
-        roleFactory.getAppByClass(form).get({}, function (response) {
+        roleFactory.getAppByClass(form, function (response) {
             response.data.forEach(function (ele) {
                 ele['APP.CHECKED'] = false;
                 $scope.appChooseList.forEach(function (ele1) {
@@ -53,7 +52,6 @@ angular.module('AndSell.Main').controller('user_role_roleModify_Controller', fun
                     }
                 });
                 returnValue.push(ele);
-
             });
         });
         return returnValue;
@@ -62,9 +60,8 @@ angular.module('AndSell.Main').controller('user_role_roleModify_Controller', fun
     $scope.loadChoice = function () {
         var form = {};
         form['APP_MAP_ROLE.ROLE_ID'] = $stateParams.id;
-        roleFactory.getAppListByRole(form).get({}, function (response) {
+        roleFactory.getAppListByRole(form, function (response) {
             $scope.appChooseList = response.data;
-            console.log($scope.appChooseList);
             $scope.deferLoad.resolve(response);
         });
     };
@@ -83,7 +80,6 @@ angular.module('AndSell.Main').controller('user_role_roleModify_Controller', fun
                 }
             })
         }
-        console.log($scope.appChooseList);
     };
 
     //设置页面Bottom触发事件
@@ -94,14 +90,11 @@ angular.module('AndSell.Main').controller('user_role_roleModify_Controller', fun
         }
         $scope.roleModify['ROLE_MAP_APP'] = $scope.appChooseList;
         console.log($scope.roleModify['ROLE_MAP_APP']);
-        roleFactory.modRoleById($scope.roleModify).get({}, function (response) {
-            console.log(response);
-            if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert("修改成功");
-                $state.go('user/role/roleList');
-            } else {
-                modalFactory.showShortAlert(response.msg);
-            }
+        roleFactory.modRoleById($scope.roleModify, function (response) {
+            modalFactory.showShortAlert("修改成功");
+            $state.go('user/role/roleList');
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     }, function () {
         //取消事件

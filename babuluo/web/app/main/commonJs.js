@@ -2,7 +2,8 @@
 
 var PRODUCT_DEFAULT_IMG = "/uploads/images/product.png";
 var FILE_SERVER_DOMAIN = "http://bbl-upload.oss-cn-shanghai.aliyuncs.com/";
-var basePath='/AndSell/app/';
+var basePath = '/AndSell/app/';
+var baseURL = '/AndSell/bubu';
 
 <!--############通用方法区############-->
 
@@ -115,15 +116,21 @@ function setContentsInfoForOrder_OFFLINE(sku) {
     var contents = '';
     if (sku['SHOP_ORDER_INFO_OFFLINE.SKU_1_VALUE'] != undefined) {
         contents += ' ';
-        contents += sku['SHOP_ORDER_INFO_OFFLINE.SKU_1_NAME'] + " : " + sku['SHOP_ORDER_INFO_OFFLINE.SKU_1_VALUE'];
+        contents += sku['SHOP_ORDER_INFO_OFFLINE.SKU_1_NAME']
+            + " : "
+            + sku['SHOP_ORDER_INFO_OFFLINE.SKU_1_VALUE'];
     }
     if (sku['SHOP_ORDER_INFO_OFFLINE.SKU_2_VALUE'] != undefined) {
         contents += ' ';
-        contents += sku['SHOP_ORDER_INFO_OFFLINE.SKU_2_NAME'] + " : " + sku['SHOP_ORDER_INFO_OFFLINE.SKU_2_VALUE'];
+        contents += sku['SHOP_ORDER_INFO_OFFLINE.SKU_2_NAME']
+            + " : "
+            + sku['SHOP_ORDER_INFO_OFFLINE.SKU_2_VALUE'];
     }
     if (sku['SHOP_ORDER_INFO_OFFLINE.SKU_3_VALUE'] != undefined) {
         contents += ' ';
-        contents += sku['SHOP_ORDER_INFO_OFFLINE.SKU_3_NAME'] + " : " + sku['SHOP_ORDER_INFO_OFFLINE.SKU_3_VALUE'];
+        contents += sku['SHOP_ORDER_INFO_OFFLINE.SKU_3_NAME']
+            + " : "
+            + sku['SHOP_ORDER_INFO_OFFLINE.SKU_3_VALUE'];
     }
     sku['SHOP_ORDER_INFO_OFFLINE.SKU_CONTENT_INFO'] = contents;
 }
@@ -139,12 +146,12 @@ function listToMap(list, key) {
     return map;
 }
 
-var replaceAll = function (str,s1, s2) {
+var replaceAll = function (str, s1, s2) {
     return str.replace(new RegExp(s1, "gm"), s2);
 }
 
 function routerPath(base, path, param, css) {
-    var url =base+path;
+    var url = base + path;
 
     var controller = {
         name: 'app', insertBefore: '#app-level', files: [url + '/controllers.js']
@@ -155,7 +162,7 @@ function routerPath(base, path, param, css) {
     };
 
     var loadItemList = new Array;
-    if (css != undefined&&css==true) {
+    if (css != undefined && css == true) {
         loadItemList.push(pageCss);
     }
     loadItemList.push(controller);
@@ -163,44 +170,41 @@ function routerPath(base, path, param, css) {
     var router = {};
     router.url = "/" + path;
     if (param != undefined) {
-        var p='';
+        var p = '';
         for (var s in param) {
-            p+='/:'+s;
+            p += '/:' + s;
         }
         router.url += p;
         router.params = (param);
     }
-    router.controller =  replaceAll( path+"/",'/','_') + "Controller";
+    router.controller = replaceAll(path + "/", '/', '_') + "Controller";
     router.templateUrl = url + "/index.html";
     router.resolve = {
-        loadServiceAndController: function ($ocLazyLoad,userFactory) {
-
-                userFactory.isLogin().get({'withCredentials': true}, function (response) {
-                    if (response.code != 0) {
-                        window.location.href='../login/index.html';
-                    }
-                });
-
-
+        loadServiceAndController: function ($ocLazyLoad, userFactory) {
+            console.log(1);
+            userFactory.isLogin({}, function (response) {
+                console.log(2);
+            }, function (response) {
+                window.location.href = '../login/index.html';
+            });
+            console.log(loadItemList);
             return $ocLazyLoad.load(loadItemList)
         }
     }
     return router;
 }
 
-function $when(from,to){
+function $when(from, to) {
     AndSellMainModule.config(function ($urlRouterProvider) {
-        $urlRouterProvider.when(from,to);
+        $urlRouterProvider.when(from, to);
     });
 }
 
-function $import(path,param,css){
+function $import(path, param, css) {
     AndSellMainModule.config(function ($stateProvider) {
-        $stateProvider.state(path,routerPath(basePath,path,param,css))
+        $stateProvider.state(path, routerPath(basePath, path, param, css))
     });
 }
-
-
 
 // ajax 对象
 function ajaxObject() {
@@ -208,8 +212,7 @@ function ajaxObject() {
     try {
         // Firefox, Opera 8.0+, Safari
         xmlHttp = new XMLHttpRequest();
-    }
-    catch (e) {
+    } catch (e) {
         // Internet Explorer
         try {
             xmlHttp = new ActiveXObject("Msxml2.XMLHTTP");
@@ -226,24 +229,22 @@ function ajaxObject() {
 }
 
 // ajax post请求：
-function ajaxPost ( url , data , fnSucceed , fnFail , fnLoading ) {
+function ajaxPost(url, data, fnSucceed, fnFail, fnLoading) {
     var ajax = ajaxObject();
-    ajax.open( "post" , url , true );
-    ajax.setRequestHeader( "Content-Type" , "application/x-www-form-urlencoded" );
+    ajax.open("post", url, true);
+    ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     ajax.withCredentials = true; //支持跨域发送cookies
     ajax.onreadystatechange = function () {
-        if( ajax.readyState == 4 ) {
-            if( ajax.status == 200 ) {
-                fnSucceed( ajax.responseText );
+        if (ajax.readyState == 4) {
+            if (ajax.status == 200) {
+                fnSucceed(ajax.responseText);
+            } else {
+                fnFail("HTTP请求错误！错误码：" + ajax.status);
             }
-            else {
-                fnFail( "HTTP请求错误！错误码："+ajax.status );
-            }
-        }
-        else {
+        } else {
             //fnLoading();
         }
     }
-    ajax.send( data );
+    ajax.send(data);
 
 }

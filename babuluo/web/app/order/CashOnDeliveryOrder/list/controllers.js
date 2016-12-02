@@ -57,7 +57,7 @@ angular.module('AndSell.Main').controller('order_CashOnDeliveryOrder_list_Contro
 
         var params = {};
         params['SHOP_ORDER.TYPE'] = 4;
-        orderFactory.getStateOrders(params).get({}, function (response) {
+        orderFactory.getStateOrders(params, function (response) {
             $scope.orderSizeMap = response.extraData.stateMap;
         });
 
@@ -79,7 +79,7 @@ angular.module('AndSell.Main').controller('order_CashOnDeliveryOrder_list_Contro
 
     //订单详情跳转
     $scope.toDetail = function (id) {
-        orderFactory.scanOrder(id).get({}, function (response) {
+        orderFactory.scanOrder({'SHOP_ORDER.ID':id}, function (response) {
             console.log(response);
         });
         $state.go('order/CashOnDeliveryOrder/orderDetail', {ORDER_ID: id});

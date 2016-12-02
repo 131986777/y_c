@@ -1,52 +1,15 @@
-AndSellMainModule.service('salesFactory', function ($resource, baseURL) {
+AndSellMainModule.service('salesFactory', function (http) {
 
-    this.ModifySalesState= function (form) {
-        return $resource(baseURL + '/sales/sales/modifyById', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.ModifySalesState=http.post('/sales/sales/modifyById');
 
-    this.AddSales= function (form) {
-        return $resource(baseURL + '/sales/sales/add', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.AddSales=http.post('/sales/sales/add');
 
-    this.AddSalesPlan= function (form) {
-        return $resource(baseURL + '/sales/salesplan/add', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.AddSalesPlan=http.post('/sales/salesplan/add');
 
+    this.ModifySalesProduct=http.post('/sales/salesplan/modifyById');
 
-    this.ModifySalesProduct = function (form){
-        return $resource(baseURL + '/sales/salesplan/modifyById', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
+    this.delSalePlanById=http.post('/sales/salesplan/modifyById');
 
-    this.delSalePlanById  = function (form){
-        return $resource(baseURL + '/sales/salesplan/modifyById', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
+    this.stopSalePlanById=http.post('/sales/salesplan/modifyById');
 
-    this.stopSalePlanById  = function (form){
-        console.log(form);
-        return $resource(baseURL + '/sales/salesplan/modifyById', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
 });

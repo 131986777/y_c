@@ -5,17 +5,9 @@ angular.module('AndSell.Main').controller('shop_shop_shopList_Controller', funct
 
     modalFactory.setBottom(false);
 
-    $scope.hourList = [
-        "0", "1", "2", "3", "4", "5", "6", "7", "8",
-        "9", "10", "11", "12", "13", "14", "15", "16",
-        "17", "18", "19", "20", "21", "22", "23"
-    ];
+    $scope.hourList = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"];
 
-    $scope.minList = [
-        "00", "05", "10", "15",
-        "20", "25", "30", "35",
-        "40", "45", "50", "55"
-    ];
+    $scope.minList = ["00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"];
 
     $scope.shopAdd = {};
     $scope.shopEdited = {};
@@ -23,13 +15,16 @@ angular.module('AndSell.Main').controller('shop_shop_shopList_Controller', funct
     $scope.bindData = function (response) {
         $scope.shopList = response.data;
         $scope.districtList = response.extraData.districtList;
-        console.log(response);
-
     };
 
     $scope.addShopList = function () {
 
-        if ($scope.shopAdd['SHOP.SHOP_NAME'] == undefined || $scope.shopAdd['SHOP.TELEPHONE'] == undefined || $scope.shopAdd['SHOP.DISTRICT_ID'] == '-1') {
+        if ($scope.shopAdd['SHOP.SHOP_NAME']
+            == undefined
+            || $scope.shopAdd['SHOP.TELEPHONE']
+            == undefined
+            || $scope.shopAdd['SHOP.DISTRICT_ID']
+            == '-1') {
             modalFactory.showAlert("请先填写完必填项。");
             return;
         }
@@ -39,19 +34,16 @@ angular.module('AndSell.Main').controller('shop_shop_shopList_Controller', funct
         //拼接时间
         $scope.shopAdd['SHOP.OPEN_TIME'] = $scope.open_time_hour + ":" + $scope.open_time_min;
         $scope.shopAdd['SHOP.CLOSE_TIME'] = $scope.close_time_hour + ":" + $scope.close_time_min;
-        shopFactory.addShopList($scope.shopAdd).get({}, function (response) {
-            if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                $("#add").modal('hide');
-                $scope.clearForm();
-                $scope.$broadcast('pageBar.reload');
-            }
+        shopFactory.addShopList($scope.shopAdd, function (response) {
+            $("#add").modal('hide');
+            $scope.clearForm();
+            $scope.$broadcast('pageBar.reload');
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     };
 
     $scope.getShopListById = function (sl) {
-        console.log(sl);
         $scope.shopEdited = clone(sl);
         $scope.edit_open_time_hour = $scope.shopEdited['SHOP.OPEN_TIME'].split(":")[0];
         $scope.edit_open_time_min = $scope.shopEdited['SHOP.OPEN_TIME'].split(":")[1];
@@ -60,23 +52,30 @@ angular.module('AndSell.Main').controller('shop_shop_shopList_Controller', funct
     };
 
     $scope.commitEdit = function () {
-        if ($scope.shopEdited['SHOP.SHOP_NAME'] == undefined || $scope.shopEdited['SHOP.TELEPHONE'] == undefined || $scope.shopEdited['SHOP.DISTRICT_ID'] == '-1') {
+        if ($scope.shopEdited['SHOP.SHOP_NAME']
+            == undefined
+            || $scope.shopEdited['SHOP.TELEPHONE']
+            == undefined
+            || $scope.shopEdited['SHOP.DISTRICT_ID']
+            == '-1') {
             modalFactory.showAlert("请先填写完必填项。");
             return;
         }
         //目前serviceId都设为1
         $scope.shopEdited['SHOP.SERVICE_ID'] = 1;
-        $scope.shopEdited['SHOP.OPEN_TIME'] = $scope.edit_open_time_hour + ":" + $scope.edit_open_time_min;
-        $scope.shopEdited['SHOP.CLOSE_TIME'] = $scope.edit_close_time_hour + ":" + $scope.edit_close_time_min;
+        $scope.shopEdited['SHOP.OPEN_TIME'] = $scope.edit_open_time_hour
+            + ":"
+            + $scope.edit_open_time_min;
+        $scope.shopEdited['SHOP.CLOSE_TIME'] = $scope.edit_close_time_hour
+            + ":"
+            + $scope.edit_close_time_min;
 
-        shopFactory.modShopListById($scope.shopEdited).get({}, function (response) {
-            if (response.extraData.state == 'true') {
-                $('#edit').modal('hide');
-                modalFactory.showShortAlert('修改成功');
-                $scope.$broadcast('pageBar.reload');
-            } else {
-                modalFactory.showShortAlert(response.msg);
-            }
+        shopFactory.modShopListById($scope.shopEdited, function (response) {
+            $('#edit').modal('hide');
+            modalFactory.showShortAlert('修改成功');
+            $scope.$broadcast('pageBar.reload');
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     };
 
@@ -84,18 +83,14 @@ angular.module('AndSell.Main').controller('shop_shop_shopList_Controller', funct
         if (sl['SHOP.IS_USE'] == "1") {
             modalFactory.showAlert("确定关停门店：［" + sl['SHOP.SHOP_NAME'] + "］?", function () {
                 sl['SHOP.IS_USE'] = "-1";
-                shopFactory.delById(sl).get({}, function (response) {
-                    if (response.extraData.state == 'true') {
-                        modalFactory.showShortAlert("关停成功");
-                    }
+                shopFactory.delById(sl, function (response) {
+                    modalFactory.showShortAlert("关停成功");
                 });
             });
         } else {
             sl['SHOP.IS_USE'] = "1";
-            shopFactory.delById(sl).get({}, function (response) {
-                if (response.extraData.state == 'true') {
-                    modalFactory.showShortAlert("启用成功");
-                }
+            shopFactory.delById(sl, function (response) {
+                modalFactory.showShortAlert("启用成功");
             });
         }
     };
@@ -114,23 +109,23 @@ angular.module('AndSell.Main').controller('shop_shop_shopList_Controller', funct
 
     $scope.addDistrict = function () {
 
-        if ($scope.add['DISTRICT.DISTRICT_NAME'] == undefined || $scope.add['DISTRICT.DISTRICT_NAME'] == "") {
+        if ($scope.add['DISTRICT.DISTRICT_NAME']
+            == undefined
+            || $scope.add['DISTRICT.DISTRICT_NAME']
+            == "") {
             modalFactory.showShortAlert("请填写区域名称");
             return
         }
         $scope.add['DISTRICT.SERVICE_ID'] = 1;
-        districtFactory.addDistrict($scope.add).get({}, function (response) {
+        districtFactory.addDistrict($scope.add, function (response) {
             $("#addDistrict").modal('hide');
-            if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert('新增成功');
-                $scope.$broadcast('pageBar.reload');
-                $scope.add['DISTRICT.DISTRICT_NAME'] = "";
-            }
+            modalFactory.showShortAlert('新增成功');
+            $scope.$broadcast('pageBar.reload');
+            $scope.add['DISTRICT.DISTRICT_NAME'] = "";
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     };
-
 
     //用于清除填写的内容
     $scope.clearForm = function () {
@@ -157,7 +152,7 @@ angular.module('AndSell.Main').controller('shop_shop_shopList_Controller', funct
     /**
      通过数据库中读取的经纬度信息，在地图上显示
      */
-    // 用经纬度设置地图中心点
+        // 用经纬度设置地图中心点
     $scope.showMap = function (sl) {
         if (sl['SHOP.LONGTUDE'] == undefined && sl['SHOP.LATITUDE'] == undefined) {
             modalFactory.showShortAlert("暂无地图信息");
@@ -165,14 +160,10 @@ angular.module('AndSell.Main').controller('shop_shop_shopList_Controller', funct
         }
         $('#showMap').modal('show');
         var map1 = new AMap.Map('allmap', {
-            resizeEnable: true,
-            center: [sl['SHOP.LONGTUDE'], sl['SHOP.LATITUDE']],
-            zoom: 16
+            resizeEnable: true, center: [sl['SHOP.LONGTUDE'], sl['SHOP.LATITUDE']], zoom: 16
         });
         var marker = new AMap.Marker({
-            position: map1.getCenter(),
-            draggable: true,
-            cursor: 'move'
+            position: map1.getCenter(), draggable: true, cursor: 'move'
         });
         marker.setMap(map1);
         // 设置点标记的动画效果，此处为弹跳效果
@@ -217,9 +208,7 @@ angular.module('AndSell.Main').controller('shop_shop_shopList_Controller', funct
         }
     };
 
-
     $scope.choosePoint = function () {
-
         $('#choosePoint').modal('show');
     };
 });

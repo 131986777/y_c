@@ -13,8 +13,7 @@ angular.module('AndSell.Main').controller('user_user_userModify_Controller', fun
         //加载员工信息
         var user = {};
         user['USER.UID'] = $stateParams.id;
-        userFactory.getUserByUID(user).get({}, function (response) {
-            console.log(response);
+        userFactory.getUserByUID(user, function (response) {
             $scope.userModify = response.data[0];
             $scope.roleList = response.extraData.roleList;
             //解析
@@ -34,7 +33,7 @@ angular.module('AndSell.Main').controller('user_user_userModify_Controller', fun
     };
 
     $scope.getShopList = function () {
-        shopFactory.getShopList().get({}, function (response) {
+        shopFactory.getShopList({}, function (response) {
             $scope.shopList = response.data;
         });
     };
@@ -48,13 +47,10 @@ angular.module('AndSell.Main').controller('user_user_userModify_Controller', fun
             pwd['USER.UID'] = $stateParams.id;
             pwd['USER.LOGIN_PWD'] = "123456";
             pwd['USER.MOBILE'] = $scope.userModify['USER.MOBILE'];
-            userFactory.modUserByUID(pwd).get({}, function (response) {
-                console.log(response);
-                if (response.extraData.state == 'true') {
-                    modalFactory.showShortAlert("密码重置成功");
-                } else {
-                    modalFactory.showShortAlert(response.msg);
-                }
+            userFactory.modUserByUID(pwd, function (response) {
+                modalFactory.showShortAlert("密码重置成功");
+            }, function (response) {
+                modalFactory.showShortAlert(response.msg);
             });
         });
     };
@@ -70,23 +66,20 @@ angular.module('AndSell.Main').controller('user_user_userModify_Controller', fun
         //拼接用户角色id
         $scope.userModify['USER.ROLE_ID_LIST'] = '';
         $scope.roleList.forEach(function (ele) {
-
             if (ele['USER_ROLE.CHECKED'] == true) {
-                $scope.userModify['USER.ROLE_ID_LIST'] = $scope.userModify['USER.ROLE_ID_LIST'] + "," + ele['USER_ROLE.ID'];
+                $scope.userModify['USER.ROLE_ID_LIST'] = $scope.userModify['USER.ROLE_ID_LIST']
+                    + ","
+                    + ele['USER_ROLE.ID'];
             }
             if ($scope.userModify['USER.ROLE_ID_LIST'].substr(0, 1) == ',') {
                 $scope.userModify['USER.ROLE_ID_LIST'] = $scope.userModify['USER.ROLE_ID_LIST'].substr(1);
             }
         });
-        console.log($scope.userModify['USER.ROLE_ID_LIST']);
-        userFactory.modUserByUID($scope.userModify).get({}, function (response) {
-            console.log(response);
-            if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert("修改成功");
-                $state.go('user/user/userList');
-            } else {
-                modalFactory.showShortAlert(response.msg);
-            }
+        userFactory.modUserByUID($scope.userModify, function (response) {
+            modalFactory.showShortAlert("修改成功");
+            $state.go('user/user/userList');
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     }, function () {
         //取消事件

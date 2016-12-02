@@ -1,83 +1,21 @@
-AndSellMainModule.service('couponFactory', function ($resource, baseURL) {
+AndSellMainModule.service('couponFactory', function (http) {
 
-    this.getCouponList = function (){
-        return $resource(baseURL + '/coupon/coupon/queryAll',null, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getCouponList=http.post('/coupon/coupon/queryAll');
 
-    this.addCouponRule = function (form) {
-        console.log('新增数据');
-        console.log(form);
-        console.log('新增数据');
-        return $resource(baseURL + '/coupon/rule/add', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.addCouponRule=http.post('/coupon/rule/add');
 
-    this.modifyCouponRule = function (form) {
-        return $resource(baseURL + '/coupon/rule/modifyById', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };//stopSouponById
-    this.stopCouponRuleById = function (form) {
-        console.log(123);
-        console.log(form);
-        return $resource(baseURL + '/coupon/rule/modifyIsStop', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };    //stopCouponById
+    this.modifyCouponRule=http.post('/coupon/rule/modifyById');
 
-    this.delCouponRule = function (form) {
-        return $resource(baseURL + '/coupon/rule/modifyIsDel', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
+    this.stopCouponRuleById=http.post('/coupon/rule/modifyIsStop');
 
-    };
-    this.addCouponInfo = function (form) {
-        //console.log('新增数据');
-        console.log(form);
-        //console.log('新增数据');
-        return $resource(baseURL + '/coupon/coupon/add', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-    this.modifyCoupon = function (form) {
-        return $resource(baseURL + '/coupon/coupon/modifyById', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
+    this.delCouponRule=http.post('/coupon/rule/modifyIsDel');
 
-    };
-    this.deleteCoupon = function (form) {
-        return $resource(baseURL + '/coupon/coupon/modIsDel', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
+    this.addCouponInfo=http.post('/coupon/coupon/add');
 
-    };
+    this.modifyCoupon=http.post('/coupon/coupon/modifyById');
 
-    this.stopCouponById = function (form) {
-        return $resource(baseURL + '/coupon/coupon/modifyIsStop', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
+    this.deleteCoupon=http.post('/coupon/coupon/modIsDel');
 
-    };
+    this.stopCouponById=http.post('/coupon/coupon/modifyIsStop');
 
 });

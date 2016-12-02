@@ -1,16 +1,5 @@
-AndSellMainModule.service('stockFactory', function ($resource, baseURL) {
+AndSellMainModule.service('stockFactory', function (http) {
 
-
-
-
-    this.modStockOnLine= function (form) {
-        return $resource(baseURL + '/stock/realtime/modifyById', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-
-
+    this.modStockOnLine= http.post('/stock/realtime/modifyById');
 
 });

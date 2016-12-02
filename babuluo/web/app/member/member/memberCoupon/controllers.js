@@ -4,12 +4,10 @@ angular.module('AndSell.Main').controller('member_member_memberCoupon_Controller
     modalFactory.setTitle('客户优惠券');
 
     $scope.bindData = function (response) {
-
         $scope.userDetailMap = response.extraData.userDetailMap;
-        $scope.couponData=response.extraData.couponList;
-        $scope.couponList=response.data;
+        $scope.couponData = response.extraData.couponList;
+        $scope.couponList = response.data;
         console.log($scope.couponList);
-
     };
     $scope.queryMemberById = function (memberId) {
         $scope.memberDetail = $scope.userDetailMap[memberId];
@@ -20,66 +18,48 @@ angular.module('AndSell.Main').controller('member_member_memberCoupon_Controller
     };
 
     $scope.detailClick = function (item) {
-        // $scope.detail = item;
-        $scope.detailArray=item.split("<br>");
-
+        $scope.detailArray = item.split("<br>");
     }
+
     $scope.coupon = {};
     $scope.add = {};
     $scope.add['MEMBER_COUPON.COUPON_ID'] = '';
     $scope.add['MEMBER_COUPON.EXPIRED_TIME'] = '';
 
     $scope.addMemberCoupon = function () {
-       // console.log($scope.memberId);
-        if($scope.memberId==undefined||$scope.memberId==''){
+        if ($scope.memberId == undefined || $scope.memberId == '') {
             modalFactory.showShortAlert('请输入登录名称并查询相关信息！');
-        }else if($scope.memberDetail==undefined){
+        } else if ($scope.memberDetail == undefined) {
             modalFactory.showShortAlert('请先查询相关信息');
-        }else{
+        } else {
 
-        $scope.add['MEMBER_COUPON.COUPON_ID'] = $scope.coupon['COUPON.ID'];
-        $scope.add['MEMBER_COUPON.EXPIRED_TIME'] = $scope.coupon['COUPON.END_DATETIME'];
-        $scope.add['MEMBER_COUPON.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
+            $scope.add['MEMBER_COUPON.COUPON_ID'] = $scope.coupon['COUPON.ID'];
+            $scope.add['MEMBER_COUPON.EXPIRED_TIME'] = $scope.coupon['COUPON.END_DATETIME'];
+            $scope.add['MEMBER_COUPON.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
 
-        $scope.coupon['COUPON.NUM_LEFT']=$scope.coupon['COUPON.NUM_LEFT']-1;
+            $scope.coupon['COUPON.NUM_LEFT'] = $scope.coupon['COUPON.NUM_LEFT'] - 1;
 
-
-        memberFactory.addMemberCoupon($scope.add).get({}, function (response) {
-
-         if (response.code == 400) {
-         modalFactory.showShortAlert(response.msg);
-
-         } else if (response.extraData.state == 'true') {
-
-             memberFactory.modCouponLeft($scope.coupon).get({},function(response){  //修改优惠券剩余数量
-                 if (response.code == 400) {
-                     modalFactory.showShortAlert(response.msg);
-
-                 } else if (response.extraData.state == 'true') {
-                     modalFactory.showShortAlert('新增成功');
-                     $scope.add='';
-                     $("#addCoupon").modal('hide');
-                     $scope.$broadcast('pageBar.reload');
-                 }
-
-             });
-
-         }
-
-         });
+            memberFactory.addMemberCoupon($scope.add, function (response) {
+                memberFactory.modCouponLeft($scope.coupon, function (response) {  //修改优惠券剩余数量
+                    modalFactory.showShortAlert('新增成功');
+                    $scope.add = '';
+                    $("#addCoupon").modal('hide');
+                    $scope.$broadcast('pageBar.reload');
+                }, function (response) {
+                    modalFactory.showShortAlert(response.msg);
+                });
+            }, function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
         }
     };
 
-    $scope.parseArray=function (data) {
-        console.log(456);
-      if (data!=undefined){
-          data=data.split(',');
-      }
-
-
+    $scope.parseArray = function (data) {
+        if (data != undefined) {
+            data = data.split(',');
+        }
         return data;
     }
-
 
 });
 

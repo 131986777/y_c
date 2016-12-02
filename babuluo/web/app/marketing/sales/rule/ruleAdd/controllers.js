@@ -8,9 +8,25 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
     var array = new Array();
     $scope.saveCurrentInfo = function (num) {
         if ($scope.salesInfo['SALES.SALE_TYPE'] == 3) {
-            var str = '{' + '"ProId"' + ':' + $scope.productId + ',' + '"Num"' + ':' + $scope.salesInfo['SALES.PRONUM' + num] + '}';
+            var str = '{'
+                + '"ProId"'
+                + ':'
+                + $scope.productId
+                + ','
+                + '"Num"'
+                + ':'
+                + $scope.salesInfo['SALES.PRONUM' + num]
+                + '}';
         } else {
-            var str = '{' + '"ProId"' + ':' + $scope.couponId + ',' + '"Num"' + ':' + $scope.salesInfo['SALES.PRONUM' + num] + '}';
+            var str = '{'
+                + '"ProId"'
+                + ':'
+                + $scope.couponId
+                + ','
+                + '"Num"'
+                + ':'
+                + $scope.salesInfo['SALES.PRONUM' + num]
+                + '}';
         }
         array.push(str);
         $scope.salesDetailInfo = array;
@@ -43,34 +59,29 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
         return form;
     }
 
-
     //设置页面Bottom触发事件
     modalFactory.setBottom(true, function () {
         console.log($scope.salesInfo);
         if ($scope.salesInfo == undefined) {
             modalFactory.showAlert("请填写完整信息");
             $scope.empty();
-        }
-        else if ($scope.salesInfo['SALES.NAME'] == undefined || $scope.salesInfo['SALES.INTRO'] == undefined) {
+        } else if ($scope.salesInfo['SALES.NAME']
+            == undefined
+            || $scope.salesInfo['SALES.INTRO']
+            == undefined) {
             modalFactory.showShortAlert("请填写完整信息");
-        }
-        else if ($scope.salesInfo['SALES.CONDITION_NUM1'] == undefined) {
+        } else if ($scope.salesInfo['SALES.CONDITION_NUM1'] == undefined) {
             modalFactory.showShortAlert("请填写完整信息");
-        }
-        else {
+        } else {
             var form = $scope.bindData($scope.salesInfo);
-            console.log(form);
-            salesFactory.AddSales(form).get({}, function (response) {
-                if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
-                    modalFactory.showShortAlert(response.msg);
-                } else if (response.extraData.state == 'true') {
-                    modalFactory.showShortAlert("保存成功");
-                    $scope.empty();
-                }
+            salesFactory.AddSales(form, function (response) {
+                modalFactory.showShortAlert("保存成功");
+                $scope.empty();
+            }, function (response) {
+                modalFactory.showShortAlert(response.msg);
             });
         }
     });
-
 
     //清空所有表单信息
     $scope.empty = function () {
@@ -82,8 +93,7 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
             $scope.salesInfo['SALES.SALE_CONTENT1'] = null;
             $scope.salesInfo['SALES.CONDITION_NUM1'] = null;
             $scope.salesInfo['SALES.PRONUM1'] = null;
-        }
-        else if (num == 3 || num == 4) {
+        } else if (num == 3 || num == 4) {
             $scope.salesInfo['SALES.SALE_CONTENT1'] = null;
             $scope.salesInfo['SALES.CONDITION_NUM1'] = null;
             $scope.salesInfo['SALES.PRONUM1'] = null;
@@ -109,8 +119,7 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
             $("#A" + num).text($scope.productName);
             data = null;
             $scope.$broadcast('pageBar.reload');
-        }
-        else {
+        } else {
             $scope.productId = data['SHOP_PRODUCT_SKU.SKU_ID'];
             $scope.productName = data['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'];
             var num = $scope.num;
@@ -139,20 +148,17 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
         }
     }
 
-
     //前端Jquery逻辑
     $(function () {
         $('.checkbox').click(function () {
-                if ($('#meiman').is(":checked")) {
-                    $('.meimanjian-ruler').removeClass('hidden');
-                    $('.manjian-ruler').addClass('hidden');
-                }
-                else {
-                    $('.meimanjian-ruler').addClass('hidden');
-                    $('.manjian-ruler').removeClass('hidden');
-                }
+            if ($('#meiman').is(":checked")) {
+                $('.meimanjian-ruler').removeClass('hidden');
+                $('.manjian-ruler').addClass('hidden');
+            } else {
+                $('.meimanjian-ruler').addClass('hidden');
+                $('.manjian-ruler').removeClass('hidden');
             }
-        );
+        });
 
         var len = $('.radio').length;
         for (var i = 0; i < len; i++) {
@@ -164,15 +170,12 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleAdd_Controll
         }
         ;
 
-
         $('.addItem').on("click", function () {
-            var a = $(this).parents('.content'),
-                b = a.find('.hidden');
+            var a = $(this).parents('.content'), b = a.find('.hidden');
             if (b.length == 1) {
                 b.eq(0).removeClass('hidden');
                 $(this).addClass('hidden');
-            }
-            else {
+            } else {
                 b.eq(0).removeClass('hidden');
             }
         });

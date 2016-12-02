@@ -27,7 +27,6 @@ angular.module('AndSell.Main').controller('product_product_productModify_Control
 
     $scope.uploadImageFiles = [];
     $scope.uploadImageFilesIndex=0;
-    //$scope.FILE_SERVER_DOMAIN = "http://babuluo-file.oss-cn-hangzhou.aliyuncs.com//";
 
     var ue;//editor
     insertHtml = function(html) {
@@ -71,9 +70,8 @@ angular.module('AndSell.Main').controller('product_product_productModify_Control
         });
 
         //加载商品数据
-        productFactory.getProductById($stateParams.productId).get({}, function (response) {
+        productFactory.getProductById({'SHOP_PRODUCT.PRD_ID':$stateParams.productId}, function (response) {
             $scope.modify=response.data[0];
-            console.log($scope.modify);
             if($scope.modify['SHOP_PRODUCT.CMP']!=null){
                 $scope.uploadImageFiles.push($scope.modify['SHOP_PRODUCT.CMP']);
             }
@@ -99,13 +97,13 @@ angular.module('AndSell.Main').controller('product_product_productModify_Control
 
 
         //加载商品分类数据
-        classFactory.getPrdClassList().get({}, function (response) {
+        classFactory.getPrdClassList({}, function (response) {
             $scope.prdClssList = response.data;
             initDefer_class.resolve();
         });
 
         //加载商品标签数据
-        tagFactory.getPrdTagList().get({}, function (response) {
+        tagFactory.getPrdTagList({}, function (response) {
             $scope.prdTagList = response.data;
             $scope.prdTagList.forEach(function (ele) {
                 $scope.prdTagMap.set(ele['SHOP_TAG.TAG_ID'],ele['SHOP_TAG.TAG']);
@@ -114,7 +112,7 @@ angular.module('AndSell.Main').controller('product_product_productModify_Control
         });
 
         //加载商品单位数据
-        unitFactory.getPrdUnitList().get({}, function (response) {
+        unitFactory.getPrdUnitList({}, function (response) {
             $scope.prdUnitList = response.data;
             initDefer_unit.resolve();
         });
@@ -170,7 +168,7 @@ angular.module('AndSell.Main').controller('product_product_productModify_Control
             if (i == 4)
                 form['SHOP_PRODUCT.P5'] = uploadImageArray[4];
         }
-        productFactory.modifyProduct(form).get({}, function (response) {
+        productFactory.modifyProduct(form, function (response) {
             if(response.code==0){
                 modalFactory.showShortAlert("保存成功");
                 $state.go("product/product/productList");

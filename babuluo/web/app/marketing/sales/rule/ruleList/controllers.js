@@ -2,7 +2,6 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
 
     modalFactory.setTitle('促销规则管理');
 
-
     modalFactory.setBottom(false);
 
     $scope.bindData = function (response) {
@@ -176,27 +175,21 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
         $scope.detailSaleList = jointList;
     };
 
-
     //根据ID修改优惠状态（停用or启用）
     $scope.changeState = function (form) {
         if (form['SALES.STATE'] == '1') {
             modalFactory.showAlert("确定停用?", function () {
                 form['SALES.STATE'] = -1;
-                salesFactory.ModifySalesState(form).get({}, function (response) {
-                    if (response.extraData.state == 'true') {
-                        modalFactory.showShortAlert("停用成功");
-                        $scope.$broadcast('pageBar.reload');
-                    }
+                salesFactory.ModifySalesState(form, function (response) {
+                    modalFactory.showShortAlert("停用成功");
+                    $scope.$broadcast('pageBar.reload');
                 });
             });
-        }
-        else {
+        } else {
             form['SALES.STATE'] = 1;
-            salesFactory.ModifySalesState(form).get({}, function (response) {
-                if (response.extraData.state == 'true') {
-                    modalFactory.showShortAlert("启用成功");
-                    $scope.$broadcast('pageBar.reload');
-                }
+            salesFactory.ModifySalesState(form, function (response) {
+                modalFactory.showShortAlert("启用成功");
+                $scope.$broadcast('pageBar.reload');
             });
         }
     };
@@ -205,14 +198,13 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
     $scope.Delete = function (form) {
         modalFactory.showAlert("确定删除?", function () {
             form['SALES.IS_DEL'] = 1;
-            salesFactory.ModifySalesState(form).get({}, function (response) {
-                if (response.extraData.state == 'true') {
-                    modalFactory.showShortAlert("删除成功");
-                    $scope.$broadcast('pageBar.reload');
-                }
+            salesFactory.ModifySalesState(form, function (response) {
+                modalFactory.showShortAlert("删除成功");
+                $scope.$broadcast('pageBar.reload');
             });
         })
     };
+
     function putParaTogether() {
         var array = new Array();
         for (var i = 0; i < arguments.length; i++) {
@@ -221,13 +213,13 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
         return array;
     }
 
-    $scope.queryByName = function (name){
-        if(name == null||name == ''){
+    $scope.queryByName = function (name) {
+        if (name == null || name == '') {
             $scope.salesList = $scope.roundList;
-        }else {
-            $scope.salesList =[];
-            $scope.roundList.forEach(function(ele){
-                if( ele['SALES.NAME'] == name){
+        } else {
+            $scope.salesList = [];
+            $scope.roundList.forEach(function (ele) {
+                if (ele['SALES.NAME'] == name) {
                     $scope.salesList.push(ele);
                 }
             })
@@ -236,18 +228,28 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
     }
 
     $scope.saveSales = function () {
-        for(var i=0;i<$scope.detailSaleListInfo.length;i++) {
+        for (var i = 0; i < $scope.detailSaleListInfo.length; i++) {
             var conditionStr = 'SALES.CONDITION_NUM' + (i + 1);
             var contentStr = 'SALES.SALE_CONTENT' + (i + 1);
-            if ($scope.detailSaleList['SALES.SALE_TYPE'] == 3 || $scope.detailSaleList['SALES.SALE_TYPE'] == 4) {
+            if ($scope.detailSaleList['SALES.SALE_TYPE']
+                == 3
+                || $scope.detailSaleList['SALES.SALE_TYPE']
+                == 4) {
                 var name = $scope.detailSaleListInfo[i][5];
-                $scope.productList.forEach(function(ele){
-                    if(ele['SHOP_PRODUCT.PRD_NAME'] == name){
+                $scope.productList.forEach(function (ele) {
+                    if (ele['SHOP_PRODUCT.PRD_NAME'] == name) {
                         proId = ele['SHOP_PRODUCT.PRD_ID']
                     }
                 })
-                var str = '{' + '"ProId"' + ':' + proId + ','
-                    + '"Num"' + ':' + $scope.detailSaleListInfo[i][3] + '}';
+                var str = '{'
+                    + '"ProId"'
+                    + ':'
+                    + proId
+                    + ','
+                    + '"Num"'
+                    + ':'
+                    + $scope.detailSaleListInfo[i][3]
+                    + '}';
                 $scope.detailSaleList[contentStr] = str;
                 $scope.detailSaleList[conditionStr] = $scope.detailSaleListInfo[i][1];
 
@@ -256,8 +258,7 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
                 $scope.detailSaleList[contentStr] = $scope.detailSaleListInfo[i][3];
             }
         }
-        salesFactory.ModifySalesState($scope.detailSaleList).get({}, function (response) {
-            console.log($scope.detailSaleList);
+        salesFactory.ModifySalesState($scope.detailSaleList, function (response) {
             if (response.extraData.state == 'true') {
                 modalFactory.showShortAlert("修改成功");
                 $scope.$broadcast('pageBar.reload');

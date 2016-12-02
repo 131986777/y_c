@@ -1,41 +1,9 @@
-AndSellMainModule.service('districtFactory', function ($resource, baseURL) {
+AndSellMainModule.service('districtFactory', function (http) {
 
-    this.getDistrictList = function (form) {
-        return $resource(baseURL + '/shop/shop_district/queryAll', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getDistrictList=http.post('/shop/shop_district/queryAll');
+    this.getDistrictById=http.post('/shop/shop_district/getById');
+    this.modDistrictById=http.post('/shop/shop_district/modifyById');
+    this.addDistrict=http.post('/shop/shop_district/add');
+    this.delById=http.post('/shop/shop_district/delById');
 
-    this.getDistrictById = function (form) {
-        return $resource(baseURL + '/shop/shop_district/getById', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-
-    this.modDistrictById = function (form) {
-        return $resource(baseURL + '/shop/shop_district/modifyById', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-
-    this.addDistrict = function (form) {
-        return $resource(baseURL + '/shop/shop_district/add', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-    this.delById = function (form) {
-        return $resource(baseURL + '/shop/shop_district/delById', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
 });

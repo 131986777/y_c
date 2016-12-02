@@ -4,30 +4,23 @@ angular.module('AndSell.Main').controller('member_member_memberInfo_Controller',
     modalFactory.setTitle('客户信息');
 
     $scope.memberId = $stateParams.id;
-    console.log("这是客户的id：" + $scope.memberId);
 
     $scope.initLoad = function () {
-
         $scope.deferLoad = $q.defer();
-
         $scope.loadSource();
         $scope.loadType();
         $scope.loadMemberDetails();
-
     };
 
     $scope.loadMemberDetails = function () {
-
         $scope.promiseAll = $q.all([$scope.deferLoad.promise]);
-
         $scope.promiseAll.then(function () {
             if ($scope.memberId == 0) {
                 modalFactory.showShortAlert("无该客户");
             }
             var form = {};
             form['MEMBER.USER_ID'] = $scope.memberId;
-
-            memberFactory.getMemberListById(form).get({}, function (response) {
+            memberFactory.getMemberListById(form, function (response) {
                 $scope.memberInfo = response.data[0];
             });
         });
@@ -37,23 +30,21 @@ angular.module('AndSell.Main').controller('member_member_memberInfo_Controller',
     //加载客户来源
     $scope.loadSource = function () {
 
-        memberSourceFactory.getMemberSourceList().get({}, function (response) {
+        memberSourceFactory.getMemberSourceList({}, function (response) {
             $scope.sourceList = response.data;
             $scope.sourceList.forEach(function (ele) {
                 $scope.sourceMap.set(ele['MEMBER_CODE_SOURCE.CODE'], ele['MEMBER_CODE_SOURCE.NAME']);
             });
             $scope.deferLoad.resolve(response);
-        }, null);
+        });
     };
 
     //加载客户类型
     $scope.loadType = function () {
-
-        memberTypeFactory.getMemberTypeList().get({}, function (response) {
+        memberTypeFactory.getMemberTypeList({}, function (response) {
             $scope.typeList = response.data;
-            console.log($scope.typeList);
             $scope.deferLoad.resolve(response);
-        }, null);
+        });
     };
 
     $scope.initLoad();
@@ -63,7 +54,7 @@ angular.module('AndSell.Main').controller('member_member_memberInfo_Controller',
         modalFactory.showAlert("确定将密码重置为【 A123456 】吗？", function () {
             $scope.memberInfo = {};
             $scope.memberInfo['MEMBER.USER_ID'] = $scope.memberId;
-            memberFactory.resetPwd($scope.memberInfo).get({}, function (response) {
+            memberFactory.resetPwd($scope.memberInfo, function (response) {
                 if (response.extraData.code == 0) {
                     modalFactory.showShortAlert("密码重置成功");
                     $scope.initLoad();
@@ -80,7 +71,7 @@ angular.module('AndSell.Main').controller('member_member_memberInfo_Controller',
             $scope.memberInfo = {};
             $scope.memberInfo['MEMBER.USER_ID'] = $scope.memberId;
             $scope.memberInfo['MEMBER.WX_OPENID'] = "{$null}";
-            memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
+            memberFactory.modMemberListById($scope.memberInfo, function (response) {
                 if (response.extraData.state == 'true') {
                     $scope.memberInfo['MEMBER.WX_OPENID'] = undefined;
                     modalFactory.showShortAlert("解绑成功");
@@ -98,7 +89,7 @@ angular.module('AndSell.Main').controller('member_member_memberInfo_Controller',
             $scope.memberInfo = {};
             $scope.memberInfo['MEMBER.USER_ID'] = $scope.memberId;
             $scope.memberInfo['MEMBER.QQ_OPENID'] = "{$null}";
-            memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
+            memberFactory.modMemberListById($scope.memberInfo, function (response) {
                 if (response.extraData.state == 'true') {
                     $scope.memberInfo['MEMBER.QQ_OPENID'] = undefined;
                     modalFactory.showShortAlert("解绑成功");
@@ -125,15 +116,12 @@ angular.module('AndSell.Main').controller('member_member_memberInfo_Controller',
             modalFactory.showAlert("用户名不能为空。");
             return;
         }
-        console.log($scope.memberInfo);
-        memberFactory.modMemberListById($scope.memberInfo).get({}, function (response) {
-            if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert("保存成功");
-                $scope.modifyID = false;
-                $scope.initLoad();
-            }
+        memberFactory.modMemberListById($scope.memberInfo, function (response) {
+            modalFactory.showShortAlert("保存成功");
+            $scope.modifyID = false;
+            $scope.initLoad();
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     }, function () {
         //取消事件

@@ -20,8 +20,7 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
         $scope.pointList = [];
         if (loginId == null || loginId == '') {
             $scope.pointList = $scope.searchList;
-        }
-        else {
+        } else {
             $scope.roundList = $scope.searchList;
             for (var i = 0; i < $scope.roundList.length; i++) {
                 if ($scope.roundList[i]['MEMBER_POINT_LIST.LOGIN_ID'] == loginId) {
@@ -35,12 +34,12 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
     //动态计算账户余额
     $scope.getDynamicBala = function () {
         if ($scope.changeType == 1) {
-            $scope.afterModify = parseInt($scope.memberDetail['MEMBER.POINT']) + parseInt($scope.modifyvalue);
-        }
-        else if ($scope.changeType == 0) {
-            $scope.afterModify = parseInt($scope.memberDetail['MEMBER.POINT']) - parseInt($scope.modifyvalue);
-        }
-        else {
+            $scope.afterModify = parseInt($scope.memberDetail['MEMBER.POINT'])
+                + parseInt($scope.modifyvalue);
+        } else if ($scope.changeType == 0) {
+            $scope.afterModify = parseInt($scope.memberDetail['MEMBER.POINT'])
+                - parseInt($scope.modifyvalue);
+        } else {
             modalFactory.showShortAlert("请输入变更类型");
         }
     }
@@ -69,18 +68,15 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
         $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.SERVICE_ID'] = $scope.memberDetail['MEMBER.SERVICE_ID'];
         if ($scope.changeType == 1) {
             $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.CHANGE_TYPE'] = 'increase';
-        }
-        else {
+        } else {
             $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.CHANGE_TYPE'] = 'decrease';
         }
-        pointFactory.addPointList($scope.ModifyBalanceInfo).get({}, function (response) {
-            if (response.code != undefined && (response.code == 4000 || response.code == 400)) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert("积分调整成功");
-                $("#point").modal('hide');
-                $scope.$broadcast('pageBar.reload');
-            }
+        pointFactory.addPointList($scope.ModifyBalanceInfo, function (response) {
+            modalFactory.showShortAlert("积分调整成功");
+            $("#point").modal('hide');
+            $scope.$broadcast('pageBar.reload');
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     }
 

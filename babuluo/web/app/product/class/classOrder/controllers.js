@@ -4,9 +4,7 @@ angular.module('AndSell.Main').controller('product_class_classOrder_Controller',
     modalFactory.setBottom(false);
 
     $scope.initLoad = function () {
-        classFactory.getPrdClassList().get({}, function (response) {
-            if (response.code == 0) {
-
+        classFactory.getPrdClassList({}, function (response) {
                 //获取数据
                 var data={
                     keyName : 'SHOP_PRODUCT_CLASS.CLASS_NAME',
@@ -16,11 +14,9 @@ angular.module('AndSell.Main').controller('product_class_classOrder_Controller',
                     lists : response.data
                 }
                 $scope.tree=data;
-
-            } else {
-                $scope.$broadcast("to-modal", {message: response.msg});
-            }
-        }, null);
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
     };
 
     $scope.initLoad();

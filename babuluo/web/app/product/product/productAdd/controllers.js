@@ -54,7 +54,7 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
         });
 
         //加载商品分类数据
-        classFactory.getPrdClassList().get({}, function (response) {
+        classFactory.getPrdClassList({}, function (response) {
             $scope.prdClssList = response.data;
             if ($scope.prdClssList.length > 0) {
                 $scope.add['SHOP_PRODUCT_CLASS.CLASS_ID'] = $scope.prdClssList[0]['SHOP_PRODUCT_CLASS.CLASS_ID'];
@@ -63,13 +63,13 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
         });
 
         //加载商品标签数据
-        tagFactory.getPrdTagList().get({}, function (response) {
+        tagFactory.getPrdTagList({}, function (response) {
             $scope.prdTagList = response.data;
             initDefer_tag.resolve();
         });
 
         //加载商品单位数据
-        unitFactory.getPrdUnitList().get({}, function (response) {
+        unitFactory.getPrdUnitList({}, function (response) {
             $scope.prdUnitList = response.data;
             if ($scope.prdUnitList.length > 0) {
                 $scope.add['SHOP_UNIT.UNIT_ID'] = $scope.prdUnitList[0]['SHOP_UNIT.UNIT_ID'];
@@ -78,7 +78,7 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
         });
 
         //加载商品编码
-        productFactory.getSpuCode().get({}, function (response) {
+        productFactory.getSpuCode({}, function (response) {
             $scope.spuCode = response.extraData.spuCode;
             $scope.product.tags.push(new Tag());
             $scope.product.tags[0]['SHOP_PRODUCT_SKU.PRD_SKU'] = $scope.spuCode + '010101';
@@ -90,14 +90,11 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
     $scope.initLoad();
 
     $scope.addProductSubmit = function () {
-        console.log($scope.tagList);
         if ($scope.add['SHOP_PRODUCT.PRD_NAME'] == undefined) {
             modalFactory.showShortAlert("请填写商品名称");
             return;
         }
-        console.log($scope.tags1);
-        console.log($scope.tags1.length);
-        if ($scope.tags1.length<1) {
+        if ($scope.tags1.length < 1) {
             modalFactory.showShortAlert("至少包含一种规格");
             return;
         }
@@ -115,7 +112,6 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
         var uploadImageArray = new Array();
         for (var i = 0; i < $scope.uploadImageFiles.length; i++) {
             if (i == $scope.uploadImageFilesIndex) {
-                console.log("封面图片为" + i);
                 form['SHOP_PRODUCT.CMP'] = $scope.uploadImageFiles[i];
             } else {
                 uploadImageArray.push($scope.uploadImageFiles[i]);
@@ -128,13 +124,11 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
         form['SHOP_PRODUCT.P4'] = uploadImageArray[3];
         form['SHOP_PRODUCT.P5'] = uploadImageArray[4];
 
-        productFactory.addProduct(form).get({}, function (response) {
-            if (response.code == 0) {
-                modalFactory.showShortAlert("保存成功");
-                $state.go("product/product/productList");
-            } else {
-                modalFactory.showShortAlert(response.msg);
-            }
+        productFactory.addProduct(form, function (response) {
+            modalFactory.showShortAlert("保存成功");
+            $state.go("product/product/productList");
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     };
 
@@ -404,7 +398,6 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
             });
         }
 
-
     };
 
     var _postFile = function (file1, filetype) {
@@ -413,7 +406,10 @@ angular.module('AndSell.Main').controller('product_product_productAdd_Controller
         var date = new Date();
         var tempArray = file.name.split('.');
         fileSuffix = tempArray[tempArray.length - 1];     //文件后缀名
-        fileName = date.getTime() + (Math.round(Math.random() * 1000)).toString() + '.' + fileSuffix;    //文件名
+        fileName = date.getTime()
+            + (Math.round(Math.random() * 1000)).toString()
+            + '.'
+            + fileSuffix;    //文件名
         fd.append('OSSAccessKeyId', 'LTAIEHpVQat6f83C');
         fd.append('policy', $scope.policy);
         fd.append('Signature', $scope.signature);

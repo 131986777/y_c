@@ -29,9 +29,6 @@ AndSellMainModule.controller('MainController', function ($scope, $state, modalFa
             case 'order':
                 $state.go('order/order/orderList', {keyword: $scope.searchContent});
                 break;
-            //case 'returnOrder':
-            //    $state.go('prd-List', {keyword: $scope.searchContent});
-            //    break;
             case 'member':
                 $state.go('member/member/memberList', {keyword: $scope.searchContent});
                 break;
@@ -39,7 +36,7 @@ AndSellMainModule.controller('MainController', function ($scope, $state, modalFa
     }
 
     $scope.logout= function () {
-        userFactory.logOut().get({}, function (response) {
+        userFactory.logOut({}, function (response) {
             window.location.href='../login/index.html';
         });
     }

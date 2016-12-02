@@ -4,18 +4,14 @@ angular.module('AndSell.Main').controller('card_card_cardType_Controller', funct
 
     $scope.initLoad = function () {
 
-        cardFactory.getCardSourceList().get({}, function (repsonce) {
-            console.log(repsonce);
+        cardFactory.getCardSourceList({}, function (repsonce) {
             $scope.cardSourceList = repsonce.data;
             $scope.sourceMap = new Map();
             for (var i = 0; i < $scope.cardSourceList.length; i++) {
                 $scope.sourceMap.set($scope.cardSourceList[i]['MEMBER_CARD_SOURCE.ID'], $scope.cardSourceList[i]['MEMBER_CARD_SOURCE.NAME']);
             }
             $scope.queryCardBySource($scope.cardSourceList[0]['MEMBER_CARD_SOURCE.ID']);
-
-
-        }, null);
-
+        });
 
     };
 
@@ -27,62 +23,35 @@ angular.module('AndSell.Main').controller('card_card_cardType_Controller', funct
     };
     $scope.queryCardBySource = function (cardSource) {
 
-        cardFactory.getCardListBySource(cardSource).get({}, function (repsonce) {
-            console.log(repsonce);
+        cardFactory.getCardListBySource(cardSource, function (repsonce) {
             $scope.cardList = repsonce.data;
-            // $scope.cardListLeft = new Array();
-            // $scope.cardListRight = new Array();
-            //
-            // for (i in  $scope.cardList) {
-            //     if (i % 2 == 0) {       //偶数
-            //         $scope.cardListLeft.push($scope.cardList[i]);
-            //     } else {  //奇数
-            //         $scope.cardListRight.push($scope.cardList[i]);
-            //     }
-            // }
-
-        }, null);
+        });
 
     }
 
-
     $scope.initLoad();
     $scope.addCardType = function () {
-        console.log($scope.add);
-
-        cardFactory.addCardType($scope.add).get({}, function (response) {
-
-            if (response.code == 400) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert('新增成功');
-                $("#cardType").modal('hide');
-                // $scope.initLoad();
-                $scope.add = {};
-                $scope.add['MEMBER_CARD_TYPE.CARD_SOURCE_ID'] = $scope.cardSourceId;
-                $scope.queryCardBySource($scope.cardSourceId);
-
-            }
-
+        cardFactory.addCardType($scope.add, function (response) {
+            modalFactory.showShortAlert('新增成功');
+            $("#cardType").modal('hide');
+            $scope.add = {};
+            $scope.add['MEMBER_CARD_TYPE.CARD_SOURCE_ID'] = $scope.cardSourceId;
+            $scope.queryCardBySource($scope.cardSourceId);
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     };
 
     $scope.selectCardColor = function (color) {
-
-        //alert(color);
         $scope.add['MEMBER_CARD_TYPE.BG_COLOR'] = color;
     }
 
     $scope.deleteCardType = function (id) {
         modalFactory.showAlert("确认删除吗?", function () {
-            cardFactory.delCardType(id).get({}, function (res) {
-                if (res.extraData.state = 'true') {
-                    modalFactory.showShortAlert("删除成功");
+            cardFactory.delCardType({'MEMBER_CARD_TYPE.ID': id}, function (res) {
+                modalFactory.showShortAlert("删除成功");
+                $scope.queryCardBySource($scope.cardSourceId);
 
-                    // $scope.initLoad();
-                    $scope.queryCardBySource($scope.cardSourceId);
-
-                }
             });
         });
     }
@@ -91,21 +60,17 @@ angular.module('AndSell.Main').controller('card_card_cardType_Controller', funct
         $scope.modify = clone(item);
         $scope.modifyId = item['MEMBER_CARD_TYPE.ID'];
 
-
     };
-
 
     $scope.modifyCardType = function () {
         $scope.modify['MEMBER_CARD_TYPE.ID'] = $scope.modifyId;
 
-        cardFactory.modifyCardTypeById().get($scope.modify, function (response) {
-            if (response.code == 400) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                $("#modifyCardType").modal('hide');
-                modalFactory.showShortAlert("修改成功");
-                $scope.queryCardBySource($scope.cardSourceId);
-            }
+        cardFactory.modifyCardTypeById($scope.modify, function (response) {
+            $("#modifyCardType").modal('hide');
+            modalFactory.showShortAlert("修改成功");
+            $scope.queryCardBySource($scope.cardSourceId);
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     };
 

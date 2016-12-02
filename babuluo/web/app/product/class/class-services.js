@@ -1,36 +1,8 @@
-AndSellMainModule.service('classFactory', function ($resource, baseURL) {
+AndSellMainModule.service('classFactory', function (http) {
 
-      this.getPrdClassList = function () {
-        return $resource(baseURL + '/shop/product/class/queryAll', null, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
+    this.getPrdClassList = http.post('/shop/product/class/queryAll');
+    this.addPrdClass = http.post('/shop/product/class/add');
+    this.delPrdClass = http.post('/shop/product/class/delById');
+    this.modifyPrdClass = http.post('/shop/product/class/modifyById');
 
-      this.addPrdClass = function (form) {
-        return $resource(baseURL + '/shop/product/class/add', form, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
-
-      this.delPrdClass = function (id) {
-        return $resource(baseURL
-            + '/shop/product/class/delById?shop_product_class.class_id=:class_id', {'class_id': id}, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
-
-      this.modifyPrdClass = function () {
-        return $resource(baseURL + '/shop/product/class/modifyById', null, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
-
-    });
+});

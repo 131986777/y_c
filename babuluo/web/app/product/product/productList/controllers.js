@@ -29,20 +29,20 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
 
     $scope.bindData = function (response) {
         $scope.productList = response.data;
-        $scope.productMap =listToMap($scope.productList,'SHOP_PRODUCT.PRD_ID');
+        $scope.productMap = listToMap($scope.productList, 'SHOP_PRODUCT.PRD_ID');
         $scope.tagList = response.extraData.tagList;
         $scope.classList = response.extraData.classList;
         $scope.classMap = response.extraData.classMap;
 
         //获取数据
-        var data={
-            keyName : 'SHOP_PRODUCT_CLASS.CLASS_NAME',
-            keyId : 'SHOP_PRODUCT_CLASS.CLASS_ID',
-            keyPId : 'SHOP_PRODUCT_CLASS.PARENT_CLASS_ID',
-            rootId : 0,
-            lists : $scope.classList
+        var data = {
+            keyName: 'SHOP_PRODUCT_CLASS.CLASS_NAME',
+            keyId: 'SHOP_PRODUCT_CLASS.CLASS_ID',
+            keyPId: 'SHOP_PRODUCT_CLASS.PARENT_CLASS_ID',
+            rootId: 0,
+            lists: $scope.classList
         }
-        $scope.tree=data;
+        $scope.tree = data;
 
     };
 
@@ -57,12 +57,12 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
         var params = {};
         params['SHOP_PRODUCT.PRD_ID'] = ids;
         params['SHOP_PRODUCT.IS_SALE'] = SALE_STATE;
-        modalFactory.showAlert("确定" + info + "这 "+ids.split(",").length+" 条商品吗?", function () {
-            productFactory.setProductState(params).get({}, function () {
+        modalFactory.showAlert("确定" + info + "这 " + ids.split(",").length + " 条商品吗?", function () {
+            productFactory.setProductState(params, function () {
                 ids.split(',').forEach(function (ele) {
-                    $scope.productMap.get(ele)['SHOP_PRODUCT.IS_SALE']=SALE_STATE;
+                    $scope.productMap.get(ele)['SHOP_PRODUCT.IS_SALE'] = SALE_STATE;
                 })
-                modalFactory.showShortAlert(info+'成功!');
+                modalFactory.showShortAlert(info + '成功!');
             });
         })
     }
@@ -76,7 +76,7 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
         var params = clone(item);
         params['SHOP_PRODUCT_SKU.IS_SALE'] = params['SHOP_PRODUCT_SKU.IS_SALE'] * -1;
         modalFactory.showAlert("确定" + info + "该规格吗?", function () {
-            productFactory.setSkuState(params).get({}, function () {
+            productFactory.setSkuState(params, function () {
                 item['SHOP_PRODUCT_SKU.IS_SALE'] = item['SHOP_PRODUCT_SKU.IS_SALE'] * -1;
             });
         })
@@ -87,8 +87,8 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
         var params = {};
         params['SHOP_PRODUCT.PRD_ID'] = ids;
         params['SHOP_PRODUCT.IS_DEL'] = 1;
-        modalFactory.showAlert("确定删除这 "+ids.split(",").length+" 条商品吗?(不可恢复)", function () {
-            productFactory.delProduct(params).get({}, function () {
+        modalFactory.showAlert("确定删除这 " + ids.split(",").length + " 条商品吗?(不可恢复)", function () {
+            productFactory.delProduct(params, function () {
                 $scope.$broadcast('pageBar.reload');
                 modalFactory.showShortAlert('删除成功!');
             });
@@ -98,7 +98,7 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
     //删除sku
     $scope.delSku = function (item) {
         item['SHOP_PRODUCT_SKU.IS_DEL'] = 1;
-        productFactory.delSku(item).get({}, function () {
+        productFactory.delSku(item, function () {
             $scope.$broadcast('pageBar.reload');
         });
     }
@@ -118,31 +118,32 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
     $scope.submitModifySkuPrice = function () {
         var param = {};
         param.skuList = JSON.stringify($scope.changeList);
-        productFactory.modifySkuListPrice(param).get({}, function (response) {
+        productFactory.modifySkuListPrice(param, function (response) {
             modalFactory.showShortAlert("改价成功");
             $('#modifySkuPrice').modal('hide');
             modalFactory.reload();
         });
     }
 
-    $scope.setPrdClass= function (data) {
-        if($scope.getCheckIdList().length==0){
+    $scope.setPrdClass = function (data) {
+        if ($scope.getCheckIdList().length == 0) {
             modalFactory.showShortAlert('至少勾选一个！');
             return;
         }
-        modalFactory.showAlert("确定移动这些商品至分类 ： "+data['SHOP_PRODUCT_CLASS.CLASS_NAME']+" 吗?", function () {
+        modalFactory.showAlert("确定移动这些商品至分类 ： "
+            + data['SHOP_PRODUCT_CLASS.CLASS_NAME']
+            + " 吗?", function () {
             var param = {};
             param['SHOP_PRODUCT.CLASS_ID'] = data['SHOP_PRODUCT_CLASS.CLASS_ID'];
             param['SHOP_PRODUCT.PRD_ID'] = $scope.getCheckIdList().toString();
-            productFactory.modifyPrdsClass(param).get({}, function (response) {
-                if (response.code == 0) {
-                    $('#setPrdClassModal').modal('hide');
-                    $scope.checkedList.forEach(function (ele) {
-                        ele['SHOP_PRODUCT.CLASS_ID'] = data['SHOP_PRODUCT_CLASS.CLASS_ID'];
-                        ele['SHOP_PRODUCT.CLASS_NAME'] = $scope.classMap[data['SHOP_PRODUCT_CLASS.CLASS_ID']];
-                    })
-                    modalFactory.showShortAlert('分类设置成功');
-                }
+            productFactory.modifyPrdsClass(param, function (response) {
+                $('#setPrdClassModal').modal('hide');
+                $scope.checkedList.forEach(function (ele) {
+                    ele['SHOP_PRODUCT.CLASS_ID'] = data['SHOP_PRODUCT_CLASS.CLASS_ID'];
+                    ele['SHOP_PRODUCT.CLASS_NAME'] = $scope.classMap[data['SHOP_PRODUCT_CLASS.CLASS_ID']];
+                })
+                modalFactory.showShortAlert('分类设置成功');
+
             });
         });
     }
@@ -151,9 +152,9 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
      * 多选处理
      **/
 
-    //批量设置标签
+        //批量设置标签
     $scope.setPrdsTag = function (data) {
-        if($scope.getCheckIdList().length==0){
+        if ($scope.getCheckIdList().length == 0) {
             modalFactory.showShortAlert('至少勾选一个！');
             return;
         }
@@ -165,14 +166,14 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
         });
         var params = {};
 
-        params['SHOP_PRODUCT.TAG_ID']=tagIdList.toString();
-        if(params['SHOP_PRODUCT.TAG_ID']==''){
-            params['SHOP_PRODUCT.TAG_ID']='{$null}';
+        params['SHOP_PRODUCT.TAG_ID'] = tagIdList.toString();
+        if (params['SHOP_PRODUCT.TAG_ID'] == '') {
+            params['SHOP_PRODUCT.TAG_ID'] = '{$null}';
         }
-        params['SHOP_PRODUCT.PRD_ID']=$scope.getCheckIdList().toString();
-        productFactory.modifyPrdsTag(params).get({}, function (response) {
+        params['SHOP_PRODUCT.PRD_ID'] = $scope.getCheckIdList().toString();
+        productFactory.modifyPrdsTag(params, function (response) {
             $scope.checkedList.forEach(function (ele) {
-                ele['SHOP_PRODUCT.TAG']=tagList;
+                ele['SHOP_PRODUCT.TAG'] = tagList;
             })
             modalFactory.showShortAlert('标签设置成功');
         });
@@ -180,7 +181,7 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
 
     //批量上下架
     $scope.changeProductsSaleState = function (state) {
-        if($scope.getCheckIdList().length==0){
+        if ($scope.getCheckIdList().length == 0) {
             modalFactory.showShortAlert('至少勾选一个！');
             return;
         }
@@ -189,7 +190,7 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
 
     //批量删除
     $scope.delProducts = function () {
-        if($scope.getCheckIdList().length==0){
+        if ($scope.getCheckIdList().length == 0) {
             modalFactory.showShortAlert('至少勾选一个！');
             return;
         }

@@ -1,52 +1,15 @@
-AndSellMainModule.service('memberGroupFactory', function ($resource, baseURL) {
+AndSellMainModule.service('memberGroupFactory', function (http) {
 
-      this.getMemberGroupList = function () {
-        return $resource(baseURL +'/member/group/queryAll', null, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
+    this.getMemberGroupList=http.post('/member/group/queryAll');
 
-    this.getMemberGroupListByType = function (id) {
-        return $resource(baseURL +'/member/group/getByTypeId?member_code_group.TYPE_ID=:ID', {'ID': id}, null, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getMemberGroupListByType=http.post('/member/group/getByTypeId');
 
-      this.getMemberTypeList=function () {
-          return $resource(baseURL +'/member/type/queryAll', null, {
-              'update': {
-                  method: 'PUT'
-              }
-          });
-      }
+    this.getMemberTypeList=http.post('/member/type/queryAll');
 
-      this.addMemberGroup = function (form) {    ///member/group/add
-        return $resource(baseURL + '/member/group/add', form, {           //http://192.168.1.200:8080/ape/bubu/member/source/add
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
+    this.addMemberGroup=http.post('/member/group/add');
 
-      this.delMemberGroup = function (id) {         //id应为字符串类型
+    this.delMemberGroup=http.post('/member/group/delById');
 
-          return $resource(baseURL + '/member/group/delById?member_code_group.ID=:ID', {'ID': id}, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
+    this.modifyById=http.post('/member/group/modifyById');
 
-      this.modifyById = function () {
-        return $resource(baseURL + '/member/group/modifyById', null, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
-
-    });
+});
