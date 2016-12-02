@@ -1,6 +1,22 @@
 
 AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
 
+    this.getCardMoneyChangeRange =function () {
+        return $resource(baseURL+'/stat/member_card_money_change_range',{},{
+            'update':{
+                method:'PUT'
+            }
+        });
+    };
+    //根据参数查询对应天数的记录   参数仅包含 消费，会员充值，会员开卡，手动更改，订单支付，消费冲红。
+    this.getCardMoneyGroup = function (event) {
+        return $resource(baseURL +'/stat/member_card_money_group?EVENT=:EVENT',{'EVENT':event},{
+            'update':{
+                method:'PUT'
+            }
+        });
+    };
+
     this.getMemberCardList = function () {
         return $resource(baseURL + '/member/membercard/queryAll', {}, {
             'update': {

@@ -13,25 +13,30 @@
             </div>
         </div>
     </div>
+    <div ng-controller="card_card_cardAnalysis_Controller as ctrl">
+        <!--<div ng-repeat="value in consumeList">{{value['.DAY']}}:{{value['.SOURCE']}}</div>-->
+        <!--<span ng-bind="consumeList.length"></span>-->
+        <!--{{rechargeList[0]}}-->
+        <span ng-if="rechargeList[0]['.DAY']=='16-11-16'">what</span>
         <table class="table table-bordered table-hover table-striped">
-            <thead>
-            <tr>
-                <th class="col-sm-1 text-center">门店</th>
-                <th class="col-sm-1 text-center">充值</th>
-                <th class="col-sm-1 text-center">消费</th>
-                <th class="col-sm-1 text-center">红冲</th>
-                <th class="col-sm-1 text-center">返点</th>
-            </tr>
-            </thead>
+                <thead>
+                <tr>
+                    <th class="col-sm-1 text-center">日期</th>
+                    <th class="col-sm-1 text-center">充值</th>
+                    <th class="col-sm-1 text-center">消费</th>
+                    <th class="col-sm-1 text-center">消费冲红</th>
+                    <th class="col-sm-1 text-center">返点</th>
+                </tr>
+                </thead>
             <tbody>
-            <tr align="center">
-                <td>云生活馆</td>
-                <td>100￥</td>
-                <td>1000￥</td>
-                <td>20￥</td>
-                <td>10￥</td>
-            </tr>
+                <tr align="center" ng-repeat="value in consumeList" ng-repeat="value2 in rechargeList">
+                    <td>20{{value['.DAY']}}</td>
+                    <td><span ng-repeat="value2 in rechargeList" ng-if="value2['.DAY']==value['.DAY']">{{value2['.SOURCE']}}</span></td>
+                    <td>{{value['.SOURCE']}}</td>
+                    <td><span ng-repeat="value3 in consumeRedList" ng-if="value3['.DAY']==value['.DAY']">{{value3['.SOURCE']}}</span></td>
+                    <td>--</td>
+                </tr>
             </tbody>
         </table>
-
+    </div>
 </div>
