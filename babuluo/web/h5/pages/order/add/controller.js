@@ -188,7 +188,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                     url: "#/pages/order/list/all"
                 };
                 window.history.replaceState(state,"","");
-
                 $state.go('pages/order/detail', {
                     ORDER_ID: response.extraData.ORDER_ID,
                     FROM: 'Add'
