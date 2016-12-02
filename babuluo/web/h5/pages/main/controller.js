@@ -38,7 +38,6 @@ AndSellH5MainModule.controller('H5.MainController', function ($scope, $state, mo
         }
         if(cartInfo.length>0)$scope.getPrdInfo(cartInfo,cartSize);
     }
-
     $scope.getPrdInfo = function (cartInfo,cartSize) {
         var size = 0;
         var params = {};
