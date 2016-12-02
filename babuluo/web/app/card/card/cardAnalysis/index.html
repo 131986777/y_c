@@ -29,11 +29,11 @@
                 </tr>
                 </thead>
             <tbody>
-                <tr align="center" ng-repeat="value in consumeList" ng-repeat="value2 in rechargeList">
-                    <td>20{{value['.DAY']}}</td>
-                    <td><span ng-repeat="value2 in rechargeList" ng-if="value2['.DAY']==value['.DAY']">{{value2['.SOURCE']}}</span></td>
-                    <td>{{value['.SOURCE']}}</td>
-                    <td><span ng-repeat="value3 in consumeRedList" ng-if="value3['.DAY']==value['.DAY']">{{value3['.SOURCE']}}</span></td>
+                <tr align="center" ng-repeat="value in cardMoneyChangeRange">
+                    <td>20{{value['._RANGE']}}</td>
+                    <td><span ng-repeat="value2 in rechargeList" ng-if="value2['.DAY']==value['._RANGE']">{{value2['.SOURCE']}}</span></td>
+                    <td><span ng-repeat="value3 in consumeList" ng-if="value3['.DAY']==value['._RANGE']">{{value3['.SOURCE']}}</span></td>
+                    <td><span ng-repeat="value4 in consumeRedList" ng-if="value4['.DAY']==value['._RANGE']">{{value4['.SOURCE']}}</span></td>
                     <td>--</td>
                 </tr>
             </tbody>

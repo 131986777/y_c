@@ -3,6 +3,10 @@ angular.module('AndSell.Main').controller('card_card_cardAnalysis_Controller', f
     modalFactory.setTitle('会员卡消费分析');
     $scope.initLoad = function () {
 
+        cardFactory.getCardMoneyChangeRange().get({},function (response) {
+            console.log(response);
+            $scope.cardMoneyChangeRange=response.data;
+        });
         cardFactory.getCardMoneyGroup("消费").get({},function (response) {
             console.log(response);
             $scope.consumeList = response.data;

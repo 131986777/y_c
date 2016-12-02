@@ -1,8 +1,8 @@
 
 AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
 
-    this.getCardMoneyChangeRange =function () {
-        return $resource(baseURL+'/stat/member_card_money_change_range',{},{
+    this.getCardMoneyChangeRange = function () {
+        return $resource(baseURL+"/stat/member_card_money_change_range",{},{
             'update':{
                 method:'PUT'
             }
