@@ -26,6 +26,7 @@ AndSellH5MainModule.controller('H5.MainController', function ($scope, $state, mo
     }
 
     $scope.caculCart = function () {
+        $scope.cartSize = 0;
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
         if (cartInfo == '' || cartInfo == undefined) {
