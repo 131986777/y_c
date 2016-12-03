@@ -1,5 +1,13 @@
 
 AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
+    //根据日期范围查询资金变动范围
+    this.getCardMoneyChangeRangeByRange=function (startDay,endDay) {
+        return $resource(baseURL+"/stat/member_card_money_change_range_by_range?STARTDAY=:STARTDAY&ENDDAY=:ENDDAY",{'STARTDAY':startDay,'ENDDAY':endDay},{
+            'update':{
+                method:'PUT'
+            }
+        });
+    };
     //根据用户输入的时间范围来查询记录
     this.getCardMoneyGroupByRange = function (event,startDay,endDay) {
         return $resource(baseURL+"/stat/member_card_money_group_by_range?EVENT=:EVENT&STARTDAY=:STARTDAY&ENDDAY=:ENDDAY",{'EVENT':event,'STARTDAY':startDay,'ENDDAY':endDay},{
@@ -7,7 +15,7 @@ AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
                 method:'PUT'
             }
         });
-    }
+    };
     this.getCardMoneyChangeRange = function () {
         return $resource(baseURL+"/stat/member_card_money_change_range",{},{
             'update':{

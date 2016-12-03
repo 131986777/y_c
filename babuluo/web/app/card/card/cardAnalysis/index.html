@@ -1,49 +1,38 @@
-<div class="page-content">
+<div class="page-content" ng-init="initLoad()">
+
+            <div class="container-fluid">
+                <div class="col-md-1">
+                    <input type="text" ng-model="groupRange['STARTDAY']" ng-init="groupRange['STARTDAY']=''" class="form-control"  placeholder="2016-12-1">
+                </div>
+
+                <div class="col-md-1">
+                    <input type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=''"  class="form-control"  placeholder="2016-12-31">
+                </div>
+                <button class="btn green" type="button" ng-click="getGroupByRange()">查询</button>
+            </div>
+
     <div class="table-content">
         <div class="table-toolbar">
-            <div class="container-fluid">
-                <div class="modal-body form-body">
-                    <form id="defaultForm" class="form-horizontal">
-                        <div class="form-group row">
-                            <div class="input-group input-daterange col-md-1" data-date="10/11/2012" language="zh-CN" data-date-format="yyyy-mm-dd">
-                                <input id="start_hour" type="text" class="form-control " placeholder="2016-11-11"
-                                       name="from" data-date-format="yyyy-mm-dd">
-                            </div>
-                            <div class="input-group input-daterange col-md-1" data-date="10/11/2012" language="zh-CN" data-date-format="yyyy-mm-dd">
-                                <input id="end_hour" type="text" class="form-control " placeholder="2017-11-11"
-                                       name="from" data-date-format="yyyy-mm-dd">
-                            </div>
-                        </div>
-                        <button class="btn">查询</button>
-                    </form>
-                </div>
-            </div>
+            <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                    <tr>
+                        <th class="col-sm-1 text-center">日期</th>
+                        <th class="col-sm-1 text-center">充值</th>
+                        <th class="col-sm-1 text-center">消费</th>
+                        <th class="col-sm-1 text-center">消费冲红</th>
+                        <th class="col-sm-1 text-center">返点</th>
+                    </tr>
+                    </thead>
+                <tbody>
+                    <tr align="center" ng-repeat="value in cardMoneyChangeRange">
+                        <td>20{{value['._RANGE']}}</td>
+                        <td><span ng-repeat="value2 in rechargeList" ng-if="value2['.DAY']==value['._RANGE']">{{value2['.SOURCE']}}</span></td>
+                        <td><span ng-repeat="value3 in consumeList" ng-if="value3['.DAY']==value['._RANGE']">{{value3['.SOURCE']}}</span></td>
+                        <td><span ng-repeat="value4 in consumeRedList" ng-if="value4['.DAY']==value['._RANGE']">{{value4['.SOURCE']}}</span></td>
+                        <td><span ng-repeat="value5 in revertList" ng-if="value5['.DAY']==value['._RANGE']">{{value5['.SOURCE']}}</span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </div>
-    <div ng-controller="card_card_cardAnalysis_Controller as ctrl">
-        <!--<div ng-repeat="value in consumeList">{{value['.DAY']}}:{{value['.SOURCE']}}</div>-->
-        <!--<span ng-bind="consumeList.length"></span>-->
-        <!--{{rechargeList[0]}}-->
-        <span ng-if="rechargeList[0]['.DAY']=='16-11-16'">what</span>
-        <table class="table table-bordered table-hover table-striped">
-                <thead>
-                <tr>
-                    <th class="col-sm-1 text-center">日期</th>
-                    <th class="col-sm-1 text-center">充值</th>
-                    <th class="col-sm-1 text-center">消费</th>
-                    <th class="col-sm-1 text-center">消费冲红</th>
-                    <th class="col-sm-1 text-center">返点</th>
-                </tr>
-                </thead>
-            <tbody>
-                <tr align="center" ng-repeat="value in cardMoneyChangeRange">
-                    <td>20{{value['._RANGE']}}</td>
-                    <td><span ng-repeat="value2 in rechargeList" ng-if="value2['.DAY']==value['._RANGE']">{{value2['.SOURCE']}}</span></td>
-                    <td><span ng-repeat="value3 in consumeList" ng-if="value3['.DAY']==value['._RANGE']">{{value3['.SOURCE']}}</span></td>
-                    <td><span ng-repeat="value4 in consumeRedList" ng-if="value4['.DAY']==value['._RANGE']">{{value4['.SOURCE']}}</span></td>
-                    <td>--</td>
-                </tr>
-            </tbody>
-        </table>
     </div>
 </div>
