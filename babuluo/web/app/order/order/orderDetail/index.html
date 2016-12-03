@@ -3,7 +3,10 @@
   <div class="table-operbar">
     <div class="table-toolbar">
       <div class="row orderHead">
-        <div class="col-md-6 orderNum" ng-bind="'订单编号：'+order['SHOP_ORDER.ORDER_NUM']">
+        <div class="col-md-6 orderNum" >
+          <span ng-bind="'订单编号：'+order['SHOP_ORDER.ORDER_NUM']"></span>
+          <span  ng-if="order['SHOP_ORDER.ERP_REMARK']!=undefined&&order['SHOP_ORDER.ERP_REMARK']!=''"
+                 ng-bind="' | 线下单号：'+order['SHOP_ORDER.ERP_NUM']"></span>
         </div>
 
         <div class="col-md-6 buttons text-right">

@@ -70,7 +70,7 @@
                   "<div class='weui_mask'></div>" +
                   "<div class='weui_dialog'>" +
                   "<div class='weui_dialog_hd'><strong class='weui_dialog_title'>{{title}}</strong></div>" +
-                  "<div class='weui_dialog_bd'>{{body}}</div>" +
+                  "<div class='weui_dialog_bd' ng-bind='body'></div>" +
                   "<div class='weui_dialog_ft'>" +
                   "<a class='weui_btn_dialog primary' ng-click='hide()'>确定</a>" +
                   "</div>" +
@@ -178,7 +178,7 @@
                   "<div class='weui_mask_transparent'></div>" +
                   " <div class='weui_toast'>" +
                   "<i class='weui_icon_toast'></i>" +
-                  "<p class='weui_toast_content'>{{body}}</p>" +
+                  "<p class='weui_toast_content' ng-bind='body'></p>" +
                   "</div>" +
                   "</div>"
               )(scope));
@@ -245,7 +245,7 @@
                   " <div class='weui_loading_leaf weui_loading_leaf_10'></div>" +
                   " <div class='weui_loading_leaf weui_loading_leaf_11'></div>" +
                   "</div>" +
-                  " <p class='weui_toast_content'>{{loadText}}</p>" +
+                  " <p class='weui_toast_content' ng-bind='loadText'></p>" +
                   "</div>" +
                   "</div>"
               )(scope));

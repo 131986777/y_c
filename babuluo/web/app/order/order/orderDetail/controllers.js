@@ -53,7 +53,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
 
    //发货订单
     $scope.sendOrder= function () {
-        modalFactory.showAlert("确定取消该订单嘛？", function () {
+        modalFactory.showAlert("商品均已发货？", function () {
             orderFactory.sendOrder({'SHOP_ORDER.ID':$scope.order['SHOP_ORDER.ID']}, function () {
                 modalFactory.showShortAlert('订单发货成功');
                 $scope.getOrder($scope.order['SHOP_ORDER.ID']);

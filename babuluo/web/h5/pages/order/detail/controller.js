@@ -32,7 +32,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     //取消订单
     $scope.cancelOrder = function () {
-        weUI.dialog.alert("提示", "确认取消该订单", function () {
+        weUI.dialog.confirm("提示", "确认取消该订单", function () {
             weUI.toast.showLoading('正在取消');
             orderFactory.cancelOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
                 weUI.toast.hideLoading();
@@ -47,7 +47,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     //确认提货
     $scope.getPrdNow = function () {
-        weUI.dialog.alert("提示", "确认提货", function () {
+        weUI.dialog.confirm("提示", "确认提货", function () {
             orderFactory.acceptOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
                 if (response.code == 0) {
                     weUI.toast.ok('收货成功');

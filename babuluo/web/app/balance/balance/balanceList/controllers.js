@@ -1,18 +1,22 @@
-angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function ($scope, $stateParams, balanceFactory, modalFactory) {
+angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function ($scope, $stateParams, memberFactory, balanceFactory, modalFactory) {
     modalFactory.setTitle('资金明细');
     modalFactory.setBottom(false);
 
     //获得所有资金明细
     $scope.bindData = function (response) {
         $scope.balanceList = response.data;
-        $scope.searchlist = response.data;
-        $scope.userDetailMap = response.extraData.userDetailMap;
-        $scope.userFininanceMap = response.extraData.userFininanceMap;
     };
 
     //根据用户ID查询用户个人信息
-    $scope.queryById = function (memberId) {
-        $scope.memberDetail = $scope.userDetailMap[memberId];
+    $scope.queryById = function (loginId) {
+        memberFactory.getMemberAccountByLoginId({'MEMBER.LOGIN_ID': loginId}, function (response) {
+            if (response.data.length > 0) {
+                $scope.memberDetail = response.data[0];
+                $scope.memberDetail['MEMBER.BALANCE'] = response.extraData.memberAccount[0]['MEMBER_ACCOUNT.BALANCE'];
+            } else {
+                modalFactory.showShortAlert("查不到相关数据");
+            }
+        });
     }
 
     //动态计算账户余额
@@ -65,19 +69,15 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
 
     //根据登录ID查询财务信息
     $scope.queryFinanceByLoginId = function (loginId) {
-        console.log(loginId);
-        if (loginId == null || loginId == '') {
-            $scope.balanceList = $scope.searchlist;
-        } else {
-            $scope.roundList = $scope.searchlist;
-            $scope.balanceList = [];
-            for (var i = 0; i < $scope.roundList.length; i++) {
-                if ($scope.roundList[i]['FINANCE_LIST.LOGIN_ID'] == loginId) {
-                    $scope.balanceList.push($scope.roundList[i]);
-                }
+        var uid = 0;
+        memberFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': loginId}, function (response) {
+            var ret = response.data;
+            if (ret.length > 0) {
+                $scope.filter['FINANCE_LIST.USER_ID'] = ret[0]['MEMBER.USER_ID'];
+            } else {
+                modalFactory.showShortAlert('查不到相关信息');
             }
-        }
-        return $scope.balanceList;
+        });
     }
 
     $scope.delete = function () {
