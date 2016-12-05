@@ -9,6 +9,4 @@ angular.module('AndSell.Main').controller('order_order_orderAnalysis_Controller'
     $scope.initLoad=function () {
 
     }
-
 });
-

@@ -3,8 +3,9 @@
     <div class="row timeBar">
         <div class="col-md-5">
             <a href="">本周</a><a href="">上周</a><a href="">本月</a><a href="">上月</a><a href="">昨天</a><a href="">今天</a>
-            <input type="text" >
-            <input type="text" >
+            <input type="text" placeholder="2016-1-1">
+            -
+            <input type="text" placeholder="2016-11-11">
             <button  class="btn green" type="button" >查询</button>
         </div>
     </div>
@@ -64,6 +65,41 @@
             </div>
         </div>
     </div>
+
+    <div id="main" style="height: 300px;margin-top: 20px;"></div>
+
+    <script type="application/javascript">
+        var myChart = echarts.init(document.getElementById('main'));
+        var option = {
+            title: {
+                text: 'Hello ECharts'
+            },
+            tooltip: {
+                trigger:'axis'
+            },
+            legend: {
+                data:['销量']
+            },
+            grid:{
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],
+            },
+            yAxis: {},
+            series: [{
+                name: '销量',
+                type: 'line',
+                data: [5, 20, 36, 10, 100, 20, 20, 20, 20, 20, 20,22,26,30]
+            }]
+        };
+        myChart.setOption(option);
+    </script>
     <div class="table-content">
         <div class="table-toolbar">
             <table class="table table-bordered table-hover table-striped">
