@@ -1,0 +1,206 @@
+<div class="page-content" ng-init="initData()">
+    <div class="row orderHead">
+        <div class="col-md-6 orderNum">
+            <span ng-bind="'订单编号：'+order['SHOP_ORDER.ORDER_NUM']"></span>
+            <span ng-if="order['SHOP_ORDER.ERP_REMARK']!=undefined&&order['SHOP_ORDER.ERP_REMARK']!=''"
+                  ng-bind="' | 线下单号：'+order['SHOP_ORDER.ERP_NUM']"></span>
+        </div>
+    </div>
+    <div class="sorting-title row">
+        <div class="col-md-7 text-center">等待分拣</div>
+        <div class="col-md-5 text-center">已分拣</div>
+    </div>
+    <div class="sorting-wrap">
+        <div class="row">
+            <!-- 未分拣 -->
+            <div class="unsorted col-md-7">
+                <table class="item-wrap">
+                    <tr>
+                        <td class="item-info">
+                            <img src="" />
+                            <p class="item-name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
+                            <p>商品规格：250g</p>
+                            <p>备注：无</p>
+                        </td>
+                        <td class="item-price">￥78.00 &times <span>3</span></td>
+                        <td class="item-btn">
+                            <button class="btn btn-default" data-toggle="modal" data-target="#add">录入</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="item-info">
+                            <img src="" />
+                            <p>商品标题</p>
+                            <p>商品规格：250g</p>
+                            <p>备注：<span class="item-note">不要辣</span></p>
+                        </td>
+                        <td class="item-price">￥78.00 &times <span>3</span></td>
+                        <td class="item-btn">
+                            <button class="btn btn-default">录入</button>
+                        </td>
+                    </tr>
+                    <tr  class="item-sorted">  <!-- 录入后添加样式 item-sorted -->
+                        <td class="item-info">
+                            <img src="" />
+                            <p>商品标题</p>
+                            <p>商品规格：250g</p>
+                            <p>备注：无</p>
+                        </td>
+                        <td class="item-price">￥78.00 &times <span>3</span></td>
+
+                        <td class="item-btn">
+                            <button class="btn btn-default">录入</button>
+                        </td>
+                        <!-- 录入后变为 -->
+                        <!-- <td class="item-btn">
+                            <button class="btn btn-default">修改</button>
+                        </td> -->
+                    </tr>
+                    <tr>
+                        <td class="item-info">
+                            <img src="" />
+                            <p>商品标题</p>
+                            <p>商品规格：250g</p>
+                            <p>备注：无</p>
+                        </td>
+                        <td class="item-price">￥78.00 &times <span>3</span></td>
+                        <td class="item-btn">
+                            <button class="btn btn-default">录入</button>
+                        </td>
+                    </tr>
+                </table>
+                <div class="total">
+                    <p>剩余 <span class="totalLeft">3</span> 件商品待分拣</p>
+                    <p>总计金额：<span class="totalNum">￥198.00</span></p>
+                </div>
+            </div>
+
+            <!-- 已分拣 -->
+            <div class="sorted col-md-5">
+                <table class="item-wrap">
+                    <tr>
+                        <td class="item-info">
+                            <p>商品规格：250g</p>
+                        </td>
+                        <td class="item-price">￥78.00 &times <span>3</span></td>
+                        <td class="item-btn">
+                            <button class="btn btn-default">撤销</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="item-info">
+                            <p>商品规格：250g</p>
+                        </td>
+                        <td class="item-price">￥78.00 &times <span>3</span></td>
+                        <td class="item-btn">
+                            <button class="btn btn-default">撤销</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="item-info">
+                            <p>商品规格：250g</p>
+                        </td>
+                        <td class="item-price">￥78.00 &times <span>3</span></td>
+                        <td class="item-btn">
+                            <button class="btn btn-default">撤销</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="item-info">
+                            <p>商品规格：250g</p>
+                        </td>
+                        <td class="item-price">￥78.00 &times <span>3</span></td>
+                        <td class="item-btn">
+                            <button class="btn btn-default">撤销</button>
+                        </td>
+                    </tr>
+                </table>
+                <div class="total">
+                    <p>已分拣 <span class="totalLeft">0</span> 件商品</p>
+                    <p>总计金额：<span class="totalNum">￥198.00</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="add" role="dialog" aria-labelledby="add">
+        <div class="modal-dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title">
+                        分拣商品信息
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" name="editForm"
+                          ng-submit="addShop()" novalidate>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                条码：
+                            </label>
+                            <div class="col-sm-7 form-control-static">
+                                A123456
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                商品：
+                            </label>
+                            <div class="col-sm-7 form-control-static">
+                                小辣椒
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                价格：
+                            </label>
+                            <div class="col-sm-7 form-control-static">
+                                ￥35.00
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                规格：
+                            </label>
+                            <div class="col-sm-7 form-control-static">
+                                500g
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                重量：
+                            </label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                金额：
+                            </label>
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text"
+                                       name="telephone" ng-model="memberAdd['MEMBER.LOGIN_ID']"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit"
+                                    ng-click="addMemberList()">
+                                确定
+                            </button>
+                            <button class="btn btn-default"
+                                    data-dismiss="modal" ng-click="clearForm()">
+                                关闭
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

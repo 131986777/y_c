@@ -1,0 +1,80 @@
+.orderHead{
+    border-bottom: 1px solid #A9A7AB;
+}
+.orderHead .orderNum{
+    padding-top: 10px;
+    font-size: 18px;
+    font-weight: 400;
+}
+.sorted{
+    padding: 20px  20px 20px;
+    min-height: 400px;
+}
+.unsorted{
+    padding: 20px 0 20px 35px;
+    min-height: 400px;
+    border-right: 1px solid black;
+}
+.sorted .item-wrap td{
+    height: 90px;
+}
+.total{
+    padding:26px 35px 0 0;
+    text-align: right;
+    height: 80px;
+}
+.total .totalLeft{
+    color: #FC5008;
+}
+.total .totalNum{
+    font-size: 20px;
+    color: #FC5008;
+}
+.sorting-wrap{
+    width: 1050px;
+    min-height: 400px;
+    margin: 30px auto 0;
+    border: 1px solid black;
+}
+.sorting-title{
+    width: 1050px;
+    font-size: 20px;
+    margin: 30px auto 0;
+}
+.item-wrap {
+    width: 100%;
+    min-height: 300px;
+    border-bottom: 1px solid #c4c4c4;
+}
+.item-wrap .item-sorted{
+    color: #c4c4c4;
+}
+.item-wrap td{
+    text-align: center;
+    width: 18%;
+}
+.item-wrap .item-info{
+    text-align: left;
+    width: 50%;
+}
+.sorted .item-wrap .item-info{
+    width: 25%;
+}
+.sorted .item-wrap td{
+    width: 20%;
+}
+.item-wrap .item-info .item-name{
+    width: 254px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.item-wrap .item-info .item-note{
+    color: red;
+}
+.item-wrap .item-info img{
+    height: 80px;
+    width: 80px;
+    margin-right: 10px;
+    float: left;
+}

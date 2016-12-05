@@ -7,11 +7,11 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     $scope.initData = function () {
         $("input").focus(function()
         {
-            $('.test').css('visibility',"hidden");
+            $('.prdList').css('visibility',"hidden");
             $('.search-bar').css('position',"relative");
             $('#nav-bottom').hide();
         }).blur(function(){
-            $('.test').css('visibility',"visible");
+            $('.prdList').css('visibility',"visible");
             $('.search-bar').css('position',"fixed");
             $('#nav-bottom').show();
         });
