@@ -14,10 +14,7 @@
           <!--<a><span class="glyphicon glyphicon-print"></span>打印</a>-->
           <!--<a><span class="glyphicon glyphicon-share"></span>导出</a>-->
           <div ng-if="orderType=='3'">
-            <button class="btn btn-default"
-                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.STATE_OUT']==-1&&order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&&order['SHOP_ORDER.STATE_MONEY']==1))"
-                    ng-click="cancelOrder()">取消订单
-            </button>
+            <button class="btn btn-default">开始分拣</button>
             <button class="btn btn-default"
                     ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1"
                     ng-click="outOrder()">分拣完毕
@@ -26,12 +23,12 @@
                     ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1"
                     ng-click="deliveryOrder()">提货
             </button>
-          </div>
-          <div ng-if="orderType=='4'">
             <button class="btn btn-default"
-                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(order['SHOP_ORDER.STATE_OUT']==-1||order['SHOP_ORDER.STATE_OUT']==-1)"
+                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.STATE_OUT']==-1&&order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&&order['SHOP_ORDER.STATE_MONEY']==1))"
                     ng-click="cancelOrder()">取消订单
             </button>
+          </div>
+          <div ng-if="orderType=='4'">
             <button class="btn btn-default"
                     ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_OUT']==-1"
                     ng-click="outOrder()">分拣完毕
@@ -40,13 +37,13 @@
                     ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1"
                     ng-click="deliveryOrder()">提货
             </button>
+            <button class="btn btn-default"
+                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(order['SHOP_ORDER.STATE_OUT']==-1||order['SHOP_ORDER.STATE_OUT']==-1)"
+                    ng-click="cancelOrder()">取消订单
+            </button>
           </div>
 
           <div ng-if="orderType=='1'">
-            <button class="btn btn-default"
-                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&& order['SHOP_ORDER.STATE_OUT']==-1))"
-                    ng-click="cancelOrder()">取消订单
-            </button>
             <button class="btn btn-default"
                     ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1"
                     ng-click="outOrder()">出库
@@ -55,7 +52,10 @@
                     ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==-1"
                     ng-click="sendOrder()">发货
             </button>
-
+            <button class="btn btn-default"
+                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&& order['SHOP_ORDER.STATE_OUT']==-1))"
+                    ng-click="cancelOrder()">取消订单
+            </button>
           </div>
           <!--<button class="btn btn-default pay"-->
           <!--ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1"-->
