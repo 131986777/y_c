@@ -360,6 +360,16 @@
                     <td ng-bind="order['SHOP_ORDER.ERP_NUM'] ">
                     </td>
                   </tr>
+                  <tr ng-if="order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'">
+                    <td class="title">微信流水：</td>
+                    <td ng-bind="order['SHOP_ORDER.WX_NO']">
+                    </td>
+                  </tr>
+                  <tr ng-if="order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'">
+                    <td class="title">会员卡号：</td>
+                    <td ng-bind="order['SHOP_ORDER.CARD_NO'] ">
+                    </td>
+                  </tr>
                   <tr >
                     <td class="title">支付账号：</td>
                     <td ng-bind="order['SHOP_ORDER.PAY_ACCOUNT'] ">
