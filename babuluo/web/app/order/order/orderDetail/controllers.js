@@ -37,15 +37,20 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
 
     //获取支付流水号
     $scope.getPayNumber = function () {
-        if($scope.order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'){
-            orderFactory.getWXPayItemByOrderId({'ORDER_WX_PAY_LIST.ORDER_ID':$scope.order['SHOP_ORDER.ID']}, function (resposne) {
-                $scope.order['SHOP_ORDER.WX_NO']=resposne.data[0]['ORDER_WX_PAY_LIST.OUT_TRADE_NO'];
-            });
-        }
-        if($scope.order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'){
-            orderFactory.getFinanceItemByOrderId({'FINANCE_LIST.EVENT_SOURCE_ID':$scope.order['SHOP_ORDER.ORDER_NUM'],'FINANCE_LIST.CHANGE_TYPE':'decrease'}, function (resposne) {
-                $scope.order['SHOP_ORDER.CARD_NO']=resposne.data[0]['FINANCE_LIST.EVENT_CARD_NO'];
-            });
+        if ($scope.order['SHOP_ORDER.STATE_MONEY'] == 1) {
+            if ($scope.order['SHOP_ORDER.PAY_TYPE'] == 'WEIXIN') {
+                orderFactory.getWXPayItemByOrderId({'ORDER_WX_PAY_LIST.ORDER_ID': $scope.order['SHOP_ORDER.ID']}, function (resposne) {
+                    $scope.order['SHOP_ORDER.WX_NO'] = resposne.data[0]['ORDER_WX_PAY_LIST.OUT_TRADE_NO'];
+                });
+            }
+            if ($scope.order['SHOP_ORDER.PAY_TYPE'] == 'ACCOUNT') {
+                orderFactory.getFinanceItemByOrderId({
+                    'FINANCE_LIST.EVENT_SOURCE_ID': $scope.order['SHOP_ORDER.ORDER_NUM'],
+                    'FINANCE_LIST.CHANGE_TYPE': 'decrease'
+                }, function (resposne) {
+                    $scope.order['SHOP_ORDER.CARD_NO'] = resposne.data[0]['FINANCE_LIST.EVENT_CARD_NO'];
+                });
+            }
         }
     }
 

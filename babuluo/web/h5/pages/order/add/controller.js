@@ -108,15 +108,19 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         $scope.order['SHOP_ORDER.PRICE_COUPON'] = 0;
         if (salePrice > 0) {
             price -= salePrice;
+            if(price<=0){
+                price=0.01;
+            }
         }
+
+        var price_mark=price;
 
         if ($scope.coupon != undefined&&$scope.coupon.MONEY!=undefined) {
-            $scope.order['SHOP_ORDER.PRICE_COUPON']=moneyFormat($scope.coupon.MONEY);
             price -= $scope.coupon.MONEY;
-        }
-
-        if(price<=0){
-            price=0.01;
+            if(price<=0){
+                price=0.01;
+            }
+            $scope.order['SHOP_ORDER.PRICE_COUPON']=moneyFormat(price_mark-price);
         }
 
         $scope.onSalePrice=moneyFormat(prdPrice-price);

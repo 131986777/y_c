@@ -14,7 +14,7 @@
           <!--<a><span class="glyphicon glyphicon-print"></span>打印</a>-->
           <!--<a><span class="glyphicon glyphicon-share"></span>导出</a>-->
           <div ng-if="orderType=='3'">
-            <button class="btn btn-default">开始分拣</button>
+            <!--<button class="btn btn-default">开始分拣</button>-->
             <button class="btn btn-default"
                     ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1"
                     ng-click="outOrder()">分拣完毕

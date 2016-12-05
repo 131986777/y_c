@@ -73,16 +73,26 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
     };
 
     //根据登录ID查询财务信息
-    $scope.queryFinanceByLoginId = function (loginId) {
-        var uid = 0;
-        memberFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': loginId}, function (response) {
-            var ret = response.data;
-            if (ret.length > 0) {
-                $scope.filter['FINANCE_LIST.USER_ID'] = ret[0]['MEMBER.USER_ID'];
-            } else {
-                modalFactory.showShortAlert('查不到相关信息');
+    $scope.queryFinanceByLoginId = function (content) {
+        $scope.filter = {'FINANCE_LIST.CHANGE_TYPE':'null'};
+        if (content != '') {
+
+            if ($scope.searchType == 'LOGIN_ID') {
+                var uid = 0;
+                memberFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': content}, function (response) {
+                    var ret = response.data;
+                    if (ret.length > 0) {
+                        $scope.filter['FINANCE_LIST.USER_ID'] = ret[0]['MEMBER.USER_ID'];
+                    } else {
+                        modalFactory.showShortAlert('查不到相关信息');
+                    }
+                });
+            } else if ($scope.searchType == 'PRICE') {
+                $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = Number(content) * 100;
+            } else if ($scope.searchType == 'CARD_NO') {
+                $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = content;
             }
-        });
+        }
     }
 
     $scope.delete = function () {
