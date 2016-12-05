@@ -187,12 +187,14 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                     title: "main",
                     url: "#/pages/order/list/all"
                 };
-                window.history.replaceState(state,"main","#/pages/order/list/all");
+                //window.history.replaceState(state,"main","#/pages/order/list/all");
 
-                $state.go('pages/order/detail', {
-                    ORDER_ID: response.extraData.ORDER_ID,
-                    FROM: 'Add'
-                });
+                window.location.replace("#/pages/order/detail/"+response.extraData.ORDER_ID+'/');
+                //
+                //$state.go('pages/order/detail', {
+                //    ORDER_ID: response.extraData.ORDER_ID,
+                //    FROM: 'Add'
+                //});
 
             }, function (response) {
                 weUI.toast.hideLoading();

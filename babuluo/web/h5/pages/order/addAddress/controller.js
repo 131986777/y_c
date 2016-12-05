@@ -72,9 +72,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
         };
         setCookie("pickupPerson", JSON.stringify($scope.PickupPerson));
 
-        $state.go('pages/order/add', {
-            SKU_IDS: $stateParams.SKU_IDS
-        });
+        history.back();
+        //$state.go('pages/order/add', {
+        //    SKU_IDS: $stateParams.SKU_IDS
+        //});
     };
 
     $(".datetime-picker").datetimePicker({
