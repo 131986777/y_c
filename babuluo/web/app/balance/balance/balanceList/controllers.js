@@ -21,16 +21,21 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
 
     //动态计算账户余额
     $scope.getDynamicBala = function () {
+        if ($scope.changeType == undefined) {
+            modalFactory.showShortAlert("请输入变更类型");
+            return;
+        }
+        if ($scope.modifyvalue == undefined || $scope.modifyvalue == '') {
+            modalFactory.showShortAlert("请输入调整数值");
+            return;
+        }
         if ($scope.changeType == 1) {
             $scope.afterModify = (parseFloat($scope.memberDetail['MEMBER.BALANCE'])
             + parseFloat($scope.modifyvalue)).toFixed(2);
-        } else if ($scope.changeType == 0) {
+        } else {
             $scope.afterModify = (parseFloat($scope.memberDetail['MEMBER.BALANCE'])
             - parseFloat($scope.modifyvalue)).toFixed(2);
-        } else {
-            modalFactory.showShortAlert("请输入变更类型");
         }
-
     }
 
     //保存时更新账户余额
