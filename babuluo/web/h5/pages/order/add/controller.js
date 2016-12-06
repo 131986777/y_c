@@ -105,16 +105,22 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
         //todo  加入其他优惠和促销的等过滤
         $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = 0;
+        $scope.order['SHOP_ORDER.PRICE_COUPON'] = 0;
         if (salePrice > 0) {
             price -= salePrice;
+            if(price<=0){
+                price=0.01;
+            }
         }
+
+        var price_mark=price;
 
         if ($scope.coupon != undefined&&$scope.coupon.MONEY!=undefined) {
             price -= $scope.coupon.MONEY;
-        }
-
-        if(price<=0){
-            price=0.01;
+            if(price<=0){
+                price=0.01;
+            }
+            $scope.order['SHOP_ORDER.PRICE_COUPON']=moneyFormat(price_mark-price);
         }
 
         $scope.onSalePrice=moneyFormat(prdPrice-price);

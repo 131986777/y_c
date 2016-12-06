@@ -4,7 +4,20 @@
             <div class="table-toolbar">
                 <div class="form-inline row">
                     <div class="form-group col-md-5">
-                        <input type="text" class="form-control" placeholder="输入登录ID" ng-model="loginId">
+                        <select ng-model="searchType"
+                                ng-init="searchType='LOGIN_ID'"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="LOGIN_ID">
+                                账号
+                            </option>
+                            <option class="nya-bs-option" value="CARD_NO">
+                                卡号
+                            </option>
+                            <option class="nya-bs-option" value="PRICE">
+                                金额
+                            </option>
+                        </select>
+                        <input type="text" class="form-control" placeholder="" ng-model="loginId">
                         <button type="submit" class="btn btn-default" ng-click="queryFinanceByLoginId(loginId)">搜索
                         </button>
                     </div>
@@ -42,6 +55,7 @@
                 <th> 登录ID</th>
                 <th> 事件</th>
                 <th> 说明</th>
+                <th> 卡号</th>
                 <th class="text-center"> 金额</th>
                 <th class="text-center"> 剩余金额</th>
                 </tr>
@@ -52,6 +66,7 @@
                     <td ng-bind="balanceInfo['FINANCE_LIST.LOGIN_ID']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_NO']"></td>
                     <td class="text-center">
                         <span style="color:black" ng-show="balanceInfo['FINANCE_LIST.CHANGE_VALUE']>0">{{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}</span>
                         <span style="color:red" ng-show="balanceInfo['FINANCE_LIST.CHANGE_VALUE']<=0">{{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}</span>

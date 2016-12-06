@@ -38,7 +38,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
             $scope.filter['SHOP_ORDER.STATE_ORDER']=1;
             $scope.filter['SHOP_ORDER.STATE_MONEY']=1;
             //$scope.filter['SHOP_ORDER.STATE_OUT']=1;
-            $scope.filter['SHOP_ORDER.STATE_OUT']=1;
             $scope.filter['SHOP_ORDER.STATE_DELIVERY']=-1;
         }else if(type=='accept'){
             $scope.filter['SHOP_ORDER.STATE_ORDER']=1;
