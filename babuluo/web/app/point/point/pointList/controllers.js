@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('point_point_pointList_Controller', function ($scope, $stateParams, pointFactory, modalFactory) {
+angular.module('AndSell.Main').controller('point_point_pointList_Controller', function ($scope, $stateParams, memberFactory, pointFactory, modalFactory) {
 
     modalFactory.setTitle('积分管理');
     modalFactory.setBottom(false);
@@ -8,25 +8,49 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
         $scope.pointList = response.data;
     };
 
-    $scope.queryById = function (memberId) {
-        $scope.memberDetail = $scope.userDetailMap[memberId];
+    $scope.queryById = function (loginId) {
+        memberFactory.getMemberAccountByLoginId({'MEMBER.LOGIN_ID': loginId}, function (response) {
+            if (response.data.length > 0) {
+                $scope.memberDetail = response.data[0];
+                $scope.memberDetail['MEMBER.POINT'] = response.extraData.memberAccount[0]['MEMBER_ACCOUNT.POINT'];
+            } else {
+                modalFactory.showShortAlert("查不到相关数据");
+            }
+        });
 
     }
 
     //根据登录ID查询财务信息
-    $scope.queryPointByLoginId = function (loginId) {
-        $scope.pointList = [];
-        if (loginId == null || loginId == '') {
-            $scope.pointList = $scope.searchList;
-        } else {
-            $scope.roundList = $scope.searchList;
-            for (var i = 0; i < $scope.roundList.length; i++) {
-                if ($scope.roundList[i]['MEMBER_POINT_LIST.LOGIN_ID'] == loginId) {
-                    $scope.pointList.push($scope.roundList[i]);
+    $scope.queryPointByLoginId = function (content) {
+        $scope.filter = {'MEMBER_POINT_LIST.CHANGE_TYPE':'null'};
+        if (content != '') {
+
+            var uid = 0;
+            memberFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': content}, function (response) {
+                var ret = response.data;
+                if (ret.length > 0) {
+                    $scope.filter['MEMBER_POINT_LIST.USER_ID'] = ret[0]['MEMBER.USER_ID'];
+                } else {
+                    modalFactory.showShortAlert('查不到相关信息');
                 }
-            }
+            });
+
+            // if ($scope.searchType == 'LOGIN_ID') {
+            //     var uid = 0;
+            //     memberFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': content}, function (response) {
+            //         var ret = response.data;
+            //         if (ret.length > 0) {
+            //             $scope.filter['MEMBER_POINT_LIST.USER_ID'] = ret[0]['MEMBER.USER_ID'];
+            //         } else {
+            //             modalFactory.showShortAlert('查不到相关信息');
+            //         }
+            //     });
+            // } else if ($scope.searchType == 'PRICE') {
+            //     $scope.filter['MEMBER_POINT_LIST.CHANGE_VALUE'] = Number(content) * 100;
+            // } else if ($scope.searchType == 'CARD_NO') {
+            //     $scope.filter['MEMBER_POINT_LIST.EVENT_CARD_NO'] = content;
+            // }
         }
-        return $scope.pointList;
     }
 
     //动态计算账户余额
