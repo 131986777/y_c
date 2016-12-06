@@ -55,7 +55,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         $scope.ModifyBalanceInfo['FINANCE_LIST.BALANCE'] = $scope.memberDetail['MEMBER.BALANCE'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.SERVICE_ID'] = $scope.memberDetail['MEMBER.SERVICE_ID'];
-        $scope.ModifyBalanceInfo['FINANCE_LIST.EVENT'] = "后台更改";
+        $scope.ModifyBalanceInfo['FINANCE_LIST.EVENT'] = "后台";
         $scope.ModifyBalanceInfo['FINANCE_LIST.EVENT_INTRO'] = $scope.introduction;
         $scope.ModifyBalanceInfo['FINANCE_LIST.CHANGE_VALUE'] = $scope.modifyvalue;
         if ($scope.changeType == 1) {

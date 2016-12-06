@@ -24,6 +24,8 @@ AndSellMainModule.service('cardFactory', function (http) {
 
     this.getUIDByMobile = http.post('/member/member/getUIDByMobile');
 
+    this.getMemberInfoByUserId = http.post('/member/memberData/getMemberInfoByUserId');
+
 });
 
 

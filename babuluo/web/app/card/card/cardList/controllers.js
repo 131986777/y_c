@@ -4,22 +4,30 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
 
     $scope.cardAdd = {};
     $scope.isFaceValue = false;
+    $scope.memberDetail = {};
 
     $scope.bindData = function (response) {
         $scope.cardList = response.data;
         $scope.sourceList = response.extraData.sourceList;
-        $scope.userDetailMap = response.extraData.userDetailMap;
         $scope.typeMap = response.extraData.typeMap;
         $scope.typeListMap = response.extraData.typeListMap;
         console.log(response);
     };
 
-    $scope.queryMemberById = function (memberId) {
-        $scope.memberDetail = $scope.userDetailMap[memberId];
-        console.log($scope.memberDetail);
-        if ($scope.memberDetail == undefined) {
-            modalFactory.showAlert("未找到该客户");
-        }
+    $scope.queryMemberById = function (loginId) {
+        cardFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': loginId}, function (response) {
+            if (response.data.length != 0) {
+                var temp = response.data[0]['MEMBER.MOBILE'];
+                cardFactory.getMemberInfoByUserId({'MEMBER_INFO.USER_ID': response.data[0]['MEMBER.USER_ID']}, function (response1) {
+                    $scope.memberDetail['MEMBER.USER_NAME'] = response1.data[0]['MEMBER_INFO.TRUE_NAME'];
+                    console.log(response1.data[0]);
+                    $scope.memberDetail['MEMBER.MOBILE'] = temp;
+                });
+            } else {
+                modalFactory.showAlert("未找到该客户");
+            }
+        });
+
     };
 
     $scope.queryTypeBySourceId = function (sourceId) {

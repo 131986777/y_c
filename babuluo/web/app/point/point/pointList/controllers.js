@@ -90,7 +90,7 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
         $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.POINT'] = $scope.memberDetail['MEMBER.POINT'];
         $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
         $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.SERVICE_ID'] = $scope.memberDetail['MEMBER.SERVICE_ID'];
-        $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.EVENT'] = "后台更改";
+        $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.EVENT'] = "后台";
         $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.EVENT_INTRO'] = $scope.introduction;
         $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.CHANGE_POINT'] = $scope.modifyvalue;
         $scope.ModifyBalanceInfo['MEMBER_POINT_LIST.SERVICE_ID'] = $scope.memberDetail['MEMBER.SERVICE_ID'];
