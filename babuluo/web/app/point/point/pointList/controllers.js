@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('point_point_pointList_Controller', function ($scope, $stateParams, memberFactory, pointFactory, modalFactory) {
+angular.module('AndSell.Main').controller('point_point_pointList_Controller', function ($scope, $stateParams, cardFactory,memberFactory, pointFactory, modalFactory) {
 
     modalFactory.setTitle('积分管理');
     modalFactory.setBottom(false);
@@ -9,10 +9,19 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
     };
 
     $scope.queryById = function (loginId) {
+        $scope.memberDetail = {};
         memberFactory.getMemberAccountByLoginId({'MEMBER.LOGIN_ID': loginId}, function (response) {
             if (response.data.length > 0) {
-                $scope.memberDetail = response.data[0];
-                $scope.memberDetail['MEMBER.POINT'] = response.extraData.memberAccount[0]['MEMBER_ACCOUNT.POINT'];
+                var tempMOBILE = response.data[0]['MEMBER.MOBILE'];
+                var tempEMAIL = response.data[0]['MEMBER.EMAIL'];
+                var tempPOINT = response.extraData.memberAccount[0]['MEMBER_ACCOUNT.POINT'];
+                cardFactory.getMemberInfoByUserId({'MEMBER_INFO.USER_ID': response.data[0]['MEMBER.USER_ID']}, function (response1) {
+                    console.log(response1.data[0]);
+                    $scope.memberDetail['MEMBER.USER_NAME'] = response1.data[0]['MEMBER_INFO.TRUE_NAME'];
+                    $scope.memberDetail['MEMBER.MOBILE'] = tempMOBILE;
+                    $scope.memberDetail['MEMBER.EMAIL'] = tempEMAIL;
+                    $scope.memberDetail['MEMBER.POINT'] = tempPOINT;
+                });
             } else {
                 modalFactory.showShortAlert("查不到相关数据");
             }
