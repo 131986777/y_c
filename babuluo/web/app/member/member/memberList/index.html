@@ -4,7 +4,7 @@
                 <div class="form-inline row">
                     <div class="col-md-3">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="name" placeholder="登陆ID/用户名/手机号"
+                            <input type="text" class="form-control" id="name" placeholder="登陆ID/手机号"
                                    ng-model="queryContent">
                         </div>
                         <div class="form-group">
@@ -77,7 +77,7 @@
             <thead>
             <tr>
                 <th class="col-sm-2">登陆账号</th>
-                <th class="col-sm-1">用户名</th>
+                <th class="col-sm-1">姓名</th>
                 <th class="col-sm-1 text-center">手机号码</th>
                 <th class="col-sm-1 text-center">客户分组</th>
                 <th class="col-sm-2 text-center">来源</th>
@@ -89,7 +89,7 @@
             <tbody>
             <tr ng-repeat="ml in memberList|filter:{}">
                 <td ng-bind="ml['MEMBER.LOGIN_ID']"></td>
-                <td ng-bind="ml['MEMBER.USER_NAME']"></td>
+                <td ng-bind="ml['MEMBER.TRUE_NAME']"></td>
                 <td ng-bind="ml['MEMBER.MOBILE']" class="text-center"></td>
                 <td ng-bind="ml['MEMBER.GROUP_NAME']" class="text-center"></td>
                 <td ng-bind="ml['MEMBER.CODE_NAME']" class="text-center"></td>
