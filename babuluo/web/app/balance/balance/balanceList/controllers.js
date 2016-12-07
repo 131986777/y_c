@@ -127,6 +127,8 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         $scope.memberDetail = null;
         $scope.memberId = null;
         $scope.changeType = null;
+        $scope.cardList = undefined;
+        $scope.MEMBER_CARD_ID = 'null';
     }
 
     $scope.fun = function () {
