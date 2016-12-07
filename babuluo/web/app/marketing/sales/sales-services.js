@@ -13,3 +13,17 @@ AndSellMainModule.service('salesFactory', function (http) {
     this.stopSalePlanById=http.post('/sales/salesplan/modifyById');
 
 });
+
+AndSellMainModule.service('eventFactory', function (http) {
+
+    this.addEvent=http.post('/sale/evnet/add');
+
+    this.modEvent=http.post('/sale/evnet/modifyById');
+
+    this.delEvent=http.post('/sale/evnet/delById');
+
+    this.getEvent=http.post('/sale/evnet/queryAll');
+
+    this.getByName=http.post('/sale/evnet/getByName');
+
+});

@@ -53,6 +53,16 @@ var filterTableFromList = function (list, tablename) {
     }
 };
 
+//obj to array
+function objectToArray(object){
+    var tmp=[];
+    for(var key in object){
+        //key是属性,object[key]是值
+        tmp.push(object[key]);//往数组中放属性
+    }
+    return tmp;
+}
+
 //处理商品价格
 function moneyFormat(money) {
     return Number(money / 100).toFixed(2);
@@ -181,13 +191,10 @@ function routerPath(base, path, param, css) {
     router.templateUrl = url + "/index.html";
     router.resolve = {
         loadServiceAndController: function ($ocLazyLoad, userFactory) {
-            console.log(1);
             userFactory.isLogin({}, function (response) {
-                console.log(2);
             }, function (response) {
                 window.location.href = '../login/index.html';
             });
-            console.log(loadItemList);
             return $ocLazyLoad.load(loadItemList)
         }
     }

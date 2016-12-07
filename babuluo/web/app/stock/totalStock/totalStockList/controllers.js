@@ -1,27 +1,29 @@
-angular.module('AndSell.Main').controller('stock_totalStock_totalStockList_Controller', function ($scope, shopFactory, totalStockFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('stock_totalStock_totalStockList_Controller', function ($scope, productFactory, shopFactory, totalStockFactory, modalFactory, $q) {
 
     modalFactory.setTitle('实时库存');
 
     $scope.bindData = function (response) {
         $scope.allStockList = response.data;
         $scope.storeQueryList = $scope.allStockList;
-        $scope.productMap = response.extraData.prdMap;
     };
 
     //根据商品id查询
     $scope.queryStockById = function (pName) {
-        $scope.roundList = $scope.storeQueryList;
-        if (pName == '' || pName == null) {
-            $scope.allStockList = $scope.roundList;
-        } else {
-            var PId = $scope.productMap[pName];
-            $scope.allStockList = [];
-            for (var i = 0; i < $scope.roundList.length; i++) {
-                if ($scope.roundList[i]['STOCK_REALTIME.PID'] == PId) {
-                    $scope.allStockList.push($scope.roundList[i]);
+        var skuList = new Array;
+        productFactory.getProduct({'SHOP_PRODUCT.PRD_NAME': pName}, function (response) {
+            response.data.forEach(function (ele) {
+                if (ele['SHOP_PRODUCT.SKULIST'] != undefined) {
+                    objectToArray(ele['SHOP_PRODUCT.SKULIST']).forEach(function (ele) {
+                        skuList.push(ele['SHOP_PRODUCT_SKU.SKU_ID']);
+                    });
                 }
+            });
+            if(skuList.length>0){
+                $scope.filter['STOCK_REALTIME.SKU_ID'] = skuList.toString();
+            }else{
+                modalFactory.showShortAlert("未找到相关数据");
             }
-        }
+        });
     }
     $scope.addStore = function () {
         if ($scope.IS_DEF) {
