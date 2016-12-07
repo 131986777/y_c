@@ -47,7 +47,6 @@ angular.module('AndSell.Main').controller('member_member_memberList_Controller',
             return;
         }
         $scope.memberAdd['MEMBER.LOGIN_PWD'] = "A123456";
-        $scope.memberAdd['MEMBER.CODE_ID'] = "PC";
 
         memberFactory.addMemberList($scope.memberAdd, function (response) {
             $("#add").modal('hide');

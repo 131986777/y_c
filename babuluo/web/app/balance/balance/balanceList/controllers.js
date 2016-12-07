@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function ($scope, $stateParams, memberFactory, balanceFactory, modalFactory) {
+angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function ($scope, $stateParams, cardFactory, memberFactory, balanceFactory, modalFactory) {
     modalFactory.setTitle('资金明细');
     modalFactory.setBottom(false);
 
@@ -9,15 +9,32 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
 
     //根据用户ID查询用户个人信息
     $scope.queryById = function (loginId) {
-        memberFactory.getMemberAccountByLoginId({'MEMBER.LOGIN_ID': loginId}, function (response) {
+        $scope.memberDetail = {};
+        $scope.cardList = {};
+        memberFactory.getCardByLoginId({'MEMBER.LOGIN_ID': loginId}, function (response) {
             if (response.data.length > 0) {
-                $scope.memberDetail = response.data[0];
-                $scope.memberDetail['MEMBER.BALANCE'] = response.extraData.memberAccount[0]['MEMBER_ACCOUNT.BALANCE'];
+                $scope.memberDetail['MEMBER.USER_ID'] = response.extraData.member['MEMBER.USER_ID'];
+                var tempMOBILE = response.extraData.member['MEMBER.MOBILE'];
+                var tempEMAIL = response.extraData.member['MEMBER.EMAIL'];
+                var cardList = response.data;
+                cardFactory.getMemberInfoByUserId({'MEMBER_INFO.USER_ID': response.extraData.member['MEMBER.USER_ID']}, function (response1) {
+                    console.log(response1.data[0]);
+                    $scope.memberDetail['MEMBER.USER_NAME'] = response1.data[0]['MEMBER_INFO.TRUE_NAME'];
+                    $scope.memberDetail['MEMBER.MOBILE'] = tempMOBILE;
+                    $scope.memberDetail['MEMBER.EMAIL'] = tempEMAIL;
+                    $scope.cardList = cardList;
+                });
             } else {
                 modalFactory.showShortAlert("查不到相关数据");
             }
         });
-    }
+    };
+
+    $scope.getCardBalance = function (key) {
+        $scope.memberDetail['MEMBER.BALANCE'] = $scope.cardList[key]['MEMBER_CARD.BALANCE'] / 100;
+        $scope.memberDetail['MEMBER.CARD_ID'] = $scope.cardList[key]['MEMBER_CARD.CARD_ID'];
+        $scope.memberDetail['MEMBER.CARD_NO'] = $scope.cardList[key]['MEMBER_CARD.CARD_NO'];
+    };
 
     //动态计算账户余额
     $scope.getDynamicBala = function () {
@@ -52,7 +69,9 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         }
         //给资金明细表添加记录--FINANCE_LIST（添加操作记录）
         $scope.ModifyBalanceInfo = {};
-        $scope.ModifyBalanceInfo['FINANCE_LIST.BALANCE'] = $scope.memberDetail['MEMBER.BALANCE'];
+        $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_BALANCE'] = $scope.memberDetail['MEMBER.BALANCE'];
+        $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_ID'] = $scope.memberDetail['MEMBER.CARD_ID'];
+        $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_NO'] = $scope.memberDetail['MEMBER.CARD_NO'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.SERVICE_ID'] = $scope.memberDetail['MEMBER.SERVICE_ID'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.EVENT'] = "后台";
@@ -74,7 +93,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
 
     //根据登录ID查询财务信息
     $scope.queryFinanceByLoginId = function (content) {
-        $scope.filter = {'FINANCE_LIST.CHANGE_TYPE':'null'};
+        $scope.filter = {'FINANCE_LIST.CHANGE_TYPE': 'null'};
         if (content != '') {
 
             if ($scope.searchType == 'LOGIN_ID') {
@@ -108,6 +127,8 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         $scope.memberDetail = null;
         $scope.memberId = null;
         $scope.changeType = null;
+        $scope.cardList = undefined;
+        $scope.MEMBER_CARD_ID = 'null';
     }
 
     $scope.fun = function () {

@@ -11,6 +11,7 @@ AndSellMainModule.service('memberFactory', function (http) {
     this.getMemberAddress=http.post('/member/address/getByUserId');
     this.getMemberData=http.post('/member/memberData/getById');
     this.getUIDByLOGINID = http.post('/member/member/getUIDByLOGINID')
+    this.getCardByLoginId = http.post('/member/membercard/getCardByLoginId');
     this.getMemberAccountByLoginId = http.post('/member/member/getAccountByLoginID');
 
     //this. = function (userId) {
