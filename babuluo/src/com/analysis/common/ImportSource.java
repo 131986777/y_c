@@ -19,12 +19,12 @@ public class ImportSource {
     /**
      *第一次导入数据时就执行此主函数
      */
-    public static void main(String[] args){
-        importSource(getImportSource());
-    }
+//    public static void main(String[] args){
+//        importSource(getImportSource());
+//    }
 
     /**
-     * 导入数据
+     * 导入数据 importSource(getImportSource())
      * @param map
      */
     public static void importSource(Map<String,Map<String,String>> map){

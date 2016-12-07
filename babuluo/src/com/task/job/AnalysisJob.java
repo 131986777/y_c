@@ -11,7 +11,7 @@ import org.quartz.JobExecutionException;
 public class AnalysisJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        System.out.println("-------------------------------------------------ruin sfdfksdff -----------");
         YesterdayOnceMore.addYesterdayCardSource();
+        System.out.println("------------------- run addYesterDayCardSource in AnalysisJob excute Method ----------------");
     }
 }

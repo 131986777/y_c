@@ -94,9 +94,6 @@ public class YesterdayOnceMore {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(date);
     }
-    public static void main(String args[]){
-        addYesterdayCardSource();
-    }
     //删除已经存在的昨天的数据
     public static void delYesterDaySource(String arg){
         Map<String,String> map = new HashMap<>();
@@ -104,6 +101,7 @@ public class YesterdayOnceMore {
         try {
             ReturnData rd = new API().call("/stat/member_card_money_del_yestarday",map);
         } catch (RuleException e) {
+            System.out.println("-----------------Quartz Yestarday card source exception by YesterDayOnceMore.delYesterdaySource--------------------------");
             e.printStackTrace();
         }
     }

@@ -10,29 +10,29 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3">
-            <div class="layout bgColor-blue">
+    <div class="col-md-3">
+        <div class="layout bgColor-blue">
             <h2>￥100.00</h2>
             <p >成交额<i title="12w313213">!</i></p>
-            </div>
         </div>
-        <div class="col-md-3">
-            <div class="layout bgColor-blue2">
-                <h2>￥100.00</h2>
-                <p>优惠额</p>
-            </div>
-        </div><div class="col-md-2">
+    </div>
+    <div class="col-md-3">
         <div class="layout bgColor-blue2">
             <h2>￥100.00</h2>
-            <p>退款额</p>
+            <p>优惠额</p>
         </div>
-    </div><div class="col-md-4">
-        <div class="layout bgColor-red">
-            <h2>￥100.00</h2>
-            <p>实收合计</p>
-        </div>
+    </div><div class="col-md-2">
+    <div class="layout bgColor-blue2">
+        <h2>￥100.00</h2>
+        <p>退款额</p>
     </div>
+</div><div class="col-md-4">
+    <div class="layout bgColor-red">
+        <h2>￥100.00</h2>
+        <p>实收合计</p>
     </div>
+</div>
+</div>
     <div class="row">
         <div class="col-md-3">
             <div class="layout bgColor-blue">
@@ -47,10 +47,10 @@
             </div>
         </div>
         <div class="col-md-2">
-        <div class="layout bgColor-blue2">
-            <h2>00</h2>
-            <p>退单数</p>
-        </div>
+            <div class="layout bgColor-blue2">
+                <h2>00</h2>
+                <p>退单数</p>
+            </div>
         </div>
         <div class="col-md-2">
             <div class="layout bgColor-red">
@@ -68,39 +68,6 @@
 
     <div id="main" style="height: 300px;margin-top: 20px;"></div>
 
-    <script type="application/javascript">
-        var myChart = echarts.init(document.getElementById('main'));
-        var option = {
-            title: {
-                text: '商品销售折线图'
-            },
-            tooltip: {
-                trigger:'axis'
-            },
-            legend: {
-                data:['销量']
-            },
-            grid:{
-                show:true,
-                left: '3%',
-                right: '4%',
-                bottom: '3%',
-                containLabel: true
-            },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15"],
-            },
-            yAxis: {},
-            series: [{
-                name: '销量',
-                type: 'line',
-                data: [5, 20, 36, 10, 100, 20, 20, 20, 20, 20, 20,22,26,30]
-            }]
-        };
-        myChart.setOption(option);
-    </script>
     <div class="table-content">
         <div class="table-toolbar">
             <table class="table table-bordered table-hover table-striped">

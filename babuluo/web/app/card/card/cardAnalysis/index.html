@@ -1,38 +1,91 @@
 <div class="page-content" ng-init="initLoad()">
 
-            <div class="container-fluid">
-                <div class="col-md-1">
-                    <input type="text" ng-model="groupRange['STARTDAY']" ng-init="groupRange['STARTDAY']=''" class="form-control"  placeholder="2016-12-1">
-                </div>
+    <div class="container-fluid">
+    <!--时间选择导航-->
+    <div class="row timeBar">
+        <div class="col-md-12">
 
-                <div class="col-md-1">
-                    <input type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=''"  class="form-control"  placeholder="2016-12-31">
-                </div>
-                <button class="btn green" type="button" ng-click="getGroupByRange()">查询</button>
+            <div class="col-md-1">
+                <input type="text" ng-model="groupRange['STARTDAY']" ng-init="groupRange['STARTDAY']=''" class="form-control"  placeholder="2016-12-1">
             </div>
 
-    <div class="table-content">
-        <div class="table-toolbar">
-            <table class="table table-bordered table-hover table-striped">
-                    <thead>
-                    <tr>
-                        <th class="col-sm-1 text-center">日期</th>
-                        <th class="col-sm-1 text-center">充值</th>
-                        <th class="col-sm-1 text-center">消费</th>
-                        <th class="col-sm-1 text-center">消费冲红</th>
-                        <th class="col-sm-1 text-center">返点</th>
-                    </tr>
-                    </thead>
-                <tbody>
-                    <tr align="center" ng-repeat="value in cardMoneyChangeRange">
-                        <td>20{{value['._RANGE']}}</td>
-                        <td><span ng-repeat="value2 in rechargeList" ng-if="value2['.DAY']==value['._RANGE']">{{value2['.SOURCE']}}</span></td>
-                        <td><span ng-repeat="value3 in consumeList" ng-if="value3['.DAY']==value['._RANGE']">{{value3['.SOURCE']}}</span></td>
-                        <td><span ng-repeat="value4 in consumeRedList" ng-if="value4['.DAY']==value['._RANGE']">{{value4['.SOURCE']}}</span></td>
-                        <td><span ng-repeat="value5 in revertList" ng-if="value5['.DAY']==value['._RANGE']">{{value5['.SOURCE']}}</span></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="col-md-1">
+                <input type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=''"  class="form-control"  placeholder="2016-12-31">
+            </div>
+            <button class="btn green" type="button" ng-click="getGroupByRange()">查询</button>
+            <a ng-click="getGroupByThisWeek()">本周</a><a ng-click="getGroupByYesterWeek()">上周</a><a ng-click="getGroupByThisMonth()">本月</a><a ng-click="getGroupByYesterMonth()">上月</a><a ng-click="getGroupByYesterDay()">昨天</a><a ng-click="getGroupByNowDay()">今天</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="layout bgColor-blue">
+                <h2><span ng-bind="addCard"></span></h2>
+                <p >期内新增会员<i title="所选时间范围内新增会员的个数">!</i></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="layout bgColor-blue2">
+                <h2><span ng-bind="invalidTotalCard['.SOURCE']"></span></h2>
+                <p>空账户<i title="所选时间范围内空账户的个数">!</i></p>
+            </div>
+        </div>
+      <div class="col-md-4">
+        <div class="layout bgColor-red">
+            <h2><span ng-bind="totalCard['.SOURCE']"></span></h2>
+            <p>会员合计<i title="所选时间范围内会员总数">!</i></p>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="layout bgColor-blue">
+                <h2><span ng-bind="rechargeOnlineSum"></span></h2>
+                <p>会员充值<i title="所选时间范围内会员充值总计">!</i></p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="layout bgColor-blue2">
+                <h2><span ng-bind="consumeSum"></span></h2>
+                <p>会员消费<i title="所选时间范围内会员消费总计">!</i></p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="layout bgColor-blue2">
+                <h2><span ng-bind="revertSum"></span></h2>
+                <p>会员返点<i title="所选时间范围内会员返点总计">!</i></p>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="layout bgColor-blue2">
+                <h2><span ng-bind="consumeRedSum"></span></h2>
+                <p>会员红冲<i title="所选时间范围内会员红冲总计">!</i></p>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="main" style="height: 300px;margin-top: 20px;"></div>
+        <div class="row table-content">
+            <div class="col-md-12 table-toolbar">
+                <table class="table table-bordered table-hover table-striped">
+                        <thead>
+                        <tr>
+                            <th class="col-sm-1 text-center">日期</th>
+                            <th class="col-sm-1 text-center">充值</th>
+                            <th class="col-sm-1 text-center">消费</th>
+                            <th class="col-sm-1 text-center">消费冲红</th>
+                            <th class="col-sm-1 text-center">返点</th>
+                        </tr>
+                        </thead>
+                    <tbody>
+                        <tr align="center" ng-repeat="VALUE in cardMoneyChange">
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.DAY']"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['rechargeOnline']"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['consume']"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['consumeRed']"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['revert']"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
