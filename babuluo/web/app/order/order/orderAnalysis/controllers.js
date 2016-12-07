@@ -1,17 +1,21 @@
 /**
  * Created by cynara on 2016/12/1.
  */
-angular.module('AndSell.Main').controller('order_order_orderAnalysis_Controller', function ($scope, $stateParams, orderFactory, modalFactory) {
+angular.module('AndSell.Main').controller('order_order_orderAnalysis_Controller', function ($scope, $stateParams,$timeout, orderFactory, modalFactory) {
 
     modalFactory.setTitle("销售分析");
     modalFactory.setBottom(false);
 
     $scope.initLoad=function () {
+        $timeout(function () {
+            chartOrder();
+        },1000);
 
     }
+
 });
-function chart(){
-    var myChart = echarts.init(document.getElementById('main'));
+function chartOrder(){
+    var myChart = echarts.init(document.getElementById('main2'));
     var option = {
         title: {
             text: '商品销售折线图'

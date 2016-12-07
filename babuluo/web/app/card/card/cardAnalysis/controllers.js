@@ -94,17 +94,17 @@ angular.module('AndSell.Main').controller('card_card_cardAnalysis_Controller', f
             var consumeRedSum = 0;
             for(var i=0;i<flag.length;i++){
                 flag[i]['MANAGE_DATA_ANALYSIS.SOURCE'] = JSON.parse(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']);
-                addCard += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['addCard']);
-                rechargeOnlineSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['rechargeOnline']);
-                consumeSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['consume']);
-                revertSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['revert']);
-                consumeRedSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['consumeRed']);
+                addCard += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['ADDCARD']);
+                rechargeOnlineSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['RECHARGEONLINE']);
+                consumeSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUME']);
+                revertSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REVERT']);
+                consumeRedSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUMERED']);
                 dateArray[i] = flag[i]['MANAGE_DATA_ANALYSIS.DAY'];
-                addCardArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['addCard']);
-                rechargeOnlineArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['rechargeOnline']);
-                consumeArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['consume']);
-                revertArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['revert']);
-                consumeRedArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['consumeRed']);
+                addCardArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['ADDCARD']);
+                rechargeOnlineArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['RECHARGEONLINE']);
+                consumeArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUME']);
+                revertArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REVERT']);
+                consumeRedArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUMERED']);
             }
             $scope.cardMoneyChange = flag;
             $scope.addCard = addCard;
@@ -115,9 +115,8 @@ angular.module('AndSell.Main').controller('card_card_cardAnalysis_Controller', f
         },null);
 
         $timeout(function () {
-            chart();
+            chartCard();
         },1000);
-
     }
 });
 //获取昨天
@@ -135,13 +134,10 @@ function getMonthFirstDay() {
     var monthFirstDay=new Date(theDate.getFullYear(),theDate.getMonth(),1);
     return monthFirstDay.getFullYear()+"-"+(monthFirstDay.getMonth()+1)+"-"+monthFirstDay.getDate();
 }
-function chart(){
-    console.log(dateArray)
+function chartCard(){
     var myChart = echarts.init(document.getElementById('main'));
     var option = {
-        title: {
-            text: '会员分析折线图'
-        },
+
         tooltip: {
             trigger:'axis'
         },
