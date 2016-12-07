@@ -180,7 +180,7 @@
 <script src="/AndSell/h5/public/libs/swiper/swiper.jquery.min.js"></script>
 
 <!--微信js sdk-->
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="/AndSell/h5/public/libs/jweixin-1.0.0.js"></script>
 
 <!--importantJs -->
 <script src="/AndSell/h5/public/application.js"></script>

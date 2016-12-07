@@ -18,14 +18,14 @@
 
 <!-- BEGIN 内容 -->
 
-  <div class="row-content">
-    <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
-  </div>
+<div class="row-content">
+  <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
+</div>
 
 <!--END 内容-->
 
 <!-- BEGIN footer-nav -->
-<nav id="nav-bottom" class="nav-fixed-bottom" ng-if="navShow" role="navigation">
+<nav class="nav-fixed-bottom" ng-if="navShow" role="navigation">
   <ul class="nav-list flexbox" style="padding: 6px 0">
     <li class="cell" ng-class="{true:'selected'}[currentPage=='sy']">
       <a ui-sref="pages/home" ng-click="toPage('sy')">
@@ -39,7 +39,7 @@
         <p class="nav-txt">分类</p>
       </a>
     </li>
-    <li class="cell"  ng-class="[currentPage=='cart']" >
+    <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']" >
       <a ui-sref="pages/cart"  ng-click="toPage('cart')" class="home-nav-cart">
         <i class="icon icon-cart"></i>
         <p class="nav-txt">购物车</p>
@@ -73,7 +73,7 @@
 <script src="/AndSell/h5/public/libs/swiper/swiper.jquery.min.js"></script>
 
 <!--微信js sdk-->
-<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="/AndSell/h5/public/libs/jweixin-1.0.0.js"></script>
 
 <!--importantJs -->
 <script src="/AndSell/h5/public/application.js"></script>
@@ -103,5 +103,4 @@
 <script src="controller.js"> </script>
 
 </html>
-
 
