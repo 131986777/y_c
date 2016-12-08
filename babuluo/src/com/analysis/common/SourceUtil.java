@@ -81,6 +81,7 @@ public class SourceUtil {
     }
     /**
      * 根据api和参数map来获取jsonArray数据  argsMap  可以为空
+     * TODO 当JSON数据的某个字段值为null时 可能会出现未知错误
      * @param api 要访问的api
      * @param argsMap 参数
      * @return jsonArray
