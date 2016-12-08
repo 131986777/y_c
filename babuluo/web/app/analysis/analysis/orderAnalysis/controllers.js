@@ -17,7 +17,7 @@ var theDate = new Date();
 var theYear = theDate.getFullYear();
 var theMonth = theDate.getMonth()+1;
 var theDay = theDate.getDate();
-angular.module('AndSell.Main').controller('order_order_orderAnalysis_Controller', function ($scope, $stateParams,$timeout, orderFactory, modalFactory) {
+angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Controller', function ($scope, $stateParams,$timeout, analysisFactory, modalFactory) {
 
     modalFactory.setTitle("销售分析");
     modalFactory.setBottom(false);
@@ -99,7 +99,7 @@ angular.module('AndSell.Main').controller('order_order_orderAnalysis_Controller'
     }
     //根据日期范围查询  无论什么情景都用这个
     function getSource(startDay,endDay) {
-        orderFactory.getOrderAnalysisByRange(startDay,endDay).get({},function (response) {
+        analysisFactory.getOrderAnalysisByRange(startDay,endDay).get({},function (response) {
             console.log(response);
             var flag = response.data;
             var turnoverSum = 0;

@@ -13,7 +13,7 @@
                 <input type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=''"  class="form-control"  placeholder="2016-12-31">
             </div>
             <button class="btn green" type="button" ng-click="getGroupByRange()">查询</button>
-            <a ng-click="getGroupByThisWeek()">本周</a><a ng-click="getGroupByYesterWeek()">上周</a><a ng-click="getGroupByThisMonth()">本月</a><a ng-click="getGroupByYesterMonth()">上月</a><a ng-click="getGroupByYesterDay()">昨天</a><a ng-click="getGroupByNowDay()">今天</a>
+            <a class="showPoint" ng-click="getGroupByThisWeek()">本周</a><a class="showPoint" ng-click="getGroupByYesterWeek()">上周</a><a class="showPoint" ng-click="getGroupByThisMonth()">本月</a><a class="showPoint" ng-click="getGroupByYesterMonth()">上月</a><a class="showPoint" ng-click="getGroupByYesterDay()">昨天</a><a class="showPoint" ng-click="getGroupByNowDay()">今天</a>
         </div>
     </div>
     <div class="row">

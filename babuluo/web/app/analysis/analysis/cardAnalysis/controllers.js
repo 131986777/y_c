@@ -8,18 +8,18 @@ var theDate = new Date();
 var theYear = theDate.getFullYear();
 var theMonth = theDate.getMonth()+1;
 var theDay = theDate.getDate();
-var charArray = null;
-angular.module('AndSell.Main').controller('card_card_cardAnalysis_Controller', function ($scope, $stateParams,$timeout,modalFactory,cardFactory) {
+var chartArray = null;
+angular.module('AndSell.Main').controller('analysis_analysis_cardAnalysis_Controller', function ($scope, $stateParams,$timeout,modalFactory,analysisFactory) {
     modalFactory.setTitle('会员分析');
 
     //页面刚加载执行
     $scope.initLoad = function () {
        getSource("1970-1-1",theYear+"-"+theMonth+"-"+theDay);
-        cardFactory.getTotalCard().get({},function (response) {
+        analysisFactory.getTotalCard().get({},function (response) {
             console.log(response);
             $scope.totalCard = response.data[0];
         },null);
-        cardFactory.getInvalidTotalCard().get({},function (response) {
+        analysisFactory.getInvalidTotalCard().get({},function (response) {
             console.log(response);
             $scope.invalidTotalCard = response.data[0];
         },null);
@@ -92,7 +92,7 @@ angular.module('AndSell.Main').controller('card_card_cardAnalysis_Controller', f
     }
     //根据日期范围来查询  不管是initLoad 还是日期框  还是周 年月  都用这个方法
      function getSource(startDay,endDay) {
-        cardFactory.getCardMoneyChangeRangeByRange(startDay,endDay).get({},function (response) {
+         analysisFactory.getCardMoneyChangeRangeByRange(startDay,endDay).get({},function (response) {
             console.log(response);
             var flag = response.data;
             var addCard = 0;

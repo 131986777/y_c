@@ -8,5 +8,3 @@ $import('order/CashOnDeliveryOrder/detail',{ORDER_ID: '1030'},true);
 $import('order/order/offlineOrderList',{keyword: ''},true);
 
 $import('order/order/orderDetail',{ORDER_ID: '1030'},true);
-
-$import('order/order/orderAnalysis',undefined,true);
