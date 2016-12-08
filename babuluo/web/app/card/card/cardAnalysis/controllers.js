@@ -8,6 +8,7 @@ var theDate = new Date();
 var theYear = theDate.getFullYear();
 var theMonth = theDate.getMonth()+1;
 var theDay = theDate.getDate();
+var charArray = null;
 angular.module('AndSell.Main').controller('card_card_cardAnalysis_Controller', function ($scope, $stateParams,$timeout,modalFactory,cardFactory) {
     modalFactory.setTitle('会员分析');
 
@@ -22,6 +23,7 @@ angular.module('AndSell.Main').controller('card_card_cardAnalysis_Controller', f
             console.log(response);
             $scope.invalidTotalCard = response.data[0];
         },null);
+        showChartOnCard();
     };
     //上周的数据
     $scope.getGroupByYesterWeek = function () {
@@ -31,6 +33,7 @@ angular.module('AndSell.Main').controller('card_card_cardAnalysis_Controller', f
         var yesterdayWeekEndDay = new Date(theYear, theMonth, theDay + (6 - theDate.getDay() - 6));
         getSource(yesterdayWeekFirstDay.getFullYear()+"-"+(yesterdayWeekFirstDay.getMonth()+1)+"-"+yesterdayWeekFirstDay.getDate(),yesterdayWeekEndDay.getFullYear()+"-"+(yesterdayWeekEndDay.getMonth()+1)+"-"+yesterdayWeekEndDay.getDate())
         theMonth = theDate.getMonth()+1;
+        showChartOnCard();
     }
     //上月的数据
     $scope.getGroupByYesterMonth = function () {
@@ -45,26 +48,31 @@ angular.module('AndSell.Main').controller('card_card_cardAnalysis_Controller', f
         var lastDay = theYear + "-" + theMonth + "-" + myDate.getDate();//上个月的最后一天
         getSource(firstDay,lastDay);
         theMonth = theDate.getMonth()+1;
+        showChartOnCard();
     }
     //今天的数据
     $scope.getGroupByNowDay = function () {
         clearTable();
-        getSource(theYear+"-"+theMonth+"-"+theDay,theYear+"-"+theMonth+"-"+theDay)
+        getSource(theYear+"-"+theMonth+"-"+theDay,theYear+"-"+theMonth+"-"+theDay);
+        showChartOnCard();
     }
     //昨天的数据
     $scope.getGroupByYesterDay = function () {
         clearTable();
         getSource(getYesterday(),getYesterday());
+        showChartOnCard();
     }
     //本月的数据
     $scope.getGroupByThisMonth = function () {
         clearTable();
         getSource(getMonthFirstDay(),theYear+"-"+theMonth+"-"+theDay);
+        showChartOnCard();
     }
     //本周的数据
     $scope.getGroupByThisWeek = function () {
         clearTable();
        getSource(getWeekFirstDay(),theYear+"-"+theMonth+"-"+theDay);
+        showChartOnCard();
     }
     //通过日期查询
     $scope.getGroupByRange = function () {
@@ -72,15 +80,15 @@ angular.module('AndSell.Main').controller('card_card_cardAnalysis_Controller', f
         var endDay = $scope.groupRange['ENDDAY'];
         clearTable();
         getSource(startDay,endDay);
+        showChartOnCard();
     }
-    //清除已经有的数据
-    function clearTable () {
-        dateArray = new Array();
-        addCardArray = new Array;
-        rechargeOnlineArray = new Array();
-        consumeArray = new Array();
-        revertArray = new Array();
-        consumeRedArray = new Array();
+    //显示图表
+    function showChartOnCard() {
+        chartArray = addCardArray;
+        chartName = "新增会员";
+        $timeout(function () {
+            chartCard();
+        },1000);
     }
     //根据日期范围来查询  不管是initLoad 还是日期框  还是周 年月  都用这个方法
      function getSource(startDay,endDay) {
@@ -113,12 +121,22 @@ angular.module('AndSell.Main').controller('card_card_cardAnalysis_Controller', f
             $scope.revertSum = revertSum;
             $scope.consumeRedSum = consumeRedSum;
         },null);
-
-        $timeout(function () {
-            chartCard();
-        },1000);
+         //select修改样式
+         $scope.chargeChartOnCard = function (chartNum) {
+             // var chartNum = $scope.CHART;
+             changedChartOnCard(chartNum);
+         }
     }
 });
+//清除已经有的数据
+function clearTable () {
+    dateArray = new Array();
+    addCardArray = new Array;
+    rechargeOnlineArray = new Array();
+    consumeArray = new Array();
+    revertArray = new Array();
+    consumeRedArray = new Array();
+}
 //获取昨天
 function getYesterday(){
     var yesterDay = new Date(theDate-(theDate.getDay()-1));
@@ -134,6 +152,42 @@ function getMonthFirstDay() {
     var monthFirstDay=new Date(theDate.getFullYear(),theDate.getMonth(),1);
     return monthFirstDay.getFullYear()+"-"+(monthFirstDay.getMonth()+1)+"-"+monthFirstDay.getDate();
 }
+//通过select 切换图表样式
+function changedChartOnCard(chartNum) {
+    switch (chartNum){
+        case '1':{
+            chartArray = addCardArray;
+            chartName = "新增会员";
+            chartCard();
+            break;
+        }
+        case '2':{
+            chartArray = rechargeOnlineArray;
+            chartName = "会员充值";
+            chartCard();
+            break;
+        }
+        case '3':{
+            chartArray = consumeArray;
+            chartName = "会员消费";
+            chartCard();
+            break;
+        }
+        case '4':{
+            chartArray = revertArray;
+            chartName = "会员返点";
+            chartCard();
+            break;
+        }
+        case '5':{
+            chartArray = consumeRedArray;
+            chartName = "会员红冲";
+            chartCard();
+            break;
+        }
+    }
+}
+//百度的图片调用
 function chartCard(){
     var myChart = echarts.init(document.getElementById('main'));
     var option = {
@@ -142,12 +196,12 @@ function chartCard(){
             trigger:'axis'
         },
         legend: {
-            data:['新增会员','会员充值','会员消费','会员返点','会员红冲']
+            data:[chartName]
         },
         grid:{
             show:true,
             left: '3%',
-            right: '4%',
+            right: '3%',
             bottom: '3%',
             containLabel: true
         },
@@ -158,25 +212,9 @@ function chartCard(){
         },
         yAxis: {},
         series: [{
-            name: '新增会员',
+            name: chartName,
             type: 'line',
-            data: addCardArray
-        },{
-            name: '会员充值',
-            type: 'line',
-            data: rechargeOnlineArray
-        },{
-            name: '会员消费',
-            type: 'line',
-            data: consumeArray
-        },{
-            name: '会员返点',
-            type: 'line',
-            data: revertArray
-        },{
-            name: '会员红冲',
-            type: 'line',
-            data: consumeRedArray
+            data: chartArray
         }]
     };
     myChart.setOption(option);

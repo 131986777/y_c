@@ -1,5 +1,14 @@
 AndSellMainModule.service('orderFactory', function ($resource, baseURL) {
 
+    //获取一定日期内的订单分析数据
+    this.getOrderAnalysisByRange = function (startDay,endDay) {
+        return $resource(baseURL+"/stat/manage_data_analysis_by_range?STARTDAY=:STARTDAY&ENDDAY=:ENDDAY&FLAG=ANALYSIS_ORDER",{'STARTDAY':startDay,'ENDDAY':endDay},{
+            'update':{
+                method:'PUT'
+            }
+        });
+    };
+
     this.addOrder = function (order) {
         return $resource(baseURL + '/shop/order/addOrderWithDetail', order, {
             'update': {

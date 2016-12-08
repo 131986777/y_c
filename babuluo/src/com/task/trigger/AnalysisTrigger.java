@@ -14,7 +14,7 @@ public class AnalysisTrigger  {
     private Scheduler scheduler = null;
     private boolean hasInit = false;
     private boolean hasStart = false;
-    private static final String CRONSTR = "/0 0 1 * * ? ";// /10 * * * * ? 十秒执行一次 0 0 1 * * ? 每天的1点执行
+    private static final String CRONSTR = "0 */5 * * * ?";// /10 * * * * ? 十秒执行一次 0 0 1 * * ? 每天的1点执行
     public AnalysisTrigger(){
         System.out.println("Analysis Trigger is runing---");
     }

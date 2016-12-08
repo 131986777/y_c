@@ -1,6 +1,6 @@
 package com.task.job;
 
-import com.analysis.common.YesterdayOnceMore;
+import com.analysis.common.YesterdaySource;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -11,7 +11,7 @@ import org.quartz.JobExecutionException;
 public class AnalysisJob implements Job {
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        YesterdayOnceMore.addYesterdayCardSource();
-        System.out.println("------------------- run addYesterDayCardSource in AnalysisJob excute Method ----------------");
+        YesterdaySource.addYesterdayCardSource();
+        YesterdaySource.addYesterdayOrderSource();
     }
 }
