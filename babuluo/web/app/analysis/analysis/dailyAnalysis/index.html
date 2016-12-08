@@ -1,0 +1,79 @@
+<div class="container-fluid" ng-init="initLoad()">
+    <!--时间选择导航-->
+    <div class="row timeBar">
+        <div class="col-md-12">
+            <div class="col-md-1">
+                <input type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=''"  class="form-control"  placeholder="2016-12-31">
+            </div>
+            <button class="btn green" type="button" ng-click="getGroupByRange()">查询</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 showPoint" >
+            <div class="layout bgColor-blue" >
+                <h2>1</h2>
+                <p >订单量<i title="所选时间内的营业额">!</i></p>
+            </div>
+        </div>
+        <div class="col-md-3 showPoint">
+            <div class="layout bgColor-blue2" >
+                <h2>2</h2>
+                <p>客单价<i title="所选时间内的折让金额">!</i></p>
+            </div>
+        </div><div class="col-md-2 showPoint">
+        <div class="layout bgColor-blue2" >
+            <h2>3</h2>
+            <p>折让金额<i title="所选时间内的退款额">!</i></p>
+        </div>
+    </div><div class="col-md-4 showPoint">
+        <div class="layout bgColor-red" >
+            <h2>4</h2>
+            <p>销售金额<i title="所选时间内的实收">!</i></p>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="layout bgColor-blue">
+                <h2>5</h2>
+                <p>新开卡<i title="所选时间内的交易数">!</i></p>
+            </div>
+        </div>
+        <div class="col-md-6" >
+            <div class="layout bgColor-red" >
+                <h2>6</h2>
+                <p>开卡金额<i title="所选时间内的所选时间内参与优惠的订单">!</i></p>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="table-content">
+        <div class="table-toolbar">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                    <th class="col-sm-1 text-center">门店</th>
+                    <th class="col-sm-1 text-center">销售金额</th>
+                    <th class="col-sm-1 text-center">新开卡</th>
+                    <th class="col-sm-1 text-center">开卡金额</th>
+                    <th class="col-sm-1 text-center">折让金额</th>
+                    <th class="col-sm-1 text-center">订单量</th>
+                    <th class="col-sm-1 text-center">客单价</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr align="center">
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
