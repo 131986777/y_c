@@ -10,3 +10,5 @@ $import('order/order/offlineOrderList',{keyword: ''},true);
 $import('order/order/orderDetail',{ORDER_ID: '1030'},true);
 
 $import('order/order/orderSorting',{ORDER_ID: '1030'},true);
+
+$import('order/order/refundOrder',{},true);

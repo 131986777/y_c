@@ -1,128 +1,238 @@
 <div class="page-content">
-    <div class="table-content">
-        <div class="table-operbar">
-            <div class="table-toolbar text-right">
-                <button show-modal id="#add" class="btn btn-default sbold green"><i
-                    class="fa fa-plus"></i> 新增事件
-                </button>
-            </div>
+  <div class="table-content">
+    <div class="table-operbar">
+      <div class="table-toolbar text-right">
+        <button show-modal id="#add" class="btn btn-default sbold green"><i
+            class="fa fa-plus"></i> 新增事件
+        </button>
+      </div>
 
 
-            <div class="multi-menu multi-menu-bordered" ng-cloak>
+      <div class="multi-menu multi-menu-bordered" ng-cloak>
 
-                <div class="table-scrollable">
-                    <table class="table table-striped table-hover">
-                        <thead>
-                        <tr>
-                            <th style="width: 120px" class="text-center"> 名称</th>
-                            <th style="width: 120px" class="text-center"> 状态</th>
-                            <th style="width: 180px" class="text-center"> 操作</th>
-                        </tr>
-                        </thead>
+        <div class="table-scrollable">
+          <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+              <th style="width: 120px" class="text-center"> 名称</th>
+              <th style="width: 120px" class="text-center"> 说明</th>
+              <th style="width: 120px" class="text-center"> 标识一</th>
+              <th style="width: 120px" class="text-center"> 标识二</th>
+              <th style="width: 120px" class="text-center"> 标识三</th>
+              <th style="width: 120px" class="text-center"> 状态</th>
+              <th style="width: 180px" class="text-center"> 操作</th>
+            </tr>
+            </thead>
 
-                        <tbody ng-cloak  class="text-center" style="vertical-align: middle">
-                        <tr ng-repeat=" value in eventList">
-                            <td class="text-center">
-                                {{value['EVENT_CONFIG.NAME']}}
-                            </td>
-                            <td class="text-center">
-                                <span ng-if="value['EVENT_CONFIG.STATE']==-1">停用</span>
-                                <span ng-if="value['EVENT_CONFIG.STATE']==1">启用</span>
-                            </td>
+            <tbody ng-cloak class="text-center" style="vertical-align: middle">
+            <tr ng-repeat=" value in eventList">
+              <td class="text-center" ng-bind="value['EVENT_CONFIG.NAME']"></td>
+              <td class="text-center" ng-bind="value['EVENT_CONFIG.CONFIG']"></td>
+              <td class="text-center" ng-bind="value['EVENT_CONFIG.MARK1']"></td>
+              <td class="text-center" ng-bind="value['EVENT_CONFIG.MARK2']"></td>
+              <td class="text-center" ng-bind="value['EVENT_CONFIG.MARK3']"></td>
+              <td class="text-center">
+                <span ng-if="value['EVENT_CONFIG.STATE']==-1">停用</span>
+                <span ng-if="value['EVENT_CONFIG.STATE']==1">启用</span>
+              </td>
 
-                            <td class="text-center">
-                                <!--<a show-modal id="#modify"-->
-                                   <!--ng-click="modifyEventClick(value)">修改</a>-->
-                                <a ng-if="value['EVENT_CONFIG.STATE']==1"
-                                   ng-click="modifyEventState(value,-1)">停用</a>
-                                <a ng-if="value['EVENT_CONFIG.STATE']==-1"
-                                   ng-click="modifyEventState(value,1)">启用</a>
-                                <!--<a ng-click="delEvent(value)">删除</a>-->
-                            </td>
-                        </tr>
+              <td class="text-center">
+                <a show-modal id="#modify"
+                ng-click="modifyEventClick(value)">修改</a>
+                <a ng-if="value['EVENT_CONFIG.STATE']==1"
+                   ng-click="modifyEventState(value,-1)">停用</a>
+                <a ng-if="value['EVENT_CONFIG.STATE']==-1"
+                   ng-click="modifyEventState(value,1)">启用</a>
+                <!--<a ng-click="delEvent(value)">删除</a>-->
+              </td>
+            </tr>
 
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+            </tbody>
+          </table>
         </div>
+      </div>
     </div>
+  </div>
 
 
-    <!--BEGIN 新增单位-->
-    <div class="modal fade text-left" id="add" tabindex="-1" aria-hidden="true"
-         style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-hidden="true"></button>
-                    <h4 class="modal-title">新增事件</h4>
-                </div>
-                <div class="modal-body form-body text-right">
-
-                    <form class="form-horizontal">
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 事件名称:
-                            </label>
-
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="add['EVENT_CONFIG.NAME']"
-                                       ng-init="add['EVENT_CONFIG.NAME']=''"
-                                       placeholder=""></div>
-                        </div>
-
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" ng-click="addEvent()" class="btn green">确定
-                    </button>
-                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
-                    </button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
+  <!--BEGIN 新增单位-->
+  <div class="modal fade text-left" id="add" tabindex="-1" aria-hidden="true"
+       style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"
+                  aria-hidden="true"></button>
+          <h4 class="modal-title">新增事件</h4>
         </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!--END 新增单位-->
+        <div class="modal-body form-body text-right">
 
-    <!--BEGIN 修改单位-->
-    <div class="modal fade text-left" id="modify" tabindex="-1"
-         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-hidden="true"></button>
-                    <h4 class="modal-title">修改事件</h4>
-                </div>
-                <div class="modal-body form-body text-right">
-                    <form class="form-horizontal">
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 事件名称:
-                            </label>
+          <form class="form-horizontal">
+            <div class="form-group row">
+              <label class="col-md-3 control-label">
+                <span class="required"> * </span> 事件名称:
+              </label>
 
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="modify['EVENT_CONFIG.NAME']"
-                                       placeholder=""></div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn green" ng-click="modifyEvent()">确定
-                    </button>
-                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
-                    </button>
-                </div>
+              <div class="col-md-8">
+                <input type="text" class="form-control"
+                       ng-model="add['EVENT_CONFIG.NAME']"
+                       ng-init="add['EVENT_CONFIG.NAME']=''"
+                       placeholder=""></div>
             </div>
-            <!-- /.modal-content -->
+            <div class="form-group row">
+              <label class="col-md-3 control-label">
+                <span class="required"> * </span> 类型:
+              </label>
+
+              <div class="col-md-8">
+                <input type="text" class="form-control"
+                       ng-model="add['EVENT_CONFIG.TYPE']"
+                       ng-init="add['EVENT_CONFIG.TYPE']=''"
+                       placeholder=""></div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 control-label">
+                <span class="required"> * </span> 标识说明:
+              </label>
+
+              <div class="col-md-8">
+                <input type="text" class="form-control"
+                       ng-model="add['EVENT_CONFIG.CONFIG']"
+                       ng-init="add['EVENT_CONFIG.CONFIG']=''"
+                       placeholder=""></div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 control-label">
+                <span class="required"> * </span> 标识一:
+              </label>
+
+              <div class="col-md-8">
+                <input type="text" class="form-control"
+                       ng-model="add['EVENT_CONFIG.MARK1']"
+                       ng-init="add['EVENT_CONFIG.MARK1']=''"
+                       placeholder=""></div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 control-label">
+                <span class="required"> * </span> 标识二:
+              </label>
+
+              <div class="col-md-8">
+                <input type="text" class="form-control"
+                       ng-model="add['EVENT_CONFIG.MARK2']"
+                       ng-init="add['EVENT_CONFIG.MARK2']=''"
+                       placeholder=""></div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 control-label">
+                <span class="required"> * </span> 标识三:
+              </label>
+
+              <div class="col-md-8">
+                <input type="text" class="form-control"
+                       ng-model="add['EVENT_CONFIG.MARK3']"
+                       ng-init="add['EVENT_CONFIG.MARK3']=''"
+                       placeholder=""></div>
+            </div>
+          </form>
         </div>
-        <!-- /.modal-dialog -->
+        <div class="modal-footer">
+          <button type="button" ng-click="addEvent()" class="btn green">确定
+          </button>
+          <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+          </button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
     </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!--END 新增单位-->
+
+  <!--BEGIN 修改单位-->
+  <div class="modal fade text-left" id="modify" tabindex="-1"
+       aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"
+                  aria-hidden="true"></button>
+          <h4 class="modal-title">修改事件</h4>
+        </div>
+        <div class="modal-body form-body text-right">
+          <form class="form-horizontal">
+            <div class="form-group row">
+              <label class="col-md-3 control-label">
+                <span class="required"> * </span> 事件名称:
+              </label>
+
+              <div class="col-md-8">
+                <input type="text" class="form-control"
+                       ng-model="modify['EVENT_CONFIG.NAME']"
+                       placeholder=""></div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 control-label">
+                <span class="required"> * </span> 类型:
+              </label>
+
+              <div class="col-md-8">
+                <input type="text" class="form-control" disabled
+                       ng-model="modify['EVENT_CONFIG.TYPE']"
+                       placeholder=""></div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 control-label">
+                <span class="required"> * </span> 标识说明:
+              </label>
+
+              <div class="col-md-8">
+                <input type="text" class="form-control"
+                       ng-model="modify['EVENT_CONFIG.CONFIG']"
+                       placeholder=""></div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 control-label">
+                <span class="required"> * </span> 标识一:
+              </label>
+
+              <div class="col-md-8">
+                <input type="text" class="form-control"
+                       ng-model="modify['EVENT_CONFIG.MARK1']"
+                       placeholder=""></div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 control-label">
+                <span class="required"> * </span> 标识二:
+              </label>
+
+              <div class="col-md-8">
+                <input type="text" class="form-control"
+                       ng-model="modify['EVENT_CONFIG.MARK2']"
+                       placeholder=""></div>
+            </div>
+            <div class="form-group row">
+              <label class="col-md-3 control-label">
+                <span class="required"> * </span> 标识三:
+              </label>
+
+              <div class="col-md-8">
+                <input type="text" class="form-control"
+                       ng-model="modify['EVENT_CONFIG.MARK3']"
+                       placeholder=""></div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn green" ng-click="modifyEvent()">确定
+          </button>
+          <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+          </button>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
 </div>
 <!-- END CONTENT -->

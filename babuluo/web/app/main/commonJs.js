@@ -63,9 +63,14 @@ function objectToArray(object){
     return tmp;
 }
 
-//处理商品价格
+//处理商品价格 除以100
 function moneyFormat(money) {
     return Number(money / 100).toFixed(2);
+}
+
+//去除小数点
+function folatFormat(money) {
+    return Number(money).toFixed(2);
 }
 
 //过滤时间后面的毫秒
@@ -147,10 +152,10 @@ function setContentsInfoForOrder_OFFLINE(sku) {
 
 //list to map   by  key
 function listToMap(list, key) {
-    var map = new Map;
+    var map = {};
     list.forEach(function (ele) {
         if (ele[key] != undefined) {
-            map.set(ele[key], ele);
+            map[ele[key]]=ele;
         }
     });
     return map;

@@ -15,4 +15,9 @@ AndSellMainModule.service('orderFactory', function (http) {
     this.getWXPayItemByOrderId= http.post('/order/wx/pay/list/getByOrderId');
     this.getFinanceItemByOrderId= http.post('/member/balance/getByOrderId');
 
+
+    this.getRefundOrder = http.post('/shop/order/refund/queryAll');
+    this.refundOrder = http.post('/shop/order/refund/refundOrder');
+    this.RemarkRefundOrder = http.post('/shop/order/refund/remarkOrder');
+
 });

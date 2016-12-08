@@ -1,9 +1,10 @@
-angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller', function ($scope, $state, $stateParams, balanceFactory,weUI, orderFactory) {
+angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller', function ($scope, $state, $stateParams, balanceFactory,weUI, orderFactory,eventFactory) {
 
 
     $scope.initLoad  = function () {
         $scope.uid = getCookie('ANDSELLID');
         $scope.queryAccount($scope.uid);
+        $scope.getEvent();
     }
 
     $scope.queryAccount = function (uid){
@@ -12,9 +13,27 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
         balanceFactory.queryAccountByUid(form, function (response) {
             console.log(response);
             $scope.balanceInfo = response.data;
-            // $scope.serviceId = $scope.balanceInfo[0]['MEMBER_ACCOUNT.SERVICE_ID'];
         }, function (response) {
             weUI.toast.error(response.msg);
+        });
+    }
+
+    $scope.getEvent = function () {
+
+        $scope.eventContent='';
+        $scope.eventMoney='';
+
+        eventFactory.getEventByType({"EVENT_CONFIG.TYPE":"RECHARGE"}, function (response) {
+            console.log(response);
+            $scope.eventList=response.data;
+            $scope.eventList.forEach(function (ele,ind) {
+                if(ind==1){
+                    $scope.eventContent+=',';
+                    $scope.eventMoney+=',';
+                }
+                $scope.eventContent+=ele['EVENT_CONFIG.MARK1']+'送'+ele['EVENT_CONFIG.MARK2'];
+                $scope.eventMoney+=ele['EVENT_CONFIG.MARK1'];
+            });
         });
     }
 

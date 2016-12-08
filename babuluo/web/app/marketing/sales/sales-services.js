@@ -16,14 +16,12 @@ AndSellMainModule.service('salesFactory', function (http) {
 
 AndSellMainModule.service('eventFactory', function (http) {
 
-    this.addEvent=http.post('/sale/evnet/add');
+    this.addEvent=http.post('/sales/event/add');
 
-    this.modEvent=http.post('/sale/evnet/modifyById');
+    this.modEvent=http.post('/sales/event/modifyById');
 
-    this.delEvent=http.post('/sale/evnet/delById');
+    this.delEvent=http.post('/sales/event/delById');
 
-    this.getEvent=http.post('/sale/evnet/queryAll');
-
-    this.getByName=http.post('/sale/evnet/getByName');
+    this.getEvent=http.post('/sales/event/queryAll');
 
 });

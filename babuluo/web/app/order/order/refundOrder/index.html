@@ -1,0 +1,154 @@
+<div class="page-content" ng-init="initData()">
+  <div class="table-operbar">
+    <div class="table-toolbar">
+
+      <!-- 所有订单 -->
+      <div class="form-group form-inline ">
+        <input type="text" class="form-control" ng-model="orderFilter" placeholder="输入商品名称/订单号">
+        <button type="submit" class="btn btn-default" ng-click="searchOrder()"><span
+            class="glyphicon glyphicon-search"></span></button>
+
+        <label style="margin-left: 20px">退款状态</label>
+        <select ng-model="filter['REFUND_ORDER.REFUND_STATE']"
+                ng-init="filter['REFUND_ORDER.REFUND_STATE']='null'"
+                class="nya-bs-select form-control">
+          <option class="nya-bs-option" value="null">
+            全部
+          </option>
+          <option class="nya-bs-option" value="-1">
+            未退款
+          </option>
+          <option class="nya-bs-option" value="1">
+            已退款
+          </option>
+        </select>
+
+      </div>
+
+      <div class="orders">
+        <div>
+          <div class="orderItem " ng-repeat=" order in orderList"
+               ng-class="{true:'unfinished'}[order['REFUND_ORDER.REFUND_STATE']==-1]">
+            <div class="imformation orderUnpayed">
+
+              <div class="payed" ng-if="order['REFUND_ORDER.REFUND_STATE']==1">已退款</div>
+              <div class="unpayed" ng-if="order['REFUND_ORDER.REFUND_STATE']==-1">未退款</div>
+              <div class="row">
+                <div class="details col-md-8">
+                  <p class="name"
+                     ng-if="order['REFUND_ORDER.REFUND_STATE']==1"
+                     ng-bind="'退款时间: '+order['REFUND_ORDER.REFUND_DATETIME']"></p>
+                  <p class="name"
+                     ng-bind="'退单备注: '+order['REFUND_ORDER.REMARK']"></p>
+                </div>
+                <div class="sum col-md-4 text-right">
+                  <div class="buttons pull-right col-md-3" ng-if="order['REFUND_ORDER.REFUND_STATE']==-1" >
+                    <button class="btn btn-detail btn-block"
+                            ng-click="endRefund(order)">
+                      已退款
+                    </button>
+                  </div>
+                  <div class="buttons pull-right col-md-3 ">
+                    <button class="btn btn-detail btn-block"
+                            id="#modifyRemark" show-modal
+                            ng-click="remarkClick(order)">
+                      修改备注
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="details col-md-8">
+                  <span class="time"
+                        ng-bind="order['REFUND_ORDER.ORDER_INFO']['SHOP_ORDER.DATETIME_ADD']"> | </span>
+                <span
+                    class="name"> {{order['REFUND_ORDER.ORDER_INFO']['SHOP_ORDER.REC_CONTACT']}} | </span>
+                  <span class="orderNum"
+                        ng-bind="'订单号：'+order['REFUND_ORDER.ORDER_INFO']['SHOP_ORDER.ORDER_NUM']"> | </span><span
+                    ng-if="order['REFUND_ORDER.ORDER_INFO']['SHOP_ORDER.PAY_TYPE']=='WEIXIN'"
+                    class="payWay"> 微信支付 | </span><span
+                    ng-if="order['REFUND_ORDER.ORDER_INFO']['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'"
+                    class="payWay"> 会员卡支付 | </span>
+                  <span ng-bind="order['REFUND_ORDER.ORDER_INFO']['SHOP_ORDER.SHOP_NAME']"></span>
+                </div>
+                <div class="sum col-md-4 text-right">
+                  <p> 订单金额：<span
+                      ng-bind="order['REFUND_ORDER.ORDER_INFO']['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
+                    元
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="product">
+              <div class="productList pull-left">
+                <ul class="list-unstyled">
+                  <li ng-repeat=" detail in order['REFUND_ORDER.ORDER_INFO']['SHOP_ORDER.ORDER_INFO']">
+                    <div class="productInfo">
+                      <img class="pull-left"
+                           ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}"
+                           style="width: 80px;height: 80px;">
+                      <p class="itemName" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']"></p>
+                      <p class="itemPrice"><span
+                          ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span> 元
+                        x
+                        <span class="itemNum" ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span>
+                      </p>
+                      <p class="itemColor"
+                         ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']"></p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div class="buttons pull-right">
+                <button class="btn btn-detail btn-block"
+                        ng-click="toDetail(order['REFUND_ORDER.ORDER_INFO']['SHOP_ORDER.ID'])">
+                  查看原订单
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div page-bar
+           filter-obj="filter"
+           url="/shop/order/refund/queryAll"
+           callback="bindData(response)">
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--BEGIN 修改订单备注-->
+<div class="modal fade text-left" id="modifyRemark" tabindex="-1"
+     aria-hidden="true" style="display: none;">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"
+                aria-hidden="true"></button>
+        <h4 class="modal-title">修改备注</h4>
+      </div>
+
+      <div class="modal-body form-body text-right">
+        <div class="form-group row">
+          <label class="col-md-3 control-label">
+            <span class="required"> * </span> 备注内容:
+          </label>
+
+          <div class="col-md-8">
+            <input type="text" class="form-control" ng-model="modify['REFUND_ORDER.REMARK']"
+                   placeholder=""/>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn green" ng-click="modifyRemark()">确定
+        </button>
+        <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

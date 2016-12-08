@@ -42,14 +42,21 @@ AndSellH5MainModule.controller('H5.MainController', function ($scope, $state, mo
         var size = 0;
         var params = {};
         params['SHOP_PRODUCT_SKU.SKU_IDS'] = cartInfo.toString();
-        if (getCookie('currentShopInfo') != '' || getCookie('currentShopInfo') != undefined) {
-            params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
-            productFactory.getProductSkuBySkuIds(params, function (response) {
-                response.data.forEach(function (ele) {
-                    size += cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
-                });
-                $scope.cartSize = size;
-            })
+        if (getCookie('currentShopInfo')
+            != ''
+            && getCookie('currentShopInfo')
+            != undefined
+            && getCookie('currentShopInfo')
+            != null) {
+            if (JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'] != undefined) {
+                params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
+                productFactory.getProductSkuBySkuIds(params, function (response) {
+                    response.data.forEach(function (ele) {
+                        size += cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
+                    });
+                    $scope.cartSize = size;
+                })
+            }
         }
     }
 
