@@ -129,8 +129,7 @@
           总计：<span class="money" ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
         </p>
       </div>
-      <div class="btn-wrap"
-      >
+      <div class="btn-wrap">
         <a class="btn-cancel btn" ng-click="cancelOrder()" ng-if="((order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.STATE_OUT']==-1&&order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&&order['SHOP_ORDER.STATE_MONEY']==1)) && order['SHOP_ORDER.TYPE']=='3')
                         ||(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&& order['SHOP_ORDER.STATE_OUT']==-1)&& order['SHOP_ORDER.TYPE']=='1')">
           取消订单
