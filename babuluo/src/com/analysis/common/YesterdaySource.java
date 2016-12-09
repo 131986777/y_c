@@ -16,7 +16,7 @@ public class YesterdaySource {
      */
     public static void addYesterdayOrderSource(){
         SourceUtil.delYesterDaySource("ANALYSIS_ORDER");
-        Map<String,Map<String,String>> map = new HashMap<>();
+        Map<String,String> map = new HashMap<>();
         Map<String,String> resMap = new HashMap<>();
         JSONArray ja = SourceUtil.getJSONArraySource("/stat/member_order_money_about_by_yesterday",null);
         JSONObject jo =  JSONObject.parseObject(ja.get(0).toString());
@@ -29,7 +29,7 @@ public class YesterdaySource {
         resMap.put("DEDUCTION_ORDERS", SourceUtil.getAboutSource("/stat/member_order_discount_orders_by_yesterday",null,".SOURCE"));
         resMap.put("DISSUCCESS_ORDERS",SourceUtil.getAboutSource("/stat/member_order_dissuccess_success_orders_by_yesterday",new HashMap<String,String>(){{put("FLAG","DATETIME_CANCEL");}},".SOURCE"));
         resMap.put("SUCCESS_ORDERS",SourceUtil.getAboutSource("/stat/member_order_dissuccess_success_orders_by_yesterday",new HashMap<String,String>(){{put("FLAG","DATETIME_DELIVERY");}},".SOURCE"));
-        map.put(SourceUtil.getYesterdayDate(),resMap);
+        map.put(SourceUtil.getYesterdayDate(), net.sf.json.JSONObject.fromObject(resMap).toString());
         SourceUtil.importSource(map,"ANALYSIS_ORDER");
     }
     /**
@@ -37,7 +37,7 @@ public class YesterdaySource {
      */
     public static void addYesterdayCardSource(){
         SourceUtil.delYesterDaySource("ANALYSIS_CARD");
-        Map<String,Map<String,String>> map = new HashMap<>();
+        Map<String,String> map = new HashMap<>();
         Map<String,String> resMap = new HashMap<>();
         resMap.put("CONSUME",SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday",new HashMap<String,String>(){{put("EVENT","消费");}},".SOURCE"));
         resMap.put("RECHARGEONLINE",SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday",new HashMap<String,String>(){{put("EVENT","会员卡充值");}},".SOURCE"));
@@ -45,7 +45,7 @@ public class YesterdaySource {
         resMap.put("CONSUMERED",SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday",new HashMap<String,String>(){{put("EVENT","消费冲红");}},".SOURCE"));
         resMap.put("REVERT",SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday",new HashMap<String,String>(){{put("EVENT","返点");}},".SOURCE"));
         resMap.put("ADDCARD",SourceUtil.getAboutSource("/stat/member_card_by_yesterday",null,".SOURCE"));
-        map.put(SourceUtil.getYesterdayDate(),resMap);
+        map.put(SourceUtil.getYesterdayDate(), net.sf.json.JSONObject.fromObject(resMap).toString());
         SourceUtil.importSource(map,"ANALYSIS_CARD");
     }
 }

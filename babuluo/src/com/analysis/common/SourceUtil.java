@@ -109,12 +109,15 @@ public class SourceUtil {
         }
         return ja;
     }
+    public static void importSource2(Map<String,Map<String,Map<String,String>>> map,String flag){
+
+    }
     /**
      * 将准备好的数据存入数据库  manage_data_analysis
      * @param map  要传入的数据
      * @param flag 标识
      */
-    public static void importSource(Map<String,Map<String,String>> map,String flag){
+    public static void importSource(Map<String,String> map,String flag){
         Iterator it = map.entrySet().iterator();
         String key = null;
         Map<String,String> argsMap = null;
@@ -123,9 +126,10 @@ public class SourceUtil {
             argsMap = new HashMap<>();
             Map.Entry entry = (Map.Entry) it.next();
             key = entry.getKey().toString();
-            String content =  net.sf.json.JSONObject.fromObject(map.get(key)).toString();
+//            String content =  net.sf.json.JSONObject.fromObject(map.get(key)).toString();
             argsMap.put("MANAGE_DATA_ANALYSIS.ANALYSIS_DATA",key);
-            argsMap.put("MANAGE_DATA_ANALYSIS.CONTENT",content);
+//            argsMap.put("MANAGE_DATA_ANALYSIS.CONTENT",content);
+            argsMap.put("MANAGE_DATA_ANALYSIS.CONTENT",map.get(key));
             argsMap.put("MANAGE_DATA_ANALYSIS.FLAG",flag);
             try {
                 rd = new API().call("/stat/manage_data_analysis_add",argsMap);
@@ -137,20 +141,20 @@ public class SourceUtil {
     //
 
     /**
-     * 往map中添加数据 必须要是.DAY 为标识 .SOURCE为键值 TODO 可以改为不必须是.DAY 和.SOURCE为标识
+     * 往map中添加数据
      * @param jsonArray 要循环读取的json数组
      * @param sourceMap 源map  为 Map<>
      * @param day 要比对的值
      * @param field 要存入数据库中的字段名
      */
-    public static void addMapSource(JSONArray jsonArray, Map<String, String> sourceMap, String day, String field) {
+    public static void addMapSource(JSONArray jsonArray, Map<String, String> sourceMap, String day, String field,String eqFlag,String value) {
         JSONObject jo;
         String eq;
         for(int j = 0; j<jsonArray.size(); j++){
             jo = JSONObject.parseObject(jsonArray.get(j).toString());
-            eq = (String) jo.get(".DAY");
+            eq = (String) jo.get(eqFlag);
             if(day.equals(eq)){
-                sourceMap.put(field, (String) jo.get(".SOURCE"));
+                sourceMap.put(field, (String) jo.get(value));
                 jsonArray.remove(j);
                 break;
             }
