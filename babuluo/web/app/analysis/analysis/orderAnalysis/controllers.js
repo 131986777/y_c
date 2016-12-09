@@ -92,7 +92,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
             chartOrder();
         },1000);
     }
-    //修改
+    //修改表格显示样式
     $scope.chargeChartOnOrder = function (chartNum) {
         // var chartNum = $scope.CHART;
         changedChart(chartNum);
@@ -148,8 +148,9 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
 });
 //获取昨天
 function getYesterday(){
-    var yesterDay = new Date(theDate-(theDate.getDay()-1));
-    return yesterDay.getFullYear()+"-"+(yesterDay.getMonth()+1)+"-"+yesterDay.getDate()
+    var yesterday = new Date();
+    yesterday.setDate(yesterday.getDate()-1);
+    return yesterday.getFullYear()+"-"+(yesterday.getMonth()+1)+"-"+yesterday.getDate()
 }
 //本周第一天
 function getWeekFirstDay() {

@@ -137,10 +137,10 @@ function clearTable () {
     revertArray = new Array();
     consumeRedArray = new Array();
 }
-//获取昨天
 function getYesterday(){
-    var yesterDay = new Date(theDate-(theDate.getDay()-1));
-    return yesterDay.getFullYear()+"-"+(yesterDay.getMonth()+1)+"-"+yesterDay.getDate()
+    var yesterday = new Date();
+    yesterday.setDate(yesterday.getDate()-1);
+    return yesterday.getFullYear()+"-"+(yesterday.getMonth()+1)+"-"+yesterday.getDate()
 }
 //本周第一天
 function getWeekFirstDay() {
