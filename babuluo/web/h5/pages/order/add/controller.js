@@ -85,6 +85,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             });
             weUI.toast.hideLoading();
             $scope.updateOrderPrice();
+        }, function (response) {
+            weUI.toast.hideLoading();
         });
     }
 

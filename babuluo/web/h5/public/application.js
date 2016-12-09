@@ -355,7 +355,7 @@ AndSellUI.directive('cartModal', function (productFactory,weUI,modalFactory) {
     }
 });
 
-AndSellService.factory("http", function ($http) {
+AndSellService.factory("http", function ($http,weUI) {
     var _post = function (url, data,funcSuccess,funcFail) {
         return $http.post(url, $.param(data), {headers: {'Content-Type': 'application/x-www-form-urlencoded','withCredentials': true}}).success(function (response) {
             if (response.code == 0) {
@@ -367,6 +367,7 @@ AndSellService.factory("http", function ($http) {
             } else {
                 if (angular.isFunction(funcFail)) {
                     if (funcFail != undefined) {
+                        weUI.toast.hideLoading();
                         funcFail(response);
                     }
                 }

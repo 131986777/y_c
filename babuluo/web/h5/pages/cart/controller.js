@@ -187,17 +187,21 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
     $scope.addOrder = function () {
         if ($scope.totalSize > 0) {
             var list = new Array;
+            var existNoStockPrd = false;
             $scope.skuList.forEach(function (ele) {
                 if (ele.isSelect) {
                     if (ele['SHOP_PRODUCT_SKU.STOCK'] > 0) {
                         list.push(ele['SHOP_PRODUCT_SKU.SKU_ID']);
                     } else {
-                        weUI.toast.error('存在售罄商品');
-                        return;
+                        existNoStockPrd = true;
                     }
                 }
             });
-            $state.go('pages/order/add', {SKU_IDS: list.toString()});
+            if (existNoStockPrd) {
+                weUI.toast.error('存在售罄商品');
+            } else {
+                $state.go('pages/order/add', {SKU_IDS: list.toString()});
+            }
         } else {
             weUI.toast.info('至少选择一项');
         }

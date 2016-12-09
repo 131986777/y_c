@@ -243,12 +243,14 @@ function routerPath(base, path, param, css) {
                 'pages/user/register', 'pages/security/resetPwd' ,'pages/user/SetPassword'];
             if (filtertList.indexOf(path) < 0) {
                 userFactory.isLogin({}, function (response) {
+                    return $ocLazyLoad.load(loadItemList);
                 }, function (response) {
                     $state.go('pages/user/accountLogin');
                     return undefined;
                 });
+            }else{
+                return $ocLazyLoad.load(loadItemList);
             }
-            return $ocLazyLoad.load(loadItemList);
         }
     }
     return router;
