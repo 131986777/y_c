@@ -212,4 +212,54 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         var node = document.getElementById("hello");
         node.style.color = "black";
     }
+
+    $scope.filterTime = function (type) {
+        console.log(type);
+        if (type == 'all') {
+            console.log('in');
+            $scope.filter['FINANCE_LIST.ADD_DATETIME_FROM'] = '';
+            $scope.filter['FINANCE_LIST.ADD_DATETIME_TO'] = '';
+        }
+    }
+
+    $('#start_hour').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        startView: 2,
+        format: 'yyyy/mm/dd hh:ii',
+        todayBtn: 'linked'
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+    $('#end_hour').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        format: 'yyyy/mm/dd hh:ii',
+        todayBtn: 'linked',
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+    $(document).ready(function () {
+        $('#birthday').daterangepicker({singleDatePicker: true}, function (start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+        $('#birthdayDate').daterangepicker({singleDatePicker: true}, function (start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
+
 });

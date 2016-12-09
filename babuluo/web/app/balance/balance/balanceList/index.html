@@ -3,7 +3,7 @@
     <div class="table-operbar">
       <div class="table-toolbar">
         <div class="form-inline row">
-          <div class="form-group col-md-5">
+          <div class="form-group col-md-4">
             <select ng-model="searchType"
                     ng-init="searchType='LOGIN_ID'"
                     class="nya-bs-select form-control">
@@ -18,11 +18,12 @@
               </option>
             </select>
             <input type="text" class="form-control" placeholder="" ng-model="loginId">
-            <button type="submit" class="btn btn-default" ng-click="queryFinanceByLoginId(loginId)">
+            <button type="submit" class="btn btn-default"
+                    ng-click="queryFinanceByLoginId(loginId)">
               搜索
             </button>
           </div>
-          <div class="form-group col-md-5">
+          <div class="form-group col-md-6">
             <label>筛选:</label>
             <select ng-model="filter['FINANCE_LIST.CHANGE_TYPE']"
                     ng-init="filter['FINANCE_LIST.CHANGE_TYPE']='null'"
@@ -60,9 +61,35 @@
               <option class="nya-bs-option" value="null">
                 所有门店
               </option>
-              <option class="nya-bs-option" ng-repeat="shop in shopList" ng-bind="shop['SHOP.SHOP_NAME']" value="{{shop['SHOP.SHOP_ID']}}">
+              <option class="nya-bs-option" ng-repeat="shop in shopList"
+                      ng-bind="shop['SHOP.SHOP_NAME']" value="{{shop['SHOP.SHOP_ID']}}">
               </option>
             </select>
+            <select ng-model="timeType"
+                    ng-init="timeType='all'"
+                    ng-change="filterTime(timeType)"
+                    class="nya-bs-select form-control">
+              <option class="nya-bs-option" value="all" >
+                所有时间
+              </option>
+              <option class="nya-bs-option" value="aim">
+                时间段内
+              </option>
+            </select>
+            <div ng-show="timeType=='aim'"
+                data-date="10/11/2012"
+                language="zh-CN"
+                data-date-format="yyyy-mm-dd">
+              <input id="start_hour" type="text" class="form-control " placeholder="起始时间"
+                     name="from" ng-model="filter['FINANCE_LIST.ADD_DATETIME_FROM']" data-date-format="yyyy/mm/dd hh:ii" style="">
+            </div>
+            <div ng-show="timeType=='aim'"
+                data-date="10/11/2012"
+                language="zh-CN"
+                data-date-format="yyyy-mm-dd">
+              <input id="end_hour" type="text" class="form-control " placeholder="截止时间"
+                     name="to" ng-model="filter['FINANCE_LIST.ADD_DATETIME_TO']" data-date-format="yyyy/mm/dd hh:ii" style="">
+            </div>
           </div>
           <div class="col-md-2">
             <button type="button" class="btn btn-default pull-right" data-toggle="modal"
@@ -99,8 +126,10 @@
           <td ng-bind="balanceInfo['FINANCE_LIST.SHOP_NAME']"></td>
           <td ng-bind="balanceInfo['FINANCE_LIST.OPER_USER_ID']"></td>
           <td>
-            <span style="color:red" ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='decrease'">支出</span>
-            <span style="color:green" ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='increase'">收入</span>
+            <span style="color:red"
+                  ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='decrease'">支出</span>
+            <span style="color:green"
+                  ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='increase'">收入</span>
           </td>
           <td class="text-center">
             <span style="color:black" ng-show="balanceInfo['FINANCE_LIST.CHANGE_VALUE']>0">{{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}</span>
@@ -271,13 +300,13 @@
             </div>
 
             <!--<div class="form-group row">-->
-              <!--<label class="col-md-3 control-label">-->
-                <!--<span class="required"> * </span> 调整后余额:-->
-              <!--</label>-->
+            <!--<label class="col-md-3 control-label">-->
+            <!--<span class="required"> * </span> 调整后余额:-->
+            <!--</label>-->
 
-              <!--<div class="col-md-8 text-left">-->
-                <!--<h5>{{afterModify}}</h5>-->
-              <!--</div>-->
+            <!--<div class="col-md-8 text-left">-->
+            <!--<h5>{{afterModify}}</h5>-->
+            <!--</div>-->
             <!--</div>-->
 
           </form>
