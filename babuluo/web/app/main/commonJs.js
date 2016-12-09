@@ -54,9 +54,9 @@ var filterTableFromList = function (list, tablename) {
 };
 
 //obj to array
-function objectToArray(object) {
-    var tmp = [];
-    for (var key in object) {
+function objectToArray(object){
+    var tmp=[];
+    for(var key in object){
         //key是属性,object[key]是值
         tmp.push(object[key]);//往数组中放属性
     }
@@ -155,7 +155,7 @@ function listToMap(list, key) {
     var map = {};
     list.forEach(function (ele) {
         if (ele[key] != undefined) {
-            map[ele[key]] = ele;
+            map[ele[key]]=ele;
         }
     });
     return map;
@@ -197,12 +197,10 @@ function routerPath(base, path, param, css) {
     router.resolve = {
         loadServiceAndController: function ($ocLazyLoad, userFactory) {
             userFactory.isLogin({}, function (response) {
-                return $ocLazyLoad.load(loadItemList)
             }, function (response) {
                 window.location.href = '../login/index.html';
-                return undefined;
             });
-
+            return $ocLazyLoad.load(loadItemList)
         }
     }
     return router;

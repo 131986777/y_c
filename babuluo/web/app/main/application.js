@@ -247,7 +247,7 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
                 obj.PN = $scope.currentPage;
                 var url = baseURL + $scope.url;
                 http.post_ori(url, obj, function (data) {
-                    if (data != undefined && data.data.length > 0) {
+                    if (data != undefined && data.data.length >= 0) {
                         $scope.pageObject = data.data;
                         var tmp = parseInt(data.extraData.page.querySize
                             / data.extraData.page.pageSize);
