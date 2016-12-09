@@ -11,7 +11,7 @@ var deduction_ordersArray = new Array();
 var cancel_ordersArray = new Array();
 var dissuccess_ordersArray = new Array();
 var success_ordersArray = new Array();
-var chartArray = new Array();
+var orderChartArray = new Array();
 var chartName = null;
 var theDate = new Date();
 var theYear = theDate.getFullYear();
@@ -24,17 +24,17 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
 
     //上周的数据
     $scope.getGroupByYesterWeek = function () {
-        clearTable();
+        clearOrderTable();
         theMonth = theDate.getMonth();
         var yesterdayWeekFirstDay=new Date(theYear,theMonth,theDay - theDate.getDay() - 6);
         var yesterdayWeekEndDay = new Date(theYear, theMonth, theDay + (6 - theDate.getDay() - 6));
-        getSource(yesterdayWeekFirstDay.getFullYear()+"-"+(yesterdayWeekFirstDay.getMonth()+1)+"-"+yesterdayWeekFirstDay.getDate(),yesterdayWeekEndDay.getFullYear()+"-"+(yesterdayWeekEndDay.getMonth()+1)+"-"+yesterdayWeekEndDay.getDate())
+        getOrderSource(yesterdayWeekFirstDay.getFullYear()+"-"+(yesterdayWeekFirstDay.getMonth()+1)+"-"+yesterdayWeekFirstDay.getDate(),yesterdayWeekEndDay.getFullYear()+"-"+(yesterdayWeekEndDay.getMonth()+1)+"-"+yesterdayWeekEndDay.getDate())
         theMonth = theDate.getMonth()+1;
         showChartOnOrder();
     }
     //上月的数据
     $scope.getGroupByYesterMonth = function () {
-        clearTable();
+        clearOrderTable();
         theMonth = theDate.getMonth();
         if(theMonth==0){
             theMonth=12;
@@ -43,50 +43,50 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
         var firstDay = theYear + "-" + theMonth + "-" + "1";//上个月的第一天
         var myDate = new Date(theYear, theMonth, 0);
         var lastDay = theYear + "-" + theMonth + "-" + myDate.getDate();//上个月的最后一天
-        getSource(firstDay,lastDay);
+        getOrderSource(firstDay,lastDay);
         theMonth = theDate.getMonth()+1;
         showChartOnOrder();
     }
     //今天的数据
     $scope.getGroupByNowDay = function () {
-        clearTable();
-        getSource(theYear+"-"+theMonth+"-"+theDay,theYear+"-"+theMonth+"-"+theDay)
+        clearOrderTable();
+        getOrderSource(theYear+"-"+theMonth+"-"+theDay,theYear+"-"+theMonth+"-"+theDay)
         showChartOnOrder();
     }
     //昨天的数据
     $scope.getGroupByYesterDay = function () {
-        clearTable();
-        getSource(getYesterday(),getYesterday());
+        clearOrderTable();
+        getOrderSource(getYesterday(),getYesterday());
         showChartOnOrder();
     }
     //本月的数据
     $scope.getGroupByThisMonth = function () {
-        clearTable();
-        getSource(getMonthFirstDay(),theYear+"-"+theMonth+"-"+theDay);
+        clearOrderTable();
+        getOrderSource(getMonthFirstDay(),theYear+"-"+theMonth+"-"+theDay);
         showChartOnOrder();
     }
     //本周的数据
     $scope.getGroupByThisWeek = function () {
-        clearTable();
-        getSource(getWeekFirstDay(),theYear+"-"+theMonth+"-"+theDay);
+        clearOrderTable();
+        getOrderSource(getWeekFirstDay(),theYear+"-"+theMonth+"-"+theDay);
         showChartOnOrder();
     }
     //通过日期查询
     $scope.getGroupByRange = function () {
         var startDay = $scope.groupRange['STARTDAY'];
         var endDay = $scope.groupRange['ENDDAY'];
-        clearTable();
-        getSource(startDay,endDay);
+        clearOrderTable();
+        getOrderSource(startDay,endDay);
         showChartOnOrder();
     }
     //页面初始化加载
     $scope.initLoad=function () {
-        getSource("1970-1-1",theYear+"-"+theMonth+"-"+theDay);
+        getOrderSource("1970-1-1",theYear+"-"+theMonth+"-"+theDay);
         showChartOnOrder();
     }
     //显示图标
     function showChartOnOrder() {
-        chartArray = turnoverArray;
+        orderChartArray = turnoverArray;
         chartName = "营业额";
         $timeout(function () {
             chartOrder();
@@ -98,7 +98,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
         changedChart(chartNum);
     }
     //根据日期范围查询  无论什么情景都用这个
-    function getSource(startDay,endDay) {
+    function getOrderSource(startDay,endDay) {
         analysisFactory.getOrderAnalysisByRange(startDay,endDay).get({},function (response) {
             console.log(response);
             var flag = response.data;
@@ -166,55 +166,55 @@ function getMonthFirstDay() {
 function changedChart(chartNum) {
     switch (chartNum){
         case '1':{
-            chartArray = turnoverArray;
+            orderChartArray = turnoverArray;
             chartName = "营业额";
             chartOrder();
             break;
         }
         case '2':{
-            chartArray = deductionArray;
+            orderChartArray = deductionArray;
             chartName = "折让金额";
             chartOrder();
             break;
         }
         case '3':{
-            chartArray = cancel_moneyArray;
+            orderChartArray = cancel_moneyArray;
             chartName = "退款额";
             chartOrder();
             break;
         }
         case '4':{
-            chartArray = realincomeArray;
+            orderChartArray = realincomeArray;
             chartName = "实收合计";
             chartOrder();
             break;
         }
         case '5':{
-            chartArray = orderquantityArray;
+            orderChartArray = orderquantityArray;
             chartName = "交易数";
             chartOrder();
             break;
         }
         case '6':{
-            chartArray = deduction_ordersArray;
+            orderChartArray = deduction_ordersArray;
             chartName = "参与优惠";
             chartOrder();
             break;
         }
         case '7':{
-            chartArray = cancel_ordersArray;
+            orderChartArray = cancel_ordersArray;
             chartName = "退单数";
             chartOrder();
             break;
         }
         case '8':{
-            chartArray = dissuccess_ordersArray;
+            orderChartArray = dissuccess_ordersArray;
             chartName = "处理中";
             chartOrder();
             break;
         }
         case '9':{
-            chartArray = success_ordersArray;
+            orderChartArray = success_ordersArray;
             chartName = "已完成";
             chartOrder();
             break;
@@ -222,7 +222,7 @@ function changedChart(chartNum) {
     }
 }
 //清除已经有的数据
-function clearTable() {
+function clearOrderTable() {
     dateArray = new Array();
     turnoverArray = new Array();
     deductionArray = new Array();
@@ -233,7 +233,7 @@ function clearTable() {
     cancel_ordersArray = new Array();
     dissuccess_ordersArray = new Array();
     success_ordersArray = new Array();
-    chartArray = new Array();
+    orderChartArray = new Array();
 }
 //引入chart
 function chartOrder(){
@@ -261,7 +261,7 @@ function chartOrder(){
         series: [{
             name:chartName,
             type: 'line',
-            data: chartArray
+            data: orderChartArray
         }]
     };
     myChart.setOption(option);
