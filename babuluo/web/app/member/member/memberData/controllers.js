@@ -26,7 +26,7 @@ angular.module('AndSell.Main').controller('member_member_memberData_Controller',
     }
 
     $scope.loadMemberData = function () {
-        memberFactory.getMemberData($scope.memberId, function (response) {
+        memberFactory.getMemberData({'MEMBER_INFO.USER_ID':$scope.memberId}, function (response) {
             $scope.memberData = response.data[0];
             $scope.bindAddr(response.data[0]);
         }, null);

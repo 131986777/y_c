@@ -22,11 +22,9 @@ angular.module('AndSell.Main').controller('card_card_cardType_Controller', funct
 
     };
     $scope.queryCardBySource = function (cardSource) {
-
-        cardFactory.getCardListBySource(cardSource, function (repsonce) {
+        cardFactory.getCardListBySource({'MEMBER_CARD_TYPE.CARD_SOURCE_ID':cardSource}, function (repsonce) {
             $scope.cardList = repsonce.data;
         });
-
     }
 
     $scope.initLoad();

@@ -28,11 +28,3 @@ AndSellMainModule.service('cardFactory', function (http) {
 
 });
 
-
-    //this. = function (sourceID) {
-    //    return $resource(baseURL + '/member/cardType/getBySource?MEMBER_CARD_TYPE.CARD_SOURCE_ID=:ID', {'ID': sourceID}, {
-    //        'update': {
-    //            method: 'PUT'
-    //        }
-    //    });
-    //};

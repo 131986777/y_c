@@ -8,8 +8,7 @@ angular.module('AndSell.Main').controller('member_member_memberAddress_Controlle
     $scope.memberId = $stateParams.id;
 
     $scope.initLoad = function () {
-        console.log($scope.memberId);
-        memberFactory.getMemberAddress($scope.memberId, function (response) {
+        memberFactory.getMemberAddress({'MEMBER_ADDRESS.USER_ID':$scope.memberId}, function (response) {
             $scope.addressList=response.data;
         });
     };

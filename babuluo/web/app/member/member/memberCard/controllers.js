@@ -10,7 +10,7 @@ angular.module('AndSell.Main').controller('member_member_memberCard_Controller',
     $scope.initLoad = function () {
         $scope.cardSourceList = new Array();
         $scope.cardTypeList = new Array();
-        memberFactory.getMembercardInfo($scope.memberId, function (response) {
+        memberFactory.getMembercardInfo({'MEMBER_CARD.USER_ID':$scope.memberId}, function (response) {
             $scope.cardInfoList = response.data;
         });
     };
