@@ -1,20 +1,26 @@
 <div class="page-content" ng-init="initData()">
-    <div class="row orderHead">
-        <div class="col-md-6 orderNum">
+    <div class="orderHead">
+        <div class="orderNum">
             <span ng-bind="'订单编号：'+order['SHOP_ORDER.ORDER_NUM']"></span>
             <span ng-if="order['SHOP_ORDER.ERP_REMARK']!=undefined&&order['SHOP_ORDER.ERP_REMARK']!=''"
                   ng-bind="' | 线下单号：'+order['SHOP_ORDER.ERP_NUM']"></span>
         </div>
     </div>
-    <div class="sorting-title row">
+<!--     <div class="sorting-title row">
         <div class="col-md-7 text-center">等待分拣</div>
         <div class="col-md-5 text-center">已分拣</div>
-    </div>
-    <div class="sorting-wrap">
-        <div class="row">
+    </div> -->
+
             <!-- 未分拣 -->
-            <div class="unsorted col-md-7">
-                <table class="item-wrap">
+                <table class="table item-wrap">
+                    <tr>
+                        <th style="width: 500px;">商品信息</th>
+                        <th class="text-right">购买数量</th>
+                        <th></th>
+                        <th class="text-right">实际规格</th>
+                        <th class="text-right">实际金额</th>
+                        <th></th>
+                    </tr>
                     <tr>
                         <td class="item-info">
                             <img src="" />
@@ -22,106 +28,84 @@
                             <p>商品规格：250g</p>
                             <p>备注：无</p>
                         </td>
-                        <td class="item-price">￥78.00 &times <span>3</span></td>
-                        <td class="item-btn">
+                        <td class="item-price text-right">￥78.00 &times <span>3</span></td>
+                        <td class="item-btn text-center" >
                             <button class="btn btn-default" data-toggle="modal" data-target="#add">录入</button>
                         </td>
+                        <td class="item-curInfo">
+                            <p></p>
+                            <p></p>
+                        </td>
+                        <td class="item-price text-right"></td>
+                        <td class="item-btn text-right">
+                            <!--<button class="btn btn-default">撤销</button>-->
+                        </td>
                     </tr>
                     <tr>
                         <td class="item-info">
                             <img src="" />
-                            <p>商品标题</p>
-                            <p>商品规格：250g</p>
-                            <p>备注：<span class="item-note">不要辣</span></p>
-                        </td>
-                        <td class="item-price">￥78.00 &times <span>3</span></td>
-                        <td class="item-btn">
-                            <button class="btn btn-default">录入</button>
-                        </td>
-                    </tr>
-                    <tr  class="item-sorted">  <!-- 录入后添加样式 item-sorted -->
-                        <td class="item-info">
-                            <img src="" />
-                            <p>商品标题</p>
+                            <p class="item-name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
                             <p>商品规格：250g</p>
                             <p>备注：无</p>
                         </td>
-                        <td class="item-price">￥78.00 &times <span>3</span></td>
-
-                        <td class="item-btn">
-                            <button class="btn btn-default">录入</button>
+                        <td class="item-price text-right">￥78.00 &times <span>3</span></td>
+                        <td class="item-btn text-center" >
+                            <button class="btn btn-default" data-toggle="modal" data-target="#add">录入</button>
                         </td>
-                        <!-- 录入后变为 -->
-                        <!-- <td class="item-btn">
-                            <button class="btn btn-default">修改</button>
-                        </td> -->
+                        <td class="item-curInfo">
+                            <p>200g &times <span>2</span></p>
+                            <p>350g &times <span>1</span></p>
+                        </td>
+                        <td class="item-price text-right">￥78.00</td>
+                        <td class="item-btn text-right">
+                            <button class="btn btn-default">撤销</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="item-info">
+                        <td class="item-info sorted">
                             <img src="" />
-                            <p>商品标题</p>
+                            <p class="item-name">商品标题商品标题商品标题商品标题商品标题商品标题商品标题</p>
                             <p>商品规格：250g</p>
                             <p>备注：无</p>
                         </td>
-                        <td class="item-price">￥78.00 &times <span>3</span></td>
-                        <td class="item-btn">
-                            <button class="btn btn-default">录入</button>
+                        <td class="item-price text-right sorted">￥78.00 &times <span>3</span></td>
+                        <td class="item-btn text-center" >
+                            <button class="btn btn-default" data-toggle="modal" data-target="#add">录入</button>
                         </td>
-                    </tr>
-                </table>
-                <div class="total">
-                    <p>剩余 <span class="totalLeft">3</span> 件商品待分拣</p>
-                    <p>总计金额：<span class="totalNum">￥198.00</span></p>
-                </div>
-            </div>
-
-            <!-- 已分拣 -->
-            <div class="sorted col-md-5">
-                <table class="item-wrap">
-                    <tr>
-                        <td class="item-info">
-                            <p>商品规格：250g</p>
+                        <td class="item-curInfo">
+                            <p>200g &times <span>2</span></p>
+                            <p>350g &times <span>1</span></p>
                         </td>
-                        <td class="item-price">￥78.00 &times <span>3</span></td>
-                        <td class="item-btn">
-                            <button class="btn btn-default">撤销</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="item-info">
-                            <p>商品规格：250g</p>
-                        </td>
-                        <td class="item-price">￥78.00 &times <span>3</span></td>
-                        <td class="item-btn">
-                            <button class="btn btn-default">撤销</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="item-info">
-                            <p>商品规格：250g</p>
-                        </td>
-                        <td class="item-price">￥78.00 &times <span>3</span></td>
-                        <td class="item-btn">
-                            <button class="btn btn-default">撤销</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="item-info">
-                            <p>商品规格：250g</p>
-                        </td>
-                        <td class="item-price">￥78.00 &times <span>3</span></td>
-                        <td class="item-btn">
+                        <td class="item-price text-right">￥78.00</td>
+                        <td class="item-btn text-right">
                             <button class="btn btn-default">撤销</button>
                         </td>
                     </tr>
                 </table>
-                <div class="total">
-                    <p>已分拣 <span class="totalLeft">0</span> 件商品</p>
-                    <p>总计金额：<span class="totalNum">￥198.00</span></p>
-                </div>
-            </div>
-        </div>
-    </div>
+                <table class="itemTotal">
+                    <tr>
+                        <td style="width:80px;">初始金额</td>
+                        <td class="num">￥198.00</td>
+                    </tr>
+                    <tr>
+                        <td>优惠金额</td>
+                        <td class="num">￥0.00</td>
+                    </tr>
+                    <tr>
+                        <td>实付金额</td>
+                        <td class="totalNum num">￥208.00</td>
+                    </tr>
+                </table>
+                <!--<div class="itemTotal text-right">-->
+                    <!--<p>剩余 <span class="totalLeft">3</span> 件商品待分拣</p>-->
+                    <!--<p>初始金额：<span class="totalNum">￥198.00</span></p>-->
+                    <!--<p>实际金额：<span class="totalNum">￥208.00</span></p>-->
+                <!--</div>-->
+
+
+
+
+
 
     <div class="modal fade" id="add" role="dialog" aria-labelledby="add">
         <div class="modal-dialog" aria-hidden="true">
@@ -142,8 +126,8 @@
                             <label class="col-sm-3 control-label">
                                 条码：
                             </label>
-                            <div class="col-sm-7 form-control-static">
-                                A123456
+                            <div class="col-sm-7">
+                                <input class="form-control" type="text">
                             </div>
                         </div>
                         <div class="form-group">
@@ -172,7 +156,7 @@
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">
-                                重量：
+                                实际重量：
                             </label>
                             <div class="col-sm-7">
                                 <input class="form-control" type="text">
