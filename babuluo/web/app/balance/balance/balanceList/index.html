@@ -23,7 +23,7 @@
               搜索
             </button>
           </div>
-          <div class="form-group col-md-6">
+          <div class="form-group col-md-7">
             <label>筛选:</label>
             <select ng-model="filter['FINANCE_LIST.CHANGE_TYPE']"
                     ng-init="filter['FINANCE_LIST.CHANGE_TYPE']='null'"
@@ -76,22 +76,23 @@
                 时间段内
               </option>
             </select>
-            <div ng-show="timeType=='aim'"
+            <div style="display:inline-block;margin:10px 0 0 36px" ng-show="timeType=='aim'"
                 data-date="10/11/2012"
                 language="zh-CN"
                 data-date-format="yyyy-mm-dd">
               <input id="start_hour" type="text" class="form-control " placeholder="起始时间"
-                     name="from" ng-model="filter['FINANCE_LIST.ADD_DATETIME_FROM']" data-date-format="yyyy/mm/dd hh:ii" style="">
+                     name="from" ng-model="filter['FINANCE_LIST.ADD_DATETIME_FROM']" data-date-format="yyyy/mm/dd hh:ii" style="margin-right: 10px">  至
             </div>
-            <div ng-show="timeType=='aim'"
+
+            <div style="display: inline-block;margin: 10px 0 0 10px;" ng-show="timeType=='aim'"
                 data-date="10/11/2012"
                 language="zh-CN"
                 data-date-format="yyyy-mm-dd">
-              <input id="end_hour" type="text" class="form-control " placeholder="截止时间"
-                     name="to" ng-model="filter['FINANCE_LIST.ADD_DATETIME_TO']" data-date-format="yyyy/mm/dd hh:ii" style="">
+               <input id="end_hour" type="text" class="form-control " placeholder="截止时间"
+                     name="to" ng-model="filter['FINANCE_LIST.ADD_DATETIME_TO']" data-date-format="yyyy/mm/dd hh:ii">
             </div>
           </div>
-          <div class="col-md-2">
+          <div class="col-md-1">
             <button type="button" class="btn btn-default pull-right" data-toggle="modal"
                     data-target="#balance" ng-click=empty()>调整资金
             </button>
