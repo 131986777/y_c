@@ -129,7 +129,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 onBridgeReady(response.extraData.unifiedOrderJsonResult, response.extraData.returnMap);
             }
         }, function (res) {
-            weUI.toast.error("支付失败");
+            weUI.wx_pay.error("支付失败");
         });
     }
 
@@ -167,7 +167,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                         location.reload();
                     })
                 } else {
-                    weUI.toast.error("支付失败");
+                    weUI.wx_pay.error("支付失败");
                 }
             }
         );

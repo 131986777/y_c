@@ -254,6 +254,54 @@
             hideLoading:function(){
               privateMethods.destroy(".weui_loading_toast");
             }
+          },
+          wx_pay:{
+            /*
+             * @param {String} options: body type time
+             * @return {Object} dialog
+             */
+            show:function(body, type, time, callback){
+              var opts = {body:body, type:type, time:time, done:callback};
+              var scope = opts.scope = angular.isObject(opts.scope) ? opts.scope.$new() : $rootScope.$new();
+              scope.show = function(){
+                scope.toast = true;
+              };
+              scope.hide= function(){
+                scope.toast = false;
+                if(angular.isFunction(opts.done)){
+                  opts.done();
+                }
+              };
+              angular.extend(scope,opts);
+              privateMethods.destroy(".aweui-show #aweui-show");
+              switch (opts.type){
+                case "error":
+                  // \EA0D
+                  opts.type = "\\EA0D";
+                  break;
+              };
+              $body.append($compile(
+                  "<style id='aweui-show' type='text/css'>" +
+                  ".weui_icon_toast:before {" +
+                  "  content: '" + opts.type +
+                  "' }" +
+                  "</style>" +
+                  "<div class='aweui-show'  ng-show='toast'>" +
+                  "<div class='weui_mask_transparent'></div>" +
+                  " <div class='weui_toast'>" +
+                  "<i class='weui_icon_toast'></i>" +
+                  "<p class='weui_toast_content'>支付失败</p>" +
+                  "</div>" +
+                  "</div>"
+              )(scope));
+              scope.show();
+              $timeout(function(){
+                scope.hide();
+              },scope.time);
+            },
+            error:function(body, callback) {
+              this.show(body, 'error', 1300, callback);
+            }
           }
         };
         return publicMethods;
