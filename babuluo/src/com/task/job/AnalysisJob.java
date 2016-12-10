@@ -13,5 +13,6 @@ public class AnalysisJob implements Job {
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
         YesterdaySource.addYesterdayCardSource();
         YesterdaySource.addYesterdayOrderSource();
+        YesterdaySource.addYesterdayShopSource();
     }
 }

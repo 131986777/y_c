@@ -3,49 +3,126 @@ package com.analysis.common;
 import com.alibaba.fastjson.JSONObject;
 import net.sf.json.JSONArray;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by liutao on 2016/12/6 17:50.
  */
 public class YesterdaySource {
+    /**
+     * 导入昨天的店铺数据到MANAGE_DATA_ANALYSIS表中
+     */
+    public static void addYesterdayShopSource() {
+        SourceUtil.delYesterDaySource("ANALYSIS_DAILY");
+        JSONArray j_shopAbout = SourceUtil.getJSONArraySource("/stat/shop_list", null);
+        JSONArray j_shopOrderAbout = SourceUtil.getJSONArraySource("/stat/shop_money_about_by_range", new HashMap<String, String>() {{
+            put("STARTDAY", SourceUtil.getYesterdayDate() + " 0:0:0");
+            put("ENDDAY", SourceUtil.getYesterdayDate() + " 23:59:59");
+        }});
+        JSONArray j_shopCardAbout = SourceUtil.getJSONArraySource("/stat/shop_newcard_by_range", new HashMap<String, String>() {{
+            put("STARTDAY", SourceUtil.getYesterdayDate() + " 0:0:0");
+            put("ENDDAY", SourceUtil.getYesterdayDate() + " 23:59:59");
+        }});
+        Map<String, String> map = new HashMap<>();
+        Map<String, Object> firstArgsMap = null;
+        Map<String, String> secondArgsMap = null;
+        List<Map<String, Object>> list = null;
+        JSONObject joNumber = null;
+        JSONObject joOther = null;
+        String eqNum = null;
+        String eqOtherNum = null;
+        list = new ArrayList<>();
+        for (int j = 0; j < j_shopAbout.size(); j++) {
+            firstArgsMap = new HashMap<>();
+            secondArgsMap = new HashMap<>();
+            secondArgsMap.put("ORDER_COUNT", "0");
+            secondArgsMap.put("MONEY_OVER", "0");
+            secondArgsMap.put("MONEY_DISCOUNT", "0");
+            secondArgsMap.put("MONEY_COUNT", "0");
+            secondArgsMap.put("ADD_CARD", "0");
+            secondArgsMap.put("ADD_CARD_MONEY", "0");
+            joNumber = JSONObject.parseObject(j_shopAbout.get(j).toString());
+            eqNum = joNumber.getString("SHOP.ID");
+            secondArgsMap.put("SHOP_ID", eqNum);
+            if (j_shopOrderAbout.size() != 0) {
+                joOther = JSONObject.parseObject(j_shopOrderAbout.get(0).toString());
+                eqOtherNum = joOther.getString("SHOP_ORDER.SHOP_ID");
+                if (eqNum.equals(eqOtherNum)) {
+                    secondArgsMap.put("ORDER_COUNT", joOther.getString(".NUMCOUNT"));
+                    secondArgsMap.put("MONEY_OVER", joOther.getString(".MONEY_OVER"));
+                    secondArgsMap.put("MONEY_DISCOUNT", joOther.getString(".DISCOUNT"));
+                    secondArgsMap.put("MONEY_COUNT", joOther.getString(".MONEY_COUNT"));
+                }
+            }
+            if (j_shopCardAbout.size() != 0) {
+                joOther = JSONObject.parseObject(j_shopCardAbout.get(0).toString());
+                eqOtherNum = joOther.getString("FINANCE_LIST.SHOP_ID");
+                if (eqNum.equals(eqOtherNum)) {
+                    secondArgsMap.put("ADD_CARD", joOther.getString(".ADDCARD"));
+                    secondArgsMap.put("ADD_CARD_MONEY", joOther.getString(".MONEY_CONUT"));
+                }
+            }
+            firstArgsMap.put("SHOP_VALUE", secondArgsMap);
+            firstArgsMap.put("SHOP_NAME", joNumber.getString("SHOP.NAME"));
+            list.add(firstArgsMap);
+        }
+        map.put(SourceUtil.getYesterdayDate(), net.sf.json.JSONArray.fromObject(list).toString());
+        SourceUtil.importSource(map, "ANALYSIS_DAILY");
+    }
 
     /**
-     *查询昨天的订单数据  并导入MANAGE_DATA_ANALYSIS表中
+     * 查询昨天的订单数据  并导入MANAGE_DATA_ANALYSIS表中
      */
-    public static void addYesterdayOrderSource(){
+    public static void addYesterdayOrderSource() {
         SourceUtil.delYesterDaySource("ANALYSIS_ORDER");
-        Map<String,String> map = new HashMap<>();
-        Map<String,String> resMap = new HashMap<>();
-        JSONArray ja = SourceUtil.getJSONArraySource("/stat/member_order_money_about_by_yesterday",null);
-        JSONObject jo =  JSONObject.parseObject(ja.get(0).toString());
-        resMap.put("DEDUCTION", ((String) jo.get(".DEDUCTION"))==null?"0":(String) jo.get(".DEDUCTION"));
-        resMap.put("ORDER_QUANTITY",((String)jo.get(".ORDERQUANTITY"))==null?"0":(String)jo.get(".ORDERQUANTITY"));
-        resMap.put("REAL_INCOME",((String)jo.get(".REALINCOME"))==null?"0":(String)jo.get(".REALINCOME"));
-        resMap.put("TURNOVER",((String)jo.get(".TURNOVER"))==null?"0":(String)jo.get(".TURNOVER"));
-        resMap.put("CANCEL_ORDERS","0");
-        resMap.put("CANCEL_MONEY","0");
-        resMap.put("DEDUCTION_ORDERS", SourceUtil.getAboutSource("/stat/member_order_discount_orders_by_yesterday",null,".SOURCE"));
-        resMap.put("DISSUCCESS_ORDERS",SourceUtil.getAboutSource("/stat/member_order_dissuccess_success_orders_by_yesterday",new HashMap<String,String>(){{put("FLAG","DATETIME_CANCEL");}},".SOURCE"));
-        resMap.put("SUCCESS_ORDERS",SourceUtil.getAboutSource("/stat/member_order_dissuccess_success_orders_by_yesterday",new HashMap<String,String>(){{put("FLAG","DATETIME_DELIVERY");}},".SOURCE"));
+        Map<String, String> map = new HashMap<>();
+        Map<String, String> resMap = new HashMap<>();
+        JSONArray ja = SourceUtil.getJSONArraySource("/stat/member_order_money_about_by_yesterday", null);
+        JSONObject jo = JSONObject.parseObject(ja.get(0).toString());
+        resMap.put("DEDUCTION", ((String) jo.get(".DEDUCTION")) == null ? "0" : (String) jo.get(".DEDUCTION"));
+        resMap.put("ORDER_QUANTITY", ((String) jo.get(".ORDERQUANTITY")) == null ? "0" : (String) jo.get(".ORDERQUANTITY"));
+        resMap.put("REAL_INCOME", ((String) jo.get(".REALINCOME")) == null ? "0" : (String) jo.get(".REALINCOME"));
+        resMap.put("TURNOVER", ((String) jo.get(".TURNOVER")) == null ? "0" : (String) jo.get(".TURNOVER"));
+        resMap.put("CANCEL_ORDERS", "0");
+        resMap.put("CANCEL_MONEY", "0");
+        resMap.put("DEDUCTION_ORDERS", SourceUtil.getAboutSource("/stat/member_order_discount_orders_by_yesterday", null, ".SOURCE"));
+        resMap.put("DISSUCCESS_ORDERS", SourceUtil.getAboutSource("/stat/member_order_dissuccess_success_orders_by_yesterday", new HashMap<String, String>() {{
+            put("FLAG", "DATETIME_CANCEL");
+        }}, ".SOURCE"));
+        resMap.put("SUCCESS_ORDERS", SourceUtil.getAboutSource("/stat/member_order_dissuccess_success_orders_by_yesterday", new HashMap<String, String>() {{
+            put("FLAG", "DATETIME_DELIVERY");
+        }}, ".SOURCE"));
         map.put(SourceUtil.getYesterdayDate(), net.sf.json.JSONObject.fromObject(resMap).toString());
-        SourceUtil.importSource(map,"ANALYSIS_ORDER");
+        SourceUtil.importSource(map, "ANALYSIS_ORDER");
     }
+
     /**
      * 查询昨天的会员卡数据  并导入MANAGE_DATA_ANALYSIS表中
      */
-    public static void addYesterdayCardSource(){
+    public static void addYesterdayCardSource() {
         SourceUtil.delYesterDaySource("ANALYSIS_CARD");
-        Map<String,String> map = new HashMap<>();
-        Map<String,String> resMap = new HashMap<>();
-        resMap.put("CONSUME",SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday",new HashMap<String,String>(){{put("EVENT","消费");}},".SOURCE"));
-        resMap.put("RECHARGEONLINE",SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday",new HashMap<String,String>(){{put("EVENT","会员卡充值");}},".SOURCE"));
-        resMap.put("RECHARGE",SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday",new HashMap<String,String>(){{put("EVENT","会员充值");}},".SOURCE"));
-        resMap.put("CONSUMERED",SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday",new HashMap<String,String>(){{put("EVENT","消费冲红");}},".SOURCE"));
-        resMap.put("REVERT",SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday",new HashMap<String,String>(){{put("EVENT","返点");}},".SOURCE"));
-        resMap.put("ADDCARD",SourceUtil.getAboutSource("/stat/member_card_by_yesterday",null,".SOURCE"));
+        Map<String, String> map = new HashMap<>();
+        Map<String, String> resMap = new HashMap<>();
+        resMap.put("CONSUME", SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday", new HashMap<String, String>() {{
+            put("EVENT", "消费");
+        }}, ".SOURCE"));
+        resMap.put("RECHARGEONLINE", SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday", new HashMap<String, String>() {{
+            put("EVENT", "会员卡充值");
+        }}, ".SOURCE"));
+        resMap.put("RECHARGE", SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday", new HashMap<String, String>() {{
+            put("EVENT", "会员充值");
+        }}, ".SOURCE"));
+        resMap.put("CONSUMERED", SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday", new HashMap<String, String>() {{
+            put("EVENT", "消费冲红");
+        }}, ".SOURCE"));
+        resMap.put("REVERT", SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday", new HashMap<String, String>() {{
+            put("EVENT", "返点");
+        }}, ".SOURCE"));
+        resMap.put("ADDCARD", SourceUtil.getAboutSource("/stat/member_card_by_yesterday", null, ".SOURCE"));
         map.put(SourceUtil.getYesterdayDate(), net.sf.json.JSONObject.fromObject(resMap).toString());
-        SourceUtil.importSource(map,"ANALYSIS_CARD");
+        SourceUtil.importSource(map, "ANALYSIS_CARD");
     }
 }

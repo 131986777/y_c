@@ -3,46 +3,48 @@
     <div class="row timeBar">
         <div class="col-md-12">
             <div class="col-md-1">
-                <input type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=''"  class="form-control"  placeholder="2016-12-31">
+                <input type="text" ng-model="groupRange['DAY']" ng-init="groupRange['DAY']=''"  class="form-control"  placeholder="2016-12-31">
             </div>
             <button class="btn green" type="button" ng-click="getGroupByRange()">查询</button>
+            <button class="btn alignRight"  type="button" onclick="outPutMethod('shopTable')">导出</button>
+            <div class="clear"></div>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3 showPoint" >
+        <div class="col-md-3" >
             <div class="layout bgColor-blue" >
-                <h2>1</h2>
-                <p >订单量<i title="所选时间内的营业额">!</i></p>
+                <h2><span ng-bind="ORDER_COUNT"></span>P</h2>
+                <p >订单量<i title="所选时间所有店铺的订单量">!</i></p>
             </div>
         </div>
-        <div class="col-md-3 showPoint">
+        <div class="col-md-3">
             <div class="layout bgColor-blue2" >
-                <h2>2</h2>
-                <p>客单价<i title="所选时间内的折让金额">!</i></p>
+                <h2><span ng-bind="MONEY_COUNT"></span>￥</h2>
+                <p>客单价<i title="所选时间所有店铺的客单价">!</i></p>
             </div>
-        </div><div class="col-md-2 showPoint">
+        </div><div class="col-md-2">
         <div class="layout bgColor-blue2" >
-            <h2>3</h2>
-            <p>折让金额<i title="所选时间内的退款额">!</i></p>
+            <h2><span ng-bind="MONEY_DISCOUNT"></span>￥</h2>
+            <p>折让金额<i title="所选时间所有店铺的折让金额">!</i></p>
         </div>
-    </div><div class="col-md-4 showPoint">
+    </div><div class="col-md-4">
         <div class="layout bgColor-red" >
-            <h2>4</h2>
-            <p>销售金额<i title="所选时间内的实收">!</i></p>
+            <h2><span ng-bind="MONEY_OVER"></span>￥</h2>
+            <p>销售金额<i title="所选时间所有店铺的销售金额">!</i></p>
         </div>
     </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            <div class="layout bgColor-blue">
-                <h2>5</h2>
-                <p>新开卡<i title="所选时间内的交易数">!</i></p>
+        <div class="col-md-6" >
+            <div class="layout bgColor-blue" >
+                <h2><span ng-bind="ADD_CARD"></span>P</h2>
+                <p>新开卡<i title="所选时间所有店铺的新开卡数">!</i></p>
             </div>
         </div>
         <div class="col-md-6" >
             <div class="layout bgColor-red" >
-                <h2>6</h2>
-                <p>开卡金额<i title="所选时间内的所选时间内参与优惠的订单">!</i></p>
+                <h2><span ng-bind="ADD_CARD_MONEY"></span>￥</h2>
+                <p>开卡金额<i title="所选时间所有店铺的新开卡金额">!</i></p>
             </div>
         </div>
     </div>
@@ -50,7 +52,7 @@
 
     <div class="table-content">
         <div class="table-toolbar">
-            <table class="table table-bordered table-hover table-striped">
+            <table class="table table-bordered table-hover table-striped" id="shopTable">
                 <thead>
                 <tr>
                     <th class="col-sm-1 text-center">门店</th>
@@ -63,14 +65,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr align="center">
-                    <td>1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
+                <tr align="center" ng-repeat="VALUE in SHOPORDERCHANGE">
+                    <td><span ng-bind="VALUE['SHOP_NAME']"></span></td>
+                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_OVER']"></span>￥</td>
+                    <td><span ng-bind="VALUE['SHOP_VALUE']['ADD_CARD']"></span></td>
+                    <td><span ng-bind="VALUE['SHOP_VALUE']['ADD_CARD_MONEY']"></span>￥</td>
+                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_DISCOUNT']"></span>￥</td>
+                    <td><span ng-bind="VALUE['SHOP_VALUE']['ORDER_COUNT']"></span></td>
+                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_COUNT']"></span>￥</td>
                 </tr>
                 </tbody>
             </table>

@@ -54,5 +54,11 @@ p i{
     margin-left:4px;
     line-height: 1em;
 }
+.alignRight{
+    float: right;
+}
+.clear{
+    clear: both;
+}
 
 
