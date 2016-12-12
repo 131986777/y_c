@@ -123,7 +123,7 @@ public class SourceUtil {
      * @param map  要传入的数据
      * @param flag 标识
      */
-    public synchronized static void importSource(Map<String, String> map, String flag) {
+    public static void importSource(Map<String, String> map, String flag) {
         Iterator it = map.entrySet().iterator();
         String key = null;
         Map<String, String> argsMap = null;
