@@ -18,19 +18,19 @@
     <div class="row">
         <div class="col-md-4 showPoint">
             <div class="layout bgColor-blue " ng-click="chargeChartOnCard('1')">
-                <h2><span ng-bind="addCard"></span></h2>
+                <h2><span ng-bind="addCard | number"></span></h2>
                 <p >期内新增会员<i title="所选时间范围内新增会员的个数">!</i></p>
             </div>
         </div>
         <div class="col-md-4">
             <div class="layout bgColor-blue2" >
-                <h2><span ng-bind="invalidTotalCard['.SOURCE']"></span></h2>
+                <h2><span ng-bind="invalidTotalCard['.SOURCE'] | number"></span></h2>
                 <p>空账户<i title="空账户总数">!</i></p>
             </div>
         </div>
       <div class="col-md-4">
         <div class="layout bgColor-red">
-            <h2><span ng-bind="totalCard['.SOURCE']"></span></h2>
+            <h2><span ng-bind="totalCard['.SOURCE'] | number"></span></h2>
             <p>会员合计<i title="会员总数">!</i></p>
         </div>
     </div>
@@ -38,25 +38,25 @@
     <div class="row">
         <div class="col-md-3 showPoint" >
             <div class="layout bgColor-blue" ng-click="chargeChartOnCard('2')">
-                <h2><span ng-bind="rechargeOnlineSum"></span></h2>
+                <h2><span ng-bind="rechargeOnlineSum | currency:'￥'"></span></h2>
                 <p>会员充值<i title="所选时间范围内会员充值总计">!</i></p>
             </div>
         </div>
         <div class="col-md-3 showPoint">
             <div class="layout bgColor-blue2" ng-click="chargeChartOnCard('3')">
-                <h2><span ng-bind="consumeSum"></span></h2>
+                <h2><span ng-bind="consumeSum | currency:'￥'"></span></h2>
                 <p>会员消费<i title="所选时间范围内会员消费总计">!</i></p>
             </div>
         </div>
         <div class="col-md-3 showPoint">
             <div class="layout bgColor-blue2" ng-click="chargeChartOnCard('4')">
-                <h2><span ng-bind="revertSum"></span></h2>
+                <h2><span ng-bind="revertSum | currency:'￥'"></span></h2>
                 <p>会员返点<i title="所选时间范围内会员返点总计">!</i></p>
             </div>
         </div>
         <div class="col-md-3 showPoint">
             <div class="layout bgColor-blue2" ng-click="chargeChartOnCard('5')">
-                <h2><span ng-bind="consumeRedSum"></span></h2>
+                <h2><span ng-bind="consumeRedSum | currency:'￥'"></span></h2>
                 <p>会员红冲<i title="所选时间范围内会员红冲总计">!</i></p>
             </div>
         </div>
@@ -84,10 +84,10 @@
                     <tbody>
                         <tr align="center" ng-repeat="VALUE in cardMoneyChange">
                             <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.DAY']"></span></td>
-                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['RECHARGEONLINE']"></span></td>
-                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUME']"></span></td>
-                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUMERED']"></span></td>
-                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['REVERT']"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['RECHARGEONLINE'] | currency:'￥'"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUME'] | currency:'￥'"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUMERED'] | currency:'￥'"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['REVERT'] | currency:'￥'"></span></td>
                         </tr>
                     </tbody>
                 </table>
