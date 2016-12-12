@@ -7,6 +7,7 @@ import com.pabula.common.util.DateUtil;
  */
 public class ENV {
 
+
     //模式
     public static String STATE = "TEST";//测试模式  不向百年传订单数据
     //public static String STATE = "NORMAL";//正常模式  向百年传订单
