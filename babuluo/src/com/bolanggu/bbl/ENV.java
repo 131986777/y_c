@@ -8,8 +8,12 @@ import com.pabula.common.util.DateUtil;
 public class ENV {
 
     //模式
-    public static String STATE = "TEST";//测试模式
-    //public static String STATE = "NORMAL";//正常模式
+    public static String STATE = "TEST";//测试模式  不向百年传订单数据
+    //public static String STATE = "NORMAL";//正常模式  向百年传订单
+
+    //门店接口
+    //public static String API_MENDIAN = "http://58.240.110.186:98/BBL/";//线上服
+    public static String API_MENDIAN = "http://58.240.110.186:99/BBL/"; //测试服
 
     //库存阀值
     public static Double STOCK_OFF = 0.75;
@@ -39,9 +43,6 @@ public class ENV {
 
     //阿里云上传在内容编辑器中，缩略图尺寸
     public static String ALIYUN_UPLOAD_IMG_SIZE = "?x-oss-process=image/resize,w_750";
-
-    //门店接口
-    public static String API_MENDIAN = "http://58.240.110.186:98/BBL/";
 
     //门店接口KEY
     public static String API_MENDIAN_CERT = "F4EBA1DE727A41A91B5D10754BFBF657";
