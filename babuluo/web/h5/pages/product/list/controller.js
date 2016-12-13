@@ -76,6 +76,9 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
 
     //获取商品列表
     $scope.getPrd = function () {
+        $('.prdList').css('visibility',"visible");
+        $('.search-bar').css('position',"fixed");
+        $('#nav-bottom').show();
         if (localStorage.getItem("PRD_LIST") != undefined) {
             $scope.prdList = JSON.parse(localStorage.getItem("PRD_LIST"));
             $scope.classList = JSON.parse(localStorage.getItem("CLASS_LIST"));
