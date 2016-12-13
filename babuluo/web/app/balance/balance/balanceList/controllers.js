@@ -1,22 +1,11 @@
-angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function ($q, $scope, $stateParams, cardFactory, memberFactory, balanceFactory, modalFactory, shopFactory) {
+angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function (http, $scope, $stateParams, cardFactory, memberFactory, balanceFactory, modalFactory, shopFactory) {
     modalFactory.setTitle('资金明细');
     modalFactory.setBottom(false);
-
-    var deferred_balance = $q.defer();
-    var deferred_shop = $q.defer();
 
     //获得所有资金明细
     $scope.bindData = function (response) {
         $scope.balanceList = response.data;
-        if ($scope.shopMap == undefined) {
-            deferred_balance.resolve(response);
-        } else {
-            $scope.balanceList.forEach(function (ele) {
-                if (ele['FINANCE_LIST.SHOP_ID'] != undefined) {
-                    ele['FINANCE_LIST.SHOP_NAME'] = $scope.shopMap[ele['FINANCE_LIST.SHOP_ID']]['SHOP.SHOP_NAME'];
-                }
-            });
-        }
+        console.log($scope.balanceList);
     };
 
     $scope.initData = function () {
@@ -29,17 +18,9 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         shopFactory.getShopList({}, function (response) {
             $scope.shopList = response.data;
             $scope.shopMap = listToMap($scope.shopList, 'SHOP.SHOP_ID');
-            deferred_shop.resolve(response);
         });
     }
 
-    $q.all([deferred_balance.promise, deferred_shop.promise]).then(function (result) {
-        $scope.balanceList.forEach(function (ele) {
-            if (ele['FINANCE_LIST.SHOP_ID'] != undefined) {
-                ele['FINANCE_LIST.SHOP_NAME'] = $scope.shopMap[ele['FINANCE_LIST.SHOP_ID']]['SHOP.SHOP_NAME'];
-            }
-        });
-    })
 
     //根据用户ID查询用户个人信息
     $scope.queryById = function (loginId) {
@@ -188,7 +169,18 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         } else {
             $scope.$broadcast('pageBar.reload');
         }
-    }
+    };
+
+    $scope.outPutQuery = function () {
+        var url = "../../outputQuery";
+        $scope.outputList = {};
+        $scope.outputList['type'] = "finance";
+        $scope.outputList['item'] = JSON.stringify($scope.balanceList);
+        console.log($scope.outputList);
+        http.post_ori(url, $scope.outputList,function (response) {
+            location.href = "/AndSell" + response;
+        });
+    };
 
     $scope.delete = function () {
         $scope.modifyvalue = null;
