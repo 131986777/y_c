@@ -69,4 +69,7 @@ public class ENV {
 
 
     public static String WX_TOKEN_GRANT_TYPE = "client_credential";
+
+
+    public static String GENERATED_EXCEL_FILE = "/download/file/GeneratedExcelFile/";
 }
