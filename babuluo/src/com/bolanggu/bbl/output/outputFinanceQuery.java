@@ -146,7 +146,12 @@ public class outputFinanceQuery {
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 
-            String changeType = "increase".equals(jsonObject.getString("FINANCE_LIST.CHANGE_TYPE")) ? "收入" : "支出";
+            String changeType;
+            if ("increase".equals(jsonObject.getString("FINANCE_LIST.CHANGE_TYPE"))) {
+                changeType = "收入";
+            } else {
+                changeType = "支出";
+            }
 
             HSSFRow row = financeSheet.createRow(rowIndex++);
             row.setHeightInPoints(25);
@@ -171,7 +176,7 @@ public class outputFinanceQuery {
             Cell cell6 = row.createCell(6);
             cell6.setCellValue(jsonObject.getString("FINANCE_LIST.OPER_USER_ID"));
             cell6.setCellStyle(cellStyle);
-            Cell cell7 = row.createCell(8);
+            Cell cell7 = row.createCell(7);
             cell7.setCellValue(changeType);
             cell7.setCellStyle(cellStyle);
             Cell cell8 = row.createCell(8);
