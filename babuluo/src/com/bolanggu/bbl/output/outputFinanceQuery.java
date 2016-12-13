@@ -40,7 +40,7 @@ public class outputFinanceQuery {
 
         HSSFSheet financeSheet = analyseBook.createSheet("资金明细表");
         financeSheet.setColumnWidth(0, 2500);
-        financeSheet.setColumnWidth(1, 5000);
+        financeSheet.setColumnWidth(1, 6000);
         financeSheet.setColumnWidth(2, 4000);
         financeSheet.setColumnWidth(3, 4000);
         financeSheet.setColumnWidth(4, 5000);
@@ -48,7 +48,7 @@ public class outputFinanceQuery {
         financeSheet.setColumnWidth(6, 4000);
         financeSheet.setColumnWidth(7, 2500);
         financeSheet.setColumnWidth(8, 4000);
-        financeSheet.setColumnWidth(9, 4000);
+        financeSheet.setColumnWidth(9, 5000);
         financeSheet.autoSizeColumn(1, true);
 
         //字体预设置
