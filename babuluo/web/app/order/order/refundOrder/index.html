@@ -41,15 +41,15 @@
                   <p class="name"
                      ng-bind="'退单备注: '+order['REFUND_ORDER.REMARK']"></p>
                 </div>
-                <div class="sum col-md-4 text-right">
-                  <div class="buttons pull-right col-md-3" ng-if="order['REFUND_ORDER.REFUND_STATE']==-1" >
-                    <button class="btn btn-detail btn-block"
+                <div class="sum col-md-4">
+                  <div class="buttons pull-right" ng-if="order['REFUND_ORDER.REFUND_STATE']==-1">
+                    <button class="btn btn-detail"
                             ng-click="endRefund(order)">
                       已退款
                     </button>
                   </div>
-                  <div class="buttons pull-right col-md-3 ">
-                    <button class="btn btn-detail btn-block"
+                  <div class="buttons pull-right">
+                    <button class="btn btn-detail"
                             id="#modifyRemark" show-modal
                             ng-click="remarkClick(order)">
                       修改备注
