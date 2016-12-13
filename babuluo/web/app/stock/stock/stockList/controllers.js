@@ -1,6 +1,7 @@
 angular.module('AndSell.Main').controller('stock_stock_stockList_Controller', function ($scope, stockFactory, modalFactory, $q) {
 
     modalFactory.setTitle('实时库存');
+    $scope.filterstocklog={};
 
     $scope.bindData = function (response) {
         $scope.stockList = response.data;
@@ -17,7 +18,11 @@ angular.module('AndSell.Main').controller('stock_stock_stockList_Controller', fu
 
     $scope.modify = {};
     $scope.modifyStockClick = function (item) {
+        $scope.stockLogList={};
         $scope.modify = clone(item);
+        $scope.filterstocklog['STOCK_LOG.PRD_ID']=$scope.modify['STOCK_REALTIME.PID'];
+        $scope.filterstocklog['STOCK_LOG.REPOS_ID']=$scope.modify['STOCK_REALTIME.STORE_ID'];
+
     };
 
     $scope.modifyStock = function () {
@@ -30,6 +35,17 @@ angular.module('AndSell.Main').controller('stock_stock_stockList_Controller', fu
             modalFactory.showShortAlert(response.msg);
         });
     };
+
+    $scope.stocklogbindData = function (response) {
+        $scope.stockLogList = response.data;
+
+        $scope.stockLogList.forEach(function (ele) {
+            ele['STOCK_LOG.UPDATE_DATETIME']=getDate(ele['STOCK_LOG.UPDATE_DATETIME']);
+
+        });
+        console.log($scope.stockLogList)
+    };
+
 
 });
 
