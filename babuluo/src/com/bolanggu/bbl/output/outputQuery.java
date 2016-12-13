@@ -24,8 +24,8 @@ public class outputQuery extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        resp.setCharacterEncoding("UTF-8");
-        resp.setHeader("content-type","text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
+//        resp.setHeader("content-type","text/html;charset=UTF-8");
 
         String type = req.getParameter("type");
         String outputDetail = req.getParameter("item");
