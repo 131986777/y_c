@@ -30,13 +30,39 @@ public class ImportSource {
         Map<String,String> map = new HashMap<>();//2016-11-12:
         Map<String,Object> firstMap = null;  //status: .. value:...
         Map<String,Object> secondMap = null; //shop_name:...shop_value:...
-        List<Object> listMoney = new ArrayList<>();
-        List<Object> listCard = new ArrayList<>();
-        List<Object> listCardMoney = new ArrayList<>();
+        List<Object> listMoney = null;
+        List<Object> listCard = null;
+        List<Object> listCardMoney = null;
         List<Object> allList = null;
         JSONObject joShopOrder = null;
         JSONObject joOther = null;
         JSONObject joAbout = null;
+        String shopOrderDay = null;
+        for(int i=0;i<j_shopOrderCompare.size();i++){
+            allList = new ArrayList<>();
+            listCard = new ArrayList<>();
+            listMoney = new ArrayList<>();
+            listCardMoney = new ArrayList<>();
+            joShopOrder=JSONObject.parseObject(j_shopOrderCompare.get(i).toString());
+            shopOrderDay = joShopOrder.getString(".DAY");
+            for(int j=0;j<j_shopAbout.size();j++){
+                joAbout = JSONObject.parseObject(j_shopAbout.get(j).toString());
+                for(int k=0;k<j_shopOrderCompare.size();k++){
+                    joOther=JSONObject.parseObject(j_shopOrderCompare.get(k).toString());
+                    if(joAbout.getString("SHOP.ID").equals(joShopOrder.getString("SHOP_ORDER.SHOP_ID"))&&joOther.getString(".DAY").equals(shopOrderDay)){
+                        secondMap = new HashMap<>();
+                        firstMap =new HashMap<>();
+                        secondMap.put("SHOP_SORT", listMoney.size() + 1);
+                        secondMap.put("MONEY_COUNT", joShopOrder.getString(".MONEY_COUNT"));
+                        secondMap.put("SHOP_ID", joAbout.getString("SHOP.ID"));
+                        firstMap.put("COMPARE_NAME", joAbout.getString("SHOP.NAME"));
+                        firstMap.put("COMPARE_VALUE", secondMap);
+                        listMoney.add(firstMap);
+                    }
+                }
+
+            }
+        }
         for(int i=0;i<j_shopOrderCompare.size();i++){
             allList = new ArrayList<>();
             listCard = new ArrayList<>();
