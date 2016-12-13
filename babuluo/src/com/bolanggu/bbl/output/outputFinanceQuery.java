@@ -159,7 +159,7 @@ public class outputFinanceQuery {
             cell0.setCellValue(analyseIndex++);
             cell0.setCellStyle(cellStyle);
             Cell cell1 = row.createCell(1);
-            cell1.setCellValue(jsonObject.getString("FINANCE_LIST.ADD_DATETIME"));
+            cell1.setCellValue(jsonObject.getString("FINANCE_LIST.ADD_DATETIME").replace(".0",""));
             cell1.setCellStyle(cellStyle);
             Cell cell2 = row.createCell(2);
             cell2.setCellValue(jsonObject.getString("FINANCE_LIST.LOGIN_ID"));
