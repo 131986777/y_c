@@ -28,8 +28,8 @@ angular.module('AndSell.H5.Main').controller('pages_account_recharge_Controller'
             $scope.eventList=response.data;
             $scope.eventList.forEach(function (ele,ind) {
                 if(ind==1){
-                    $scope.eventContent+=',';
-                    $scope.eventMoney+=',';
+                    $scope.eventContent+='，';
+                    $scope.eventMoney+='，';
                 }
                 $scope.eventContent+=ele['EVENT_CONFIG.MARK1']+'送'+ele['EVENT_CONFIG.MARK2'];
                 $scope.eventMoney+=ele['EVENT_CONFIG.MARK1'];

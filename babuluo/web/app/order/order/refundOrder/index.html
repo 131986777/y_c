@@ -39,7 +39,7 @@
                      ng-if="order['REFUND_ORDER.REFUND_STATE']==1"
                      ng-bind="'退款时间: '+order['REFUND_ORDER.REFUND_DATETIME']"></p>
                   <p class="name"
-                     ng-bind="'退单备注: '+order['REFUND_ORDER.REMARK']"></p>
+                     ng-bind="'退单备注: '+order['REFUND_ORDER.REMARK']" ng-if="order['REFUND_ORDER.REMARK']!=undefined"></p>
                 </div>
                 <div class="sum col-md-4 text-right">
                   <div class="buttons pull-right col-md-3" ng-if="order['REFUND_ORDER.REFUND_STATE']==-1" >
