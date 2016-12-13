@@ -37,7 +37,7 @@ AndSellService.factory("http", function ($http) {
             }
         },
         post_ori: function (url,param,func,error) {
-            return $http.post(url, $.param(param), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function (result) {
+            return $http.post(url, $.param(param), {headers: {'Content-Type': 'text/html; charset=UTF-8'}}).success(function (result) {
 
                 if (angular.isFunction(func)) {
                     func(result);

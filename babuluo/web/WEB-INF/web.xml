@@ -63,6 +63,15 @@
         <url-pattern>/aliYun</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>output</servlet-name>
+        <servlet-class>com.bolanggu.bbl.output.outputQuery</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>output</servlet-name>
+        <url-pattern>/outputQuery</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>updateOrderPay</servlet-name>
