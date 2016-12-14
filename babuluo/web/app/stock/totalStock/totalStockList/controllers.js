@@ -8,7 +8,7 @@ angular.module('AndSell.Main').controller('stock_totalStock_totalStockList_Contr
     };
 
     //根据商品id查询
-    $scope.queryStockById = function (pName) {
+    $scope.queryStockByName = function (pName) {
         var skuList = new Array;
         productFactory.getProduct({'SHOP_PRODUCT.PRD_NAME': pName}, function (response) {
             response.data.forEach(function (ele) {
