@@ -1,0 +1,35 @@
+.con{
+    display: inline-block;
+}
+.btn1{
+    float: left;
+    width: 104px;
+    padding: 6px;
+    text-align: center;
+    border-radius: 5px;
+    border-bottom-left-radius: 0px;
+    background-color:#cccccc;
+    border: 2px solid #9a9a9a;
+    border-left:0px;
+}
+.btn1:first-child{
+    border-left:2px solid #9a9a9a;
+}
+
+.tab-focus{
+    background-color: white;
+    border-bottom-color: #fff !important;
+}
+.pos{
+    position: relative;
+    top: 30px;
+    left: -15px;
+}
+.table{
+    position: relative;
+    top: 41px;
+    left: -15px;
+}
+.table>thead>tr>th{
+    background-color: #cccccc;
+}

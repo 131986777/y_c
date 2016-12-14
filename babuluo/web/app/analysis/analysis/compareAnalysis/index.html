@@ -1,0 +1,61 @@
+<div ng-init="initLoad()">
+    <!--标题选择-->
+    <div id="topTiltle" class="con">
+        <div class="btn1" ng-repeat="(key,attr) in arr"  ng-class="{'tab-focus':attr.val}" ng-click="show(key)" ng-bind="attr.name"></div>
+    </div>
+    <!--时间选择导航-->
+    <div class="row">
+        <div class="col-md-12 pos">
+            <div class="col-md-1">
+                <input type="text" ng-model="groupRange['DAY']" ng-init="groupRange['DAY']=''"  class="form-control"  placeholder="2016-12-31">
+            </div>
+            <button class="btn green" type="button" ng-click="getGroupByRange()">查询</button>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="table-content">
+        <div class="table-toolbar">
+            <table class="table table-bordered table-hover table-striped" id="shopTable">
+                <thead>
+                <tr>
+                    <th class="col-sm-1 text-center">名次</th>
+                    <th class="col-sm-1 text-center">排名</th>
+                    <th class="col-sm-1 text-center">营业额</th>
+                    <th class="col-sm-1 text-center">差距</th>
+                    <th class="col-sm-1 text-center">较上期排名</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr align="center" >
+                    <td><span >1</span></td>
+                    <td><span >大理店</span></td>
+                    <td><span></span></td>
+                    <td><span>132435</span></td>
+                    <td><span >+5（325435）</span></td>
+                </tr>
+                <tr align="center" >
+                    <td><span >1</span></td>
+                    <td><span>大理店</span></td>
+                    <td><span ></span></td>
+                    <td><span>132435</span></td>
+                    <td><span >+5（325435）</span></td>
+                </tr>
+                <tr align="center" >
+                    <td><span >1</span></td>
+                    <td><span>大理店</span></td>
+                    <td><span ></span></td>
+                    <td><span>132435</span></td>
+                    <td><span >+5（325435）</span></td>
+                </tr>
+                <tr align="center" >
+                    <td><span >1</span></td>
+                    <td><span>大理店</span></td>
+                    <td><span ></span></td>
+                    <td><span>132435</span></td>
+                    <td><span >+5（325435）</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
