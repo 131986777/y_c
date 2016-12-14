@@ -3,6 +3,14 @@
  */
 AndSellMainModule.service('analysisFactory', function ($resource, baseURL) {
     //根据日期范围查询资金变动范围
+    this.getCompareChangeByRange=function (startDay,endDay) {
+        return $resource(baseURL+"/stat/manage_data_analysis_by_range?STARTDAY=:STARTDAY&ENDDAY=:ENDDAY&FLAG=ANALYSIS_COMPARE",{'STARTDAY':startDay,'ENDDAY':endDay},{
+            'update':{
+                method:'PUT'
+            }
+        });
+    };
+    //根据日期范围查询资金变动范围
     this.getCardMoneyChangeRangeByRange=function (startDay,endDay) {
         return $resource(baseURL+"/stat/manage_data_analysis_by_range?STARTDAY=:STARTDAY&ENDDAY=:ENDDAY&FLAG=ANALYSIS_CARD",{'STARTDAY':startDay,'ENDDAY':endDay},{
             'update':{

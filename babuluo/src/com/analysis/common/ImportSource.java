@@ -15,10 +15,11 @@ public class ImportSource {
     public static void main(String[] args){
 //        getDaliyImportSource();
 //        SourceUtil.importSource(getDaliyImportSource(),"ANALYSIS_DAILY");
-        long l = System.currentTimeMillis();
-        SourceUtil.importSource(getCompareSource(),"ANALYSIS_COMPARE");
-//        getDaliyImportSource();
-        System.out.println(System.currentTimeMillis()-l);
+//        long l = System.currentTimeMillis();
+//        SourceUtil.importSource(getCompareSource(),"ANALYSIS_COMPARE");
+////        getDaliyImportSource();
+//        System.out.println(System.currentTimeMillis()-l);
+        SourceUtil.importSource(ImportSource.getDaliyImportSource(),"ANALYSIS_DAILY");
 //
     }
 
@@ -152,8 +153,8 @@ public class ImportSource {
      */
     public static Map<String,String> getDaliyImportSource(){
         JSONArray j_shopAbout = SourceUtil.getJSONArraySource("/stat/shop_list",null);
-        JSONArray j_shopOrderAbout = SourceUtil.getJSONArraySource("/stat/shop_money_about_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date()));}});
-        JSONArray j_shopCardAbout = SourceUtil.getJSONArraySource("/stat/shop_newcard_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date()));}});
+        JSONArray j_shopOrderAbout = SourceUtil.getJSONArraySource("/stat/shop_money_about_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");}});
+        JSONArray j_shopCardAbout = SourceUtil.getJSONArraySource("/stat/shop_newcard_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");}});
         Map<String,String> map = new HashMap<>();
         Map<String,Object> firstArgsMap = null;
         Map<String,String> secondArgsMap = null;
@@ -164,12 +165,18 @@ public class ImportSource {
         String eqNum= null;
         String eqOtherNum = null;
         String eqDateByCard = null;
+        List<String> dayList = new ArrayList<>();
         for(int i=0;i<j_shopOrderAbout.size();i++){
-            list = new ArrayList<>();
             joOther = JSONObject.parseObject(j_shopOrderAbout.get(i).toString());
-            eqDate = joOther.getString(".DAY");
-            eqOtherNum = joOther.getString("SHOP_ORDER.SHOP_ID");
-            for(int j = 0;j<j_shopAbout.size();j++){
+            if(!dayList.contains(joOther.getString(".DAY"))){
+                dayList.add(joOther.getString(".DAY"));
+            }
+        }
+        for(int i=0;i<dayList.size();i++){
+            list = new ArrayList<>();
+            for(int j=0;j<j_shopAbout.size();j++){
+                joNumber =  JSONObject.parseObject(j_shopAbout.get(j).toString());
+                eqNum = joNumber.getString("SHOP.ID");
                 firstArgsMap = new HashMap<>();
                 secondArgsMap = new HashMap<>();
                 secondArgsMap.put("ORDER_COUNT","0");
@@ -178,29 +185,32 @@ public class ImportSource {
                 secondArgsMap.put("MONEY_COUNT","0");
                 secondArgsMap.put("ADD_CARD","0");
                 secondArgsMap.put("ADD_CARD_MONEY","0");
-                joNumber = JSONObject.parseObject(j_shopAbout.get(j).toString());
-                eqNum = joNumber.getString("SHOP.ID");
                 secondArgsMap.put("SHOP_ID",eqNum);
-                if(eqNum.equals(eqOtherNum)){
-                    secondArgsMap.put("ORDER_COUNT",joOther.getString(".NUMCOUNT"));
-                    secondArgsMap.put("MONEY_OVER",joOther.getString(".MONEY_OVER"));
-                    secondArgsMap.put("MONEY_DISCOUNT",joOther.getString(".DISCOUNT"));
-                    secondArgsMap.put("MONEY_COUNT",joOther.getString(".MONEY_COUNT"));
-                }
-                for(int k=0;k<j_shopCardAbout.size();k++){
-                    joOther = JSONObject.parseObject(j_shopCardAbout.get(k).toString());
-                    eqDateByCard = joOther.getString(".DAY");
+                for(int l=0;l<j_shopCardAbout.size();l++){
+                    joOther = JSONObject.parseObject(j_shopCardAbout.get(l).toString());
+                    eqDate = joOther.getString(".DAY");
                     eqOtherNum = joOther.getString("FINANCE_LIST.SHOP_ID");
-                    if(eqDate.equals(eqDateByCard)&&eqNum.equals(eqOtherNum)){
+                    if(eqDate.equals(dayList.get(i))&&eqNum.equals(eqOtherNum)){
                         secondArgsMap.put("ADD_CARD",joOther.getString(".ADDCARD"));
                         secondArgsMap.put("ADD_CARD_MONEY",joOther.getString(".MONEY_CONUT"));
                     }
                 }
-                firstArgsMap.put("SHOP_VALUE",secondArgsMap);
-                firstArgsMap.put("SHOP_NAME",joNumber.getString("SHOP.NAME"));
-                list.add(firstArgsMap);
+                for(int k=0;k<j_shopOrderAbout.size();k++){
+                    joOther = JSONObject.parseObject(j_shopOrderAbout.get(k).toString());
+                    eqOtherNum = joOther.getString("SHOP_ORDER.SHOP_ID");
+                    eqDate = joOther.getString(".DAY");
+                    if(eqDate.equals(dayList.get(i))&&eqOtherNum.equals(eqNum)){
+                        secondArgsMap.put("ORDER_COUNT",joOther.getString(".NUMCOUNT"));
+                        secondArgsMap.put("MONEY_OVER",joOther.getString(".MONEY_OVER"));
+                        secondArgsMap.put("MONEY_DISCOUNT",joOther.getString(".DISCOUNT"));
+                        secondArgsMap.put("MONEY_COUNT",joOther.getString(".MONEY_COUNT"));
+                        firstArgsMap.put("SHOP_VALUE",secondArgsMap);
+                        firstArgsMap.put("SHOP_NAME",joNumber.getString("SHOP.NAME"));
+                        list.add(firstArgsMap);
+                    }
+                }
             }
-            map.put(eqDate, JSONArray.fromObject(list).toString());
+            map.put(dayList.get(i), JSONArray.fromObject(list).toString());
         }
         return map;
     }
