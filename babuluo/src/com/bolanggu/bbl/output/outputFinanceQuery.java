@@ -1,13 +1,15 @@
 package com.bolanggu.bbl.output;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.pabula.common.util.DateUtil;
+import com.pabula.common.util.StrUtil;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.util.CellRangeAddress;
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;
@@ -36,7 +38,7 @@ public class outputFinanceQuery {
 
 
         //解析主要数据
-        JSONArray jsonArray = new JSONArray(outputDetail);
+        JSONArray jsonArray = JSON.parseArray(outputDetail);
 
         HSSFSheet financeSheet = analyseBook.createSheet("资金明细表");
         financeSheet.setColumnWidth(0, 2500);
@@ -143,10 +145,11 @@ public class outputFinanceQuery {
         balance.setCellStyle(title2Style);
         int analyseIndex = 1;//序号
 
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+        for (int i = 0; i < jsonArray.size(); i++) {
+            JSONObject jsonObject = jsonArray.getJSONObject(i);
 
             String changeType;
+
             if ("increase".equals(jsonObject.getString("FINANCE_LIST.CHANGE_TYPE"))) {
                 changeType = "收入";
             } else {
@@ -159,7 +162,7 @@ public class outputFinanceQuery {
             cell0.setCellValue(analyseIndex++);
             cell0.setCellStyle(cellStyle);
             Cell cell1 = row.createCell(1);
-            cell1.setCellValue(jsonObject.getString("FINANCE_LIST.ADD_DATETIME").replace(".0",""));
+            cell1.setCellValue(jsonObject.getString("FINANCE_LIST.ADD_DATETIME").replace(".0", ""));
             cell1.setCellStyle(cellStyle);
             Cell cell2 = row.createCell(2);
             cell2.setCellValue(jsonObject.getString("FINANCE_LIST.LOGIN_ID"));
@@ -168,13 +171,13 @@ public class outputFinanceQuery {
             cell3.setCellValue(jsonObject.getString("FINANCE_LIST.EVENT"));
             cell3.setCellStyle(cellStyle);
             Cell cell4 = row.createCell(4);
-            cell4.setCellValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_NO"));
+            cell4.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_NO"),""));
             cell4.setCellStyle(cellStyle);
             Cell cell5 = row.createCell(5);
-            cell5.setCellValue(jsonObject.getString("FINANCE_LIST.SHOP"));
+            cell5.setCellValue( StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.SHOP"),""));
             cell5.setCellStyle(cellStyle);
             Cell cell6 = row.createCell(6);
-            cell6.setCellValue(jsonObject.getString("FINANCE_LIST.OPER_USER_ID"));
+            cell6.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.OPER_USER_ID"),""));
             cell6.setCellStyle(cellStyle);
             Cell cell7 = row.createCell(7);
             cell7.setCellValue(changeType);
@@ -189,12 +192,14 @@ public class outputFinanceQuery {
 
         HSSFRow rowM = financeSheet.createRow(rowIndex);
         rowM.setHeightInPoints(25);
-        Cell cellMan = rowM.createCell(0);
-        cellMan.setCellValue("操作人：");
-        cellMan.setCellStyle(cellStyle);
-        Cell cellManValue = rowM.createCell(1);
-        cellManValue.setCellValue("");
-        cellManValue.setCellStyle(cellStyle);
+//        Cell cellMan = rowM.createCell(0);
+//        cellMan.setCellValue("操作人：");
+//        cellMan.setCellStyle(cellStyle);
+//        Cell cellManValue = rowM.createCell(1);
+//        cellManValue.setCellValue("");
+//        cellManValue.setCellStyle(cellStyle);
+        rowM.createCell(0).setCellValue("");
+        rowM.createCell(1).setCellValue("");
         rowM.createCell(2).setCellValue("");
         rowM.createCell(3).setCellValue("");
         rowM.createCell(4).setCellValue("");

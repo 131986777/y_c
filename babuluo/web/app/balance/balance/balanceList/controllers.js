@@ -1,10 +1,11 @@
-angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function (http, $scope, $stateParams, cardFactory, memberFactory, balanceFactory, modalFactory, shopFactory) {
+angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function ($q, http, $scope, $stateParams, cardFactory, memberFactory, balanceFactory, modalFactory, shopFactory) {
     modalFactory.setTitle('资金明细');
     modalFactory.setBottom(false);
 
     //获得所有资金明细
     $scope.bindData = function (response) {
         $scope.balanceList = response.data;
+        $scope.querySize = response.extraData.page.querySize;
         console.log($scope.balanceList);
     };
 
@@ -172,14 +173,29 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
     };
 
     $scope.outPutQuery = function () {
-        var url = "../../outputQuery";
-        $scope.outputList = {};
-        $scope.outputList['type'] = "finance";
-        $scope.outputList['item'] = JSON.stringify($scope.balanceList);
-        console.log($scope.outputList);
-        http.post_ori(url, $scope.outputList,function (response) {
-            location.href = "/AndSell" + response;
-        });
+        if ($scope.querySize - 3000 <= 0) {
+            balanceFactory.getAllFinanceList($scope.filter, function (response) {
+                if (response.code == 0 && response.msg == "ok") {
+                    $scope.outputBalance = response.data;
+                    var url = "../../outputQuery";
+                    $scope.outputList = {};
+                    $scope.outputList['type'] = "finance";
+                    $scope.outputList['item'] = JSON.stringify($scope.outputBalance);
+                    http.post_ori(url, $scope.outputList, function (response) {
+                        if(response!="failure"){
+                            location.href = "/AndSell" + response;
+                        }else {
+                            modalFactory.showShortAlert("导出失败");
+                        }
+                    });
+                } else {
+                    modalFactory.showShortAlert(response.msg);
+                }
+            });
+        }else {
+            modalFactory.showAlert("数据量过大，请缩小数据范围");
+        }
+
     };
 
     $scope.delete = function () {
