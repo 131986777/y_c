@@ -63,6 +63,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
             $scope.memberDetail['MEMBER.BALANCE'] = card['MEMBER_CARD.BALANCE'] / 100;
             $scope.memberDetail['MEMBER.CARD_ID'] = card['MEMBER_CARD.CARD_ID'];
             $scope.memberDetail['MEMBER.CARD_NO'] = card['MEMBER_CARD.CARD_NO'];
+            $scope.memberDetail['MEMBER.CARD_TYPE_ID'] = card['MEMBER_CARD.TYPE_ID'];
             $scope.memberDetail.select = true;
         } else {
             $scope.memberDetail['MEMBER.BALANCE'] = undefined;
@@ -120,6 +121,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         $scope.ModifyBalanceInfo = {};
         $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_BALANCE'] = $scope.memberDetail['MEMBER.BALANCE'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_ID'] = $scope.memberDetail['MEMBER.CARD_ID'];
+        $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_TYPE_ID'] = $scope.memberDetail['MEMBER.CARD_TYPE_ID'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_NO'] = $scope.memberDetail['MEMBER.CARD_NO'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.SERVICE_ID'] = $scope.memberDetail['MEMBER.SERVICE_ID'];

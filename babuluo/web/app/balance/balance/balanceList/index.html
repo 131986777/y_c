@@ -118,11 +118,12 @@
                 <th> 手机号</th>
                 <th> 事件</th>
                 <th> 说明</th>
-                <th> 卡号</th>
-                <th> 门店</th>
+                <th> 交易卡号</th>
+                <th> 交易卡余额</th>
+                <th> 操作门店</th>
                 <th> 操作员</th>
                 <th> 类型</th>
-                <th class="text-center"> 金额</th>
+                <th class="text-center"> 交易金额</th>
                 <th class="text-center"> 账户余额</th>
                 </tr>
                 </thead>
@@ -133,6 +134,7 @@
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_NO']"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_BALANCE']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.SHOP']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.OPER_USER_ID']"></td>
                     <td>
