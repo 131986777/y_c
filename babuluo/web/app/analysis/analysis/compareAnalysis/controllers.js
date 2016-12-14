@@ -35,5 +35,3 @@ angular.module('AndSell.Main').controller('analysis_analysis_compareAnalysis_Con
     }
 });
 
-
-

@@ -12,6 +12,97 @@ import java.util.Map;
  * Created by liutao on 2016/12/6 17:50.
  */
 public class YesterdaySource {
+    public static void main(String args[]){
+        addYesterdayCompareSource();
+    }
+    /**
+     * 获取昨天的作战室数据并保存到MANAGE_DATA_ANALYSIS表中
+     */
+    public static void addYesterdayCompareSource(){
+        SourceUtil.delYesterDaySource("ANALYSIS_COMPARE");
+        JSONArray j_shopAbout = SourceUtil.getJSONArraySource("/stat/shop_list",null);
+        JSONArray j_shopOrderCompare = SourceUtil.getJSONArraySource("/stat/shop_compare_by_range",new HashMap<String,String>(){{put("STARTDAY",SourceUtil.getYesterdayDate()+" 0:0:0");put("ENDDAY",SourceUtil.getYesterdayDate()+" 23:59:59");}});
+        JSONArray j_addCardCompare = SourceUtil.getJSONArraySource("/stat/shop_compare_card_by_range",new HashMap<String,String>(){{put("STARTDAY",SourceUtil.getYesterdayDate()+" 0:0:0");put("ENDDAY",SourceUtil.getYesterdayDate()+" 23:59:59");put("EVENT","会员开卡");put("ORDERBY","count(*)");}});
+        JSONArray j_cardMoneyCompare = SourceUtil.getJSONArraySource("/stat/shop_compare_card_by_range",new HashMap<String,String>(){{put("STARTDAY",SourceUtil.getYesterdayDate()+" 0:0:0");put("ENDDAY",SourceUtil.getYesterdayDate()+" 23:59:59");put("EVENT","会员充值");put("ORDERBY","sum(change_value)");}});
+        Map<String,String> map = new HashMap<>();//2016-11-12:
+        Map<String,Object> firstMap = null;  //status: .. value:...
+        Map<String,Object> secondMap = null; //shop_name:...shop_value:...
+        List<Object> listMoney = null;
+        List<Object> listCard = null;
+        List<Object> listCardMoney = null;
+        List<Object> allList = null;
+        JSONObject joOther = null;
+        JSONObject flag = null;
+        allList = new ArrayList<>();
+        listCard = new ArrayList<>();
+        listMoney = new ArrayList<>();
+        listCardMoney = new ArrayList<>();
+        for(int k=0;k<j_shopOrderCompare.size();k++){
+            joOther = JSONObject.parseObject(j_shopOrderCompare.get(k).toString());
+            secondMap = new HashMap<>();
+            firstMap =new HashMap<>();
+            secondMap.put("SHOP_SORT", listMoney.size() + 1);
+            secondMap.put("MONEY_COUNT", joOther.getString(".MONEY_COUNT"));
+            secondMap.put("SHOP_ID", joOther.getString("SHOP_ORDER.SHOP_ID"));
+            for(int l = 0;l<j_shopAbout.size();l++){
+                flag = JSONObject.parseObject(j_shopAbout.get(l).toString());
+                if(flag.getString("SHOP.ID").equals(joOther.getString("SHOP_ORDER.SHOP_ID"))){
+                    firstMap.put("COMPARE_NAME", flag.getString("SHOP.NAME"));
+                    firstMap.put("COMPARE_VALUE", secondMap);
+                    listMoney.add(firstMap);
+                    break;
+                }
+            }
+        }
+        for(int k=0;k<j_addCardCompare.size();k++){
+            joOther = joOther = JSONObject.parseObject(j_addCardCompare.get(k).toString());
+            secondMap = new HashMap();
+            firstMap = new HashMap<>();
+            secondMap.put("SHOP_SORT", listCard.size() + 1);
+            secondMap.put("ADD_NUMBER",joOther.getString(".NUMBER"));
+            secondMap.put("SHOP_ID",joOther.getString("FINANCE_LIST.SHOP_ID"));
+            for(int l = 0;l<j_shopAbout.size();l++){
+                flag = JSONObject.parseObject(j_shopAbout.get(l).toString());
+                if(flag.getString("SHOP.ID").equals(joOther.getString("FINANCE_LIST.SHOP_ID"))){
+                    firstMap.put("COMPARE_NAME", flag.getString("SHOP.NAME"));
+                    firstMap.put("COMPARE_VALUE", secondMap);
+                    listCard.add(firstMap);
+                    break;
+                }
+            }
+        }
+        for(int k=0;k<j_cardMoneyCompare.size();k++){
+            joOther = JSONObject.parseObject(j_cardMoneyCompare.get(k).toString());
+            secondMap = new HashMap();
+            firstMap = new HashMap<>();
+            secondMap.put("SHOP_SORT", listCardMoney.size()+1);
+            secondMap.put("CARD_MONEY_COUNT", joOther.getString(".MONEY_COUNT"));
+            secondMap.put("SHOP_ID", joOther.getString("FINANCE_LIST.SHOP_ID"));
+            for(int l = 0;l<j_shopAbout.size();l++){
+                flag = JSONObject.parseObject(j_shopAbout.get(l).toString());
+                if(flag.getString("SHOP.ID").equals(joOther.getString("FINANCE_LIST.SHOP_ID"))){
+                    firstMap.put("COMPARE_NAME", flag.getString("SHOP.NAME"));
+                    firstMap.put("COMPARE_VALUE", secondMap);
+                    listCardMoney.add(firstMap);
+                    break;
+                }
+            }
+        }
+        firstMap = new HashMap();
+        firstMap.put("STATUS","营业额" );
+        firstMap.put("VALUE",listMoney);
+        allList.add(firstMap);
+        firstMap = new HashMap();
+        firstMap.put("STATUS","销卡" );
+        firstMap.put("VALUE", listCardMoney);
+        allList.add(firstMap);
+        firstMap = new HashMap();
+        firstMap.put("STATUS","开卡" );
+        firstMap.put("VALUE",listCard);
+        allList.add(firstMap);
+        map.put(SourceUtil.getYesterdayDate(),JSONObject.toJSONString(allList));
+        SourceUtil.importSource(map,"ANALYSIS_COMPARE");
+    }
     /**
      * 导入昨天的店铺数据到MANAGE_DATA_ANALYSIS表中
      */
