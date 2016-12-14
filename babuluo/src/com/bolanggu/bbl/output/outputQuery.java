@@ -30,44 +30,50 @@ public class outputQuery extends HttpServlet {
         String type = req.getParameter("type");
         String outputDetail = req.getParameter("item");
 
-        HSSFWorkbook analyseBook = new HSSFWorkbook();
-
-        if ("finance".equals(type)) {
-            outputFinanceQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
-        } else if ("point".equals(type)) {
-            //outPutPointeQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
-        }
-
-        FileOutputStream os = null;
-        DateFormat format = new SimpleDateFormat("yyyyMMddhhMMss");
-        Date date = new Date();
-        String filename = type + format.format(date) + ".xls";
-        File filePath = null;
-        File filePathDir = null;
-        filePath = new File(getClass()
-                .getClassLoader()
-                .getResource("/")
-                .getPath()
-                .replace("/WEB-INF/classes",
-                        ENV.GENERATED_EXCEL_FILE + filename));
-        filePathDir = new File(getClass()
-                .getClassLoader()
-                .getResource("/")
-                .getPath()
-                .replace("/WEB-INF/classes",
-                        ENV.GENERATED_EXCEL_FILE));
-        if (filePath.exists()) {
-            os = new FileOutputStream(filePath);
-        } else {
-            filePathDir.mkdirs();
-            os = new FileOutputStream(filePath);
-        }
-        analyseBook.write(os);
-        os.flush();
-        os.close();
         PrintWriter pw = resp.getWriter();
-        pw.print(ENV.GENERATED_EXCEL_FILE + filename);
-        pw.close();
+
+        try {
+            HSSFWorkbook analyseBook = new HSSFWorkbook();
+
+            if ("finance".equals(type)) {
+                outputFinanceQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+            } else if ("point".equals(type)) {
+                //outPutPointeQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+            }
+
+            FileOutputStream os = null;
+            DateFormat format = new SimpleDateFormat("yyyyMMddhhMMss");
+            Date date = new Date();
+            String filename = type + format.format(date) + ".xls";
+            File filePath = null;
+            File filePathDir = null;
+            filePath = new File(getClass()
+                    .getClassLoader()
+                    .getResource("/")
+                    .getPath()
+                    .replace("/WEB-INF/classes",
+                            ENV.GENERATED_EXCEL_FILE + filename));
+            filePathDir = new File(getClass()
+                    .getClassLoader()
+                    .getResource("/")
+                    .getPath()
+                    .replace("/WEB-INF/classes",
+                            ENV.GENERATED_EXCEL_FILE));
+            if (filePath.exists()) {
+                os = new FileOutputStream(filePath);
+            } else {
+                filePathDir.mkdirs();
+                os = new FileOutputStream(filePath);
+            }
+            analyseBook.write(os);
+            os.flush();
+            os.close();
+            pw.print(ENV.GENERATED_EXCEL_FILE + filename);
+            pw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            pw.print("failure");
+        }
     }
 
     @Override
