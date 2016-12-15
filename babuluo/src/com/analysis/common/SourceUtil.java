@@ -63,12 +63,22 @@ public class SourceUtil {
         JSONObject flag;
         for(int k = 0; k<j_other.size(); k++){
             joOther = JSONObject.parseObject(j_other.get(k).toString());
-            if(joOther.getString(".DAY").equals(eqDay)){
-                secondMap = new HashMap<>();
-                firstMap =new HashMap<>();
-                secondMap.put("SHOP_SORT", otherList.size() + 1);
-                secondMap.put(argsList.get(0), joOther.getString(argsList.get(1)));
-                secondMap.put("SHOP_ID", joOther.getString(argsList.get(2)));
+            secondMap = new HashMap<>();
+            firstMap =new HashMap<>();
+            secondMap.put("SHOP_SORT", otherList.size() + 1);
+            secondMap.put(argsList.get(0), joOther.getString(argsList.get(1)));
+            secondMap.put("SHOP_ID", joOther.getString(argsList.get(2)));
+            if(eqDay!=null&&joOther.getString(".DAY").equals(eqDay)){
+                for(int l = 0;l<j_shopAbout.size();l++){
+                    flag = JSONObject.parseObject(j_shopAbout.get(l).toString());
+                    if(flag.getString("SHOP.ID").equals(joOther.getString(argsList.get(2)))){
+                        firstMap.put("COMPARE_NAME", flag.getString("SHOP.NAME"));
+                        firstMap.put("COMPARE_VALUE", secondMap);
+                        otherList.add(firstMap);
+                        break;
+                    }
+                }
+            }else{
                 for(int l = 0;l<j_shopAbout.size();l++){
                     flag = JSONObject.parseObject(j_shopAbout.get(l).toString());
                     if(flag.getString("SHOP.ID").equals(joOther.getString(argsList.get(2)))){
@@ -185,7 +195,6 @@ public class SourceUtil {
         }
         return ja;
     }
-
     /**
      * 将准备好的数据存入数据库  manage_data_analysis
      *

@@ -128,13 +128,13 @@ public class ImportSource {
         JSONArray j_cardMoneyCompare = SourceUtil.getJSONArraySource("/stat/shop_compare_card_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");put("EVENT","会员充值");put("ORDERBY","sum(change_value)");}});
         Map<String,String> map = new HashMap<>();
         Map<String,Object> firstMap = null;
-        Map<String,Object> secondMap = null;
+//        Map<String,Object> secondMap = null;
         List<Object> listMoney = null;
         List<Object> listCard = null;
         List<Object> listCardMoney = null;
         List<Object> allList = null;
         JSONObject joOther = null;
-        JSONObject flag = null;
+//        JSONObject flag = null;
         String eqDay = null;
         List<String> dayList = new LinkedList<>();
         for(int i=0;i<j_shopOrderCompare.size();i++){
