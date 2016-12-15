@@ -141,9 +141,15 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
 
     //根据登录ID查询财务信息
     $scope.queryFinanceByLoginId = function (content) {
+        console.log(1);
         if ($scope.lastSearch != content || $scope.lastSearchType != $scope.searchType) {
-            if (content != '') {
+
                 if ($scope.searchType == 'LOGIN_ID') {
+                    if (content == '') {
+                        $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
+                        $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
+                        $scope.filter['FINANCE_LIST.USER_ID'] = content;
+                    }else{
                     memberFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': content}, function (response) {
                         var ret = response.data;
                         if (ret.length > 0) {
@@ -154,6 +160,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
                             modalFactory.showShortAlert('查不到相关信息');
                         }
                     });
+                    }
                 } else if ($scope.searchType == 'PRICE') {
                     $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
                     $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
@@ -163,7 +170,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
                     $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
                     $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = content;
                 }
-            }
+
             $scope.lastSearch = content;
             $scope.lastSearchType = $scope.searchType;
         } else {
