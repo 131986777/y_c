@@ -1,10 +1,11 @@
-angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function (http, $scope, $stateParams, cardFactory, memberFactory, balanceFactory, modalFactory, shopFactory) {
+angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function ($q, http, $scope, $stateParams, cardFactory, memberFactory, balanceFactory, modalFactory, shopFactory) {
     modalFactory.setTitle('资金明细');
     modalFactory.setBottom(false);
 
     //获得所有资金明细
     $scope.bindData = function (response) {
         $scope.balanceList = response.data;
+        $scope.querySize = response.extraData.page.querySize;
         console.log($scope.balanceList);
     };
 
@@ -62,6 +63,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
             $scope.memberDetail['MEMBER.BALANCE'] = card['MEMBER_CARD.BALANCE'] / 100;
             $scope.memberDetail['MEMBER.CARD_ID'] = card['MEMBER_CARD.CARD_ID'];
             $scope.memberDetail['MEMBER.CARD_NO'] = card['MEMBER_CARD.CARD_NO'];
+            $scope.memberDetail['MEMBER.CARD_TYPE_ID'] = card['MEMBER_CARD.TYPE_ID'];
             $scope.memberDetail.select = true;
         } else {
             $scope.memberDetail['MEMBER.BALANCE'] = undefined;
@@ -119,6 +121,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         $scope.ModifyBalanceInfo = {};
         $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_BALANCE'] = $scope.memberDetail['MEMBER.BALANCE'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_ID'] = $scope.memberDetail['MEMBER.CARD_ID'];
+        $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_TYPE_ID'] = $scope.memberDetail['MEMBER.CARD_TYPE_ID'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_NO'] = $scope.memberDetail['MEMBER.CARD_NO'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.SERVICE_ID'] = $scope.memberDetail['MEMBER.SERVICE_ID'];
@@ -179,14 +182,29 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
     };
 
     $scope.outPutQuery = function () {
-        var url = "../../outputQuery";
-        $scope.outputList = {};
-        $scope.outputList['type'] = "finance";
-        $scope.outputList['item'] = JSON.stringify($scope.balanceList);
-        console.log($scope.outputList);
-        http.post_ori(url, $scope.outputList,function (response) {
-            location.href = "/AndSell" + response;
-        });
+        if ($scope.querySize - 3000 <= 0) {
+            balanceFactory.getAllFinanceList($scope.filter, function (response) {
+                if (response.code == 0 && response.msg == "ok") {
+                    $scope.outputBalance = response.data;
+                    var url = "../../outputQuery";
+                    $scope.outputList = {};
+                    $scope.outputList['type'] = "finance";
+                    $scope.outputList['item'] = JSON.stringify($scope.outputBalance);
+                    http.post_ori(url, $scope.outputList, function (response) {
+                        if(response!="failure"){
+                            location.href = "/AndSell" + response;
+                        }else {
+                            modalFactory.showShortAlert("导出失败");
+                        }
+                    });
+                } else {
+                    modalFactory.showShortAlert(response.msg);
+                }
+            });
+        }else {
+            modalFactory.showAlert("数据量过大，请缩小数据范围");
+        }
+
     };
 
     $scope.delete = function () {
