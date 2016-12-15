@@ -19,7 +19,7 @@ var theMonth = theDate.getMonth()+1;
 var theDay = theDate.getDate();
 angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Controller', function ($scope, $stateParams,$timeout, analysisFactory, modalFactory) {
 
-    modalFactory.setTitle("销售分析");
+    modalFactory.setTitle("线上销售分析");
     modalFactory.setBottom(false);
 
     //上周的数据
@@ -114,14 +114,14 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
             for(var i=0;i<flag.length;i++){
                 dateArray[i] =  flag[i]['MANAGE_DATA_ANALYSIS.DAY'];
                 flag[i]['MANAGE_DATA_ANALYSIS.SOURCE'] = JSON.parse(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']);
-                turnoverSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['TURNOVER']);
-                turnoverArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['TURNOVER']);
-                deductionSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION']);
-                deductionArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION']);
-                cancel_moneySum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_MONEY']);
-                cancel_moneyArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_MONEY']);
-                realincomeSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REAL_INCOME']);
-                realincomeArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REAL_INCOME']);
+                turnoverSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['TURNOVER']/100);
+                turnoverArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['TURNOVER']/100);
+                deductionSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION']/100);
+                deductionArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION']/100);
+                cancel_moneySum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_MONEY']/100);
+                cancel_moneyArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_MONEY']/100);
+                realincomeSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REAL_INCOME']/100);
+                realincomeArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REAL_INCOME']/100);
                 orderquantitySum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['ORDER_QUANTITY']);
                 orderquantityArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['ORDER_QUANTITY']);
                 deduction_ordersSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION_ORDERS']);

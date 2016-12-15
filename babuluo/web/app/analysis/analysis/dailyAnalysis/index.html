@@ -67,12 +67,12 @@
                 <tbody>
                 <tr align="center" ng-repeat="VALUE in SHOPORDERCHANGE">
                     <td><span ng-bind="VALUE['SHOP_NAME']"></span></td>
-                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_OVER'] | currency:'￥'"></span></td>
+                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_OVER']/100 | currency:'￥'"></span></td>
                     <td><span ng-bind="VALUE['SHOP_VALUE']['ADD_CARD']"></span></td>
-                    <td><span ng-bind="VALUE['SHOP_VALUE']['ADD_CARD_MONEY'] | currency:'￥'"></span></td>
-                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_DISCOUNT'] | currency:'￥'"></span></td>
+                    <td><span ng-bind="VALUE['SHOP_VALUE']['ADD_CARD_MONEY']/100 | currency:'￥'"></span></td>
+                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_DISCOUNT']/100 | currency:'￥'"></span></td>
                     <td><span ng-bind="VALUE['SHOP_VALUE']['ORDER_COUNT']"></span></td>
-                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_COUNT'] | currency:'￥'"></span></td>
+                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_COUNT']/100 | currency:'￥'"></span></td>
                 </tr>
                 </tbody>
             </table>

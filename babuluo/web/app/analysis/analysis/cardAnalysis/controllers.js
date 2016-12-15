@@ -108,16 +108,16 @@ angular.module('AndSell.Main').controller('analysis_analysis_cardAnalysis_Contro
             for(var i=0;i<flag.length;i++){
                 flag[i]['MANAGE_DATA_ANALYSIS.SOURCE'] = JSON.parse(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']);
                 addCard += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['ADDCARD']);
-                rechargeOnlineSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['RECHARGEONLINE']);
-                consumeSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUME']);
-                revertSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REVERT']);
-                consumeRedSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUMERED']);
+                rechargeOnlineSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['RECHARGEONLINE']/100);
+                consumeSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUME']/100);
+                revertSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REVERT']/100);
+                consumeRedSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUMERED']/100);
                 dateArray[i] = flag[i]['MANAGE_DATA_ANALYSIS.DAY'];
                 addCardArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['ADDCARD']);
-                rechargeOnlineArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['RECHARGEONLINE']);
-                consumeArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUME']);
-                revertArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REVERT']);
-                consumeRedArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUMERED']);
+                rechargeOnlineArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['RECHARGEONLINE']/100);
+                consumeArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUME']/100);
+                revertArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REVERT']/100);
+                consumeRedArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUMERED']/100);
             }
             $scope.cardMoneyChange = flag;
             $scope.addCard = addCard;

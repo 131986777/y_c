@@ -102,13 +102,13 @@
                 <tbody>
                 <tr align="center" ng-repeat="VALUE in orderAnaysis">
                     <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.DAY']"></span></td>
-                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['TURNOVER'] | currency:'￥'"></span></td>
-                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION'] | currency:'￥'"></span></td>
-                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_MONEY'] | currency:'￥'"></span></td>
+                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['TURNOVER']/100 | currency:'￥'"></span></td>
+                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION']/100 | currency:'￥'"></span></td>
+                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_MONEY']/100 | currency:'￥'"></span></td>
                     <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['ORDER_QUANTITY'] | number"></span></td>
                     <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION_ORDERS'] | number"></span></td>
                     <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_ORDERS'] | number"></span></td>
-                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['REAL_INCOME'] | currency:'￥'"></span></td>
+                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['REAL_INCOME']/100 | currency:'￥'"></span></td>
                 </tr>
                 </tbody>
             </table>

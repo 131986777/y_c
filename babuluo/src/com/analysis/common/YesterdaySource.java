@@ -13,7 +13,32 @@ import java.util.Map;
  */
 public class YesterdaySource {
     public static void main(String args[]){
-        addYesterdayCompareSource();
+        addYesterdayOfflineOrderSource();
+    }
+
+    /**
+     * 查询昨天的线下订单数据  并导入MANAGE_DATA_ANALYSIS表中
+     */
+    public static void addYesterdayOfflineOrderSource(){
+        SourceUtil.delYesterDaySource("ANALYSIS_ORDER");
+        JSONArray j_moneyAbout = SourceUtil.getJSONArraySource("/stat/member_offline_order_money_about_by_range",new HashMap<String,String>(){{put("STARTDAY",SourceUtil.getYesterdayDate()+" 0:0:0");put("ENDDAY",SourceUtil.getYesterdayDate()+" 23:59:59");}});
+        Map<String, String> map = new HashMap<>();
+        Map<String, String> resMap = new HashMap<>();
+        JSONObject jo = new JSONObject();
+        if(j_moneyAbout.size()!=0){
+            jo = JSONObject.parseObject(j_moneyAbout.get(0).toString());
+        }
+        resMap.put("DEDUCTION", ((String) jo.get(".DISCOUNT")) == null ? "0" : (String) jo.get(".DISCOUNT"));
+        resMap.put("ORDER_QUANTITY", ((String) jo.get(".NUMCOUNT")) == null ? "0" : (String) jo.get(".NUMCOUNT"));
+        resMap.put("REAL_INCOME", ((String) jo.get(".MONEY_OVER")) == null ? "0" : (String) jo.get(".MONEY_OVER"));
+        resMap.put("TURNOVER", ((String) jo.get(".MONEY_COUNT")) == null ? "0" : (String) jo.get(".MONEY_COUNT"));
+        resMap.put("CANCEL_ORDERS", "0");
+        resMap.put("CANCEL_MONEY", "0");
+        resMap.put("DEDUCTION_ORDERS",SourceUtil.getAboutSource("/stat/member_offline_discount_orders_by_range",new HashMap<String,String>(){{put("STARTDAY",SourceUtil.getYesterdayDate()+" 0:0:0");put("ENDDAY",SourceUtil.getYesterdayDate()+" 23:59:59");}},".SOURCE"));
+        resMap.put("DISSUCCESS_ORDERS",SourceUtil.getAboutSource("/stat/member_offline_dissucess_orders_by_range",new HashMap<String,String>(){{put("STARTDAY",SourceUtil.getYesterdayDate()+" 0:0:0");put("ENDDAY",SourceUtil.getYesterdayDate()+" 23:59:59");}},".SOURCE"));
+        resMap.put("SUCCESS_ORDERS", (Integer.parseInt(resMap.get("ORDER_QUANTITY"))-Integer.parseInt(resMap.get("DISSUCCESS_ORDERS")))+"");
+        map.put(SourceUtil.getYesterdayDate(), net.sf.json.JSONObject.fromObject(resMap).toString());
+        SourceUtil.importSource(map, "ANALYSIS_ORDER_OFFLINE");
     }
     /**
      * 获取昨天的作战室数据并保存到MANAGE_DATA_ANALYSIS表中
@@ -138,22 +163,26 @@ public class YesterdaySource {
             joNumber = JSONObject.parseObject(j_shopAbout.get(j).toString());
             eqNum = joNumber.getString("SHOP.ID");
             secondArgsMap.put("SHOP_ID", eqNum);
-            if (j_shopOrderAbout.size() != 0) {
-                joOther = JSONObject.parseObject(j_shopOrderAbout.get(0).toString());
-                eqOtherNum = joOther.getString("SHOP_ORDER.SHOP_ID");
-                if (eqNum.equals(eqOtherNum)) {
-                    secondArgsMap.put("ORDER_COUNT", joOther.getString(".NUMCOUNT"));
-                    secondArgsMap.put("MONEY_OVER", joOther.getString(".MONEY_OVER"));
-                    secondArgsMap.put("MONEY_DISCOUNT", joOther.getString(".DISCOUNT"));
-                    secondArgsMap.put("MONEY_COUNT", joOther.getString(".MONEY_COUNT"));
+            for(int l=0;l<j_shopCardAbout.size();l++){
+                joOther = JSONObject.parseObject(j_shopCardAbout.get(l).toString());
+                eqOtherNum = joOther.getString("FINANCE_LIST.SHOP_ID");
+                if(eqNum.equals(eqOtherNum)){
+                    secondArgsMap.put("ADD_CARD",joOther.getString(".ADDCARD"));
+                    secondArgsMap.put("ADD_CARD_MONEY",joOther.getString(".MONEY_CONUT"));
+                    j_shopCardAbout.remove(l);
+                    break;
                 }
             }
-            if (j_shopCardAbout.size() != 0) {
-                joOther = JSONObject.parseObject(j_shopCardAbout.get(0).toString());
-                eqOtherNum = joOther.getString("FINANCE_LIST.SHOP_ID");
-                if (eqNum.equals(eqOtherNum)) {
-                    secondArgsMap.put("ADD_CARD", joOther.getString(".ADDCARD"));
-                    secondArgsMap.put("ADD_CARD_MONEY", joOther.getString(".MONEY_CONUT"));
+            for(int k=0;k<j_shopOrderAbout.size();k++){
+                joOther = JSONObject.parseObject(j_shopOrderAbout.get(k).toString());
+                eqOtherNum = joOther.getString("SHOP_ORDER.SHOP_ID");
+                if(eqOtherNum.equals(eqNum)){
+                    secondArgsMap.put("ORDER_COUNT",joOther.getString(".NUMCOUNT"));
+                    secondArgsMap.put("MONEY_OVER",joOther.getString(".MONEY_OVER"));
+                    secondArgsMap.put("MONEY_DISCOUNT",joOther.getString(".DISCOUNT"));
+                    secondArgsMap.put("MONEY_COUNT",joOther.getString(".MONEY_COUNT"));
+                    j_shopOrderAbout.remove(k);
+                    break;
                 }
             }
             firstArgsMap.put("SHOP_VALUE", secondArgsMap);
@@ -163,7 +192,6 @@ public class YesterdaySource {
         map.put(SourceUtil.getYesterdayDate(), net.sf.json.JSONArray.fromObject(list).toString());
         SourceUtil.importSource(map, "ANALYSIS_DAILY");
     }
-
     /**
      * 查询昨天的订单数据  并导入MANAGE_DATA_ANALYSIS表中
      */

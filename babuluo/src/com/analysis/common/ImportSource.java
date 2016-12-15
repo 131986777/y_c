@@ -13,25 +13,45 @@ import java.util.*;
 public class ImportSource {
 
     public static void main(String[] args){
-//        getDaliyImportSource();
-//        SourceUtil.importSource(getDaliyImportSource(),"ANALYSIS_DAILY");
-//        long l = System.currentTimeMillis();
-//        SourceUtil.importSource(getCompareSource(),"ANALYSIS_COMPARE");
-////        getDaliyImportSource();
-//        System.out.println(System.currentTimeMillis()-l);
-        SourceUtil.importSource(ImportSource.getDaliyImportSource(),"ANALYSIS_DAILY");
-//
+        SourceUtil.importSource(getOrderOfflineImportSource(),"ANALYSIS_ORDER_OFFLINE");
     }
-
+    public static Map<String,String> getOrderOfflineImportSource(){
+        JSONArray j_moneyAbout = SourceUtil.getJSONArraySource("/stat/member_offline_order_money_about_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");}});
+        JSONArray j_saleOrders = SourceUtil.getJSONArraySource("/stat/member_offline_discount_orders_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");}});
+        JSONArray j_disSuccessOrders = SourceUtil.getJSONArraySource("/stat/member_offline_dissucess_orders_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");}});
+        Map<String,String> map = new HashMap<>();
+        Map<String,String> sourceMap = null;
+        JSONObject jo = null;
+        String j_day = null;
+        String eq = null;
+        for(int i=0;i<j_moneyAbout.size();i++){
+            sourceMap = new HashMap<>();
+            jo = JSONObject.parseObject(j_moneyAbout.get(i).toString());
+            sourceMap.put("DEDUCTION", (String) jo.get(".DISCOUNT"));
+            sourceMap.put("ORDER_QUANTITY",(String)jo.get(".NUMCOUNT"));
+            sourceMap.put("REAL_INCOME",(String)jo.get(".MONEY_OVER"));
+            sourceMap.put("TURNOVER",(String)jo.get(".MONEY_COUNT"));
+            sourceMap.put("CANCEL_ORDERS","0");
+            sourceMap.put("CANCEL_MONEY","0");
+            sourceMap.put("DEDUCTION_ORDERS", "0");
+            sourceMap.put("DISSUCCESS_ORDERS", "0");
+            j_day = (String) jo.get(".DAY");
+            SourceUtil.addMapSource(j_saleOrders,sourceMap,j_day,"DEDUCTION_ORDERS",".DAY",".SOURCE");
+            SourceUtil.addMapSource(j_disSuccessOrders, sourceMap, j_day,"DISSUCCESS_ORDERS",".DAY",".SOURCE");
+            sourceMap.put("SUCCESS_ORDERS", (Integer.parseInt((String)jo.get(".NUMCOUNT"))-Integer.parseInt(sourceMap.get("DISSUCCESS_ORDERS")))+"");
+            map.put("20"+j_day, net.sf.json.JSONObject.fromObject(sourceMap).toString());
+        }
+        return map;
+    }
     /**
      *获取之前的店铺比对数据
      * @return
      */
     public static Map<String,String> getCompareSource(){
         JSONArray j_shopAbout = SourceUtil.getJSONArraySource("/stat/shop_list",null);
-        JSONArray j_shopOrderCompare = SourceUtil.getJSONArraySource("/stat/shop_compare_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date()));}});
-        JSONArray j_addCardCompare = SourceUtil.getJSONArraySource("/stat/shop_compare_card_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date()));put("EVENT","会员开卡");put("ORDERBY","count(*)");}});
-        JSONArray j_cardMoneyCompare = SourceUtil.getJSONArraySource("/stat/shop_compare_card_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date()));put("EVENT","会员充值");put("ORDERBY","sum(change_value)");}});
+        JSONArray j_shopOrderCompare = SourceUtil.getJSONArraySource("/stat/shop_compare_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");}});
+        JSONArray j_addCardCompare = SourceUtil.getJSONArraySource("/stat/shop_compare_card_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");put("EVENT","会员开卡");put("ORDERBY","count(*)");}});
+        JSONArray j_cardMoneyCompare = SourceUtil.getJSONArraySource("/stat/shop_compare_card_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");put("EVENT","会员充值");put("ORDERBY","sum(change_value)");}});
         Map<String,String> map = new HashMap<>();//2016-11-12:
         Map<String,Object> firstMap = null;  //status: .. value:...
         Map<String,Object> secondMap = null; //shop_name:...shop_value:...
@@ -164,7 +184,6 @@ public class ImportSource {
         String eqDate = null;
         String eqNum= null;
         String eqOtherNum = null;
-        String eqDateByCard = null;
         List<String> dayList = new ArrayList<>();
         for(int i=0;i<j_shopOrderAbout.size();i++){
             joOther = JSONObject.parseObject(j_shopOrderAbout.get(i).toString());
@@ -193,6 +212,8 @@ public class ImportSource {
                     if(eqDate.equals(dayList.get(i))&&eqNum.equals(eqOtherNum)){
                         secondArgsMap.put("ADD_CARD",joOther.getString(".ADDCARD"));
                         secondArgsMap.put("ADD_CARD_MONEY",joOther.getString(".MONEY_CONUT"));
+                        j_shopCardAbout.remove(l);
+                        break;
                     }
                 }
                 for(int k=0;k<j_shopOrderAbout.size();k++){
@@ -204,11 +225,13 @@ public class ImportSource {
                         secondArgsMap.put("MONEY_OVER",joOther.getString(".MONEY_OVER"));
                         secondArgsMap.put("MONEY_DISCOUNT",joOther.getString(".DISCOUNT"));
                         secondArgsMap.put("MONEY_COUNT",joOther.getString(".MONEY_COUNT"));
-                        firstArgsMap.put("SHOP_VALUE",secondArgsMap);
-                        firstArgsMap.put("SHOP_NAME",joNumber.getString("SHOP.NAME"));
-                        list.add(firstArgsMap);
+                        j_shopOrderAbout.remove(k);
+                        break;
                     }
                 }
+                firstArgsMap.put("SHOP_VALUE",secondArgsMap);
+                firstArgsMap.put("SHOP_NAME",joNumber.getString("SHOP.NAME"));
+                list.add(firstArgsMap);
             }
             map.put(dayList.get(i), JSONArray.fromObject(list).toString());
         }

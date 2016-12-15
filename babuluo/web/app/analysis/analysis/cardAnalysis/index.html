@@ -84,10 +84,10 @@
                     <tbody>
                         <tr align="center" ng-repeat="VALUE in cardMoneyChange">
                             <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.DAY']"></span></td>
-                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['RECHARGEONLINE'] | currency:'￥'"></span></td>
-                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUME'] | currency:'￥'"></span></td>
-                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUMERED'] | currency:'￥'"></span></td>
-                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['REVERT'] | currency:'￥'"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['RECHARGEONLINE']/100 | currency:'￥'"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUME']/100 | currency:'￥'"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUMERED']/100 | currency:'￥'"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['REVERT']/100 | currency:'￥'"></span></td>
                         </tr>
                     </tbody>
                 </table>

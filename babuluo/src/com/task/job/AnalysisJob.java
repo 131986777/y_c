@@ -17,5 +17,6 @@ public class AnalysisJob implements Job {
         YesterdaySource.addYesterdayOrderSource();
         YesterdaySource.addYesterdayShopSource();
         YesterdaySource.addYesterdayCompareSource();
+        YesterdaySource.addYesterdayOfflineOrderSource();
     }
 }

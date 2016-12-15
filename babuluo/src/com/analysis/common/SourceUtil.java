@@ -73,6 +73,9 @@ public class SourceUtil {
                 rd = new API().call(api, argsMap);
                 data = rd.getData();
                 jsonArray = JSONArray.fromObject(data);
+                if(jsonArray.size()==0){
+                    return "0";
+                }
                 jb = JSONObject.parseObject(jsonArray.get(0).toString());
                 str = (String) jb.get(flag);
             } catch (RuleException e) {

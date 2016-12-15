@@ -15,6 +15,10 @@ angular.module('AndSell.Main').controller('analysis_analysis_dailyAnalysis_Contr
     function getDailySource(startDay,endDay) {
         analysisFactory.getshopDailyChangeByRange(startDay,endDay).get({},function (response) {
             console.log(response);
+            if((response.data).length==0){
+                modalFactory.showShortAlert("所选日期无数据！")
+                return;
+            }
             var flag = JSON.parse((response.data)[0]['MANAGE_DATA_ANALYSIS.SOURCE'])
             var add_card_money = 0;
             var money_discount = 0
