@@ -144,9 +144,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
 
     //根据登录ID查询财务信息
     $scope.queryFinanceByLoginId = function (content) {
-        console.log(1);
         if ($scope.lastSearch != content || $scope.lastSearchType != $scope.searchType) {
-
                 if ($scope.searchType == 'LOGIN_ID') {
                     if (content == '') {
                         $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
