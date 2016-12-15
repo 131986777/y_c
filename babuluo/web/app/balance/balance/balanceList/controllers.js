@@ -173,7 +173,6 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
                     $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
                     $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = content;
                 }
-
             $scope.lastSearch = content;
             $scope.lastSearchType = $scope.searchType;
         } else {
