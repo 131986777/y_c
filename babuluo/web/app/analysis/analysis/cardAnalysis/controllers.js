@@ -14,7 +14,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_cardAnalysis_Contro
 
     //页面刚加载执行
     $scope.initLoad = function () {
-        getCardSource("1970-1-1",theYear+"-"+theMonth+"-"+theDay);
+        getCardSource(getYesterMonthBeginDay,theYear+"-"+theMonth+"-"+theDay);
         analysisFactory.getTotalCard().get({},function (response) {
             console.log(response);
             $scope.totalCard = response.data[0];
@@ -138,6 +138,12 @@ function clearCardTable () {
     revertArray = new Array();
     consumeRedArray = new Array();
     cardChartArray = new Array();
+}
+//获取最近一个月的起始时间
+function getYesterMonthBeginDay() {
+    var monthData = new Date();
+    monthData.setMonth(monthData.getMonth()-1);
+    return monthData.getFullYear()+"-"+(monthData.getMonth()+1)+"-"+monthData.getDate()
 }
 //获取昨天
 function getYesterday(){

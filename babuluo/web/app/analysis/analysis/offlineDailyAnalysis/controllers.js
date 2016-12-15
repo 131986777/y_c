@@ -2,8 +2,8 @@
  * Created by remix on 2016/12/8.
  */
 
-angular.module('AndSell.Main').controller('analysis_analysis_dailyAnalysis_Controller', function ($scope, $stateParams, analysisFactory, modalFactory) {
-    modalFactory.setTitle("线上经营日报");
+angular.module('AndSell.Main').controller('analysis_analysis_offlineDailyAnalysis_Controller', function ($scope, $stateParams, analysisFactory, modalFactory) {
+    modalFactory.setTitle("线下经营日报");
     modalFactory.setBottom(false);
     $scope.initLoad = function () {
         getDailySource(getYesterday(),getYesterday())
@@ -13,7 +13,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_dailyAnalysis_Contr
         getDailySource(day,day);
     }
     function getDailySource(startDay,endDay) {
-        analysisFactory.getshopDailyChangeByRange(startDay,endDay).get({},function (response) {
+        analysisFactory.getOfflineDailyChangeByRange(startDay,endDay).get({},function (response) {
             console.log(response);
             if((response.data).length==0){
                 modalFactory.showShortAlert("所选日期无数据！")
@@ -27,12 +27,12 @@ angular.module('AndSell.Main').controller('analysis_analysis_dailyAnalysis_Contr
             var money_count = 0;
             var money_over = 0;
             for(var i=0;i<flag.length;i++){
-                add_card_money += parseFloat(flag[i]['SHOP_VALUE']['ADD_CARD_MONEY'])/100;
-                money_discount += parseFloat(flag[i]['SHOP_VALUE']['MONEY_DISCOUNT'])/100
+                add_card_money += parseFloat(flag[i]['SHOP_VALUE']['ADD_CARD_MONEY']);
+                money_discount += parseFloat(flag[i]['SHOP_VALUE']['MONEY_DISCOUNT'])
                 order_count += parseFloat(flag[i]['SHOP_VALUE']['ORDER_COUNT']);
                 add_card += parseFloat(flag[i]['SHOP_VALUE']['ADD_CARD']);
-                money_count += parseFloat(flag[i]['SHOP_VALUE']['MONEY_COUNT'])/100;
-                money_over += parseFloat(flag[i]['SHOP_VALUE']['MONEY_OVER'])/100;
+                money_count += parseFloat(flag[i]['SHOP_VALUE']['MONEY_COUNT']);
+                money_over += parseFloat(flag[i]['SHOP_VALUE']['MONEY_OVER']);
             }
             $scope.ADD_CARD_MONEY = add_card_money;
             $scope.MONEY_DISCOUNT  = money_discount

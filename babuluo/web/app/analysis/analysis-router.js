@@ -3,6 +3,7 @@
  */
 //日报相关
 $import('analysis/analysis/dailyAnalysis',undefined,true);
+$import('analysis/analysis/offlineDailyAnalysis',undefined,true);
 //会员分析相关
 $import('analysis/analysis/cardAnalysis',undefined,true);
 //订单相关

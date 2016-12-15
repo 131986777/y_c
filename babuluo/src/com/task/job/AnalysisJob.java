@@ -11,12 +11,14 @@ import org.quartz.JobExecutionException;
  */
 @DisallowConcurrentExecution
 public class AnalysisJob implements Job {
+    private static YesterdaySource yds = new YesterdaySource();
     @Override
     public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
-        YesterdaySource.addYesterdayCardSource();
-        YesterdaySource.addYesterdayOrderSource();
-        YesterdaySource.addYesterdayShopSource();
-        YesterdaySource.addYesterdayCompareSource();
-        YesterdaySource.addYesterdayOfflineOrderSource();
+        yds.addYesterdayCardSource();
+        yds.addYesterdayOrderSource();
+        yds.addYesterdayShopSource();
+        yds.addYesterdayCompareSource();
+        yds.addYesterdayOfflineOrderSource();
+        yds.addYesterdayOfflineDailySource();
     }
 }

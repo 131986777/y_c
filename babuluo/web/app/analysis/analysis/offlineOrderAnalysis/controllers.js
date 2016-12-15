@@ -11,15 +11,15 @@ var deduction_ordersArray = new Array();
 var cancel_ordersArray = new Array();
 var dissuccess_ordersArray = new Array();
 var success_ordersArray = new Array();
-var orderChartArray = new Array();
+var offlineOrderChartArray = new Array();
 var chartName = null;
 var theDate = new Date();
 var theYear = theDate.getFullYear();
 var theMonth = theDate.getMonth()+1;
 var theDay = theDate.getDate();
-angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Controller', function ($scope, $stateParams,$timeout, analysisFactory, modalFactory) {
+angular.module('AndSell.Main').controller('analysis_analysis_offlineOrderAnalysis_Controller', function ($scope, $stateParams,$timeout, analysisFactory, modalFactory) {
 
-    modalFactory.setTitle("线上销售分析");
+    modalFactory.setTitle("线下销售分析");
     modalFactory.setBottom(false);
 
     //上周的数据
@@ -30,7 +30,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
         var yesterdayWeekEndDay = new Date(theYear, theMonth, theDay + (6 - theDate.getDay() - 6));
         getOrderSource(yesterdayWeekFirstDay.getFullYear()+"-"+(yesterdayWeekFirstDay.getMonth()+1)+"-"+yesterdayWeekFirstDay.getDate(),yesterdayWeekEndDay.getFullYear()+"-"+(yesterdayWeekEndDay.getMonth()+1)+"-"+yesterdayWeekEndDay.getDate())
         theMonth = theDate.getMonth()+1;
-        showChartOnOrder();
+        showChartOnOfflineOrder();
     }
     //上月的数据
     $scope.getGroupByYesterMonth = function () {
@@ -45,31 +45,31 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
         var lastDay = theYear + "-" + theMonth + "-" + myDate.getDate();//上个月的最后一天
         getOrderSource(firstDay,lastDay);
         theMonth = theDate.getMonth()+1;
-        showChartOnOrder();
+        showChartOnOfflineOrder();
     }
     //今天的数据
     $scope.getGroupByNowDay = function () {
         clearOrderTable();
         getOrderSource(theYear+"-"+theMonth+"-"+theDay,theYear+"-"+theMonth+"-"+theDay)
-        showChartOnOrder();
+        showChartOnOfflineOrder();
     }
     //昨天的数据
     $scope.getGroupByYesterDay = function () {
         clearOrderTable();
         getOrderSource(getYesterday(),getYesterday());
-        showChartOnOrder();
+        showChartOnOfflineOrder();
     }
     //本月的数据
     $scope.getGroupByThisMonth = function () {
         clearOrderTable();
         getOrderSource(getMonthFirstDay(),theYear+"-"+theMonth+"-"+theDay);
-        showChartOnOrder();
+        showChartOnOfflineOrder();
     }
     //本周的数据
     $scope.getGroupByThisWeek = function () {
         clearOrderTable();
         getOrderSource(getWeekFirstDay(),theYear+"-"+theMonth+"-"+theDay);
-        showChartOnOrder();
+        showChartOnOfflineOrder();
     }
     //通过日期查询
     $scope.getGroupByRange = function () {
@@ -77,19 +77,19 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
         var endDay = $scope.groupRange['ENDDAY'];
         clearOrderTable();
         getOrderSource(startDay,endDay);
-        showChartOnOrder();
+        showChartOnOfflineOrder();
     }
     //页面初始化加载
     $scope.initLoad=function () {
         getOrderSource(getYesterMonthBeginDay,theYear+"-"+theMonth+"-"+theDay);
-        showChartOnOrder();
+        showChartOnOfflineOrder();
     }
     //显示图标
-    function showChartOnOrder() {
-        orderChartArray = turnoverArray;
+    function showChartOnOfflineOrder() {
+        offlineOrderChartArray = turnoverArray;
         chartName = "营业额";
         $timeout(function () {
-            chartOrder();
+            chartOfflineOrder();
         },1000);
     }
     //修改表格显示样式
@@ -99,7 +99,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
     }
     //根据日期范围查询  无论什么情景都用这个
     function getOrderSource(startDay,endDay) {
-        analysisFactory.getOrderAnalysisByRange(startDay,endDay).get({},function (response) {
+        analysisFactory.getOfflineOrderChangeByRange(startDay,endDay).get({},function (response) {
             console.log(response);
             var flag = response.data;
             var turnoverSum = 0;
@@ -114,14 +114,14 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
             for(var i=0;i<flag.length;i++){
                 dateArray[i] =  flag[i]['MANAGE_DATA_ANALYSIS.DAY'];
                 flag[i]['MANAGE_DATA_ANALYSIS.SOURCE'] = JSON.parse(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']);
-                turnoverSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['TURNOVER']/100);
-                turnoverArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['TURNOVER']/100);
-                deductionSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION']/100);
-                deductionArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION']/100);
-                cancel_moneySum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_MONEY']/100);
-                cancel_moneyArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_MONEY']/100);
-                realincomeSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REAL_INCOME']/100);
-                realincomeArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REAL_INCOME']/100);
+                turnoverSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['TURNOVER']);
+                turnoverArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['TURNOVER']);
+                deductionSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION']);
+                deductionArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION']);
+                cancel_moneySum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_MONEY']);
+                cancel_moneyArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_MONEY']);
+                realincomeSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REAL_INCOME']);
+                realincomeArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['REAL_INCOME']);
                 orderquantitySum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['ORDER_QUANTITY']);
                 orderquantityArray[i] = parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['ORDER_QUANTITY']);
                 deduction_ordersSum += parseFloat(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION_ORDERS']);
@@ -172,57 +172,57 @@ function getMonthFirstDay() {
 function changedChart(chartNum) {
     switch (chartNum){
         case '1':{
-            orderChartArray = turnoverArray;
+            offlineOrderChartArray = turnoverArray;
             chartName = "营业额";
-            chartOrder();
+            chartOfflineOrder();
             break;
         }
         case '2':{
-            orderChartArray = deductionArray;
+            offlineOrderChartArray = deductionArray;
             chartName = "折让金额";
-            chartOrder();
+            chartOfflineOrder();
             break;
         }
         case '3':{
-            orderChartArray = cancel_moneyArray;
+            offlineOrderChartArray = cancel_moneyArray;
             chartName = "退款额";
-            chartOrder();
+            chartOfflineOrder();
             break;
         }
         case '4':{
-            orderChartArray = realincomeArray;
+            offlineOrderChartArray = realincomeArray;
             chartName = "实收合计";
-            chartOrder();
+            chartOfflineOrder();
             break;
         }
         case '5':{
-            orderChartArray = orderquantityArray;
+            offlineOrderChartArray = orderquantityArray;
             chartName = "交易数";
-            chartOrder();
+            chartOfflineOrder();
             break;
         }
         case '6':{
-            orderChartArray = deduction_ordersArray;
+            offlineOrderChartArray = deduction_ordersArray;
             chartName = "参与优惠";
-            chartOrder();
+            chartOfflineOrder();
             break;
         }
         case '7':{
-            orderChartArray = cancel_ordersArray;
+            offlineOrderChartArray = cancel_ordersArray;
             chartName = "退单数";
-            chartOrder();
+            chartOfflineOrder();
             break;
         }
         case '8':{
-            orderChartArray = dissuccess_ordersArray;
+            offlineOrderChartArray = dissuccess_ordersArray;
             chartName = "处理中";
-            chartOrder();
+            chartOfflineOrder();
             break;
         }
         case '9':{
-            orderChartArray = success_ordersArray;
+            offlineOrderChartArray = success_ordersArray;
             chartName = "已完成";
-            chartOrder();
+            chartOfflineOrder();
             break;
         }
     }
@@ -239,10 +239,10 @@ function clearOrderTable() {
     cancel_ordersArray = new Array();
     dissuccess_ordersArray = new Array();
     success_ordersArray = new Array();
-    orderChartArray = new Array();
+    offlineOrderChartArray = new Array();
 }
 //引入chart
-function chartOrder(){
+function chartOfflineOrder(){
     var myChart = echarts.init(document.getElementById('main'));
     var option = {
         tooltip: {
@@ -267,8 +267,63 @@ function chartOrder(){
         series: [{
             name:chartName,
             type: 'line',
-            data: orderChartArray
+            data: offlineOrderChartArray
         }]
     };
     myChart.setOption(option);
+
+
+
+    $('#start_hour').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        startView: 2,
+        format: 'yyyy/mm/dd hh:ii',
+        todayBtn: 'linked'
+        /* }).on('click', function (ev) {
+         $("#start_hour").datetimepicker("setEndDate", $("#end_hour").val());
+         });*/
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+
+    $('#end_hour').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        format: 'yyyy/mm/dd hh:ii',
+        todayBtn: 'linked',
+        /* }).on('click', function (ev) {
+         $("#end_hour").datetimepicker("setStartDate", $("#start_hour").val());
+         });*/
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+
+
+    $(document).ready(function() {
+        $('#birthday').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
+
+    $(document).ready(function() {
+        $('#birthdayDate').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
+
 }

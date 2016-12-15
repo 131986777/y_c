@@ -13,14 +13,67 @@ import java.util.Map;
  */
 public class YesterdaySource {
     public static void main(String args[]){
-        addYesterdayOfflineOrderSource();
+//        addYesterdayOfflineDailySource();
     }
 
     /**
+     * 获取并导入昨天的线下店铺数据
+     */
+    public void addYesterdayOfflineDailySource(){
+        SourceUtil.delYesterDaySource("ANALYSIS_DAILY_OFFLINE");
+        JSONArray j_shopAbout = SourceUtil.getJSONArraySource("/stat/shop_list", null);
+        JSONArray j_shopOrderAbout = SourceUtil.getJSONArraySource("/stat/shop_offline_money_about_by_range", new HashMap<String, String>() {{
+            put("STARTDAY", SourceUtil.getYesterdayDate() + " 0:0:0");
+            put("ENDDAY", SourceUtil.getYesterdayDate() + " 23:59:59");
+        }});
+//        JSONArray j_shopCardAbout = SourceUtil.getJSONArraySource("/stat/shop_newcard_by_range", new HashMap<String, String>() {{
+//            put("STARTDAY", SourceUtil.getYesterdayDate() + " 0:0:0");
+//            put("ENDDAY", SourceUtil.getYesterdayDate() + " 23:59:59");
+//        }});
+        Map<String, String> map = new HashMap<>();
+        Map<String, Object> firstArgsMap = null;
+        Map<String, String> secondArgsMap = null;
+        List<Map<String, Object>> list = null;
+        JSONObject joNumber = null;
+        JSONObject joOther = null;
+        String eqNum = null;
+        String eqOtherNum = null;
+        list = new ArrayList<>();
+        for (int j = 0; j < j_shopAbout.size(); j++) {
+            firstArgsMap = new HashMap<>();
+            secondArgsMap = new HashMap<>();
+            secondArgsMap.put("ORDER_COUNT", "0");
+            secondArgsMap.put("MONEY_OVER", "0");
+            secondArgsMap.put("MONEY_DISCOUNT", "0");
+            secondArgsMap.put("MONEY_COUNT", "0");
+            secondArgsMap.put("ADD_CARD", "0");
+            secondArgsMap.put("ADD_CARD_MONEY", "0");
+            joNumber = JSONObject.parseObject(j_shopAbout.get(j).toString());
+            eqNum = joNumber.getString("SHOP.ID");
+            secondArgsMap.put("SHOP_ID", eqNum);
+//            for(int l=0;l<j_shopCardAbout.size();l++){
+//                joOther = JSONObject.parseObject(j_shopCardAbout.get(l).toString());
+//                eqOtherNum = joOther.getString("FINANCE_LIST.SHOP_ID");
+//                if(eqNum.equals(eqOtherNum)){
+//                    secondArgsMap.put("ADD_CARD",joOther.getString(".ADDCARD"));
+//                    secondArgsMap.put("ADD_CARD_MONEY",joOther.getString(".MONEY_CONUT"));
+//                    j_shopCardAbout.remove(l);
+//                    break;
+//                }
+//            }
+            SourceUtil.addMapSourceByDaily(j_shopOrderAbout, secondArgsMap, eqNum,"SHOP_ORDER_OFFLINE.SOURCE_SHOP",null);
+            firstArgsMap.put("SHOP_VALUE", secondArgsMap);
+            firstArgsMap.put("SHOP_NAME", joNumber.getString("SHOP.NAME"));
+            list.add(firstArgsMap);
+        }
+        map.put(SourceUtil.getYesterdayDate(), net.sf.json.JSONArray.fromObject(list).toString());
+        SourceUtil.importSource(map, "ANALYSIS_DAILY_OFFLINE");
+    }
+    /**
      * 查询昨天的线下订单数据  并导入MANAGE_DATA_ANALYSIS表中
      */
-    public static void addYesterdayOfflineOrderSource(){
-        SourceUtil.delYesterDaySource("ANALYSIS_ORDER");
+    public void addYesterdayOfflineOrderSource(){
+        SourceUtil.delYesterDaySource("ANALYSIS_ORDER_OFFLINE");
         JSONArray j_moneyAbout = SourceUtil.getJSONArraySource("/stat/member_offline_order_money_about_by_range",new HashMap<String,String>(){{put("STARTDAY",SourceUtil.getYesterdayDate()+" 0:0:0");put("ENDDAY",SourceUtil.getYesterdayDate()+" 23:59:59");}});
         Map<String, String> map = new HashMap<>();
         Map<String, String> resMap = new HashMap<>();
@@ -43,7 +96,7 @@ public class YesterdaySource {
     /**
      * 获取昨天的作战室数据并保存到MANAGE_DATA_ANALYSIS表中
      */
-    public static void addYesterdayCompareSource(){
+    public void addYesterdayCompareSource(){
         SourceUtil.delYesterDaySource("ANALYSIS_COMPARE");
         JSONArray j_shopAbout = SourceUtil.getJSONArraySource("/stat/shop_list",null);
         JSONArray j_shopOrderCompare = SourceUtil.getJSONArraySource("/stat/shop_compare_by_range",new HashMap<String,String>(){{put("STARTDAY",SourceUtil.getYesterdayDate()+" 0:0:0");put("ENDDAY",SourceUtil.getYesterdayDate()+" 23:59:59");}});
@@ -131,7 +184,7 @@ public class YesterdaySource {
     /**
      * 导入昨天的店铺数据到MANAGE_DATA_ANALYSIS表中
      */
-    public static void addYesterdayShopSource() {
+    public void addYesterdayShopSource() {
         SourceUtil.delYesterDaySource("ANALYSIS_DAILY");
         JSONArray j_shopAbout = SourceUtil.getJSONArraySource("/stat/shop_list", null);
         JSONArray j_shopOrderAbout = SourceUtil.getJSONArraySource("/stat/shop_money_about_by_range", new HashMap<String, String>() {{
@@ -173,18 +226,19 @@ public class YesterdaySource {
                     break;
                 }
             }
-            for(int k=0;k<j_shopOrderAbout.size();k++){
-                joOther = JSONObject.parseObject(j_shopOrderAbout.get(k).toString());
-                eqOtherNum = joOther.getString("SHOP_ORDER.SHOP_ID");
-                if(eqOtherNum.equals(eqNum)){
-                    secondArgsMap.put("ORDER_COUNT",joOther.getString(".NUMCOUNT"));
-                    secondArgsMap.put("MONEY_OVER",joOther.getString(".MONEY_OVER"));
-                    secondArgsMap.put("MONEY_DISCOUNT",joOther.getString(".DISCOUNT"));
-                    secondArgsMap.put("MONEY_COUNT",joOther.getString(".MONEY_COUNT"));
-                    j_shopOrderAbout.remove(k);
-                    break;
-                }
-            }
+            SourceUtil.addMapSourceByDaily(j_shopOrderAbout, secondArgsMap, eqNum,"SHOP_ORDER.SHOP_ID",null);
+//            for(int k=0;k<j_shopOrderAbout.size();k++){
+//                joOther = JSONObject.parseObject(j_shopOrderAbout.get(k).toString());
+//                eqOtherNum = joOther.getString("SHOP_ORDER.SHOP_ID");
+//                if(eqOtherNum.equals(eqNum)){
+//                    secondArgsMap.put("ORDER_COUNT",joOther.getString(".NUMCOUNT"));
+//                    secondArgsMap.put("MONEY_OVER",joOther.getString(".MONEY_OVER"));
+//                    secondArgsMap.put("MONEY_DISCOUNT",joOther.getString(".DISCOUNT"));
+//                    secondArgsMap.put("MONEY_COUNT",joOther.getString(".MONEY_COUNT"));
+//                    j_shopOrderAbout.remove(k);
+//                    break;
+//                }
+//            }
             firstArgsMap.put("SHOP_VALUE", secondArgsMap);
             firstArgsMap.put("SHOP_NAME", joNumber.getString("SHOP.NAME"));
             list.add(firstArgsMap);
@@ -195,7 +249,7 @@ public class YesterdaySource {
     /**
      * 查询昨天的订单数据  并导入MANAGE_DATA_ANALYSIS表中
      */
-    public static void addYesterdayOrderSource() {
+    public void addYesterdayOrderSource() {
         SourceUtil.delYesterDaySource("ANALYSIS_ORDER");
         Map<String, String> map = new HashMap<>();
         Map<String, String> resMap = new HashMap<>();
@@ -217,11 +271,10 @@ public class YesterdaySource {
         map.put(SourceUtil.getYesterdayDate(), net.sf.json.JSONObject.fromObject(resMap).toString());
         SourceUtil.importSource(map, "ANALYSIS_ORDER");
     }
-
     /**
      * 查询昨天的会员卡数据  并导入MANAGE_DATA_ANALYSIS表中
      */
-    public static void addYesterdayCardSource() {
+    public void addYesterdayCardSource() {
         SourceUtil.delYesterDaySource("ANALYSIS_CARD");
         Map<String, String> map = new HashMap<>();
         Map<String, String> resMap = new HashMap<>();
