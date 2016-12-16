@@ -327,14 +327,13 @@ public class ImportSource {
      */
     public static Map<String,String> getCardImportSource(){
         JSONArray j_riqi = SourceUtil.getJSONArraySource("/stat/member_card_money_change_range",null);
-        JSONArray j_xiaofei = SourceUtil.getJSONArraySource("/stat/member_card_money_group",new HashMap<String,String>(){{put("EVENT", "消费");}});
-        JSONArray j_huiyuanchongzhi = SourceUtil.getJSONArraySource("/stat/member_card_money_group",new HashMap<String,String>(){{put("EVENT", "会员充值");}});
+        JSONArray j_xiaofei = SourceUtil.getJSONArraySource("/stat/member_card_money_group",new HashMap<String,String>(){{put("EVENT", "消费','线上消费','线下消费','订单支付");}});
+        JSONArray j_huiyuanchongzhi = SourceUtil.getJSONArraySource("/stat/member_card_money_group",new HashMap<String,String>(){{put("EVENT", "会员充值','会员卡充值','会员卡充值满送','充值送','线下充值");}});
         JSONArray j_huiyuanchongzhixianxia = SourceUtil.getJSONArraySource("/stat/member_card_money_group",new HashMap<String,String>(){{put("EVENT", "会员卡充值");}});
         JSONArray j_xiaofeichonghong = SourceUtil.getJSONArraySource("/stat/member_card_money_group",new HashMap<String,String>(){{put("EVENT", "消费冲红");}});
         JSONArray j_fandian = SourceUtil.getJSONArraySource("/stat/member_card_money_group",new HashMap<String,String>(){{put("EVENT", "返点");}});
         JSONArray j_tianjiaohuiyuan = SourceUtil.getJSONArraySource("/stat/member_crad_count_group",null);
         JSONObject jo_riqi = null;
-        JSONObject jo = null;
         Map<String,String> map = new HashMap<>();;
         Map<String,String> sourceMap = null;
         String eq = null;
