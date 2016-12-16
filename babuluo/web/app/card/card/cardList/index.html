@@ -19,7 +19,7 @@
                             </button>
                         </div>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-4">
                         <label class="control-label">筛选：</label>
                         <select ng-model="filter['MEMBER_CARD.SOURCE_ID']"
                                 ng-init="filter['MEMBER_CARD.SOURCE_ID']='null'"
@@ -54,10 +54,17 @@
                             <option class="nya-bs-option" value="ADD_DATETIME ASC">开卡时间↑</option>
                         </select>
                     </div>
-                    <div class="col-md-1 text-right">
-                        <button type="button" class="btn btn-default" data-toggle="modal"
-                                data-target="#cardList"><i class="fa fa-plus"></i>开卡
-                        </button>
+                    <div class="col-md-2 text-right">
+                        <div class="col-md-8">
+                            <button type="button" class="btn btn-default" data-toggle="modal"
+                                    data-target="#cardList"><i class="fa fa-plus"></i>开卡
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-default pull-right"
+                                    ng-click="outPutQuery()">导出
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

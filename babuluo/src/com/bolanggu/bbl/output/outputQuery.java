@@ -25,7 +25,6 @@ public class outputQuery extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         req.setCharacterEncoding("UTF-8");
-//        resp.setHeader("content-type","text/html;charset=UTF-8");
 
         String type = req.getParameter("type");
         String outputDetail = req.getParameter("item");
@@ -35,10 +34,19 @@ public class outputQuery extends HttpServlet {
         try {
             HSSFWorkbook analyseBook = new HSSFWorkbook();
 
-            if ("finance".equals(type)) {
-                outputFinanceQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
-            } else if ("point".equals(type)) {
-                //outPutPointeQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+            switch (type) {
+                case "finance":
+                    outputFinanceQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+                    break;
+                case "point":
+                    //outPutPointQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+                    break;
+                case "card":
+                    outputCardQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+                    break;
+                case "member":
+                    //outPutPointQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+                    break;
             }
 
             FileOutputStream os = null;

@@ -40,8 +40,8 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
                 var map = {};
                 var money = 0;
                 $scope.cardList.forEach(function (ele) {
-                    map[ele['MEMBER_CARD.CARD_ID']] = ele;
-                    money = money + Number(ele['MEMBER_CARD.BALANCE']);
+                    map[ele['FINANCE_LIST.CARD_ID']] = ele;
+                    money = money + Number(ele['FINANCE_LIST.BALANCE']);
                 });
                 $scope.cardMap = map;
                 $scope.cardTotalMoney = moneyFormat(money);
@@ -60,10 +60,10 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
     $scope.getCardBalance = function (id) {
         var card = $scope.cardMap[id];
         if (card != undefined) {
-            $scope.memberDetail['MEMBER.BALANCE'] = card['MEMBER_CARD.BALANCE'] / 100;
-            $scope.memberDetail['MEMBER.CARD_ID'] = card['MEMBER_CARD.CARD_ID'];
-            $scope.memberDetail['MEMBER.CARD_NO'] = card['MEMBER_CARD.CARD_NO'];
-            $scope.memberDetail['MEMBER.CARD_TYPE_ID'] = card['MEMBER_CARD.TYPE_ID'];
+            $scope.memberDetail['MEMBER.BALANCE'] = card['FINANCE_LIST.BALANCE'] / 100;
+            $scope.memberDetail['MEMBER.CARD_ID'] = card['FINANCE_LIST.CARD_ID'];
+            $scope.memberDetail['MEMBER.CARD_NO'] = card['FINANCE_LIST.CARD_NO'];
+            $scope.memberDetail['MEMBER.CARD_TYPE_ID'] = card['FINANCE_LIST.TYPE_ID'];
             $scope.memberDetail.select = true;
         } else {
             $scope.memberDetail['MEMBER.BALANCE'] = undefined;
@@ -179,10 +179,24 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
     };
 
     $scope.outPutQuery = function () {
-        if ($scope.querySize - 3000 <= 0) {
+        if ($scope.querySize - 4000 <= 0) {
             balanceFactory.getAllFinanceList($scope.filter, function (response) {
                 if (response.code == 0 && response.msg == "ok") {
-                    $scope.outputBalance = response.data;
+                    $scope.outputBalance = [];
+                    response.data.forEach(function (ele) {
+                        var form = {};
+                        form['FINANCE_LIST.ADD_DATETIME'] = ele['FINANCE_LIST.ADD_DATETIME'];
+                        form['FINANCE_LIST.BALANCE'] = ele['FINANCE_LIST.BALANCE'];
+                        form['FINANCE_LIST.CHANGE_TYPE'] = ele['FINANCE_LIST.CHANGE_TYPE'];
+                        form['FINANCE_LIST.CHANGE_VALUE'] = ele['FINANCE_LIST.CHANGE_VALUE'];
+                        form['FINANCE_LIST.EVENT'] = ele['FINANCE_LIST.EVENT'];
+                        form['FINANCE_LIST.EVENT_CARD_BALANCE'] = ele['FINANCE_LIST.EVENT_CARD_BALANCE'];
+                        form['FINANCE_LIST.EVENT_CARD_NO'] = ele['FINANCE_LIST.EVENT_CARD_NO'];
+                        form['FINANCE_LIST.LOGIN_ID'] = ele['FINANCE_LIST.LOGIN_ID'];
+                        form['FINANCE_LIST.SHOP'] = ele['FINANCE_LIST.SHOP'];
+                        form['FINANCE_LIST.OPER_USER_ID'] = ele['FINANCE_LIST.OPER_USER_ID'];
+                        $scope.outputBalance.push(form);
+                    });
                     var url = "../../outputQuery";
                     $scope.outputList = {};
                     $scope.outputList['type'] = "finance";
@@ -217,7 +231,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         $scope.memberDetail = null;
         $scope.memberId = null;
         $scope.cardList = undefined;
-        $scope.MEMBER_CARD_ID = 'null';
+        $scope.FINANCE_LIST_ID = 'null';
         $scope.changeType = 1;
         $scope.cardTotalMoney = 0;
     }
