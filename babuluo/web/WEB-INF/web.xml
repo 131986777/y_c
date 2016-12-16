@@ -78,7 +78,15 @@
         <servlet-class>com.task.servlet.UpdateOrderPayServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-
+    <servlet>
+        <servlet-name>analysisServlet</servlet-name>
+        <servlet-class>com.task.servlet.AnalysisServlet</servlet-class>
+        <!--<load-on-startup>1</load-on-startup>-->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>analysisServlet</servlet-name>
+        <url-pattern>/analysisServlet___</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>updateOrderPay</servlet-name>
         <url-pattern>/updateOrderPay34433232</url-pattern>

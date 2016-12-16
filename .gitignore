@@ -11,3 +11,5 @@ babuluo/web/WEB-INF/classes/
 /babuluo/web/uploads
 /babuluo/web/web.iml
 /.gitignore
+/bbl.iml
+/README.md

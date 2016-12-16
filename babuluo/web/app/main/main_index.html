@@ -2,7 +2,7 @@
 <html lang="zh-CN" ng-app="AndSell.Main" ng-controller="MainController">
 
 <head>
-    <meta charset="utf-8" contentType="text/html; charset=UTF-8">
+     <meta charset="utf-8" contentType="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -427,21 +427,70 @@
                     </div>
                 </li>
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#"
+                   data-hover="dropdown">
+                    <i class="icon-settings"></i>
+                    DEMO
+                </a>
+                <div class="sub-menu-wrap dropdown-menu">
+                    <ul class="sub-menu " role="menu">
+                        <li>
+                            <a ui-sref="demo-add">
+                                DEMO1
+                            </a>
+                            <a ui-sref="demoModify">
+                                Switch
+                            </a>
+                        </li>
+
+                    </ul>
+                </div>
+            </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="card/card/cardAnalysis"
                        data-hover="dropdown">
                         <i class="icon-settings"></i>
-                        DEMO
+                        分析
                     </a>
-                    <div class="sub-menu-wrap dropdown-menu">
+                    <div class="sub-menu-wrap sub-menu-3 dropdown-menu">
                         <ul class="sub-menu " role="menu">
                             <li>
-                                <a ui-sref="demo-add">
-                                    DEMO1
-                                </a>
-                                <a ui-sref="demoModify">
-                                    Switch
+                                <a ui-sref="analysis/analysis/cardAnalysis">
+                                    会员态势
                                 </a>
                             </li>
+                            <!--<li>-->
+                                <!--<a ui-sref="analysis/analysis/compareAnalysis">-->
+                                    <!--作战室-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                        <ul class="sub-menu " role="menu">
+                            <li>
+                                <a ui-sref="analysis/analysis/orderAnalysis">
+                                    线上销售态势
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="analysis/analysis/offlineOrderAnalysis">
+                                    线下销售态势
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="sub-menu " role="menu">
+                            <li>
+                                <a ui-sref="analysis/analysis/dailyAnalysis">
+                                    线上经营日报
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="analysis/analysis/offlineDailyAnalysis">
+                                    线下经营日报
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="sub-menu " role="menu">
 
                         </ul>
                     </div>
@@ -487,7 +536,10 @@
 
 
 <!--############JS引用区############-->
-
+<!--导出数据-->
+<script src="/AndSell/app/analysis/analysis/analysis-outputexcel.js"></script>
+<!--ECharts-->
+<script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/3.3.1/echarts.min.js"></script>
 <script src="/AndSell/app/components/libs/jquery/dist/jquery.min.js"></script>
 <script src="/AndSell/app/components/libs/angular/angular.min.js"></script>
 <script src="/AndSell/app/components/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -547,6 +599,7 @@
 <script src="/AndSell/app/stock/stock-router.js"></script><!--库存相关路由中心-->
 <script src="/AndSell/app/marketing/marketing-router.js"></script><!--营销相关路由中心-->
 <script src="/AndSell/app/user/user-router.js"></script><!--管理员相关路由中心-->
+<script src="/AndSell/app/analysis/analysis-router.js"></script><!--数据分析相关路由-->
 
 
 <!--############service集合区############-->
@@ -574,6 +627,7 @@
 <script src="/AndSell/app/balance/balance/balance-services.js"></script><!--资金示例使用-->
 <script src="/AndSell/app/card/card/card-services.js"></script><!--demo2 示例使用-->
 <script src="/AndSell/app/order/order/order-services.js"></script><!--demo2 示例使用-->
+<script src="/AndSell/app/analysis/analysis/analysis-service.js"></script><!--数据分析-->
 
 <!--############controller集合区(以后尝试 切换时注入)############-->
 <script src="main_controller.js"></script>
