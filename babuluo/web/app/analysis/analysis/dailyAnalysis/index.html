@@ -3,7 +3,7 @@
     <div class="row timeBar">
         <div class="col-md-12">
             <div class="col-md-1">
-                <input type="text" ng-model="groupRange['DAY']" ng-init="groupRange['DAY']=''"  class="form-control"  placeholder="2016-12-31">
+                <input id="startDay" type="text" ng-model="groupRange['DAY']" ng-init="groupRange['DAY']=YESTERDAY"  class="form-control"  placeholder="">
             </div>
             <button class="btn green" type="button" ng-click="getGroupByRange()">查询</button>
             <button class="btn alignRight"  type="button" onclick="outPutMethod('shopTable')">导出</button>
@@ -34,20 +34,20 @@
         </div>
     </div>
     </div>
-    <div class="row">
-        <div class="col-md-6" >
-            <div class="layout bgColor-blue" >
-                <h2><span ng-bind="ADD_CARD | number"></span></h2>
-                <p>新开卡<i title="所选时间所有店铺的新开卡数">!</i></p>
-            </div>
-        </div>
-        <div class="col-md-6" >
-            <div class="layout bgColor-red" >
-                <h2><span ng-bind="ADD_CARD_MONEY | currency:'￥'"></span></h2>
-                <p>开卡金额<i title="所选时间所有店铺的新开卡金额">!</i></p>
-            </div>
-        </div>
-    </div>
+    <!--<div class="row">-->
+        <!--<div class="col-md-6" >-->
+            <!--<div class="layout bgColor-blue" >-->
+                <!--<h2><span ng-bind="ADD_CARD | number"></span></h2>-->
+                <!--<p>新开卡<i title="所选时间所有店铺的新开卡数">!</i></p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="col-md-6" >-->
+            <!--<div class="layout bgColor-red" >-->
+                <!--<h2><span ng-bind="ADD_CARD_MONEY | currency:'￥'"></span></h2>-->
+                <!--<p>开卡金额<i title="所选时间所有店铺的新开卡金额">!</i></p>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
     </div>
 
     <div class="table-content">
@@ -57,8 +57,8 @@
                 <tr>
                     <th class="col-sm-1 text-center">门店</th>
                     <th class="col-sm-1 text-center">销售金额</th>
-                    <th class="col-sm-1 text-center">新开卡</th>
-                    <th class="col-sm-1 text-center">开卡金额</th>
+                    <!--<th class="col-sm-1 text-center">新开卡</th>-->
+                    <!--<th class="col-sm-1 text-center">开卡金额</th>-->
                     <th class="col-sm-1 text-center">折让金额</th>
                     <th class="col-sm-1 text-center">订单量</th>
                     <th class="col-sm-1 text-center">客单价</th>
@@ -68,8 +68,8 @@
                 <tr align="center" ng-repeat="VALUE in SHOPORDERCHANGE">
                     <td><span ng-bind="VALUE['SHOP_NAME']"></span></td>
                     <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_OVER']/100 | currency:'￥'"></span></td>
-                    <td><span ng-bind="VALUE['SHOP_VALUE']['ADD_CARD']"></span></td>
-                    <td><span ng-bind="VALUE['SHOP_VALUE']['ADD_CARD_MONEY']/100 | currency:'￥'"></span></td>
+                    <!--<td><span ng-bind="VALUE['SHOP_VALUE']['ADD_CARD']"></span></td>-->
+                    <!--<td><span ng-bind="VALUE['SHOP_VALUE']['ADD_CARD_MONEY']/100 | currency:'￥'"></span></td>-->
                     <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_DISCOUNT']/100 | currency:'￥'"></span></td>
                     <td><span ng-bind="VALUE['SHOP_VALUE']['ORDER_COUNT']"></span></td>
                     <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_COUNT']/100 | currency:'￥'"></span></td>

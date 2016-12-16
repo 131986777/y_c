@@ -21,7 +21,8 @@ angular.module('AndSell.Main').controller('analysis_analysis_offlineOrderAnalysi
 
     modalFactory.setTitle("线下销售分析");
     modalFactory.setBottom(false);
-
+    $scope.START = getYesterMonthBeginDay();
+    $scope.END = theYear+"-"+theMonth+"-"+theDay;
     //上周的数据
     $scope.getGroupByYesterWeek = function () {
         clearOrderTable();
@@ -83,6 +84,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_offlineOrderAnalysi
     $scope.initLoad=function () {
         getOrderSource(getYesterMonthBeginDay,theYear+"-"+theMonth+"-"+theDay);
         showChartOnOfflineOrder();
+        dataStatus($scope);
     }
     //显示图标
     function showChartOnOfflineOrder() {
@@ -271,20 +273,17 @@ function chartOfflineOrder(){
         }]
     };
     myChart.setOption(option);
-
-
-
-    $('#start_hour').datetimepicker({
+}
+function dataStatus($scope) {
+    $('#startDay').datetimepicker({
+        minView: "month",
         language: 'zh-CN',
         autoclose: true,
         todayHighlight: true,
         weekStart: 1,
         startView: 2,
-        format: 'yyyy/mm/dd hh:ii',
+        format: 'yyyy-mm-dd',
         todayBtn: 'linked'
-        /* }).on('click', function (ev) {
-         $("#start_hour").datetimepicker("setEndDate", $("#end_hour").val());
-         });*/
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -294,16 +293,14 @@ function chartOfflineOrder(){
     });
 
 
-    $('#end_hour').datetimepicker({
+    $('#endDay').datetimepicker({
+        minView: "month",
         language: 'zh-CN',
         autoclose: true,
         todayHighlight: true,
         weekStart: 1,
-        format: 'yyyy/mm/dd hh:ii',
+        format: 'yyyy-mm-dd ',
         todayBtn: 'linked',
-        /* }).on('click', function (ev) {
-         $("#end_hour").datetimepicker("setStartDate", $("#start_hour").val());
-         });*/
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -325,5 +322,4 @@ function chartOfflineOrder(){
             console.log(start.toISOString(), end.toISOString(), label);
         });
     });
-
 }

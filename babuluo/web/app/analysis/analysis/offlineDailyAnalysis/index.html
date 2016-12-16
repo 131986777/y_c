@@ -3,7 +3,7 @@
     <div class="row timeBar">
         <div class="col-md-12">
             <div class="col-md-1">
-                <input type="text" ng-model="groupRange['DAY']" ng-init="groupRange['DAY']=''"  class="form-control"  placeholder="2016-12-31">
+                <input id="startDay" type="text" ng-model="groupRange['DAY']" ng-init="groupRange['DAY']=YESTERDAY"  class="form-control"  placeholder="">
             </div>
             <button class="btn green" type="button" ng-click="getGroupByRange()">查询</button>
             <button class="btn alignRight"  type="button" onclick="outPutMethod('shopTable')">导出</button>

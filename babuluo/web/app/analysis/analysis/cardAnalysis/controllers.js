@@ -24,7 +24,10 @@ angular.module('AndSell.Main').controller('analysis_analysis_cardAnalysis_Contro
             $scope.invalidTotalCard = response.data[0];
         },null);
         showChartOnCard();
+        dataStatus($scope);
     };
+    $scope.START = getYesterMonthBeginDay();
+    $scope.END = theYear+"-"+theMonth+"-"+theDay;
     //上周的数据
     $scope.getGroupByYesterWeek = function () {
         clearCardTable();
@@ -227,4 +230,53 @@ function chartCard(){
         }]
     };
     myChart.setOption(option);
+}
+function dataStatus($scope) {
+    $('#startDay').datetimepicker({
+        minView: "month",
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        startView: 2,
+        format: 'yyyy-mm-dd',
+        todayBtn: 'linked'
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+
+    $('#endDay').datetimepicker({
+        minView: "month",
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        format: 'yyyy-mm-dd ',
+        todayBtn: 'linked',
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+
+
+    $(document).ready(function() {
+        $('#birthday').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
+
+    $(document).ready(function() {
+        $('#birthdayDate').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
 }

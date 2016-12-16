@@ -19,7 +19,7 @@ public class ImportSource {
     public  static Map<String,String> getDailyOfflineImportSource(){
         JSONArray j_shopAbout = SourceUtil.getJSONArraySource("/stat/shop_list",null);
         JSONArray j_shopOrderAbout = SourceUtil.getJSONArraySource("/stat/shop_offline_money_about_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");}});
-//        JSONArray j_shopCardAbout = SourceUtil.getJSONArraySource("/stat/shop_newcard_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");}});
+        JSONArray j_shopCardAbout = SourceUtil.getJSONArraySource("/stat/member_offline_card_newcards_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");}});
         Map<String,String> map = new HashMap<>();
         Map<String,Object> firstArgsMap = null;
         Map<String,String> secondArgsMap = null;
@@ -52,31 +52,18 @@ public class ImportSource {
                 secondArgsMap.put("ADD_CARD","0");
                 secondArgsMap.put("ADD_CARD_MONEY","0");
                 secondArgsMap.put("SHOP_ID",eqNum);
-//                for(int l=0;l<j_shopCardAbout.size();l++){
-//                    joOther = JSONObject.parseObject(j_shopCardAbout.get(l).toString());
-//                    eqDate = joOther.getString(".DAY");
-//                    eqOtherNum = joOther.getString("FINANCE_LIST.SHOP_ID");
-//                    if(eqDate.equals(dayList.get(i))&&eqNum.equals(eqOtherNum)){
-//                        secondArgsMap.put("ADD_CARD",joOther.getString(".ADDCARD"));
-//                        secondArgsMap.put("ADD_CARD_MONEY",joOther.getString(".MONEY_CONUT"));
-//                        j_shopCardAbout.remove(l);
-//                        break;
-//                    }
-//                }
+                for(int l=0;l<j_shopCardAbout.size();l++){
+                    joOther = JSONObject.parseObject(j_shopCardAbout.get(l).toString());
+                    eqDate = joOther.getString(".DAY");
+                    eqOtherNum = joOther.getString("FINANCE_LIST.SHOP_ID");
+                    if(eqDate.equals(dayList.get(i))&&eqNum.equals(eqOtherNum)){
+                        secondArgsMap.put("ADD_CARD",joOther.getString(".ADDCARD"));
+                        secondArgsMap.put("ADD_CARD_MONEY",joOther.getString("FINANCE_LIST.MONEY_COUNT"));
+                        j_shopCardAbout.remove(l);
+                        break;
+                    }
+                }
                 SourceUtil.addMapSourceByDaily(j_shopOrderAbout, secondArgsMap, eqNum,"SHOP_ORDER_OFFLINE.SOURCE_SHOP",dayListToday);
-//                for(int k=0;k<j_shopOrderAbout.size();k++){
-//                    joOther = JSONObject.parseObject(j_shopOrderAbout.get(k).toString());
-//                    eqOtherNum = joOther.getString("SHOP_ORDER_OFFLINE.SOURCE_SHOP");
-//                    eqDate = joOther.getString(".DAY");
-//                    if(eqDate.equals(dayListToday)&&eqOtherNum.equals(eqNum)){
-//                        secondArgsMap.put("ORDER_COUNT",joOther.getString(".NUMCOUNT"));
-//                        secondArgsMap.put("MONEY_OVER",joOther.getString(".MONEY_OVER"));
-//                        secondArgsMap.put("MONEY_DISCOUNT",joOther.getString(".DISCOUNT"));
-//                        secondArgsMap.put("MONEY_COUNT",joOther.getString(".MONEY_COUNT"));
-//                        j_shopOrderAbout.remove(k);
-//                        break;
-//                    }
-//                }
                 firstArgsMap.put("SHOP_VALUE",secondArgsMap);
                 firstArgsMap.put("SHOP_NAME",joNumber.getString("SHOP.NAME"));
                 list.add(firstArgsMap);
@@ -97,7 +84,6 @@ public class ImportSource {
         Map<String,String> sourceMap = null;
         JSONObject jo = null;
         String j_day = null;
-        String eq = null;
         for(int i=0;i<j_moneyAbout.size();i++){
             sourceMap = new HashMap<>();
             jo = JSONObject.parseObject(j_moneyAbout.get(i).toString());
@@ -232,16 +218,13 @@ public class ImportSource {
     public static Map<String,String> getDailyImportSource(){
         JSONArray j_shopAbout = SourceUtil.getJSONArraySource("/stat/shop_list",null);
         JSONArray j_shopOrderAbout = SourceUtil.getJSONArraySource("/stat/shop_money_about_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");}});
-        JSONArray j_shopCardAbout = SourceUtil.getJSONArraySource("/stat/shop_newcard_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");}});
         Map<String,String> map = new HashMap<>();
         Map<String,Object> firstArgsMap = null;
         Map<String,String> secondArgsMap = null;
         List<Map<String,Object>> list = null;
         JSONObject joNumber= null;
         JSONObject joOther = null;
-        String eqDate = null;
         String eqNum= null;
-        String eqOtherNum = null;
         List<String> dayList = new ArrayList<>();
         String dayListToday = null;
         for(int i=0;i<j_shopOrderAbout.size();i++){
@@ -265,31 +248,7 @@ public class ImportSource {
                 secondArgsMap.put("ADD_CARD","0");
                 secondArgsMap.put("ADD_CARD_MONEY","0");
                 secondArgsMap.put("SHOP_ID",eqNum);
-                for(int l=0;l<j_shopCardAbout.size();l++){
-                    joOther = JSONObject.parseObject(j_shopCardAbout.get(l).toString());
-                    eqDate = joOther.getString(".DAY");
-                    eqOtherNum = joOther.getString("FINANCE_LIST.SHOP_ID");
-                    if(eqDate.equals(dayList.get(i))&&eqNum.equals(eqOtherNum)){
-                        secondArgsMap.put("ADD_CARD",joOther.getString(".ADDCARD"));
-                        secondArgsMap.put("ADD_CARD_MONEY",joOther.getString(".MONEY_CONUT"));
-                        j_shopCardAbout.remove(l);
-                        break;
-                    }
-                }
                 SourceUtil.addMapSourceByDaily(j_shopOrderAbout, secondArgsMap, eqNum,"SHOP_ORDER.SHOP_ID",dayListToday);
-//                for(int k=0;k<j_shopOrderAbout.size();k++){
-//                    joOther = JSONObject.parseObject(j_shopOrderAbout.get(k).toString());
-//                    eqOtherNum = joOther.getString("SHOP_ORDER.SHOP_ID");
-//                    eqDate = joOther.getString(".DAY");
-//                    if(eqDate.equals(dayList.get(i))&&eqOtherNum.equals(eqNum)){
-//                        secondArgsMap.put("ORDER_COUNT",joOther.getString(".NUMCOUNT"));
-//                        secondArgsMap.put("MONEY_OVER",joOther.getString(".MONEY_OVER"));
-//                        secondArgsMap.put("MONEY_DISCOUNT",joOther.getString(".DISCOUNT"));
-//                        secondArgsMap.put("MONEY_COUNT",joOther.getString(".MONEY_COUNT"));
-//                        j_shopOrderAbout.remove(k);
-//                        break;
-//                    }
-//                }
                 firstArgsMap.put("SHOP_VALUE",secondArgsMap);
                 firstArgsMap.put("SHOP_NAME",joNumber.getString("SHOP.NAME"));
                 list.add(firstArgsMap);
@@ -317,9 +276,11 @@ public class ImportSource {
         JSONArray j_saleOrders = SourceUtil.getJSONArraySource("/stat/member_order_discount_orders",null);
         JSONArray j_disSuccessOrders = SourceUtil.getJSONArraySource("/stat/member_order_dissuccess_orders",null);
         JSONArray j_successOrders = SourceUtil.getJSONArraySource("/stat/member_order_success_orders",null);
+        JSONArray j_backOrders = SourceUtil.getJSONArraySource("/stat/member_order_back_orders_by_range",new HashMap<String,String>(){{put("STARTDAY","1970-1-1");put("ENDDAY",new SimpleDateFormat("yyyy-MM-dd").format(new Date())+" 23:59:59");}});
         Map<String,String> map = new HashMap<>();
         Map<String,String> sourceMap = null;
         JSONObject jo = null;
+        JSONObject joBack = null;
         String j_day = null;
         String eq = null;
         for(int i=0;i<j_moneyAbout.size();i++){
@@ -338,6 +299,18 @@ public class ImportSource {
             SourceUtil.addMapSource(j_saleOrders,sourceMap,j_day,"DEDUCTION_ORDERS",".DAY",".SOURCE");
             SourceUtil.addMapSource(j_disSuccessOrders, sourceMap, j_day,"DISSUCCESS_ORDERS",".DAY",".SOURCE");
             SourceUtil.addMapSource(j_successOrders,sourceMap,j_day,"SUCCESS_ORDERS",".DAY",".SOURCE");
+            for(int j=0;j<j_backOrders.size();j++){
+                joBack = JSONObject.parseObject(j_backOrders.get(j).toString());
+                eq = joBack.getString(".DAY");
+                if(eq.equals(j_day)){
+                    sourceMap.put("CANCEL_ORDERS",joBack.getString(".ORDERQUANTITY"));
+                    sourceMap.put("CANCEL_MONEY",joBack.getString(".REALINCOME"));
+                    sourceMap.put("DEDUCTION",(Integer.parseInt(sourceMap.get("DEDUCTION"))-joBack.getIntValue(".DEDUCTION"))+"");
+                    sourceMap.put("ORDER_QUANTITY",(Integer.parseInt(sourceMap.get("ORDER_QUANTITY"))-joBack.getIntValue(".ORDERQUANTITY"))+"");
+                    sourceMap.put("REAL_INCOME",(Integer.parseInt(sourceMap.get("REAL_INCOME"))-joBack.getIntValue(".REALINCOME"))+"");
+                    sourceMap.put("TURNOVER",(Integer.parseInt(sourceMap.get("TURNOVER"))-joBack.getIntValue(".TURNOVER"))+"");
+                }
+            }
             map.put("20"+j_day, net.sf.json.JSONObject.fromObject(sourceMap).toString());
         }
         return map;

@@ -23,16 +23,18 @@ public class YesterdaySource {
             put("STARTDAY", SourceUtil.getYesterdayDate() + " 0:0:0");
             put("ENDDAY", SourceUtil.getYesterdayDate() + " 23:59:59");
         }});
-//        JSONArray j_shopCardAbout = SourceUtil.getJSONArraySource("/stat/shop_newcard_by_range", new HashMap<String, String>() {{
-//            put("STARTDAY", SourceUtil.getYesterdayDate() + " 0:0:0");
-//            put("ENDDAY", SourceUtil.getYesterdayDate() + " 23:59:59");
-//        }});
+        JSONArray j_shopCardAbout = SourceUtil.getJSONArraySource("/stat/member_offline_card_newcards_by_range", new HashMap<String, String>() {{
+            put("STARTDAY", SourceUtil.getYesterdayDate() + " 0:0:0");
+            put("ENDDAY", SourceUtil.getYesterdayDate() + " 23:59:59");
+        }});
         Map<String, String> map = new HashMap<>();
         Map<String, Object> firstArgsMap = null;
         Map<String, String> secondArgsMap = null;
         List<Map<String, Object>> list = null;
         JSONObject joNumber = null;
+        JSONObject joOther = null;
         String eqNum = null;
+        String eqOtherNum = null;
         list = new ArrayList<>();
         for (int j = 0; j < j_shopAbout.size(); j++) {
             firstArgsMap = new HashMap<>();
@@ -46,16 +48,16 @@ public class YesterdaySource {
             joNumber = JSONObject.parseObject(j_shopAbout.get(j).toString());
             eqNum = joNumber.getString("SHOP.ID");
             secondArgsMap.put("SHOP_ID", eqNum);
-//            for(int l=0;l<j_shopCardAbout.size();l++){
-//                joOther = JSONObject.parseObject(j_shopCardAbout.get(l).toString());
-//                eqOtherNum = joOther.getString("FINANCE_LIST.SHOP_ID");
-//                if(eqNum.equals(eqOtherNum)){
-//                    secondArgsMap.put("ADD_CARD",joOther.getString(".ADDCARD"));
-//                    secondArgsMap.put("ADD_CARD_MONEY",joOther.getString(".MONEY_CONUT"));
-//                    j_shopCardAbout.remove(l);
-//                    break;
-//                }
-//            }
+            for(int l=0;l<j_shopCardAbout.size();l++){
+                joOther = JSONObject.parseObject(j_shopCardAbout.get(l).toString());
+                eqOtherNum = joOther.getString("FINANCE_LIST.SHOP_ID");
+                if(eqNum.equals(eqOtherNum)){
+                    secondArgsMap.put("ADD_CARD",joOther.getString(".ADDCARD"));
+                    secondArgsMap.put("ADD_CARD_MONEY",joOther.getString("FINANCE_LIST.MONEY_COUNT"));
+                    j_shopCardAbout.remove(l);
+                    break;
+                }
+            }
             SourceUtil.addMapSourceByDaily(j_shopOrderAbout, secondArgsMap, eqNum,"SHOP_ORDER_OFFLINE.SOURCE_SHOP",null);
             firstArgsMap.put("SHOP_VALUE", secondArgsMap);
             firstArgsMap.put("SHOP_NAME", joNumber.getString("SHOP.NAME"));
@@ -72,14 +74,20 @@ public class YesterdaySource {
         JSONArray j_moneyAbout = SourceUtil.getJSONArraySource("/stat/member_offline_order_money_about_by_range",new HashMap<String,String>(){{put("STARTDAY",SourceUtil.getYesterdayDate()+" 0:0:0");put("ENDDAY",SourceUtil.getYesterdayDate()+" 23:59:59");}});
         Map<String, String> map = new HashMap<>();
         Map<String, String> resMap = new HashMap<>();
-        JSONObject jo = new JSONObject();
+        JSONObject jo = null;
         if(j_moneyAbout.size()!=0){
             jo = JSONObject.parseObject(j_moneyAbout.get(0).toString());
+            resMap.put("DEDUCTION",jo.getString(".DISCOUNT"));
+            resMap.put("ORDER_QUANTITY",jo.getString(".NUMCOUNT"));
+            resMap.put("REAL_INCOME",jo.getString(".MONEY_OVER"));
+            resMap.put("TURNOVER",jo.getString(".MONEY_COUNT"));
+        }else{
+            resMap.put("DEDUCTION", "0");
+            resMap.put("ORDER_QUANTITY", "0");
+            resMap.put("REAL_INCOME", "0");
+            resMap.put("TURNOVER",  "0");
         }
-        resMap.put("DEDUCTION", ((String) jo.get(".DISCOUNT")) == null ? "0" : (String) jo.get(".DISCOUNT"));
-        resMap.put("ORDER_QUANTITY", ((String) jo.get(".NUMCOUNT")) == null ? "0" : (String) jo.get(".NUMCOUNT"));
-        resMap.put("REAL_INCOME", ((String) jo.get(".MONEY_OVER")) == null ? "0" : (String) jo.get(".MONEY_OVER"));
-        resMap.put("TURNOVER", ((String) jo.get(".MONEY_COUNT")) == null ? "0" : (String) jo.get(".MONEY_COUNT"));
+
         resMap.put("CANCEL_ORDERS", "0");
         resMap.put("CANCEL_MONEY", "0");
         resMap.put("DEDUCTION_ORDERS",SourceUtil.getAboutSource("/stat/member_offline_discount_orders_by_range",new HashMap<String,String>(){{put("STARTDAY",SourceUtil.getYesterdayDate()+" 0:0:0");put("ENDDAY",SourceUtil.getYesterdayDate()+" 23:59:59");}},".SOURCE"));
@@ -251,14 +259,37 @@ public class YesterdaySource {
         SourceUtil.delYesterDaySource("ANALYSIS_ORDER");
         Map<String, String> map = new HashMap<>();
         Map<String, String> resMap = new HashMap<>();
+        JSONObject jo = null;
         JSONArray ja = SourceUtil.getJSONArraySource("/stat/member_order_money_about_by_yesterday", null);
-        JSONObject jo = JSONObject.parseObject(ja.get(0).toString());
-        resMap.put("DEDUCTION", ((String) jo.get(".DEDUCTION")) == null ? "0" : (String) jo.get(".DEDUCTION"));
-        resMap.put("ORDER_QUANTITY", ((String) jo.get(".ORDERQUANTITY")) == null ? "0" : (String) jo.get(".ORDERQUANTITY"));
-        resMap.put("REAL_INCOME", ((String) jo.get(".REALINCOME")) == null ? "0" : (String) jo.get(".REALINCOME"));
-        resMap.put("TURNOVER", ((String) jo.get(".TURNOVER")) == null ? "0" : (String) jo.get(".TURNOVER"));
-        resMap.put("CANCEL_ORDERS", "0");
-        resMap.put("CANCEL_MONEY", "0");
+        JSONArray j_backOrders = SourceUtil.getJSONArraySource("/stat/member_order_back_orders_by_range",new HashMap<String, String>() {{
+            put("STARTDAY", SourceUtil.getYesterdayDate() + " 0:0:0");
+            put("ENDDAY", SourceUtil.getYesterdayDate() + " 23:59:59");
+        }});
+        if(ja!=null&&ja.size()!=0){
+            jo = JSONObject.parseObject(ja.get(0).toString());
+            resMap.put("DEDUCTION", jo.getString(".DEDUCTION"));
+            resMap.put("ORDER_QUANTITY", jo.getString(".ORDERQUANTITY"));
+            resMap.put("REAL_INCOME",jo.getString(".REALINCOME"));
+            resMap.put("TURNOVER",jo.getString(".TURNOVER"));
+        }else{
+            resMap.put("DEDUCTION", "0");
+            resMap.put("ORDER_QUANTITY","0");
+            resMap.put("REAL_INCOME","0");
+            resMap.put("TURNOVER","0");
+        }
+
+        if(j_backOrders!=null&&j_backOrders.size()!=0){
+            jo = JSONObject.parseObject(j_backOrders.get(0).toString());
+            resMap.put("CANCEL_ORDERS",jo.getString(".ORDERQUANTITY"));
+            resMap.put("CANCEL_MONEY",jo.getString(".REALINCOME"));
+            resMap.put("DEDUCTION",(Integer.parseInt(resMap.get("DEDUCTION"))-jo.getIntValue(".DEDUCTION"))+"");
+            resMap.put("ORDER_QUANTITY",(Integer.parseInt(resMap.get("ORDER_QUANTITY"))-jo.getIntValue(".ORDERQUANTITY"))+"");
+            resMap.put("REAL_INCOME",(Integer.parseInt(resMap.get("REAL_INCOME"))-jo.getIntValue(".REALINCOME"))+"");
+            resMap.put("TURNOVER",(Integer.parseInt(resMap.get("TURNOVER"))-jo.getIntValue(".TURNOVER"))+"");
+        }else{
+            resMap.put("CANCEL_ORDERS", "0");
+            resMap.put("CANCEL_MONEY", "0");
+        }
         resMap.put("DEDUCTION_ORDERS", SourceUtil.getAboutSource("/stat/member_order_discount_orders_by_yesterday", null, ".SOURCE"));
         resMap.put("DISSUCCESS_ORDERS", SourceUtil.getAboutSource("/stat/member_order_dissuccess_success_orders_by_yesterday", new HashMap<String, String>() {{
             put("FLAG", "DATETIME_CANCEL");

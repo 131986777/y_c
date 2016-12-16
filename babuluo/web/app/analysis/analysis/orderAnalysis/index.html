@@ -4,9 +4,9 @@
         <div class="col-md-12">
 
             <div class="col-md-2">
-                <input type="text" ng-model="groupRange['STARTDAY']" ng-init="groupRange['STARTDAY']=''" class="form-control inputWidth"  placeholder="2016-12-1">
+                <input id="startDay" type="text" ng-model="groupRange['STARTDAY']" ng-init="groupRange['STARTDAY']=START" class="form-control inputWidth"  placeholder="">
                 <span>-</span>
-                <input type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=''"  class="form-control inputWidth"  placeholder="2016-12-31">
+                <input id="endDay" type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=END"  class="form-control inputWidth"  placeholder="">
             </div>
 
             <button class="btn" type="button" ng-click="getGroupByRange()">查询</button>
