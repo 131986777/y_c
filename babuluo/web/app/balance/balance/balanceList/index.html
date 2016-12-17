@@ -108,7 +108,7 @@
                         </div>
                         <div>
                             <button type="button" class="btn btn-default pull-right"
-                                     ng-click="outPutQuery()">导出
+                                    ng-click="outPutQuery()">导出
                             </button>
                         </div>
                     </div>
@@ -144,10 +144,8 @@
                     <td ng-bind="balanceInfo['FINANCE_LIST.SHOP']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.OPER_USER_ID']"></td>
                     <td>
-            <span style="color:red"
-                  ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='decrease'">支出</span>
-                        <span style="color:green"
-                              ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='increase'">收入</span>
+                        <span style="color:red" ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='decrease'">支出</span>
+                        <span style="color:green" ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='increase'">收入</span>
                     </td>
                     <td class="text-center">
                         <span style="color:black" ng-show="balanceInfo['FINANCE_LIST.CHANGE_VALUE']>0">{{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}</span>
