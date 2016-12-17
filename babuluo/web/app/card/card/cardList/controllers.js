@@ -6,6 +6,10 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
     $scope.isFaceValue = false;
     $scope.memberDetail = {};
 
+    $scope.filter={
+        'MEMBER_CARD.STATE': '-1,1'
+    };
+
     $scope.bindData = function (response) {
         $scope.cardList = response.data;
         $scope.querySize = response.extraData.page.querySize;
@@ -128,6 +132,26 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
             $scope.filter['MEMBER_CARD.USER_ID'] = "null";
         }
     };
+
+    $scope.frezzeCard = function (item) {
+        modalFactory.showAlert("确认冻结卡号："+  item['MEMBER_CARD.CARD_NO']+"吗？", function () {
+            cardFactory.frezzeCard(item, function () {
+                item['MEMBER_CARD.STATE'] =  -1;
+            }, function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+        });
+    }
+
+    $scope.FrozenCard = function (item) {
+        modalFactory.showAlert("确认解冻卡号："+  item['MEMBER_CARD.CARD_NO']+"吗？", function () {
+            cardFactory.FrozenCard(item, function () {
+                item['MEMBER_CARD.STATE'] =  1;
+            }, function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+        });
+    }
 
     $scope.outPutQuery = function () {
         if ($scope.querySize - 5000 <= 0) {

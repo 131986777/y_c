@@ -167,10 +167,17 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
                     $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
                     $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
                     $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = Number(content) * 100;
+                    $scope.filter['FINANCE_LIST.EVENT_SOURCE_ID'] = 'null';
                 } else if ($scope.searchType == 'CARD_NO') {
                     $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
                     $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
                     $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = content;
+                    $scope.filter['FINANCE_LIST.EVENT_SOURCE_ID'] = 'null';
+                } else if ($scope.searchType == 'ORDER') {
+                    $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
+                    $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
+                    $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
+                    $scope.filter['FINANCE_LIST.EVENT_SOURCE_ID'] = content;
                 }
             $scope.lastSearch = content;
             $scope.lastSearchType = $scope.searchType;

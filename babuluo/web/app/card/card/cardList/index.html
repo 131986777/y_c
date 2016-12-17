@@ -76,19 +76,20 @@
             <div ng-repeat="cl in cardList|filter:{}" class="card pull-left"
                  ng-style="cl['MEMBER_CARD.CARD_STYLE']" style="width:411px;height:228px;">
                 <div class="row cardTitle">
-                    <div class="col-md-8">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</div>
-                    <div class="col-md-4 text-right">{{cl['MEMBER_CARD.TYPE_NAME']}}</div>
+                    <div class="col-md-6">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</div>
+                    <div class="col-md-6 text-right">{{cl['MEMBER_CARD.TYPE_NAME']}}</div>
                 </div>
-                <p class="balance"><span>余额</span>{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}</p>
+                <p class="balance"  ng-if="cl['MEMBER_CARD.STATE']==1" ><span>余额</span>{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}<span ng-click="frezzeCard(cl)">冻结</span></p>
+                <p class="balance"  ng-if="cl['MEMBER_CARD.STATE']==-1" ><span>(冻结)余额</span>{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}<span ng-click="FrozenCard(cl)" >解冻</span></p>
                 <p ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0" class="froze">
                     （冻结{{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}}）
                 </p>
                 <div class="row cardFooter">
                     <div class="col-md-4 nowrap">{{cl['MEMBER_CARD.MEMBER_LOGIN_ID']}}</div>
-                    <div class="col-md-4 nowrap text-right count">
+                    <div class="col-md-3 nowrap text-right count">
                         <span ng-show="cl['MEMBER_CARD.IS_FACE_VALUE']==1">面值{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</span>
                     </div>
-                    <div class="col-md-4 text-right time nowrap">
+                    <div class="col-md-5 text-right time nowrap">
                         {{cl['MEMBER_CARD.ADD_DATETIME'] |FormatStrDate}}
                         {{cl['MEMBER_CARD.SOURCE_NAME']}}
                     </div>
