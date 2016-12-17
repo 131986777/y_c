@@ -292,10 +292,10 @@ public class YesterdaySource {
         }
         resMap.put("DEDUCTION_ORDERS", SourceUtil.getAboutSource("/stat/member_order_discount_orders_by_yesterday", null, ".SOURCE"));
         resMap.put("DISSUCCESS_ORDERS", SourceUtil.getAboutSource("/stat/member_order_dissuccess_success_orders_by_yesterday", new HashMap<String, String>() {{
-            put("FLAG", "DATETIME_CANCEL");
+            put("FLAG", "-1");
         }}, ".SOURCE"));
         resMap.put("SUCCESS_ORDERS", SourceUtil.getAboutSource("/stat/member_order_dissuccess_success_orders_by_yesterday", new HashMap<String, String>() {{
-            put("FLAG", "DATETIME_DELIVERY");
+            put("FLAG", "1");
         }}, ".SOURCE"));
         map.put(SourceUtil.getYesterdayDate(), net.sf.json.JSONObject.fromObject(resMap).toString());
         SourceUtil.importSource(map, "ANALYSIS_ORDER");
@@ -308,13 +308,13 @@ public class YesterdaySource {
         Map<String, String> map = new HashMap<>();
         Map<String, String> resMap = new HashMap<>();
         resMap.put("CONSUME", SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday", new HashMap<String, String>() {{
-            put("EVENT", "消费");
+            put("EVENT", "消费','线上消费','线下消费','订单支付");
         }}, ".SOURCE"));
         resMap.put("RECHARGEONLINE", SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday", new HashMap<String, String>() {{
-            put("EVENT", "会员卡充值");
+            put("EVENT","会员充值','会员卡充值','会员卡充值满送','充值送','线下充值");
         }}, ".SOURCE"));
         resMap.put("RECHARGE", SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday", new HashMap<String, String>() {{
-            put("EVENT", "会员充值");
+            put("EVENT", "会员充值','会员卡充值','会员卡充值满送','充值送','线下充值");
         }}, ".SOURCE"));
         resMap.put("CONSUMERED", SourceUtil.getAboutSource("/stat/member_card_money_by_yesterday", new HashMap<String, String>() {{
             put("EVENT", "消费冲红");

@@ -4,43 +4,28 @@
 angular.module('AndSell.Main').controller('analysis_analysis_compareAnalysis_Controller', function ($scope, $stateParams,$timeout, analysisFactory, modalFactory) {
     modalFactory.setTitle("作站室");
     $scope.initLoad=function () {
-        getSource('2016-12-01','2016-12-01');
-        $scope.val=true;
-        var arr=[
-            {"name":"日榜单",
-                "val":true
-            },
-            {"name":"月榜单",
-                "val":false
-            },
-            {"name":"周榜单",
-                "val":false
-            }
-        ];
-        $scope.arr=arr;
-        var lastkey=-1;
-        $scope.show=function (key) {
-            if($scope.arr[key].val==false){
-                if(lastkey==-1){
-                    $scope.arr[0].val=false;
-                    $scope.arr[key].val=!$scope.arr[key].val;
-                    lastkey=key;
+        getCompareSource(getYesterday(),getYesterday());
+        dataStatus($scope);
+        $scope.YESTERDAY = getYesterday();
 
-                }else {
-                    $scope.arr[lastkey].val=false;
-                    $scope.arr[key].val=!$scope.arr[key].val;
-                    lastkey=key;
-                }
-            }
-        }
+    };
+    $scope.getGroupByRange = function () {
+        var day = $scope.groupRange['DAY'];
+        getCompareSource(day,day);
     }
-    function getSource(startDay,endDay) {
+    function getCompareSource(startDay,endDay) {
         analysisFactory.getCompareChangeByRange(startDay,endDay).get({},function(response){
             console.log(response);
-            var flag = response.data;
-            for(var i = 0;i<flag.length;i++){
-
+            if((response.data).length==0){
+                modalFactory.showShortAlert("所选日期无数据！")
+                return;
             }
+            var flag = response.data;
+            var jsonObj = null;
+            for(var i = 0;i<flag.length;i++){
+                jsonObj = JSON.parse(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']);
+            }
+            $scope.jsonObj = jsonObj;
         });
     }
 });
@@ -49,4 +34,23 @@ function getYesterday(){
     var yesterday = new Date();
     yesterday.setDate(yesterday.getDate()-1);
     return yesterday.getFullYear()+"-"+(yesterday.getMonth()+1)+"-"+yesterday.getDate()
+}
+function dataStatus($scope) {
+    $('#startDay').datetimepicker({
+        minView: "month",
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        startView: 2,
+        format: 'yyyy-mm-dd',
+        todayBtn: 'linked'
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
 }

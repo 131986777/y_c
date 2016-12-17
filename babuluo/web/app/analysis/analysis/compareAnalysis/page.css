@@ -1,35 +1,28 @@
-.con{
-    display: inline-block;
+.compareNav{
+    margin-bottom: 20px;
+
 }
-.btn1{
-    float: left;
-    width: 104px;
-    padding: 6px;
+.compareNav li{
+    width: 96px;
     text-align: center;
-    border-radius: 5px;
-    border-bottom-left-radius: 0px;
-    background-color:#cccccc;
-    border: 2px solid #9a9a9a;
-    border-left:0px;
+    border-left: 1px solid #e0e0e0;
+
 }
-.btn1:first-child{
-    border-left:2px solid #9a9a9a;
+.compareNav li a{
+    width: 9;
+    padding: 0;
+    display: inline-block;
+    font-size: 16px;
+    text-decoration: none;
+    color: rgb(51,51,51);
+}
+.compareNav li.first{
+    border-left: 0;
+}
+.alignRight{
+    float: right;
+}
+.clear{
+    clear: both;
 }
 
-.tab-focus{
-    background-color: white;
-    border-bottom-color: #fff !important;
-}
-.pos{
-    position: relative;
-    top: 30px;
-    left: -15px;
-}
-.table{
-    position: relative;
-    top: 41px;
-    left: -15px;
-}
-.table>thead>tr>th{
-    background-color: #cccccc;
-}

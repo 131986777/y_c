@@ -19,7 +19,7 @@
         </div>
         <div class="col-md-3">
             <div class="layout bgColor-blue2" >
-                <h2><span ng-bind="MONEY_COUNT | currency:'￥'"></span></h2>
+                <h2><span ng-bind="MONEY_OVER/ORDER_COUNT | currency:'￥'"></span></h2>
                 <p>客单价<i title="所选时间所有店铺的客单价">!</i></p>
             </div>
         </div><div class="col-md-2">
@@ -67,12 +67,12 @@
                 <tbody>
                 <tr align="center" ng-repeat="VALUE in SHOPORDERCHANGE">
                     <td><span ng-bind="VALUE['SHOP_NAME']"></span></td>
-                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_OVER']/100 | currency:'￥'"></span></td>
+                    <td><span ng-if="VALUE['SHOP_VALUE']['MONEY_OVER']!='0'"><span ng-bind="VALUE['SHOP_VALUE']['MONEY_OVER']/100 | currency:'￥'"></span></span></td>
                     <!--<td><span ng-bind="VALUE['SHOP_VALUE']['ADD_CARD']"></span></td>-->
                     <!--<td><span ng-bind="VALUE['SHOP_VALUE']['ADD_CARD_MONEY']/100 | currency:'￥'"></span></td>-->
-                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_DISCOUNT']/100 | currency:'￥'"></span></td>
-                    <td><span ng-bind="VALUE['SHOP_VALUE']['ORDER_COUNT']"></span></td>
-                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_COUNT']/100 | currency:'￥'"></span></td>
+                    <td><span ng-if="VALUE['SHOP_VALUE']['MONEY_DISCOUNT']!='0'"><span ng-bind="VALUE['SHOP_VALUE']['MONEY_DISCOUNT']/100 | currency:'￥'"></span></span></td>
+                    <td><span ng-if="VALUE['SHOP_VALUE']['ORDER_COUNT']!=0"> <span ng-bind="VALUE['SHOP_VALUE']['ORDER_COUNT']"></span></span></td>
+                    <td><span ng-bind="VALUE['SHOP_VALUE']['MONEY_OVER']/VALUE['SHOP_VALUE']['ORDER_COUNT']/100 | currency:'￥'"></span></td>
                 </tr>
                 </tbody>
             </table>

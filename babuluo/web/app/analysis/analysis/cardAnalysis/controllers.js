@@ -36,6 +36,8 @@ angular.module('AndSell.Main').controller('analysis_analysis_cardAnalysis_Contro
         var yesterdayWeekEndDay = new Date(theYear, theMonth, theDay + (6 - theDate.getDay() - 6));
         getCardSource(yesterdayWeekFirstDay.getFullYear()+"-"+(yesterdayWeekFirstDay.getMonth()+1)+"-"+yesterdayWeekFirstDay.getDate(),yesterdayWeekEndDay.getFullYear()+"-"+(yesterdayWeekEndDay.getMonth()+1)+"-"+yesterdayWeekEndDay.getDate())
         theMonth = theDate.getMonth()+1;
+        $scope.groupRange['STARTDAY'] = yesterdayWeekFirstDay.getFullYear()+"-"+(yesterdayWeekFirstDay.getMonth()+1)+"-"+yesterdayWeekFirstDay.getDate();
+        $scope.groupRange['ENDDAY'] = yesterdayWeekEndDay.getFullYear()+"-"+(yesterdayWeekEndDay.getMonth()+1)+"-"+yesterdayWeekEndDay.getDate();
         showChartOnCard();
     }
     //上月的数据
@@ -49,6 +51,8 @@ angular.module('AndSell.Main').controller('analysis_analysis_cardAnalysis_Contro
         var firstDay = theYear + "-" + theMonth + "-" + "1";//上个月的第一天
         var myDate = new Date(theYear, theMonth, 0);
         var lastDay = theYear + "-" + theMonth + "-" + myDate.getDate();//上个月的最后一天
+        $scope.groupRange['STARTDAY'] = firstDay;
+        $scope.groupRange['ENDDAY'] = lastDay;
         getCardSource(firstDay,lastDay);
         theMonth = theDate.getMonth()+1;
         showChartOnCard();
@@ -57,24 +61,32 @@ angular.module('AndSell.Main').controller('analysis_analysis_cardAnalysis_Contro
     $scope.getGroupByNowDay = function () {
         clearCardTable();
         getCardSource(theYear+"-"+theMonth+"-"+theDay,theYear+"-"+theMonth+"-"+theDay);
+        $scope.groupRange['STARTDAY'] = theYear+"-"+theMonth+"-"+theDay;
+        $scope.groupRange['ENDDAY'] = theYear+"-"+theMonth+"-"+theDay
         showChartOnCard();
     }
     //昨天的数据
     $scope.getGroupByYesterDay = function () {
         clearCardTable();
         getCardSource(getYesterday(),getYesterday());
+        $scope.groupRange['STARTDAY'] = getYesterday()
+        $scope.groupRange['ENDDAY'] = getYesterday()
         showChartOnCard();
     }
     //本月的数据
     $scope.getGroupByThisMonth = function () {
         clearCardTable();
         getCardSource(getMonthFirstDay(),theYear+"-"+theMonth+"-"+theDay);
+        $scope.groupRange['STARTDAY'] = getMonthFirstDay()
+        $scope.groupRange['ENDDAY'] = theYear+"-"+theMonth+"-"+theDay;
         showChartOnCard();
     }
     //本周的数据
     $scope.getGroupByThisWeek = function () {
         clearCardTable();
         getCardSource(getWeekFirstDay(),theYear+"-"+theMonth+"-"+theDay);
+        $scope.groupRange['STARTDAY'] = getWeekFirstDay()
+        $scope.groupRange['ENDDAY'] = theYear+"-"+theMonth+"-"+theDay;
        showChartOnCard();
     }
     //通过日期查询
