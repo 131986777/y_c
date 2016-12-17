@@ -136,11 +136,11 @@
                 <tbody ng-cloak>
                 <tr ng-repeat='balanceInfo in balanceList'>
                     <td ng-bind="balanceInfo['FINANCE_LIST.ADD_DATETIME'] | FormatAllDate"></td>
-                    <td ng-bind="balanceInfo['FINANCE_LIST.LOGIN_ID']"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.MEMBER_MOBILE']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_NO']"></td>
-                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_BALANCE']"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_BALANCE'] | currency :'￥'"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.SHOP']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.OPER_USER_ID']"></td>
                     <td>

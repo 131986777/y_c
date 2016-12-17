@@ -160,6 +160,11 @@ public class outputFinanceQuery {
                 changeType = "支出";
             }
 
+            String cardBalance = StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_BALANCE"), "");
+            if (!"".equals(cardBalance)) {
+                cardBalance = "￥"+ cardBalance;
+            }
+
             HSSFRow row = financeSheet.createRow(rowIndex++);
             row.setHeightInPoints(25);
             Cell cell0 = row.createCell(0);
@@ -169,22 +174,22 @@ public class outputFinanceQuery {
             cell1.setCellValue(jsonObject.getString("FINANCE_LIST.ADD_DATETIME").replace(".0", ""));
             cell1.setCellStyle(cellStyle);
             Cell cell2 = row.createCell(2);
-            cell2.setCellValue(jsonObject.getString("FINANCE_LIST.LOGIN_ID"));
+            cell2.setCellValue(jsonObject.getString("FINANCE_LIST.MEMBER_MOBILE"));
             cell2.setCellStyle(cellStyle);
             Cell cell3 = row.createCell(3);
             cell3.setCellValue(jsonObject.getString("FINANCE_LIST.EVENT"));
             cell3.setCellStyle(cellStyle);
             Cell cell4 = row.createCell(4);
-            cell4.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_NO"),""));
+            cell4.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_NO"), ""));
             cell4.setCellStyle(cellStyle);
             Cell cell5 = row.createCell(5);
-            cell5.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_BALANCE"),""));
+            cell5.setCellValue(cardBalance);
             cell5.setCellStyle(cellStyle);
             Cell cell6 = row.createCell(6);
-            cell6.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.SHOP"),""));
+            cell6.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.SHOP"), ""));
             cell6.setCellStyle(cellStyle);
             Cell cell7 = row.createCell(7);
-            cell7.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.OPER_USER_ID"),""));
+            cell7.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.OPER_USER_ID"), ""));
             cell7.setCellStyle(cellStyle);
             Cell cell8 = row.createCell(8);
             cell8.setCellValue(changeType);

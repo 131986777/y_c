@@ -192,7 +192,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
                         form['FINANCE_LIST.EVENT'] = ele['FINANCE_LIST.EVENT'];
                         form['FINANCE_LIST.EVENT_CARD_BALANCE'] = ele['FINANCE_LIST.EVENT_CARD_BALANCE'];
                         form['FINANCE_LIST.EVENT_CARD_NO'] = ele['FINANCE_LIST.EVENT_CARD_NO'];
-                        form['FINANCE_LIST.LOGIN_ID'] = ele['FINANCE_LIST.LOGIN_ID'];
+                        form['FINANCE_LIST.MEMBER_MOBILE'] = ele['FINANCE_LIST.MEMBER_MOBILE'];
                         form['FINANCE_LIST.SHOP'] = ele['FINANCE_LIST.SHOP'];
                         form['FINANCE_LIST.OPER_USER_ID'] = ele['FINANCE_LIST.OPER_USER_ID'];
                         $scope.outputBalance.push(form);
