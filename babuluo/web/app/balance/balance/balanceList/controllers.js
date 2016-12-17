@@ -137,6 +137,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
             modalFactory.showShortAlert("资金调整成功");
             $("#balance").modal('hide');
             $scope.$broadcast('pageBar.reload');
+            $scope.MEMBER_CARD_ID = "null";
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
         });
