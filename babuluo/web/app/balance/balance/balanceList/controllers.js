@@ -24,7 +24,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
 
 
     //根据用户ID查询用户个人信息
-    $scope.queryById = function (loginId) {
+     $scope.queryById = function (loginId) {
         if (loginId == '') {
             $scope.$broadcast('pageBar.reload');
             return;
@@ -40,8 +40,8 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
                 var map = {};
                 var money = 0;
                 $scope.cardList.forEach(function (ele) {
-                    map[ele['FINANCE_LIST.CARD_ID']] = ele;
-                    money = money + Number(ele['FINANCE_LIST.BALANCE']);
+                    map[ele['MEMBER_CARD.CARD_ID']] = ele;
+                    money = money + Number(ele['MEMBER_CARD.BALANCE']);
                 });
                 $scope.cardMap = map;
                 $scope.cardTotalMoney = moneyFormat(money);
@@ -60,10 +60,10 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
     $scope.getCardBalance = function (id) {
         var card = $scope.cardMap[id];
         if (card != undefined) {
-            $scope.memberDetail['MEMBER.BALANCE'] = card['FINANCE_LIST.BALANCE'] / 100;
-            $scope.memberDetail['MEMBER.CARD_ID'] = card['FINANCE_LIST.CARD_ID'];
-            $scope.memberDetail['MEMBER.CARD_NO'] = card['FINANCE_LIST.CARD_NO'];
-            $scope.memberDetail['MEMBER.CARD_TYPE_ID'] = card['FINANCE_LIST.TYPE_ID'];
+            $scope.memberDetail['MEMBER.BALANCE'] = card['MEMBER_CARD.BALANCE'] / 100;
+            $scope.memberDetail['MEMBER.CARD_ID'] = card['MEMBER_CARD.CARD_ID'];
+            $scope.memberDetail['MEMBER.CARD_NO'] = card['MEMBER_CARD.CARD_NO'];
+            $scope.memberDetail['MEMBER.CARD_TYPE_ID'] = card['MEMBER_CARD.TYPE_ID'];
             $scope.memberDetail.select = true;
         } else {
             $scope.memberDetail['MEMBER.BALANCE'] = undefined;
