@@ -39,7 +39,7 @@ public class outputQuery extends HttpServlet {
                     outputFinanceQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
                     break;
                 case "point":
-                    //outPutPointQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+                    outputPointQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
                     break;
                 case "card":
                     outputCardQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);

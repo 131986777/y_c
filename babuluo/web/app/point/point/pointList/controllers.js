@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('point_point_pointList_Controller', function ($scope, shopFactory, $stateParams, cardFactory, memberFactory, pointFactory, modalFactory) {
+angular.module('AndSell.Main').controller('point_point_pointList_Controller', function (http,$scope, shopFactory, $stateParams, cardFactory, memberFactory, pointFactory, modalFactory) {
 
     modalFactory.setTitle('积分管理');
     modalFactory.setBottom(false);
@@ -6,7 +6,7 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
     $scope.bindData = function (response) {
         console.log(response);
         $scope.pointList = response.data;
-
+        $scope.querySize = response.extraData.page.querySize;
     };
 
     $scope.initData = function () {
@@ -128,7 +128,47 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
         });
-    }
+    };
+
+    $scope.outPutQuery = function () {
+        if ($scope.querySize - 4000 <= 0) {
+            pointFactory.getAllPointList($scope.filter, function (response) {
+                if (response.code == 0 && response.msg == "ok") {
+                    $scope.outputPoint = [];
+                    response.data.forEach(function (ele) {
+                        var form = {};
+                        form['MEMBER_POINT_LIST.USER_ID'] = ele['MEMBER_POINT_LIST.USER_ID'];
+                        form['MEMBER_POINT_LIST.ADD_DATETIME'] = ele['MEMBER_POINT_LIST.ADD_DATETIME'];
+                        form['MEMBER_POINT_LIST.POINT'] = ele['MEMBER_POINT_LIST.POINT'];
+                        form['MEMBER_POINT_LIST.CHANGE_TYPE'] = ele['MEMBER_POINT_LIST.CHANGE_TYPE'];
+                        form['MEMBER_POINT_LIST.CHANGE_POINT'] = ele['MEMBER_POINT_LIST.CHANGE_POINT'];
+                        form['MEMBER_POINT_LIST.EVENT'] = ele['MEMBER_POINT_LIST.EVENT'];
+                        form['MEMBER_POINT_LIST.EVENT_CARD_NO'] = ele['MEMBER_POINT_LIST.EVENT_CARD_NO'];
+                        form['MEMBER_POINT_LIST.MEMBER_MOBILE'] = ele['MEMBER_POINT_LIST.MEMBER_MOBILE'];
+                        form['MEMBER_POINT_LIST.SHOP'] = ele['MEMBER_POINT_LIST.SHOP'];
+                        form['MEMBER_POINT_LIST.OPER_USER_ID'] = ele['MEMBER_POINT_LIST.OPER_USER_ID'];
+                        $scope.outputPoint.push(form);
+                    });
+                    var url = "../../outputQuery";
+                    $scope.outputList = {};
+                    $scope.outputList['type'] = "point";
+                    $scope.outputList['item'] = JSON.stringify($scope.outputPoint);
+                    http.post_ori(url, $scope.outputList, function (response) {
+                        if(response!="failure"){
+                            location.href = "/AndSell" + response;
+                        }else {
+                            modalFactory.showShortAlert("导出失败");
+                        }
+                    });
+                } else {
+                    modalFactory.showShortAlert(response.msg);
+                }
+            });
+        }else {
+            modalFactory.showAlert("数据量过大，请缩小数据范围");
+        }
+
+    };
 
     $scope.empty = function () {
         $scope.modifyvalue = null;
