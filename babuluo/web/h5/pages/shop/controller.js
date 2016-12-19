@@ -13,7 +13,13 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
     $scope.getData=function () {
         weUI.toast.showLoading('正在加载');
         shopFactory.getShopList($scope.filter, function (response) {
-            $scope.shopList = response.data;
+            var list = new Array;
+            response.data.forEach(function (ele) {
+               if(ele['SHOP.SHOP_ID']!='100002'&&ele['SHOP.SHOP_ID']!='111111'){
+                   list.push(ele);
+               }
+            });
+            $scope.shopList = list;
             $scope.shopListLength = response.data.length;
             $scope.districtList = response.extraData.districtList;
             var shopMap = new Map();
