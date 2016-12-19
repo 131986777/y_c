@@ -49,6 +49,7 @@ public class Kucun {
 //            //list.add("100036");
 //            list.add("100003");
 
+
 //            for (int i = 0; i < list.size(); i++) {
                 String mendianID= id;
                 String returnStr = run(mendianID);
