@@ -11,7 +11,7 @@ angular.module('AndSell.Main').controller('user_role_roleAdd_Controller', functi
 
     $scope.loadAPPs = function () {
         //加载权限App类型
-        roleFactory.getAppClass({}, function (response) {
+        roleFactory.getAppClass({"APP_CLASS.SYS_ID": "BBL"}, function (response) {
             $scope.roleClassList = response.data;
             $scope.roleClassList.forEach(function (ele) {
                 ele.childList = $scope.filterParentAuth(ele['APP_CLASS.ID']);
@@ -49,7 +49,18 @@ angular.module('AndSell.Main').controller('user_role_roleAdd_Controller', functi
             return;
         }
 
-        $scope.roleAdd['ROLE_MAP_APP'] = $scope.appChooseList;
+        //拼接应用id
+        $scope.roleAdd['USER_ROLE.ROLE_MAP_APP'] = '';
+        $scope.appChooseList.forEach(function (ele) {
+            $scope.roleAdd['USER_ROLE.ROLE_MAP_APP'] = $scope.roleAdd['USER_ROLE.ROLE_MAP_APP']
+                + ","
+                + ele['APP.APP_ID'];
+
+            if ($scope.roleAdd['USER_ROLE.ROLE_MAP_APP'].substr(0, 1) == ',') {
+                $scope.roleAdd['USER_ROLE.ROLE_MAP_APP'] = $scope.roleAdd['USER_ROLE.ROLE_MAP_APP'].substr(1);
+            }
+        });
+
         console.log($scope.roleAdd);
         roleFactory.addRole($scope.roleAdd, function (response) {
             modalFactory.showShortAlert("添加成功");

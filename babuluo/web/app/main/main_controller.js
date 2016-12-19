@@ -1,6 +1,11 @@
-AndSellMainModule.controller('MainController', function ($scope, $state, modalFactory,userFactory) {
+AndSellMainModule.controller('MainController', function ($scope, modalFactory, userFactory) {
 
     $scope.searchContent = "";
+
+    $scope.APP_ID_LIST = getCookie('APP_ID_LIST');
+
+    console.log($scope.APP_ID_LIST);
+
     //逻辑
     $scope.$on('title', function (event, data) {
         $scope.title = data;
@@ -16,7 +21,7 @@ AndSellMainModule.controller('MainController', function ($scope, $state, modalFa
     });
 
     $scope.queryKeyUp = function (e) {
-        if(window.event?e.keyCode:e.which==13){
+        if (window.event ? e.keyCode : e.which == 13) {
             $scope.search();
         }
     };
@@ -35,9 +40,9 @@ AndSellMainModule.controller('MainController', function ($scope, $state, modalFa
         }
     }
 
-    $scope.logout= function () {
+    $scope.logout = function () {
         userFactory.logOut({}, function (response) {
-            window.location.href='../login/index.html';
+            window.location.href = '../login/index.html';
         });
     }
 

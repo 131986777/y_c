@@ -27,9 +27,13 @@ angular.module('AndSell.Main').controller('user_user_userModify_Controller', fun
                     });
                 }
             }
+            if ($scope.userModify['USER.SHOP_ID']==undefined){
+                $scope.userModify['USER.SHOP_ID']="null";
+            }
         });
 
         $scope.getShopList();
+
     };
 
     $scope.getShopList = function () {
@@ -46,8 +50,7 @@ angular.module('AndSell.Main').controller('user_user_userModify_Controller', fun
             var pwd = {};
             pwd['USER.UID'] = $stateParams.id;
             pwd['USER.LOGIN_PWD'] = "123456";
-            pwd['USER.MOBILE'] = $scope.userModify['USER.MOBILE'];
-            userFactory.modUserByUID(pwd, function (response) {
+            userFactory.resetPwd(pwd, function (response) {
                 modalFactory.showShortAlert("密码重置成功");
             }, function (response) {
                 modalFactory.showShortAlert(response.msg);
