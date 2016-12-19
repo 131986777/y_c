@@ -55,7 +55,7 @@ angular.module('AndSell.Main').controller('member_member_memberInfo_Controller',
             $scope.memberInfo = {};
             $scope.memberInfo['MEMBER.USER_ID'] = $scope.memberId;
             memberFactory.resetPwd($scope.memberInfo, function (response) {
-                if (response.extraData.code == 0) {
+                if (response.extraData.state == "state") {
                     modalFactory.showShortAlert("密码重置成功");
                     $scope.initLoad();
                 } else {

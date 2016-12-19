@@ -8,6 +8,8 @@ AndSellMainModule.service('userFactory', function (http) {
 
     this.modUserByUID=http.post('/user/user/modifyById');
 
+    this.resetPwd=http.post('/user/user/resetPwd');
+
     this.isLogin=http.post('/login/isLogin');
 
     this.logOut=http.post('/login/logout');

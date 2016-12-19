@@ -45,7 +45,7 @@ public class outputQuery extends HttpServlet {
                     outputCardQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
                     break;
                 case "member":
-                    //outPutPointQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+                    outputMemberQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
                     break;
             }
 
