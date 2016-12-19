@@ -30,7 +30,7 @@ angular.module('AndSell.Main').controller('user_role_roleModify_Controller', fun
     $scope.loadAPPs = function () {
 
         //加载权限App类型
-        roleFactory.getAppClass({}, function (response) {
+        roleFactory.getAppClass({"APP_CLASS.SYS_ID": "BBL"}, function (response) {
             $scope.roleClassList = response.data;
             $scope.roleClassList.forEach(function (ele) {
                 ele.childList = $scope.filterParentAuth(ele['APP_CLASS.ID']);
