@@ -1,6 +1,6 @@
-angular.module('app',[]).controller('login_Controller', function ($scope,$http) {
+angular.module('app',[]).controller('login_Controller', function ($scope) {
 
-    $scope.login = function () {  
+    $scope.login = function () {
         ajaxPost('/AndSell/bubu/login/userLogin','LOGIN_ID='+$scope.userName+'&PWD='+$scope.password, function (response) {
             console.log(response);
             if (JSON.parse(response).code == 0) {

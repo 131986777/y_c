@@ -33,6 +33,7 @@ angular.module('AndSell.Main').controller('user_user_userModify_Controller', fun
         });
 
         $scope.getShopList();
+
     };
 
     $scope.getShopList = function () {
