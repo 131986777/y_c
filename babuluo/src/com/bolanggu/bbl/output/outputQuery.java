@@ -28,6 +28,7 @@ public class outputQuery extends HttpServlet {
 
         String type = req.getParameter("type");
         String outputDetail = req.getParameter("item");
+        String parameter = req.getParameter("param");
 
         PrintWriter pw = resp.getWriter();
 
@@ -36,7 +37,7 @@ public class outputQuery extends HttpServlet {
 
             switch (type) {
                 case "finance":
-                    outputFinanceQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+                    outputFinanceQuery.newInstance().GenerateExcelSheet(analyseBook, parameter);
                     break;
                 case "point":
                     outputPointQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);

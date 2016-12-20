@@ -47,8 +47,8 @@ public class outputMemberQuery {
         cardSheet.setColumnWidth(5, 4000);
         cardSheet.setColumnWidth(6, 4000);
         cardSheet.setColumnWidth(7, 4000);
-        cardSheet.setColumnWidth(8, 6000);
-        cardSheet.setColumnWidth(9, 3000);
+        cardSheet.setColumnWidth(8, 4000);
+        cardSheet.setColumnWidth(9, 6000);
         cardSheet.autoSizeColumn(1, true);
 
         //字体预设置
@@ -145,45 +145,37 @@ public class outputMemberQuery {
         for (int i = 0; i < jsonArray.size(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-            String state;
-
-            if (jsonObject.getInteger("MEMBER.STATE") == 1) {
-                state = "正常";
-            } else {
-                state = "冻结";
-            }
-
             HSSFRow row = cardSheet.createRow(rowIndex++);
             row.setHeightInPoints(25);
             Cell cell0 = row.createCell(0);
             cell0.setCellValue(analyseIndex++);
             cell0.setCellStyle(cellStyle);
             Cell cell1 = row.createCell(1);
-            cell1.setCellValue(jsonObject.getString("MEMBER.CARD_NO"));
+            cell1.setCellValue(jsonObject.getString("MEMBER.LOGIN_ID"));
             cell1.setCellStyle(cellStyle);
             Cell cell2 = row.createCell(2);
-            cell2.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.MEMBER_NAME")));
+            cell2.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.TRUE_NAME"),""));
             cell2.setCellStyle(cellStyle);
             Cell cell3 = row.createCell(3);
-            cell3.setCellValue(jsonObject.getString("MEMBER.MEMBER_PHONE"));
+            cell3.setCellValue(jsonObject.getString("MEMBER.MOBILE"));
             cell3.setCellStyle(cellStyle);
             Cell cell4 = row.createCell(4);
-            cell4.setCellValue("￥" + jsonObject.getString("MEMBER.BALANCE"));
+            cell4.setCellValue(jsonObject.getString("MEMBER.CODE_NAME"));
             cell4.setCellStyle(cellStyle);
             Cell cell5 = row.createCell(5);
-            cell5.setCellValue(jsonObject.getString("MEMBER.SOURCE_NAME"));
+            cell5.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.ID_NUMBER"),""));
             cell5.setCellStyle(cellStyle);
             Cell cell6 = row.createCell(6);
-            cell6.setCellValue(jsonObject.getString("MEMBER.TYPE_NAME"));
+            cell6.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.BIRTHDAY"),""));
             cell6.setCellStyle(cellStyle);
             Cell cell7 = row.createCell(7);
-            cell7.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.SHOP"), ""));
+            cell7.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.SEX"), ""));
             cell7.setCellStyle(cellStyle);
             Cell cell8 = row.createCell(8);
-            cell8.setCellValue(jsonObject.getString("MEMBER.ADD_DATETIME").replace(".0",""));
+            cell8.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.REFERENCE"), ""));
             cell8.setCellStyle(cellStyle);
             Cell cell9 = row.createCell(9);
-            cell9.setCellValue(state);
+            cell9.setCellValue(jsonObject.getString("MEMBER.REG_DATETIME").replace(".0",""));
             cell9.setCellStyle(cellStyle);
         }
 
@@ -202,13 +194,13 @@ public class outputMemberQuery {
         rowM.createCell(4).setCellValue("");
         rowM.createCell(5).setCellValue("");
         rowM.createCell(6).setCellValue("");
-        Cell cellTime = rowM.createCell(7);
+        rowM.createCell(7).setCellValue("");
+        Cell cellTime = rowM.createCell(8);
         cellTime.setCellValue("导出时间：");
         cellTime.setCellStyle(cellStyle);
-        Cell cellTimeValue = rowM.createCell(8);
+        Cell cellTimeValue = rowM.createCell(9);
         cellTimeValue.setCellValue(dateFormat.format(DateUtil.getCurrTime()));
         cellTimeValue.setCellStyle(cellStyle);
-        rowM.createCell(9).setCellValue("");
 
         //总计结束
         return cardSheet;

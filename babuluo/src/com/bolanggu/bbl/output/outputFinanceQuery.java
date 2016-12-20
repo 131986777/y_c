@@ -3,18 +3,25 @@ package com.bolanggu.bbl.output;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.pabula.api.API;
+import com.pabula.api.data.ReturnData;
 import com.pabula.common.util.DateUtil;
 import com.pabula.common.util.StrUtil;
+import com.pabula.fw.exception.RuleException;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.util.CellRangeAddress;
 
+
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * Created by 95155 on 2016/12/12.
@@ -34,11 +41,19 @@ public class outputFinanceQuery {
         return bean;
     }
 
-    public HSSFSheet GenerateExcelSheet(HSSFWorkbook analyseBook, String outputDetail) {
+    public HSSFSheet GenerateExcelSheet(HSSFWorkbook analyseBook, String parameter) throws RuleException {
 
+        JSONObject paramJson = JSON.parseObject(parameter);
 
+        Map<String, Object> map = new HashMap<>();
+        for (Map.Entry<String, Object> entry : paramJson.entrySet()) {
+            System.out.println(entry.getKey() + ":" + entry.getValue());
+            map.put(entry.getKey(), entry.getValue());
+        }
+
+        ReturnData outputDetail = new API().call("/member/balance/getAllBalanceList",map);
         //解析主要数据
-        JSONArray jsonArray = JSON.parseArray(outputDetail);
+        JSONArray jsonArray = JSONArray.parseArray(outputDetail.getData().toString());
 
         HSSFSheet financeSheet = analyseBook.createSheet("资金明细表");
         financeSheet.setColumnWidth(0, 2500);
@@ -162,7 +177,7 @@ public class outputFinanceQuery {
 
             String cardBalance = StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_BALANCE"), "");
             if (!"".equals(cardBalance)) {
-                cardBalance = "￥"+ cardBalance;
+                cardBalance = "￥" + cardBalance;
             }
 
             HSSFRow row = financeSheet.createRow(rowIndex++);

@@ -24,7 +24,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
 
 
     //根据用户ID查询用户个人信息
-     $scope.queryById = function (loginId) {
+    $scope.queryById = function (loginId) {
         if (loginId == '') {
             $scope.$broadcast('pageBar.reload');
             return;
@@ -146,12 +146,12 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
     //根据登录ID查询财务信息
     $scope.queryFinanceByLoginId = function (content) {
         if ($scope.lastSearch != content || $scope.lastSearchType != $scope.searchType) {
-                if ($scope.searchType == 'LOGIN_ID') {
-                    if (content == '') {
-                        $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
-                        $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
-                        $scope.filter['FINANCE_LIST.USER_ID'] = content;
-                    }else{
+            if ($scope.searchType == 'LOGIN_ID') {
+                if (content == '') {
+                    $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
+                    $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
+                    $scope.filter['FINANCE_LIST.USER_ID'] = content;
+                } else {
                     memberFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': content}, function (response) {
                         var ret = response.data;
                         if (ret.length > 0) {
@@ -162,23 +162,23 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
                             modalFactory.showShortAlert('查不到相关信息');
                         }
                     });
-                    }
-                } else if ($scope.searchType == 'PRICE') {
-                    $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
-                    $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
-                    $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = Number(content) * 100;
-                    $scope.filter['FINANCE_LIST.EVENT_SOURCE_ID'] = 'null';
-                } else if ($scope.searchType == 'CARD_NO') {
-                    $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
-                    $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
-                    $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = content;
-                    $scope.filter['FINANCE_LIST.EVENT_SOURCE_ID'] = 'null';
-                } else if ($scope.searchType == 'ORDER') {
-                    $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
-                    $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
-                    $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
-                    $scope.filter['FINANCE_LIST.EVENT_SOURCE_ID'] = content;
                 }
+            } else if ($scope.searchType == 'PRICE') {
+                $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
+                $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
+                $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = Number(content) * 100;
+                $scope.filter['FINANCE_LIST.EVENT_SOURCE_ID'] = 'null';
+            } else if ($scope.searchType == 'CARD_NO') {
+                $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
+                $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
+                $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = content;
+                $scope.filter['FINANCE_LIST.EVENT_SOURCE_ID'] = 'null';
+            } else if ($scope.searchType == 'ORDER') {
+                $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
+                $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
+                $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
+                $scope.filter['FINANCE_LIST.EVENT_SOURCE_ID'] = content;
+            }
             $scope.lastSearch = content;
             $scope.lastSearchType = $scope.searchType;
         } else {
@@ -187,43 +187,18 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
     };
 
     $scope.outPutQuery = function () {
-        if ($scope.querySize - 4000 <= 0) {
-            balanceFactory.getAllFinanceList($scope.filter, function (response) {
-                if (response.code == 0 && response.msg == "ok") {
-                    $scope.outputBalance = [];
-                    response.data.forEach(function (ele) {
-                        var form = {};
-                        form['FINANCE_LIST.ADD_DATETIME'] = ele['FINANCE_LIST.ADD_DATETIME'];
-                        form['FINANCE_LIST.BALANCE'] = ele['FINANCE_LIST.BALANCE'];
-                        form['FINANCE_LIST.CHANGE_TYPE'] = ele['FINANCE_LIST.CHANGE_TYPE'];
-                        form['FINANCE_LIST.CHANGE_VALUE'] = ele['FINANCE_LIST.CHANGE_VALUE'];
-                        form['FINANCE_LIST.EVENT'] = ele['FINANCE_LIST.EVENT'];
-                        form['FINANCE_LIST.EVENT_CARD_BALANCE'] = ele['FINANCE_LIST.EVENT_CARD_BALANCE'];
-                        form['FINANCE_LIST.EVENT_CARD_NO'] = ele['FINANCE_LIST.EVENT_CARD_NO'];
-                        form['FINANCE_LIST.MEMBER_MOBILE'] = ele['FINANCE_LIST.MEMBER_MOBILE'];
-                        form['FINANCE_LIST.SHOP'] = ele['FINANCE_LIST.SHOP'];
-                        form['FINANCE_LIST.OPER_USER_ID'] = ele['FINANCE_LIST.OPER_USER_ID'];
-                        $scope.outputBalance.push(form);
-                    });
-                    var url = "../../outputQuery";
-                    $scope.outputList = {};
-                    $scope.outputList['type'] = "finance";
-                    $scope.outputList['item'] = JSON.stringify($scope.outputBalance);
-                    http.post_ori(url, $scope.outputList, function (response) {
-                        if(response!="failure"){
-                            location.href = "/AndSell" + response;
-                        }else {
-                            modalFactory.showShortAlert("导出失败");
-                        }
-                    });
-                } else {
-                    modalFactory.showShortAlert(response.msg);
-                }
-            });
-        }else {
-            modalFactory.showAlert("数据量过大，请缩小数据范围");
-        }
 
+        var url = "../../outputQuery";
+        $scope.outputList = {};
+        $scope.outputList['type'] = "finance";
+        $scope.outputList['param'] = JSON.stringify($scope.filter);
+        http.post_ori(url, $scope.outputList, function (response) {
+            if (response != "failure") {
+                location.href = "/AndSell" + response;
+            } else {
+                modalFactory.showShortAlert("导出失败");
+            }
+        });
     };
 
     $scope.delete = function () {
