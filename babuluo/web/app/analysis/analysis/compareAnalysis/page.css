@@ -30,7 +30,7 @@
 .compareNav>li.active>a:hover{
     color: #DC5424;
 }
-li i{
+.ai{
     display:inline-block;
     width: 1em;
     height: 1em;
