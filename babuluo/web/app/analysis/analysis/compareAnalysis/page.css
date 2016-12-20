@@ -25,4 +25,9 @@
 .clear{
     clear: both;
 }
+.compareNav>li.active>a,
+.compareNav>li.active>a:focus,
+.compareNav>li.active>a:hover{
+    color: #DC5424;
 
+}
