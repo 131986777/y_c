@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('card_card_cardList_Controller', function ($scope, $stateParams, cardFactory, modalFactory) {
+angular.module('AndSell.Main').controller('card_card_cardList_Controller', function (http, $scope, $stateParams, cardFactory, modalFactory) {
 
     modalFactory.setTitle('已开会员卡');
 
@@ -6,8 +6,13 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
     $scope.isFaceValue = false;
     $scope.memberDetail = {};
 
+    $scope.filter={
+        'MEMBER_CARD.STATE': '-1,1'
+    };
+
     $scope.bindData = function (response) {
         $scope.cardList = response.data;
+        $scope.querySize = response.extraData.page.querySize;
         $scope.sourceList = response.extraData.sourceList;
         $scope.typeMap = response.extraData.typeMap;
         $scope.typeListMap = response.extraData.typeListMap;
@@ -126,6 +131,66 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
         } else {
             $scope.filter['MEMBER_CARD.USER_ID'] = "null";
         }
+    };
+
+    $scope.frezzeCard = function (item) {
+        modalFactory.showAlert("确认冻结卡号："+  item['MEMBER_CARD.CARD_NO']+"吗？", function () {
+            cardFactory.frezzeCard(item, function () {
+                item['MEMBER_CARD.STATE'] =  -1;
+            }, function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+        });
+    }
+
+    $scope.FrozenCard = function (item) {
+        modalFactory.showAlert("确认解冻卡号："+  item['MEMBER_CARD.CARD_NO']+"吗？", function () {
+            cardFactory.FrozenCard(item, function () {
+                item['MEMBER_CARD.STATE'] =  1;
+            }, function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+        });
+    }
+
+    $scope.outPutQuery = function () {
+        if ($scope.querySize - 5000 <= 0) {
+            cardFactory.getMemberCardList($scope.filter, function (response) {
+                if (response.code == 0 && response.msg == "ok") {
+                    $scope.outputCard = [];
+                    response.data.forEach(function (ele) {
+                        var form = {};
+                        form['MEMBER_CARD.CARD_NO'] = ele['MEMBER_CARD.CARD_NO'];
+                        form['MEMBER_CARD.MEMBER_NAME'] = ele['MEMBER_CARD.MEMBER_NAME'];
+                        form['MEMBER_CARD.TYPE_NAME'] = ele['MEMBER_CARD.TYPE_NAME'];
+                        form['MEMBER_CARD.SOURCE_NAME'] = ele['MEMBER_CARD.SOURCE_NAME'];
+                        form['MEMBER_CARD.BALANCE'] = ele['MEMBER_CARD.BALANCE'];
+                        form['MEMBER_CARD.ADD_DATETIME'] = ele['MEMBER_CARD.ADD_DATETIME'];
+                        form['MEMBER_CARD.STATE'] = ele['MEMBER_CARD.STATE'];
+                        form['MEMBER_CARD.MEMBER_PHONE'] = ele['MEMBER_CARD.MEMBER_PHONE'];
+                        form['MEMBER_CARD.SHOP'] = ele['MEMBER_CARD.SHOP'];
+                        $scope.outputCard.push(form);
+                    });
+
+                    var url = "../../outputQuery";
+                    $scope.outputList = {};
+                    $scope.outputList['type'] = "card";
+                    $scope.outputList['item'] = JSON.stringify($scope.outputCard);
+                    http.post_ori(url, $scope.outputList, function (response) {
+                        if (response != "failure") {
+                            location.href = "/AndSell" + response;
+                        } else {
+                            modalFactory.showShortAlert("导出失败");
+                        }
+                    });
+                } else {
+                    modalFactory.showShortAlert(response.msg);
+                }
+            });
+        } else {
+            modalFactory.showAlert("数据量过大，请缩小数据范围");
+        }
+
     };
 
     $scope.isNull = function (str) {

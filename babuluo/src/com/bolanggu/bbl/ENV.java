@@ -13,9 +13,10 @@ public class ENV {
     //public static String STATE = "NORMAL";//正常模式  向百年传订单
 
     //门店接口
-    public static String API_MENDIAN = "http://58.240.110.186:98/BBL/";//线上服
+    //public static String API_MENDIAN = "http://58.240.110.186:98/BBL/";//线上服
     //public static String API_MENDIAN = "http://58.240.110.186:99/BBL/"; //测试服
     //public static String API_MENDIAN = "http://192.168.1.69:99/BBL/"; //BBL内网
+    public static String API_MENDIAN = "http://192.168.1.68:98/BBL/"; //BBL内网
 
 
     //库存阀值

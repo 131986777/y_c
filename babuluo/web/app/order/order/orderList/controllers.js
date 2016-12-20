@@ -80,12 +80,9 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
 
         var params = {};
         params['SHOP_ORDER.TYPE'] = $stateParams.orderType;
-        console.log('hahaha');
         orderFactory.getStateOrders(params, function (response) {
-            console.log(111);
             $scope.orderSizeMap = response.extraData.stateMap;
         });
-
 
         $scope.orderList = response.data;
         $scope.orderList.forEach(function (ele) {
@@ -95,7 +92,6 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
                 setContentsInfoForOrder(item);
             });
         });
-        console.log($scope.orderList);
     }
 
     //查询订单

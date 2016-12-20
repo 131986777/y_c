@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('point_point_pointList_Controller', function ($scope, $stateParams, cardFactory,memberFactory, pointFactory, modalFactory) {
+angular.module('AndSell.Main').controller('point_point_pointList_Controller', function (http,$scope, shopFactory, $stateParams, cardFactory, memberFactory, pointFactory, modalFactory) {
 
     modalFactory.setTitle('积分管理');
     modalFactory.setBottom(false);
@@ -6,6 +6,20 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
     $scope.bindData = function (response) {
         console.log(response);
         $scope.pointList = response.data;
+        $scope.querySize = response.extraData.page.querySize;
+    };
+
+    $scope.initData = function () {
+        $scope.getShop();
+        $scope.lastSearch = '';
+        $scope.lastSearchType = 'LOGIN_ID';
+    };
+
+    $scope.getShop = function () {
+        shopFactory.getShopList({}, function (response) {
+            $scope.shopList = response.data;
+            $scope.shopMap = listToMap($scope.shopList, 'SHOP.SHOP_ID');
+        });
     };
 
     $scope.queryById = function (loginId) {
@@ -15,6 +29,7 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
                 var tempMOBILE = response.data[0]['MEMBER.MOBILE'];
                 var tempEMAIL = response.data[0]['MEMBER.EMAIL'];
                 var tempPOINT = response.extraData.memberAccount[0]['MEMBER_ACCOUNT.POINT'];
+                $scope.memberDetail['MEMBER.USER_ID'] = response.data[0]['MEMBER.USER_ID'];
                 cardFactory.getMemberInfoByUserId({'MEMBER_INFO.USER_ID': response.data[0]['MEMBER.USER_ID']}, function (response1) {
                     console.log(response1.data[0]);
                     $scope.memberDetail['MEMBER.USER_NAME'] = response1.data[0]['MEMBER_INFO.TRUE_NAME'];
@@ -31,34 +46,32 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
 
     //根据登录ID查询财务信息
     $scope.queryPointByLoginId = function (content) {
-        $scope.filter = {'MEMBER_POINT_LIST.CHANGE_TYPE':'null'};
-        if (content != '') {
-
-            var uid = 0;
-            memberFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': content}, function (response) {
-                var ret = response.data;
-                if (ret.length > 0) {
-                    $scope.filter['MEMBER_POINT_LIST.USER_ID'] = ret[0]['MEMBER.USER_ID'];
+        //$scope.filter = {'MEMBER_POINT_LIST.CHANGE_TYPE':'null'};
+        if ($scope.lastSearch != content || $scope.lastSearchType != $scope.searchType) {
+            if ($scope.searchType == 'LOGIN_ID') {
+                if (content == '') {
+                    $scope.filter['MEMBER_POINT_LIST.CHANGE_VALUE'] = 'null';
+                    $scope.filter['MEMBER_POINT_LIST.EVENT_CARD_NO'] = 'null';
+                    $scope.filter['MEMBER_POINT_LIST.USER_ID'] = content;
                 } else {
-                    modalFactory.showShortAlert('查不到相关信息');
+                    memberFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': content}, function (response) {
+                        var ret = response.data;
+                        if (ret.length > 0) {
+                            $scope.filter['MEMBER_POINT_LIST.USER_ID'] = ret[0]['MEMBER.USER_ID'];
+                        } else {
+                            modalFactory.showShortAlert('查不到相关信息');
+                        }
+                    });
                 }
-            });
-
-            // if ($scope.searchType == 'LOGIN_ID') {
-            //     var uid = 0;
-            //     memberFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': content}, function (response) {
-            //         var ret = response.data;
-            //         if (ret.length > 0) {
-            //             $scope.filter['MEMBER_POINT_LIST.USER_ID'] = ret[0]['MEMBER.USER_ID'];
-            //         } else {
-            //             modalFactory.showShortAlert('查不到相关信息');
-            //         }
-            //     });
-            // } else if ($scope.searchType == 'PRICE') {
-            //     $scope.filter['MEMBER_POINT_LIST.CHANGE_VALUE'] = Number(content) * 100;
-            // } else if ($scope.searchType == 'CARD_NO') {
-            //     $scope.filter['MEMBER_POINT_LIST.EVENT_CARD_NO'] = content;
-            // }
+            } else if ($scope.searchType == 'CARD_NO') {
+                $scope.filter['MEMBER_POINT_LIST.CHANGE_VALUE'] = 'null';
+                $scope.filter['MEMBER_POINT_LIST.USER_ID'] = 'null';
+                $scope.filter['MEMBER_POINT_LIST.EVENT_CARD_NO'] = content;
+            }
+            $scope.lastSearch = content;
+            $scope.lastSearchType = $scope.searchType;
+        } else {
+            $scope.$broadcast('pageBar.reload');
         }
     }
 
@@ -115,7 +128,47 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
         });
-    }
+    };
+
+    $scope.outPutQuery = function () {
+        if ($scope.querySize - 4000 <= 0) {
+            pointFactory.getAllPointList($scope.filter, function (response) {
+                if (response.code == 0 && response.msg == "ok") {
+                    $scope.outputPoint = [];
+                    response.data.forEach(function (ele) {
+                        var form = {};
+                        form['MEMBER_POINT_LIST.USER_ID'] = ele['MEMBER_POINT_LIST.USER_ID'];
+                        form['MEMBER_POINT_LIST.ADD_DATETIME'] = ele['MEMBER_POINT_LIST.ADD_DATETIME'];
+                        form['MEMBER_POINT_LIST.POINT'] = ele['MEMBER_POINT_LIST.POINT'];
+                        form['MEMBER_POINT_LIST.CHANGE_TYPE'] = ele['MEMBER_POINT_LIST.CHANGE_TYPE'];
+                        form['MEMBER_POINT_LIST.CHANGE_POINT'] = ele['MEMBER_POINT_LIST.CHANGE_POINT'];
+                        form['MEMBER_POINT_LIST.EVENT'] = ele['MEMBER_POINT_LIST.EVENT'];
+                        form['MEMBER_POINT_LIST.EVENT_CARD_NO'] = ele['MEMBER_POINT_LIST.EVENT_CARD_NO'];
+                        form['MEMBER_POINT_LIST.MEMBER_MOBILE'] = ele['MEMBER_POINT_LIST.MEMBER_MOBILE'];
+                        form['MEMBER_POINT_LIST.SHOP'] = ele['MEMBER_POINT_LIST.SHOP'];
+                        form['MEMBER_POINT_LIST.OPER_USER_ID'] = ele['MEMBER_POINT_LIST.OPER_USER_ID'];
+                        $scope.outputPoint.push(form);
+                    });
+                    var url = "../../outputQuery";
+                    $scope.outputList = {};
+                    $scope.outputList['type'] = "point";
+                    $scope.outputList['item'] = JSON.stringify($scope.outputPoint);
+                    http.post_ori(url, $scope.outputList, function (response) {
+                        if(response!="failure"){
+                            location.href = "/AndSell" + response;
+                        }else {
+                            modalFactory.showShortAlert("导出失败");
+                        }
+                    });
+                } else {
+                    modalFactory.showShortAlert(response.msg);
+                }
+            });
+        }else {
+            modalFactory.showAlert("数据量过大，请缩小数据范围");
+        }
+
+    };
 
     $scope.empty = function () {
         $scope.modifyvalue = null;
@@ -131,6 +184,46 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
         $scope.afterModify = null;
         $scope.introduction = null;
     }
+
+    $('#start_hour').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        startView: 2,
+        format: 'yyyy/mm/dd hh:ii',
+        todayBtn: 'linked'
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+    $('#end_hour').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        format: 'yyyy/mm/dd hh:ii',
+        todayBtn: 'linked',
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+    $(document).ready(function () {
+        $('#birthday').daterangepicker({singleDatePicker: true}, function (start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+        $('#birthdayDate').daterangepicker({singleDatePicker: true}, function (start, end, label) {
+            console.log(start.toISOString(), end.toISOString(), label);
+        });
+    });
 });
 
 

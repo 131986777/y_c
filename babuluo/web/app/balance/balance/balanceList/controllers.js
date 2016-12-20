@@ -1,10 +1,11 @@
-angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function (http, $scope, $stateParams, cardFactory, memberFactory, balanceFactory, modalFactory, shopFactory) {
+angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function ($q, http, $scope, $stateParams, cardFactory, memberFactory, balanceFactory, modalFactory, shopFactory) {
     modalFactory.setTitle('资金明细');
     modalFactory.setBottom(false);
 
     //获得所有资金明细
     $scope.bindData = function (response) {
         $scope.balanceList = response.data;
+        $scope.querySize = response.extraData.page.querySize;
         console.log($scope.balanceList);
     };
 
@@ -62,6 +63,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
             $scope.memberDetail['MEMBER.BALANCE'] = card['MEMBER_CARD.BALANCE'] / 100;
             $scope.memberDetail['MEMBER.CARD_ID'] = card['MEMBER_CARD.CARD_ID'];
             $scope.memberDetail['MEMBER.CARD_NO'] = card['MEMBER_CARD.CARD_NO'];
+            $scope.memberDetail['MEMBER.CARD_TYPE_ID'] = card['MEMBER_CARD.TYPE_ID'];
             $scope.memberDetail.select = true;
         } else {
             $scope.memberDetail['MEMBER.BALANCE'] = undefined;
@@ -119,6 +121,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         $scope.ModifyBalanceInfo = {};
         $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_BALANCE'] = $scope.memberDetail['MEMBER.BALANCE'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_ID'] = $scope.memberDetail['MEMBER.CARD_ID'];
+        $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_TYPE_ID'] = $scope.memberDetail['MEMBER.CARD_TYPE_ID'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.CARD_NO'] = $scope.memberDetail['MEMBER.CARD_NO'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
         $scope.ModifyBalanceInfo['FINANCE_LIST.SERVICE_ID'] = $scope.memberDetail['MEMBER.SERVICE_ID'];
@@ -134,6 +137,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
             modalFactory.showShortAlert("资金调整成功");
             $("#balance").modal('hide');
             $scope.$broadcast('pageBar.reload');
+            $scope.MEMBER_CARD_ID = "null";
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
         });
@@ -142,8 +146,12 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
     //根据登录ID查询财务信息
     $scope.queryFinanceByLoginId = function (content) {
         if ($scope.lastSearch != content || $scope.lastSearchType != $scope.searchType) {
-            if (content != '') {
-                if ($scope.searchType == 'LOGIN_ID') {
+            if ($scope.searchType == 'LOGIN_ID') {
+                if (content == '') {
+                    $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
+                    $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
+                    $scope.filter['FINANCE_LIST.USER_ID'] = content;
+                } else {
                     memberFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': content}, function (response) {
                         var ret = response.data;
                         if (ret.length > 0) {
@@ -154,15 +162,22 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
                             modalFactory.showShortAlert('查不到相关信息');
                         }
                     });
-                } else if ($scope.searchType == 'PRICE') {
-                    $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
-                    $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
-                    $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = Number(content) * 100;
-                } else if ($scope.searchType == 'CARD_NO') {
-                    $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
-                    $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
-                    $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = content;
                 }
+            } else if ($scope.searchType == 'PRICE') {
+                $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
+                $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
+                $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = Number(content) * 100;
+                $scope.filter['FINANCE_LIST.EVENT_SOURCE_ID'] = 'null';
+            } else if ($scope.searchType == 'CARD_NO') {
+                $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
+                $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
+                $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = content;
+                $scope.filter['FINANCE_LIST.EVENT_SOURCE_ID'] = 'null';
+            } else if ($scope.searchType == 'ORDER') {
+                $scope.filter['FINANCE_LIST.CHANGE_VALUE'] = 'null';
+                $scope.filter['FINANCE_LIST.USER_ID'] = 'null';
+                $scope.filter['FINANCE_LIST.EVENT_CARD_NO'] = 'null';
+                $scope.filter['FINANCE_LIST.EVENT_SOURCE_ID'] = content;
             }
             $scope.lastSearch = content;
             $scope.lastSearchType = $scope.searchType;
@@ -172,13 +187,17 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
     };
 
     $scope.outPutQuery = function () {
+
         var url = "../../outputQuery";
         $scope.outputList = {};
         $scope.outputList['type'] = "finance";
-        $scope.outputList['item'] = JSON.stringify($scope.balanceList);
-        console.log($scope.outputList);
-        http.post_ori(url, $scope.outputList,function (response) {
-            location.href = "/AndSell" + response;
+        $scope.outputList['param'] = JSON.stringify($scope.filter);
+        http.post_ori(url, $scope.outputList, function (response) {
+            if (response != "failure") {
+                location.href = "/AndSell" + response;
+            } else {
+                modalFactory.showShortAlert("导出失败");
+            }
         });
     };
 
@@ -195,7 +214,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         $scope.memberDetail = null;
         $scope.memberId = null;
         $scope.cardList = undefined;
-        $scope.MEMBER_CARD_ID = 'null';
+        $scope.FINANCE_LIST_ID = 'null';
         $scope.changeType = 1;
         $scope.cardTotalMoney = 0;
     }

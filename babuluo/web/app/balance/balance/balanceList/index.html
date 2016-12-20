@@ -16,6 +16,9 @@
                             <option class="nya-bs-option" value="PRICE">
                                 金额
                             </option>
+                            <option class="nya-bs-option" value="ORDER">
+                                单号
+                            </option>
                         </select>
                         <input type="text" class="form-control" placeholder="" ng-model="loginId">
                         <button type="submit" class="btn btn-default"
@@ -44,11 +47,17 @@
                             <option class="nya-bs-option" value="null">
                                 所有明细
                             </option>
-                            <option class="nya-bs-option" value="线下充值','消费">
+                            <option class="nya-bs-option" value="线下充值','会员充值','会员卡充值','充值送','会员卡充值满送">
                                 充值明细
                             </option>
-                            <option class="nya-bs-option" value="线上消费','订单支付">
+                            <option class="nya-bs-option" value="充值送','会员卡充值满送">
+                                赠送明细
+                            </option>
+                            <option class="nya-bs-option" value="线上消费','订单支付','线下消费','消费">
                                 消费明细
+                            </option>
+                            <option class="nya-bs-option" value="订单退款','线下退款','线上退款">
+                                退款明细
                             </option>
                             <option class="nya-bs-option" value="会员开卡">
                                 开卡明细
@@ -102,7 +111,7 @@
                         </div>
                         <div>
                             <button type="button" class="btn btn-default pull-right"
-                                     ng-click="outPutQuery()">导出
+                                    ng-click="outPutQuery()">导出
                             </button>
                         </div>
                     </div>
@@ -118,28 +127,28 @@
                 <th> 手机号</th>
                 <th> 事件</th>
                 <th> 说明</th>
-                <th> 卡号</th>
-                <th> 门店</th>
+                <th> 交易卡号</th>
+                <th> 交易卡余额</th>
+                <th> 操作门店</th>
                 <th> 操作员</th>
                 <th> 类型</th>
-                <th class="text-center"> 金额</th>
+                <th class="text-center"> 交易金额</th>
                 <th class="text-center"> 账户余额</th>
                 </tr>
                 </thead>
                 <tbody ng-cloak>
                 <tr ng-repeat='balanceInfo in balanceList'>
                     <td ng-bind="balanceInfo['FINANCE_LIST.ADD_DATETIME'] | FormatAllDate"></td>
-                    <td ng-bind="balanceInfo['FINANCE_LIST.LOGIN_ID']"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.MEMBER_MOBILE']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_NO']"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_BALANCE'] | currency :'￥'"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.SHOP']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.OPER_USER_ID']"></td>
                     <td>
-            <span style="color:red"
-                  ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='decrease'">支出</span>
-                        <span style="color:green"
-                              ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='increase'">收入</span>
+                        <span style="color:red" ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='decrease'">支出</span>
+                        <span style="color:green" ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='increase'">收入</span>
                     </td>
                     <td class="text-center">
                         <span style="color:black" ng-show="balanceInfo['FINANCE_LIST.CHANGE_VALUE']>0">{{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}</span>

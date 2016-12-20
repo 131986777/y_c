@@ -30,7 +30,7 @@ angular.module('AndSell.Main').controller('user_role_roleModify_Controller', fun
     $scope.loadAPPs = function () {
 
         //加载权限App类型
-        roleFactory.getAppClass({}, function (response) {
+        roleFactory.getAppClass({"APP_CLASS.SYS_ID": "BBL"}, function (response) {
             $scope.roleClassList = response.data;
             $scope.roleClassList.forEach(function (ele) {
                 ele.childList = $scope.filterParentAuth(ele['APP_CLASS.ID']);
@@ -88,8 +88,18 @@ angular.module('AndSell.Main').controller('user_role_roleModify_Controller', fun
             modalFactory.showShortAlert("请填写角色名称");
             return;
         }
-        $scope.roleModify['ROLE_MAP_APP'] = $scope.appChooseList;
-        console.log($scope.roleModify['ROLE_MAP_APP']);
+        //拼接应用id
+        $scope.roleModify['USER_ROLE.ROLE_MAP_APP'] = '';
+        $scope.appChooseList.forEach(function (ele) {
+            $scope.roleModify['USER_ROLE.ROLE_MAP_APP'] = $scope.roleModify['USER_ROLE.ROLE_MAP_APP']
+                + ","
+                + ele['APP.APP_ID'];
+
+            if ($scope.roleModify['USER_ROLE.ROLE_MAP_APP'].substr(0, 1) == ',') {
+                $scope.roleModify['USER_ROLE.ROLE_MAP_APP'] = $scope.roleModify['USER_ROLE.ROLE_MAP_APP'].substr(1);
+            }
+        });
+        console.log($scope.roleModify['USER_ROLE.ROLE_MAP_APP']);
         roleFactory.modRoleById($scope.roleModify, function (response) {
             modalFactory.showShortAlert("修改成功");
             $state.go('user/role/roleList');

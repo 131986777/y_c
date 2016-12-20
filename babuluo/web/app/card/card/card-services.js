@@ -26,5 +26,9 @@ AndSellMainModule.service('cardFactory', function (http) {
 
     this.getMemberInfoByUserId = http.post('/member/memberData/getMemberInfoByUserId');
 
+    this.frezzeCard = http.post('/member/membercard/frezzeCard');
+
+    this.FrozenCard = http.post('/member/membercard/FrozenCard');
+
 });
 
