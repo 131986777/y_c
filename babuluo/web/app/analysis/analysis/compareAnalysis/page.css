@@ -29,5 +29,17 @@
 .compareNav>li.active>a:focus,
 .compareNav>li.active>a:hover{
     color: #DC5424;
-
+}
+li i{
+    display:inline-block;
+    width: 1em;
+    height: 1em;
+    background-color: #e0e0e0;
+    color: #555;
+    font-size: 13px;
+    font-style:normal;
+    border-radius: 0.5em;
+    text-align: center;
+    margin-left:4px;
+    line-height: 1em;
 }
