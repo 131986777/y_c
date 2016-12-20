@@ -27,7 +27,6 @@ public class outputQuery extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         String type = req.getParameter("type");
-        String outputDetail = req.getParameter("item");
         String parameter = req.getParameter("param");
 
         PrintWriter pw = resp.getWriter();
@@ -40,13 +39,13 @@ public class outputQuery extends HttpServlet {
                     outputFinanceQuery.newInstance().GenerateExcelSheet(analyseBook, parameter);
                     break;
                 case "point":
-                    outputPointQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+                    outputPointQuery.newInstance().GenerateExcelSheet(analyseBook, parameter);
                     break;
                 case "card":
-                    outputCardQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+                    outputCardQuery.newInstance().GenerateExcelSheet(analyseBook, parameter);
                     break;
                 case "member":
-                    outputMemberQuery.newInstance().GenerateExcelSheet(analyseBook, outputDetail);
+                    outputMemberQuery.newInstance().GenerateExcelSheet(analyseBook, parameter);
                     break;
             }
 

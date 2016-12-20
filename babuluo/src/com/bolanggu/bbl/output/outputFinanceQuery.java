@@ -47,7 +47,6 @@ public class outputFinanceQuery {
 
         Map<String, Object> map = new HashMap<>();
         for (Map.Entry<String, Object> entry : paramJson.entrySet()) {
-            System.out.println(entry.getKey() + ":" + entry.getValue());
             map.put(entry.getKey(), entry.getValue());
         }
 

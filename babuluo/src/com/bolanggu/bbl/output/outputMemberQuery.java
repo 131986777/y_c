@@ -3,8 +3,11 @@ package com.bolanggu.bbl.output;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.pabula.api.API;
+import com.pabula.api.data.ReturnData;
 import com.pabula.common.util.DateUtil;
 import com.pabula.common.util.StrUtil;
+import com.pabula.fw.exception.RuleException;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.Cell;
@@ -13,6 +16,8 @@ import org.apache.poi.ss.util.CellRangeAddress;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by 95155 on 2016/12/12.
@@ -32,11 +37,18 @@ public class outputMemberQuery {
         return bean;
     }
 
-    public HSSFSheet GenerateExcelSheet(HSSFWorkbook analyseBook, String outputDetail) {
+    public HSSFSheet GenerateExcelSheet(HSSFWorkbook analyseBook, String parameter) throws RuleException {
 
+        JSONObject paramJson = JSON.parseObject(parameter);
 
+        Map<String, Object> map = new HashMap<>();
+        for (Map.Entry<String, Object> entry : paramJson.entrySet()) {
+            map.put(entry.getKey(), entry.getValue());
+        }
+
+        ReturnData outputDetail = new API().call("/member/member/queryAll", map);
         //解析主要数据
-        JSONArray jsonArray = JSON.parseArray(outputDetail);
+        JSONArray jsonArray = JSONArray.parseArray(outputDetail.getData().toString());
 
         HSSFSheet cardSheet = analyseBook.createSheet("会员表");
         cardSheet.setColumnWidth(0, 2500);
@@ -154,7 +166,7 @@ public class outputMemberQuery {
             cell1.setCellValue(jsonObject.getString("MEMBER.LOGIN_ID"));
             cell1.setCellStyle(cellStyle);
             Cell cell2 = row.createCell(2);
-            cell2.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.TRUE_NAME"),""));
+            cell2.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.TRUE_NAME"), ""));
             cell2.setCellStyle(cellStyle);
             Cell cell3 = row.createCell(3);
             cell3.setCellValue(jsonObject.getString("MEMBER.MOBILE"));
@@ -163,10 +175,10 @@ public class outputMemberQuery {
             cell4.setCellValue(jsonObject.getString("MEMBER.CODE_NAME"));
             cell4.setCellStyle(cellStyle);
             Cell cell5 = row.createCell(5);
-            cell5.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.ID_NUMBER"),""));
+            cell5.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.ID_NUMBER"), ""));
             cell5.setCellStyle(cellStyle);
             Cell cell6 = row.createCell(6);
-            cell6.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.BIRTHDAY"),""));
+            cell6.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.BIRTHDAY"), ""));
             cell6.setCellStyle(cellStyle);
             Cell cell7 = row.createCell(7);
             cell7.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.SEX"), ""));
@@ -175,7 +187,7 @@ public class outputMemberQuery {
             cell8.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.REFERENCE"), ""));
             cell8.setCellStyle(cellStyle);
             Cell cell9 = row.createCell(9);
-            cell9.setCellValue(jsonObject.getString("MEMBER.REG_DATETIME").replace(".0",""));
+            cell9.setCellValue(jsonObject.getString("MEMBER.REG_DATETIME").replace(".0", ""));
             cell9.setCellStyle(cellStyle);
         }
 
