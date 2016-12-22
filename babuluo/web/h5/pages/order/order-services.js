@@ -1,6 +1,6 @@
 AndSellH5MainModule.service('orderFactory', function (http) {
 
-    this.addOrder = http.post('/shop/order/addOrderWithDetail');
+    this.addOrder = http.post('/shop/order/filterOrderType');
 
     this.getOrderById = http.post('/shop/order/getById');
 

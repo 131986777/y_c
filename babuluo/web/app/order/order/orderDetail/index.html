@@ -67,6 +67,23 @@
           <!--ng-click="getPrdNow()">确认提货-->
           <!--</button>-->
           <!--</div>-->
+          <div ng-if="orderType=='5'">
+            <!--<button class="btn btn-default">开始分拣</button>-->
+            <button class="btn btn-default"
+                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1"
+                    ng-click="outOrder()">分拣完毕
+            </button>
+            <button class="btn btn-default"
+                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1"
+                    ng-click="deliveryOrder()">提货
+            </button>
+            <button class="btn btn-default"
+                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.STATE_OUT']==-1&&order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&&order['SHOP_ORDER.STATE_MONEY']==1))"
+                    ng-click="cancelOrder()">取消订单
+            </button>
+          </div>
+
+
         </div>
       </div> <!-- orderHead -->
 
@@ -77,6 +94,20 @@
             <!--<p><span class="leftTime">13分</span>后订单被关闭</p></div>-->
           </div>
           <div ng-if="orderType=='3'">
+            <div class="payed"
+                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">
+              等待分捡
+            </div>
+            <div class="payed"
+                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">
+              等待提货
+            </div>
+            <div class="payed"
+                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">
+              已完成
+            </div>
+          </div>
+          <div ng-if="orderType=='5'">
             <div class="payed"
                  ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">
               等待分捡
@@ -192,6 +223,28 @@
                 交易成功
               </li>
             </ul>
+            <ul class="progressList" ng-if="order['SHOP_ORDER.TYPE']=='5'">
+              <li class="step-5 step-first"
+                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                下单
+              </li>
+              <li class="step-5"
+                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_ORDER']==1]">
+                捡货
+              </li>
+              <li class="step-5"
+                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
+                付款
+              </li>
+              <li class="step-5"
+                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
+                提货
+              </li>
+              <li class="step-5 step-last"
+                  ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
+                交易成功
+              </li>
+            </ul>
           </div>
 
           <div class="progressTime" ng-if="order['SHOP_ORDER.STATE_ORDER']==1">
@@ -300,9 +353,19 @@
                       <p class="itemName" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']"></p>
                       <p class="itemColor" ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']"></p>
                     </td>
-                    <td class="price text-center"><span
+                    <td class="price text-center"ng-if="order['SHOP_ORDER.STATE_OUT']==-1"><span
                         ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span> 元 x
                       <span class="itemCount" ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span></td>
+                    <td class="price text-center"ng-if="order['SHOP_ORDER.STATE_OUT']==1">
+                      <div ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
+                      <p ng-bind="stocklist.weight+' X '+stocklist.count"></p>
+                      </div>
+                    </td>
+                    <td class="price text-center"ng-if="order['SHOP_ORDER.STATE_OUT']==1">
+                      <div ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
+                        <p ng-bind="stocklist.price | currency : '￥'"></p>
+                      </div>
+                    </td>
                     <td class="remark text-right">
                       <p class="pull-right" ng-bind="detail['SHOP_ORDER_INFO.REMARK']">
                       </p>

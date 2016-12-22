@@ -60,6 +60,10 @@ public class ENV {
     public static String WX_APPSECRET = "4e204b8f9cf5a5c11457ffa40d891ffc";
 
 
+    //订单模式
+    public static String ORDER_TYPE = "YYD";//预约单
+// public static String ORDER_TYPE = "NORMAL";//正常单
+
     /**
      * 微信支付配置信息
      */
