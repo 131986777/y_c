@@ -57,14 +57,14 @@ angular.module('AndSell.Main').controller('analysis_analysis_cardAnalysis_Contro
         theMonth = theDate.getMonth()+1;
         showChartOnCard();
     }
-    //今天的数据
-    $scope.getGroupByNowDay = function () {
-        clearCardTable();
-        getCardSource(theYear+"-"+theMonth+"-"+theDay,theYear+"-"+theMonth+"-"+theDay);
-        $scope.groupRange['STARTDAY'] = theYear+"-"+theMonth+"-"+theDay;
-        $scope.groupRange['ENDDAY'] = theYear+"-"+theMonth+"-"+theDay
-        showChartOnCard();
-    }
+    // //今天的数据
+    // $scope.getGroupByNowDay = function () {
+    //     clearCardTable();
+    //     getCardSource(theYear+"-"+theMonth+"-"+theDay,theYear+"-"+theMonth+"-"+theDay);
+    //     $scope.groupRange['STARTDAY'] = theYear+"-"+theMonth+"-"+theDay;
+    //     $scope.groupRange['ENDDAY'] = theYear+"-"+theMonth+"-"+theDay
+    //     showChartOnCard();
+    // }
     //昨天的数据
     $scope.getGroupByYesterDay = function () {
         clearCardTable();

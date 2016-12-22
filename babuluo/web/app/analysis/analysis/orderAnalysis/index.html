@@ -3,14 +3,14 @@
     <div class="row timeBar">
         <div class="col-md-12">
 
-            <div class="col-md-2">
+            <div class="col-md-2 fixWidth">
                 <input id="startDay" type="text" ng-model="groupRange['STARTDAY']" ng-init="groupRange['STARTDAY']=START" class="form-control inputWidth"  placeholder="">
                 <span>-</span>
                 <input id="endDay" type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=END"  class="form-control inputWidth"  placeholder="">
             </div>
 
             <button class="btn" type="button" ng-click="getGroupByRange()">查询</button>
-            <a class="showPoint" ng-click="getGroupByThisWeek()">本周</a><a class="showPoint" ng-click="getGroupByYesterWeek()">上周</a><a class="showPoint" ng-click="getGroupByThisMonth()">本月</a><a class="showPoint" ng-click="getGroupByYesterMonth()">上月</a><a class="showPoint" ng-click="getGroupByYesterDay()">昨天</a><a class="showPoint" ng-click="getGroupByNowDay()">今天</a>
+            <a class="showPoint" ng-click="getGroupByThisWeek()">本周</a><a class="showPoint" ng-click="getGroupByYesterWeek()">上周</a><a class="showPoint" ng-click="getGroupByThisMonth()">本月</a><a class="showPoint" ng-click="getGroupByYesterMonth()">上月</a><a class="showPoint" ng-click="getGroupByYesterDay()">昨天</a>
             <button class="btn alignRight" type="button" onclick="outPutMethod('orderTable')">导出</button>
             <div class="clear"></div>
         </div>

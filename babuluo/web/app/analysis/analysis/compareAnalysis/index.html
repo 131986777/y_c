@@ -6,8 +6,8 @@
     </ul>
     <div class="row timeBar">
         <div class="col-md-12">
-            <div class="col-md-1">
-                <input id="startDay" type="text" ng-model="groupRange['DAY']" ng-init="groupRange['DAY']=YESTERDAY"  class="form-control"  placeholder="">
+            <div class="col-md-1 fixWidthByOneInput" >
+                <input id="startDay" type="text" ng-model="groupRange['DAY']" ng-init="groupRange['DAY']=YESTERDAY" width="100px"  class="form-control inputWidth"  placeholder="" >
             </div>
             <div class="col-md-1">
                 <button class="btn green" type="button" ng-click="getGroupByRange()">查询</button>
@@ -30,6 +30,7 @@
                 <thead>
                 <tr>
                     <th class="col-sm-1 text-center">名次</th>
+                    <th class="col-sm-1 text-center">门店ID</th>
                     <th class="col-sm-1 text-center">排名</th>
                     <th class="col-sm-1 text-center">营业额</th>
                     <th class="col-sm-1 text-center">差距</th>
@@ -38,6 +39,7 @@
                 <tbody>
                     <tr align="center" ng-repeat="VALUE in jsonObj[0]['VALUE']">
                         <td><span ng-bind="VALUE['COMPARE_VALUE']['SHOP_SORT']"></span></td>
+                        <td><span ng-bind="VALUE['COMPARE_VALUE']['SHOP_ID']"></span></td>
                         <td><span ng-bind="VALUE['COMPARE_NAME']"></span></td>
                         <td><span ng-if="VALUE['COMPARE_VALUE']['MONEY_COUNT'] != 0"><span ng-bind="VALUE['COMPARE_VALUE']['MONEY_COUNT']/100 | currency:'￥'"></span></span></td>
                         <td><span ng-if="VALUE['COMPARE_VALUE']['COMPARE_DIFF'] != 0"><span ng-bind="VALUE['COMPARE_VALUE']['COMPARE_DIFF']/100 | currency:'￥'"></span></span></td>
@@ -50,6 +52,7 @@
                 <thead>
                 <tr>
                     <th class="col-sm-1 text-center">名次</th>
+                    <th class="col-sm-1 text-center">店铺ID</th>
                     <th class="col-sm-1 text-center">排名</th>
                     <th class="col-sm-1 text-center">销卡</th>
                     <th class="col-sm-1 text-center">差距</th>
@@ -58,6 +61,7 @@
                 <tbody>
                 <tr align="center" ng-repeat="VALUE in jsonObj[1]['VALUE']">
                     <td><span ng-bind="VALUE['COMPARE_VALUE']['SHOP_SORT']"></span></td>
+                    <td><span ng-bind="VALUE['COMPARE_VALUE']['SHOP_ID']"></span></td>
                     <td><span ng-bind="VALUE['COMPARE_NAME']"></span></td>
                     <td><span ng-if="VALUE['COMPARE_VALUE']['CARD_MONEY_COUNT'] != 0"><span ng-bind="VALUE['COMPARE_VALUE']['CARD_MONEY_COUNT']/100 | currency:'￥'"></span></span></td>
                     <td><span ng-if="VALUE['COMPARE_VALUE']['COMPARE_DIFF'] != 0"><span ng-bind="VALUE['COMPARE_VALUE']['COMPARE_DIFF']/100 | currency:'￥'"></span></span></td>
@@ -70,6 +74,7 @@
                 <thead>
                 <tr>
                     <th class="col-sm-1 text-center">名次</th>
+                    <th class="col-sm-1 text-center">店铺ID</th>
                     <th class="col-sm-1 text-center">排名</th>
                     <th class="col-sm-1 text-center">开卡</th>
                     <th class="col-sm-1 text-center">差距</th>
@@ -78,6 +83,7 @@
                 <tbody>
                 <tr align="center" ng-repeat="VALUE in jsonObj[2]['VALUE']">
                     <td><span ng-bind="VALUE['COMPARE_VALUE']['SHOP_SORT']"></span></td>
+                    <td><span ng-bind="VALUE['COMPARE_VALUE']['SHOP_ID']"></span></td>
                     <td><span ng-bind="VALUE['COMPARE_NAME']"></span></td>
                     <td><span ng-if="VALUE['COMPARE_VALUE']['ADD_NUMBER'] != 0"><span ng-bind="VALUE['COMPARE_VALUE']['ADD_NUMBER']"></span></span></td>
                     <td><span ng-if="VALUE['COMPARE_VALUE']['COMPARE_DIFF'] != 0"><span ng-bind="VALUE['COMPARE_VALUE']['COMPARE_DIFF']"></span></span></td>
