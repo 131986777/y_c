@@ -13,8 +13,9 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
     $scope.bindData = function (response) {
         $scope.cardList = response.data;
         $scope.querySize = response.extraData.page.querySize;
-        $scope.sourceList = response.extraData.sourceList;
         $scope.typeMap = response.extraData.typeMap;
+        $scope.sourceList = response.extraData.sourceList;
+        $scope.shopList = response.extraData.shopList;
         $scope.typeListMap = response.extraData.typeListMap;
         console.log(response);
     };
