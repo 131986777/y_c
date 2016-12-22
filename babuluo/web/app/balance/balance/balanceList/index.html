@@ -59,7 +59,7 @@
                             <option class="nya-bs-option" value="订单退款','线下退款','线上退款">
                                 退款明细
                             </option>
-                            <option class="nya-bs-option" value="会员开卡">
+                            <option class="nya-bs-option" value="会员开卡','线下开卡','线上开卡">
                                 开卡明细
                             </option>
                         </select>
@@ -104,7 +104,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <div class="col-md-8">
+                        <div class="col-md-8" ng-if="APP_ID_LIST.indexOf('@1109@')>=0">
                             <button type="button" class="btn btn-default pull-right" data-toggle="modal"
                                     data-target="#balance" ng-click=empty()>调整资金
                             </button>
@@ -296,6 +296,25 @@
                                     减少
                                 </label>
 
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 control-label">
+                                <span class="required"></span>参与活动:
+                            </label>
+                            <div class="col-sm-8">
+                                <select ng-model="ACTIVITY_ID"
+                                        class="nya-bs-select form-control" ng-init="ACTIVITY_ID ='{$null}'">
+                                    <option class="nya-bs-option" value ="{$null}">
+                                        不参与活动
+                                    </option>
+                                    <option class="nya-bs-option"
+                                            ng-repeat="activity in activitys"
+                                            ng-bind="activity['ACTIVITY.NAME']"
+                                            value="{{activity['ACTIVITY.ID']}}">
+                                    </option>
+                                </select>
                             </div>
                         </div>
 

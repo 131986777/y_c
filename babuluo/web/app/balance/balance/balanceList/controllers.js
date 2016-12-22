@@ -12,7 +12,11 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
     $scope.initData = function () {
         $scope.getShop();
         $scope.lastSearch = '';
+        $scope.ACTIVITY_ID='';
         $scope.lastSearchType = 'LOGIN_ID';
+        balanceFactory.getAllUsefulActivity({},function (response) {
+            $scope.activitys=response.data;
+        });
     }
 
     $scope.getShop = function () {
@@ -128,6 +132,7 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         $scope.ModifyBalanceInfo['FINANCE_LIST.EVENT'] = "后台";
         $scope.ModifyBalanceInfo['FINANCE_LIST.EVENT_INTRO'] = $scope.introduction;
         $scope.ModifyBalanceInfo['FINANCE_LIST.CHANGE_VALUE'] = $scope.modifyvalue;
+        $scope.ModifyBalanceInfo['ACTIVITY_ID'] = $scope.ACTIVITY_ID;
         if ($scope.changeType == 1) {
             $scope.ModifyBalanceInfo['FINANCE_LIST.CHANGE_TYPE'] = 'increase';
         } else {
