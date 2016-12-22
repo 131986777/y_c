@@ -85,13 +85,12 @@
                     （冻结{{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}}）
                 </p>
                 <div class="row cardFooter">
-                    <div class="col-md-4 nowrap">{{cl['MEMBER_CARD.MEMBER_LOGIN_ID']}}</div>
+                    <div class="col-md-5 nowrap">{{cl['MEMBER_CARD.MEMBER_NAME']}} {{cl['MEMBER_CARD.MEMBER_PHONE']}}</div>
                     <div class="col-md-3 nowrap text-right count">
                         <span ng-show="cl['MEMBER_CARD.IS_FACE_VALUE']==1">面值{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</span>
                     </div>
-                    <div class="col-md-5 text-right time nowrap">
-                        {{cl['MEMBER_CARD.ADD_DATETIME'] |FormatStrDate}}
-                        {{cl['MEMBER_CARD.SOURCE_NAME']}}
+                    <div class="col-md-4 text-right time nowrap">
+                        {{cl['MEMBER_CARD.SHOP']}}
                     </div>
                 </div>
             </div>
