@@ -4,7 +4,7 @@ AndSellMainModule.controller('MainController', function ($scope, modalFactory, u
 
     $scope.APP_ID_LIST = getCookie('APP_ID_LIST');
 
-    console.log($scope.APP_ID_LIST);
+    //console.log($scope.APP_ID_LIST);
 
     //逻辑
     $scope.$on('title', function (event, data) {
