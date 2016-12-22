@@ -124,14 +124,16 @@
             <table class="table table-bordered table-hover table-striped">
                 <thead>
                 <th> 时间</th>
-                <th> 客户姓名</th>
-                <th> 手机号</th>
+                <th> 姓名</th>
+                <th> 手机</th>
                 <th> 事件</th>
                 <th> 说明</th>
                 <th> 交易卡号</th>
-                <th> 交易卡余额</th>
-                <th> 开卡门店</th>
-                <th> 操作门店</th>
+                <th> 交易前</th>
+                <th> 交易后</th>
+                <th> 卡类别</th>
+                <th> 开卡店</th>
+                <th> 操作店</th>
                 <th> 操作员</th>
                 <th> 类型</th>
                 <th class="text-center"> 交易金额</th>
@@ -146,7 +148,9 @@
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_NO']"></td>
-                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_BALANCE'] | currency :'￥'"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.BEFORE_CARD_BALANCE']| currency :'￥'"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_BALANCE']| currency :'￥'"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_TYPE']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.CARD_SHOP']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.SHOP']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.OPER_USER_ID']"></td>
