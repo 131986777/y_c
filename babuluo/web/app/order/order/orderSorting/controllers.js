@@ -225,9 +225,9 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
 
         console.log("分拣完毕")
 
-        $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = $scope.stockdiscountprice*100;
+        // $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = $scope.stockdiscountprice*100;
 
-        $scope.order['SHOP_ORDER.PRICE_PRD'] = $scope.stockprdprice*100;
+        $scope.order['SHOP_ORDER.PRICE_ORDER'] = $scope.stockprdprice*100;
 
         $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.stockprdprice*100;
 
@@ -236,15 +236,17 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
         //更新状态
         $scope.order['SHOP_ORDER.STATE_OUT'] = 1;
 
-        console.log($scope.sortedDetailList)
+        console.log($scope.sortedDetailList);
 
-        delete $scope.order['SHOP_ORDER.ORDER_INFO']
+        delete $scope.order['SHOP_ORDER.ORDER_INFO'];
 
         console.log($scope.order);
 
         orderFactory.modifyBySortComplete($scope.order, function (response) {
 
             modalFactory.showShortAlert('分拣成功');
+
+            $state.go('order/order/orderDetail', {ORDER_ID: $scope.order['SHOP_ORDER.ID']});
 
         }, function (response) {
 

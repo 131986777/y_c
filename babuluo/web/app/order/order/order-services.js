@@ -19,6 +19,9 @@ AndSellMainModule.service('orderFactory', function (http) {
     this.getRefundOrder = http.post('/shop/order/refund/queryAll');
     this.refundOrder = http.post('/shop/order/refund/refundOrder');
     this.RemarkRefundOrder = http.post('/shop/order/refund/remarkOrder');
+
     this.getBySkuId = http.post('/shop/product/getBySkuIdWithAllInfo');
+
     this.modifyBySortComplete = http.post('/shop/order/modifyBySortComplete');
+
 });

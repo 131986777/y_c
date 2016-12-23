@@ -20,8 +20,6 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
             response.data[0]['SHOP_ORDER.DATETIME_COMMENT'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_COMMENT']);
             response.data[0]['SHOP_ORDER.DATETIME_ACCEPT'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ACCEPT']);
             $scope.orderDetailList = JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
-            console.log("订单详情")
-            console.log($scope.orderDetailList)
             $scope.order = response.data[0];
             if ($scope.order['SHOP_ORDER.ERP_REMARK']
                 != undefined

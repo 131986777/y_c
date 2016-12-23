@@ -90,7 +90,11 @@
       <div class="orderWrap">
         <div class="orderState">
           <div class="unpayed"
-               ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.TYPE']!='4'">等待付款
+               ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.TYPE']!='4'&&order['SHOP_ORDER.TYPE']!='5'">等待付款
+            <!--<p><span class="leftTime">13分</span>后订单被关闭</p></div>-->
+          </div>
+          <div class="unpayed"
+               ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.TYPE']=='5'&&order['SHOP_ORDER.STATE_OUT']==1">等待付款
             <!--<p><span class="leftTime">13分</span>后订单被关闭</p></div>-->
           </div>
           <div ng-if="orderType=='3'">

@@ -114,11 +114,11 @@
                ng-class="{true:'unfinished'}[!((order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1)||(order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1)||(order['SHOP_ORDER.STATE_ORDER']==-1))]">
             <div class="imformation orderUnpayed">
               <div class="payed"
-                   ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
+                   ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1">
                 等待付款
               </div>
               <div class="unpayed"
-                   ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">
+                   ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==-1">
                 等待分拣
               </div>
               <div class="unpayed"
@@ -171,7 +171,7 @@
               </div>
               <div class="buttons pull-right">
               <button class="btn btn-detail btn-block"
-              ng-click="toSort(order['SHOP_ORDER.ID'])"ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">
+              ng-click="toSort(order['SHOP_ORDER.ID'])"ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==-1">
               去分拣
               </button>
               </div>

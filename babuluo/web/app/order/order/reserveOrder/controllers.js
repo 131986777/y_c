@@ -43,6 +43,7 @@ angular.module('AndSell.Main').controller('order_order_reserveOrder_Controller',
         } else if (type == 'pay') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = -1;
+            $scope.filter['SHOP_ORDER.STATE_OUT'] = 1;
         } else if (type == 'get') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
@@ -50,8 +51,8 @@ angular.module('AndSell.Main').controller('order_order_reserveOrder_Controller',
             $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = -1
         } else if (type == 'out') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_OUT'] = -1
+            $scope.filter['SHOP_ORDER.STATE_MONEY'] = -1;
+            $scope.filter['SHOP_ORDER.STATE_OUT'] = -1;
         } else if (type == 'send') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
