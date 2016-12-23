@@ -12,6 +12,34 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
     $scope.cancelsortstockdetail = [];
     $scope.initstockprice=0;
 
+    var bodyKeyDownObverse = (function (){
+        var $str = '';
+        function init(callback){
+            document.body.addEventListener("keydown",function(e){
+                var $key = String.fromCharCode(e.keyCode);
+                $str += $key;
+                callback($str);
+            },false);
+        }
+        function reset(){
+            $str = '';
+        }
+        return {
+            init:init,
+            reset:reset,
+        }
+    })();
+
+    bodyKeyDownObverse.init(function (a) {
+        console.log(a);//输入的值
+
+        //遍历订单下的sku二维码去进行比对
+        if(a.indexOf('111')>0){
+            //做自己的分拣逻辑
+            bodyKeyDownObverse.reset();
+        }
+    });
+
 
     $scope.initData = function () {
 

@@ -84,18 +84,14 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
     }
 
     $scope.save = function (form) {
-
-        console.log(form);
         delete form['salesInfo'];
-        var f=$.param(form);
-        console.log(f);
-        //salesFactory.ModifySalesProduct(form, function (response) {
-        //    modalFactory.showShortAlert('修改成功');
-        //    $("#addSalePlan").modal('hide');
-        //    $scope.$broadcast('pageBar.reload');
-        //}, function (response) {
-        //    modalFactory.showShortAlert(response.msg);
-        //});
+        salesFactory.ModifySalesProduct(form, function (response) {
+            modalFactory.showShortAlert('修改成功');
+            $("#addSalePlan").modal('hide');
+            $scope.$broadcast('pageBar.reload');
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
 
     }
 
