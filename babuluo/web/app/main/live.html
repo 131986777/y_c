@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>云厨经营态势直播间</title>
+</head>
+<body style="margin: 0;padding: 0; overflow: hidden;">
+<div style="width: 100%;height: 100%">
+    <iframe src="http://datav.aliyun.com/share/61c3b5e06a5c6add326d3a0454004995?spm=0.0.0.0.ZG5y0Q" id="farme" scrolling="no" onload="changeFrameHeight()"  frameborder="0" width="100%"></iframe>
+</div>
+<script type="application/javascript">
+    var ifm= document.getElementById("farme");
+    ifm.height=document.documentElement.clientHeight;
+    function changeFrameHeight(){
+        var ifm= document.getElementById("farme");
+        ifm.height=document.documentElement.clientHeight;
+    }
+    window.onresize=function(){
+        changeFrameHeight();
+    }
+</script>
+</body>
+</html>
