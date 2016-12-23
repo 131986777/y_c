@@ -176,4 +176,46 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
     $scope.isNotNull = function (str) {
         return !$scope.isNull(str);
     };
+
+
+    $scope.filterTime = function (type) {
+        if (type == 'all') {
+            $scope.filter['MEMBER_CARD.ADD_DATETIME_FROM'] = '';
+            $scope.filter['MEMBER_CARD.ADD_DATETIME_TO'] = '';
+        }
+    };
+
+    $('#start_hour').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        startView: 2,
+        minView:'month',
+        format: 'yyyy/mm/dd',
+        todayBtn: 'linked'
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+    $('#end_hour').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        minView:'month',
+        format: 'yyyy/mm/dd',
+        todayBtn: 'linked'
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
 });
