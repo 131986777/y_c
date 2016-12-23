@@ -85,10 +85,18 @@
                                 时间段内
                             </option>
                         </select>
-                        <div style="display:inline-block;margin:10px 0 0 36px" ng-show="timeType=='aim'"
-                             data-date="10/11/2012"
-                             language="zh-CN"
-                             data-date-format="yyyy-mm-dd">
+                        <select ng-model="moneyRange"
+                                ng-init="moneyRange='all'"
+                                ng-change="filterMoney(moneyRange)"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="all">
+                                所有金额
+                            </option>
+                            <option class="nya-bs-option" value="aim">
+                                金额范围内
+                            </option>
+                        </select>
+                        <div style="display:inline-block;margin:10px 0 0 36px" ng-show="timeType=='aim'">
                             <input id="start_hour" type="text" class="form-control " placeholder="起始时间"
                                    name="from" ng-model="filter['FINANCE_LIST.ADD_DATETIME_FROM']"
                                    data-date-format="yyyy/mm/dd hh:ii" style="margin-right: 10px"> 至
@@ -101,6 +109,16 @@
                             <input id="end_hour" type="text" class="form-control " placeholder="截止时间"
                                    name="to" ng-model="filter['FINANCE_LIST.ADD_DATETIME_TO']"
                                    data-date-format="yyyy/mm/dd hh:ii">
+                        </div>
+                        <div style="display:inline-block;margin:10px 0 0 36px" ng-show="moneyRange=='aim'">
+                            <input id="start_range" type="text" class="form-control " placeholder="最小金额"
+                                   name="from" ng-model="filter['FINANCE_LIST.MONEY_FROM']"
+                                   style="margin-right: 10px"> 至
+                        </div>
+
+                        <div style="display: inline-block;margin: 10px 0 0 10px;" ng-show="moneyRange=='aim'">
+                            <input id="end_range" type="text" class="form-control " placeholder="最大金额"
+                                   name="to" ng-model="filter['FINANCE_LIST.MONEY_TO']">
                         </div>
                     </div>
                     <div class="col-md-2">

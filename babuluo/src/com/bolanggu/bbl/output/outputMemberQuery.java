@@ -137,19 +137,22 @@ public class outputMemberQuery {
         Cell cellOrderPrice = rowTitle.createCell(4);
         cellOrderPrice.setCellValue("来源");
         cellOrderPrice.setCellStyle(title2Style);
-        Cell cellCardNo = rowTitle.createCell(5);
+        Cell shop = rowTitle.createCell(5);
+        shop.setCellValue("所属门店");
+        shop.setCellStyle(title2Style);
+        Cell cellCardNo = rowTitle.createCell(6);
         cellCardNo.setCellValue("身份证");
         cellCardNo.setCellStyle(title2Style);
-        Cell cellReturnPrice = rowTitle.createCell(6);
+        Cell cellReturnPrice = rowTitle.createCell(7);
         cellReturnPrice.setCellValue("生日");
         cellReturnPrice.setCellStyle(title2Style);
-        Cell operator = rowTitle.createCell(7);
+        Cell operator = rowTitle.createCell(8);
         operator.setCellValue("性别");
         operator.setCellStyle(title2Style);
-        Cell type = rowTitle.createCell(8);
+        Cell type = rowTitle.createCell(9);
         type.setCellValue("推荐人");
         type.setCellStyle(title2Style);
-        Cell money = rowTitle.createCell(9);
+        Cell money = rowTitle.createCell(10);
         money.setCellValue("注册时间");
         money.setCellStyle(title2Style);
         int analyseIndex = 1;//序号
@@ -175,20 +178,23 @@ public class outputMemberQuery {
             cell4.setCellValue(jsonObject.getString("MEMBER.CODE_NAME"));
             cell4.setCellStyle(cellStyle);
             Cell cell5 = row.createCell(5);
-            cell5.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.ID_NUMBER"), ""));
+            cell5.setCellValue(jsonObject.getString("MEMBER.SHOP"));
             cell5.setCellStyle(cellStyle);
-            Cell cell6 = row.createCell(6);
-            cell6.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.BIRTHDAY"), ""));
+            Cell cell6 = row.createCell(5);
+            cell6.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.ID_NUMBER"), ""));
             cell6.setCellStyle(cellStyle);
             Cell cell7 = row.createCell(7);
-            cell7.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.SEX"), ""));
+            cell7.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.BIRTHDAY"), ""));
             cell7.setCellStyle(cellStyle);
             Cell cell8 = row.createCell(8);
-            cell8.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.REFERENCE"), ""));
+            cell8.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.SEX"), ""));
             cell8.setCellStyle(cellStyle);
             Cell cell9 = row.createCell(9);
-            cell9.setCellValue(jsonObject.getString("MEMBER.REG_DATETIME").replace(".0", ""));
+            cell9.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.REFERENCE"), ""));
             cell9.setCellStyle(cellStyle);
+            Cell cell10 = row.createCell(10);
+            cell10.setCellValue(jsonObject.getString("MEMBER.REG_DATETIME").replace(".0", ""));
+            cell10.setCellStyle(cellStyle);
         }
 
         HSSFRow rowM = cardSheet.createRow(rowIndex);
