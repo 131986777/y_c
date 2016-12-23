@@ -25,4 +25,30 @@
 .clear{
     clear: both;
 }
+.compareNav>li.active>a,
+.compareNav>li.active>a:focus,
+.compareNav>li.active>a:hover{
+    color: #DC5424;
+}
+.ai{
+    display:inline-block;
+    width: 1em;
+    height: 1em;
+    background-color: #e0e0e0;
+    color: #555;
+    font-size: 13px;
+    font-style:normal;
+    border-radius: 0.5em;
+    text-align: center;
+    margin-left:4px;
+    line-height: 1em;
+}
+.inputWidth{
+    min-width: 104px;
+    width: 47% !important;
+    display: inline-block !important;
+}
+.fixWidthByOneInput{
+    min-width:120px;
+}
 

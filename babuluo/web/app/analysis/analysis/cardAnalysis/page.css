@@ -61,8 +61,12 @@ p i{
     clear: both;
 }
 .inputWidth{
+    min-width: 104px;
     width: 47% !important;
     display: inline-block !important;
+}
+.fixWidth{
+    min-width:270px;
 }
 
 

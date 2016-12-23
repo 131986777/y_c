@@ -52,14 +52,14 @@ angular.module('AndSell.Main').controller('analysis_analysis_offlineOrderAnalysi
         theMonth = theDate.getMonth()+1;
         showChartOnOfflineOrder();
     }
-    //今天的数据
-    $scope.getGroupByNowDay = function () {
-        clearOrderTable();
-        getOrderSource(theYear+"-"+theMonth+"-"+theDay,theYear+"-"+theMonth+"-"+theDay)
-        $scope.groupRange['STARTDAY'] = theYear+"-"+theMonth+"-"+theDay;
-        $scope.groupRange['ENDDAY'] =theYear+"-"+theMonth+"-"+theDay;
-        showChartOnOfflineOrder();
-    }
+    // //今天的数据
+    // $scope.getGroupByNowDay = function () {
+    //     clearOrderTable();
+    //     getOrderSource(theYear+"-"+theMonth+"-"+theDay,theYear+"-"+theMonth+"-"+theDay)
+    //     $scope.groupRange['STARTDAY'] = theYear+"-"+theMonth+"-"+theDay;
+    //     $scope.groupRange['ENDDAY'] =theYear+"-"+theMonth+"-"+theDay;
+    //     showChartOnOfflineOrder();
+    // }
     //昨天的数据
     $scope.getGroupByYesterDay = function () {
         clearOrderTable();
