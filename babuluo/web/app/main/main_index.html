@@ -386,24 +386,24 @@
                     </a>
                     <div class="sub-menu-wrap sub-menu-2 dropdown-menu">
                         <ul class="sub-menu " role="menu">
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1099@')>=0">
                                 <a ui-sref="shop/shop/shopList">
                                     门店
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1100@')>=0">
                                 <a ui-sref="shop/shop_district/districtList">
                                     门店区域
                                 </a>
                             </li>
                         </ul>
                         <ul class="sub-menu " role="menu">
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1101@')>=0">
                                 <a ui-sref="user/user/userList">
                                     员工
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1102@')>=0">
                                 <a ui-sref="user/role/roleList">
                                     角色
                                 </a>
