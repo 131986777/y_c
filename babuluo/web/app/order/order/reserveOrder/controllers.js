@@ -1,6 +1,6 @@
-angular.module('AndSell.Main').controller('order_order_orderList_Controller', function ($scope, $state, $stateParams, orderFactory, modalFactory) {
+angular.module('AndSell.Main').controller('order_order_reserveOrder_Controller', function ($scope, $state, $stateParams, orderFactory, modalFactory) {
 
-    modalFactory.setTitle('订货单');
+    modalFactory.setTitle('预订单');
     modalFactory.setBottom(false);
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
@@ -23,6 +23,10 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
                 modalFactory.setTitle('订货单');
             } else if ($stateParams.orderType == '3') {
                 modalFactory.setTitle('自提单');
+
+            }
+            else if($stateParams.orderType == '5'){
+                modalFactory.setTitle('预订单')
             }
         }
         if (type == 'all') {
@@ -39,6 +43,7 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
         } else if (type == 'pay') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = -1;
+            $scope.filter['SHOP_ORDER.STATE_OUT'] = 1;
         } else if (type == 'get') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
@@ -46,8 +51,8 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
             $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = -1
         } else if (type == 'out') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_OUT'] = -1
+            $scope.filter['SHOP_ORDER.STATE_MONEY'] = -1;
+            $scope.filter['SHOP_ORDER.STATE_OUT'] = -1;
         } else if (type == 'send') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
@@ -82,7 +87,6 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
         params['SHOP_ORDER.TYPE'] = $stateParams.orderType;
         console.log('hahaha');
         orderFactory.getStateOrders(params, function (response) {
-            console.log(111);
             $scope.orderSizeMap = response.extraData.stateMap;
         });
 
@@ -109,6 +113,14 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
             console.log(response);
         });
         $state.go('order/order/orderDetail', {ORDER_ID: id});
+    }
+
+    //分拣跳转
+    $scope.toSort = function (id) {
+        orderFactory.scanOrder({'SHOP_ORDER.ID': id}, function (response) {
+            console.log(response);
+        });
+        $state.go('order/order/orderSorting', {ORDER_ID: id});
     }
 
 });
