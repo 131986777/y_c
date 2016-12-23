@@ -83,7 +83,6 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
 
     }
 
-
     $scope.save = function (form) {
         salesFactory.ModifySalesProduct(form, function (response) {
             modalFactory.showShortAlert('修改成功');
