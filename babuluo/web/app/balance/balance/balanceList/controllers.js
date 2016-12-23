@@ -236,6 +236,14 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
             $scope.filter['FINANCE_LIST.ADD_DATETIME_FROM'] = '';
             $scope.filter['FINANCE_LIST.ADD_DATETIME_TO'] = '';
         }
+    };
+
+    $scope.filterMoney = function (type) {
+        console.log(type);
+        if (type == 'all') {
+            $scope.filter['FINANCE_LIST.MONEY_FROM'] = '';
+            $scope.filter['FINANCE_LIST.MONEY_TO'] = '';
+        }
     }
 
     $('#start_hour').datetimepicker({
