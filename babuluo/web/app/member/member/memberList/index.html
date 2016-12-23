@@ -52,7 +52,16 @@
                                 value="{{value['MEMBER_CODE_GROUP.ID']}}">
                         </option>
                     </select>
-
+                    <select ng-model="filter['MEMBER.SHOP_ID']"
+                            ng-init="filter['MEMBER.SHOP_ID']='null'"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="null">
+                            所属门店
+                        </option>
+                        <option class="nya-bs-option" ng-repeat="shop in shopList"
+                                ng-bind="shop['SHOP.SHOP_NAME']" value="{{shop['SHOP.SHOP_ID']}}">
+                        </option>
+                    </select>
                     <label class="control-label">排序：</label>
                     <select ng-model="filter['MEMBER.REG_DATETIME']"
                             ng-init="filter['MEMBER.REG_DATETIME']='REG_DATETIME DESC'"
@@ -85,7 +94,8 @@
                 <th class="col-sm-1">姓名</th>
                 <th class="col-sm-1 text-center">手机号码</th>
                 <th class="col-sm-1 text-center">客户分组</th>
-                <th class="col-sm-2 text-center">来源</th>
+                <th class="col-sm-1 text-center">来源</th>
+                <th class="col-sm-1 text-center">所属门店</th>
                 <th class="col-sm-2 text-center">注册时间</th>
                 <th class="col-sm-1 text-center">状态</th>
                 <th class="col-sm-2 text-center">操作</th>
@@ -98,6 +108,7 @@
                 <td ng-bind="ml['MEMBER.MOBILE']" class="text-center"></td>
                 <td ng-bind="ml['MEMBER.GROUP_NAME']" class="text-center"></td>
                 <td ng-bind="ml['MEMBER.CODE_NAME']" class="text-center"></td>
+                <td ng-bind="ml['MEMBER.SHOP']" class="text-center"></td>
                 <td ng-bind="ml['MEMBER.REG_DATETIME'] | FormatAllDate" class="text-center"></td>
                 <td ng-bind="ml['MEMBER.USE_STATE'] | FormatState" class="text-center"></td>
                 <td class="text-center">

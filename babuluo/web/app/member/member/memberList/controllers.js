@@ -22,6 +22,7 @@ angular.module('AndSell.Main').controller('member_member_memberList_Controller',
         $scope.sourceList = response.extraData.sourceList;
         $scope.typeList = response.extraData.typeList;
         $scope.groupList = response.extraData.groupList;
+        $scope.shopList = response.extraData.shopList;
     };
 
     //根据类型加载客户分组
