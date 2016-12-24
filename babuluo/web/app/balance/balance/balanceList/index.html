@@ -181,8 +181,10 @@
                         <span style="color:red" ng-show="balanceInfo['FINANCE_LIST.CHANGE_VALUE']<=0">{{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}</span>
                     </td>
                     <td class="text-center">
+                        <div ng-if="balanceInfo['FINANCE_LIST.USER_ID']!=undefined">
                         <span style="color:black" ng-show="balanceInfo['FINANCE_LIST.BALANCE']>0">{{balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'}}</span>
                         <span style="color:red" ng-show="balanceInfo['FINANCE_LIST.BALANCE']<=0">{{balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'}}</span>
+                        </div>
                     </td>
                 </tr>
                 </tbody>

@@ -58,13 +58,6 @@
                                     value="{{value['SHOP.SHOP_ID']}}">
                             </option>
                         </select>
-                        <label class="control-label">排序：</label>
-                        <select ng-model="filter['MEMBER_CARD.ADD_DATETIME']"
-                                ng-init="filter['MEMBER_CARD.ADD_DATETIME']='ADD_DATETIME DESC'"
-                                class="nya-bs-select form-control">
-                            <option class="nya-bs-option" value="ADD_DATETIME DESC">开卡时间↓</option>
-                            <option class="nya-bs-option" value="ADD_DATETIME ASC">开卡时间↑</option>
-                        </select>
                         <select ng-model="timeType"
                                 ng-init="timeType='all'"
                                 ng-change="filterTime(timeType)"
@@ -93,6 +86,13 @@
                                    name="to" ng-model="filter['MEMBER_CARD.ADD_DATETIME_TO']"
                                    data-date-format="yyyy/mm/dd">
                         </div>
+                        <label class="control-label">排序：</label>
+                        <select ng-model="filter['MEMBER_CARD.ADD_DATETIME']"
+                                ng-init="filter['MEMBER_CARD.ADD_DATETIME']='ADD_DATETIME DESC'"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="ADD_DATETIME DESC">开卡时间↓</option>
+                            <option class="nya-bs-option" value="ADD_DATETIME ASC">开卡时间↑</option>
+                        </select>
                     </div>
                     <div class="col-md-2 text-right">
                         <div class="col-md-8">
