@@ -2,24 +2,23 @@
     <div class="table-content">
         <div class="table-operbar">
             <div class="table-toolbar">
-                <div class="form-inline row">
-                    <div class="col-md-5">
-                        <div class="form-group">
-                            <label for="name" class="control-label">客户:</label>
-                            <input  type="text" class="form-control" id="name" placeholder="登陆ID/手机号"
-                                   ng-model="query['MEMBER_CARD.MEMBER']">
-                        </div>
-                        <div class="form-group">
-                            <label for="cardNum" class="control-label">卡号:</label>
-                            <input type="text" class="form-control" id="cardNum"
-                                   ng-model="query['MEMBER_CARD.CARD_NO']">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default pull-right" ng-click="query()">查询
-                            </button>
-                        </div>
+                <div class="form-inline">
+
+                    <div class="form-group">
+                        <label for="name" class="control-label">客户:</label>
+                        <input type="text" class="form-control" id="name" placeholder="登陆ID/手机号"
+                               ng-model="query['MEMBER_CARD.MEMBER']">
                     </div>
-                    <div class="col-md-5">
+                    <div class="form-group">
+                        <label for="cardNum" class="control-label">卡号:</label>
+                        <input type="text" class="form-control" id="cardNum"
+                               ng-model="query['MEMBER_CARD.CARD_NO']">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right" ng-click="query()">查询
+                        </button>
+                    </div>
+                    <div class="sort">
                         <label class="control-label">筛选：</label>
                         <select ng-model="filter['MEMBER_CARD.SOURCE_ID']"
                                 ng-init="filter['MEMBER_CARD.SOURCE_ID']='null'"
@@ -48,7 +47,7 @@
                         </select>
                         <select ng-model="filter['MEMBER_CARD.SHOP_ID']"
                                 ng-init="filter['MEMBER_CARD.SHOP_ID']='null'"
-                                class="nya-bs-select form-control">
+                                class="nya-bs-select form-control" style="width: 90px">
                             <option class="nya-bs-option" value="null">
                                 所有门店
                             </option>
@@ -69,23 +68,7 @@
                                 时间段内
                             </option>
                         </select>
-                        <div style="display:inline-block;margin:10px 0 0 36px" ng-show="timeType=='aim'"
-                             data-date="10/11/2012"
-                             language="zh-CN"
-                             data-date-format="yyyy-mm-dd">
-                            <input id="start_hour" type="text" class="form-control " placeholder="起始时间"
-                                   name="from" ng-model="filter['MEMBER_CARD.ADD_DATETIME_FROM']"
-                                   data-date-format="yyyy/mm/dd" style="margin-right: 10px"> 至
-                        </div>
 
-                        <div style="display: inline-block;margin: 10px 0 0 10px;" ng-show="timeType=='aim'"
-                             data-date="10/11/2012"
-                             language="zh-CN"
-                             data-date-format="yyyy-mm-dd">
-                            <input id="end_hour" type="text" class="form-control " placeholder="截止时间"
-                                   name="to" ng-model="filter['MEMBER_CARD.ADD_DATETIME_TO']"
-                                   data-date-format="yyyy/mm/dd">
-                        </div>
                         <label class="control-label">排序：</label>
                         <select ng-model="filter['MEMBER_CARD.ADD_DATETIME']"
                                 ng-init="filter['MEMBER_CARD.ADD_DATETIME']='ADD_DATETIME DESC'"
@@ -93,19 +76,32 @@
                             <option class="nya-bs-option" value="ADD_DATETIME DESC">开卡时间↓</option>
                             <option class="nya-bs-option" value="ADD_DATETIME ASC">开卡时间↑</option>
                         </select>
-                    </div>
-                    <div class="col-md-2 text-right">
-                        <div class="col-md-8">
-                            <button type="button" class="btn btn-default" data-toggle="modal"
-                                    data-target="#cardList"><i class="fa fa-plus"></i>开卡
-                            </button>
+                        <div class="time-pick" ng-show="timeType=='aim'">
+                            <div style="display:inline-block;margin:10px 0 0 36px"
+                                 data-date="10/11/2012"
+                                 language="zh-CN"
+                                 data-date-format="yyyy-mm-dd">
+                                <input id="start_hour" type="text" class="form-control " placeholder="起始时间"
+                                       name="from" ng-model="filter['MEMBER_CARD.ADD_DATETIME_FROM']"
+                                       data-date-format="yyyy/mm/dd" style="margin-right: 10px;width: 125px"> 至
+                            </div>
+
+                            <div style="display: inline-block;margin: 10px 0 0 10px;"
+                                 data-date="10/11/2012"
+                                 language="zh-CN"
+                                 data-date-format="yyyy-mm-dd">
+                                <input id="end_hour" type="text" class="form-control " placeholder="截止时间"
+                                       name="to" ng-model="filter['MEMBER_CARD.ADD_DATETIME_TO']"
+                                       data-date-format="yyyy/mm/dd" style="width: 125px">
+                            </div>
                         </div>
-                        <div>
-                            <button type="button" class="btn btn-default pull-right"
-                                    ng-click="outPutQuery()">导出
-                            </button>
-                        </div>
                     </div>
+                    <button type="button" class="btn btn-default pull-right"
+                            ng-click="outPutQuery()">导出
+                    </button>
+                    <button type="button" class="btn btn-default pull-right" data-toggle="modal"
+                            data-target="#cardList"><i class="fa fa-plus"></i>开卡
+                    </button>
                 </div>
             </div>
         </div>
@@ -119,13 +115,16 @@
                     <div class="col-md-6">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</div>
                     <div class="col-md-6 text-right">{{cl['MEMBER_CARD.TYPE_NAME']}}</div>
                 </div>
-                <p class="balance"  ng-if="cl['MEMBER_CARD.STATE']==1" ><span>余额</span>{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}<span ng-click="frezzeCard(cl)">冻结</span></p>
-                <p class="balance"  ng-if="cl['MEMBER_CARD.STATE']==-1" ><span>(冻结)余额</span>{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}<span ng-click="FrozenCard(cl)" >解冻</span></p>
+                <p class="balance" ng-if="cl['MEMBER_CARD.STATE']==1"><span>余额</span>{{cl['MEMBER_CARD.BALANCE'] |
+                    currency : '￥'}}<span ng-click="frezzeCard(cl)">冻结</span></p>
+                <p class="balance" ng-if="cl['MEMBER_CARD.STATE']==-1"><span>(冻结)余额</span>{{cl['MEMBER_CARD.BALANCE'] |
+                    currency : '￥'}}<span ng-click="FrozenCard(cl)">解冻</span></p>
                 <p ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0" class="froze">
                     （冻结{{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}}）
                 </p>
                 <div class="row cardFooter">
-                    <div class="col-md-5 nowrap">{{cl['MEMBER_CARD.MEMBER_NAME']}} {{cl['MEMBER_CARD.MEMBER_PHONE']}}</div>
+                    <div class="col-md-5 nowrap">{{cl['MEMBER_CARD.MEMBER_NAME']}} {{cl['MEMBER_CARD.MEMBER_PHONE']}}
+                    </div>
                     <div class="col-md-3 nowrap text-right count">
                         <span ng-show="cl['MEMBER_CARD.IS_FACE_VALUE']==1">面值{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</span>
                     </div>
