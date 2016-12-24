@@ -31,13 +31,28 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
     })();
 
     bodyKeyDownObverse.init(function (a) {
+
         console.log(a);//输入的值
 
+        console.log($scope.orderDetailList)
+
         //遍历订单下的sku二维码去进行比对
-        if(a.indexOf('111')>0){
-            //做自己的分拣逻辑
-            bodyKeyDownObverse.reset();
-        }
+
+        $scope.orderDetailList.forEach(function (ele,index) {
+
+
+            var BAR_CODE = ele['SHOP_ORDER_INFO.BAR_CODE'];
+
+            if(a == BAR_CODE){
+                //做自己的分拣逻辑
+                //$scope.modifyStockClick(ele);
+                document.querySelectorAll("table>tbody>tr")[index+1].children[2].children[0].click();
+                bodyKeyDownObverse.reset();
+            }
+
+
+        });
+
     });
 
 
@@ -74,9 +89,31 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
     }
     //点击录入按钮
     $scope.modifyStockClick = function (item) {
+        //$('#sort').removeAttr('data-target');
         $scope.stockdetail = item;
         $scope.stockweight = [];
         $scope.stockprice = [];
+
+
+        console.log("点击录入的详情")
+
+        console.log($scope.stockdetail)
+
+        if( $scope.stockdetail['SHOP_ORDER_INFO.UNIT']==undefined)
+            $scope.stockdetail['SHOP_ORDER_INFO.UNIT'] =[];
+
+
+        if( $scope.stockdetail['SHOP_ORDER_INFO.UNIT']!='kg'||$scope.stockdetail['SHOP_ORDER_INFO.UNIT']!='千克'){
+
+            $('#sort').removeAttr('data-target');
+
+            $scope.stockweight = $scope.stockdetail['SHOP_ORDER_INFO.SKU_1_VALUE'];
+
+            $scope.stockprice = $scope.stockdetail['SHOP_ORDER_INFO.PRICE_NOW'];
+
+            $scope.addStockProduct();
+
+        }
     };
     //点击录入的确定按钮
     $scope.addStockProduct = function () {
@@ -161,6 +198,9 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
         $scope.calculatePrdPrice();
 
 
+        console.log($scope.sortedDetailList)
+
+        console.log($scope.orderDetailList)
 
 
     }
@@ -201,6 +241,8 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
         $scope.sortedDetailList.splice(compare2-1,1);
 
         $scope.calculatePrdPrice();
+
+
 
 
     };
