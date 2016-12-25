@@ -1,6 +1,9 @@
 p {
     margin: 0;
 }
+.prevent{
+    pointer-events: none;
+}
 .table > tbody > tr > td {
     vertical-align: middle;
 }

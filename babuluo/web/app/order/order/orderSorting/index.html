@@ -28,7 +28,7 @@
                         <td class="item-price text-right"> <span
                                 ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span> 元 x<span ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span></td>
                         <td class="item-btn text-center" >
-                        <button class="btn btn-default" data-toggle="modal" data-target="#add"ng-click="modifyStockClick(detail)">录入</button>
+                        <button class="btn btn-default" id="sort"data-toggle="modal" data-target="#add"ng-click="modifyStockClick(detail)">录入</button>
                     </td>
                         <td class="item-curInfo">
                             <div ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
@@ -80,12 +80,6 @@
                         <td class="totalNum num"ng-bind="stockprdprice | currency : '￥'"></td>
                     </tr>
                 </table>
-
-
-
-
-
-
 
     <div class="modal fade" id="add" role="dialog" aria-labelledby="add">
         <div class="modal-dialog" aria-hidden="true">
