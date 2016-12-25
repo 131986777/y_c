@@ -9,8 +9,8 @@ public class ENV {
 
 
     //模式
-    public static String STATE = "TEST";//测试模式  不向百年传订单数据
-    //public static String STATE = "NORMAL";//正常模式  向百年传订单
+    //public static String STATE = "TEST";//测试模式  不向百年传订单数据
+    public static String STATE = "NORMAL";//正常模式  向百年传订单
 
     //门店接口
     public static String API_MENDIAN = "http://58.240.110.186:98/BBL/";//线上服
