@@ -3,30 +3,32 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
     modalFactory.setTitle('分拣看板');
     modalFactory.setBottom(false);
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
-    $scope.PRD_SKU=[];
-    $scope.stockweight=[];
-    $scope.stockprice=[];
+    $scope.PRD_SKU = [];
+    $scope.stockweight = [];
+    $scope.stockprice = [];
     $scope.sortedDetailList = [];
     $scope.stockdetail = [];
     $scope.cancelstockdetail = [];
     $scope.cancelsortstockdetail = [];
-    $scope.initstockprice=0;
+    $scope.initstockprice = 0;
 
-    var bodyKeyDownObverse = (function (){
+    var bodyKeyDownObverse = (function () {
         var $str = '';
-        function init(callback){
-            document.body.addEventListener("keydown",function(e){
+
+        function init(callback) {
+            document.body.addEventListener("keydown", function (e) {
                 var $key = String.fromCharCode(e.keyCode);
                 $str += $key;
                 callback($str);
-            },false);
+            }, false);
         }
-        function reset(){
+
+        function reset() {
             $str = '';
         }
+
         return {
-            init:init,
-            reset:reset,
+            init: init, reset: reset,
         }
     })();
 
@@ -38,23 +40,21 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
 
         //遍历订单下的sku二维码去进行比对
 
-        $scope.orderDetailList.forEach(function (ele,index) {
-
+        $scope.orderDetailList.forEach(function (ele, index) {
 
             var BAR_CODE = ele['SHOP_ORDER_INFO.BAR_CODE'];
 
-            if(a == BAR_CODE){
+            if (a == BAR_CODE) {
                 //做自己的分拣逻辑
                 //$scope.modifyStockClick(ele);
-                document.querySelectorAll("table>tbody>tr")[index+1].children[2].children[0].click();
+                document.querySelectorAll("table>tbody>tr")[index
+                + 1].children[2].children[0].click();
                 bodyKeyDownObverse.reset();
             }
-
 
         });
 
     });
-
 
     $scope.initData = function () {
 
@@ -94,18 +94,18 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
         $scope.stockweight = [];
         $scope.stockprice = [];
 
+        console.log("点击录入的详情");
 
-        console.log("点击录入的详情")
+        console.log($scope.stockdetail);
 
-        console.log($scope.stockdetail)
+        if ($scope.stockdetail['SHOP_ORDER_INFO.UNIT'] == undefined) {
+            $scope.stockdetail['SHOP_ORDER_INFO.UNIT'] = [];
+        }
 
-        if( $scope.stockdetail['SHOP_ORDER_INFO.UNIT']==undefined)
-            $scope.stockdetail['SHOP_ORDER_INFO.UNIT'] =[];
-
-
-        if( $scope.stockdetail['SHOP_ORDER_INFO.UNIT']!='kg'||$scope.stockdetail['SHOP_ORDER_INFO.UNIT']!='千克'){
-
-            $('#sort').removeAttr('data-target');
+        if ($scope.stockdetail['SHOP_ORDER_INFO.UNIT']
+            != 'kg'
+            && $scope.stockdetail['SHOP_ORDER_INFO.UNIT']
+            != '千克') {
 
             $scope.stockweight = $scope.stockdetail['SHOP_ORDER_INFO.SKU_1_VALUE'];
 
@@ -113,23 +113,25 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
 
             $scope.addStockProduct();
 
+        } else {
+            $('#add').modal('show');
         }
     };
     //点击录入的确定按钮
     $scope.addStockProduct = function () {
 
-        if( $scope.stockdetail['SHOP_ORDER_INFO.STOCKWEIGHT']==undefined)
-            $scope.stockdetail['SHOP_ORDER_INFO.STOCKWEIGHT'] =[];
+        if ($scope.stockdetail['SHOP_ORDER_INFO.STOCKWEIGHT'] == undefined) {
+            $scope.stockdetail['SHOP_ORDER_INFO.STOCKWEIGHT'] = [];
+        }
 
-        if( $scope.stockdetail['SHOP_ORDER_INFO.STOCKPRICE']==undefined)
-            $scope.stockdetail['SHOP_ORDER_INFO.STOCKPRICE'] =[];
+        if ($scope.stockdetail['SHOP_ORDER_INFO.STOCKPRICE'] == undefined) {
+            $scope.stockdetail['SHOP_ORDER_INFO.STOCKPRICE'] = [];
+        }
 
         var ifNew = true;
 
-
-
         $scope.stockdetail['SHOP_ORDER_INFO.STOCKPRICE'].push({
-            price:$scope.stockprice
+            price: $scope.stockprice
         });
         $scope.stockdetail['SHOP_ORDER_INFO.STOCKSUMPRICE'] = 0;
         //计算实际金额
@@ -137,25 +139,23 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
 
             $scope.stockdetail['SHOP_ORDER_INFO.STOCKSUMPRICE'] += parseFloat(ele.price);
 
-
         });
 
         $scope.stockdetail['SHOP_ORDER_INFO.STOCKSUMPRICE'] = $scope.stockdetail['SHOP_ORDER_INFO.STOCKSUMPRICE'].toFixed(2);
 
         $scope.stockdetail['SHOP_ORDER_INFO.STOCKWEIGHT'].forEach(function (ele) {
             //ele.price = $scope.price;
-            if(ele.weight == $scope.stockweight ){
-                ele.count+=1;
+            if (ele.weight == $scope.stockweight) {
+                ele.count += 1;
                 ele.price = ele.count * ele.price;
-                ifNew=false;
+                ifNew = false;
             }
         });
-        if(ifNew)
-        $scope.stockdetail['SHOP_ORDER_INFO.STOCKWEIGHT'].push({
-            weight:$scope.stockweight,
-            count:1,
-            price:$scope.stockprice
-        });
+        if (ifNew) {
+            $scope.stockdetail['SHOP_ORDER_INFO.STOCKWEIGHT'].push({
+                weight: $scope.stockweight, count: 1, price: $scope.stockprice
+            });
+        }
 
         //计算总件数
         $scope.stockdetail['SHOP_ORDER_INFO.STOCKSUMCOUNT'] = 0;
@@ -166,87 +166,79 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
 
         });
 
-
         //已录入变成灰色
 
-        if($scope.stockdetail['SHOP_ORDER_INFO.STOCKSUMCOUNT'] >= $scope.stockdetail['SHOP_ORDER_INFO.COUNT'] ){
+        if ($scope.stockdetail['SHOP_ORDER_INFO.STOCKSUMCOUNT']
+            >= $scope.stockdetail['SHOP_ORDER_INFO.COUNT']) {
 
-        var comparecount = 0;
+            var comparecount = 0;
 
-        var compare = 0;
+            var compare = 0;
 
-        $scope.orderDetailList.forEach(function (ele) {
+            $scope.orderDetailList.forEach(function (ele) {
 
-            comparecount++;
+                comparecount++;
 
-            if(ele['SHOP_ORDER_INFO.SKU_ID'] == $scope.stockdetail['SHOP_ORDER_INFO.SKU_ID']){
+                if (ele['SHOP_ORDER_INFO.SKU_ID'] == $scope.stockdetail['SHOP_ORDER_INFO.SKU_ID']) {
 
-                compare = comparecount-1;
+                    compare = comparecount - 1;
 
-                $scope.sortedDetailList.push($scope.stockdetail)
+                    $scope.sortedDetailList.push($scope.stockdetail)
 
-            }
+                }
 
-        });
+            });
 
-
-        $scope.orderDetailList.splice(compare,1);
+            $scope.orderDetailList.splice(compare, 1);
 
         }
 
-
         $scope.calculatePrdPrice();
-
 
         console.log($scope.sortedDetailList)
 
         console.log($scope.orderDetailList)
-
 
     }
 
     //已分拣点击撤销
     $scope.cancelSortStockClick = function (item) {
 
-    $scope.cancelsortstockdetail = item;
+        $scope.cancelsortstockdetail = item;
         //已录入变成原来的颜色
         var comparecount2 = 0;
 
         var compare2 = 0;
 
+        delete $scope.cancelsortstockdetail['SHOP_ORDER_INFO.STOCKPRICE'];
+
+        delete $scope.cancelsortstockdetail['SHOP_ORDER_INFO.STOCKWEIGHT'];
+
+        delete $scope.cancelsortstockdetail['SHOP_ORDER_INFO.STOCKSUMCOUNT'];
+
+        delete $scope.cancelsortstockdetail['SHOP_ORDER_INFO.STOCKSUMPRICE'];
+
         $scope.sortedDetailList.forEach(function (ele) {
 
             comparecount2++;
 
-            if(ele['SHOP_ORDER_INFO.SKU_ID'] == $scope.cancelsortstockdetail['SHOP_ORDER_INFO.SKU_ID']){
+            if (ele['SHOP_ORDER_INFO.SKU_ID']
+                == $scope.cancelsortstockdetail['SHOP_ORDER_INFO.SKU_ID']) {
 
                 compare2 = comparecount2;
 
                 $scope.orderDetailList.push($scope.cancelsortstockdetail);
 
-                delete $scope.cancelsortstockdetail['SHOP_ORDER_INFO.STOCKPRICE'];
-
-                delete $scope.cancelsortstockdetail['SHOP_ORDER_INFO.STOCKWEIGHT'];
-
-                delete $scope.cancelsortstockdetail['SHOP_ORDER_INFO.STOCKSUMCOUNT'];
-
-                delete $scope.cancelsortstockdetail['SHOP_ORDER_INFO.STOCKSUMPRICE']
-
             }
-
 
         });
 
-
-        $scope.sortedDetailList.splice(compare2-1,1);
+        $scope.sortedDetailList.splice(compare2 - 1, 1);
 
         $scope.calculatePrdPrice();
 
-
-
-
     };
-   //计算初始总金额
+    //计算初始总金额
     $scope.stockprdprice = 0;
 
     $scope.calculatePrdPrice = function () {
@@ -259,20 +251,22 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
 
         });
 
-
-
-};
+    };
 
     //计算商品分拣金额
     $scope.calculatestockprice = function () {
 
-        var weight1 = $scope.stockdetail['SHOP_ORDER_INFO.SKU_CONTENT_INFO'].replace(/[^0-9]/g,'');
+        var weight1 = $scope.stockdetail['SHOP_ORDER_INFO.SKU_CONTENT_INFO'].replace(/[^0-9]/g, '');
 
-        var weight2 = $scope.stockweight.replace(/[^0-9]/g,'');
+        if (weight1 == '') {
+            weight1 = 1000;
+        }
+        var weight2 = $scope.stockweight.replace(/[^0-9]/g, '');
 
+        console.log(weight2);
 
-
-        var price = weight2/weight1*$scope.stockdetail['SHOP_ORDER_INFO.PRICE_NOW'];
+        var price = (Number(weight2) / Number(weight1))
+            * $scope.stockdetail['SHOP_ORDER_INFO.PRICE_NOW'];
 
         $scope.initstockprice = price.toFixed(2);
 
@@ -280,9 +274,7 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
 
     }
 
-
-    $scope.initStockprice= function () {
-
+    $scope.initStockprice = function () {
 
         $scope.stockprice = $scope.initstockprice;
 
@@ -293,13 +285,25 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
     //分拣完毕，更新状态
     $scope.completesort = function () {
 
+        if ($scope.sortedDetailList.length == 0) {
+            modalFactory.showShortAlert("至少分拣完一件商品！");
+        } else if ($scope.orderDetailList.length > 0) {
+            modalFactory.showAlert("您还有未分拣的商品！ 确定完成分拣？", function () {
+                $scope.endSort();
+            });
+        } else {
+            $scope.endSort();
+        }
+    };
+
+    $scope.endSort = function () {
         console.log("分拣完毕")
 
         // $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = $scope.stockdiscountprice*100;
 
-        $scope.order['SHOP_ORDER.PRICE_ORDER'] = $scope.stockprdprice*100;
+        $scope.order['SHOP_ORDER.PRICE_ORDER'] = $scope.stockprdprice * 100;
 
-        $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.stockprdprice*100;
+        $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.stockprdprice * 100;
 
         $scope.order['SHOP_ORDER.DETAILS'] = JSON.stringify($scope.sortedDetailList);
 
@@ -323,10 +327,6 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
             modalFactory.showShortAlert('分拣失败');
 
         });
-
-
-
-    };
-
+    }
 
 });

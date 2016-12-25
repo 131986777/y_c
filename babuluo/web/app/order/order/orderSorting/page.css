@@ -11,12 +11,14 @@ p {
 .orderHead {
     border-bottom: 1px solid #A9A7AB;
     margin-bottom: 30px;
+
 }
 
 .orderHead .orderNum {
     padding-top: 10px;
     font-size: 18px;
     font-weight: 400;
+    display:inline-block;
 }
 
 .item-info img {

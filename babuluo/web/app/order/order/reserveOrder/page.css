@@ -12,7 +12,6 @@
 
 }
 .orderNav li a{
-    width: 9;
     padding: 0;
     display: inline-block;
     font-size: 16px;
@@ -44,7 +43,7 @@
     padding:20px 30px 10px;
 }
 .productList{
-    width: 80%;
+    width: 85%;
 }
 .productList li{
     height: 80px;

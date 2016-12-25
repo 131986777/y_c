@@ -2,84 +2,99 @@
     <div class="orderHead">
         <div class="orderNum">
             <span ng-bind="'订单编号：'+order['SHOP_ORDER.ORDER_NUM']"></span>
-            <span ng-if="order['SHOP_ORDER.ERP_REMARK']!=undefined&&order['SHOP_ORDER.ERP_REMARK']!=''"
-                  ng-bind="' | 线下单号：'+order['SHOP_ORDER.ERP_NUM']"></span>
+            <span
+                ng-if="order['SHOP_ORDER.ERP_REMARK']!=undefined&&order['SHOP_ORDER.ERP_REMARK']!=''"
+                ng-bind="' | 线下单号：'+order['SHOP_ORDER.ERP_NUM']"></span>
+
         </div>
-        <button ng-click="completesort()"style="float: right">分拣完毕</button>
+        <button ng-click="completesort()" class="btn btn-default" style="float: right">分拣完毕</button>
     </div>
-            <!-- 未分拣 -->
-                <table class="table item-wrap">
-                    <tr>
-                        <th style="width: 500px;">商品信息</th>
-                        <th class="text-right">购买数量</th>
-                        <th></th>
-                        <th class="text-right">实际规格</th>
-                        <th class="text-right">实际金额</th>
-                        <th></th>
-                    </tr>
-                    <tr ng-repeat="detail in orderDetailList">
-                        <td class="item-info ">
-                            <img ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}" />
-                            <p class="itemNum" ng-bind="detail['SHOP_ORDER_INFO.SKU']"></p>
-                            <p class="item-name" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']"></p>
-                            <p ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']"></p>
-                            <p ng-bind="detail['SHOP_ORDER_INFO.REMARK']"></p>
-                        </td>
-                        <td class="item-price text-right"> <span
-                                ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span> 元 x<span ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span></td>
-                        <td class="item-btn text-center" >
-                        <button class="btn btn-default" id="sort"data-toggle="modal" data-target="#add"ng-click="modifyStockClick(detail)">录入</button>
-                    </td>
-                        <td class="item-curInfo">
-                            <div ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
-                            <p ng-bind="stocklist.weight+' X '+stocklist.count"></p></div>
-                        </td>
-                        <td class="item-price text-right"ng-bind="detail['SHOP_ORDER_INFO.STOCKSUMPRICE']"></td>
+    <!-- 未分拣 -->
+    <table class="table item-wrap">
+        <tr>
+            <th style="width: 500px;">商品信息</th>
+            <th class="text-right">购买数量</th>
+            <th></th>
+            <th class="text-right">实际规格</th>
+            <th class="text-right">实际金额</th>
+            <th></th>
+        </tr>
+        <tr ng-repeat="detail in orderDetailList">
+            <td class="item-info ">
+                <img ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}"/>
+                <p class="itemNum" ng-bind="detail['SHOP_ORDER_INFO.SKU']"></p>
+                <p class="item-name" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']"></p>
+                <p ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']"></p>
+                <p ng-bind="detail['SHOP_ORDER_INFO.REMARK']"></p>
+            </td>
+            <td class="item-price text-right"> <span
+                ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span> 元 x<span
+                ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span></td>
+            <td class="item-btn text-center">
+                <button class="btn btn-default" ng-click="modifyStockClick(detail)">录入</button>
+            </td>
+            <td class="item-curInfo">
+                <div ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
+                    <p ng-bind="stocklist.weight+' X '+stocklist.count"></p></div>
+            </td>
+            <td class="item-price text-right">
+                <div ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
+                    <p ng-bind="stocklist.price | currency : '￥'"></p>
+                </div>
+            </td>
+            <td class="item-btn text-right">
+                <button class="btn btn-default" ng-if="detail['SHOP_ORDER_INFO.STOCKWEIGHT'].length>0"
+                        ng-click="cancelSortStockClick(detail)">撤销</button>
+            </td>
+        </tr>
 
-                    </tr>
+        <tr ng-repeat="detail in sortedDetailList">
+            <td class="item-info sorted">
+                <img ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}"/>
+                <p class="itemNum" ng-bind="detail['SHOP_ORDER_INFO.SKU']"></p>
+                <p class="item-name" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']"></p>
+                <p ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']"></p>
+                <p ng-bind="detail['SHOP_ORDER_INFO.REMARK']"></p>
+            </td>
+            <td class="item-price text-right"> <span
+                ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span> 元 x<span
+                ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span></td>
+            <td class="item-btn text-center">
+                <!--<button class="btn btn-default" ng-click="modifyStockClick(detail)">录入</button>-->
+            </td>
+            <td class="item-curInfo">
+                <div ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
+                    <p ng-bind="stocklist.weight+' X '+stocklist.count"></p></div>
+            </td>
+            <td class="item-price text-right">
+                <div ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
+                    <p ng-bind="stocklist.price | currency : '￥'"></p>
+                </div>
+            </td>
 
-                    <tr ng-repeat="detail in sortedDetailList">
-                        <td class="item-info sorted">
-                            <img ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}" />
-                            <p class="itemNum" ng-bind="detail['SHOP_ORDER_INFO.SKU']"></p>
-                            <p class="item-name" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']"></p>
-                            <p ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']"></p>
-                            <p ng-bind="detail['SHOP_ORDER_INFO.REMARK']"></p>
-                        </td>
-                        <td class="item-price text-right"> <span
-                                ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span> 元 x<span ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span></td>
-                        <td class="item-btn text-center" >
-                            <button class="btn btn-default" data-toggle="modal" data-target="#add"ng-click="modifyStockClick(detail)">录入</button>
-                        </td>
-                        <td class="item-curInfo">
-                            <div ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
-                                <p ng-bind="stocklist.weight+' X '+stocklist.count"></p></div>
-                        </td>
-                        <td class="item-price text-right"ng-bind="detail['SHOP_ORDER_INFO.STOCKSUMPRICE']"></td>
-                        <td class="item-btn text-right">
-                            <button class="btn btn-default"ng-click="cancelSortStockClick(detail)">撤销</button>
-                        </td>
-                    </tr>
+            <td class="item-btn text-right">
+                <button class="btn btn-default" ng-click="cancelSortStockClick(detail)">撤销</button>
+            </td>
+        </tr>
 
 
-                </table>
+    </table>
 
 
-
-                <table class="itemTotal">
-                    <tr>
-                        <td style="width:80px;">初始金额</td>
-                        <td class="num"ng-bind="stockprdprice | currency : '￥'"></td>
-                    </tr>
-                    <tr>
-                        <td>优惠金额</td>
-                        <td class="num"ng-bind="stockdiscountprice">￥0.00</td>
-                    </tr>
-                    <tr>
-                        <td>实付金额</td>
-                        <td class="totalNum num"ng-bind="stockprdprice | currency : '￥'"></td>
-                    </tr>
-                </table>
+    <table class="itemTotal">
+        <tr>
+            <td style="width:80px;">初始金额</td>
+            <td class="num" ng-bind="stockprdprice | currency : '￥'"></td>
+        </tr>
+        <tr>
+            <td>优惠金额</td>
+            <td class="num" ng-bind="stockdiscountprice">￥0.00</td>
+        </tr>
+        <tr>
+            <td>实付金额</td>
+            <td class="totalNum num" ng-bind="stockprdprice | currency : '￥'"></td>
+        </tr>
+    </table>
 
     <div class="modal fade" id="add" role="dialog" aria-labelledby="add">
         <div class="modal-dialog" aria-hidden="true">
@@ -101,17 +116,19 @@
                                 条码：
                             </label>
                             <!--<div class="col-sm-7">-->
-                                <div class="col-sm-7 form-control-static" ng-bind="stockdetail['SHOP_ORDER_INFO.SKU']"></div>
+                            <div class="col-sm-7 form-control-static"
+                                 ng-bind="stockdetail['SHOP_ORDER_INFO.SKU']"></div>
                             <!--</div>-->
                             <!--<div class="col-sm-2">-->
-                                <!--<button ng-click="getProductBySkuId()">查询</button>-->
+                            <!--<button ng-click="getProductBySkuId()">查询</button>-->
                             <!--</div>-->
                         </div>
                         <div class="form-group">
                             <label class="col-sm-3 control-label">
                                 商品：
                             </label>
-                            <div class="col-sm-7 form-control-static"ng-bind="stockdetail['SHOP_ORDER_INFO.PRD_NAME']">
+                            <div class="col-sm-7 form-control-static"
+                                 ng-bind="stockdetail['SHOP_ORDER_INFO.PRD_NAME']">
 
                             </div>
                         </div>
@@ -119,7 +136,8 @@
                             <label class="col-sm-3 control-label">
                                 价格：
                             </label>
-                            <div class="col-sm-7 form-control-static"ng-bind="stockdetail['SHOP_ORDER_INFO.PRICE_NOW'] | currency : '￥'">
+                            <div class="col-sm-7 form-control-static"
+                                 ng-bind="stockdetail['SHOP_ORDER_INFO.PRICE_NOW'] | currency : '￥'">
 
                             </div>
                         </div>
@@ -127,7 +145,8 @@
                             <label class="col-sm-3 control-label">
                                 规格：
                             </label>
-                            <div class="col-sm-7 form-control-static"ng-bind="stockdetail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']">
+                            <div class="col-sm-7 form-control-static"
+                                 ng-bind="stockdetail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']">
 
                             </div>
                         </div>
@@ -136,7 +155,8 @@
                                 实际重量：
                             </label>
                             <div class="col-sm-7">
-                                <input class="form-control" type="text"ng-model="stockweight"ng-change="calculatestockprice()">
+                                <input class="form-control" type="text" ng-model="stockweight"
+                                       ng-change="calculatestockprice()">
                             </div>
                         </div>
                         <div class="form-group">
@@ -145,7 +165,8 @@
                             </label>
                             <div class="col-sm-7">
                                 <input class="form-control" tfype="text"
-                                       name="telephone" ng-model="stockprice"ng-init="initStockprice()"
+                                       name="telephone" ng-model="stockprice"
+                                       ng-init="initStockprice()"
                                        required>
                             </div>
                         </div>
