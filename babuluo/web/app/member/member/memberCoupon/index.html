@@ -1,115 +1,115 @@
 <div class="page-content couponList">
     <div class="table-content">
-    <div class="table-operbar">
-        <div class="table-toolbar">
+        <div class="table-operbar">
+            <div class="table-toolbar">
                 <div class="form-inline row">
                     <div class="col-md-2">
                         <select ng-model="filter['MEMBER_COUPON.COUPON_ID']"
-                            ng-init="filter['MEMBER_COUPON.COUPON_ID']=''"
-                            class="nya-bs-select form-control pull-left">
+                                ng-init="filter['MEMBER_COUPON.COUPON_ID']=''"
+                                class="nya-bs-select form-control pull-left">
                             <option class="nya-bs-option" value="">选择优惠券名称</option>
-                            <option ng-repeat="item in couponData" ng-bind="item['COUPON.NAME']"
-                                value="{{item['COUPON.ID']}}"></option>
+                            <option ng-repeat="item in couponList" ng-bind="item['COUPON.NAME']"
+                                    value="{{item['MEMBER_COUPON.COUPON_ID']}}"></option>
 
                         </select>
                     </div>
                     <div class="col-md-3 pull-right text-right">
                         <button show-modal id="#addCoupon" class="btn btn-default sbold green pull-right">
-                        领取优惠券
+                            领取优惠券
                         </button>
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
 
-    <div class="coupon-page">
+        <div class="coupon-page">
 
-        <div class="coupon-wrap">
+            <div class="coupon-wrap">
 
 
-            <div class="coupon-list">
-                <div class="coupon-content" ng-repeat="(key,item) in couponList">
-                    <div class="coupon-head">
-                        <div class="coupon-info">
-                            <p class='couponType'>{{item['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME']}}</p>
-                            <p class="couponTime" ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']!=null">有效期至<span>{{item['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']|FormatAllDate}}</span></p>
-                            <div class="couponValue">
-                                <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
-                                    <span>{{(item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}</span>
+                <div class="coupon-list">
+                    <div class="coupon-content" ng-repeat="(key,item) in couponList">
+                        <div class="coupon-head">
+                            <div class="coupon-info">
+                                <p class='couponType'>{{item['COUPON.NAME']}}</p>
+                                <p class="couponTime" ng-if="item['COUPON.END_DATETIME']!=null">有效期至<span>{{item['COUPON.END_DATETIME']|FormatAllDate}}</span></p>
+                                <div class="couponValue">
+                                <span ng-if="item['COUPON_RULE.TYPE']==1">
+                                    <span>{{(item['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}</span>
                                     <span class='couponType'>元</span>
                                 </span>
-                                <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
-                                    <span>{{(item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</span>
+                                    <span ng-if="item['COUPON_RULE.TYPE']==2">
+                                    <span>{{(item['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</span>
                                     <span class='couponType'>折</span>
                                  </span>
+                                </div>
+                                <!--  <div class="coupon-limit">最多折扣<span>12元</span></div>-->
                             </div>
-                            <!--  <div class="coupon-limit">最多折扣<span>12元</span></div>-->
                         </div>
-                    </div>
-                    <div class="border"></div>
-                    <div class="coupon-contain">
-                        <div class="coupon-desc">
-                            <p class="limit-time">
-                                <span>限定时间(每周</span>
-                                <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
-                                <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
-                                <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
-                                <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
-                                <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
-                                <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
-                                <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
-                                <span>)</span>
-                            </p>
-                            <p class="limit-item">
+                        <div class="border"></div>
+                        <div class="coupon-contain">
+                            <div class="coupon-desc">
+                                <p class="limit-time">
+                                    <span>限定时间(每周</span>
+                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
+                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
+                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
+                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
+                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
+                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
+                                    <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
+                                    <span>)</span>
+                                </p>
+                                <p class="limit-item">
 
-                                <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">限定商品使用
-                                  <a data-toggle="modal" data-target="#detail" class="btn sbold green" ng-click="detailClick(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])">
+                                <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==1">限定商品使用
+                                  <a data-toggle="modal" data-target="#detail" class="btn sbold green" ng-click="detailClick(item['COUPON.TARGET_OBJ_INFO'])">
                                     查看详情
                                   </a>
                                 </span>
-                                <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==2">限定商品类别使用
-                                 <a data-toggle="modal" data-target="#detail" class="btn sbold green" ng-click="detailClick(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])">
+                                    <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==2">限定商品类别使用
+                                 <a data-toggle="modal" data-target="#detail" class="btn sbold green" ng-click="detailClick(item['COUPON.TARGET_OBJ_INFO'])">
                                     查看详情
                                   </a></span>
-                                <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==3">限定商品标签使用
-                                  <a data-toggle="modal" data-target="#detail" class="btn sbold green" ng-click="detailClick(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])">
+                                    <span ng-if="item['COUPON.TARGET_OBJ_TYPE']==3">限定商品标签使用
+                                  <a data-toggle="modal" data-target="#detail" class="btn sbold green" ng-click="detailClick(item['COUPON.TARGET_OBJ_INFO'])">
                                     查看详情
                                   </a>
                                 </span>
-                            </p>
-                            <p class="coupon-detail">
-                                {{item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.INTRO']}}</p>
-                            <!--<div class="coupon-footer text-right">
-                                限量300张，每人限领1张
-                            </div>-->
-                            <!--停用/过期-->
-                            <div class="coupon-state"></div>
-                            <div class="coupon-footer text-right">
-                                <!--<div class="buttons">
-                                    <a show-modal id="#modCoupon" ng-click="modCouponClick(item['MEMBER_COUPON.COUPON_INFO'])" class="note"
-                                       ng-if="mouseIsEnter[key]&&item['MEMBER_COUPON.COUPON_INFO']['COUPON.IsEnd']==-1"></a>
-                                    <a ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.STOP']==1&&item['MEMBER_COUPON.COUPON_INFO']['COUPON.IsEnd']==-1&&mouseIsEnter[key]"
-                                       class="stop" ng-click="stopCoupon(item['MEMBER_COUPON.COUPON_INFO'])"></a>
-                                    <a ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.STOP']==-1&&item['MEMBER_COUPON.COUPON_INFO']['COUPON.IsEnd']==-1&&mouseIsEnter[key]"
-                                       class="start" ng-click="stopCoupon(item['MEMBER_COUPON.COUPON_INFO'])"></a>&lt;!&ndash;启用&ndash;&gt;
-                                    <a class="del" ng-click="delCoupon(item['MEMBER_COUPON.COUPON_INFO'])"></a>
-                                </div>&lt;!&ndash; 图标 &ndash;&gt;-->
-                                <span>{{item['MEMBER_COUPON.MEMBER_LOGIN_ID']}}</span>
+                                </p>
+                                <p class="coupon-detail">
+                                    {{item['COUPON_RULE.INTRO']}}</p>
+                                <!--<div class="coupon-footer text-right">
+                                    限量300张，每人限领1张
+                                </div>-->
+                                <!--停用/过期-->
+                                <div class="coupon-state"></div>
+                                <div class="coupon-footer text-right">
+                                    <!--<div class="buttons">
+                                        <a show-modal id="#modCoupon" ng-click="modCouponClick(item)" class="note"
+                                           ng-if="mouseIsEnter[key]&&item['COUPON.IsEnd']==-1"></a>
+                                        <a ng-if="item['COUPON.STOP']==1&&item['COUPON.IsEnd']==-1&&mouseIsEnter[key]"
+                                           class="stop" ng-click="stopCoupon(item)"></a>
+                                        <a ng-if="item['COUPON.STOP']==-1&&item['COUPON.IsEnd']==-1&&mouseIsEnter[key]"
+                                           class="start" ng-click="stopCoupon(item)"></a>&lt;!&ndash;启用&ndash;&gt;
+                                        <a class="del" ng-click="delCoupon(item)"></a>
+                                    </div>&lt;!&ndash; 图标 &ndash;&gt;-->
+                                    <span>{{item['MEMBER_COUPON.MEMBER_LOGIN_ID']}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
 
         </div>
-
-    </div>
-    <div page-bar
-         filter-obj="filter"
-         url="/member/coupon/queryAll"
-         callback="bindData(response)">
-    </div>
+        <div page-bar
+             filter-obj="filter"
+             url="/member/coupon/queryAll"
+             callback="bindData(response)">
+        </div>
     </div>
     <!--<class-switch-modal callback="classSwitch(data)"></class-switch-modal>
     <tag-switch-modal callback="tagSwitch(data)"></tag-switch-modal>
@@ -169,11 +169,11 @@
                             </label>
 
                             <div class="col-md-8">
-                               <select  class="nya-bs-select form-control"
-                                        ng-model="coupon"
-                                        ng-options="item as item['COUPON.NAME'] for item in couponData" >
-                                   <option class="nya-bs-option" value="">选择优惠券</option>
-                               </select>
+                                <select  class="nya-bs-select form-control"
+                                         ng-model="coupon"
+                                         ng-options="item as item['COUPON.NAME'] for item in couponList2" >
+                                    <option class="nya-bs-option" value="">选择优惠券</option>
+                                </select>
                             </div>
                         </div>
 

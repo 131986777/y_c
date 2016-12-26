@@ -6,15 +6,27 @@ angular.module('AndSell.Main').controller('member_member_memberCoupon_Controller
     $scope.bindData = function (response) {
         $scope.userDetailMap = response.extraData.userDetailMap;
         $scope.couponData = response.extraData.couponList;
+        $scope.ruleList = response.extraData.ruleList;
         $scope.couponList = response.data;
+        memberFactory.queryAllName(function (resp) {
+            $scope.couponList2 = resp.data;
+            console.log($scope.couponList2);
+        });
+
+        $scope.memberDetail = {};
         console.log($scope.couponList);
     };
     $scope.queryMemberById = function (memberId) {
-        $scope.memberDetail = $scope.userDetailMap[memberId];
-        console.log($scope.memberDetail);
-        if ($scope.memberDetail == undefined) {
-            modalFactory.showAlert("未找到该客户");
-        }
+        memberFactory.getMemberByName({'MEMBER.LOGIN_ID':$scope.memberId},function(resp) {
+            resp.data.forEach(function (ele) {
+                if ($scope.memberDetail == ele['MEMBER.LOGIN_ID']) {
+                    modalFactory.showAlert("未找到该客户");
+                }else {
+                    $scope.memberDetail=ele;
+                }
+            });
+        },null);
+
     };
 
     $scope.detailClick = function (item) {
