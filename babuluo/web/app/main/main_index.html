@@ -48,8 +48,10 @@
     <script type="text/javascript"
             src="http://webapi.amap.com/maps?v=1.3&key=ef5bbbdf7bca82910095f043224c0138&plugin=AMap.Autocomplete"></script>
 
-
-
+    <!--导出数据-->
+    <script src="/AndSell/app/analysis/analysis/analysis-outputexcel.js"></script>
+    <!--ECharts-->
+    <script type="application/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/echarts/3.3.1/echarts.min.js"></script>
 
 </head>
 
@@ -212,9 +214,9 @@
                                 <a ui-sref="order/order/refundOrder">
                                     退款单
                                 </a>
-                                <a ui-sref="order/order/paymentOrder">
-                                    付款单
-                                </a>
+                                <!--<a ui-sref="order/order/paymentOrder">-->
+                                    <!--付款单-->
+                                <!--</a>-->
                             </li>
                             <li>
                                 <a ui-sref="order/order/reserveOrder({orderType:'5'})">
@@ -612,6 +614,7 @@
 <script src="/AndSell/app/stock/stock-router.js"></script><!--库存相关路由中心-->
 <script src="/AndSell/app/marketing/marketing-router.js"></script><!--营销相关路由中心-->
 <script src="/AndSell/app/user/user-router.js"></script><!--管理员相关路由中心-->
+<script src="/AndSell/app/analysis/analysis-router.js"></script><!--数据分析相关路由-->
 
 
 <!--############service集合区############-->
@@ -639,6 +642,7 @@
 <script src="/AndSell/app/balance/balance/balance-services.js"></script><!--资金示例使用-->
 <script src="/AndSell/app/card/card/card-services.js"></script><!--demo2 示例使用-->
 <script src="/AndSell/app/order/order/order-services.js"></script><!--demo2 示例使用-->
+<script src="/AndSell/app/analysis/analysis/analysis-service.js"></script><!--数据分析-->
 
 <!--############controller集合区(以后尝试 切换时注入)############-->
 <script src="main_controller.js"></script>

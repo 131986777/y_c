@@ -47,6 +47,15 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                 var skulistsForOrder = new Array;
                 $scope.skuList.forEach(function (ele) {
                     setContentsInfo(ele);
+                    if (cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']] > ele['SHOP_PRODUCT_SKU.STOCK']) {
+                        weUI.toast.info(ele['SHOP_PRODUCT.PRD_NAME']
+                            + "剩余"
+                            + ele['SHOP_PRODUCT_SKU.STOCK']
+                            + "件，已自动调整数量！");
+                        cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']] = ele['SHOP_PRODUCT_SKU.STOCK'];
+                        setCookie('cartSize', JSON.stringify(cartSize));
+                        $scope.updateCartPrice();
+                    }
                     ele['SHOP_PRODUCT_SKU.SIZE'] = cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
                     ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
                     ele.isSale = false;
@@ -56,7 +65,9 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                         'num': ele['SHOP_PRODUCT_SKU.SIZE'],
                         'price': ele['SHOP_PRODUCT_SKU.REAL_PRICES']
                     });
+
                 });
+                console.log($scope.skuList);
                 $scope.calculateSaleInfo(skulistsForOrder);
                 $scope.checkAllPrd();
             })

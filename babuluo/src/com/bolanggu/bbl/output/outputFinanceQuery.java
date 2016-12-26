@@ -191,14 +191,13 @@ public class outputFinanceQuery {
             }
 
             String cardBalance = StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_BALANCE"), "");
+            String cardBalanceBefore = "";
             if (!"".equals(cardBalance)) {
                 cardBalance = "￥" + cardBalance;
-            }
-
-            String cardBalanceBefore = StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.BEFORE_CARD_BALANCE"), "");
-            if (!"".equals(cardBalanceBefore)) {
+                cardBalanceBefore = StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.BEFORE_CARD_BALANCE"), "");
                 cardBalanceBefore = "￥" + cardBalanceBefore;
             }
+
 
             HSSFRow row = financeSheet.createRow(rowIndex++);
             row.setHeightInPoints(25);
@@ -266,10 +265,14 @@ public class outputFinanceQuery {
         rowM.createCell(6).setCellValue("");
         rowM.createCell(7).setCellValue("");
         rowM.createCell(8).setCellValue("");
-        Cell cellTime = rowM.createCell(9);
+        rowM.createCell(9).setCellValue("");
+        rowM.createCell(10).setCellValue("");
+        rowM.createCell(11).setCellValue("");
+        rowM.createCell(12).setCellValue("");
+        Cell cellTime = rowM.createCell(13);
         cellTime.setCellValue("导出时间：");
         cellTime.setCellStyle(cellStyle);
-        Cell cellTimeValue = rowM.createCell(10);
+        Cell cellTimeValue = rowM.createCell(14);
         cellTimeValue.setCellValue(dateFormat.format(DateUtil.getCurrTime()));
         cellTimeValue.setCellStyle(cellStyle);
 
