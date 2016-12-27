@@ -1,15 +1,17 @@
-<div class="page-content couponList">
+<div class="page-content couponList" ng-init="initData()">
     <div class="table-content">
         <div class="table-operbar">
             <div class="table-toolbar">
                 <div class="form-inline row">
                     <div class="col-md-2">
-                        <select ng-model="filter['MEMBER_COUPON.COUPON_ID']"
-                                ng-init="filter['MEMBER_COUPON.COUPON_ID']=''"
-                                class="nya-bs-select form-control pull-left">
+                        <select ng-model="filter['COUPON.ID']"
+                                ng-init="filter['COUPON.ID']=''"
+                                class="nya-bs-select form-control pull-left"
+                                ng-options="coupon['COUPON.ID'] as coupon['COUPON.NAME'] for coupon in couponData"
+                        >
                             <option class="nya-bs-option" value="">选择优惠券名称</option>
-                            <option ng-repeat="item in couponList" ng-bind="item['COUPON.NAME']"
-                                    value="{{item['MEMBER_COUPON.COUPON_ID']}}"></option>
+                            <!--<option ng-repeat="item in couponData" ng-bind="item['COUPON.NAME']"
+                                    value="item['COUPON.ID']"></option>-->
 
                         </select>
                     </div>
@@ -171,7 +173,7 @@
                             <div class="col-md-8">
                                 <select  class="nya-bs-select form-control"
                                          ng-model="coupon"
-                                         ng-options="item as item['COUPON.NAME'] for item in couponList2" >
+                                         ng-options="coupon['COUPON.ID'] as coupon['COUPON.NAME'] for coupon in couponData" >
                                     <option class="nya-bs-option" value="">选择优惠券</option>
                                 </select>
                             </div>

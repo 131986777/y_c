@@ -3,15 +3,19 @@ angular.module('AndSell.Main').controller('member_member_memberCoupon_Controller
     //设置页面Title
     modalFactory.setTitle('客户优惠券');
 
+    $scope.initData = function (){
+        memberFactory.getAllCoupon({},function(resp) {
+            $scope.couponData = resp.data;
+        });
+        console.log($scope.couponData);
+    };
+
     $scope.bindData = function (response) {
         $scope.userDetailMap = response.extraData.userDetailMap;
-        $scope.couponData = response.extraData.couponList;
+        // $scope.couponData = response.extraData.couponList;
         $scope.ruleList = response.extraData.ruleList;
         $scope.couponList = response.data;
-        memberFactory.queryAllName(function (resp) {
-            $scope.couponList2 = resp.data;
-            console.log($scope.couponList2);
-        });
+
 
         $scope.memberDetail = {};
         console.log($scope.couponList);

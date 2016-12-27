@@ -13,3 +13,6 @@ babuluo/web/WEB-INF/classes/
 /.gitignore
 /bbl.iml
 /README.md
+/babuluo/web/WEB-INF/web.xml
+/babuluo/web/META-INF/context.xml
+/babuluo/web/WEB-INF/web.xml

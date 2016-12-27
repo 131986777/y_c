@@ -21,5 +21,6 @@ this.getMemberByName = http.post('/member/member/getByName');
 
     this.addMemberCoupon=http.post( '/member/coupon/add');
     this.modCouponLeft=http.post('/coupon/coupon/modLeftNum');
+    this.getAllCoupon=http.post('/coupon/coupon/queryAll');
 
 });
