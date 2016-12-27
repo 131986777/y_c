@@ -153,7 +153,7 @@
                 <li class="logo text-center">
                     <img  src="../components/images/logo.png">
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1062@')>=0">
                     <a ui-sref="product/product/productList" class="dropdown-toggle" data-toggle="dropdown"
                        data-hover="dropdown">
                         <i class="iconfont icon-shangpin"></i>
@@ -161,12 +161,12 @@
                     </a>
                     <div class="sub-menu-wrap sub-menu-2  dropdown-menu" role="menu">
                         <ul class="sub-menu " role="menu">
-                            <li class="">
+                            <li class="" ng-if="APP_ID_LIST.indexOf('@1070@')>=0">
                                 <a ui-sref="product/product/productAdd">
                                     商品录入
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1071@')>=0">
                                 <a ui-sref="product/product/productList">
                                     商品列表
                                 </a>
@@ -174,17 +174,17 @@
 
                         </ul>
                         <ul class="sub-menu " role="menu">
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1072@')>=0">
                                 <a ui-sref="product/class/classList">
                                     商品分类
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1073@')>=0">
                                 <a ui-sref="product/tag/tagList">
                                     商品标签
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1073@')>=0">
                                 <a ui-sref="product/unit/unitList">
                                     商品单位
                                 </a>
@@ -192,25 +192,25 @@
                         </ul>
                     </div>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1063@')>=0">
                     <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="order/order/orderList({orderType:'3'})"
                        data-hover="dropdown">
                         <i class="icon-docs"></i>
                         订单
                     </a>
                     <div class="sub-menu-wrap dropdown-menu" role="menu">
-                        <ul class="sub-menu ">
-                            <li>
+                        <ul class="sub-menu">
+                            <li ng-if="APP_ID_LIST.indexOf('@1075@')>=0">
                                 <a ui-sref="order/order/orderList({orderType:'1'})">
                                     订货单
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1076@')>=0">
                                 <a ui-sref="order/order/orderList({orderType:'3'})">
                                     自提单
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1077@')>=0">
                                 <a ui-sref="order/order/refundOrder">
                                     退款单
                                 </a>
@@ -218,7 +218,7 @@
                                     <!--付款单-->
                                 <!--</a>-->
                             </li>
-                            <li>
+                            <li  ng-if="APP_ID_LIST.indexOf('@1110@')>=0">
                                 <a ui-sref="order/order/reserveOrder({orderType:'5'})">
                                     预约单
                                 </a>
@@ -236,20 +236,20 @@
                         </ul>
                     </div>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1064@')>=0">
                     <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="stock/stock/stockList"
                        data-hover="dropdown">
                         <i class="iconfont icon-kucun"></i>
                         库存
                     </a>
                     <div class="sub-menu-wrap dropdown-menu" role="menu">
-                        <ul class="sub-menu ">
-                            <li>
+                        <ul class="sub-menu">
+                            <li ng-if="APP_ID_LIST.indexOf('@1079@')>=0">
                                 <a ui-sref="stock/store/storeList">
                                     仓库列表
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1080@')>=0">
                                 <a ui-sref="stock/stock/stockList">
                                     实时库存
                                 </a>
@@ -257,30 +257,30 @@
                         </ul>
                     </div>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1065@')>=0">
                     <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="member/member/memberList"
                        data-hover="dropdown">
                         <i class="icon-users"></i>
                         客户
                     </a>
                     <div class="sub-menu-wrap sub-menu-2 dropdown-menu">
-                        <ul class="sub-menu " role="menu">
-                            <li>
+                        <ul class="sub-menu" role="menu">
+                            <li ng-if="APP_ID_LIST.indexOf('@1081@')>=0">
                                 <a ui-sref="member/member/memberList">
                                     客户列表
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1082@')>=0">
                                 <a ui-sref="member/source/sourceList">
                                     客户来源
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1083@')>=0">
                                 <a ui-sref="member/group/groupList">
                                     客户分组
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1084@')>=0">
                                 <a ui-sref="member/type/typeList">
                                     客户类型
                                 </a>
@@ -288,20 +288,22 @@
                         </ul>
 
                         <ul class="sub-menu" role="menu">
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1085@')>=0">
                                 <a ui-sref="member/member/memberCoupon">
                                     客户优惠券
                                 </a>
+                            </li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1086@')>=0">
                                 <a ui-sref="card/card/cardList">
                                     已开会员卡
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1087@')>=0">
                                 <a ui-sref="card/card/cardType">
                                     会员卡类型
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1088@')>=0">
                                 <a ui-sref="card/card/cardSource">
                                     发卡渠道
                                 </a>
@@ -309,7 +311,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1066@')>=0">
                     <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="balance/balance/balanceList"
                        data-hover="dropdown">
                         <i class="iconfont icon-zijinyue"></i>
@@ -317,12 +319,12 @@
                     </a>
                     <div class="sub-menu-wrap sub-menu-1 dropdown-menu">
                         <ul class="sub-menu" role="menu">
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1089@')>=0">
                                 <a ui-sref="balance/balance/balanceList">
                                     资金明细
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1090@')>=0">
                                 <a ui-sref="point/point/pointList">
                                     积分明细
                                 </a>
@@ -330,7 +332,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1067@')>=0">
                     <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="marketing/coupon/coupon/couponList"
                        data-hover="dropdown">
                         <i class="icon-graph"></i>
@@ -339,53 +341,52 @@
                     </a>
                     <div class="sub-menu-wrap sub-menu-3 dropdown-menu">
                         <ul class="sub-menu " role="menu">
-
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1091@')>=0">
                                 <a ui-sref="marketing/sales/sales/salesList">
                                     交易促销
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1092@')>=0">
                                 <a ui-sref="marketing/coupon/coupon/couponList">
                                     优惠券
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1093@')>=0">
                                 <a href="#">
                                     事件营销
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1094@')>=0">
                                 <a ui-sref="marketing/sales/event">
                                     事件
                                 </a>
                             </li>
-                            <li>
-                                <a ui-sref="marketing/sales/activity">
-                                    充值活动
-                                </a>
-                            </li>
+                            <!--<li>-->
+                                <!--<a ui-sref="marketing/sales/activity">-->
+                                    <!--充值活动-->
+                                <!--</a>-->
+                            <!--</li>-->
                         </ul>
 
                         <ul class="sub-menu " role="menu">
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1095@')>=0">
                                 <a ui-sref="marketing/banner/banner">
                                     横幅
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1096@')>=0">
                                 <a ui-sref="marketing/banner/bannerPosition">
                                     横幅位置
                                 </a>
                             </li>
                         </ul>
-                        <ul class="sub-menu " role="menu">
-                            <li>
+                        <ul class="sub-menu" role="menu">
+                            <li ng-if="APP_ID_LIST.indexOf('@1097@')>=0">
                                 <a ui-sref="marketing/sales/rule/ruleList">
                                     促销规则
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1098@')>=0">
                                 <a ui-sref="marketing/coupon/rule/ruleList">
                                     优惠券规则
                                 </a>
@@ -393,13 +394,13 @@
                         </ul>
                     </div>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1068@')>=0">
                     <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="shop/shop/shopList"
                        data-hover="dropdown">
                         <i class="icon-settings"></i>
                         管理
                     </a>
-                    <div class="sub-menu-wrap sub-menu-3 dropdown-menu">
+                    <div class="sub-menu-wrap sub-menu-2 dropdown-menu">
                         <ul class="sub-menu " role="menu">
                             <li ng-if="APP_ID_LIST.indexOf('@1099@')>=0">
                                 <a ui-sref="shop/shop/shopList">
@@ -424,18 +425,18 @@
                                 </a>
                             </li>
                         </ul>
-                        <ul class="sub-menu " role="menu">
-                            <li>
-                                <a href="#">
-                                    操作日志
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    系统配置
-                                </a>
-                            </li>
-                        </ul>
+                        <!--<ul class="sub-menu " role="menu">-->
+                            <!--<li>-->
+                                <!--<a href="#">-->
+                                    <!--操作日志-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<a href="#">-->
+                                    <!--系统配置-->
+                                <!--</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
                     </div>
                 </li>
                 <!--<li class="dropdown">-->
