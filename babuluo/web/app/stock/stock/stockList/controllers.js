@@ -20,9 +20,17 @@ angular.module('AndSell.Main').controller('stock_stock_stockList_Controller', fu
     $scope.modifyStockClick = function (item) {
         $scope.stockLogList={};
         $scope.modify = clone(item);
-        $scope.filterstocklog['STOCK_LOG.PRD_ID']=$scope.modify['STOCK_REALTIME.PID'];
-        $scope.filterstocklog['STOCK_LOG.REPOS_ID']=$scope.modify['STOCK_REALTIME.STORE_ID'];
+        $scope.filterstocklog['STOCK_LOG.SHOP_ID']=$scope.modify['STOCK_REALTIME.SHOP_ID'];
+        $scope.filterstocklog['STOCK_LOG.GOODSCODE']=$scope.modify['STOCK_REALTIME.GOODSCODE'];
 
+    };
+
+    $scope.detailStockClick = function (item) {
+        $scope.stockLogList={};
+        $scope.modify = clone(item);
+        $scope.filterstocklog['STOCK_LOG.SHOP_ID']=$scope.modify['STOCK_REALTIME.SHOP_ID'];
+        $scope.filterstocklog['STOCK_LOG.GOODSCODE']=$scope.modify['STOCK_REALTIME.GOODSCODE'];
+        $scope.$broadcast('pageBar.reload');
     };
 
     $scope.modifyStock = function () {
