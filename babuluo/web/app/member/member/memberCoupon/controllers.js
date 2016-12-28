@@ -35,7 +35,7 @@ angular.module('AndSell.Main').controller('member_member_memberCoupon_Controller
 
     $scope.detailClick = function (item) {
         $scope.detailArray = item.split("<br>");
-    }
+    };
 
     $scope.coupon = {};
     $scope.add = {};

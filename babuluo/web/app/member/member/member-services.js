@@ -13,7 +13,7 @@ AndSellMainModule.service('memberFactory', function (http) {
     this.getUIDByLOGINID = http.post('/member/member/getUIDByLOGINID')
     this.getCardByLoginId = http.post('/member/membercard/getCardByLoginId');
     this.getMemberAccountByLoginId = http.post('/member/member/getAccountByLoginID');
-this.getMemberByName = http.post('/member/member/getByName');
+    this.getMemberByName = http.post('/member/member/getByName');
     this.modMemberDataById=http.post('/member/memberData/modifyById');
     this.getMembercardInfo=http.post('/member/membercard/getByUserId');
     this.getMembercardType=http.post('/member/cardType/getById');
