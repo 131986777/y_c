@@ -13,7 +13,7 @@ AndSellMainModule.service('memberFactory', function (http) {
     this.getUIDByLOGINID = http.post('/member/member/getUIDByLOGINID')
     this.getCardByLoginId = http.post('/member/membercard/getCardByLoginId');
     this.getMemberAccountByLoginId = http.post('/member/member/getAccountByLoginID');
-
+    this.getMemberByName = http.post('/member/member/getByName');
     this.modMemberDataById=http.post('/member/memberData/modifyById');
     this.getMembercardInfo=http.post('/member/membercard/getByUserId');
     this.getMembercardType=http.post('/member/cardType/getById');
@@ -21,5 +21,6 @@ AndSellMainModule.service('memberFactory', function (http) {
 
     this.addMemberCoupon=http.post( '/member/coupon/add');
     this.modCouponLeft=http.post('/coupon/coupon/modLeftNum');
+    this.getAllCoupon=http.post('/coupon/coupon/queryAll');
 
 });
