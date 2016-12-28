@@ -17,6 +17,7 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
     }
 
     $scope.prdSwitch = function (data) {
+        console.log(data);
         var array = new Array();
         for (var i = 0; i < data.length; i++) {
             array.push(data[i]['SHOP_PRODUCT_SKU.SKU_ID']);
@@ -27,8 +28,9 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
                 result.push(array[i])
             }
         }
+        console.log(result);
         //插入促销商品
-        $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result;
+        $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result.toString();
         $scope.save($scope.updatePlanForm);
     }
 
