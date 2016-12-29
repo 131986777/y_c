@@ -141,21 +141,22 @@
         <div class="table-scrollable">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
-                <th> 时间</th>
-                <th> 姓名</th>
-                <th> 手机</th>
+                <th> 交易时间</th>
+                <th> 客户姓名</th>
+                <th> 客户手机号</th>
                 <th> 事件</th>
-                <th> 说明</th>
+                <!--<th> 说明</th>-->
                 <th> 交易卡号</th>
-                <th> 交易前</th>
-                <th> 交易后</th>
-                <th> 卡类别</th>
-                <th> 开卡店</th>
+                <!--<th> 交易前</th>-->
+                <!--<th> 交易后</th>-->
+                <th> 交易卡类别</th>
+                <!--<th> 开卡店</th>-->
                 <th> 操作店</th>
-                <th> 操作员</th>
+                <!--<th> 操作员</th>-->
                 <th> 类型</th>
                 <th class="text-center"> 交易金额</th>
-                <th class="text-center"> 账户余额</th>
+                <th class="text-center"> 账户可用余额</th>
+                <th class="text-center"> 操作</th>
                 </tr>
                 </thead>
                 <tbody ng-cloak>
@@ -164,14 +165,14 @@
                     <td ng-bind="balanceInfo['FINANCE_LIST.TRUE_NAME']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.MEMBER_MOBILE']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT']"></td>
-                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>
+                    <!--<td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>-->
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_NO']"></td>
-                    <td ng-bind="balanceInfo['FINANCE_LIST.BEFORE_CARD_BALANCE']| currency :'￥'"></td>
-                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_BALANCE']| currency :'￥'"></td>
+                    <!--<td ng-bind="balanceInfo['FINANCE_LIST.BEFORE_CARD_BALANCE']| currency :'￥'"></td>-->
+                    <!--<td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_BALANCE']| currency :'￥'"></td>-->
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_TYPE']"></td>
-                    <td ng-bind="balanceInfo['FINANCE_LIST.CARD_SHOP']"></td>
+                    <!--<td ng-bind="balanceInfo['FINANCE_LIST.CARD_SHOP']"></td>-->
                     <td ng-bind="balanceInfo['FINANCE_LIST.SHOP']"></td>
-                    <td ng-bind="balanceInfo['FINANCE_LIST.OPER_USER_ID']"></td>
+                    <!--<td ng-bind="balanceInfo['FINANCE_LIST.OPER_USER_ID']"></td>-->
                     <td>
                         <span style="color:red" ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='decrease'">支出</span>
                         <span style="color:green" ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='increase'">收入</span>
@@ -182,9 +183,13 @@
                     </td>
                     <td class="text-center">
                         <div ng-if="balanceInfo['FINANCE_LIST.USER_ID']!=undefined">
-                        <span style="color:black" ng-show="balanceInfo['FINANCE_LIST.BALANCE']>0">{{balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'}}</span>
-                        <span style="color:red" ng-show="balanceInfo['FINANCE_LIST.BALANCE']<=0">{{balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'}}</span>
+                            <span style="color:black" ng-show="balanceInfo['FINANCE_LIST.BALANCE']>0">{{balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'}}</span>
+                            <span style="color:red" ng-show="balanceInfo['FINANCE_LIST.BALANCE']<=0">{{balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'}}</span>
                         </div>
+                    </td>
+                    <td class="text-center">
+                        <a class="table-link" data-toggle="modal" data-target="#showMore"
+                           ng-click="getFinanceListById(balanceInfo)">更多</a>
                     </td>
                 </tr>
                 </tbody>
@@ -198,6 +203,74 @@
         </div>
     </div>
 
+    <div class="modal fade" id="showMore" role="dialog" aria-labelledby="edit">
+        <div class="modal-dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title">
+                        更多交易信息
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" name="editForm" novalidate>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                交易说明：
+                            </label>
+                            <label class="col-sm-7 control-label" style="text-align: left">
+                                {{finMore['FINANCE_LIST.EVENT_INTRO']}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                卡交易前余额：
+                            </label>
+                            <label class="col-sm-7 control-label" style="text-align: left">
+                                {{finMore['FINANCE_LIST.EVENT_CARD_BALANCE'] | currency :'￥'}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                卡交易后余额：
+                            </label>
+                            <label class="col-sm-7 control-label" style="text-align: left">
+                                {{finMore['FINANCE_LIST.BEFORE_CARD_BALANCE'] | currency :'￥'}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                开卡门店：
+                            </label>
+                            <label class="col-sm-7 control-label" style="text-align: left">
+                                {{finMore['FINANCE_LIST.SHOP']}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                交易操作人：
+                            </label>
+                            <label class="col-sm-7 control-label" style="text-align: left">
+                                {{finMore['FINANCE_LIST.OPER_USER_ID']}}
+                            </label>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">
+                                保存
+                            </button>
+                            <button class="btn btn-default"
+                                    data-dismiss="modal">
+                                关闭
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="balance">
         <div class="modal-dialog">
@@ -330,7 +403,7 @@
                             <div class="col-sm-8">
                                 <select ng-model="ACTIVITY_ID"
                                         class="nya-bs-select form-control" ng-init="ACTIVITY_ID ='{$null}'">
-                                    <option class="nya-bs-option" value ="{$null}">
+                                    <option class="nya-bs-option" value="{$null}">
                                         不参与活动
                                     </option>
                                     <option class="nya-bs-option"
