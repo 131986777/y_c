@@ -206,6 +206,10 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         });
     };
 
+    $scope.getFinanceListById = function (balanceInfo) {
+        $scope.finMore = clone(balanceInfo);
+    };
+
     $scope.delete = function () {
         $scope.modifyvalue = null;
         $scope.afterModify = null;
