@@ -920,16 +920,16 @@ p {
     background-color: #fff;
 }
 .free-icon{
-    display: inline-block;
+    display: flex;
     width: 18px;
     height: 18px;
     font-size: 12px;
     color: #fff;
     background-color: #f36f1a;
     border-radius: 2px;
-    text-align:center;
     margin-right: 40px;
-
+    justify-content: center;
+    align-items: center;
 }
 .shopping-cart .product-wrap .product-name, .shopping-cart .freePrd-wrap .product-name{
     line-height: 1.4;
@@ -1143,7 +1143,11 @@ p {
     margin: 9px 0 0;
     font-size: 12px;
 }
-
+.order-add .freePrd .product-img{
+    width: 36px;
+    height: 36px;
+    margin:0 7px;
+}
 .order-add .product-list .product-money {
     color: #F36F1C;
     margin: 0 0 9px;

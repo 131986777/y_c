@@ -354,7 +354,65 @@ AndSellUI.directive('cartModal', function (productFactory,weUI,modalFactory) {
         }
     }
 });
+//支付会员卡选择
+AndSellUI.directive('cardModal', function (productFactory,weUI,modalFactory) {
+    return {
+        restrict: 'EA',
+        templateUrl: '/AndSell/h5/public/template/cardPay.html',
+        scope: {
+            callback: '&',id: '= id',storeId : '=storeId',show: '= show'
+        },
+        controller: function ($scope) {
 
+            var mask = $("#mask");
+            var weuiActionsheet = $("#weui_actionsheet");
+
+            $scope.$watch('show', function () {
+                if($scope.show==true&&$scope.id!=undefined){
+                    $scope.initData();
+                }
+            }, true);
+
+            function toggleActionSheet() {
+
+                // 弹出选择框
+                mask.show().addClass('weui_fade_toggle').focus();
+
+                //加focus是为了触发一次页面的重排(reflow or layout thrashing),使mask的transition动画得以正常触发
+                weuiActionsheet.addClass("weui_actionsheet_toggle");
+
+                mask.click(function () {
+
+                    // 隐藏选择框
+                    mask.hide().removeClass('weui_fade_toggle');
+                    weuiActionsheet.removeClass("weui_actionsheet_toggle");
+                });
+            }
+
+            $scope.initData = function () {
+                $scope.show=false;
+                toggleActionSheet();
+                // current sku select map
+                $scope.currSkuContentSelectMap = {
+                    name1: '', name2: '', name3: ''
+                }
+
+
+            }
+            //确认提交
+            $scope.addToCart = function () {
+                $scope.setReturn();
+
+            }
+            $scope.setReturn = function () {
+                $scope.callback();
+                // 隐藏商品选择框
+                mask.hide().removeClass('weui_fade_toggle');
+                weuiActionsheet.removeClass("weui_actionsheet_toggle");
+            }
+        }
+    }
+});
 AndSellService.factory("http", function ($http,weUI) {
     var _post = function (url, data,funcSuccess,funcFail) {
         return $http.post(url, $.param(data), {headers: {'Content-Type': 'application/x-www-form-urlencoded','withCredentials': true}}).success(function (response) {

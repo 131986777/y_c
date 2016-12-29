@@ -1,0 +1,47 @@
+<!--BEGIN actionSheet-->
+<div id=" actionSheet_wrap ">
+    <div class="weui_mask_transition" id="mask"></div>
+    <div class="weui_actionsheet" id="weui_actionsheet">
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <!--未选中/选中 ng-class="{true:' icon-checked',false:'icon-check'}-->
+                <i class="icon icon-checked" style="margin-right: 30px"></i>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+            <div class="card-list" style="background-color: #1393ff;border-radius: 2px">
+                <div class="card-wrap">
+                    <div class="card-head flexbox">
+                        <div class="cardNum cell">
+                            No.1331
+                        </div>
+                        <div class="cardType cell text-right">
+                            门店VIP卡
+                        </div>
+                    </div>
+                    <div class="card-detail text-center">
+                        <span>余额</span>￥2000
+                        <p ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0" class="froze">
+
+                        </p>
+                    </div>
+                    <div class="card-foot flexbox">
+                        <div class="cardTime cell">
+                            2016-12-16
+                        </div>
+                        <div class="cardVal cell text-center">
+                            <span ng-show="cl['MEMBER_CARD.IS_FACE_VALUE']==1">￥1000</span>
+                        </div>
+                        <div class="cardSource cell text-right">
+                            线上卡
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="action-bar">
+            <div class="weui_actionsheet_cell cell ok add-to-cart" ng-click="addToCart()">确定</div>
+        </div>
+    </div>
+</div>
+<!--END actionSheet-->
