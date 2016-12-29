@@ -4,7 +4,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
     modalFactory.setBottom(false);
 
     $scope.districtName = "全部区域";
-
+    $scope.currentDistrictName = '全部区域';
     $scope.initLoad = function () {
         $scope.filter = {};
         $scope.getData();
@@ -22,6 +22,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
             //console.log(list);
             $scope.shopListLength = response.data.length;
             $scope.districtList = response.extraData.districtList;
+            console.log('list',$scope.districtList);
             var shopMap = new Map();
             list.forEach(function (ele) {
                 shopMap.set(ele['SHOP.SHOP_ID'],ele);
@@ -85,6 +86,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
         $scope.districtName = districtName;
         $scope.filter['SHOP.DISTRICT_ID'] = districtId;
         $scope.getData();
+        $scope.currentDistrictName = districtName;
         // shopFactory.getShopList(form, function (response) {
         //     $scope.shopList = response.data;
         //     $scope.shopListLength = response.data.length;
@@ -92,6 +94,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
     };
 
     $scope.allDistrict = function (districtName) {
+        $scope.currentDistrictName = '全部区域';
         $scope.districtName = districtName;
         $scope.filter['SHOP.DISTRICT_ID'] = '';
         $scope.getData();

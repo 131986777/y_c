@@ -23,31 +23,34 @@
 
     <div class="shop-wrap">
         <!-- 最近浏览 -->
-        <div class="shop-recent">
+        <div class="shop-recent" ng-show="recentShopList.length>0">
             <div class="title">
                 最近浏览
             </div>
             <div class="shop-list">
-                <a class="shops" ng-repeat="shop in recentShopList" ng-click="shopSelect(shop)">
-                    <img class="pull-left" src="../../public/img/icon-shopLogo.png">
-                    <p ng-bind="shop['SHOP.SHOP_NAME']"></p>
-                    <p>{{shop['SHOP.ADDR']}}</p>
-                    <p class="time">营业时间 {{shop['SHOP.OPEN_TIME']}}-{{shop['SHOP.CLOSE_TIME']}}
-                        电话<span ng-bind="shop['SHOP.TELEPHONE']"> 025-3242343243</span>
-                    </p>
-                    <div class="position"
-                         ng-show="coord.latitude!=undefined&&coord.longitude!=undefined&&coord.longitude!=undefined&&shop['SHOP.LATITUDE']!=undefined">
-                        <i class="position-icon"></i>
-                        距离<span
-                        ng-bind="getDistanceFromLatLonInKm(coord.latitude,coord.longitude,shop['SHOP.LATITUDE'],shop['SHOP.LONGTUDE'])"></span>公里
-                    </div>
-                </a>
+                <div class="shops" >
+                    <a ng-repeat="shop in recentShopList" ng-click="shopSelect(shop)" class="shop-name">{{shop['SHOP.SHOP_NAME']}}</a>
+                </div>
             </div>
         </div>
-
+        <!--区域选择-->
+        <div class="shop-recent">
+            <div class="title">
+                选择区域
+            </div>
+            <div class="shop-list">
+                <div class="shops">
+                    <a class="shop-name" ng-class="{true:'active'}[currentDistrictName == '全部区域']"
+                            ng-click="allDistrict('全部区域')">全部区域</a>
+                    <a ng-repeat="district in districtList"
+                       ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'],district['DISTRICT.DISTRICT_NAME'])" class="shop-name" ng-class="{true:
+                       'active'}[district['DISTRICT.DISTRICT_NAME']==currentDistrictName]">{{district['DISTRICT.DISTRICT_NAME']}}</a>
+                </div>
+            </div>
+        </div>
         <div class="shop-choose">
             <div class="title">
-                全部店面
+                门店列表
             </div>
             <div class="shop-list">
                 <a class="shops" ng-repeat="shop in shopList" ng-click="shopSelect(shop)">

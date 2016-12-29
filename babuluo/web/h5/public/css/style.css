@@ -2498,8 +2498,7 @@ p {
     line-height: 40px;
 }
 
-.shop-page .shop-wrap {
-}
+
 
 .shop-page .shop-list p {
     margin-bottom: 13px;
@@ -2523,7 +2522,28 @@ p {
     color: #000;
     display: block;
 }
-
+.shop-page .shop-recent .shop-list .shops {
+    background-color: transparent;
+}
+.shop-page .shop-list .shops .shop-name{
+    display: inline-block;
+    /*width: 90px;*/
+    height: 38px;
+    text-align: center;
+    line-height: 38px;
+    background-color: #fff;
+    margin: 0 10px 9px 0;
+    padding:0 10px;
+    color: #484848;
+    font-size: 14px;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*white-space: nowrap;*/
+}
+.shop-page .shop-list .shops .active{
+    color: #fff;
+    background-color: #f46f1a;
+}
 .shop-page .shop-list .shops .position-icon {
     display: inline-block;
     width: 10px;
