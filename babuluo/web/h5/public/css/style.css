@@ -2470,11 +2470,12 @@ p {
     padding: 0 10px 0;
 }
 
-.shop-page .shop-select .map-icon {
+.map-icon {
+    float: right;
     height: 18px;
     width: 16px;
     background: url("../img/icon-map_01.jpg");
-    margin-top: 11px;
+    margin: 6px 15px 0 0;
 }
 
 .shop-page .shop-select-wrap .dropdown a {
