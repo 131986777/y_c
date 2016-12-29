@@ -1,21 +1,21 @@
 <div class="table-operbar">
-    <div class="table-toolbar">
-        <!-- BEGIN 导航标签 -->
-        <ul class="nav nav-tabs">
-            <li class="active">
-                <a> 分库存 </a>
-            </li>
-            <li>
-                <a ui-sref="stock/totalStock/totalStockList"> 总库存 </a>
-            </li>
-        </ul>
-        <!-- END 导航标签 -->
-    </div>
+        <div class="table-toolbar">
+            <!-- BEGIN 导航标签 -->
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a> 分库存 </a>
+                </li>
+                <li>
+                    <a ui-sref="stock/totalStock/totalStockList"> 总库存 </a>
+                </li>
+            </ul>
+            <!-- END 导航标签 -->
+        </div>
 
-    <div class="form-inline form-group">
-        <div class="table-operbar">
-            <div class="form-inline row">
-                <div class="col-md-4">
+        <div class="form-inline form-group">
+            <div class="table-operbar">
+                <div class="form-inline row">
+                    <div class="col-md-4">
                     <div class="form-group ">
                         <input type="text" class="form-control" placeholder="商品名称" ng-model="pName">
                     </div>
@@ -24,8 +24,8 @@
                                 ng-click="queryStockById(pName)">查询
                         </button>
                     </div>
-                </div>
-                <div class="col-md-5">
+                    </div>
+                    <div class="col-md-5">
                     <label class="control-label">筛选：</label>
                     <select ng-model="filter['STOCK_REALTIME.STORE_ID']"
                             ng-init="filter['STOCK_REALTIME.STORE_ID']=''"
@@ -55,55 +55,51 @@
                             实时库存升序
                         </option>
                     </select>
+                     </div>
                 </div>
-            </div>
+                </div>
         </div>
-    </div>
 
-    <div class="table-scrollable">
-        <table class="table table-bordered table-hover table-striped">
-            <thead>
-            <tr>
+        <div class="table-scrollable">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
 
-                <!--<th class="col-md-2"> 发卡渠道编码</th>-->
-                <th class="col-md-3"> 商品</th>
-                <th class="col-md-1 text-center"> 单位</th>
-                <th class="col-md-2 text-center"> 仓库</th>
-                <th class="col-md-1 text-center"> 实时库存</th>
-                <th class="col-md-1 text-center"> 带锁库存</th>
-                <th class="col-md-1.5 text-center">最后变更</th>
-                <th class="col-md-1 text-center">渠道</th>
-                <th class="col-md-1 text-center"> 操作</th>
-            </tr>
-            </thead>
-            <tbody ng-cloak>
-            <tr ng-repeat="item in stockList">
-                <td ng-bind="item['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品ID-->
-                <td ng-bind="item['SHOP_UNIT.UNIT_NAME']" class="text-center"></td> <!--单位-->
-                <td class="text-center">{{storeMap[(item['STOCK_REALTIME.STORE_ID'])]}}</td>
-                <!--仓库-->
-                <td ng-bind="item['STOCK_REALTIME.STOCK']" class="text-center"></td> <!--实时库存-->
-                <td ng-bind="item['STOCK_REALTIME.LOCK_STOCK']" class="text-center"></td>
-                <!--锁定库存-->
-                <td ng-bind="item['STOCK_REALTIME.UPDATE_DATETIME']" class="text-center"></td>
-                <!--最后变更-->
-                <td class="text-center">
-                    <span ng-if="item['SHOP_PRODUCT.REMARK']=='onLine'">线上</span>
-                    <span ng-if="item['SHOP_PRODUCT.REMARK']=='offLine'">线下</span>
-                </td>
-                <td class="text-center">
+                    <!--<th class="col-md-2"> 发卡渠道编码</th>-->
+                    <th class="col-md-3"> 商品</th>
+                    <th class="col-md-1 text-center"> 单位</th>
+                    <th class="col-md-2 text-center"> 仓库</th>
+                    <th class="col-md-1 text-center"> 实时库存</th>
+                    <th class="col-md-1 text-center"> 带锁库存</th>
+                    <th class="col-md-1.5 text-center">最后变更</th>
+                    <th class="col-md-1 text-center">渠道</th>
+                    <th class="col-md-1 text-center"> 操作</th>
+                </tr>
+                </thead>
+                <tbody ng-cloak>
+                <tr ng-repeat="item in stockList">
+                    <td ng-bind="item['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品ID-->
+                    <td ng-bind="item['SHOP_UNIT.UNIT_NAME']" class="text-center"></td> <!--单位-->
+                    <td class="text-center">{{storeMap[(item['STOCK_REALTIME.STORE_ID'])]}}</td> <!--仓库-->
+                    <td ng-bind="item['STOCK_REALTIME.STOCK']" class="text-center"></td> <!--实时库存-->
+                    <td ng-bind="item['STOCK_REALTIME.LOCK_STOCK']" class="text-center"></td> <!--锁定库存-->
+                    <td ng-bind="item['STOCK_REALTIME.UPDATE_DATETIME']" class="text-center"></td> <!--最后变更-->
+                    <td class="text-center">
+                        <span ng-if="item['SHOP_PRODUCT.REMARK']=='onLine'">线上</span>
+                        <span ng-if="item['SHOP_PRODUCT.REMARK']=='offLine'">线下</span>
+                    </td>
+                    <td class="text-center">
                     <div>
                         <a type="button" show-modal id="#Stockmingxi"
-                           ng-click="modifyStockClick(item)">明细</a>
-                        <a ng-if="item['SHOP_PRODUCT.REMARK']=='onLine'" type="button" show-modal
-                           id="#modifyStock"
+                           ng-click="detailStockClick(item)">明细</a>
+                        <a ng-if="item['SHOP_PRODUCT.REMARK']=='onLine'" type="button" show-modal id="#modifyStock"
                            ng-click="modifyStockClick(item)">修改</a>
                     </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     <div page-bar
          filter-obj="filter"
          url="/stock/realtime/queryAll"
@@ -148,6 +144,7 @@
                     </div>
 
 
+
                 </form>
             </div>
             <div class="modal-footer">
@@ -162,6 +159,7 @@
     <!-- /.modal-dialog -->
 </div>
 <!--END 修改发卡渠道-->
+
 
 
 <!--BEGIN 查看商品明细-->
@@ -179,20 +177,19 @@
 
                 <table class="table table-bordered table-hover table-striped">
                     <thead>
-                    <tr>
-                        <th class="col-md-4"> 商品</th>
-                        <th class="col-md-4 text-center"> 库存</th>
-                        <th class="col-md-4">变更时间</th>
-                    </tr>
+                        <tr>
+                            <th class="col-md-4"> 商品</th>
+                            <th class="col-md-4 text-center"> 库存</th>
+                            <th class="col-md-4">变更时间</th>
+                        </tr>
                     </thead>
                     <tbody ng-cloak>
 
-                    <tr ng-repeat="item in stockLogList">
-                        <td ng-bind="modify['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品名字-->
-                        <td class="text-center" ng-bind="item['STOCK_LOG.STOCK']"></td>
-                        <!--商品库存-->
-                        <td ng-bind="item['STOCK_LOG.UPDATE_DATETIME']"></td>   <!--商品库存-->
-                    </tr>
+                        <tr ng-repeat="item in stockLogList">
+                            <td ng-bind="modify['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品名字-->
+                            <td class="text-center"ng-bind="item['STOCK_LOG.STOCK']"></td>   <!--商品库存-->
+                            <td ng-bind="item['STOCK_LOG.UPDATE_DATETIME']"></td>   <!--商品库存-->
+                        </tr>
                     </tbody>
 
                 </table>
@@ -203,7 +200,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" ng-click=" " class="btn green" data-dismiss="modal">确定
+                <button type="button" ng-click=" " class="btn green"data-dismiss="modal">确定
                 </button>
             </div>
         </div>
