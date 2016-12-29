@@ -1,25 +1,25 @@
 <div class="shop-page bg-grey" style="height: 900px">
 
-    <div class="shop-select">
-        <!-- 门店选择 -->
-        <div class="shop-select-wrap">
-            <div class="dropdown text-center">
-                <a id="dLabel" type="button" data-toggle="dropdown">
-                    {{districtName}}
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    <li ng-click="allDistrict('全部区域')">全部区域</li>
-                    <li ng-repeat="district in districtList"
-                        ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'],district['DISTRICT.DISTRICT_NAME'])">
-                        {{district['DISTRICT.DISTRICT_NAME']}}
-                    </li>
-                </ul>
-                <!--<div class="map-icon pull-right"></div>-->
-            </div>
+    <!--<div class="shop-select">-->
+        <!--&lt;!&ndash; 门店选择 &ndash;&gt;-->
+        <!--<div class="shop-select-wrap">-->
+            <!--<div class="dropdown text-center">-->
+                <!--<a id="dLabel" type="button" data-toggle="dropdown">-->
+                    <!--{{districtName}}-->
+                    <!--<span class="caret"></span>-->
+                <!--</a>-->
+                <!--<ul class="dropdown-menu">-->
+                    <!--<li ng-click="allDistrict('全部区域')">全部区域</li>-->
+                    <!--<li ng-repeat="district in districtList"-->
+                        <!--ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'],district['DISTRICT.DISTRICT_NAME'])">-->
+                        <!--{{district['DISTRICT.DISTRICT_NAME']}}-->
+                    <!--</li>-->
+                <!--</ul>-->
+                <!--&lt;!&ndash;<div class="map-icon pull-right"></div>&ndash;&gt;-->
+            <!--</div>-->
 
-        </div>
-    </div>
+        <!--</div>-->
+    <!--</div>-->
 
     <div class="shop-wrap">
         <!-- 最近浏览 -->
