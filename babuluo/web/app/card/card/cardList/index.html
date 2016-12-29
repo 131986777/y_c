@@ -107,34 +107,42 @@
         </div>
 
         <!-- cardList -->
-        <div class="cardList-wrap">
-
-            <div ng-repeat="cl in cardList|filter:{}" class="card pull-left"
-                 ng-style="cl['MEMBER_CARD.CARD_STYLE']" style="width:411px;height:228px;">
-                <div class="row cardTitle">
-                    <div class="col-md-6">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</div>
-                    <div class="col-md-6 text-right">{{cl['MEMBER_CARD.TYPE_NAME']}}</div>
-                </div>
-                <p class="balance" ng-if="cl['MEMBER_CARD.STATE']==1"><span>余额</span>{{cl['MEMBER_CARD.BALANCE'] |
-                    currency : '￥'}}<span ng-click="frezzeCard(cl)">冻结</span></p>
-                <p class="balance" ng-if="cl['MEMBER_CARD.STATE']==-1"><span>(冻结)余额</span>{{cl['MEMBER_CARD.BALANCE'] |
-                    currency : '￥'}}<span ng-click="FrozenCard(cl)">解冻</span></p>
-                <p ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0" class="froze">
-                    （冻结{{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}}）
-                </p>
-                <div class="row cardFooter">
-                    <div class="col-md-5 nowrap">{{cl['MEMBER_CARD.MEMBER_NAME']}} {{cl['MEMBER_CARD.MEMBER_PHONE']}}
-                    </div>
-                    <div class="col-md-3 nowrap text-right count">
-                        <span ng-show="cl['MEMBER_CARD.IS_FACE_VALUE']==1">面值{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</span>
-                    </div>
-                    <div class="col-md-4 text-right time nowrap">
-                        {{cl['MEMBER_CARD.SHOP']}}
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th class="col-sm-2">卡号</th>
+                <th class="col-sm-1">卡类型</th>
+                <th class="col-sm-1 text-center">余额</th>
+                <th class="col-sm-1 text-center">客户姓名</th>
+                <th class="col-sm-1.5 text-center">客户手机号</th>
+                <th class="col-sm-1.5 text-center">所属门店</th>
+                <th class="col-sm-2 text-center">开卡时间</th>
+                <th class="col-sm-1 text-center">状态</th>
+                <th class="col-sm-1 text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="cl in cardList|filter:{}">
+                <td ng-bind="cl['MEMBER_CARD.CARD_NO'] | FormatNo"></td>
+                <td ng-bind="cl['MEMBER_CARD.TYPE_NAME']"></td>
+                <td ng-bind="cl['MEMBER_CARD.BALANCE'] | currency : '￥'" class="text-center"></td>
+                <td ng-bind="cl['MEMBER_CARD.MEMBER_NAME']" class="text-center"></td>
+                <td ng-bind="cl['MEMBER_CARD.MEMBER_PHONE']" class="text-center"></td>
+                <td ng-bind="cl['MEMBER_CARD.SHOP']" class="text-center"></td>
+                <td ng-bind="cl['MEMBER_CARD.ADD_DATETIME'] | FormatAllDate" class="text-center"></td>
+                <td class="text-center">
+                    <span ng-show="cl['MEMBER_CARD.STATE']==1">正常</span>
+                    <span ng-show="cl['MEMBER_CARD.STATE']==-1">冻结</span>
+                </td>
+                <td class="text-center">
+                    <a class="table-link">
+                        <span ng-show="cl['MEMBER_CARD.STATE']==1" ng-click="frezzeCard(cl)">冻结</span>
+                        <span ng-show="cl['MEMBER_CARD.STATE']==-1" ng-click="FrozenCard(cl)">启用</span>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
         <div page-bar
              filter-obj="filter"

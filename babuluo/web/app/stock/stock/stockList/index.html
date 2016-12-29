@@ -91,7 +91,7 @@
                     <td class="text-center">
                     <div>
                         <a type="button" show-modal id="#Stockmingxi"
-                           ng-click="modifyStockClick(item)">明细</a>
+                           ng-click="detailStockClick(item)">明细</a>
                         <a ng-if="item['SHOP_PRODUCT.REMARK']=='onLine'" type="button" show-modal id="#modifyStock"
                            ng-click="modifyStockClick(item)">修改</a>
                     </div>
@@ -195,7 +195,7 @@
                 </table>
                 <div page-bar
                      filter-obj="filterstocklog"
-                     url="/log/stock/getByReposIdAndPrdId"
+                     url="/log/stock/getByShopIdAndPrdSku"
                      callback="stocklogbindData(response)">
                 </div>
             </div>
