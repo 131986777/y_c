@@ -360,7 +360,7 @@ AndSellUI.directive('cardModal', function (productFactory,weUI,modalFactory) {
         restrict: 'EA',
         templateUrl: '/AndSell/h5/public/template/cardPay.html',
         scope: {
-            callback: '&',id: '= id',storeId : '=storeId',show: '= show'
+            callback: '&',money : '=money',show: '= show'
         },
         controller: function ($scope) {
 
@@ -368,7 +368,9 @@ AndSellUI.directive('cardModal', function (productFactory,weUI,modalFactory) {
             var weuiActionsheet = $("#weui_actionsheet");
 
             $scope.$watch('show', function () {
-                if($scope.show==true&&$scope.id!=undefined){
+                console.log(111);
+                if($scope.show==true){
+                    console.log(222);
                     $scope.initData();
                 }
             }, true);
