@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, weUI, productFactory, orderFactory, modalFactory,weUI) {
+angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, weUI, productFactory, orderFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
@@ -7,7 +7,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     $scope.initData = function () {
         modalFactory.setCurrentPage('wd');
-        if($stateParams.FROM=='Add'){
+        if ($stateParams.FROM == 'Add') {
             //如果是从下单页面条转过来 则控制上一页路径
             //var state = {
             //    title: "main",
@@ -75,33 +75,47 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 OPENID: openId,
                 IP: ip,
                 ORDER_ID: $scope.order['SHOP_ORDER.ID'],
-                TYPE:'ORDER'
+                TYPE: 'ORDER'
             };
 
             wxPay(formData);
 
         } else if ($scope.order['SHOP_ORDER.PAY_TYPE'] == 'ACCOUNT') {
-            alert(1);
-            $scope.cardModalShow=true;
-
-            // weUI.dialog.confirm("提示", "确认支付该订单", function () {
-            //     weUI.toast.showLoading('正在支付');
-            //     orderFactory.payOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
-            //         weUI.toast.hideLoading();
-            //         weUI.toast.ok('支付成功');
-            //         $state.go("pages/personal");
-            //     }, function (response) {
-            //         weUI.toast.hideLoading();
-            //         weUI.toast.error(response.msg);
-            //     });
-            // }, function () {
-            //
-            // });
+            $scope.cardModalShow = true;
         }
     };
 
+    $scope.cardPay = function () {
+        $scope.payCard = JSON.parse(getCookie("payCard"));
+        if (!isEmptyObject($scope.payCard)) {
+            weUI.dialog.confirm("提示", "确认支付该订单", function () {
+                weUI.toast.showLoading('正在支付');
+                var form = {};
+                form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
+                form['SHOP_ORDER.CARD_ID'] = $scope.payCard['MEMBER_CARD.CARD_ID'];
+                form['SHOP_ORDER.CARD_NO'] = $scope.payCard['MEMBER_CARD.CARD_NO'];
+                form['SHOP_ORDER.CARD_BALANCE'] = $scope.payCard['MEMBER_CARD.BALANCE'];
+                console.log(form);
+                orderFactory.payOrder(form, function (response) {
+                    weUI.toast.hideLoading();
+                    weUI.toast.ok('支付成功');
+                    $scope.cardModalShow = false;
+                    $state.go("pages/personal");
+                }, function (response) {
+                    weUI.toast.hideLoading();
+                    weUI.toast.error(response.msg);
+                });
+            }, function () {
 
-    $scope.toDetail= function (id) {
+            });
+        } else {
+            weUI.toast.info("请选择一张会员卡支付");
+        }
+
+    };
+
+
+    $scope.toDetail = function (id) {
         $state.go('pages/product/detail', {PRD_ID: id});
     }
 
@@ -137,8 +151,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     }
 
 
-
-
     /**
      * 微信支付JSAPI调用
      * * @param postData
@@ -159,11 +171,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                     $scope.wxPayInfo = "正在查询支付结果,请稍等...";
                     var formData = {
                         OUT_TRADE_NO: unifiedJson.out_trade_no,
-                        ORDER_ID:$scope.order['SHOP_ORDER.ID'],
-                        TYPE:'ORDER',
-                        CALLBACK:'-1'
+                        ORDER_ID: $scope.order['SHOP_ORDER.ID'],
+                        TYPE: 'ORDER',
+                        CALLBACK: '-1'
                     };
-                    orderFactory.queryWXPayResult(formData, function(res) {
+                    orderFactory.queryWXPayResult(formData, function (res) {
                         weUI.toast.ok('订单支付成功');
                         $scope.getOrder($scope.order['SHOP_ORDER.ID']);
                     }, function (res) {
