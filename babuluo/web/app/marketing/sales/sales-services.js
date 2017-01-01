@@ -1,8 +1,18 @@
 AndSellMainModule.service('salesFactory', function (http) {
 
-    this.ModifySalesState=http.post('/sales/sales/modifyById');
+    this.MosdifyAdaptor=http.post('/promo/role/andSell/modifyById');
 
-    this.AddSales=http.post('/sales/sales/add');
+    this.ModifySalesState=http.post('/sales/sales/modifyById');
+    //
+    //this.AddSales=http.post('/sales/sales/add');
+    //
+    //this.AddPromoRole=http.postPromo('http://192.168.2.145:8080/bubu/promo/role/add') ;
+
+    this.AddPromoRoleAdaptor=http.post('/promo/role/andSell/add') ;
+
+    this.QueryPromoRoleAdaptor=http.post('/promo/role/andSell/queryAll') ;
+
+    this.AddSkuInfo=http.post("/sales/sales/queryAll");
 
     this.AddSalesPlan=http.post('/sales/salesplan/add');
 

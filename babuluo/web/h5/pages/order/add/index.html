@@ -29,26 +29,68 @@
             <!--</div>-->
             <!--</div>-->
             <!-- BEGIN 商品信息-->
-            <div class="product-wrap weui_cell" ng-repeat="sku in skuList">
-                <div class="product-img-wrap weui_cell_hd">
-                    <img ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220" class="product-img">
-                </div>
-                <div class="content weui_cell_bd weui_cell_primary">
-                    <h5 class="product-name" ng-bind="sku['SHOP_PRODUCT.PRD_NAME']">
-                    </h5>
-                    <p class="product-cls" ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
-                    </p>
-                    <p class="product-cls" ng-bind="'编号：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
-                    </p>
-                </div>
-                <div class="ext weui_cell_ft">
+            <div class="prdList-wap" ng-repeat="sku in skuList">
+                <div class="product-wrap weui_cell">
+                    <div class="product-img-wrap weui_cell_hd">
+                        <img ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"
+                             class="product-img">
+                    </div>
+                    <div class="content weui_cell_bd weui_cell_primary">
+                        <h5 class="product-name" ng-bind="sku['SHOP_PRODUCT.PRD_NAME']">
+                        </h5>
+                        <p class="product-cls" ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
+                        </p>
+                        <p class="product-cls" ng-bind="'编号：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
+                        </p>
+                    </div>
+                    <div class="ext weui_cell_ft">
                     <span class="product-money" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
                     </span>
-                    <span class="product-money del-line" ng-if="sku['isSale']"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
+                        <span class="product-money del-line" ng-if="sku['isSale'] && !sku['hasPresent']"
+                              ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
                     </span>
-                    <p class="product-num" ng-bind="sku['SHOP_PRODUCT_SKU.SIZE']">
-                    </p>
+                        <p class="product-num" ng-bind="sku['SHOP_PRODUCT_SKU.SIZE']">
+                        </p>
+                    </div>
+                    <!--<div class="freePrd-wrap weui_cell" ng-if="sku['hasPresent']">-->
+                        <!--<div class="product-select-wrap weui_cell_hd">-->
+                            <!--<span class="free-icon">赠</span>-->
+                        <!--</div>-->
+                        <!--<div class="product-detail weui_cell_bd">-->
+                            <!--<img class="freePrd-img"-->
+                                 <!--ng-src="{{FILE_SERVER_DOMAIN+sku['present']['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">-->
+                            <!--<h5 class="product-name" ng-bind="sku['present']['SHOP_PRODUCT.PRD_NAME']"></h5>-->
+                            <!--<p class="product-cls"-->
+                               <!--ng-bind="sku['present']['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ sku['present']['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ sku['planUnit']['presents'][0]['num']">-->
+                            <!--</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
                 </div>
+                <div class="freePrd weui_cell" ng-if="sku['hasPresent']">
+                    <div class="product-select-wrap weui_cell_hd">
+                    <span class="free-icon">赠</span>
+                    </div>
+                    <div class="product-img-wrap weui_cell_hd">
+                        <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+sku['present']['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
+                    </div>
+                    <div class="content weui_cell_bd weui_cell_primary">
+                        <h5 class="product-name" ng-bind="sku['present']['SHOP_PRODUCT.PRD_NAME']"></h5>
+                        <p class="product-cls" ng-bind="sku['present']['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ sku['present']['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ sku['planUnit']['presents'][0]['num']"></p>
+                    </div>
+                </div>
+            </div>
+            <!--赠品-->
+            <div ng-if="orderPresent != null">
+            <div class="free-icon" style="margin: 20px 30px 10px">赠</div>
+            <div class="freePrd weui_cell">
+                <div class="product-img-wrap weui_cell_hd">
+                    <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+orderPresent['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
+                </div>
+                <div class="content weui_cell_bd weui_cell_primary">
+                    <h5 class="product-name" ng-bind="orderPresent['SHOP_PRODUCT.PRD_NAME']"></h5>
+                    <p class="product-cls" ng-bind="orderPresent['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ orderPresent['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ orderPresentNum"></p>
+                </div>
+            </div>
             </div>
             <!-- END 商品信息-->
         </div>

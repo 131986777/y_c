@@ -1,11 +1,124 @@
-angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Controller', function ($scope, $stateParams, salesFactory, modalFactory) {
+angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Controller', function ($q ,$scope, $stateParams,$http,http ,salesFactory, modalFactory) {
 
     modalFactory.setTitle('促销管理');
     modalFactory.setBottom(false);
 
-    var salePlanMap = [{id: 1, name: '单件商品促销'}, {id: 2, name: '按商品类别促销'}, {id: 3, name: '按商品标签促销'}];
+    var salePlanMap = [{type: 'skuAlone', name: '单件商品促销'}, {type: 'classAlone', name: '按商品类别促销'}, {type: 'tagAlone', name: '按商品标签促销'}];
 
     $scope.salePlanMap = salePlanMap
+
+    $scope.rangeId = 0 ;
+
+    $scope.filterc = 'null' ;
+
+    $scope.checkedList = [] ;
+
+    $scope.ranFilter = function (){
+        if ($scope.filterc != 'null') {
+            $scope.salesPlan = [];
+            $scope.clonePlan.forEach(function (ele) {
+                if (ele['role']['adaptor']['PROMO_ROLE_ANDSELL.PROMOTION_TYPE'] == 'order') {
+                    if ($scope.filterc == "order") {
+                        $scope.salesPlan.push(ele);
+                    }
+                } else {
+                    if ($scope.filterc == ele['range']['type_role']) {
+                        $scope.salesPlan.push(ele);
+                    }
+                }
+            })
+        }else {
+            $scope.salesPlan = $scope.clonePlan ;
+        }
+    }
+
+    $scope.queryPlan = function (){
+        http.post_ori("http://127.0.0.1:8080/bubu/promo/plan/queryAll",{}
+            //console.log(response);
+            , function (response) {
+                $scope.salesPlan = response.data;
+                $scope.queryRange() ;
+            }
+            , function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+    }
+
+    $scope.queryRange = function (){
+        http.post_ori("http://127.0.0.1:8080/bubu/promo/range/myQueryAll",{}
+            //console.log(response);
+            , function (response) {
+                $scope.salesRange = response.data;
+                $scope.addRange() ;
+                $scope.addRole();
+                $scope.clonePlan = $scope.salesPlan ;
+            }
+            , function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+    }
+
+    $scope.addRange = function (){
+        $scope.salesPlan.forEach(function(ele){
+            $scope.salesRange.forEach(function (ran) {
+                if (ele['PROMOTION_PLAN.PROMOTION_RANGE_ID'] == ran['promotion_range_id']){
+                    ele['range'] = ran ;
+                }
+            })
+        })
+    }
+
+    $scope.addRole = function () {
+        $scope.salesPlan.forEach(function(ele){
+            $scope.salesList.forEach(function(rol){
+                if (ele['PROMOTION_PLAN.PROMOTION_ROLE_ID'] == rol['PROMOTION_ROLE.PROMOTION_ROLE_ID']){
+                    ele['role'] = rol ;
+                    var role = JSON.parse(rol['PROMOTION_ROLE.PROMOTION_ROLE']) ;
+                    rol['role'] = role ;
+                }
+            })
+        })
+    }
+
+          //请求促销规则
+    $scope.queryDate = function (){
+        http.post_ori("http://127.0.0.1:8080/bubu/promo/role/queryAll",{}
+            //console.log(response);
+            , function (response) {
+                $scope.bindData2(response) ;
+                $scope.queryPlan();
+            }
+            , function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+
+    }
+    $scope.queryAdaptor = function (){
+        salesFactory.QueryPromoRoleAdaptor({}
+            , function (response) {
+                console.log(response);
+                $scope.addAdaptor(response);
+            }
+            , function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+    }
+    $scope.addAdaptor = function (response){
+        var adaptor = response.data ;
+        adaptor.forEach(function(ele){
+            $scope.salesList.forEach(function(sale){
+                if (ele["PROMO_ROLE_ANDSELL.PROMOTION_ROLE_ID"] == sale["PROMOTION_ROLE.PROMOTION_ROLE_ID"]){
+                    sale["adaptor"] = ele ;
+                }
+            })
+        })
+    }
+
+    $scope.bindData2 = function (response){
+        $scope.salesList = response.data;
+        $scope.queryAdaptor();
+    }
+
 
     $scope.getCurrentPro = function (item) {
         $scope.updatePlanForm = clone(item);
@@ -16,23 +129,7 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
         }
     }
 
-    $scope.prdSwitch = function (data) {
-        console.log(data);
-        var array = new Array();
-        for (var i = 0; i < data.length; i++) {
-            array.push(data[i]['SHOP_PRODUCT_SKU.SKU_ID']);
-        }
-        var result = [];
-        for (var i = 0; i < array.length; i++) {
-            if (result.indexOf(array[i]) == -1) {
-                result.push(array[i])
-            }
-        }
-        console.log(result);
-        //插入促销商品
-        $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result.toString();
-        $scope.save($scope.updatePlanForm);
-    }
+
 
     $scope.getCurrentClass = function (item) {
         $scope.updatePlanForm = clone(item);
@@ -43,20 +140,111 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
         }
     }
 
-    $scope.classSwitch = function (data) {
-        var array = new Array();
-        for (var i = 0; i < data.length; i++) {
-            array.push(data[i]['SHOP_PRODUCT_CLASS.CLASS_ID']);
-        }
-        var result = [];
-        for (var i = 0; i < array.length; i++) {
-            if (result.indexOf(array[i]) == -1) {
-                result.push(array[i])
+    $scope.bindRangeId = function(item){
+        $scope.rangeId = item['PROMOTION_PLAN.PROMOTION_RANGE_ID'] ;
+        $scope.checkedList = item['range']['rangeDetailVOs'] ;
+    }
+
+    $scope.prdSwitch = function (data) {
+        $scope.delSkuRangeDetail( $scope.rangeId , data)
+    }
+
+    $scope.delSkuRangeDetail = function ( id , data) {
+        http.post_ori("http://127.0.0.1:8080/bubu/promo/rangeDetail/delByRangeId",{"PROMOTION_RANGE_DETAIL.PROMOTION_RANGE_ID" : id}
+            //console.log(response);
+            , function (response) {
+                $scope.addSkuRangeDetails(data)
             }
-        }
-        //插入促销商品
-        $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result;
-        $scope.save($scope.updatePlanForm);
+            , function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+    }
+    $scope.addSkuRangeDetails = function (data) {
+        var p = []
+        data.forEach(function(ele){
+            var c = $q.defer();
+            p.push(c.promise)
+            var rangeDetail = {};
+            rangeDetail['PROMOTION_RANGE_DETAIL.PROMOTION_RANGE_ID'] = $scope.rangeId;
+            rangeDetail['PROMOTION_RANGE_DETAIL.TARGET_TYPE'] = "sku" ;
+            rangeDetail['PROMOTION_RANGE_DETAIL.TARGET'] = ele['SHOP_PRODUCT_SKU.SKU_ID'] ;
+            $scope.addRangeDetail( rangeDetail , c) ;
+        }) ;
+        $q.all(p).then(function(){
+            $scope.$broadcast('pageBar.reload');
+        })
+    }
+    $scope.classSwitch = function (data) {
+        $scope.delClassRangeDetail($scope.rangeId , data) ;
+
+    }
+
+    $scope.tagSwitch = function (data) {
+        $scope.delTagRangeDetail( $scope.rangeId , data)
+    }
+
+    $scope.delTagRangeDetail = function (id , data) {
+        http.post_ori("http://127.0.0.1:8080/bubu/promo/rangeDetail/delByRangeId",{"PROMOTION_RANGE_DETAIL.PROMOTION_RANGE_ID" : id}
+            //console.log(response);
+            , function (response) {
+                $scope.addTagRangeDetails(data)
+            }
+            , function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+    }
+    $scope.addTagRangeDetails = function(data){
+        var p = []
+        data.forEach(function(ele){
+            var c = $q.defer();
+            p.push(c.promise)
+            var rangeDetail = {};
+            rangeDetail['PROMOTION_RANGE_DETAIL.PROMOTION_RANGE_ID'] = $scope.rangeId;
+            rangeDetail['PROMOTION_RANGE_DETAIL.TARGET_TYPE'] = "tag" ;
+            rangeDetail['PROMOTION_RANGE_DETAIL.TARGET'] = ele['SHOP_TAG.TAG_ID'] ;
+            $scope.addRangeDetail( rangeDetail , c) ;
+        }) ;
+        $q.all(p).then(function(){
+            $scope.$broadcast('pageBar.reload');
+        })
+    }
+    $scope.addClassRangeDetails = function (data){
+        var p = []
+        data.forEach(function(ele){
+            var c = $q.defer();
+            p.push(c.promise)
+            var rangeDetail = {};
+            rangeDetail['PROMOTION_RANGE_DETAIL.PROMOTION_RANGE_ID'] = $scope.rangeId;
+            rangeDetail['PROMOTION_RANGE_DETAIL.TARGET_TYPE'] = "class" ;
+            rangeDetail['PROMOTION_RANGE_DETAIL.TARGET'] = ele['SHOP_PRODUCT_CLASS.CLASS_ID'] ;
+            $scope.addRangeDetail( rangeDetail , c) ;
+        }) ;
+        $q.all(p).then(function(){
+                $scope.$broadcast('pageBar.reload');
+            })
+    }
+    $scope.addRangeDetail = function ( rangeDetail , c){
+        http.post_ori("http://127.0.0.1:8080/bubu/promo/rangeDetail/add",rangeDetail
+            //console.log(response);
+            , function (response) {
+                modalFactory.showShortAlert("添加成功");
+                c.resolve();
+                //$scope.$broadcast('pageBar.reload');
+                //$scope.queryRange() ;
+            }
+            , function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+    }
+    $scope.delClassRangeDetail = function ( id , data) {
+        http.post_ori("http://127.0.0.1:8080/bubu/promo/rangeDetail/delByRangeId",{"PROMOTION_RANGE_DETAIL.PROMOTION_RANGE_ID" : id}
+            //console.log(response);
+            , function (response) {
+                $scope.addClassRangeDetails(data)
+            }
+            , function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
     }
 
     $scope.getCurrentTag = function (item) {
@@ -68,25 +256,9 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
         }
     }
 
-    $scope.tagSwitch = function (data) {
-        var array = new Array();
-        for (var i = 0; i < data.length; i++) {
-            array.push(data[i]['SHOP_TAG.TAG_ID']);
-        }
-        var result = [];
-        for (var i = 0; i < array.length; i++) {
-            if (result.indexOf(array[i]) == -1) {
-                result.push(array[i])
-            }
-        }
-        //插入促销商品
-        $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result;
-        $scope.save($scope.updatePlanForm);
 
-    }
 
     $scope.save = function (form) {
-        delete form['salesInfo'];
         salesFactory.ModifySalesProduct(form, function (response) {
             modalFactory.showShortAlert('修改成功');
             $("#addSalePlan").modal('hide');
@@ -94,12 +266,13 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
         });
-
+        $scope.queryRange() ;
     }
 
     $scope.bindData = function (response) {
+        $scope.queryDate() ;
         console.log(response);
-        $scope.salesPlan = response.data;
+        //$scope.salesPlan = response.data;
         //商品类别的ID和名称的Map
         $scope.proClassInfo = response.extraData.proClassMap;
         //商品的ID和名称的Map
@@ -109,7 +282,7 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
         //获得促销规则的ID和详细信息的Map
         $scope.salesMap = response.extraData.salesMap;
         //获得促销规则详情
-        $scope.salesList = response.extraData.salesList;
+        //$scope.salesList = response.extraData.salesList;
         //获得商品标签的ID和名称的Map
         $scope.tagMap = response.extraData.tagMap;
         //获得商品标签的ID和促销针对的Map
@@ -123,85 +296,121 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
         $scope.urlMap = response.extraData.urlMap;
         $scope.proAndSkuInfoMap = response.extraData.proAndSkuInfoMap;
 
-        $scope.salesPlan.forEach(function (ele) {
-            $scope.salesList.forEach(function (item) {
-                if (ele['SALES_PLAN.SALE_ID'] == item['SALES.ID']) {
-                    var totalArray = new Array();
-                    if (item['SALES.SALE_TYPE'] == 3) {
-                        for (var i = 1; i <= 6; i++) {
-                            if (item['SALES.CONDITION_NUM' + i] != null) {
-                                var jsonInfo = item['SALES.SALE_CONTENT' + i].toString();
-                                var info = JSON.parse(jsonInfo);
-                                var array = new Array();
-                                array.push(item['SALES.CONDITION_NUM' + i]);
-                                array.push($scope.proAndSkuInfoMap[info['ProId']]);
-                                array.push(info['Num']);
-                                array.push($scope.skuMap[info['ProId']]);
-                                array.push($scope.urlMap[info['ProId']]);
-                                totalArray.push(array);
-                                $scope.salesDetailInfo = totalArray;
-                            }
-                            ele['salesInfo'] = $scope.salesDetailInfo;
-                            ele['salesClass'] = item['SALES.SALE_TYPE'];
-                        }
-                    } else if (item['SALES.SALE_TYPE'] == 4) {
-                        for (var i = 1; i <= 6; i++) {
-                            if (item['SALES.CONDITION_NUM' + i] != null) {
-                                var jsonInfo = item['SALES.SALE_CONTENT' + i].toString();
-                                var info = JSON.parse(jsonInfo);
-                                var array = new Array();
-                                array.push(item['SALES.CONDITION_NUM' + i]);
-                                array.push($scope.couponMap[info['ProId']]);
-                                array.push(info['Num']);
-                                totalArray.push(array);
-                                $scope.salesDetailInfo = totalArray;
-                            }
-                            ele['salesInfo'] = $scope.salesDetailInfo;
-                            ele['salesClass'] = item['SALES.SALE_TYPE'];
-                        }
-                    } else if (item['SALES.SALE_TYPE'] == 1 || item['SALES.SALE_TYPE'] == 2) {
-                        for (var i = 1; i <= 6; i++) {
-                            if (item['SALES.CONDITION_NUM' + i] != null) {
-                                var array = new Array();
-                                array.push(item['SALES.CONDITION_NUM' + i]);
-                                array.push(item['SALES.SALE_CONTENT' + i]);
-                                totalArray.push(array);
-                                $scope.salesDetailInfo = totalArray;
-                            }
-                            ele['salesInfo'] = $scope.salesDetailInfo;
-                            ele['salesClass'] = item['SALES.SALE_TYPE'];
-                        }
-                    }
-                }
-            })
-        })
+        //$scope.salesPlan.forEach(function (ele) {
+        //    $scope.salesList.forEach(function (item) {
+        //        if (ele['SALES_PLAN.SALE_ID'] == item['SALES.ID']) {
+        //            var totalArray = new Array();
+        //            if (item['SALES.SALE_TYPE'] == 3) {
+        //                for (var i = 1; i <= 6; i++) {
+        //                    if (item['SALES.CONDITION_NUM' + i] != null) {
+        //                        var jsonInfo = item['SALES.SALE_CONTENT' + i].toString();
+        //                        var info = JSON.parse(jsonInfo);
+        //                        var array = new Array();
+        //                        array.push(item['SALES.CONDITION_NUM' + i]);
+        //                        array.push($scope.proAndSkuInfoMap[info['ProId']]);
+        //                        array.push(info['Num']);
+        //                        array.push($scope.skuMap[info['ProId']]);
+        //                        array.push($scope.urlMap[info['ProId']]);
+        //                        totalArray.push(array);
+        //                        $scope.salesDetailInfo = totalArray;
+        //                    }
+        //                    ele['salesInfo'] = $scope.salesDetailInfo;
+        //                    ele['salesClass'] = item['SALES.SALE_TYPE'];
+        //                }
+        //            } else if (item['SALES.SALE_TYPE'] == 4) {
+        //                for (var i = 1; i <= 6; i++) {
+        //                    if (item['SALES.CONDITION_NUM' + i] != null) {
+        //                        var jsonInfo = item['SALES.SALE_CONTENT' + i].toString();
+        //                        var info = JSON.parse(jsonInfo);
+        //                        var array = new Array();
+        //                        array.push(item['SALES.CONDITION_NUM' + i]);
+        //                        array.push($scope.couponMap[info['ProId']]);
+        //                        array.push(info['Num']);
+        //                        totalArray.push(array);
+        //                        $scope.salesDetailInfo = totalArray;
+        //                    }
+        //                    ele['salesInfo'] = $scope.salesDetailInfo;
+        //                    ele['salesClass'] = item['SALES.SALE_TYPE'];
+        //                }
+        //            } else if (item['SALES.SALE_TYPE'] == 1 || item['SALES.SALE_TYPE'] == 2) {
+        //                for (var i = 1; i <= 6; i++) {
+        //                    if (item['SALES.CONDITION_NUM' + i] != null) {
+        //                        var array = new Array();
+        //                        array.push(item['SALES.CONDITION_NUM' + i]);
+        //                        array.push(item['SALES.SALE_CONTENT' + i]);
+        //                        totalArray.push(array);
+        //                        $scope.salesDetailInfo = totalArray;
+        //                    }
+        //                    ele['salesInfo'] = $scope.salesDetailInfo;
+        //                    ele['salesClass'] = item['SALES.SALE_TYPE'];
+        //                }
+        //            }
+        //        }
+        //    })
+        //})
     };
 
-    $scope.addSalePlan = function () {
-        $scope.add['SALES_PLAN.BEGIN_DATETIME'] = $scope.from;
-        $scope.add['SALES_PLAN.END_DATETIME'] = $scope.to;
+    $scope.bindId = function ( response){
+        $scope.add['PROMOTION_PLAN.PROMOTION_RANGE_ID'] = response.extraData['PROMOTION_RANGE_ID'];
+        http.post_ori("http://127.0.0.1:8080/bubu/promo/plan/add",$scope.add
+            //console.log(response);
+            , function (response) {
+                modalFactory.showShortAlert("创建plan成功");
+                $scope.$broadcast('pageBar.reload');
+                $scope.queryDate() ;
+            }
+            , function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+    }
 
-        if ($scope.add['SALES_PLAN.NAME']
+    $scope.addSalePlan = function () {
+        $scope.add['PROMOTION_PLAN.BEGIN_DATETIME'] = $scope.from;
+        $scope.add['PROMOTION_PLAN.END_DATETIME'] = $scope.to;
+
+        if ($scope.add['PROMOTION_PLAN.NAME']
             == ''
-            || $scope.add['SALES_PLAN.INTRO']
+            || $scope.add['PROMOTION_PLAN.PROMOTION_DESCRIBE']
             == ''
-            || $scope.add['SALES_PLAN.SALE_ID']
+            || $scope.add['PROMOTION_PLAN.PROMOTION_ROLE_ID']
             == '') {
             alert('请输入完整信息');
         } else {
-            var id = $scope.add['SALES_PLAN.SALE_ID'];
-            if ($scope.salesTarget[id] == 1) {
-                $scope.add['SALES_PLAN.TARGET_OBJ_TYPE'] = -1;
-                console.log($scope.add);
+
+            if ($scope.showCont == false){
+                http.post_ori("http://127.0.0.1:8080/bubu/promo/plan/add",$scope.add
+                    //console.log(response);
+                    , function (response) {
+                        modalFactory.showShortAlert("创建plan成功") ;
+                    }
+                    , function (response) {
+                        modalFactory.showShortAlert(response.msg);
+                    });
+            }else if ($scope.showCont == true) {
+                $scope.add['PROMOTION_RANGE.IS_DEL'] = -1 ;
+                http.post_ori("http://127.0.0.1:8080/bubu/promo/range/add", $scope.add
+                    //console.log(response);
+                    , function (response) {
+                        $scope.bindId(response);
+                    }
+                    , function (response) {
+                        modalFactory.showShortAlert(response.msg);
+                    });
+
             }
-            salesFactory.AddSalesPlan($scope.add, function (response) {
-                modalFactory.showShortAlert('新增成功');
-                $scope.empty();
-                $("#addSalePlan").modal('hide');
-                $scope.$broadcast('pageBar.reload');
-            }, function (response) {
-                modalFactory.showShortAlert(response.msg);
-            });
+            //var id = $scope.add['SALES_PLAN.SALE_ID'];
+            //if ($scope.salesTarget[id] == 1) {
+            //    $scope.add['SALES_PLAN.TARGET_OBJ_TYPE'] = -1;
+            //    console.log($scope.add);
+            //}
+            //salesFactory.AddSalesPlan($scope.add, function (response) {
+            //    modalFactory.showShortAlert('新增成功');
+            //    $scope.empty();
+            //    $("#addSalePlan").modal('hide');
+            //    $scope.$broadcast('pageBar.reload');
+            //}, function (response) {
+            //    modalFactory.showShortAlert(response.msg);
+            //});
         }
     };
 
@@ -217,40 +426,63 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
     };
 
     $scope.stopSalesPlan = function (item) {
-        if (item['SALES_PLAN.STATE'] == 1) {
+        if (item['PROMOTION_PLAN.STATE'] != 'cancel') {
             modalFactory.showAlert("确认停用吗?", function () {
-                item['SALES_PLAN.STATE'] = -1;
-                salesFactory.stopSalePlanById(item, function (res) {
-                    modalFactory.showShortAlert("停用成功");
+                item['PROMOTION_PLAN.STATE'] = 'cancel';
+                http.post_ori("http://127.0.0.1:8080/bubu/promo/plan/modifyById",item
+                    //console.log(response);
+                    , function (response) {
+                        modalFactory.showShortAlert("禁用成功") ;
+                        $scope.$broadcast('pageBar.reload');
+                    }
+                    , function (response) {
+                        modalFactory.showShortAlert(response.msg);
+                    });
+                //salesFactory.stopSalePlanById(item, function (res) {
+                //    modalFactory.showShortAlert("停用成功");
+                //    $scope.$broadcast('pageBar.reload');
+                //});
+            });
+        } else if (item['PROMOTION_PLAN.STATE'] == 'cancel'){
+            item['PROMOTION_PLAN.STATE'] = 'disCancel';
+            http.post_ori("http://127.0.0.1:8080/bubu/promo/plan/modifyById",item
+                //console.log(response);
+                , function (response) {
+                    modalFactory.showShortAlert("启用成功") ;
                     $scope.$broadcast('pageBar.reload');
+                }
+                , function (response) {
+                    modalFactory.showShortAlert(response.msg);
                 });
-            });
-        } else {
-            item['SALES_PLAN.STATE'] = 1;
-            salesFactory.stopSalePlanById(item, function (res) {
-                modalFactory.showShortAlert("启用成功");
-                $scope.$broadcast('pageBar.reload');
-            });
         }
     };
 
     $scope.delSalesPlan = function (item) {
         modalFactory.showAlert("确认删除吗?", function () {
-            item['SALES_PLAN.IS_DEL'] = 1;
-            salesFactory.delSalePlanById(item, function (res) {
-                modalFactory.showShortAlert("删除成功");
-                $scope.$broadcast('pageBar.reload');
-            });
+            item['PROMOTION_PLAN.IS_DEL'] = 1;
+            http.post_ori("http://127.0.0.1:8080/bubu/promo/plan/modifyById",item
+                //console.log(response);
+                , function (response) {
+                    modalFactory.showShortAlert("删除成功") ;
+                    $scope.$broadcast('pageBar.reload');
+                }
+                , function (response) {
+                    modalFactory.showShortAlert(response.msg);
+                });
         });
     };
 
     $scope.show = function () {
-        var id = $scope.add['SALES_PLAN.SALE_ID'];
-        if ($scope.salesTarget[id] == 2) {
-            $scope.showCont = true;
-        } else {
-            $scope.showCont = false;
-        }
+        var id = $scope.add['PROMOTION_PLAN.PROMOTION_ROLE_ID'];
+        $scope.salesList.forEach(function(ele){
+            if ( ele['PROMOTION_ROLE.PROMOTION_ROLE_ID'] == id){
+                if (ele['adaptor']['PROMO_ROLE_ANDSELL.PROMOTION_TYPE'] == "prd") {
+                    $scope.showCont = true;
+                } else {
+                    $scope.showCont = false;
+                }
+            }
+        })
     }
 
     $scope.empty = function () {

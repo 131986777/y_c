@@ -200,6 +200,20 @@ angular.module('AndSell.Main').controller('product_product_productModify_Control
         }
     };
 
+    $scope.modifySkuClick= function (sku) {
+        $scope.modifySku=clone(sku);
+        $scope.modifySkuOrign=sku;
+    }
+
+    $scope.modifyProductSkuName= function () {
+        productFactory.modifySku($scope.modifySku, function (response) {
+            modalFactory.showShortAlert("修改成功");
+            $scope.modifySkuOrign['SHOP_PRODUCT_SKU.SKU_CONTENT1']=$scope.modifySku['SHOP_PRODUCT_SKU.SKU_CONTENT1'];
+            $scope.modifySkuOrign['SHOP_PRODUCT_SKU.SKU_CONTENT2']=$scope.modifySku['SHOP_PRODUCT_SKU.SKU_CONTENT2'];
+            $scope.modifySkuOrign['SHOP_PRODUCT_SKU.SKU_CONTENT3']=$scope.modifySku['SHOP_PRODUCT_SKU.SKU_CONTENT3'];
+        });
+    }
+    
     //阿里云连接
     function connALiYun() {
         var actionUrl = "../../aliYun";

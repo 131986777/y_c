@@ -13,6 +13,6 @@ AndSellMainModule.service('productFactory', function (http) {
     this.modifySkuListPrice=http.post('/shop/product/sku/modifySkuListPrice');
     this.modifyPrdsTag=http.post('/shop/product/setTag');
     this.modifyPrdsClass=http.post('/shop/product/setPrdClass');
-
+    this.modifySku=http.post('/shop/product/sku/modifyById');
 
 });
