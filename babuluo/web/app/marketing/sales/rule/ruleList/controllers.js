@@ -9,16 +9,15 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
     $scope.filter['state'] = '';
 
     //请求所有数据
-    $scope.queryDate = function () {
-        promoFactory.getPromoRole({}, function (response) {
-            $scope.bindData(response);
-            $scope.queryAdaptor();
-        }, function (response) {
-            modalFactory.showShortAlert(response.msg);
-        });
+    $scope.bindData = function (response) {
+        $scope.salesList = response.data;
+        $scope.roundList = response.data;
+        $scope.queryAdaptor();
 
         salesFactory.AddSkuInfo({}, function (response) {
-            $scope.bindData2(response);
+            $scope.productMap = response.extraData.productMap;
+            $scope.productList = response.extraData.productList;
+            $scope.skuMap = response.extraData.skuMap;
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
         });
@@ -43,20 +42,6 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
             })
         })
     }
-
-    $scope.bindData = function (response) {
-        //console.log(response);
-        $scope.salesList = response.data;
-        $scope.roundList = response.data;
-
-    };
-
-    $scope.bindData2 = function (response) {
-        $scope.productMap = response.extraData.productMap;
-        $scope.productList = response.extraData.productList;
-        $scope.skuMap = response.extraData.skuMap;
-
-    };
 
     $scope.queryByGivenInfo = function (form) {
         var array = new Array();
@@ -118,51 +103,9 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
             }
         }
 
-        //if (form['SALES.CONDITION_NUM1'] != null) {
-        //    var salesObj1 = new Object();
-        //    salesObj1.CONDITION_NUM = form['SALES.CONDITION_NUM1'];
-        //    salesObj1.SALE_CONTENT = form['SALES.SALE_CONTENT1'];
-        //    array.push(salesObj1);
-        //
-        //}
-        //if (form['SALES.CONDITION_NUM2'] != null) {
-        //    var salesObj2 = new Object();
-        //    salesObj2.CONDITION_NUM = form['SALES.CONDITION_NUM2'];
-        //    salesObj2.SALE_CONTENT = form['SALES.SALE_CONTENT2'];
-        //    array.push(salesObj2);
-        //
-        //}
-        //if (form['SALES.CONDITION_NUM3'] != null) {
-        //    var salesObj3 = new Object();
-        //    salesObj3.CONDITION_NUM = form['SALES.CONDITION_NUM3'];
-        //    salesObj3.SALE_CONTENT = form['SALES.SALE_CONTENT3'];
-        //    array.push(salesObj3);
-        //
-        //}
-        //if (form['SALES.CONDITION_NUM4'] != null) {
-        //    var salesObj4 = new Object();
-        //    salesObj4.CONDITION_NUM = form['SALES.CONDITION_NUM4'];
-        //    salesObj4.SALE_CONTENT = form['SALES.SALE_CONTENT4'];
-        //    array.push(salesObj4);
-        //}
-        //if (form['SALES.CONDITION_NUM5'] != null) {
-        //    var salesObj5 = new Object();
-        //    salesObj5.CONDITION_NUM = form['SALES.CONDITION_NUM5'];
-        //    salesObj5.SALE_CONTENT = form['SALES.SALE_CONTENT5'];
-        //    array.push(salesObj5);
-        //
-        //}
-        //if (form['SALES.CONDITION_NUM6'] != null) {
-        //    var salesObj6 = new Object();
-        //    salesObj6.CONDITION_NUM = form['SALES.CONDITION_NUM6'];
-        //    salesObj6.SALE_CONTENT = form['SALES.SALE_CONTENT6'];
-        //    array.push(salesObj6);
-        //}
-
         array.forEach(function (item) {
             var array = new Array();
-            //var saleJson = JSON.parse(item['SALE_CONTENT'].toString());
-            //skuId和prdId的Map
+
             if (form ['PROMOTION_ROLE.PROMOTION_TYPE_ACTION'] == "present") {
                 var prdId = $scope.skuMap[item['SALE_CONTENT'][0]['skuId'] + ''];
                 var name = $scope.productMap[prdId];
@@ -248,43 +191,6 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
                 default:
 
             }
-            //switch (form['SALES.SALE_TARGET']) {
-            //    case '1':
-            //        switch (form['SALES.CONDITION_TYPE']) {
-            //            case '1':
-            //                switch (form['SALES.SALE_TYPE']) {
-            //                    case '1':
-            //                        array = putParaTogether("满", item['CONDITION_NUM'], "元减",
-            // item['SALE_CONTENT'], "元"); middleArray.push(array); break; case '2': array =
-            // putParaTogether("满", item['CONDITION_NUM'], "元打", item['SALE_CONTENT'], "折");
-            // middleArray.push(array); break; case '3': array = putParaTogether("满",
-            // item['CONDITION_NUM'], "元送", saleJson['Num'], "件", name); middleArray.push(array);
-            // break; case '4': array = putParaTogether("满", item['CONDITION_NUM'], "元送",
-            // saleJson['Num'], "张", name); middleArray.push(array); break; default: } break; case
-            // '2': switch (form['SALES.SALE_TYPE']) { case '1': array = putParaTogether("每满",
-            // item['CONDITION_NUM'], "元减", item['SALE_CONTENT'], "元"); middleArray.push(array);
-            // break; case '2': array = putParaTogether("每满", item['CONDITION_NUM'], "元打",
-            // item['SALE_CONTENT'], "折"); middleArray.push(array); break; case '3': array =
-            // putParaTogether("每满", item['CONDITION_NUM'], "元送", saleJson['Num'], "件", name);
-            // middleArray.push(array); break; case '4': array = putParaTogether("满",
-            // item['CONDITION_NUM'], "元送", saleJson['Num'], "张", name); middleArray.push(array);
-            // break; default: } break; default: } break; case '2': switch
-            // (form['SALES.CONDITION_TYPE']) { case '1': switch (form['SALES.SALE_TYPE']) { case
-            // '1': array = putParaTogether("满", item['CONDITION_NUM'], "件减", item['SALE_CONTENT'],
-            // "元"); middleArray.push(array); break; case '2': array = putParaTogether("满",
-            // item['CONDITION_NUM'], "件打", item['SALE_CONTENT'], "折"); middleArray.push(array);
-            // break; case '3': array = putParaTogether("满", item['CONDITION_NUM'], "件送",
-            // saleJson['Num'], "件", name); middleArray.push(array); break; case '4': array =
-            // putParaTogether("满", item['CONDITION_NUM'], "件送", saleJson['Num'], "张", name);
-            // middleArray.push(array); break; default: } break; case '2': switch
-            // (form['SALES.SALE_TYPE']) { case '1': array = putParaTogether("每满",
-            // item['CONDITION_NUM'], "件减", item['SALE_CONTENT'], "元"); middleArray.push(array);
-            // break; case '2': array = putParaTogether("每满", item['CONDITION_NUM'], "件打",
-            // item['SALE_CONTENT'], "折"); middleArray.push(array); break; case '3': array =
-            // putParaTogether("每满", item['CONDITION_NUM'], "件送", saleJson['Num'], "件", name);
-            // middleArray.push(array); break; case '4': array = putParaTogether("每满",
-            // item['CONDITION_NUM'], "件送", saleJson['Num'], "张", name); middleArray.push(array);
-            // break; default: } break; default: } break; default: }
         });
 
         var jointList = {};
@@ -345,7 +251,7 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
         } else {
             $scope.salesList = [];
             $scope.roundList.forEach(function (ele) {
-                if (ele['PROMOTION_ROLE.NAME'] == name) {
+                if (ele['PROMOTION_ROLE.NAME'].indexOf(name)>-1) {
                     $scope.salesList.push(ele);
                 }
             })
@@ -353,37 +259,37 @@ angular.module('AndSell.Main').controller('marketing_sales_rule_ruleList_Control
         return $scope.salesList;
     }
 
-    $scope.queryBy2 = function () {
-        $scope.salesList = [];
-        if ($scope.filter['state'] == '' && $scope.filter['type'] == '') {
-            $scope.roundList.forEach(function (ele) {
-                $scope.salesList.push(ele);
-            })
-        }
-        if ($scope.filter['state'] == null || $scope.filter['state'] == '') {
-            $scope.roundList.forEach(function (ele) {
-                if (ele['adaptor']['PROMO_ROLE_ANDSELL.PROMOTION_TYPE'] == $scope.filter['type']) {
-                    $scope.salesList.push(ele);
-                }
-            })
-        }
-        if ($scope.filter['type'] == null || $scope.filter['type'] == '') {
-            $scope.roundList.forEach(function (ele) {
-                if (ele['adaptor']['PROMO_ROLE_ANDSELL.STATE'] == $scope.filter['state']) {
-                    $scope.salesList.push(ele);
-                }
-            })
-        }
-        $scope.roundList.forEach(function (ele) {
-            if (ele['adaptor']['PROMO_ROLE_ANDSELL.STATE']
-                == $scope.filter['state']
-                && ele['adaptor']['PROMO_ROLE_ANDSELL.PROMOTION_TYPE']
-                == $scope.filter['type']) {
-                $scope.salesList.push(ele);
-            }
-        })
-        return $scope.salesList;
-    }
+    //$scope.queryBy2 = function () {
+    //    $scope.salesList = [];
+    //    if ($scope.filter['state'] == '' && $scope.filter['type'] == '') {
+    //        $scope.roundList.forEach(function (ele) {
+    //            $scope.salesList.push(ele);
+    //        })
+    //    }
+    //    if ($scope.filter['state'] == null || $scope.filter['state'] == '') {
+    //        $scope.roundList.forEach(function (ele) {
+    //            if (ele['adaptor']['PROMO_ROLE_ANDSELL.PROMOTION_TYPE'] == $scope.filter['type']) {
+    //                $scope.salesList.push(ele);
+    //            }
+    //        })
+    //    }
+    //    if ($scope.filter['type'] == null || $scope.filter['type'] == '') {
+    //        $scope.roundList.forEach(function (ele) {
+    //            if (ele['adaptor']['PROMO_ROLE_ANDSELL.STATE'] == $scope.filter['state']) {
+    //                $scope.salesList.push(ele);
+    //            }
+    //        })
+    //    }
+    //    $scope.roundList.forEach(function (ele) {
+    //        if (ele['adaptor']['PROMO_ROLE_ANDSELL.STATE']
+    //            == $scope.filter['state']
+    //            && ele['adaptor']['PROMO_ROLE_ANDSELL.PROMOTION_TYPE']
+    //            == $scope.filter['type']) {
+    //            $scope.salesList.push(ele);
+    //        }
+    //    })
+    //    return $scope.salesList;
+    //}
 
     $scope.saveSales = function () {
         for (var i = 0; i < $scope.detailSaleListInfo.length; i++) {
