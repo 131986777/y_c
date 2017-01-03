@@ -18,7 +18,7 @@
             <div class="col-md-2 text-right">
                 <button show-modal id="#addSalePlan" class="btn btn-default sbold green pull-right">
                     <i
-                        class="fa fa-plus"></i>新增促销计划
+                            class="fa fa-plus"></i>新增促销计划
                 </button>
             </div>
         </div>
@@ -69,13 +69,10 @@
                         </button>
                         <span class="buy-text">买</span>
                         <div class="buy-content">
-                            <div class="buy-list"
-                                 ng-repeat="pro in item['range']['rangeDetailVOs']">
-                                <div class="product-item">
-                                    <img class="pull-left" style="width: 60px;height: 60px;"
-                                         ng-src="{{FILE_SERVER_DOMAIN+skuMap[pro['target']]['SHOP_PRODUCT.CMP']}}">
-                                    <p class="itemName"
-                                       style="height: 60px;line-height: 60px;padding-left: 5px">
+                            <div class="buy-list">
+                                <div class="product-item"  ng-repeat="pro in item['range']['rangeDetailVOs']">
+                                    <img ng-src="{{FILE_SERVER_DOMAIN+skuMap[pro['target']]['SHOP_PRODUCT.CMP']}}">
+                                    <p class="itemName">
                                         {{skuMap[pro['target']]['SHOP_PRODUCT.PRD_NAME']}}</p>
                                 </div>
                             </div>
@@ -97,10 +94,9 @@
                                 </p>
                             </div>
                             <div class="product-item">
-                                <img class="pull-left" style="width: 40px;height: 40px;"
+                                <img style="width: 40px;height: 40px;"
                                      ng-src="{{FILE_SERVER_DOMAIN+skuMap[auto['presents'][0]['skuId']]['SHOP_PRODUCT.CMP']}}">
-                                <p class="itemName"
-                                   style="height: 40px;line-height: 40px;padding-left: 5px">
+                                <p class="itemName">
                                     {{skuMap[auto['presents'][0]['skuId']]['SHOP_PRODUCT.PRD_NAME']}}</p>
                             </div>
                         </div>
@@ -204,8 +200,7 @@
                             <div class="product-item">
                                 <img class="pull-left" style="width: 40px;height: 40px;"
                                      ng-src="{{FILE_SERVER_DOMAIN+skuMap[auto['presents'][0]['skuId']]['SHOP_PRODUCT.CMP']}}">
-                                <p class="itemName"
-                                   style="height: 40px;line-height: 40px;padding-left: 5px">
+                                <p class="itemName">
                                     {{skuMap[auto['presents'][0]['skuId']]['SHOP_PRODUCT.PRD_NAME']}}</p>
                             </div>
                         </div>
@@ -297,8 +292,7 @@
                             <div class="product-item">
                                 <img class="pull-left" style="width: 40px;height: 40px;"
                                      ng-src="{{FILE_SERVER_DOMAIN+skuMap[auto['presents'][0]['skuId']]['SHOP_PRODUCT.CMP']}}">
-                                <p class="itemName"
-                                   style="height: 40px;line-height: 40px;padding-left: 5px">
+                                <p class="itemName">
                                     {{skuMap[auto['presents'][0]['skuId']]['SHOP_PRODUCT.PRD_NAME']}}</p>
                             </div>
                         </div>
@@ -355,7 +349,7 @@
                                 <div class="form-group form-inline"
                                      ng-repeat="pro in item['range']['rangeDetailVOs']">
                                     <span
-                                        class="tag">{{tagMap[pro['target']]['SHOP_TAG.TAG']}}</span>
+                                            class="tag">{{tagMap[pro['target']]['SHOP_TAG.TAG']}}</span>
                                 </div>
                             </div>
                             <div class="product-total">>>共<span class="itemNum">{{item['range']['rangeDetailVOs'].length}}</span>种标签参与
