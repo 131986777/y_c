@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Controller', function ($q, $scope, $stateParams, $http, productFactory, promoFactory, salesFactory, modalFactory) {
+angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Controller', function ($q, $scope, $stateParams, $http, productFactory, tagFactory, unitFactory, classFactory, promoFactory, salesFactory, modalFactory) {
 
     modalFactory.setTitle('促销管理');
     modalFactory.setBottom(false);
@@ -16,6 +16,8 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
     $scope.filterc = 'null';
 
     $scope.checkedList = [];
+
+    $scope.skuList = new Array;
 
     $scope.ranFilter = function () {
         if ($scope.filterc != 'null') {
@@ -49,32 +51,37 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
     $scope.queryRange = function () {
         promoFactory.getPromoRange({}, function (response) {
             $scope.salesRange = response.data;
-            $scope.addRange();
-            $scope.addRole();
+            var getPrdSkuIdsForAddRange = $q.defer();
+            var getPrdSkuIdsForAddRole = $q.defer();
+            $scope.addRange(getPrdSkuIdsForAddRange);
+            $scope.addRole(getPrdSkuIdsForAddRole);
             $scope.clonePlan = $scope.salesPlan;
+            $q.all([getPrdSkuIdsForAddRange.promise, getPrdSkuIdsForAddRole.promise]).then(function (result) {
+                $scope.getPrdSkuData();
+            });
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
         });
     }
 
-    $scope.addRange = function () {
-        var skuList = new Array;
+    $scope.addRange = function (defer) {
+
         $scope.salesPlan.forEach(function (ele) {
             $scope.salesRange.forEach(function (ran) {
                 if (ele['PROMOTION_PLAN.PROMOTION_RANGE_ID'] == ran['promotion_range_id']) {
                     ele['range'] = ran;
                     if (ele['range']['type_role'] == 'skuAlone') {
                         ele['range']['rangeDetailVOs'].forEach(function (sku) {
-                            skuList.push(sku['target']);
+                            $scope.skuList.push(sku['target']);
                         });
                     }
                 }
             })
+            defer.resolve();
         })
-        $scope.getPrdSkuData(skuList);
     }
 
-    $scope.addRole = function () {
+    $scope.addRole = function (defer) {
         $scope.salesPlan.forEach(function (ele) {
             $scope.salesList.forEach(function (rol) {
                 if (ele['PROMOTION_PLAN.PROMOTION_ROLE_ID']
@@ -82,14 +89,25 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
                     ele['role'] = rol;
                     var role = JSON.parse(rol['PROMOTION_ROLE.PROMOTION_ROLE']);
                     rol['role'] = role;
+
+                    if (ele['role']['PROMOTION_ROLE.PROMOTION_TYPE_ACTION'] == 'present') {
+                        ele['role']['role'].forEach(function (sku) {
+                            sku['presents'].forEach(function (e) {
+                                $scope.skuList.push(e['skuId']);
+                            });
+                        });
+                    }
+
                 }
             })
+            defer.resolve();
         })
     }
 
-    $scope.getPrdSkuData= function (list) {
-        productFactory.getBySkuIdWithAllInfo({'SHOP_PRODUCT_SKU.SKU_IDS':list.toString()},function(response){
-           $scope.skuMap=listToMap(response.data,"SHOP_PRODUCT_SKU.SKU_ID");
+    $scope.getPrdSkuData = function () {
+        console.log($scope.skuList);
+        productFactory.getBySkuIdWithAllInfo({'SHOP_PRODUCT_SKU.SKU_IDS': $scope.skuList.toString()}, function (response) {
+            $scope.skuMap = listToMap(response.data, "SHOP_PRODUCT_SKU.SKU_ID");
         })
     }
 
@@ -253,10 +271,22 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
         $scope.queryRange();
     }
 
+    $scope.getPrdExtraData = function () {
+        tagFactory.getPrdTagList({}, function (response) {
+            $scope.tagMap = listToMap(response.data, "SHOP_TAG.TAG_ID");
+            console.log($scope.tagMap);
+        });
+        classFactory.getPrdClassList({}, function (response) {
+            $scope.classMap = listToMap(response.data, "SHOP_PRODUCT_CLASS.CLASS_ID");
+            console.log($scope.classMap);
+        });
+    }
+
     $scope.bindData = function (response) {
         $scope.salesList = response.data;
         $scope.queryAdaptor();
         $scope.queryPlan();
+        $scope.getPrdExtraData();
         //$scope.queryDate();
         //
         ////商品类别的ID和名称的Map
