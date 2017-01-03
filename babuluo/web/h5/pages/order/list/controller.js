@@ -25,6 +25,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
         };
         if(type=='all'){
             //全部订单
+        }else if(type=='out'){
+            $scope.filter['SHOP_ORDER.STATE_ORDER']=1;
+            $scope.filter['SHOP_ORDER.STATE_MONEY']=-1;
+            $scope.filter['SHOP_ORDER.STATE_OUT']=-1;
         }else if(type=='end'){
             $scope.filter['SHOP_ORDER.STATE_ORDER']=1;
             $scope.filter['SHOP_ORDER.STATE_MONEY']=1;

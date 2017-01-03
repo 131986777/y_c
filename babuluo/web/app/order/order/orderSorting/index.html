@@ -117,7 +117,7 @@
                             </label>
                             <!--<div class="col-sm-7">-->
                             <div class="col-sm-7 form-control-static"
-                                 ng-bind="stockdetail['SHOP_ORDER_INFO.SKU']"></div>
+                                 ng-bind="stockdetail['SHOP_ORDER_INFO.BAR_CODE']"></div>
                             <!--</div>-->
                             <!--<div class="col-sm-2">-->
                             <!--<button ng-click="getProductBySkuId()">查询</button>-->
@@ -137,7 +137,8 @@
                                 价格：
                             </label>
                             <div class="col-sm-7 form-control-static"
-                                 ng-bind="stockdetail['SHOP_ORDER_INFO.PRICE_NOW'] | currency : '￥'">
+
+                                 ng-bind="(stockdetail['SHOP_ORDER_INFO.PRICE_NOW']  | currency : '￥')+' / '+stockdetail['SHOP_ORDER_INFO.UNIT']">
 
                             </div>
                         </div>

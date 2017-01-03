@@ -1,4 +1,4 @@
-<div class="bg-grey order-list-page" ng-init="initData()">
+ <div class="bg-grey order-list-page" ng-init="initData()">
   <div class="weui_tab tab-default">
     <div class="order-act- weui_navbar">
       <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[state=='all']"
@@ -10,6 +10,11 @@
          ui-sref="pages/order/list({state:'end'})"
          >
         已完成
+      </a>
+      <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[state=='out']"
+         ui-sref="pages/order/list({state:'out'})"
+         >
+        待分拣
       </a>
       <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[state=='pay']"
          ui-sref="pages/order/list({state:'pay'})"
