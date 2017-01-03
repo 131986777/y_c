@@ -23,3 +23,29 @@ AndSellH5MainModule.service('orderFactory', function (http) {
     this.calculateSale = http.post('/sales/salesplan/calculateSale');
 
 })
+
+
+AndSellH5MainModule.service('promoFactory', function (http) {
+
+    this.doPromoCalculate=http.post('/promo/doPromoCalculate');
+
+    this.getPromoRole=http.post('/promo/role/queryAll');
+
+    this.modPromoRole=http.post('/promo/role/modifyById');
+
+    this.getPromoPlan=http.post('/promo/plan/queryAll');
+
+    this.getPromoRange=http.post('/promo/range/myQueryAll');
+
+    this.delPromoRangeDetail=http.post('/promo/rangeDetail/delByRangeId');
+
+    this.addPromoRangeDetail=http.post('/promo/rangeDetail/add');
+
+    this.addPromoPlan=http.post('/promo/plan/add');
+
+    this.modPromoPlan=http.post('/promo/plan/modifyById');
+
+    this.addPromoRange=http.post('/promo/range/add');
+
+})
+

@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', function ($scope, $state,balanceFactory, $stateParams, weUI, $http,http ,couponFactory,productFactory, orderFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', function ($scope, $state, balanceFactory, promoFactory, $stateParams, weUI, $http, http, couponFactory, productFactory, orderFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('新增订单');
     modalFactory.setBottom(false);
@@ -73,45 +73,44 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
     }
 
     //计算促销结果
-    $scope.calculatePromotion = function (){
+    $scope.calculatePromotion = function () {
         weUI.toast.showLoading('正在查询促销条件');
-        var cartRequestVO = {'skuVOs' : $scope.skulistsForOrder} ;
-        var json = JSON.stringify(cartRequestVO) ;
-        http.post_ori("http://127.0.0.1:8080/bubu/promo/doPromoCalculate",{'cartRequestVO' : json}
-            //console.log(response);
-            , function (response) {
-                $scope.planUnitList = response.data ;
-                weUI.toast.hideLoading();
-                $scope.bindPromoResult() ;
-            }
-            , function (response) {
-                modalFactory.showShortAlert(response.msg);
-            });
+        var cartRequestVO = {'skuVOs': $scope.skulistsForOrder};
+        var json = JSON.stringify(cartRequestVO);
+        promoFactory.doPromoCalculate({'cartRequestVO': json}, function (response) {
+            $scope.planUnitList = response.data;
+            weUI.toast.hideLoading();
+            $scope.bindPromoResult();
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
     }
 
-    $scope.bindPromoResult = function (){
+    $scope.bindPromoResult = function () {
         var presentIds = '';
-        $scope.skuList.forEach(function(ele){
-            $scope.planUnitList.forEach(function(unit){
-                if (unit['skuVOs'] == null || unit['skuVOs'].length == 0){
-                    if (unit['presents'] != null && unit['presents'].length == 1){
-                        if (presentIds != ''){
-                            presentIds += ',' ;
+        $scope.skuList.forEach(function (ele) {
+            $scope.planUnitList.forEach(function (unit) {
+                if (unit['skuVOs'] == null || unit['skuVOs'].length == 0) {
+                    if (unit['presents'] != null && unit['presents'].length == 1) {
+                        if (presentIds != '') {
+                            presentIds += ',';
                         }
-                        presentIds += unit['presents'][0]['skuId'] ;
+                        presentIds += unit['presents'][0]['skuId'];
                     }
-                    return ;
+                    return;
                 }
-                if (ele['SHOP_PRODUCT_SKU.SKU_ID'] == unit['skuVOs'][0]['skuId']){
-                    ele['planUnit'] = unit ;
-                    ele['isSale'] = true ;
-                    ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = ele['SHOP_PRODUCT_SKU.REAL_PRICES'] ;
-                    ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = unit['afterSumPrice'] / 100 / unit['skuVOs'][0]['num'];
-                    if (unit['presents'] != null && unit['presents'].length == 1){
-                        if (presentIds != ''){
-                            presentIds += ',' ;
+                if (ele['SHOP_PRODUCT_SKU.SKU_ID'] == unit['skuVOs'][0]['skuId']) {
+                    ele['planUnit'] = unit;
+                    ele['isSale'] = true;
+                    ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
+                    ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = unit['afterSumPrice']
+                        / 100
+                        / unit['skuVOs'][0]['num'];
+                    if (unit['presents'] != null && unit['presents'].length == 1) {
+                        if (presentIds != '') {
+                            presentIds += ',';
                         }
-                        presentIds += unit['presents'][0]['skuId'] ;
+                        presentIds += unit['presents'][0]['skuId'];
                     }
                 }
             })
@@ -121,10 +120,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 $scope.presents = response.data;
                 $scope.skuList.forEach(function (ele) {
                     $scope.presents.forEach(function (present) {
-                        if (ele['planUnit'] == null ){
-                            return ;
+                        if (ele['planUnit'] == null) {
+                            return;
                         }
-                        if (ele['planUnit']['presents'][0]['skuId'] == present['SHOP_PRODUCT_SKU.SKU_ID']) {
+                        if (ele['planUnit']['presents'][0]['skuId']
+                            == present['SHOP_PRODUCT_SKU.SKU_ID']) {
                             ele['present'] = present;
                             ele['hasPresent'] = true;
                         } else {
@@ -132,15 +132,16 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                         }
                     })
                 })
-                $scope.planUnitList.forEach(function(unit){
+                $scope.planUnitList.forEach(function (unit) {
                     if (unit['skuVOs'] == null || unit['skuVOs'].length == 0) {
                         $scope.presents.forEach(function (present) {
-                            if (unit['presents'] == null || unit['presents'].length == 0){
-                                return ;
+                            if (unit['presents'] == null || unit['presents'].length == 0) {
+                                return;
                             }
-                            if (unit['presents'][0]['skuId'] == present['SHOP_PRODUCT_SKU.SKU_ID']){
-                                $scope.orderPresent = present ;
-                                $scope.orderPresentNum = unit['presents'][0]['num'] ;
+                            if (unit['presents'][0]['skuId']
+                                == present['SHOP_PRODUCT_SKU.SKU_ID']) {
+                                $scope.orderPresent = present;
+                                $scope.orderPresentNum = unit['presents'][0]['num'];
                             }
                         })
                     }
@@ -152,7 +153,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
     //计算销售信息
     //$scope.calculateSaleInfo = function (list) {
-    //    orderFactory.calculateSale({'ORDER_PRD_LIST': JSON.stringify(list)}, function (response) {
+    //    orderFactory.calculateSale({'ORDER_PRD_LIST': JSON.stringify(list)}, function (response)
+    // {
     //        var newPrdListInOrder = objectToArray(response.extraData.newOrder);
     //        var newPriceMap = {};
     //        newPrdListInOrder.forEach(function (ele) {
@@ -165,15 +167,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
     //                    //价格不一致 参与了促销
     //                    ele.isSale = true;
     //                }
-    //                ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']];
-    //            }
-    //        });
-    //        weUI.toast.hideLoading();
-    //        $scope.updateOrderPrice();
-    //    }, function (response) {
-    //        weUI.toast.hideLoading();
-    //    });
-    //}
+    //                ele['SHOP_PRODUCT_SKU.REAL_PRICES'] =
+    // newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']]; } }); weUI.toast.hideLoading();
+    // $scope.updateOrderPrice(); }, function (response) { weUI.toast.hideLoading(); }); }
 
     //计算订单价格
     $scope.updateOrderPrice = function () {
@@ -181,7 +177,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         var new_price = 0;
         $scope.skuList.forEach(function (ele) {
             price += ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] * ele['SHOP_PRODUCT_SKU.SIZE'];
-            new_price += ele['SHOP_PRODUCT_SKU.REAL_PRICES'] ;
+            new_price += ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
         });
         $scope.order['SHOP_ORDER.PRICE_PRD'] = price;
         var prdPrice = price;
@@ -195,30 +191,30 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         $scope.order['SHOP_ORDER.PRICE_COUPON'] = 0;
         if (salePrice > 0) {
             price -= salePrice;
-            if(price<=0){
-                price=0.01;
+            if (price <= 0) {
+                price = 0.01;
             }
         }
 
-        var price_mark=price;
+        var price_mark = price;
 
-        if ($scope.coupon != undefined&&$scope.coupon.MONEY!=undefined) {
+        if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
             price -= $scope.coupon.MONEY;
-            if(price<=0){
-                price=0.01;
+            if (price <= 0) {
+                price = 0.01;
             }
-            $scope.order['SHOP_ORDER.PRICE_COUPON']=moneyFormat(price_mark-price);
+            $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
         }
 
         //订单促销
-        $scope.planUnitList.forEach(function(ele){
-            if (ele['skuVOs'] == null || ele['skuVOs'].length == 0){
+        $scope.planUnitList.forEach(function (ele) {
+            if (ele['skuVOs'] == null || ele['skuVOs'].length == 0) {
                 price = ele['afterSumPrice'] / 100;
             }
         })
 
-        $scope.onSalePrice=moneyFormat(prdPrice-price);
-        $scope.order['SHOP_ORDER.PRICE_DISCOUNT']= $scope.onSalePrice;
+        $scope.onSalePrice = moneyFormat(prdPrice - price);
+        $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = $scope.onSalePrice;
         $scope.order['SHOP_ORDER.PRICE_ORDER'] = price;
         $scope.order['SHOP_ORDER.PRICE_OVER'] = price;
 
@@ -258,8 +254,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 params['SHOP_ORDER.GET_PRD_DATETIME'] = noUndefinedAndNull($scope.cookiePickupPerson.getTime);//提货时间
             }
 
-            if($scope.coupon!=undefined){
-                params['SHOP_ORDER.COUPON_ID']=$scope.coupon.ID;
+            if ($scope.coupon != undefined) {
+                params['SHOP_ORDER.COUPON_ID'] = $scope.coupon.ID;
             }
             params['SHOP_ORDER.DETAILS'] = JSON.stringify($scope.skuList);//sku信息
             orderFactory.addOrder(params, function (response) {
@@ -284,12 +280,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 }
                 $scope.commitClick = true;
                 var state = {
-                    title: "main",
-                    url: "#/pages/order/list/all"
+                    title: "main", url: "#/pages/order/list/all"
                 };
                 //window.history.replaceState(state,"main","#/pages/order/list/all");
 
-                window.location.replace("#/pages/order/detail/"+response.extraData.ORDER_ID+'/');
+                window.location.replace("#/pages/order/detail/"
+                    + response.extraData.ORDER_ID
+                    + '/');
                 //
                 //$state.go('pages/order/detail', {
                 //    ORDER_ID: response.extraData.ORDER_ID,
@@ -304,16 +301,17 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         }
     }
 
-    $scope.cardPay= function () {
-        if($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']>=$scope.order['SHOP_ORDER.PRICE_OVER']){
-            $scope.order['SHOP_ORDER.PAY_TYPE']='ACCOUNT';
+    $scope.cardPay = function () {
+        if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
+            >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
+            $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
         } else {
             weUI.toast.info('会员卡余额不足，请先充值');
         }
     }
 
-    $scope.wxPay= function () {
-        $scope.order['SHOP_ORDER.PAY_TYPE']='WEIXIN';
+    $scope.wxPay = function () {
+        $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
     }
 
     $scope.queryAccount = function () {
@@ -321,9 +319,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         balanceFactory.queryAccountByUid(form, function (response) {
             console.log(response);
             $scope.balanceInfo = response.data;
-            if($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']>=$scope.order['SHOP_ORDER.PRICE_OVER']) {
+            if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
+                >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
                 $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
-            }else{
+            } else {
                 $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
             }
         }, function (response) {

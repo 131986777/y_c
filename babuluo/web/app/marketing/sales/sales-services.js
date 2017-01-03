@@ -3,10 +3,6 @@ AndSellMainModule.service('salesFactory', function (http) {
     this.MosdifyAdaptor=http.post('/promo/role/andSell/modifyById');
 
     this.ModifySalesState=http.post('/sales/sales/modifyById');
-    //
-    //this.AddSales=http.post('/sales/sales/add');
-    //
-    //this.AddPromoRole=http.postPromo('http://192.168.2.145:8080/bubu/promo/role/add') ;
 
     this.AddPromoRoleAdaptor=http.post('/promo/role/andSell/add') ;
 
@@ -23,6 +19,31 @@ AndSellMainModule.service('salesFactory', function (http) {
     this.stopSalePlanById=http.post('/sales/salesplan/modifyById');
 
 });
+
+
+AndSellMainModule.service('promoFactory', function (http) {
+
+    this.doPromoCalculate=http.post('/promo/doPromoCalculate');
+
+    this.getPromoRole=http.post('/promo/role/queryAll');
+
+    this.modPromoRole=http.post('/promo/role/modifyById');
+
+    this.getPromoPlan=http.post('/promo/plan/queryAll');
+
+    this.getPromoRange=http.post('/promo/range/myQueryAll');
+
+    this.delPromoRangeDetail=http.post('/promo/rangeDetail/delByRangeId');
+
+    this.addPromoRangeDetail=http.post('/promo/rangeDetail/add');
+
+    this.addPromoPlan=http.post('/promo/plan/add');
+
+    this.modPromoPlan=http.post('/promo/plan/modifyById');
+
+    this.addPromoRange=http.post('/promo/range/add');
+
+})
 
 AndSellMainModule.service('eventFactory', function (http) {
 

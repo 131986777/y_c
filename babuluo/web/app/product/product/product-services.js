@@ -14,5 +14,6 @@ AndSellMainModule.service('productFactory', function (http) {
     this.modifyPrdsTag=http.post('/shop/product/setTag');
     this.modifyPrdsClass=http.post('/shop/product/setPrdClass');
     this.modifySku=http.post('/shop/product/sku/modifyById');
+    this.getBySkuIdWithAllInfo=http.post('/shop/product/getBySkuIdWithAllInfo');
 
 });
