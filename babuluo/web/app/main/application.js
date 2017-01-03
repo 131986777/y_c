@@ -5,10 +5,16 @@ var AndSellMainModule = angular.module('AndSell.Main', ['AndSell.Service', 'AndS
 
 var AndSellData = angular.module("AndSell.data", []);
 AndSellService.constant('baseURL', '/AndSell/bubu');
+AndSellService.constant('imgURL', 'http://bbl-upload.oss-cn-shanghai.aliyuncs.com/');
 
 AndSellService.factory("http", function ($http) {
-    var _post = function (url, data,funcSuccess,funcFail) {
-        return $http.post(url, $.param(data), {headers: {'Content-Type': 'application/x-www-form-urlencoded','withCredentials': true}}).success(function (response) {
+    var _post = function (url, data, funcSuccess, funcFail) {
+        return $http.post(url, $.param(data), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'withCredentials': true
+            }
+        }).success(function (response) {
             if (response.code == 0) {
                 if (angular.isFunction(funcSuccess)) {
                     if (funcSuccess != undefined) {
@@ -25,18 +31,17 @@ AndSellService.factory("http", function ($http) {
         });
     };
     return {
-        post: function (url,init) {
+        post: function (url, init) {
             return function (form, funcSuccess, funcFail) {
                 if (form == undefined) {
                     form = {};
                 }
-                if (init != undefined&&angular.isFunction(init)) {
+                if (init != undefined && angular.isFunction(init)) {
                     init(form);
                 }
-                return _post(baseURL + url, form,funcSuccess,funcFail)
+                return _post(baseURL + url, form, funcSuccess, funcFail)
             }
-        },
-        post_ori: function (url,param,func,error) {
+        }, post_ori: function (url, param, func, error) {
             return $http.post(url, $.param(param), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function (result) {
 
                 if (angular.isFunction(func)) {
@@ -378,7 +383,7 @@ AndSellUI.directive('tagSwitchModal', function (http, baseURL, tagFactory) {
     }
 });
 
-AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory, unitFactory, productFactory, tagFactory) {
+AndSellUI.directive('productSwitchModal', function (http, imgURL, baseURL, classFactory, unitFactory, productFactory, tagFactory) {
     return {
         restrict: 'EA',
         templateUrl: '/AndSell/app/components/libs/angular/template/productSwitchModal.html',
@@ -386,6 +391,8 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
             callback: '&'
         },
         controller: function ($scope) {
+
+            $scope.FILE_SERVER_DOMAIN = imgURL;
 
             $scope.getInitData = function () {
                 tagFactory.getPrdTagList({}, function (response) {
@@ -416,10 +423,10 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
             }
 
             $scope.search = function () {
-                $scope.productFilter['SHOP_PRODUCT.SEARCH_CONTENT']= $scope.productFilterSearch;
+                $scope.productFilter['SHOP_PRODUCT.SEARCH_CONTENT'] = $scope.productFilterSearch;
             }
 
-            $scope.existItem =  function (item) {
+            $scope.existItem = function (item) {
                 if ($scope.selectItemList.indexOf(item) < 0) {
                     return true;
                 }
@@ -441,8 +448,8 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
             $scope.setReturn = function () {
                 $scope.callback({data: $scope.selectItemList});
                 $scope.selectItemList = new Array;
-                $scope.productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID']='null';
-                $scope.productFilterSearch='';
+                $scope.productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID'] = 'null';
+                $scope.productFilterSearch = '';
                 $('#productSwitchModal').modal('hide');
             }
         }
@@ -450,7 +457,7 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
 });
 
 //优惠券模态框
-AndSellUI.directive('couponItemSwitchModal', function (http, baseURL,couponFactory) {
+AndSellUI.directive('couponItemSwitchModal', function (http, baseURL, couponFactory) {
     return {
         restrict: 'EA',
         templateUrl: '/AndSell/app/components/libs/angular/template/couponItemSwitchModal.html',
@@ -470,7 +477,7 @@ AndSellUI.directive('couponItemSwitchModal', function (http, baseURL,couponFacto
             }
 
             $scope.checkItem = function (item) {
-                $scope.selectItem=item;
+                $scope.selectItem = item;
             }
 
             $scope.setReturn = function () {
@@ -485,7 +492,7 @@ AndSellUI.directive('couponItemSwitchModal', function (http, baseURL,couponFacto
     }
 });
 
-AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFactory, unitFactory, productFactory, tagFactory) {
+AndSellUI.directive('productItemSwitchModal', function (http, baseURL, imgURL, classFactory, unitFactory, productFactory, tagFactory) {
     return {
         restrict: 'EA',
         templateUrl: '/AndSell/app/components/libs/angular/template/productItemSwitchModal.html',
@@ -493,6 +500,8 @@ AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFact
             callback: '&'
         },
         controller: function ($scope) {
+
+            $scope.FILE_SERVER_DOMAIN = imgURL;
 
             $scope.getInitData = function () {
                 tagFactory.getPrdTagList({}, function (response) {
@@ -513,17 +522,17 @@ AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFact
             }
 
             $scope.checkItem = function (item) {
-                $scope.selectItem=item;
+                $scope.selectItem = item;
             }
 
             $scope.search = function () {
-                $scope.productFilter['SHOP_PRODUCT.SEARCH_CONTENT']= $scope.productFilterSearch;
+                $scope.productFilter['SHOP_PRODUCT.SEARCH_CONTENT'] = $scope.productFilterSearch;
             }
 
             $scope.setReturn = function () {
                 $scope.callback({data: $scope.selectItem});
-                $scope.productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID']='null';
-                $scope.productFilterSearch='';
+                $scope.productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID'] = 'null';
+                $scope.productFilterSearch = '';
                 $('#productItemSwitchModal').modal('hide');
             }
             $scope.cancel = function () {
@@ -545,17 +554,19 @@ AndSellUI.directive('treeList', function () {
         controller: function ($scope) {
 
             $scope.$watch('tree', function () {
-                if($scope.tree!=undefined)
-                $scope.treeData();
+                if ($scope.tree != undefined) {
+                    $scope.treeData();
+                }
             });
 
             // 多级菜单初始化
             $scope.multiMenuInit = function () {
                 function setSubmenu(menu) {
-                    if(menu!= undefined)
-                        if (menu.childList ) {
+                    if (menu != undefined) {
+                        if (menu.childList) {
                             menu.showSubmenu = false; // 默认子菜单隐藏
                         }
+                    }
                 }
 
                 setSubmenu($scope.firstMenu);
@@ -565,17 +576,17 @@ AndSellUI.directive('treeList', function () {
                 setSubmenu($scope.fifthMenu);
             };
 
-            $scope.treeData= function () {
+            $scope.treeData = function () {
 
-                var tree=$scope.tree;
+                var tree = $scope.tree;
                 var root = {};
-                root[tree.keyId]=tree.rootId;
-                root[tree.keyPId]=tree.rootId;
-                root[tree.keyName]='';
+                root[tree.keyId] = tree.rootId;
+                root[tree.keyPId] = tree.rootId;
+                root[tree.keyName] = '';
 
-                $scope.keyName=tree.keyName;
-                $scope.keyId=tree.keyId;
-                $scope.keyPId=tree.keyPId;
+                $scope.keyName = tree.keyName;
+                $scope.keyId = tree.keyId;
+                $scope.keyPId = tree.keyPId;
 
                 $scope.multimenuList = [];
                 var list = new Array;
@@ -584,7 +595,7 @@ AndSellUI.directive('treeList', function () {
                     list.push(element);
                 });
 
-                $scope.multimenuList_origin = convertListWithParent(list,tree.keyPId,tree.keyId, tree.rootId);
+                $scope.multimenuList_origin = convertListWithParent(list, tree.keyPId, tree.keyId, tree.rootId);
                 $scope.multimenuList = [];
                 angular.copy($scope.multimenuList_origin, $scope.multimenuList);
             }
@@ -641,22 +652,23 @@ AndSellUI.directive('treeList', function () {
                 $('[data-toggle="popover"]').popover()
             });
 
-            $scope.setReturn= function (item) {
-                $scope.callback({data:item});
+            $scope.setReturn = function (item) {
+                $scope.callback({data: item});
             }
 
         }
     }
 });
 
-
 AndSellService.filter('bytes', function () {
     return function (bytes, precision) {
         if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
         if (typeof precision === 'undefined') precision = 1;
-        var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
-            number = Math.floor(Math.log(bytes) / Math.log(1024));
-        return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) + ' ' + units[number];
+        var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'], number = Math.floor(Math.log(bytes)
+            / Math.log(1024));
+        return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision)
+            + ' '
+            + units[number];
     }
 });
 
