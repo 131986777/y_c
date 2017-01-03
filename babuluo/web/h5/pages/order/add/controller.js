@@ -141,7 +141,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                     }
                 });
                 $scope.updateOrderPrice();
-            })
+            });
         }else{
             $scope.updateOrderPrice();
         }
