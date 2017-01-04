@@ -37,6 +37,7 @@ public class outputMemberQuery {
         return bean;
     }
 
+
     public HSSFSheet GenerateExcelSheet(HSSFWorkbook analyseBook, String parameter) throws RuleException {
 
         JSONObject paramJson = JSON.parseObject(parameter);
