@@ -35,5 +35,7 @@ $import('pages/account/recharge');
 
 $import('pages/security/resetPwd');
 
+$import('pages/order/review',{ID:''});
+
 
 
