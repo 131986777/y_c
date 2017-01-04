@@ -81,22 +81,19 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             wxPay(formData);
 
         } else if ($scope.order['SHOP_ORDER.PAY_TYPE'] == 'ACCOUNT') {
-            alert(1);
-            $scope.cardModalShow=true;
+            weUI.dialog.confirm("提示", "确认支付该订单", function () {
+                weUI.toast.showLoading('正在支付');
+                orderFactory.payOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
+                    weUI.toast.hideLoading();
+                    weUI.toast.ok('支付成功');
+                    $state.go("pages/personal");
+                }, function (response) {
+                    weUI.toast.hideLoading();
+                    weUI.toast.error(response.msg);
+                });
+            }, function () {
 
-            // weUI.dialog.confirm("提示", "确认支付该订单", function () {
-            //     weUI.toast.showLoading('正在支付');
-            //     orderFactory.payOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
-            //         weUI.toast.hideLoading();
-            //         weUI.toast.ok('支付成功');
-            //         $state.go("pages/personal");
-            //     }, function (response) {
-            //         weUI.toast.hideLoading();
-            //         weUI.toast.error(response.msg);
-            //     });
-            // }, function () {
-            //
-            // });
+            });
         }
     };
 
@@ -107,7 +104,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     //评价订单
     $scope.commentOrder = function () {
-
+        //pages_order_review_Controller
+        $state.go('pages/order/review', {ID: $scope.order['SHOP_ORDER.ID']});
     };
 
     /**
