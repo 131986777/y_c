@@ -12,8 +12,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
         $scope.cookiePickupPerson = JSON.parse(getCookie("pickupPerson"));
 
-        console.log($scope.cookiePickupPerson);
-
         $scope.EmptyPick = isEmptyObject($scope.cookiePickupPerson);
         if (!$scope.EmptyPick) {
             $scope.cookiePickupPerson.getTime = setTime();
@@ -256,19 +254,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                     $scope.descCoupon($scope.coupon.ID);
                 }
                 $scope.commitClick = true;
-                var state = {
-                    title: "main", url: "#/pages/order/list/all"
-                };
-                //window.history.replaceState(state,"main","#/pages/order/list/all");
 
                 window.location.replace("#/pages/order/detail/"
                     + response.extraData.ORDER_ID
                     + '/');
-                //
-                //$state.go('pages/order/detail', {
-                //    ORDER_ID: response.extraData.ORDER_ID,
-                //    FROM: 'Add'
-                //});
 
             }, function (response) {
                 weUI.toast.hideLoading();
