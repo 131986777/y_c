@@ -160,6 +160,7 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
         $scope.outputList = {};
         $scope.outputList['type'] = "card";
         $scope.outputList['param'] = JSON.stringify($scope.filter);
+        modalFactory.showShortAlert("正在导出 请稍等");
         http.post_ori(url, $scope.outputList, function (response) {
             if (response != "failure") {
                 location.href = "/AndSell" + response;

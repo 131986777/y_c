@@ -48,7 +48,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_review_Controller', fu
         }
         $q.all(promise).then(function () {
             $state.go('pages/order/detail',{ORDER_ID: id});
-            weUI.info("提交成功");
+            weUI.toast.info("提交成功");
         });
     };
 

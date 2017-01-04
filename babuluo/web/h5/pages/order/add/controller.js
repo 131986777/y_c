@@ -74,7 +74,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             weUI.toast.hideLoading();
             $scope.bindPromoResult();
         }, function (response) {
-            modalFactory.showShortAlert(response.msg);
+            weUI.toast.error(response.msg);
         });
     };
 
