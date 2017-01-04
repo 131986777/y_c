@@ -143,6 +143,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         }else{
             $scope.updateOrderPrice();
         }
+        if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
+            >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
+            $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
+        } else {
+            $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
+        }
+
     }
 
     //计算订单价格
@@ -286,12 +293,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             console.log(response);
             $scope.balanceInfo = response.data;
             if ($scope.balanceInfo.length > 0) {
-                if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
-                    >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
-                    $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
-                } else {
-                    $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
-                }
+
             } else {
                 $state.go('pages/user/accountLogin');
                 weUI.toast.error('请使用正确的账号登录');
