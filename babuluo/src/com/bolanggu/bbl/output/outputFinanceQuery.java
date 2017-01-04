@@ -14,6 +14,8 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFCell;
+import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -57,7 +59,7 @@ public class outputFinanceQuery {
         //解析主要数据
         JSONArray jsonArray = JSONArray.parseArray(outputDetail.getData().toString());
 
-        Sheet financeSheet = analyseBook.createSheet("资金明细表");
+        SXSSFSheet financeSheet = analyseBook.createSheet("资金明细表");
         financeSheet.setColumnWidth(0, 2000);
         financeSheet.setColumnWidth(1, 6000);
         financeSheet.setColumnWidth(2, 3000);
@@ -73,7 +75,6 @@ public class outputFinanceQuery {
         financeSheet.setColumnWidth(12, 3000);
         financeSheet.setColumnWidth(13, 4000);
         financeSheet.setColumnWidth(14, 5000);
-        financeSheet.autoSizeColumn(1, true);
 
         //字体预设置
         XSSFFont font = (XSSFFont) analyseBook.createFont();
@@ -127,57 +128,57 @@ public class outputFinanceQuery {
 
         int rowIndex = 0;//行数
         //地区分析开始
-        Row analyseTitle = financeSheet.createRow(rowIndex++);
+        SXSSFRow analyseTitle = financeSheet.createRow(rowIndex++);
         analyseTitle.setHeightInPoints(25);
-        Cell cellTitle1 = analyseTitle.createCell(0);
+        SXSSFCell cellTitle1 = analyseTitle.createCell(0);
         cellTitle1.setCellStyle(titleStyle);
         cellTitle1.setCellValue("资金明细记录");
 
-        Row rowTitle = financeSheet.createRow(rowIndex++);
+        SXSSFRow rowTitle = financeSheet.createRow(rowIndex++);
         rowTitle.setHeightInPoints(25);
-        Cell cellNum = rowTitle.createCell(0);
+        SXSSFCell cellNum = rowTitle.createCell(0);
         cellNum.setCellValue("序号");
         cellNum.setCellStyle(title2Style);
-        Cell cellArea = rowTitle.createCell(1);
+        SXSSFCell cellArea = rowTitle.createCell(1);
         cellArea.setCellValue("时间");
         cellArea.setCellStyle(title2Style);
-        Cell cellName = rowTitle.createCell(2);
+        SXSSFCell cellName = rowTitle.createCell(2);
         cellName.setCellValue("客户姓名");
         cellName.setCellStyle(title2Style);
-        Cell cellPhone = rowTitle.createCell(3);
+        SXSSFCell cellPhone = rowTitle.createCell(3);
         cellPhone.setCellValue("手机号");
         cellPhone.setCellStyle(title2Style);
-        Cell cellReturn = rowTitle.createCell(4);
+        SXSSFCell cellReturn = rowTitle.createCell(4);
         cellReturn.setCellValue("变更事件");
         cellReturn.setCellStyle(title2Style);
-        Cell cellOrderPrice = rowTitle.createCell(5);
+        SXSSFCell cellOrderPrice = rowTitle.createCell(5);
         cellOrderPrice.setCellValue("交易卡号");
         cellOrderPrice.setCellStyle(title2Style);
-        Cell cellBalBe = rowTitle.createCell(6);
+        SXSSFCell cellBalBe = rowTitle.createCell(6);
         cellBalBe.setCellValue("交易前余额");
         cellBalBe.setCellStyle(title2Style);
-        Cell cellBalAf = rowTitle.createCell(7);
+        SXSSFCell cellBalAf = rowTitle.createCell(7);
         cellBalAf.setCellValue("交易后余额");
         cellBalAf.setCellStyle(title2Style);
-        Cell cellCardType = rowTitle.createCell(8);
+        SXSSFCell cellCardType = rowTitle.createCell(8);
         cellCardType.setCellValue("交易卡类别");
         cellCardType.setCellStyle(title2Style);
-        Cell cellCardShop = rowTitle.createCell(9);
+        SXSSFCell cellCardShop = rowTitle.createCell(9);
         cellCardShop.setCellValue("交易卡开卡门店");
         cellCardShop.setCellStyle(title2Style);
-        Cell cellReturnPrice = rowTitle.createCell(10);
+        SXSSFCell cellReturnPrice = rowTitle.createCell(10);
         cellReturnPrice.setCellValue("交易操作门店");
         cellReturnPrice.setCellStyle(title2Style);
-        Cell operator = rowTitle.createCell(11);
+        SXSSFCell operator = rowTitle.createCell(11);
         operator.setCellValue("操作员");
         operator.setCellStyle(title2Style);
-        Cell type = rowTitle.createCell(12);
+        SXSSFCell type = rowTitle.createCell(12);
         type.setCellValue("变更类型");
         type.setCellStyle(title2Style);
-        Cell money = rowTitle.createCell(13);
+        SXSSFCell money = rowTitle.createCell(13);
         money.setCellValue("变更金额");
         money.setCellStyle(title2Style);
-        Cell balance = rowTitle.createCell(14);
+        SXSSFCell balance = rowTitle.createCell(14);
         balance.setCellValue("账户余额");
         balance.setCellStyle(title2Style);
         int analyseIndex = 1;//序号
@@ -206,56 +207,56 @@ public class outputFinanceQuery {
                 Balance = "￥" + Balance;
             }
 
-            Row row = financeSheet.createRow(rowIndex++);
+            SXSSFRow row = financeSheet.createRow(rowIndex++);
             row.setHeightInPoints(25);
-            Cell cell0 = row.createCell(0);
+            SXSSFCell cell0 = row.createCell(0);
             cell0.setCellValue(analyseIndex++);
             cell0.setCellStyle(cellStyle);
-            Cell cell1 = row.createCell(1);
+            SXSSFCell cell1 = row.createCell(1);
             cell1.setCellValue(jsonObject.getString("FINANCE_LIST.ADD_DATETIME").replace(".0", ""));
             cell1.setCellStyle(cellStyle);
-            Cell cell2 = row.createCell(2);
+            SXSSFCell cell2 = row.createCell(2);
             cell2.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.TRUE_NAME"), ""));
             cell2.setCellStyle(cellStyle);
-            Cell cell3 = row.createCell(3);
+            SXSSFCell cell3 = row.createCell(3);
             cell3.setCellValue(jsonObject.getString("FINANCE_LIST.MEMBER_MOBILE"));
             cell3.setCellStyle(cellStyle);
-            Cell cell4 = row.createCell(4);
+            SXSSFCell cell4 = row.createCell(4);
             cell4.setCellValue(jsonObject.getString("FINANCE_LIST.EVENT"));
             cell4.setCellStyle(cellStyle);
-            Cell cell5 = row.createCell(5);
+            SXSSFCell cell5 = row.createCell(5);
             cell5.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_NO"), ""));
             cell5.setCellStyle(cellStyle);
-            Cell cell6 = row.createCell(6);
+            SXSSFCell cell6 = row.createCell(6);
             cell6.setCellValue(cardBalanceBefore);
             cell6.setCellStyle(cellStyle);
-            Cell cell7 = row.createCell(7);
+            SXSSFCell cell7 = row.createCell(7);
             cell7.setCellValue(cardBalance);
             cell7.setCellStyle(cellStyle);
-            Cell cell8 = row.createCell(8);
+            SXSSFCell cell8 = row.createCell(8);
             cell8.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_TYPE"), ""));
             cell8.setCellStyle(cellStyle);
-            Cell cell9 = row.createCell(9);
+            SXSSFCell cell9 = row.createCell(9);
             cell9.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.CARD_SHOP"), ""));
             cell9.setCellStyle(cellStyle);
-            Cell cell10 = row.createCell(10);
+            SXSSFCell cell10 = row.createCell(10);
             cell10.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.SHOP"), ""));
             cell10.setCellStyle(cellStyle);
-            Cell cell11 = row.createCell(11);
+            SXSSFCell cell11 = row.createCell(11);
             cell11.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.OPER_USER_ID"), ""));
             cell11.setCellStyle(cellStyle);
-            Cell cell12 = row.createCell(12);
+            SXSSFCell cell12 = row.createCell(12);
             cell12.setCellValue(changeType);
             cell12.setCellStyle(cellStyle);
-            Cell cell13 = row.createCell(13);
+            SXSSFCell cell13 = row.createCell(13);
             cell13.setCellValue(NumFormat.format(jsonObject.getDouble("FINANCE_LIST.CHANGE_VALUE")));
             cell13.setCellStyle(cellStyle);
-            Cell cell14 = row.createCell(14);
+            SXSSFCell cell14 = row.createCell(14);
             cell14.setCellValue(Balance);
             cell14.setCellStyle(cellStyle);
         }
 
-        Row rowM = financeSheet.createRow(rowIndex);
+        SXSSFRow rowM = financeSheet.createRow(rowIndex);
         rowM.setHeightInPoints(25);
 //        Cell cellMan = rowM.createCell(0);
 //        cellMan.setCellValue("操作人：");
@@ -276,14 +277,14 @@ public class outputFinanceQuery {
         rowM.createCell(10).setCellValue("");
         rowM.createCell(11).setCellValue("");
         rowM.createCell(12).setCellValue("");
-        Cell cellTime = rowM.createCell(13);
+        SXSSFCell cellTime = rowM.createCell(13);
         cellTime.setCellValue("导出时间：");
         cellTime.setCellStyle(cellStyle);
-        Cell cellTimeValue = rowM.createCell(14);
+        SXSSFCell cellTimeValue = rowM.createCell(14);
         cellTimeValue.setCellValue(dateFormat.format(DateUtil.getCurrTime()));
         cellTimeValue.setCellStyle(cellStyle);
 
-        return (SXSSFSheet) financeSheet;
+        return financeSheet;
 
     }
 
