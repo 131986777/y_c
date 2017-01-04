@@ -8,17 +8,18 @@ import com.pabula.api.data.ReturnData;
 import com.pabula.common.util.DateUtil;
 import com.pabula.common.util.StrUtil;
 import com.pabula.fw.exception.RuleException;
-import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.*;
 
+import java.awt.*;
 import java.text.DateFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -39,7 +40,7 @@ public class outputCardQuery {
         return bean;
     }
 
-    public HSSFSheet GenerateExcelSheet(HSSFWorkbook analyseBook, String parameter) throws RuleException {
+    public SXSSFSheet GenerateExcelSheet(SXSSFWorkbook analyseBook, String parameter) throws RuleException {
 
         JSONObject paramJson = JSON.parseObject(parameter);
 
@@ -51,8 +52,7 @@ public class outputCardQuery {
         ReturnData outputDetail = new API().call("/member/membercard/queryAll", map);
         //解析主要数据
         JSONArray jsonArray = JSONArray.parseArray(outputDetail.getData().toString());
-
-        HSSFSheet cardSheet = analyseBook.createSheet("会员卡表");
+        Sheet cardSheet = analyseBook.createSheet("会员卡表");
         cardSheet.setColumnWidth(0, 2500);
         cardSheet.setColumnWidth(1, 6000);
         cardSheet.setColumnWidth(2, 5000);
@@ -66,19 +66,19 @@ public class outputCardQuery {
         cardSheet.autoSizeColumn(1, true);
 
         //字体预设置
-        HSSFFont font = analyseBook.createFont();
+        Font font = analyseBook.createFont();
         font.setFontName("微软雅黑");
         font.setFontHeightInPoints((short) 14);
 
-        HSSFFont font2 = analyseBook.createFont();
+        Font font2 = analyseBook.createFont();
         font2.setFontName("微软雅黑");
         font2.setFontHeightInPoints((short) 12);
 
-        HSSFFont font3 = analyseBook.createFont();
+        Font font3 = analyseBook.createFont();
         font3.setFontName("微软雅黑");
         font3.setFontHeightInPoints((short) 11);
 
-        HSSFFont font4 = analyseBook.createFont();
+        Font font4 = analyseBook.createFont();
         font4.setFontName("微软雅黑");
         font4.setFontHeightInPoints((short) 11);
         font4.setColor(Font.COLOR_RED);
@@ -86,43 +86,46 @@ public class outputCardQuery {
         cardSheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 9));
 
         //大标题样式
-        HSSFCellStyle titleStyle = analyseBook.createCellStyle();
+        CellStyle titleStyle = analyseBook.createCellStyle();
 
-        titleStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-        titleStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+        titleStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+        titleStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
         titleStyle.setFillForegroundColor(HSSFColor.GREY_40_PERCENT.index);
-        titleStyle.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        titleStyle.setFillPattern(XSSFCellStyle.SOLID_FOREGROUND);
         titleStyle.setFont(font);
 
         //第二行样式
-        HSSFCellStyle title2Style = analyseBook.createCellStyle();
-        title2Style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+        CellStyle title2Style = analyseBook.createCellStyle();
+        title2Style.setAlignment(XSSFCellStyle.ALIGN_CENTER);
         title2Style.setFillForegroundColor(HSSFColor.GREY_25_PERCENT.index);
-        title2Style.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+        title2Style.setFillPattern(XSSFCellStyle.SOLID_FOREGROUND);
         title2Style.setFont(font2);
 
         //内容的样式
-        HSSFCellStyle cellStyle = analyseBook.createCellStyle();
-        cellStyle.setAlignment(HSSFCellStyle.ALIGN_RIGHT);
+        CellStyle cellStyle = analyseBook.createCellStyle();
+        cellStyle.setAlignment(XSSFCellStyle.ALIGN_RIGHT);
         cellStyle.setFont(font3);
 
         //总计的样式
-        HSSFCellStyle totalStyle = analyseBook.createCellStyle();
-        totalStyle.setAlignment(HSSFCellStyle.ALIGN_RIGHT);
+        CellStyle totalStyle = analyseBook.createCellStyle();
+        totalStyle.setAlignment(XSSFCellStyle.ALIGN_RIGHT);
         totalStyle.setFont(font4);
 
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
 
         int rowIndex = 0;//行数
+
+
+
         //地区分析开始
-        HSSFRow analyseTitle = cardSheet.createRow(rowIndex++);
+        Row analyseTitle = cardSheet.createRow(rowIndex++);
         analyseTitle.setHeightInPoints(25);
         Cell cellTitle1 = analyseTitle.createCell(0);
         cellTitle1.setCellStyle(titleStyle);
         cellTitle1.setCellValue("资金明细记录");
 
-        HSSFRow rowTitle = cardSheet.createRow(rowIndex++);
+        Row rowTitle = cardSheet.createRow(rowIndex++);
         rowTitle.setHeightInPoints(25);
         Cell cellNum = rowTitle.createCell(0);
         cellNum.setCellValue("序号");
@@ -167,7 +170,7 @@ public class outputCardQuery {
                 state = "冻结";
             }
 
-            HSSFRow row = cardSheet.createRow(rowIndex++);
+            Row row = cardSheet.createRow(rowIndex++);
             row.setHeightInPoints(25);
             Cell cell0 = row.createCell(0);
             cell0.setCellValue(analyseIndex++);
@@ -201,7 +204,7 @@ public class outputCardQuery {
             cell9.setCellStyle(cellStyle);
         }
 
-        HSSFRow rowM = cardSheet.createRow(rowIndex);
+        Row rowM = cardSheet.createRow(rowIndex);
         rowM.setHeightInPoints(25);
 //        Cell cellMan = rowM.createCell(0);
 //        cellMan.setCellValue("操作人：");
@@ -225,7 +228,7 @@ public class outputCardQuery {
         rowM.createCell(9).setCellValue("");
 
         //总计结束
-        return cardSheet;
+        return (SXSSFSheet) cardSheet;
 
     }
 

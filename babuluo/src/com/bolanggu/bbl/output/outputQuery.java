@@ -2,7 +2,9 @@ package com.bolanggu.bbl.output;
 
 
 import com.bolanggu.bbl.ENV;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +34,7 @@ public class outputQuery extends HttpServlet {
         PrintWriter pw = resp.getWriter();
 
         try {
-            HSSFWorkbook analyseBook = new HSSFWorkbook();
+            SXSSFWorkbook analyseBook = new SXSSFWorkbook();
 
             switch (type) {
                 case "finance":
@@ -52,7 +54,7 @@ public class outputQuery extends HttpServlet {
             FileOutputStream os = null;
             DateFormat format = new SimpleDateFormat("yyyyMMddhhMMss");
             Date date = new Date();
-            String filename = type + format.format(date) + ".xls";
+            String filename = type + format.format(date) + ".xlsx";
             File filePath = null;
             File filePathDir = null;
             filePath = new File(getClass()
