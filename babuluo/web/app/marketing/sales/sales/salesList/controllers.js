@@ -342,6 +342,7 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
             if ($scope.showCont == false) {
                 promoFactory.addPromoPlan($scope.add, function (response) {
                     modalFactory.showShortAlert("创建成功");
+                    $scope.$broadcast('pageBar.reload');
                 }, function (response) {
                     modalFactory.showShortAlert(response.msg);
                 });

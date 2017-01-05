@@ -57,6 +57,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                     'unitPrice': ele['SHOP_PRODUCT_SKU.REAL_PRICES'] * 100
                 });
             });
+            console.log($scope.skulistsForOrder);
             $scope.calculatePromotion();
         });
 
@@ -140,9 +141,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 });
                 $scope.updateOrderPrice();
             });
-        }else{
-            $scope.updateOrderPrice();
         }
+        $scope.updateOrderPrice();
+
         if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
             >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
             $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
@@ -154,14 +155,17 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
     //计算订单价格
     $scope.updateOrderPrice = function () {
+        console.log($scope.skuList);
         console.log('-------------');
         var price = 0;
         var new_price = 0;
         $scope.skuList.forEach(function (ele) {
             price += ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] * ele['SHOP_PRODUCT_SKU.SIZE'];
-            new_price += ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
+            new_price += ele['SHOP_PRODUCT_SKU.REAL_PRICES'] * ele['SHOP_PRODUCT_SKU.SIZE'];
         });
         $scope.order['SHOP_ORDER.PRICE_PRD'] = price;
+        console.log(clone($scope.order['SHOP_ORDER.PRICE_PRD']));
+        console.log(clone(new_price));
         var prdPrice = price;
         var salePrice = moneyFormat(price - new_price);
         $scope.order['SHOP_ORDER.PRICE_SALE'] = salePrice; // 促销价格
@@ -177,7 +181,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 price = 0.01;
             }
         }
-
         var price_mark = price;
 
         if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
@@ -187,7 +190,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             }
             $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
         }
-
+        console.log(clone($scope.order['SHOP_ORDER.PRICE_COUPON']));
         //订单促销
         $scope.planUnitList.forEach(function (ele) {
             if (ele['skuVOs'] == null || ele['skuVOs'].length == 0) {
