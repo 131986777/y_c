@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="AndSell.PC.Main" ng-controller="PC.MainController">
+<head>
+    <meta charset="UTF-8">
+    <title ng-bind="title"></title>
+
+    <link rel="stylesheet" href="/AndSell/h5/public/css/style.css"></head>
+
+</head>
+<body>
+
+<div class="row-content">
+    <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
+</div>
+
+
+</body>
+
+<!--############JS引用区############-->
+<script src="/AndSell/pc/public/libs/jquery/dist/jquery.min.js"></script>
+<script src="/AndSell/pc/public/libs/angular/angular.min.js"></script>
+<script src="/AndSell/pc/public/libs/angular/angular-sanitize.js"></script>
+<script src="/AndSell/pc/public/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="/AndSell/pc/public/libs/ocLazyLoad.min.js"></script>
+<script src="/AndSell/pc/public/libs/angular-resource/angular-resource.min.js"></script>
+<script src="/AndSell/pc/public/libs/weui.js"></script>
+<script src="/AndSell/pc/public/libs/weui/dist/lib/jquery-2.1.4.js"></script>
+<script src="/AndSell/pc/public/libs/weui/dist/js/jquery-weui.min.js"></script>
+<script src="/AndSell/pc/public/libs/weui/dist/js/city-picker.min.js"></script>
+<script src="/AndSell/pc/public/libs/cookie.js"></script>
+<script src="/AndSell/pc/public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/AndSell/pc/public/libs/swiper/swiper.jquery.min.js"></script>
+
+
+<!--importantJs -->
+<script src="/AndSell/pc/public/application.js"></script>
+
+<!--############通用方法区############-->
+<script src="/AndSell/pc/public/commonJs.js"></script>
+
+<!--############ router ############-->
+<script src="router.js"></script>
+
+
+<!--############ service ############-->
+<script src="../product/product-services.js"></script>
+<script src="../order/order-services.js"></script>
+<script src="../personal/personal-services.js"></script>
+<script src="../shop/shop-services.js"></script>
+<script src="../coupon/coupon-services.js"></script>
+<script src="../login/user-services.js"></script>
+<script src="../account/account-services.js"></script>
+<script src="../security/security-services.js"></script>
+
+
+<!--############ controller ############-->
+<script src="controller.js"></script>
+
+</html>
