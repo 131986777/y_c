@@ -98,6 +98,7 @@ angular.module('AndSell.Main').controller('member_member_memberList_Controller',
         $scope.outputList = {};
         $scope.outputList['type'] = "member";
         $scope.outputList['param'] = JSON.stringify($scope.filter);
+        modalFactory.showShortAlert("正在导出 请稍等");
         http.post_ori(url, $scope.outputList, function (response) {
             if (response != "failure") {
                 location.href = "/AndSell" + response;

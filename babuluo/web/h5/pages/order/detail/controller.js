@@ -7,14 +7,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     $scope.initData = function () {
         modalFactory.setCurrentPage('wd');
-        if ($stateParams.FROM == 'Add') {
-            //如果是从下单页面条转过来 则控制上一页路径
-            //var state = {
-            //    title: "main",
-            //    url: "#/pages/order/list/all"
-            //};
-            //window.history.pushState(state,"main","#/pages/order/list/all");
-        }
         $scope.getOrder($stateParams.ORDER_ID);
         $scope.shop = JSON.parse(getCookie('currentShopInfo'));
     }
@@ -121,7 +113,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     //评价订单
     $scope.commentOrder = function () {
-
+        $state.go('pages/order/review', {ID: $scope.order['SHOP_ORDER.ID']});
     };
 
     /**

@@ -105,7 +105,6 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
     }
 
     $scope.getPrdSkuData = function () {
-        console.log($scope.skuList);
         productFactory.getBySkuIdWithAllInfo({'SHOP_PRODUCT_SKU.SKU_IDS': $scope.skuList.toString()}, function (response) {
             $scope.skuMap = listToMap(response.data, "SHOP_PRODUCT_SKU.SKU_ID");
         })
@@ -113,7 +112,6 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
 
     $scope.queryAdaptor = function () {
         salesFactory.QueryPromoRoleAdaptor({}, function (response) {
-            console.log(response);
             $scope.addAdaptor(response);
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
@@ -274,18 +272,22 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
     $scope.getPrdExtraData = function () {
         tagFactory.getPrdTagList({}, function (response) {
             $scope.tagMap = listToMap(response.data, "SHOP_TAG.TAG_ID");
-            console.log($scope.tagMap);
         });
         classFactory.getPrdClassList({}, function (response) {
             $scope.classMap = listToMap(response.data, "SHOP_PRODUCT_CLASS.CLASS_ID");
-            console.log($scope.classMap);
         });
     }
 
     $scope.bindData = function (response) {
-        $scope.salesList = response.data;
-        $scope.queryAdaptor();
-        $scope.queryPlan();
+
+        promoFactory.getPromoRole({}, function (resp) {
+            $scope.salesList = resp.data;
+            $scope.salesPlan = response.data;
+            $scope.queryRange();
+            $scope.queryAdaptor();
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
         $scope.getPrdExtraData();
         //$scope.queryDate();
         //
@@ -452,10 +454,8 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
 
     $(document).ready(function () {
         $('#birthday').daterangepicker({singleDatePicker: true}, function (start, end, label) {
-            console.log(start.toISOString(), end.toISOString(), label);
         });
         $('#birthdayDate').daterangepicker({singleDatePicker: true}, function (start, end, label) {
-            console.log(start.toISOString(), end.toISOString(), label);
         });
     });
 

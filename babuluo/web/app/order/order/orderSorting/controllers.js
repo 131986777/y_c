@@ -42,9 +42,7 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
 
         $scope.orderDetailList.forEach(function (ele, index) {
 
-            var BAR_CODE = ele['SHOP_ORDER_INFO.BAR_CODE'];
-
-            if (a == BAR_CODE) {
+            if (a.indexOf(ele['SHOP_ORDER_INFO.BAR_CODE']) > -1) {
                 //做自己的分拣逻辑
                 //$scope.modifyStockClick(ele);
                 document.querySelectorAll("table>tbody>tr")[index
@@ -72,8 +70,8 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
             response.data[0]['SHOP_ORDER.DATETIME_COMMENT'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_COMMENT']);
             response.data[0]['SHOP_ORDER.DATETIME_ACCEPT'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ACCEPT']);
             $scope.orderDetailList = JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
-            console.log("原订单商品详情")
-            console.log($scope.orderDetailList)
+            console.log("原订单商品详情");
+            console.log($scope.orderDetailList);
             $scope.order = response.data[0];
             if ($scope.order['SHOP_ORDER.ERP_REMARK']
                 != undefined
@@ -117,6 +115,7 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
             $('#add').modal('show');
         }
     };
+
     //点击录入的确定按钮
     $scope.addStockProduct = function () {
 

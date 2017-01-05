@@ -76,7 +76,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             weUI.toast.hideLoading();
             $scope.bindPromoResult();
         }, function (response) {
-            modalFactory.showShortAlert(response.msg);
+            weUI.toast.error(response.msg);
         });
     }
 

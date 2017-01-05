@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_personal_Controller', function (orderFactory,userFactory, $scope, $state, personalFactory, modalFactory, weUI, balanceFactory) {
+angular.module('AndSell.H5.Main').controller('pages_personal_Controller', function (orderFactory, userFactory, $scope, $state, personalFactory, modalFactory, weUI, balanceFactory) {
 
     modalFactory.setTitle('我的');
     modalFactory.setBottom(true);
@@ -11,17 +11,19 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
         });
     }
 
-    $scope.getOrderStates= function () {
-        orderFactory.getOrderStates({},function(response){
-            $scope.stateMap=response.extraData.stateMap;
+    $scope.getOrderStates = function () {
+        orderFactory.getOrderStates({}, function (response) {
+            $scope.stateMap = response.extraData.stateMap;
         });
     }
 
-    $scope.queryAccount = function (uid) {
-        var form = {};
-        balanceFactory.queryAccountByUid(form, function (response) {
-            console.log(response);
+    $scope.queryAccount = function () {
+        balanceFactory.queryAccountByUid({}, function (response) {
             $scope.balanceInfo = response.data;
+            if (!$scope.balanceInfo.length > 0) {
+                $state.go('pages/user/accountLogin');
+                weUI.toast.error('请使用正确的账号登录');
+            }
         }, function (response) {
             weUI.toast.error(response.msg);
         });
@@ -59,6 +61,9 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
             $scope.getPhone($scope.uid);
             $scope.getCouponSum($scope.uid);
             $scope.getOrderStates();
+        } else {
+            $state.go('pages/user/accountLogin');
+            weUI.toast.error('登录异常');
         }
     }
 

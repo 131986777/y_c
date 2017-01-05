@@ -35,9 +35,13 @@
                 </div>
                 <div class="weui_cell no_access">
                     <div class="order-act weui_cell_bd weui_cell_primary flexbox">
-                        <a class="cell" ui-sref="pages/order/list({state:'end'})">
-                            <div class="icon icon-order-ok"></div>
-                            <p class="order-act-txt" >已完成</p>
+                        <!--<a class="cell" ui-sref="pages/order/list({state:'end'})">-->
+                            <!--<div class="icon icon-order-ok"></div>-->
+                            <!--<p class="order-act-txt" >已完成</p>-->
+                        <!--</a> -->
+                        <a class="cell" ui-sref="pages/order/list({state:'out'})">
+                            <div class="icon icon-order-ok"><span class="order-num" ng-if="stateMap.out>0" ng-bind="stateMap.out"></span></div>
+                            <p class="order-act-txt" >待分拣</p>
                         </a>
                         <a class="cell" ui-sref="pages/order/list({state:'pay'})">
                             <div class="icon icon-order-pay"><span class="order-num" ng-if="stateMap.pay>0" ng-bind="stateMap.pay"></span> </div>
