@@ -394,9 +394,18 @@ p {
     background: url("../img/icon-personal.png") no-repeat -72px -25px;
     background-size: 96px 50px;
 }
+.icon-resetName {
+    display: inline-block;
+    background: url("../img/icon-resetName.png") no-repeat;
+    background-size: 15px 15px;
+    vertical-align: bottom;
+    width: 15px;
+    height: 15px;
+}
 .icon-cart {
     background: url("../img/icon.png") no-repeat -30px -60px;
     background-size: 200px 150px;
+
 }
 .icon-home{
     background: url("../img/icon.png") no-repeat 0 -60px;
@@ -1535,6 +1544,7 @@ p {
 .personal-index .personal-name {
     margin: 12px 0 27px;
     font-size: 15px;
+    padding-left: 15px;
 }
 
 .personal-index .order-act-wrap::before {
