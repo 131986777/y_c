@@ -17,6 +17,12 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
         });
     }
 
+    $scope.modifyName = function () {
+        weUI.dialog.confirmInput("修改昵称", "11111", function (data) {
+                console.log(data);
+        });
+    }
+
     $scope.queryAccount = function () {
         balanceFactory.queryAccountByUid({}, function (response) {
             $scope.balanceInfo = response.data;

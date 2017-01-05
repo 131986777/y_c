@@ -130,6 +130,59 @@
                   "</div>"
               )(scope));
               scope.show();
+            } ,
+              /*
+             * @param {Object} options:
+             * - title {String}
+             * - body {String}
+             * - scope {Object}
+             * - preSureCallback {Function}
+             * - preCancelCallback {Function}
+             * @return {Object} dialog
+             */
+            confirmInput:function(title, body, doneCallback, cancelCallback){
+              var opts = {title:title, body:body, done:doneCallback, cancel:cancelCallback};
+
+              if (opts.title == undefined) {
+                opts.title = "提示";
+              }
+              if (opts.title == undefined) {
+                opts.title = "";
+              }
+
+              var scope = opts.scope = angular.isObject(opts.scope) ? opts.scope.$new() : $rootScope.$new();
+              scope.show = function(){
+                scope.dialogConfirm = true;
+              };
+              scope.hide= function(){
+                if(angular.isFunction(opts.cancel)){
+                  opts.cancel();
+                }
+                scope.dialogConfirm = false;
+              };
+              scope.sure= function(c){
+                  console.log(c);
+                if(angular.isFunction(opts.done)){
+                    opts.done({'data':c});
+                }
+                scope.dialogConfirm = false;
+              };
+              angular.extend(scope,opts);
+              privateMethods.destroy(".weui_dialog_confirm");
+              $body.append($compile(
+                  "<div class='weui_dialog_confirm'  ng-show='dialogConfirm'>" +
+                  "<div class='weui_mask'></div>" +
+                  "<div class='weui_dialog'>" +
+                  "<div class='weui_dialog_hd'><strong class='weui_dialog_title' ng-bind='title'></strong></div>" +
+                  "<div class='weui_dialog_bd'> <input style='border:none;border-bottom:1px solid grey; margin-top: 20px;padding-left: 10px;padding-right: 30px;width: 100%;background-color: transparent' ng-model='body'/></div>" +
+                  "<div class='weui_dialog_ft'>" +
+                  "<a class='weui_btn_dialog primary' ng-click='sure(body)'>确定</a>" +
+                  "<a class='weui_btn_dialog default' ng-click='hide()'>取消</a>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>"
+              )(scope));
+              scope.show();
             }
           },
           toast:{
