@@ -1544,6 +1544,7 @@ p {
 .personal-index .personal-name {
     margin: 12px 0 27px;
     font-size: 15px;
+    padding-left: 15px;
 }
 
 .personal-index .order-act-wrap::before {
