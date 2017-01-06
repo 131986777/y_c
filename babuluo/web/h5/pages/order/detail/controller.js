@@ -160,6 +160,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             },
             function (res) {
                 if (res.err_msg == "get_brand_wcpay_request:ok") {
+                    weUI.toast.ok('正在查询支付结果,请稍等...');
                     $scope.wxPayInfo = "正在查询支付结果,请稍等...";
                     var formData = {
                         OUT_TRADE_NO: unifiedJson.out_trade_no,

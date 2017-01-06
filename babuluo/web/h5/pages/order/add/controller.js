@@ -10,6 +10,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
     $scope.initData = function () {
 
+        $scope.canCommit = false;
+
         $scope.cookiePickupPerson = JSON.parse(getCookie("pickupPerson"));
 
         $scope.EmptyPick = isEmptyObject($scope.cookiePickupPerson);
@@ -38,14 +40,14 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
         $scope.skuIds = $stateParams.SKU_IDS;
         var params = {};
-        var skuIdLists=new Array;
-        $scope.skuIds.split(",").forEach(function (ele,index) {
+        var skuIdLists = new Array;
+        $scope.skuIds.split(",").forEach(function (ele, index) {
             console.log(index);
-            if($scope.cartSize[ele]>0){
+            if ($scope.cartSize[ele] > 0) {
                 skuIdLists.push(ele);
             }
         })
-        if(skuIdLists.length==0){
+        if (skuIdLists.length == 0) {
             window.history.back();
             return;
         }
@@ -183,6 +185,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         } else {
             $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
         }
+        $scope.canCommit = true;
 
     }
 
@@ -244,6 +247,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
 
     //提交订单
     $scope.commitOrder = function () {
+        if (!$scope.canCommit) {
+            return;
+        }
 
         if ($scope.order['SHOP_ORDER.PRICE_OVER'] <= 0) {
             weUI.toast.error('订单异常,请重新下单');
@@ -363,7 +369,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             MONEY: $scope.totalMoney,
             'SKU_IDS': $stateParams.SKU_IDS,
             'pickupPerson': $stateParams.pickupPerson,
-            'FROM' : 'ADD'
+            'FROM': 'ADD'
         });
     }
 
