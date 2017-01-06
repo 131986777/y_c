@@ -3,6 +3,14 @@
  */
 AndSellMainModule.service('analysisFactory', function ($resource, baseURL) {
     //根据日期范围查询线下日报
+    this.getOfflineFormChangeByRange=function (startDay,endDay) {
+        return $resource(baseURL+"/stat/manage_data_analysis_by_range?STARTDAY=:STARTDAY&ENDDAY=:ENDDAY&FLAG=ANALYSIS_FORM",{'STARTDAY':startDay,'ENDDAY':endDay},{
+            'update':{
+                method:'PUT'
+            }
+        });
+    };
+    //根据日期范围查询线下日报
     this.getOfflineDailyChangeByRange=function (startDay,endDay) {
         return $resource(baseURL+"/stat/manage_data_analysis_by_range?STARTDAY=:STARTDAY&ENDDAY=:ENDDAY&FLAG=ANALYSIS_DAILY_OFFLINE",{'STARTDAY':startDay,'ENDDAY':endDay},{
             'update':{

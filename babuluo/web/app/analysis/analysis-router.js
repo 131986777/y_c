@@ -13,3 +13,6 @@ $import('analysis/analysis/offlineOrderAnalysis',undefined,true);
 $import('analysis/analysis/compareAnalysis',undefined,true);
 //直播相关
 $import('analysis/analysis/liveAnalysis',undefined,true);
+
+//
+$import('analysis/analysis/formAnalysis',undefined,true);
