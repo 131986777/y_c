@@ -236,6 +236,7 @@
                                     <option class="nya-bs-option"
                                             ng-repeat="value in typeListAdd"
                                             ng-bind="value['MEMBER_CARD_TYPE.NAME']"
+                                            ng-if="value['MEMBER_CARD_TYPE.ID']!=998"
                                             value="{{value['MEMBER_CARD_TYPE.ID']}}">
                                     </option>
                                 </select>
