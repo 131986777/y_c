@@ -18,10 +18,16 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
     }
 
     $scope.modifyName = function () {
-        weUI.dialog.confirmInput("修改昵称", "11111", function (data) {
-                console.log(data);
+        weUI.dialog.confirmInput("修改昵称", $scope.USER_NAME, function (data) {
+            personalFactory.modifyMember({"MEMBER.USER_NAME": data.data}, function (response) {
+                weUI.toast.ok("修改成功");
+                $scope.initLoad();
+            }, function (response) {
+                weUI.toast.error(response.msg);
+            });
         });
     }
+
 
     $scope.queryAccount = function () {
         balanceFactory.queryAccountByUid({}, function (response) {
@@ -39,9 +45,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
         var form = {};
         form['MEMBER.USER_ID'] = uid;
         personalFactory.getPhone(form, function (response) {
-            console.log(response);
-            $scope.phone = response.data[0]['MEMBER.MOBILE'];
-            console.log($scope.phone);
+            $scope.USER_NAME = response.data[0]['MEMBER.USER_NAME'];
         }, function (response) {
             weUI.toast.error(response.msg);
         });
