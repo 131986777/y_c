@@ -69,21 +69,38 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
     //计算促销结果
     $scope.calculatePromotion = function (){
         weUI.toast.showLoading('正在查询促销条件');
+        $scope.skulistsForOrder.forEach(function(ele){                       //四舍五入
+            ele['unitPrice'] = Math.round( ele['unitPrice'] ) ;
+        })
         var cartRequestVO = {'skuVOs' : $scope.skulistsForOrder} ;
         var json = JSON.stringify(cartRequestVO) ;
         promoFactory.doPromoCalculate({'cartRequestVO' : json}, function (response) {
             $scope.planUnitList = response.data ;
+            $scope.planUnitFilter() ;
             weUI.toast.hideLoading();
             $scope.bindPromoResult();
+            $scope.updateCartPrice();
         }, function (response) {
             weUI.toast.error(response.msg);
         });
     }
 
+    //筛选planUnit
+    $scope.planUnitFilter = function () {
+        for (var i=0 ; i<$scope.planUnitList.length ; i++){
+            if ($scope.planUnitList[i]['state'] != "checked"){
+                $scope.planUnitList.splice( i , 1 )
+                i-- ;
+            }
+        }
+    }
     $scope.bindPromoResult = function (){
         var presentIds = '';
         $scope.skuList.forEach(function(ele){
             $scope.planUnitList.forEach(function(unit){
+                if (null == unit){
+                    return ;
+                }
                 if (unit['skuVOs'] == null || unit['skuVOs'].length == 0){
                     return ;
                 }
@@ -110,6 +127,9 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                         if (ele['planUnit'] == null ){
                             return ;
                         }
+                        if (null == ele['planUnit']['presents']){
+                            return ;
+                        }
                         if (ele['planUnit']['presents'][0]['skuId'] == present['SHOP_PRODUCT_SKU.SKU_ID']) {
                             ele['present'] = present;
                             ele['hasPresent'] = true;
@@ -120,7 +140,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                 })
             }) ;
         }
-        $scope.updateCartPrice();
+
     }
 
     //计算销售信息
