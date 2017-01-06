@@ -3,55 +3,71 @@
         <div class="form-title">
             订单设置
         </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-                小于其订单不可订货
-            </label>
-        </div>
-        <div class="radio">
-            <label>
-                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                小于其订单量按零售价订货
-            </label>
+
+        <div class="col-sm-12">
+            <div class="col-sm-2">
+                订单模式：
+            </div>
+            <div class="col-sm-8">
+                <label class="radio-inline">
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="NORMAL" ng-model="ORDER_MODE"> 普通单
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="YYD" ng-model="ORDER_MODE"> 预订单
+                </label>
+            </div>
         </div>
 
         <div class="form-title">
-            订货端设置
+            库存设置
         </div>
-        <div class="radio">
+        <div class="col-sm-12">
+            <div class="col-sm-2">
+                库存阈值：
+            </div>
             <label class="radio-inline">
-                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 不启用交货日期
+                <input type="radio" value="55" ng-model="INVENTORY_THRESHOLD"> 55%
             </label>
             <label class="radio-inline">
-                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 默认初始化
+                <input type="radio" value="65" ng-model="INVENTORY_THRESHOLD"> 65%
             </label>
             <label class="radio-inline">
-                <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 字体初始化
+                <input type="radio" value="75" ng-model="INVENTORY_THRESHOLD"> 75%
+            </label>
+            <label class="radio-inline">
+                <input type="radio" value="85" ng-model="INVENTORY_THRESHOLD"> 85%
+            </label>
+            <label class="radio-inline">
+                <input type="radio" value="95" ng-model="INVENTORY_THRESHOLD"> 95%
             </label>
         </div>
-
         <div class="form-title">
-            商品设置
+            支付设置
         </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="">
-                商品显示原价
-            </label>
+        <div class="col-sm-12">
+            <div>
+                微信APP_ID：
+                <input type="text" ng-model="WX_APP_ID">
+            </div>
+            <div>
+                微信WX_APP_SECRET：
+                <input type="text" ng-model="WX_APP_SECRET">
+            </div>
+            <div>
+                微信MCHID：
+                <input type="text" ng-model="WX_MCHID">
+            </div>
+            <div>
+                微信KEY：
+                <input type="text" ng-model="WX_KEY">
+            </div>
         </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="">
-                交货日期必填
-            </label>
-        </div>
-        <div class="checkbox">
-            <label>
-                <input type="checkbox" value="">
-                设置重量单位为：<input type="text" style="display: inline-block;width:50px ">
-            </label>
-        </div>
+        <!--<div class="checkbox">-->
+        <!--<label>-->
+        <!--<input type="checkbox" value="">-->
+        <!--设置重量单位为：<input type="text" style="display: inline-block;width:50px ">-->
+        <!--</label>-->
+        <!--</div>-->
     </form>
 </div>
 <!-- END CONTENT -->
