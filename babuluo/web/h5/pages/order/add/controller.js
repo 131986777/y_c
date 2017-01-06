@@ -191,12 +191,12 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
         }
         console.log(clone($scope.order['SHOP_ORDER.PRICE_COUPON']));
-        //订单促销
-        $scope.planUnitList.forEach(function (ele) {
-            if (ele['skuVOs'] == null || ele['skuVOs'].length == 0) {
-                price = ele['afterSumPrice'] / 100;
-            }
-        })
+        ////订单促销
+        //$scope.planUnitList.forEach(function (ele) {
+        //    if (ele['skuVOs'] == null || ele['skuVOs'].length == 0) {
+        //        price = ele['afterSumPrice'] / 100;
+        //    }
+        //})
 
         $scope.onSalePrice = moneyFormat(prdPrice - price);
         $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = $scope.onSalePrice;
