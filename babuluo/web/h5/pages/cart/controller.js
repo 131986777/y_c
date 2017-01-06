@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function ($scope, $state, promoFactory,orderFactory,$http,http , productFactory, weUI, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function ($scope, $state, promoFactory, orderFactory, $http, http, productFactory, weUI, modalFactory) {
 
     modalFactory.setTitle('购物车');
     modalFactory.setBottom(true);
@@ -67,17 +67,17 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
         $scope.updateCartPrice();
     }
     //计算促销结果
-    $scope.calculatePromotion = function (){
+    $scope.calculatePromotion = function () {
         weUI.toast.showLoading('正在查询促销条件');
-        $scope.skulistsForOrder.forEach(function(ele){                       //四舍五入
-            ele['unitPrice'] = Math.round( ele['unitPrice'] ) ;
+        $scope.skulistsForOrder.forEach(function (ele) {                       //四舍五入
+            ele['unitPrice'] = Math.round(ele['unitPrice']);
         })
-        var cartRequestVO = {'skuVOs' : $scope.skulistsForOrder} ;
-        var json = JSON.stringify(cartRequestVO) ;
-        promoFactory.doPromoCalculate({'cartRequestVO' : json}, function (response) {
-            $scope.planUnitList = response.data ;
-            $scope.planUnitFilter() ;
+        var cartRequestVO = {'skuVOs': $scope.skulistsForOrder};
+        var json = JSON.stringify(cartRequestVO);
+        promoFactory.doPromoCalculate({'cartRequestVO': json}, function (response) {
             weUI.toast.hideLoading();
+            $scope.planUnitList = response.data;
+            $scope.planUnitFilter();
             $scope.bindPromoResult();
             $scope.updateCartPrice();
         }, function (response) {
@@ -87,33 +87,37 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
 
     //筛选planUnit
     $scope.planUnitFilter = function () {
-        for (var i=0 ; i<$scope.planUnitList.length ; i++){
-            if ($scope.planUnitList[i]['state'] != "checked"){
-                $scope.planUnitList.splice( i , 1 )
-                i-- ;
+        for (var i = 0; i < $scope.planUnitList.length; i++) {
+            if (undefined != $scope.planUnitList[i]) {
+                if ($scope.planUnitList[i]['state'] != "checked") {
+                    $scope.planUnitList.splice(i, 1)
+                    i--;
+                }
             }
         }
     }
-    $scope.bindPromoResult = function (){
+    $scope.bindPromoResult = function () {
         var presentIds = '';
-        $scope.skuList.forEach(function(ele){
-            $scope.planUnitList.forEach(function(unit){
-                if (null == unit){
-                    return ;
+        $scope.skuList.forEach(function (ele) {
+            $scope.planUnitList.forEach(function (unit) {
+                if (null == unit) {
+                    return;
                 }
-                if (unit['skuVOs'] == null || unit['skuVOs'].length == 0){
-                    return ;
+                if (unit['skuVOs'] == null || unit['skuVOs'].length == 0) {
+                    return;
                 }
-                if (ele['SHOP_PRODUCT_SKU.SKU_ID'] == unit['skuVOs'][0]['skuId']){
-                    ele['planUnit'] = unit ;
-                    ele['isSale'] = true ;
-                    ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = ele['SHOP_PRODUCT_SKU.REAL_PRICES'] ;
-                    ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = unit['afterSumPrice'] / 100 / unit['skuVOs'][0]['num'];
-                    if (unit['presents'] != null && unit['presents'].length == 1){
-                        if (presentIds != ''){
-                            presentIds += ',' ;
+                if (ele['SHOP_PRODUCT_SKU.SKU_ID'] == unit['skuVOs'][0]['skuId']) {
+                    ele['planUnit'] = unit;
+                    ele['isSale'] = true;
+                    ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
+                    ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = unit['afterSumPrice']
+                        / 100
+                        / unit['skuVOs'][0]['num'];
+                    if (unit['presents'] != null && unit['presents'].length == 1) {
+                        if (presentIds != '') {
+                            presentIds += ',';
                         }
-                        presentIds += unit['presents'][0]['skuId'] ;
+                        presentIds += unit['presents'][0]['skuId'];
                     }
                 }
 
@@ -124,13 +128,14 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                 $scope.presents = response.data;
                 $scope.skuList.forEach(function (ele) {
                     $scope.presents.forEach(function (present) {
-                        if (ele['planUnit'] == null ){
-                            return ;
+                        if (ele['planUnit'] == null) {
+                            return;
                         }
-                        if (null == ele['planUnit']['presents']){
-                            return ;
+                        if (null == ele['planUnit']['presents']) {
+                            return;
                         }
-                        if (ele['planUnit']['presents'][0]['skuId'] == present['SHOP_PRODUCT_SKU.SKU_ID']) {
+                        if (ele['planUnit']['presents'][0]['skuId']
+                            == present['SHOP_PRODUCT_SKU.SKU_ID']) {
                             ele['present'] = present;
                             ele['hasPresent'] = true;
                         } else {
@@ -138,7 +143,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                         }
                     })
                 })
-            }) ;
+            });
         }
 
     }
@@ -181,7 +186,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             setCookie('cartSize', JSON.stringify(cartSize));
 
             //$scope.updateCartPrice();
-            $scope.getCartInfoInCookie() ;
+            $scope.getCartInfoInCookie();
         }
     }
 
@@ -201,7 +206,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             setCookie('cartSize', JSON.stringify(cartSize));
 
             //$scope.updateCartPrice();
-            $scope.getCartInfoInCookie() ;
+            $scope.getCartInfoInCookie();
         } else {
             weUI.toast.ok('已达到该商品最大库存数');
         }
@@ -225,7 +230,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
         setCookie('cartInfo', JSON.stringify(cartInfo));
         setCookie('cartSize', JSON.stringify(cartSize));
         //$scope.updateCartPrice();
-        $scope.getCartInfoInCookie() ;
+        $scope.getCartInfoInCookie();
     }
 
     //更新购物车价格
