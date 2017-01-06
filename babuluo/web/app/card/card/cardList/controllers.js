@@ -23,6 +23,7 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
     $scope.queryMemberById = function (loginId) {
         cardFactory.getUIDByLOGINID({'MEMBER.LOGIN_ID': loginId}, function (response) {
             if (response.data.length != 0) {
+                $scope.memberDetail['MEMBER.USER_ID'] = response.data[0]['MEMBER.USER_ID'];
                 var temp = response.data[0]['MEMBER.MOBILE'];
                 cardFactory.getMemberInfoByUserId({'MEMBER_INFO.USER_ID': response.data[0]['MEMBER.USER_ID']}, function (response1) {
                     $scope.memberDetail['MEMBER.USER_NAME'] = response1.data[0]['MEMBER_INFO.TRUE_NAME'];
@@ -65,6 +66,9 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
             modalFactory.showAlert("金额不能小于0");
             return;
         }
+        if ($scope.isNull($scope.cardAdd['MEMBER_CARD.BALANCE'])) {
+            $scope.cardAdd['MEMBER_CARD.BALANCE'] = 0;
+        }
         $scope.cardAdd['MEMBER_CARD.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
         if ($scope.isFaceValue == false) {
             $scope.cardAdd['MEMBER_CARD.IS_FACE_VALUE'] = -1;
@@ -78,6 +82,7 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
                 return;
             }
         }
+
         if ($scope.isNull($scope.cardAdd['MEMBER_CARD.FREEZE_BALANCE'])) {
             $scope.cardAdd['MEMBER_CARD.FREEZE_BALANCE'] = 0;
         }
