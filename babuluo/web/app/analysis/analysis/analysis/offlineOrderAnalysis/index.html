@@ -3,36 +3,45 @@
     <div class="row timeBar">
         <div class="col-md-12">
             <div class="col-md-2 fixWidth">
-                <input id="startDay" type="text" ng-model="groupRange['STARTDAY']" ng-init="groupRange['STARTDAY']=START" class="form-control inputWidth"  placeholder="">
+                <input id="startDay" type="text" ng-model="groupRange['STARTDAY']"
+                       ng-init="groupRange['STARTDAY']=START" class="form-control inputWidth"
+                       placeholder="">
                 <span>-</span>
-                <input id="endDay" type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=END"  class="form-control inputWidth"  placeholder="">
+                <input id="endDay" type="text" ng-model="groupRange['ENDDAY']"
+                       ng-init="groupRange['ENDDAY']=END" class="form-control inputWidth"
+                       placeholder="">
             </div>
             <button class="btn" type="button" ng-click="getGroupByRange()">查询</button>
-            <a class="showPoint" ng-click="getGroupByThisWeek()">本周</a><a class="showPoint" ng-click="getGroupByYesterWeek()">上周</a><a class="showPoint" ng-click="getGroupByThisMonth()">本月</a><a class="showPoint" ng-click="getGroupByYesterMonth()">上月</a><a class="showPoint" ng-click="getGroupByYesterDay()">昨天</a>
-            <button class="btn alignRight" type="button" onclick="outPutMethod('orderTable')">导出</button>
+            <a class="showPoint" ng-click="getGroupByThisWeek()">本周</a><a class="showPoint"
+                                                                          ng-click="getGroupByYesterWeek()">上周</a><a
+            class="showPoint" ng-click="getGroupByThisMonth()">本月</a><a class="showPoint"
+                                                                        ng-click="getGroupByYesterMonth()">上月</a><a
+            class="showPoint" ng-click="getGroupByYesterDay()">昨天</a>
+            <button class="btn alignRight" type="button" onclick="outPutMethod('orderTable')">导出
+            </button>
             <div class="clear"></div>
         </div>
     </div>
     <div class="row">
-    <div class="col-md-4 showPoint" >
-        <div class="layout bgColor-blue" ng-click="chargeChartOnOrder('1')">
-            <h2><span ng-bind="turnoverSum | currency:'￥'"></span></h2>
-            <p >营业额<i title="所选时间内的营业额">!</i></p>
-        </div>
-    </div>
-    <div class="col-md-4 showPoint">
-        <div class="layout bgColor-blue2" ng-click="chargeChartOnOrder('2')">
-            <h2><span ng-bind="deductionSum | currency:'￥'"></span></h2>
-            <p>折让金额<i title="所选时间内的折让金额">!</i></p>
-        </div>
-    </div>
         <div class="col-md-4 showPoint">
-    <div class="layout bgColor-red" ng-click="chargeChartOnOrder('4')">
-        <h2><span ng-bind="realincomeSum | currency:'￥'"></span></h2>
-        <p>实收合计<i title="所选时间内的实收">!</i></p>
+            <div class="layout bgColor-blue" ng-click="chargeChartOnOrder('1')">
+                <h2><span ng-bind="turnoverSum | currency:'￥'"></span></h2>
+                <p>营业额<i title="所选时间内的营业额">!</i></p>
+            </div>
+        </div>
+        <div class="col-md-4 showPoint">
+            <div class="layout bgColor-blue2" ng-click="chargeChartOnOrder('2')">
+                <h2><span ng-bind="deductionSum | currency:'￥'"></span></h2>
+                <p>折让金额<i title="所选时间内的折让金额">!</i></p>
+            </div>
+        </div>
+        <div class="col-md-4 showPoint">
+            <div class="layout bgColor-red" ng-click="chargeChartOnOrder('4')">
+                <h2><span ng-bind="realincomeSum | currency:'￥'"></span></h2>
+                <p>实收合计<i title="所选时间内的实收">!</i></p>
+            </div>
+        </div>
     </div>
-</div>
-</div>
     <div class="row">
         <div class="col-md-4 showPoint">
             <div class="layout bgColor-blue" ng-click="chargeChartOnOrder('5')">
@@ -40,23 +49,23 @@
                 <p>交易数<i title="所选时间内的交易数">!</i></p>
             </div>
         </div>
-        <div class="col-md-4 showPoint" >
+        <div class="col-md-4 showPoint">
             <div class="layout bgColor-blue2" ng-click="chargeChartOnOrder('6')">
                 <h2><span ng-bind="deduction_ordersSum | number"></span></h2>
                 <p>参与优惠订单<i title="所选时间内的所选时间内参与优惠的订单">!</i></p>
             </div>
         </div>
         <!--<div class="col-md-2 showPoint">-->
-            <!--<div class="layout bgColor-red" ng-click="chargeChartOnOrder('7')">-->
-                <!--<h2><span ng-bind="cancel_ordersSum | number"></span></h2>-->
-                <!--<p>退单数<i title="所选时间内退单数">!</i></p>-->
-            <!--</div>-->
+        <!--<div class="layout bgColor-red" ng-click="chargeChartOnOrder('7')">-->
+        <!--<h2><span ng-bind="cancel_ordersSum | number"></span></h2>-->
+        <!--<p>退单数<i title="所选时间内退单数">!</i></p>-->
+        <!--</div>-->
         <!--</div>-->
         <!--<div class="col-md-2 showPoint">-->
-            <!--<div class="layout bgColor-blue2" ng-click="chargeChartOnOrder('8')">-->
-                <!--<h2><span ng-bind="dissuccess_ordersSum | number"></span></h2>-->
-                <!--<p>处理中<i title="所选时间内正在处理的订单">!</i></p>-->
-            <!--</div>-->
+        <!--<div class="layout bgColor-blue2" ng-click="chargeChartOnOrder('8')">-->
+        <!--<h2><span ng-bind="dissuccess_ordersSum | number"></span></h2>-->
+        <!--<p>处理中<i title="所选时间内正在处理的订单">!</i></p>-->
+        <!--</div>-->
         <!--</div>-->
         <div class="col-md-4 showPoint">
             <div class="layout bgColor-red" ng-click="chargeChartOnOrder('9')">
@@ -96,13 +105,23 @@
                 <tbody>
                 <tr align="center" ng-repeat="VALUE in orderAnaysis">
                     <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.DAY']"></span></td>
-                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['TURNOVER'] | currency:'￥'"></span></td>
-                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION'] | currency:'￥'"></span></td>
+                    <td><span
+                        ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['TURNOVER'] | currency:'￥'"></span>
+                    </td>
+                    <td><span
+                        ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION'] | currency:'￥'"></span>
+                    </td>
                     <!--<td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_MONEY'] | currency:'￥'"></span></td>-->
-                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['ORDER_QUANTITY'] | number"></span></td>
-                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION_ORDERS'] | number"></span></td>
+                    <td><span
+                        ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['ORDER_QUANTITY'] | number"></span>
+                    </td>
+                    <td><span
+                        ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['DEDUCTION_ORDERS'] | number"></span>
+                    </td>
                     <!--<td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CANCEL_ORDERS'] | number"></span></td>-->
-                    <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['REAL_INCOME'] | currency:'￥'"></span></td>
+                    <td><span
+                        ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['REAL_INCOME'] | currency:'￥'"></span>
+                    </td>
                 </tr>
                 </tbody>
             </table>
