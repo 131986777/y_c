@@ -25,6 +25,11 @@ function outPutMethod(tableId) {
     if(getExplorer()=='ie'){
         var curTbl = document.getElementById(tableid);
         var oXL = new ActiveXObject("Excel.Application");
+        oXL.Selection.CurrentRegion.Select;            //选择当前区域
+        oXL.Selection.Interior.Pattern = 0;            //设置底色为空
+        oXL.Selection.Borders.LineStyle = 2;        //设置单元格边框为实线
+        oXL.Selection.ColumnWidth = 5;                //设置列宽
+        oXL.Selection.RowHeight = 16;              //行高
         var oWB = oXL.Workbooks.Add();
         var xlsheet = oWB.Worksheets(1);
         var sel = document.body.createTextRange();
