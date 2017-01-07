@@ -3,31 +3,22 @@
  */
 
 angular.module('AndSell.Main').controller('analysis_analysis_offlineFormAnalysis_Controller', function ($scope, $stateParams, analysisFactory, modalFactory) {
-    modalFactory.setTitle("FROM");
+    modalFactory.setTitle("线下销售报表");
     modalFactory.setBottom(false);
+    $scope.START = getYesterMonthBeginDay(getYesterday());
+    $scope.END = getYesterday();
     $scope.initLoad = function () {
-        getFormSource(getYesterday(),getYesterday());
+        getOfflineFormSource(getYesterMonthBeginDay(getYesterday()),getYesterday());
         dataStatus($scope);
-        $scope.FLAG = 1;
     }
-    $scope.YESTERDAY = getYesterday();
     $scope.getGroupByRange = function () {
         clearTable();
-        var day = $scope.groupRange['DAY'];
-        if($scope.FLAG == 1){
-            getFormSource(day,day);
-        }else if($scope.FLAG == 2){
-            getFormSource(getWeekBeginDay(new Date(day)),getWeekEndDay(new Date(day)));
-        }else if($scope.FLAG == 3){
-            getFormSource(getYesterMonthBeginDay(new Date(day)),day);
-        }
+        var startDay = $scope.groupRange['STARTDAY'];
+        var endDay = $scope.groupRange['ENDDAY'];
+        getOfflineFormSource(startDay,endDay);
 
     }
-    $scope.changeFormByDayState = function (state) {
-        $scope.FLAG = state;
-        $scope.getGroupByRange();
-    }
-    function getFormSource(startDay,endDay) {
+    function getOfflineFormSource(startDay,endDay) {
         analysisFactory.getOfflineFormChangeByRange(startDay,endDay).get({},function (response) {
             console.log(response);
             if((response.data).length==0){
@@ -149,6 +140,21 @@ function dataStatus($scope) {
         startView: 2,
         format: 'yyyy-mm-dd',
         todayBtn: 'linked'
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+    $('#endDay').datetimepicker({
+        minView: "month",
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        format: 'yyyy-mm-dd ',
+        todayBtn: 'linked',
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;

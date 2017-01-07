@@ -2,9 +2,17 @@
  * Created by liutao on 2016/12/8 18:0:0.
  */
 AndSellMainModule.service('analysisFactory', function ($resource, baseURL) {
-    //根据日期范围查询线下日报
-    this.getOfflineFormChangeByRange=function (startDay,endDay) {
+    //根据实际范围查询线上商品销售报表
+    this.getFormChangeByRange=function (startDay,endDay) {
         return $resource(baseURL+"/stat/manage_data_analysis_by_range?STARTDAY=:STARTDAY&ENDDAY=:ENDDAY&FLAG=ANALYSIS_FORM",{'STARTDAY':startDay,'ENDDAY':endDay},{
+            'update':{
+                method:'PUT'
+            }
+        });
+    };
+    // 根据时间范围查询线下报表
+    this.getOfflineFormChangeByRange=function (startDay,endDay) {
+        return $resource(baseURL+"/stat/manage_data_analysis_by_range?STARTDAY=:STARTDAY&ENDDAY=:ENDDAY&FLAG=ANALYSIS_FORM_OFFLINE",{'STARTDAY':startDay,'ENDDAY':endDay},{
             'update':{
                 method:'PUT'
             }

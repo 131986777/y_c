@@ -2,20 +2,13 @@
     <!--时间选择导航-->
     <div class="row timeBar">
         <div class="col-md-12">
-            <div class="col-md-1 fixWidthByOneInput">
-                <input id="startDay" type="text" ng-model="groupRange['DAY']" ng-init="groupRange['DAY']=YESTERDAY"  class="form-control inputWidth"  placeholder="">
+            <div class="col-md-2 fixWidth">
+                <input id="startDay" type="text" ng-model="groupRange['STARTDAY']" ng-init="groupRange['STARTDAY']=START" class="form-control inputWidth"  placeholder="">
+                <span>-</span>
+                <input id="endDay" type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=END"  class="form-control inputWidth"  placeholder="">
             </div>
-            <div class="col-md-1">
-                <button class="btn " type="button" ng-click="getGroupByRange()">查询</button>
-            </div>
-            <div class="col-md-4">
-                <ul class="compareNav  nav-justified list-unstyled">
-                    <li ng-class="{true:' active'}[FLAG==1]" class="compareNav first"><a href="" ng-click="changeFormByDayState('1')">日</a></li>
-                    <li ng-class="{true:' active'}[FLAG==2]"><a href="" ng-click="changeFormByDayState('2')">周</a><i class="ai" title="所选时间所在一周的数据">!</i></li>
-                    <li ng-class="{true:' active'}[FLAG==3]"><a href="" ng-click="changeFormByDayState('3')">月</a><i class="ai" title="所选时间前一个月的数据">!</i></li>
-                </ul>
-            </div>
-            <button class="btn alignRight"  type="button" onclick="outPutMethod('formTable')">导出</button>
+            <button class="btn " type="button" ng-click="getGroupByRange()">查询</button>
+            <button class="btn alignRight"  type="button" onclick="outPutMethod('offlineFormTable')">导出</button>
             <div class="clear"></div>
         </div>
     </div>
@@ -23,7 +16,7 @@
 
     <div class="table-content">
         <div class="table-toolbar">
-            <table class="table table-bordered table-hover table-striped" id="formTable">
+            <table class="table table-bordered table-hover table-striped" id="offlineFormTable">
                 <thead>
                 <tr>
                     <th class="text-center">起始日期</th>
