@@ -15,4 +15,5 @@ $import('analysis/analysis/compareAnalysis',undefined,true);
 $import('analysis/analysis/liveAnalysis',undefined,true);
 
 //
+$import('analysis/analysis/offlineFormAnalysis',undefined,true);
 $import('analysis/analysis/formAnalysis',undefined,true);

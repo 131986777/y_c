@@ -2,7 +2,7 @@
  * Created by remix on 2016/12/8.
  */
 
-angular.module('AndSell.Main').controller('analysis_analysis_formAnalysis_Controller', function ($scope, $stateParams, analysisFactory, modalFactory) {
+angular.module('AndSell.Main').controller('analysis_analysis_offlineFormAnalysis_Controller', function ($scope, $stateParams, analysisFactory, modalFactory) {
     modalFactory.setTitle("FROM");
     modalFactory.setBottom(false);
     $scope.initLoad = function () {
