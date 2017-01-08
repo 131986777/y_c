@@ -237,16 +237,16 @@ function routerPath(base, path, param, css) {
     router.templateUrl = url + "/index.html";
     router.resolve = {
         loadServiceAndController: function ($ocLazyLoad, userFactory, $state, weUI) {
-            var filtertList = ['pages/product/list', 'pages/product/tagPrdList', 'pages/home',
-                'pages/product/detail', 'pages/cart', 'pages/shop', 'pages/user/accountLogin',
-                'pages/user/phoneLogin',
-                'pages/user/register', 'pages/security/resetPwd' ,'pages/user/SetPassword'];
-            if (filtertList.indexOf(path) < 0) {
-                userFactory.isLogin({}, function (response) {
-                }, function (response) {
-                    $state.go('pages/user/accountLogin');
-                });
-            }
+            //var filtertList = ['pages/product/list', 'pages/product/tagPrdList', 'pages/home',
+            //    'pages/product/detail', 'pages/cart', 'pages/shop', 'pages/login/accountLogin',
+            //    'pages/user/phoneLogin',
+            //    'pages/user/register', 'pages/security/resetPwd' ,'pages/user/SetPassword'];
+            //if (filtertList.indexOf(path) < 0) {
+            //    userFactory.isLogin({}, function (response) {
+            //    }, function (response) {
+            //        $state.go('pages/login/accountLogin');
+            //    });
+            //}
             return $ocLazyLoad.load(loadItemList);
         }
     }

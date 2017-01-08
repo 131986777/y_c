@@ -1,0 +1,229 @@
+
+    <div class="buyCars">
+        <div class="effectiveArea">
+            <div class="controlBar">
+                <div class="effectiveArea">
+                    <div class="storeInfo storeInfo1">
+                        <p class="storeName">莲花新城店</p>
+                        <p class="number"><span class="phoneNumber">025-66018138</span><span class="openTime">7:30－21:30</span></p>
+                        <p class="addressInfo">建邺区莲花新城北苑6栋24-8</p>
+                    </div>
+                    <div class="toolbar toolbar1">
+                        <!-- 搜索框 -->
+                        <div class="row-input">
+                            <input type="text" ng-model="searchInfo" placeholder="商品" ng-keyup="myKeyup($event)">
+                            <div class="btn-search">
+                                <i class="icon-search" ng-click="search()"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row-wrap1" ng-init="initLoad()">
+                <div class="row-title">
+                    我的购物车
+                </div>
+
+                <div class="bu-table-wrap">
+                    <table class="bu-table row-bordered">
+                        <tr class="table-nav">
+                            <td class="th-title">
+                                <div class="checkPos">
+
+                                    <label class="checkbox">
+                                        <input type="checkbox">
+                                        <span class="showCheck"></span>
+
+
+                                    </label>
+
+                                </div>
+                                <label for="checkbox-all" class="all">全选</label>
+                            </td>
+                            <td class="th-title">
+                                商品名称
+                            </td>
+                            <td class="th-title">
+                                单价
+                            </td>
+                            <td class="th-title">
+                                数量
+                            </td>
+                            <td class="th-title">
+                                小计
+                            </td>
+                            <td class="th-title">
+                                库存
+                            </td>
+                            <td class="th-title">
+                                操作
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                                <div class="checkPos">
+
+                                    <label class="checkbox">
+                                        <input type="checkbox">
+                                        <span class="showCheck"></span>
+
+
+                                    </label>
+
+                                </div
+                            </td>
+                            <td>
+
+                                <div class="parent">
+                                    <div class="pic">
+
+                                    </div>
+                                    <div class="info">
+                                        展卉 智利蓝莓 新鲜进口125g*2盒
+                                    </div>
+                                    <div class="size">
+                                        【规格:125g*2盒】
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                ￥38.80
+                            </td>
+                            <td>
+                                <div class="num">
+                                    <lable class="num-decrement">—</lable>
+                                    <input class="txt" type="" name="" value="2"/>
+                                    <lable class="num-increment">+</lable>
+                                </div>
+                            </td>
+                            <td>
+                                ￥38.80
+                            </td>
+                            <td>
+                                有货
+                            </td>
+                            <td class="del">
+                                删除
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                                <div class="checkPos">
+
+                                    <label class="checkbox">
+                                        <input type="checkbox">
+                                        <span class="showCheck"></span>
+
+
+                                    </label>
+
+                                </div>
+
+
+                            </td>
+                            <td>
+
+                                <div class="parent">
+                                    <div class="pic">
+
+                                    </div>
+                                    <div class="info">
+                                        展卉 智利蓝莓 新鲜进口125g*2盒
+                                    </div>
+                                    <div class="size">
+                                        【规格:125g*2盒】
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                ￥38.80
+                            </td>
+                            <td>
+                                <div class="num">
+                                    <lable class="num-decrement">—</lable>
+                                    <input class="txt" type="" name="" value="2"/>
+                                    <lable class="num-increment">—</lable>
+                                </div>
+                            </td>
+                            <td>
+                                ￥38.80
+                            </td>
+                            <td>
+                                有货
+                            </td>
+                            <td class="del">
+                                删除
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+
+                                <div class="checkPos">
+
+                                    <label class="checkbox">
+                                        <input type="checkbox">
+                                        <span class="showCheck"></span>
+
+
+                                    </label>
+
+                                </div>
+
+
+                            </td>
+                            <td>
+
+                                <div class="parent">
+                                    <div class="pic">
+
+                                    </div>
+                                    <div class="info">
+                                        展卉 智利蓝莓 新鲜进口125g*2盒
+                                    </div>
+                                    <div class="size">
+                                        【规格:125g*2盒】
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                ￥38.80
+                            </td>
+                            <td>
+                                <div class="num">
+                                    <lable class="num-decrement">—</lable>
+                                    <input class="txt" type="" name="" value="2"/>
+                                    <lable class="num-increment">—</lable>
+                                </div>
+                            </td>
+                            <td>
+                                ￥38.80
+                            </td>
+                            <td>
+                                有货
+                            </td>
+                            <td class="del">
+                                删除
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="foot">
+                    <div class="footFirst">
+                        <span>共</span>
+                        <span class="sep">6</span>
+                        <span>件商品</span>
+                    </div>
+                    <div class="footSecond">
+                        <span>合计</span>
+                        <span class="youhui">（已优惠￥7.00）</span>
+                        <span class="sep1">￥280.00</span>
+                        <div class="buy">去结算</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>

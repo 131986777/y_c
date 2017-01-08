@@ -1,0 +1,93 @@
+/* line 2, ../sass/pay.scss */
+body {
+  font-family: 'Microsoft YaHei';
+  background-color: #f6f6f6; }
+
+/* line 6, ../sass/pay.scss */
+.container {
+  background-color: #fff; }
+/* line 8, ../sass/pay.scss */
+.container .row-wrap1 {
+  margin-bottom: 35px;
+  margin-left: 50px; }
+/* line 11, ../sass/pay.scss */
+.container .row-wrap1 .row-header1 {
+  width: 1100px;
+  height: 82px;
+  line-height: 80px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-left: 0px;
+  font-size: 25px;
+  color: #4b4b4b; }
+/* line 20, ../sass/pay.scss */
+.container .row-wrap1 .info {
+  margin-top: 30px;
+  font-size: 16px;
+  color: #4b4b4b; }
+/* line 25, ../sass/pay.scss */
+.container .row-wrap1 .infoTop {
+  font-size: 14px;
+  color: #4b4b4b;
+  margin-top: 30px; }
+/* line 29, ../sass/pay.scss */
+.container .row-wrap1 .infoTop .infoFirst {
+  margin-bottom: 10px; }
+/* line 31, ../sass/pay.scss */
+.container .row-wrap1 .infoTop .infoFirst .front {
+  float: left;
+  width: 80px;
+  margin-right: 30px; }
+/* line 39, ../sass/pay.scss */
+.container .row-wrap1 .infoMiddle {
+  font-size: 14px;
+  color: #4b4b4b;
+  margin-top: 40px; }
+/* line 43, ../sass/pay.scss */
+.container .row-wrap1 .infoMiddle .infoSecond {
+  margin-bottom: 10px; }
+/* line 45, ../sass/pay.scss */
+.container .row-wrap1 .infoMiddle .infoSecond .front {
+  float: left;
+  width: 80px;
+  margin-right: 30px; }
+/* line 52, ../sass/pay.scss */
+.container .row-wrap1 .infoLast {
+  font-size: 14px;
+  margin-top: 30px;
+  color: #4b4b4b; }
+/* line 56, ../sass/pay.scss */
+.container .row-wrap1 .infoLast .infoThird {
+  margin-bottom: 10px; }
+/* line 58, ../sass/pay.scss */
+.container .row-wrap1 .infoLast .infoThird .front {
+  float: left;
+  width: 80px;
+  margin-right: 30px; }
+/* line 64, ../sass/pay.scss */
+.container .row-wrap1 .infoLast .infoThird .price {
+  font-size: 25px;
+  color: #f36e19; }
+/* line 70, ../sass/pay.scss */
+.container .row-wrap1 .foot {
+  overflow: hidden;
+  width: 1100px;
+  margin-top: 20px;
+  border-top: 1px solid #c1c1c1; }
+/* line 75, ../sass/pay.scss */
+.container .row-wrap1 .foot .payWay {
+  width: 200px;
+  height: 70px;
+  float: left;
+  margin-top: 30px;
+  /* background-color: red; */
+  margin-right: 25px;
+  border: 1px solid #c1c1c1; }
+/* line 84, ../sass/pay.scss */
+.container .row-wrap1 .foot .huiyuan {
+  background-image: url(/AndSell/pc/public/css/img/huiyuan.png); }
+/* line 87, ../sass/pay.scss */
+.container .row-wrap1 .foot .zhifubao {
+  background-image: url(/AndSell/pc/public/css/img/zhifubao.png); }
+/* line 90, ../sass/pay.scss */
+.container .row-wrap1 .foot .weixin {
+  background-image: url(/AndSell/pc/public/css/img/weixin.png); }

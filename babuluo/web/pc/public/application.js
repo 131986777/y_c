@@ -31,6 +31,18 @@ AndSellUI.service('modalFactory', function ($rootScope) {
         $rootScope.$broadcast("nav-bottom", bottom);
     };
 
+    this.setHeader = function (state) {
+        var bar = {};
+        bar.OnOffState = state;
+        $rootScope.$broadcast("header-bar", bar);
+    };
+
+    this.setSide = function (state) {
+        var bar = {};
+        bar.OnOffState = state;
+        $rootScope.$broadcast("side-bar", bar);
+    };
+
     this.setCurrentPage = function (currentPage) {
         $rootScope.$broadcast("currentPage", currentPage);
     };

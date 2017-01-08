@@ -2,5 +2,7 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
 
     modalFactory.setTitle("主页");
 
+    modalFactory.setHeader(true);
+
 });
 
