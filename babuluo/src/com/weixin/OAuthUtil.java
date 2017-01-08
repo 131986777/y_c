@@ -59,6 +59,7 @@ public class OAuthUtil {
 
 
 		System.err.println(url + "OAuth获得CODE对应的OPEN_ID: " + result);
+		System.out.println(url + "OAuth获得CODE对应的OPEN_ID: " + result);
 
 		JSONObject obj = JSON.parseObject(result);
 		int errcode = obj.getIntValue("errcode");

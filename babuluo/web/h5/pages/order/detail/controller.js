@@ -53,6 +53,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     //立即支付
     $scope.payNow = function () {
+        //alert(getCookie('openId'));
         /**
          * 如果是需要微信支付的类型
          * 调用微信统一下单的接口
