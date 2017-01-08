@@ -5,10 +5,10 @@
 angular.module('AndSell.Main').controller('analysis_analysis_offlineFormAnalysis_Controller', function ($scope, $stateParams, analysisFactory, modalFactory) {
     modalFactory.setTitle("线下销售报表");
     modalFactory.setBottom(false);
-    $scope.START = getYesterMonthBeginDay(getYesterday());
+    $scope.START = getYesterday();
     $scope.END = getYesterday();
     $scope.initLoad = function () {
-        getOfflineFormSource(getYesterMonthBeginDay(getYesterday()),getYesterday());
+        getOfflineFormSource(getYesterday(),getYesterday());
         dataStatus($scope);
     }
     $scope.getGroupByRange = function () {
@@ -71,7 +71,11 @@ angular.module('AndSell.Main').controller('analysis_analysis_offlineFormAnalysis
             }
             for(var i=0;i<flag.length;i++){
                 flag[i]['SHOP_VALUE']['AVG_MONEY_COUNT'] = parseFloat(flag[i]['SHOP_VALUE']['MONEY_COUNT'])/(response.data).length;
-                flag[i]['SHOP_VALUE']['AVG_UNIT_MONEY'] = parseFloat(flag[i]['SHOP_VALUE']['MONEY_COUNT'])/parseFloat(flag[i]['SHOP_VALUE']['TOTAL_UNIT']);
+                if(parseFloat(flag[i]['SHOP_VALUE']['TOTAL_UNIT'])!=0){
+                    flag[i]['SHOP_VALUE']['AVG_UNIT_MONEY'] = parseFloat(flag[i]['SHOP_VALUE']['MONEY_COUNT'])/parseFloat(flag[i]['SHOP_VALUE']['TOTAL_UNIT']);
+                }else{
+                    flag[i]['SHOP_VALUE']['AVG_UNIT_MONEY'] = "";
+                }
                 flag[i]['SHOP_VALUE']['AVG_ORDER_MONEY'] = parseFloat(flag[i]['SHOP_VALUE']['MONEY_COUNT'])/flag[i]['SHOP_VALUE']['ORDER_COUNT'];
             }
             $scope.ADD_CARD = add_card;
@@ -84,7 +88,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_offlineFormAnalysis
             $scope.ORDER_COUNT = order_count;
             $scope.MONEY_COUNT = money_count;
             $scope.AUTO_DISCOUNT =auto_discount;
-            $scope.AVG_UNIT_MONEY =money_count/total_unit;
+            $scope.AVG_UNIT_MONEY =(total_unit==0?"":money_count/total_unit);
             $scope.AVG_ORDER_MONEY = money_count/order_count;
             $scope.AVG_MONEY_COUNT = money_count/(response.data).length;
             $scope.FORMSOURCE = flag;
@@ -108,22 +112,6 @@ angular.module('AndSell.Main').controller('analysis_analysis_offlineFormAnalysis
         $scope.FORMSOURCE = "";
     }
 });
-//获取以选择天数为基准的一周的开始
-function getWeekBeginDay(day) {
-    var monday = new Date(day.getTime() - (day.getDay()-1)*24*60*60*1000);
-    return monday.getFullYear()+"-"+(monday.getMonth()+1)+"-"+monday.getDate();
-}
-//获取以选择天数为基准的一周的结束
-function getWeekEndDay(day) {
-    var sunday = new Date(day.getTime() + (7-day.getDay())*24*60*60*1000 );
-    return sunday.getFullYear()+"-"+(sunday.getMonth()+1)+"-"+sunday.getDate();
-}
-//获取最近一个月的起始时间
-function getYesterMonthBeginDay(day) {
-    var date = new Date(day);
-    date.setMonth(date.getMonth()-1);
-    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
-}
 //获取昨天
 function getYesterday(){
     var yesterday = new Date();

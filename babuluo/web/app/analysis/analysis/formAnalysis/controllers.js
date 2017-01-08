@@ -5,11 +5,11 @@
 angular.module('AndSell.Main').controller('analysis_analysis_formAnalysis_Controller', function ($scope, $stateParams, analysisFactory, modalFactory) {
     modalFactory.setTitle("线上商品销售报表");
     modalFactory.setBottom(false);
-    $scope.START = getYesterMonthBeginDay(getYesterday());
+    $scope.START = getYesterday();
     $scope.END = getYesterday();
     $scope.initLoad = function () {
         dataStatus($scope);
-        getFormSource(getYesterMonthBeginDay(),getYesterday());
+        getFormSource(getYesterday(),getYesterday());
     }
     $scope.YESTERDAY = getYesterday();
     $scope.getGroupByRange = function () {
@@ -41,12 +41,12 @@ angular.module('AndSell.Main').controller('analysis_analysis_formAnalysis_Contro
 });
 
 
-//获取最近一个月的起始时间
-function getYesterMonthBeginDay(day) {
-    var date = new Date(day);
-    date.setMonth(date.getMonth()-1);
-    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
-}
+// //获取最近一个月的起始时间
+// function getYesterMonthBeginDay(day) {
+//     var date = new Date(day);
+//     date.setMonth(date.getMonth()-1);
+//     return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()
+// }
 //获取昨天
 function getYesterday(){
     var yesterday = new Date();
