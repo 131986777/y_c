@@ -50,6 +50,18 @@ AndSellUI.service('modalFactory', function ($rootScope) {
     this.updateCart = function () {
         $rootScope.$broadcast("updateCart");
     };
+
+    this.showAlert = function (msg, func) {
+        $rootScope.$broadcast("to-modal", {
+            message: msg, callback: func
+        });
+    };
+
+    this.showShortAlert = function (msg, func) {
+        $rootScope.$broadcast("to-short-modal", {
+            message: msg, callback: func
+        });
+    };
 });
 
 //商品选择sku加入购物车
