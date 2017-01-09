@@ -1,4 +1,4 @@
-AndSellMainModule.controller('MainController', function ($scope, modalFactory, userFactory) {
+AndSellMainModule.controller('MainController', function ($scope, $state,modalFactory, userFactory) {
 
     $scope.searchContent = "";
 
