@@ -17,12 +17,12 @@
                 <div class="mid">
                     <div class="account">
                         <span class="word">帐号</span>
-                        <input type="text" class="txt" />
+                        <input type="text" ng-model="loginInfo['LOGIN_ID']" class="txt" />
 
                     </div>
                     <div class="account pwd">
                         <span class="word">密码</span>
-                        <input type="password" class="txt" />
+                        <input type="password" ng-model="loginInfo['PWD']" class="txt" />
 
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                     <a class="regist" href="">注册</a>
                     <a class="forget" href="">忘记密码?</a>
                 </div>
-                <div class="but">
+                <div class="but" ng-click="userLogin()">
                     登录
                 </div>
             </div>
