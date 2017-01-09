@@ -18,7 +18,6 @@ AndSellUI.directive('stringToNumber', function () {
         }
     };
 });
-
 AndSellUI.service('modalFactory', function ($rootScope) {
 
     this.setTitle = function (title) {

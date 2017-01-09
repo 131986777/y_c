@@ -528,14 +528,14 @@ table{
 .effectiveArea {
   padding: 0;
   width: 1200px;
-  margin: 35px auto 0;
+  margin: 0 auto;
   /*background-color: #f6f6f6;*/
   }
 
 
 /*sidebar*/
 /* line 488, ../../sass/public/style.scss */
-.effectiveArea .sidebar {
+ .sidebar {
   margin-top: 25px;
   float: left;
   width: 223px;
@@ -544,11 +544,11 @@ table{
 }
 
 /* line 494, ../../sass/public/style.scss */
-.effectiveArea .sidebar ul {
+ .sidebar ul {
   margin-bottom: 34px; }
 
 /* line 497, ../../sass/public/style.scss */
-.effectiveArea .sidebar li {
+ .sidebar li {
   height: 36px;
   line-height: 36px;
   padding-left: 55px;
@@ -557,19 +557,19 @@ table{
   cursor: pointer; }
 
 /* line 505, ../../sass/public/style.scss */
-.effectiveArea .sidebar li:hover {
+.sidebar li:hover {
   background-color: #f9f9f9; }
-.effectiveArea .sidebar .selected {
-  color: #f36e19; }
+ .sidebar li .selected {
+  background-color: #f36e19; }
 
 /* line 508, ../../sass/public/style.scss */
-.effectiveArea .sidebar .active,
-.effectiveArea .sidebar .active:hover {
+ .sidebar .active,
+ .sidebar .active:hover {
   background-color: #1393ff;
   color: #fff; }
 
 /* line 513, ../../sass/public/style.scss */
-.effectiveArea .sidebar .sidebar-title {
+ .sidebar .sidebar-title {
   font-size: 18px;
   color: #bbb;
   position: relative;
