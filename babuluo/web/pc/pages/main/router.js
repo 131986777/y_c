@@ -1,6 +1,6 @@
 $when('', '/pages/home');
 
-$import('pages/home');
+$import('pages/home',{},true);
 $import('pages/cart',{},true);
 //
 //$import('pages/payment/check_out', {ORDER_ID: '1023'});
