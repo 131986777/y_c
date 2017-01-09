@@ -61,7 +61,8 @@ public class ENV {
      */
 
     public static String WX_APPID = "wx7c4d78e05a44115e";
-    public static String WX_APPSECRET = "4e204b8f9cf5a5c11457ffa40d891ffc";
+    //public static String WX_APPSECRET = "4e204b8f9cf5a5c11457ffa40d891ffc";
+    public static String WX_APPSECRET = "166b4fe401feca5d175bc57463f646b3";
 
 
     /**
