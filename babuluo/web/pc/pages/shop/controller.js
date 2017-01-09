@@ -3,5 +3,4 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
     modalFactory.setTitle("订单列表");
 
     modalFactory.setHeader(false);
-
 });

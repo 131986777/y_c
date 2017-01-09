@@ -5,10 +5,13 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
         $scope.title = data;
     });
 
-    //nav-Bottom 初始化
     $scope.$on('header-bar', function (event, data) {
         $scope.showMenuBar = data.OnOffState;
         $scope.showControllerBar = data.OnOffState;
+        $scope.showGoodsCategoriesBar = data.OnOffState;
+    });
+
+    $scope.$on('categories-bar', function (event, data) {
         $scope.showGoodsCategoriesBar = data.OnOffState;
     });
 

@@ -1,0 +1,1580 @@
+Index: babuluo/web/H5/pages/product/product_detail.html
+===================================================================
+--- babuluo/web/H5/pages/product/product_detail.html	(date 1476342844000)
++++ babuluo/web/H5/pages/product/product_detail.html	(date 1476342844000)
+@@ -1,154 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="zh-CN">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-
+-    <title>商品详情</title>
+-
+-    <link rel="stylesheet" href="../../public/libs/bootstrap/dist/css/bootstrap.min.css">
+-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+-    <link rel="stylesheet" href="../../public/css/style.css">
+-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
+-
+-
+-</head>
+-
+-<body class="bg-grey product-detail-page nav-bottom">
+-<!-- BEGIN 商品详情图片 -->
+-<div class="swiper-container">
+-    <div class="swiper-wrapper">
+-        <!-- Slides -->
+-        <div class="swiper-slide">Slide 1</div>
+-        <div class="swiper-slide">Slide 2</div>
+-        <div class="swiper-slide">Slide 3</div>
+-    </div>
+-    <div class="swiper-pagination"></div>
+-</div>
+-<!-- END 商品详情图片 -->
+-
+-<div class="weui_cells">
+-    <div class="weui_cell">
+-        <div class="basic-info weui_cell_bd weui_cell_primary">
+-            <h4 class="name">
+-                泰国金枕头冷冻榴莲果肉300g
+-            </h4>
+-            <p class="feature">
+-                热带风味 冰爽甜蜜
+-            </p>
+-            <p class="money">
+-                ¥48.10
+-            </p>
+-            <p class="code">
+-                商品编码：1010500318
+-            </p>
+-        </div>
+-    </div>
+-    <div class="sale-info weui_cell">
+-        <div class="weui_cell_hd">
+-            促销信息:
+-        </div>
+-        <div class="weui_cell_bd weui_cell_primary">
+-            <span class="label label-default">满减</span>
+-            满200减20
+-        </div>
+-    </div>
+-</div>
+-
+-<div class="weui_cells">
+-    <div class="sku-info weui_cell">
+-        <div class="weui_cell_hd">
+-            规格：
+-        </div>
+-        <div class="sku-list label-group weui_cell_bd">
+-            <span class="sku-label selected label-outline">
+-                250g
+-            </span>
+-            <span class="sku-label label-outline">
+-                250g
+-            </span>
+-            <span class="sku-label label-outline">
+-                250g
+-            </span>
+-        </div>
+-    </div>
+-
+-    <div class="weui_cell">
+-        <div class="weui_cell_hd">
+-            数量：
+-        </div>
+-        <div class="weui_cell_bd">
+-            <div class="product-num-wrap input-group">
+-                <span class="input-group-btn">
+-                    <button class="btn btn-default" type="button">
+-                        -
+-                    </button>
+-                </span>
+-                <input class="form-control text-center" disabled="" type="text" value="1">
+-                <span class="input-group-btn">
+-                    <button class="btn btn-default" type="button">
+-                        +
+-                    </button>
+-                </span>
+-            </div>
+-        </div>
+-    </div>
+-</div>
+-
+-<div class="weui_tab tab-default">
+-    <div class="weui_navbar">
+-        <a class="weui_navbar_item weui_bar_item_on" href="#tab1">
+-            选项一
+-        </a>
+-        <a class="weui_navbar_item" href="#tab2">
+-            选项二
+-        </a>
+-    </div>
+-    <div class="weui_tab_bd">
+-        <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
+-            <h5 class="name">
+-                美国无籽黑提无籽黑提
+-            </h5>
+-            <p class="money">
+-                ¥48.10
+-            </p>
+-            <i class="icon icon-cart"></i>
+-        </div>
+-        <div id="tab2" class="weui_tab_bd_item">
+-            <h1 class="doc-head">通讯录</h1>
+-        </div>
+-    </div>
+-</div>
+-
+-<div class="product-action-wrap action-bar-wrap">
+-    <div class="action-bar border-top">
+-        <div class="icon-wrap">
+-            <i class="icon icon-cart-small"></i>
+-            购物车
+-        </div>
+-        <div class="icon-wrap">
+-            <!-- 已收藏 class="icon-collected" -->
+-            <i class="icon icon-collect"></i>
+-            收藏
+-        </div>
+-        <a class="add-to-cart cell" href="#">
+-            加入购物车
+-        </a>
+-    </div>
+-</div>
+-
+-<script src="../../public/libs/weui/dist/lib/jquery-2.1.4.js"></script>
+-<script src="../../public/libs/weui/dist/js/jquery-weui.min.js"></script>
+-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/js/swiper.jquery.min.js"></script>
+-
+-<script>
+-    $(document).ready(function () {
+-        var mySwiper = new Swiper ('.swiper-container', {
+-            pagination: '.swiper-pagination',
+-            paginationClickable: true
+-        })
+-    });
+-</script>
+-
+-</body>
+-</html>
+Index: babuluo/web/H5/pages/cart/cart.html
+===================================================================
+--- babuluo/web/H5/pages/cart/cart.html	(date 1476342844000)
++++ babuluo/web/H5/pages/cart/cart.html	(date 1476342844000)
+@@ -1,225 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="zh-CN" ng-app="cartApp">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-
+-    <title>购物车</title>
+-
+-    <!-- 新 Bootstrap 核心 CSS 文件 -->
+-    <link rel="stylesheet"
+-          href="../../public/libs/bootstrap/dist/css/bootstrap.min.css">
+-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+-
+-    <link rel="stylesheet" href="../../public/css/style.css">
+-
+-</head>
+-
+-<body class="bg-grey nav-bottom" ng-controller="shopCartController">
+-<div class="container-fluid shopping-cart">
+-    <!-- BEGIN 商品列表-->
+-    <div class="row">
+-        <div class="product-list weui_cells">
+-            <div class="product-sale-wrap weui_cell">
+-                <div class="product-select-wrap weui_cell_hd">
+-                    <i class="icon icon-check"></i>
+-                </div>
+-                <div class="product-sale weui_cell_bd">
+-                    满200减20
+-                </div>
+-            </div>
+-            <!-- BEGIN 商品信息-->
+-            <div class="product-wrap weui_cell">
+-                <div class="product-select-wrap weui_cell_hd"
+-                     ng-init="product.isSelected = false"
+-                     ng-click="product.isSelected = !product.isSelected">
+-                    <i class="icon icon-checked"
+-                       ng-show="product.isSelected"></i>
+-                    <i class="icon icon-check"
+-                       ng-show="!product.isSelected"></i>
+-                </div>
+-                <div class="product-detail weui_cell_bd">
+-                    <img ng-src="" class="product-img">
+-                    <h5 class="product-name">
+-                        美国无籽黑提无籽黑提
+-                    </h5>
+-                    <p class="product-cls">
+-                        规格:100g
+-                    </p>
+-                    <p class="product-money">
+-                        ￥96.00
+-                    </p>
+-                    <div class="product-num-wrap input-group"
+-                         ng-init="cartInfo.buyCount = 1">
+-                        <span class="input-group-btn">
+-                            <button class="btn btn-default" type="button"
+-                                    ng-click="changeBuyCount(cartInfo, -1)">
+-                                -
+-                            </button>
+-                        </span>
+-                        <input class="form-control text-center" type="text"
+-                               ng-blur="updateProductBuyCount(cartInfo)"
+-                               ng-model="cartInfo.buyCount">
+-                        <span class="input-group-btn">
+-                            <button class="btn btn-default"  type="button"
+-                                    ng-click="changeBuyCount(cartInfo, 1)">
+-                                +
+-                            </button>
+-                        </span>
+-                    </div>
+-                    <a class="del-wrap" ng-click="delShopCart(cartInfo)">
+-                        <i class="icon icon-del"></i>
+-                    </a>
+-                </div>
+-            </div>
+-            <!-- END 商品信息-->
+-        </div>
+-    </div>
+-    <!-- END 商品列表-->
+-
+-    <div class="payment-wrap action-bar-wrap">
+-        <div class="action-bar border-top">
+-            <div class="cart-icon-wrap">
+-                <i class="icon icon-check"></i>
+-                全选
+-            </div>
+-            <div class="payment-info cell">
+-                <p class="all">
+-                    总计：<span class="money">￥96.00</span>
+-                </p>
+-                <p class="sale">(不含运费，已优惠已优惠已优惠已优惠</p>
+-            </div>
+-            <a class="payment-check" href="../order/order_add.html">
+-                去结算
+-                <span class="product-num">(2件)</span>
+-            </a>
+-        </div>
+-    </div>
+-</div>
+-
+-
+-
+-<script src="../../public/libs/weui/dist/lib/jquery-2.1.4.js"></script>
+-<script src="../../public/libs/angular/angular.min.js"></script>
+-<script src="../../public/libs/angular/weui.js"></script>
+-
+-<script>
+-    var app = angular.module("cartApp",['weUI']);
+-
+-    app.controller('shopCartController', function($scope, weUI) {
+-        $scope.changeBuyCount = function(cartInfo, type) {
+-            if (type < 0) {
+-
+-                // 如果商品数量等于1弹出提示
+-                if(cartInfo.buyCount == 1) {
+-                    weUI.dialog.confirm("警告", "确定删除此商品吗？", function() {
+-
+-                        var formData = {};
+-
+-                        formData.memberId = 1023;
+-                        formData.cartId = cartInfo.cartId;
+-                        http.post(url, formData, function(response) {
+-                            if(response.code == 0) {
+-                                cartInfo.buyCount = parseInt(cartInfo.buyCount) - 1;
+-                                weUI.toast.ok("删除成功", function(){
+-                                    $scope.removeCart(cartInfo);
+-                                });
+-                            } else {
+-                                weUI.dialog.alert(response.msg);
+-                            }
+-                        });
+-                    });
+-                } else {
+-                    cartInfo.buyCount = parseInt(cartInfo.buyCount) - 1;
+-                }
+-
+-            } else {
+-                cartInfo.buyCount = parseInt(cartInfo.buyCount) + 1;
+-            }
+-
+-
+-            $scope.updateProductBuyCount(cartInfo);
+-        };
+-
+-
+-        $scope.updateProductBuyCount = function(cartInfo) {
+-            if (parseInt(cartInfo.buyCount) < 0 ) {
+-                cartInfo.buyCount = 0;
+-            }
+-
+-            if (parseInt(cartInfo.buyCount) > 0 && parseInt(cartInfo.buyCount) < cartInfo.productInfo.orderMinBuyCount ) {
+-                if ($scope.setting.sysSetting.ifLessMin == 1) {
+-                    cartInfo.buyCount = cartInfo.productInfo.orderMinBuyCount;
+-                    weUI.toast.show("最小起订量为:" + cartInfo.buyCount, "info", 1200);
+-                } else {
+-                    // weUI.toast.show("小于起订量，将原价购买。", "info", 1200);
+-                }
+-            }
+-
+-            $scope.updateCart(cartInfo);
+-
+-            cartInfo.sumPrice = cartInfo.buyCount * cartInfo.productInfo.orderPrice;
+-
+-            $scope.cartSumPrice = 0;
+-            $scope.shopCartList.forEach(function(cartInfo) {
+-                $scope.cartSumPrice = $scope.cartSumPrice + cartInfo.sumPrice;
+-            });
+-
+-        };
+-
+-
+-
+-        $scope.delShopCart = function(cartInfo) {
+-
+-            weUI.dialog.confirm("警告", "确定删除此商品吗？", function() {
+-
+-                var formData = {};
+-
+-                formData.memberId = 1023;
+-                formData.cartId = cartInfo.cartId;
+-                http.post(url, formData, function(response) {
+-                    console.log(response);
+-                    if(response.code == 0) {
+-                        weUI.toast.ok("删除成功", function(){
+-                            $scope.removeCart(cartInfo);
+-                            $scope.updateProductBuyCount(cartInfo);
+-                        });
+-                    } else {
+-                        weUI.dialog.alert(response.msg);
+-                    }
+-                });
+-            });
+-
+-        };
+-
+-        $scope.removeCart = function(cartInfo) {
+-            console.log('removeCart');
+-            var index = $scope.shopCartList.indexOf(cartInfo);
+-
+-            console.log(index);
+-            if (index > -1) {
+-                $scope.shopCartList.splice(index, 1);
+-            }
+-        };
+-
+-        $scope.updateCart = function(cartInfo) {
+-            var formData = {};
+-
+-            formData.cartId = cartInfo.cartId;
+-            formData.buyCount = cartInfo.buyCount;
+-
+-            http.post(url, formData, function(response) {
+-                console.log(response);
+-                if (parseInt(formData.buyCount) == 0) {
+-                    $scope.removeCart(cartInfo);
+-                }
+-            });
+-        };
+-    });
+-
+-</script>
+-
+-
+-</body>
+-
+-</html>
+Index: babuluo/web/H5/pages/order/order_list.html
+===================================================================
+--- babuluo/web/H5/pages/order/order_list.html	(date 1476342844000)
++++ babuluo/web/H5/pages/order/order_list.html	(date 1476342844000)
+@@ -1,108 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="zh-CN">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-
+-    <title>订单列表</title>
+-
+-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+-    <link rel="stylesheet" href="../../public/css/style.css">
+-
+-
+-</head>
+-
+-<body class="bg-grey order-list-page">
+-<div class="weui_tab tab-default">
+-    <div class="order-act- weui_navbar">
+-        <a class="weui_navbar_item weui_bar_item_on" href="#all">
+-            全部
+-        </a>
+-        <a class="weui_navbar_item" href="#complete">
+-            已完成
+-        </a>
+-        <a class="weui_navbar_item" href="#pay">
+-            待付款
+-        </a>
+-        <a class="weui_navbar_item" href="#deliver">
+-            待自提
+-        </a>
+-        <a class="weui_navbar_item" href="#review">
+-            待评价
+-        </a>
+-    </div>
+-
+-
+-    <div class="weui_tab_bd">
+-        <div id="all" class="weui_tab_bd_item weui_tab_bd_item_active">
+-            <div class="order-wrap weui_cells">
+-                <div class="weui_cell">
+-                    <div class="weui_cell_bd weui_cell_primary">
+-                        订单编号 D-20160928-1510
+-                    </div>
+-                    <div class="order-state weui_cell_ft">
+-                        待付款
+-                    </div>
+-                </div>
+-
+-                <!-- BEGIN 商品信息-->
+-                <div class="product-wrap weui_cell">
+-                    <div class="product-img-wrap weui_cell_hd">
+-                        <img class="product-img" src="">
+-                    </div>
+-                    <div class="basic-info weui_cell_bd weui_cell_primary">
+-                        <h5 class="product-name">
+-                            美国无籽黑提无籽黑提美国无籽黑提无籽黑提
+-                        </h5>
+-                        <p class="product-cls">
+-                            规格:100g
+-                        </p>
+-                    </div>
+-                    <div class="ext weui_cell_ft">
+-                        <p class="product-money">
+-                            ￥96.00
+-                        </p>
+-                        <p class="product-num">
+-                            &times;2
+-                        </p>
+-                    </div>
+-                </div>
+-                <!-- END 商品信息-->
+-
+-                <div class="weui_cell">
+-                    <div class="total-price weui_cell_bd weui_cell_primary">
+-                        共2件商品 合计:¥101.00（含运费5.00）
+-                    </div>
+-                </div>
+-
+-                <div class="weui_cell">
+-                    <div class="act-btn-wrap weui_cell_bd weui_cell_primary">
+-                        <a class="btn btn-plain-default btn-sm" href="#">
+-                            去付款
+-                        </a>
+-                    </div>
+-                </div>
+-            </div>
+-        </div>
+-
+-        <div id="complete" class="weui_tab_bd_item">
+-            <h1 class="doc-head">通讯录</h1>
+-        </div>
+-        <div id="pay" class="weui_tab_bd_item">
+-            <h1 class="doc-head">通讯录</h1>
+-        </div>
+-        <div id="deliver" class="weui_tab_bd_item">
+-            <h1 class="doc-head">通讯录</h1>
+-        </div>
+-        <div id="review" class="weui_tab_bd_item">
+-            <h1 class="doc-head">通讯录</h1>
+-        </div>
+-    </div>
+-</div>
+-
+-<script src="../../public/libs/weui/dist/lib/jquery-2.1.4.js"></script>
+-<script src="../../public/libs/weui/dist/js/jquery-weui.min.js"></script>
+-
+-
+-</body>
+-</html>
+Index: babuluo/web/H5/pages/payment/check_out_success.html
+===================================================================
+--- babuluo/web/H5/pages/payment/check_out_success.html	(date 1476342844000)
++++ babuluo/web/H5/pages/payment/check_out_success.html	(date 1476342844000)
+@@ -1,49 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="zh-CN">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-
+-    <title>购物车</title>
+-
+-    <link rel="stylesheet" href="../../public/libs/bootstrap/dist/css/bootstrap.min.css">
+-
+-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+-
+-    <link rel="stylesheet" href="../../public/css/style.css">
+-</head>
+-
+-<body class="check-out-success">
+-<header class="succ text-center">
+-    <div class="content">
+-        <div class="icon-wrap">
+-            <i class="icon icon-chenggong"></i>
+-        </div>
+-        <div class="txt">
+-            <h2 class="succ-title green">
+-                购买成功！
+-            </h2>
+-            <p class="grey xs">
+-                恭喜您，成功购买福袋商品
+-            </p>
+-        </div>
+-    </div>
+-
+-    <img class="succ-img" src="../../public/img/payment_fudai.jpg" alt="福袋">
+-</header>
+-<div class="container-fluid ">
+-    <div class="more row text-center">
+-        <p>
+-            更多福利请关注
+-            <span class="green">云厨一站</span>
+-        </p>
+-        <img class="more-img" src="../../public/img/payment_erweima.png" alt="二维码">
+-        <p>
+-            更多详情可咨询客服热线&nbsp;&nbsp;
+-            <span class="green">400-000-9185</span>
+-        </p>
+-
+-    </div>
+-</div>
+-</body>
+-</html>
+Index: babuluo/web/H5/pages/payment/check_out.html
+===================================================================
+--- babuluo/web/H5/pages/payment/check_out.html	(date 1476342844000)
++++ babuluo/web/H5/pages/payment/check_out.html	(date 1476342844000)
+@@ -1,85 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="zh-CN">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-
+-    <title>支付</title>
+-
+-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+-    <link rel="stylesheet" href="../../public/css/style.css">
+-</head>
+-
+-<body class="check-out-page bg-grey">
+-<header>
+-    <div class="weui_cell">
+-        <div class="weui_cell_hd">
+-            <i class="icon icon-ok"></i>
+-        </div>
+-        <div class="weui_cell_bd">
+-            <h4 class="suc-title">
+-                提交订单成功
+-            </h4>
+-            <p>
+-                请在30分钟之内完成付款，逾期订单将关闭
+-            </p>
+-        </div>
+-    </div>
+-</header>
+-<div class="container-fluid ">
+-    <div class="order-info border-bottom row">
+-        <div class="col-xs-12">
+-            <p>
+-                订单编号：506090710000126548
+-            </p>
+-            <p>
+-                下单日期：2016-08-23  11:36:45
+-            </p>
+-        </div>
+-        <div class="col-xs-12">
+-            <p>
+-                提货人：刘华华
+-            </p>
+-            <p>
+-                联系方式：18042112088
+-            </p>
+-        </div>
+-        <div class="col-xs-12">
+-            <p>
+-                提货时间：2016.08.23星期三
+-            </p>
+-            <p>
+-                提货门店：莲花新城店
+-            </p>
+-            <p>
+-                提货方式：自提
+-            </p>
+-            <p>
+-                提货码：lhh20160823
+-            </p>
+-        </div>
+-    </div>
+-
+-    <div class="payment-info">
+-        <p class="">
+-            订单总额：¥168
+-        </p>
+-        <p class="sale">
+-            已优惠 ¥0.00
+-        </p>
+-        <p>
+-            付款方式：余额支付
+-        </p>
+-    </div>
+-</div>
+-
+-<div class="action-bar-wrap">
+-    <div class="action-bar border-top">
+-        <a class="check cell open-popup" href="javascript:;"
+-           data-target="#half">立即付款
+-        </a>
+-    </div>
+-</div>
+-
+-</body>
+-</html>
+Index: babuluo/web/H5/pages/order/order_address.html
+===================================================================
+--- babuluo/web/H5/pages/order/order_address.html	(date 1476342844000)
++++ babuluo/web/H5/pages/order/order_address.html	(date 1476342844000)
+@@ -1,177 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="zh-CN" ng-app="orderAddress">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-
+-    <title>收货/提货信息</title>
+-
+-    <!-- 新 Bootstrap 核心 CSS 文件 -->
+-    <link rel="stylesheet"
+-          href="../../public/libs/bootstrap/dist/css/bootstrap.min.css">
+-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+-    <link rel="stylesheet" href="../../public/css/style.css">
+-    <link rel="stylesheet"
+-          href="../../public/libs/weui/dist/css/jquery-weui.min.css">
+-</head>
+-
+-<body class="order-address" ng-controller="OrderAddressCtrl">
+-<div class="container-fluid">
+-    <div class="row">
+-        <div class="weui_cells weui_cells_form">
+-            <div class="weui_cell">
+-                <div class="weui_cell_hd">
+-                    <label class="weui_label">收货人:</label>
+-                </div>
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    <input class="weui_input" type="text"
+-                           placeholder="请输入收货人">
+-                </div>
+-            </div>
+-            <div class="weui_cell">
+-                <div class="weui_cell_hd">
+-                    <label class="weui_label">联系方式:</label>
+-                </div>
+-
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    <input class="weui_input" type="number"
+-                           placeholder="请输入联系方式">
+-                </div>
+-            </div>
+-
+-            <div class="name weui_cell weui_cell_select">
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    <select class="weui_select" ng-model="addressType">
+-                        <option value="0">提货方式</option>
+-                        <option value="1">门店自提</option>
+-                        <option value="2">快递收货</option>
+-                    </select>
+-                </div>
+-            </div>
+-        </div>
+-
+-        <div class="weui_cells" ng-cloak ng-show="addressType == 1">
+-            <div class="store-name weui_cell weui_cell_select">
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    <select class="weui_select">
+-                        <option selected value="0">选择提货门店</option>
+-                        <option value="1">门店自提</option>
+-                        <option value="2">快递收货</option>
+-                    </select>
+-                </div>
+-            </div>
+-            <div class="date weui_cell">
+-                <div class="weui_cell_bd">
+-                    <p class="title">
+-                        选择提货时间：
+-                    </p>
+-                    <input class="datetime-picker weui_input" type="text"
+-                           placeholder="请选择提货时间">
+-                </div>
+-            </div>
+-        </div>
+-
+-        <div class="weui_cells" ng-cloak ng-show="addressType == 2">
+-            <div class="weui_cell">
+-                <div class="weui_cell_bd">
+-                    <p class="title">
+-                        所在地区：
+-                    </p>
+-                    <input class="weui_input" type="text" id='city-picker'
+-                           value="江苏省 南京市" placeholder="请选择所在地区">
+-                </div>
+-            </div>
+-
+-            <div class="weui_cell">
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    <p class="title">
+-                        详细地址：
+-                    </p>
+-                    <div class="weui_cell_bd weui_cell_primary">
+-                        <input class="weui_input" type="number"
+-                               placeholder="街道、楼牌号等">
+-                    </div>
+-                </div>
+-            </div>
+-            <div class="date weui_cell">
+-                <div class="weui_cell_bd">
+-                    <p class="title">
+-                        预计送达时间：
+-                    </p>
+-                    <input class="datetime-picker weui_input" type="text"
+-                           placeholder="请选择预计送达时间">
+-                </div>
+-            </div>
+-        </div>
+-        <div class="weui_btn_area">
+-            <button class="weui_btn" type="button">提交</button>
+-        </div>
+-    </div>
+-</div>
+-
+-<script src="../../public/libs/weui/dist/lib/jquery-2.1.4.js"></script>
+-<script src="../../public/libs/angular/angular.min.js"></script>
+-<script src="../../public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+-
+-<!-- weui -->
+-<script src="../../public/libs/weui/dist/js/jquery-weui.min.js"></script>
+-<script src="../../public/libs/weui/dist/js/city-picker.min.js"></script>
+-<script>
+-    $(".datetime-picker").datetimePicker({
+-        title: '请选择时间',
+-        min: (function() {
+-            var minTime,
+-                year,
+-                month,
+-                day,
+-                minTimeString;
+-
+-            function formatNum(num) {
+-                return num < 10 ? '0' + num : num;
+-            }
+-
+-            minTime = new Date();
+-            minTime.setDate(minTime.getDate() + 2); // 推迟2天
+-            year = minTime.getFullYear();
+-            month = formatNum(minTime.getMonth() + 1);
+-            day = formatNum(minTime.getDate());
+-            minTimeString = year + '-' + month + '-' + day;
+-
+-            return minTimeString;
+-        })(),
+-        times: function () {
+-            return [  // 自定义的时间
+-                {
+-                    values: ['7:00-18:00']
+-                }
+-            ];
+-        }
+-    });
+-
+-    $("#city-picker").cityPicker({
+-        title: "请选择所在地区"
+-    });
+-
+-    var app = angular.module('orderAddress', []);
+-    app.controller('OrderAddressCtrl', ['$scope', function($scope) {
+-        $scope.addressType = '2';
+-    }]);
+-
+-    app.directive('convertToNumber', function() {
+-        return {
+-            require: 'ngModel',
+-            link: function(scope, element, attrs, ngModel) {
+-                ngModel.$parsers.push(function(val) {
+-                    return parseInt(val, 10);
+-                });
+-                ngModel.$formatters.push(function(val) {
+-                    return '' + val;
+-                });
+-            }
+-        };
+-    });
+-
+-</script>
+-</body>
+-
+-</html>
+Index: babuluo/web/H5/pages/order/order_detail.html
+===================================================================
+--- babuluo/web/H5/pages/order/order_detail.html	(date 1476342844000)
++++ babuluo/web/H5/pages/order/order_detail.html	(date 1476342844000)
+@@ -1,124 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="zh-CN">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-
+-    <title>支付</title>
+-
+-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+-    <link rel="stylesheet" href="../../public/css/style.css">
+-</head>
+-
+-<body class="check-out-page bg-grey">
+-<header>
+-    <div class="weui_cell">
+-        <div class="weui_cell_hd">
+-            <i class="icon icon-ok"></i>
+-        </div>
+-        <div class="weui_cell_bd">
+-            <h4 class="suc-title">
+-                提交订单成功
+-            </h4>
+-            <p>
+-                请在30分钟之内完成付款，逾期订单将关闭
+-            </p>
+-        </div>
+-    </div>
+-</header>
+-<div class="container-fluid ">
+-    <div class="order-info">
+-        <div class="col-xs-12">
+-            <p>
+-                订单编号：506090710000126548
+-            </p>
+-            <p>
+-                下单日期：2016-08-23  11:36:45
+-            </p>
+-        </div>
+-        <div class="col-xs-12">
+-            <p>
+-                提货人：刘华华
+-            </p>
+-            <p>
+-                联系方式：18042112088
+-            </p>
+-        </div>
+-        <div class="col-xs-12">
+-            <p>
+-                提货时间：2016.08.23星期三
+-            </p>
+-            <p>
+-                提货门店：莲花新城店
+-            </p>
+-            <p>
+-                提货方式：自提
+-            </p>
+-            <p>
+-                提货码：lhh20160823t
+-            </p>
+-        </div>
+-    </div>
+-
+-    <div class="product-list weui_cells">
+-        <div class="weui_cell">
+-            <div class="weui_cell_bd">
+-                商品列表
+-            </div>
+-        </div>
+-        <div class="product-wrap weui_cell">
+-            <div class="product-img-wrap weui_cell_hd">
+-                <img class="product-img" src="">
+-            </div>
+-            <div class="basic-info weui_cell_bd weui_cell_primary">
+-                <h5 class="product-name">
+-                    美国无籽黑提无籽黑提美国无籽黑提无籽黑提
+-                </h5>
+-                <p class="product-cls">
+-                    规格:100g
+-                </p>
+-            </div>
+-            <div class="ext weui_cell_ft">
+-                <p class="product-money">
+-                    ￥96.00
+-                </p>
+-                <p class="product-num">
+-                    &times;2
+-                </p>
+-            </div>
+-        </div>
+-    </div>
+-
+-    <div class="payment-info">
+-        <p>
+-            订单总额：¥168
+-        </p>
+-        <p class="sale">
+-            已优惠 ¥0.00
+-        </p>
+-        <p>
+-            付款方式：余额支付
+-        </p>
+-    </div>
+-</div>
+-
+-<div class="action-bar-wrap">
+-    <div class="action-bar border-top">
+-        <div class="cell">
+-            <p class="all">
+-                总计：<span class="money">￥96.00</span>
+-            </p>
+-        </div>
+-        <div class="btn-wrap">
+-            <a class="btn-cancel btn" href="javascript:;">
+-                取消订单
+-            </a>
+-            <a class="btn my-btn-default" href="javascript:;">
+-                立即付款
+-            </a>
+-        </div>
+-    </div>
+-</div>
+-
+-</body>
+-</html>
+Index: babuluo/web/H5/pages/personal/index.html
+===================================================================
+--- babuluo/web/H5/pages/personal/index.html	(date 1476342844000)
++++ babuluo/web/H5/pages/personal/index.html	(date 1476342844000)
+@@ -1,157 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="zh-CN">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-
+-    <title>购物车</title>
+-
+-    <link rel="stylesheet" href="../../public/libs/bootstrap/dist/css/bootstrap.min.css">
+-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+-
+-    <link rel="stylesheet" href="../../public/css/style.css">
+-</head>
+-
+-<body class="personal-index bg-grey nav-bottom">
+-<main class="container-fluid">
+-    <div class="row">
+-        <div class="header">
+-            <img class="personal-img">
+-            <h5 class="personal-name">
+-                ZEXIKUN
+-            </h5>
+-            <div class="personal-info flexbox">
+-                <div class="points cell">
+-                    <span class="num">150</span>
+-                    <p class="personal-info-txt">用户积分</p>
+-                </div>
+-                <div class="points cell">
+-                    <span class="num">150</span>
+-                    <p class="personal-info-txt">账户余额</p>
+-                </div>
+-                <div class="points cell">
+-                    <span class="num">5张</span>
+-                    <p class="personal-info-txt">优惠券</p>
+-                </div>
+-            </div>
+-        </div>
+-
+-        <div class="order-act-wrap weui_cells weui_cells_access">
+-            <div class="weui_cell">
+-                <div class="order-act-title weui_cell_bd weui_cell_primary">
+-                    全部订单
+-                </div>
+-                <div class="weui_cell_ft"></div>
+-            </div>
+-            <div class="weui_cell no_access">
+-                <div class="order-act weui_cell_bd weui_cell_primary flexbox">
+-                    <a class="cell">
+-                        <i class="icon icon-order-ok"></i>
+-                        <p class="order-act-txt">已完成</p>
+-                    </a>
+-                    <a class="cell">
+-                        <i class="icon icon-order-pay"></i>
+-                        <p class="order-act-txt">待付款</p>
+-                    </a>
+-                    <a class="cell">
+-                        <i class="icon icon-order-deliver"></i>
+-                        <p class="order-act-txt">待自提</p>
+-                    </a>
+-                    <a class="cell">
+-                        <i class="icon icon-order-evaluate"></i>
+-                        <p class="order-act-txt">待评价</p>
+-                    </a>
+-                </div>
+-            </div>
+-        </div>
+-
+-        <div class="main-entry weui_cells weui_cells_access">
+-            <a class="weui_cell">
+-                <div class="weui_cell_hd">
+-                    <i class="icon icon-safety"></i>
+-                </div>
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    账户安全
+-                </div>
+-                <div class="weui_cell_ft"></div>
+-            </a>
+-            <a class="weui_cell">
+-                <div class="weui_cell_hd">
+-                    <i class="icon icon-membership-card"></i>
+-                </div>
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    我的会员卡
+-                </div>
+-                <div class="weui_cell_ft"></div>
+-            </a>
+-            <a class="weui_cell">
+-                <div class="weui_cell_hd">
+-                    <i class="icon icon-contact"></i>
+-                </div>
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    联系我们
+-                </div>
+-                <div class="weui_cell_ft"></div>
+-            </a>
+-            <a class="weui_cell">
+-                <div class="weui_cell_hd">
+-                    <i class="icon icon-about"></i>
+-                </div>
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    关于我们
+-                </div>
+-                <div class="weui_cell_ft"></div>
+-            </a>
+-            <a class="weui_cell">
+-                <div class="weui_cell_hd">
+-                    <i class="icon icon-more"></i>
+-                </div>
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    更多
+-                </div>
+-                <div class="weui_cell_ft"></div>
+-            </a>
+-        </div>
+-    </div>
+-</main>
+-
+-<nav class="nav-fixed-bottom" role="navigation">
+-    <ul class="nav-list flexbox">
+-        <li class="cell selected">
+-            <a href="#">
+-                <i class="icon icon-home"></i>
+-                <p class="nav-txt">首页</p>
+-            </a>
+-        </li>
+-        <li class="cell">
+-            <a href="#">
+-                <i class="icon icon-cart"></i>
+-                <p class="nav-txt">购物车</p>
+-            </a>
+-        </li>
+-        <li class="cell">
+-            <a href="#">
+-                <i class="icon icon-product-class"></i>
+-                <p class="nav-txt">分类</p>
+-            </a>
+-        </li>
+-        <li class="cell">
+-            <a href="#">
+-                <i class="icon icon-personal"></i>
+-                <p class="nav-txt">我的</p>
+-            </a>
+-        </li>
+-    </ul>
+-</nav>
+-
+-
+-<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+-<script src="../public/libs/weui/dist/lib/jquery-2.1.4.js"></script>
+-<script src="../public/libs/angular/angular-1.3.0.js"></script>
+-<script src="../public/js/bootstrap-3.3.4/js/bootstrap.min.js"></script>
+-
+-<!-- weui -->
+-<script src="../public/libs/angular/weui.js"></script>
+-<script src="../public/libs/weui/dist/js/jquery-weui.min.js"></script>
+-</body>
+-</html>
+Index: babuluo/web/H5/pages/user/login.html
+===================================================================
+--- babuluo/web/H5/pages/user/login.html	(date 1476342844000)
++++ babuluo/web/H5/pages/user/login.html	(date 1476342844000)
+@@ -1,97 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="zh-CN">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-
+-    <title>登录</title>
+-
+-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+-
+-    <link rel="stylesheet" href="../../public/css/style.css">
+-</head>
+-
+-<body>
+-
+-<div class="user-wrap user">
+-    <div class="logo-wrap">
+-        <img class="logo" src="../../public/img/login_logo.png">
+-    </div>
+-    <div>
+-        <div class="weui_cells weui_cells_form">
+-            <div class="weui_cell">
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    <input class="weui_input" type="tel" name="phone" id="phone"
+-                           placeholder="请输入手机号">
+-                </div>
+-            </div>
+-            <div class="weui_cell">
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    <input class="weui_input" type="text" name="vcode" id="vcode"
+-                           placeholder="请输入验证码">
+-                </div>
+-            </div>
+-        </div>
+-        <div class="weui_cells_tips">
+-            <span class="color-default">提示：</span>
+-            未注册云厨一站的手机号，登陆时将自动注册，且代表
+-            您已经同意
+-            <span class="color-default">《用户协议》</span>
+-        </div>
+-        <div class="weui_btn_area">
+-            <button class="weui_btn btn-blue" type="button">获取验证码</button>
+-            <button class="weui_btn my-btn-default" type="submit">登录</button>
+-        </div>
+-        <div class="login-other">
+-            <a class="btn-link" href="signup.html">
+-                免费注册
+-            </a>
+-            <a class="btn-link pull-right" href="#">
+-                账号密码登录
+-            </a>
+-        </div>
+-    </div>
+-
+-    <div>
+-        <div class="weui_cells weui_cells_form">
+-            <div class="weui_cell">
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    <input class="weui_input" type="text" name="phone" id="account"
+-                           placeholder="请输入账号">
+-                </div>
+-            </div>
+-            <div class="weui_cell">
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    <input class="weui_input" type="text" name="password"
+-                           id="password" placeholder="请输入密码">
+-                </div>
+-            </div>
+-        </div>
+-        <div class="check-wrap">
+-            <label class="remember">
+-                <my-check item="remember"></my-check>
+-                7天免登录
+-            </label>
+-
+-            <a class="btn-link pull-right" href="#">
+-                忘记密码？
+-            </a>
+-        </div>
+-        <div class="weui_btn_area">
+-            <button class="weui_btn my-btn-default" type="submit">登录</button>
+-        </div>
+-        <div class="login-other">
+-            <a class="btn-link" href="signup.html">
+-                免费注册
+-            </a>
+-            <a class="btn-link pull-right" href="#">
+-                账号密码登录
+-            </a>
+-        </div>
+-    </div>
+-</div>
+-<script src="../../public/libs/angular/angular.min.js"></script>
+-
+-</body>
+-</html>
+-
+Index: babuluo/web/H5/pages/order/order_add.html
+===================================================================
+--- babuluo/web/H5/pages/order/order_add.html	(date 1476342844000)
++++ babuluo/web/H5/pages/order/order_add.html	(date 1476342844000)
+@@ -1,142 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="zh-CN">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-
+-    <title>新增订单</title>
+-
+-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+-
+-    <link rel="stylesheet" href="../../public/css/style.css">
+-</head>
+-
+-<body class="bg-grey nav-bottom">
+-
+-<div class="container-fluid order-add">
+-    <div class="row">
+-        <div class="weui_cells weui_cells_access">
+-            <a class="order-address weui_cell" href="order_address.html">
+-                <div class="detail weui_cell_bd weui_cell_primary">
+-                    <p class="">提 货 人：刘华华 180****2088</p>
+-                    <p class="">提货门店：莲花新城店</p>
+-                    <p class="">提货时间：2016.08.23</p>
+-                </div>
+-                <div class="weui_cell_ft"></div>
+-            </a>
+-            <div class="dec"></div>
+-        </div>
+-
+-        <div class="product-list weui_cells">
+-            <div class="product-sale-wrap weui_cell">
+-                <div class="product-sale weui_cell_bd">
+-                    满200减20
+-                </div>
+-            </div>
+-            <!-- BEGIN 商品信息-->
+-            <div class="product-wrap weui_cell">
+-                <div class="product-img-wrap weui_cell_hd">
+-                    <img ng-src="" class="product-img">
+-                </div>
+-                <div class="content weui_cell_bd weui_cell_primary">
+-                    <h5 class="product-name">
+-                        美国无籽黑提无籽黑提美国无籽黑提无籽黑提
+-                    </h5>
+-                    <p class="product-cls">
+-                        规格:100g
+-                    </p>
+-                    <p class="product-cls">
+-                        编号：101005808
+-                    </p>
+-                </div>
+-                <div class="ext weui_cell_ft">
+-                    <p class="product-money">
+-                        ￥96.00
+-                    </p>
+-                    <p class="product-num">
+-                        &times;2
+-                    </p>
+-                </div>
+-            </div>
+-            <!-- END 商品信息-->
+-        </div>
+-
+-        <div class="weui_cells weui_cells_access">
+-            <div class="weui_cell">
+-                <div class="weui_cell_bd">
+-                    使用优惠券
+-                </div>
+-                <div class="weui_cell_ft weui_cell_primary">
+-                    5元优惠券
+-                </div>
+-            </div>
+-        </div>
+-
+-        <div class="weui_cells weui_cells_access">
+-            <div class="weui_cell">
+-                <div class="weui_cell_bd">
+-                    使用积分
+-                </div>
+-                <div class="weui_cell_ft weui_cell_primary">
+-                    200积分可用
+-                </div>
+-            </div>
+-        </div>
+-
+-        <div class="payment-list weui_cells">
+-            <div class="balance weui_cell">
+-                <div class="icon-wrap weui_cell_bd">
+-                    <i class="icon icon-balance"></i>
+-                </div>
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    余额支付
+-                </div>
+-                <div class="weui_cell_ft">
+-                    <i class="icon icon-check"></i>
+-                </div>
+-            </div>
+-            <div class="balance weui_cell">
+-                <div class="icon-wrap weui_cell_bd">
+-                    <i class="icon icon-alipay"></i>
+-                </div>
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    支付宝支付
+-                </div>
+-                <div class="weui_cell_ft">
+-                    <i class="icon icon-checked"></i>
+-                    <i class="icon icon-check"></i>
+-                </div>
+-            </div>
+-            <div class="balance weui_cell">
+-                <div class="icon-wrap weui_cell_bd">
+-                    <i class="icon icon-unipay"></i>
+-                </div>
+-                <div class="weui_cell_bd weui_cell_primary">
+-                    银联支付
+-                </div>
+-                <div class="weui_cell_ft">
+-                    <i class="icon icon-check"></i>
+-                </div>
+-            </div>
+-        </div>
+-    </div>
+-
+-    <div class="payment-wrap action-bar-wrap">
+-        <div class="action-bar border-top">
+-            <div class="payment-info cell">
+-                <p class="all">
+-                    总计：<span class="money">￥96.00</span>
+-                </p>
+-                <p class="sale">(不含运费，已优惠已优惠已优惠已优惠</p>
+-            </div>
+-            <a class="payment-check" href="#">
+-                提交订单
+-            </a>
+-        </div>
+-    </div>
+-</div>
+-
+-
+-</body>
+-
+-</html>
+Index: babuluo/web/H5/pages/user/signup.html
+===================================================================
+--- babuluo/web/H5/pages/user/signup.html	(date 1476342844000)
++++ babuluo/web/H5/pages/user/signup.html	(date 1476342844000)
+@@ -1,68 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="zh-CN" ng-app="signup">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-
+-    <title>注册</title>
+-
+-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+-
+-    <link rel="stylesheet" href="../../public/css/style.css">
+-</head>
+-
+-<body class="user sign-up" ng-controller="SignupCtrl">
+-
+-<div class="user-wrap">
+-    <div class="logo-wrap">
+-        <img class="logo" src="../../public/img/login_logo.png">
+-    </div>
+-
+-    <div class="weui_cells weui_cells_form">
+-        <div class="weui_cell">
+-            <div class="weui_cell_bd">
+-                <input class="weui_input" type="tel" placeholder="手机号">
+-            </div>
+-        </div>
+-
+-        <div class="weui_cell">
+-            <div class="weui_cell_bd weui_cell_primary">
+-                <input class="weui_input" type="tel" placeholder="验证码">
+-                <a class="vcode-btn my-btn-default" href="javascript:;">发送验证码</a>
+-            </div>
+-        </div>
+-
+-        <div class="weui_cell">
+-            <div class="weui_cell_bd weui_cell_primary">
+-                <input class="weui_input" type="text" name="password"
+-                       placeholder="密码">
+-            </div>
+-        </div>
+-        <div class="weui_cell">
+-            <div class="weui_cell_bd weui_cell_primary">
+-                <input class="weui_input" type="text" name="password"
+-                       placeholder="确认密码">
+-            </div>
+-        </div>
+-    </div>
+-    <div class="check-wrap">
+-        <label class="remember">
+-            <my-check item="agree"></my-check>
+-            同意注册协议
+-        </label>
+-    </div>
+-    <div class="weui_btn_area">
+-        <button class="weui_btn my-btn-default" type="submit">注册</button>
+-    </div>
+-</div>
+-<script src="../../public/libs/angular/angular.min.js"></script>
+-<script src="../../public/components/check/check.js"></script>
+-<script>
+-    var app = angular.module('signup', ['myCheck']);
+-    app.controller('SignupCtrl', function() {
+-
+-    });
+-</script>
+-</body>
+-</html>
+-
+Index: babuluo/web/H5/pages/product/product_list.html
+===================================================================
+--- babuluo/web/H5/pages/product/product_list.html	(date 1476342844000)
++++ babuluo/web/H5/pages/product/product_list.html	(date 1476342844000)
+@@ -1,134 +0,0 @@
+-<!DOCTYPE html>
+-<html lang="zh-CN">
+-<head>
+-    <meta charset="UTF-8">
+-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-
+-    <title>商品列表</title>
+-
+-    <link rel="stylesheet" href="../../public/libs/weui/dist/lib/weui.min.css">
+-    <link rel="stylesheet" href="../../public/css/style.css">
+-
+-</head>
+-
+-<body class="bg-grey product-list-page">
+-<!-- BEGIN 商品搜索 -->
+-<div class="search-bar flexbox">
+-    <input class="search-input cell" type="search" placeholder="输入菜品名称">
+-    <a class="icon-wrap cell fixed" href="javascript:">
+-        <i class="icon icon-search"></i>
+-    </a>
+-</div>
+-<!-- END 商品搜索 -->
+-<div class="weui_tab">
+-    <div class="product-list-navbar weui_navbar">
+-        <a class="weui_navbar_item weui_bar_item_on" href="#tab1">
+-            选项一
+-        </a>
+-        <a class="weui_navbar_item" href="#tab2">
+-            选项二
+-        </a>
+-        <a class="weui_navbar_item" href="#tab3">
+-            选项二
+-        </a>
+-        <a class="weui_navbar_item" href="#tab3">
+-            选项二
+-        </a>
+-        <a class="weui_navbar_item" href="#tab3">
+-            选项二
+-        </a>
+-
+-    </div>
+-    <div class="weui_tab_bd">
+-        <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
+-            <a class="product-wrap weui_cell" href="product_detail.html">
+-                <div class="weui_cell_hd">
+-                    <img class="img">
+-                </div>
+-                <div class="weui_cell_bd">
+-                    <h5 class="name">
+-                        美国无籽黑提无籽黑提
+-                    </h5>
+-                    <p class="money">
+-                        ¥48.10
+-                    </p>
+-                    <i class="icon icon-cart"></i>
+-                </div>
+-            </a>
+-            <a class="product-wrap weui_cell" href="product_detail.html">
+-                <div class="weui_cell_hd">
+-                    <img class="img">
+-                </div>
+-                <div class="weui_cell_bd">
+-                    <h5 class="name">
+-                        美国无籽黑提无籽黑提
+-                    </h5>
+-                    <p class="money">
+-                        ¥48.10
+-                    </p>
+-                    <i class="icon icon-cart"></i>
+-                </div>
+-            </a>
+-            <a class="product-wrap weui_cell" href="product_detail.html">
+-                <div class="weui_cell_hd">
+-                    <img class="img">
+-                </div>
+-                <div class="weui_cell_bd">
+-                    <h5 class="name">
+-                        美国无籽黑提无籽黑提
+-                    </h5>
+-                    <p class="money">
+-                        ¥48.10
+-                    </p>
+-                    <i class="icon icon-cart"></i>
+-                </div>
+-            </a>
+-            <a class="product-wrap weui_cell" href="product_detail.html">
+-                <div class="weui_cell_hd">
+-                    <img class="img">
+-                </div>
+-                <div class="weui_cell_bd">
+-                    <h5 class="name">
+-                        美国无籽黑提无籽黑提
+-                    </h5>
+-                    <p class="money">
+-                        ¥48.10
+-                    </p>
+-                    <i class="icon icon-cart"></i>
+-                </div>
+-            </a>
+-            <a class="product-wrap weui_cell" href="product_detail.html">
+-                <div class="weui_cell_hd">
+-                    <img class="img">
+-                </div>
+-                <div class="weui_cell_bd">
+-                    <h5 class="name">
+-                        美国无籽黑提无籽黑提
+-                    </h5>
+-                    <p class="money">
+-                        ¥48.10
+-                    </p>
+-                    <i class="icon icon-cart"></i>
+-                </div>
+-            </a>
+-
+-        </div>
+-        <div id="tab2" class="weui_tab_bd_item">
+-            <h1 class="doc-head">通讯录</h1>
+-        </div>
+-        <div id="tab3" class="weui_tab_bd_item">
+-            <h1 class="doc-head">发现</h1>
+-        </div>
+-        <div id="tab4" class="weui_tab_bd_item">
+-            <h1 class="doc-head">我的</h1>
+-        </div>
+-    </div>
+-</div>
+-
+-
+-
+-<script src="../../public/libs/weui/dist/lib/jquery-2.1.4.js"></script>
+-<script src="../../public/libs/weui/dist/js/jquery-weui.min.js"></script>
+-
+-</body>
+-</html>

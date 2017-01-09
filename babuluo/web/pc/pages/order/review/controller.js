@@ -4,6 +4,8 @@ angular.module('AndSell.PC.Main').controller('pages_order_review_Controller', fu
 
     modalFactory.setHeader(false);
 
+    modalFactory.setCateGory(true);
+
     modalFactory.setSide(true);
 
 });
