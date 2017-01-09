@@ -384,6 +384,137 @@ AndSellUI.directive('cartModal', function (productFactory, weUI, modalFactory) {
         }
     }
 });
+
+
+AndSellUI.directive('pageBar', function (http, baseURL) {
+    return {
+        restrict: 'EA',
+        templateUrl: '/AndSell/pc/public/template/pageBar.html',
+        scope: {
+            callback: '&', url: '@', filter: '=filterObj'
+        },
+        controller: function ($scope) {
+
+            $scope.pageObject = {};
+            $scope.initPageSize = 0;
+
+            $scope.hasPrevPage = function () {
+                return $scope.currentPage > 1;
+            };
+
+            $scope.hasNextPage = function () {
+                return $scope.currentPage < $scope.totalPage;
+            };
+
+            $scope.changePage = function () {
+                $scope.currentPage = $scope.currentPageMirror;
+            };
+
+            //只是页数改变
+            $scope.loadPage = function (pageIndex) {
+                if ($scope.pageIndex != $scope.currentPage && !($scope.pageIndex
+                    < 1
+                    || $scope.pageIndex
+                    > $scope.totalPage )) {
+                    $scope.currentPage = pageIndex;
+                }
+            };
+
+            $scope.nextPage = function () {
+                if ($scope.hasNextPage()) {
+                    $scope.loadPage(parseInt($scope.currentPage) + 1);
+                }
+            };
+
+            $scope.prevPage = function () {
+                if ($scope.hasPrevPage()) {
+                    $scope.loadPage(parseInt($scope.currentPage) - 1);
+                }
+            };
+
+            $scope.loadData = function () {
+                if ($scope.isInitLoad) {
+                    $scope.isInitLoad = false;
+                    return;
+                }
+
+                $scope.currentPageMirror = $scope.currentPage;
+                var pageForm = $scope.filter;
+                var obj = angular.copy(pageForm);
+                $scope.initPageSize = obj.initPageSize;
+                if (obj.selectPageSize != undefined) {
+                    $scope.selectPageSize = obj.selectPageSize;
+                }
+                if ($scope.initPageSize == 0 || $scope.initPageSize == undefined) {
+                    obj.PAGE_SIZE = $scope.selectPageSize;
+                } else {
+                    obj.PAGE_SIZE = $scope.initPageSize;
+                }
+                obj.PN = $scope.currentPage;
+                var url = baseURL + $scope.url;
+                http.post_ori(url, obj, function (data) {
+                    if (data != undefined && data.data.length >= 0) {
+                        $scope.pageObject = data.data;
+                        var tmp = parseInt(data.extraData.page.querySize
+                            / data.extraData.page.pageSize);
+                        $scope.totalPage = ( tmp
+                        * data.extraData.page.pageSize
+                        == data.extraData.page.querySize) ? tmp : tmp + 1;
+                        $scope.totalCount = data.extraData.page.querySize;
+
+                        if ($scope.totalCount == 0) {
+                            $scope.showPageBar = false;
+                        } else {
+                            $scope.showPageBar = true;
+                        }
+                    }
+                    $scope.callback({response: data});
+                });
+            };
+
+        },
+        link: function (scope, element, attr) {
+
+            scope.totalCount = 0;
+            scope.pageSize = 10;
+            scope.totalPage = 1;
+            scope.isInitLoad = true;
+            scope.currentPage = 1;
+            scope.showPageBar = false;
+
+            scope.$watch('selectPageSize', function () {
+                if (!scope.isInitLoad) {
+                    if (scope.currentPage == 1) {
+                        scope.loadData();
+                    } else {
+                        scope.currentPage = 1;
+                    }
+                }
+            });
+
+            scope.$watch('currentPage', function () {
+                if (!(scope.currentPage < 1 || scope.currentPage > scope.totalPage)) {
+                    scope.loadData();
+                }
+            });
+            if (undefined == scope.filter) {
+                scope.filter = {};
+            }
+            scope.$watch('filter', function () {
+                scope.currentPage = 1;
+                scope.loadData();
+            }, true);
+
+            scope.$on("pageBar.reload", function (d, data) {
+                scope.currentPage = 1;
+                scope.loadData();
+            });
+
+        }
+    };
+});
+
+
 //支付会员卡选择
 AndSellUI.directive('cardModal', function (weUI, modalFactory, personalFactory) {
     return {

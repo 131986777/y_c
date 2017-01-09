@@ -40,4 +40,5 @@ $import('pages/security/modifyPwd', {state: 'all'},true);
 //
 //$import('pages/order/review',{ID:''});
 //
+$import('pages/personal/center',{},true);
 
