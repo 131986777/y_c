@@ -4,6 +4,7 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
 
     modalFactory.setHeader(true);
 
+    modalFactory.setSide(false);
 
 });
 

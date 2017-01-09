@@ -385,6 +385,89 @@ AndSellUI.directive('cartModal', function (productFactory, weUI, modalFactory) {
     }
 });
 
+AndSellUI.directive('messageModal', function () {
+    return {
+        scope: {
+            title: '@title', btnLeft: '@cancel', btnRight: '@confirm'
+        },
+        templateUrl: "/AndSell/pc/public/template/modal.html",
+        restrict: 'EA',
+        transclude: true,
+        link: function postLink(scope, element, attrs) {
+
+            scope.title = '默认提示';
+
+            scope.btnLeft = '取消';
+
+            scope.callback = {};
+
+            scope.btnRight = '确认';
+
+            scope.ifShow = false;
+
+            scope.$on('to-modal', function (d, data) {
+                console.log('ahahah');
+                scope.title = data.message;
+                scope.callback = data.callback;
+                scope.ifShow = true;
+                return true;
+            });
+
+            scope.btnLeftClick = function () {
+                scope.ifShow = false;
+            };
+
+            scope.btnRightClick = function () {
+                scope.ifShow = false;
+                if (undefined != scope.callback) {
+                    scope.callback();
+                }
+            };
+        }
+    };
+});
+
+AndSellUI.directive('shortMessageModal', function ($timeout) {
+    return {
+        scope: {
+            title: '@title'
+        },
+        templateUrl: "/AndSell/pc/public/template/shortmodal.html",
+        restrict: 'EA',
+        transclude: true,
+        link: function postLink(scope, element, attrs) {
+
+            scope.title = '默认提示';
+
+            scope.ifShow = false;
+            scope.callback = {};
+
+            scope.$on('to-short-modal', function (d, data) {
+                scope.title = data.message;
+                scope.callback = data.callback;
+                scope.ifShow = true;
+                $timeout(function () {
+                    scope.ifShow = false;
+                    if (undefined != scope.callback) {
+                        scope.callback();
+                    }
+                }, 800);
+                return true;
+            });
+        }
+    };
+});
+
+AndSellUI.directive('showModal', function () {
+    return {
+        link: function (scope, elements) {
+            elements[0].onclick = function () {
+                $(this.id).modal('show');
+            }
+        }
+    };
+});
+
 
 AndSellUI.directive('pageBar', function (http, baseURL) {
     return {

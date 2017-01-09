@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title ng-bind="title"></title>
 
+    <link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+
     <link rel="stylesheet" href="/AndSell/pc/public/css/public/style.css">
     <link rel="stylesheet" href="/AndSell/pc/public/css/public/componentsGallery.css">
     <link rel="stylesheet" href="/AndSell/pc/public/css/public/screen.css" media="screen">
@@ -264,6 +267,11 @@
         </div>
         <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
     </div>
+
+    <!--带确定和取消的阻塞提示框 -->
+    <div message-modal></div>
+    <!--短时间提示后隐藏的非阻塞提示框 -->
+    <div short-message-modal></div>
 </div>
 
 <footer>
