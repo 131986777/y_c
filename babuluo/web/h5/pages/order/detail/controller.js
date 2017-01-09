@@ -104,7 +104,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     //评价订单
     $scope.commentOrder = function () {
-
+        //pages_order_review_Controller
+        $state.go('pages/order/review', {ID: $scope.order['SHOP_ORDER.ID']});
     };
 
     /**

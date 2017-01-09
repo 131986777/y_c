@@ -920,16 +920,16 @@ p {
     background-color: #fff;
 }
 .free-icon{
-    display: inline-block;
+    display: flex;
     width: 18px;
     height: 18px;
     font-size: 12px;
     color: #fff;
     background-color: #f36f1a;
     border-radius: 2px;
-    text-align:center;
     margin-right: 40px;
-
+    justify-content: center;
+    align-items: center;
 }
 .shopping-cart .product-wrap .product-name, .shopping-cart .freePrd-wrap .product-name{
     line-height: 1.4;
@@ -1143,7 +1143,11 @@ p {
     margin: 9px 0 0;
     font-size: 12px;
 }
-
+.order-add .freePrd .product-img{
+    width: 36px;
+    height: 36px;
+    margin:0 7px;
+}
 .order-add .product-list .product-money {
     color: #F36F1C;
     margin: 0 0 9px;
@@ -2466,11 +2470,12 @@ p {
     padding: 0 10px 0;
 }
 
-.shop-page .shop-select .map-icon {
+.map-icon {
+    float: right;
     height: 18px;
     width: 16px;
     background: url("../img/icon-map_01.jpg");
-    margin-top: 11px;
+    margin: 6px 15px 0 0;
 }
 
 .shop-page .shop-select-wrap .dropdown a {
@@ -2494,8 +2499,7 @@ p {
     line-height: 40px;
 }
 
-.shop-page .shop-wrap {
-}
+
 
 .shop-page .shop-list p {
     margin-bottom: 13px;
@@ -2511,7 +2515,7 @@ p {
     margin-bottom: 0;
 }
 
-.shop-page .shop-list .shops {
+.shop-page .shops {
     background-color: #fff;
     padding: 10px 10px;
     margin-bottom: 10px;
@@ -2520,7 +2524,69 @@ p {
     display: block;
 }
 
-.shop-page .shop-list .shops .position-icon {
+.shops_center_style{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+shop-list{
+    background-color: #fff;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    position: relative;
+    color: #000;
+    display: block;
+}
+
+.shop-page .shop-recent .shop-list .shops {
+    background-color: transparent;
+}
+.shop-page .shop-list .shops .shop-name{
+    display: inline-block;
+    width: 29.4%;
+    height: 38px;
+    text-align: center;
+    line-height: 38px;
+    background-color: #fff;
+    margin: 0 7px 6px 4px;
+    padding:0px;
+    color: #484848;
+    font-size: 14px;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*white-space: nowrap;*/
+}
+
+.history{
+    margin-left: 10px;
+    width:100%;
+    margin: 0 auto;
+}
+
+.shop-button{
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.shop-button{
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.shop-page .shop-list .shops .active{
+    color: #fff;
+    background-color: #f46f1a;
+}
+.shop-page .shop-list .position-icon {
     display: inline-block;
     width: 10px;
     height: 12px;

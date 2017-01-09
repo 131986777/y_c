@@ -1,4 +1,12 @@
-angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function (userFactory,orderFactory , $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').filter('formatDate',function(){
+   return function(value){
+       if('' == value)return '';
+       else{
+           return value.substr(0,19);
+       }
+   }
+});
+var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function (userFactory,orderFactory ,$timeout, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
 
     // modalFactory.setTitle('商品详情');
 
@@ -17,6 +25,8 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
         $scope.currSkuContentSelectMap = {
             name1: '', name2: '', name3: ''
         }
+
+
 
         var params = {};
         params['SHOP_PRODUCT.PRD_ID'] = $stateParams.PRD_ID;
@@ -59,6 +69,19 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
                     $scope.noStore = true;
                 }
             }
+        });
+
+        //商品评论
+        productFactory.getCommemtByProIdProSku({'SHOP_COMMENT.PRO_ID':$stateParams['PRD_ID']},function (resp) {
+            $scope.proComments = resp.data;
+            $scope.allComments = $scope.proComments;
+            $scope.goodComments = resp.extraData.goodList;
+            $scope.midComments = resp.extraData.midList;
+            $scope.badComments = resp.extraData.badList;
+            console.log("1: "+$scope.goodComments.length);
+            console.log($.isEmptyObject(resp.extraData['midList']));
+            console.log("3: "+$scope.badComments.length);
+            console.log("4: "+$scope.proComments.length);
         });
 
         $scope.skuSize = 1;
@@ -385,6 +408,31 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
 
     }
 
+    //切换数据源
+    $scope.reset = function (val) {
+        if(val=='all'){
+            $scope.allComments = $scope.proComments;
+        }
+        if(val=='good'){
+            $scope.allComments = $scope.goodComments;
+        }
+        if(val=='mid'){
+            $scope.allComments = $scope.midComments;
+        }
+        if(val=='bad'){
+            $scope.allComments = $scope.badComments;
+        }
+    };
+
+    //判断数据长度
+    $scope.listLength = function (val) {
+      if($.isEmptyObject(val)){
+          return 0;
+      } else{
+          return [val].length;
+      }
+    };
+
     var swiper = new Swiper('.swiper-container', {
         paginationClickable: true,
         spaceBetween: 300,
@@ -396,5 +444,4 @@ angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', 
     });
 
 });
-
 

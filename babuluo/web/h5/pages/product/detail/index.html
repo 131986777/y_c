@@ -110,14 +110,134 @@
       <a class="weui_navbar_item" href="#tab1">
         商品详情
       </a>
-      <!--<a class="weui_navbar_item" href="#tab2">-->
-      <!--商品评价-->
-      <!--</a>-->
+      <a class="weui_navbar_item" href="#tab2">
+      商品评价
+      </a>
     </div>
     <div class="weui_tab_bd">
       <div id="tab1" class="weui_tab_bd_item weui_tab_bd_item_active">
         <span ng-bind-html="product['SHOP_PRODUCT.SHOP_DES']"></span>
       </div>
+      <div id="tab2" class="weui_tab_bd_item">
+        <div class="review-nav flexbox">
+          <a href="review-all" ng-click="reset('all')" class="col cell text-center" data-toggle="tab">
+            <span>{{proComments.length}}</span>
+            <p>全部</p>
+          </a>
+          <a href="#review-good" ng-click="reset('good')" class="col cell text-center" data-toggle="tab">
+            <span>{{listLength(goodComments)}}</span>
+            <p>好评</p>
+          </a>
+          <a href="#review-middle" ng-click="reset('mid')" class="col cell text-center" data-toggle="tab">
+            <span>{{listLength(midComments)}}</span>
+            <p>中评</p>
+          </a>
+          <a href="#review-bad" ng-click="reset('bad')" class="col cell text-center" data-toggle="tab">
+            <span>{{listLength(badComments)}}</span>
+            <p>差评</p>
+          </a>
+        </div>
+        <div class="tab-content">
+          <!--   全部评价 -->
+          <div id="" class="tab-pane active" ng-repeat="proc in allComments">
+            <div class="review-wrap">
+              <div class="review-content">
+                <div class="review-head flexbox">
+                  <div class="userName cell"  ng-bind="proc['MEMBER.USER_NAME']">
+                    <!--吃遍美食-->
+                    <span class="item-star" style="margin-left: 8px;">一星差评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="proc['SHOP_COMMENT.STAR']=='5'">五星好评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="proc['SHOP_COMMENT.STAR']=='4'">四星好评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="proc['SHOP_COMMENT.STAR']=='3'">三星中评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="proc['SHOP_COMMENT.STAR']=='2'">二星中评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="proc['SHOP_COMMENT.STAR']=='1'">一星差评</span>
+                  </div>
+                  <div class="userTime cell text-right" ng-bind="proc['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD_TIME']">
+                    <!--2016 09 29 14:52-->
+                  </div>
+                </div>
+                <div class="review-detail">
+                  所有{{proc['SHOP_COMMENT.PRO_MAIN_COMMENT']}}
+                </div>
+                <img class="userIcon" ng-src="{{proc['MEMBER.HEADIMG_URL']}}">
+              </div>
+            </div>
+          </div>
+          <!-- 好评 -->
+         <!-- <div id="review-good" class="tab-pane" ng-repeat="gproc in goodComments">
+            <div class="review-wrap">
+              <div class="review-content">
+                <div class="review-head flexbox">
+                  <div class="userName cell" ng-bind="gproc['MEMBER.USER_NAME']">
+                    &lt;!&ndash;吃遍美食&ndash;&gt;
+                    <span class="item-star" style="margin-left: 8px;" ng-show="gproc['SHOP_COMMENT.STAR']=='5'">五星好评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="gproc['SHOP_COMMENT.STAR']=='4'">四星好评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="gproc['SHOP_COMMENT.STAR']=='3'">三星中评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="gproc['SHOP_COMMENT.STAR']=='2'">二星中评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="gproc['SHOP_COMMENT.STAR']=='1'">一星差评</span>
+                  </div>
+                  <div class="userTime cell text-right" ng-bind="gproc['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD_TIME']">
+                    &lt;!&ndash;2016 09 29 14:52&ndash;&gt;
+                  </div>
+                </div>
+                <div class="review-detail">
+                  东西很好吃很新鲜，东西很好吃很新鲜，东西很好吃很新鲜。{{gproc['SHOP_COMMENT.PRO_MAIN_COMMENT']}}
+                </div>
+                <img class="userIcon" ng-src="{{gproc['MEMBER.HEADIMG_URL']}}">
+              </div>
+            </div>
+          </div>
+          &lt;!&ndash; 中评 &ndash;&gt;
+          <div id="review-middle" class="tab-pane"  ng-repeat="mproc in midComments">
+            <div class="review-wrap">
+              <div class="review-content">
+                <div class="review-head flexbox">
+                  <div class="userName cell" ng-bind="mproc['MEMBER.USER_NAME']">
+                    &lt;!&ndash;吃遍美食&ndash;&gt;
+                    <span class="item-star" style="margin-left: 8px;" ng-show="mproc['SHOP_COMMENT.STAR']=='5'">五星好评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="mproc['SHOP_COMMENT.STAR']=='4'">四星好评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="mproc['SHOP_COMMENT.STAR']=='3'">三星中评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="mproc['SHOP_COMMENT.STAR']=='2'">二星中评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="mproc['SHOP_COMMENT.STAR']=='1'">一星差评</span>
+                  </div>
+                  <div class="userTime cell text-right" ng-bind="mproc['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD_TIME'] | formatDate">
+                    &lt;!&ndash;2016 09 29 14:52&ndash;&gt;
+                  </div>
+                </div>
+                <div class="review-detail">
+                  还可以{{nproc['SHOP_COMMENT.PRO_MAIN_COMMENT']}}
+                </div>
+                <img class="userIcon" ng-src="{{nproc['MEMBER.HEADIMG_URL']}}">
+              </div>
+            </div>
+          </div>
+          &lt;!&ndash; 差评 &ndash;&gt;
+          <div id="review-bad" class="tab-pane"  ng-repeat="bproc in badComments">
+            <div class="review-wrap">
+              <div class="review-content">
+                <div class="review-head flexbox">
+                  <div class="userName cell" ng-bind="bproc['MEMBER.USER_NAME']">
+                    &lt;!&ndash;吃遍美食&ndash;&gt;
+                    <span class="item-star" style="margin-left: 8px;" ng-show="bproc['MEMBER.USER_NAME']=='5'">五星好评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="bproc['MEMBER.USER_NAME']=='4'">四星好评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="bproc['MEMBER.USER_NAME']=='3'">三星中评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="bproc['MEMBER.USER_NAME']=='2'">二星中评</span>
+                    <span class="item-star" style="margin-left: 8px;" ng-show="bproc['MEMBER.USER_NAME']=='1'">一星差评</span>
+                  </div>
+                  <div class="userTime cell text-right" ng-bind="bproc['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD_TIME']">
+                    &lt;!&ndash;2016 09 29 14:52&ndash;&gt;
+                  </div>
+                </div>
+                <div class="review-detail">
+                  不好吃{{bproc['SHOP_COMMENT.PRO_MAIN_COMMENT']}}
+                </div>
+                <img class="userIcon" ng-src="{{bproc['MEMBER.HEADIMG_URL']}}">
+              </div>
+            </div>
+          </div>-->
+
+        </div>
+    </div>
     </div>
   </div>
 
@@ -128,11 +248,11 @@
         <span class="cartNum" ng-bind="totalSize"></span>
         购物车
       </div>
-      <!--<div class="icon-wrap">-->
-      <!--&lt;!&ndash; 已收藏 class="icon-collected" &ndash;&gt;-->
-      <!--<i class="icon icon-collect"></i>-->
-      <!--收藏-->
-      <!--</div>-->
+      <div class="icon-wrap">
+      <!-- 已收藏 class="icon-collected" -->
+      <i class="icon icon-collect active"></i>
+      收藏
+      </div>
       <a class="add-to-cart cell" ng-click="addToCart()">
         加入购物车
       </a>
