@@ -4,16 +4,16 @@ body {
   background-color: #f6f6f6; }
 
 /* line 7, ../sass/orderEvaluate.scss */
-.container .sidebar1 {
+.containers .sidebar1 {
   background-color: #fff;
   width: 230px;
   height: 100%; }
 /* line 11, ../sass/orderEvaluate.scss */
-.container .sidebar1 .sidebar-title {
+.containers .sidebar1 .sidebar-title {
   font-size: 16px;
   color: #494949; }
 /* line 15, ../sass/orderEvaluate.scss */
-.container .sidebar1 li {
+.containers .sidebar1 li {
   font-size: 14px;
   color: #8c8c8c; }
 
@@ -22,7 +22,7 @@ body {
   background-color: #fff;
   color: #4b4b4b;
   height: 100%;
-  width: 960px;
+  width: 965px;
   padding-bottom: 35px; }
 /* line 29, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .row-header1 {

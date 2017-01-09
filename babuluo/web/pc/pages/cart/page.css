@@ -212,4 +212,6 @@ body {
     line-height: 2.8;
     font-size: 18px;
     color: #fff;
-    float: right; }
+    float: right;
+    cursor: pointer;
+}

@@ -5,5 +5,6 @@ angular.module('AndSell.PC.Main').controller('pages_security_modifyPwd_Controlle
     modalFactory.setHeader(false);
 
     modalFactory.setSide(true);
+    modalFactory.setCateGory(true);
 
 });
