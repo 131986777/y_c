@@ -5,5 +5,5 @@ angular.module('AndSell.PC.Main').controller('pages_account_balance_Controller',
     modalFactory.setHeader(false);
 
     modalFactory.setSide(true);
-
+    modalFactory.setCateGory(true);
 });

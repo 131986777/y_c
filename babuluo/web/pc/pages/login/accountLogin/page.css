@@ -4,7 +4,8 @@
   background-color: inherit;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%); }
+  transform: translateY(-50%);
+  left: 0%; }
 /* line 7, ../sass/login.scss */
 .loginPanel .middle {
   width: 710px;

@@ -73,4 +73,6 @@ body {
   color: #4b4b4b;
   height: 100%;
   width: 960px;
-  background-color: #fff; }
+  background-color: #fff;
+  min-height: 633px;
+}
