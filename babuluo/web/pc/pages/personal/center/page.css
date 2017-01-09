@@ -1,0 +1,62 @@
+.row-wrap1{
+    float: right;
+    width: 965px;
+    min-height: 633px;
+    background-color: white;
+}
+.row-wrap1 .row-content .info{
+    width: 965px;
+    height: 130px;
+    margin-top: 20px;
+}
+.row-wrap1 .row-content .info .imgPer{
+    width: 130px;
+    height:130px;
+    background-image: url(/AndSell/pc/public/css/img/personImg.png);
+    display: inline-block;
+}
+.row-wrap1 .row-content .info .addInfo{
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 35px;
+    vertical-align: top;
+    margin-top: 20px;
+}
+.row-wrap1 .row-content .info .addInfo .pos{
+    margin-bottom: 25px;
+}
+.row-wrap1 .row-content .info .addInfo .name{
+    font-size: 25px;
+    color: #494949;
+}
+.row-wrap1 .row-content .info .addInfo .phone{
+    color: #8c8c8c;
+    display: inline-block;
+}
+.row-wrap1 .row-content .info .addInfo .num{
+    color: #4c4c4c;
+    display: inline-block;
+}
+.row-wrap1 .row-content .info .addInfo .security{
+    color: #f36e19;
+}
+.row-wrap1 .row-content .info .detail{
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 100px;
+    vertical-align: top;
+    margin-top: 65px;
+}
+.row-wrap1 .row-content .info .detail .each{
+   margin-bottom: 10px;
+}
+.row-wrap1 .row-content .info .detail .count{
+    display: inline-block;
+    color: #8c8c8c;
+    width: 80px;
+
+}
+.row-wrap1 .row-content .info .detail .detInfo{
+    display: inline-block;
+    color: #4c4c4c;
+}

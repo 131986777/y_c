@@ -54,8 +54,11 @@ body {
   margin-right: 25px;
   width: 70px;
   height: 70px;
-  background-image: url(/AndSell/pc/public/css/img/pro.png);
   float: left; }
+.row-wrap1 .row-content .proEvals .eachEval .parent .pic .img {
+  width:100%;
+  height: 100%;
+   }
 /* line 60, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .proEvals .eachEval .parent .info {
   font-size: 14px;
