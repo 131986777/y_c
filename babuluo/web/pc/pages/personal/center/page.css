@@ -3,6 +3,10 @@
     width: 965px;
     min-height: 633px;
     background-color: white;
+
+}
+.row-wrap1 .row-content{
+    margin-bottom: 30px;
 }
 .row-wrap1 .row-content .info{
     width: 965px;
@@ -59,4 +63,96 @@
 .row-wrap1 .row-content .info .detail .detInfo{
     display: inline-block;
     color: #4c4c4c;
+}
+.row-wrap1 .font{
+    color: #4b4b4b;
+    font-size: 18px;
+    height: 90px;
+    line-height: 100px;
+    padding-left: 40px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.row-wrap1 .card{
+    overflow: hidden;
+}
+.row-wrap1 .card .eachCard{
+    width: 365px;
+    height: 180px;
+    background: -webkit-linear-gradient(left bottom, #f7ad38 , #e09117); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right,  #f7ad38 , #e09117); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right,  #f7ad38 , #e09117); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right,  #f7ad38 , #e09117); /* 标准的语法（必须放在最后） */
+    border-radius: 5px;
+    float: left;
+    margin-right: 65px;
+    margin-left: 12px;
+    margin-top: 35px;
+}
+.row-wrap1 .card .orange{
+
+    background: -webkit-linear-gradient(left bottom, #f7ad38 , #e09117); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right,  #f7ad38 , #e09117); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right,  #f7ad38 , #e09117); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right,  #f7ad38 , #e09117); /* 标准的语法（必须放在最后） */
+
+}
+.row-wrap1 .card .blue{
+
+    background: -webkit-linear-gradient(left bottom, #24aca6 , #189991); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right,  #24aca6 , #189991); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right, #24aca6 , #189991); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right,  #24aca6 , #189991); /* 标准的语法（必须放在最后） */
+
+}
+.row-wrap1 .card .black{
+
+    background: -webkit-linear-gradient(left bottom, #414143 , #2d2e30); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right,  #414143 , #2d2e30); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right,  #414143 , #2d2e30); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right,  #414143 , #2d2e30); /* 标准的语法（必须放在最后） */
+
+}
+.row-wrap1 .card .eachCard .pos{
+    margin-left: 15px;
+    /* margin-top: 3px; */
+    padding-top: 15px;
+    height: 100%;
+    margin-right: 15px;
+    color: white;
+}
+.row-wrap1 .card .eachCard .pos .num{
+    display: inline-block;
+    font-size: 22px;
+}
+.row-wrap1 .card .eachCard .pos .ka{
+    float: right;
+}
+.row-wrap1 .card .eachCard .pos .mid{
+    margin-top: 40px;
+    margin-left: 132px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+.row-wrap1 .card .eachCard .pos .m{
+    width: 165px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+.row-wrap1 .card .eachCard .pos .m .word{
+    display: inline-block;
+}
+.row-wrap1 .card .eachCard .pos .m .money{
+    display: inline-block;
+    font-size: 22px;
+
+}
+.row-wrap1 .card .eachCard .pos .foot{
+    font-size: 12px;
+}
+.row-wrap1 .card .eachCard .pos .foot .time{
+    display: inline-block;
+    margin-right: 17px;
+}
+.row-wrap1 .card .eachCard .pos .foot .time .t_inner{
+    display: inline-block;
 }

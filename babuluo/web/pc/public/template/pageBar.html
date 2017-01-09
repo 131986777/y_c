@@ -1,27 +1,41 @@
-<div class="page_control">
-    <span class="total_count">共计：<span class="count" ng-bind="totalCount"></span>条</span>
-    <div class="count_control">
-        每页显示
-        <div class="select" ng-init="selectPageSize = 10;">
-            <p class="select_show" ng-bind="selectPageSize">10</p>
-            <ul>
-                <li class="show_limit">100</li>
-                <li class="show_limit">50</li>
-                <li class="show_limit">20</li>
-                <li class="show_limit">10</li>
+<div ng-cloak class="table-pagebar" style="margin-top: 0px;margin-right: 19px;padding-bottom: 23px;">
+    <!--<div class="col-md-12" ng-show="!showPageBar">-->
+        <!--暂无数据-->
+    <!--</div>-->
+
+    <div class="row">
+        <div class="col-md-12 form-inline  text-right">
+            <ul class="pager" style="text-align: right">
+                <li style=" display: inline-block;">共 {{totalCount}} 条，每页显示</li>
+                <li style="padding-right: 20px;display: inline-block;">
+                    <select ng-model="selectPageSize"
+                            ng-init="selectPageSize = '10'"
+                            class="nya-bs-select form-control"
+                            data-width="80px">
+                        <option class="nya-bs-option" value="5">5条</option>
+                        <option class="nya-bs-option" value="10">10条</option>
+                        <option class="nya-bs-option" value="30">30条</option>
+                        <option class="nya-bs-option" value="50">50条</option>
+                        <option class="nya-bs-option" value="100">100条</option>
+                    </select>
+                </li>
+                <li style=" display: inline-block;" class="previous">
+                    <button type="button" ng-click="prevPage()"
+                            class="btn btn-default">< 上一页
+                    </button>
+                </li>
+                <li style=" display: inline-block;">
+                    <input type="text" class=" form-control text-center"
+                           ng-enter="changePage()" ng-model="currentPageMirror"
+                           style="width: 40px;padding-right: 4px;padding-left: 4px;">
+                </li>
+                <li class="next" style=" display: inline-block;">
+                    <button type="button" ng-click="nextPage()"
+                            class="btn btn-default">下一页 >
+                    </button>
+                </li>
             </ul>
         </div>
-    </div>
-    <div class="count_control bu-mr-10">条</div>
-    <div class="single_page">
-        <span class="left_btn" ng-click="prevPage()"></span>
-        <span class="count">{{currentPage}}/{{totalPage}}</span>
-        <span class="right_btn bu-mr-10" ng-click="nextPage()"></span>
-    </div>
-    <div class="jump_page">
-        <span class="count_control">到第</span>
-        <input type="text" ng-model="currentPageMirror" class="text-center">
-        <span class="count_control">页</span>
-        <input type="submit" class="jump" ng-click="changePage()"  value="确认">
+
     </div>
 </div>
