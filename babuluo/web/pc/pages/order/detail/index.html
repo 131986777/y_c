@@ -45,7 +45,7 @@
             </div>
         </div>
         <div class="flow_progress">
-            <div class="gradient_bar step_3"></div>
+            <div class="gradient_bar step_7"></div>
             <ul class="progress_step" ng-if="order['SHOP_ORDER.TYPE']=='1'">
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
                     提交<span class="finished_time">11月03日 17:20</span>
@@ -99,13 +99,17 @@
             </ul>
             <ul class="progress_step" ng-if="order['SHOP_ORDER.TYPE']=='5'">
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
-                    下单<span class="finished_time">11月03日 17:20</span>
+                    下单
+                    <span class="finished_time">11月03日 17:20</span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_ORDER']==1]">
-                    捡货<span class="finished_time">11月03日 17:20</span>
+                    捡货
+                    <span class="finished_time">11月03日 17:20</span>
                 </li>
+
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
-                    付款<span class="finished_time">11月03日 17:20</span>
+                    付款
+                    <!--<span class="finished_time">11月03日 17:20</span>-->
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
                     提货
