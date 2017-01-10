@@ -21,7 +21,6 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
             });
             $scope.shopListLength = response.data.length;
             $scope.districtList = response.extraData.districtList;
-            console.log('list', $scope.districtList);
             var shopMap = new Map();
             list.forEach(function (ele) {
                 shopMap.set(ele['SHOP.SHOP_ID'], ele);
