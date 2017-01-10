@@ -55,7 +55,6 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
                     });
                     $scope.calculateSaleInfo(skulistsForOrder);
                     $scope.skuData = $scope.getPrdSkuData($scope.skuList);
-                    console.log($scope.skuData);
                     if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length > 0) {
                         $scope.checkContent(1, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
                     }
@@ -78,10 +77,6 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
             $scope.goodComments = resp.extraData.goodList;
             $scope.midComments = resp.extraData.midList;
             $scope.badComments = resp.extraData.badList;
-            console.log("1: "+$scope.goodComments.length);
-            console.log($.isEmptyObject(resp.extraData['midList']));
-            console.log("3: "+$scope.badComments.length);
-            console.log("4: "+$scope.proComments.length);
         });
 
         $scope.skuSize = 1;

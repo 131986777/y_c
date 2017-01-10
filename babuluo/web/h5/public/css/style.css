@@ -1793,7 +1793,7 @@ p {
 }
 
 .product-detail-page .review-wrap .userName {
-    padding-left: 26px;
+    padding-left: 36px;
 }
 
 .product-detail-page .review-wrap .userTime {
@@ -1801,10 +1801,10 @@ p {
 }
 
 .product-detail-page .review-wrap .userIcon {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     position: absolute;
-    top: 15px;
+    top: 21px;
     left: 28px;
 }
 
@@ -2561,7 +2561,7 @@ p {
     text-align: center;
 }
 
-shop-list{
+.shop-list{
     background-color: #fff;
     padding: 10px 10px;
     margin-bottom: 10px;
