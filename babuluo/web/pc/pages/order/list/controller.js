@@ -1,4 +1,4 @@
-angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', function (productFactory, $interval, $stateParams,$scope, $state, modalFactory,orderFactory) {
+angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', function (productFactory, $interval, $stateParams, $scope, $state, modalFactory, orderFactory) {
 
     modalFactory.setTitle("订单列表");
 
@@ -19,8 +19,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
 
         $scope.state = type;
         $scope.filter = {
-            PAGE_SIZE: 5,
-            PN: 1
+            PAGE_SIZE: 5, PN: 1
         };
         if (type == 'all') {
             //全部订单
@@ -65,7 +64,6 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
 
     $scope.getOrder = function () {
         orderFactory.getOrder($scope.filter, function (response) {
-            console.log(response);
             Array.prototype.push.apply($scope.orderList, response.data);//数组合并
             $scope.orderList.forEach(function (ele) {
                 ele.details = JSON.parse(ele['SHOP_ORDER.ORDER_INFO']);
@@ -95,7 +93,9 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
 
     //下拉更多商品
     $scope.getMoreOrder = function () {
-        $scope.filter.PN = $scope.page.pageIndex + 1;
+        if ($scope.page != undefined) {
+            $scope.filter.PN = $scope.page.pageIndex + 1;
+        }
         $scope.getOrder();
     };
 
@@ -110,8 +110,8 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
     }
 
     //下拉监听器
-    $(document.body).infinite().on("infinite", function() {
-        if($scope.loading) return;
+    $(document.body).infinite().on("infinite", function () {
+        if ($scope.loading) return;
         $scope.loading = true;
         if ($scope.hasNextPage) {
             $scope.getMoreOrder();
