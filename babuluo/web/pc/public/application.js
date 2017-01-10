@@ -35,10 +35,16 @@ AndSellUI.service('modalFactory', function ($rootScope) {
         bar.OnOffState = state;
         $rootScope.$broadcast("header-bar", bar);
     };
+
     this.setShowMenu = function (state) {
         var bar = {};
         bar.OnOffState = state;
         $rootScope.$broadcast("header-showMenu", bar);
+    };
+    this.setLeftMenu = function (state) {
+        var bar = {};
+        bar.OnOffState = state;
+        $rootScope.$broadcast("leftMenu", bar);
     };
     this.setTab = function (state) {
         var bar = {};
@@ -63,6 +69,18 @@ AndSellUI.service('modalFactory', function ($rootScope) {
 
     this.updateCart = function () {
         $rootScope.$broadcast("updateCart");
+    };
+
+    this.showAlert = function (msg, func) {
+        $rootScope.$broadcast("to-modal", {
+            message: msg, callback: func
+        });
+    };
+
+    this.showShortAlert = function (msg, func) {
+        $rootScope.$broadcast("to-short-modal", {
+            message: msg, callback: func
+        });
     };
 });
 
@@ -381,6 +399,89 @@ AndSellUI.directive('cartModal', function (productFactory, weUI, modalFactory) {
     }
 });
 
+AndSellUI.directive('messageModal', function () {
+    return {
+        scope: {
+            title: '@title', btnLeft: '@cancel', btnRight: '@confirm'
+        },
+        templateUrl: "/AndSell/pc/public/template/modal.html",
+        restrict: 'EA',
+        transclude: true,
+        link: function postLink(scope, element, attrs) {
+
+            scope.title = '默认提示';
+
+            scope.btnLeft = '取消';
+
+            scope.callback = {};
+
+            scope.btnRight = '确认';
+
+            scope.ifShow = false;
+
+            scope.$on('to-modal', function (d, data) {
+                console.log('ahahah');
+                scope.title = data.message;
+                scope.callback = data.callback;
+                scope.ifShow = true;
+                return true;
+            });
+
+            scope.btnLeftClick = function () {
+                scope.ifShow = false;
+            };
+
+            scope.btnRightClick = function () {
+                scope.ifShow = false;
+                if (undefined != scope.callback) {
+                    scope.callback();
+                }
+            };
+        }
+    };
+});
+
+AndSellUI.directive('shortMessageModal', function ($timeout) {
+    return {
+        scope: {
+            title: '@title'
+        },
+        templateUrl: "/AndSell/pc/public/template/shortmodal.html",
+        restrict: 'EA',
+        transclude: true,
+        link: function postLink(scope, element, attrs) {
+
+            scope.title = '默认提示';
+
+            scope.ifShow = false;
+            scope.callback = {};
+
+            scope.$on('to-short-modal', function (d, data) {
+                scope.title = data.message;
+                scope.callback = data.callback;
+                scope.ifShow = true;
+                $timeout(function () {
+                    scope.ifShow = false;
+                    if (undefined != scope.callback) {
+                        scope.callback();
+                    }
+                }, 800);
+                return true;
+            });
+        }
+    };
+});
+
+AndSellUI.directive('showModal', function () {
+    return {
+        link: function (scope, elements) {
+            elements[0].onclick = function () {
+                $(this.id).modal('show');
+            }
+        }
+    };
+});
+
 
 AndSellUI.directive('pageBar', function (http, baseURL) {
     return {
@@ -589,7 +690,7 @@ AndSellUI.directive('cardModal', function (weUI, modalFactory, personalFactory) 
         }
     }
 });
-AndSellService.factory("http", function ($http, weUI) {
+AndSellService.factory("http", function ($http) {
     var _post = function (url, data, funcSuccess, funcFail) {
         return $http.post(url, $.param(data), {
             headers: {
@@ -606,7 +707,6 @@ AndSellService.factory("http", function ($http, weUI) {
             } else {
                 if (angular.isFunction(funcFail)) {
                     if (funcFail != undefined) {
-                        weUI.toast.hideLoading();
                         funcFail(response);
                     }
                 }
@@ -624,6 +724,17 @@ AndSellService.factory("http", function ($http, weUI) {
                 }
                 return _post(baseURL + url, form, funcSuccess, funcFail)
             }
+        }, post_ori: function (url, param, func, error) {
+            return $http.post(url, $.param(param), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function (result) {
+
+                if (angular.isFunction(func)) {
+                    func(result);
+                }
+            }).error(function (err) {
+                if (angular.isFunction(error)) {
+                    error(err);
+                }
+            });
         }
     };
 });

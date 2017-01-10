@@ -90,7 +90,7 @@ angular.module('AndSell.Main').controller('order_order_reserveOrder_Controller',
             $scope.orderSizeMap = response.extraData.stateMap;
         });
 
-
+        $("html,body").animate({scrollTop:0}, 250);
         $scope.orderList = response.data;
         $scope.orderList.forEach(function (ele) {
             ele['SHOP_ORDER.DATETIME_ADD'] = getDate(ele['SHOP_ORDER.DATETIME_ADD']);

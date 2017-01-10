@@ -13,6 +13,9 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
     $scope.$on('header-showMenu', function (event, data) {
         $scope.showMenuBar = data.OnOffState;
     });
+    $scope.$on('leftMenu', function (event, data) {
+        $scope.showLeftMenu = data.OnOffState;
+    });
     $scope.$on('header-tab', function (event, data) {
         $scope.showControllerBar = data.OnOffState;
     });

@@ -1,6 +1,6 @@
 $when('', '/pages/home');
 
-$import('pages/home');
+$import('pages/home',{},true);
 $import('pages/cart',{},true);
 //
 //$import('pages/payment/check_out', {ORDER_ID: '1023'});
@@ -27,7 +27,7 @@ $import('pages/shop', {FROM: ''},true);
 //
 //$import('pages/coupon/list');
 //
-//$import('pages/login/register');
+$import('pages/login/register',{},true);
 $import('pages/login/accountLogin', {FROM: ''},true);
 $import('pages/login/phoneLogin', {FROM: ''},true);
 //$import('pages/login/SetPassword', {LOGIN_ID: '0'});

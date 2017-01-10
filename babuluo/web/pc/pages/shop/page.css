@@ -5,7 +5,9 @@ body {
 
 /* line 6, ../sass/store.scss */
 .container1 {
-  background-color: #fff; }
+  background-color: #fff;
+  width: 100%;
+}
 /* line 8, ../sass/store.scss */
 .container1 .row-wrap1 {
   margin-left: 75px;

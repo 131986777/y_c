@@ -1,9 +1,10 @@
 /* line 2, ../sass/fundDetail.scss */
 body {
   font-family: 'Microsoft YaHei';
-  background-color: #f6f6f6; }
+  background-color: #f6f6f6;
+}
 
-/* line 7, ../sass/fundDetail.scss */
+/* line 7, ../sssass/fundDetail.scss */
 .container .sidebar1 {
   background-color: #fff;
   width: 230px;
@@ -75,4 +76,5 @@ body {
   width: 960px;
   background-color: #fff;
   min-height: 633px;
+  /* padding-left: 3px; */
 }

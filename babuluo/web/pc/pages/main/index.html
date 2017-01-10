@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title ng-bind="title"></title>
 
+    <!--<link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <!--<link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">-->
+
     <link rel="stylesheet" href="/AndSell/pc/public/css/public/style.css">
     <link rel="stylesheet" href="/AndSell/pc/public/css/public/componentsGallery.css">
     <link rel="stylesheet" href="/AndSell/pc/public/css/public/screen.css" media="screen">
@@ -20,7 +23,7 @@
             </div>
             <div class="loginGroup">
                 <a ui-sref="pages/login/accountLogin" class="logoIn">请登录</a>
-                <a href="" class="signIn">免费注册</a>
+                <a ui-sref="pages/login/register" class="signIn" >免费注册</a>
             </div>
             <div class="seviceGroup">
                 <a href="" class="personalCenter">个人中心</a>
@@ -212,59 +215,80 @@
     </div>
 </header>
 <div class="container">
-<div  class="effectiveArea">
-    <div class="sidebar sidebar1" ng-if="showSideBar">
-        <!-- 订单 -->
-        <div class="sidebar-title">
-            <i class="icon icon-order"></i>
-            订单中心
-        </div>
-        <ul>
-            <li ui-sref="business.priceList" class="" ng-class="{true:'active'}[state ==1]"
-                ng-click="getState(1)">我的订单
-            </li>
-            <li ui-sref="business.priceAudit" ng-class="{true:'active'}[state ==2]"
-                ng-click="getState(2)">我的订单
-            </li>
-            <li ui-sref="business.purchaseList" ng-class="{true:'active'}[state ==3]"
-                ng-click="getState(3)">评价订单
-            </li>
-            <li ui-sref="business.purchaseAudit" ng-class="{true:'active'}[state ==4]"
-                ng-click="getState(4)">评价晒单
-            </li>
-            <li ui-sref="business.payrequestList" ng-class="{true:'active'}[state ==5]"
-                ng-click="getState(5)">评价晒单记录
-            </li>
-        </ul>
-        <!-- 库存 -->
-        <div class="sidebar-title">
-            <i class="icon icon-stock"></i>
-            资产中心
-        </div>
-        <ul>
-            <li>余额</li>
-            <li>优惠券</li>
-        </ul>
-        <!-- 库存 -->
-        <div class="sidebar-title">
-            <i class="icon icon-stock"></i>
-            设置中心
-        </div>
-        <ul>
-            <li>个人信息</li>
-        </ul>
-        <!-- 库存 -->
-        <div class="sidebar-title">
-            <i class="icon icon-stock"></i>
-            其他功能
-        </div>
-        <ul>
-            <li>浏览历史</li>
-        </ul>
-    </div>
-</div>
+    <div class="productList">
+        <div class="leftMenu" ng-if="showLeftMenu">
+            <div class="categoriePic icon-wine ">
+                <!--<img src="../../public/css/img/_cake.png" alt="">-->
+            </div>
+            <div class="categoriePic icon-cake"></div>
+            <div class="categoriePic icon-rice-two"></div>
+            <div class="categoriePic icon-fruit"></div>
+            <div class="categoriePic icon-meat"></div>
+            <div class="categoriePic icon-snow"></div>
+            <div class="categoriePic icon-egg"></div>
+            <div class="categoriePic icon-juice"></div>
+            <div class="categoriePic icon-rice-one"></div>
 
-    <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
+        </div>
+    <div  class="effectiveArea">
+        <div class="sidebar sidebar1" ng-if="showSideBar">
+            <!-- 订单 -->
+            <div class="sidebar-title">
+                <i class="icon icon-order"></i>
+                订单中心
+            </div>
+            <ul>
+                <li ui-sref="business.priceList" class="" ng-class="{true:'active'}[state ==1]"
+                    ng-click="getState(1)">我的订单
+                </li>
+                <li ui-sref="business.priceAudit" ng-class="{true:'active'}[state ==2]"
+                    ng-click="getState(2)">我的订单
+                </li>
+                <li ui-sref="business.purchaseList" ng-class="{true:'active'}[state ==3]"
+                    ng-click="getState(3)">评价订单
+                </li>
+                <li ui-sref="business.purchaseAudit" ng-class="{true:'active'}[state ==4]"
+                    ng-click="getState(4)">评价晒单
+                </li>
+                <li ui-sref="business.payrequestList" ng-class="{true:'active'}[state ==5]"
+                    ng-click="getState(5)">评价晒单记录
+                </li>
+            </ul>
+            <!-- 库存 -->
+            <div class="sidebar-title">
+                <i class="icon icon-stock"></i>
+                资产中心
+            </div>
+            <ul>
+                <li>余额</li>
+                <li>优惠券</li>
+            </ul>
+            <!-- 库存 -->
+            <div class="sidebar-title">
+                <i class="icon icon-stock"></i>
+                设置中心
+            </div>
+            <ul>
+                <li>个人信息</li>
+            </ul>
+            <!-- 库存 -->
+            <div class="sidebar-title">
+                <i class="icon icon-stock"></i>
+                其他功能
+            </div>
+            <ul>
+                <li>浏览历史</li>
+            </ul>
+        </div>
+
+        <!--带确定和取消的阻塞提示框 -->
+        <div message-modal></div>
+        <!--短时间提示后隐藏的非阻塞提示框 -->
+        <div short-message-modal></div>
+        <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
+    </div>
+
+    </div>
 </div>
 
 <footer>

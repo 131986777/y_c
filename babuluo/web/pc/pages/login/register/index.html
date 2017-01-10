@@ -7,12 +7,10 @@
         <div class="infoPanel">
             <div class="infoNav">
 
-                <a class="infoLogin font ">
-                    帐号登录
+                <a class="infoLogin font  ">
+                    注册帐号
                 </a>
-                <a class="infoCertific font  selected " ui-sref="pages/login/accountLogin">
-                    验证码登录
-                </a>
+
             </div>
             <div class="mid">
                 <div class="account">
@@ -28,11 +26,29 @@
                         <div class="send">发送中...</div>
                         <div class="sended">已发送（30s）</div>
                     </div>
+
+
+                </div>
+                <div class="account pwd">
+                    <span class="word">密码</span>
+                    <input type="password" ng-model="loginInfo['PWD']" class="txt" />
+
+                </div>
+                <div class="account pwd">
+                    <span class="word">确认密码</span>
+                    <input type="password" ng-model="loginInfo['PWD']" class="txt" />
+
                 </div>
             </div>
+            <div class="pos">
+                <div class="pos2">
+                    <a class="regist" ui-sref="pages/login/register">已有帐号?</a>
+                    <a class="forget" href="">直接登录</a>
+                </div>
 
+            </div>
             <div class="but" ng-click="userLogin()">
-                登录
+                注册
             </div>
         </div>
 

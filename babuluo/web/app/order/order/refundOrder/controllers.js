@@ -6,6 +6,7 @@ angular.module('AndSell.Main').controller('order_order_refundOrder_Controller', 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.bindData = function (response) {
+        $("html,body").animate({scrollTop:0}, 250);
         $scope.orderList = response.data;
         $scope.orderList.forEach(function (ele) {
             ele['REFUND_ORDER.ORDER_INFO'] = JSON.parse(ele['REFUND_ORDER.ORDER_INFO']);
