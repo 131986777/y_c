@@ -18,6 +18,7 @@ $import('pages/order/list', {state: 'all'}, true);
 // '0'}); $import('pages/order/addAddress', {SKU_IDS: '1060'});
 // $import('pages/order/CashOnDeliveryOrder');
 $import('pages/order/review', {}, true);
+
 $import('pages/order/detail', {ORDER_ID: ''}, true);
 //
 //$import('pages/personal', {}, true);
