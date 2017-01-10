@@ -4,7 +4,8 @@
   background-color: inherit;
   position: absolute;
   top: 50%;
-  transform: translateY(-50%); }
+  transform: translateY(-50%);
+  left: 0%; }
 /* line 7, ../sass/login.scss */
 .loginPanel .middle {
   width: 710px;
@@ -23,7 +24,7 @@
 /* line 21, ../sass/login.scss */
 .loginPanel .middle .infoPanel {
   width: 320px;
-  height: 300px;
+  height: 385px;
   float: left;
   /* overflow: hidden; */
   border: 1px solid #c1c1c1;
@@ -39,8 +40,8 @@
   color: #484848;
   float: left;
   padding: 11px;
-  margin-left: 53px;
-  cursor: pointer; }
+  margin-left: 115px;
+  cursor: pointer;}
 /* line 40, ../sass/login.scss */
 .loginPanel .middle .infoPanel .infoNav .selected {
   border-top: 3px solid #f36f1a; }
@@ -53,13 +54,59 @@
   border: 1px solid #c1c1c1;
   width: 270px;
   height: 50px; }
+.loginPanel .middle .infoPanel .mid .account .codePos{
+  position: relative;
+  width: 209px;
+  display: inline-block;}
+.loginPanel .middle .infoPanel .mid .account .codePos .codeLogin{
+  width: 100px;
+  height: 30px;
+  display: inline-block;
+  background-color: #f36f1a;
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 2.1;
+  position: absolute;
+  right: 8px;
+  top: 10px;}
+.loginPanel .middle .infoPanel .mid .account .codePos .send{
+  width: 100px;
+  height: 30px;
+  display: inline-block;
+  background-color: #e6e6e6;
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 2.1;
+  position: absolute;
+  right: -138px;
+  top: 10px;}
+.loginPanel .middle .infoPanel .mid .account .codePos .sended{
+  width: 100px;
+  height: 30px;
+  display: inline-block;
+  background-color: #e6e6e6;
+  color: white;
+  font-size: 14px;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 2.1;
+  position: absolute;
+  right: -250px;
+  top: 10px;}
+
 /* line 51, ../sass/login.scss */
 .loginPanel .middle .infoPanel .mid .account .txt {
   font-size: 15px;
   padding: 2px;
   border: none;
   outline: none;
-  height: 48px; }
+  height: 48px;
+  width:195px;
+}
 /* line 58, ../sass/login.scss */
 .loginPanel .middle .infoPanel .mid .account .word {
   font-size: 14px;
@@ -74,14 +121,25 @@
   margin-left: 25px;
   margin-top: 18px;
   font-size: 14px;
-  color: #989898; }
-/* line 74, ../sass/login.scss */
-.loginPanel .middle .infoPanel .pos .regist {
-  cursor: pointer; }
-/* line 78, ../sass/login.scss */
-.loginPanel .middle .infoPanel .pos .forget {
+  color: #989898;
+  overflow: hidden;
+}
+.loginPanel .middle .infoPanel .pos2 {
   float: right;
-  cursor: pointer; }
+}
+/* line 74, ../sass/login.scss */
+.loginPanel .middle .infoPanel .pos .pos2 .regist {
+  cursor: pointer;
+  color: #b2b2b2;
+  font-size: 13px;
+}
+/* line 78, ../sass/login.scss */
+.loginPanel .middle .infoPanel .pos .pos2 .forget {
+  cursor: pointer;
+  color: #f36e19;
+  font-size: 13px;
+
+}
 /* line 83, ../sass/login.scss */
 .loginPanel .middle .infoPanel .but {
   width: 270px;
@@ -93,4 +151,6 @@
   color: white;
   line-height: 41px;
   cursor: pointer; }
-
+/* line 95, ../sass/login.scss */
+.loginPanel .middle .show {
+  display: none; }

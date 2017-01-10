@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title ng-bind="title"></title>
 
-    <link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <!--<link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">-->
+    <!--<link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">-->
 
     <link rel="stylesheet" href="/AndSell/pc/public/css/public/style.css">
     <link rel="stylesheet" href="/AndSell/pc/public/css/public/componentsGallery.css">
@@ -216,7 +216,22 @@
     </div>
 </header>
 <div class="container">
-    <div class="effectiveArea">
+    <div class="productList">
+        <div class="leftMenu" ng-if="showLeftMenu">
+            <div class="categoriePic icon-wine ">
+                <!--<img src="../../public/css/img/_cake.png" alt="">-->
+            </div>
+            <div class="categoriePic icon-cake"></div>
+            <div class="categoriePic icon-rice-two"></div>
+            <div class="categoriePic icon-fruit"></div>
+            <div class="categoriePic icon-meat"></div>
+            <div class="categoriePic icon-snow"></div>
+            <div class="categoriePic icon-egg"></div>
+            <div class="categoriePic icon-juice"></div>
+            <div class="categoriePic icon-rice-one"></div>
+
+        </div>
+    <div  class="effectiveArea">
         <div class="sidebar sidebar1" ng-if="showSideBar">
             <!-- 订单 -->
             <div class="sidebar-title">
@@ -266,13 +281,15 @@
                 <li>浏览历史</li>
             </ul>
         </div>
+
+        <!--带确定和取消的阻塞提示框 -->
+        <div message-modal></div>
+        <!--短时间提示后隐藏的非阻塞提示框 -->
+        <div short-message-modal></div>
         <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
     </div>
 
-    <!--带确定和取消的阻塞提示框 -->
-    <div message-modal></div>
-    <!--短时间提示后隐藏的非阻塞提示框 -->
-    <div short-message-modal></div>
+    </div>
 </div>
 
 <footer>
