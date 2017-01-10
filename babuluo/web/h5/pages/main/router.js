@@ -22,7 +22,7 @@ $import('pages/personal', {}, true);
 $import('pages/personal/card');
 $import('pages/personal/coupon');
 
-$import('pages/shop', {FROM: ''},true);
+$import('pages/shop', {FROM: ''});
 
 $import('pages/coupon/list');
 
@@ -35,8 +35,6 @@ $import('pages/account/balance');
 $import('pages/account/recharge');
 
 $import('pages/security/resetPwd');
-
-$import('pages/order/review',{ID:''});
 
 
 

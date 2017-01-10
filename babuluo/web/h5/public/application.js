@@ -506,6 +506,24 @@ AndSellUI.filter('FormatAllDate', function () {
         return formatDate;
     }
 });
+
+AndSellUI.filter('strLength', function() {
+    return function(input) {
+        var len = 0;
+        for (var i=0; i<input.length; i++) {
+            if (input.charCodeAt(i)>127 || input.charCodeAt(i)==94) {
+                len += 2;
+            } else {
+                len++;
+            }
+        }
+        if(len>=10){
+            return input.substring(0,5)+'……';
+        }else{
+            return input;
+        }
+    }
+});
 /**
  *
  * 根据1和-1判断状态

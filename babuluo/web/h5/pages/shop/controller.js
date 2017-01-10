@@ -7,24 +7,25 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
     $scope.currentDistrictName = '全部区域';
 
     $scope.initLoad = function () {
-        $scope.filter = {};
-        //$scope.filter['SHOP.DISTRICT_ID']='1000';
-        $scope.chooseDistrict('1000','雨花台区');
-        //$scope.getData();
+        $scope.getData();
     };
 
     $scope.getData = function () {
         weUI.toast.showLoading('正在加载');
-        shopFactory.getShopList($scope.filter, function (response) {
+        shopFactory.getShopList({}, function (response) {
             var list = new Array;
             response.data.forEach(function (ele) {
-                if (ele['SHOP.SHOP_ID'] != '100002' && ele['SHOP.SHOP_ID'] != '111111' && ele['SHOP.SHOP_ID'] != '0') {
+                if (ele['SHOP.SHOP_ID']
+                    != '100002'
+                    && ele['SHOP.SHOP_ID']
+                    != '111111'
+                    && ele['SHOP.SHOP_ID']
+                    != '0') {
                     list.push(ele);
                 }
             });
-            $scope.shopListLength = response.data.length;
+            $scope.shopListLength = list.length;
             $scope.districtList = response.extraData.districtList;
-            console.log('list', $scope.districtList);
             var shopMap = new Map();
             list.forEach(function (ele) {
                 shopMap.set(ele['SHOP.SHOP_ID'], ele);
@@ -46,11 +47,14 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
         if (getCookie('recentShopList') != undefined) {
             $scope.cookieShopIdList = getCookie('recentShopList').split(',');
         }
-        $scope.cookieShopIdList.forEach(function (ele) {
+        var id = '1000';
+        $scope.cookieShopIdList.forEach(function (ele, index) {
             if ($scope.shopMap.get(ele) != undefined) {
-                recentShopList.push($scope.shopMap.get(ele));
+                recentShopList.push($scope.shopMap.get(ele))
+                id = $scope.shopMap.get(ele)['SHOP.DISTRICT_ID'];
             }
         });
+        $scope.chooseDistrict(id);
         $scope.recentShopList = recentShopList.reverse();
     };
 
@@ -79,17 +83,15 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
         });
     };
 
-    $scope.chooseDistrict = function (districtId, districtName) {
-        $scope.districtName = districtName;
-        $scope.filter['SHOP.DISTRICT_ID'] = districtId;
-        console.log(districtId);
-        $scope.currentDistrictName = districtName;
-        $scope.getData();
-        $scope.currentDistrictName = districtName;
-        // shopFactory.getShopList(form, function (response) {
-        //     $scope.shopList = response.data;
-        //     $scope.shopListLength = response.data.length;
-        // });
+    $scope.chooseDistrict = function (districtId) {
+        $scope.currDistrictId = districtId;
+        var list = new Array;
+        $scope.shopList.forEach(function (ele) {
+            if (ele['SHOP.DISTRICT_ID'] == districtId) {
+                list.push(ele);
+            }
+        });
+        $scope.currshopList = list;
     };
 
     $scope.initLoad();
@@ -127,11 +129,6 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
 
     function success(pos) {
         var crd = pos.coords;
-
-        console.log('Your current position is:');
-        console.log('Latitude : ' + crd.latitude);
-        console.log('Longitude: ' + crd.longitude);
-        console.log('More or less ' + crd.accuracy + ' meters.');
         $scope.coord = crd;
     };
 
@@ -146,8 +143,6 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
     function sorting(arr) {
         var arr1 = [];
         var arr2 = [];
-        var i = 0;
-        var j = 0;
         arr.forEach(function (ele) {
             if (ele['SHOP.LATITUDE'] == null && ele['SHOP.LONGTUDE'] == null) {
                 arr2.push(ele);
@@ -155,7 +150,6 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
                 arr1.push(ele);
             }
         });
-
         return quickSort(arr1).concat(arr2);
     }
 
@@ -163,7 +157,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
 
     //快速排序
     var quickSort = function (arr) {
-        if (arr.length <= 1) {
+        if (arr.length <= 1||$scope.coord == undefined) {
             return arr;
         }
 
@@ -185,23 +179,4 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
         }
         return quickSort(left).concat(pivot, quickSort(right));
     };
-});
-
-
-app.filter('strLength', function() {
-    return function(input) {
-        var len = 0;
-        for (var i=0; i<input.length; i++) {
-            if (input.charCodeAt(i)>127 || input.charCodeAt(i)==94) {
-                len += 2;
-            } else {
-                len++;
-            }
-        }
-        if(len>=10){
-            return input.substring(0,5)+'……';
-        }else{
-            return input;
-        }
-    }
 });

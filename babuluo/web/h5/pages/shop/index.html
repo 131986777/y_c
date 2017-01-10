@@ -41,8 +41,9 @@
             <div class="shop-list">
                 <div class="shops history">
                     <a ng-repeat="district in districtList"
-                       ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'],district['DISTRICT.DISTRICT_NAME'])" class="shop-name" ng-class="{true:
-                       'active'}[district['DISTRICT.DISTRICT_NAME']==currentDistrictName]">{{district['DISTRICT.DISTRICT_NAME']}}</a>
+                       ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'])"
+                       class="shop-name"
+                       ng-class="{true:'active'}[district['DISTRICT.DISTRICT_ID']==currDistrictId]">{{district['DISTRICT.DISTRICT_NAME']}}</a>
                 </div>
             </div>
         </div>
@@ -51,7 +52,7 @@
                 门店列表
             </div>
             <div class="shop-list">
-                <a class="shops" ng-repeat="shop in shopList" ng-click="shopSelect(shop)">
+                <a class="shops" ng-repeat="shop in currshopList" ng-click="shopSelect(shop)">
                     <img class="pull-left" src="../../public/img/icon-shopLogo.png">
                     <p ng-bind="shop['SHOP.SHOP_NAME']"></p>
                     <p class="addrs">{{shop['SHOP.ADDR']}}</p>
