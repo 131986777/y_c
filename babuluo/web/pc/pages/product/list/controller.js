@@ -4,4 +4,10 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
 
     modalFactory.setHeader(true);
 
+    modalFactory.setSide(false);
+
+    $scope.bindData= function (response) {
+        console.log(response);
+    }
+
 });
