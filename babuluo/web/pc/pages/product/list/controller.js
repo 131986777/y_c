@@ -6,8 +6,28 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
 
     modalFactory.setSide(false);
 
-    $scope.bindData= function (response) {
+    $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
+
+    $scope.filter = {
+        'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
+        'SHOP_PRODUCT.REMARK': 'offLine'
+    };
+
+    $scope.bindData = function (response) {
+
+        // if (getCookie('currentShopInfo') != undefined) {
+        //     $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']
+        // } else {
+        //     $scope.toShop();
+        // }
+
         console.log(response);
+        $scope.prdList = response.data;
+    };
+
+    $scope.toShop = function () {
+        $state.go('pages/shop', {'FROM': window.location.href});
     }
+
 
 });

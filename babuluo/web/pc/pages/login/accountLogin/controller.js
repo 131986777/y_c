@@ -4,6 +4,7 @@ angular.module('AndSell.PC.Main').controller('pages_login_accountLogin_Controlle
 
     modalFactory.setHeader(false);
 
+    modalFactory.setSide(false);
 
     $scope.userLogin = function () {
         var form = $scope.loginInfo;
