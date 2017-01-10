@@ -20,7 +20,7 @@ $import('pages/order/list', {state: 'all'}, true);
 $import('pages/order/review', {}, true);
 
 $import('pages/order/detail', {ORDER_ID: ''}, true);
-//
+
 //$import('pages/personal', {}, true);
 //$import('pages/personal/card');
 //$import('pages/personal/coupon');
