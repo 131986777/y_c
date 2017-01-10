@@ -517,8 +517,8 @@ AndSellUI.filter('strLength', function() {
                 len++;
             }
         }
-        if(len>=10){
-            return input.substring(0,5)+'……';
+        if(len>10){
+            return input.substring(0,5)+'…';
         }else{
             return input;
         }
