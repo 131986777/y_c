@@ -4,5 +4,9 @@
     font-weight: 700;
 }
 .radio,.checkbox{
-    padding-left: 100px;
+    display: inline-block;
+}
+.radio-title{
+    float: left;
+    width:180px;
 }
