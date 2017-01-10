@@ -5,7 +5,7 @@
                 <div ng-show="!EmptyPick&&cookiePickupPerson.type==3" class="detail weui_cell_bd weui_cell_primary">
                     <p class="">提 货 人：{{cookiePickupPerson.man}}</p>
                     <p class="">手机号码：{{cookiePickupPerson.phone}}</p>
-                    <p class="">提货门店：{{shop}}</p>
+                    <p class="">提货门店：{{shop['SHOP.SHOP_NAME']}}</p>
                     <p class="">提货时间：{{cookiePickupPerson.getTime}}</p>
                 </div>
                 <div ng-show="!EmptyPick&&cookiePickupPerson.type==1" class="detail weui_cell_bd weui_cell_primary">

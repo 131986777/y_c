@@ -30,7 +30,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             $scope.cartSize = JSON.parse($scope.cartSize);
         }
 
-        $scope.shop = JSON.parse(getCookie('currentShopInfo'))['SHOP.SHOP_NAME'];
+        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
 
         $scope.COUPON_INFO = $stateParams.COUPON_INFO;
         if ($stateParams.COUPON_INFO != '') {
@@ -101,7 +101,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
         for (var i = 0; i < $scope.planUnitList.length; i++) {
             if (undefined != $scope.planUnitList[i]) {
                 if ($scope.planUnitList[i]['state'] != "checked") {
-                    $scope.planUnitList.splice(i, 1)
+                    $scope.planUnitList.splice(i, 1);
                     i--;
                 }
             }
@@ -312,10 +312,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                     $scope.descCoupon($scope.coupon.ID);
                 }
                 $scope.commitClick = true;
-
-                window.location.replace("#/pages/order/detail/"
-                    + response.extraData.ORDER_ID
-                    + '/');
+                console.log(response);
+                //window.location.replace("#/pages/order/detail/"
+                //    + response.extraData.ORDER_ID
+                //    + '/');
 
             }, function (response) {
                 weUI.toast.hideLoading();
