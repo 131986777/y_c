@@ -28,11 +28,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_review_Controller', fu
         params['SHOP_COMMENT.STATE'] = $scope.state;
         console.log( $scope.orderDetailList);
         console.log( $scope.order['SHOP_ORDER.SHOP_ID']);
-        var commit={};
+        $scope.commit={};
         var promise=new Array;
         for(var i = 0;i<$scope.evaluate.length;i++){
-            commit[i]=$q.defer();
-            promise.push(commit[i].promise);
+            $scope.commit[i]=$q.defer();
+            promise.push($scope.commit[i].promise);
             params['SHOP_COMMENT.STAR'] = $scope.star[i];
             params['SHOP_COMMENT.PRO_MAIN_COMMENT'] = $scope.evaluate[i];
             params['SHOP_COMMENT.SHOP_ID'] = $scope.order['SHOP_ORDER.SHOP_ID'];
@@ -40,17 +40,24 @@ angular.module('AndSell.H5.Main').controller('pages_order_review_Controller', fu
             params['SHOP_COMMENT.PRO_ID'] = $scope.orderDetailList[i]['SHOP_ORDER_INFO.PRD_ID'];
             params['SHOP_COMMENT.PRO_SKU'] = $scope.orderDetailList[i]['SHOP_ORDER_INFO.SKU'];
             params['SHOP_ORDER.ID'] = $stateParams.ID;
-            params['SHOP_ORDER.STAE_COMMENT'] = '1';
-            orderFactory.addComments(params,function (resp) {
-                commit[i].resolve();
-            });
-
+            params['SHOP_ORDER.STATE_COMMENT'] = '1';
+            $scope.addComment(params,i);
         }
         $q.all(promise).then(function () {
-            $state.go('pages/order/detail',{ORDER_ID: id});
+            //$state.go('pages/order/detail',{ORDER_ID: $stateParams.ID});
             weUI.toast.info("提交成功");
+            window.history.back();
         });
     };
+
+    $scope.addComment=function(params,i){
+        console.log(i);
+        orderFactory.addComments(params,function (resp) {
+            console.log('--');
+            console.log( i);
+            $scope.commit[i].resolve();
+        });
+    }
 
     //判断是否匿名
     $scope.clickIn = function () {
