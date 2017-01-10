@@ -1,52 +1,135 @@
-<div class="showBoard">
-    <div class="showTitle">
-        <h1 class="title">订单详情</h1>
-        <div class="searchGroup">
-            <input type="text" class="text" placeholder="搜索商品">
-            <input type="text" class="button">
-        </div>
-        <div class="categoriesToggle">
-            <ul>
-                <li><a href="" class="active">全部</a></li>
-                <li><a href="">待支付</a></li>
-                <li><a href="">待提货</a></li>
-                <li><a href="">待评价</a></li>
-                <li><a href="">已完成</a></li>
-            </ul>
-        </div>
-    </div>
+<div class="showBoard" ng-init="initData()">
     <div class="orderDetailShow">
         <div class="pay_head">
-            <span class="wait_pay">等待付款</span>
-            <span class="time_warning">120分钟后订单将被关闭</span>
+            <span class="wait_pay">
+                <div ng-if="order['SHOP_ORDER.TYPE']=='1'">
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">订单待支付！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">订单待出库！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==-1">订单待发货！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==-1">订单待收货！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&order['SHOP_ORDER.STATE_ACCEPT']==-1">订单已完成！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
+                </div>
+                <div ng-if="order['SHOP_ORDER.TYPE']=='3'">
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">订单待支付！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">订单待分拣！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">订单待提货！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">订单已完成！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
+                </div>
+                <div ng-if="order['SHOP_ORDER.TYPE']=='5'">
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1">订单待支付！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==-1">订单待分拣！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">订单待提货！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">订单已完成！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
+                </div>
+            </span>
+            <span class="time_warning">
+                <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.TYPE']!='5'">
+                    请在30分钟之内完成付款，逾期订单将关闭
+                </p>
+                <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.TYPE']=='5'">
+                    请在30分钟之内完成付款，逾期订单将关闭
+                </p>
+            </span>
             <div class="opreation_group">
-                <div class="cancel_order">取消订单</div>
-                <div class="pay_now">立即支付</div>
+                <div class="cancel_order" ng-click="cancelOrder()"
+                     ng-if="((order['SHOP_ORDER.STATE_MONEY']==-1||((order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&&order['SHOP_ORDER.STATE_MONEY']==1))&& (order['SHOP_ORDER.TYPE']=='3'||order['SHOP_ORDER.TYPE']=='5')))||(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&& order['SHOP_ORDER.STATE_OUT']==-1)&& order['SHOP_ORDER.TYPE']=='1')">
+                    取消订单
+                </div>
+                <div class="pay_now" ng-click="payNow()"
+                     ng-if="((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.TYPE']!='5')||(order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.TYPE']=='5'))">
+                    立即支付
+                </div>
             </div>
         </div>
         <div class="flow_progress">
-            <div class="gradient_bar step_3"></div>
-            <ul class="progress_step">
-                <li class="finished">提交订单<span class="finished_time">11月03日 17:20</span></li>
-                <li class="finished">订单审核<span class="finished_time">11月03日 17:20</span></li>
-                <li class="finished">财务审核<span class="finished_time">11月03日 17:20</span></li>
-                <li>出库</li>
-                <li>发货</li>
-                <li>收货确认</li>
-                <li>完成</li>
+            <div class="gradient_bar step_7"></div>
+            <ul class="progress_step" ng-if="order['SHOP_ORDER.TYPE']=='1'">
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                    提交<span class="finished_time">11月03日 17:20</span>
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
+                    付款<span class="finished_time">11月03日 17:20</span>
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
+                    出库<span class="finished_time">11月03日 17:20</span>
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1]">
+                    发货
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1]">
+                    收货
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
+                    交易完成
+                </li>
+            </ul>
+            <ul class="progress_step" ng-if="order['SHOP_ORDER.TYPE']=='3'">
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                    下单<span class="finished_time">11月03日 17:20</span>
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
+                    付款<span class="finished_time">11月03日 17:20</span>
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
+                    捡货<span class="finished_time">11月03日 17:20</span>
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
+                    提货
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
+                    交易完成
+                </li>
+            </ul>
+            <ul class="progress_step" ng-if="order['SHOP_ORDER.TYPE']=='4'">
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                    下单<span class="finished_time">11月03日 17:20</span>
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
+                    捡货<span class="finished_time">11月03日 17:20</span>
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
+                    提货
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
+                    交易完成
+                </li>
+            </ul>
+            <ul class="progress_step" ng-if="order['SHOP_ORDER.TYPE']=='5'">
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                    下单
+                    <span class="finished_time">11月03日 17:20</span>
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_ORDER']==1]">
+                    捡货
+                    <span class="finished_time">11月03日 17:20</span>
+                </li>
+
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
+                    付款
+                    <!--<span class="finished_time">11月03日 17:20</span>-->
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
+                    提货
+                </li>
+                <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
+                    交易完成
+                </li>
             </ul>
         </div>
         <div class="order_info">
-            <h2 class="order_Id">订单号:201611034152</h2>
+            <h2 class="order_Id">订单号:{{order['SHOP_ORDER.ORDER_NUM']}}</h2>
             <div class="order_show">
                 <div class="pic_card">
                     <ul>
-                        <li>
-                            <img src="imgs/shangping2.jpg" alt="">
+                        <li ng-repeat="detail in orderDetailList">
+                            <img ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}">
                             <div class="goods_intro">
-                                <p class="goods_name" title="时尚复古斜挎单肩包">时尚复古斜挎单肩包时尚复古斜挎单肩包</p>
-                                <p class="goods_size">深灰色 XXXXL</p>
-                                <p class="goods_id">P20161020123323</p>
+                                <p class="goods_name" title="时尚复古斜挎单肩包">{{detail['SHOP_ORDER_INFO.PRD_NAME']}}</p>
+                                <p class="goods_size">{{detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']}}</p>
+                                <p class="goods_id">{{detail['SHOP_ORDER_INFO.SPU']}}</p>
                             </div>
                             <div class="gift">
                                 <ul>
@@ -55,55 +138,42 @@
                                         <span class="gift_name">时尚复古斜挎单肩包</span>
                                         <span class="count">x1箱</span>
                                     </li>
-                                    <li>
-                                        <img src="imgs/shangping3.jpg" alt="">
-                                        <span class="gift_name">时尚复古斜挎单肩包</span>
-                                        <span class="count">x1个</span>
-                                    </li>
+
                                 </ul>
                             </div>
                             <div class="price">
-                                <span>¥420.00</span><span class="price_count">x2个</span>
-                                <span class="single_count">小计 ¥840</span>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="imgs/shangping2.jpg" alt="">
-                            <div class="goods_intro">
-                                <p class="goods_name" class="goods_name" title="时尚复古斜挎单肩包">时尚复古斜挎单肩包</p>
-                                <p class="goods_size">深灰色 XXXXL</p>
-                                <p class="goods_id">P20161020123323</p>
-                            </div>
-                            <div class="price">
-                                <span>¥420.00</span><span class="price_count">x2个</span>
-                                <span class="single_count">小计 ¥840</span>
+                                <span>{{detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'}}</span><span
+                                    class="price_count">x{{detail['SHOP_ORDER_INFO.COUNT']}}个</span>
+                                <span class="single_count">小计 {{detail['SHOP_ORDER_INFO.PRICE_SUM']*detail['SHOP_ORDER_INFO.COUNT'] | currency : '￥'}}</span>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <p class="remark">备注:这是一条备注～</p>
+                <p class="remark">备注:{{detail['SHOP_ORDER_INFO.REMARK']}}</p>
             </div>
         </div>
         <div class="receipt_info">
-            <h3 class="info_title">收货信息</h3>
-            <p><span>姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><span>刘花花</span></p>
-            <p><span>联系电话</span><span>18042112022</span></p>
-            <p><span>收货地址</span><span>江苏省 南京市 建邺区 南京国家广告产业园3栋</span></p>
-            <p><span>联系电话</span><span>18042112022</span></p>
+            <p><span>联&nbsp;&nbsp;系&nbsp;&nbsp;人</span><span>{{order['SHOP_ORDER.REC_CONTACT']}}</span></p>
+            <p><span>联系电话</span><span>{{order['SHOP_ORDER.REC_PHONE']}}</span></p>
+            <div ng-show="order['SHOP_ORDER.TYPE']=='3'">
+                <h3 class="info_title">提货信息</h3>
+                <p><span>提货方式</span><span>自提</span></p>
+                <p><span>提货门店</span><span>{{order['SHOP_ORDER.SHOP_NAME']}}</span></p>
+                <p><span>提货时间</span><span>{{order['SHOP_ORDER.GET_PRD_DATETIME']}}</span></p>
+                <p><span>提&nbsp;&nbsp;货&nbsp;&nbsp;码</span><span>{{order['SHO|P_ORDER.REC_CHECKCODE']}}</span></p>
+            </div>
+            <div ng-show="order['SHOP_ORDER.TYPE']=='1'">
+                <h3 class="info_title">收货信息</h3>
+                <p><span>收货方式</span><span>快递</span></p>
+                <p><span>收货地址</span><span>{{order['SHOP_ORDER.REC_ADDR']}}</span></p>
+            </div>
         </div>
-        <div class="other_info">
-            <h3 class="info_title">其他信息</h3>
-            <p><span>备注信息</span><span>发申通快递</span></p>
-            <p><span>交货日期</span><span>2016-11-04</span></p>
-            <p><span>附件信息</span><span>江苏省 南京市 建邺区 南京国家广告产业园3栋</span></p>
-            <p><span>联系电话</span><span>18042112022</span></p>
-            <div class="change_info"></div>
-        </div>
+
         <div class="total_count">
-            <p><span>商品金额</span><span>¥280.00</span></p>
-            <p><span>运费</span><span>¥8.00</span></p>
-            <p><span>优惠金额</span><span>¥8.00</span></p>
-            <p><span>实付金额</span><span class="need_pay">¥280.00</span></p>
+            <p><span>商品金额</span><span>{{order['SHOP_ORDER.PRICE_PRD'] | currency : '￥'}}</span></p>
+            <!--<p><span>运费</span><span>¥8.00</span></p>-->
+            <p><span>优惠金额</span><span>{{order['SHOP_ORDER.PRICE_DISCOUNT'] | currency : '￥'}}</span></p>
+            <p><span>实付金额</span><span class="need_pay">{{order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'}}</span></p>
         </div>
     </div>
 </div>
