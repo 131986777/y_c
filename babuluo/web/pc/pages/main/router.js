@@ -19,7 +19,7 @@ $import('pages/order/list', {state: 'all'},true);
 //$import('pages/order/CashOnDeliveryOrder');
 $import('pages/order/review',{ID:''},true);
 //
-//$import('pages/personal', {}, true);
+$import('pages/personal/center', {}, true);
 //$import('pages/personal/card');
 //$import('pages/personal/coupon');
 //

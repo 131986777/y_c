@@ -5,133 +5,48 @@
 
             </div>
             <div class="addInfo">
-                <p class="name pos">ZEXIKUN</p>
+                <p class="name pos">{{USER['MEMBER.USER_NAME']}} </p>
                 <p class="phone pos">手机号</p>
-                <p class="num pos">18251815890</p>
+                <p class="num pos">USER['MEMBER.MOBILE']</p>
                 <p class="security">安全中心</p>
             </div>
             <div class="detail">
                 <div class="each">
                     <p class="count">帐户余额</p>
-                    <p class="detInfo">￥17500.00</p>
+                    <p class="detInfo">￥{{balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']}}</p>
                 </div>
                 <div class="each">
                     <p class="count">优惠券</p>
-                    <p class="detInfo">3张</p>
+                    <p class="detInfo">{{coupon.length}}张</p>
                 </div>
                 <div class="">
                     <p class="count">积分余额</p>
-                    <p class="detInfo">￥150.00</p>
+                    <p class="detInfo">{{balanceInfo[0]['MEMBER_ACCOUNT.POINT']}}</p>
                 </div>
 
             </div>
         </div>
-        <div class="row-header font">修改密码</div>
-        <div class="card">
-            <div class="eachCard orange">
+        <div class="row-header font">个人中心</div>
+        <span ng-if="memberCards.length==0" class="no-coupon">你暂无会员卡！</span>
+        <div class="card" ng-repeat="cl in memberCards">
+            <div class="eachCard"  ng-style="cl['MEMBER_CARD.CARD_STYLE']">
                 <div class="pos">
-                    <p class="num">NO. 1399 5262 515</p>
-                    <p class="num ka">金卡</p>
-                    <p class="mid">(冻结 ￥19.82)</p>
+                    <p class="num">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</p>
+                    <p class="num ka">{{cl['MEMBER_CARD.TYPE_NAME']}}</p>
+                    <p class="mid" ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0">(冻结 {{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}})</p>
                     <div class="m">
                         <p class="word">余额</p>
-                        <p class="money">￥1980.00</p>
+                        <p class="money">{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}</p>
                     </div>
                     <div class="foot">
-                        <p class="time">2016-09-26 11:51:22</p>
-                        <div class="time">
+                        <p class="time">{{cl['MEMBER_CARD.ADD_DATETIME'] |FormatStrDate}}</p>
+                        <div class="time" ng-show="cl['MEMBER_CARD.IS_FACE_VALUE']==1">
                             <p class="t_inner">发卡面值</p>
-                            <p class="t_inner">￥400</p>
+                            <p class="t_inner">{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</p>
                         </div>
-                        <p class="time">线下门店发卡</p>
+                        <p class="time">{{cl['MEMBER_CARD.SOURCE_NAME']}}</p>
                     </div>
-
                 </div>
-
-            </div>
-            <div class="eachCard blue">
-                <div class="pos">
-                    <p class="num">NO. 1399 5262 515</p>
-                    <p class="num ka">金卡</p>
-                    <p class="mid">(冻结 ￥19.82)</p>
-                    <div class="m">
-                        <p class="word">余额</p>
-                        <p class="money">￥1980.00</p>
-                    </div>
-                    <div class="foot">
-                        <p class="time">2016-09-26 11:51:22</p>
-                        <div class="time">
-                            <p class="t_inner">发卡面值</p>
-                            <p class="t_inner">￥400</p>
-                        </div>
-                        <p class="time">线下门店发卡</p>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="eachCard">
-                <div class="pos">
-                    <p class="num">NO. 1399 5262 515</p>
-                    <p class="num ka">金卡</p>
-                    <p class="mid">(冻结 ￥19.82)</p>
-                    <div class="m">
-                        <p class="word">余额</p>
-                        <p class="money">￥1980.00</p>
-                    </div>
-                    <div class="foot">
-                        <p class="time">2016-09-26 11:51:22</p>
-                        <div class="time">
-                            <p class="t_inner">发卡面值</p>
-                            <p class="t_inner">￥400</p>
-                        </div>
-                        <p class="time">线下门店发卡</p>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="eachCard black">
-                <div class="pos">
-                    <p class="num">NO. 1399 5262 515</p>
-                    <p class="num ka">金卡</p>
-                    <p class="mid">(冻结 ￥19.82)</p>
-                    <div class="m">
-                        <p class="word">余额</p>
-                        <p class="money">￥1980.00</p>
-                    </div>
-                    <div class="foot">
-                        <p class="time">2016-09-26 11:51:22</p>
-                        <div class="time">
-                            <p class="t_inner">发卡面值</p>
-                            <p class="t_inner">￥400</p>
-                        </div>
-                        <p class="time">线下门店发卡</p>
-                    </div>
-
-                </div>
-
-            </div>
-            <div class="eachCard">
-                <div class="pos">
-                    <p class="num">NO. 1399 5262 515</p>
-                    <p class="num ka">金卡</p>
-                    <p class="mid">(冻结 ￥19.82)</p>
-                    <div class="m">
-                        <p class="word">余额</p>
-                        <p class="money">￥1980.00</p>
-                    </div>
-                    <div class="foot">
-                        <p class="time">2016-09-26 11:51:22</p>
-                        <div class="time">
-                            <p class="t_inner">发卡面值</p>
-                            <p class="t_inner">￥400</p>
-                        </div>
-                        <p class="time">线下门店发卡</p>
-                    </div>
-
-                </div>
-
             </div>
         </div>
     </div>
