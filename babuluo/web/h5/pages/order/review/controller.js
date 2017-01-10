@@ -41,6 +41,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_review_Controller', fu
             params['SHOP_COMMENT.PRO_SKU'] = $scope.orderDetailList[i]['SHOP_ORDER_INFO.SKU'];
             params['SHOP_ORDER.ID'] = $stateParams.ID;
             params['SHOP_ORDER.STATE_COMMENT'] = '1';
+            params['SHOP_ORDER.USER_ANONYMOUS'] = $scope.flag;
             $scope.addComment(params,i);
         }
         $q.all(promise).then(function () {
