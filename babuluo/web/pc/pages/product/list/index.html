@@ -29,7 +29,7 @@
                                   ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥'"></span>
                             <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>
                         </div>
-                        <div class="but show">
+                        <div class="but show" ng-if="item['SHOP_PRODUCT.HAS_STOCK']!=0" ng-click="addToCart(item['SHOP_PRODUCT.SKULIST'][0])">
                             <img class="img" src="/AndSell/pc/public/css/img/buyCar.png" alt="">
                             <span class="buy">加入购物车</span>
                         </div>
@@ -40,7 +40,7 @@
     </div>
     <div page-bar
          filter-obj="filter"
-         url="/shop/product/queryAll"
+         url="/shop/product/queryAllForAgent"
          callback="bindData(response)">
     </div>
 
