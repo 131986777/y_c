@@ -5,9 +5,12 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
 
     $scope.districtName = "全部区域";
     $scope.currentDistrictName = '全部区域';
+
     $scope.initLoad = function () {
         $scope.filter = {};
-        $scope.getData();
+        //$scope.filter['SHOP.DISTRICT_ID']='1000';
+        $scope.chooseDistrict('1000','雨花台区');
+        //$scope.getData();
     };
 
     $scope.getData = function () {
@@ -49,9 +52,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
             }
         });
         $scope.recentShopList = recentShopList.reverse();
-    }
-
-    $scope.initLoad();
+    };
 
     $scope.shopSelect = function (shop) {
         setCookie('currentShop', shop['SHOP.SHOP_ID']);
@@ -76,11 +77,13 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
                 window.location.href = $stateParams.FROM;
             }
         });
-    }
+    };
 
     $scope.chooseDistrict = function (districtId, districtName) {
         $scope.districtName = districtName;
         $scope.filter['SHOP.DISTRICT_ID'] = districtId;
+        console.log(districtId);
+        $scope.currentDistrictName = districtName;
         $scope.getData();
         $scope.currentDistrictName = districtName;
         // shopFactory.getShopList(form, function (response) {
@@ -89,12 +92,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
         // });
     };
 
-    $scope.allDistrict = function (districtName) {
-        $scope.currentDistrictName = '全部区域';
-        $scope.districtName = districtName;
-        $scope.filter['SHOP.DISTRICT_ID'] = '';
-        $scope.getData();
-    };
+    $scope.initLoad();
 
     /**
      * approx distance between two points on earth ellipsoid
@@ -187,4 +185,23 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
         }
         return quickSort(left).concat(pivot, quickSort(right));
     };
+});
+
+
+app.filter('strLength', function() {
+    return function(input) {
+        var len = 0;
+        for (var i=0; i<input.length; i++) {
+            if (input.charCodeAt(i)>127 || input.charCodeAt(i)==94) {
+                len += 2;
+            } else {
+                len++;
+            }
+        }
+        if(len>=10){
+            return input.substring(0,5)+'……';
+        }else{
+            return input;
+        }
+    }
 });

@@ -12,7 +12,6 @@ AndSellH5MainModule.service('productFactory', function ($resource,http) {
     this.getProductAllInfoById = http.post('/shop/product/getByIdWithAllInfoForAgent');
 
     this.getProductSkuBySkuIds = http.post('/shop/product/getBySkuIdWithAllInfoForAgent');
+    this.getCommemtByProIdProSku = http.post('/shop/comment/getById');
 
-    this.getPresentsBySkuIds = http.post('/shop/product/getBySkuIdWithAllInfo') ;
-
-});
+	this.getPresentsBySkuIds = http.post('/shop/product/getBySkuIdWithAllInfo') ;});
