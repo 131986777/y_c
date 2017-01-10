@@ -66,6 +66,7 @@ a img {
 /* line 116, ../../../../../usr/local/lib/ruby/gems/2.3.0/gems/compass-core-1.0.3/stylesheets/compass/reset/_utilities.scss */
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
+  background-color: #fff;
 }
 
 /* line 2, ../sass/global/_mixin.scss */

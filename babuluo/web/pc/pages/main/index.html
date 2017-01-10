@@ -212,58 +212,59 @@
     </div>
 </header>
 <div class="container">
-    <div class="effectiveArea">
-        <div class="sidebar sidebar1" ng-if="showSideBar">
-            <!-- 订单 -->
-            <div class="sidebar-title">
-                <i class="icon icon-order"></i>
-                订单中心
-            </div>
-            <ul>
-                <li ui-sref="business.priceList" class="" ng-class="{true:'active'}[state ==1]"
-                    ng-click="getState(1)">我的订单
-                </li>
-                <li ui-sref="business.priceAudit" ng-class="{true:'active'}[state ==2]"
-                    ng-click="getState(2)">我的订单
-                </li>
-                <li ui-sref="business.purchaseList" ng-class="{true:'active'}[state ==3]"
-                    ng-click="getState(3)">评价订单
-                </li>
-                <li ui-sref="business.purchaseAudit" ng-class="{true:'active'}[state ==4]"
-                    ng-click="getState(4)">评价晒单
-                </li>
-                <li ui-sref="business.payrequestList" ng-class="{true:'active'}[state ==5]"
-                    ng-click="getState(5)">评价晒单记录
-                </li>
-            </ul>
-            <!-- 库存 -->
-            <div class="sidebar-title">
-                <i class="icon icon-stock"></i>
-                资产中心
-            </div>
-            <ul>
-                <li>余额</li>
-                <li>优惠券</li>
-            </ul>
-            <!-- 库存 -->
-            <div class="sidebar-title">
-                <i class="icon icon-stock"></i>
-                设置中心
-            </div>
-            <ul>
-                <li>个人信息</li>
-            </ul>
-            <!-- 库存 -->
-            <div class="sidebar-title">
-                <i class="icon icon-stock"></i>
-                其他功能
-            </div>
-            <ul>
-                <li>浏览历史</li>
-            </ul>
+<div  class="effectiveArea">
+    <div class="sidebar sidebar1" ng-if="showSideBar">
+        <!-- 订单 -->
+        <div class="sidebar-title">
+            <i class="icon icon-order"></i>
+            订单中心
         </div>
-        <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
+        <ul>
+            <li ui-sref="business.priceList" class="" ng-class="{true:'active'}[state ==1]"
+                ng-click="getState(1)">我的订单
+            </li>
+            <li ui-sref="business.priceAudit" ng-class="{true:'active'}[state ==2]"
+                ng-click="getState(2)">我的订单
+            </li>
+            <li ui-sref="business.purchaseList" ng-class="{true:'active'}[state ==3]"
+                ng-click="getState(3)">评价订单
+            </li>
+            <li ui-sref="business.purchaseAudit" ng-class="{true:'active'}[state ==4]"
+                ng-click="getState(4)">评价晒单
+            </li>
+            <li ui-sref="business.payrequestList" ng-class="{true:'active'}[state ==5]"
+                ng-click="getState(5)">评价晒单记录
+            </li>
+        </ul>
+        <!-- 库存 -->
+        <div class="sidebar-title">
+            <i class="icon icon-stock"></i>
+            资产中心
+        </div>
+        <ul>
+            <li>余额</li>
+            <li>优惠券</li>
+        </ul>
+        <!-- 库存 -->
+        <div class="sidebar-title">
+            <i class="icon icon-stock"></i>
+            设置中心
+        </div>
+        <ul>
+            <li>个人信息</li>
+        </ul>
+        <!-- 库存 -->
+        <div class="sidebar-title">
+            <i class="icon icon-stock"></i>
+            其他功能
+        </div>
+        <ul>
+            <li>浏览历史</li>
+        </ul>
     </div>
+</div>
+
+    <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
 </div>
 
 <footer>
