@@ -30,7 +30,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
             $scope.cartSize = JSON.parse($scope.cartSize);
         }
 
-        $scope.shop = JSON.parse(getCookie('currentShopInfo'))['SHOP.SHOP_NAME'];
+        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
 
         $scope.COUPON_INFO = $stateParams.COUPON_INFO;
         if ($stateParams.COUPON_INFO != '') {
