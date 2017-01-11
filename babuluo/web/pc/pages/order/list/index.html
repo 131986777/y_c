@@ -84,10 +84,11 @@
                             <li ng-repeat=" detail in order.details">
                                 <div class="pic">
                                     <img ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}"
+                                         ng-click="toProduct(order['SHOP_ORDER_INFO.PRD_ID'])"
                                          style="width: 80px;height: 80px;">
                                 </div>
                                 <div class="info">
-                                    <p class="infoTitle">{{detail['SHOP_ORDER_INFO.PRD_NAME']}}</p>
+                                    <p class="infoTitle" ng-click="toProduct(order['SHOP_ORDER_INFO.PRD_ID'])">{{detail['SHOP_ORDER_INFO.PRD_NAME']}}</p>
                                     <p class="standards">【 {{detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']}} 】</p>
                                     <p class="price">
                                         <span class="unitPrice">{{detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'}}</span>

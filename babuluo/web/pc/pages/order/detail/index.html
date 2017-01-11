@@ -162,22 +162,22 @@
                 <div class="pic_card">
                     <ul>
                         <li ng-repeat="detail in orderDetailList">
-                            <img ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}">
+                            <img ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}" ng-click="toDetail(detail['SHOP_ORDER_INFO.PRD_ID'])">
                             <div class="goods_intro">
-                                <p class="goods_name">{{detail['SHOP_ORDER_INFO.PRD_NAME']}}</p>
+                                <p class="goods_name" ng-click="toDetail(detail['SHOP_ORDER_INFO.PRD_ID'])">{{detail['SHOP_ORDER_INFO.PRD_NAME']}}</p>
                                 <p class="goods_size">{{detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']}}</p>
                                 <p class="goods_id">{{detail['SHOP_ORDER_INFO.SPU']}}</p>
                             </div>
-                            <div class="gift">
-                                <ul>
-                                    <li>
-                                        <img src="imgs/shangping3.jpg" alt="">
-                                        <span class="gift_name">时尚复古斜挎单肩包</span>
-                                        <span class="count">x1箱</span>
-                                    </li>
+                            <!--<div class="gift">-->
+                                <!--<ul>-->
+                                    <!--<li>-->
+                                        <!--<img src="imgs/shangping3.jpg" alt="">-->
+                                        <!--<span class="gift_name">时尚复古斜挎单肩包</span>-->
+                                        <!--<span class="count">x1箱</span>-->
+                                    <!--</li>-->
 
-                                </ul>
-                            </div>
+                                <!--</ul>-->
+                            <!--</div>-->
                             <div class="price" ng-if="order['SHOP_ORDER.STATE_OUT']==-1">
                                 <span>{{detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'}}</span>
                                 <span class="price_count">x{{detail['SHOP_ORDER_INFO.COUNT']}}</span>
