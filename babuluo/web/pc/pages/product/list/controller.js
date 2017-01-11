@@ -5,7 +5,9 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
     modalFactory.setHeader(true);
 
     modalFactory.setSide(false);
-    modalFactory.setLeftMenu(true);
+
+    modalFactory.setLeftMenu(false);
+
     $scope.nofind=function () {
         var img=event.srcElement;
         img.src="../../public/css/img/product.png";

@@ -1,0 +1,464 @@
+/* line 1, ../sass/headers/_crumbsBar.scss */
+.crumbsBar {
+  width: 100%;
+  height: 38px;
+}
+/* line 4, ../sass/headers/_crumbsBar.scss */
+.crumbsBar a {
+  font-size: 13px;
+  color: #4b4b4b;
+  display: inline-block;
+  height: 100%;
+  line-height: 38px;
+  position: relative;
+  margin-right: 20px;
+}
+/* line 12, ../sass/headers/_crumbsBar.scss */
+.crumbsBar a:after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 5px;
+  height: 10px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAMCAYAAABBV8wuAAAAAXNSR0IArs4c6QAAAMVJREFUGBlj2L17Nz8DFsD09+/fXdu3b49El2P6//9/OCMjY+uOHTv8kSUZQZw9e/ao/fnzZzdQQYq7u/tukBgTiHBxcbnFwsLi++/fv3lAO21AYmAdIAYIAI0zAxq9lpmZORCsAyLMwAAUuAk07gNQ0gwucebMGS6gPVuBilYB7ZkGlrh9+zb7mzdvNgAFj3t4eDSDTGDcv38/y8+fP1cDtb/y9PRMBwmCABNQcCaQ/gZUmQkWgRIsQMt2s7GxrQHS/5AlAKe3Tdix/prSAAAAAElFTkSuQmCC');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* line 26, ../sass/headers/_crumbsBar.scss */
+.crumbsBar a:last-child {
+  color: #b6b6b6;
+}
+/* line 28, ../sass/headers/_crumbsBar.scss */
+.crumbsBar a:last-child:after {
+  display: none;
+}
+
+/* line 1, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar {
+  width: 210px;
+  height: auto;
+  display: inline-block;
+}
+/* line 5, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .title {
+  font-size: 14px;
+  color: #4b4b4b;
+  display: block;
+  width: 100%;
+  height: 38px;
+  line-height: 38px;
+  font-weight: normal;
+  border: 1px solid #ddd;
+  padding: 0 18px;
+}
+/* line 16, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists {
+  width: 100%;
+  height: auto;
+  margin-top: -1px;
+  border: 1px solid #ddd;
+}
+/* line 21, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul {
+  width: 100%;
+  height: auto;
+}
+/* line 24, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li {
+  width: 100%;
+  padding: 0 27px;
+}
+/* line 27, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li img {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 15px auto;
+}
+/* line 33, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li .intro {
+  width: 100%;
+}
+/* line 35, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li .intro p {
+  line-height: 1.7em;
+}
+/* line 38, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li .intro .name {
+  font-size: 14px;
+  color: #4b4b4b;
+}
+/* line 42, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li .intro .price {
+  font-size: 14px;
+  color: #4b4b4b;
+}
+/* line 46, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li .intro .sales {
+  color: #f36e19;
+  font-size: 14px;
+}
+
+/* line 3, ../sass/goodsDetail.scss */
+.goodsDetail {
+  padding: 0 65px;
+  min-height: 300px;
+}
+/* line 6, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+/* line 10, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow {
+  display: inline-block;
+  height: 430px;
+}
+/* line 13, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow .mainPic {
+  height: 100%;
+  width: 430px;
+  margin-right: 10px;
+  display: inline-block;
+}
+/* line 18, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow .mainPic img {
+  width: 100%;
+  height: 100%;
+}
+/* line 23, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow .picList {
+  width: 78px;
+  height: 100%;
+  display: inline-block;
+}
+/* line 27, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow .picList ul {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+/* line 31, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow .picList ul li {
+  width: 100%;
+  height: 78px;
+  margin-bottom: 10px;
+}
+/* line 35, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow .picList ul li img {
+  width: 100%;
+  height: 100%;
+}
+/* line 43, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose {
+  width: 500px;
+  height: 100%;
+  display: inline-block;
+  overflow: hidden;
+  float: right;
+}
+/* line 49, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .title {
+  line-height: 1.8em;
+  padding: 6px 0;
+}
+/* line 52, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .title .goodsName {
+  color: #4c4c4c;
+  font-size: 18px;
+}
+/* line 56, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .title .subTitle {
+  font-size: 12px;
+  color: #a9a9a9;
+}
+/* line 61, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox {
+  margin-top: 10px;
+  width: 100%;
+  height: 100px;
+  padding: 18px;
+  border: 1px solid #ddd;
+}
+/* line 68, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .name, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .name {
+  display: inline-block;
+  width: 54px;
+  color: #4b4b4b;
+  font-size: 14px;
+}
+/* line 74, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .content, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content {
+  display: inline-block;
+}
+/* line 76, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .content .current, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content .current {
+  font-size: 25px;
+  color: #f36e19;
+  margin-right: 6px;
+}
+/* line 80, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .content .current .moneySign, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content .current .moneySign {
+  font-size: 14px;
+}
+/* line 84, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .content .origin, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content .origin {
+  font-size: 16px;
+  color: #a8a8a8;
+  position: relative;
+}
+/* line 88, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .content .origin:after, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content .origin:after {
+  content: '';
+  width: calc(100% + 2px);
+  height: 1px;
+  background-color: #a8a8a8;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+}
+/* line 101, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup {
+  margin-top: 20px;
+  line-height: 20px;
+}
+/* line 106, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content .activities {
+  display: inline-block;
+  font-size: 13px;
+  color: #4c4c4c;
+  vertical-align: bottom;
+  line-height: 20px;
+}
+/* line 112, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content .activities .sign {
+  font-size: 8px;
+  color: #fff;
+  display: inline-block;
+  height: 20px;
+  padding: 0px 5px;
+  line-height: 20px;
+  background-color: #f36f1a;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+/* line 127, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose {
+  margin-top: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+/* line 132, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards {
+  width: 100%;
+  font-size: 0;
+}
+/* line 136, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .name {
+  display: inline-block;
+  width: 46px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #4b4b4b;
+  border: 1px solid transparent;
+  vertical-align: top;
+}
+/* line 146, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .standardsList {
+  display: inline-block;
+  width: calc(100% - 46px);
+}
+/* line 149, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .standardsList li {
+  display: inline-block;
+  padding: 0 16px;
+  height: 30px;
+  line-height: 30px;
+  color: #4b4b4b;
+  font-size: 14px;
+  margin-right: 10px;
+  margin-bottom: 18px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+/* line 160, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .standardsList li.active {
+  border-color: #f36f1a;
+}
+/* line 167, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose {
+  display: inline-block;
+  height: 37px;
+  font-size: 0;
+  margin-top: 28px;
+}
+/* line 172, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .name {
+  display: inline-block;
+  width: 46px;
+  height: 37px;
+  line-height: 37px;
+  font-size: 14px;
+  color: #4b4b4b;
+  border: 1px solid transparent;
+  vertical-align: top;
+}
+/* line 182, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .numberChange {
+  width: 140px;
+  height: 100%;
+  border: 1px solid #ddd;
+  display: inline-block;
+  position: relative;
+}
+/* line 188, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .numberChange .text {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  border: none;
+  outline: 0;
+  padding: 0 37px;
+  text-align: center;
+  color: #4b4b4b;
+  font-size: 14px;
+}
+/* line 199, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .numberChange .control {
+  width: 37px;
+  height: 37px;
+  position: absolute;
+  border: 1px solid #ddd;
+  top: 50%;
+  transform: translateY(-50%);
+  background-position: center;
+  background-size: auto;
+  background-repeat: no-repeat;
+}
+/* line 209, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .numberChange .control.reduce {
+  left: -1px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAABCAYAAADuHp8EAAAAAXNSR0IArs4c6QAAABBJREFUCB1jPHz48H8GMgAAsuwDStIThe0AAAAASUVORK5CYII=');
+}
+/* line 213, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .numberChange .control.add {
+  right: -1px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAAXNSR0IArs4c6QAAACxJREFUKBVjYMABDh8+/B+HFAMTLgl84sNREyO+UMIXGFjl8Bk2HEOPLD8BABJzCe5N4V7zAAAAAElFTkSuQmCC');
+}
+/* line 220, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup {
+  display: inline-block;
+  height: 45px;
+  margin-top: 18px;
+}
+/* line 224, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup a {
+  display: inline-block;
+  width: auto;
+  height: 100%;
+  vertical-align: top;
+  line-height: 45px;
+  margin-right: 20px;
+}
+/* line 232, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .addToCart {
+  width: 175px;
+  padding-left: 40px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAVCAYAAABCIB6VAAAAAXNSR0IArs4c6QAAAnxJREFUOBGtlc9rE1EQx3eTGKl23UOIt2TTRE8RqfZQ6MGLnmoPHjz7F1REqWdPKt4E6UHsVQ+CFIpHqRcPIoIVDBFqfhGEQBCNMQslZtfPrHnL2yRtpXVgmDffmfm+ebOT1qxWq2u+718zDMNEB+iDQqFwB3soiVG9gB5BE+hR0zSvYw8tZqVSsSGbp+tTsK0KI/4rjHR/EPEpeibPD6TdblvdbrfDBSGmYgew7QgJ865D7ED0hq7faoQXwX2wTYXhruCv4f/QMBnrAvhnmWsoJJdwHALlfD5/WwW48BGYpzC5A2wlHo/fdxynquU9ISbkXyLEFJcILKLn6/X6OVXgeV4azFNYo9EIXjoYDIpgtpZ3Vs7wbE8iltgcRa/lMJQpsWCLChDLZU/BPA0LLqGRKDFPKwEGeclkspjJZL6KI6PAyChuiA+hjMJLJBKzahStVut4r9f7JXFkW/Y4FMjKPEPWxej3+8Uw8A8H13VlXQORUUS2QlA6qdLRDEHZkG9/U43M0DaHVswc+gndEQc5gZ5Gd3jZsciMJYrIZsxAmsOK6nJSdzifGfHlw22h3hgxhEK8RLCFPhwt3Mun9jffaV1yxoghk5WTDzTN+fteRHqMfNe27Y1UKvVzInEsFiuxQhKbZkMe68X7nTudzio5y5I31jHr87FWq72gg9n9iEbiLi98OYL9f3ds3dQVbN0yXd+jiw+WZS2l0+muiumW180zsufk+fxgrmaz2fcSj/xA9AJI7+Jb2Av8Ob2ix/Qz8Vv4WazDj+qmiu1KTAfvhkl9irZUwQSr8gw+fHjedRTNZnOKDi7LluRyufIEwhDiv9Al9tcjb1OBfwAf/CWMOEQFbAAAAABJRU5ErkJggg==');
+  background-position: 10% center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: #4b4b4b;
+  font-size: 14px;
+  border: 1px solid #ddd;
+}
+/* line 244, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .buyNow {
+  width: 170px;
+  background-color: #f36f1a;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+}
+/* line 251, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .collect {
+  width: 45px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAgpJREFUOBGllc1Kw0AQx5u0xfbmQcFS7KciCopXERSDJy8efAXBBxARLwq+hYJP4EkoeBQvXr0oWLFtjNQqXhVb++VvpAmapE1sF4bdnZ357T+zmyQQ8NmKxeKSrusLPsMDIb+BxO21Wq0v+nU/OYqfoFKpNA/0WlGUdjAYnE0mk7deeapXgKwD3ZW+3W4rzWbzZyzzXs1TsWEY2UajkQca7IAaKJ/IZDKPvcCeiuv1+s4vqLDkXLZ7QWWtp2JqO0YZdOKGJNhsKP6MRqPJWCz2ZvrsvQWW+gFKEDD1yxbxz9uTZA78mu4Ky2N3xOUpz5McMPOAwPZxbjCepI+Ks98mT0LuPXaqAjtiMDQoVMQIAwtTpmMV+a+hUEjD/yCLgzQU5zFNam/VuFwuj9dqtUt2TPcJfwiHw8uJROJZ8q3rFo/Hn5ivYIYs/KehshSJRDQTKrkWWCZy6dlVylKWuc9myON3hFkpf8DiZdcCXc6K8BgAPUun07o9zAGWAIKn7YHd5pzJjNuaK7hbsBsAEf7AlUplFMCIG8TNh4gYL9mwfc2huFqtuil4V1X1gORDFH7YIW6lc4BJsupLQhM7BjrJAR1ms9kDGeM7kTVzAz5UDjEOsFlfEnP8Lea4gltAX0xIKpWq4NvkbZWP03nH7wA7/nmAPwFqAC5MmFvPtbzBv1YoFFYRodljvgGvKrWZ/xSY2gAAAABJRU5ErkJggg==');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+  border: 1px solid #ddd;
+}
+/* line 262, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro {
+  margin-top: 40px;
+}
+/* line 264, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro {
+  width: 844px;
+  display: inline-block;
+  float: right;
+}
+/* line 268, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introCategories {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #ddd;
+}
+/* line 272, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introCategories ul {
+  width: 100%;
+  height: 100%;
+}
+/* line 276, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introCategories ul li {
+  display: inline-block;
+  height: 100%;
+}
+/* line 279, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introCategories ul li a {
+  display: inline-block;
+  height: 100%;
+  padding: 0 32px;
+  color: #4b4b4b;
+  font-size: 14px;
+  line-height: 40px;
+  position: relative;
+  margin-right: 10px;
+}
+/* line 288, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introCategories ul li a.active:after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  background-color: #f36e19;
+  bottom: 0;
+  left: 0;
+}
+/* line 302, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent {
+  border: 1px solid #ddd;
+  margin-top: -1px;
+  min-height: 300px;
+}
+/* line 306, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .imgList {
+  width: 100%;
+  font-size: 0;
+}
+/* line 309, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .imgList img {
+  width: 100%;
+  height: auto;
+}
