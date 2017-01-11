@@ -44,78 +44,115 @@
                 </div>
             </div>
         </div>
-        <div class="flow_progress">
+        <div class="flow_progress" ng-if="order['SHOP_ORDER.STATE_ORDER']==1">
             <div class="gradient_bar step_7"></div>
             <ul class="progress_step" ng-if="order['SHOP_ORDER.TYPE']=='1'">
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
-                    提交<span class="finished_time">11月03日 17:20</span>
+                    提交
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_ADD']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_ADD']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
-                    付款<span class="finished_time">11月03日 17:20</span>
+                    付款
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_PAY']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_PAY']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
-                    出库<span class="finished_time">11月03日 17:20</span>
+                    出库
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_OUT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_OUT']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1]">
                     发货
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_SEND']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_SEND']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1]">
                     收货
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_ACCEPT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_ACCEPT']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
                     交易完成
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_COMMENT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_COMMENT']"></span>
                 </li>
             </ul>
             <ul class="progress_step" ng-if="order['SHOP_ORDER.TYPE']=='3'">
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
-                    下单<span class="finished_time">11月03日 17:20</span>
+                    下单
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_ADD']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_ADD']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
-                    付款<span class="finished_time">11月03日 17:20</span>
+                    付款
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_PAY']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_PAY']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
-                    捡货<span class="finished_time">11月03日 17:20</span>
+                    捡货
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_OUT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_OUT']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
                     提货
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_DELIVERY']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_DELIVERY']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
                     交易完成
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_COMMENT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_COMMENT']"></span>
                 </li>
             </ul>
             <ul class="progress_step" ng-if="order['SHOP_ORDER.TYPE']=='4'">
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
-                    下单<span class="finished_time">11月03日 17:20</span>
+                    下单
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_ADD']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_ADD']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
-                    捡货<span class="finished_time">11月03日 17:20</span>
+                    捡货
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_OUT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_OUT']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
                     提货
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_DELIVERY']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_DELIVERY']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
                     交易完成
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_COMMENT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_COMMENT']"></span>
                 </li>
             </ul>
             <ul class="progress_step" ng-if="order['SHOP_ORDER.TYPE']=='5'">
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
                     下单
-                    <span class="finished_time">11月03日 17:20</span>
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_ADD']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_ADD']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_ORDER']==1]">
                     捡货
-                    <span class="finished_time">11月03日 17:20</span>
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_OUT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_OUT']"></span>
                 </li>
-
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
                     付款
-                    <!--<span class="finished_time">11月03日 17:20</span>-->
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_PAY']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_PAY']"></span>
+                </li>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
                     提货
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_DELIVERY']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_DELIVERY']"></span>
                 </li>
                 <li ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
                     交易完成
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_COMMENT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_COMMENT']"></span>
                 </li>
             </ul>
         </div>
@@ -127,7 +164,7 @@
                         <li ng-repeat="detail in orderDetailList">
                             <img ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}">
                             <div class="goods_intro">
-                                <p class="goods_name" title="时尚复古斜挎单肩包">{{detail['SHOP_ORDER_INFO.PRD_NAME']}}</p>
+                                <p class="goods_name">{{detail['SHOP_ORDER_INFO.PRD_NAME']}}</p>
                                 <p class="goods_size">{{detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']}}</p>
                                 <p class="goods_id">{{detail['SHOP_ORDER_INFO.SPU']}}</p>
                             </div>
@@ -141,10 +178,17 @@
 
                                 </ul>
                             </div>
-                            <div class="price">
-                                <span>{{detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'}}</span><span
-                                    class="price_count">x{{detail['SHOP_ORDER_INFO.COUNT']}}个</span>
+                            <div class="price" ng-if="order['SHOP_ORDER.STATE_OUT']==-1">
+                                <span>{{detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'}}</span>
+                                <span class="price_count">x{{detail['SHOP_ORDER_INFO.COUNT']}}</span>
                                 <span class="single_count">小计 {{detail['SHOP_ORDER_INFO.PRICE_SUM']*detail['SHOP_ORDER_INFO.COUNT'] | currency : '￥'}}</span>
+                            </div>
+                            <div class="price" ng-if="order['SHOP_ORDER.STATE_OUT']==1">
+                                <div ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
+                                    <span>{{stocklist.weight}}</span>
+                                    <span class="price_count">x{{stocklist.count}}</span>
+                                    <span class="single_count">小计 {{stocklist.price | currency : '￥'}}</span>
+                                </div>
                             </div>
                         </li>
                     </ul>
@@ -154,7 +198,7 @@
         </div>
         <div class="receipt_info">
             <p><span>联&nbsp;&nbsp;系&nbsp;&nbsp;人</span><span>{{order['SHOP_ORDER.REC_CONTACT']}}</span></p>
-            <p><span>联系电话</span><span>{{order['SHOP_ORDER.REC_PHONE']}}</span></p>
+            <p><span>联系电话</span><span>{{order['SHOP_ORDER.REC_PHONE']}}</span></p><br>
             <div ng-show="order['SHOP_ORDER.TYPE']=='3'">
                 <h3 class="info_title">提货信息</h3>
                 <p><span>提货方式</span><span>自提</span></p>
