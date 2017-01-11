@@ -1,79 +1,90 @@
-<div class="effectiveArea">
+<div class="effectiveArea" ng-init="initData()">
     <div class="goodsDetail">
-        <div class="crumbsBar">
-            <a href="">爆款菜品</a>
-            <a href="">水果</a>
-            <a href="">蓝莓</a>
-        </div>
+        <!--<div class="crumbsBar">-->
+            <!--<a href="">爆款菜品</a>-->
+            <!--<a href="">水果</a>-->
+            <!--<a href="">蓝莓</a>-->
+        <!--</div>-->
         <div class="goodsDetailShow">
             <div class="picShow">
                 <div class="mainPic">
-                    <img src="../images/togetherBuy_pic_1.png" alt="">
+                    <img ng-src="{{FILE_SERVER_DOMAIN+product['SHOP_PRODUCT.CMP']}}">
                 </div>
                 <div class="picList">
                     <ul>
-                        <li><img src="../images/togetherBuy_pic_1.png" alt=""></li>
-                        <li><img src="../images/togetherBuy_pic_1.png" alt=""></li>
-                        <li><img src="../images/togetherBuy_pic_1.png" alt=""></li>
-                        <li><img src="../images/togetherBuy_pic_1.png" alt=""></li>
-                        <li><img src="../images/togetherBuy_pic_1.png" alt=""></li>
+                        <li ng-repeat="slide in slides">
+                            <img ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
+                                 style="height: 100%;width: 100%;">
+                        </li>
                     </ul>
                 </div>
             </div>
             <div class="purchaseChoose">
                 <div class="title">
-                    <h2 class="goodsName">Driscoll's智利蓝莓12盒 （单盒125g）</h2>
-                    <p class="subTitle">颗粒超大饱满 富含花青素</p>
+                    <h2 class="goodsName" ng-bind="product['SHOP_PRODUCT.PRD_NAME']"></h2>
+                    <p class="subTitle" ng-bind="'商品编码 ：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']"></p>
                 </div>
                 <div class="priceBox">
                     <div class="priceGroup">
                         <span class="name">价格</span>
-                                <span class="content">
-                                    <span class="current"><span class="moneySign">¥</span>28.00</span>
-                                    <span class="origin">¥28.00</span>
-                                </span>
+                        <span class="content">
+                            <span class="current" ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
+                                  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+                            </span>
+                            <span class="origin" ng-if="sku!=undefined&&sku['isSale']"
+                                  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
+                            </span>
+                            <!--<span ng-bind="skuData.minPrice | currency :'￥'"></span> - -->
+                            <!--<span ng-bind="skuData.maxPrice | currency :'￥'"></span>-->
+                        </span>
                     </div>
-                    <div class="promotionGroup">
-                        <span class="name">促销</span>
-                                <span class="content">
-                                    <span class="activities"><span class="sign">下单立减</span>下单立减10.00元，买一送一</span>
-                                </span>
-                    </div>
+                    <!--<div class="promotionGroup">-->
+                    <!--<span class="name">促销</span>-->
+                    <!--<span class="content">-->
+                    <!--<span class="activities">-->
+                    <!--<span class="sign">下单立减</span>-->
+                    <!--下单立减10.00元，买一送一-->
+                    <!--</span>-->
+                    <!--</span>-->
+                    <!--</div>-->
                 </div>
                 <div class="categoriesChoose">
-                    <div class="standards">
-                        <span class="name">种类</span>
+                    <div class="standards" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>0">
+                        <span class="name" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']"></span>
                         <ul class="standardsList">
-                            <li>美莓组合</li>
-                            <li>红树莓</li>
-                            <li>蓝莓</li>
-                            <li>双莓组合</li>
-                            <li>双莓组合</li>
-                            <li>双莓组合</li>
-                            <li>双莓组合</li>
+                            <li ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1']"
+                                ng-click="checkContent(1,item)"
+                                ng-bind="item">
+                            </li>
                         </ul>
                     </div>
-                    <div class="standards">
-                        <span class="name">规格</span>
+                    <div class="standards" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>1">
+                        <span class="name" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME2']"></span>
                         <ul class="standardsList">
-                            <li>美莓组合</li>
-                            <li>红树莓</li>
-                            <li>蓝莓</li>
-                            <li>双莓组合</li>
+                            <li ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT2']"
+                                ng-click="checkContent(2,item)"
+                                ng-bind="item"></li>
+                        </ul>
+                    </div>
+                    <div class="standards" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>2">
+                        <span class="name" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']"></span>
+                        <ul class="standardsList">
+                            <li ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT3']"
+                                ng-click="checkContent(3,item)"
+                                ng-bind="item"></li>
                         </ul>
                     </div>
                 </div>
                 <div class="countChoose">
                     <span class="name">数量</span>
                     <div class="numberChange">
-                        <a href="" class="control reduce"></a>
-                        <input type="text" class="text" value="5">
-                        <a href="" class="control add"></a>
+                        <a ng-click="lessSize()" class="control reduce"></a>
+                        <input type="text" class="text" ng-model="skuSize">
+                        <a ng-click="moreSize()" class="control add"></a>
                     </div>
                 </div>
                 <div class="endPayGroup">
-                    <a href="" class="addToCart">加入购物车</a>
-                    <a href="" class="buyNow">立即购买</a>
+                    <a href="" class="addToCart" ng-click="addToCart()">加入购物车</a>
                     <a href="" class="collect"></a>
                 </div>
             </div>
@@ -146,19 +157,12 @@
             <div class="detailIntro">
                 <div class="introCategories">
                     <ul>
-                        <li><a href="" class="active">图文详情</a></li>
-                        <li><a href="">评价详情</a></li>
+                        <li><a href="" class="active" ng-click="prd_detai_model='detail'">图文详情</a></li>
+                        <li><a href="" ng-click="prd_detai_model='comment'">评价详情</a></li>
                     </ul>
                 </div>
                 <div class="introContent">
-                    <div class="imgList">
-                        <img src="../images/goodsDetailed.png" alt="">
-                        <img src="../images/goodsDetailed.png" alt="">
-                        <img src="../images/goodsDetailed.png" alt="">
-                        <img src="../images/goodsDetailed.png" alt="">
-                        <img src="../images/goodsDetailed.png" alt="">
-                        <img src="../images/goodsDetailed.png" alt="">
-                    </div>
+                    <span ng-bind-html="product['SHOP_PRODUCT.SHOP_DES']"></span>
                 </div>
             </div>
         </div>
