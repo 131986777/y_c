@@ -60,7 +60,9 @@
   padding: 2px;
   border: none;
   outline: none;
-  height: 48px; }
+  height: 48px;
+  width:195px;
+}
 /* line 58, ../sass/login.scss */
 .loginPanel .middle .infoPanel .mid .account .word {
   font-size: 14px;
@@ -78,11 +80,15 @@
   color: #989898; }
 /* line 74, ../sass/login.scss */
 .loginPanel .middle .infoPanel .pos .regist {
-  cursor: pointer; }
+  cursor: pointer;
+  color: #b2b2b2;
+  font-size: 13px;}
 /* line 78, ../sass/login.scss */
 .loginPanel .middle .infoPanel .pos .forget {
   float: right;
-  cursor: pointer; }
+  cursor: pointer;
+  color: #b2b2b2;
+  font-size: 13px;}
 /* line 83, ../sass/login.scss */
 .loginPanel .middle .infoPanel .but {
   width: 270px;

@@ -3,7 +3,6 @@
     width: 965px;
     min-height: 633px;
     background-color: white;
-
 }
 .row-wrap1 .row-content{
     margin-bottom: 30px;
@@ -29,6 +28,7 @@
 .row-wrap1 .row-content .info .addInfo .pos{
     margin-bottom: 25px;
 }
+
 .row-wrap1 .row-content .info .addInfo .name{
     font-size: 25px;
     color: #494949;
@@ -120,9 +120,23 @@
     margin-right: 15px;
     color: white;
 }
+.row-wrap1 .card .addCard {
+
+    background-color: #c1c1c1!important;
+}
 .row-wrap1 .card .eachCard .pos .num{
     display: inline-block;
     font-size: 22px;
+}
+.row-wrap1 .card .eachCard .posAdd{
+    height: 180px;
+    background-color: #F5F5F5;
+}
+.row-wrap1 .card .addCard .posAdd .add{
+    font-size: 22px;
+    text-align: center;
+    line-height:8;
+    color: #4b4b4b;
 }
 .row-wrap1 .card .eachCard .pos .ka{
     float: right;
@@ -133,6 +147,7 @@
     font-size: 14px;
     margin-bottom: 10px;
 }
+
 .row-wrap1 .card .eachCard .pos .m{
     width: 165px;
     margin: 0 auto;

@@ -1,26 +1,35 @@
 <div class="row-wrap row-wrap1">
-    <div class="row-header1 font">修改密码</div>
-    <div class="row-content">
-        <form action="" class="bu-form">
-            <div class="form-group">
-                <div class="pwd">原密码</div>
-                <input type="password" class="typeIn large-size" placeholder="" ng-model="login_pwd" ng-blur="passwordIsExist()">
-            </div>
+        <div class="row-header1 font">修改密码</div>
+        <div class="row-content">
+            <form action="" class="bu-form">
+                <div class="form-group">
+                    <div class="pwd">手机号</div>
+                    <input type="text" class="typeIn large-size" placeholder="">
+                </div>
+                <div class="form-group">
+                    <div class="pwd">验证码</div>
+                    <div class="yzmPos">
+                        <input type="text" class="typeIn large-size" placeholder="">
+                        <div class="yzm">获取验证码</div>
+                        <div class="send">发送中...</div>
+                        <div class="sended">已发送（30s）</div>
+                    </div>
 
-            <div class="form-group">
-                <div class="pwd">新密码</div>
-                <input type="password" class="typeIn large-size" placeholder="">
+                </div>
+                <div class="form-group">
+                    <div class="pwd">新密码</div>
+                    <input type="password" class="typeIn large-size" placeholder="">
 
-            </div>
-            <div class="form-group">
-                <div class="pwd">确认密码</div>
-                <input type="password" class="typeIn large-size" placeholder="">
+                </div>
+                <div class="form-group">
+                    <div class="pwd">确认密码</div>
+                    <input type="password" class="typeIn large-size" placeholder="">
 
+                </div>
+            </form>
+            <div class="save-btn">
+                <button class="btn btn-info" style="margin-right: 10px" ng-click="submit()" data-dismiss="modal">保存</button>
+                <button class="btn btn-defult" data-dismiss="modal">取消</button>
             </div>
-        </form>
-        <div class="save-btn">
-            <button class="btn btn-info" style="margin-right: 10px" ng-click="submit()" data-dismiss="modal">保存</button>
-            <button class="btn btn-defult" data-dismiss="modal">取消</button>
         </div>
     </div>
-</div>

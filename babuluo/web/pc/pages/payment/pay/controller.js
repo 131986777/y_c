@@ -2,6 +2,7 @@ angular.module('AndSell.PC.Main').controller('pages_payment_pay_Controller', fun
 
     modalFactory.setTitle("订单支付");
     modalFactory.setHeader(false);
-    modalFactory.setCateGory(true);
+    modalFactory.setShowMenu(true);
+    modalFactory.setTab(true);
 
 });

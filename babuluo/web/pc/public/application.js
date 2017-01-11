@@ -36,6 +36,21 @@ AndSellUI.service('modalFactory', function ($rootScope) {
         $rootScope.$broadcast("header-bar", bar);
     };
 
+    this.setShowMenu = function (state) {
+        var bar = {};
+        bar.OnOffState = state;
+        $rootScope.$broadcast("header-showMenu", bar);
+    };
+    this.setLeftMenu = function (state) {
+        var bar = {};
+        bar.OnOffState = state;
+        $rootScope.$broadcast("leftMenu", bar);
+    };
+    this.setTab = function (state) {
+        var bar = {};
+        bar.OnOffState = state;
+        $rootScope.$broadcast("header-tab", bar);
+    };
     this.setSide = function (state) {
         var bar = {};
         bar.OnOffState = state;

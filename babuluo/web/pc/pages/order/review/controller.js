@@ -3,9 +3,8 @@ angular.module('AndSell.PC.Main').controller('pages_order_review_Controller', fu
     modalFactory.setTitle("订单评论");
 
     modalFactory.setHeader(false);
-
-    modalFactory.setCateGory(true);
-
+    modalFactory.setShowMenu(true);
+    modalFactory.setTab(true);
     modalFactory.setSide(true);
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;

@@ -23,7 +23,8 @@ body {
   color: #4b4b4b;
   height: 100%;
   width: 965px;
-  padding-bottom: 35px; }
+  padding-bottom: 35px;
+}
 /* line 29, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .row-header1 {
   height: 88px;
