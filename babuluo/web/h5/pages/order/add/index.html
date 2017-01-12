@@ -29,7 +29,7 @@
             <!--</div>-->
             <!--</div>-->
             <!-- BEGIN 商品信息-->
-            <div class="prdList-wap" ng-repeat="sku in skuList">
+            <div class="prdList-wap" ng-repeat="sku in skuList" ng-if="sku['isPresent'] == null">
                 <div class="product-wrap weui_cell">
                     <div class="product-img-wrap weui_cell_hd">
                         <img ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"
@@ -66,29 +66,29 @@
                         <!--</div>-->
                     <!--</div>-->
                 </div>
-                <div class="freePrd weui_cell" ng-if="sku['hasPresent']">
+                <div class="freePrd weui_cell" ng-if="presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ] != null">
                     <div class="product-select-wrap weui_cell_hd">
                     <span class="free-icon">赠</span>
                     </div>
                     <div class="product-img-wrap weui_cell_hd">
-                        <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+sku['present']['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
+                        <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
                     </div>
                     <div class="content weui_cell_bd weui_cell_primary">
-                        <h5 class="product-name" ng-bind="sku['present']['SHOP_PRODUCT.PRD_NAME']"></h5>
-                        <p class="product-cls" ng-bind="sku['present']['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ sku['present']['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ sku['planUnit']['presents'][0]['num']"></p>
+                        <h5 class="product-name" ng-bind="presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_PRODUCT.PRD_NAME']"></h5>
+                        <p class="product-cls" ng-bind="presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ sku['planUnit']['presents'][0]['num']"></p>
                     </div>
                 </div>
             </div>
             <!--赠品-->
-            <div ng-if="orderPresent != null">
+            <div ng-if="orderPresentNum != 0">
             <div class="free-icon" style="margin: 20px 30px 10px">赠</div>
             <div class="freePrd weui_cell">
                 <div class="product-img-wrap weui_cell_hd">
-                    <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+orderPresent['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
+                    <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+presentMap['order']['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
                 </div>
                 <div class="content weui_cell_bd weui_cell_primary">
-                    <h5 class="product-name" ng-bind="orderPresent['SHOP_PRODUCT.PRD_NAME']"></h5>
-                    <p class="product-cls" ng-bind="orderPresent['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ orderPresent['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ orderPresentNum"></p>
+                    <h5 class="product-name" ng-bind="presentMap['order']['SHOP_PRODUCT.PRD_NAME']"></h5>
+                    <p class="product-cls" ng-bind="presentMap['order']['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ presentMap['order']['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ orderPresentNum"></p>
                 </div>
             </div>
             </div>

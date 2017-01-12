@@ -5,6 +5,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
+
     $scope.initData = function () {
         $(".product-list").css("min-height", document.documentElement.clientHeight - 100);
         modalFactory.setCurrentPage('cart');
@@ -97,7 +98,6 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             }
         }
     }
-
     $scope.bindPromoResult = function () {
         var presentIds = '';
         $scope.skuList.forEach(function (ele) {
@@ -122,29 +122,52 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
                         presentIds += unit['presents'][0]['skuId'];
                     }
                 }
-
             })
         })
         if (presentIds != '') {
             productFactory.getPresentsBySkuIds({'SHOP_PRODUCT_SKU.SKU_IDS': presentIds}, function (response) {
                 $scope.presents = response.data;
-                $scope.skuList.forEach(function (ele) {
-                    $scope.presents.forEach(function (present) {
-                        if (ele['planUnit'] == null) {
-                            return;
-                        }
-                        if (null == ele['planUnit']['presents']) {
-                            return;
-                        }
-                        if (ele['planUnit']['presents'][0]['skuId']
-                            == present['SHOP_PRODUCT_SKU.SKU_ID']) {
-                            ele['present'] = present;
-                            ele['hasPresent'] = true;
-                        } else {
-                            ele['hasPresent'] = false;
+                $scope.presentMap = {} ;
+                $scope.planUnitList.forEach(function(unit){
+                    if (null == unit) {
+                        return;
+                    }
+                    if (null == unit['presents'] || unit['presents'].length < 1){
+                        return;
+                    }
+                    $scope.presents.forEach(function(present){
+                        if (unit['presents'][0]['skuId'] == present['SHOP_PRODUCT_SKU.SKU_ID']){
+                            present['isPresent'] = true ;
+                            if (unit['skuVOs'] == null || unit['skuVOs'].length == 0){
+                                present['orderOrPrd'] = "order" ;
+                            }else {
+                                present['orderOrPrd'] = "prd" ;
+                                present['blongToSkuId'] = unit['skuVOs'][0]['skuId'] ;
+                                $scope.presentMap[ present['blongToSkuId'] ] = present;
+                            }
+                            $scope.skuList.push(present) ;
                         }
                     })
                 })
+
+                //旧逻辑
+                //$scope.skuList.forEach(function (ele) {
+                //    $scope.presents.forEach(function (present) {
+                //        if (ele['planUnit'] == null) {
+                //            return;
+                //        }
+                //        if (null == ele['planUnit']['presents']) {
+                //            return;
+                //        }
+                //        if (ele['planUnit']['presents'][0]['skuId']
+                //            == present['SHOP_PRODUCT_SKU.SKU_ID']) {
+                //            ele['present'] = present;
+                //            ele['hasPresent'] = true;
+                //        } else {
+                //            ele['hasPresent'] = false;
+                //        }
+                //    })
+                //})
             });
         }
 

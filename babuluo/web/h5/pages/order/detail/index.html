@@ -100,7 +100,7 @@
                     商品列表
                 </div>
             </div>
-            <div class="product-wrap weui_cell" ng-repeat="detail in orderDetailList"
+            <div class="product-wrap weui_cell" ng-repeat="detail in orderDetailList" ng-if="detail['isPresent'] == null"
                  ng-click="toDetail(detail['SHOP_ORDER_INFO.PRD_ID'])">
                 <div class="product-img-wrap weui_cell_hd">
                     <img class="product-img"
@@ -129,6 +129,30 @@
                             class="product-num" ng-bind="'X '+stocklist.count"></span></p>
 
                         </span>
+                    </div>
+                </div>
+                <div class="freePrd weui_cell" ng-if="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ] != null">
+                    <div class="product-select-wrap weui_cell_hd">
+                        <span class="free-icon">赠</span>
+                    </div>
+                    <div class="product-img-wrap weui_cell_hd">
+                        <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+presentMap[ detail['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_ORDER_INFO.IMG_URL']}}">
+                    </div>
+                    <div class="content weui_cell_bd weui_cell_primary">
+                        <h5 class="product-name" ng-bind="presentMap[ detail['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_ORDER_INFO.PRD_NAME']"></h5>
+                        <p class="product-cls" ng-bind="presentMap[ detail['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] +'x'+ presentMap[ detail['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_ORDER_INFO.COUNT']"></p>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="presentMap['order'] != null">
+                <div class="free-icon" style="margin: 20px 30px 10px">赠</div>
+                <div class="freePrd weui_cell">
+                    <div class="product-img-wrap weui_cell_hd">
+                        <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+presentMap['order']['SHOP_ORDER_INFO.IMG_URL']}}">
+                    </div>
+                    <div class="content weui_cell_bd weui_cell_primary">
+                        <h5 class="product-name" ng-bind="presentMap['order']['SHOP_ORDER_INFO.PRD_NAME']"></h5>
+                        <p class="product-cls" ng-bind="presentMap['order']['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] +'x'+ presentMap['order']['SHOP_ORDER_INFO.COUNT']"></p>
                     </div>
                 </div>
             </div>

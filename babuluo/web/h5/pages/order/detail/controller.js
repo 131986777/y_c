@@ -11,6 +11,21 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         $scope.shop = JSON.parse(getCookie('currentShopInfo'));
     }
 
+    $scope.bindPresent = function () {
+        $scope.presentMap = {}
+        $scope.orderDetailList.forEach(function(detail){
+            if ( detail['isPresent'] == null){
+                return
+            }
+            if ( detail['orderOrPrd'] == "prd"){
+                $scope.presentMap[detail['blongToSkuId']] = detail;
+            }else if ( detail['orderOrPrd'] == "order"){
+                $scope.presentMap['order'] = detail ;
+            }
+        })
+    }
+
+
     $scope.getOrder = function (id) {
         orderFactory.getOrderById({'SHOP_ORDER.ID': id}, function (response) {
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
@@ -19,6 +34,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             $scope.orderDetailList.forEach(function (ele) {
                 setContentsInfoForOrder(ele);
             });
+            $scope.bindPresent();
         });
     }
 
