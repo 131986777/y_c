@@ -50,7 +50,7 @@ angular.module('AndSell.Main').controller('shop_shop_district_districtList_Contr
 
     $scope.delDistrict = function (value) {
         modalFactory.showAlert("确认删除区域：［" + value['DISTRICT.DISTRICT_NAME'] + "］吗?", function () {
-            districtFactory.delById({'MEMBER.USER_ID': value}, function (response) {
+            districtFactory.delById(value, function (response) {
                 modalFactory.showShortAlert("删除成功");
                 $scope.initLoad();
             });

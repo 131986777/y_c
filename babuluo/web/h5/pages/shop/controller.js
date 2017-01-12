@@ -26,6 +26,10 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
             });
             $scope.shopListLength = list.length;
             $scope.districtList = response.extraData.districtList;
+            $scope.districtList.push({
+                'DISTRICT.DISTRICT_NAME':'全部区域',
+                'DISTRICT.DISTRICT_ID':0
+            });
             var shopMap = new Map();
             list.forEach(function (ele) {
                 shopMap.set(ele['SHOP.SHOP_ID'], ele);
@@ -87,7 +91,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
         $scope.currDistrictId = districtId;
         var list = new Array;
         $scope.shopList.forEach(function (ele) {
-            if (ele['SHOP.DISTRICT_ID'] == districtId) {
+            if (ele['SHOP.DISTRICT_ID'] == districtId || districtId == 0) {
                 list.push(ele);
             }
         });
@@ -157,7 +161,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
 
     //快速排序
     var quickSort = function (arr) {
-        if (arr.length <= 1||$scope.coord == undefined) {
+        if (arr.length <= 1 || $scope.coord == undefined) {
             return arr;
         }
 
