@@ -28,8 +28,8 @@ body {
   width: 1202px;
   /* border: 1px solid #c1c1c1; */
   overflow: hidden;
-  border-top: 1px solid #c1c1c1;
-  border-left: 1px solid #c1c1c1;
+  border-top: 1px solid #ebebeb;
+  border-left: 1px solid #ebebeb;
   margin-top: 25px;
   margin-bottom: 35px; }
 /* line 32, ../sass/productList.scss */
@@ -39,8 +39,8 @@ body {
   text-align: center;
   width: 240px;
   height: 280px;
-  border-right: 1px solid #c1c1c1;
-  border-bottom: 1px solid #c1c1c1;
+  border-right: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
   cursor: pointer;
   position: relative; }
 /* line 42, ../sass/productList.scss */
