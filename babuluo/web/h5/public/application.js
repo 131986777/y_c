@@ -432,7 +432,8 @@ AndSellUI.directive('cardModal', function (weUI, modalFactory, personalFactory) 
         }
     }
 });
-AndSellService.factory("http", function ($http, weUI) {
+
+AndSellService.factory("http", function ($http) {
     var _post = function (url, data, funcSuccess, funcFail) {
         return $http.post(url, $.param(data), {
             headers: {
@@ -449,7 +450,6 @@ AndSellService.factory("http", function ($http, weUI) {
             } else {
                 if (angular.isFunction(funcFail)) {
                     if (funcFail != undefined) {
-                        weUI.toast.hideLoading();
                         funcFail(response);
                     }
                 }
@@ -467,6 +467,17 @@ AndSellService.factory("http", function ($http, weUI) {
                 }
                 return _post(baseURL + url, form, funcSuccess, funcFail)
             }
+        }, post_ori: function (url, param, func, error) {
+            return $http.post(url, $.param(param), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function (result) {
+
+                if (angular.isFunction(func)) {
+                    func(result);
+                }
+            }).error(function (err) {
+                if (angular.isFunction(error)) {
+                    error(err);
+                }
+            });
         }
     };
 });
