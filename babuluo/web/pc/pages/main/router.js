@@ -11,14 +11,14 @@ $import('pages/product/detail', {PRD_ID: '1242'},true);
 $import('pages/product/list', {keyword: '', classId: undefined, tagId: ''}, true);
 //$import('pages/product/tagPrdList', {tagId: '1023'});
 //
-//$import('pages/order/add', {SKU_IDS: '1060', COUPON_INFO: ''});
+// $import('pages/order/add', {SKU_IDS: '1060', COUPON_INFO: ''});
 $import('pages/order/list', {state: 'all'}, true);
 //$import('pages/order/detail', {ORDER_ID: '1030',FROM:'List'});
 //$import('pages/order/addCoupon', {SKU_IDS: '1060', pickupPerson: '{}', PRODUCTS: '{}', MONEY:
 // '0'}); $import('pages/order/addAddress', {SKU_IDS: '1060'});
 // $import('pages/order/CashOnDeliveryOrder');
 $import('pages/order/review',{ID:''},true);
-$import('pages/order/confirm', {}, true);
+$import('pages/order/confirm', {SKU_IDS: '', COUPON_INFO: ''}, true);
 $import('pages/order/detail', {ORDER_ID: ''}, true);
 
 //

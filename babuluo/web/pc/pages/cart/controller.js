@@ -263,7 +263,7 @@ angular.module('AndSell.PC.Main').controller('pages_cart_Controller', function (
             if (existNoStockPrd) {
                 modalFactory.showShortAlert('存在售罄商品');
             } else {
-                $state.go('pages/order/add', {SKU_IDS: list.toString()});
+                $state.go('pages/order/confirm', {SKU_IDS: list.toString()});
             }
         } else {
             modalFactory.showShortAlert('至少选择一项');
