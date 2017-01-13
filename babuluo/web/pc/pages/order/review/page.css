@@ -105,7 +105,7 @@ body {
   background: url(../../../public/css/img/star-matrix.png) no-repeat 0 0;
   top: 13px;
 }
-.nostar {background-position:0 0}
+.nostar {background-position:0 0px}
 .onestar {background-position:0 -16px}
 .twostar {background-position:0 -32px}
 .threestar {background-position:0 -48px}
