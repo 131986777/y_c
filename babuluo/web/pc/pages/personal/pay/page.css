@@ -161,7 +161,6 @@ body {
 
 }
  .modal-content{
-    height: 100%;
     border: 1px solid #dcdcdc!important;
 }
 .modal-body{
@@ -195,13 +194,22 @@ body {
 .weixin .modal-content p .sep{
     color: #f36f1a;
 }
+.weixin .modal-content{
+    width:370px ; height:440px;margin:0 auto ;margin-top: 200px;
+}
+.huiyuan .modal-content{
+    width:931px ;
+    min-height:300px;
+    margin: 0 auto ;
+    margin-top: 100px;
+}
 /*会员卡支付弹出层*/
 .huiyuan .modal-content .card{
     overflow: hidden;
-    margin-left: 42px;
+    margin-left: 55px;
 }
-.huiyuan .modal-content .cardpos{
-
+.huiyuan .modal-content .cardPos{
+margin-bottom: 50px;
 }
 .huiyuan .modal-content .card .eachCard{
     width: 365px;
@@ -244,7 +252,6 @@ body {
     margin-left: 15px;
     /* margin-top: 3px; */
     padding-top: 15px;
-    height: 100%;
     margin-right: 15px;
     color: white;
 }
@@ -298,4 +305,7 @@ body {
 }
 .huiyuan .modal-content .card .eachCard .pos .foot .time .t_inner{
     display: inline-block;
+}
+.modalBg{
+    background-color: rgba(0, 0, 0, 0.3);
 }
