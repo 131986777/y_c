@@ -79,9 +79,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     };
 
     $scope.cardPay = function () {
+        console.log(getCookie("payCard"));
         $scope.payCard = JSON.parse(getCookie("payCard"));
         if (!isEmptyObject($scope.payCard)) {
-            weUI.dialog.confirm("提示", "确认支付该订单", function () {
+            weUI.dialog.confirm("提示", "确认支付该订单？", function () {
                 weUI.toast.showLoading('正在支付');
                 var form = {};
                 form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
