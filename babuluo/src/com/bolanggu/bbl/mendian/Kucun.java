@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.pabula.api.API;
 import com.pabula.api.data.ReturnData;
 import com.pabula.common.util.HttpClientUtil;
+import com.pabula.common.util.MD5;
 import com.pabula.fw.exception.RuleException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -172,16 +173,16 @@ public class Kucun {
         list.add("100083");
         list.add("100084");
         //list.add("111111");
-        for (int i = 0; i < list.size(); i++) {
-            String arg = list.get(i);
-
-            Thread t = new Thread(new Runnable(){
-                public void run(){
-                    tongbu(arg);
-                }});
-            t.start();
-
-        }
+        //for (int i = 0; i < list.size(); i++) {
+        //    String arg = list.get(i);
+        //
+        //    Thread t = new Thread(new Runnable(){
+        //        public void run(){
+        //            tongbu(arg);
+        //        }});
+        //    t.start();
+        //
+        //}
 
 
 
@@ -199,9 +200,23 @@ public class Kucun {
         //    e.printStackTrace();
         //}
 
-        //System.out.println(MD5.MD5Encode("appid=wx7c4d78e05a44115e&body=订单4219&mch_id=1298356201&nonce_str=4ylbnn1xaza9fo6ir915upslmk9fycnm&notify_url=http://app.bblycyz.com/AndSell/h5/pages/main/wxPayCallback.jsp&out_trade_no=10003463&product_id=4219&spbill_create_ip=null&total_fee=880&trade_type=NATIVE&key=fdbnhlsh6gs79ro4lhr6vutmgnx0flfc"));
-        //System.out.println(com.tencent.common.MD5.MD5Encode("appid=wx7c4d78e05a44115e&body=订单4219&mch_id=1298356201&nonce_str=4ylbnn1xaza9fo6ir915upslmk9fycnm&notify_url=http://app.bblycyz.com/AndSell/h5/pages/main/wxPayCallback.jsp&out_trade_no=10003463&product_id=4219&spbill_create_ip=null&total_fee=880&trade_type=NATIVE&key=fdbnhlsh6gs79ro4lhr6vutmgnx0flfc"));
+        String c="appid=wx7c4d78e05a44115e&body=订单4233&mch_id=1298356201&nonce_str=x2oqf7lu03rl8wqvcwb9ww08efwmnuob&notify_url=http://app.bblycyz.com/AndSell/h5/pages/main/wxPayCallback.jsp&out_trade_no=10003467&product_id=4233&spbill_create_ip=null&total_fee=880&trade_type=NATIVE&key=fdbnhlsh6gs79ro4lhr6vutmgnx0flfc";
+        StringBuffer sb = new StringBuffer();
+        sb.append(c);
+        System.out.println(MD5.MD5Encode(new String(sb.toString())));
+        System.out.println(com.tencent.common.MD5.MD5Encode(new String(sb.toString())));
+        System.out.println(com.tencent.common.MD5.MD5Encode(sb.toString()));
 
+        byte[] b = c.getBytes("gbk");//编码
+        String sa = new String(b, "gbk");//解码:用什么字符集编码就用什么字符集解码
+        System.out.println(sa);
+
+        byte[] d = c.getBytes("utf-8");//编码
+        String sa2 = new String(d, "utf-8");//解码:用什么字符集编码就用什么字符集解码
+        System.out.println(sa2);
+
+        System.out.println(com.tencent.common.MD5.MD5Encode(new String(d)));
+        System.out.println(com.tencent.common.MD5.MD5Encode(new String(b)));
     }
 
 

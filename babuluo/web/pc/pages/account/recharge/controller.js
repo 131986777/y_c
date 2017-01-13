@@ -12,6 +12,8 @@ angular.module('AndSell.PC.Main').controller('pages_account_recharge_Controller'
     modalFactory.setTab(true);
     modalFactory.setLeftMenu(false);
     $(".zhifu").click(function () {
+        $(".zhifu").removeClass("active");
+        $(".yang").removeClass("choosed");
         if($(this).hasClass("active")){
             $(this).removeClass("active");
             $(this).find(".yang").removeClass("choosed");
