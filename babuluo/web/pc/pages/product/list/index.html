@@ -15,7 +15,8 @@
                     <div class="eachPro1">
                         <div class="proPic">
                             <img class="img eachPic" ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])"
-                                 ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220" onerror="nofind();"/>
+                                 ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"
+                                 onerror="nofind();"/>
                         </div>
                         <div class="proInfo">
                             <span class="detail" ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">{{item['SHOP_PRODUCT.PRD_NAME']}}</span>
@@ -27,10 +28,17 @@
                             <span class="detail money" ng-if="item['SHOP_PRODUCT.MINSKUPRICE']!=undefined"
                                   ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥'"></span>
                             <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>
+
                         </div>
-                        <div class="but show" ng-if="item['SHOP_PRODUCT.HAS_STOCK']!=0" ng-click="addToCart(item['SHOP_PRODUCT.SKULIST'][0])">
-                            <img class="img" src="/AndSell/pc/public/css/img/buyCar.png" alt="">
-                            <span class="buy">加入购物车</span>
+                        <div class="but show">
+                            <div ng-if="item['SHOP_PRODUCT.HAS_STOCK']!=0"
+                                 ng-click="addToCart(item['SHOP_PRODUCT.SKULIST'][0])">
+                                <img class="img" src="/AndSell/pc/public/css/img/buyCar.png" alt="">
+                                <span class="buy">加入购物车</span>
+                            </div>
+                            <div ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0">
+                                <span class="buy">已售罄</span>
+                            </div>
                         </div>
                     </div>
                 </div>

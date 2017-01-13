@@ -368,9 +368,21 @@
   line-height: 45px;
   margin-right: 20px;
 }
-
-/* line 244, ../sass/goodsDetail.scss */
+/* line 232, ../sass/goodsDetail.scss */
 .goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .addToCart {
+  width: 175px;
+  padding-left: 40px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAVCAYAAABCIB6VAAAAAXNSR0IArs4c6QAAAnxJREFUOBGtlc9rE1EQx3eTGKl23UOIt2TTRE8RqfZQ6MGLnmoPHjz7F1REqWdPKt4E6UHsVQ+CFIpHqRcPIoIVDBFqfhGEQBCNMQslZtfPrHnL2yRtpXVgmDffmfm+ebOT1qxWq2u+718zDMNEB+iDQqFwB3soiVG9gB5BE+hR0zSvYw8tZqVSsSGbp+tTsK0KI/4rjHR/EPEpeibPD6TdblvdbrfDBSGmYgew7QgJ865D7ED0hq7faoQXwX2wTYXhruCv4f/QMBnrAvhnmWsoJJdwHALlfD5/WwW48BGYpzC5A2wlHo/fdxynquU9ISbkXyLEFJcILKLn6/X6OVXgeV4azFNYo9EIXjoYDIpgtpZ3Vs7wbE8iltgcRa/lMJQpsWCLChDLZU/BPA0LLqGRKDFPKwEGeclkspjJZL6KI6PAyChuiA+hjMJLJBKzahStVut4r9f7JXFkW/Y4FMjKPEPWxej3+8Uw8A8H13VlXQORUUS2QlA6qdLRDEHZkG9/U43M0DaHVswc+gndEQc5gZ5Gd3jZsciMJYrIZsxAmsOK6nJSdzifGfHlw22h3hgxhEK8RLCFPhwt3Mun9jffaV1yxoghk5WTDzTN+fteRHqMfNe27Y1UKvVzInEsFiuxQhKbZkMe68X7nTudzio5y5I31jHr87FWq72gg9n9iEbiLi98OYL9f3ds3dQVbN0yXd+jiw+WZS2l0+muiumW180zsufk+fxgrmaz2fcSj/xA9AJI7+Jb2Av8Ob2ix/Qz8Vv4WazDj+qmiu1KTAfvhkl9irZUwQSr8gw+fHjedRTNZnOKDi7LluRyufIEwhDiv9Al9tcjb1OBfwAf/CWMOEQFbAAAAABJRU5ErkJggg==');
+  background-position: 10% center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: #4b4b4b;
+  font-size: 14px;
+  border: 1px solid #ddd;
+}
+/* line 244, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .buyNow {
   width: 170px;
   background-color: #f36f1a;
   font-size: 14px;

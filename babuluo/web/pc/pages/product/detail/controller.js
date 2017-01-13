@@ -23,6 +23,8 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
 
     $scope.initData = function () {
 
+        console.log(JSON.parse(getCookie('currentShopInfo')));
+
         // 设置轮播图图片间隔
         $scope.myInterval = 4000;
         // 轮播图数据初始化
@@ -32,7 +34,6 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         $scope.currSkuContentSelectMap = {
             name1: '', name2: '', name3: ''
         }
-
 
         var params = {};
         params['SHOP_PRODUCT.PRD_ID'] = $stateParams.PRD_ID;
@@ -61,6 +62,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
                     });
                     $scope.calculateSaleInfo(skulistsForOrder);
                     $scope.skuData = $scope.getPrdSkuData($scope.skuList);
+
                     if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length > 0) {
                         $scope.checkContent(1, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
                     }
@@ -87,6 +89,8 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
 
         $scope.skuSize = 1;
         $scope.caculCart();
+
+
     }
 
     $scope.setPrdPicBanner = function (prd) {
@@ -340,6 +344,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
     //加入购物车
     $scope.addToCart = function () {
         if ($scope.sku != undefined) {
+            console.log($scope.sku);
             if ($scope.sku['SHOP_PRODUCT_SKU.STOCK'] > 0) {
                 var cartInfo = getCookie('cartInfo');
                 var cartSize = getCookie('cartSize');
@@ -380,6 +385,10 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         } else {
             modalFactory.showShortAlert('请选择规格！');
         }
+    }
+
+    $scope.buyNow = function () {
+
     }
 
     $scope.toShop = function () {
