@@ -6,8 +6,6 @@ angular.module('AndSell.PC.Main').controller('pages_cart_Controller', function (
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
-    setCookie('currentShopInfo',"100060");
-
     $scope.initData = function () {
         modalFactory.setCurrentPage('cart');
 

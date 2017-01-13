@@ -1,7 +1,6 @@
 package com.weixin;
 
 import com.bolanggu.bbl.ENV;
-import com.bubu.wx.pay.MatrixToImageWriter;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -135,8 +134,8 @@ public class WXPay {
         resultMap.put("out_trade_no", paramMap.get("out_trade_no"));
         resultMap.put("resultXML", resultXML);
 
-        resultMap.put("code_url",
-        encodeQrcodes(resultMap.get("code_url").toString(), WxPayConfig.WX_CODE_URL_PATH));
+//        resultMap.put("code_url",
+//        encodeQrcodes(resultMap.get("code_url").toString(), WxPayConfig.WX_CODE_URL_PATH));
         return resultMap;
     }
 
@@ -401,33 +400,33 @@ public class WXPay {
 
     /**
      * 生成二维码
-     */
-    public static String encodeQrcodes(String content, String path) {
-        String name = System.currentTimeMillis() + "";
-        String parentPath = path + name + ".jpg";
-        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-        Map hints = new HashMap();
-        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-        BitMatrix bitMatrix = null;
-        try {
-            bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
-            BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
-            try {
-                File file = new File(parentPath);
-                if (!file.getParentFile().exists()) {
-                    file.getParentFile().mkdirs();
-                }
-                ImageIO.write(image, "jpg", file);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return parentPath;
-        } catch (WriterException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-        return parentPath;
-    }
+//     */
+//    public static String encodeQrcodes(String content, String path) {
+//        String name = System.currentTimeMillis() + "";
+//        String parentPath = path + name + ".jpg";
+//        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+//        Map hints = new HashMap();
+//        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+//        BitMatrix bitMatrix = null;
+//        try {
+//            bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
+//            BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
+//            try {
+//                File file = new File(parentPath);
+//                if (!file.getParentFile().exists()) {
+//                    file.getParentFile().mkdirs();
+//                }
+//                ImageIO.write(image, "jpg", file);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            return parentPath;
+//        } catch (WriterException e1) {
+//            // TODO Auto-generated catch block
+//            e1.printStackTrace();
+//        }
+//        return parentPath;
+//    }
 
     /**
      * 拼接微信h5支付参数

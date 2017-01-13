@@ -22,7 +22,7 @@ $import('pages/order/confirm', {}, true);
 $import('pages/order/detail', {ORDER_ID: ''}, true);
 
 //
-$import('pages/personal/center', {}, true);
+// $import('pages/personal/center', {}, true);
 //$import('pages/personal/card');
 //$import('pages/personal/coupon');
 
