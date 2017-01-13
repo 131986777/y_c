@@ -68,7 +68,8 @@
                         <td>
                             <div class="parent">
                                 <div class="pic">
-                                    <img class="proPic" ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
+                                    <img class="proPic"
+                                         ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
                                 </div>
                                 <div class="info">
                                     {{sku['SHOP_PRODUCT.PRD_NAME']}}
@@ -84,7 +85,8 @@
                         <td>
                             <div class="num">
                                 <lable class="num-decrement" ng-click="lessSize(sku)"></lable>
-                                <input class="txt" type="" name="" ng-change="updateCartPrice()" ng-model="sku['SHOP_PRODUCT_SKU.SIZE']"/>
+                                <input class="txt" type="" name="" ng-change="updateCartPrice()"
+                                       ng-model="sku['SHOP_PRODUCT_SKU.SIZE']"/>
                                 <lable class="num-increment" ng-click="moreSize(sku)"></lable>
                             </div>
                         </td>
@@ -103,14 +105,14 @@
             <div class="foot">
                 <div class="footFirst">
                     <span>共</span>
-                    <span class="sep">{{totalSize}}</span>
+                    <span class="sep" ng-init="totalSize=0">{{totalSize}}</span>
                     <span>件商品</span>
                 </div>
                 <div class="footSecond">
                     <span>合计</span>
                     <span class="youhui" ng-if="totalPrice-beforePrice>0">（已优惠{{totalPrice-beforePrice | currency :'￥'}}）</span>
                     <span class="sep1">{{totalPrice | currency :'￥'}}</span>
-                    <div class="buy">去结算</div>
+                    <div class="buy" ng-click="addOrder()">去结算</div>
                 </div>
             </div>
         </div>
