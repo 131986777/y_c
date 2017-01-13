@@ -1,0 +1,190 @@
+<div class="row-wrap row-wrap1">
+    <div class="row-header row-header1">
+            选择付款方式
+    </div>
+    <div class="contends">
+        <div class="info">
+            收货信息
+        </div>
+        <div class="infoTop">
+            <div class="infoFirst">
+                <div class="front">收&nbsp;&nbsp;货&nbsp;&nbsp;人</div>
+                <div class="">小红啊</div>
+            </div>
+            <div class="infoFirst">
+                <div class="front">提货门店</div>
+                <div class="">朗诗国际店</div>
+            </div>
+            <div class="infoFirst">
+                <div class="front">门店地址</div>
+                <div class="">江苏省 南京市 建邺区 南京国家广告产业园</div>
+            </div>
+            <div class="infoFirst">
+                <div class="front">门店电话</div>
+                <div class="">18251815890</div>
+            </div>
+            <div class="infoFirst">
+                <div class="front">门店地址</div>
+                <div class="">江苏省 南京市 建邺区 南京国家广告产业园</div>
+            </div>
+        </div>
+        <div class="infoMiddle">
+            <div class="infoSecond">
+                <div class="front">商品金额</div>
+                <div class="">￥280.00</div>
+            </div>
+            <div class="infoSecond">
+                <div class="front">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费</div>
+                <div class="">￥2.00</div>
+            </div>
+            <div class="infoSecond">
+                <div class="front">优惠金额</div>
+                <div class="">￥2.00</div>
+            </div>
+        </div>
+        <div class="infoLast">
+            <div class="infoThird">
+                <div class="front">订单金额</div>
+                <div class="price">￥280.00</div>
+            </div>
+        </div>
+        <div class="foot">
+            <div class="zhifu">
+                <span class="payWay huiyuan" ng-click="chooseHuiyuan()"></span>
+                <div class="yang"></div>
+            </div>
+            <div class="zhifu">
+                <span class="payWay zhifubao"></span>
+                <div class="yang"></div>
+            </div>
+            <div class="zhifu" ng-click="chooseModal()">
+                <span class="payWay weixin"></span>
+                <div class="yang"></div>
+            </div>
+        </div>
+    </div>
+
+    <div style="clear: both"></div>
+
+</div>
+<div class="modal fade text-left in weixin"
+     ng-show="ifShow"
+     data-keyboard="false" data-backdrop="static"
+     tabindex="-1" data-backdrop="static" data-keyboard="false" aria-hidden="false"
+     style="display: block; padding-right: 17px;
+          width:370px ;height: 440px; margin-left: 35% ;margin-top: 200px">
+    <div class="modal-content">
+        <div class="modal-body form-body text-left" style="margin-top: 12px;margin-bottom: 12px">
+            <span class="text-left"> 微信支付 </span>
+            <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
+        </div>
+        <div class="weixinImg">
+            <img class="ma" src="../../public/css/img/weixinma.png" alt="">
+        </div>
+        <p>请使用<span class="sep">微信</span>扫一扫</p>
+        <p>二维码完成支付</p>
+    </div>
+</div>
+<div class="modal fade text-left in huiyuan"
+     ng-show="ifShowhuiyuan       "
+     data-keyboard="false" data-backdrop="static"
+     tabindex="-1" data-backdrop="static" data-keyboard="false" aria-hidden="false"
+     style="display: block; padding-right: 17px;
+          width:931px ;height: 785px; margin-left: 35% ;margin-top: 100px">
+    <div class="modal-content">
+        <div class="modal-body form-body text-left" style="margin-top: 12px;margin-bottom: 12px">
+            <span class="text-left"> 会员卡 </span>
+            <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
+        </div>
+        <div class="cardPos">
+            <div class="card">
+                <div class="eachCard orange">
+                    <div class="pos">
+                        <p class="num">NO. 1399 5262 515</p>
+                        <p class="num ka">金卡</p>
+                        <p class="mid">(冻结 ￥19.82)</p>
+                        <div class="m">
+                            <p class="word">余额</p>
+                            <p class="money">￥1980.00</p>
+                        </div>
+                        <div class="foot">
+                            <p class="time">2016-09-26 11:51:22</p>
+                            <div class="time">
+                                <p class="t_inner">发卡面值</p>
+                                <p class="t_inner">￥400</p>
+                            </div>
+                            <p class="time">线下门店发卡</p>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="eachCard blue">
+                    <div class="pos">
+                        <p class="num">NO. 1399 5262 515</p>
+                        <p class="num ka">金卡</p>
+                        <p class="mid">(冻结 ￥19.82)</p>
+                        <div class="m">
+                            <p class="word">余额</p>
+                            <p class="money">￥1980.00</p>
+                        </div>
+                        <div class="foot">
+                            <p class="time">2016-09-26 11:51:22</p>
+                            <div class="time">
+                                <p class="t_inner">发卡面值</p>
+                                <p class="t_inner">￥400</p>
+                            </div>
+                            <p class="time">线下门店发卡</p>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="eachCard black">
+                    <div class="pos">
+                        <p class="num">NO. 1399 5262 515</p>
+                        <p class="num ka">金卡</p>
+                        <p class="mid">(冻结 ￥19.82)</p>
+                        <div class="m">
+                            <p class="word">余额</p>
+                            <p class="money">￥1980.00</p>
+                        </div>
+                        <div class="foot">
+                            <p class="time">2016-09-26 11:51:22</p>
+                            <div class="time">
+                                <p class="t_inner">发卡面值</p>
+                                <p class="t_inner">￥400</p>
+                            </div>
+                            <p class="time">线下门店发卡</p>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="eachCard">
+                    <div class="pos">
+                        <p class="num">NO. 1399 5262 515</p>
+                        <p class="num ka">金卡</p>
+                        <p class="mid">(冻结 ￥19.82)</p>
+                        <div class="m">
+                            <p class="word">余额</p>
+                            <p class="money">￥1980.00</p>
+                        </div>
+                        <div class="foot">
+                            <p class="time">2016-09-26 11:51:22</p>
+                            <div class="time">
+                                <p class="t_inner">发卡面值</p>
+                                <p class="t_inner">￥400</p>
+                            </div>
+                            <p class="time">线下门店发卡</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

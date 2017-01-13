@@ -81,8 +81,19 @@ body {
 .row-wrap1 .row-content .proEvals .eachEval .statisfied {
   margin-top: 35px;
   margin-bottom: 15px; }
-.rating{
+.row-wrap1 .row-content .proEvals .eachEval .statisfied .ratePos{
   display: inline-block;
+  background-color: white;
+  width: 80px;
+  height: 29px;
+  overflow: hidden;
+  margin-left: 15px;
+  /* margin-top: -7px; */
+  position: relative;
+  top: 2px;
+}
+.rating{
+
   overflow: hidden;
   width: 80px;
   height: 16px;
@@ -92,6 +103,7 @@ body {
   clear: both;
   position: relative;
   background: url(../../../public/css/img/star-matrix.png) no-repeat 0 0;
+  top: 13px;
 }
 .nostar {background-position:0 0}
 .onestar {background-position:0 -16px}
@@ -137,7 +149,7 @@ ul.rating li.five a:hover {background-position:0 -160px}
 .row-wrap1 .row-content .proEvals .eachEval .txt {
   width: 875px;
   height: 110px;
-  border: 1px solid #c1c1c1; }
+  border: 1px solid #dcdcdc; }
 /* line 84, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .proEvals .eachEval .txt .area {
   width: 100%;
@@ -147,10 +159,10 @@ ul.rating li.five a:hover {background-position:0 -160px}
   padding: 5px;
   font-size: 14px;
   border: none;
-  background-color: #f8f8f8; }
+  background-color: #fbfbfb; }
 /* line 98, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .proEvals .eachEval .txt:hover {
-  background-color: #f8f8f8; }
+  background-color: #fbfbfb; }
 /* line 105, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .publish {
   float: right;
