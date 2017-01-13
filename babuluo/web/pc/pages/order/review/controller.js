@@ -14,8 +14,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_review_Controller', fu
         $(this).parent().parent().removeClass().addClass("rating "+myclass);
 //		console.log(myclass);
         return false;//返回假，链接a不跳转
-
-    }
+    });
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {

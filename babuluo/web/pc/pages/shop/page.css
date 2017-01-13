@@ -23,9 +23,7 @@ body {
 .container1 .row-wrap1 .row-title {
   width: 1050px;
   /* height: 82px; */
-  /* line-height: 96px; */
-  /* border-bottom: 1px solid #e0e0e0; */
-  padding-left: 0px;
+    padding-left: 0px;
   font-size: 25px;
   color: #4b4b4b;
   margin-top: 60px;
