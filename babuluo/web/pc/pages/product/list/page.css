@@ -25,6 +25,13 @@ body {
   line-height: 49px;
   /* margin-right: 38px; */
   margin-left: 40px; }
+.container .productList .effectiveArea .rangeTab .range {
+  display: inline-block;
+  width: 16px;
+  height: 12px;
+  background: url(../../../public/css/img/range.png);
+  margin-left: 10px;
+}
 .container .productList .effectiveArea .rangeTab .proIcon{
  margin-left: 8px;
 }
