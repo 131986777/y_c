@@ -559,8 +559,8 @@ table{
 /* line 505, ../../sass/public/style.scss */
 .sidebar li:hover {
   background-color: #f9f9f9; }
- .sidebar li .selected {
-  background-color: #f36e19; }
+ .sidebar .selected {
+ color: #f36e19!important; }
 
 /* line 508, ../../sass/public/style.scss */
  .sidebar .active,
@@ -654,7 +654,7 @@ table{
   float: left;
   width: 210px;
   height: 34px;
-  border: 1px solid #d0d1d4;
+  border: 1px solid #dcdcdc;
   padding-left: 10px;
   overflow: hidden; }
 
@@ -663,7 +663,7 @@ table{
   height: 33px;
   width: 164px;
   border: none;
-  border-right: 1px solid #d0d1d4;
+  border-right: 1px solid #dcdcdc;
   outline: none; }
 
 /* line 604, ../../sass/public/style.scss */

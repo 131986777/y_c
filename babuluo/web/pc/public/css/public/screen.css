@@ -111,14 +111,14 @@ html, body {
   position: absolute;
   width: 41px;
   height:351px;
-  border-left: 1px solid #c1c1c1;
-  border-top: 1px solid #c1c1c1;
-  border-right: 1px solid #c1c1c1;
+  border-left: 1px solid #ebebeb;
+  border-top: 1px solid #ebebeb;
+  border-right: 1px solid #ebebeb;
 }
 .productList .leftMenu .categoriePic{
   width:40px;
   height:39px;
-  border-bottom: 1px solid #c1c1c1;
+  border-bottom: 1px solid #ebebeb;
   cursor: pointer;
 
 }

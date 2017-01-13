@@ -5,4 +5,13 @@ angular.module('AndSell.PC.Main').controller('pages_payment_pay_Controller', fun
     modalFactory.setShowMenu(true);
     modalFactory.setTab(true);
 
-});
+    $(".zhifu").click(function () {
+        if ($(this).hasClass("active")) {
+            $(this).removeClass("active");
+            $(this).find(".yang").removeClass("choosed");
+        } else {
+            $(this).addClass("active");
+            $(this).find(".yang").addClass("choosed");
+        }
+    });
+    });

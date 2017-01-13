@@ -24,15 +24,15 @@
                     <span class="word">验证码</span>
                     <div class="codePos">
                         <input type="text" ng-model="loginInfo['PWD']" class="txt" />
-                        <div class="codeLogin">获取验证码</div>
-                        <div class="send">发送中...</div>
-                        <div class="sended">已发送（30s）</div>
+                        <div class="codeLogin" ng-if="get">获取验证码</div>
+                        <div class="send" ng-if="send">发送中...</div>
+                        <div class="sended" ng-if="sended">已发送（30s）</div>
                     </div>
                 </div>
             </div>
 
             <div class="but" ng-click="userLogin()">
-                登录
+                <a href="">登录</a>
             </div>
         </div>
 

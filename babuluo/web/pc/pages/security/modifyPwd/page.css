@@ -63,6 +63,8 @@ body {
   position: absolute;
   right: 8px;
   top: 5px;
+
+  cursor: pointer;
   }
 .row-wrap1 .row-content .bu-form .form-group .yzmPos .send {
   width: 100px;
@@ -75,7 +77,7 @@ body {
   text-align: center;
   line-height: 2.1;
   position: absolute;
-  right: -120px;
+  right: 8px;
   top: 5px;
 }
 .row-wrap1 .row-content .bu-form .form-group .yzmPos .sended {
@@ -89,12 +91,12 @@ body {
   text-align: center;
   line-height: 2.1;
   position: absolute;
-  right: -230px;
+  right: 8px;
   top: 5px;
 }
 /* line 49, ../sass/security.scss */
 .row-wrap1 .row-content .bu-form .form-group .typeIn {
-  border: 1px solid #c1c1c1;
+  border: 1px solid #dddddd;
   width: 300px;
   height: 40px;
   padding: 5px;

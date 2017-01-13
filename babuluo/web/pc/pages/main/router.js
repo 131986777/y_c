@@ -18,7 +18,7 @@ $import('pages/order/list', {state: 'all'}, true);
 // '0'}); $import('pages/order/addAddress', {SKU_IDS: '1060'});
 // $import('pages/order/CashOnDeliveryOrder');
 $import('pages/order/review',{ID:''},true);
-
+$import('pages/order/confirm', {}, true);
 $import('pages/order/detail', {ORDER_ID: ''}, true);
 
 //
@@ -36,6 +36,7 @@ $import('pages/login/phoneLogin', {FROM: ''}, true);
 //$import('pages/login/SetPassword', {LOGIN_ID: '0'});
 //
 $import('pages/account/balance', {}, true);
+$import('pages/account/recharge', {}, true);
 //$import('pages/account/recharge');
 //
 //$import('pages/security/resetPwd');
