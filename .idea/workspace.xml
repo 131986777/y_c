@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c4a12cf3-03f3-4fce-9d52-6e688b902a23" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/cart/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/cart/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/order/add/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/order/add/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/order/add/index.html" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/order/add/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/public/css/style.css" afterPath="$PROJECT_DIR$/babuluo/web/h5/public/css/style.css" />
-    </list>
+    <list default="true" id="c4a12cf3-03f3-4fce-9d52-6e688b902a23" name="Default" comment="" />
     <ignored path="bbl.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -963,12 +954,12 @@
       <workItem from="1483675571933" duration="5544000" />
       <workItem from="1483685115841" duration="9554000" />
       <workItem from="1484185996863" duration="29126000" />
-      <workItem from="1484272613304" duration="23338000" />
+      <workItem from="1484272613304" duration="23852000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69422000" />
+    <option name="totallyTimeSpent" value="69936000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -980,7 +971,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1358" y="-319" width="1936" height="1056" extended-state="7" />
+    <frame x="1358" y="-319" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
