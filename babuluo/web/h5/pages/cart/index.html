@@ -13,7 +13,7 @@
     <!-- BEGIN 商品信息-->
 
     <div class="product-list" ng-repeat="sku in skuList">
-      <div class="product-wrap weui_cell">
+      <div class="product-wrap weui_cell" ng-if="sku['isPresent'] == null">
        <div class="product-select-wrap weui_cell_hd"
            ng-click="checkItem(sku)">
         <i class="icon icon-checked"
@@ -32,7 +32,7 @@
         <span class="product-money" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
           </span>
           <!--原价-->
-          <span class="product-money del-line" ng-if="sku['isSale'] && !sku['hasPresent']" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
+          <span class="product-money del-line" ng-if="sku['isSale'] && presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ] == null" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
           </span>
 
           <a class="del-wrap" ng-click="delShopCart(sku)">
@@ -53,14 +53,14 @@
          </div>
         </div>
       </div>
-      <div class="freePrd-wrap weui_cell" ng-if="sku['hasPresent']">
+      <div class="freePrd-wrap weui_cell" ng-if="presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ] != null">
         <div class="product-select-wrap weui_cell_hd">
           <span class="free-icon">赠</span>
         </div>
         <div class="product-detail weui_cell_bd">
-          <img class="freePrd-img" ng-src="{{FILE_SERVER_DOMAIN+sku['present']['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
-          <h5 class="product-name" ng-bind="sku['present']['SHOP_PRODUCT.PRD_NAME']"></h5>
-          <p class="product-cls" ng-bind="sku['present']['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ sku['present']['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ sku['planUnit']['presents'][0]['num']">
+          <img class="freePrd-img" ng-src="{{FILE_SERVER_DOMAIN+presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
+          <h5 class="product-name" ng-bind="presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_PRODUCT.PRD_NAME']"></h5>
+          <p class="product-cls" ng-bind="presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ sku['planUnit']['presents'][0]['num']">
           </p>
         </div>
       </div>
