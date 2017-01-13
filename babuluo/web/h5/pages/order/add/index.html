@@ -115,20 +115,20 @@
                 </div>
             </div>
         </div>
-        <div class="weui_cells weui_cells_access">
-            <div class="weui_cell" ng-click="goCoupon()">
-                <div class="weui_cell_bd">
-                    <span ng-if="COUPON_INFO!=''" ng-bind="coupon.COUPON_NAME"></span>
-                    <span ng-if="COUPON_INFO==''">使用优惠券</span>
+        <!--<div class="weui_cells weui_cells_access">-->
+            <!--<div class="weui_cell" ng-click="goCoupon()">-->
+                <!--<div class="weui_cell_bd">-->
+                    <!--<span ng-if="COUPON_INFO!=''" ng-bind="coupon.COUPON_NAME"></span>-->
+                    <!--<span ng-if="COUPON_INFO==''">使用优惠券</span>-->
 
-                </div>
-                <div class="weui_cell_ft weui_cell_primary">
-                    <span ng-if="COUPON_INFO!=''">已选择</span>
-                    <span ng-if="COUPON_INFO==''">未使用</span>
+                <!--</div>-->
+                <!--<div class="weui_cell_ft weui_cell_primary">-->
+                    <!--<span ng-if="COUPON_INFO!=''">已选择</span>-->
+                    <!--<span ng-if="COUPON_INFO==''">未使用</span>-->
 
-                </div>
-            </div>
-        </div>
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <!--<div class="weui_cells weui_cells_access">-->
         <!--<div class="weui_cell">-->
@@ -141,45 +141,45 @@
         <!--</div>-->
         <!--</div>-->
 
-        <div class="payment-list weui_cells" >
-            <div class="balance weui_cell" ng-click="cardPay()">
-                <div class="icon-wrap weui_cell_bd">
-                    <i class="icon icon-userpay"></i>
-                </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    会员卡支付
-                </div>
-
-                <div class="weui_cell_ft">
-                    <i class="icon "
-                       ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT']"></i>
-                </div>
-            </div>
-            <div class="balance weui_cell" ng-click="wxPay()">
-                <div class="icon-wrap weui_cell_bd">
-                    <i class="icon icon-wepay"></i>
-                </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    微信支付
-                </div>
-                <div class="weui_cell_ft">
-                    <i class="icon "
-                       ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='WEIXIN']"></i>
-                </div>
-            </div>
-            <!--<div class="balance weui_cell" ng-click="order['SHOP_ORDER.PAY_TYPE']='FACE'" ng-if="!EmptyPick&&(cookiePickupPerson.type==3)">-->
+        <!--<div class="payment-list weui_cells" >-->
+            <!--<div class="balance weui_cell" ng-click="cardPay()">-->
                 <!--<div class="icon-wrap weui_cell_bd">-->
-                    <!--<i class="icon icon-unipay"></i>-->
+                    <!--<i class="icon icon-userpay"></i>-->
                 <!--</div>-->
                 <!--<div class="weui_cell_bd weui_cell_primary">-->
-                    <!--自提付款-->
+                    <!--会员卡支付-->
+                <!--</div>-->
+
+                <!--<div class="weui_cell_ft">-->
+                    <!--<i class="icon "-->
+                       <!--ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT']"></i>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="balance weui_cell" ng-click="wxPay()">-->
+                <!--<div class="icon-wrap weui_cell_bd">-->
+                    <!--<i class="icon icon-wepay"></i>-->
+                <!--</div>-->
+                <!--<div class="weui_cell_bd weui_cell_primary">-->
+                    <!--微信支付-->
                 <!--</div>-->
                 <!--<div class="weui_cell_ft">-->
                     <!--<i class="icon "-->
-                       <!--ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='FACE']"></i>-->
+                       <!--ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='WEIXIN']"></i>-->
                 <!--</div>-->
             <!--</div>-->
-        </div>
+            <!--&lt;!&ndash;<div class="balance weui_cell" ng-click="order['SHOP_ORDER.PAY_TYPE']='FACE'" ng-if="!EmptyPick&&(cookiePickupPerson.type==3)">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="icon-wrap weui_cell_bd">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<i class="icon icon-unipay"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="weui_cell_bd weui_cell_primary">&ndash;&gt;-->
+                    <!--&lt;!&ndash;自提付款&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="weui_cell_ft">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<i class="icon "&ndash;&gt;-->
+                       <!--&lt;!&ndash;ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='FACE']"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
     </div>
 
     <div class="payment-wrap action-bar-wrap">
