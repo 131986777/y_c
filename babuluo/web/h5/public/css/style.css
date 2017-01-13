@@ -1076,11 +1076,13 @@ p {
     font-size: 60px;
 }
 
-.order-add .weui_cells {
+.order-add .weui_cells,.orderDetail-pay .weui_cells {
     font-size: 14px;
     line-height: 1;
 }
-
+.orderDetail-pay{
+    margin:10px 22px;
+}
 .order-add .weui_cell {
     padding: 12px 15px 12px 20px;
 }
@@ -1167,7 +1169,7 @@ p {
     text-decoration: line-through;
 }
 
-.order-add .payment-list .icon-wrap {
+.order-add .payment-list .icon-wrap,.orderDetail-pay .payment-list .icon-wrap{
     margin-right: 12px;
 }
 
