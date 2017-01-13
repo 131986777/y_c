@@ -40,9 +40,11 @@ angular.module('AndSell.PC.Main').controller('pages_cart_Controller', function (
             productFactory.getProductSkuBySkuIds(params, function (response) {
                 $scope.skuList = response.data;
                 $scope.skulistsForOrder = new Array;
+                $scope.beforePrice = 0;
                 $scope.skuList.forEach(function (ele) {
                     setContentsInfo(ele);
                     ele['SHOP_PRODUCT_SKU.SIZE'] = cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
+                    $scope.beforePrice = $scope.beforePrice + (ele['SHOP_PRODUCT_SKU.SIZE'] * ele['SHOP_PRODUCT_SKU.REAL_PRICES']);
                     ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
                     ele.isSale = false;
                     ele.isSelect = false;
