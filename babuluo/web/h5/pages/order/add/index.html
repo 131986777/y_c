@@ -44,11 +44,11 @@
                         </p>
                     </div>
                     <div class="ext weui_cell_ft">
-                    <span class="product-money" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
-                    </span>
-                        <span class="product-money del-line" ng-if="sku['isSale'] && !sku['hasPresent']"
+                        <span class="product-money" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+                        </span>
+                        <span class="product-money del-line" ng-if="sku['isSale'] && presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ] == null"
                               ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
-                    </span>
+                        </span>
                         <p class="product-num" ng-bind="sku['SHOP_PRODUCT_SKU.SIZE']">
                         </p>
                     </div>
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <!--赠品-->
-            <div ng-if="orderPresentNum != 0">
+            <div ng-if="presentMap['order'] != null">
             <div class="free-icon" style="margin: 20px 30px 10px">赠</div>
             <div class="freePrd weui_cell">
                 <div class="product-img-wrap weui_cell_hd">
