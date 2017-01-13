@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, weUI, productFactory, orderFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state,http, $stateParams, weUI, productFactory, orderFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
@@ -142,6 +142,12 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         }, function (res) {
             weUI.wx_pay.error("支付失败");
         });
+
+        //orderFactory.wxPayUndefinedOrderForPC(formData, function (response) {
+        //  console.log(response);
+        //}, function (res) {
+        //    weUI.wx_pay.error("支付失败");
+        //});
     }
 
 
@@ -170,12 +176,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                         TYPE: 'ORDER',
                         CALLBACK: '-1'
                     };
-                    orderFactory.queryWXPayResult(formData, function (res) {
+                    http.post_ori("http://app.bblycyz.com/AndSell/wxCallBack",formData, function (res) {
                         weUI.toast.ok('订单支付成功');
-                        $scope.getOrder($scope.order['SHOP_ORDER.ID']);
-                    }, function (res) {
                         location.reload();
-                    })
+                    }, function (res) {
+                        weUI.toast.ok('后台确认收款中!');
+                        location.reload();
+                    });
                 } else {
                     weUI.wx_pay.error("支付失败");
                 }
