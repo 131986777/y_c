@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.pabula.api.API;
 import com.pabula.api.data.ReturnData;
 import com.pabula.common.util.HttpClientUtil;
-import com.pabula.common.util.MD5;
 import com.pabula.fw.exception.RuleException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -166,7 +165,7 @@ public class Kucun {
         list.add("100075");
         list.add("100076");
         list.add("100077");*/
-        list.add("100078");
+        //list.add("100078");
      /*   list.add("100079");
         list.add("100080");
         list.add("100081");
@@ -174,24 +173,24 @@ public class Kucun {
         list.add("100083");
         list.add("100084");
         //list.add("111111");
-        //for (int i = 0; i < list.size(); i++) {
-        //    String arg = list.get(i);
-        //
-        //    Thread t = new Thread(new Runnable(){
-        //        public void run(){
-        //            tongbu(arg);
-        //        }});
-        //    t.start();
-        //
-        //}
+        for (int i = 0; i < list.size(); i++) {
+            String arg = list.get(i);
+
+            Thread t = new Thread(new Runnable(){
+                public void run(){
+                    tongbu(arg);
+                }});
+            t.start();
+
+        }
 
 
 
         //System.out.println(MD5.MD5Encode("ycyzyy2016"));
 
-        Map<String,String> map =new HashMap<>();
-        map.put("ORDER_NUM","009990033222");
-        map.put("ORDER_INFO","[{\"PRD_ID\":\"800277\",\"PRD_NAME\":\"莲花味精99%\",\"UNIT\":\"袋\",\"BAR_CODE\":\"6901377001000\",\"PRICE_OLD\":1.5,\"PRICE_NOW\":1.5,\"COUNT\":1.0,\"PRICE_SUM\":1.5}]");
+        //Map<String,String> map =new HashMap<>();
+        //map.put("ORDER_NUM","009990033222");
+        //map.put("ORDER_INFO","[{\"PRD_ID\":\"800277\",\"PRD_NAME\":\"莲花味精99%\",\"UNIT\":\"袋\",\"BAR_CODE\":\"6901377001000\",\"PRICE_OLD\":1.5,\"PRICE_NOW\":1.5,\"COUNT\":1.0,\"PRICE_SUM\":1.5}]");
         //String returnStr = HttpClientUtil.doGet("http://app.bblycyz.com/AndSell/bubu/shop/.orderOffline/addOrderForOffline",map);
         //System.out.println(returnStr);
         //try {
@@ -201,8 +200,8 @@ public class Kucun {
         //    e.printStackTrace();
         //}
 
-        System.out.println(MD5.MD5Encode("appid=wx7c4d78e05a44115e&body=订单4219&mch_id=1298356201&nonce_str=4ylbnn1xaza9fo6ir915upslmk9fycnm&notify_url=http://app.bblycyz.com/AndSell/h5/pages/main/wxPayCallback.jsp&out_trade_no=10003463&product_id=4219&spbill_create_ip=null&total_fee=880&trade_type=NATIVE&key=fdbnhlsh6gs79ro4lhr6vutmgnx0flfc"));
-        System.out.println(com.tencent.common.MD5.MD5Encode("appid=wx7c4d78e05a44115e&body=订单4219&mch_id=1298356201&nonce_str=4ylbnn1xaza9fo6ir915upslmk9fycnm&notify_url=http://app.bblycyz.com/AndSell/h5/pages/main/wxPayCallback.jsp&out_trade_no=10003463&product_id=4219&spbill_create_ip=null&total_fee=880&trade_type=NATIVE&key=fdbnhlsh6gs79ro4lhr6vutmgnx0flfc"));
+        //System.out.println(MD5.MD5Encode("appid=wx7c4d78e05a44115e&body=订单4219&mch_id=1298356201&nonce_str=4ylbnn1xaza9fo6ir915upslmk9fycnm&notify_url=http://app.bblycyz.com/AndSell/h5/pages/main/wxPayCallback.jsp&out_trade_no=10003463&product_id=4219&spbill_create_ip=null&total_fee=880&trade_type=NATIVE&key=fdbnhlsh6gs79ro4lhr6vutmgnx0flfc"));
+        //System.out.println(com.tencent.common.MD5.MD5Encode("appid=wx7c4d78e05a44115e&body=订单4219&mch_id=1298356201&nonce_str=4ylbnn1xaza9fo6ir915upslmk9fycnm&notify_url=http://app.bblycyz.com/AndSell/h5/pages/main/wxPayCallback.jsp&out_trade_no=10003463&product_id=4219&spbill_create_ip=null&total_fee=880&trade_type=NATIVE&key=fdbnhlsh6gs79ro4lhr6vutmgnx0flfc"));
 
     }
 
