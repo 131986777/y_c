@@ -1,9 +1,9 @@
 <div class="effectiveArea" ng-init="initData()">
     <div class="goodsDetail">
         <!--<div class="crumbsBar">-->
-            <!--<a href="">爆款菜品</a>-->
-            <!--<a href="">水果</a>-->
-            <!--<a href="">蓝莓</a>-->
+        <!--<a href="">爆款菜品</a>-->
+        <!--<a href="">水果</a>-->
+        <!--<a href="">蓝莓</a>-->
         <!--</div>-->
         <div class="goodsDetailShow">
             <div class="picShow">
@@ -13,8 +13,9 @@
                 <div class="picList">
                     <ul>
                         <li ng-repeat="slide in slides">
-                            <img ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
-                                 style="height: 100%;width: 100%;">
+                            <img
+                                ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
+                                style="height: 100%;width: 100%;">
                         </li>
                     </ul>
                 </div>
@@ -28,7 +29,8 @@
                     <div class="priceGroup">
                         <span class="name">价格</span>
                         <span class="content">
-                            <span class="current" ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
+                            <span class="current"
+                                  ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
                                   ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
                             </span>
                             <span class="origin" ng-if="sku!=undefined&&sku['isSale']"
@@ -156,16 +158,133 @@
                 </div>
             </div>
             <div class="detailIntro">
-                <div class="introCategories">
+                <div class="introCategories" ng-init="prd_detai_model='detail'">
                     <ul>
-                        <li><a href="" class="active" ng-click="prd_detai_model='detail'">图文详情</a></li>
-                        <li><a href="" ng-click="prd_detai_model='comment'">评价详情</a></li>
+                        <li><a ng-class="{true:'active'}[prd_detai_model=='detail']"
+                               ng-click="prd_detai_model='detail'">图文详情</a></li>
+                        <li><a ng-class="{true:'active'}[prd_detai_model=='comment']"
+                               ng-click="prd_detai_model='comment'">评价详情</a></li>
                     </ul>
                 </div>
-                <div class="introContent">
+                <div class="introContent" ng-if="prd_detai_model=='detail'">
                     <span ng-bind-html="product['SHOP_PRODUCT.SHOP_DES']"></span>
                 </div>
+
+                <div class="introContent" ng-if="prd_detai_model=='comment'">
+                    <div class="imgIntro">
+                        <div class="imgList">
+                            <img src="../images/goodsDetailed.png" alt="">
+                            <img src="../images/goodsDetailed.png" alt="">
+                            <img src="../images/goodsDetailed.png" alt="">
+                            <img src="../images/goodsDetailed.png" alt="">
+                            <img src="../images/goodsDetailed.png" alt="">
+                            <img src="../images/goodsDetailed.png" alt="">
+                        </div>
+                    </div>
+                    <div class="evaluateIntro active">
+                        <div class="summarize">
+                            <div class="totalPer">
+                                <span class="number">98%</span>
+                                <span class="text">好评度</span>
+                            </div>
+                            <div class="evaluateSources">
+                                <div class="source">
+                                    <span class="name">好评<span class="count">(126条)</span></span>
+                                    <div class="perBar">
+                                        <div class="currentPer" style="width:98%;"></div>
+                                    </div>
+                                    <span class="show">98%</span>
+                                </div>
+                                <div class="source">
+                                    <span class="name">中评<span class="count">(12条)</span></span>
+                                    <div class="perBar">
+                                        <div class="currentPer" style="width:2%;"></div>
+                                    </div>
+                                    <span class="show">98%</span>
+                                </div>
+                                <div class="source">
+                                    <span class="name">差评<span class="count">(1条)</span></span>
+                                    <div class="perBar">
+                                        <div class="currentPer" style="width:0;"></div>
+                                    </div>
+                                    <span class="show">98%</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="evaluateLists">
+                            <div class="list">
+                                <div class="favicon">
+                                    <img src="../images/togetherBuy_pic_2.png" alt="">
+                                </div>
+                                <div class="listContent">
+                                    <p class="userInfo"><span class="name">ZEXIKUN</span><span
+                                        class="time">2016/12/29 17:36:59</span></p>
+                                    <p class="text">
+                                        用了一段时间，感觉还行。不过发热还是有一些，特别是风扇高速转动时噪音比较大。电池续航一般，正常使用3个多小时。因为是新品，价格偏贵。外包装精致，产品做工扎实。</p>
+                                    <div class="imgList">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list">
+                                <div class="favicon">
+                                    <img src="../images/togetherBuy_pic_2.png" alt="">
+                                </div>
+                                <div class="listContent">
+                                    <p class="userInfo"><span class="name">ZEXIKUN</span><span
+                                        class="time">2016/12/29 17:36:59</span></p>
+                                    <p class="text">
+                                        用了一段时间，感觉还行。不过发热还是有一些，特别是风扇高速转动时噪音比较大。电池续航一般，正常使用3个多小时。因为是新品，价格偏贵。外包装精致，产品做工扎实。</p>
+                                    <div class="imgList">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list">
+                                <div class="favicon">
+                                    <img src="../images/togetherBuy_pic_2.png" alt="">
+                                </div>
+                                <div class="listContent">
+                                    <p class="userInfo"><span class="name">ZEXIKUN</span><span
+                                        class="time">2016/12/29 17:36:59</span></p>
+                                    <p class="text">
+                                        用了一段时间，感觉还行。不过发热还是有一些，特别是风扇高速转动时噪音比较大。电池续航一般，正常使用3个多小时。因为是新品，价格偏贵。外包装精致，产品做工扎实。</p>
+                                    <div class="imgList">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list">
+                                <div class="favicon">
+                                    <img src="../images/togetherBuy_pic_2.png" alt="">
+                                </div>
+                                <div class="listContent">
+                                    <p class="userInfo"><span class="name">ZEXIKUN</span><span
+                                        class="time">2016/12/29 17:36:59</span></p>
+                                    <p class="text">
+                                        用了一段时间，感觉还行。不过发热还是有一些，特别是风扇高速转动时噪音比较大。电池续航一般，正常使用3个多小时。因为是新品，价格偏贵。外包装精致，产品做工扎实。</p>
+                                    <div class="imgList">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 </div>
