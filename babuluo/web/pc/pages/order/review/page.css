@@ -25,16 +25,19 @@ body {
   width: 965px;
   padding-bottom: 35px;
 }
+.row-wrap1 .row-content{
+  padding: 20px 10px 0;
+}
 /* line 29, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .row-header1 {
   height: 88px;
   line-height: 70px;
   /* padding-left: 40px; */
   font-size: 20px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #dcdcdc;
   width: 875px;
   margin-left: 40px;
-  width: 802px; }
+  width: 870px; }
 /* line 39, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .toolbar1 {
   float: right; }
@@ -78,11 +81,75 @@ body {
 .row-wrap1 .row-content .proEvals .eachEval .statisfied {
   margin-top: 35px;
   margin-bottom: 15px; }
+.row-wrap1 .row-content .proEvals .eachEval .statisfied .ratePos{
+  display: inline-block;
+  background-color: white;
+  width: 80px;
+  height: 29px;
+  overflow: hidden;
+  margin-left: 15px;
+  /* margin-top: -7px; */
+  position: relative;
+  top: 2px;
+}
+.rating{
+
+  overflow: hidden;
+  width: 80px;
+  height: 16px;
+  margin: 0 0 20px 0;
+  padding: 0;
+  list-style: none;
+  clear: both;
+  position: relative;
+  background: url(../../../public/css/img/star-matrix.png) no-repeat 0 0;
+  top: 13px;
+}
+.nostar {background-position:0 0}
+.onestar {background-position:0 -16px}
+.twostar {background-position:0 -32px}
+.threestar {background-position:0 -48px}
+.fourstar {background-position:0 -64px}
+.fivestar {background-position:0 -80px}
+ul.rating li {
+  cursor: pointer;
+  float:left;
+  text-indent:-999em;
+}
+ul.rating li a {
+  position:absolute;
+  left:0;
+  top:0;
+  width:16px;
+  height:16px;
+  text-decoration:none;
+  z-index: 200;
+}
+ul.rating li.one a {left:0}
+ul.rating li.two a {left:16px;}
+ul.rating li.three a {left:32px;}
+ul.rating li.four a {left:48px;}
+ul.rating li.five a {left:64px;}
+ul.rating li a:hover {
+  z-index:2;
+  width:80px;
+  height:16px;
+  overflow:hidden;
+  left:0;
+  background: url(../../../public/css/img/star-matrix.png) no-repeat 0 0;
+}
+ul.rating li.one a:hover {background-position:0 -96px;}
+ul.rating li.two a:hover {background-position:0 -112px;}
+ul.rating li.three a:hover {background-position:0 -128px}
+ul.rating li.four a:hover {background-position:0 -144px}
+ul.rating li.five a:hover {background-position:0 -160px}
+
+
 /* line 80, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .proEvals .eachEval .txt {
-  width: 815px;
+  width: 875px;
   height: 110px;
-  border: 1px solid #c1c1c1; }
+  border: 1px solid #dcdcdc; }
 /* line 84, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .proEvals .eachEval .txt .area {
   width: 100%;
@@ -92,15 +159,15 @@ body {
   padding: 5px;
   font-size: 14px;
   border: none;
-  background-color: #f8f8f8; }
+  background-color: #fbfbfb; }
 /* line 98, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .proEvals .eachEval .txt:hover {
-  background-color: #f8f8f8; }
+  background-color: #fbfbfb; }
 /* line 105, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .publish {
   float: right;
   margin-top: 17px;
-  margin-right: 27px;
+  margin-right: 35px;
   font-size: 14px; }
 /* line 110, ../sass/orderEvaluate.scss */
 .row-wrap1 .row-content .publish .checkPos {

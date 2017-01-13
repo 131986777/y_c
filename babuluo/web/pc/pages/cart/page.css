@@ -127,7 +127,7 @@ body {
     font-size: 13px; }
 /* line 135, ../sass/buyCar.scss */
 .container .buyCars .row-wrap1 .bu-table-wrap .bu-table .num {
-    border: 1px solid #c1c1c1;
+    border: 1px solid #DDDDDD;
     width: 140px;
     height: 35px;
     text-align: center;
@@ -137,8 +137,8 @@ body {
     width: 70px;
     border: none;
     height: 33px;
-    border-left: 1px solid #c1c1c1;
-    border-right: 1px solid #c1c1c1;
+    border-left: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
     text-align: center; }
 /* line 149, ../sass/buyCar.scss */
 .container .buyCars .row-wrap1 .bu-table-wrap .bu-table .num .num-decrement {
@@ -173,7 +173,7 @@ body {
 /* line 193, ../sass/buyCar.scss */
 .container .buyCars .row-wrap1 .foot {
     width: 1059px;
-    border: 1px solid #c1c1c1;
+    border: 1px solid #DDDDDD;
     overflow: hidden;
     height: 50px; }
 /* line 198, ../sass/buyCar.scss */

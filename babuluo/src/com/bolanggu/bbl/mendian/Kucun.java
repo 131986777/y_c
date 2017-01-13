@@ -184,6 +184,7 @@ public class Kucun {
 
         }
 
+
         //System.out.println(MD5.MD5Encode("ycyzyy2016"));
 
     }

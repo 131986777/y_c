@@ -607,8 +607,8 @@ p {
 .action-bar .icon {
     display: block;
     margin: 0 auto;
-    width: 25px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
 }
 
 .action-bar a {
@@ -1793,7 +1793,7 @@ p {
 }
 
 .product-detail-page .review-wrap .userName {
-    padding-left: 26px;
+    padding-left: 36px;
 }
 
 .product-detail-page .review-wrap .userTime {
@@ -1801,10 +1801,10 @@ p {
 }
 
 .product-detail-page .review-wrap .userIcon {
-    width: 20px;
-    height: 20px;
+    width: 28px;
+    height: 28px;
     position: absolute;
-    top: 15px;
+    top: 21px;
     left: 28px;
 }
 
@@ -2525,7 +2525,7 @@ p {
     margin-bottom: 0;
 }
 
-.shop-page .shop-list .shops {
+.shop-page .shops {
     background-color: #fff;
     padding: 10px 10px;
     margin-bottom: 10px;
@@ -2555,7 +2555,69 @@ p {
     color: #fff;
     background-color: #f46f1a;
 }
-.shop-page .shop-list .shops .position-icon {
+.shops_center_style{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.shop-list{
+    /*background-color: #fff;*/
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    position: relative;
+    color: #000;
+    display: block;
+}
+
+.shop-page .shop-recent .shop-list .shops {
+    background-color: transparent;
+}
+.shop-page .shop-list .shops .shop-name{
+    display: inline-block;
+    width: 29.4%;
+    height: 38px;
+    text-align: center;
+    line-height: 38px;
+    background-color: #fff;
+    margin: 0 7px 6px 4px;
+    padding:0px;
+    color: #484848;
+    font-size: 14px;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*white-space: nowrap;*/
+}
+
+.history{
+    margin-left: 10px;
+    width:100%;
+    margin: 0 auto;
+}
+
+.shop-button{
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.shop-button{
+    display: inline-flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.shop-page .shop-list .shops .active{
+    color: #fff;
+    background-color: #f46f1a;
+}
+.shop-page .shop-list .position-icon {
     display: inline-block;
     width: 10px;
     height: 12px;

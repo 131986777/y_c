@@ -91,6 +91,11 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
         $state.go('pages/order/detail', {ORDER_ID: id});
     };
 
+    //商品详情跳转
+    $scope.toProduct = function (id) {
+        $state.go('pages/product/detail', {PRD_ID: id});
+    };
+
     //下拉更多商品
     $scope.getMoreOrder = function () {
         if ($scope.page != undefined) {

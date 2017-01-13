@@ -2,24 +2,24 @@
     <div class=" pull-right"></div>
     <!--<div class="map-icon pull-right"></div>-->
     <!--<div class="shop-select">-->
-        <!--&lt;!&ndash; 门店选择 &ndash;&gt;-->
-        <!--<div class="shop-select-wrap">-->
-            <!--<div class="dropdown text-center">-->
-                <!--<a id="dLabel" type="button" data-toggle="dropdown">-->
-                    <!--{{districtName}}-->
-                    <!--<span class="caret"></span>-->
-                <!--</a>-->
-                <!--<ul class="dropdown-menu">-->
-                    <!--<li ng-click="allDistrict('全部区域')">全部区域</li>-->
-                    <!--<li ng-repeat="district in districtList"-->
-                        <!--ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'],district['DISTRICT.DISTRICT_NAME'])">-->
-                        <!--{{district['DISTRICT.DISTRICT_NAME']}}-->
-                    <!--</li>-->
-                <!--</ul>-->
-                <!--&lt;!&ndash;&ndash;&gt;-->
-            <!--</div>-->
+    <!--&lt;!&ndash; 门店选择 &ndash;&gt;-->
+    <!--<div class="shop-select-wrap">-->
+    <!--<div class="dropdown text-center">-->
+    <!--<a id="dLabel" type="button" data-toggle="dropdown">-->
+    <!--{{districtName}}-->
+    <!--<span class="caret"></span>-->
+    <!--</a>-->
+    <!--<ul class="dropdown-menu">-->
+    <!--<li ng-click="allDistrict('全部区域')">全部区域</li>-->
+    <!--<li ng-repeat="district in districtList"-->
+    <!--ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'],district['DISTRICT.DISTRICT_NAME'])">-->
+    <!--{{district['DISTRICT.DISTRICT_NAME']}}-->
+    <!--</li>-->
+    <!--</ul>-->
+    <!--&lt;!&ndash;&ndash;&gt;-->
+    <!--</div>-->
 
-        <!--</div>-->
+    <!--</div>-->
     <!--</div>-->
 
     <div class="shop-wrap">
@@ -29,8 +29,8 @@
                 最近浏览
             </div>
             <div class="shop-list">
-                <div class="shops" >
-                    <a ng-repeat="shop in recentShopList" ng-click="shopSelect(shop)" class="shop-name">{{shop['SHOP.SHOP_NAME']}}</a>
+                <div class="shops history">
+                    <a ng-repeat="shop in recentShopList" ng-click="shopSelect(shop)" class="shop-name">{{shop['SHOP.SHOP_NAME'] | strLength}}</a>
                 </div>
             </div>
         </div>
@@ -40,12 +40,11 @@
                 选择区域
             </div>
             <div class="shop-list">
-                <div class="shops">
-                    <a class="shop-name" ng-class="{true:'active'}[currentDistrictName == '全部区域']"
-                            ng-click="allDistrict('全部区域')">全部区域</a>
+                <div class="shops history">
                     <a ng-repeat="district in districtList"
-                       ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'],district['DISTRICT.DISTRICT_NAME'])" class="shop-name" ng-class="{true:
-                       'active'}[district['DISTRICT.DISTRICT_NAME']==currentDistrictName]">{{district['DISTRICT.DISTRICT_NAME']}}</a>
+                       ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'])"
+                       class="shop-name"
+                       ng-class="{true:'active'}[district['DISTRICT.DISTRICT_ID']==currDistrictId]">{{district['DISTRICT.DISTRICT_NAME']}}</a>
                 </div>
             </div>
         </div>
@@ -54,7 +53,7 @@
                 门店列表
             </div>
             <div class="shop-list">
-                <a class="shops" ng-repeat="shop in shopList" ng-click="shopSelect(shop)">
+                <a class="shops" ng-repeat="shop in currshopList" ng-click="shopSelect(shop)">
                     <img class="pull-left" src="../../public/img/icon-shopLogo.png">
                     <p ng-bind="shop['SHOP.SHOP_NAME']"></p>
                     <p class="addrs">{{shop['SHOP.ADDR']}}</p>
@@ -66,7 +65,7 @@
                          ng-show="coord.latitude!=undefined&&coord.longitude!=undefined&&coord.longitude!=undefined&&shop['SHOP.LATITUDE']!=undefined">
                         <i class="position-icon"></i>
                         距离<span
-                        ng-bind="getDistanceFromLatLonInKm(coord.latitude,coord.longitude,shop['SHOP.LATITUDE'],shop['SHOP.LONGTUDE'])"></span>公里
+                            ng-bind="getDistanceFromLatLonInKm(coord.latitude,coord.longitude,shop['SHOP.LATITUDE'],shop['SHOP.LONGTUDE'])"></span>公里
                     </div>
                 </a>
             </div>

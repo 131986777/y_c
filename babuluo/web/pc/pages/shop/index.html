@@ -3,7 +3,7 @@
         <div class="toolbar toolbar1">
             <!-- 搜索框 -->
             <div class="row-input">
-                <input type="text" ng-model="searchInfo" placeholder="标题/商品/供应商"
+                <input type="text" ng-model="searchInfo" placeholder="搜索门店"
                        ng-keyup="myKeyup($event)">
                 <div class="btn-search">
                     <i class="icon-search" ng-click="search()"></i>
@@ -16,18 +16,18 @@
             <span class="title">江苏省南京市建邺区嘉陵江东街18号</span>
             <div class="change">切换地址</div>
         </div>
-        <div class="recent">
+        <div class="recent" ng-show="recentShopList.length>0">
             <div class="recentTitle">最近浏览</div>
             <div class="storeContain">
                 <div class="store" ng-repeat="shop in recentShopList" ng-click="shopSelect(shop)">{{shop['SHOP.SHOP_NAME']}}</div>
             </div>
 
         </div>
-        <div class="recent ">
+        <div class="recent recent11">
             <div class="recentTitle">区域</div>
             <div class="storeContain">
                 <div class="store" ng-repeat="district in districtList"
-                     ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'],district['DISTRICT.DISTRICT_NAME'])" class="shop-name" ng-class="{true:
+                     ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'])" class="shop-name" ng-class="{true:
                 'active'}[district['DISTRICT.DISTRICT_NAME']==currentDistrictName]">{{district['DISTRICT.DISTRICT_NAME']}}</div>
             </div>
         </div>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="listDetail">
                     <div class="name">{{shop['SHOP.SHOP_NAME']}}</div>
-                    <div class="addr">
+                    <div class="addr" ng-show="coord.latitude!=undefined&&coord.longitude!=undefined&&coord.longitude!=undefined&&shop['SHOP.LATITUDE']!=undefined">
                         <img class="img1" src="/AndSell/pc/public/css/img/mapLogo.png" alt="">
                         <span class="title">{{getDistanceFromLatLonInKm(coord.latitude,coord.longitude,shop['SHOP.LATITUDE'],shop['SHOP.LONGTUDE'])}}km</span>
                     </div>

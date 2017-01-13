@@ -1,4 +1,4 @@
-angular.module('AndSell.PC.Main').controller('pages_order_review_Controller', function (productFactory, $interval, $scope,$stateParams, $state, modalFactory, orderFactory) {
+angular.module('AndSell.PC.Main').controller('pages_order_review_Controller', function (productFactory, $interval,$scope,$stateParams, $state, modalFactory, orderFactory) {
 
     modalFactory.setTitle("订单评论");
 
@@ -67,6 +67,14 @@ angular.module('AndSell.PC.Main').controller('pages_order_review_Controller', fu
             $scope.flag*=-1;
         }
     };
+
+    $scope.collectionClick = function(i,star,event){
+        $scope.star[i] = star;
+        //将a的父亲的父亲即ul的class删除再给他添加个新的class
+        $(event.target).parent().parent().removeClass().addClass("rating "+$(event.target).parent().attr('class')+'star');
+        return false;//返回假，链接a不跳转
+    };
+
 
 });
 

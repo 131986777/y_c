@@ -28,6 +28,16 @@
                 </div>
                 <div class="statisfied">
                     <span class="">商品满意度</span>
+                    <div class="ratePos">
+                        <ul class="rating nostar">
+                            <li class="one"><a title="1分" href="javascript:;" ng-click="collectionClick($index,1,$event)">1</a></li>
+                            <li class="two"><a title="2分" href="javascript:;" ng-click="collectionClick($index,2,$event)">2</a></li>
+                            <li class="three"><a title="3分" href="javascript:;" ng-click="collectionClick($index,3,$event)">3</a></li>
+                            <li class="four"><a title="4分" href="javascript:;" ng-click="collectionClick($index,4,$event)">4</a></li>
+                            <li class="five"><a title="5分" href="javascript:;" ng-click="collectionClick($index,5,$event)">5</a></li>
+                        </ul>
+                    </div>
+
                 </div>
                 <div class="txt">
                     <textarea class="area" ng-model="evaluate[$index]"></textarea>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <title ng-bind="title"></title>
 
-    <!--<link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">-->
-    <!--<link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">-->
+    <link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="/AndSell/pc/public/css/public/style.css">
     <link rel="stylesheet" href="/AndSell/pc/public/css/public/componentsGallery.css">
@@ -192,6 +192,7 @@
                             <div class="detailedList"></div>
                         </div>
                     </li>
+
                     <li>
                         <div class="innerContainer">
                             <div class="categoriePic icon-juice"></div>
@@ -233,19 +234,17 @@
     <div  class="effectiveArea">
         <div class="sidebar sidebar1" ng-if="showSideBar">
             <!-- 订单 -->
-            <div class="sidebar-title">
-                <i class="icon icon-order"></i>
+            <div class="sidebar-title ">
                 订单中心
             </div>
             <ul>
-                <li ui-sref="business.priceList" class="" ng-class="{true:'active'}[state ==1]"
-                    ng-click="getState(1)">我的订单
+                <li ui-sref="business.priceList" class="selected" >我的订单
                 </li>
                 <li ui-sref="business.priceAudit" ng-class="{true:'active'}[state ==2]"
-                    ng-click="getState(2)">我的订单
+                    ng-click="getState(2)">团购订单
                 </li>
                 <li ui-sref="business.purchaseList" ng-class="{true:'active'}[state ==3]"
-                    ng-click="getState(3)">评价订单
+                    ng-click="getState(3)">我的预售
                 </li>
                 <li ui-sref="business.purchaseAudit" ng-class="{true:'active'}[state ==4]"
                     ng-click="getState(4)">评价晒单
@@ -256,7 +255,6 @@
             </ul>
             <!-- 库存 -->
             <div class="sidebar-title">
-                <i class="icon icon-stock"></i>
                 资产中心
             </div>
             <ul>
@@ -265,7 +263,6 @@
             </ul>
             <!-- 库存 -->
             <div class="sidebar-title">
-                <i class="icon icon-stock"></i>
                 设置中心
             </div>
             <ul>
@@ -273,7 +270,6 @@
             </ul>
             <!-- 库存 -->
             <div class="sidebar-title">
-                <i class="icon icon-stock"></i>
                 其他功能
             </div>
             <ul>

@@ -66,6 +66,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
         }
         $scope.updateCartPrice();
     }
+
     //计算促销结果
     $scope.calculatePromotion = function () {
         weUI.toast.showLoading('正在查询促销条件');
@@ -96,6 +97,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             }
         }
     }
+
     $scope.bindPromoResult = function () {
         var presentIds = '';
         $scope.skuList.forEach(function (ele) {

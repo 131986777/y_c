@@ -396,18 +396,25 @@ AndSellUI.directive('cardModal', function (weUI, modalFactory, personalFactory) 
             };
 
             $scope.loadMemberCard = function () {
-                weUI.toast.showLoading('正在加载');
+                weUI.toast.showLoading('正在加载会员卡');
                 personalFactory.getMemberCardByUserId({}, function (response) {
                     $scope.cardList = response.data;
                     $scope.choosedCard = JSON.parse(getCookie("payCard"));
-                    if (!isEmptyObject($scope.choosedCard)) {
-                        $scope.choosedCardID = $scope.choosedCard['MEMBER_CARD.CARD_ID'];
+                    if ($scope.cardList.length > 1) {
+                        if (!isEmptyObject($scope.choosedCard)) {
+                            $scope.choosedCardID = $scope.choosedCard['MEMBER_CARD.CARD_ID'];
+                        }
+                        $scope.cardList.forEach(function (ele) {
+                            ele['MEMBER_CARD.CHECKED'] = ele['MEMBER_CARD.CARD_ID'] == $scope.choosedCardID;
+                        });
+
+                    }else {
+                        $scope.cardList[0]['MEMBER_CARD.CHECKED'] = true;
+                        setCookie('payCard', JSON.stringify($scope.cardList[0]));
+                        $scope.chooseCard();
                     }
-                    $scope.cardList.forEach(function (ele) {
-                        ele['MEMBER_CARD.CHECKED'] = ele['MEMBER_CARD.CARD_ID'] == $scope.choosedCardID;
-                    });
-                    console.log($scope.cardList);
                     weUI.toast.hideLoading();
+
                 }, function (response) {
                     weUI.toast.hideLoading();
                     weUI.toast.error(response.msg);
@@ -504,6 +511,24 @@ AndSellUI.filter('FormatAllDate', function () {
             + ":"
             + date.getSeconds();
         return formatDate;
+    }
+});
+
+AndSellUI.filter('strLength', function () {
+    return function (input) {
+        var len = 0;
+        for (var i = 0; i < input.length; i++) {
+            if (input.charCodeAt(i) > 127 || input.charCodeAt(i) == 94) {
+                len += 2;
+            } else {
+                len++;
+            }
+        }
+        if (len > 10) {
+            return input.substring(0, 5) + '…';
+        } else {
+            return input;
+        }
     }
 });
 /**
