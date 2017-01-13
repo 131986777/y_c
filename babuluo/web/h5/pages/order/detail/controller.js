@@ -64,7 +64,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             var formData = {
                 PRODUCT_ID: $scope.order['SHOP_ORDER.ID'],
                 FEE: moneyToFee($scope.order['SHOP_ORDER.PRICE_OVER']),
-                BODY: '订单' + $scope.order['SHOP_ORDER.ID'],
+                BODY: 'ORDER:' + $scope.order['SHOP_ORDER.ORDER_NUM'],
                 OPENID: openId,
                 IP: ip,
                 ORDER_ID: $scope.order['SHOP_ORDER.ID'],
@@ -84,7 +84,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         if (!isEmptyObject($scope.payCard)) {
             weUI.dialog.confirm("提示", "确认支付该订单？", function () {
                 weUI.toast.showLoading('正在支付');
-                var form = {};
+                var form = $scope.order;
                 form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
                 form['SHOP_ORDER.CARD_ID'] = $scope.payCard['MEMBER_CARD.CARD_ID'];
                 form['SHOP_ORDER.CARD_NO'] = $scope.payCard['MEMBER_CARD.CARD_NO'];

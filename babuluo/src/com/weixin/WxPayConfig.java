@@ -15,6 +15,6 @@ public class WxPayConfig {
     public static String WX_PAY_REFUND = "https://api.mch.weixin.qq.com/secapi/pay/refund";//订单退款
 
     //微信二维码存放路径
-    public static String WX_CODE_URL_PATH = "/uploads/wximages/";
+    public static String WX_CODE_URL_PATH = "wxImages/";
 
 }

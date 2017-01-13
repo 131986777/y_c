@@ -7,6 +7,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
+import com.pabula.common.util.PathUtil;
 import com.pabula.common.util.RandomUtil;
 import com.pabula.common.util.SeqNumHelper;
 import com.pabula.common.util.StrUtil;
@@ -134,9 +135,11 @@ public class WXPay {
         //微信返回结果里面吗没有这个 为了订单查询方便人添加
         resultMap.put("out_trade_no", paramMap.get("out_trade_no"));
         resultMap.put("resultXML", resultXML);
-
+        System.out.println("start");
+        System.out.println(resultMap.get("code_url"));
         resultMap.put("code_url",
-        encodeQrcodes(resultMap.get("code_url").toString(), WxPayConfig.WX_CODE_URL_PATH));
+            encodeQrcodes(resultMap.get("code_url").toString(),WxPayConfig.WX_CODE_URL_PATH));
+        System.out.println(resultMap.get("code_url"));
         return resultMap;
     }
 
@@ -330,9 +333,9 @@ public class WXPay {
         }
         sb.append("key=");
         sb.append(keyStr);
+        System.out.println("start");
         System.out.println(sb.toString());
-        System.out.println(MD5.MD5Encode(sb.toString()));
-        System.out.println(MD5.MD5Encode(sb.toString()).toUpperCase());
+        System.out.println(com.tencent.common.MD5.MD5Encode(sb.toString()).toUpperCase());
         System.out.println("over");
         return MD5.MD5Encode(sb.toString()).toUpperCase();
     }
@@ -413,7 +416,7 @@ public class WXPay {
             bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
             BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
             try {
-                File file = new File(parentPath);
+                File file = new File(PathUtil.getProjectRootDir()+parentPath);
                 if (!file.getParentFile().exists()) {
                     file.getParentFile().mkdirs();
                 }
@@ -499,7 +502,5 @@ public class WXPay {
 
     public static void main(String[] args) {
 
-        //        unifiedOrder("127.0.0.1", "fdskfjdskfj;dsjfds", "3232", "body", 12300);
-        refundOrder("10003693", 1800);
     }
 }

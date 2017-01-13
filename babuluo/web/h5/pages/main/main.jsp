@@ -19,7 +19,7 @@
     //String ip = request.getRemoteHost();
     //String ip = request.getHeader("Host");  //上了nginx与tomcat集群后，要用这个获得
     String ip = request.getHeader("X-Real-IP");  //上了nginx与tomcat集群后，要用这个获得
-
+//    String ip = "117.89.49.108";
     Cookie ipCookie = new Cookie("ip", ip);
     response.addCookie(ipCookie);
 
