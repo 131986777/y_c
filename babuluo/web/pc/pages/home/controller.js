@@ -6,5 +6,7 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
 
     modalFactory.setSide(false);
 
+    modalFactory.setLeftMenu(true);
+
 });
 
