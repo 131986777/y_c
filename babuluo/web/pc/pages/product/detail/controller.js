@@ -90,7 +90,18 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         $scope.skuSize = 1;
         $scope.caculCart();
 
-
+        $scope.goodCommentsPercent = $scope.commentsPercent($scope.listLength($scope.goodComments,$scope.proComments.length))+"%";
+        $scope.midCommentsPercent = $scope.commentsPercent($scope.listLength($scope.midComments,$scope.proComments.length))+"%";
+        $scope.badCommentsPercent = $scope.commentsPercent($scope.listLength($scope.badComments,$scope.proComments.length))+"%";
+        $scope.goodcp={
+            'width':$scope.goodCommentsPercent
+        }
+        $scope.midcp={
+            'width':$scope.midCommentsPercent
+        }
+        $scope.badcp={
+            'width':$scope.badCommentsPercent
+        }
     }
 
     $scope.setPrdPicBanner = function (prd) {
@@ -440,6 +451,8 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         }
     };
 
+
+
     var swiper = new Swiper('.swiper-container', {
         paginationClickable: true,
         spaceBetween: 300,
@@ -449,6 +462,15 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         observer: true,
         observeParents: true
     });
+
+    //好评百分比，中评百分比，差评百分比
+    $scope.commentsPercent = function (fra,nums) {
+        if(nums==0){
+            return 0;
+        }
+        return (parseInt(fra)/parseInt(nums)*100).fixed(0);
+    }
+
 
 });
 

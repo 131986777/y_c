@@ -190,94 +190,44 @@
                             </div>
                             <div class="evaluateSources">
                                 <div class="source">
-                                    <span class="name">好评<span class="count">(126条)</span></span>
+                                    <span class="name">好评<span class="count">({{listLength(goodComments)}}条)</span></span>
                                     <div class="perBar">
-                                        <div class="currentPer" style="width:98%;"></div>
+                                        <div class="currentPer" ng-style="goodcp"></div>
                                     </div>
-                                    <span class="show">98%</span>
+                                    <span class="show">{{goodCommentsPercent}}</span>
                                 </div>
                                 <div class="source">
-                                    <span class="name">中评<span class="count">(12条)</span></span>
+                                    <span class="name">中评<span class="count">({{listLength(midComments)}}条)</span></span>
                                     <div class="perBar">
-                                        <div class="currentPer" style="width:2%;"></div>
+                                        <div class="currentPer" ng-style="midcp"></div>
                                     </div>
-                                    <span class="show">98%</span>
+                                    <span class="show">{{midCommentsPercent}}</span>
                                 </div>
                                 <div class="source">
-                                    <span class="name">差评<span class="count">(1条)</span></span>
+                                    <span class="name">差评<span class="count">({{listLength(badComments)}}条)</span></span>
                                     <div class="perBar">
-                                        <div class="currentPer" style="width:0;"></div>
+                                        <div class="currentPer" ng-style="badcp"></div>
                                     </div>
-                                    <span class="show">98%</span>
+                                    <span class="show">{{badCommentsPercent}}</span>
                                 </div>
                             </div>
                         </div>
-                        <div class="evaluateLists">
+                        <div class="evaluateLists" ng-repeat="proc in allComments">
                             <div class="list">
                                 <div class="favicon">
                                     <img src="../images/togetherBuy_pic_2.png" alt="">
                                 </div>
                                 <div class="listContent">
-                                    <p class="userInfo"><span class="name">ZEXIKUN</span><span
-                                        class="time">2016/12/29 17:36:59</span></p>
+                                    <p class="userInfo"><span class="name">{{proc['MEMBER.USER_NAME']}}</span><span
+                                        class="time">{{proc['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD_TIME']}}</span></p>
                                     <p class="text">
-                                        用了一段时间，感觉还行。不过发热还是有一些，特别是风扇高速转动时噪音比较大。电池续航一般，正常使用3个多小时。因为是新品，价格偏贵。外包装精致，产品做工扎实。</p>
+                                        {{proc['SHOP_COMMENT.PRO_MAIN_COMMENT']}}</p>
                                     <div class="imgList">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list">
-                                <div class="favicon">
-                                    <img src="../images/togetherBuy_pic_2.png" alt="">
-                                </div>
-                                <div class="listContent">
-                                    <p class="userInfo"><span class="name">ZEXIKUN</span><span
-                                        class="time">2016/12/29 17:36:59</span></p>
-                                    <p class="text">
-                                        用了一段时间，感觉还行。不过发热还是有一些，特别是风扇高速转动时噪音比较大。电池续航一般，正常使用3个多小时。因为是新品，价格偏贵。外包装精致，产品做工扎实。</p>
-                                    <div class="imgList">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list">
-                                <div class="favicon">
-                                    <img src="../images/togetherBuy_pic_2.png" alt="">
-                                </div>
-                                <div class="listContent">
-                                    <p class="userInfo"><span class="name">ZEXIKUN</span><span
-                                        class="time">2016/12/29 17:36:59</span></p>
-                                    <p class="text">
-                                        用了一段时间，感觉还行。不过发热还是有一些，特别是风扇高速转动时噪音比较大。电池续航一般，正常使用3个多小时。因为是新品，价格偏贵。外包装精致，产品做工扎实。</p>
-                                    <div class="imgList">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list">
-                                <div class="favicon">
-                                    <img src="../images/togetherBuy_pic_2.png" alt="">
-                                </div>
-                                <div class="listContent">
-                                    <p class="userInfo"><span class="name">ZEXIKUN</span><span
-                                        class="time">2016/12/29 17:36:59</span></p>
-                                    <p class="text">
-                                        用了一段时间，感觉还行。不过发热还是有一些，特别是风扇高速转动时噪音比较大。电池续航一般，正常使用3个多小时。因为是新品，价格偏贵。外包装精致，产品做工扎实。</p>
-                                    <div class="imgList">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']!=undefined">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS2']!=undefined">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS3']!=undefined">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS4']!=undefined">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS5']!=undefined">
                                     </div>
                                 </div>
                             </div>
