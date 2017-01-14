@@ -1,23 +1,29 @@
-angular.module('AndSell.PC.Main').controller('pages_login_phoneLogin_Controller', function (productFactory, $interval, $scope, $state, modalFactory, shopFactory) {
+angular.module('AndSell.PC.Main').controller('pages_login_phoneLogin_Controller', function (productFactory, $interval, $scope, $state, modalFactory, userFactory,shopFactory) {
 
     modalFactory.setTitle("验证码登录");
 
     modalFactory.setHeader(false);
 
+    $scope.sendwait=true;
+    $scope.sending=false;
+    $scope.sended=false;
+
     $scope.sendSms = function () {
+
+        $scope.sendwait=false;
+        $scope.sending=true;
 
         var send= function () {
             var form = {};
             form['PHONE'] = $scope.memberInfo['PHONE'];
             userFactory.phoneSms(form, function (response) {
-                console.log(form);
-                $('.send').fadeOut();
-                $('.sended').fadeIn();
+                $scope.sended=true;
+                $scope.sending=false;
                 $scope.time = 60;
                 $scope.timer = $interval(function () {
                     if($scope.time==0){
-                        $('.send').fadeIn();
-                        $('.sended').fadeOut();
+                        $scope.sended=false;
+                        $scope.sendwait=true;
                         $scope.time=60;
                         $interval.cancel($scope.timer);
                     }

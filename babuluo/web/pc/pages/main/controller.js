@@ -1,4 +1,4 @@
-AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, modalFactory, productFactory) {
+AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, modalFactory,personalFactory,userFactory, productFactory) {
 
     //逻辑
     $scope.$on('title', function (event, data) {
@@ -64,7 +64,8 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
             cartSize = JSON.parse(cartSize);
         }
         if (cartInfo.length > 0)$scope.getPrdInfo(cartInfo, cartSize);
-    }
+    };
+
     $scope.getPrdInfo = function (cartInfo, cartSize) {
         var size = 0;
         var params = {};
@@ -87,10 +88,6 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
         }
     }
 
-    $scope.updateUser=function(){
-
-    };
-
     $scope.caculCart();
 
     $scope.updateShop();
@@ -101,6 +98,32 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
 
     $scope.toPrdClassList = function (id) {
         $state.go('pages/product/list', {classId: id});
+    }
+
+    $scope.getUser = function (uid) {
+        var form = {};
+        form['MEMBER.USER_ID'] = uid;
+        personalFactory.getPhone(form, function (response) {
+            $scope.USER = response.data[0];
+        }, function (response) {
+
+        });
+    }
+
+    $scope.uid = getCookie('ANDSELLID');
+    if ($scope.uid != undefined && $scope.uid != '') {
+        $scope.getUser($scope.uid);
+    } else {
+        $state.go('pages/user/accountLogin');
+        modalFactory.showShortAlert('登录异常');
+    }
+
+    $scope.logOut= function () {
+        modalFactory.showAlert("确定退出登录？", function () {
+            userFactory.loginOut({}, function (response) {
+                $state.go('pages/user/accountLogin');
+            });
+        })
     }
 
 });
