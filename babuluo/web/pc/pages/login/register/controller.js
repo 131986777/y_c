@@ -1,15 +1,18 @@
-angular.module('AndSell.PC.Main').controller('pages_login_register_Controller', function (productFactory, $interval, $scope, $state, modalFactory, shopFactory) {
+angular.module('AndSell.PC.Main').controller('pages_login_register_Controller', function (productFactory, $interval, $scope, $state, modalFactory, userFactory) {
 
     modalFactory.setTitle("账号注册");
 
     modalFactory.setHeader(false);
 
     modalFactory.setSide(false);
+    $scope.get = true;
+    $scope.send = false;
+    $scope.sended = false;
 
 
-    $scope.showColor = function (){
-        var  num = $scope.memberInfo['MEMBER.LOGIN_ID'];
-        if (num == 11){
+    $scope.showColor = function () {
+        var num = $scope.memberInfo['MEMBER.LOGIN_ID'];
+        if (num == 11) {
 
         }
     }
@@ -24,7 +27,7 @@ angular.module('AndSell.PC.Main').controller('pages_login_register_Controller', 
 
     $scope.checkPassword = function () {
         if ($scope.memberInfo['MEMBER.LOGIN_PWD'] != $scope.memberInfo['MEMBER.password']) {
-            modalFactory.showShortAlert('两次面不一致，请检查密码');
+            modalFactory.showShortAlert('两次密码不一致，请检查密码');
         }
     }
 
@@ -38,12 +41,11 @@ angular.module('AndSell.PC.Main').controller('pages_login_register_Controller', 
         form['MEMBER.CHECKCODE'] = $scope.memberInfo['MEMBER.CHECKCODE'];
         userFactory.newUserReg(form, function (response) {
             modalFactory.showShortAlert('注册成功');
-            $state.go('pages/user/accountLogin');
+            $state.go('pages/login/accountLogin');
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
         });
     }
-
 
 
     $scope.sendSms = function () {
@@ -55,24 +57,28 @@ angular.module('AndSell.PC.Main').controller('pages_login_register_Controller', 
                 modalFactory.showShortAlert('请输入正确手机号');
             } else {
                 var form = {};
-                form['FLAG'] =1;
+                form['FLAG'] = 1;
                 form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
+                $scope.get = false;
+                $scope.send = true;
                 userFactory.sendVerificationCode(form, function (response) {
                     console.log(form);
-                    $('.send').fadeOut();
-                    $('.sended').fadeIn();
                     $scope.time = 60;
+                    $scope.send = false;
+                    $scope.sended = true;
                     $scope.timer = $interval(function () {
-                        if($scope.time==0){
-                            $('.send').fadeIn();
-                            $('.sended').fadeOut();
-                            $scope.time=60;
+                        if ($scope.time == 0) {
+                            $scope.time = 60;
+                            $scope.get = true;
+                            $scope.send = false;
+                            $scope.sended = false;
                             $interval.cancel($scope.timer);
                         }
                         else {
                             $scope.time--;
                         }
                     }, 1000);
+
                     modalFactory.showShortAlert('请输入验证码');
                 }, function (response) {
                     modalFactory.showShortAlert(response.msg);
@@ -84,5 +90,4 @@ angular.module('AndSell.PC.Main').controller('pages_login_register_Controller', 
     $scope.$on('destroy', function () {
         $interval.cancel($scope.timer);
     })
-
 });

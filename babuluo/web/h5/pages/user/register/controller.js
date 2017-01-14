@@ -19,7 +19,7 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
 
     $scope.checkPassword = function () {
         if ($scope.memberInfo['MEMBER.LOGIN_PWD'] != $scope.memberInfo['MEMBER.password']) {
-            weUI.toast.error('两次面不一致，请检查密码');
+            weUI.toast.error('两次密码不一致，请检查密码');
         }
     }
 
@@ -80,7 +80,3 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
         $interval.cancel($scope.timer);
     })
 });
-
-
-
-

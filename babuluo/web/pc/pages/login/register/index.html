@@ -7,7 +7,7 @@
         <div class="infoPanel">
             <div class="infoNav">
 
-                <a class="infoLogin font">
+                <a class="infoLogin font  ">
                     注册帐号
                 </a>
 
@@ -15,40 +15,42 @@
             <div class="mid">
                 <div class="account">
                     <span class="word">手机号</span>
-                    <input type="text" ng-model="memberInfo['MEMBER.LOGIN_ID']" ng-blur="ckeckPhone()" ng-change="showColor()" class="txt" />
+                    <input type="text" ng-init="memberInfo['MEMBER.LOGIN_ID'] =''"
+                           ng-model="memberInfo['MEMBER.LOGIN_ID']" ng-blur="ckeckPhone()" ng-change="showColor()"
+                           class="txt"/>
 
                 </div>
                 <div class="account pwd">
                     <span class="word">验证码</span>
                     <div class="codePos">
-                        <input type="text" ng-model="memberInfo['MEMBER.CHECKCODE']" class="txt" />
-                        <div class="codeLogin" ng-click="sendSms()">获取验证码</div>
-                        <div class="send">发送中...</div>
-                        <div class="sended">已发送（{{time}}s）</div>
+                        <input type="text" ng-model="memberInfo['MEMBER.CHECKCODE']" class="txt"/>
+                        <div class="codeLogin" ng-if="get" ng-click="sendSms()">获取验证码</div>
+                        <div class="send" ng-if="send">发送中...</div>
+                        <div class="sended" ng-show="sended">已发送（{{time}}）</div>
                     </div>
 
 
                 </div>
                 <div class="account pwd">
                     <span class="word">密码</span>
-                    <input type="password" ng-model="memberInfo['MEMBER.LOGIN_PWD']" ng-blur="checkPwd()" class="txt" />
+                    <input type="password" ng-model="memberInfo['MEMBER.LOGIN_PWD']" ng-blur="checkPwd()" class="txt"/>
 
                 </div>
                 <div class="account pwd">
                     <span class="word">确认密码</span>
-                    <input type="password" ng-model="loginInfo['PWD']" class="txt" />
+                    <input type="password" ng-model="memberInfo['MEMBER.password']" ng-blur="checkPassword()" class="txt"/>
 
                 </div>
             </div>
             <div class="pos">
                 <div class="pos2">
-                    <a class="regist" ui-sref="pages/login/accountLogin">已有帐号?</a>
+                    <a class="regist">已有帐号?</a>
                     <a class="forget" ui-sref="pages/login/accountLogin">直接登录</a>
                 </div>
 
             </div>
-            <div class="but" ng-click="userLogin()">
-                注册
+            <div class="but" ng-click="reg()">
+                <a>注册</a>
             </div>
         </div>
 
