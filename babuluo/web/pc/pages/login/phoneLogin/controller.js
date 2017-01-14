@@ -11,12 +11,12 @@ angular.module('AndSell.PC.Main').controller('pages_login_phoneLogin_Controller'
             form['PHONE'] = $scope.memberInfo['PHONE'];
             userFactory.phoneSms(form, function (response) {
                 console.log(form);
-                $('.send').fadeOut();
+                $('.codeLogin').fadeOut();
                 $('.sended').fadeIn();
                 $scope.time = 60;
                 $scope.timer = $interval(function () {
                     if($scope.time==0){
-                        $('.send').fadeIn();
+                        $('.codeLogin').fadeIn();
                         $('.sended').fadeOut();
                         $scope.time=60;
                         $interval.cancel($scope.timer);

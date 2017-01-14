@@ -11,9 +11,9 @@
                     <div class="pwd">验证码</div>
                     <div class="yzmPos">
                         <input type="text" class="typeIn large-size" placeholder="" ng-model="memberInfo['MEMBER.CHECKCODE']">
-                        <div class="yzm" ng-click="sendSms()">获取验证码</div>
-                        <div class="send">发送中...</div>
-                        <div class="sended">已发送（{{time}}s）</div>
+                        <div class="yzm" ng-click="sendSms()" ng-style="h1">获取验证码</div>
+                        <div class="send" ng-style="h2">发送中...</div>
+                        <div class="sended" ng-style="h3">已发送（{{time}}s）</div>
                     </div>
 
                 </div>

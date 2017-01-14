@@ -45,7 +45,6 @@ angular.module('AndSell.PC.Main').controller('pages_security_modifyPwd_Controlle
     }
 
 
-
     $scope.sendSms = function (){
         if ($scope.memberInfo['MEMBER.LOGIN_ID'] == '') {
              modalFactory.showShortAlert('请输入手机号');
@@ -59,10 +58,14 @@ angular.module('AndSell.PC.Main').controller('pages_security_modifyPwd_Controlle
                 form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
                 form['FLAG'] = 0;
                 securityFactory.sendVerificationCode(form, function (response) {
-                    $('.send').fadeOut();
-                    $('.sended').fadeIn();
+                    $('.yzm').fadeOut();
+                    $('.send').fadeIn();
                     $scope.time = 60;
                     $scope.timer = $interval(function () {
+                        if(response.msg=='ok'){
+                            $('.send').fadeOut();
+                            $('.sended').fadeIn();
+                        }
                         if($scope.time==0){
                             $('.send').fadeIn();
                             $('.sended').fadeOut();

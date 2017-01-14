@@ -1,4 +1,4 @@
-angular.module('AndSell.PC.Main').controller('pages_login_register_Controller', function (productFactory, $interval, $scope, $state, modalFactory, shopFactory) {
+angular.module('AndSell.PC.Main').controller('pages_login_register_Controller', function (productFactory, $interval, $scope, $state, modalFactory, userFactory) {
 
     modalFactory.setTitle("账号注册");
 
