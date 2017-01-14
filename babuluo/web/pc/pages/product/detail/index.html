@@ -13,8 +13,9 @@
                 <div class="picList">
                     <ul>
                         <li ng-repeat="slide in slides">
-                            <img ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
-                                 style="height: 100%;width: 100%;">
+                            <img
+                                ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
+                                style="height: 100%;width: 100%;">
                         </li>
                     </ul>
                 </div>
@@ -28,7 +29,8 @@
                     <div class="priceGroup">
                         <span class="name">价格</span>
                         <span class="content">
-                            <span class="current" ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
+                            <span class="current"
+                                  ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
                                   ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
                             </span>
                             <span class="origin" ng-if="sku!=undefined&&sku['isSale']"
@@ -85,6 +87,7 @@
                 </div>
                 <div class="endPayGroup">
                     <a href="" class="addToCart" ng-click="addToCart()">加入购物车</a>
+                    <a href="" class="buyNow" ng-click="buyNow()">立即购买</a>
                     <a href="" class="collect"></a>
                 </div>
             </div>
@@ -155,14 +158,80 @@
                 </div>
             </div>
             <div class="detailIntro">
-                <div class="introCategories">
+                <div class="introCategories" ng-init="prd_detai_model='detail'">
                     <ul>
-                        <li><a href="" class="active" ng-click="prd_detai_model='detail'">图文详情</a></li>
-                        <li><a href="" ng-click="prd_detai_model='comment'">评价详情</a></li>
+                        <li><a ng-class="{true:'active'}[prd_detai_model=='detail']"
+                               ng-click="prd_detai_model='detail'">图文详情</a></li>
+                        <li><a ng-class="{true:'active'}[prd_detai_model=='comment']"
+                               ng-click="prd_detai_model='comment'">评价详情</a></li>
                     </ul>
                 </div>
-                <div class="introContent">
+                <div class="introContent" ng-if="prd_detai_model=='detail'">
                     <span ng-bind-html="product['SHOP_PRODUCT.SHOP_DES']"></span>
+                </div>
+
+                <div class="introContent" ng-if="prd_detai_model=='comment'">
+                    <div class="imgIntro">
+                        <div class="imgList">
+                            <img src="../images/goodsDetailed.png" alt="">
+                            <img src="../images/goodsDetailed.png" alt="">
+                            <img src="../images/goodsDetailed.png" alt="">
+                            <img src="../images/goodsDetailed.png" alt="">
+                            <img src="../images/goodsDetailed.png" alt="">
+                            <img src="../images/goodsDetailed.png" alt="">
+                        </div>
+                    </div>
+                    <div class="evaluateIntro active">
+                        <div class="summarize">
+                            <div class="totalPer">
+                                <span class="number">98%</span>
+                                <span class="text">好评度</span>
+                            </div>
+                            <div class="evaluateSources">
+                                <div class="source">
+                                    <span class="name">好评<span class="count">({{listLength(goodComments)}}条)</span></span>
+                                    <div class="perBar">
+                                        <div class="currentPer" ng-style="goodcp"></div>
+                                    </div>
+                                    <span class="show">{{goodCommentsPercent}}</span>
+                                </div>
+                                <div class="source">
+                                    <span class="name">中评<span class="count">({{listLength(midComments)}}条)</span></span>
+                                    <div class="perBar">
+                                        <div class="currentPer" ng-style="midcp"></div>
+                                    </div>
+                                    <span class="show">{{midCommentsPercent}}</span>
+                                </div>
+                                <div class="source">
+                                    <span class="name">差评<span class="count">({{listLength(badComments)}}条)</span></span>
+                                    <div class="perBar">
+                                        <div class="currentPer" ng-style="badcp"></div>
+                                    </div>
+                                    <span class="show">{{badCommentsPercent}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="evaluateLists" ng-repeat="proc in allComments">
+                            <div class="list">
+                                <div class="favicon">
+                                    <img src="../images/togetherBuy_pic_2.png" alt="">
+                                </div>
+                                <div class="listContent">
+                                    <p class="userInfo"><span class="name">{{proc['MEMBER.USER_NAME']}}</span><span
+                                        class="time">{{proc['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD_TIME']}}</span></p>
+                                    <p class="text">
+                                        {{proc['SHOP_COMMENT.PRO_MAIN_COMMENT']}}</p>
+                                    <div class="imgList">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']!=undefined">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS2']!=undefined">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS3']!=undefined">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS4']!=undefined">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS5']!=undefined">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

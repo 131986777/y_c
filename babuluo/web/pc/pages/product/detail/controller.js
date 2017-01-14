@@ -23,6 +23,8 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
 
     $scope.initData = function () {
 
+        console.log(JSON.parse(getCookie('currentShopInfo')));
+
         // 设置轮播图图片间隔
         $scope.myInterval = 4000;
         // 轮播图数据初始化
@@ -32,7 +34,6 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         $scope.currSkuContentSelectMap = {
             name1: '', name2: '', name3: ''
         }
-
 
         var params = {};
         params['SHOP_PRODUCT.PRD_ID'] = $stateParams.PRD_ID;
@@ -87,6 +88,19 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
 
         $scope.skuSize = 1;
         $scope.caculCart();
+
+        $scope.goodCommentsPercent = $scope.commentsPercent($scope.listLength($scope.goodComments,$scope.proComments.length))+"%";
+        $scope.midCommentsPercent = $scope.commentsPercent($scope.listLength($scope.midComments,$scope.proComments.length))+"%";
+        $scope.badCommentsPercent = $scope.commentsPercent($scope.listLength($scope.badComments,$scope.proComments.length))+"%";
+        $scope.goodcp={
+            'width':$scope.goodCommentsPercent
+        }
+        $scope.midcp={
+            'width':$scope.midCommentsPercent
+        }
+        $scope.badcp={
+            'width':$scope.badCommentsPercent
+        }
     }
 
     $scope.setPrdPicBanner = function (prd) {
@@ -340,6 +354,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
     //加入购物车
     $scope.addToCart = function () {
         if ($scope.sku != undefined) {
+            console.log($scope.sku);
             if ($scope.sku['SHOP_PRODUCT_SKU.STOCK'] > 0) {
                 var cartInfo = getCookie('cartInfo');
                 var cartSize = getCookie('cartSize');
@@ -431,6 +446,8 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         }
     };
 
+
+
     var swiper = new Swiper('.swiper-container', {
         paginationClickable: true,
         spaceBetween: 300,
@@ -440,6 +457,15 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         observer: true,
         observeParents: true
     });
+
+    //好评百分比，中评百分比，差评百分比
+    $scope.commentsPercent = function (fra,nums) {
+        if(nums==0){
+            return 0;
+        }
+        return (parseInt(fra)/parseInt(nums)*100).fixed(0);
+    }
+
 
 });
 
