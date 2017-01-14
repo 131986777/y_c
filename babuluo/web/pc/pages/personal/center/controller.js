@@ -1,7 +1,4 @@
-/**
- * Created by njwb on 2017/1/9.
- */
-angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller', function ($interval, $scope, $state, modalFactory, personalFactory,balanceFactory) {
+angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller', function ($interval, $scope, $state, modalFactory,orderFactory, personalFactory,balanceFactory) {
 
     modalFactory.setTitle("订单评价");
 
@@ -62,6 +59,15 @@ angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller',
         });
     }
 
+
+
+    $scope.getOrderStates = function () {
+        orderFactory.getOrderStates({}, function (response) {
+            $scope.stateMap = response.extraData.stateMap;
+        });
+    };
+
     $scope.initLoad();
+
 
 });

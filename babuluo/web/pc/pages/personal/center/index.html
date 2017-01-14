@@ -7,8 +7,8 @@
             <div class="addInfo">
                 <p class="name pos">{{USER['MEMBER.USER_NAME']}} </p>
                 <p class="phone pos">手机号</p>
-                <p class="num pos">USER['MEMBER.MOBILE']</p>
-                <p class="security">安全中心</p>
+                <p class="num pos">{{USER['MEMBER.MOBILE']}}</p>
+                <p class="security" ui-sref="pages/security/modifyPwd">安全中心</p>
             </div>
             <div class="detail">
                 <div class="each">
@@ -29,11 +29,12 @@
         <div class="row-header font">个人中心</div>
         <span ng-if="memberCards.length==0" class="no-coupon">你暂无会员卡！</span>
         <div class="card" ng-repeat="cl in memberCards">
-            <div class="eachCard"  ng-style="cl['MEMBER_CARD.CARD_STYLE']">
+            <div class="eachCard" ng-style="cl['MEMBER_CARD.CARD_STYLE']">
                 <div class="pos">
                     <p class="num">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</p>
                     <p class="num ka">{{cl['MEMBER_CARD.TYPE_NAME']}}</p>
-                    <p class="mid" ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0">(冻结 {{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}})</p>
+                    <p class="mid" ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0">(冻结
+                        {{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}})</p>
                     <div class="m">
                         <p class="word">余额</p>
                         <p class="money">{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}</p>
@@ -56,3 +57,4 @@
             </div>
         </div>
     </div>
+</div>

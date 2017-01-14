@@ -4,8 +4,8 @@ angular.module('AndSell.PC.Main').controller('pages_security_modifyPwd_Controlle
 
     modalFactory.setHeader(false);
 
+    //modalFactory.setCateGory(true);
     modalFactory.setSide(true);
-    modalFactory.setCateGory(true);
     $scope.get=true;
     $scope.send=false;
     $scope.sended=false;
