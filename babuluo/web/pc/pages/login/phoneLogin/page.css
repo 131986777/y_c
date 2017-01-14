@@ -89,6 +89,7 @@
   right: 8px;
   top: 10px;
   cursor: pointer;
+  z-index: 1010;
 }
 .loginPanel .middle .infoPanel .mid .account .codePos .send{
   width: 100px;
@@ -102,7 +103,9 @@
   line-height: 2.1;
   position: absolute;
   right: 8px;
-  top: 10px;}
+  top: 10px;
+  z-index: 1000;
+}
 .loginPanel .middle .infoPanel .mid .account .codePos .sended{
   width: 100px;
   height: 30px;
@@ -115,7 +118,9 @@
   line-height: 2.1;
   position: absolute;
   right: 8px;
-  top: 10px;}
+  top: 10px;
+  z-index: 900;
+}
 /* line 83, ../sass/login.scss */
 .loginPanel .middle .infoPanel .but {
   width: 270px;

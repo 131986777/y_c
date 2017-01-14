@@ -67,7 +67,7 @@ angular.module('AndSell.PC.Main').controller('pages_security_modifyPwd_Controlle
                             $('.sended').fadeIn();
                         }
                         if($scope.time==0){
-                            $('.send').fadeIn();
+                            $('.yzm').fadeIn();
                             $('.sended').fadeOut();
                             $scope.time=60;
                             $interval.cancel($scope.timer);

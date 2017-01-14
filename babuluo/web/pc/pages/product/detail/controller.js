@@ -459,7 +459,8 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
     });
 
     //好评百分比，中评百分比，差评百分比
-    $scope.commentsPercent = function (fra,nums) {
+    $scope.commentsPercents = function (fra,nums) {
+        alert('sss');
         if(nums==0){
             return 0;
         }
