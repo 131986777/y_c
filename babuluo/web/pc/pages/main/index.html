@@ -56,11 +56,11 @@
             <div class="categories" ng-init="menuBarPosi ='sy'">
                 <ul>
                     <li><a ui-sref="pages/home" ng-class="{true:'active'}[menuBarPosi =='sy']" ng-click="menuBarPosi = sy">首页</a></li>
-                    <li><a ui-sref="pages/product/list" ng-class="{true:'active'}[menuBarPosi =='sycp']" ng-click="menuBarPosi = 'sycp'">所有菜品</a></li>
-                    <li><a ui-sref="pages/product/list" ng-class="{true:'active'}[menuBarPosi =='bkcp']" ng-click="menuBarPosi = 'bkcp'">爆款菜品</a></li>
-                    <li><a ui-sref="pages/product/list" ng-class="{true:'active'}[menuBarPosi =='xpss']" ng-click="menuBarPosi = 'xpss'">新品上市</a></li>
-                    <li><a ui-sref="pages/order/list" ng-class="{true:'active'}[menuBarPosi =='wddd']" ng-click="menuBarPosi = 'wddd'">我的订单</a></li>
+                    <li><a ui-sref="pages/product/list" ng-class="{true:'active'}[menuBarPosi =='sycp']" ng-click="menuBarPosi = 'sycp';toPrdTagList('')">所有菜品</a></li>
+                    <li><a ui-sref="pages/product/list" ng-class="{true:'active'}[menuBarPosi =='bkcp']" ng-click="menuBarPosi = 'bkcp';toPrdTagList(1024)">爆款菜品</a></li>
+                    <li><a ui-sref="pages/product/list" ng-class="{true:'active'}[menuBarPosi =='xpss']" ng-click="menuBarPosi = 'xpss'toPrdTagList(1023)">新品上市</a></li>
                     <li><a ui-sref="pages/product/list" ng-class="{true:'active'}[menuBarPosi =='slsc']" ng-click="menuBarPosi = 'slsc'">时令蔬菜</a></li>
+                    <li><a ui-sref="pages/order/list" ng-class="{true:'active'}[menuBarPosi =='wddd']" ng-click="menuBarPosi = 'wddd'">我的订单</a></li>
                 </ul>
             </div>
         </div>

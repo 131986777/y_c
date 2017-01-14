@@ -1,4 +1,4 @@
-angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', function (productFactory, $interval, $scope, $state, modalFactory, shopFactory) {
+angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', function (productFactory, $interval, $scope, $state, modalFactory, $state,$stateParams) {
 
     modalFactory.setTitle("商品列表");
 
@@ -27,6 +27,8 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
     }
 
     $scope.filter = {
+        'SHOP_PRODUCT.CLASS_ID':$stateParams.classId,
+        'SHOP_PRODUCT.TAG_ID':$stateParams.tagId,
         'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
         'SHOP_PRODUCT.REMARK': 'offLine',
         'SHOP_PRODUCT.ORDER':'HAS_STOCK DESC,SHOP_PRODUCT.CLASS_ID ASC,convert(SHOP_PRODUCT.PRD_NAME using gbk) asc '

@@ -8,7 +8,7 @@ $import('pages/cart', {}, true);
 $import('pages/payment/pay', {}, true);
 //
 $import('pages/product/detail', {PRD_ID: '1242'},true);
-$import('pages/product/list', {keyword: '', classId: undefined, tagId: ''}, true);
+$import('pages/product/list', {keyword: '', classId: '', tagId: ''}, true);
 //$import('pages/product/tagPrdList', {tagId: '1023'});
 //
 // $import('pages/order/add', {SKU_IDS: '1060', COUPON_INFO: ''});
