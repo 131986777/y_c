@@ -7,14 +7,15 @@
         <!--</div>-->
         <div class="goodsDetailShow">
             <div class="picShow">
-                <div class="mainPic">
-                    <img ng-src="{{FILE_SERVER_DOMAIN+product['SHOP_PRODUCT.CMP']}}">
+                <div class="mainPic" ng-init="CMP=FILE_SERVER_DOMAIN+product['SHOP_PRODUCT.CMP']">
+                    <img ng-src="{{CMP}}">
                 </div>
                 <div class="picList">
                     <ul>
                         <li ng-repeat="slide in slides">
                             <img
                                 ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
+                                ng-click="CMP=slide.image"
                                 style="height: 100%;width: 100%;">
                         </li>
                     </ul>
