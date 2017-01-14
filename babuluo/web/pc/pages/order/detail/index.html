@@ -38,7 +38,8 @@
                      ng-if="((order['SHOP_ORDER.STATE_MONEY']==-1||((order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&&order['SHOP_ORDER.STATE_MONEY']==1))&& (order['SHOP_ORDER.TYPE']=='3'||order['SHOP_ORDER.TYPE']=='5')))||(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&& order['SHOP_ORDER.STATE_OUT']==-1)&& order['SHOP_ORDER.TYPE']=='1')">
                     取消订单
                 </div>
-                <div class="pay_now" ng-click="payNow()"
+                <!--ng-click="payNow()"-->
+                <div class="pay_now" ui-sref="pages/personal/pay({ORDER_ID:order['SHOP_ORDER.ID']})"
                      ng-if="((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.TYPE']!='5')||(order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.TYPE']=='5'))">
                     立即支付
                 </div>
@@ -193,7 +194,7 @@
                         </li>
                     </ul>
                 </div>
-                <p class="remark">备注:{{detail['SHOP_ORDER_INFO.REMARK']}}</p>
+                <p class="remark">备注:{{order['SHOP_ORDER.REMARK']}}</p>
             </div>
         </div>
         <div class="receipt_info">

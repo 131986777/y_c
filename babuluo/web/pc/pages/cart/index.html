@@ -94,7 +94,8 @@
                             {{sku['SHOP_PRODUCT_SKU.SIZE'] * sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'}}
                         </td>
                         <td>
-                            {{sku['SHOP_PRODUCT_SKU.STOCK']}}
+                            <span ng-if="sku['SHOP_PRODUCT_SKU.STOCK']>0">有货</span>
+                            <span ng-if="sku['SHOP_PRODUCT_SKU.STOCK']<=0">售罄</span>
                         </td>
                         <td class="del">
                             <span ng-click="delShopCart(sku)">删除</span>

@@ -73,7 +73,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
         //加入购物车
         setCookie('cartSize', JSON.stringify(cartSize));
         setCookie('cartInfo', JSON.stringify(cartInfo));
-
+        modalFactory.updateCart();
         modalFactory.showShortAlert("加入购物车成功");
     }
 });

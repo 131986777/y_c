@@ -5,7 +5,8 @@
     <title ng-bind="title"></title>
 
     <link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap-theme.min.css"
+          rel="stylesheet">
 
     <link rel="stylesheet" href="/AndSell/pc/public/css/public/style.css">
     <link rel="stylesheet" href="/AndSell/pc/public/css/public/componentsGallery.css">
@@ -22,13 +23,15 @@
                 <a href="" class="welcomeInfo">你好，欢迎来到云厨1站</a>
             </div>
             <div class="loginGroup">
-                <a ui-sref="pages/login/accountLogin" class="logoIn">请登录</a>
-                <a ui-sref="pages/login/register" class="signIn" >免费注册</a>
+                <a class="logoIn" ng-if="USER!=undefined" ng-bind="USER['MEMBER.USER_NAME']"></a>
+                <a ui-sref="pages/login/accountLogin" class="logoIn" ng-if="USER==undefined">请登录</a>
+                <a ui-sref="pages/login/register" class="signIn" ng-if="USER==undefined">免费注册</a>
+                <a class="signIn" ng-click="logOut()" ng-if="USER!=undefined">退出</a>
             </div>
             <div class="seviceGroup">
-                <a ui-sref="pages/personal/center" class="personalCenter">个人中心</a>
-                <a href="" class="clientSevice">客户服务</a>
-                <a href="" class="followUs">关注我们</a>
+                <a ui-sref="pages/personal/center" ng-if="USER!=undefined" class="personalCenter">个人中心</a>
+                <a ng-if="USER!=undefined" class="clientSevice">客户服务</a>
+                <a class="followUs">关注我们</a>
             </div>
         </div>
     </div>
@@ -38,7 +41,8 @@
                 <p class="storeName" ng-if="shop==undefined">点击选择门店</p>
                 <p class="storeName" ng-bind="shop['SHOP.SHOP_NAME']"></p>
                 <p class="number"><span class="phoneNumber" ng-bind="shop['SHOP.TELEPHONE']"></span><span
-                    class="openTime" ng-bind="shop['SHOP.OPEN_TIME']+' — '+shop['SHOP.CLOSE_TIME']"></span></p>
+                    class="openTime"
+                    ng-bind="shop['SHOP.OPEN_TIME']+' — '+shop['SHOP.CLOSE_TIME']"></span></p>
                 <p class="addressInfo" ng-bind="shop['SHOP.ADDR']"></p>
             </div>
             <div class="searchBar">
@@ -47,7 +51,7 @@
             </div>
             <div class="myShoppingCart">
                 <a ui-sref="pages/cart">我的购物车</a>
-                <span class="messageCount">3</span>
+                <span class="messageCount" ng-bind="cartSize"></span>
             </div>
         </div>
     </div>
@@ -55,12 +59,23 @@
         <div class="effectiveArea">
             <div class="categories" ng-init="menuBarPosi ='sy'">
                 <ul>
-                    <li><a ui-sref="pages/home" ng-class="{true:'active'}[menuBarPosi =='sy']" ng-click="menuBarPosi = sy">首页</a></li>
-                    <li><a ui-sref="pages/product/list" ng-class="{true:'active'}[menuBarPosi =='sycp']" ng-click="menuBarPosi = 'sycp';toPrdTagList('')">所有菜品</a></li>
-                    <li><a ui-sref="pages/product/list" ng-class="{true:'active'}[menuBarPosi =='bkcp']" ng-click="menuBarPosi = 'bkcp';toPrdTagList(1024)">爆款菜品</a></li>
-                    <li><a ui-sref="pages/product/list" ng-class="{true:'active'}[menuBarPosi =='xpss']" ng-click="menuBarPosi = 'xpss';toPrdTagList(1023)">新品上市</a></li>
-                    <li><a ui-sref="pages/product/list" ng-class="{true:'active'}[menuBarPosi =='slsc']" ng-click="menuBarPosi = 'slsc'">时令蔬菜</a></li>
-                    <li><a ui-sref="pages/order/list" ng-class="{true:'active'}[menuBarPosi =='wddd']" ng-click="menuBarPosi = 'wddd'">我的订单</a></li>
+                    <li><a ui-sref="pages/home" ng-class="{true:'active'}[menuBarPosi =='sy']"
+                           ng-click="menuBarPosi = sy">首页</a></li>
+                    <li><a ui-sref="pages/product/list"
+                           ng-class="{true:'active'}[menuBarPosi =='sycp']"
+                           ng-click="menuBarPosi = 'sycp';toPrdTagList('')">所有菜品</a></li>
+                    <li><a ui-sref="pages/product/list"
+                           ng-class="{true:'active'}[menuBarPosi =='bkcp']"
+                           ng-click="menuBarPosi = 'bkcp';toPrdTagList(1024)">爆款菜品</a></li>
+                    <li><a ui-sref="pages/product/list"
+                           ng-class="{true:'active'}[menuBarPosi =='xpss']"
+                           ng-click="menuBarPosi = 'xpss';toPrdTagList(1023)">新品上市</a></li>
+                    <li><a ui-sref="pages/product/list"
+                           ng-class="{true:'active'}[menuBarPosi =='slsc']"
+                           ng-click="menuBarPosi = 'slsc'">时令蔬菜</a></li>
+                    <li><a ui-sref="pages/order/list"
+                           ng-class="{true:'active'}[menuBarPosi =='wddd']"
+                           ng-click="menuBarPosi = 'wddd'">我的订单</a></li>
                 </ul>
             </div>
         </div>
@@ -232,58 +247,58 @@
             <div class="categoriePic icon-rice-one"></div>
 
         </div>
-    <div  class="effectiveArea">
-        <div class="sidebar sidebar1" ng-if="showSideBar">
-            <!-- 订单 -->
-            <div class="sidebar-title ">
-                订单中心
+        <div class="effectiveArea">
+            <div class="sidebar sidebar1" ng-if="showSideBar">
+                <!-- 订单 -->
+                <div class="sidebar-title ">
+                    订单中心
+                </div>
+                <ul>
+                    <li ui-sref="business.priceList" class="selected">我的订单
+                    </li>
+                    <li ui-sref="business.priceAudit" ng-class="{true:'active'}[state ==2]"
+                        ng-click="getState(2)">团购订单
+                    </li>
+                    <li ui-sref="business.purchaseList" ng-class="{true:'active'}[state ==3]"
+                        ng-click="getState(3)">我的预售
+                    </li>
+                    <li ui-sref="business.purchaseAudit" ng-class="{true:'active'}[state ==4]"
+                        ng-click="getState(4)">评价晒单
+                    </li>
+                    <li ui-sref="business.payrequestList" ng-class="{true:'active'}[state ==5]"
+                        ng-click="getState(5)">评价晒单记录
+                    </li>
+                </ul>
+                <!-- 库存 -->
+                <div class="sidebar-title">
+                    资产中心
+                </div>
+                <ul>
+                    <li>余额</li>
+                    <li>优惠券</li>
+                </ul>
+                <!-- 库存 -->
+                <div class="sidebar-title">
+                    设置中心
+                </div>
+                <ul>
+                    <li>个人信息</li>
+                </ul>
+                <!-- 库存 -->
+                <div class="sidebar-title">
+                    其他功能
+                </div>
+                <ul>
+                    <li>浏览历史</li>
+                </ul>
             </div>
-            <ul>
-                <li ui-sref="business.priceList" class="selected" >我的订单
-                </li>
-                <li ui-sref="business.priceAudit" ng-class="{true:'active'}[state ==2]"
-                    ng-click="getState(2)">团购订单
-                </li>
-                <li ui-sref="business.purchaseList" ng-class="{true:'active'}[state ==3]"
-                    ng-click="getState(3)">我的预售
-                </li>
-                <li ui-sref="business.purchaseAudit" ng-class="{true:'active'}[state ==4]"
-                    ng-click="getState(4)">评价晒单
-                </li>
-                <li ui-sref="business.payrequestList" ng-class="{true:'active'}[state ==5]"
-                    ng-click="getState(5)">评价晒单记录
-                </li>
-            </ul>
-            <!-- 库存 -->
-            <div class="sidebar-title">
-                资产中心
-            </div>
-            <ul>
-                <li>余额</li>
-                <li>优惠券</li>
-            </ul>
-            <!-- 库存 -->
-            <div class="sidebar-title">
-                设置中心
-            </div>
-            <ul>
-                <li>个人信息</li>
-            </ul>
-            <!-- 库存 -->
-            <div class="sidebar-title">
-                其他功能
-            </div>
-            <ul>
-                <li>浏览历史</li>
-            </ul>
-        </div>
 
-        <!--带确定和取消的阻塞提示框 -->
-        <div message-modal></div>
-        <!--短时间提示后隐藏的非阻塞提示框 -->
-        <div short-message-modal></div>
-        <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
-    </div>
+            <!--带确定和取消的阻塞提示框 -->
+            <div message-modal></div>
+            <!--短时间提示后隐藏的非阻塞提示框 -->
+            <div short-message-modal></div>
+            <div ui-view="" class="ng-scope" style="overflow-x:hidden "></div>
+        </div>
 
     </div>
 </div>
