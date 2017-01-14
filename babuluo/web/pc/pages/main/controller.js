@@ -39,6 +39,11 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
         $scope.caculCart();
     });
 
+    //低栏
+    $scope.$on('updateUser', function (event, data) {
+        $scope.updateUser();
+    });
+
     $scope.toPage = function (page) {
         $scope.currentPage = page;
     }
@@ -81,6 +86,10 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
             }
         }
     }
+
+    $scope.updateUser=function(){
+
+    };
 
     $scope.caculCart();
 

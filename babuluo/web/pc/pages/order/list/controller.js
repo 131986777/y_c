@@ -3,6 +3,9 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
     modalFactory.setTitle("订单列表");
 
     modalFactory.setHeader(false);
+
+    modalFactory.setSide(true);
+
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
