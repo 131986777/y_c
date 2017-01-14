@@ -29,12 +29,12 @@
                 <div class="statisfied">
                     <span class="">商品满意度</span>
                     <div class="ratePos">
-                        <ul  id="{{detail['SHOP_ORDER_INFO.SKU_ID']}}" class="rating nostar " ng-class="detail.star">
-                            <li id="{{detail['SHOP_ORDER_INFO.SKU_ID']}}_one" class="one" ng-click="detail.star='onestar'"><a title="1分" >1</a></li>
-                            <li id="{{detail['SHOP_ORDER_INFO.SKU_ID']}}_two" class="two" ng-click="detail.star='twostar'"><a title="2分" >2</a></li>
-                            <li id="{{detail['SHOP_ORDER_INFO.SKU_ID']}}_three" class="three" ng-click="detail.star='threestar'"><a title="3分">3</a></li>
-                            <li id="{{detail['SHOP_ORDER_INFO.SKU_ID']}}_four" class="four" ng-click="detail.star='fourstar'"><a title="4分" >4</a></li>
-                            <li id="{{detail['SHOP_ORDER_INFO.SKU_ID']}}_five" class="five" ng-click="detail.star='fivestar'"><a title="5分">5</a></li>
+                        <ul class="rating nostar">
+                            <li class="one"><a title="1分" href="javascript:;" ng-click="collectionClick($index,1,$event)">1</a></li>
+                            <li class="two"><a title="2分" href="javascript:;" ng-click="collectionClick($index,2,$event)">2</a></li>
+                            <li class="three"><a title="3分" href="javascript:;" ng-click="collectionClick($index,3,$event)">3</a></li>
+                            <li class="four"><a title="4分" href="javascript:;" ng-click="collectionClick($index,4,$event)">4</a></li>
+                            <li class="five"><a title="5分" href="javascript:;" ng-click="collectionClick($index,5,$event)">5</a></li>
                         </ul>
                     </div>
 

@@ -6,6 +6,7 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
 
     modalFactory.setBottom(false);
 
+    modalFactory.setSide(false);
 
  $(".store").click(function () {
         $(".store").removeClass("active");
@@ -28,7 +29,6 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
             $(this).find(".yang").addClass("choosed");
         }
     });
-
     $scope.districtName = "全部区域";
     $scope.currentDistrictName = '全部区域';
     $scope.initLoad = function () {
@@ -37,16 +37,24 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
     };
 
     $scope.getData = function () {
-        shopFactory.getShopList($scope.filter, function (response) {
+        shopFactory.getShopList({}, function (response) {
             var list = new Array;
             response.data.forEach(function (ele) {
-                if (ele['SHOP.SHOP_ID'] != '100002' && ele['SHOP.SHOP_ID'] != '111111' && ele['SHOP.SHOP_ID'] != '0') {
+                if (ele['SHOP.SHOP_ID']
+                    != '100002'
+                    && ele['SHOP.SHOP_ID']
+                    != '111111'
+                    && ele['SHOP.SHOP_ID']
+                    != '0') {
                     list.push(ele);
                 }
             });
-            $scope.shopListLength = response.data.length;
+            $scope.shopListLength = list.length;
             $scope.districtList = response.extraData.districtList;
-            console.log('list', $scope.districtList);
+            $scope.districtList.push({
+                'DISTRICT.DISTRICT_NAME':'全部区域',
+                'DISTRICT.DISTRICT_ID':0
+            });
             var shopMap = new Map();
             list.forEach(function (ele) {
                 shopMap.set(ele['SHOP.SHOP_ID'], ele);
@@ -65,15 +73,16 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
         if (getCookie('recentShopList') != undefined) {
             $scope.cookieShopIdList = getCookie('recentShopList').split(',');
         }
-        $scope.cookieShopIdList.forEach(function (ele) {
+        var id = '1000';
+        $scope.cookieShopIdList.forEach(function (ele, index) {
             if ($scope.shopMap.get(ele) != undefined) {
-                recentShopList.push($scope.shopMap.get(ele));
+                recentShopList.push($scope.shopMap.get(ele))
+                id = $scope.shopMap.get(ele)['SHOP.DISTRICT_ID'];
             }
         });
+        $scope.chooseDistrict(id);
         $scope.recentShopList = recentShopList.reverse();
-    }
-
-    $scope.initLoad();
+    };
 
     $scope.shopSelect = function (shop) {
         setCookie('currentShop', shop['SHOP.SHOP_ID']);
@@ -108,14 +117,20 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
         $scope.currentDistrictName = districtName;
     };
 
-    $scope.allDistrict = function (districtName) {
-        $scope.currentDistrictName = '全部区域';
-        $scope.districtName = districtName;
-        $scope.filter['SHOP.DISTRICT_ID'] = '';
-        $scope.getData();
+    $scope.chooseDistrict = function (districtId) {
+        $scope.currDistrictId = districtId;
+        var list = new Array;
+        $scope.shopList.forEach(function (ele) {
+            if (ele['SHOP.DISTRICT_ID'] == districtId || districtId == 0) {
+                list.push(ele);
+            }
+        });
+        $scope.currshopList = list;
     };
 
-    /*
+    $scope.initLoad();
+
+    /**
      * approx distance between two points on earth ellipsoid
      * @param {Object} lat1
      * @param {Object} lng1
@@ -148,11 +163,6 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
 
     function success(pos) {
         var crd = pos.coords;
-
-        console.log('Your current position is:');
-        console.log('Latitude : ' + crd.latitude);
-        console.log('Longitude: ' + crd.longitude);
-        console.log('More or less ' + crd.accuracy + ' meters.');
         $scope.coord = crd;
     };
 
@@ -167,8 +177,6 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
     function sorting(arr) {
         var arr1 = [];
         var arr2 = [];
-        var i = 0;
-        var j = 0;
         arr.forEach(function (ele) {
             if (ele['SHOP.LATITUDE'] == null && ele['SHOP.LONGTUDE'] == null) {
                 arr2.push(ele);
@@ -176,7 +184,6 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
                 arr1.push(ele);
             }
         });
-
         return quickSort(arr1).concat(arr2);
     }
 
@@ -184,7 +191,7 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
 
     //快速排序
     var quickSort = function (arr) {
-        if (arr.length <= 1) {
+        if (arr.length <= 1 || $scope.coord == undefined) {
             return arr;
         }
 
@@ -206,4 +213,26 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
         }
         return quickSort(left).concat(pivot, quickSort(right));
     };
+
+    $(".store").click(function () {
+        $(".store").removeClass("active");
+        $(".yang").removeClass("choosed");
+        if ($(this).hasClass("active")) {
+            $(this).removeClass("active");
+            $(this).find(".yang").removeClass("choosed");
+        } else {
+            $(this).addClass("active");
+            $(this).find(".yang").addClass("choosed");
+        }
+    });
+    $(".storeArea").click(function () {
+
+        if ($(this).hasClass("active")) {
+            $(this).removeClass("active");
+            $(this).find(".yang").removeClass("choosed");
+        } else {
+            $(this).addClass("active");
+            $(this).find(".yang").addClass("choosed");
+        }
+    });
 });

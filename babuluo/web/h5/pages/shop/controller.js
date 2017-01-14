@@ -5,8 +5,8 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
 
     $scope.districtName = "全部区域";
     $scope.currentDistrictName = '全部区域';
-
     $scope.initLoad = function () {
+        $scope.filter = {};
         $scope.getData();
     };
 

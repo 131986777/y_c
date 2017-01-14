@@ -22,6 +22,10 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         $scope.myInterval = 4000;
         // 轮播图数据初始化
         $scope.slides = new Array;
+        //设置商品收藏状态初始化
+        //$scope.collectionState = 1;
+
+        $scope.uid = getCookie('ANDSELLID');
 
         // current sku select map
         $scope.currSkuContentSelectMap = {
@@ -55,6 +59,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
                     });
                     $scope.calculateSaleInfo(skulistsForOrder);
                     $scope.skuData = $scope.getPrdSkuData($scope.skuList);
+                    console.log($scope.skuData);
                     if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length > 0) {
                         $scope.checkContent(1, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
                     }
@@ -77,6 +82,10 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
             $scope.goodComments = resp.extraData.goodList;
             $scope.midComments = resp.extraData.midList;
             $scope.badComments = resp.extraData.badList;
+            console.log("1: "+$scope.goodComments.length);
+            console.log($.isEmptyObject(resp.extraData['midList']));
+            console.log("3: "+$scope.badComments.length);
+            console.log("4: "+$scope.proComments.length);
         });
 
         $scope.skuSize = 1;
@@ -429,6 +438,22 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
           return [val].length;
       }
     };
+
+    //点击收藏按钮事件
+    $scope.collectionClick = function(){
+
+        $scope.collectionState *= -1;
+
+       var parameters = {};
+        parameters['PRODUCT_COLLECTION.USER_ID'] = $scope.uid;
+        parameters['PRODUCT_COLLECTION.PRD_ID'] = $scope.product['SHOP_PRODUCT.PRD_ID'];
+        parameters['PRODUCT_COLLECTION.PRD_SPU'] = $scope.product['SHOP_PRODUCT.PRD_SPU'];
+        parameters['PRODUCT_COLLECTION.COLLECTION_STATE'] = $scope.collectionState;
+
+        productFactory.addAndMod(parameters);
+    };
+
+    $scope.isCollection = 'false';
 
     var swiper = new Swiper('.swiper-container', {
         paginationClickable: true,

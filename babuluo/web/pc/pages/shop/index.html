@@ -16,7 +16,7 @@
             <span class="title">江苏省南京市建邺区嘉陵江东街18号</span>
             <div class="change">切换地址</div>
         </div>
-        <div class="recent">
+        <div class="recent" ng-show="recentShopList.length>0">
             <div class="recentTitle">最近浏览</div>
             <div class="storeContain">
                 <div class="store" ng-repeat="shop in recentShopList" ng-click="shopSelect(shop)"> <span>{{shop['SHOP.SHOP_NAME']}}</span>
@@ -28,7 +28,7 @@
             <div class="recentTitle">区域</div>
             <div class="storeContain">
                 <div class="storeArea" ng-repeat="district in districtList"
-                     ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'],district['DISTRICT.DISTRICT_NAME'])" class="shop-name" ng-class="{true:
+                     ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'])" class="shop-name" ng-class="{true:
                 'active'}[district['DISTRICT.DISTRICT_NAME']==currentDistrictName]"><span>{{district['DISTRICT.DISTRICT_NAME']}}</span>
                     <div class="yang"></div></div>
             </div>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="listDetail">
                     <div class="name">{{shop['SHOP.SHOP_NAME']}}</div>
-                    <div class="addr">
+                    <div class="addr" ng-show="coord.latitude!=undefined&&coord.longitude!=undefined&&coord.longitude!=undefined&&shop['SHOP.LATITUDE']!=undefined">
                         <img class="img1" src="/AndSell/pc/public/css/img/mapLogo.png" alt="">
                         <span class="title">{{getDistanceFromLatLonInKm(coord.latitude,coord.longitude,shop['SHOP.LATITUDE'],shop['SHOP.LONGTUDE'])}}km</span>
                     </div>
