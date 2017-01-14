@@ -90,6 +90,7 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
             $scope.shopInfo = response.data[0];
             if ($scope.shopInfo != undefined) {
                 setCookie('currentShopInfo', JSON.stringify($scope.shopInfo));
+                modalFactory.updateShop();
             }
 
             if ($stateParams.FROM == '') {
@@ -105,10 +106,6 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
         $scope.filter['SHOP.DISTRICT_ID'] = districtId;
         $scope.getData();
         $scope.currentDistrictName = districtName;
-        // shopFactory.getShopList(form, function (response) {
-        //     $scope.shopList = response.data;
-        //     $scope.shopListLength = response.data.length;
-        // });
     };
 
     $scope.allDistrict = function (districtName) {
