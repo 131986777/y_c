@@ -27,12 +27,12 @@
   height: 300px;
   float: left;
   /* overflow: hidden; */
-  border: 1px solid #c1c1c1;
+  border: 1px solid #e6e6e6;
   background-color: white; }
 /* line 28, ../sass/login.scss */
 .loginPanel .middle .infoPanel .infoNav {
   overflow: hidden;
-  border-bottom: 1px solid #c1c1c1;
+  border-bottom: 1px solid #e6e6e6;
   height: 39px; }
 /* line 32, ../sass/login.scss */
 .loginPanel .middle .infoPanel .infoNav .font {
@@ -51,7 +51,7 @@
   margin-left: 25px; }
 /* line 47, ../sass/login.scss */
 .loginPanel .middle .infoPanel .mid .account {
-  border: 1px solid #c1c1c1;
+  border: 1px solid #e6e6e6;
   width: 270px;
   height: 50px; }
 /* line 51, ../sass/login.scss */
@@ -97,6 +97,10 @@
   margin-left: 25px;
   margin-top: 18px;
   text-align: center;
+  color: white;
+  line-height: 41px;
+  cursor: pointer; }
+.loginPanel .middle .infoPanel .but a{
   color: white;
   line-height: 41px;
   cursor: pointer; }

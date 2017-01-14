@@ -35,7 +35,7 @@
           <span class="product-money del-line" ng-if="sku['isSale'] && presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ] == null" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
           </span>
 
-          <a class="del-wrap" >
+          <a class="del-wrap" ng-click="delShopCart(sku)">
             <i class="icon icon-del"></i>
           </a>
           <div class="product-num-wrap input-group">

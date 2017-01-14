@@ -12,5 +12,9 @@ public class WxPayConfig {
     public static String WX_PAY_UNIFIEDORDER = "https://api.mch.weixin.qq.com/pay/unifiedorder";//统一下单
     public static String WX_PAY_QUERYORDER = "https://api.mch.weixin.qq.com/pay/orderquery";//查询结果
     public static String WX_PAY_CLOSERDER = "https://api.mch.weixin.qq.com/pay/closeorder";//关闭订单
+    public static String WX_PAY_REFUND = "https://api.mch.weixin.qq.com/secapi/pay/refund";//订单退款
+
+    //微信二维码存放路径
+    public static String WX_CODE_URL_PATH = "wxImages/";
 
 }

@@ -1,5 +1,5 @@
 <div class="row-wrap row-wrap1">
-    <div class="row-content">
+    <div class="row-content" ng-init="initData()">
         <div class="toolbar toolbar1">
             <!-- 搜索框 -->
             <div class="row-input">
@@ -12,26 +12,36 @@
 
         </div>
         <div class="row-header1 font">订单评价</div>
-        <div class="proEvals">
+        <div class="proEvals" ng-repeat="detail in orderDetailList">
             <div class="eachEval">
                 <div class="parent">
                     <div class="pic">
-                        <img class="img" src="../../public/css/img/product.png" alt="">
+                        <img class="img" ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}" alt="">
                     </div>
                     <div class="info">
-                        <span>展卉 智利蓝莓 新鲜进口125g*2盒</span>
-                        <span class="price">￥28.00&nbsp;&nbsp;x1</span>
+                        <span ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']"></span>
+                        <span class="price">￥{{detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'}}&nbsp;x{{detail['SHOP_ORDER_INFO.COUNT']}}</span>
                     </div>
-                    <div class="size">
-                        【规格:125g*2盒】
+                    <div class="size" ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']">
                     </div>
-                    <div class="size">P201610131232</div>
+                    <div class="size" ng-bind="detail['SHOP_ORDER_INFO.ORDER_ID']"></div>
                 </div>
+
                 <div class="statisfied">
                     <span class="">商品满意度</span>
+                    <div class="ratePos">
+                        <ul class="rating nostar">
+                            <li class="one"><a title="1分" href="#">1</a></li>
+                            <li class="two"><a title="2分" href="#">2</a></li>
+                            <li class="three"><a title="3分" href="#">3</a></li>
+                            <li class="four"><a title="4分" href="#">4</a></li>
+                            <li class="five"><a title="5分" href="#">5</a></li>
+                        </ul>
+                    </div>
+
                 </div>
                 <div class="txt">
-                    <textarea class="area"></textarea>
+                    <textarea class="area" ng-model="evaluate[$index]"></textarea>
                 </div>
             </div>
             <div class="eachEval">
@@ -48,6 +58,15 @@
                 </div>
                 <div class="statisfied">
                     <span class="">商品满意度</span>
+                    <div class="ratePos">
+                        <ul class="rating nostar">
+                            <li class="one"><a title="1分" href="#">1</a></li>
+                            <li class="two"><a title="2分" href="#">2</a></li>
+                            <li class="three"><a title="3分" href="#">3</a></li>
+                            <li class="four"><a title="4分" href="#">4</a></li>
+                            <li class="five"><a title="5分" href="#">5</a></li>
+                        </ul>
+                    </div>
                 </div>
                 <div class="txt">
                     <textarea class="area"></textarea>
@@ -62,7 +81,7 @@
                 </label>
             </div>
             <label class="niming">匿名评价</label>
-            <div class="eval">发表评价</div>
+            <div class="eval" ng-click="commitData()">发表评价</div>
         </div>
     </div>
 </div>

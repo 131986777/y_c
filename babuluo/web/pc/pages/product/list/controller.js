@@ -6,22 +6,25 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
 
     modalFactory.setSide(false);
 
-    modalFactory.setLeftMenu(false);
+    modalFactory.setLeftMenu(true);
 
     $scope.nofind=function () {
         var img=event.srcElement;
         img.src="../../public/css/img/product.png";
         img.onerror=null;
     }
-    setCookie();
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
-    // if (getCookie('currentShopInfo') != undefined) {
-    //     $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']
-    // } else {
-    //     $scope.toShop();
-    // }
+    $scope.toShop = function () {
+        $state.go('pages/shop', {'FROM': window.location.href});
+    }
+
+    if (getCookie('currentShopInfo') != undefined) {
+        $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']
+    } else {
+        $scope.toShop();
+    }
 
     $scope.filter = {
         'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
@@ -35,8 +38,9 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
         $scope.prdList = response.data;
     };
 
-    $scope.toShop = function () {
-        $state.go('pages/shop', {'FROM': window.location.href});
+    //跳转至详情页
+    $scope.toDetail = function (id) {
+        $state.go('pages/product/detail', {PRD_ID: id});
     }
 
     //加入购物车
@@ -68,7 +72,6 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
         setCookie('cartSize', JSON.stringify(cartSize));
         setCookie('cartInfo', JSON.stringify(cartInfo));
 
-        console.log(getCookie('cartInfo'));
-        console.log(getCookie('cartSize'));
+        modalFactory.showShortAlert("加入购物车成功");
     }
 });

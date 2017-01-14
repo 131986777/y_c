@@ -1,4 +1,6 @@
+
 angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, weUI, productFactory, promoFactory ,orderFactory, modalFactory, weUI) {
+
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
@@ -232,7 +234,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             var formData = {
                 PRODUCT_ID: $scope.order['SHOP_ORDER.ID'],
                 FEE: moneyToFee($scope.order['SHOP_ORDER.PRICE_OVER']),
-                BODY: '订单' + $scope.order['SHOP_ORDER.ID'],
+                BODY: 'ORDER:' + $scope.order['SHOP_ORDER.ORDER_NUM'],
                 OPENID: openId,
                 IP: ip,
                 ORDER_ID: $scope.order['SHOP_ORDER.ID'],
@@ -247,9 +249,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     };
 
     $scope.cardPay = function () {
+        console.log(getCookie("payCard"));
         $scope.payCard = JSON.parse(getCookie("payCard"));
         if (!isEmptyObject($scope.payCard)) {
-            weUI.dialog.confirm("提示", "确认支付该订单", function () {
+            weUI.dialog.confirm("提示", "确认支付该订单？", function () {
                 weUI.toast.showLoading('正在支付');
                 var form = $scope.order;
                 form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
@@ -309,6 +312,12 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         }, function (res) {
             weUI.wx_pay.error("支付失败");
         });
+
+        //orderFactory.wxPayUndefinedOrderForPC(formData, function (response) {
+        //  console.log(response);
+        //}, function (res) {
+        //    weUI.wx_pay.error("支付失败");
+        //});
     }
 
 
@@ -337,12 +346,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                         TYPE: 'ORDER',
                         CALLBACK: '-1'
                     };
-                    orderFactory.queryWXPayResult(formData, function (res) {
+                    http.post_ori("http://app.bblycyz.com/AndSell/wxCallBack",formData, function (res) {
                         weUI.toast.ok('订单支付成功');
-                        $scope.getOrder($scope.order['SHOP_ORDER.ID']);
-                    }, function (res) {
                         location.reload();
-                    })
+                    }, function (res) {
+                        weUI.toast.ok('后台确认收款中!');
+                        location.reload();
+                    });
                 } else {
                     weUI.wx_pay.error("支付失败");
                 }

@@ -1,0 +1,301 @@
+/* line 2, ../sass/fundDetail.scss */
+body {
+    font-family: 'Microsoft YaHei';
+    background-color: #f6f6f6;
+}
+
+/* line 7, ../sssass/fundDetail.scss */
+.container .sidebar1 {
+    background-color: #fff;
+    width: 230px;
+    height: 100%; }
+/* line 11, ../sass/fundDetail.scss */
+.container .sidebar1 .sidebar-title {
+    font-size: 16px;
+    color: #494949; }
+/* line 15, ../sass/fundDetail.scss */
+.container .sidebar1 li {
+    font-size: 14px;
+    color: #8c8c8c; }
+/* line 22, ../sass/fundDetail.scss */
+.container .row-wrap .row-tou {
+    margin-left: 40px;
+    font-size: 25px;
+    padding-left: 0px;
+    padding-top: 35px; }
+/* line 29, ../sass/fundDetail.scss */
+.container .row-wrap .font {
+    color: #4b4b4b; }
+/* line 32, ../sass/fundDetail.scss */
+.container .row-wrap .row-nav {
+    width: 875px;
+    margin-left: 40px;
+    font-size: 18px;
+    color: #8a8a8a;
+    margin-top: 20px;
+    border-top: 1px solid #dddcdc;
+    line-height: 4.2; }
+.row-wrap1 .row-header1{
+    height: 70px;
+    line-height: 70px;
+    padding-left: 0px;
+    font-size: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    width: 885px;
+    margin-left: 38px;
+}
+.row-wrap1 .contends{
+
+    margin-left: 38px;
+}
+/* line 41, ../sass/fundDetail.scss */
+ .info {
+    margin-top: 30px;
+    font-size: 16px;
+    color: #4b4b4b; }
+/* line 25, ../sass/pay.scss */
+.row-wrap .infoTop {
+    font-size: 14px;
+    color: #4b4b4b;
+    margin-top: 30px; }
+/* line 29, ../sass/pay.scss */
+.row-wrap1 .infoTop .infoFirst {
+    margin-bottom: 10px; }
+/* line 31, ../sass/pay.scss */
+.row-wrap1 .infoTop .infoFirst .front {
+    float: left;
+    width: 80px;
+    margin-right: 30px; }
+/* line 39, ../sass/pay.scss */
+.row-wrap1 .infoMiddle {
+    font-size: 14px;
+    color: #4b4b4b;
+    margin-top: 40px; }
+/* line 43, ../sass/pay.scss */
+.row-wrap1 .infoMiddle .infoSecond {
+    margin-bottom: 10px; }
+/* line 45, ../sass/pay.scss */
+ .row-wrap1 .infoMiddle .infoSecond .front {
+    float: left;
+    width: 80px;
+    margin-right: 30px; }
+/* line 52, ../sass/pay.scss */
+ .row-wrap1 .infoLast {
+    font-size: 14px;
+    margin-top: 30px;
+    color: #4b4b4b; }
+/* line 56, ../sass/pay.scss */
+ .row-wrap1 .infoLast .infoThird {
+    margin-bottom: 10px; }
+/* line 58, ../sass/pay.scss */
+ .row-wrap1 .infoLast .infoThird .front {
+    float: left;
+    width: 80px;
+    margin-right: 30px; }
+/* line 64, ../sass/pay.scss */
+.row-wrap1 .infoLast .infoThird .price {
+    font-size: 25px;
+    color: #f36e19; }
+/* line 70, ../sass/pay.scss */
+ .row-wrap1 .foot {
+     overflow: hidden;
+     width: 880px;
+     margin-top: 20px;
+     border-top: 1px solid #dcdcdc; }
+.row-wrap1 .foot .zhifu {
+    width: 200px;
+    height: 70px;
+    display: inline-block;
+    border: 1px solid #dcdcdc;
+    margin-top: 30px;
+    position: relative;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.active{
+    border:1px solid #f36f1a!important;
+}
+.choosed{
+    position: absolute;
+    /* right: initial; */
+    right: 0px;
+    bottom: 0px;
+    border-bottom: 15px solid #f36f1a;
+    border-left: 15px solid transparent;
+}
+/* line 75, ../sass/pay.scss */
+ .row-wrap1 .foot .payWay {
+    width: 180px;
+    height: 65px;
+    float: left;
+    /* background-color: red; */
+    margin-right: 25px; }
+/* line 84, ../sass/pay.scss */
+ .row-wrap1 .foot .huiyuan {
+    background-image: url(/AndSell/pc/public/css/img/huiyuan.png); }
+/* line 87, ../sass/pay.scss */
+ .row-wrap1 .foot .zhifubao {
+    background-image: url(/AndSell/pc/public/css/img/zhifubao.png); }
+/* line 90, ../sass/pay.scss */
+ .row-wrap1 .foot .weixin {
+    background-image: url(/AndSell/pc/public/css/img/weixin.png); }
+
+/* line 81, ../sass/fundDetail.scss */
+.row-wrap1 {
+    color: #4b4b4b;
+    height: 100%;
+    width: 960px;
+    background-color: #fff;
+    min-height: 633px;
+    /* padding-left: 3px; */
+}
+/*微信支付弹出层*/
+.weixin .modal-content .weixinImg{
+    width: 352px;
+    height: 305px;
+    text-align: center;
+
+}
+.weixin .modal-content .weixinImg .ma{
+    margin-top: 30px;
+
+}
+ .modal-content{
+    height: 100%;
+    border: 1px solid #dcdcdc!important;
+}
+.modal-body{
+
+     margin-top: 0px!important;
+    margin-bottom: 12px;
+    height: 55px;
+    background-color: #f6f6f6;
+}
+.modal-body .text-left{
+
+    color: #5b5b5b;
+    /* height: 53px; */
+    font-size: 18px;
+    /* font-weight: 500; */
+    line-height: 1.5;
+}
+.modal-body .guan{
+    font-size: 30px;
+    color: #808080;
+    float: right;
+    margin-top: -4px;
+    cursor: pointer;
+}
+.weixin .modal-content p{
+    font-size: 14px;
+    color: #4b4b4b;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.weixin .modal-content p .sep{
+    color: #f36f1a;
+}
+/*会员卡支付弹出层*/
+.huiyuan .modal-content .card{
+    overflow: hidden;
+    margin-left: 42px;
+}
+.huiyuan .modal-content .cardpos{
+
+}
+.huiyuan .modal-content .card .eachCard{
+    width: 365px;
+    height: 180px;
+    background: -webkit-linear-gradient(left bottom, #f7ad38 , #e09117); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right,  #f7ad38 , #e09117); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right,  #f7ad38 , #e09117); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right,  #f7ad38 , #e09117); /* 标准的语法（必须放在最后） */
+    border-radius: 5px;
+    float: left;
+    margin-right: 55px;
+    margin-left: 12px;
+    margin-top: 35px;
+}
+.huiyuan .modal-content .card .orange{
+
+    background: -webkit-linear-gradient(left bottom, #f7ad38 , #e09117); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right,  #f7ad38 , #e09117); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right,  #f7ad38 , #e09117); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right,  #f7ad38 , #e09117); /* 标准的语法（必须放在最后） */
+
+}
+.huiyuan .modal-content .card  .blue{
+
+    background: -webkit-linear-gradient(left bottom, #24aca6 , #189991); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right,  #24aca6 , #189991); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right, #24aca6 , #189991); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right,  #24aca6 , #189991); /* 标准的语法（必须放在最后） */
+
+}
+.huiyuan .modal-content .card  .black{
+
+    background: -webkit-linear-gradient(left bottom, #414143 , #2d2e30); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right,  #414143 , #2d2e30); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right,  #414143 , #2d2e30); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right,  #414143 , #2d2e30); /* 标准的语法（必须放在最后） */
+
+}
+.huiyuan .modal-content .card  .eachCard .pos{
+    margin-left: 15px;
+    /* margin-top: 3px; */
+    padding-top: 15px;
+    height: 100%;
+    margin-right: 15px;
+    color: white;
+}
+.huiyuan .modal-content .card .addCard {
+
+    background-color: #c1c1c1!important;
+}
+.huiyuan .modal-content .card  .eachCard .pos .num{
+    display: inline-block;
+    font-size: 22px;
+}
+.huiyuan .modal-content .card  .eachCard .posAdd{
+    height: 180px;
+    background-color: #F5F5F5;
+}
+.huiyuan .modal-content .card  .addCard .posAdd .add{
+    font-size: 22px;
+    text-align: center;
+    line-height:8;
+    color: #4b4b4b;
+}
+.huiyuan .modal-content .card  .eachCard .pos .ka{
+    float: right;
+}
+.huiyuan .modal-content .card  .eachCard .pos .mid{
+    margin-top: 40px;
+    margin-left: 132px;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.huiyuan .modal-content .card .eachCard .pos .m{
+    width: 165px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+.huiyuan .modal-content .card  .eachCard .pos .m .word{
+    display: inline-block;
+}
+.huiyuan .modal-content .card .eachCard .pos .m .money{
+    display: inline-block;
+    font-size: 22px;
+
+}
+.huiyuan .modal-content .card  .eachCard .pos .foot{
+    font-size: 12px;
+}
+.huiyuan .modal-content .card  .eachCard .pos .foot .time{
+    display: inline-block;
+    margin-right: 17px;
+}
+.huiyuan .modal-content .card .eachCard .pos .foot .time .t_inner{
+    display: inline-block;
+}

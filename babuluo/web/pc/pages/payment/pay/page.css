@@ -18,7 +18,7 @@ body {
   width: 1100px;
   height: 82px;
   line-height: 80px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #dcdcdc;
   padding-left: 0px;
   font-size: 25px;
   color: #4b4b4b; }
@@ -75,16 +75,35 @@ body {
   overflow: hidden;
   width: 1100px;
   margin-top: 20px;
-  border-top: 1px solid #c1c1c1; }
-/* line 75, ../sass/pay.scss */
-.containers .row-wrap1 .foot .payWay {
+  border-top: 1px solid #dcdcdc; }
+.containers .row-wrap1 .foot .zhifu {
   width: 200px;
   height: 70px;
-  float: left;
+  display: inline-block;
+  border: 1px solid #dcdcdc;
   margin-top: 30px;
+  position: relative;
+  margin-right: 15px;
+  cursor: pointer;
+}
+.active{
+  border:1px solid #f36f1a!important;
+}
+.choosed{
+  position: absolute;
+  /* right: initial; */
+  right: 0px;
+  bottom: 0px;
+  border-bottom: 15px solid #f36f1a;
+  border-left: 15px solid transparent;
+}
+/* line 75, ../sass/pay.scss */
+.containers .row-wrap1 .foot .payWay {
+  width: 180px;
+  height: 65px;
+  float: left;
   /* background-color: red; */
-  margin-right: 25px;
-  border: 1px solid #c1c1c1; }
+  margin-right: 25px; }
 /* line 84, ../sass/pay.scss */
 .containers .row-wrap1 .foot .huiyuan {
   background-image: url(/AndSell/pc/public/css/img/huiyuan.png); }

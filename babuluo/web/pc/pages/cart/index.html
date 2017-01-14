@@ -29,9 +29,9 @@
                 <table class="bu-table row-bordered">
                     <tr class="table-nav">
                         <td class="th-title">
-                            <div ng-click="checkAllPrd()" class="checkPos">
+                            <div class="checkPos">
                                 <label class="checkbox">
-                                    <input type="checkbox">
+                                    <input type="checkbox" ng-checked="checkAll" ng-click="checkAllPrd()">
                                     <span class="showCheck"></span>
                                 </label>
                             </div>
@@ -60,7 +60,7 @@
                         <td>
                             <div class="checkPos">
                                 <label class="checkbox">
-                                    <input type="checkbox">
+                                    <input type="checkbox" ng-checked="sku.isSelect" ng-click="checkItem(sku)">
                                     <span class="showCheck"></span>
                                 </label>
                             </div>
@@ -92,7 +92,7 @@
                             {{sku['SHOP_PRODUCT_SKU.SIZE'] * sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'}}
                         </td>
                         <td>
-                            有货
+                            {{sku['SHOP_PRODUCT_SKU.STOCK']}}
                         </td>
                         <td class="del">
                             <span ng-click="delShopCart(sku)">删除</span>
@@ -108,7 +108,7 @@
                 </div>
                 <div class="footSecond">
                     <span>合计</span>
-                    <span class="youhui">（已优惠￥7.00）</span>
+                    <span class="youhui" ng-if="totalPrice-beforePrice>0">（已优惠{{totalPrice-beforePrice | currency :'￥'}}）</span>
                     <span class="sep1">{{totalPrice | currency :'￥'}}</span>
                     <div class="buy">去结算</div>
                 </div>

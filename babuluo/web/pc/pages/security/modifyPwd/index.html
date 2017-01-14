@@ -10,9 +10,9 @@
                     <div class="pwd">验证码</div>
                     <div class="yzmPos">
                         <input type="text" class="typeIn large-size" placeholder="">
-                        <div class="yzm">获取验证码</div>
-                        <div class="send">发送中...</div>
-                        <div class="sended">已发送（30s）</div>
+                        <div class="yzm" ng-if="get">获取验证码</div>
+                        <div class="send" ng-if="send">发送中...</div>
+                        <div class="sended" ng-if="sended">已发送（30s）</div>
                     </div>
 
                 </div>

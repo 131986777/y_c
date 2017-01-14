@@ -27,12 +27,12 @@
   height: 385px;
   float: left;
   /* overflow: hidden; */
-  border: 1px solid #c1c1c1;
+  border: 1px solid #e6e6e6;
   background-color: white; }
 /* line 28, ../sass/login.scss */
 .loginPanel .middle .infoPanel .infoNav {
   overflow: hidden;
-  border-bottom: 1px solid #c1c1c1;
+  border-bottom: 1px solid #e6e6e6;
   height: 39px; }
 /* line 32, ../sass/login.scss */
 .loginPanel .middle .infoPanel .infoNav .font {
@@ -51,7 +51,7 @@
   margin-left: 25px; }
 /* line 47, ../sass/login.scss */
 .loginPanel .middle .infoPanel .mid .account {
-  border: 1px solid #c1c1c1;
+  border: 1px solid #e6e6e6;
   width: 270px;
   height: 50px; }
 .loginPanel .middle .infoPanel .mid .account .codePos{
@@ -70,7 +70,8 @@
   line-height: 2.1;
   position: absolute;
   right: 8px;
-  top: 10px;}
+  top: 10px;
+  cursor: pointer;}
 .loginPanel .middle .infoPanel .mid .account .codePos .send{
   width: 100px;
   height: 30px;
@@ -82,7 +83,7 @@
   text-align: center;
   line-height: 2.1;
   position: absolute;
-  right: -138px;
+  right: 8px;
   top: 10px;}
 .loginPanel .middle .infoPanel .mid .account .codePos .sended{
   width: 100px;
@@ -95,7 +96,7 @@
   text-align: center;
   line-height: 2.1;
   position: absolute;
-  right: -250px;
+  right: 8px;
   top: 10px;}
 
 /* line 51, ../sass/login.scss */
@@ -132,6 +133,7 @@
   cursor: pointer;
   color: #b2b2b2;
   font-size: 13px;
+  margin-right: 5px;
 }
 /* line 78, ../sass/login.scss */
 .loginPanel .middle .infoPanel .pos .pos2 .forget {
@@ -148,6 +150,10 @@
   margin-left: 25px;
   margin-top: 18px;
   text-align: center;
+  color: white;
+  line-height: 41px;
+  cursor: pointer; }
+.loginPanel .middle .infoPanel .but a{
   color: white;
   line-height: 41px;
   cursor: pointer; }

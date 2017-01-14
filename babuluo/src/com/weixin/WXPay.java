@@ -1,41 +1,49 @@
 package com.weixin;
 
 import com.bolanggu.bbl.ENV;
-
+//import com.bubu.wx.pay.MatrixToImageWriter;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.pabula.common.util.PathUtil;
 import com.pabula.common.util.RandomUtil;
 import com.pabula.common.util.SeqNumHelper;
 import com.pabula.common.util.StrUtil;
 import com.pabula.fw.exception.DataAccessException;
 import com.tencent.common.MD5;
 import com.tencent.common.XMLParser;
-
+import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.IOException;
-import java.util.*;
-
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+import javax.imageio.ImageIO;
 import javax.xml.parsers.ParserConfigurationException;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 import org.xml.sax.SAXException;
 
 /**
- * 微信支付相关方法
- * Created by xq on 2016.6.28 17 33.
+ * 微信支付相关方法 Created by xq on 2016.6.28 17 33.
  */
 public class WXPay {
-
 
     /**
      * 统一下单
      *
      * @param product_id 商品id
-     * @param body       体
-     * @param fee        支付金额
-     * @return
+     * @param body 体
+     * @param fee 支付金额
      */
-    public static Map<String, Object> unifiedOrder(String ip, String openId, String product_id, String body, int fee) {
+    public static Map<String, Object> unifiedOrder(String ip, String openId, String product_id,
+        String body, int fee) {
 
         HashMap<String, String> paramMap = new HashMap();
 
@@ -46,7 +54,8 @@ public class WXPay {
         paramMap.put("product_id", product_id); // 商品ID
         paramMap.put("body", body);         //描述
         try {
-            paramMap.put("out_trade_no", "1000" + SeqNumHelper.getNewSeqNum("andsell", "order_wx_pay_flow_num")); //每次统一下单生成唯一流水号
+            paramMap.put("out_trade_no", "1000" + SeqNumHelper.getNewSeqNum("andsell",
+                "order_wx_pay_flow_num")); //每次统一下单生成唯一流水号
         } catch (DataAccessException e) {
             paramMap.put("out_trade_no", System.currentTimeMillis() + ""); //报错就用时间戳（唯一性） 防止这个参数没有值
             e.printStackTrace();
@@ -57,8 +66,9 @@ public class WXPay {
         paramMap.put("mch_id", ENV.WX_MCHID); //商户号
         paramMap.put("nonce_str", RandomUtil.getRandomStringByLength(32));  //随机码
         String checkSign = wxPaySign(paramMap, ENV.WX_KEY);
-
-        String resultXML = HttpUtil.sendHttpsPOST(WxPayConfig.WX_PAY_UNIFIEDORDER, wxPayUnifiedOrderPostXml(paramMap, checkSign));
+        System.out.println(checkSign);
+        String resultXML = HttpUtil.sendHttpsPOST(WxPayConfig.WX_PAY_UNIFIEDORDER,
+            wxPayUnifiedOrderPostXml(paramMap, checkSign));
 
         Map<String, Object> resultMap = null;
         try {
@@ -77,41 +87,88 @@ public class WXPay {
         return resultMap;
     }
 
+    /**
+     * 统一下单
+     *
+     * @param product_id 商品id
+     * @param body 体
+     * @param fee 支付金额
+     */
+    public static Map<String, Object> unifiedOrderForPC(String ip, String product_id, String body,
+        int fee) {
+
+        HashMap<String, String> paramMap = new HashMap();
+
+        paramMap.put("trade_type", "NATIVE");
+
+        paramMap.put("spbill_create_ip", ip); //Ip
+        paramMap.put("product_id", product_id); // 商品ID
+        paramMap.put("body", body);         //描述
+        try {
+            paramMap.put("out_trade_no", "1000" + SeqNumHelper.getNewSeqNum("andsell",
+                "order_wx_pay_flow_num")); //每次统一下单生成唯一流水号
+        } catch (DataAccessException e) {
+            paramMap.put("out_trade_no", System.currentTimeMillis() + ""); //报错就用时间戳（唯一性） 防止这个参数没有值
+            e.printStackTrace();
+        }
+        paramMap.put("total_fee", fee + ""); //金额 以分为单位
+        paramMap.put("notify_url", ENV.WX_PAY_RESULT_CALLBACK_URL); //回调地址
+        paramMap.put("appid", ENV.WX_APPID); //appid
+        paramMap.put("mch_id", ENV.WX_MCHID); //商户号
+        paramMap.put("nonce_str", RandomUtil.getRandomStringByLength(32));  //随机码
+        String checkSign = wxPaySign(paramMap, ENV.WX_KEY);
+        System.out.println(wxPayUnifiedOrderPostXml(paramMap, checkSign));
+        String resultXML = HttpUtil.sendHttpsPOST(WxPayConfig.WX_PAY_UNIFIEDORDER,
+            wxPayUnifiedOrderPostXml(paramMap, checkSign));
+        System.out.println(resultXML);
+        Map<String, Object> resultMap = null;
+        try {
+            resultMap = XMLParser.getMapFromXML(resultXML);
+            //addUnifiedOrderData(request, resultMap, resultXML, paramMap);
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (SAXException e) {
+            e.printStackTrace();
+        }
+        //微信返回结果里面吗没有这个 为了订单查询方便人添加
+        resultMap.put("out_trade_no", paramMap.get("out_trade_no"));
+        resultMap.put("resultXML", resultXML);
+        resultMap.put("code_url",
+            encodeQrcodes(resultMap.get("code_url").toString(),WxPayConfig.WX_CODE_URL_PATH));
+        return resultMap;
+    }
 
     /**
      * 从ioInput 里面获取参数信息
-     * @param request
-     * @return
      */
     public static String getPostStr(javax.servlet.http.HttpServletRequest request) {
 
         BufferedInputStream bis = null;
         StringBuffer reqXml = new StringBuffer();
 
-        try{
+        try {
             bis = new BufferedInputStream(request.getInputStream());
             byte[] buff = new byte[1024];
             int readSize = 0;
             try {
                 while ((readSize = bis.read(buff, 0, 1)) != -1) {
-                    reqXml.append(new String(buff,0, readSize,"UTF-8"));
+                    reqXml.append(new String(buff, 0, readSize, "UTF-8"));
                 }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 bis.close();
             }
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return reqXml.toString();
     }
 
-
     /**
      * 把微信的xml结果转换成map
-     * @param xml
-     * @return
      */
     public static Map<String, Object> getWxPayResult(String xml) {
 
@@ -133,8 +190,8 @@ public class WXPay {
         return null;
     }
 
-
-    public static void addUnifiedOrderData(Map<String, Object> resultMap, String resultXML, HashMap<String, String> paramMap) {
+    public static void addUnifiedOrderData(Map<String, Object> resultMap, String resultXML,
+        HashMap<String, String> paramMap) {
         Object returnCode = resultMap.get("return_code");
 
         if (resultMap != null) {
@@ -164,9 +221,6 @@ public class WXPay {
 
     /**
      * 订单查询
-     *
-     * @param out_trade_no
-     * @return
      */
     public static Map<String, Object> queryOrder(String out_trade_no) {
 
@@ -196,14 +250,9 @@ public class WXPay {
 
     /**
      * 订单关闭
-     *
-     * @param out_trade_no
-     * @param appid
-     * @param mch_id
-     * @param key
-     * @return
      */
-    public static Map<String, Object> closeOrder(String out_trade_no, String appid, String mch_id, String key) {
+    public static Map<String, Object> closeOrder(String out_trade_no, String appid, String mch_id,
+        String key) {
 
         HashMap<String, String> paramMap = new HashMap();
         paramMap.put("out_trade_no", out_trade_no); //锟教伙拷 锟斤拷台锟斤拷贸锟阶碉拷锟斤拷
@@ -229,11 +278,43 @@ public class WXPay {
     }
 
     /**
+     * 订单关闭
+     */
+    public static void refundOrder(String orderNum, int fee) {
+
+        HashMap<String, String> paramMap = new HashMap();
+        paramMap.put("out_trade_no", orderNum); //金额 以分为单位
+        paramMap.put("out_refund_no", "00" + orderNum); //金额 以分为单位
+        paramMap.put("total_fee", fee + ""); //金额 以分为单位
+        paramMap.put("refund_fee", fee + ""); //金额 以分为单位
+        paramMap.put("notify_url", ENV.WX_PAY_RESULT_CALLBACK_URL); //回调地址
+        paramMap.put("appid", ENV.WX_APPID); //appid
+        paramMap.put("mch_id", ENV.WX_MCHID); //商户号
+        paramMap.put("op_user_id", ENV.WX_MCHID); //商户号
+        paramMap.put("nonce_str", RandomUtil.getRandomStringByLength(32));  //随机码
+        String checkSign = wxPaySign(paramMap, ENV.WX_KEY);
+        String data = wxPayUnifiedOrderPostXml(paramMap, checkSign);
+        System.out.println(data);
+
+        String resultXML = HttpUtil.sendHttpsPOST(WxPayConfig.WX_PAY_UNIFIEDORDER, data);
+
+        //Map<String, Object> resultMap = null;
+        //try {
+        //    //resultMap = XMLParser.getMapFromXML(resultXML);
+        //    //addUnifiedOrderData(request, resultMap, resultXML, paramMap);
+        //} catch (ParserConfigurationException e) {
+        //    e.printStackTrace();
+        //} catch (IOException e) {
+        //    e.printStackTrace();
+        //} catch (SAXException e) {
+        //    e.printStackTrace();
+        //}
+        System.out.println(resultXML);
+        //return resultMap;
+    }
+
+    /**
      * WXPay
-     *
-     * @param map
-     * @param keyStr
-     * @return
      */
     public static String wxPaySign(Map<String, String> map, String keyStr) {
         if (null == map || map.isEmpty()) {
@@ -249,16 +330,15 @@ public class WXPay {
         }
         sb.append("key=");
         sb.append(keyStr);
-
+        System.out.println(sb.toString());
+        System.out.println(MD5.MD5Encode(sb.toString()));
+        System.out.println(MD5.MD5Encode(sb.toString()).toUpperCase());
+        System.out.println("over");
         return MD5.MD5Encode(sb.toString()).toUpperCase();
     }
 
     /**
      * mapToXML
-     *
-     * @param map
-     * @param sign
-     * @return
      */
     public static String wxPayUnifiedOrderPostXml(Map<String, String> map, String sign) {
         if (null == map || map.isEmpty()) {
@@ -318,48 +398,42 @@ public class WXPay {
     //    }
     //}
     //
-    ///**
-    // * 生成二维码
-    // *
-    // * @param content
-    // */
-    //public static String encodeQrcodes(String content, String path) {
-    //    String name = System.currentTimeMillis() + "";
-    //    String parentPath = path + name + ".jpg";
-    //    MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-    //    Map hints = new HashMap();
-    //    hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-    //    BitMatrix bitMatrix = null;
-    //    try {
-    //        bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
-    //        BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
-    //        try {
-    //            File file = new File(parentPath);
-    //            if (!file.getParentFile().exists()) {
-    //                file.getParentFile().mkdirs();
-    //            }
-    //            ImageIO.write(image, "jpg", file);
-    //        } catch (IOException e) {
-    //            e.printStackTrace();
-    //        }
-    //        return name;
-    //
-    //    } catch (WriterException e1) {
-    //        // TODO Auto-generated catch block
-    //        e1.printStackTrace();
-    //    }
-    //    return name;
-    //}
+
+    /**
+     * 生成二维码
+     */
+    public static String encodeQrcodes(String content, String path) {
+        String name = System.currentTimeMillis() + "";
+        String parentPath = path + name + ".jpg";
+        MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+        Map hints = new HashMap();
+        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+        BitMatrix bitMatrix = null;
+        try {
+            bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
+//            BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
+//            try {
+//                File file = new File(PathUtil.getProjectRootDir()+parentPath);
+//                if (!file.getParentFile().exists()) {
+//                    file.getParentFile().mkdirs();
+//                }
+////                ImageIO.write(image, "jpg", file);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+            return parentPath;
+        } catch (WriterException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
+        return parentPath;
+    }
 
     /**
      * 拼接微信h5支付参数
-     *
-     * @param appid
-     * @param prepay_id
-     * @return
      */
-    public static String unifiedOrderJsonResult(String appid, String prepay_id, String oid, String key1) {
-
+    public static String unifiedOrderJsonResult(String appid, String prepay_id, String oid,
+        String key1) {
 
         if (StrUtil.isNull(appid) || StrUtil.isNull(prepay_id)) {
             return null;
@@ -394,7 +468,6 @@ public class WXPay {
         return sb.toString();
     }
 
-
     /**
      * @param xml
      * @return
@@ -424,13 +497,9 @@ public class WXPay {
         return map;
     }
 
-
     public static void main(String[] args) {
 
-
-//        unifiedOrder("127.0.0.1", "fdskfjdskfj;dsjfds", "3232", "body", 12300);
-
+        //        unifiedOrder("127.0.0.1", "fdskfjdskfj;dsjfds", "3232", "body", 12300);
+        refundOrder("10003693", 1800);
     }
-
-
 }

@@ -17,11 +17,12 @@ $import('pages/order/list', {state: 'all'}, true);
 //$import('pages/order/addCoupon', {SKU_IDS: '1060', pickupPerson: '{}', PRODUCTS: '{}', MONEY:
 // '0'}); $import('pages/order/addAddress', {SKU_IDS: '1060'});
 // $import('pages/order/CashOnDeliveryOrder');
-$import('pages/order/review', {}, true);
-
+$import('pages/order/review',{ID:''},true);
+$import('pages/order/confirm', {}, true);
 $import('pages/order/detail', {ORDER_ID: ''}, true);
 
-//$import('pages/personal', {}, true);
+//
+// $import('pages/personal/center', {}, true);
 //$import('pages/personal/card');
 //$import('pages/personal/coupon');
 
@@ -35,12 +36,14 @@ $import('pages/login/phoneLogin', {FROM: ''}, true);
 //$import('pages/login/SetPassword', {LOGIN_ID: '0'});
 //
 $import('pages/account/balance', {}, true);
+$import('pages/account/recharge', {}, true);
 //$import('pages/account/recharge');
 //
 //$import('pages/security/resetPwd');
-$import('pages/security/modifyPwd', {state: 'all'}, true);
+$import('pages/security/modifyPwd', {login_id:''},true);
 //
 //$import('pages/order/review',{ID:''});
 //
 $import('pages/personal/center', {}, true);
+$import('pages/personal/pay', {}, true);
 

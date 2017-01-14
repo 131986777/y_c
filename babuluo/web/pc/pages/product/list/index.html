@@ -14,12 +14,12 @@
                 <div class="eachPro" ng-repeat="item in prdList">
                     <div class="eachPro1">
                         <div class="proPic">
-                            <img class="img eachPic"
-                                 ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220" onerror="nofind();"
-                            />
+                            <img class="img eachPic" ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])"
+                                 ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"
+                                 onerror="nofind();"/>
                         </div>
                         <div class="proInfo">
-                            <span class="detail">{{item['SHOP_PRODUCT.PRD_NAME']}}</span>
+                            <span class="detail" ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">{{item['SHOP_PRODUCT.PRD_NAME']}}</span>
                         </div>
                         <div class="proInfo">
                             <span class="detail">{{item['SHOP_PRODUCT.SKULIST'][0]['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']}}</span>
@@ -28,37 +28,20 @@
                             <span class="detail money" ng-if="item['SHOP_PRODUCT.MINSKUPRICE']!=undefined"
                                   ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥'"></span>
                             <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>
-                        </div>
-                        <div class="but show" ng-if="item['SHOP_PRODUCT.HAS_STOCK']!=0" ng-click="addToCart(item['SHOP_PRODUCT.SKULIST'][0])">
-                            <img class="img" src="/AndSell/pc/public/css/img/buyCar.png" alt="">
-                            <span class="buy">加入购物车</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="eachPro">
-                    <div class="eachPro1">
-                        <div class="proPic">
-                            <img src="../../public/css/img/product.png" alt="" class="eachPic">
-                        </div>
-                        <div class="proInfo">
-                            <span class="detail">展卉</span>
-                            <span class="detail">智利草莓</span>
-                            <span class="detail">125g*2盒</span>
-                        </div>
-                        <div class="proInfo">
-                            <span class="detail">新鲜进口水果</span>
-                            <span class="detail">自营水果</span>
-                        </div>
-                        <div class="much">
-                            <span class="detail money">￥128.00</span>
+
                         </div>
                         <div class="but show">
-                            <img class="img" src="/AndSell/pc/public/css/img/buyCar.png" alt="">
-                            <span class="buy">加入购物车</span>
+                            <div ng-if="item['SHOP_PRODUCT.HAS_STOCK']!=0"
+                                 ng-click="addToCart(item['SHOP_PRODUCT.SKULIST'][0])">
+                                <img class="img" src="/AndSell/pc/public/css/img/buyCar.png" alt="">
+                                <span class="buy">加入购物车</span>
+                            </div>
+                            <div ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0">
+                                <span class="buy">已售罄</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

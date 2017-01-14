@@ -3,6 +3,8 @@ body {
   font-family: 'Microsoft YaHei'; }
 
 /* line 6, ../sass/productList.scss */
+.container{
+  background-color: #fff; }
 .container .productList {
   background-color: #fff; }
 /* line 9, ../sass/productList.scss */
@@ -28,8 +30,8 @@ body {
   width: 1202px;
   /* border: 1px solid #c1c1c1; */
   overflow: hidden;
-  border-top: 1px solid #c1c1c1;
-  border-left: 1px solid #c1c1c1;
+  border-top: 1px solid #ebebeb;
+  border-left: 1px solid #ebebeb;
   margin-top: 25px;
   margin-bottom: 35px; }
 /* line 32, ../sass/productList.scss */
@@ -37,10 +39,10 @@ body {
   box-sizing: border-box;
   float: left;
   text-align: center;
-  width: 240px;
+  width: 237px;
   height: 280px;
-  border-right: 1px solid #c1c1c1;
-  border-bottom: 1px solid #c1c1c1;
+  border-right: 1px solid #ebebeb;
+  border-bottom: 1px solid #ebebeb;
   cursor: pointer;
   position: relative; }
 /* line 42, ../sass/productList.scss */
