@@ -82,6 +82,8 @@ angular.module('AndSell.PC.Main').controller('pages_login_register_Controller', 
                     modalFactory.showShortAlert('请输入验证码');
                 }, function (response) {
                     modalFactory.showShortAlert(response.msg);
+                    $scope.get = true;
+                    $scope.send = false;
                 });
             }
         }
