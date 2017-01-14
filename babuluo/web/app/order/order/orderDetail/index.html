@@ -347,7 +347,7 @@
           <div class="items"> <!-- 商品列 -->
             <ul class="list-unstyled">
               <li ng-repeat="detail in orderDetailList">
-                <table class="itemInfo">
+                <table class="itemInfo" ng-if="detail['isPresent'] == null">
                   <tr>
                     <td class="itemForm">
                       <img class="pull-left"
@@ -376,6 +376,24 @@
                     </td>
                   </tr>
                 </table>
+                <div class="present"  ng-if="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ] != null">
+                  <div class="text">赠</div>
+                  <div class="present-info">
+                    <img ng-src="{{FILE_SERVER_DOMAIN+presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.IMG_URL']}}">
+                    <span ng-bind="presentMap[detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.PRD_NAME']"></span><br>
+                    <span class="itemColor" ng-bind="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.SKU_CONTENT_INFO']  +'x'+ presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.COUNT']"></span>
+                  </div>
+                </div>
+              </li>
+              <li class="order-present" ng-if="presentMap['order'] != null">
+                <h5>订单赠品</h5>
+                <div class="present">
+                  <div class="present-info">
+                    <img ng-src="{{FILE_SERVER_DOMAIN+presentMap['order']['SHOP_ORDER_INFO.IMG_URL']}}">
+                    <span ng-bind="presentMap['order']['SHOP_ORDER_INFO.PRD_NAME']"></span><br>
+                    <span class="itemColor" ng-bind="presentMap['order']['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] +'x'+ presentMap['order']['SHOP_ORDER_INFO.COUNT']"></span>
+                  </div>
+                </div>
               </li>
             </ul>
           </div>

@@ -19,16 +19,18 @@
         <div class="recent">
             <div class="recentTitle">最近浏览</div>
             <div class="storeContain">
-                <div class="store" ng-repeat="shop in recentShopList" ng-click="shopSelect(shop)">{{shop['SHOP.SHOP_NAME']}}</div>
+                <div class="store" ng-repeat="shop in recentShopList" ng-click="shopSelect(shop)"> <span>{{shop['SHOP.SHOP_NAME']}}</span>
+                    <div class="yang"></div></div>
             </div>
 
         </div>
         <div class="recent recent11">
             <div class="recentTitle">区域</div>
             <div class="storeContain">
-                <div class="store" ng-repeat="district in districtList"
+                <div class="storeArea" ng-repeat="district in districtList"
                      ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'],district['DISTRICT.DISTRICT_NAME'])" class="shop-name" ng-class="{true:
-                'active'}[district['DISTRICT.DISTRICT_NAME']==currentDistrictName]">{{district['DISTRICT.DISTRICT_NAME']}}</div>
+                'active'}[district['DISTRICT.DISTRICT_NAME']==currentDistrictName]"><span>{{district['DISTRICT.DISTRICT_NAME']}}</span>
+                    <div class="yang"></div></div>
             </div>
         </div>
         <div class="recent recent1">

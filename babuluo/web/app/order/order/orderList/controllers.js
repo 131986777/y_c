@@ -9,6 +9,22 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
         $scope.filterStateOrder('out');
     }
 
+    $scope.bindPresent = function (){
+        $scope.orderList.forEach(function (ele) {
+            ele['presentMap'] = {}
+            ele.details.forEach(function(detail){
+                if (detail['isPresent'] == null) {
+                    return
+                }
+                if (detail['orderOrPrd'] == "prd") {
+                    ele['presentMap'][detail['blongToSkuId']] = detail;
+                } else if (detail['orderOrPrd'] == "order") {
+                    ele['presentMap']['order'] = detail;
+                }
+            })
+        });
+    }
+
     $scope.filterStateOrder = function (type) {
         $scope.state = type;
         $scope.orderType = $stateParams.orderType;
@@ -95,6 +111,7 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
                 setContentsInfoForOrder(item);
             });
         });
+        $scope.bindPresent()
         console.log($scope.orderList);
     }
 

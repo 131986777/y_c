@@ -22,9 +22,19 @@ body {
   font-size: 14px;
   color: #4b4b4b;
   cursor: pointer;
-  line-height: 44px;
+  line-height: 49px;
   /* margin-right: 38px; */
   margin-left: 40px; }
+.container .productList .effectiveArea .rangeTab .range {
+  display: inline-block;
+  width: 16px;
+  height: 12px;
+  background: url(../../../public/css/img/range.png);
+  margin-left: 10px;
+}
+.container .productList .effectiveArea .rangeTab .proIcon{
+ margin-left: 8px;
+}
 /* line 24, ../sass/productList.scss */
 .container .productList .effectiveArea .products {
   width: 1202px;
@@ -86,8 +96,8 @@ body {
   line-height: 2.2; }
 /* line 78, ../sass/productList.scss */
 .container .productList .effectiveArea .products .eachPro .but .img {
-  width: 22px;
-  height: 20px;
+  width: 16px;
+  height:16px;
   position: relative;
   left: -14px;
   top: 3px; }

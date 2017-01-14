@@ -2,87 +2,87 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c4a12cf3-03f3-4fce-9d52-6e688b902a23" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/public/css/img/icon-star.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/public/css/img/star-matrix.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/public/css/img/weixinma.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/src/com/weixin/WXPayResultCallBackServlet.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/account/recharge/controller.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/account/recharge/index.html" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/account/recharge/page.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/order/confirm/controller.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/order/confirm/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/order/confirm/page.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/account/recharge/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/src/com/weixin/WXPayResultCallBackServlet.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/personal/pay/controller.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/personal/pay/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/order/confirm/controller.js" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/personal/pay/page.css" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/babuluo/src/com/weixin/WXPayResultInvokeServlet.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/bolanggu/bbl/mendian/Kucun$1.class" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/account/recharge/controller.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/public/css/img/star-matrix.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/public/css/img/icon-star.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/personal/pay/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/public/css/img/weixinma.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/order/confirm/page.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/order/confirm/index.html" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/bolanggu/bbl/mendian/Kucun$1.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/bolanggu/bbl/ENV.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/bolanggu/bbl/ENV.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/bolanggu/bbl/mendian/Kucun.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/bolanggu/bbl/mendian/Kucun.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/weixin/WXPay.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/weixin/WXPay.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/weixin/WxPayConfig.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/weixin/WxPayConfig.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/bolanggu/bbl/ENV.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/bolanggu/bbl/ENV.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/bolanggu/bbl/mendian/Kucun.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/bolanggu/bbl/mendian/Kucun.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/weixin/WXPay.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/weixin/WXPay.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/weixin/WxPayConfig.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/weixin/WxPayConfig.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/lib/bulas_to_andsell.jar" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/lib/bulas_to_andsell.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/src/com/bolanggu/bbl/ENV.java" afterPath="$PROJECT_DIR$/babuluo/src/com/bolanggu/bbl/ENV.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/src/com/bolanggu/bbl/mendian/Kucun.java" afterPath="$PROJECT_DIR$/babuluo/src/com/bolanggu/bbl/mendian/Kucun.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/src/com/weixin/WXPay.java" afterPath="$PROJECT_DIR$/babuluo/src/com/weixin/WXPay.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/src/com/weixin/WxPayConfig.java" afterPath="$PROJECT_DIR$/babuluo/src/com/weixin/WxPayConfig.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/web.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/app/shop/shop_district/districtList/controllers.js" afterPath="$PROJECT_DIR$/babuluo/web/app/shop/shop_district/districtList/controllers.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/account/recharge/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/account/recharge/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/cart/index.html" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/cart/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/main/main.jsp" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/main/main.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/main/wxPayCallback.jsp" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/main/wxPayCallback.jsp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/order/order-services.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/order/order-services.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/product/detail/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/product/detail/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/shop/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/shop/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/shop/index.html" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/shop/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/public/application.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/public/application.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/cart/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/cart/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/cart/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/cart/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/cart/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/cart/page.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/accountLogin/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/accountLogin/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/accountLogin/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/accountLogin/page.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/phoneLogin/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/phoneLogin/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/phoneLogin/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/phoneLogin/index.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/bolanggu/bbl/mendian/Kucun$1.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/babuluo/src/com/weixin/WXPayResultInvokeServlet.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/phoneLogin/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/phoneLogin/page.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/register/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/register/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/register/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/register/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/register/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/register/page.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/main/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/main/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/main/router.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/main/router.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/order/review/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/order/review/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/order/review/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/order/review/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/order/review/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/order/review/page.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/payment/pay/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/payment/pay/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/payment/pay/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/payment/pay/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/payment/pay/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/payment/pay/page.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/personal/center/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/personal/center/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/personal/center/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/personal/center/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/product/detail/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/product/detail/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/product/detail/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/product/detail/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/product/detail/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/product/detail/page.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/product/list/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/product/list/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/product/list/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/product/list/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/product/list/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/product/list/page.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/security/modifyPwd/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/security/modifyPwd/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/security/modifyPwd/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/security/modifyPwd/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/security/modifyPwd/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/security/modifyPwd/page.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/security/security-services.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/security/security-services.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/shop/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/shop/controller.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/shop/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/shop/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/shop/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/shop/page.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/public/css/public/screen.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/public/css/public/screen.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/weixin/WXPay.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/weixin/WXPay.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/weixin/WxPayConfig.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/weixin/WxPayConfig.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/src/com/weixin/WXPay.java" afterPath="$PROJECT_DIR$/babuluo/src/com/weixin/WXPay.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/cart/index.html" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/cart/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/public/css/public/style.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/public/css/public/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/product/detail/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/product/detail/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/security/security-services.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/security/security-services.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/lib/bulas_to_andsell.jar" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/lib/bulas_to_andsell.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/account/recharge/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/account/recharge/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/accountLogin/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/accountLogin/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/public/css/public/screen.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/public/css/public/screen.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/main/router.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/main/router.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/app/shop/shop_district/districtList/controllers.js" afterPath="$PROJECT_DIR$/babuluo/web/app/shop/shop_district/districtList/controllers.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/order/review/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/order/review/page.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/src/com/bolanggu/bbl/ENV.java" afterPath="$PROJECT_DIR$/babuluo/src/com/bolanggu/bbl/ENV.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/bolanggu/bbl/mendian/Kucun.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/bolanggu/bbl/mendian/Kucun.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/product/list/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/product/list/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/web.xml" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/web.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/order/review/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/order/review/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/bolanggu/bbl/ENV.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/bolanggu/bbl/ENV.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/register/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/register/page.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/product/detail/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/product/detail/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/register/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/register/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/weixin/WXPay.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/com/weixin/WXPay.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/phoneLogin/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/phoneLogin/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/public/application.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/public/application.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/src/com/bolanggu/bbl/mendian/Kucun.java" afterPath="$PROJECT_DIR$/babuluo/src/com/bolanggu/bbl/mendian/Kucun.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/weixin/WxPayConfig.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/weixin/WxPayConfig.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/public/template/pageBar.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/public/template/pageBar.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/phoneLogin/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/phoneLogin/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/personal/center/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/personal/center/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/payment/pay/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/payment/pay/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/order/order-services.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/order/order-services.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/security/modifyPwd/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/security/modifyPwd/page.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/product/list/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/product/list/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/order/review/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/order/review/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/shop/index.html" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/shop/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/cart/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/cart/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/shop/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/shop/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/cart/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/cart/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/main/main.jsp" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/main/main.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/main/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/main/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/payment/pay/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/payment/pay/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/product/detail/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/product/detail/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/personal/center/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/personal/center/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/cart/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/cart/page.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/main/wxPayCallback.jsp" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/main/wxPayCallback.jsp" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/bolanggu/bbl/ENV.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/bolanggu/bbl/ENV.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/product/list/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/product/list/page.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/security/modifyPwd/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/security/modifyPwd/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/shop/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/shop/page.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/register/index.html" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/register/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/payment/pay/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/payment/pay/page.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/product/detail/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/product/detail/page.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/src/com/weixin/WxPayConfig.java" afterPath="$PROJECT_DIR$/babuluo/src/com/weixin/WxPayConfig.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/h5/pages/shop/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/h5/pages/shop/controller.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/bolanggu/bbl/mendian/Kucun.class" afterPath="$PROJECT_DIR$/babuluo/web/WEB-INF/classes/production/babuluo/com/bolanggu/bbl/mendian/Kucun.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/login/accountLogin/page.css" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/login/accountLogin/page.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/babuluo/web/pc/pages/shop/controller.js" afterPath="$PROJECT_DIR$/babuluo/web/pc/pages/shop/controller.js" />
     </list>
     <ignored path="bbl.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -104,52 +104,33 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/cart/controller.js">
+      <file leaf-file-name="controllers.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/babuluo/web/app/order/order/orderList/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="176" column="0" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
+              <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/cart/index.html">
+        <entry file="file://$PROJECT_DIR$/babuluo/web/app/order/order/orderList/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="16" column="52" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
+            <state vertical-scroll-proportion="-1.0178572">
+              <caret line="144" column="65" selection-start-line="144" selection-start-column="65" selection-end-line="144" selection-end-column="65" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#li#0;n#ul#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#style#0;n#img#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#li#1;n#ul#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/add/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="90" column="83" selection-start-line="90" selection-start-column="83" selection-end-line="90" selection-end-column="83" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/add/controller.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="322" column="72" selection-start-line="322" selection-start-column="65" selection-end-line="322" selection-end-column="72" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="controller.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/controller.js">
+      <file leaf-file-name="babuluo.iml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/babuluo/babuluo.iml">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -158,19 +139,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.4400716">
-              <caret line="329" column="21" selection-start-line="329" selection-start-column="21" selection-end-line="329" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.097269624">
+              <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="controller.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/list/controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="79" column="5" selection-start-line="65" selection-start-column="4" selection-end-line="79" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/list/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.9464285">
+              <caret line="121" column="52" selection-start-line="121" selection-start-column="43" selection-end-line="121" selection-end-column="52" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#1;n#div#0;n#div#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#p#1;n#div#0;n#div#3;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#div#2;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -193,10 +192,20 @@
         <option value="$PROJECT_DIR$/babuluo/web/h5/pages/cart/index.html" />
         <option value="$PROJECT_DIR$/babuluo/web/h5/pages/order/add/index.html" />
         <option value="$PROJECT_DIR$/babuluo/web/h5/pages/order/add/controller.js" />
-        <option value="$PROJECT_DIR$/babuluo/web/h5/pages/cart/controller.js" />
-        <option value="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/controller.js" />
-        <option value="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html" />
         <option value="$PROJECT_DIR$/babuluo/src/com/weixin/WXPay.java" />
+        <option value="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/controller.js" />
+        <option value="$PROJECT_DIR$/babuluo/web/h5/pages/cart/controller.js" />
+        <option value="$PROJECT_DIR$/babuluo/web/h5/pages/product/product-services.js" />
+        <option value="$PROJECT_DIR$/babuluo/web/h5/pages/product/detail/controller.js" />
+        <option value="$PROJECT_DIR$/babuluo/web/h5/pages/product/detail/index.html" />
+        <option value="$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html" />
+        <option value="$PROJECT_DIR$/babuluo/web/h5/pages/order/list/controller.js" />
+        <option value="$PROJECT_DIR$/babuluo/web/app/order/order/orderDetail/controllers.js" />
+        <option value="$PROJECT_DIR$/babuluo/web/app/order/order/orderDetail/index.html" />
+        <option value="$PROJECT_DIR$/babuluo/web/app/order/order/orderList/controllers.js" />
+        <option value="$PROJECT_DIR$/babuluo/web/h5/pages/order/list/index.html" />
+        <option value="$PROJECT_DIR$/babuluo/web/app/order/order/orderList/index.html" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -243,8 +252,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -313,7 +321,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
+              <option name="myItemId" value="classes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -332,54 +340,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="h5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bbl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="babuluo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="h5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bbl" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="babuluo" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="h5" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -457,7 +417,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="detail" />
+              <option name="myItemId" value="list" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -475,11 +435,47 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="h5" />
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bbl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="babuluo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bbl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="babuluo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -487,7 +483,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="add" />
+              <option name="myItemId" value="order" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -505,28 +501,125 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="h5" />
+              <option name="myItemId" value="app" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="pages" />
+              <option name="myItemId" value="order" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="cart" />
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="orderList" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bbl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="babuluo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="order" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="orderDetail" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bbl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="babuluo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bbl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="babuluo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="web" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="global-style" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="bbl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="babuluo" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../bubu-promo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15234375" />
     <property name="project.structure.side.proportion" value="0.20046084" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
@@ -550,6 +643,10 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\bubu\bbl\babuluo\web\app\components\global-style" />
+      <recent name="D:\bubu\bbl\babuluo\web\app\order\order\orderList" />
+      <recent name="D:\bubu\bbl\babuluo\web\app\order\order\orderDetail" />
+      <recent name="D:\bubu\bbl\babuluo\web\pc\pages\order\detail" />
       <recent name="D:\bubu\bbl\babuluo\web\h5\public\css" />
     </key>
   </component>
@@ -1084,11 +1181,16 @@
       <workItem from="1484185996863" duration="29126000" />
       <workItem from="1484272613304" duration="25038000" />
       <workItem from="1484360003066" duration="111000" />
+      <workItem from="1484360281165" duration="80000" />
+      <workItem from="1484360387580" duration="7743000" />
+      <workItem from="1484374816306" duration="324000" />
+      <workItem from="1484375909199" duration="8136000" />
+      <workItem from="1484384109667" duration="2694000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71233000" />
+    <option name="totallyTimeSpent" value="90210000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1122,7 +1224,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33261105" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3336945" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1153,131 +1255,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/add/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="322" column="72" selection-start-line="322" selection-start-column="65" selection-end-line="322" selection-end-column="72" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#div#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#div#3;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/src/com/weixin/WXPay.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="422" column="15" selection-start-line="422" selection-start-column="15" selection-end-line="422" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/cart/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="135" column="31" selection-start-line="135" selection-start-column="31" selection-end-line="135" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/cart/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="75" selection-start-line="15" selection-start-column="75" selection-end-line="15" selection-end-column="75" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/add/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="31" column="35" selection-start-line="31" selection-start-column="24" selection-end-line="31" selection-end-column="35" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/add/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="206" column="9" selection-start-line="143" selection-start-column="7" selection-end-line="206" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="154" column="92" selection-start-line="154" selection-start-column="77" selection-end-line="154" selection-end-column="92" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#div#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#div#3;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/babuluo/web/WEB-INF/lib/promo_to_andsell.jar!/com/bubu/promo/plan/Controller.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/add/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="235" column="18" selection-start-line="235" selection-start-column="18" selection-end-line="235" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/cart/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="263" column="35" selection-start-line="263" selection-start-column="35" selection-end-line="263" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$PROJECT_DIR$/babuluo/web/WEB-INF/lib/promo_to_andsell.jar!/com/bubu/promo/plan/Service.class">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1397,13 +1374,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/src/com/bolanggu/bbl/output/outputQuery.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.021252796">
-          <caret line="6" column="20" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/babuluo/web/app/marketing/sales/sales/salesList/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1488,24 +1458,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/cart/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="52" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/cart/controller.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="176" column="0" selection-start-line="176" selection-start-column="0" selection-end-line="176" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/babuluo/web/h5/public/commonJs.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33275563">
@@ -1513,25 +1465,156 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/src/com/weixin/WXPay.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="422" column="15" selection-start-line="422" selection-start-column="15" selection-end-line="422" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/src/com/bolanggu/bbl/output/outputQuery.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.9160714">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/order-services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25357142">
+          <caret line="33" column="4" selection-start-line="33" selection-start-column="4" selection-end-line="33" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/cart/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="46" column="41" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/cart/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="52" selection-start-line="16" selection-start-column="52" selection-end-line="16" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/add/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="90" column="83" selection-start-line="90" selection-start-column="83" selection-end-line="90" selection-end-column="83" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/add/controller.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="322" column="72" selection-start-line="322" selection-start-column="65" selection-end-line="322" selection-end-column="72" />
-          <folding />
+          <caret line="322" column="49" selection-start-line="322" selection-start-column="49" selection-end-line="322" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/product/product-services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.61071426">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/product/detail/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42857143">
+          <caret line="52" column="20" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/product/detail/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.93214285">
+          <caret line="196" column="31" selection-start-line="196" selection-start-column="31" selection-end-line="196" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/pc/pages/order/detail/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="5.8286853">
+          <caret line="154" column="80" selection-start-line="154" selection-start-column="80" selection-end-line="154" selection-end-column="80" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="201" column="33" selection-start-line="201" selection-start-column="33" selection-end-line="201" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/app/order/order/orderDetail/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.1860466">
+          <caret line="345" column="16" selection-start-line="345" selection-start-column="16" selection-end-line="345" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.287594">
+          <caret line="185" column="90" selection-start-line="185" selection-start-column="55" selection-end-line="185" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/app/order/order/orderDetail/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.4">
+          <caret line="24" column="6" selection-start-line="12" selection-start-column="4" selection-end-line="24" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/list/controller.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="79" column="5" selection-start-line="65" selection-start-column="4" selection-end-line="79" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/app/order/order/orderList/controllers.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/list/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.9464285">
+          <caret line="121" column="52" selection-start-line="121" selection-start-column="43" selection-end-line="121" selection-end-column="52" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#div#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#div#0;n#div#1;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/web/app/order/order/orderList/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.0178572">
+          <caret line="144" column="65" selection-start-line="144" selection-start-column="65" selection-end-line="144" selection-end-column="65" />
+          <folding>
+            <element signature="n#div#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#li#0;n#ul#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#li#0;n#ul#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#li#1;n#ul#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#div#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/babuluo/babuluo.iml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -1539,29 +1622,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/src/com/weixin/WXPay.java">
+    <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="422" column="15" selection-start-line="422" selection-start-column="15" selection-end-line="422" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/babuluo/web/h5/pages/order/detail/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.4400716">
-          <caret line="329" column="21" selection-start-line="329" selection-start-column="21" selection-end-line="329" selection-end-column="21" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#div#3;n#div#0;n#div#1;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#p#1;n#div#0;n#div#3;n#div#0;n#div#1;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#2;n#div#2;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.097269624">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1584,7 +1649,7 @@
       </state>
       <state key="FacetStructureConfigurable.UI">
         <settings>
-          <last-edited>Web (babuluo)|Web</last-edited>
+          <last-edited>Detection</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

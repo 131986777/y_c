@@ -63,6 +63,22 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
         $scope.getOrder();
     }
 
+    $scope.bindPresent = function (){
+        $scope.orderList.forEach(function (ele) {
+            ele['presentMap'] = {}
+            ele.details.forEach(function(detail){
+                if (detail['isPresent'] == null) {
+                    return
+                }
+                if (detail['orderOrPrd'] == "prd") {
+                    ele['presentMap'][detail['blongToSkuId']] = detail;
+                } else if (detail['orderOrPrd'] == "order") {
+                    ele['presentMap']['order'] = detail;
+                }
+            })
+        });
+    }
+
     $scope.getOrder = function () {
         weUI.toast.showLoading('正在加载');
         orderFactory.getOrder($scope.filter, function (response) {
@@ -84,6 +100,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
             $scope.loading = false;
             weUI.toast.hideLoading();
             $scope.getDataReady = true;
+            $scope.bindPresent()
         }, function (response) {
             weUI.toast.hideLoading();
             weUI.toast.error(response.msg);

@@ -22,6 +22,8 @@
       });
       $scope.chooseModal=function () {
           $scope.ifShow=true;
+          $scope.state='openWeixin';
+
       }
       $scope.close=function () {
           $scope.ifShow=false;
@@ -29,5 +31,6 @@
       }
       $scope.chooseHuiyuan=function () {
           $scope.ifShowhuiyuan=true;
+          $scope.state='openHuiyuan';
       }
   });

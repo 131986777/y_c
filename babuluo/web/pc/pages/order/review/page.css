@@ -138,11 +138,11 @@ ul.rating li a:hover {
   left:0;
   background: url(../../../public/css/img/star-matrix.png) no-repeat 0 0;
 }
-ul.rating li.one a:hover {background-position:0 -96px;}
-ul.rating li.two a:hover {background-position:0 -112px;}
-ul.rating li.three a:hover {background-position:0 -128px}
-ul.rating li.four a:hover {background-position:0 -144px}
-ul.rating li.five a:hover {background-position:0 -160px}
+ul.rating li.one a:hover {background-position:0 -112px;}
+ul.rating li.two a:hover {background-position:0 -128px;}
+ul.rating li.three a:hover {background-position:0 -144px}
+ul.rating li.four a:hover {background-position:0 -160px}
+ul.rating li.five a:hover {background-position:0 -176px}
 
 
 /* line 80, ../sass/orderEvaluate.scss */

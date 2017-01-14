@@ -23,9 +23,7 @@ body {
 .container1 .row-wrap1 .row-title {
   width: 1050px;
   /* height: 82px; */
-  /* line-height: 96px; */
-  /* border-bottom: 1px solid #e0e0e0; */
-  padding-left: 0px;
+    padding-left: 0px;
   font-size: 25px;
   color: #4b4b4b;
   margin-top: 60px;
@@ -78,7 +76,23 @@ body {
   font-size: 14px;
   color: #494949;
   margin-bottom: 20px;
-  cursor: pointer; }
+  cursor: pointer;
+  position: relative;
+}
+.container1 .row-wrap1 .recent .storeContain .storeArea {
+  float: left;
+  width: 95px;
+  height: 35px;
+  border: 1px solid #dcdcdc;
+  margin-right: 20px;
+  text-align: center;
+  line-height: 2.3;
+  font-size: 14px;
+  color: #494949;
+  margin-bottom: 20px;
+  cursor: pointer;
+  position: relative;
+}
 /* line 72, ../sass/store.scss */
 .container1 .row-wrap1 .recent1 {
   border-bottom: 1px solid #dcdcdc;
@@ -139,3 +153,15 @@ body {
 .container1 .row-wrap1 .storeList .list .listDetail .addrDetail .img1 {
   width: 16px;
   height: 16px; }
+
+.choosed{
+  position: absolute;
+  /* right: initial; */
+  right: 0px;
+  bottom: 0px;
+  border-bottom: 10px solid #f36f1a;
+  border-left: 10px solid transparent;
+}
+.active{
+  border: 1px solid #f36f1a!important;
+}
