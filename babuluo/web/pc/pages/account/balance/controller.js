@@ -7,6 +7,7 @@ angular.module('AndSell.PC.Main').controller('pages_account_balance_Controller',
     modalFactory.setSide(true);
     modalFactory.setCateGory(true);
 
+
     $scope.balanceDetail = "收支明细";
     $scope.initLoad  = function () {
         $scope.uid = getCookie('ANDSELLID');
