@@ -338,7 +338,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_confirm_Controller', f
             if ($scope.balanceInfo.length > 0) {
 
             } else {
-                $state.go('pages/user/accountLogin');
+                $state.go('pages/login/accountLogin');
                 modalFactory.showShortAlert('请使用正确的账号登录');
             }
         }, function (response) {

@@ -29,7 +29,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
 
     //取消订单
     $scope.cancelOrder = function () {
-        modalFactory.showAlert("提示", "确认取消该订单", function () {
+        modalFactory.showAlert("确认取消该订单", function () {
             orderFactory.cancelOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
                 modalFactory.showShortAlert('取消订单成功');
                 $scope.getOrder($scope.order['SHOP_ORDER.ID']);
@@ -41,7 +41,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
 
     //确认提货
     $scope.getPrdNow = function () {
-        modalFactory.showAlert("提示", "确认提货", function () {
+        modalFactory.showAlert("确认提货", function () {
             orderFactory.acceptOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
                 if (response.code == 0) {
                     modalFactory.showShortAlert('收货成功');
@@ -83,7 +83,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
     $scope.cardPay = function () {
         $scope.payCard = JSON.parse(getCookie("payCard"));
         if (!isEmptyObject($scope.payCard)) {
-            modalFactory.showAlert("提示", "确认支付该订单", function () {
+            modalFactory.showAlert("确认支付该订单", function () {
                 var form = {};
                 form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
                 form['SHOP_ORDER.CARD_ID'] = $scope.payCard['MEMBER_CARD.CARD_ID'];
@@ -105,7 +105,6 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
         }
 
     };
-
 
     $scope.toDetail = function (id) {
         $state.go('pages/product/detail', {PRD_ID: id});
@@ -142,44 +141,39 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
         });
     }
 
-
     /**
      * 微信支付JSAPI调用
      * * @param postData
      */
     function onBridgeReady(postData, unifiedJson) {
         var post = JSON.parse(postData);
-        WeixinJSBridge.invoke(
-            'getBrandWCPayRequest', {
-                "appId": post.appId,
-                "timeStamp": post.timeStamp,
-                "nonceStr": post.nonceStr,
-                "package": post.package,
-                "signType": post.signType,
-                "paySign": post.paySign
-            },
-            function (res) {
-                if (res.err_msg == "get_brand_wcpay_request:ok") {
-                    modalFactory.showShortAlert('正在查询支付结果,请稍等...');
-                    $scope.wxPayInfo = "正在查询支付结果,请稍等...";
-                    var formData = {
-                        OUT_TRADE_NO: unifiedJson.out_trade_no,
-                        ORDER_ID: $scope.order['SHOP_ORDER.ID'],
-                        TYPE: 'ORDER',
-                        CALLBACK: '-1'
-                    };
-                    orderFactory.queryWXPayResult(formData, function (res) {
-                        modalFactory.showShortAlert('订单支付成功');
-                        $scope.getOrder($scope.order['SHOP_ORDER.ID']);
-                    }, function (res) {
-                        location.reload();
-                    })
-                } else {
-                    modalFactory.showShortAlert("支付失败");
-                }
+        WeixinJSBridge.invoke('getBrandWCPayRequest', {
+            "appId": post.appId,
+            "timeStamp": post.timeStamp,
+            "nonceStr": post.nonceStr,
+            "package": post.package,
+            "signType": post.signType,
+            "paySign": post.paySign
+        }, function (res) {
+            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                modalFactory.showShortAlert('正在查询支付结果,请稍等...');
+                $scope.wxPayInfo = "正在查询支付结果,请稍等...";
+                var formData = {
+                    OUT_TRADE_NO: unifiedJson.out_trade_no,
+                    ORDER_ID: $scope.order['SHOP_ORDER.ID'],
+                    TYPE: 'ORDER',
+                    CALLBACK: '-1'
+                };
+                orderFactory.queryWXPayResult(formData, function (res) {
+                    modalFactory.showShortAlert('订单支付成功');
+                    $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+                }, function (res) {
+                    location.reload();
+                })
+            } else {
+                modalFactory.showShortAlert("支付失败");
             }
-        );
+        });
     }
-
 
 });

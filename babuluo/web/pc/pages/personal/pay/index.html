@@ -1,4 +1,4 @@
-<div class="row-wrap row-wrap1">
+<div class="row-wrap row-wrap1" ng-init="initData()">
     <div class="row-header row-header1">
             选择付款方式
     </div>
@@ -8,30 +8,30 @@
         </div>
         <div class="infoTop">
             <div class="infoFirst">
-                <div class="front">收&nbsp;&nbsp;货&nbsp;&nbsp;人</div>
-                <div class="">小红啊</div>
+                <div class="front">提&nbsp;&nbsp;货&nbsp;&nbsp;人</div>
+                <div class="" ng-bind="order['SHOP_ORDER.REC_CONTACT']"></div>
+            </div>
+            <div class="infoFirst">
+                <div class="front">联系方式</div>
+                <div class="" ng-bind="order['SHOP_ORDER.REC_PHONE']"></div>
             </div>
             <div class="infoFirst">
                 <div class="front">提货门店</div>
-                <div class="">朗诗国际店</div>
+                <div class="" ng-bind="shop['SHOP.SHOP_NAME']"></div>
             </div>
             <div class="infoFirst">
                 <div class="front">门店地址</div>
-                <div class="">江苏省 南京市 建邺区 南京国家广告产业园</div>
+                <div class="" ng-bind="shop['SHOP.ADDR']"></div>
             </div>
             <div class="infoFirst">
                 <div class="front">门店电话</div>
-                <div class="">18251815890</div>
-            </div>
-            <div class="infoFirst">
-                <div class="front">门店地址</div>
-                <div class="">江苏省 南京市 建邺区 南京国家广告产业园</div>
+                <div class=""  ng-bind="shop['SHOP.TELEPHONE']"></div>
             </div>
         </div>
         <div class="infoMiddle">
             <div class="infoSecond">
                 <div class="front">商品金额</div>
-                <div class="">￥280.00</div>
+                <div class="" ng-bind="order['SHOP_ORDER.PRICE_PRD']|currency : '￥'"></div>
             </div>
             <!--<div class="infoSecond">-->
                 <!--<div class="front">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费</div>-->
@@ -39,13 +39,13 @@
             <!--</div>-->
             <div class="infoSecond">
                 <div class="front">优惠金额</div>
-                <div class="">￥2.00</div>
+                <div class="" ng-bind="order['SHOP_ORDER.PRICE_DISCOUNT']|currency : '￥'"></div>
             </div>
         </div>
         <div class="infoLast">
             <div class="infoThird">
                 <div class="front">订单金额</div>
-                <div class="price">￥280.00</div>
+                <div class="price" ng-bind="order['SHOP_ORDER.PRICE_OVER']|currency : '￥'"></div>
             </div>
         </div>
         <div class="foot">
@@ -57,7 +57,7 @@
                 <span class="payWay zhifubao"></span>
                 <div class="yang"></div>
             </div>
-            <div class="zhifu" ng-click="chooseModal()">
+            <div class="zhifu" ng-click="chooseWeiXin()">
                 <span class="payWay weixin"></span>
                 <div class="yang"></div>
             </div>
@@ -78,11 +78,12 @@
             <span class="text-left"> 微信支付 </span>
             <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
         </div>
-        <div class="weixinImg">
-            <img class="ma" src="../../public/css/img/weixinma.png" alt="">
+        <div class="weixinImg" ng-if="wxPayCode!=undefined">
+            <img  ng-src="{{wxPayCode}}" alt="">
         </div>
-        <p>请使用<span class="sep">微信</span>扫一扫</p>
-        <p>二维码完成支付</p>
+        <p ng-if="wxPayCode!=undefined">请使用<span class="sep">微信</span>扫一扫</p>
+        <p ng-if="wxPayCode!=undefined">二维码完成支付</p>
+        <p ng-if="wxPayCode==undefined">正在读取二维码</p>
     </div>
 </div>
 <div class="modal fade text-left in huiyuan modalBg"

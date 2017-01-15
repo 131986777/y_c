@@ -43,5 +43,5 @@ $import('pages/security/modifyPwd', {login_id:''},true);
 //$import('pages/order/review',{ID:''});
 //
 $import('pages/personal/center', {}, true);
-$import('pages/personal/pay', {ORDER_ID:''}, true);
+$import('pages/personal/pay', {ORDER_ID:'',COUPON_INFO:''}, true);
 

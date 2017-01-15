@@ -11,7 +11,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller',
         balanceFactory.queryAccountByUid({}, function (response) {
             $scope.balanceInfo = response.data;
             if (!$scope.balanceInfo.length > 0) {
-                $state.go('pages/user/accountLogin');
+                $state.go('pages/login/accountLogin');
                 modalFactory.showShortAlert('请使用正确的账号登录');
             }
         }, function (response) {
@@ -50,7 +50,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller',
             $scope.getCouponSum($scope.uid);
             $scope.getOrderStates();
         } else {
-            $state.go('pages/user/accountLogin');
+            $state.go('pages/login/accountLogin');
             modalFactory.showShortAlert('登录异常');
         }
 

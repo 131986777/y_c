@@ -38,7 +38,7 @@ angular.module('AndSell.PC.Main').controller('pages_security_modifyPwd_Controlle
 
         userFactory.newUserReg(form, function (response) {
             modalFactory.showShortAlert('注册成功');
-            $state.go('pages/user/accountLogin');
+            $state.go('pages/login/accountLogin');
         }, function (response) {
              modalFactory.showShortAlert(response.msg);
         });
@@ -87,7 +87,7 @@ angular.module('AndSell.PC.Main').controller('pages_security_modifyPwd_Controlle
         form['MEMBER.PWD'] = $scope.memberInfo['MEMBER.PWD'];
         securityFactory.updataMemberInfo(form, function (response) {
             modalFactory.showShortAlert('密码修改成功');
-            $state.go('pages/user/accountLogin');
+            $state.go('pages/login/accountLogin');
         },function(response){
              modalFactory.showShortAlert(response.msg);
         });

@@ -114,14 +114,14 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
     if ($scope.uid != undefined && $scope.uid != '') {
         $scope.getUser($scope.uid);
     } else {
-        $state.go('pages/user/accountLogin');
+        $state.go('pages/login/accountLogin');
         modalFactory.showShortAlert('登录异常');
     }
 
     $scope.logOut= function () {
         modalFactory.showAlert("确定退出登录？", function () {
             userFactory.loginOut({}, function (response) {
-                $state.go('pages/user/accountLogin');
+                $state.go('pages/login/accountLogin');
             });
         })
     }

@@ -111,7 +111,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
 
     //取消订单
     $scope.cancelOrder = function (id) {
-        modalFactory.showAlert('提示 ', ' 确认取消该订单嘛? ', function () {
+        modalFactory.showAlert(' 确认取消该订单嘛? ', function () {
             orderFactory.cancelOrder({'SHOP_ORDER.ID': id}, function () {
                 modalFactory.showShortAlert('取消订单成功');
                 $scope.initData();
