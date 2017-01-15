@@ -373,8 +373,8 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         }
         $scope.order['SHOP_ORDER.ORDER_INFO'] = JSON.stringify($scope.orderDetailList);
         if ($scope.state == 'openWeixin') {
-            //var ip = getCookie('ip');
-            var ip = "183.206.169.255";
+            var ip = getCookie('ip_nginx');
+            //var ip = "183.206.169.255";
             var openId = getCookie('openId');
             var formData = {
                 PRODUCT_ID: $scope.order['SHOP_ORDER.ID'],

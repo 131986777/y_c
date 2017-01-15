@@ -55,10 +55,12 @@ angular.module('AndSell.PC.Main').controller('pages_security_modifyPwd_Controlle
                  modalFactory.showShortAlert('请输入正确手机号');
             }
             else {
+                $scope.SMSstate='Sending';
                 var form ={};
                 form['PHONE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
                 form['FLAG'] = 0;
                 securityFactory.sendVerificationCode(form, function (response) {
+                    $scope.SMSstate='SendEnd';
                     $('.send').fadeOut();
                     $('.sended').fadeIn();
                     $scope.time = 60;
@@ -68,6 +70,7 @@ angular.module('AndSell.PC.Main').controller('pages_security_modifyPwd_Controlle
                             $('.sended').fadeOut();
                             $scope.time=60;
                             $interval.cancel($scope.timer);
+                            $scope.SMSstate='SendWait';
                         }
                         else {
                             $scope.time--;

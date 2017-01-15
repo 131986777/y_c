@@ -58,8 +58,8 @@ angular.module('AndSell.PC.Main').controller('pages_account_recharge_Controller'
     }
 
     $scope.updateBalanceByWx = function () {
-        //var ip = getCookie('ip');
-        var ip = "183.206.169.255";
+        var ip = getCookie('ip_nginx');
+        //var ip = "183.206.169.255";
         var openId = getCookie('openId');
         var formData = {
             TYPE: 'ACCOUNT',

@@ -9,11 +9,11 @@
                 </div>
                 <div class="form-group">
                     <div class="pwd">验证码</div>
-                    <div class="yzmPos">
+                    <div class="yzmPos" ng-init="SMSstate='WaitSend'">
                         <input type="text" class="typeIn large-size" placeholder="" ng-model="memberInfo['MEMBER.CHECKCODE']">
-                        <div class="yzm" ng-click="sendSms()">获取验证码</div>
-                        <div class="send">发送中...</div>
-                        <div class="sended">已发送（{{time}}s）</div>
+                        <div class="yzm" ng-if="SMSstate=='WaitSend'" ng-click="sendSms()">获取验证码</div>
+                        <div class="send" ng-if="SMSstate=='Sending'">发送中...</div>
+                        <div class="sended" ng-if="SMSstate=='SendEnd'">已发送（{{time}}s）</div>
                     </div>
 
                 </div>
