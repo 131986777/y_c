@@ -35,7 +35,7 @@ $import('pages/login/phoneLogin', {FROM: ''}, true);
 //$import('pages/login/SetPassword', {LOGIN_ID: '0'});
 //
 $import('pages/account/balance',{},true);
-//$import('pages/account/recharge');
+$import('pages/account/recharge',{},true);
 //
 //$import('pages/security/resetPwd');
 $import('pages/security/modifyPwd', {login_id:''},true);

@@ -28,7 +28,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
     }
     $scope.chooseHuiyuan = function () {
         $scope.ifShowhuiyuan = true;
-        $scope.state = 'openHuiYuan';
+        $scope.state = 'openHuiyuan';
         $scope.payNow();
     }
 

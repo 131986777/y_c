@@ -20,6 +20,8 @@ AndSellPCMainModule.service('orderFactory', function (http) {
 
     this.queryWXPayResult = http.post('/wx/pay/wxpayCallback');
 
+    this.queryWXPayOrder = http.post('/wx/pay/wxPayQueryOrder');
+
     this.getOrderStates = http.post('/shop/order/getStateOrdersForAgent')
 
     this.calculateSale = http.post('/sales/salesplan/calculateSale');
