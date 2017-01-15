@@ -4,6 +4,8 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
 
     modalFactory.setHeader(false);
 
+    modalFactory.setCateGory(true);
+
     modalFactory.setSide(true);
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;

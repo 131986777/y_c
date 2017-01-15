@@ -4,6 +4,8 @@ angular.module('AndSell.PC.Main').controller('pages_cart_Controller', function (
 
     modalFactory.setHeader(false);
 
+    modalFactory.setSide(false);
+
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {

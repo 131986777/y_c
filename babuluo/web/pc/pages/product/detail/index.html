@@ -5,9 +5,9 @@
         <!--<a href="">水果</a>-->
         <!--<a href="">蓝莓</a>-->
         <!--</div>-->
-        <div class="goodsDetailShow">
+        <div class="goodsDetailShow" >
             <div class="picShow">
-                <div class="mainPic" ng-init="CMP=FILE_SERVER_DOMAIN+product['SHOP_PRODUCT.CMP']">
+                <div class="mainPic">
                     <img ng-src="{{CMP}}">
                 </div>
                 <div class="picList">
@@ -15,8 +15,7 @@
                         <li ng-repeat="slide in slides">
                             <img
                                 ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
-                                ng-click="CMP=slide.image"
-                                style="height: 100%;width: 100%;">
+                                style="height: 100%;width: 100%;" ng-click="changeCMP(slide.image)">
                         </li>
                     </ul>
                 </div>
@@ -56,6 +55,7 @@
                         <span class="name" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']"></span>
                         <ul class="standardsList">
                             <li ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1']"
+                                ng-class=" { true :'active'}[currSkuContentSelectMap.name1==item] "
                                 ng-click="checkContent(1,item)"
                                 ng-bind="item">
                             </li>
@@ -65,6 +65,7 @@
                         <span class="name" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME2']"></span>
                         <ul class="standardsList">
                             <li ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT2']"
+                                ng-class=" { true :'active'}[currSkuContentSelectMap.name2==item] "
                                 ng-click="checkContent(2,item)"
                                 ng-bind="item"></li>
                         </ul>
@@ -73,6 +74,7 @@
                         <span class="name" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']"></span>
                         <ul class="standardsList">
                             <li ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT3']"
+                                ng-class=" { true :'active'}[currSkuContentSelectMap.name3==item] "
                                 ng-click="checkContent(3,item)"
                                 ng-bind="item"></li>
                         </ul>
@@ -89,7 +91,7 @@
                 <div class="endPayGroup">
                     <a href="" class="addToCart" ng-click="addToCart()">加入购物车</a>
                     <a href="" class="buyNow" ng-click="buyNow()">立即购买</a>
-                    <a href="" class="collect"></a>
+                    <!--<a href="" class="collect"></a>-->
                 </div>
             </div>
 

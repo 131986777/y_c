@@ -5,7 +5,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller',
     modalFactory.setHeader(false);
     modalFactory.setSide(true);
     modalFactory.setCateGory(true);
-
+    modalFactory.setLeftMenu(false);
 
     $scope.queryAccount = function () {
         balanceFactory.queryAccountByUid({}, function (response) {
