@@ -1,5 +1,7 @@
 AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, modalFactory,personalFactory,userFactory, productFactory) {
 
+
+    $scope.key = $scope;
     //逻辑
     $scope.$on('title', function (event, data) {
         $scope.title = data;
@@ -31,7 +33,7 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
 
     //低栏
     $scope.$on('updateShop', function (event, data) {
-        $$scope.updateShop();
+        $scope.updateShop();
     });
 
     //低栏
@@ -64,6 +66,23 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
             cartSize = JSON.parse(cartSize);
         }
         if (cartInfo.length > 0)$scope.getPrdInfo(cartInfo, cartSize);
+    };
+
+
+    $scope.aa = function () {
+        console.log($scope.key.prdKeyword);
+    }
+
+    //商品搜索
+    $scope.searchPrd = function () {
+        $state.go('pages/product/list', {keyword: $scope.key.prdKeyword});
+    }
+
+    $scope.myKeyup = function(e){
+        var keycode = window.event?e.keyCode:e.which;
+        if(keycode==13){
+            $scope.searchPrd();
+        }
     };
 
     $scope.getPrdInfo = function (cartInfo, cartSize) {
