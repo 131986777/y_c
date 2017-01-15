@@ -1,6 +1,6 @@
 <div class="row-wrap row-wrap1" ng-init="initData()">
     <div class="row-header row-header1">
-            选择付款方式
+        选择付款方式
     </div>
     <div class="contends">
         <div class="info">
@@ -25,7 +25,7 @@
             </div>
             <div class="infoFirst">
                 <div class="front">门店电话</div>
-                <div class=""  ng-bind="shop['SHOP.TELEPHONE']"></div>
+                <div class="" ng-bind="shop['SHOP.TELEPHONE']"></div>
             </div>
         </div>
         <div class="infoMiddle">
@@ -34,8 +34,8 @@
                 <div class="" ng-bind="order['SHOP_ORDER.PRICE_PRD']|currency : '￥'"></div>
             </div>
             <!--<div class="infoSecond">-->
-                <!--<div class="front">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费</div>-->
-                <!--<div class="">￥2.00</div>-->
+            <!--<div class="front">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费</div>-->
+            <!--<div class="">￥2.00</div>-->
             <!--</div>-->
             <div class="infoSecond">
                 <div class="front">优惠金额</div>
@@ -79,7 +79,7 @@
             <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
         </div>
         <div class="weixinImg" ng-if="wxPayCode!=undefined">
-            <img  ng-src="{{wxPayCode}}" alt="">
+            <img ng-src="{{wxPayCode}}" alt="">
         </div>
         <p ng-if="wxPayCode!=undefined">请使用<span class="sep">微信</span>扫一扫</p>
         <p ng-if="wxPayCode!=undefined">二维码完成支付</p>
@@ -98,91 +98,29 @@
         </div>
         <div class="cardPos">
             <div class="card">
-                <div class="eachCard orange">
+                <div class="eachCard" ng-repeat="cl in cardList" ng-style="cl['MEMBER_CARD.CARD_STYLE']" ng-click="cardPay(cl)">
                     <div class="pos">
-                        <p class="num">NO. 1399 5262 515</p>
-                        <p class="num ka">金卡</p>
-                        <p class="mid">(冻结 ￥19.82)</p>
+                        <p class="num">NO. {{cl['MEMBER_CARD.CARD_NO']}}</p>
+                        <p class="num ka">{{cl['MEMBER_CARD.TYPE_NAME']}}</p>
+                        <p class="mid">
+                            <span ng-if="cl['MEMBER_CARD.FREEZE_BALANCE']>0">(冻结 {{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}})</span>
+                        </p>
                         <div class="m">
                             <p class="word">余额</p>
-                            <p class="money">￥1980.00</p>
+                            <p class="money">{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}</p>
                         </div>
                         <div class="foot">
-                            <p class="time">2016-09-26 11:51:22</p>
-                            <div class="time">
+                            <p class="time">{{cl['MEMBER_CARD.ADD_DATETIME']}}</p>
+                            <div class="time" ng-if="cl['MEMBER_CARD.FACE_VALUE']>0">
                                 <p class="t_inner">发卡面值</p>
-                                <p class="t_inner">￥400</p>
+                                <p class="t_inner">{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</p>
                             </div>
-                            <p class="time">线下门店发卡</p>
+                            <p class="time">{{cl['MEMBER_CARD.SOURCE_NAME']}}</p>
                         </div>
 
                     </div>
 
                 </div>
-                <div class="eachCard blue">
-                    <div class="pos">
-                        <p class="num">NO. 1399 5262 515</p>
-                        <p class="num ka">金卡</p>
-                        <p class="mid">(冻结 ￥19.82)</p>
-                        <div class="m">
-                            <p class="word">余额</p>
-                            <p class="money">￥1980.00</p>
-                        </div>
-                        <div class="foot">
-                            <p class="time">2016-09-26 11:51:22</p>
-                            <div class="time">
-                                <p class="t_inner">发卡面值</p>
-                                <p class="t_inner">￥400</p>
-                            </div>
-                            <p class="time">线下门店发卡</p>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="eachCard black">
-                    <div class="pos">
-                        <p class="num">NO. 1399 5262 515</p>
-                        <p class="num ka">金卡</p>
-                        <p class="mid">(冻结 ￥19.82)</p>
-                        <div class="m">
-                            <p class="word">余额</p>
-                            <p class="money">￥1980.00</p>
-                        </div>
-                        <div class="foot">
-                            <p class="time">2016-09-26 11:51:22</p>
-                            <div class="time">
-                                <p class="t_inner">发卡面值</p>
-                                <p class="t_inner">￥400</p>
-                            </div>
-                            <p class="time">线下门店发卡</p>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="eachCard">
-                    <div class="pos">
-                        <p class="num">NO. 1399 5262 515</p>
-                        <p class="num ka">金卡</p>
-                        <p class="mid">(冻结 ￥19.82)</p>
-                        <div class="m">
-                            <p class="word">余额</p>
-                            <p class="money">￥1980.00</p>
-                        </div>
-                        <div class="foot">
-                            <p class="time">2016-09-26 11:51:22</p>
-                            <div class="time">
-                                <p class="t_inner">发卡面值</p>
-                                <p class="t_inner">￥400</p>
-                            </div>
-                            <p class="time">线下门店发卡</p>
-                        </div>
-
-                    </div>
-
-                </div>
-
             </div>
         </div>
 

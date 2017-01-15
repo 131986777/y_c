@@ -214,10 +214,10 @@ margin-bottom: 50px;
 .huiyuan .modal-content .card .eachCard{
     width: 365px;
     height: 180px;
-    background: -webkit-linear-gradient(left bottom, #f7ad38 , #e09117); /* Safari 5.1 - 6.0 */
-    background: -o-linear-gradient(top right,  #f7ad38 , #e09117); /* Opera 11.1 - 12.0 */
-    background: -moz-linear-gradient(top right,  #f7ad38 , #e09117); /* Firefox 3.6 - 15 */
-    background: linear-gradient(to top right,  #f7ad38 , #e09117); /* 标准的语法（必须放在最后） */
+    /*background: -webkit-linear-gradient(left bottom, #f7ad38 , #e09117); !* Safari 5.1 - 6.0 *!*/
+    /*background: -o-linear-gradient(top right,  #f7ad38 , #e09117); !* Opera 11.1 - 12.0 *!*/
+    /*background: -moz-linear-gradient(top right,  #f7ad38 , #e09117); !* Firefox 3.6 - 15 *!*/
+    /*background: linear-gradient(to top right,  #f7ad38 , #e09117); !* 标准的语法（必须放在最后） *!*/
     border-radius: 5px;
     float: left;
     margin-right: 55px;

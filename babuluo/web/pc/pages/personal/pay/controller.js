@@ -1,4 +1,4 @@
-angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', function (productFactory, $q, userFactory, orderFactory, $stateParams, $interval, $scope, shopFactory, $state, modalFactory, balanceFactory) {
+angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', function (productFactory, $q, userFactory, orderFactory, $stateParams, $interval, $scope, shopFactory, $state, modalFactory, balanceFactory,personalFactory,promoFactory,couponFactory) {
 
     modalFactory.setTitle("微信支付");
 
@@ -28,7 +28,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
     }
     $scope.chooseHuiyuan = function () {
         $scope.ifShowhuiyuan = true;
-        $scope.state = 'openHuiyuan';
+        $scope.state = 'openHuiYuan';
         $scope.payNow();
     }
 
@@ -71,6 +71,17 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         });
 
     }
+
+    $scope.loadMemberCard = function () {
+        personalFactory.getMemberCardByUserId({}, function (response) {
+            $scope.cardList = response.data;
+            console.log($scope.cardList);
+
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+        $scope.show = false;
+    };
 
     $scope.getShop = function (id) {
         shopFactory.getShopById({'SHOP.SHOP_ID': id}, function (response) {
@@ -370,25 +381,26 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
 
         } else if ($scope.state == 'openHuiYuan') {
             //支付会员卡
+            $scope.loadMemberCard();
         }
     };
 
-    $scope.cardPay = function () {
-        console.log(getCookie("payCard"));
-        $scope.payCard = JSON.parse(getCookie("payCard"));
+    $scope.cardPay = function (card) {
+        $scope.payCard = card;
         if (!isEmptyObject($scope.payCard)) {
+            $scope.close();
             modalFactory.showAlert("确认支付该订单？", function () {
                 var form = $scope.order;
                 form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
                 form['SHOP_ORDER.CARD_ID'] = $scope.payCard['MEMBER_CARD.CARD_ID'];
                 form['SHOP_ORDER.CARD_NO'] = $scope.payCard['MEMBER_CARD.CARD_NO'];
                 form['SHOP_ORDER.CARD_BALANCE'] = $scope.payCard['MEMBER_CARD.BALANCE'];
+                form['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
                 console.log(form);
                 orderFactory.payOrder(form, function (response) {
                     modalFactory.showShortAlert('支付成功');
-                    $scope.cardModalShow = false;
                     $scope.delCoupon();
-                    $state.go("pages/personal");
+                    $state.go("pages/order/detail",{ORDER_ID: $scope.order['SHOP_ORDER.ID']});
                 }, function (response) {
                     modalFactory.showShortAlert(response.msg);
                 });
