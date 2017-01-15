@@ -1,4 +1,4 @@
-<div class="container ">
+<div class="container " ng-init="initData()">
     <div class="effectiveArea home-page">
         <div class="bannerSlider">
             <ul>
@@ -11,405 +11,234 @@
             </ul>
         </div>
         <div class="entryCategories">
-            <div class="entry timeLimit">
-                <h1 class="entryTitle">
-                    <span class="name">限时秒杀</span>
-                    <div class="timeCount">
-                        距离结束还有：<span class="count hours">02</span>时<span
-                        class="count minutes">10</span>分<span
-                        class="count seconds">56</span>秒
-                    </div>
-                </h1>
-                <div class="picShow">
-                    <ul>
-                        <li><a href=""><img
-                            src="/AndSell/pc/public/css/img/time_limit_image.png" alt=""></a>
-                        </li>
-                        <li><a href=""><img
-                            src="/AndSell/pc/public/css/img/time_limit_image.png" alt=""></a>
-                        </li>
-                        <li><a href=""><img
-                            src="/AndSell/pc/public/css/img/time_limit_image.png" alt=""></a>
-                        </li>
-                        <li><a href=""><img
-                            src="/AndSell/pc/public/css/img/time_limit_image.png" alt=""></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="entry togetherBuy">
-                <h1 class="entryTitle">
-                    <span class="name">团购</span>
-                </h1>
-                <div class="picShow">
-                    <ul>
-                        <li>
-                            <a href="">
-                                <div class="pic">
-                                    <img src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                         alt="">
-                                </div>
-                                <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                <p class="price">
-                                    <span class="current">¥128.00</span><span
-                                    class="origin">¥129.00</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <div class="pic">
-                                    <img src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                         alt="">
-                                </div>
-                                <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                <p class="price">
-                                    <span class="current">¥128.00</span><span
-                                    class="origin">¥129.00</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <div class="pic">
-                                    <img src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                         alt="">
-                                </div>
-                                <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                <p class="price">
-                                    <span class="current">¥128.00</span><span
-                                    class="origin">¥129.00</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <div class="pic">
-                                    <img src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                         alt="">
-                                </div>
-                                <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                <p class="price">
-                                    <span class="current">¥128.00</span><span
-                                    class="origin">¥129.00</span>
-                                </p>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <div class="pic">
-                                    <img src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                         alt="">
-                                </div>
-                                <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                <p class="price">
-                                    <span class="current">¥128.00</span><span
-                                    class="origin">¥129.00</span>
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="entry todayRecommend">
-                <h1 class="entryTitle">
-                    <span class="name">今日推荐</span>
-                </h1>
-                <div class="picShow">
-                    <ul>
-                        <li>
-                            <a href="">
-                                <!--                                    <img src="/AndSell/pc/public/css/img/time_limit_image.png" alt="">-->
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <!--                                    <img src="/AndSell/pc/public/css/img/time_limit_image.png" alt="">-->
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <!--                                    <img src="/AndSell/pc/public/css/img/time_limit_image.png" alt="">-->
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <!--                                    <img src="/AndSell/pc/public/css/img/time_limit_image.png" alt="">-->
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="entry floorLikeRec">
-                <h1 class="entryTitle">1F
-                    <span class="name">水果</span>
-                    <a href="" class="getAll">查看全部 ></a>
-                </h1>
-                <div class="picShow">
+            <!--<div class="entry timeLimit" ng-show="limitList.length>0">-->
+            <!--<h1 class="entryTitle">-->
+            <!--<span class="name">限时秒杀</span>-->
+            <!--<div class="timeCount">-->
+            <!--距离结束还有：<span class="count hours">{{item.hour}}</span>时<span-->
+            <!--class="count minutes">{{item.minute}}</span>分<span-->
+            <!--class="count seconds">{{item.second}}</span>秒-->
+            <!--</div>-->
+            <!--</h1>-->
+            <!--<div class="picShow">-->
+            <!--<ul>-->
+            <!--<li ng-repeat="item in limitList" ng-if="item['is_show']==true">-->
+            <!--<a ng-href="{{item['BANNER.URL']}}">-->
+            <!--<img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">-->
+            <!--</a>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="entry togetherBuy" ng-show="groupList.length>0">-->
+            <!--<h1 class="entryTitle">-->
+            <!--<span class="name">团购</span>-->
+            <!--</h1>-->
+            <!--<div class="picShow">-->
+            <!--<ul>-->
+            <!--<li ng-repeat="item in groupList" ng-if="item['is_show']==true">-->
+            <!--<a ng-href="{{item['BANNER.URL']}}">-->
+            <!--<div class="pic">-->
+            <!--<img ng-if="item['is_show']==true"-->
+            <!--ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"-->
+            <!--ng-href="{{item['BANNER.URL']}}">-->
+            <!--</div>-->
+            <!--</a>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div class="entry todayRecommend" ng-if="recommendList.length>0||recommNineList.length>0">-->
+            <!--<h1 class="entryTitle">-->
+            <!--<span class="name">今日推荐</span>-->
+            <!--</h1>-->
+            <!--<div class="picShow">-->
+            <!--<ul>-->
+            <!--<li>-->
+            <!--<a ng-repeat="item in recommendList" ng-href="{{item['BANNER.URL']}}"-->
+            <!--ng-if="item['is_show']==true">-->
+            <!--<img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">-->
+            <!--</a>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
+            <!--</div>-->
+            <div class="entry floorLikeRec" ng-repeat="(key,itemList) in BannerList">
+                <div>
+                    <h1 class="entryTitle">{{key+1}}F
+                        <span class="name">{{itemList.name}}</span>
+                        <a ng-href="{{itemList.content[0]['BANNER.URL']}}" class="getAll">查看全部 ></a>
+                    </h1>
                     <div class="bannerPic">
-                        <img src="/AndSell/pc/public/css/img/floor_like_rec_banner_1.png"
-                             alt="">
+                        <img ng-src="{{FILE_SERVER_DOMAIN+itemList.content[0]['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
                     </div>
-                    <div class="recommendArea">
-                        <div class="bestRec">
-                            <a href="">
-                                <img
-                                    src="/AndSell/pc/public/css/img/floor_like_rec_banner_1.png"
-                                    alt="">
-                            </a>
-                        </div>
-                        <div class="normalRec">
-                            <ul>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="entry floorLikeRec">
-                <h1 class="entryTitle">1F
-                    <span class="name">水果</span>
-                    <a href="" class="getAll">查看全部 ></a>
-                </h1>
-                <div class="picShow">
-                    <div class="bannerPic">
-                        <img src="/AndSell/pc/public/css/img/floor_like_rec_banner_1.png"
-                             alt="">
-                    </div>
-                    <div class="recommendArea">
-                        <div class="bestRec">
-                            <a href="">
-                                <img
-                                    src="/AndSell/pc/public/css/img/floor_like_rec_banner_1.png"
-                                    alt="">
-                            </a>
-                        </div>
-                        <div class="normalRec">
-                            <ul>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="">
-                                        <div class="pic">
-                                            <img
-                                                src="/AndSell/pc/public/css/img/togetherBuy_pic_1.png"
-                                                alt="">
-                                        </div>
-                                        <p class="name">展卉 新鲜智利蓝莓100g展卉 新鲜智利蓝莓展</p>
-                                        <p class="price">
-                                            <span class="current">¥128.00</span><span
-                                            class="origin">¥129.00</span>
-                                        </p>
-                                    </a>
-                                </li>
-                            </ul>
+                    <div class="picShow">
+                        <div class="recommendArea">
+                            <div class="bestRec">
+                                <a href="">
+                                    <img  ng-src="{{FILE_SERVER_DOMAIN+itemList.content[0]['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
+                                </a>
+                            </div>
+                            <div class="normalRec" ng-if="itemList.id=='1020'">
+                                <ul>
+                                    <li ng-repeat="item in tagProductList['1036']">
+                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                            <div class="pic">
+                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
+                                            </div>
+                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                                            <p class="price">
+                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                                <!--<span class="origin"></span>-->
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="normalRec" ng-if="itemList.id=='1019'">
+                                <ul>
+                                    <li ng-repeat="item in tagProductList['1037']">
+                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                            <div class="pic">
+                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
+                                            </div>
+                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                                            <p class="price">
+                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                                <!--<span class="origin"></span>-->
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="normalRec" ng-if="itemList.id=='1019'">
+                                <ul>
+                                    <li ng-repeat="item in tagProductList['1037']">
+                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                            <div class="pic">
+                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
+                                            </div>
+                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                                            <p class="price">
+                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                                <!--<span class="origin"></span>-->
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="normalRec" ng-if="itemList.id=='1017'">
+                                <ul>
+                                    <li ng-repeat="item in tagProductList['3000']">
+                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                            <div class="pic">
+                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
+                                            </div>
+                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                                            <p class="price">
+                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                                <!--<span class="origin"></span>-->
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="normalRec" ng-if="itemList.id=='3000'">
+                                <ul>
+                                    <li ng-repeat="item in tagProductList['3001']">
+                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                            <div class="pic">
+                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
+                                            </div>
+                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                                            <p class="price">
+                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                                <!--<span class="origin"></span>-->
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="normalRec" ng-if="itemList.id=='3001'">
+                                <ul>
+                                    <li ng-repeat="item in tagProductList['3004']">
+                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                            <div class="pic">
+                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
+                                            </div>
+                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                                            <p class="price">
+                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                                <!--<span class="origin"></span>-->
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="normalRec" ng-if="itemList.id=='3002'">
+                                <ul>
+                                    <li ng-repeat="item in tagProductList['3002']">
+                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                            <div class="pic">
+                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
+                                            </div>
+                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                                            <p class="price">
+                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                                <!--<span class="origin"></span>-->
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="normalRec" ng-if="itemList.id=='3003'">
+                                <ul>
+                                    <li ng-repeat="item in tagProductList['3003']">
+                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                            <div class="pic">
+                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
+                                            </div>
+                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                                            <p class="price">
+                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                                <!--<span class="origin"></span>-->
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="normalRec" ng-if="itemList.id=='3004'">
+                                <ul>
+                                    <li ng-repeat="item in tagProductList['3005']">
+                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                            <div class="pic">
+                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
+                                            </div>
+                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                                            <p class="price">
+                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                                <!--<span class="origin"></span>-->
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="normalRec" ng-if="itemList.id=='3005'">
+                                <ul>
+                                    <li ng-repeat="item in tagProductList['3006']">
+                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                            <div class="pic">
+                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
+                                            </div>
+                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                                            <p class="price">
+                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                                <!--<span class="origin"></span>-->
+                                            </p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
