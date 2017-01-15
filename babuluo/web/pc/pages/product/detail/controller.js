@@ -410,7 +410,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
     }
 
     $scope.buyNow = function () {
-
+        $state.go('pages/order/confirm', {'SKU_IDS': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID']});
     }
 
     $scope.toShop = function () {
