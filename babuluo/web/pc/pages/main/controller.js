@@ -33,7 +33,7 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
 
     //低栏
     $scope.$on('updateShop', function (event, data) {
-        $$scope.updateShop();
+        $scope.updateShop();
     });
 
     //低栏
