@@ -1,4 +1,4 @@
-angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', function (productFactory, $q, userFactory, orderFactory, $stateParams, $interval, $scope, shopFactory, $state, modalFactory, balanceFactory,personalFactory,promoFactory,couponFactory) {
+angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', function (productFactory, $q, userFactory, orderFactory, $stateParams, $interval, $scope, shopFactory, $state, modalFactory, balanceFactory, personalFactory, promoFactory, couponFactory) {
 
     modalFactory.setTitle("微信支付");
 
@@ -28,7 +28,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
     }
     $scope.chooseHuiyuan = function () {
         $scope.ifShowhuiyuan = true;
-        $scope.state = 'openHuiyuan';
+        $scope.state = 'openHuiYuan';
         $scope.payNow();
     }
 
@@ -76,11 +76,13 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         personalFactory.getMemberCardByUserId({}, function (response) {
             $scope.cardList = response.data;
             console.log($scope.cardList);
-
+            if (response.data.length == 1) {
+                modalFactory.showShortAlert("只有一张会员卡，已自动选择");
+                $scope.cardPay($scope.cardList[0]);
+            }
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
         });
-        $scope.show = false;
     };
 
     $scope.getShop = function (id) {
@@ -268,7 +270,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
             >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
             $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
         } else {
-           modalFactory.showShortAlert('会员卡余额不足，请先充值');
+            modalFactory.showShortAlert('会员卡余额不足，请先充值');
         }
     };
 
@@ -333,7 +335,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
 
     //确认提货
     $scope.getPrdNow = function () {
-        modalFactory.showAlert( "确认提货", function () {
+        modalFactory.showAlert("确认提货", function () {
             orderFactory.acceptOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
                 if (response.code == 0) {
                     modalFactory.showShortAlert('收货成功');
@@ -386,9 +388,9 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
     };
 
     $scope.cardPay = function (card) {
+        $scope.close();
         $scope.payCard = card;
         if (!isEmptyObject($scope.payCard)) {
-            $scope.close();
             modalFactory.showAlert("确认支付该订单？", function () {
                 var form = $scope.order;
                 form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
@@ -400,7 +402,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
                 orderFactory.payOrder(form, function (response) {
                     modalFactory.showShortAlert('支付成功');
                     $scope.delCoupon();
-                    $state.go("pages/order/detail",{ORDER_ID: $scope.order['SHOP_ORDER.ID']});
+                    $state.go("pages/order/detail", {ORDER_ID: $scope.order['SHOP_ORDER.ID']});
                 }, function (response) {
                     modalFactory.showShortAlert(response.msg);
                 });
@@ -408,7 +410,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
 
             });
         } else {
-           modalFactory.showShortAlert("请选择一张会员卡支付");
+            modalFactory.showShortAlert("请选择一张会员卡支付");
         }
 
     };
@@ -424,7 +426,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
 
     function wxPay(formData) {
         orderFactory.wxPayUndefinedOrderForPC(formData, function (response) {
-            $scope.wxPayCode="/AndSell/"+response.extraData.code_url;
+            $scope.wxPayCode = "/AndSell/" + response.extraData.code_url;
             console.log(response);
         }, function (res) {
             modalFactory.showShortAlert("支付失败");

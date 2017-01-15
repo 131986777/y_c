@@ -111,7 +111,7 @@
                         </div>
                         <div class="foot">
                             <p class="time">{{cl['MEMBER_CARD.ADD_DATETIME']}}</p>
-                            <div class="time" ng-if="cl['MEMBER_CARD.FACE_VALUE']>0">
+                            <div class="time" ng-if="cl['MEMBER_CARD.IS_FACE_VALUE']==1">
                                 <p class="t_inner">发卡面值</p>
                                 <p class="t_inner">{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</p>
                             </div>
