@@ -121,6 +121,12 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         }
     }
 
+    //订单详情跳转
+    $scope.toDetail = function (id) {
+        $state.go('pages/order/detail', {ORDER_ID: id});
+    };
+
+
     $scope.calculatePromotion = function (deferred) {
         modalFactory.showShortAlert('正在查询促销条件');
         $scope.skulistsForOrder.forEach(function (ele) {                       //四舍五入
@@ -402,7 +408,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
                 orderFactory.payOrder(form, function (response) {
                     modalFactory.showShortAlert('支付成功');
                     $scope.delCoupon();
-                    $state.go("pages/order/detail", {ORDER_ID: $scope.order['SHOP_ORDER.ID']});
+                    $scope.toDetail($stateParams.ORDER_ID);
                 }, function (response) {
                     modalFactory.showShortAlert(response.msg);
                 });
@@ -427,46 +433,66 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
     function wxPay(formData) {
         orderFactory.wxPayUndefinedOrderForPC(formData, function (response) {
             $scope.wxPayCode = "/AndSell/" + response.extraData.code_url;
-            console.log(response);
+            $scope.wxScanPayOutTradeNo = response.extraData.returnMap.out_trade_no;
+            getResult = setInterval(function () {
+                $scope.$apply($scope.queryWXPayResult);
+            }, 2000);
+
         }, function (res) {
             modalFactory.showShortAlert("支付失败");
         });
     }
 
+    var getResult;
+
+    var lock = 0;
+
+    $scope.queryWXPayResult = function () {
+
+        $scope.pay = {
+            out_trade_no: $scope.wxScanPayOutTradeNo
+        }
+        if (lock == 0) {
+            lock = 1;
+            orderFactory.queryWXPayOrder($scope.pay, function (response) {
+                lock =0;
+                console.log(response);
+                console.log(1);
+                if (response.extraData.payState == '1') {
+                    console.log(2);
+                    $scope.wxDataResult();
+                    clearInterval(getResult);
+                } else if (response.extraData.payState == '-1') {
+                    clearInterval(getResult);
+                    modalFactory.showShortAlert("支付失败或订单异常");
+                }
+            });
+        }
+    }
+
     /**
-     * 微信支付JSAPI调用
+     * 微信支付
      * * @param postData
      */
-    function onBridgeReady(postData, unifiedJson) {
-        var post = JSON.parse(postData);
-        WeixinJSBridge.invoke('getBrandWCPayRequest', {
-            "appId": post.appId,
-            "timeStamp": post.timeStamp,
-            "nonceStr": post.nonceStr,
-            "package": post.package,
-            "signType": post.signType,
-            "paySign": post.paySign
+    $scope.wxDataResult = function () {
+
+        modalFactory.showShortAlert('正在查询支付结果,请稍等...');
+        $scope.wxPayInfo = "正在查询支付结果,请稍等...";
+        var formData = {
+            OUT_TRADE_NO: $scope.wxScanPayOutTradeNo,
+            ORDER_ID: $scope.order['SHOP_ORDER.ID'],
+            UID: $scope.order['SHOP_ORDER.UID'],
+            TYPE: 'ORDER',
+            CALLBACK: '-1'
+        };
+        http.post_ori("/AndSell/wxCallBack", formData, function (res) {
+            modalFactory.showShortAlert('订单支付成功');
+            $scope.close();
+            $scope.delCoupon();
+            $scope.toDetail($stateParams.ORDER_ID);
         }, function (res) {
-            if (res.err_msg == "get_brand_wcpay_request:ok") {
-                modalFactory.showShortAlert('正在查询支付结果,请稍等...');
-                $scope.wxPayInfo = "正在查询支付结果,请稍等...";
-                var formData = {
-                    OUT_TRADE_NO: unifiedJson.out_trade_no,
-                    ORDER_ID: $scope.order['SHOP_ORDER.ID'],
-                    TYPE: 'ORDER',
-                    CALLBACK: '-1'
-                };
-                http.post_ori("http://app.bblycyz.com/AndSell/wxCallBack", formData, function (res) {
-                    modalFactory.showShortAlert('订单支付成功');
-                    $scope.delCoupon();
-                    location.reload();
-                }, function (res) {
-                    modalFactory.showShortAlert('后台确认收款中!');
-                    location.reload();
-                });
-            } else {
-                modalFactory.showShortAlert("支付失败");
-            }
+            modalFactory.showShortAlert('后台确认收款中!');
+            $scope.toDetail($stateParams.ORDER_ID);
         });
     }
 });
