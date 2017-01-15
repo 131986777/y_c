@@ -27,6 +27,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
     }
 
     $scope.filter = {
+        'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,
         'SHOP_PRODUCT.CLASS_ID':$stateParams.classId,
         'SHOP_PRODUCT.TAG_ID':$stateParams.tagId,
         'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
