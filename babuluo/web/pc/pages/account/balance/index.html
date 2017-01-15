@@ -1,28 +1,29 @@
-<div class="row-wrap row-wrap1">
-    <div class="row-tou font">资金明细</div>
-    <div class="row-nav">帐户余额</div>
-    <div class="money font">
-        <span class="price">{{balance | currency : '￥'}}</span>
-        <span class="recharge" ui-sref="pages/account/recharge">立即充值</span>
-    </div>
-
-    <div class="detail row-content">
-        <div class="detail-fund">
-            收支明细
+<div class="container-balance">
+    <div class="row-wrap row-wrap1">
+        <div class="row-tou font">资金明细</div>
+        <div class="row-nav">帐户余额</div>
+        <div class="money font">
+            <span class="price">{{balance | currency : '￥'}}</span>
+            <span class="recharge" ui-sref="pages/account/recharge">立即充值</span>
         </div>
-        <div class="bu-table-wrap">
-            <table  class="bu-table row-bordered" >
-                <tr ng-repeat="item in balanceInfo"
-                    ng-if="balanceInfo.length > 0 && balanceInfo[0]['FINANCE_LIST.BALANCE'] > 0">
-                    <td width="200">{{item['FINANCE_LIST.ADD_DATETIME']}}</td>
-                    <td width="100">{{item['FINANCE_LIST.EVENT']}}</td>
-                    <td width="100">{{item['FINANCE_LIST.CHANGE_VALUE'] | currency : '￥'}}</td>
-                    <td width="100">余额：{{item['FINANCE_LIST.BALANCE'] | currency : '￥'}}</td>
-                    <!--<td class="sep" width="100">查看详情</td>-->
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div style="clear: both"></div>
 
+        <div class="detail row-content">
+            <div class="detail-fund">
+                收支明细
+            </div>
+            <div class="bu-table-wrap">
+                <table class="bu-table row-bordered">
+                    <tr ng-repeat="item in balanceInfo"
+                        ng-if="balanceInfo.length > 0 && balanceInfo[0]['FINANCE_LIST.BALANCE'] > 0">
+                        <td width="200">{{item['FINANCE_LIST.ADD_DATETIME']}}</td>
+                        <td width="100">{{item['FINANCE_LIST.EVENT']}}</td>
+                        <td width="100">{{item['FINANCE_LIST.CHANGE_VALUE'] | currency : '￥'}}</td>
+                        <td width="100">余额：{{item['FINANCE_LIST.BALANCE'] | currency : '￥'}}</td>
+                        <!--<td class="sep" width="100">查看详情</td>-->
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div style="clear: both"></div>
+    </div>
 </div>

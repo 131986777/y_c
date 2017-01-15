@@ -1,63 +1,68 @@
-<div class="row-wrap row-wrap1">
-    <div class="row-tou font">充值金额</div>
-    <div class="row-nav">帐户余额</div>
-    <div class="money font">
-        <span class="price" ng-bind="balance['MEMBER_ACCOUNT.BALANCE']| currency : '￥'"></span>
-    </div>
-    <div class="detail row-content">
-        <div class="detail-fund">
-            <div class="fundPos">
-                <span class="charge">充值金额</span>
-                <input class="chargeTxt" type="text">
-                <span class="recharge">元</span>
-            </div>
+<div class="container-recharge">
+    <div class="row-wrap row-wrap1">
+        <div class="row-tou font">充值金额</div>
+        <div class="row-nav">帐户余额</div>
+        <div class="money font">
+            <span class="price"
+                  ng-bind="balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']| currency : '￥'"></span>
+        </div>
+        <div class="detail row-content">
+            <div class="detail-fund">
+                <div class="fundPos">
+                    <span class="charge">充值金额</span>
+                    <input class="chargeTxt"  type="number" ng-model="balanceInfo['CHANGE_VALUE']">
+                    <span class="recharge">元</span>
+                </div>
 
-        </div>
-        <div class="mothod">充值方式</div>
-        <div class="foot" ng-init="type=='zhifubao'">
-            <div class="zhifu" ng-click="type='zhifubao'">
-                <span class="payWay zhifubao"></span>
-                <div class="yang"></div>
             </div>
+            <div class="mothod">充值方式</div>
+            <div class="foot">
+                <div class="zhifu" ng-click="type='zhifubao'">
+                    <span class="payWay zhifubao"></span>
+                    <div class="yang"></div>
+                </div>
 
-            <div class="zhifu" ng-click="type='weixin'">
-                <span class="payWay weixin"></span>
-                <div class="yang"></div>
+                <div class="zhifu" ng-click="type='weixin'">
+                    <span class="payWay weixin"></span>
+                    <div class="yang"></div>
+                </div>
+            </div>
+            <div class="liji">
+                <a class="chong" ng-click="recharge()">立即充值</a>
+            </div>
+            <div class="word">
+                <p ng-if="eventList.length>0">
+                    感恩回馈，充值返送，{{eventContent}}（友情提醒：充值金额等于{{eventMoney}}方可返送）</p>
+                <p></p>
+                <p>温馨提示：</p>
+                <p>1、充值成功后，余额可能存在延迟现象，一般1到5分钟内到账，如有问题，请咨询客服；</p>
+                <p>2、充值金额输入值不许是不小于10且不大于50000的正整数；</p>
+                <p>3、您只能用储蓄卡进行充值，如遇到任何支付问题可以查看在线支付帮助；</p>
+                <p>4、充值完成后，您可以进入账户充值记录页面进行查看余额充值状态。</p>
             </div>
         </div>
-        <div class="liji">
-            <a class="chong" ng-click="recharge()">立即充值</a>
-        </div>
-        <div class="word">
-            <p ng-if="eventList.length>0">感恩回馈，充值返送，{{eventContent}}（友情提醒：充值金额等于{{eventMoney}}方可返送）</p>
-            <p></p>
-            <p>温馨提示：</p>
-            <p>1、充值成功后，余额可能存在延迟现象，一般1到5分钟内到账，如有问题，请咨询客服；</p>
-            <p>2、充值金额输入值不许是不小于10且不大于50000的正整数；</p>
-            <p>3、您只能用储蓄卡进行充值，如遇到任何支付问题可以查看在线支付帮助；</p>
-            <p>4、充值完成后，您可以进入账户充值记录页面进行查看余额充值状态。</p>
-        </div>
-    </div>
-    <div style="clear: both"></div>
+        <div style="clear: both"></div>
 
-    <div class="modal fade text-left in weixin"
-         ng-show="ifWXCodeShow"
-         data-keyboard="false" data-backdrop="static"
-         tabindex="-1" data-backdrop="static" data-keyboard="false" aria-hidden="false"
-         style="display: block;
+        <div class="modal fade text-left in weixin"
+             ng-show="ifWXCodeShow"
+             data-keyboard="false" data-backdrop="static"
+             tabindex="-1" data-backdrop="static" data-keyboard="false" aria-hidden="false"
+             style="display: block;
           ">
-        <div class="modal-content">
-            <div class="modal-body form-body text-left" style="margin-top: 12px;margin-bottom: 12px">
-                <span class="text-left"> 微信支付 </span>
-                <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
+            <div class="modal-content">
+                <div class="modal-body form-body text-left"
+                     style="margin-top: 12px;margin-bottom: 12px">
+                    <span class="text-left"> 微信支付 </span>
+                    <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
+                </div>
+                <div class="weixinImg" ng-if="wxPayCode!=undefined">
+                    <img ng-src="{{wxPayCode}}" alt="">
+                </div>
+                <p ng-if="wxPayCode!=undefined">请使用<span class="sep">微信</span>扫一扫</p>
+                <p ng-if="wxPayCode!=undefined">二维码完成支付</p>
+                <p ng-if="wxPayCode==undefined">正在读取二维码</p>
             </div>
-            <div class="weixinImg" ng-if="wxPayCode!=undefined">
-                <img ng-src="{{wxPayCode}}" alt="">
-            </div>
-            <p ng-if="wxPayCode!=undefined">请使用<span class="sep">微信</span>扫一扫</p>
-            <p ng-if="wxPayCode!=undefined">二维码完成支付</p>
-            <p ng-if="wxPayCode==undefined">正在读取二维码</p>
         </div>
-    </div>
 
+    </div>
 </div>

@@ -1,12 +1,12 @@
-<div class="container  container1">
+<div class="container  container-shop">
     <div class="row-wrap1 row-wrap" >
         <div class="toolbar toolbar1">
             <!-- 搜索框 -->
-            <div class="row-input">
+            <div class="row-input" ng-init="searchInfo=''">
                 <input type="text" ng-model="searchInfo" placeholder="搜索门店"
                        ng-keyup="myKeyup($event)">
-                <div class="btn-search">
-                    <i class="icon-search" ng-click="search()"></i>
+                <div class="btn-search" ng-click="search(searchInfo)">
+                    <i class="icon-search"></i>
                 </div>
             </div>
 
@@ -28,8 +28,8 @@
             <div class="recentTitle">区域</div>
             <div class="storeContain">
                 <div class="storeArea" ng-repeat="district in districtList"
-                     ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'])" class="shop-name" ng-class="{true:
-                'active'}[district['DISTRICT.DISTRICT_NAME']==currentDistrictName]"><span>{{district['DISTRICT.DISTRICT_NAME']}}</span>
+                     ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'])" class="shop-name"
+                     ng-class="{true:'active'}[district['DISTRICT.DISTRICT_ID']==currDistrictId]"><span>{{district['DISTRICT.DISTRICT_NAME']}}</span>
                     <div class="yang"></div></div>
             </div>
         </div>
@@ -38,7 +38,7 @@
 
         </div>
         <div class="storeList">
-            <div class="list" ng-repeat="shop in shopList" ng-click="shopSelect(shop)">
+            <div class="list" ng-repeat="shop in currshopList" ng-click="shopSelect(shop)">
                 <div class="storelogo">
                     <img class="logo" src="../../public/css/img/store.png">
                 </div>

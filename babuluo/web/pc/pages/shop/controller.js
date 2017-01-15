@@ -1,4 +1,4 @@
-angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (productFactory, $interval, $scope, $state,$stateParams, modalFactory, shopFactory) {
+angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (productFactory, $interval, $scope, $state, $stateParams, modalFactory, shopFactory) {
 
     modalFactory.setTitle("订单列表");
 
@@ -8,7 +8,7 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
 
     modalFactory.setSide(false);
 
- $(".store").click(function () {
+    $(".store").click(function () {
         $(".store").removeClass("active");
         $(".yang").removeClass("choosed");
         if ($(this).hasClass("active")) {
@@ -52,8 +52,7 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
             $scope.shopListLength = list.length;
             $scope.districtList = response.extraData.districtList;
             $scope.districtList.push({
-                'DISTRICT.DISTRICT_NAME':'全部区域',
-                'DISTRICT.DISTRICT_ID':0
+                'DISTRICT.DISTRICT_NAME': '全部区域', 'DISTRICT.DISTRICT_ID': 0
             });
             var shopMap = new Map();
             list.forEach(function (ele) {
@@ -110,12 +109,22 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
         });
     }
 
-    $scope.chooseDistrict = function (districtId, districtName) {
-        $scope.districtName = districtName;
-        $scope.filter['SHOP.DISTRICT_ID'] = districtId;
-        $scope.getData();
-        $scope.currentDistrictName = districtName;
-    };
+    $scope.search = function (key) {
+        console.log(key);
+        if (key != undefined && key != '') {
+            console.log(1);
+            var list = new Array;
+            $scope.shopList.forEach(function (ele) {
+                if (ele['SHOP.SHOP_NAME'].indexOf(key) > -1) {
+                    list.push(ele);
+                }
+            });
+            $scope.currshopList = list;
+            console.log(2);
+        } else {
+            $scope.chooseDistrict(0);
+        }
+    }
 
     $scope.chooseDistrict = function (districtId) {
         $scope.currDistrictId = districtId;
@@ -125,6 +134,7 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
                 list.push(ele);
             }
         });
+        console.log($scope.currDistrictId);
         $scope.currshopList = list;
     };
 

@@ -2,6 +2,7 @@ package com.weixin;
 
 import com.bolanggu.bbl.ENV;
 //import com.bubu.wx.pay.MatrixToImageWriter;
+import com.bubu.wx.pay.MatrixToImageWriter;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -409,23 +410,23 @@ public class WXPay {
         Map hints = new HashMap();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         BitMatrix bitMatrix = null;
-//        try {
-//            bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
-//            BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
-//            try {
-//                File file = new File(PathUtil.getProjectRootDir()+parentPath);
-//                if (!file.getParentFile().exists()) {
-//                    file.getParentFile().mkdirs();
-//                }
-//                ImageIO.write(image, "jpg", file);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            return parentPath;
-//        } catch (WriterException e1) {
-//            // TODO Auto-generated catch block
-//            e1.printStackTrace();
-//        }
+        try {
+            bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
+            BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
+            try {
+                File file = new File(PathUtil.getProjectRootDir()+parentPath);
+                if (!file.getParentFile().exists()) {
+                    file.getParentFile().mkdirs();
+                }
+                ImageIO.write(image, "jpg", file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return parentPath;
+        } catch (WriterException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+        }
         return parentPath;
     }
 

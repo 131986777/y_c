@@ -1,7 +1,4 @@
-/**
- * Created by njwb on 2017/1/12.
- */
-angular.module('AndSell.PC.Main').controller('pages_account_recharge_Controller', function (productFactory, $interval, $scope, $state, modalFactory) {
+angular.module('AndSell.PC.Main').controller('pages_account_recharge_Controller', function (balanceFactory,http,orderFactory,eventFactory,productFactory, $interval, $scope, $state, modalFactory) {
     modalFactory.setTitle("充值中心");
 
     modalFactory.setHeader(false);
@@ -23,7 +20,6 @@ angular.module('AndSell.PC.Main').controller('pages_account_recharge_Controller'
         }
 
     })
-
 
     $scope.initLoad = function () {
         $scope.uid = getCookie('ANDSELLID');
@@ -61,15 +57,16 @@ angular.module('AndSell.PC.Main').controller('pages_account_recharge_Controller'
         });
     }
 
-    $scope.updateBalance = function () {
-        var ip = getCookie('ip');
+    $scope.updateBalanceByWx = function () {
+        //var ip = getCookie('ip');
+        var ip = "183.206.169.255";
         var openId = getCookie('openId');
         var formData = {
             TYPE: 'ACCOUNT',
             FEE: parseInt($scope.balanceInfo['CHANGE_VALUE'] * 100),
             NOW_BALANCE: parseInt($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] * 100),
             PRODUCT_ID: $scope.uid,
-            BODY: '充值',
+            BODY: 'RECHRGE ',
             OPENID: openId,
             IP: ip,
             ORDER_ID: $scope.uid
@@ -78,89 +75,90 @@ angular.module('AndSell.PC.Main').controller('pages_account_recharge_Controller'
         wxPay(formData);
     };
 
-    function wxPay(formData) {
-        orderFactory.wxPayUndefinedOrder(formData, function (response) {
 
-            console.log(response);
-            if (typeof WeixinJSBridge == "undefined") {
-                // alert('WeixinJSBridge == null');
-                if (document.addEventListener) {
-                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-                } else if (document.attachEvent) {
-                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
-                }
-            } else {
-                onBridgeReady(response.extraData.unifiedOrderJsonResult, response.extraData.returnMap);
-            }
+    function wxPay(formData) {
+        orderFactory.wxPayUndefinedOrderForPC(formData, function (response) {
+            $scope.wxPayCode = "/AndSell/" + response.extraData.code_url;
+            $scope.wxScanPayOutTradeNo = response.extraData.returnMap.out_trade_no;
+            getResult = setInterval(function () {
+                $scope.$apply($scope.queryWXPayResult);
+            }, 2000);
 
         }, function (res) {
-            weUI.toast.error(res.msg);
+            $scope.close();
+            modalFactory.showShortAlert("支付失败");
         });
+    }
+
+    var getResult;
+
+    var lock = 0;
+
+    $scope.queryWXPayResult = function () {
+
+        $scope.pay = {
+            out_trade_no: $scope.wxScanPayOutTradeNo
+        }
+        if (lock == 0) {
+            lock = 1;
+            orderFactory.queryWXPayOrder($scope.pay, function (response) {
+                lock =0;
+                console.log(response);
+                console.log(1);
+                if (response.extraData.payState == '1') {
+                    console.log(2);
+                    $scope.wxDataResult();
+                    clearInterval(getResult);
+                } else if (response.extraData.payState == '-1') {
+                    clearInterval(getResult);
+                    modalFactory.showShortAlert("支付失败或订单异常");
+                }
+            });
+        }
     }
 
     /**
-     * 微信支付JSAPI调用
+     * 微信支付
      * * @param postData
      */
-    function onBridgeReady(postData, unifiedJson) {
+    $scope.wxDataResult = function () {
 
-        // alert('onBridgeReady');
-        // alert(postData);
-        var post = JSON.parse(postData);
-        WeixinJSBridge.invoke('getBrandWCPayRequest', {
-            "appId": post.appId,
-            "timeStamp": post.timeStamp,
-            "nonceStr": post.nonceStr,
-            "package": post.package,
-            "signType": post.signType,
-            "paySign": post.paySign
+        modalFactory.showShortAlert('正在查询支付结果,请稍等...');
+        $scope.wxPayInfo = "正在查询支付结果,请稍等...";
+        var formData = {
+            OUT_TRADE_NO:  $scope.wxScanPayOutTradeNo,
+            ORDER_ID: $scope.uid,
+            TYPE: 'ACCOUNT',
+            CALLBACK: '-1',
+            NOW_BALANCE: parseInt($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
+                * 100),
+            UID: $scope.uid,
+            FEE: parseInt($scope.balanceInfo['CHANGE_VALUE'] * 100)
+        };
+        http.post_ori("/AndSell/wxCallBack", formData, function (res) {
+            modalFactory.showShortAlert('账户充值成功');
+            $scope.close();
+            $scope.initLoad();
         }, function (res) {
-            // alert(JSON.stringify(res));
-            // alert(res.err_msg);
-            if (res.err_msg == "get_brand_wcpay_request:ok") {
-                $scope.wxPayInfo = "正在查询支付结果,请稍等...";
-                try {
-                    var formData = {
-                        OUT_TRADE_NO: unifiedJson.out_trade_no,
-                        ORDER_ID: $scope.uid,
-                        TYPE: 'ACCOUNT',
-                        CALLBACK: '-1',
-                        NOW_BALANCE: parseInt($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
-                            * 100),
-                        UID: $scope.uid,
-                        FEE: parseInt($scope.balanceInfo['CHANGE_VALUE'] * 100)
-                    };
-                    http.post_ori("http://app.bblycyz.com/AndSell/wxCallBack", formData, function (res) {
-                        location.reload();
-                    }, function (res) {
-                        location.reload();
-                    });
-                    //// alert(JSON.stringify(formData));
-                    //orderFactory.queryWXPayResult(formData, function(res) {
-                    //    // alert('queryWXPayResult');
-                    //    location.reload();
-                    //}, function (res) {
-                    //    weUI.toast.error(res.msg);
-                    //})
-                } catch (err) {
-                    weUI.toast.error(err);
-                }
-
-            } else {
-                weUI.toast.error("支付失败，请重试");
-                // alert("支付失败，请重试");
-            }
+            modalFactory.showShortAlert('后台确认收款中!');
+            $scope.toDetail($stateParams.ORDER_ID);
         });
     }
-
+    $scope.type=
+        'zhibubao';
     $scope.recharge= function () {
         if($scope.type=='weixin'){
-
+            $scope.ifWXCodeShow=true;
+            $scope.updateBalanceByWx();
         }else{
 
         }
     }
+
+    $scope.close= function () {
+        $scope.ifWXCodeShow=false;
+        clearInterval(getResult);
+    };
     
     $scope.initLoad();
 

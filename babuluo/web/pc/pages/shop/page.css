@@ -1,26 +1,22 @@
-/* line 2, ../sass/store.scss */
-body {
-  font-family: 'Microsoft YaHei';
-  background-color: #f6f6f6; }
 
 /* line 6, ../sass/store.scss */
-.container1 {
+.container-shop {
   background-color: #fff;
   width: 100%;
 }
 /* line 8, ../sass/store.scss */
-.container1 .row-wrap1 {
+.container-shop .row-wrap1 {
   margin-left: 75px;
   width: 1145px; }
 /* line 11, ../sass/store.scss */
-.container1 .row-wrap1 .toolbar1 {
+.container-shop .row-wrap1 .toolbar1 {
   padding: 0 0;
   overflow: hidden;
   float: right;
   margin-top: 60px;
   margin-right: 52px; }
 /* line 18, ../sass/store.scss */
-.container1 .row-wrap1 .row-title {
+.container-shop .row-wrap1 .row-title {
   width: 1050px;
   /* height: 82px; */
     padding-left: 0px;
@@ -29,22 +25,22 @@ body {
   margin-top: 60px;
   margin-bottom: 30px; }
 /* line 28, ../sass/store.scss */
-.container1 .row-wrap1 .row-title .img {
+.container-shop .row-wrap1 .row-title .img {
   width: 25px;
   height: 25px; }
 /* line 33, ../sass/store.scss */
-.container1 .row-wrap1 .row-title .change {
+.container-shop .row-wrap1 .row-title .change {
   font-size: 14px;
   color: #f47b2f;
   margin-left: 30px;
   margin-top: 15px; }
 /* line 40, ../sass/store.scss */
-.container1 .row-wrap1 .recent {
+.container-shop .row-wrap1 .recent {
   margin-left: 20px;
   overflow: hidden;
   margin-bottom: 30px; }
 /* line 44, ../sass/store.scss */
-.container1 .row-wrap1 .recent .recentTitle {
+.container-shop .row-wrap1 .recent .recentTitle {
   float: left;
   font-size: 18px;
   color: #494949;
@@ -53,11 +49,11 @@ body {
   width: 80px;
   text-align: right; }
 /* line 53, ../sass/store.scss */
-.container1 .row-wrap1 .recent .storeContain {
+.container-shop .row-wrap1 .recent .storeContain {
   overflow: hidden;
   width: 955px; }
 /* line 56, ../sass/store.scss */
-.container1 .row-wrap1 .recent .storeContain .store {
+.container-shop .row-wrap1 .recent .storeContain .store {
   float: left;
   width: 95px;
   height: 35px;
@@ -71,7 +67,7 @@ body {
   cursor: pointer;
   position: relative;
 }
-.container1 .row-wrap1 .recent .storeContain .storeArea {
+.container-shop .row-wrap1 .recent .storeContain .storeArea {
   float: left;
   width: 95px;
   height: 35px;
@@ -86,18 +82,18 @@ body {
   position: relative;
 }
 /* line 72, ../sass/store.scss */
-.container1 .row-wrap1 .recent1 {
+.container-shop .row-wrap1 .recent1 {
   border-bottom: 1px solid #c1c1c1;
   line-height: 3.5;
   width: 1060px;
   margin-top: -40px; }
 /* line 78, ../sass/store.scss */
-.container1 .row-wrap1 .storeList {
+.container-shop .row-wrap1 .storeList {
   width: 1070px;
   overflow: hidden;
   margin-left: 30px; }
 /* line 82, ../sass/store.scss */
-.container1 .row-wrap1 .storeList .list {
+.container-shop .row-wrap1 .storeList .list {
   width: 470px;
   height: 100px;
   border: 1px solid #c1c1c1;
@@ -105,48 +101,48 @@ body {
   margin-right: 65px;
   margin-bottom: 20px; }
 /* line 89, ../sass/store.scss */
-.container1 .row-wrap1 .storeList .list .storelogo {
+.container-shop .row-wrap1 .storeList .list .storelogo {
   width: 95px;
   height: 98px;
   float: left; }
-.container1 .row-wrap1 .storeList .list .storelogo .logo {
+.container-shop .row-wrap1 .storeList .list .storelogo .logo {
   width:100%;
   height:100%;
   }
 /* line 96, ../sass/store.scss */
-.container1 .row-wrap1 .storeList .list .listDetail {
+.container-shop .row-wrap1 .storeList .list .listDetail {
   margin-left: 110px;
   margin-top: 8px; }
 /* line 99, ../sass/store.scss */
-.container1 .row-wrap1 .storeList .list .listDetail .name {
+.container-shop .row-wrap1 .storeList .list .listDetail .name {
   display: inline-block;
   font-size: 18px;
   color: #4b4b4b;
   margin-bottom: 18px; }
 /* line 105, ../sass/store.scss */
-.container1 .row-wrap1 .storeList .list .listDetail .addr {
+.container-shop .row-wrap1 .storeList .list .listDetail .addr {
   display: inline-block;
   float: right;
   margin-right: 15px; }
 /* line 109, ../sass/store.scss */
-.container1 .row-wrap1 .storeList .list .listDetail .addr .img1 {
+.container-shop .row-wrap1 .storeList .list .listDetail .addr .img1 {
   width: 16px;
   height: 16px; }
 /* line 114, ../sass/store.scss */
-.container1 .row-wrap1 .storeList .list .listDetail .num {
+.container-shop .row-wrap1 .storeList .list .listDetail .num {
   font-size: 14px;
   color: #4b4b4b;
   margin-bottom: 10px; }
 /* line 120, ../sass/store.scss */
-.container1 .row-wrap1 .storeList .list .listDetail .addrDetail .address {
+.container-shop .row-wrap1 .storeList .list .listDetail .addrDetail .address {
   font-size: 14px;
   color: #8a8a8a; }
 /* line 124, ../sass/store.scss */
-.container1 .row-wrap1 .storeList .list .listDetail .addrDetail .img1 {
+.container-shop .row-wrap1 .storeList .list .listDetail .addrDetail .img1 {
   width: 16px;
   height: 16px; }
 
-.choosed{
+.container-shop .choosed{
   position: absolute;
   /* right: initial; */
   right: 0px;
@@ -154,6 +150,6 @@ body {
   border-bottom: 10px solid #f36f1a;
   border-left: 10px solid transparent;
 }
-.active{
+.container-shop .active{
   border: 1px solid #f36f1a!important;
 }
