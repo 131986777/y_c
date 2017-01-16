@@ -32,7 +32,7 @@ $import('pages/shop', {FROM: ''},true);
 $import('pages/login/register', {}, true);
 $import('pages/login/accountLogin', {FROM: ''}, true);
 $import('pages/login/phoneLogin', {FROM: ''}, true);
-//$import('pages/login/SetPassword', {LOGIN_ID: '0'});
+$import('pages/login/setPassword', {},true);
 //
 $import('pages/account/balance',{},true);
 $import('pages/account/recharge',{},true);

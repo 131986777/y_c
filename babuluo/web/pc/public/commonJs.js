@@ -240,7 +240,7 @@ function routerPath(base, path, param, css) {
             var filterList = ['pages/product/list', 'pages/product/tagPrdList', 'pages/home',
                 'pages/product/detail', 'pages/cart', 'pages/shop', 'pages/login/accountLogin',
                 'pages/login/phoneLogin',
-                'pages/login/register', 'pages/security/resetPwd' ,'pages/login/SetPassword'];
+                'pages/login/register' ,'pages/login/setPassword', 'pages/security/resetPwd' ,'pages/login/SetPassword'];
             if (filterList.indexOf(path) < 0) {
                 userFactory.isLogin({}, function (response) {
                 }, function (response) {
