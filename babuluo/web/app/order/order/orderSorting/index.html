@@ -156,7 +156,7 @@
                                 实际重量：
                             </label>
                             <div class="col-sm-7">
-                                <input class="form-control" type="text" ng-model="stockweight"
+                                <input class="form-control" placeholder="请输入实际重量 必填" type="text" ng-model="stockweight"
                                        ng-change="calculatestockprice()">
                             </div>
                         </div>
@@ -165,10 +165,13 @@
                                 金额：
                             </label>
                             <div class="col-sm-7">
-                                <input class="form-control" tfype="text"
+                                <input class="form-control"
                                        name="telephone" ng-model="stockprice"
+                                       type="text"
+                                       money
                                        ng-init="initStockprice()"
                                        required>
+
                             </div>
                         </div>
                         <div class="modal-footer">
