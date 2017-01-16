@@ -147,7 +147,15 @@
     font-size: 14px;
     margin-bottom: 10px;
 }
-
+.row-wrap-personal-center .icon-resetName {
+    display: inline-block;
+    background: url("/AndSell/pc/public/css/img/icon-resetName.png") no-repeat;
+    background-size: 15px 15px;
+    vertical-align: bottom;
+    margin-left: 10px;
+    width: 15px;
+    height: 15px;
+}
 .row-wrap-personal-center .card .eachCard .pos .m{
     width: 165px;
     margin: 0 auto;

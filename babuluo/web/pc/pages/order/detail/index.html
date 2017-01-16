@@ -222,7 +222,7 @@
                         </li>
                     </ul>
                 </div>
-                <p class="remark">备注:{{order['SHOP_ORDER.REMARK']}}</p>
+                <p class="remark" ng-if="order['SHOP_ORDER.REMARK']!=undefined&&order['SHOP_ORDER.REMARK']!=''">备注:{{order['SHOP_ORDER.REMARK']}}</p>
             </div>
         </div>
         <div class="receipt_info">
