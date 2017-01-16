@@ -33,8 +33,10 @@ $import('pages/user/SetPassword', {LOGIN_ID: '0'});
 
 $import('pages/account/balance');
 $import('pages/account/recharge');
+$import('pages/account/lucky',{},true);
 
 $import('pages/security/resetPwd');
+
 
 
 
