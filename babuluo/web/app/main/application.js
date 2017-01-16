@@ -665,7 +665,7 @@ AndSellUI.directive('money', function ($filter, $window) {
     //小数位
     var floatLimit = 2;
 
-    //保留小数 不够充0
+    //保留小数并加千位逗号 不够充0
     function Decimal(x) {
         var f_x = parseFloat(x);
         if (isNaN(f_x)) {
@@ -681,9 +681,10 @@ AndSellUI.directive('money', function ($filter, $window) {
         while (s_x.length <= pos_decimal + floatLimit) {
             s_x += '0';
         }
-        return s_x;
+        return s_x.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
     }
 
+    //特殊字符处理
     function filter(value, blur) {
         value = value.replace(/[^\d.]/g, "");
         //必须保证第一个为数字而不是.
@@ -724,7 +725,7 @@ AndSellUI.directive('money', function ($filter, $window) {
     }
 
     return {
-        restrict: 'A', require: 'ngModel', link: function (scope, elem, attrs, ctrl) {
+        restrict: 'A', require: 'ngModel', link: function (scope, elem, attrs, ctrl, ngModel) {
 
             elem.bind('focus', function () {
                 var newValue = elem.val();
@@ -733,7 +734,6 @@ AndSellUI.directive('money', function ($filter, $window) {
                     newValue = 0;
                 }
                 elem.val(parseFloat(newValue));
-
             });
 
             elem.bind('blur', function () {
@@ -742,7 +742,9 @@ AndSellUI.directive('money', function ($filter, $window) {
 
             ctrl.$viewChangeListeners.push(function () {
                 elem.val(filter(elem.val(), false));
+
             });
+
         }
     };
 });
