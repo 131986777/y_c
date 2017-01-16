@@ -37,10 +37,10 @@
   width: 1202px;
   /* border: 1px solid #c1c1c1; */
   overflow: hidden;
-  border-top: 1px solid #ebebeb;
+  /* border-top: 1px solid #ebebeb; */
   border-left: 1px solid #ebebeb;
   margin-top: 25px;
-  margin-bottom: 35px; }
+  margin-bottom: 35px;}
 /* line 32, ../sass/productList.scss */
 .container-product-list .productList .effectiveArea .products .eachPro {
   box-sizing: border-box;
@@ -51,7 +51,11 @@
   border-right: 1px solid #ebebeb;
   border-bottom: 1px solid #ebebeb;
   cursor: pointer;
-  position: relative; }
+  position: relative;
+  border-top: 1px solid #ebebeb; }
+.container-product-list .productList .effectiveArea .products .eachPro:nth-child(n+6) {
+  border-top:none;
+   }
 /* line 42, ../sass/productList.scss */
 .container-product-list .productList .effectiveArea .products .eachPro .eachPro1 {
   transition: all .3s ease; }
