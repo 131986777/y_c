@@ -103,9 +103,12 @@ angular.module('AndSell.H5.Main').controller('pages_account_lucky_Controller', f
     //
     $scope.stop= function () {
         console.log('stop');
-        lotteryPlugin.stop(3, function () {
-            alert("停在了3");
-        });
+        setTimeout(function () {
+            lotteryPlugin.stop(3, function () {
+                console.log("停在了3");
+            });
+        },2000);
+
     }
 
 });
