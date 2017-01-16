@@ -49,8 +49,8 @@ public class ENV {
     public static String API_MENDIAN_CERT = "F4EBA1DE727A41A91B5D10754BFBF657";
 
 
-    public static String ORDER_TYPE = "YYD";//预约单
-    //public static String ORDER_TYPE = "NORMAL";//正常单
+    //public static String ORDER_TYPE = "YYD";//预约单
+    public static String ORDER_TYPE = "NORMAL";//正常单
 
 
 
