@@ -107,6 +107,17 @@ angular.module('AndSell.H5.Main').controller('pages_account_lucky_Controller', f
     //}
     //
 
+    $scope.initData = function () {
+        //没有中奖的区域
+        $scope.unLuckyPosition = [1, 2, 3, 4, 5, 6, 7, 8];
+        eventFactory.queryPosition({}, function (response) {
+            response.data.forEach(function (ele) {
+                $scope.unLuckyPosition.remove(Number(ele['LUCKY_DRAW.LOCATION']));
+            });
+
+        });
+    }
+
     $scope.queryLucky = function () {
         eventFactory.queryLucky({'USER_ID': getCookie('ANDSELLID')}, function (response) {
             if (response.code == 0 && response.msg == "ok") {
@@ -117,8 +128,7 @@ angular.module('AndSell.H5.Main').controller('pages_account_lucky_Controller', f
                         alert("恭喜您中奖了！奖品为" + position + "！");
                     }, 2500);
                 } else {
-                    var arr = [4, 5, 6, 7, 8];
-                    var random = getRandom(arr);
+                    var random = getRandom($scope.unLuckyPosition);
                     $scope.stop(random);
                     setTimeout(function () {
                         alert("很遗憾您没有中奖。");

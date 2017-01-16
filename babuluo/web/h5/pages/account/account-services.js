@@ -13,4 +13,6 @@ AndSellH5MainModule.service('eventFactory', function (http) {
 
     this.queryLucky = http.post('/marketing/luckyDraw/ifLuckMan');
 
+    this.queryPosition = http.post('/marketing/luckyDraw/queryAll');
+
 });
