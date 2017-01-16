@@ -51,7 +51,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
                             if (ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE'] == 1) {   //限定商品
 
                                 for (i = 0; i < $scope.orderList.length; i++) {   //遍历订单中的每一个商品
-                                    if (targetObjArray.indexOf($scope.orderList[i]['SHOP_PRODUCT_SKU.SKU_ID'])
+                                    if (targetObjArray.indexOf($scope.orderList[i]['SHOP_ORDER_INFO.SKU_ID'])
                                         == -1) {
                                         break;
                                     }
@@ -67,7 +67,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
                                 for (i = 0; i < $scope.orderList.length; i++) {   //遍历订单中的每一个商品
 
-                                    if (targetObjArray.indexOf($scope.orderList[i]['SHOP_PRODUCT.CLASS_ID'])
+                                    if (targetObjArray.indexOf($scope.orderList[i]['SHOP_ORDER_INFO.CLASS_ID'])
                                         == -1) {   //该商品id不在限定对象数组中，直接跳出
                                         break;
                                     }
@@ -82,8 +82,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
                             if (ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE'] == 3) {   //限定标签
 
                                 for (var i = 0; i < $scope.orderList.length; i++) {   //遍历订单中的每一个商品
-                                    console.log($scope.orderList[i]['SHOP_PRODUCT.TAG_ID']);
-                                    var tagIdArray = $scope.orderList[i]['SHOP_PRODUCT.TAG_ID'].split(',');
+                                    var tagIdArray = $scope.orderList[i]['SHOP_ORDER_INFO.TAG_ID'].split(',');
                                     for (var j = 0; j < tagIdArray.length; j++) {
                                         if (targetObjArray.indexOf(tagIdArray[j]) != -1) {         //商品的标签ID有多个，只要有一个在限定数组中即可
                                             if (i == $scope.orderList.length - 1) {
@@ -145,10 +144,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
 
             json = JSON.stringify(obj);
         }
-        $state.go('pages/order/add', {
+        $state.go('pages/order/detail', {
             'COUPON_INFO': json,
-            'SKU_IDS': $stateParams.SKU_IDS,
-            'pickupPerson': $stateParams.pickupPerson
+            'ORDER_ID': $stateParams.ORDER_ID,
+            'FROM': 'COUPON'
         });
 
     }
@@ -156,8 +155,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
     $scope.returnOrder = function () {
         $state.go('pages/order/add', {
             'COUPON_INFO': '',
-            'SKU_IDS': $stateParams.SKU_IDS,
-            'pickupPerson': $stateParams.pickupPerson
+            'ORDER_ID': $stateParams.ORDER_ID,
+            'FROM': 'COUPON'
         });
     }
 

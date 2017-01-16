@@ -1,10 +1,11 @@
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.io.IOException" %>
-<%@ page import="com.weixin.WXPay" %>
-<%@ page import="java.util.Map" %>
 <%@ page import="com.pabula.api.API" %>
-<%@ page import="java.util.HashMap" %>
+<%@ page import="com.pabula.common.util.HttpClientUtil" %>
 <%@ page import="com.pabula.common.util.StrUtil" %>
+<%@ page import="com.weixin.WXPay" %>
+<%@ page import="java.io.IOException" %>
+<%@ page import="java.io.PrintWriter" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Map" %>
 
 <%--
   Created by IntelliJ IDEA.
@@ -45,6 +46,7 @@
                     params.put("FEE", fee + "");
                     params.put("CALLBACK", "1");
                     new API().call("/wx/pay/wxpayCallback", params);
+                    String returnStr = HttpClientUtil.doGet("http://app.bblycyz.com/AndSell/wxCallBack",params);
                     result = true;
                 }
             }

@@ -16,4 +16,6 @@ AndSellH5MainModule.service('productFactory', function ($resource, http) {
     this.getCommemtByProIdProSku = http.post('/shop/comment/getById');
 
     this.getPresentsBySkuIds = http.post('/shop/product/getBySkuIdWithAllInfo');
+
+    this.addAndMod = http.post('/user/collection/addAndMod');
 });

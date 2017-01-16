@@ -11,15 +11,13 @@
      * 1. 判断cookie 里面有没有openid, 如果没有, 则判断paramater 里面有没有code ,如果用也没有则说明, 没有微信个人呢信息
      * 则需要请求个人信息openid
      */
-
-
     /**
      * 设置ip地址
      */
     //String ip = request.getRemoteHost();
     //String ip = request.getHeader("Host");  //上了nginx与tomcat集群后，要用这个获得
     String ip = request.getHeader("X-Real-IP");  //上了nginx与tomcat集群后，要用这个获得
-
+//    String ip = "117.89.49.108";
     Cookie ipCookie = new Cookie("ip", ip);
     response.addCookie(ipCookie);
 
@@ -178,6 +176,7 @@
 <script src="/AndSell/h5/public/libs/cookie.js"></script>
 <script src="/AndSell/h5/public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="/AndSell/h5/public/libs/swiper/swiper.jquery.min.js"></script>
+<script src="/AndSell/h5/public/js/lucky/jquery-latest.js"></script>
 
 <!--微信js sdk-->
 <script src="/AndSell/h5/public/libs/jweixin-1.0.0.js"></script>

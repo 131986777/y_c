@@ -1,119 +1,128 @@
-<div class="buyCars">
-    <div class="effectiveArea">
-        <div class="controlBar">
-            <div class="effectiveArea">
-                <div class="storeInfo storeInfo1">
-                    <p class="storeName">莲花新城店</p>
-                    <p class="number"><span class="phoneNumber">025-66018138</span><span
+<div class="container-cart">
+    <div class="buyCars">
+        <div class="effectiveArea">
+            <div class="controlBar">
+                <div class="effectiveArea">
+                    <div class="storeInfo storeInfo1">
+                        <p class="storeName">莲花新城店</p>
+                        <p class="number"><span class="phoneNumber">025-66018138</span><span
                             class="openTime">7:30－21:30</span></p>
-                    <p class="addressInfo">建邺区莲花新城北苑6栋24-8</p>
-                </div>
-                <div class="toolbar toolbar1">
-                    <!-- 搜索框 -->
-                    <div class="row-input">
-                        <input type="text" ng-model="searchInfo" placeholder="商品" ng-keyup="myKeyup($event)">
-                        <div class="btn-search">
-                            <i class="icon-search" ng-click="search()"></i>
-                        </div>
+                        <p class="addressInfo">建邺区莲花新城北苑6栋24-8</p>
                     </div>
+                    <div class="toolbar toolbar1">
+                        <!-- 搜索框 -->
+                        <div class="row-input">
+                            <input type="text" ng-model="searchInfo" placeholder="商品"
+                                   ng-keyup="myKeyup($event)">
+                            <div class="btn-search">
+                                <i class="icon-search" ng-click="search()"></i>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
+            </div>
+            <div class="row-wrap1" ng-init="initData()">
+                <div class="row-title">
+                    我的购物车
+                </div>
+
+                <div class="bu-table-wrap">
+                    <table class="bu-table row-bordered">
+                        <tr class="table-nav">
+                            <td class="th-title">
+                                <div class="checkPos">
+                                    <label class="checkbox">
+                                        <input type="checkbox" ng-checked="checkAll"
+                                               ng-click="checkAllPrd()">
+                                        <span class="showCheck"></span>
+                                    </label>
+                                </div>
+                                <label class="all">全选</label>
+                            </td>
+                            <td class="th-title">
+                                商品名称
+                            </td>
+                            <td class="th-title">
+                                单价
+                            </td>
+                            <td class="th-title">
+                                数量
+                            </td>
+                            <td class="th-title">
+                                小计
+                            </td>
+                            <td class="th-title">
+                                库存
+                            </td>
+                            <td class="th-title">
+                                操作
+                            </td>
+                        </tr>
+                        <tr ng-repeat="sku in skuList">
+                            <td>
+                                <div class="checkPos">
+                                    <label class="checkbox">
+                                        <input type="checkbox" ng-checked="sku.isSelect"
+                                               ng-click="checkItem(sku)">
+                                        <span class="showCheck"></span>
+                                    </label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="parent">
+                                    <div class="pic">
+                                        <img class="proPic"
+                                             ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
+                                    </div>
+                                    <div class="info">
+                                        {{sku['SHOP_PRODUCT.PRD_NAME']}}
+                                    </div>
+                                    <div class="size">
+                                        【{{sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']}}】
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                {{sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'}}
+                            </td>
+                            <td>
+                                <div class="num">
+                                    <lable class="num-decrement" ng-click="lessSize(sku)"></lable>
+                                    <input class="txt" type="" name="" ng-change="updateCartPrice()"
+                                           ng-model="sku['SHOP_PRODUCT_SKU.SIZE']"/>
+                                    <lable class="num-increment" ng-click="moreSize(sku)"></lable>
+                                </div>
+                            </td>
+                            <td>
+                                {{sku['SHOP_PRODUCT_SKU.SIZE'] * sku['SHOP_PRODUCT_SKU.REAL_PRICES']
+                                | currency :'￥'}}
+                            </td>
+                            <td>
+                                <span ng-if="sku['SHOP_PRODUCT_SKU.STOCK']>0">有货</span>
+                                <span ng-if="sku['SHOP_PRODUCT_SKU.STOCK']<=0">售罄</span>
+                            </td>
+                            <td class="del">
+                                <span ng-click="delShopCart(sku)">删除</span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="foot">
+                    <div class="footFirst">
+                        <span>共</span>
+                        <span class="sep" ng-init="totalSize=0">{{totalSize}}</span>
+                        <span>件商品</span>
+                    </div>
+                    <div class="footSecond">
+                        <span>合计</span>
+                        <span class="youhui" ng-if="totalPrice-beforePrice>0">（已优惠{{totalPrice-beforePrice | currency :'￥'}}）</span>
+                        <span class="sep1">{{totalPrice | currency :'￥'}}</span>
+                        <div class="buy" ng-click="addOrder()">去结算</div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row-wrap1" ng-init="initData()">
-            <div class="row-title">
-                我的购物车
-            </div>
 
-            <div class="bu-table-wrap">
-                <table class="bu-table row-bordered">
-                    <tr class="table-nav">
-                        <td class="th-title">
-                            <div ng-click="checkAllPrd()" class="checkPos">
-                                <label class="checkbox">
-                                    <input type="checkbox">
-                                    <span class="showCheck"></span>
-                                </label>
-                            </div>
-                            <label class="all">全选</label>
-                        </td>
-                        <td class="th-title">
-                            商品名称
-                        </td>
-                        <td class="th-title">
-                            单价
-                        </td>
-                        <td class="th-title">
-                            数量
-                        </td>
-                        <td class="th-title">
-                            小计
-                        </td>
-                        <td class="th-title">
-                            库存
-                        </td>
-                        <td class="th-title">
-                            操作
-                        </td>
-                    </tr>
-                    <tr ng-repeat="sku in skuList">
-                        <td>
-                            <div class="checkPos">
-                                <label class="checkbox">
-                                    <input type="checkbox">
-                                    <span class="showCheck"></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="parent">
-                                <div class="pic">
-                                    <img class="proPic" ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
-                                </div>
-                                <div class="info">
-                                    {{sku['SHOP_PRODUCT.PRD_NAME']}}
-                                </div>
-                                <div class="size">
-                                    【{{sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']}}】
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            {{sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'}}
-                        </td>
-                        <td>
-                            <div class="num">
-                                <lable class="num-decrement" ng-click="lessSize(sku)"></lable>
-                                <input class="txt" type="" name="" ng-change="updateCartPrice()" ng-model="sku['SHOP_PRODUCT_SKU.SIZE']"/>
-                                <lable class="num-increment" ng-click="moreSize(sku)"></lable>
-                            </div>
-                        </td>
-                        <td>
-                            {{sku['SHOP_PRODUCT_SKU.SIZE'] * sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'}}
-                        </td>
-                        <td>
-                            有货
-                        </td>
-                        <td class="del">
-                            <span ng-click="delShopCart(sku)">删除</span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="foot">
-                <div class="footFirst">
-                    <span>共</span>
-                    <span class="sep">{{totalSize}}</span>
-                    <span>件商品</span>
-                </div>
-                <div class="footSecond">
-                    <span>合计</span>
-                    <span class="youhui">（已优惠￥7.00）</span>
-                    <span class="sep1">{{totalPrice | currency :'￥'}}</span>
-                    <div class="buy">去结算</div>
-                </div>
-            </div>
-        </div>
     </div>
-
 </div>

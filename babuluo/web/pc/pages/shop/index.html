@@ -1,12 +1,12 @@
-<div class="container  container1">
+<div class="container  container-shop">
     <div class="row-wrap1 row-wrap" >
         <div class="toolbar toolbar1">
             <!-- 搜索框 -->
-            <div class="row-input">
+            <div class="row-input" ng-init="searchInfo=''">
                 <input type="text" ng-model="searchInfo" placeholder="搜索门店"
                        ng-keyup="myKeyup($event)">
-                <div class="btn-search">
-                    <i class="icon-search" ng-click="search()"></i>
+                <div class="btn-search" ng-click="search(searchInfo)">
+                    <i class="icon-search"></i>
                 </div>
             </div>
 
@@ -16,83 +16,21 @@
             <span class="title">江苏省南京市建邺区嘉陵江东街18号</span>
             <div class="change">切换地址</div>
         </div>
-        <div class="recent">
+        <div class="recent" ng-show="recentShopList.length>0">
             <div class="recentTitle">最近浏览</div>
             <div class="storeContain">
-                <div class="store">
-                    <span>莲花新城店</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="store ">
-                    <span>莲花新城店</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="store ">
-                    <span>莲花新城店</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="store ">
-                    <span>莲花新城店</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="store ">
-                    <span>莲花新城店</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="store ">
-                    <span>莲花新城店</span>
-                    <div class="yang"></div>
-                </div>
+                <div class="store" ng-repeat="shop in recentShopList" ng-click="shopSelect(shop)"> <span>{{shop['SHOP.SHOP_NAME']}}</span>
+                    <div class="yang"></div></div>
             </div>
 
         </div>
         <div class="recent recent11">
             <div class="recentTitle">区域</div>
             <div class="storeContain">
-                <div class="storeArea">
-                    <span>建邺区</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="storeArea">
-                    <span>建邺区</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="storeArea">
-                    <span>建邺区</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="storeArea">
-                    <span>建邺区</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="storeArea">
-                    <span>建邺区</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="storeArea">
-                    <span>建邺区</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="storeArea">
-                    <span>建邺区</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="storeArea">
-                    <span>江宁区</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="storeArea">
-                    <span>雨花台区</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="storeArea">
-                    <span>建邺区</span>
-                    <div class="yang"></div>
-                </div>
-                <div class="storeArea">
-                    <span>雨花台区</span>
-                    <div class="yang"></div>
-                </div>
+                <div class="storeArea" ng-repeat="district in districtList"
+                     ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'])" class="shop-name"
+                     ng-class="{true:'active'}[district['DISTRICT.DISTRICT_ID']==currDistrictId]"><span>{{district['DISTRICT.DISTRICT_NAME']}}</span>
+                    <div class="yang"></div></div>
             </div>
         </div>
         <div class="recent recent1">
@@ -100,63 +38,23 @@
 
         </div>
         <div class="storeList">
-            <div class="list">
+            <div class="list" ng-repeat="shop in currshopList" ng-click="shopSelect(shop)">
                 <div class="storelogo">
                     <img class="logo" src="../../public/css/img/store.png">
                 </div>
                 <div class="listDetail">
-                    <div class="name">莲花店啊</div>
-                    <div class="addr">
+                    <div class="name">{{shop['SHOP.SHOP_NAME']}}</div>
+                    <div class="addr" ng-show="coord.latitude!=undefined&&coord.longitude!=undefined&&coord.longitude!=undefined&&shop['SHOP.LATITUDE']!=undefined">
                         <img class="img1" src="/AndSell/pc/public/css/img/mapLogo.png" alt="">
-                        <span class="title">1.4km</span>
+                        <span class="title">{{getDistanceFromLatLonInKm(coord.latitude,coord.longitude,shop['SHOP.LATITUDE'],shop['SHOP.LONGTUDE'])}}km</span>
                     </div>
                     <div class="num">
-                        <span>025-8899998</span>
-                        <span>&nbsp;&nbsp;7.30-21.30</span>
+                        <span>{{shop['SHOP.TELEPHONE']}}</span>
+                        <span>{{shop['SHOP.OPEN_TIME']}}-{{shop['SHOP.CLOSE_TIME']}}</span>
                     </div>
                     <div class="addrDetail">
                         <img class="img1" src="/AndSell/pc/public/css/img/mapLogo.png" alt="">
-                        <span class="address">建邺区嘉陵江东街18号</span>
-                    </div>
-                </div>
-            </div>
-            <div class="list">
-                <div class="storelogo">
-                    <img class="logo" src="../../public/css/img/store.png">
-                </div>
-                <div class="listDetail">
-                    <div class="name">莲花新城店</div>
-                    <div class="addr">
-                        <img class="img1" src="/AndSell/pc/public/css/img/mapLogo.png" alt="">
-                        <span class="title">1.4km</span>
-                    </div>
-                    <div class="num">
-                        <span>025-8899998</span>
-                        <span>&nbsp;&nbsp;7.30-21.30</span>
-                    </div>
-                    <div class="addrDetail">
-                        <img class="img1" src="/AndSell/pc/public/css/img/mapLogo.png" alt="">
-                        <span class="address">建邺区嘉陵江东街18号</span>
-                    </div>
-                </div>
-            </div>
-            <div class="list">
-                <div class="storelogo">
-                    <img class="logo" src="../../public/css/img/store.png">
-                </div>
-                <div class="listDetail">
-                    <div class="name">莲花新城店</div>
-                    <div class="addr">
-                        <img class="img1" src="/AndSell/pc/public/css/img/mapLogo.png" alt="">
-                        <span class="title">1.4km</span>
-                    </div>
-                    <div class="num">
-                        <span>025-8899998</span>
-                        <span>&nbsp;&nbsp;7.30-21.30</span>
-                    </div>
-                    <div class="addrDetail">
-                        <img class="img1" src="/AndSell/pc/public/css/img/mapLogo.png" alt="">
-                        <span class="address">建邺区嘉陵江东街18号</span>
+                        <span class="address">{{shop['SHOP.ADDR']}}</span>
                     </div>
                 </div>
             </div>

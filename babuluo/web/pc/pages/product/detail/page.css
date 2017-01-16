@@ -88,7 +88,7 @@
   line-height: 1.7em;
 }
 /* line 38, ../sass/sidebars/_goodsShowBar.scss */
-.goodsShowBar .lists ul li .intro .name {
+.goodsShowBar .lists ul li .intro .name, .goodsShowBar .lists ul li .intro .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .goodsShowBar .lists ul li .intro .show {
   font-size: 14px;
   color: #4b4b4b;
 }
@@ -186,7 +186,7 @@
   border: 1px solid #ddd;
 }
 /* line 68, ../sass/goodsDetail.scss */
-.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .name, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .name {
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .name, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .name, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .goodsDetailShow .purchaseChoose .priceBox .priceGroup .show, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .show {
   display: inline-block;
   width: 54px;
   color: #4b4b4b;
@@ -261,7 +261,7 @@
   font-size: 0;
 }
 /* line 136, ../sass/goodsDetail.scss */
-.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .name {
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .name, .goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .goodsDetailShow .purchaseChoose .categoriesChoose .standards .show {
   display: inline-block;
   width: 46px;
   height: 30px;
@@ -301,7 +301,7 @@
   margin-top: 28px;
 }
 /* line 172, ../sass/goodsDetail.scss */
-.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .name {
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .name, .goodsDetail .goodsDetailShow .purchaseChoose .countChoose .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .goodsDetailShow .purchaseChoose .countChoose .show {
   display: inline-block;
   width: 46px;
   height: 37px;
@@ -368,9 +368,21 @@
   line-height: 45px;
   margin-right: 20px;
 }
-
-/* line 244, ../sass/goodsDetail.scss */
+/* line 232, ../sass/goodsDetail.scss */
 .goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .addToCart {
+  width: 175px;
+  padding-left: 40px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAVCAYAAABCIB6VAAAAAXNSR0IArs4c6QAAAnxJREFUOBGtlc9rE1EQx3eTGKl23UOIt2TTRE8RqfZQ6MGLnmoPHjz7F1REqWdPKt4E6UHsVQ+CFIpHqRcPIoIVDBFqfhGEQBCNMQslZtfPrHnL2yRtpXVgmDffmfm+ebOT1qxWq2u+718zDMNEB+iDQqFwB3soiVG9gB5BE+hR0zSvYw8tZqVSsSGbp+tTsK0KI/4rjHR/EPEpeibPD6TdblvdbrfDBSGmYgew7QgJ865D7ED0hq7faoQXwX2wTYXhruCv4f/QMBnrAvhnmWsoJJdwHALlfD5/WwW48BGYpzC5A2wlHo/fdxynquU9ISbkXyLEFJcILKLn6/X6OVXgeV4azFNYo9EIXjoYDIpgtpZ3Vs7wbE8iltgcRa/lMJQpsWCLChDLZU/BPA0LLqGRKDFPKwEGeclkspjJZL6KI6PAyChuiA+hjMJLJBKzahStVut4r9f7JXFkW/Y4FMjKPEPWxej3+8Uw8A8H13VlXQORUUS2QlA6qdLRDEHZkG9/U43M0DaHVswc+gndEQc5gZ5Gd3jZsciMJYrIZsxAmsOK6nJSdzifGfHlw22h3hgxhEK8RLCFPhwt3Mun9jffaV1yxoghk5WTDzTN+fteRHqMfNe27Y1UKvVzInEsFiuxQhKbZkMe68X7nTudzio5y5I31jHr87FWq72gg9n9iEbiLi98OYL9f3ds3dQVbN0yXd+jiw+WZS2l0+muiumW180zsufk+fxgrmaz2fcSj/xA9AJI7+Jb2Av8Ob2ix/Qz8Vv4WazDj+qmiu1KTAfvhkl9irZUwQSr8gw+fHjedRTNZnOKDi7LluRyufIEwhDiv9Al9tcjb1OBfwAf/CWMOEQFbAAAAABJRU5ErkJggg==');
+  background-position: 10% center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: #4b4b4b;
+  font-size: 14px;
+  border: 1px solid #ddd;
+}
+/* line 244, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .buyNow {
   width: 170px;
   background-color: #f36f1a;
   font-size: 14px;
@@ -438,15 +450,190 @@
 .goodsDetail .goodsIntro .detailIntro .introContent {
   border: 1px solid #ddd;
   margin-top: -1px;
-  min-height: 300px;
 }
-/* line 306, ../sass/goodsDetail.scss */
-.goodsDetail .goodsIntro .detailIntro .introContent .imgList {
+/* line 305, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .imgIntro, .goodsDetail .goodsIntro .detailIntro .introContent evaluateIntro {
+  width: 100%;
+  height: auto;
+  display: none;
+}
+/* line 309, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .imgIntro.active, .goodsDetail .goodsIntro .detailIntro .introContent evaluateIntro.active {
+  display: block;
+}
+/* line 314, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .imgIntro .imgList {
   width: 100%;
   font-size: 0;
 }
-/* line 309, ../sass/goodsDetail.scss */
-.goodsDetail .goodsIntro .detailIntro .introContent .imgList img {
+/* line 317, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .imgIntro .imgList img {
   width: 100%;
   height: auto;
+}
+/* line 324, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro {
+  width: 100%;
+  overflow: hidden;
+}
+/* line 327, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize {
+  padding: 20px 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  margin-top: -1px;
+}
+/* line 334, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .totalPer {
+  width: 155px;
+  height: 76px;
+  display: inline-block;
+  position: relative;
+  margin-right: 22px;
+}
+/* line 340, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .totalPer .number, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .totalPer .text {
+  position: absolute;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* line 346, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .totalPer .number {
+  font-size: 40px;
+  color: #f36e19;
+  top: 0;
+}
+/* line 351, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .totalPer .text {
+  color: #4b4b4b;
+  bottom: 0;
+}
+/* line 356, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources {
+  display: inline-block;
+  width: 600px;
+  height: 76px;
+  overflow: hidden;
+}
+/* line 361, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source {
+  display: inline-block;
+  width: auto;
+  height: 15px;
+  margin-bottom: 15.33333px;
+}
+/* line 366, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .name, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show {
+  font-size: 14px;
+  color: #4b4b4b;
+  display: inline-block;
+  width: 100px;
+  height: 100%;
+  line-height: 15px;
+  vertical-align: top;
+}
+/* line 374, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .name .count, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show .count {
+  color: #f36e19;
+}
+/* line 378, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .perBar {
+  width: 227px;
+  height: 100%;
+  background-color: #f4f4f4;
+  display: inline-block;
+}
+/* line 383, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .perBar .currentPer {
+  background-color: #f36e19;
+  width: 0;
+  height: 100%;
+  transition: all .3s ease;
+}
+/* line 390, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show {
+  margin-left: 10px;
+}
+/* line 397, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists {
+  width: 100%;
+}
+/* line 399, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list {
+  padding: 30px 45px 10px;
+  border: 1px solid #ddd;
+  margin-top: -1px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  font-size: 0;
+}
+/* line 405, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list:last-child {
+  border-bottom-color: transparent;
+}
+/* line 409, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .favicon {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 999px;
+  background-color: #f6f6f6;
+  position: relative;
+  overflow: hidden;
+}
+/* line 418, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .favicon img {
+  position: absolute;
+  height: 100%;
+  width: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* line 426, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent {
+  width: calc(100% - 50px);
+  margin-left: 10px;
+  display: inline-block;
+}
+/* line 430, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .userInfo {
+  line-height: 1.5;
+}
+/* line 432, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .userInfo span {
+  margin-right: 10px;
+}
+/* line 435, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .userInfo .name, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .userInfo .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .evaluateLists .list .listContent .userInfo .show {
+  font-size: 14px;
+  color: #4b4b4b;
+}
+/* line 439, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .userInfo .time {
+  font-size: 12px;
+  color: #a5a5a5;
+}
+/* line 444, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .text {
+  line-height: 2em;
+  font-size: 13px;
+  color: #a1a1a1;
+  word-break: break-all;
+  white-space: pre-wrap;
+  text-align: justify;
+}
+/* line 452, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .imgList {
+  overflow: hidden;
+  margin-top: 6px;
+}
+/* line 455, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .imgList img {
+  width: 40px;
+  height: 40px;
+  margin-right: 7px;
 }

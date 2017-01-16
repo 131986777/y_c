@@ -1,4 +1,4 @@
-angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', function (productFactory, $interval, $scope, $state, modalFactory, shopFactory) {
+angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', function (productFactory, $interval, $scope, $state, modalFactory, $state,$stateParams) {
 
     modalFactory.setTitle("商品列表");
 
@@ -13,17 +13,23 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
         img.src="../../public/css/img/product.png";
         img.onerror=null;
     }
-    setCookie();
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
-    // if (getCookie('currentShopInfo') != undefined) {
-    //     $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']
-    // } else {
-    //     $scope.toShop();
-    // }
+    $scope.toShop = function () {
+        $state.go('pages/shop', {'FROM': window.location.href});
+    }
+
+    if (getCookie('currentShopInfo') != undefined) {
+        $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']
+    } else {
+        $scope.toShop();
+    }
 
     $scope.filter = {
+        'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,
+        'SHOP_PRODUCT.CLASS_ID':$stateParams.classId,
+        'SHOP_PRODUCT.TAG_ID':$stateParams.tagId,
         'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
         'SHOP_PRODUCT.REMARK': 'offLine',
         'SHOP_PRODUCT.ORDER':'HAS_STOCK DESC,SHOP_PRODUCT.CLASS_ID ASC,convert(SHOP_PRODUCT.PRD_NAME using gbk) asc '
@@ -34,10 +40,6 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
         console.log(response);
         $scope.prdList = response.data;
     };
-
-    $scope.toShop = function () {
-        $state.go('pages/shop', {'FROM': window.location.href});
-    }
 
     //跳转至详情页
     $scope.toDetail = function (id) {
@@ -72,8 +74,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
         //加入购物车
         setCookie('cartSize', JSON.stringify(cartSize));
         setCookie('cartInfo', JSON.stringify(cartInfo));
-
-        console.log(getCookie('cartInfo'));
-        console.log(getCookie('cartSize'));
+        modalFactory.updateCart();
+        modalFactory.showShortAlert("加入购物车成功");
     }
 });
