@@ -184,7 +184,7 @@
                     <div class="evaluateIntro active">
                         <div class="summarize">
                             <div class="totalPer">
-                                <span class="number">98%</span>
+                                <span class="number">{{goodCommentsPercent}}</span>
                                 <span class="text">好评度</span>
                             </div>
                             <div class="evaluateSources">
@@ -193,7 +193,7 @@
                                     <div class="perBar">
                                         <div class="currentPer" ng-style="goodcp"></div>
                                     </div>
-                                    <span class="show" ng-bind="commentsPercents(listLength(goodComments),proComments.length)"></span>
+                                    <span class="show">{{goodCommentsPercent}}</span>
                                 </div>
                                 <div class="source">
                                     <span class="name">中评<span class="count">({{listLength(midComments)}}条)</span></span>
