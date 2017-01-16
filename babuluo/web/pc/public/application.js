@@ -71,6 +71,10 @@ AndSellUI.service('modalFactory', function ($rootScope) {
         $rootScope.$broadcast("updateCart");
     };
 
+    this.updateShop = function () {
+        $rootScope.$broadcast("updateShop");
+    };
+
     this.showAlert = function (msg, func) {
         $rootScope.$broadcast("to-modal", {
             message: msg, callback: func

@@ -1,14 +1,14 @@
-<div class="row-wrap row-wrap1">
+<div class="row-wrap row-wrap-personal-center">
     <div class="row-content">
         <div class="info">
             <div class="imgPer">
 
             </div>
             <div class="addInfo">
-                <p class="name pos">{{USER['MEMBER.USER_NAME']}} </p>
+                <p class="name pos">{{USER['MEMBER.USER_NAME']}}<span class="icon-resetName" id="#modifyName" show-modal> </span></p>
                 <p class="phone pos">手机号</p>
-                <p class="num pos">USER['MEMBER.MOBILE']</p>
-                <p class="security">安全中心</p>
+                <p class="num pos">{{USER['MEMBER.MOBILE']}}</p>
+                <p class="security" ui-sref="pages/security/modifyPwd">安全中心</p>
             </div>
             <div class="detail">
                 <div class="each">
@@ -29,11 +29,12 @@
         <div class="row-header font">个人中心</div>
         <span ng-if="memberCards.length==0" class="no-coupon">你暂无会员卡！</span>
         <div class="card" ng-repeat="cl in memberCards">
-            <div class="eachCard"  ng-style="cl['MEMBER_CARD.CARD_STYLE']">
+            <div class="eachCard" ng-style="cl['MEMBER_CARD.CARD_STYLE']">
                 <div class="pos">
                     <p class="num">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</p>
                     <p class="num ka">{{cl['MEMBER_CARD.TYPE_NAME']}}</p>
-                    <p class="mid" ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0">(冻结 {{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}})</p>
+                    <p class="mid" ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0">(冻结
+                        {{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}})</p>
                     <div class="m">
                         <p class="word">余额</p>
                         <p class="money">{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}</p>
@@ -56,3 +57,37 @@
             </div>
         </div>
     </div>
+    <!--BEGIN 修改单位-->
+    <div class="modal fade text-left" id="modifyName" tabindex="-1"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true"></button>
+                    <h4 class="modal-title">修改商品规格名</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+                    <form class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 规格名(1):
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control"
+                                       ng-model="modifySku['SHOP_PRODUCT_SKU.SKU_CONTENT1']"
+                                       placeholder=""></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn green" data-dismiss="modal" ng-click="modifyProductSkuName()">确定
+                    </button>
+                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

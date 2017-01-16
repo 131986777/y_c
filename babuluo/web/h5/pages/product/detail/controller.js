@@ -16,6 +16,8 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
 
     $scope.initData = function () {
 
+        console.log(JSON.parse(getCookie('currentShopInfo')));
+
         // 设置轮播图图片间隔
         $scope.myInterval = 4000;
         // 轮播图数据初始化
@@ -29,8 +31,6 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         $scope.currSkuContentSelectMap = {
             name1: '', name2: '', name3: ''
         }
-
-
 
         var params = {};
         params['SHOP_PRODUCT.PRD_ID'] = $stateParams.PRD_ID;
@@ -90,6 +90,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
 
         $scope.skuSize = 1;
         $scope.caculCart();
+
     }
 
     $scope.setPrdPicBanner = function (prd) {
@@ -346,6 +347,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
     //加入购物车
     $scope.addToCart = function () {
         if ($scope.sku != undefined) {
+            console.log($scope.sku);
             if ($scope.sku['SHOP_PRODUCT_SKU.STOCK'] > 0) {
                 var cartInfo = getCookie('cartInfo');
                 var cartSize = getCookie('cartSize');

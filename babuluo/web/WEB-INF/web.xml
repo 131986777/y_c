@@ -53,6 +53,19 @@
     </servlet-mapping>
     <!--Hessian-->
 
+    <!--Hessian-->
+    <servlet>
+        <!-- 配置 HessianServlet，Servlet的名字随便配置，例如这里配置成ServiceServlet-->
+        <servlet-name>wxCallBack</servlet-name>
+        <servlet-class>com.weixin.WXPayResultCallBackServlet</servlet-class>
+    </servlet>
+    <!-- 映射 HessianServlet的访问URL地址-->
+    <servlet-mapping>
+        <servlet-name>wxCallBack</servlet-name>
+        <url-pattern>/wxCallBack</url-pattern>
+    </servlet-mapping>
+    <!--Hessian-->
+
     <servlet>
         <servlet-name>aliyun</servlet-name>
         <servlet-class>com.bolanggu.bbl.aliyun.connectALiYun</servlet-class>
