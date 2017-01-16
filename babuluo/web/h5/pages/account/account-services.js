@@ -9,6 +9,8 @@ AndSellH5MainModule.service('balanceFactory', function (http) {
 
 AndSellH5MainModule.service('eventFactory', function (http) {
 
-    this.getEventByType=http.post('/sales/event/getByType');
+    this.getEventByType = http.post('/sales/event/getByType');
+
+    this.queryLucky = http.post('/marketing/luckyDraw/ifLuckMan');
 
 });
