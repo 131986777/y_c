@@ -10,7 +10,11 @@
                 <input id="endDay" type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=END"  class="form-control inputWidth"  placeholder="">
             </div>
             <button class="btn " type="button" ng-click="getGroupByRange()">查询</button>
-            <a class="showPoint" ng-click="getGroupByThisWeek()">本周</a><a class="showPoint" ng-click="getGroupByYesterWeek()">上周</a><a class="showPoint" ng-click="getGroupByThisMonth()">本月</a><a class="showPoint" ng-click="getGroupByYesterMonth()">上月</a><a class="showPoint" ng-click="getGroupByYesterDay()">昨天</a>
+            <span ng-if="weekDay != 1"><a class="showPoint" ng-click="getGroupByThisWeek()">本周</a></span>
+            <a class="showPoint" ng-click="getGroupByYesterWeek()">上周</a>
+            <span ng-if="monthDay != 1"><a class="showPoint" ng-click="getGroupByThisMonth()">本月</a></span>
+            <a class="showPoint" ng-click="getGroupByYesterMonth()">上月</a>
+            <a class="showPoint" ng-click="getGroupByYesterDay()">昨天</a>
             <button class="btn alignRight"  type="button" onclick="outPutMethod('cardTable')">导出</button>
             <div class="clear"></div>
         </div>
