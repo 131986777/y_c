@@ -33,9 +33,10 @@
                 <div class="pos">
                     <p class="num">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</p>
                     <p class="num ka">{{cl['MEMBER_CARD.TYPE_NAME']}}</p>
-                    <p class="mid" ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0">(冻结
-                        {{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}})</p>
+
                     <div class="m">
+                        <p class="mid" ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0">(冻结
+                            {{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}})</p>
                         <p class="word">余额</p>
                         <p class="money">{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}</p>
                     </div>
@@ -67,7 +68,7 @@
                             aria-hidden="true"></button>
                     <h4 class="modal-title">修改商品规格名</h4>
                 </div>
-                <div class="modal-body form-body text-right">
+                <div class="modal-body" style="min-height: 70px">
                     <form class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
@@ -80,6 +81,7 @@
                                        placeholder=""></div>
                         </div>
                     </form>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn green" data-dismiss="modal" ng-click="modifyProductSkuName()">确定
