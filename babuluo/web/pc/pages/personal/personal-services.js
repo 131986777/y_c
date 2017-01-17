@@ -10,4 +10,6 @@ AndSellPCMainModule.service('personalFactory', function (http) {
 
     this.getCoupon = http.post('/member/coupon/querySumByUser');
 
+    this.modifyMember = http.post('/member/member/modifyMemberInMobile');
+
 });
