@@ -18,9 +18,9 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
     $scope.recommNineList = new Array();
     $scope.BannerList = new Array();
 
-    $scope.myKeyup = function(e){
-        var keycode = window.event?e.keyCode:e.which;
-        if(keycode==13){
+    $scope.myKeyup = function (e) {
+        var keycode = window.event ? e.keyCode : e.which;
+        if (keycode == 13) {
             $scope.searchPrd();
         }
     };
@@ -31,20 +31,20 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
     }
 
     $scope.initData = function () {
-        $scope.STORE_ID = 0 ;
+        $scope.STORE_ID = 0;
 
         modalFactory.setCurrentPage('sy');
 
         if (getCookie('currentShop') != undefined) {
-            $scope.shopInfo= ToJson(getCookie('currentShopInfo'));
-            $scope.STORE_ID=$scope.shopInfo['SHOP.REPOS_ID'];
-        }else{
+            $scope.shopInfo = ToJson(getCookie('currentShopInfo'));
+            $scope.STORE_ID = $scope.shopInfo['SHOP.REPOS_ID'];
+        } else {
             $scope.toShop();
         }
 
         var params = {}
         params['SHOP_PRODUCT.TAG_ID'] = '1036,1037,3000,3001,3002,3003,3004,3005,3006';
-        params['SHOP_PRODUCT.STORE_ID']=$scope.STORE_ID;
+        params['SHOP_PRODUCT.STORE_ID'] = $scope.STORE_ID;
         productFactory.getProductByTag(params, function (response) {
             if (response.code == 0) {
                 $scope.tagProductList = {};
@@ -198,7 +198,7 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
                 else if (ele['BANNER.POSITION_ID'] == "1018") {     //今日推荐九宫格
                     $scope.recommNineList.push(ele);
                 }
-                else {
+                else if (["3006", "3007", "3008", "3009", "3010", "3011", "3012", "3013", "3014"].contains(ele['BANNER.POSITION_ID'])) {
                     // console.log(ele['BANNER.POSITION_ID']);
                     var flag = false;
                     for (i = 0; i < $scope.BannerList.length; i++) {
@@ -242,7 +242,7 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
 
             });
         });
-console.log($scope.BannerList);
+        console.log($scope.BannerList);
     }
 
     //以毫秒为单位
@@ -257,11 +257,11 @@ console.log($scope.BannerList);
 
     }
 
-    $scope.toShop= function () {
+    $scope.toShop = function () {
         $state.go('pages/shop');
     }
 
-    $scope.$on('$destroy',function(){
+    $scope.$on('$destroy', function () {
         $interval.cancel($scope.timer);
     })
 
@@ -271,21 +271,30 @@ console.log($scope.BannerList);
         centeredSlides: true,
         autoplay: 3500,
         autoplayDisableOnInteraction: false,
-        observer:true,
-        observeParents:true
+        observer: true,
+        observeParents: true
     });
 
-    $scope.toPrdList= function () {
+    $scope.toPrdList = function () {
         $state.go('pages/product/list');
     }
 
-    $scope.toPrdTagList= function (id) {
-        $state.go('pages/product/tagPrdList',{tagId:id});
+    $scope.toPrdTagList = function (id) {
+        $state.go('pages/product/tagPrdList', {tagId: id});
     }
 
-    $scope.toOrderList= function () {
+    $scope.toOrderList = function () {
         $state.go('pages/order/list');
     }
 
+    Array.prototype.contains = function (obj) {
+        var i = this.length;
+        while (i--) {
+            if (this[i] === obj) {
+                return true;
+            }
+        }
+        return false;
+    }
 });
 

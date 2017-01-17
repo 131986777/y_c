@@ -76,163 +76,21 @@
                         <div class="recommendArea">
                             <div class="bestRec">
                                 <a href="">
-                                    <img  ng-src="{{FILE_SERVER_DOMAIN+itemList.content[0]['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
+                                    <img ng-src="{{FILE_SERVER_DOMAIN+itemList.content[0]['BANNER.PICTURE2']+'?x-oss-process=image/resize,w_750'}}">
                                 </a>
                             </div>
-                            <div class="normalRec" ng-if="itemList.id=='1020'">
+                            <div class="normalRec">
                                 <ul>
-                                    <li ng-repeat="item in tagProductList['1036']">
+                                    <li ng-repeat="item in tagProductList[itemList.content[0]['BANNER.TAG_ID']]">
                                         <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
                                             <div class="pic">
-                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
+                                                <img width="150" height="150"
+                                                     ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
                                             </div>
                                             <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
                                             <p class="price">
-                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                                                <!--<span class="origin"></span>-->
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="normalRec" ng-if="itemList.id=='1019'">
-                                <ul>
-                                    <li ng-repeat="item in tagProductList['1037']">
-                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                                            <div class="pic">
-                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
-                                            </div>
-                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                                            <p class="price">
-                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                                                <!--<span class="origin"></span>-->
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="normalRec" ng-if="itemList.id=='1019'">
-                                <ul>
-                                    <li ng-repeat="item in tagProductList['1037']">
-                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                                            <div class="pic">
-                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
-                                            </div>
-                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                                            <p class="price">
-                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                                                <!--<span class="origin"></span>-->
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="normalRec" ng-if="itemList.id=='1017'">
-                                <ul>
-                                    <li ng-repeat="item in tagProductList['3000']">
-                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                                            <div class="pic">
-                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
-                                            </div>
-                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                                            <p class="price">
-                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                                                <!--<span class="origin"></span>-->
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="normalRec" ng-if="itemList.id=='3000'">
-                                <ul>
-                                    <li ng-repeat="item in tagProductList['3001']">
-                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                                            <div class="pic">
-                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
-                                            </div>
-                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                                            <p class="price">
-                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                                                <!--<span class="origin"></span>-->
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="normalRec" ng-if="itemList.id=='3001'">
-                                <ul>
-                                    <li ng-repeat="item in tagProductList['3004']">
-                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                                            <div class="pic">
-                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
-                                            </div>
-                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                                            <p class="price">
-                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                                                <!--<span class="origin"></span>-->
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="normalRec" ng-if="itemList.id=='3002'">
-                                <ul>
-                                    <li ng-repeat="item in tagProductList['3002']">
-                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                                            <div class="pic">
-                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
-                                            </div>
-                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                                            <p class="price">
-                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                                                <!--<span class="origin"></span>-->
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="normalRec" ng-if="itemList.id=='3003'">
-                                <ul>
-                                    <li ng-repeat="item in tagProductList['3003']">
-                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                                            <div class="pic">
-                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
-                                            </div>
-                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                                            <p class="price">
-                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                                                <!--<span class="origin"></span>-->
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="normalRec" ng-if="itemList.id=='3004'">
-                                <ul>
-                                    <li ng-repeat="item in tagProductList['3005']">
-                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                                            <div class="pic">
-                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
-                                            </div>
-                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                                            <p class="price">
-                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                                                <!--<span class="origin"></span>-->
-                                            </p>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="normalRec" ng-if="itemList.id=='3005'">
-                                <ul>
-                                    <li ng-repeat="item in tagProductList['3006']">
-                                        <a ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                                            <div class="pic">
-                                                <img width="150" height="150" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
-                                            </div>
-                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                                            <p class="price">
-                                                <span class="current" ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                                <span class="current"
+                                                      ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
                                                 <!--<span class="origin"></span>-->
                                             </p>
                                         </a>
