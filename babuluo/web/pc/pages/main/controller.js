@@ -1,5 +1,4 @@
-AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, modalFactory,personalFactory,userFactory, productFactory) {
-
+AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, modalFactory, personalFactory, userFactory, productFactory) {
 
     $scope.key = $scope;
     //逻辑
@@ -43,6 +42,7 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
 
     //低栏
     $scope.$on('updateUser', function (event, data) {
+        console.log(' get ');
         $scope.updateUser();
     });
 
@@ -50,8 +50,8 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
         $scope.currentPage = page;
     }
 
-    $scope.updateShop= function () {
-        $scope.shop=JSON.parse(getCookie('currentShopInfo'));
+    $scope.updateShop = function () {
+        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
     }
 
     $scope.caculCart = function () {
@@ -68,19 +68,14 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
         if (cartInfo.length > 0)$scope.getPrdInfo(cartInfo, cartSize);
     };
 
-
-    $scope.aa = function () {
-        console.log($scope.key.prdKeyword);
-    }
-
     //商品搜索
     $scope.searchPrd = function () {
         $state.go('pages/product/list', {keyword: $scope.key.prdKeyword});
     }
 
-    $scope.myKeyup = function(e){
-        var keycode = window.event?e.keyCode:e.which;
-        if(keycode==13){
+    $scope.myKeyup = function (e) {
+        var keycode = window.event ? e.keyCode : e.which;
+        if (keycode == 13) {
             $scope.searchPrd();
         }
     };
@@ -129,17 +124,29 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
         });
     }
 
-    $scope.uid = getCookie('ANDSELLID');
-    if ($scope.uid != undefined && $scope.uid != '') {
-        $scope.getUser($scope.uid);
-    } else {
-        $state.go('pages/login/accountLogin');
-        modalFactory.showShortAlert('登录异常');
+    $scope.updateUser = function () {
+        console.log('login');
+        userFactory.isLogin({}, function (response) {
+            console.log('login in');
+            $scope.uid = getCookie('ANDSELLID');
+            if ($scope.uid != undefined && $scope.uid != '') {
+                console.log('true');
+                $scope.getUser($scope.uid);
+            } else {
+                console.log('null');
+                $scope.USER = undefined;
+            }
+        }, function (response) {
+            console.log('false');
+            $scope.USER = undefined;
+        });
+
     }
 
-    $scope.logOut= function () {
+    $scope.logOut = function () {
         modalFactory.showAlert("确定退出登录？", function () {
             userFactory.loginOut({}, function (response) {
+                modalFactory.updateUser();
                 $state.go('pages/login/accountLogin');
             });
         })

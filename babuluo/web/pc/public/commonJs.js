@@ -236,7 +236,7 @@ function routerPath(base, path, param, css) {
     router.controller = replaceAll(path + "/", '/', '_') + "Controller";
     router.templateUrl = url + "/index.html";
     router.resolve = {
-        loadServiceAndController: function ($ocLazyLoad, userFactory, $state, weUI) {
+        loadServiceAndController: function ($ocLazyLoad, userFactory, $state) {
             var filterList = ['pages/product/list', 'pages/product/tagPrdList', 'pages/home',
                 'pages/product/detail', 'pages/cart', 'pages/shop', 'pages/login/accountLogin',
                 'pages/login/phoneLogin',

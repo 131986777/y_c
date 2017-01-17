@@ -76,4 +76,21 @@ public class ENV {
 
 
     public static String GENERATED_EXCEL_FILE = "/download/file/GeneratedExcelFile/";
+
+
+
+    /**
+     * 支付宝配置信息
+     */
+    //支付宝即时到账合作伙伴PID
+    public static String ALIPAY_PID = "2088121817954413";
+    //支付宝即时到账合作伙伴密钥
+    public static String ALIPAY_KEY = "9ybppnj0mfpv2h71secymxw3oets636g";
+    //支付宝日志输出
+    public static String ALIPAY_LOG = "C:\\";
+    //支付宝异步通知接口
+    public static String ALIPAY_NOTIFY_URL = "http://app.bblycyz.com/AndSell/alipay";
+    //支付宝结果跳转页面
+    public static String ALIPAY_RETURN_URL = "http://app.bblycyz.com/AndSell/ui/alipay/return_url.jsp";
+
 }

@@ -54,7 +54,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_review_Controller', fu
         }
         $q.all(promise).then(function () {
             $state.go('pages/order/detail',{ORDER_ID: id});
-            weUI.toast.info("提交成功");
+            modalFactory.showShortAlert("提交成功")
         });
     };
 

@@ -34,9 +34,9 @@ angular.module('AndSell.PC.Main').controller('pages_account_recharge_Controller'
             console.log(response);
             $scope.balanceInfo = response.data;
         }, function (response) {
-            weUI.toast.error(response.msg);
+            modalFactory.showShortAlert(response.msg);
         });
-    }
+    };
 
     $scope.getEvent = function () {
 

@@ -42,6 +42,7 @@ angular.module('AndSell.PC.Main').controller('pages_login_phoneLogin_Controller'
     $scope.login= function () {
         var loginEvent= function () {
             userFactory.phoneLogin($scope.memberInfo, function (response) {
+                modalFactory.updateUser();
                 $state.go('pages/home');
             },function(response){
                 modalFactory.showShortAlert(response.msg);
