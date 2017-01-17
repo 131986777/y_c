@@ -1,33 +1,27 @@
-angular.module('AndSell.PC.Main').controller('pages_login_phoneLogin_Controller', function (productFactory, $interval, $scope, $state, modalFactory, userFactory,shopFactory) {
+angular.module('AndSell.PC.Main').controller('pages_login_phoneLogin_Controller', function (productFactory, $interval, $scope, $state, modalFactory, shopFactory) {
 
     modalFactory.setTitle("验证码登录");
 
     modalFactory.setHeader(false);
 
-    modalFactory.setSide(false);
-
-    modalFactory.setLeftMenu(false);
-
-    $scope.sendwait=true;
-    $scope.sending=false;
-    $scope.sended=false;
-
     $scope.sendSms = function () {
-
-        $scope.sendwait=false;
-        $scope.sending=true;
 
         var send= function () {
             var form = {};
             form['PHONE'] = $scope.memberInfo['PHONE'];
             userFactory.phoneSms(form, function (response) {
-                $scope.sended=true;
-                $scope.sending=false;
+                console.log(form);
+                $('.codeLogin').fadeOut();
+                $('.send').fadeIn();
                 $scope.time = 60;
+                if(response.msg=='ok'){
+                    $('.send').fadeOut();
+                    $('.sended').fadeIn();
+                }
                 $scope.timer = $interval(function () {
                     if($scope.time==0){
-                        $scope.sended=false;
-                        $scope.sendwait=true;
+                        $('.codeLogin').fadeIn();
+                        $('.sended').fadeOut();
                         $scope.time=60;
                         $interval.cancel($scope.timer);
                     }
@@ -46,7 +40,6 @@ angular.module('AndSell.PC.Main').controller('pages_login_phoneLogin_Controller'
     $scope.login= function () {
         var loginEvent= function () {
             userFactory.phoneLogin($scope.memberInfo, function (response) {
-                modalFactory.updateUser();
                 $state.go('pages/home');
             },function(response){
                 modalFactory.showShortAlert(response.msg);
@@ -57,6 +50,7 @@ angular.module('AndSell.PC.Main').controller('pages_login_phoneLogin_Controller'
 
 
     var checkForm= function (did) {
+        console.log($scope.memberInfo);
         if ($scope.memberInfo['PHONE'] == '') {
             modalFactory.showShortAlert('请输入手机号');
         } else {

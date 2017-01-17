@@ -45,7 +45,7 @@
   position: absolute;
   right: 8px;
   top: 5px;
-
+  z-index: 1010;
   cursor: pointer;
   }
 .row-wrap-modPwd .row-content .bu-form .form-group .yzmPos .send {
@@ -61,6 +61,7 @@
   position: absolute;
   right: 8px;
   top: 5px;
+  z-index: 1000;
 }
 .row-wrap-modPwd .row-content .bu-form .form-group .yzmPos .sended {
   width: 100px;
@@ -75,6 +76,7 @@
   position: absolute;
   right: 8px;
   top: 5px;
+  z-index: 990;
 }
 /* line 49, ../sass/security.scss */
 .row-wrap-modPwd .row-content .bu-form .form-group .typeIn {
