@@ -42,7 +42,6 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
 
     //低栏
     $scope.$on('updateUser', function (event, data) {
-        console.log(' get ');
         $scope.updateUser();
     });
 
@@ -125,19 +124,14 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
     }
 
     $scope.updateUser = function () {
-        console.log('login');
         userFactory.isLogin({}, function (response) {
-            console.log('login in');
             $scope.uid = getCookie('ANDSELLID');
             if ($scope.uid != undefined && $scope.uid != '') {
-                console.log('true');
                 $scope.getUser($scope.uid);
             } else {
-                console.log('null');
                 $scope.USER = undefined;
             }
         }, function (response) {
-            console.log('false');
             $scope.USER = undefined;
         });
 

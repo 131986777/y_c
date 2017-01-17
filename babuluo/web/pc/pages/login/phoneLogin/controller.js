@@ -53,7 +53,6 @@ angular.module('AndSell.PC.Main').controller('pages_login_phoneLogin_Controller'
 
 
     var checkForm= function (did) {
-        console.log($scope.memberInfo);
         if ($scope.memberInfo['PHONE'] == '') {
             modalFactory.showShortAlert('请输入手机号');
         } else {
