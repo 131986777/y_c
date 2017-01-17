@@ -5,7 +5,10 @@ angular.module('AndSell.PC.Main').controller('pages_security_modifyPwd_Controlle
     modalFactory.setHeader(false);
 
     modalFactory.setSide(true);
+
     modalFactory.setCateGory(true);
+
+    modalFactory.setLeftMenu(false);
 
     $scope.checkPwd = function () {
         var pwd = $scope.memberInfo['MEMBER.PWD'];

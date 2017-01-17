@@ -8,6 +8,8 @@ angular.module('AndSell.PC.Main').controller('pages_shop_Controller', function (
 
     modalFactory.setSide(false);
 
+    modalFactory.setLeftMenu(false);
+
     $(".store").click(function () {
         $(".store").removeClass("active");
         $(".yang").removeClass("choosed");

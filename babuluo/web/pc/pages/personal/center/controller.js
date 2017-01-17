@@ -3,8 +3,11 @@ angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller',
     modalFactory.setTitle("个人中心");
 
     modalFactory.setHeader(false);
+
     modalFactory.setSide(true);
+
     modalFactory.setCateGory(true);
+
     modalFactory.setLeftMenu(false);
 
     $scope.queryAccount = function () {

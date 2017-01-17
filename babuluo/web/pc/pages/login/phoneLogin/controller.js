@@ -4,6 +4,10 @@ angular.module('AndSell.PC.Main').controller('pages_login_phoneLogin_Controller'
 
     modalFactory.setHeader(false);
 
+    modalFactory.setSide(false);
+
+    modalFactory.setLeftMenu(false);
+
     $scope.sendwait=true;
     $scope.sending=false;
     $scope.sended=false;

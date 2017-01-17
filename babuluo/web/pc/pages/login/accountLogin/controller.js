@@ -6,6 +6,8 @@ angular.module('AndSell.PC.Main').controller('pages_login_accountLogin_Controlle
 
     modalFactory.setSide(false);
 
+    modalFactory.setLeftMenu(false);
+
     $scope.userLogin = function () {
         var form = $scope.loginInfo;
         userFactory.login(form, function (response) {

@@ -6,6 +6,8 @@ angular.module('AndSell.PC.Main').controller('pages_cart_Controller', function (
 
     modalFactory.setSide(false);
 
+    modalFactory.setLeftMenu(false);
+
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {

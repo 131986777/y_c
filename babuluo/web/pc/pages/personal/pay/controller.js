@@ -5,7 +5,11 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
     modalFactory.setHeader(false);
 
     modalFactory.setSide(true);
+
     modalFactory.setCateGory(true);
+
+    modalFactory.setLeftMenu(false);
+
     $(".zhifu").click(function () {
         $(".zhifu").removeClass("active");
         $(".yang").removeClass("choosed");

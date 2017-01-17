@@ -7,8 +7,8 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
     modalFactory.setSide(false);
 
     modalFactory.setLeftMenu(true);
+
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
-    modalFactory.setBottom(true);
     $scope.homeList = new Array();
     $scope.limitList = new Array();
     $scope.groupList = new Array();

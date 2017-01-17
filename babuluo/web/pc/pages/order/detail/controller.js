@@ -8,6 +8,8 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
 
     modalFactory.setCateGory(true);
 
+    modalFactory.setLeftMenu(false);
+
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {

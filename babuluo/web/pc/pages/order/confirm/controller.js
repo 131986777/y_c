@@ -10,7 +10,9 @@ angular.module('AndSell.PC.Main').controller('pages_order_confirm_Controller', f
     modalFactory.setSide(false);
 
     modalFactory.setShowMenu(true);
+
     modalFactory.setTab(true);
+
     modalFactory.setLeftMenu(false);
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
