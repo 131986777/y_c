@@ -205,7 +205,8 @@
                                 </ul>
                             </div>
                             <div class="price" ng-if="order['SHOP_ORDER.STATE_OUT']==-1">
-                                <span><span class="currentPrice">{{detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'}}</span><span class="originPrice">¥420.00</span></span>
+                                <span><span class="currentPrice">{{detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'}}</span><span
+                                    class="originPrice">¥420.00</span></span>
                                 <span
                                     class="price_count">x{{detail['SHOP_ORDER_INFO.COUNT']}}</span>
                                 <span class="single_count">小计 {{detail['SHOP_ORDER_INFO.PRICE_SUM']*detail['SHOP_ORDER_INFO.COUNT'] | currency : '￥'}}</span>
@@ -221,6 +222,7 @@
                         </li>
                     </ul>
                 </div>
+
                 <p class="remark"
                    ng-if="order['SHOP_ORDER.REMARK']!=undefined&&order['SHOP_ORDER.REMARK']!=''">
                     备注:{{order['SHOP_ORDER.REMARK']}}</p>
