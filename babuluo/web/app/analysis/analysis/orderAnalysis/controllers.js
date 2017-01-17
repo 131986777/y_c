@@ -21,6 +21,8 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
 
     modalFactory.setTitle("线上销售分析");
     modalFactory.setBottom(false);
+    $scope.monthDay = new Date().getDate();
+    $scope.weekDay = new Date().getDay();
     $scope.START = getYesterMonthBeginDay();
     $scope.END = theYear+"-"+theMonth+"-"+theDay;
     //上周的数据
@@ -48,6 +50,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderAnalysis_Contr
         var lastDay = theYear + "-" + theMonth + "-" + myDate.getDate();//上个月的最后一天
         getOrderSource(firstDay,lastDay);
         theMonth = theDate.getMonth()+1;
+        theYear = theDate.getFullYear();
         $scope.groupRange['STARTDAY'] = firstDay;
         $scope.groupRange['ENDDAY'] = lastDay;
         showChartOnOrder();

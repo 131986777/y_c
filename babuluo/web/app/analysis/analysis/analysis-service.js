@@ -10,7 +10,7 @@ AndSellMainModule.service('analysisFactory', function ($resource, baseURL) {
             }
         });
     };
-    // 根据时间范围查询线下报表
+    // 根据时间范围查询线下报表 。。。
     this.getOfflineFormChangeByRange=function (startDay,endDay) {
         return $resource(baseURL+"/stat/manage_data_analysis_by_range?STARTDAY=:STARTDAY&ENDDAY=:ENDDAY&FLAG=ANALYSIS_FORM_OFFLINE",{'STARTDAY':startDay,'ENDDAY':endDay},{
             'update':{
