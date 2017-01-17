@@ -35,6 +35,10 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
             name1: '', name2: '', name3: ''
         }
 
+        productFactory.querySalesRankingByShopId({'PAGE_SIZE':'10','PN':'1'},function (resq) {
+            $scope.productRanking = resq.data;
+        });
+
         var params = {};
         params['SHOP_PRODUCT.PRD_ID'] = $stateParams.PRD_ID;
         $scope.STORE_ID = 0;
@@ -44,8 +48,10 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         }
         productFactory.getProductAllInfoById(params, function (response) {
             $scope.product = response.data[0];
+            $scope.CMP = $scope.FILE_SERVER_DOMAIN + $scope.product['SHOP_PRODUCT.CMP'];
             if ($scope.product != undefined) {
-                modalFactory.setTitle($scope.product['SHOP_PRODUCT.PRD_NAME'] + ' - 云厨1站商城 - 十分钟吃饭，优质食品购买平台');
+                modalFactory.setTitle($scope.product['SHOP_PRODUCT.PRD_NAME']
+                    + ' - 云厨1站商城 - 十分钟吃饭，优质食品购买平台');
                 $scope.setPrdPicBanner($scope.product);
                 if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                     $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
@@ -60,7 +66,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
                             'price': ele['SHOP_PRODUCT_SKU.REAL_PRICES']
                         });
                     });
-                    $scope.calculateSaleInfo(skulistsForOrder);
+                    //$scope.calculateSaleInfo(skulistsForOrder);
                     $scope.skuData = $scope.getPrdSkuData($scope.skuList);
                     if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length > 0) {
                         $scope.checkContent(1, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
@@ -108,6 +114,10 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         alert(goodCommentsPercent);
     }
 
+    $scope.changeCMP = function (img) {
+        $scope.CMP = img;
+    }
+
     $scope.setPrdPicBanner = function (prd) {
         // 添加轮播图源
         if (prd['SHOP_PRODUCT.CMP'] != undefined) {
@@ -129,6 +139,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
             $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.P5']});
         }
     }
+
 
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -402,6 +413,10 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         }
     }
 
+    $scope.buyNow = function () {
+        $state.go('pages/order/confirm', {'SKU_IDS': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID']});
+    }
+
     $scope.toShop = function () {
         $state.go('pages/shop', {'FROM': window.location.href});
     }
@@ -426,7 +441,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
 
     }
 
-    //切换数据源
+    //切换评论数据源
     $scope.reset = function (val) {
         if (val == 'all') {
             $scope.allComments = $scope.proComments;
@@ -455,8 +470,6 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         }
     };
 
-
-
     var swiper = new Swiper('.swiper-container', {
         paginationClickable: true,
         spaceBetween: 300,
@@ -468,18 +481,27 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
     });
 
     //好评百分比，中评百分比，差评百分比
-    $scope.commentsPercents = function (fra,nums) {
-        //alert(fra+' '+nums);
-        //alert(typeof(fra)+typeof (nums));
-        //alert($scope.goodCommentsPercent+" "+$scope.midCommentsPercent+" "+$scope.badCommentsPercent);
-        // alert((parseInt(fra)/parseInt(nums)*100).fixed(0));
-        if(nums==0){
+    $scope.commentsPercent = function (fra, nums) {
+        if (nums == 0) {
             return 0;
         }
         var i =  fra/nums*100;
         return i;
     }
 
+    //点击收藏按钮事件
+    $scope.collectionClick = function(){
+
+        $scope.collectionState *= -1;
+
+        var parameters = {};
+        parameters['PRODUCT_COLLECTION.USER_ID'] = $scope.uid;
+        parameters['PRODUCT_COLLECTION.PRD_ID'] = $scope.product['SHOP_PRODUCT.PRD_ID'];
+        parameters['PRODUCT_COLLECTION.PRD_SPU'] = $scope.product['SHOP_PRODUCT.PRD_SPU'];
+        parameters['PRODUCT_COLLECTION.COLLECTION_STATE'] = $scope.collectionState;
+
+        productFactory.addAndMod(parameters);
+    };
 
 });
 
