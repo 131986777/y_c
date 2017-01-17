@@ -542,6 +542,7 @@ AndSellUI.directive('productItemSwitchModal', function (http, baseURL, imgURL, c
     }
 });
 
+
 //树形结构
 AndSellUI.directive('treeList', function () {
     return {
