@@ -46,7 +46,7 @@
                     请在30分钟之内完成付款，逾期订单将关闭
                 </p>
             </span>
-            <div class="opreation_group"  ng-if="order['SHOP_ORDER.STATE_ORDER']==1">
+            <div class="opreation_group" ng-if="order['SHOP_ORDER.STATE_ORDER']==1">
                 <div class="cancel_order" ng-click="cancelOrder()"
                      ng-if="((order['SHOP_ORDER.STATE_MONEY']==-1||((order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&&order['SHOP_ORDER.STATE_MONEY']==1))&& (order['SHOP_ORDER.TYPE']=='3'||order['SHOP_ORDER.TYPE']=='5')))
                         ||(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&& order['SHOP_ORDER.STATE_OUT']==-1)&& order['SHOP_ORDER.TYPE']=='1')">
@@ -195,18 +195,18 @@
                                     {{detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']}}</p>
                                 <p class="goods_id">{{detail['SHOP_ORDER_INFO.SPU']}}</p>
                             </div>
-                            <!--<div class="gift">-->
-                            <!--<ul>-->
-                            <!--<li>-->
-                            <!--<img src="imgs/shangping3.jpg" alt="">-->
-                            <!--<span class="gift_name">时尚复古斜挎单肩包</span>-->
-                            <!--<span class="count">x1箱</span>-->
-                            <!--</li>-->
+                            <div class="gift">
+                                <ul>
+                                    <li>
+                                        <img src="imgs/shangping3.jpg" alt="">
+                                        <span class="gift_name">时尚复古斜挎单肩包</span>
+                                        <span class="count">x1箱</span>
+                                    </li>
 
-                            <!--</ul>-->
-                            <!--</div>-->
+                                </ul>
+                            </div>
                             <div class="price" ng-if="order['SHOP_ORDER.STATE_OUT']==-1">
-                                <span>{{detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'}}</span>
+                                <span><span class="currentPrice">{{detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'}}</span><span class="originPrice">¥420.00</span></span>
                                 <span
                                     class="price_count">x{{detail['SHOP_ORDER_INFO.COUNT']}}</span>
                                 <span class="single_count">小计 {{detail['SHOP_ORDER_INFO.PRICE_SUM']*detail['SHOP_ORDER_INFO.COUNT'] | currency : '￥'}}</span>
@@ -222,7 +222,9 @@
                         </li>
                     </ul>
                 </div>
-                <p class="remark" ng-if="order['SHOP_ORDER.REMARK']!=undefined&&order['SHOP_ORDER.REMARK']!=''">备注:{{order['SHOP_ORDER.REMARK']}}</p>
+                <p class="remark"
+                   ng-if="order['SHOP_ORDER.REMARK']!=undefined&&order['SHOP_ORDER.REMARK']!=''">
+                    备注:{{order['SHOP_ORDER.REMARK']}}</p>
             </div>
         </div>
         <div class="receipt_info">
