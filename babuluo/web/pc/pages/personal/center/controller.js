@@ -1,6 +1,6 @@
-angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller', function ($interval, $scope, $state, modalFactory,orderFactory, personalFactory,balanceFactory) {
+angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller', function ($interval, $scope, $state, modalFactory, orderFactory, personalFactory, balanceFactory) {
 
-    modalFactory.setTitle("订单评价");
+    modalFactory.setTitle("个人中心");
 
     modalFactory.setHeader(false);
     modalFactory.setSide(true);
@@ -24,6 +24,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller',
         form['MEMBER.USER_ID'] = uid;
         personalFactory.getPhone(form, function (response) {
             $scope.USER = response.data[0];
+            $scope.modifyUserName = $scope.USER['MEMBER.USER_NAME'];
         }, function (response) {
 
         });
@@ -54,11 +55,10 @@ angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller',
             modalFactory.showShortAlert('登录异常');
         }
 
-        personalFactory.getMemberCardByUserId({},function (resq) {
-            $scope.memberCards =resq.data;
+        personalFactory.getMemberCardByUserId({}, function (resq) {
+            $scope.memberCards = resq.data;
         });
     }
-
 
 
     $scope.getOrderStates = function () {
@@ -70,4 +70,13 @@ angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller',
     $scope.initLoad();
 
 
+    $scope.modifyName = function () {
+
+        personalFactory.modifyMember({"MEMBER.USER_NAME": $scope.modifyUserName}, function (response) {
+            modalFactory.showShortAlert("修改成功");
+            $scope.initLoad();
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+    }
 });
