@@ -19,7 +19,9 @@ angular.module('AndSell.Main').controller('analysis_analysis_compareAnalysis_Con
         if(state=='3'){
             $scope.initLoad();
         }else if(state=='4'){
-            getCompareSource(getWeekBeginDay(new Date(new Date())),getWeekEndDay(new Date(new Date())));
+
+            $scope.getGroupByRange();
+
         }else if(state =='5'){
             getCompareSource(getYesterMonthBeginDay(new Date()),getYesterday());
         }
@@ -28,7 +30,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_compareAnalysis_Con
     $scope.getGroupByRange = function () {
         var day = $scope.groupRange['DAY'];
         if($scope.FLAG=='4'){
-            getCompareSource(getWeekBeginDay(new Date(day)),getWeekEndDay(new Date(day)));
+            getCompareSource(getWeekBeginDay(new Date(day)),day);
         }else if($scope.FLAG =='5'){
             getCompareSource(getYesterMonthBeginDay(day),day);
         }else{
@@ -161,10 +163,12 @@ function quickSort(arr){
     //递归
     return quickSort(left).concat([pivot],quickSort(right));
 }
+
+
 //获取以选择天数为基准的一周的开始
 function getWeekBeginDay(day) {
-    var monday = new Date(day.getTime() - (day.getDay()-1)*24*60*60*1000);
-    return monday.getFullYear()+"-"+(monday.getMonth()+1)+"-"+monday.getDate();
+    var date = new Date(day.getTime() - 7 * 24 * 3600 * 1000);
+    return date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate();
 }
 //获取以选择天数为基准的一周的结束
 function getWeekEndDay(day) {

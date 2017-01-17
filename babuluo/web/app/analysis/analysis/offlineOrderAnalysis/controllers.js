@@ -21,6 +21,8 @@ angular.module('AndSell.Main').controller('analysis_analysis_offlineOrderAnalysi
 
     modalFactory.setTitle("线下销售分析");
     modalFactory.setBottom(false);
+    $scope.monthDay = new Date().getDate();
+    $scope.weekDay = new Date().getDay();
     $scope.START = getYesterMonthBeginDay();
     $scope.END = theYear+"-"+theMonth+"-"+theDay;
     //上周的数据
@@ -50,6 +52,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_offlineOrderAnalysi
         $scope.groupRange['STARTDAY'] = firstDay;
         $scope.groupRange['ENDDAY'] =lastDay;
         theMonth = theDate.getMonth()+1;
+        theYear = theDate.getFullYear();
         showChartOnOfflineOrder();
     }
     // //今天的数据
