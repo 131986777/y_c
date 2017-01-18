@@ -475,9 +475,28 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
             console.log($scope.useableList);
         }
     }
-    
-    $scope.chooseCoupon = function () {
-        
+
+    $scope.chooseCoupon = function (coupon) {
+        console.log(coupon);
+        $scope.choiceCoupon = coupon;
+        $scope.ifShowCoupon = false;
+        var price = coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'] / 100;
+        var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
+        switch (Number(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE'])) {
+            case 1:
+                $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.order['SHOP_ORDER.PRICE_OVER'] - (price);
+                break;
+            case 2:
+                $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.order['SHOP_ORDER.PRICE_OVER'] * (price);
+                break;
+        }
+
+        if ($scope.order['SHOP_ORDER.PRICE_OVER'] <= 0) {
+            $scope.order['SHOP_ORDER.PRICE_OVER'] = 0.01;
+        }
+        $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - $scope.order['SHOP_ORDER.PRICE_OVER']);
+        $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
+        $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.choiceCoupon.ID;
     }
 
     $scope.cardPay = function (card) {
@@ -581,5 +600,19 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
             modalFactory.showShortAlert('后台确认收款中!');
             $scope.toDetail($stateParams.ORDER_ID);
         });
+    }
+
+    $scope.detailData = function (data) {
+
+        var str = data.replace(/<br>/g, " ");
+        return str;
+
+    }
+
+    $scope.parseArray = function (data) {
+        if (data != undefined) {
+            data = data.split(',');
+        }
+        return data;
     }
 });

@@ -47,8 +47,57 @@
                 <div class="front">订单金额</div>
                 <div class="price" ng-bind="order['SHOP_ORDER.PRICE_OVER']|currency : '￥'"></div>
             </div>
-            <div>
-                <span ng-click="queryCoupon()">选择优惠券</span>
+        </div>
+        <div class="infoLast">
+            <div class="infoThird">
+                <div class="front">优&nbsp; 惠 &nbsp;券</div>
+                <div class="coupon" ng-show="choiceCoupon!=undefined">
+                    <div class="couponNav">
+                        <div class="cpPos">
+                            <p class="cpTitle">{{choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME']}}</p>
+                            <div class="cpMoneyPos"
+                                 ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                                <p class="cpMoney">
+                                    {{(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}</p>
+                                <p class="yuan">元</p>
+                            </div>
+                            <div class="cpMoneyPos"
+                                 ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                                <p class="cpMoney">
+                                    {{(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</p>
+                                <p class="yuan">折</p>
+                            </div>
+                            <p class="deadTime">有效期至{{choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']}}</p>
+                        </div>
+                    </div>
+                    <div class="couponMid">
+                        <span class="cpTime">限定时间（每周</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
+                        <span>)</span>
+                        <div class="midPos">
+                            <p class="con">
+                            <span ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用
+                                ({{detailData(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                                <span ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==2">特定商品类别使用
+                                ({{detailData(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                                <span ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==3">特定商品标签使用
+                                ({{detailData(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="" ng-show="choiceCoupon==undefined">
+                    <span ng-click="queryCoupon()">选择优惠券</span>
+                </div>
             </div>
         </div>
         <div class="foot">
@@ -134,7 +183,6 @@
 
         </div>
     </div>
-
     <div class="modal fade text-left in couponModal"
          ng-show="ifShowCoupon" ng-class="{true:'modalBg'}[state=='openCoupon']"
          data-keyboard="false" data-backdrop="static"
@@ -146,27 +194,50 @@
                 <span class="text-left"> 优惠券 </span>
                 <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
             </div>
-            <div class="coupon">
+            <div class="coupon" ng-repeat="ul in useableList" ng-click="chooseCoupon(ul)">
                 <div class="couponNav">
                     <div class="cpPos">
-                        <p class="cpTitle">5元无门槛券</p>
-                        <div class="cpMoneyPos">
-                            <p class="cpMoney">5.00</p>
+                        <p class="cpTitle">{{ul['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME']}}</p>
+                        <div class="cpMoneyPos"
+                             ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                            <p class="cpMoney">
+                                {{(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}</p>
                             <p class="yuan">元</p>
                         </div>
-
-                        <p class="deadTime">有效期至2017-1-15 0:0:0</p>
+                        <div class="cpMoneyPos"
+                             ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                            <p class="cpMoney">
+                                {{(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</p>
+                            <p class="yuan">折</p>
+                        </div>
+                        <p class="deadTime">有效期至{{ul['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']}}</p>
                     </div>
                 </div>
                 <div class="couponMid">
-                    <p class="cpTime">限定时间（每周三）</p>
+                    <span class="cpTime">限定时间（每周</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
+                    <span>)</span>
                     <div class="midPos">
-                        <p class="con">满<span class="m">1.00</span>元可使用</p>
-                        <p class="much">已领一张</p>
+                        <p class="con">
+                            <span ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用
+                                ({{detailData(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                            <span ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==2">特定商品类别使用
+                                ({{detailData(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                            <span ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==3">特定商品标签使用
+                                ({{detailData(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                        </p>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
