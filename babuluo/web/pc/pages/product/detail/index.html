@@ -91,7 +91,7 @@
                 <div class="endPayGroup">
                     <a href="" class="addToCart" ng-click="addToCart()">加入购物车</a>
                     <a href="" class="buyNow" ng-click="buyNow()">立即购买</a>
-                    <a href="" class="collect"></a>
+                    <a href="" class="collect" ng-class="{true:'active'}[collectionState==1]" ng-init="collectionState=-1" ng-click="collectionClick()"></a>
                 </div>
             </div>
 
@@ -110,7 +110,7 @@
                             </div>
                         </li>
                     </ul>
-                </div>
+                 </div>
             </div>
             <div class="detailIntro">
                 <div class="introCategories" ng-init="prd_detai_model='detail'">

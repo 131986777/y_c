@@ -1,3 +1,7 @@
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .collect.active {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAl9JREFUOBGlVUtrU0EUPmfuy9gGs1DwQZNUE0ILSrYiGAiu3LjwLwiugoFaxY2FLhVrTNxY8Be4EgoupS7culEw0pAX+MBNNaltw713/CaaNMm93FzrwGXOnPnOl2/OOTMhCjk6t+Yv/ywmLoaEkx4W6Lr2PZLcA/5amBgOA+oWk1nbdt4BLIXB56OPWx+mxYlpALXv2M5dNUsidm3q22odNKYq3i7MnWNJVZBqioiZbNPUU5FH9WYQ8VTFgnh5QKqIpCS9t+8sBZGqvUDF3eXkSWfPbUgprTEipl2NrES0svV9zD+yGBIjmPdun43v9+wMM2cgLQPXJWjMjuAPTGYUU75FbqqS6aNFevVIqdZGLA4IxT8K8fuS5HXYaVQnchB5CAsnQdQn5OGF0IT2jImt/yZVOiAMXIYmrfV+KnbuzJ22f9EmzpA6hM5hCNJQhdDc7JP6t35XzDxofzZMM4981YeofzSgcEuPyLwiVaHD4qnF7tJ8AsV7gyPF1Tr0gCDTMHJH12rtQcwYsXKqCwHiTZhnBqDAmallaVouUmo0RnGeCxKrtGuCeWMUFGSz5JeTpArvIVZOV8oFNYcZ6OFFP5wvMd4DX7AfAXLpi/UQdwqpE3gPjvuR+PlwY0/JYjI2uechJrL9FHTRoyv4VtFHO5MkHfKmzkPssDPML47poCPX9YiWPlZpreJbMTSRRmWe/9n7+xO2Nx0eYna5rxhXcwPdcSH2tHVz9mHj60DlTKn5JVZu3xDCzKIWr5Tfr4Ce/zwp1JMo8tFy8/WAzG+Olmvv4b+6XYhfYSnzk5jfaVK2vzXv3FgAAAAASUVORK5CYII=');
+}
+
 /* line 1, ../sass/headers/_crumbsBar.scss */
 .crumbsBar {
   width: 100%;
@@ -263,7 +267,7 @@
 /* line 136, ../sass/goodsDetail.scss */
 .goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .name, .goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .goodsDetailShow .purchaseChoose .categoriesChoose .standards .show {
   display: inline-block;
-  width: 46px;
+  width: 80px;
   height: 30px;
   line-height: 30px;
   font-size: 14px;
@@ -274,7 +278,7 @@
 /* line 146, ../sass/goodsDetail.scss */
 .goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .standardsList {
   display: inline-block;
-  width: calc(100% - 46px);
+  width: calc(100% - 80px);
 }
 /* line 149, ../sass/goodsDetail.scss */
 .goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .standardsList li {
