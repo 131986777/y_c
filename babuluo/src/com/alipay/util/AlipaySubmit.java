@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.dom4j.Document;
@@ -129,5 +130,13 @@ public class AlipaySubmit {
         }
 
         return result.toString();
+    }
+
+    public static void main(String[] args) {
+        Map<String,String> sParaTemp = new HashMap<>();
+        //除去数组中的空值和签名参数
+        Map<String, String> sPara = AlipayCore.paraFilter(sParaTemp);
+        //生成签名结果
+        String mysign = buildRequestMysign(sPara,"sy6zcif7m285u4htm311yytz6eyks7ce");
     }
 }
