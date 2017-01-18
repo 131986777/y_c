@@ -127,6 +127,7 @@ public class AlipaySubmit {
                     result.append(node1.getText());
                 }
             }
+
         }
 
         return result.toString();
