@@ -341,3 +341,10 @@
 .row-wrap-order-pay .weixin .modalBg {
     background-color: rgba(0, 0, 0, 0.3);
 }
+
+.row-wrap-order-pay .couponModal .modal-content {
+    width: 931px;
+    min-height: 300px;
+    margin: 0 auto;
+    margin-top: 100px;
+}

@@ -29,6 +29,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
     $scope.close = function () {
         $scope.ifShow = false;
         $scope.ifShowhuiyuan = false;
+        $scope.ifShowCoupon = false;
     }
     $scope.chooseHuiyuan = function () {
         $scope.ifShowhuiyuan = true;
@@ -397,6 +398,88 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         }
     };
 
+    $scope.queryCoupon = function () {
+        $scope.ifShowCoupon = true;
+        $scope.state = 'openCoupon';
+
+        personalFactory.getCouponListByUser({}, function (response) {
+            $scope.memberCouponList = response.data;       //客户的所有优惠券
+            $scope.judgeUsableCoupon();
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+    }
+
+    /**
+     * 判断可用优惠券
+     */
+    $scope.useableList = new Array();   //可用的优惠券数组，如可用压入里面
+
+    $scope.judgeUsableCoupon = function () {
+
+        var week = new Date().getDay();     //得到的今日的星期
+        if (week = 0) {
+            week = 7;
+        }
+
+        if ($scope.memberCouponList.length <= 0) {
+            modalFactory.showShortAlert("无可用优惠券！");
+        } else {
+            $scope.memberCouponList.forEach(function (ele) {
+                var targetObjArray = ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_ID'];  //限定对象数组
+                var weekArray = ele['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'];    //优惠券的星期数组
+                if (ele['MEMBER_COUPON.COUPON_INFO'] != undefined && ele['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO'] != undefined) {
+                    if ((ele['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.CONDITION_PRICE']) / 100 < $scope.order['SHOP_ORDER.PRICE_OVER']) {   //满足使用门槛
+                        if (weekArray.indexOf(week) != -1) {       //如果今天的星期在优惠券的星期数组
+                            if (ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE'] == 1) {   //限定商品
+                                for (i = 0; i < $scope.orderDetailList.length; i++) {   //遍历订单中的每一个商品
+                                    if (targetObjArray.indexOf($scope.orderDetailList[i]['SHOP_ORDER_INFO.SKU_ID']) == -1) {
+                                        break;
+                                    }
+                                    if (i == $scope.orderDetailList.length - 1) {
+                                        $scope.useableList.push(ele);
+                                    }
+                                }
+                            }
+                            if (ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE'] == 2) {   //限定类别
+                                for (i = 0; i < $scope.orderDetailList.length; i++) {   //遍历订单中的每一个商品
+                                    if (targetObjArray.indexOf($scope.orderDetailList[i]['SHOP_ORDER_INFO.CLASS_ID']) == -1) {   //该商品id不在限定对象数组中，直接跳出
+                                        break;
+                                    }
+                                    if (i == $scope.orderDetailList.length - 1) {
+                                        $scope.useableList.push(ele);
+                                    }
+                                }
+                            }
+                            if (ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE'] == 3) {   //限定标签
+
+                                for (var i = 0; i < $scope.orderDetailList.length; i++) {   //遍历订单中的每一个商品
+                                    var tagIdArray = $scope.orderDetailList[i]['SHOP_ORDER_INFO.TAG_ID'].split(',');
+                                    for (var j = 0; j < tagIdArray.length; j++) {
+                                        if (targetObjArray.indexOf(tagIdArray[j]) != -1) {         //商品的标签ID有多个，只要有一个在限定数组中即可
+                                            if (i == $scope.orderDetailList.length - 1) {
+                                                $scope.useableList.push(ele);
+                                            }
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            if (ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE'] == -1) {   //不限定
+                                $scope.useableList.push(ele);
+                            }
+                        }
+                    }
+                }
+            });
+            console.log($scope.useableList);
+        }
+    }
+    
+    $scope.chooseCoupon = function () {
+        
+    }
+
     $scope.cardPay = function (card) {
         $scope.close();
         $scope.payCard = card;
@@ -459,7 +542,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         if (lock == 0) {
             lock = 1;
             orderFactory.queryWXPayOrder($scope.pay, function (response) {
-                lock =0;
+                lock = 0;
                 console.log(response);
                 console.log(1);
                 if (response.extraData.payState == '1') {
