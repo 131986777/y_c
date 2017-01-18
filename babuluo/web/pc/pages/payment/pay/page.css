@@ -1,4 +1,8 @@
 
+.payEffect{
+  background-color: #fff;
+  height:100%;
+}
 /* line 6, ../sass/pay.scss */
 .containers-order-pay {
   background-color: #fff;
@@ -32,10 +36,13 @@
 .containers-order-pay .row-wrap1 .infoTop .infoFirst {
   margin-bottom: 10px; }
 /* line 31, ../sass/pay.scss */
-.containers-order-pay .row-wrap1 .infoTop .infoFirst .front {
+.containers-order-pay .row-wrap1 .front {
   float: left;
   width: 80px;
-  margin-right: 30px; }
+  margin-right: 30px;
+  font-size: 14px;
+  color: #4b4b4b;
+}
 /* line 39, ../sass/pay.scss */
 .containers-order-pay .row-wrap1 .infoMiddle {
   font-size: 14px;
@@ -48,7 +55,9 @@
 .containers-order-pay .row-wrap1 .infoMiddle .infoSecond .front {
   float: left;
   width: 80px;
-  margin-right: 30px; }
+  margin-right: 30px;
+
+}
 /* line 52, ../sass/pay.scss */
 .containers-order-pay .row-wrap1 .infoLast {
   font-size: 14px;
@@ -66,6 +75,74 @@
 .containers-order-pay .row-wrap1 .infoLast .infoThird .price {
   font-size: 25px;
   color: #f36e19; }
+.containers-order-pay .row-wrap1 .coupon{
+  width: 275px;
+  height: 115px;
+  background-color: #FFF9F4;
+  border-radius: 3px;
+  display: inline-block;
+}
+.containers-order-pay .row-wrap1 .coupon .couponNav {
+  height: 40px;
+  width: 100%;
+  background-color: #FF9732;
+  color: white;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.containers-order-pay .row-wrap1 .coupon .couponNav .cpPos{
+  margin-left: 10px;
+  padding-top: 6px;
+}
+.containers-order-pay .row-wrap1 .coupon .couponNav .cpPos .cpMoneyPos{
+  float: right;
+  margin-right: 10px;
+}
+.containers-order-pay .row-wrap1 .coupon .couponNav .cpPos .cpMoneyPos .cpMoney{
+  display: inline-block;
+  font-size: 25px;
+  /* float: right; */
+  margin-right: 5px;
+
+}
+.containers-order-pay .row-wrap1 .coupon .couponNav .cpPos .cpMoneyPos .yuan{
+  /* display: inline-block; */
+  font-size: 16px;
+
+  display: inline-block;
+}
+.containers-order-pay .row-wrap1 .coupon .couponNav .cpTitle {
+  font-size: 16px;
+  display: inline-block;
+}
+.containers-order-pay .row-wrap1 .coupon .couponNav .deadTime{
+font-size: 11px;
+}
+.containers-order-pay .row-wrap1 .coupon .couponMid{
+  margin-top: 15px;
+  margin-left: 10px;
+}
+.containers-order-pay .row-wrap1 .coupon .cpTime{
+  font-size: 16px;
+  color: #4b4b4b;
+}
+.containers-order-pay .row-wrap1 .coupon .couponMid .midPos{
+  margin-top: 15px;
+}
+.containers-order-pay .row-wrap1 .coupon .couponMid .midPos .con{
+  color: #4b4b4b;
+  font-size: 11px;
+  display: inline-block;
+}
+.containers-order-pay .row-wrap1 .coupon .couponMid .midPos .con .m{
+ color: #f36f1a;
+}
+.containers-order-pay .row-wrap1 .coupon .couponMid .midPos .much{
+  float: right;
+  color: #4b4b4b;
+  font-size: 11px;
+  margin-right: 10px;
+}
 /* line 70, ../sass/pay.scss */
 .containers-order-pay .row-wrap1 .foot {
   overflow: hidden;
