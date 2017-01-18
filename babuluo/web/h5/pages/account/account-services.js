@@ -15,4 +15,6 @@ AndSellH5MainModule.service('eventFactory', function (http) {
 
     this.queryPosition = http.post('/marketing/luckyDraw/queryAll');
 
+    this.getCouponInfo = http.post('/coupon/coupon/getById');
+
 });

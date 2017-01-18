@@ -110,13 +110,29 @@ angular.module('AndSell.H5.Main').controller('pages_account_lucky_Controller', f
     $scope.initData = function () {
         //没有中奖的区域
         $scope.unLuckyPosition = [1, 2, 3, 4, 5, 6, 7, 8];
+        $scope.couponIdList = [];
+        $scope.couponMap = Map();
         eventFactory.queryPosition({}, function (response) {
+            console.log(response.data);
+            $scope.luckListAll = response.data;
             response.data.forEach(function (ele) {
                 $scope.unLuckyPosition.remove(Number(ele['LUCKY_DRAW.LOCATION']));
+                $scope.couponIdList.push(ele['LUCKY_DRAW.PRIZE_ID']);
             });
-
+            $scope.couponIdList = unique($scope.couponIdList);
+            eventFactory.getCouponInfo({'COUPON.ID': $scope.couponIdList}, function (response) {
+                response.data.forEach(function (ele) {
+                    $scope.couponMap.set(ele['COUPON.ID'], ele);
+                });
+            });
         });
-    }
+        console.log($scope.couponMap);
+    };
+
+    $scope.getInfo = function (i) {
+        //得到优惠券信息
+        $scope.couponMap.get($scope.luckListAll[i]['LUCKY_DRAW.PRIZE_ID']);
+    };
 
     $scope.queryLucky = function () {
         eventFactory.queryLucky({'USER_ID': getCookie('ANDSELLID')}, function (response) {
@@ -125,7 +141,7 @@ angular.module('AndSell.H5.Main').controller('pages_account_lucky_Controller', f
                 if (position != 0) {
                     $scope.stop(Number(position));
                     setTimeout(function () {
-                        alert("恭喜您中奖了！奖品为" + position + "！");
+                        alert("恭喜您中奖了！奖品为：" + $scope.luckListAll[position]['LUCKY_DRAW.INTRO'] + "！");
                     }, 2500);
                 } else {
                     var random = getRandom($scope.unLuckyPosition);
@@ -149,6 +165,19 @@ angular.module('AndSell.H5.Main').controller('pages_account_lucky_Controller', f
     function getRandom(array) {
         var n = Math.floor(Math.random() * array.length + 1) - 1;
         return array[n];
+    }
+
+    //数组去重
+    function unique(arr) {
+        var result = [],
+            hash = {};
+        for (var i = 0, elem; (elem = arr[i]) != null; i++) {
+            if (!hash[elem]) {
+                result.push(elem);
+                hash[elem] = true;
+            }
+        }
+        return result;
     }
 });
 
