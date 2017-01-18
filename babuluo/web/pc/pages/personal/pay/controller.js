@@ -484,11 +484,9 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
         switch (Number(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE'])) {
             case 1:
-                console.log(1);
                 $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.order['SHOP_ORDER.PRICE_OVER'] - (price);
                 break;
             case 2:
-                console.log(2);
                 $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.order['SHOP_ORDER.PRICE_OVER'] * (price);
                 break;
         }
