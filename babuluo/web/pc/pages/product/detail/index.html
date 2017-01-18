@@ -5,17 +5,17 @@
         <!--<a href="">水果</a>-->
         <!--<a href="">蓝莓</a>-->
         <!--</div>-->
-        <div class="goodsDetailShow">
+        <div class="goodsDetailShow" >
             <div class="picShow">
                 <div class="mainPic">
-                    <img ng-src="{{FILE_SERVER_DOMAIN+product['SHOP_PRODUCT.CMP']}}">
+                    <img ng-src="{{CMP}}">
                 </div>
                 <div class="picList">
                     <ul>
                         <li ng-repeat="slide in slides">
                             <img
-                                ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
-                                style="height: 100%;width: 100%;">
+                                    ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
+                                    style="height: 100%;width: 100%;" ng-click="changeCMP(slide.image)">
                         </li>
                     </ul>
                 </div>
@@ -30,31 +30,31 @@
                         <span class="name">价格</span>
                         <span class="content">
                             <span class="current"
-                                  ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
-                                  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+                                  ng-bind="nowPrice | currency :'￥'">
                             </span>
-                            <span class="origin" ng-if="sku!=undefined&&sku['isSale']"
-                                  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
+                            <span class="origin" ng-if="oldPrice != null"
+                                  ng-bind="oldPrice | currency :'￥'">
                             </span>
                             <!--<span ng-bind="skuData.minPrice | currency :'￥'"></span> - -->
                             <!--<span ng-bind="skuData.maxPrice | currency :'￥'"></span>-->
                         </span>
                     </div>
-                    <!--<div class="promotionGroup">-->
-                    <!--<span class="name">促销</span>-->
-                    <!--<span class="content">-->
-                    <!--<span class="activities">-->
-                    <!--<span class="sign">下单立减</span>-->
-                    <!--下单立减10.00元，买一送一-->
-                    <!--</span>-->
-                    <!--</span>-->
-                    <!--</div>-->
+                    <div class="promotionGroup" ng-if="planUnitVO['presents'] != null">
+                    <span class="name" >促销</span>
+                    <span class="content">
+                    <span class="activities">
+                    <span class="sign">赠</span>
+                    <span ng-bind="present['SHOP_PRODUCT.PRD_NAME'] + present['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ present['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ planUnitVO['presents'][0]['num']"></span>
+                    </span>
+                    </span>
+                    </div>
                 </div>
                 <div class="categoriesChoose">
                     <div class="standards" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>0">
                         <span class="name" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME1']"></span>
                         <ul class="standardsList">
                             <li ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1']"
+                                ng-class=" { true :'active'}[currSkuContentSelectMap.name1==item] "
                                 ng-click="checkContent(1,item)"
                                 ng-bind="item">
                             </li>
@@ -64,6 +64,7 @@
                         <span class="name" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME2']"></span>
                         <ul class="standardsList">
                             <li ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT2']"
+                                ng-class=" { true :'active'}[currSkuContentSelectMap.name2==item] "
                                 ng-click="checkContent(2,item)"
                                 ng-bind="item"></li>
                         </ul>
@@ -72,6 +73,7 @@
                         <span class="name" ng-bind="skuData['SHOP_PRODUCT_SKU.SKU_NAME3']"></span>
                         <ul class="standardsList">
                             <li ng-repeat="item in skuData['SHOP_PRODUCT_SKU.SKU_CONTENT3']"
+                                ng-class=" { true :'active'}[currSkuContentSelectMap.name3==item] "
                                 ng-click="checkContent(3,item)"
                                 ng-bind="item"></li>
                         </ul>
@@ -184,99 +186,49 @@
                     <div class="evaluateIntro active">
                         <div class="summarize">
                             <div class="totalPer">
-                                <span class="number">98%</span>
+                                <span class="number">{{goodCommentsPercent}}</span>
                                 <span class="text">好评度</span>
                             </div>
                             <div class="evaluateSources">
                                 <div class="source">
-                                    <span class="name">好评<span class="count">(126条)</span></span>
+                                    <span class="name">好评<span class="count">({{listLength(goodComments)}}条)</span></span>
                                     <div class="perBar">
-                                        <div class="currentPer" style="width:98%;"></div>
+                                        <div class="currentPer" ng-style="goodcp"></div>
                                     </div>
-                                    <span class="show">98%</span>
+                                    <!--<span class="show" >{{goodCommentsPercent}}</span>-->
                                 </div>
                                 <div class="source">
-                                    <span class="name">中评<span class="count">(12条)</span></span>
+                                    <span class="name">中评<span class="count">({{listLength(midComments)}}条)</span></span>
                                     <div class="perBar">
-                                        <div class="currentPer" style="width:2%;"></div>
+                                        <div class="currentPer" ng-style="midcp"></div>
                                     </div>
-                                    <span class="show">98%</span>
+                                    <!--<span class="show">{{midCommentsPercent}}</span>-->
                                 </div>
                                 <div class="source">
-                                    <span class="name">差评<span class="count">(1条)</span></span>
+                                    <span class="name">差评<span class="count">({{listLength(badComments)}}条)</span></span>
                                     <div class="perBar">
-                                        <div class="currentPer" style="width:0;"></div>
+                                        <div class="currentPer" ng-style="badcp"></div>
                                     </div>
-                                    <span class="show">98%</span>
+                                    <!--<span class="show">{{badCommentsPercent}}</span>-->
                                 </div>
                             </div>
                         </div>
-                        <div class="evaluateLists">
+                        <div class="evaluateLists" ng-repeat="proc in allComments">
                             <div class="list">
                                 <div class="favicon">
                                     <img src="../images/togetherBuy_pic_2.png" alt="">
                                 </div>
                                 <div class="listContent">
-                                    <p class="userInfo"><span class="name">ZEXIKUN</span><span
-                                        class="time">2016/12/29 17:36:59</span></p>
+                                    <p class="userInfo"><span class="name">{{proc['MEMBER.USER_NAME']}}</span><span
+                                            class="time">{{proc['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD_TIME']}}</span></p>
                                     <p class="text">
-                                        用了一段时间，感觉还行。不过发热还是有一些，特别是风扇高速转动时噪音比较大。电池续航一般，正常使用3个多小时。因为是新品，价格偏贵。外包装精致，产品做工扎实。</p>
+                                        {{proc['SHOP_COMMENT.PRO_MAIN_COMMENT']}}</p>
                                     <div class="imgList">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list">
-                                <div class="favicon">
-                                    <img src="../images/togetherBuy_pic_2.png" alt="">
-                                </div>
-                                <div class="listContent">
-                                    <p class="userInfo"><span class="name">ZEXIKUN</span><span
-                                        class="time">2016/12/29 17:36:59</span></p>
-                                    <p class="text">
-                                        用了一段时间，感觉还行。不过发热还是有一些，特别是风扇高速转动时噪音比较大。电池续航一般，正常使用3个多小时。因为是新品，价格偏贵。外包装精致，产品做工扎实。</p>
-                                    <div class="imgList">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list">
-                                <div class="favicon">
-                                    <img src="../images/togetherBuy_pic_2.png" alt="">
-                                </div>
-                                <div class="listContent">
-                                    <p class="userInfo"><span class="name">ZEXIKUN</span><span
-                                        class="time">2016/12/29 17:36:59</span></p>
-                                    <p class="text">
-                                        用了一段时间，感觉还行。不过发热还是有一些，特别是风扇高速转动时噪音比较大。电池续航一般，正常使用3个多小时。因为是新品，价格偏贵。外包装精致，产品做工扎实。</p>
-                                    <div class="imgList">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="list">
-                                <div class="favicon">
-                                    <img src="../images/togetherBuy_pic_2.png" alt="">
-                                </div>
-                                <div class="listContent">
-                                    <p class="userInfo"><span class="name">ZEXIKUN</span><span
-                                        class="time">2016/12/29 17:36:59</span></p>
-                                    <p class="text">
-                                        用了一段时间，感觉还行。不过发热还是有一些，特别是风扇高速转动时噪音比较大。电池续航一般，正常使用3个多小时。因为是新品，价格偏贵。外包装精致，产品做工扎实。</p>
-                                    <div class="imgList">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
-                                        <img src="../images/togetherBuy_pic_4.png" alt="">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']!=undefined">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS2']!=undefined">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS3']!=undefined">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS4']!=undefined">
+                                        <img ng-src="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS1']" alt="" ng-show="proc['SHOP_COMMENT.PRO_COMMENT_PHOTOS5']!=undefined">
                                     </div>
                                 </div>
                             </div>

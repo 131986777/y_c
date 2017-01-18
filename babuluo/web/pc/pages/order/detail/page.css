@@ -1,6 +1,7 @@
 @charset "UTF-8";
+
 /* line 2, ../sass/orderDetail.scss */
-.pay_head .opreation_group .return_goods, .pay_head .opreation_group .cancel_order, .pay_head .opreation_group .pay_now {
+.containers-order-detail .showBoard .pay_head .opreation_group .return_goods, .pay_head .opreation_group .cancel_order, .pay_head .opreation_group .pay_now {
   width: 104px;
   height: 35px;
   box-sizing: border-box;
@@ -17,33 +18,35 @@
   text-align: center;
   line-height: 35px;
 }
+
 /* line 18, ../sass/orderDetail.scss */
-.pay_head .opreation_group .return_goods:hover, .pay_head .opreation_group .cancel_order:hover, .pay_head .opreation_group .pay_now:hover {
+.containers-order-detail .showBoard .pay_head .opreation_group .return_goods:hover, .pay_head .opreation_group .cancel_order:hover, .pay_head .opreation_group .pay_now:hover {
   background-color: #e46818;
   border-color: #e46818;
 }
 
 /* line 23, ../sass/orderDetail.scss */
-.pay_head .opreation_group .return_goods, .pay_head .opreation_group .cancel_order {
+.containers-order-detail .showBoard .pay_head .opreation_group .return_goods, .pay_head .opreation_group .cancel_order {
   color: #8a8a8a;
   border: 1px solid #dcdcdc;
   background-color: #fff;
 }
+
 /* line 28, ../sass/orderDetail.scss */
-.pay_head .opreation_group .return_goods:hover, .pay_head .opreation_group .cancel_order:hover {
+.containers-order-detail .showBoard .pay_head .opreation_group .return_goods:hover, .pay_head .opreation_group .cancel_order:hover {
   background-color: #ededed;
   border-color: #ededed;
 }
 
-/* line 33, ../sass/orderDetail.scss */
-.pay_head {
+.containers-order-detail .showBoard .pay_head {
   width: 100%;
   height: 55px;
   margin-top: 28px;
   position: relative;
 }
+
 /* line 38, ../sass/orderDetail.scss */
-.pay_head .wait_pay {
+.containers-order-detail .showBoard .pay_head .wait_pay {
   display: inline-block;
   font-size: 18px;
   color: #808080;
@@ -51,29 +54,31 @@
   top: 0;
   left: 0;
 }
-/* line 46, ../sass/orderDetail.scss */
-.pay_head .time_warning {
+
+.containers-order-detail .showBoard .pay_head .time_warning {
   font-size: 14px;
   color: #fc5d5d;
   position: absolute;
   bottom: 0;
   left: 0;
 }
+
 /* line 53, ../sass/orderDetail.scss */
-.pay_head .opreation_group {
+.containers-order-detail .showBoard .pay_head .opreation_group {
   display: inline-block;
   position: absolute;
   bottom: 0;
   right: 0;
   padding-right: 25px;
 }
+
 /* line 59, ../sass/orderDetail.scss */
-.pay_head .opreation_group .return_goods, .pay_head .opreation_group .cancel_order {
+.containers-order-detail .showBoard .pay_head .opreation_group .return_goods, .pay_head .opreation_group .cancel_order {
   margin-right: 17px;
 }
 
 /* line 68, ../sass/orderDetail.scss */
-.flow_progress {
+.containers-order-detail .showBoard .flow_progress {
   width: 100%;
   height: 21px;
   background-color: #f6f6f6;
@@ -82,8 +87,9 @@
   font-size: 0;
   margin-top: 43px;
 }
+
 /* line 76, ../sass/orderDetail.scss */
-.flow_progress .gradient_bar {
+.containers-order-detail .showBoard .flow_progress .gradient_bar {
   width: 0;
   height: 100%;
   position: absolute;
@@ -93,36 +99,44 @@
   background-color: #7bb149;
   transition: all .3s ease;
 }
+
 /* line 87, ../sass/orderDetail.scss */
-.flow_progress .gradient_bar.step_1 {
+.containers-order-detail .showBoard .flow_progress .gradient_bar.step_1 {
   width: 14.28571%;
 }
+
 /* line 87, ../sass/orderDetail.scss */
-.flow_progress .gradient_bar.step_2 {
+.containers-order-detail .showBoard .flow_progress .gradient_bar.step_2 {
   width: 28.57143%;
 }
+
 /* line 87, ../sass/orderDetail.scss */
-.flow_progress .gradient_bar.step_3 {
+.containers-order-detail .showBoard .flow_progress .gradient_bar.step_3 {
   width: 42.85714%;
 }
+
 /* line 87, ../sass/orderDetail.scss */
-.flow_progress .gradient_bar.step_4 {
+.containers-order-detail .showBoard .flow_progress .gradient_bar.step_4 {
   width: 57.14286%;
 }
+
 /* line 87, ../sass/orderDetail.scss */
-.flow_progress .gradient_bar.step_5 {
+.containers-order-detail .showBoard .flow_progress .gradient_bar.step_5 {
   width: 71.42857%;
 }
+
 /* line 87, ../sass/orderDetail.scss */
-.flow_progress .gradient_bar.step_6 {
+.containers-order-detail .showBoard .flow_progress .gradient_bar.step_6 {
   width: 85.71429%;
 }
+
 /* line 87, ../sass/orderDetail.scss */
-.flow_progress .gradient_bar.step_7 {
+.containers-order-detail .showBoard .flow_progress .gradient_bar.step_7 {
   width: 100%;
 }
+
 /* line 92, ../sass/orderDetail.scss */
-.flow_progress .progress_step {
+.containers-order-detail .showBoard .flow_progress .progress_step {
   width: 100%;
   height: 100%;
   font-size: 0;
@@ -130,8 +144,9 @@
   left: 0;
   top: 0;
 }
+
 /* line 99, ../sass/orderDetail.scss */
-.flow_progress .progress_step li {
+.containers-order-detail .showBoard .flow_progress .progress_step li {
   font-size: 13px;
   display: inline-block;
   color: #929292;
@@ -142,12 +157,14 @@
   position: relative;
   font-weight: 100;
 }
+
 /* line 109, ../sass/orderDetail.scss */
-.flow_progress .progress_step li.finished {
+.containers-order-detail .showBoard .flow_progress .progress_step li.finished {
   color: white;
 }
+
 /* line 111, ../sass/orderDetail.scss */
-.flow_progress .progress_step li.finished .finished_time {
+.containers-order-detail .showBoard .flow_progress .progress_step li.finished .finished_time {
   display: inline-block;
   text-align: center;
   width: 100%;
@@ -159,59 +176,68 @@
 }
 
 /* line 125, ../sass/orderDetail.scss */
-.order_info {
+.containers-order-detail .showBoard .order_info {
   margin-top: 83px;
   width: 100%;
   border-bottom: 1px solid #dcdcdc;
   padding-bottom: 20px;
 }
+
 /* line 130, ../sass/orderDetail.scss */
-.order_info .order_Id {
+.containers-order-detail .showBoard .order_info .order_Id {
   font-size: 16px;
   font-weight: 100;
   color: #4b4b4b;
 }
+
 /* line 135, ../sass/orderDetail.scss */
-.order_info .order_show {
+.containers-order-detail .showBoard .order_info .order_show {
   margin-top: 26px;
   width: 700px;
   min-height: 200px;
 }
+
 /* line 140, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card {
+.containers-order-detail .showBoard .order_info .order_show .pic_card {
   width: 100%;
 }
+
 /* line 142, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul {
   width: 100%;
 }
+
 /* line 144, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li {
   margin-top: 40px;
   width: 100%;
   padding-left: 115px;
   position: relative;
   margin-bottom: 23px;
 }
+
 /* line 151, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li:first-child {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li:first-child {
   margin-top: 0;
 }
+
 /* line 154, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li img {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li img {
   width: 70px;
   height: 70px;
   position: absolute;
   left: 0;
   top: 0;
 }
+
 /* line 161, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .goods_intro {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .goods_intro {
   height: 70px;
   position: relative;
 }
+
 /* line 164, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .goods_intro .goods_name {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .goods_intro .goods_name {
   width: 15em;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -221,8 +247,9 @@
   height: auto;
   line-height: 1.5em;
 }
+
 /* line 174, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .goods_intro .goods_size {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .goods_intro .goods_size {
   font-size: 13px;
   color: #8a8a8a;
   height: auto;
@@ -231,8 +258,9 @@
   top: 50%;
   transform: translateY(-25%);
 }
+
 /* line 183, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .goods_intro .goods_id {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .goods_intro .goods_id {
   font-size: 12px;
   color: #969696;
   height: auto;
@@ -241,15 +269,17 @@
   top: 100%;
   transform: translateY(-110%);
 }
+
 /* line 193, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .gift {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .gift {
   margin-top: 14px;
   position: relative;
   padding-left: 33px;
 }
+
 /* line 197, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .gift:after {
-  content: 'Ôù';
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .gift:after {
+  content: 'èµ ';
   position: absolute;
   left: 0;
   top: 0;
@@ -257,50 +287,58 @@
   font-size: 13px;
   color: #8a8a8a;
 }
+
 /* line 206, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .gift ul {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .gift ul {
   position: relative;
 }
+
 /* line 208, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .gift ul li {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .gift ul li {
   padding: 0;
   min-height: auto;
   margin: 0;
   margin-bottom: 10px;
   height: 40px;
 }
+
 /* line 214, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .gift ul li * {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .gift ul li * {
   margin-right: 18px;
   vertical-align: top;
 }
+
 /* line 218, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .gift ul li img {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .gift ul li img {
   width: 40px;
   height: 40px;
   position: relative;
 }
+
 /* line 224, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .gift ul li .gift_name {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .gift ul li .gift_name {
   font-size: 14px;
   display: inline-block;
   height: 40px;
   color: #494949;
   line-height: 40px;
 }
+
 /* line 231, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .gift ul li .count {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .gift ul li .count {
   font-size: 14px;
   color: #494949;
   line-height: 40px;
 }
+
 /* line 239, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .remark {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .remark {
   color: #fc5d5d;
   font-size: 14px;
 }
+
 /* line 243, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .price {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .price {
   font-size: 14px;
   color: #555;
   position: absolute;
@@ -309,49 +347,78 @@
   right: 0;
   top: 0;
 }
+
 /* line 251, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .price .price_count {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .price .price_count {
   margin: 0px 13px;
 }
+
 /* line 254, ../sass/orderDetail.scss */
-.order_info .order_show .pic_card ul li .price .single_count {
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .price .single_count {
   color: #a2a2a2;
   margin-left: 60px;
 }
-/* line 262, ../sass/orderDetail.scss */
-.order_info .order_show .remark {
+
+/* line 258, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .price .currentPrice {
+  margin-right: .6em;
+}
+
+/* line 261, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .price .originPrice {
+  color: #a2a2a2;
+  position: relative;
+}
+
+/* line 264, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .order_info .order_show .pic_card ul li .price .originPrice:after {
+  content: '';
+  width: calc(100% + 2px);
+  height: 1px;
+  background-color: #a8a8a8;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+}
+
+/* line 279, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .order_info .order_show .remark {
   color: #fc5d5d;
   font-size: 14px;
   display: inline-block;
   margin-left: 115px;
 }
 
-/* line 270, ../sass/orderDetail.scss */
-.receipt_info, .other_info {
+/* line 287, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .receipt_info, .other_info {
   padding: 27px 0;
   border-bottom: 1px solid #dcdcdc;
   position: relative;
 }
-/* line 274, ../sass/orderDetail.scss */
-.receipt_info .info_title, .other_info .info_title {
+
+/* line 291, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .receipt_info .info_title, .other_info .info_title {
   font-size: 16px;
   color: #4b4b4b;
   font-weight: 100;
   margin-bottom: 27px;
 }
-/* line 280, ../sass/orderDetail.scss */
-.receipt_info p, .other_info p {
+
+/* line 297, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .receipt_info p, .other_info p {
   font-size: 14px;
   color: #4b4b4b;
   line-height: 2em;
 }
-/* line 284, ../sass/orderDetail.scss */
-.receipt_info p span:last-child, .other_info p span:last-child {
+
+/* line 301, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .receipt_info p span:last-child, .other_info p span:last-child {
   margin-left: 59px;
 }
 
-/* line 291, ../sass/orderDetail.scss */
-.other_info .change_info {
+/* line 308, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .other_info .change_info {
   width: 20px;
   height: 20px;
   position: absolute;
@@ -362,36 +429,51 @@
   background-position: center;
   background-repeat: no-repeat;
 }
-/* line 301, ../sass/orderDetail.scss */
-.other_info .change_info:hover {
+
+/* line 318, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .other_info .change_info:hover {
   background-image: url(../imgs/deep_write.png);
 }
 
-/* line 306, ../sass/orderDetail.scss */
-.total_count {
+/* line 323, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .total_count {
   position: relative;
   padding-top: 23px;
   right: 0;
   float: right;
 }
-/* line 311, ../sass/orderDetail.scss */
-.total_count p {
+
+/* line 328, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .total_count p {
   font-size: 14px;
   color: #4b4b4b;
   width: 222px;
   vertical-align: bottom;
   line-height: 2.5em;
 }
-/* line 317, ../sass/orderDetail.scss */
-.total_count p span:last-child {
+
+/* line 334, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .total_count p span:last-child {
   float: right;
 }
-/* line 320, ../sass/orderDetail.scss */
-.total_count p .need_pay {
+
+/* line 337, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .total_count p .need_pay {
   font-size: 25px;
   color: #f36e19;
 }
-/* line 324, ../sass/orderDetail.scss */
-.total_count p:last-child {
+
+/* line 341, ../sass/orderDetail.scss */
+.containers-order-detail .showBoard .total_count p:last-child {
   margin-top: 15px;
+}
+
+/* line 21, ../sass/orderList.scss */
+.containers-order-detail .showBoard {
+  width: 960px;
+  min-height: 600px;
+  display: inline-block;
+  float: right;
+  padding: 20px 30px;
+  background-color: #fff;
 }

@@ -62,6 +62,22 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
         $scope.getOrder();
     }
 
+    $scope.bindPresent = function (){
+        $scope.orderList.forEach(function (ele) {
+            ele['presentMap'] = {}
+            ele.details.forEach(function(detail){
+                if (detail['isPresent'] == null) {
+                    return
+                }
+                if (detail['orderOrPrd'] == "prd") {
+                    ele['presentMap'][detail['blongToSkuId']] = detail;
+                } else if (detail['orderOrPrd'] == "order") {
+                    ele['presentMap']['order'] = detail;
+                }
+            })
+        });
+    }
+
     $scope.getOrder = function () {
         orderFactory.getOrder($scope.filter, function (response) {
             Array.prototype.push.apply($scope.orderList, response.data);//数组合并
@@ -81,6 +97,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
             $scope.loading = false;
 
             $scope.getDataReady = true;
+            $scope.bindPresent();
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
         });

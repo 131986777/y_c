@@ -1,5 +1,5 @@
 
-angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory,balanceFactory, http, weUI, productFactory, promoFactory, orderFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory,balanceFactory, http, weUI, productFactory, promoFactory, orderFactory, modalFactory) {
 
 
     modalFactory.setTitle('订单详情');
