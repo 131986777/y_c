@@ -47,6 +47,9 @@
                 <div class="front">订单金额</div>
                 <div class="price" ng-bind="order['SHOP_ORDER.PRICE_OVER']|currency : '￥'"></div>
             </div>
+            <div>
+                <span ng-click="queryCoupon()">选择优惠券</span>
+            </div>
         </div>
         <div class="foot">
             <div class="zhifu">
@@ -125,6 +128,41 @@
 
                         </div>
 
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade text-left in couponModal"
+         ng-show="ifShowCoupon" ng-class="{true:'modalBg'}[state=='openCoupon']"
+         data-keyboard="false" data-backdrop="static"
+         tabindex="-1" data-backdrop="static" data-keyboard="false" aria-hidden="false"
+         style="display: block;">
+        <div class="modal-content">
+            <div class="modal-body form-body text-left"
+                 style="margin-top: 12px;margin-bottom: 12px">
+                <span class="text-left"> 优惠券 </span>
+                <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
+            </div>
+            <div class="coupon">
+                <div class="couponNav">
+                    <div class="cpPos">
+                        <p class="cpTitle">5元无门槛券</p>
+                        <div class="cpMoneyPos">
+                            <p class="cpMoney">5.00</p>
+                            <p class="yuan">元</p>
+                        </div>
+
+                        <p class="deadTime">有效期至2017-1-15 0:0:0</p>
+                    </div>
+                </div>
+                <div class="couponMid">
+                    <p class="cpTime">限定时间（每周三）</p>
+                    <div class="midPos">
+                        <p class="con">满<span class="m">1.00</span>元可使用</p>
+                        <p class="much">已领一张</p>
                     </div>
                 </div>
             </div>
