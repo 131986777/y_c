@@ -348,3 +348,85 @@
     margin: 0 auto;
     margin-top: 100px;
 }
+
+.row-wrap-order-pay .coupon {
+    width: 275px;
+    height: 115px;
+    background-color: #FFF9F4;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.row-wrap-order-pay .coupon .couponNav {
+    height: 40px;
+    width: 100%;
+    background-color: #FF9732;
+    color: white;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.row-wrap-order-pay .coupon .couponNav .cpPos {
+    margin-left: 10px;
+    padding-top: 6px;
+}
+
+.row-wrap-order-pay .coupon .couponNav .cpPos .cpMoneyPos {
+    float: right;
+    margin-right: 10px;
+}
+
+.row-wrap-order-pay .coupon .couponNav .cpPos .cpMoneyPos .cpMoney {
+    display: inline-block;
+    font-size: 25px;
+    /* float: right; */
+    margin-right: 5px;
+
+}
+
+.row-wrap-order-pay .coupon .couponNav .cpPos .cpMoneyPos .yuan {
+    /* display: inline-block; */
+    font-size: 16px;
+
+    display: inline-block;
+}
+
+.row-wrap-order-pay .coupon .couponNav .cpTitle {
+    font-size: 16px;
+    display: inline-block;
+}
+
+.row-wrap-order-pay .coupon .couponNav .deadTime {
+    font-size: 11px;
+}
+
+.row-wrap-order-pay .coupon .couponMid {
+    margin-top: 15px;
+    margin-left: 10px;
+}
+
+.row-wrap-order-pay .coupon .cpTime {
+    font-size: 16px;
+    color: #4b4b4b;
+}
+
+.row-wrap-order-pay .coupon .couponMid .midPos {
+    margin-top: 15px;
+}
+
+.row-wrap-order-pay .coupon .couponMid .midPos .con {
+    color: #4b4b4b;
+    font-size: 11px;
+    display: inline-block;
+}
+
+.row-wrap-order-pay .coupon .couponMid .midPos .con .m {
+    color: #f36f1a;
+}
+
+.row-wrap-order-pay .coupon .couponMid .midPos .much {
+    float: right;
+    color: #4b4b4b;
+    font-size: 11px;
+    margin-right: 10px;
+}
