@@ -34,10 +34,6 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
 
     bodyKeyDownObverse.init(function (a) {
 
-        console.log(a);//输入的值
-
-        console.log($scope.orderDetailList)
-
         //遍历订单下的sku二维码去进行比对
 
         $scope.orderDetailList.forEach(function (ele, index) {
@@ -118,7 +114,14 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
 
     //点击录入的确定按钮
     $scope.addStockProduct = function () {
-
+        if ($scope.stockweight == undefined || $scope.stockweight == '') {
+            modalFactory.showShortAlert('录入失败：请输入规格');
+            return;
+        }
+        if ($scope.stockprice == undefined || $scope.stockprice == '' || $scope.stockprice == 0) {
+            modalFactory.showShortAlert('录入失败：请确保金额正常且不为0');
+            return;
+        }
         if ($scope.stockdetail['SHOP_ORDER_INFO.STOCKWEIGHT'] == undefined) {
             $scope.stockdetail['SHOP_ORDER_INFO.STOCKWEIGHT'] = [];
         }
