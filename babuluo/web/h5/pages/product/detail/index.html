@@ -184,7 +184,7 @@
                                     </div>
                                 </div>
                                 <div class="review-detail">
-                                    所有{{proc['SHOP_COMMENT.PRO_MAIN_COMMENT']}}
+                                    {{proc['SHOP_COMMENT.PRO_MAIN_COMMENT']}}
                                 </div>
                                 <img class="userIcon" ng-src="{{proc['MEMBER.HEADIMG_URL']}}">
                             </div>
@@ -195,29 +195,29 @@
         </div>
     </div>
 
-    <div class="product-action-wrap action-bar-wrap">
-        <div class="action-bar border-top">
-            <div class="icon-wrap">
-                <i class="icon icon-cart-small" ng-click="toCart()"></i>
-                <span class="cartNum" ng-bind="totalSize"></span>
-                购物车
-            </div>
-            <div class="icon-wrap">
-                <!-- 已收藏 class="icon-collected" -->
-                <i class="icon icon-collect active"></i>
-                收藏
-            </div>
-            <a class="add-to-cart cell" ng-click="addToCart()">
-                加入购物车
-            </a>
-        </div>
+  <div class="product-action-wrap action-bar-wrap">
+    <div class="action-bar border-top">
+      <div class="icon-wrap">
+        <i class="icon icon-cart-small" ng-click="toCart()"></i>
+        <span class="cartNum" ng-bind="totalSize"></span>
+        购物车
+      </div>
+      <div class="icon-wrap" ng-click="collectionClick()">
+      <!-- 已收藏 class="icon-collected" -->
+      <i class="icon icon-collect active" ng-class="{true:'icon-collected',false:'icon-collect'}[collectionState==1]" ng-init="collectionState=-1"></i>
+      收藏
+      </div>
+      <a class="add-to-cart cell" ng-click="addToCart()">
+        加入购物车
+      </a>
     </div>
+  </div>
 
-    <!--选择页面遮罩-->
-    <div class="chose-shop" ng-if="STORE_ID==0">
-        <i class="icon-shop"></i>
-        <span>请先选择门店，即可在线购买！</span>
-        <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
-    </div>
+  <!--选择页面遮罩-->
+  <div class="chose-shop" ng-if="STORE_ID==0">
+    <i class="icon-shop"></i>
+    <span>请先选择门店，即可在线购买！</span>
+    <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
+  </div>
 
 </div>

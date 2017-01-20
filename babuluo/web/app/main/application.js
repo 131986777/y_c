@@ -11,8 +11,7 @@ AndSellService.factory("http", function ($http) {
     var _post = function (url, data, funcSuccess, funcFail) {
         return $http.post(url, $.param(data), {
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'withCredentials': true
+                'Content-Type': 'application/x-www-form-urlencoded', 'withCredentials': true
             }
         }).success(function (response) {
             if (response.code == 0) {
@@ -543,6 +542,7 @@ AndSellUI.directive('productItemSwitchModal', function (http, baseURL, imgURL, c
     }
 });
 
+
 //树形结构
 AndSellUI.directive('treeList', function () {
     return {
@@ -658,6 +658,96 @@ AndSellUI.directive('treeList', function () {
 
         }
     }
+});
+
+//Money
+AndSellUI.directive('money', function ($filter, $window) {
+
+    //小数位
+    var floatLimit = 2;
+
+    //保留小数并加千位逗号 不够充0
+    function Decimal(x) {
+        var f_x = parseFloat(x);
+        if (isNaN(f_x)) {
+            return 0;
+        }
+        var f_x = Math.round(x * 100) / 100;
+        var s_x = f_x.toString();
+        var pos_decimal = s_x.indexOf('.');
+        if (pos_decimal < 0) {
+            pos_decimal = s_x.length;
+            s_x += '.';
+        }
+        while (s_x.length <= pos_decimal + floatLimit) {
+            s_x += '0';
+        }
+        return s_x.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    }
+
+    //特殊字符处理
+    function filter(value, blur) {
+        value = value.replace(/[^\d.]/g, "");
+        //必须保证第一个为数字而不是.
+        value = value.replace(/^\./g, "");
+        //保证只有出现一个.而没有多个.
+        value = value.replace(/\.{2,}/g, ".");
+        //保证.只出现一次，而不能出现两次以上
+        value = value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+
+        //去除起始0
+        if (value.length > 1 && value.substring(0, 1) == '0' && value.substring(1, 2) != '.') {
+            value = value.substring(1);
+        }
+
+        var ind = value.indexOf('.');
+        if (ind > -1) {
+            //小数点之后最多两位
+            if (value.split(".")[1].length > floatLimit) {
+                value = value.substring(0, ind + floatLimit + 1);
+            } else if (value.split(".")[1].length == 0 && blur) {
+                //去除结尾.
+                value = value.substring(0, ind);
+
+            }
+        }
+
+        //默认0
+        if (value == '') {
+            value = 0;
+        }
+
+        //自动填充0
+        if (blur) {
+            value = Decimal(value);
+        }
+
+        return value;
+    }
+
+    return {
+        restrict: 'A', require: 'ngModel', link: function (scope, elem, attrs, ctrl, ngModel) {
+
+            elem.bind('focus', function () {
+                var newValue = elem.val();
+                newValue = Number(newValue.replace(/[^0-9\.]+/g, ""));
+                if (isNaN(newValue)) {
+                    newValue = 0;
+                }
+                elem.val(parseFloat(newValue));
+            });
+
+            elem.bind('blur', function () {
+                elem.val(filter(elem.val(), true));
+            });
+
+            ctrl.$viewChangeListeners.push(function () {
+                elem.val(filter(elem.val(), false));
+
+            });
+
+        }
+    };
 });
 
 AndSellService.filter('bytes', function () {

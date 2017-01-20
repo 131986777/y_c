@@ -5,12 +5,16 @@ angular.module('AndSell.PC.Main').controller('pages_account_balance_Controller',
     modalFactory.setHeader(false);
 
     modalFactory.setSide(true);
+
     modalFactory.setCateGory(true);
+
+    modalFactory.setLeftMenu(false);
 
     $scope.balanceDetail = "收支明细";
     $scope.initLoad  = function () {
         $scope.uid = getCookie('ANDSELLID');
         $scope.queryFinanceListByUid($scope.uid);
+        $scope.queryAccountListByUid($scope.uid);
     }
 
     $scope.queryFinanceListByUid = function(uid){
@@ -18,9 +22,16 @@ angular.module('AndSell.PC.Main').controller('pages_account_balance_Controller',
         form['FINANCE_LIST.USER_ID'] = uid;
         balanceFactory.queryByUid(form, function (response) {
             $scope.balanceInfo = response.data;
-            $scope.balance = $scope.balanceInfo[0]['FINANCE_LIST.BALANCE'];
             $scope.typeInfo = $scope.balanceInfo;
-        })
+        });
+    }
+
+    $scope.queryAccountListByUid = function(uid){
+        var form = {};
+        form['FINANCE_LIST.USER_ID'] = uid;
+        balanceFactory.queryAccountByUid(form, function (response) {
+            $scope.balance = response.data[0]['MEMBER_ACCOUNT.BALANCE'];
+        });
     }
 
     $scope.initLoad();

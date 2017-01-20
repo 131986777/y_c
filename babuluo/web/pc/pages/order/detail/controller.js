@@ -1,4 +1,4 @@
-angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory,balanceFactory, http, weUI, productFactory, promoFactory, orderFactory, modalFactory) {
+angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory,balanceFactory, http,productFactory, promoFactory, orderFactory, modalFactory) {
     modalFactory.setTitle("订单详情");
 
     modalFactory.setHeader(false);
@@ -22,7 +22,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
         promise.then(function (result) {
 
             $scope.COUPON_INFO = $stateParams.COUPON_INFO;
-            if ($stateParams.COUPON_INFO != '') {
+            if ($stateParams.COUPON_INFO != ''&&$stateParams.COUPON_INFO!=undefined) {
                 $scope.coupon = JSON.parse($stateParams.COUPON_INFO);
                 if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
                     var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
@@ -79,7 +79,6 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
     }
 
     $scope.calculatePromotion = function (deferred) {
-        weUI.toast.showLoading('正在查询促销条件');
         $scope.skulistsForOrder.forEach(function (ele) {                       //四舍五入
             ele['unitPrice'] = Math.round(ele['unitPrice']);
         })
@@ -91,9 +90,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
             $scope.bindUnit();
             $scope.getPresent();
             deferred.resolve();
-            weUI.toast.hideLoading();
         }, function (response) {
-            weUI.toast.error(response.msg);
         });
     }
 
@@ -172,9 +169,16 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
                         }
                     })
                 })
-                $scope.beforePay();
+                $scope.addPresents();
             });
         }
+        $scope.saveOrder()
+    }
+
+
+    $scope.saveOrder = function(){
+        var orderJson = JSON.stringify($scope.order) ;
+        localStorage.setItem('order',orderJson);
     }
 
     $scope.addDetail = function (present) {
@@ -230,8 +234,6 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
         if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
             >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
             $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
-        } else {
-            weUI.toast.info('会员卡余额不足，请先充值');
         }
     };
 
@@ -248,10 +250,8 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
                 deferred.resolve();
             } else {
                 $state.go('pages/user/accountLogin');
-                weUI.toast.error('请使用正确的账号登录');
             }
         }, function (response) {
-            weUI.toast.error(response.msg);
         });
     }
 
@@ -275,8 +275,8 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
     $scope.getOrder = function (id , deferred) {
         orderFactory.getOrderById({'SHOP_ORDER.ID': id}, function (response) {
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
-            $scope.orderDetailList = JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
             $scope.order = response.data[0];
+            $scope.orderDetailList = JSON.parse($scope.order['SHOP_ORDER.ORDER_INFO']);
             $scope.orderDetailList.forEach(function (ele) {
                 setContentsInfoForOrder(ele);
             });
@@ -310,13 +310,16 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
         });
     }
 
-    $scope.beforePay = function (){
+    $scope.addPresents = function (){
         if ($scope.presents != undefined) {
             $scope.presents.forEach(function (present) {
-                $scope.addDetail(present);
+                if (present != null) {
+                    $scope.addDetail(present);
+                }
             })
         }
         $scope.order['SHOP_ORDER.ORDER_INFO'] = JSON.stringify($scope.orderDetailList);
+        $scope.saveOrder()
     }
 
     //立即支付

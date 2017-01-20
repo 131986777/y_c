@@ -1,7 +1,8 @@
 angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', function ($q, $scope, $http, $stateParams, bannerFactory, modalFactory) {
 
     modalFactory.setTitle('横幅列表');
-    $scope.uploadImageFiles = '';
+    $scope.uploadImageFiles1 = '';
+    $scope.uploadImageFiles2 = '';
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     connALiYun();
@@ -55,7 +56,8 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
 
     $scope.addBannerInfo = function () {
 
-        $scope.add['BANNER.PICTURE'] = $scope.uploadImageFiles;
+        $scope.add['BANNER.PICTURE'] = $scope.uploadImageFiles1;
+        $scope.add['BANNER.PICTURE2'] = $scope.uploadImageFiles2;
         var startTime = document.getElementById("startTime").value;
         startTime = startTime.replace("T", " ");
         $scope.add['BANNER.BEGIN_DATETIME'] = startTime;  //开始时间
@@ -69,6 +71,8 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
             $scope.add = {};
             $("#addBanner").modal('hide');
             $scope.$broadcast('pageBar.reload');
+            $scope.uploadImageFiles1 = '';
+            $scope.uploadImageFiles2 = '';
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
         });
@@ -82,7 +86,8 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
     };
     $scope.modifyClick = function (item) {
         $scope.mod = clone(item);
-        $scope.uploadImageFiles = $scope.mod['BANNER.PICTURE'];
+        $scope.uploadImageFiles1 = $scope.mod['BANNER.PICTURE'];
+        $scope.uploadImageFiles2 = $scope.mod['BANNER.PICTURE2'];
     };
 
     $scope.modBannerInfo = function () {
@@ -100,13 +105,15 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
         mendTime = mendTime.replace("T", " ");
         $scope.mod['BANNER.END_DATETIME'] = mendTime;  //结束时间
 
-        $scope.mod['BANNER.PICTURE'] = $scope.uploadImageFiles;
+        $scope.mod['BANNER.PICTURE'] = $scope.uploadImageFiles1;
+        $scope.mod['BANNER.PICTURE2'] = $scope.uploadImageFiles2;
 
         bannerFactory.modifyBanner($scope.mod, function (response) {
             $("#modBanner").modal('hide');
             modalFactory.showShortAlert("修改成功");
             $scope.$broadcast('pageBar.reload');
-
+            $scope.uploadImageFiles1 = '';
+            $scope.uploadImageFiles2 = '';
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
         });
@@ -155,11 +162,22 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
     /**
      *  上传商品的图片， 最多上传6个
      **/
-    $scope.uploadImage = function (element) {
-        _uploadFiles(element.files, $scope.uploadImageFiles, 'image', function (errResponse) {
-        }, function (successResponse) {
-            $scope.uploadImageFiles = successResponse.url;
-        });
+    $scope.uploadImage = function (element, index) {
+
+        switch (index) {
+            case 1:
+                _uploadFiles(element.files, $scope.uploadImageFiles1, 'image', function (errResponse) {
+                }, function (successResponse) {
+                    $scope.uploadImageFiles1 = successResponse.url;
+                });
+                break;
+            case 2:
+                _uploadFiles(element.files, $scope.uploadImageFiles2, 'image', function (errResponse) {
+                }, function (successResponse) {
+                    $scope.uploadImageFiles2 = successResponse.url;
+                });
+                break;
+        }
     };
 
     //上传文件

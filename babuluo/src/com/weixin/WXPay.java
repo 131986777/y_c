@@ -409,23 +409,23 @@ public class WXPay {
         Map hints = new HashMap();
         hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         BitMatrix bitMatrix = null;
-        try {
-            bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
+//        try {
+//            bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
 //            BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
 //            try {
 //                File file = new File(PathUtil.getProjectRootDir()+parentPath);
 //                if (!file.getParentFile().exists()) {
 //                    file.getParentFile().mkdirs();
 //                }
-////                ImageIO.write(image, "jpg", file);
+//                ImageIO.write(image, "jpg", file);
 //            } catch (IOException e) {
 //                e.printStackTrace();
 //            }
-            return parentPath;
-        } catch (WriterException e1) {
-            // TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
+//            return parentPath;
+//        } catch (WriterException e1) {
+//            // TODO Auto-generated catch block
+//            e1.printStackTrace();
+//        }
         return parentPath;
     }
 

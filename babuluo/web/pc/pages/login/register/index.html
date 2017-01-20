@@ -7,7 +7,7 @@
         <div class="infoPanel">
             <div class="infoNav">
 
-                <a class="infoLogin font  ">
+                <a class="infoLogin font">
                     注册帐号
                 </a>
 
@@ -15,23 +15,23 @@
             <div class="mid">
                 <div class="account">
                     <span class="word">手机号</span>
-                    <input type="text" ng-model="loginInfo['LOGIN_ID']" class="txt" />
+                    <input type="text" ng-model="memberInfo['MEMBER.LOGIN_ID']" ng-blur="ckeckPhone()" ng-change="showColor()" class="txt" />
 
                 </div>
                 <div class="account pwd">
                     <span class="word">验证码</span>
                     <div class="codePos">
-                        <input type="text" ng-model="loginInfo['PWD']" class="txt" />
-                        <div class="codeLogin" ng-if="get">获取验证码</div>
-                        <div class="send" ng-if="send">发送中...</div>
-                        <div class="sended" ng-if="sended">已发送（30s）</div>
+                        <input type="text" ng-model="memberInfo['MEMBER.CHECKCODE']" class="txt" />
+                        <div class="codeLogin" ng-click="sendSms()">获取验证码</div>
+                        <div class="send">发送中...</div>
+                        <div class="sended">已发送（{{time}}s）</div>
                     </div>
 
 
                 </div>
                 <div class="account pwd">
                     <span class="word">密码</span>
-                    <input type="password" ng-model="loginInfo['PWD']" class="txt" />
+                    <input type="password" ng-model="memberInfo['MEMBER.LOGIN_PWD']" ng-blur="checkPwd()" class="txt" />
 
                 </div>
                 <div class="account pwd">
@@ -42,13 +42,13 @@
             </div>
             <div class="pos">
                 <div class="pos2">
-                    <a class="regist" ui-sref="pages/login/register">已有帐号?</a>
-                    <a class="forget" href="">直接登录</a>
+                    <a class="regist">已有帐号?</a>
+                    <a class="forget" ui-sref="pages/login/register">直接登录</a>
                 </div>
 
             </div>
-            <div class="but" ng-click="userLogin()">
-                <a href="">注册</a>
+            <div class="but" ng-click="reg()">
+                注册
             </div>
         </div>
 

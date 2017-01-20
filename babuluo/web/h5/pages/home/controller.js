@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory,weUI) {
+angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory, weUI) {
 
     modalFactory.setTitle('云厨1站商城 - 十分钟吃饭，优质食品购买平台');
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
@@ -12,9 +12,9 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     $scope.recommNineList = new Array();
     $scope.BannerList = new Array();
 
-    $scope.myKeyup = function(e){
-        var keycode = window.event?e.keyCode:e.which;
-        if(keycode==13){
+    $scope.myKeyup = function (e) {
+        var keycode = window.event ? e.keyCode : e.which;
+        if (keycode == 13) {
             $scope.searchPrd();
         }
     };
@@ -25,20 +25,20 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     }
 
     $scope.initData = function () {
-        $scope.STORE_ID = 0 ;
+        $scope.STORE_ID = 0;
 
         modalFactory.setCurrentPage('sy');
 
         if (getCookie('currentShop') != undefined) {
-            $scope.shopInfo= ToJson(getCookie('currentShopInfo'));
-            $scope.STORE_ID=$scope.shopInfo['SHOP.REPOS_ID'];
-        }else{
+            $scope.shopInfo = ToJson(getCookie('currentShopInfo'));
+            $scope.STORE_ID = $scope.shopInfo['SHOP.REPOS_ID'];
+        } else {
             $scope.toShop();
         }
 
         var params = {}
         params['SHOP_PRODUCT.TAG_ID'] = '1036,1037,3000,3001,3002,3003,3004,3005,3006';
-        params['SHOP_PRODUCT.STORE_ID']=$scope.STORE_ID;
+        params['SHOP_PRODUCT.STORE_ID'] = $scope.STORE_ID;
         productFactory.getProductByTag(params, function (response) {
             if (response.code == 0) {
                 $scope.tagProductList = {};
@@ -76,7 +76,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                             $scope.tagProductList['3000'] = ne;
                         }
                     }
-                   
+
                     if (ele['SHOP_PRODUCT.TAG_ID'].indexOf('3001') >= 0) {
                         if ($scope.tagProductList['3001'] == undefined) {
                             var ne = new Array;
@@ -192,8 +192,8 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                 else if (ele['BANNER.POSITION_ID'] == "1018") {     //今日推荐九宫格
                     $scope.recommNineList.push(ele);
                 }
-                else {
-                   // console.log(ele['BANNER.POSITION_ID']);
+                else if (["1019", "1020", "1017", "3000", "3001", "3002", "3003", "3004", "3005"].contains(ele['BANNER.POSITION_ID'])) {
+                    // console.log(ele['BANNER.POSITION_ID']);
                     var flag = false;
                     for (i = 0; i < $scope.BannerList.length; i++) {
                         if ($scope.BannerList[i].id == ele['BANNER.POSITION_ID']) {
@@ -251,11 +251,11 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
     }
 
-    $scope.toShop= function () {
+    $scope.toShop = function () {
         $state.go('pages/shop');
     }
 
-    $scope.$on('$destroy',function(){
+    $scope.$on('$destroy', function () {
         $interval.cancel($scope.timer);
     })
 
@@ -265,20 +265,30 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         centeredSlides: true,
         autoplay: 3500,
         autoplayDisableOnInteraction: false,
-        observer:true,
-        observeParents:true
+        observer: true,
+        observeParents: true
     });
 
-    $scope.toPrdList= function () {
+    $scope.toPrdList = function () {
         $state.go('pages/product/list');
     }
 
-    $scope.toPrdTagList= function (id) {
-        $state.go('pages/product/tagPrdList',{tagId:id});
+    $scope.toPrdTagList = function (id) {
+        $state.go('pages/product/tagPrdList', {tagId: id});
     }
 
-    $scope.toOrderList= function () {
+    $scope.toOrderList = function () {
         $state.go('pages/order/list');
+    }
+
+    Array.prototype.contains = function (obj) {
+        var i = this.length;
+        while (i--) {
+            if (this[i] === obj) {
+                return true;
+            }
+        }
+        return false;
     }
 
 });

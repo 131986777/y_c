@@ -4,6 +4,10 @@ angular.module('AndSell.PC.Main').controller('pages_cart_Controller', function (
 
     modalFactory.setHeader(false);
 
+    modalFactory.setSide(false);
+
+    modalFactory.setLeftMenu(false);
+
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
@@ -166,8 +170,8 @@ angular.module('AndSell.PC.Main').controller('pages_cart_Controller', function (
             cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] -= 1;
             setCookie('cartSize', JSON.stringify(cartSize));
 
-            //$scope.updateCartPrice();
-            $scope.getCartInfoInCookie();
+            $scope.updateCartPrice();
+            //$scope.getCartInfoInCookie();
         }
     }
 
@@ -186,8 +190,8 @@ angular.module('AndSell.PC.Main').controller('pages_cart_Controller', function (
             cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] += 1;
             setCookie('cartSize', JSON.stringify(cartSize));
 
-            //$scope.updateCartPrice();
-            $scope.getCartInfoInCookie();
+            $scope.updateCartPrice();
+            //$scope.getCartInfoInCookie();
         } else {
             modalFactory.showShortAlert('已达到该商品最大库存数');
         }
@@ -210,8 +214,8 @@ angular.module('AndSell.PC.Main').controller('pages_cart_Controller', function (
         cartSize[sku['SHOP_PRODUCT_SKU.SKU_ID']] = 0;
         setCookie('cartInfo', JSON.stringify(cartInfo));
         setCookie('cartSize', JSON.stringify(cartSize));
-        //$scope.updateCartPrice();
-        $scope.getCartInfoInCookie();
+        $scope.updateCartPrice();
+        //$scope.getCartInfoInCookie();
     }
 
     //更新购物车价格

@@ -11,7 +11,8 @@ var theDay = theDate.getDate();
 var cardChartArray = new Array();
 angular.module('AndSell.Main').controller('analysis_analysis_cardAnalysis_Controller', function ($scope, $stateParams,$timeout,modalFactory,analysisFactory) {
     modalFactory.setTitle('会员分析');
-
+    $scope.monthDay = new Date().getDate();
+    $scope.weekDay = new Date().getDay();
     //页面刚加载执行
     $scope.initLoad = function () {
         getCardSource(getYesterMonthBeginDay,theYear+"-"+theMonth+"-"+theDay);
@@ -55,6 +56,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_cardAnalysis_Contro
         $scope.groupRange['ENDDAY'] = lastDay;
         getCardSource(firstDay,lastDay);
         theMonth = theDate.getMonth()+1;
+        theYear = theDate.getFullYear();
         showChartOnCard();
     }
     //昨天的数据
@@ -64,6 +66,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_cardAnalysis_Contro
         $scope.groupRange['STARTDAY'] = getYesterday()
         $scope.groupRange['ENDDAY'] = getYesterday()
         showChartOnCard();
+        ;
     }
     //本月的数据
     $scope.getGroupByThisMonth = function () {

@@ -1,20 +1,20 @@
-/**
- * Created by njwb on 2017/1/9.
- */
-angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller', function ($interval, $scope, $state, modalFactory, personalFactory,balanceFactory) {
+angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller', function ($interval, $scope, $state, modalFactory, orderFactory, personalFactory, balanceFactory) {
 
-    modalFactory.setTitle("订单评价");
+    modalFactory.setTitle("个人中心");
 
     modalFactory.setHeader(false);
+
     modalFactory.setSide(true);
+
     modalFactory.setCateGory(true);
 
+    modalFactory.setLeftMenu(false);
 
     $scope.queryAccount = function () {
         balanceFactory.queryAccountByUid({}, function (response) {
             $scope.balanceInfo = response.data;
             if (!$scope.balanceInfo.length > 0) {
-                $state.go('pages/user/accountLogin');
+                $state.go('pages/login/accountLogin');
                 modalFactory.showShortAlert('请使用正确的账号登录');
             }
         }, function (response) {
@@ -27,6 +27,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller',
         form['MEMBER.USER_ID'] = uid;
         personalFactory.getPhone(form, function (response) {
             $scope.USER = response.data[0];
+            $scope.modifyUserName = $scope.USER['MEMBER.USER_NAME'];
         }, function (response) {
 
         });
@@ -53,15 +54,32 @@ angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller',
             $scope.getCouponSum($scope.uid);
             $scope.getOrderStates();
         } else {
-            $state.go('pages/user/accountLogin');
+            $state.go('pages/login/accountLogin');
             modalFactory.showShortAlert('登录异常');
         }
 
-        personalFactory.getMemberCardByUserId({},function (resq) {
-            $scope.memberCards =resq.data;
+        personalFactory.getMemberCardByUserId({}, function (resq) {
+            $scope.memberCards = resq.data;
         });
     }
 
+
+    $scope.getOrderStates = function () {
+        orderFactory.getOrderStates({}, function (response) {
+            $scope.stateMap = response.extraData.stateMap;
+        });
+    };
+
     $scope.initLoad();
 
+
+    $scope.modifyName = function () {
+
+        personalFactory.modifyMember({"MEMBER.USER_NAME": $scope.modifyUserName}, function (response) {
+            modalFactory.showShortAlert("修改成功");
+            $scope.initLoad();
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+    }
 });

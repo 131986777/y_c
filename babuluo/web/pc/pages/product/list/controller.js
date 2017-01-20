@@ -1,12 +1,12 @@
-angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', function (productFactory, $interval, $scope, $state, modalFactory, shopFactory) {
+angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', function (productFactory, $interval, $scope, $state, modalFactory, $state,$stateParams) {
 
     modalFactory.setTitle("商品列表");
 
     modalFactory.setHeader(true);
 
     modalFactory.setSide(false);
-
-    modalFactory.setLeftMenu(true);
+    //
+    // modalFactory.setLeftMenu(true);
 
     $scope.nofind=function () {
         var img=event.srcElement;
@@ -27,6 +27,9 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
     }
 
     $scope.filter = {
+        'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,
+        'SHOP_PRODUCT.CLASS_ID':$stateParams.classId,
+        'SHOP_PRODUCT.TAG_ID':$stateParams.tagId,
         'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
         'SHOP_PRODUCT.REMARK': 'offLine',
         'SHOP_PRODUCT.ORDER':'HAS_STOCK DESC,SHOP_PRODUCT.CLASS_ID ASC,convert(SHOP_PRODUCT.PRD_NAME using gbk) asc '
@@ -71,7 +74,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
         //加入购物车
         setCookie('cartSize', JSON.stringify(cartSize));
         setCookie('cartInfo', JSON.stringify(cartInfo));
-
+        modalFactory.updateCart();
         modalFactory.showShortAlert("加入购物车成功");
     }
 });

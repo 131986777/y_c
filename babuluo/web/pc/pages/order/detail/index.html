@@ -53,7 +53,7 @@
                     取消订单
                 </div>
                 <!--ng-click="payNow()"-->
-                <div class="pay_now" ui-sref="pages/personal/pay({order:order})"
+                <div class="pay_now" ui-sref="pages/personal/pay({ORDER_ID:order['SHOP_ORDER.ID']})"
                      ng-if="((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.TYPE']!='5')||(order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.TYPE']=='5'))">
                     立即支付
                 </div>

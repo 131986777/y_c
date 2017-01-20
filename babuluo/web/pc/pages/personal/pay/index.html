@@ -1,6 +1,6 @@
-<div class="row-wrap row-wrap1">
+<div class="row-wrap row-wrap-order-pay" ng-init="initData()">
     <div class="row-header row-header1">
-            选择付款方式
+        选择付款方式
     </div>
     <div class="contends">
         <div class="info">
@@ -8,44 +8,96 @@
         </div>
         <div class="infoTop">
             <div class="infoFirst">
-                <div class="front">收&nbsp;&nbsp;货&nbsp;&nbsp;人</div>
-                <div class="">小红啊</div>
+                <div class="front">提&nbsp;&nbsp;货&nbsp;&nbsp;人</div>
+                <div class="" ng-bind="order['SHOP_ORDER.REC_CONTACT']"></div>
+            </div>
+            <div class="infoFirst">
+                <div class="front">联系方式</div>
+                <div class="" ng-bind="order['SHOP_ORDER.REC_PHONE']"></div>
             </div>
             <div class="infoFirst">
                 <div class="front">提货门店</div>
-                <div class="">朗诗国际店</div>
+                <div class="" ng-bind="shop['SHOP.SHOP_NAME']"></div>
             </div>
             <div class="infoFirst">
                 <div class="front">门店地址</div>
-                <div class="">江苏省 南京市 建邺区 南京国家广告产业园</div>
+                <div class="" ng-bind="shop['SHOP.ADDR']"></div>
             </div>
             <div class="infoFirst">
                 <div class="front">门店电话</div>
-                <div class="">18251815890</div>
-            </div>
-            <div class="infoFirst">
-                <div class="front">门店地址</div>
-                <div class="">江苏省 南京市 建邺区 南京国家广告产业园</div>
+                <div class="" ng-bind="shop['SHOP.TELEPHONE']"></div>
             </div>
         </div>
         <div class="infoMiddle">
             <div class="infoSecond">
                 <div class="front">商品金额</div>
-                <div class="">￥280.00</div>
+                <div class="" ng-bind="order['SHOP_ORDER.PRICE_PRD']|currency : '￥'"></div>
             </div>
-            <div class="infoSecond">
-                <div class="front">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费</div>
-                <div class="">￥2.00</div>
-            </div>
+            <!--<div class="infoSecond">-->
+            <!--<div class="front">运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费</div>-->
+            <!--<div class="">￥2.00</div>-->
+            <!--</div>-->
             <div class="infoSecond">
                 <div class="front">优惠金额</div>
-                <div class="">￥2.00</div>
+                <div class="" ng-bind="order['SHOP_ORDER.PRICE_DISCOUNT']|currency : '￥'"></div>
             </div>
         </div>
         <div class="infoLast">
             <div class="infoThird">
                 <div class="front">订单金额</div>
-                <div class="price">￥280.00</div>
+                <div class="price" ng-bind="order['SHOP_ORDER.PRICE_OVER']|currency : '￥'"></div>
+            </div>
+        </div>
+        <div class="infoLast">
+            <div class="infoThird">
+                <div class="front">优&nbsp; 惠 &nbsp;券</div>
+                <div class="coupon" ng-show="choiceCoupon!=undefined">
+                    <div class="couponNav">
+                        <div class="cpPos">
+                            <p class="cpTitle">{{choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME']}}</p>
+                            <div class="cpMoneyPos"
+                                 ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                                <p class="cpMoney">
+                                    {{(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}</p>
+                                <p class="yuan">元</p>
+                            </div>
+                            <div class="cpMoneyPos"
+                                 ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                                <p class="cpMoney">
+                                    {{(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</p>
+                                <p class="yuan">折</p>
+                            </div>
+                            <p class="deadTime">有效期至{{choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']}}</p>
+                        </div>
+                    </div>
+                    <div class="couponMid">
+                        <span class="cpTime">限定时间（每周</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
+                        <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
+                        <span>)</span>
+                        <div class="midPos">
+                            <p class="con">
+                            <span ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用
+                                ({{detailData(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                                <span ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==2">特定商品类别使用
+                                ({{detailData(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                                <span ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==3">特定商品标签使用
+                                ({{detailData(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="" ng-show="choiceCoupon==undefined">
+                    <span ng-click="queryCoupon()">选择优惠券</span>
+                </div>
             </div>
         </div>
         <div class="foot">
@@ -56,8 +108,10 @@
             <div class="zhifu">
                 <span class="payWay zhifubao"></span>
                 <div class="yang"></div>
-            </div>eval("1+1")
-            <div class="zhifu" ng-click="chooseModal()">
+
+            </div>
+            <div class="zhifu" ng-click="chooseWeiXin()">
+
                 <span class="payWay weixin"></span>
                 <div class="yang"></div>
             </div>
@@ -66,124 +120,126 @@
 
     <div style="clear: both"></div>
 
-</div>
-<div class="modal fade text-left in weixin"
-     ng-show="ifShow"
-     data-keyboard="false" ng-class="{true:'modalBg'}[state=='openWeixin']" data-backdrop="static"
-     tabindex="-1" data-backdrop="static" data-keyboard="false" aria-hidden="false"
-     style="display: block;
+
+    <div class="modal fade text-left in weixin"
+         ng-show="ifShow"
+         data-keyboard="false" ng-class="{true:'modalBg'}[state=='openWeixin']"
+         data-backdrop="static"
+         tabindex="-1" data-backdrop="static" data-keyboard="false" aria-hidden="false"
+         style="display: block;
           ">
-    <div class="modal-content">
-        <div class="modal-body form-body text-left" style="margin-top: 12px;margin-bottom: 12px">
-            <span class="text-left"> 微信支付 </span>
-            <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
+        <div class="modal-content">
+            <div class="modal-body form-body text-left"
+                 style="margin-top: 12px;margin-bottom: 12px">
+                <span class="text-left"> 微信支付 </span>
+                <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
+            </div>
+            <div class="weixinImg" ng-if="wxPayCode!=undefined">
+                <img ng-src="{{wxPayCode}}" alt="">
+            </div>
+            <p ng-if="wxPayCode!=undefined">请使用<span class="sep">微信</span>扫一扫</p>
+            <p ng-if="wxPayCode!=undefined">二维码完成支付</p>
+            <p ng-if="wxPayCode==undefined">正在读取二维码</p>
         </div>
-        <div class="weixinImg">
-            <img class="ma" src="../../public/css/img/weixinma.png" alt="">
-        </div>
-        <p>请使用<span class="sep">微信</span>扫一扫</p>
-        <p>二维码完成支付</p>
     </div>
-</div>
-<div class="modal fade text-left in huiyuan modalBg"
-     ng-show="ifShowhuiyuan" ng-class="{true:'modalBg'}[state=='openHuiyuan']"
-     data-keyboard="false" data-backdrop="static"
-     tabindex="-1" data-backdrop="static" data-keyboard="false" aria-hidden="false"
-     style="display: block;">
-    <div class="modal-content">
-        <div class="modal-body form-body text-left" style="margin-top: 12px;margin-bottom: 12px">
-            <span class="text-left"> 会员卡 </span>
-            <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
+    <div class="modal fade text-left in huiyuan modalBg"
+         ng-show="ifShowhuiyuan" ng-class="{true:'modalBg'}[state=='openHuiyuan']"
+         data-keyboard="false" data-backdrop="static"
+         tabindex="-1" data-backdrop="static" data-keyboard="false" aria-hidden="false"
+         style="display: block;">
+        <div class="modal-content">
+            <div class="modal-body form-body text-left"
+                 style="margin-top: 12px;margin-bottom: 12px">
+                <span class="text-left"> 会员卡 </span>
+                <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
+            </div>
+            <div class="cardPos">
+                <div class="card">
+                    <div class="eachCard" ng-repeat="cl in cardList"
+                         ng-style="cl['MEMBER_CARD.CARD_STYLE']" ng-click="cardPay(cl)">
+                        <div class="pos">
+                            <p class="num">NO. {{cl['MEMBER_CARD.CARD_NO']}}</p>
+                            <p class="num ka">{{cl['MEMBER_CARD.TYPE_NAME']}}</p>
+                            <p class="mid">
+                                <span ng-if="cl['MEMBER_CARD.FREEZE_BALANCE']>0">(冻结 {{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}})</span>
+                            </p>
+                            <div class="m">
+                                <p class="word">余额</p>
+                                <p class="money">{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}</p>
+                            </div>
+                            <div class="foot">
+                                <p class="time">{{cl['MEMBER_CARD.ADD_DATETIME']}}</p>
+                                <div class="time" ng-if="cl['MEMBER_CARD.IS_FACE_VALUE']==1">
+                                    <p class="t_inner">发卡面值</p>
+                                    <p class="t_inner">{{cl['MEMBER_CARD.FACE_VALUE'] | currency :
+                                        '￥'}}</p>
+                                </div>
+                                <p class="time">{{cl['MEMBER_CARD.SOURCE_NAME']}}</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="cardPos">
-            <div class="card">
-                <div class="eachCard orange">
-                    <div class="pos">
-                        <p class="num">NO. 1399 5262 515</p>
-                        <p class="num ka">金卡</p>
-                        <p class="mid">(冻结 ￥19.82)</p>
-                        <div class="m">
-                            <p class="word">余额</p>
-                            <p class="money">￥1980.00</p>
+    </div>
+    <div class="modal fade text-left in couponModal"
+         ng-show="ifShowCoupon" ng-class="{true:'modalBg'}[state=='openCoupon']"
+         data-keyboard="false" data-backdrop="static"
+         tabindex="-1" data-backdrop="static" data-keyboard="false" aria-hidden="false"
+         style="display: block;">
+        <div class="modal-content">
+            <div class="modal-body form-body text-left"
+                 style="margin-top: 12px;margin-bottom: 12px">
+                <span class="text-left"> 优惠券 </span>
+                <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
+            </div>
+            <div class="coupon" ng-repeat="ul in useableList" ng-click="chooseCoupon(ul)">
+                <div class="couponNav">
+                    <div class="cpPos">
+                        <p class="cpTitle">{{ul['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME']}}</p>
+                        <div class="cpMoneyPos"
+                             ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                            <p class="cpMoney">
+                                {{(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}</p>
+                            <p class="yuan">元</p>
                         </div>
-                        <div class="foot">
-                            <p class="time">2016-09-26 11:51:22</p>
-                            <div class="time">
-                                <p class="t_inner">发卡面值</p>
-                                <p class="t_inner">￥400</p>
-                            </div>
-                            <p class="time">线下门店发卡</p>
+                        <div class="cpMoneyPos"
+                             ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                            <p class="cpMoney">
+                                {{(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</p>
+                            <p class="yuan">折</p>
                         </div>
-
+                        <p class="deadTime">有效期至{{ul['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']}}</p>
                     </div>
-
                 </div>
-                <div class="eachCard blue">
-                    <div class="pos">
-                        <p class="num">NO. 1399 5262 515</p>
-                        <p class="num ka">金卡</p>
-                        <p class="mid">(冻结 ￥19.82)</p>
-                        <div class="m">
-                            <p class="word">余额</p>
-                            <p class="money">￥1980.00</p>
-                        </div>
-                        <div class="foot">
-                            <p class="time">2016-09-26 11:51:22</p>
-                            <div class="time">
-                                <p class="t_inner">发卡面值</p>
-                                <p class="t_inner">￥400</p>
-                            </div>
-                            <p class="time">线下门店发卡</p>
-                        </div>
-
+                <div class="couponMid">
+                    <span class="cpTime">限定时间（每周</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
+                    <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
+                    <span>)</span>
+                    <div class="midPos">
+                        <p class="con">
+                            <span ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用
+                                ({{detailData(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                            <span ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==2">特定商品类别使用
+                                ({{detailData(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                            <span ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==3">特定商品标签使用
+                                ({{detailData(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                        </p>
                     </div>
-
                 </div>
-                <div class="eachCard black">
-                    <div class="pos">
-                        <p class="num">NO. 1399 5262 515</p>
-                        <p class="num ka">金卡</p>
-                        <p class="mid">(冻结 ￥19.82)</p>
-                        <div class="m">
-                            <p class="word">余额</p>
-                            <p class="money">￥1980.00</p>
-                        </div>
-                        <div class="foot">
-                            <p class="time">2016-09-26 11:51:22</p>
-                            <div class="time">
-                                <p class="t_inner">发卡面值</p>
-                                <p class="t_inner">￥400</p>
-                            </div>
-                            <p class="time">线下门店发卡</p>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="eachCard">
-                    <div class="pos">
-                        <p class="num">NO. 1399 5262 515</p>
-                        <p class="num ka">金卡</p>
-                        <p class="mid">(冻结 ￥19.82)</p>
-                        <div class="m">
-                            <p class="word">余额</p>
-                            <p class="money">￥1980.00</p>
-                        </div>
-                        <div class="foot">
-                            <p class="time">2016-09-26 11:51:22</p>
-                            <div class="time">
-                                <p class="t_inner">发卡面值</p>
-                                <p class="t_inner">￥400</p>
-                            </div>
-                            <p class="time">线下门店发卡</p>
-                        </div>
-
-                    </div>
-
-                </div>
-
             </div>
         </div>
-
     </div>
 </div>
