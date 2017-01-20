@@ -1,6 +1,6 @@
 var AndSellRouter = angular.module('AndSell.Router', ['ui.router', 'oc.lazyLoad']);
 var AndSellService = angular.module('AndSell.Service', ['ngResource']);
-var AndSellUI = angular.module('AndSell.UI', ['nya.bootstrap.select', 'ngTagsInput', 'AndSell.Service']);
+var AndSellUI = angular.module('AndSell.UI', ['nya.bootstrap.select', 'ngTagsInput', 'AndSell.Service','focus-if']);
 var AndSellMainModule = angular.module('AndSell.Main', ['AndSell.Service', 'AndSell.Router', 'AndSell.UI']);
 
 var AndSellData = angular.module("AndSell.data", []);
@@ -65,6 +65,12 @@ AndSellUI.directive('stringToNumber', function () {
                 return parseFloat(value);
             });
         }
+    };
+});
+
+AndSellUI.directive('autoFocus', function(){
+    return function(scope, element){
+        element[0].focus();
     };
 });
 
