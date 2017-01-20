@@ -47,7 +47,9 @@ body {
   /* line 49, ../sass/fundDetail.scss */
   .container-balance .row-wrap .money .recharge {
     font-size: 16px;
-    color: #f36e19; }
+    color: #f36e19;
+    cursor: pointer;
+  }
 /* line 54, ../sass/fundDetail.scss */
 .container-balance .row-wrap .detail {
   width: 945px; }

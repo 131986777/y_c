@@ -347,7 +347,6 @@
 .containers-order-detail .showBoard .receipt_info .info_title, .other_info .info_title {
   font-size: 16px;
   color: #4b4b4b;
-  font-weight: 100;
   margin-bottom: 27px;
 }
 /* line 280, ../sass/orderDetail.scss */

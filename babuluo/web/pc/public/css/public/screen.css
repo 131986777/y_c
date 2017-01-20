@@ -111,15 +111,11 @@ html, body {
   position: fixed;
   width: 41px;
   height: 351px;
-  border-left: 1px solid #ebebeb;
-  border-top: 1px solid #ebebeb;
-  border-right: 1px solid #ebebeb;
-  transform: translateX(-100%);
+  transform: translateX(-134%);
 }
 .productList .leftMenu .categoriePic{
   width:40px;
   height:39px;
-  border-bottom: 1px solid #ebebeb;
   cursor: pointer;
 
 }
