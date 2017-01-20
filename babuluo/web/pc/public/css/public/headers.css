@@ -250,10 +250,12 @@
 /* line 16, ../sass/headers/_userBar.scss */
 .userBar [class*="Group"][class*="login"] {
   margin-left: 25px;
+
 }
 /* line 18, ../sass/headers/_userBar.scss */
 .userBar [class*="Group"][class*="login"] a {
   margin-right: 10px;
+  cursor: pointer;
 }
 /* line 22, ../sass/headers/_userBar.scss */
 .userBar [class*="Group"][class*="sevice"] {
