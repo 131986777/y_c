@@ -13,3 +13,5 @@ $import('marketing/banner/banner');
 $import('marketing/coupon/coupon/couponList',undefined,true);
 
 $import('marketing/sales/event');
+
+$import('marketing/lucky/lucky',undefined,true);

@@ -1,0 +1,141 @@
+form{
+    overflow: hidden;
+}
+.radio,.checkbox{
+    display: inline-block;
+}
+.radio-title{
+    float: left;
+    width:115px;
+}
+.lottery-wrap{
+    width: 1120px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.lottery-set{
+    display: inline-block;
+    vertical-align: top;
+    width: 500px;
+    margin-left: 80px;
+}
+.lottery {
+    display: inline-block;
+    width: 530px;
+    border: 4px solid #ba1809;
+}
+
+.lottery table {
+    width: 100%;
+}
+
+.lottery table tr {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.lottery table td {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    width: 33.33%;
+    height: 167px;
+    text-align: center;
+    color: #333;
+    font-size: 0;
+    background-image: url(/AndSell/h5/public/img/reward_bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto 101%;
+}
+
+.lottery table td .rewards {
+    width: 100%;
+    height: 68px;
+    position: absolute;
+    top: 36px;
+    left:0;
+    line-height: 68px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.lottery table td .rewards .price {
+    color: rgba(76, 0, 0, 0.7);
+    font-weight: 900;
+    font-size: 28px;
+    margin-right: 0.1em;
+    vertical-align: baseline;
+}
+
+.lottery table td .rewards .symbol {
+    font-size: 18px;
+    color: rgba(76, 0, 0, 0.7);
+    font-weight: 900;
+    vertical-align: baseline;
+}
+
+.lottery table td .rewards-info {
+    position: absolute;
+    width: 100%;
+    height: 35px;
+    left: 0;
+    bottom: 0;
+    font-size: 16px;
+    line-height: 35px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.lottery table td a {
+    width: 100%;
+    height: 100%;
+    display: block;
+    text-decoration: none;
+    background: url(/AndSell/h5/public/img/lottery1.jpg) no-repeat center center;
+    background-size: 100% 100%;
+}
+
+.lottery table td a:hover {
+    background-image: url(/AndSell/h5/public/img/lottery2.jpg);
+}
+
+.lottery table td.active .mask {
+    display: block;
+}
+
+.mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(252, 211, 4, 0.5);
+    display: none;
+}
+
+@media (max-width: 500px) {
+    .lottery {
+        width: 320px;
+    }
+    .lottery table td {
+        height: 100px;
+    }
+    .lottery table td .rewards {
+        left: 0;
+        top: 20px;
+        height: 42px;
+        line-height: 48px;
+    }
+    .lottery table td .rewards .price {
+        font-size: 19px;
+    }
+    .lottery table td .rewards .symbol {
+        font-size: 14px;
+    }
+    .lottery table td .rewards-info {
+        font-size: 12px;
+        height: 20px;
+        line-height: 20px;
+    }
+}

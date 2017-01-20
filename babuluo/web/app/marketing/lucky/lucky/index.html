@@ -1,0 +1,312 @@
+<div class="lottery-wrap">
+    <div class="lottery-init">
+        <form action="" class="form-horizontal">
+            <div class="form-group">
+                <label class="radio-title control-label">活动状态：</label>
+                <div class="col-sm-10">
+                    <label class="radio-inline">
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="NORMAL"> 开启
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="YYD"> 关闭
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="radio-title control-label">单次积分消耗：</label>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div id="lottery" ng-init="initData()" class="lottery">
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="lottery-unit lottery-unit-0">
+                    <div class="rewards">
+                    <span class="price">
+                        8.2
+                    </span>
+                        <span class="symbol">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[0]==undefined&&show">
+                        <span class="symbol">没有奖品</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[0]!=undefined&&show">
+                        {{luckListAll[0]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[0]==undefined&&show">没有奖品</div>
+                    <div class="mask"></div>
+                </td>
+                <td class="lottery-unit lottery-unit-1">
+                    <div class="rewards">
+                    <span class="price">
+                        8.2
+                    </span>
+                        <span class="symbol">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[1]==undefined&&show">
+                        <span class="symbol">没有奖品</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[1]!=undefined&&show">
+                        {{luckListAll[1]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[1]==undefined&&show">没有奖品</div>
+                    <div class="mask"></div>
+                </td>
+                <td class="lottery-unit lottery-unit-2">
+                    <div class="rewards">
+                    <span class="price">
+                        8.2
+                    </span>
+                        <span class="symbol">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[2]==undefined&&show">
+                        <span class="symbol">没有奖品</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[2]!=undefined&&show">
+                        {{luckListAll[2]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[2]==undefined&&show">没有奖品</div>
+                    <div class="mask"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="lottery-unit lottery-unit-7">
+                    <div class="rewards">
+                    <span class="price">
+                        8.2
+                    </span>
+                        <span class="symbol">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[7]==undefined&&show">
+                        <span class="symbol">没有奖品</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[7]!=undefined&&show">
+                        {{luckListAll[7]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[7]==undefined&&show">没有奖品</div>
+                    <div class="mask"></div>
+                </td>
+                <td>
+                    <a class="startBtn"></a>
+                </td>
+                <td class="lottery-unit lottery-unit-3">
+                    <div class="rewards">
+                    <span class="price">
+                        8.2
+                    </span>
+                        <span class="symbol">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[3]==undefined&&show">
+                        <span class="symbol">没有奖品</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[3]!=undefined&&show">
+                        {{luckListAll[3]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[3]==undefined&&show">没有奖品</div>
+                    <div class="mask"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="lottery-unit lottery-unit-6">
+                    <div class="rewards">
+                    <span class="price">
+                        8.2
+                    </span>
+                        <span class="symbol">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[6]==undefined&&show">
+                        <span class="symbol">没有奖品</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[6]!=undefined&&show">
+                        {{luckListAll[6]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[6]==undefined&&show">没有奖品</div>
+                    <div class="mask"></div>
+                </td>
+                <td class="lottery-unit lottery-unit-5">
+                    <div class="rewards">
+                    <span class="price">
+                        8.2
+                    </span>
+                        <span class="symbol">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[5]==undefined&&show">
+                        <span class="symbol">没有奖品</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[5]!=undefined&&show">
+                        {{luckListAll[5]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[5]==undefined&&show">没有奖品</div>
+                    <div class="mask"></div>
+                </td>
+                <td class="lottery-unit lottery-unit-4">
+                    <div class="rewards">
+                    <span class="price">
+                        8.2
+                    </span>
+                        <span class="symbol">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[4]==undefined&&show">
+                        <span class="symbol">没有奖品</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[4]!=undefined&&show">
+                        {{luckListAll[4]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[4]==undefined&&show">没有奖品</div>
+                    <div class="mask"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="lottery-set">
+        <h4>奖励设置</h4>
+        <form action="" class="form-horizontal">
+            <div class="form-title">
+                一号位
+            </div>
+                <div class="form-group col-sm-6">
+                    <label class="control-label col-sm-4">奖品：</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="control-label col-sm-4">数量：</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+
+                <div class="form-group col-sm-6">
+                    <label class="control-label col-sm-4">说明：</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label class="control-label col-sm-4">概率：</label>
+                    <div class="col-sm-7">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+        </form>
+        <form action="" class="form-horizontal">
+            <div class="form-title">
+                二号位
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-4">奖品：</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-4">数量：</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-4">说明：</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-4">概率：</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+        </form>
+        <form action="" class="form-horizontal">
+            <div class="form-title">
+                三号位
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-4">奖品：</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-4">数量：</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-4">说明：</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-4">概率：</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+        </form>
+        <form action="" class="form-horizontal">
+            <div class="form-title">
+                四号位
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-4">奖品：</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-4">数量：</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-4">说明：</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="form-group col-sm-6">
+                <label class="control-label col-sm-4">概率：</label>
+                <div class="col-sm-7">
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
