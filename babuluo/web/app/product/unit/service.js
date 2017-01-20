@@ -1,36 +1,8 @@
-angular.module('AndSell.Main').service('unitFactory', function ($resource, baseURL) {
+angular.module('AndSell.Main').service('unitFactory', function (http) {
 
-      this.getPrdUnitList = function () {
-        return $resource(baseURL + '/shop/product/unit/queryAll', null, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
+    this.getPrdUnitList = http.post('/shop/product/unit/queryAll');
+    this.addPrdUnit = http.post('/shop/product/unit/add');
+    this.delPrdUnit = http.post('/shop/product/unit/delById');
+    this.modifyPrdUnit = http.post('/shop/product/unit/modifyById');
 
-      this.addPrdUnit = function (form) {
-        return $resource(baseURL + '/shop/product/unit/add', form, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
-
-      this.delPrdUnit = function (id) {
-        return $resource(baseURL
-            + '/shop/product/unit/delById?shop_unit.unit_id=:unit_id', {'unit_id': id}, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
-
-      this.modifyPrdUnit = function () {
-        return $resource(baseURL + '/shop/product/unit/modifyById', null, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
-
-    });
+});

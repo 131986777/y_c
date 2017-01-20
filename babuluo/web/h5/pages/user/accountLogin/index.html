@@ -1,4 +1,4 @@
-<div class="user-wrap user" ng-init="initData()">
+<div class="user-wrap sign-up user" ng-init="initData()">
     <div class="logo-wrap">
         <img class="logo" src="../../public/img/login_logo.png">
     </div>
@@ -7,17 +7,20 @@
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
                     <input class="weui_input" type="text" name="phone" id="account"
-                           placeholder="账号" ng-model="memberInfo['LOGIN_ID']">
+                           placeholder="手机号" ng-model="memberInfo['LOGIN_ID']">
                 </div>
             </div>
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
                     <input class="weui_input" type="password" name="password"
                            id="password" placeholder="密码"  ng-keyup="myKeyup($event)"  ng-model="memberInfo['PWD']">
+                    <a class="vcode-btn btn-link" ui-sref="pages/security/resetPwd">
+                        忘记密码？
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="check-wrap">
+        <!--<div class="check-wrap">-->
             <!--<a class="remember">-->
                 <!--<label class="btn-link"-->
                        <!--ng-init="autoLogin.isSelected = false"-->
@@ -29,10 +32,8 @@
                     <!--七天免登录-->
                 <!--</label>-->
             <!--</a>-->
-            <a class="btn-link pull-right" ui-sref="pages/security/resetPwd">
-                忘记密码？
-            </a>
-        </div>
+
+        <!--</div>-->
         <div class="weui_btn_area">
             <button class="weui_btn my-btn-default" type="submit" ng-click="login()">登录</button>
         </div>

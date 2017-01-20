@@ -5,7 +5,7 @@
                 <div ng-show="!EmptyPick&&cookiePickupPerson.type==3" class="detail weui_cell_bd weui_cell_primary">
                     <p class="">提 货 人：{{cookiePickupPerson.man}}</p>
                     <p class="">手机号码：{{cookiePickupPerson.phone}}</p>
-                    <p class="">提货门店：{{cookiePickupPerson.shop}}</p>
+                    <p class="">提货门店：{{shop['SHOP.SHOP_NAME']}}</p>
                     <p class="">提货时间：{{cookiePickupPerson.getTime}}</p>
                 </div>
                 <div ng-show="!EmptyPick&&cookiePickupPerson.type==1" class="detail weui_cell_bd weui_cell_primary">
@@ -29,26 +29,68 @@
             <!--</div>-->
             <!--</div>-->
             <!-- BEGIN 商品信息-->
-            <div class="product-wrap weui_cell" ng-repeat="sku in skuList">
+            <div class="prdList-wap" ng-repeat="sku in skuList" ng-if="sku['isPresent'] == null">
+                <div class="product-wrap weui_cell">
+                    <div class="product-img-wrap weui_cell_hd">
+                        <img ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"
+                             class="product-img">
+                    </div>
+                    <div class="content weui_cell_bd weui_cell_primary">
+                        <h5 class="product-name" ng-bind="sku['SHOP_PRODUCT.PRD_NAME']">
+                        </h5>
+                        <p class="product-cls" ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
+                        </p>
+                        <p class="product-cls" ng-bind="'编号：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
+                        </p>
+                    </div>
+                    <div class="ext weui_cell_ft">
+                        <span class="product-money" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+                        </span>
+                        <span class="product-money del-line" ng-if="sku['isSale'] && presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ] == null"
+                              ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
+                        </span>
+                        <p class="product-num" ng-bind="sku['SHOP_PRODUCT_SKU.SIZE']">
+                        </p>
+                    </div>
+                    <!--<div class="freePrd-wrap weui_cell" ng-if="sku['hasPresent']">-->
+                        <!--<div class="product-select-wrap weui_cell_hd">-->
+                            <!--<span class="free-icon">赠</span>-->
+                        <!--</div>-->
+                        <!--<div class="product-detail weui_cell_bd">-->
+                            <!--<img class="freePrd-img"-->
+                                 <!--ng-src="{{FILE_SERVER_DOMAIN+sku['present']['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">-->
+                            <!--<h5 class="product-name" ng-bind="sku['present']['SHOP_PRODUCT.PRD_NAME']"></h5>-->
+                            <!--<p class="product-cls"-->
+                               <!--ng-bind="sku['present']['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ sku['present']['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ sku['planUnit']['presents'][0]['num']">-->
+                            <!--</p>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+                <div class="freePrd weui_cell" ng-if="presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ] != null">
+                    <div class="product-select-wrap weui_cell_hd">
+                    <span class="free-icon">赠</span>
+                    </div>
+                    <div class="product-img-wrap weui_cell_hd">
+                        <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
+                    </div>
+                    <div class="content weui_cell_bd weui_cell_primary">
+                        <h5 class="product-name" ng-bind="presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_PRODUCT.PRD_NAME']"></h5>
+                        <p class="product-cls" ng-bind="presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ presentMap[ sku['SHOP_PRODUCT_SKU.SKU_ID'] ]['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ sku['planUnit']['presents'][0]['num']"></p>
+                    </div>
+                </div>
+            </div>
+            <!--赠品-->
+            <div ng-if="presentMap['order'] != null">
+            <div class="free-icon" style="margin: 20px 30px 10px">赠</div>
+            <div class="freePrd weui_cell">
                 <div class="product-img-wrap weui_cell_hd">
-                    <img ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220" class="product-img">
+                    <img class="product-img" ng-src="{{FILE_SERVER_DOMAIN+presentMap['order']['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
                 </div>
                 <div class="content weui_cell_bd weui_cell_primary">
-                    <h5 class="product-name" ng-bind="sku['SHOP_PRODUCT.PRD_NAME']">
-                    </h5>
-                    <p class="product-cls" ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']">
-                    </p>
-                    <p class="product-cls" ng-bind="'编号：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
-                    </p>
+                    <h5 class="product-name" ng-bind="presentMap['order']['SHOP_PRODUCT.PRD_NAME']"></h5>
+                    <p class="product-cls" ng-bind="presentMap['order']['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ presentMap['order']['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ orderPresentNum"></p>
                 </div>
-                <div class="ext weui_cell_ft">
-                    <span class="product-money" ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
-                    </span>
-                    <span class="product-money del-line" ng-if="sku['isSale']"  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
-                    </span>
-                    <p class="product-num" ng-bind="sku['SHOP_PRODUCT_SKU.SIZE']">
-                    </p>
-                </div>
+            </div>
             </div>
             <!-- END 商品信息-->
         </div>
@@ -73,20 +115,20 @@
                 </div>
             </div>
         </div>
-        <div class="weui_cells weui_cells_access">
-            <div class="weui_cell" ng-click="goCoupon()">
-                <div class="weui_cell_bd">
-                    <span ng-if="COUPON_INFO!=''" ng-bind="coupon.COUPON_NAME"></span>
-                    <span ng-if="COUPON_INFO==''">使用优惠券</span>
+        <!--<div class="weui_cells weui_cells_access">-->
+            <!--<div class="weui_cell" ng-click="goCoupon()">-->
+                <!--<div class="weui_cell_bd">-->
+                    <!--<span ng-if="COUPON_INFO!=''" ng-bind="coupon.COUPON_NAME"></span>-->
+                    <!--<span ng-if="COUPON_INFO==''">使用优惠券</span>-->
 
-                </div>
-                <div class="weui_cell_ft weui_cell_primary">
-                    <span ng-if="COUPON_INFO!=''">已选择</span>
-                    <span ng-if="COUPON_INFO==''">未使用</span>
+                <!--</div>-->
+                <!--<div class="weui_cell_ft weui_cell_primary">-->
+                    <!--<span ng-if="COUPON_INFO!=''">已选择</span>-->
+                    <!--<span ng-if="COUPON_INFO==''">未使用</span>-->
 
-                </div>
-            </div>
-        </div>
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
 
         <!--<div class="weui_cells weui_cells_access">-->
         <!--<div class="weui_cell">-->
@@ -99,45 +141,45 @@
         <!--</div>-->
         <!--</div>-->
 
-        <div class="payment-list weui_cells" >
-            <div class="balance weui_cell" ng-click="cardPay()">
-                <div class="icon-wrap weui_cell_bd">
-                    <i class="icon icon-userpay"></i>
-                </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    会员卡支付
-                </div>
-
-                <div class="weui_cell_ft">
-                    <i class="icon "
-                       ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT']"></i>
-                </div>
-            </div>
-            <div class="balance weui_cell" ng-click="wxPay()">
-                <div class="icon-wrap weui_cell_bd">
-                    <i class="icon icon-wepay"></i>
-                </div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    微信支付
-                </div>
-                <div class="weui_cell_ft">
-                    <i class="icon "
-                       ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='WEIXIN']"></i>
-                </div>
-            </div>
-            <!--<div class="balance weui_cell" ng-click="order['SHOP_ORDER.PAY_TYPE']='FACE'" ng-if="!EmptyPick&&(cookiePickupPerson.type==3)">-->
+        <!--<div class="payment-list weui_cells" >-->
+            <!--<div class="balance weui_cell" ng-click="cardPay()">-->
                 <!--<div class="icon-wrap weui_cell_bd">-->
-                    <!--<i class="icon icon-unipay"></i>-->
+                    <!--<i class="icon icon-userpay"></i>-->
                 <!--</div>-->
                 <!--<div class="weui_cell_bd weui_cell_primary">-->
-                    <!--自提付款-->
+                    <!--会员卡支付-->
+                <!--</div>-->
+
+                <!--<div class="weui_cell_ft">-->
+                    <!--<i class="icon "-->
+                       <!--ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT']"></i>-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="balance weui_cell" ng-click="wxPay()">-->
+                <!--<div class="icon-wrap weui_cell_bd">-->
+                    <!--<i class="icon icon-wepay"></i>-->
+                <!--</div>-->
+                <!--<div class="weui_cell_bd weui_cell_primary">-->
+                    <!--微信支付-->
                 <!--</div>-->
                 <!--<div class="weui_cell_ft">-->
                     <!--<i class="icon "-->
-                       <!--ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='FACE']"></i>-->
+                       <!--ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='WEIXIN']"></i>-->
                 <!--</div>-->
             <!--</div>-->
-        </div>
+            <!--&lt;!&ndash;<div class="balance weui_cell" ng-click="order['SHOP_ORDER.PAY_TYPE']='FACE'" ng-if="!EmptyPick&&(cookiePickupPerson.type==3)">&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="icon-wrap weui_cell_bd">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<i class="icon icon-unipay"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="weui_cell_bd weui_cell_primary">&ndash;&gt;-->
+                    <!--&lt;!&ndash;自提付款&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;<div class="weui_cell_ft">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<i class="icon "&ndash;&gt;-->
+                       <!--&lt;!&ndash;ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='FACE']"></i>&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--</div>-->
     </div>
 
     <div class="payment-wrap action-bar-wrap">

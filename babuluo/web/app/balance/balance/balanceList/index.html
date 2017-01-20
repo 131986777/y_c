@@ -1,20 +1,38 @@
-<div class="page-content">
+<div class="page-content" ng-init="initData()">
     <div class="table-content">
         <div class="table-operbar">
             <div class="table-toolbar">
                 <div class="form-inline row">
-                    <div class="form-group col-md-5">
-                        <input type="text" class="form-control" placeholder="输入登录ID" ng-model="loginId">
-                        <button type="submit" class="btn btn-default" ng-click="queryFinanceByLoginId(loginId)">搜索
+                    <div class="form-group col-md-4">
+                        <select ng-model="searchType"
+                                ng-init="searchType='LOGIN_ID'"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="LOGIN_ID">
+                                账号
+                            </option>
+                            <option class="nya-bs-option" value="CARD_NO">
+                                卡号
+                            </option>
+                            <option class="nya-bs-option" value="PRICE">
+                                金额
+                            </option>
+                            <option class="nya-bs-option" value="ORDER">
+                                单号
+                            </option>
+                        </select>
+                        <input type="text" class="form-control" placeholder="" ng-model="loginId">
+                        <button type="submit" class="btn btn-default"
+                                ng-click="queryFinanceByLoginId(loginId)">
+                            搜索
                         </button>
                     </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-6">
                         <label>筛选:</label>
                         <select ng-model="filter['FINANCE_LIST.CHANGE_TYPE']"
                                 ng-init="filter['FINANCE_LIST.CHANGE_TYPE']='null'"
                                 class="nya-bs-select form-control">
                             <option class="nya-bs-option" value="null">
-                                来源
+                                所有收支
                             </option>
                             <option class="nya-bs-option" value="decrease">
                                 支出
@@ -23,12 +41,103 @@
                                 收入
                             </option>
                         </select>
-                    </div> <!-- select-center  -->
+                        <select ng-model="filter['FINANCE_LIST.EVENT']"
+                                ng-init="filter['FINANCE_LIST.EVENT']='null'"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="null">
+                                所有明细
+                            </option>
+                            <option class="nya-bs-option" value="线下充值','会员充值','会员卡充值','充值送','会员卡充值满送">
+                                充值明细
+                            </option>
+                            <option class="nya-bs-option" value="充值送','会员卡充值满送">
+                                赠送明细
+                            </option>
+                            <option class="nya-bs-option" value="线上消费','订单支付','线下消费','消费">
+                                消费明细
+                            </option>
+                            <option class="nya-bs-option" value="订单退款','线下退款','线上退款">
+                                退款明细
+                            </option>
+                            <option class="nya-bs-option" value="会员开卡','线下开卡','线上开卡">
+                                开卡明细
+                            </option>
+                            <option class="nya-bs-option" value="后台">
+                                后台调整
+                            </option>
+                            <option class="nya-bs-option" value="线下换卡','线下换卡-销卡','线下换卡-开卡">
+                                换卡明细
+                            </option>
+                        </select>
+
+                        <select ng-model="filter['FINANCE_LIST.SHOP_ID']"
+                                ng-init="filter['FINANCE_LIST.SHOP_ID']='null'"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="null">
+                                所有门店
+                            </option>
+                            <option class="nya-bs-option" ng-repeat="shop in shopList"
+                                    ng-bind="shop['SHOP.SHOP_NAME']" value="{{shop['SHOP.SHOP_ID']}}">
+                            </option>
+                        </select>
+                        <select ng-model="timeType"
+                                ng-init="timeType='all'"
+                                ng-change="filterTime(timeType)"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="all">
+                                所有时间
+                            </option>
+                            <option class="nya-bs-option" value="aim">
+                                时间段内
+                            </option>
+                        </select>
+                        <select ng-model="moneyRange"
+                                ng-init="moneyRange='all'"
+                                ng-change="filterMoney(moneyRange)"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="all">
+                                所有金额
+                            </option>
+                            <option class="nya-bs-option" value="aim">
+                                金额范围内
+                            </option>
+                        </select>
+                        <div style="display:inline-block;margin:10px 0 0 36px" ng-show="timeType=='aim'">
+                            <input id="start_hour" type="text" class="form-control " placeholder="起始时间"
+                                   name="from" ng-model="filter['FINANCE_LIST.ADD_DATETIME_FROM']"
+                                   data-date-format="yyyy/mm/dd hh:ii" style="margin-right: 10px"> 至
+                        </div>
+
+                        <div style="display: inline-block;margin: 10px 0 0 10px;" ng-show="timeType=='aim'"
+                             data-date="10/11/2012"
+                             language="zh-CN"
+                             data-date-format="yyyy-mm-dd">
+                            <input id="end_hour" type="text" class="form-control " placeholder="截止时间"
+                                   name="to" ng-model="filter['FINANCE_LIST.ADD_DATETIME_TO']"
+                                   data-date-format="yyyy/mm/dd hh:ii">
+                        </div>
+                        <div style="display:inline-block;margin:10px 0 0 36px" ng-show="moneyRange=='aim'">
+                            <input id="start_range" type="text" class="form-control " placeholder="最小金额"
+                                   name="from" ng-model="filter['FINANCE_LIST.MONEY_FROM']"
+                                   style="margin-right: 10px"> 至
+                        </div>
+
+                        <div style="display: inline-block;margin: 10px 0 0 10px;" ng-show="moneyRange=='aim'">
+                            <input id="end_range" type="text" class="form-control " placeholder="最大金额"
+                                   name="to" ng-model="filter['FINANCE_LIST.MONEY_TO']">
+                        </div>
+                    </div>
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-default pull-right" data-toggle="modal"
-                                data-target="#balance"
-                                ng-click=empty()>调整资金
-                        </button>
+                        <div class="col-md-8" ng-if="APP_ID_LIST.indexOf('@1109@')>=0">
+                            <button type="button" class="btn btn-default pull-right" data-toggle="modal"
+                                    data-target="#balance" ng-click=empty()>调整资金
+                            </button>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-default pull-right"
+                                    ng-click="outPutQuery()">导出
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -38,27 +147,55 @@
         <div class="table-scrollable">
             <table class="table table-bordered table-hover table-striped">
                 <thead>
-                <th> 时间</th>
-                <th> 登录ID</th>
+                <th> 交易时间</th>
+                <th> 客户姓名</th>
+                <th> 客户手机号</th>
                 <th> 事件</th>
-                <th> 说明</th>
-                <th class="text-center"> 金额</th>
-                <th class="text-center"> 剩余金额</th>
+                <!--<th> 说明</th>-->
+                <th> 交易卡号</th>
+                <!--<th> 交易前</th>-->
+                <!--<th> 交易后</th>-->
+                <th> 交易卡类别</th>
+                <!--<th> 开卡店</th>-->
+                <th> 操作店</th>
+                <!--<th> 操作员</th>-->
+                <th> 类型</th>
+                <th class="text-center"> 交易金额</th>
+                <th class="text-center"> 账户可用余额</th>
+                <th class="text-center"> 操作</th>
                 </tr>
                 </thead>
                 <tbody ng-cloak>
                 <tr ng-repeat='balanceInfo in balanceList'>
                     <td ng-bind="balanceInfo['FINANCE_LIST.ADD_DATETIME'] | FormatAllDate"></td>
-                    <td ng-bind="balanceInfo['FINANCE_LIST.LOGIN_ID']"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.TRUE_NAME']"></td>
+                    <td ng-bind="balanceInfo['FINANCE_LIST.MEMBER_MOBILE']"></td>
                     <td ng-bind="balanceInfo['FINANCE_LIST.EVENT']"></td>
-                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>
+                    <!--<td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO']"></td>-->
+                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_NO']"></td>
+                    <!--<td ng-bind="balanceInfo['FINANCE_LIST.BEFORE_CARD_BALANCE']| currency :'￥'"></td>-->
+                    <!--<td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_BALANCE']| currency :'￥'"></td>-->
+                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_TYPE']"></td>
+                    <!--<td ng-bind="balanceInfo['FINANCE_LIST.CARD_SHOP']"></td>-->
+                    <td ng-bind="balanceInfo['FINANCE_LIST.SHOP']"></td>
+                    <!--<td ng-bind="balanceInfo['FINANCE_LIST.OPER_USER_ID']"></td>-->
+                    <td>
+                        <span style="color:red" ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='decrease'">支出</span>
+                        <span style="color:green" ng-if="balanceInfo['FINANCE_LIST.CHANGE_TYPE']=='increase'">收入</span>
+                    </td>
                     <td class="text-center">
                         <span style="color:black" ng-show="balanceInfo['FINANCE_LIST.CHANGE_VALUE']>0">{{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}</span>
                         <span style="color:red" ng-show="balanceInfo['FINANCE_LIST.CHANGE_VALUE']<=0">{{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}</span>
                     </td>
                     <td class="text-center">
-                        <span style="color:black" ng-show="balanceInfo['FINANCE_LIST.BALANCE']>0">{{balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'}}</span>
-                        <span style="color:red" ng-show="balanceInfo['FINANCE_LIST.BALANCE']<=0">{{balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'}}</span>
+                        <div ng-if="balanceInfo['FINANCE_LIST.USER_ID']!=undefined">
+                            <span style="color:black" ng-show="balanceInfo['FINANCE_LIST.BALANCE']>0">{{balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'}}</span>
+                            <span style="color:red" ng-show="balanceInfo['FINANCE_LIST.BALANCE']<=0">{{balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'}}</span>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <a class="table-link" data-toggle="modal" data-target="#showMore"
+                           ng-click="getFinanceListById(balanceInfo)">更多</a>
                     </td>
                 </tr>
                 </tbody>
@@ -72,7 +209,75 @@
         </div>
     </div>
 
-    <!-MODAL-->
+    <div class="modal fade" id="showMore" role="dialog" aria-labelledby="edit">
+        <div class="modal-dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title">
+                        更多交易信息
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" name="editForm" novalidate>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                交易说明：
+                            </label>
+                            <label class="col-sm-7 control-label" style="text-align: left">
+                                {{finMore['FINANCE_LIST.EVENT_INTRO']}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                卡交易前余额：
+                            </label>
+                            <label class="col-sm-7 control-label" style="text-align: left">
+                                {{finMore['FINANCE_LIST.BEFORE_CARD_BALANCE'] | currency :'￥'}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                卡交易后余额：
+                            </label>
+                            <label class="col-sm-7 control-label" style="text-align: left">
+                                {{finMore['FINANCE_LIST.EVENT_CARD_BALANCE'] | currency :'￥'}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                开卡门店：
+                            </label>
+                            <label class="col-sm-7 control-label" style="text-align: left">
+                                {{finMore['FINANCE_LIST.CARD_SHOP']}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                交易操作人：
+                            </label>
+                            <label class="col-sm-7 control-label" style="text-align: left">
+                                {{finMore['FINANCE_LIST.OPER_USER_ID']}}
+                            </label>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit">
+                                保存
+                            </button>
+                            <button class="btn btn-default"
+                                    data-dismiss="modal">
+                                关闭
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="balance">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -91,11 +296,13 @@
 
                             <div class="col-md-8 text-left form-inline">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="请输入会员登录ID" ng-model="memberId">
+                                    <input type="text" class="form-control" placeholder="请输入会员登录ID"
+                                           ng-model="memberId">
                                 </div>
 
                                 <!--调用根据ID查询用户信息的API：/member/member/getById-->
-                                <button type="submit" class="btn btn-default" ng-click="queryById(memberId)">查询</button>
+                                <button type="submit" class="btn btn-default" ng-click="queryById(memberId)">查询
+                                </button>
                                 <span class="help-block"
                                       ng-show="editForm.name.$error.required && !editForm.name.$pristine">
                                          请先输入会员ID
@@ -131,14 +338,43 @@
 
                             <div class="col-md-8 text-left">
                                 <h5 ng-bind="memberDetail['MEMBER.EMAIL']"></h5>
-
-
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 当前余额:
+                                <span class="required"> * </span> 总余额:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="cardTotalMoney"></h5>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 control-label">
+                                <span class="required"> * </span>会员卡:
+                            </label>
+                            <div class="col-sm-8">
+                                <select ng-model="MEMBER_CARD_ID"
+                                        ng-init="MEMBER_CARD_ID='null'"
+                                        ng-change="getCardBalance(MEMBER_CARD_ID)"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option" value="null">
+                                        随机会员卡
+                                    </option>
+                                    <option class="nya-bs-option"
+                                            ng-repeat="(key,value) in cardList"
+                                            ng-bind="value['MEMBER_CARD.CARD_NO']"
+                                            value="{{value['MEMBER_CARD.CARD_ID']}}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" ng-if="memberDetail.select">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 卡余额:
                             </label>
 
                             <div class="col-md-8 text-left">
@@ -152,14 +388,36 @@
                             </label>
 
                             <div class="col-md-8 text-left">
+
                                 <label class="radio-inline">
-                                    <input type="radio" name="types" value="1" ng-model="changeType"
-                                           ng-click="delete()"> 新增
+                                    <input type="radio" value="1" ng-model="changeType"
+                                           ng-checked="true">
+                                    新增
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="types" value="0" ng-model="changeType"
-                                           ng-click="delete()"> 减少
+                                    <input type="radio" value="0" ng-model="changeType">
+                                    减少
                                 </label>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 control-label">
+                                <span class="required"></span>参与活动:
+                            </label>
+                            <div class="col-sm-8">
+                                <select ng-model="ACTIVITY_ID"
+                                        class="nya-bs-select form-control" ng-init="ACTIVITY_ID ='{$null}'">
+                                    <option class="nya-bs-option" value="{$null}">
+                                        不参与活动
+                                    </option>
+                                    <option class="nya-bs-option"
+                                            ng-repeat="activity in activitys"
+                                            ng-bind="activity['ACTIVITY.NAME']"
+                                            value="{{activity['ACTIVITY.ID']}}">
+                                    </option>
+                                </select>
                             </div>
                         </div>
 
@@ -186,15 +444,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 调整后余额:
-                            </label>
+                        <!--<div class="form-group row">-->
+                        <!--<label class="col-md-3 control-label">-->
+                        <!--<span class="required"> * </span> 调整后余额:-->
+                        <!--</label>-->
 
-                            <div class="col-md-8 text-left">
-                                <h5>{{afterModify}}</h5>
-                            </div>
-                        </div>
+                        <!--<div class="col-md-8 text-left">-->
+                        <!--<h5>{{afterModify}}</h5>-->
+                        <!--</div>-->
+                        <!--</div>-->
 
                     </form>
                 </div>

@@ -1,10 +1,9 @@
-AndSellMainModule.service('balanceFactory', function ($resource, baseURL) {
-    this.addFinanceList= function (form) {
-        return $resource(baseURL + '/member/balance/add', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+AndSellMainModule.service('balanceFactory', function (http) {
+
+    this.addFinanceList = http.post('/member/balance/add');
+
+    this.getAllFinanceList = http.post('/member/balance/getAllBalanceList');
+
+    this.getAllUsefulActivity = http.post('/sales/activity/getAllUsefulRechargeActivityForOwn');
 
 });

@@ -3,10 +3,9 @@ angular.module('AndSell.Main').controller('card_card_cardSource_Controller', fun
 
   modalFactory.setTitle('会员卡发布渠道');
   $scope.initLoad = function () {
-    cardFactory.getCardSourceList().get({}, function (repsonce) {
-      console.log(repsonce);
+    cardFactory.getCardSourceList({}, function (repsonce) {
       $scope.cardSourceList = repsonce.data;
-    }, null);
+    });
   };
 
   $scope.initLoad();
@@ -15,17 +14,14 @@ angular.module('AndSell.Main').controller('card_card_cardSource_Controller', fun
     $scope.addCardSource = function () {
     console.log($scope.add);
 
-    cardFactory.addCardSource($scope.add).get({}, function (response) {
-
-      if (response.code == 400) {
-        modalFactory.showShortAlert(response.msg);
-      } else if (response.extraData.state == 'true') {
+    cardFactory.addCardSource($scope.add, function (response) {
         modalFactory.showShortAlert('新增成功');
         $scope.add='';
         $scope.IS_DEF=false;
         $("#addSource").modal('hide');
         $scope.initLoad();
-      }
+    }, function (response) {
+      modalFactory.showShortAlert(response.msg);
     });
   };
 
@@ -40,26 +36,21 @@ angular.module('AndSell.Main').controller('card_card_cardSource_Controller', fun
   $scope.modifyCardSource = function () {
     $scope.modify['MEMBER_CARD_SOURCE.ID'] =  $scope.modifyId;
 
-    cardFactory.modifyCardSourceById ().get($scope.modify, function (response) {
-      if (response.code == 400) {
-        modalFactory.showShortAlert(response.msg);
-      } else if (response.extraData.state == 'true') {
+    cardFactory.modifyCardSourceById($scope.modify, function (response) {
         $("#modifySource").modal('hide');
         modalFactory.showShortAlert("修改成功");
         $scope.initLoad();
-      }
+    }, function (response) {
+      modalFactory.showShortAlert(response.msg);
     });
   };
 
   $scope.deleteCardSource = function (id) {
-
     modalFactory.showAlert("确认删除吗?", function () {
-      cardFactory.delCardSource(id).get({}, function (res) {
-        if (res.extraData.state = 'true') {
+      cardFactory.delCardSource({'MEMBER_CARD_SOURCE.ID':id}, function (res) {
           modalFactory.showShortAlert("删除成功");
 
           $scope.initLoad();
-        }
       });
     });
 

@@ -1,99 +1,34 @@
+AndSellMainModule.service('cardFactory', function (http) {
 
-AndSellMainModule.service('cardFactory', function ($resource, baseURL) {
-    this.getMemberCardList = function () {
-        return $resource(baseURL + '/member/membercard/queryAll', {}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getMemberCardList = http.post('/member/membercard/queryAll');
 
-    this.addMemberCard = function (form) {
-        return $resource(baseURL + '/member/membercard/add', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.addMemberCard = http.post('/member/membercard/add');
 
+    this.getCardSourceList = http.post('/member/cardSource/queryAll');
 
-    this.getCardSourceList = function () {
-        return $resource(baseURL + '/member/cardSource/queryAll', null, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.addCardSource = http.post('/member/cardSource/add');
 
-    this.addCardSource = function (form) {
-        return $resource(baseURL + '/member/cardSource/add', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.delCardSource = http.post('/member/cardSource/delById');
 
-    this.delCardSource = function (id) {
-        return $resource(baseURL + '/member/cardSource/delById?MEMBER_CARD_SOURCE.ID=:ID', {'ID': id},{
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.modifyCardSourceById = http.post('/member/cardSource/modifyById');
 
-    this.modifyCardSourceById = function () {
-        return $resource(baseURL + '/member/cardSource/modifyById', null, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getCardListBySource = http.post('/member/cardType/getBySource');
 
+    this.addCardType = http.post('/member/cardType/add');
 
-    this.getCardListBySource = function (sourceID) {
-        console.log(456);
-        console.log('id为'+sourceID);
-        return $resource(baseURL + '/member/cardType/getBySource?MEMBER_CARD_TYPE.CARD_SOURCE_ID=:ID', {'ID': sourceID}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.delCardType = http.post('/member/cardType/delById');
 
+    this.modifyCardTypeById = http.post('/member/cardType/modifyById');
 
-    this.addCardType = function (form) {
-        return $resource(baseURL + '/member/cardType/add', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-    this.delCardType = function (id) {
-        return $resource(baseURL + '/member/cardType/delById?MEMBER_CARD_TYPE.ID=:ID', {'ID': id},{
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-    this.modifyCardTypeById = function () {
-        return $resource(baseURL + '/member/cardType/modifyById', null, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-    this.getUIDByLOGINID = function (form) {
-        return $resource(baseURL + '/member/member/getUIDByLOGINID', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-    this.getUIDByMobile = function (form) {
-        return $resource(baseURL + '/member/member/getUIDByMobile', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getUIDByLOGINID = http.post('/member/member/getUIDByLOGINID');
+
+    this.getUIDByMobile = http.post('/member/member/getUIDByMobile');
+
+    this.getMemberInfoByUserId = http.post('/member/memberData/getMemberInfoByUserId');
+
+    this.frezzeCard = http.post('/member/membercard/frezzeCard');
+
+    this.FrozenCard = http.post('/member/membercard/FrozenCard');
+
 });
+

@@ -1,11 +1,21 @@
-<div class="page-content">
+<div class="page-content" ng-init="initData()">
     <div class="table-content">
         <div class="table-operbar">
             <div class="table-toolbar">
                 <div class="row">
                     <div class="form-inline form-group">
-                        <div class="form-group col-md-5">
-                            <input type="text" class="form-control" placeholder="输入用户名" ng-model="loginId">
+                        <div class="form-group col-md-4">
+                            <select ng-model="searchType"
+                                    ng-init="searchType='LOGIN_ID'"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value="LOGIN_ID">
+                                    账号
+                                </option>
+                                <option class="nya-bs-option" value="CARD_NO">
+                                    卡号
+                                </option>
+                            </select>
+                            <input type="text" class="form-control" ng-model="loginId">
                             <button type="submit" class="btn btn-default" ng-click="queryPointByLoginId(loginId)">搜索
                             </button>
                         </div>
@@ -15,7 +25,7 @@
                                     ng-init="filter['MEMBER_POINT_LIST.CHANGE_TYPE']='null'"
                                     class="nya-bs-select form-control">
                                 <option class="nya-bs-option" value="null">
-                                    来源
+                                    所有收支
                                 </option>
                                 <option class="nya-bs-option" value="decrease">
                                     支出
@@ -24,11 +34,54 @@
                                     收入
                                 </option>
                             </select>
+                            <select ng-model="filter['MEMBER_POINT_LIST.SHOP_ID']"
+                                    ng-init="filter['MEMBER_POINT_LIST.SHOP_ID']='null'"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value="null">
+                                    所有门店
+                                </option>
+                                <option class="nya-bs-option" ng-repeat="shop in shopList"
+                                        ng-bind="shop['SHOP.SHOP_NAME']" value="{{shop['SHOP.SHOP_ID']}}">
+                                </option>
+                            </select>
+                            <select ng-model="timeType"
+                                    ng-init="timeType='all'"
+                                    ng-change="filterTime(timeType)"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value="all">
+                                    所有时间
+                                </option>
+                                <option class="nya-bs-option" value="aim">
+                                    时间段内
+                                </option>
+                            </select>
+                            <div style="display:inline-block;margin:10px 0 0 36px" ng-show="timeType=='aim'"
+                                 data-date="10/11/2012"
+                                 language="zh-CN"
+                                 data-date-format="yyyy-mm-dd">
+                                <input id="start_hour" type="text" class="form-control " placeholder="起始时间"
+                                       name="from" ng-model="filter['MEMBER_POINT_LIST.ADD_DATETIME_FROM']"
+                                       data-date-format="yyyy/mm/dd hh:ii" style="margin-right: 10px"> 至
+                            </div>
+
+                            <div style="display: inline-block;margin: 10px 0 0 10px;" ng-show="timeType=='aim'"
+                                 data-date="10/11/2012"
+                                 language="zh-CN"
+                                 data-date-format="yyyy-mm-dd">
+                                <input id="end_hour" type="text" class="form-control " placeholder="截止时间"
+                                       name="to" ng-model="filter['MEMBER_POINT_LIST.ADD_DATETIME_TO']"
+                                       data-date-format="yyyy/mm/dd hh:ii">
+                            </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3">
+                            <div class="col-md-8">
                             <button type="button" class="btn btn-default pull-right" data-toggle="modal"
                                     data-target="#point"
                                     ng-click=empty()>调整积分
+                            </button>
+                            </div>
+                            <button type="button" class="btn btn-default pull-right"
+                                    ng-click="outPutQuery()">导出
                             </button>
                         </div>
                     </div>
@@ -41,11 +94,15 @@
                 <thead>
                 <tr>
                     <th>会员编号</th>
-                    <th>用户名</th>
+                    <th>手机号</th>
                     <th>时间</th>
                     <th>事件</th>
                     <th>说明</th>
-                    <th class="text-center">积分</th>
+                    <th>交易卡号</th>
+                    <th>操作门店</th>
+                    <th>操作员</th>
+                    <th> 类型</th>
+                    <th class="text-center">变更积分</th>
                     <th class="text-center">剩余积分</th>
                 </tr>
                 </thead>
@@ -53,10 +110,17 @@
                 <tbody ng-cloak>
                 <tr ng-repeat='pointInfo in pointList'>
                     <td ng-bind="pointInfo['MEMBER_POINT_LIST.USER_ID' ]"></td>
-                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.LOGIN_ID' ]"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.MEMBER_MOBILE']"></td>
                     <td ng-bind="pointInfo['MEMBER_POINT_LIST.ADD_DATETIME'] | FormatAllDate"></td>
-                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT' ]"></td>
-                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT_INTRO' ]"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT']"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT_INTRO']"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT_CARD_NO']"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.SHOP']"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.OPER_USER_ID']"></td>
+                    <td>
+                        <span style="color:red" ng-if="pointInfo['MEMBER_POINT_LIST.CHANGE_TYPE']=='decrease'">支出</span>
+                        <span style="color:green" ng-if="pointInfo['MEMBER_POINT_LIST.CHANGE_TYPE']=='increase'">收入</span>
+                    </td>
                     <td class="text-center">
                         <span style="color:black" ng-show="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']>0">{{pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']}}</span>
                         <span style="color:red" ng-show="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']<=0">{{pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']}}</span>

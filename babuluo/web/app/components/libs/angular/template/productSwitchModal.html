@@ -54,7 +54,7 @@
                 <tr ng-repeat="sku in skuList"
                     ng-click="insertItem(sku)">
                   <td>
-                    <img ng-src="{{sku['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.CMP']}}"
+                    <img ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.CMP']}}"
                          class="img-thumbnail"
                          style="height: 50px;width: 50px;float: left;padding: 0px;">
                     <div style="padding-left: 60px;text-align: left">

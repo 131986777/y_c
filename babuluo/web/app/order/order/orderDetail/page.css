@@ -15,11 +15,11 @@
     padding-top: 25px;
     margin-bottom: 25px;
 }
-.orderState p{
-    font-size: 14px;
-    color: #FC5008;
-    padding-top: 3px;
-}
+/*.orderState p{*/
+    /*font-size: 14px;*/
+    /*color: #FC5008;*/
+    /*padding-top: 3px;*/
+/*}*/
 .progressList{
     list-style-type: none;
     overflow: hidden;

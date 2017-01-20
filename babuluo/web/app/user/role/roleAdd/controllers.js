@@ -3,20 +3,15 @@ angular.module('AndSell.Main').controller('user_role_roleAdd_Controller', functi
     //设置页面Title
     modalFactory.setTitle('新增员工角色');
 
-
     $scope.initLoad = function () {
-
         $scope.roleAdd = {};
         $scope.appChooseList = [];
         $scope.loadAPPs();
     };
 
-
     $scope.loadAPPs = function () {
-
         //加载权限App类型
-        roleFactory.getAppClass().get({}, function (response) {
-            console.log(response);
+        roleFactory.getAppClass({"APP_CLASS.SYS_ID": "BBL"}, function (response) {
             $scope.roleClassList = response.data;
             $scope.roleClassList.forEach(function (ele) {
                 ele.childList = $scope.filterParentAuth(ele['APP_CLASS.ID']);
@@ -25,11 +20,10 @@ angular.module('AndSell.Main').controller('user_role_roleAdd_Controller', functi
     };
 
     $scope.filterParentAuth = function (id) {
-
         var returnValue = new Array;
         var form = {};
         form['APP.CLASS_ID'] = id;
-        roleFactory.getAppByClass(form).get({}, function (response) {
+        roleFactory.getAppByClass(form, function (response) {
             response.data.forEach(function (ele) {
                 returnValue.push(ele);
             });
@@ -55,16 +49,24 @@ angular.module('AndSell.Main').controller('user_role_roleAdd_Controller', functi
             return;
         }
 
-        $scope.roleAdd['ROLE_MAP_APP'] = $scope.appChooseList;
-        console.log($scope.roleAdd);
-        roleFactory.addRole($scope.roleAdd).get({}, function (response) {
-            console.log(response);
-            if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert("添加成功");
-                $state.go('user/role/roleList');
-            } else {
-                modalFactory.showShortAlert(response.msg);
+        //拼接应用id
+        $scope.roleAdd['USER_ROLE.ROLE_MAP_APP'] = '';
+        $scope.appChooseList.forEach(function (ele) {
+            $scope.roleAdd['USER_ROLE.ROLE_MAP_APP'] = $scope.roleAdd['USER_ROLE.ROLE_MAP_APP']
+                + ","
+                + ele['APP.APP_ID'];
+
+            if ($scope.roleAdd['USER_ROLE.ROLE_MAP_APP'].substr(0, 1) == ',') {
+                $scope.roleAdd['USER_ROLE.ROLE_MAP_APP'] = $scope.roleAdd['USER_ROLE.ROLE_MAP_APP'].substr(1);
             }
+        });
+
+        console.log($scope.roleAdd);
+        roleFactory.addRole($scope.roleAdd, function (response) {
+            modalFactory.showShortAlert("添加成功");
+            $state.go('user/role/roleList');
+        }, function (resposne) {
+            modalFactory.showShortAlert(response.msg);
         });
 
     }, function () {

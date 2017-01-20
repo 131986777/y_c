@@ -1,92 +1,27 @@
-AndSellMainModule.service('orderFactory', function ($resource, baseURL) {
+AndSellMainModule.service('orderFactory', function (http) {
 
-    this.addOrder = function (order) {
-        return $resource(baseURL + '/shop/order/addOrderWithDetail', order, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.addOrder=http.post('/shop/order/filterOrderType');
+    this.getById=http.post('/shop/order/getById');
+    this.getOrder=http.post('/shop/order/queryAll');
+    this.getStateOrders=http.post('/shop/order/getStateOrders');
+    this.cancelOrder=http.post('/shop/order/cancelOrder');
+    this.outOrder=http.post('/shop/order/outOrder');
+    this.sendOrder=http.post('/shop/order/sendOrder');
+    this.payOrder=http.post('/shop/order/payOrder');
+    this.deliveryOrder=http.post('/shop/order/deliveryOrder');
+    this.modifyOrderRemark=http.post('/shop/order/modifyOrderRemark');
+    this.scanOrder=http.post('/shop/order/scanOrder');
 
-    this.getById= function (id) {
-        return $resource(baseURL + '/shop/order/getById?SHOP_ORDER.ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-
-    this.getOrder= function (filter) {
-        console.log(filter);
-        return $resource(baseURL + '/shop/order/queryAll', filter , {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getWXPayItemByOrderId= http.post('/order/wx/pay/list/getByOrderId');
+    this.getFinanceItemByOrderId= http.post('/member/balance/getByOrderId');
 
 
-    this.getStateOrders= function (params) {
-        return $resource(baseURL + '/shop/order/getStateOrders', params , {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.getRefundOrder = http.post('/shop/order/refund/queryAll');
+    this.refundOrder = http.post('/shop/order/refund/refundOrder');
+    this.RemarkRefundOrder = http.post('/shop/order/refund/remarkOrder');
 
-    this.cancelOrder= function (id) {
-        return $resource(baseURL + '/shop/order/cancelOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
+    this.getBySkuId = http.post('/shop/product/getBySkuIdWithAllInfo');
 
-    this.outOrder= function (id) {
-        return $resource(baseURL + '/shop/order/outOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
+    this.modifyBySortComplete = http.post('/shop/order/modifyBySortComplete');
 
-    this.sendOrder= function (id) {
-        return $resource(baseURL + '/shop/order/sendOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
-
-    this.payOrder= function (params) {
-        return $resource(baseURL + '/shop/order/payOrder',params, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
-
-    this.deliveryOrder= function (id) {
-        return $resource(baseURL + '/shop/order/deliveryOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
-
-    this.modifyOrderRemark= function (form) {
-        return $resource(baseURL + '/shop/order/modifyOrderRemark', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
-
-    this.scanOrder= function (id) {
-        return $resource(baseURL + '/shop/order/scanOrder?SHOP_ORDER.ID=:ID', {ID:id}, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
 });

@@ -70,7 +70,7 @@
                   "<div class='weui_mask'></div>" +
                   "<div class='weui_dialog'>" +
                   "<div class='weui_dialog_hd'><strong class='weui_dialog_title'>{{title}}</strong></div>" +
-                  "<div class='weui_dialog_bd'>{{body}}</div>" +
+                  "<div class='weui_dialog_bd' ng-bind='body'></div>" +
                   "<div class='weui_dialog_ft'>" +
                   "<a class='weui_btn_dialog primary' ng-click='hide()'>确定</a>" +
                   "</div>" +
@@ -130,6 +130,59 @@
                   "</div>"
               )(scope));
               scope.show();
+            } ,
+              /*
+             * @param {Object} options:
+             * - title {String}
+             * - body {String}
+             * - scope {Object}
+             * - preSureCallback {Function}
+             * - preCancelCallback {Function}
+             * @return {Object} dialog
+             */
+            confirmInput:function(title, body, doneCallback, cancelCallback){
+              var opts = {title:title, body:body, done:doneCallback, cancel:cancelCallback};
+
+              if (opts.title == undefined) {
+                opts.title = "提示";
+              }
+              if (opts.title == undefined) {
+                opts.title = "";
+              }
+
+              var scope = opts.scope = angular.isObject(opts.scope) ? opts.scope.$new() : $rootScope.$new();
+              scope.show = function(){
+                scope.dialogConfirm = true;
+              };
+              scope.hide= function(){
+                if(angular.isFunction(opts.cancel)){
+                  opts.cancel();
+                }
+                scope.dialogConfirm = false;
+              };
+              scope.sure= function(c){
+                  console.log(c);
+                if(angular.isFunction(opts.done)){
+                    opts.done({'data':c});
+                }
+                scope.dialogConfirm = false;
+              };
+              angular.extend(scope,opts);
+              privateMethods.destroy(".weui_dialog_confirm");
+              $body.append($compile(
+                  "<div class='weui_dialog_confirm'  ng-show='dialogConfirm'>" +
+                  "<div class='weui_mask'></div>" +
+                  "<div class='weui_dialog'>" +
+                  "<div class='weui_dialog_hd'><strong class='weui_dialog_title' ng-bind='title'></strong></div>" +
+                  "<div class='weui_dialog_bd'> <input style='border:none;border-bottom:1px solid grey; margin-top: 20px;padding-left: 10px;padding-right: 30px;width: 100%;background-color: transparent' ng-model='body'/></div>" +
+                  "<div class='weui_dialog_ft'>" +
+                  "<a class='weui_btn_dialog primary' ng-click='sure(body)'>确定</a>" +
+                  "<a class='weui_btn_dialog default' ng-click='hide()'>取消</a>" +
+                  "</div>" +
+                  "</div>" +
+                  "</div>"
+              )(scope));
+              scope.show();
             }
           },
           toast:{
@@ -178,7 +231,7 @@
                   "<div class='weui_mask_transparent'></div>" +
                   " <div class='weui_toast'>" +
                   "<i class='weui_icon_toast'></i>" +
-                  "<p class='weui_toast_content'>{{body}}</p>" +
+                  "<p class='weui_toast_content' ng-bind='body'></p>" +
                   "</div>" +
                   "</div>"
               )(scope));
@@ -245,7 +298,7 @@
                   " <div class='weui_loading_leaf weui_loading_leaf_10'></div>" +
                   " <div class='weui_loading_leaf weui_loading_leaf_11'></div>" +
                   "</div>" +
-                  " <p class='weui_toast_content'>{{loadText}}</p>" +
+                  " <p class='weui_toast_content' ng-bind='loadText'></p>" +
                   "</div>" +
                   "</div>"
               )(scope));
@@ -253,6 +306,54 @@
             },
             hideLoading:function(){
               privateMethods.destroy(".weui_loading_toast");
+            }
+          },
+          wx_pay:{
+            /*
+             * @param {String} options: body type time
+             * @return {Object} dialog
+             */
+            show:function(body, type, time, callback){
+              var opts = {body:body, type:type, time:time, done:callback};
+              var scope = opts.scope = angular.isObject(opts.scope) ? opts.scope.$new() : $rootScope.$new();
+              scope.show = function(){
+                scope.toast = true;
+              };
+              scope.hide= function(){
+                scope.toast = false;
+                if(angular.isFunction(opts.done)){
+                  opts.done();
+                }
+              };
+              angular.extend(scope,opts);
+              privateMethods.destroy(".aweui-show #aweui-show");
+              switch (opts.type){
+                case "error":
+                  // \EA0D
+                  opts.type = "\\EA0D";
+                  break;
+              };
+              $body.append($compile(
+                  "<style id='aweui-show' type='text/css'>" +
+                  ".weui_icon_toast:before {" +
+                  "  content: '" + opts.type +
+                  "' }" +
+                  "</style>" +
+                  "<div class='aweui-show'  ng-show='toast'>" +
+                  "<div class='weui_mask_transparent'></div>" +
+                  " <div class='weui_toast'>" +
+                  "<i class='weui_icon_toast'></i>" +
+                  "<p class='weui_toast_content'>支付失败</p>" +
+                  "</div>" +
+                  "</div>"
+              )(scope));
+              scope.show();
+              $timeout(function(){
+                scope.hide();
+              },scope.time);
+            },
+            error:function(body, callback) {
+              this.show(body, 'error', 1300, callback);
             }
           }
         };

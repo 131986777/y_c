@@ -6,16 +6,13 @@ angular.module('AndSell.Main').controller('member_member_memberCard_Controller',
     modalFactory.setBottom(false);
 
     $scope.memberId = $stateParams.id;
-    console.log("这是客户的id：" + $scope.memberId);
 
     $scope.initLoad = function () {
-        //var sourceID,typeID;
         $scope.cardSourceList = new Array();
         $scope.cardTypeList = new Array();
-        memberFactory.getMembercardInfo($scope.memberId).get({}, function (response) {
-            console.log(response);
+        memberFactory.getMembercardInfo({'MEMBER_CARD.USER_ID':$scope.memberId}, function (response) {
             $scope.cardInfoList = response.data;
-        }, null);
+        });
     };
     $scope.initLoad();
 

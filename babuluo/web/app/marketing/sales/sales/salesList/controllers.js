@@ -1,338 +1,426 @@
-
-angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Controller', function ($scope, $stateParams, salesFactory, modalFactory) {
+angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Controller', function ($q, $scope, $stateParams, $http, productFactory, tagFactory, unitFactory, classFactory, promoFactory, salesFactory, modalFactory) {
 
     modalFactory.setTitle('促销管理');
     modalFactory.setBottom(false);
 
+    $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
-    var salePlanMap=[{id:1,name:'单件商品促销'},
-        {id:2,name:'按商品类别促销'},
-        {id:3,name:'按商品标签促销'}
-    ];
+    var salePlanMap = [{type: 'skuAlone', name: '单件商品促销'}, {
+        type: 'classAlone', name: '按商品类别促销'
+    }, {type: 'tagAlone', name: '按商品标签促销'}];
 
+    $scope.salePlanMap = salePlanMap;
 
-    $scope.salePlanMap = salePlanMap
+    $scope.rangeId = 0;
 
+    $scope.filterc = 'null';
 
-    $scope.getCurrentPro = function(item) {
-        $scope.updatePlanForm = clone(item);
-        if(item['SALES_PLAN.TARGET_OBJ_ID'] == null){
-            $scope.currentPro = null;
+    $scope.checkedList = [];
+
+    $scope.skuList = new Array;
+
+    $scope.ranFilter = function () {
+        if ($scope.filterc != 'null') {
+            $scope.salesPlan = [];
+            $scope.clonePlan.forEach(function (ele) {
+                if (ele['role']['adaptor']['PROMO_ROLE_ANDSELL.PROMOTION_TYPE'] == 'order') {
+                    if ($scope.filterc == "order") {
+                        $scope.salesPlan.push(ele);
+                    }
+                } else {
+                    if ($scope.filterc == ele['range']['type_role']) {
+                        $scope.salesPlan.push(ele);
+                    }
+                }
+            })
+        } else {
+            $scope.salesPlan = $scope.clonePlan;
         }
-        else{
+    }
+
+    $scope.queryPlan = function () {
+        promoFactory.getPromoPlan({}, function (response) {
+            $scope.salesPlan = response.data;
+
+            $scope.queryRange();
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+    }
+
+    $scope.queryRange = function () {
+        promoFactory.getPromoRange({}, function (response) {
+            $scope.salesRange = response.data;
+            var getPrdSkuIdsForAddRange = $q.defer();
+            var getPrdSkuIdsForAddRole = $q.defer();
+            $scope.addRange(getPrdSkuIdsForAddRange);
+            $scope.addRole(getPrdSkuIdsForAddRole);
+            $scope.clonePlan = $scope.salesPlan;
+            $q.all([getPrdSkuIdsForAddRange.promise, getPrdSkuIdsForAddRole.promise]).then(function (result) {
+                $scope.getPrdSkuData();
+            });
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+    }
+
+    $scope.addRange = function (defer) {
+
+        $scope.salesPlan.forEach(function (ele) {
+            $scope.salesRange.forEach(function (ran) {
+                if (ele['PROMOTION_PLAN.PROMOTION_RANGE_ID'] == ran['promotion_range_id']) {
+                    ele['range'] = ran;
+                    if (ele['range']['type_role'] == 'skuAlone') {
+                        ele['range']['rangeDetailVOs'].forEach(function (sku) {
+                            $scope.skuList.push(sku['target']);
+                        });
+                    }
+                }
+            })
+            defer.resolve();
+        })
+    }
+
+    $scope.addRole = function (defer) {
+        $scope.salesPlan.forEach(function (ele) {
+            $scope.salesList.forEach(function (rol) {
+                if (ele['PROMOTION_PLAN.PROMOTION_ROLE_ID']
+                    == rol['PROMOTION_ROLE.PROMOTION_ROLE_ID']) {
+                    ele['role'] = rol;
+                    var role = JSON.parse(rol['PROMOTION_ROLE.PROMOTION_ROLE']);
+                    rol['role'] = role;
+
+                    if (ele['role']['PROMOTION_ROLE.PROMOTION_TYPE_ACTION'] == 'present') {
+                        ele['role']['role'].forEach(function (sku) {
+                            sku['presents'].forEach(function (e) {
+                                $scope.skuList.push(e['skuId']);
+                            });
+                        });
+                    }
+
+                }
+            })
+            defer.resolve();
+        })
+    }
+
+    $scope.getPrdSkuData = function () {
+        productFactory.getBySkuIdWithAllInfo({'SHOP_PRODUCT_SKU.SKU_IDS': $scope.skuList.toString()}, function (response) {
+            $scope.skuMap = listToMap(response.data, "SHOP_PRODUCT_SKU.SKU_ID");
+        })
+    }
+
+    $scope.queryAdaptor = function () {
+        salesFactory.QueryPromoRoleAdaptor({}, function (response) {
+            $scope.addAdaptor(response);
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+    };
+
+    $scope.addAdaptor = function (response) {
+        var adaptor = response.data;
+        adaptor.forEach(function (ele) {
+            $scope.salesList.forEach(function (sale) {
+                if (ele["PROMO_ROLE_ANDSELL.PROMOTION_ROLE_ID"]
+                    == sale["PROMOTION_ROLE.PROMOTION_ROLE_ID"]) {
+                    sale["adaptor"] = ele;
+                }
+            })
+        })
+    };
+
+    $scope.getCurrentPro = function (item) {
+        $scope.updatePlanForm = clone(item);
+        if (item['SALES_PLAN.TARGET_OBJ_ID'] == null) {
+            $scope.currentPro = null;
+        } else {
             $scope.currentPro = item['SALES_PLAN.TARGET_OBJ_ID'].split(',');
         }
-    }
+    };
 
-    $scope.prdSwitch = function (data) {
-        console.log(data);
-        var array = new Array();
-
-        for (var i = 0; i < data.length; i++) {
-            array.push(data[i]['SHOP_PRODUCT_SKU.SKU_ID']);
-        }
-
-        var result = [];
-        for(var i=0; i<array.length; i++){
-            if(result.indexOf(array[i])==-1){
-                result.push(array[i])
-            }
-        }
-        //插入促销商品
-        $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result;
-        var form = {};
-        form = $scope.updatePlanForm;
-        $scope.save(form);
-    }
-
-    /*$scope.prdSwitch = function (data) {
-        var array = new Array();
-        var addarray = $scope.currentPro;
-
-        for (var i = 0; i < data.length; i++) {
-                array.push(data[i]['SHOP_PRODUCT_SKU.PRD_ID']);
-            }
-        if(addarray != null){
-            for (var i = 0; i < addarray.length; i++) {
-                array.push(addarray[i]);
-
-            }
-        }
-
-        var result = [];
-        for(var i=0; i<array.length; i++){
-            if(result.indexOf(array[i])==-1){
-                result.push(array[i])
-            }
-        }
-            //插入促销商品
-            $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result;
-            var form = {};
-            form = $scope.updatePlanForm;
-        $scope.save(form);
-    }*/
-
-    $scope.getCurrentClass = function(item) {
+    $scope.getCurrentClass = function (item) {
         $scope.updatePlanForm = clone(item);
-        if(item['SALES_PLAN.TARGET_OBJ_ID'] == null){
+        if (item['SALES_PLAN.TARGET_OBJ_ID'] == null) {
             $scope.currentClass = null;
-        }
-        else{
+        } else {
             $scope.currentClass = item['SALES_PLAN.TARGET_OBJ_ID'].split(',');
         }
+    };
+
+    $scope.bindRangeId = function (item) {
+        $scope.rangeId = item['PROMOTION_PLAN.PROMOTION_RANGE_ID'];
+        $scope.checkedList = item['range']['rangeDetailVOs'];
+    };
+
+    $scope.prdSwitch = function (data) {
+        $scope.delSkuRangeDetail($scope.rangeId, data)
+    };
+
+    $scope.delSkuRangeDetail = function (id, data) {
+        promoFactory.delPromoRangeDetail({"PROMOTION_RANGE_DETAIL.PROMOTION_RANGE_ID": id}, function (response) {
+            $scope.addSkuRangeDetails(data)
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+
+    };
+
+    $scope.addSkuRangeDetails = function (data) {
+        var p = [];
+        data.forEach(function (ele) {
+            var c = $q.defer();
+            p.push(c.promise);
+            var rangeDetail = {};
+            rangeDetail['PROMOTION_RANGE_DETAIL.PROMOTION_RANGE_ID'] = $scope.rangeId;
+            rangeDetail['PROMOTION_RANGE_DETAIL.TARGET_TYPE'] = "sku";
+            rangeDetail['PROMOTION_RANGE_DETAIL.TARGET'] = ele['SHOP_PRODUCT_SKU.SKU_ID'];
+            $scope.addRangeDetail(rangeDetail, c);
+        });
+        $q.all(p).then(function () {
+            $scope.$broadcast('pageBar.reload');
+        })
+    };
+
+    $scope.classSwitch = function (data) {
+        $scope.delClassRangeDetail($scope.rangeId, data);
+
+    };
+
+    $scope.tagSwitch = function (data) {
+        $scope.delTagRangeDetail($scope.rangeId, data)
+    };
+
+    $scope.delTagRangeDetail = function (id, data) {
+        promoFactory.delPromoRangeDetail({"PROMOTION_RANGE_DETAIL.PROMOTION_RANGE_ID": id}, function (response) {
+            $scope.addTagRangeDetails(data);
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+    };
+
+    $scope.addTagRangeDetails = function (data) {
+        var p = [];
+        data.forEach(function (ele) {
+            var c = $q.defer();
+            p.push(c.promise);
+            var rangeDetail = {};
+            rangeDetail['PROMOTION_RANGE_DETAIL.PROMOTION_RANGE_ID'] = $scope.rangeId;
+            rangeDetail['PROMOTION_RANGE_DETAIL.TARGET_TYPE'] = "tag";
+            rangeDetail['PROMOTION_RANGE_DETAIL.TARGET'] = ele['SHOP_TAG.TAG_ID'];
+            $scope.addRangeDetail(rangeDetail, c);
+        });
+        $q.all(p).then(function () {
+            $scope.$broadcast('pageBar.reload');
+        })
+    };
+
+    $scope.addClassRangeDetails = function (data) {
+        var p = [];
+        data.forEach(function (ele) {
+            var c = $q.defer();
+            p.push(c.promise);
+            var rangeDetail = {};
+            rangeDetail['PROMOTION_RANGE_DETAIL.PROMOTION_RANGE_ID'] = $scope.rangeId;
+            rangeDetail['PROMOTION_RANGE_DETAIL.TARGET_TYPE'] = "class";
+            rangeDetail['PROMOTION_RANGE_DETAIL.TARGET'] = ele['SHOP_PRODUCT_CLASS.CLASS_ID'];
+            $scope.addRangeDetail(rangeDetail, c);
+        });
+        $q.all(p).then(function () {
+            $scope.$broadcast('pageBar.reload');
+        })
+    };
+
+    $scope.addRangeDetail = function (rangeDetail, c) {
+        promoFactory.addPromoRangeDetail(rangeDetail, function (response) {
+            modalFactory.showShortAlert("添加成功");
+            c.resolve();
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+    };
+
+    $scope.delClassRangeDetail = function (id, data) {
+        promoFactory.delPromoRangeDetail({"PROMOTION_RANGE_DETAIL.PROMOTION_RANGE_ID": id}, function (response) {
+            $scope.addClassRangeDetails(data)
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+
     }
 
-    $scope.classSwitch = function(data){
-        var array = new Array();
-        //var addarray = $scope.currentClass;
-
-        for (var i = 0; i < data.length; i++) {
-            array.push(data[i]['SHOP_PRODUCT_CLASS.CLASS_ID']);
-        }
-        /*if(addarray != null){
-            for (var i = 0; i < addarray.length; i++) {
-                array.push(addarray[i]);
-            }
-        }*/
-
-        var result = [];
-        for(var i=0; i<array.length; i++){
-            if(result.indexOf(array[i])==-1){
-                result.push(array[i])
-            }
-        }
-        //插入促销商品
-        $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result;
-        var form = {};
-        form = $scope.updatePlanForm;
-        $scope.save(form);
-    }
-
-    $scope.getCurrentTag = function(item) {
+    $scope.getCurrentTag = function (item) {
         $scope.updatePlanForm = clone(item);
-        if(item['SALES_PLAN.TARGET_OBJ_ID'] == null){
+        if (item['SALES_PLAN.TARGET_OBJ_ID'] == null) {
             $scope.currentTag = null;
-        }
-        else{
+        } else {
             $scope.currentTag = item['SALES_PLAN.TARGET_OBJ_ID'].split(',');
         }
     }
 
-    $scope.tagSwitch = function (data) {
-        var array = new Array();
-        //var addarray = $scope.currentTag;
-
-        for (var i = 0; i < data.length; i++) {
-            array.push(data[i]['SHOP_TAG.TAG_ID']);
-        }
-
-        /*if(addarray != null){
-            for (var i = 0; i < addarray.length; i++) {
-                array.push(addarray[i]);
-            }
-        }*/
-
-        var result = [];
-        for(var i=0; i<array.length; i++){
-            if(result.indexOf(array[i])==-1){
-                result.push(array[i])
-            }
-        }
-        //插入促销商品
-        $scope.updatePlanForm['SALES_PLAN.TARGET_OBJ_ID'] = result;
-        var form = {};
-        form = $scope.updatePlanForm;
-        $scope.save(form);
-
+    $scope.save = function (form) {
+        salesFactory.ModifySalesProduct(form, function (response) {
+            modalFactory.showShortAlert('修改成功');
+            $("#addSalePlan").modal('hide');
+            $scope.$broadcast('pageBar.reload');
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+        $scope.queryRange();
     }
 
-    $scope.save = function (form){
-        salesFactory.ModifySalesProduct(form). get({}, function (response) {
-            if (response.code == 400) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert('修改成功');
-                $("#addSalePlan").modal('hide');
+    $scope.getPrdExtraData = function () {
+        tagFactory.getPrdTagList({}, function (response) {
+            $scope.tagMap = listToMap(response.data, "SHOP_TAG.TAG_ID");
+        });
+        classFactory.getPrdClassList({}, function (response) {
+            $scope.classMap = listToMap(response.data, "SHOP_PRODUCT_CLASS.CLASS_ID");
+        });
+    }
+
+    $scope.bindData = function (response) {
+
+        promoFactory.getPromoRole({}, function (resp) {
+            $scope.salesList = resp.data;
+            $scope.salesPlan = response.data;
+            $scope.queryRange();
+            $scope.queryAdaptor();
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+        $scope.getPrdExtraData();
+        //$scope.queryDate();
+        //
+        ////商品类别的ID和名称的Map
+        //$scope.proClassInfo = response.extraData.proClassMap;
+        ////商品的ID和名称的Map
+        //$scope.productMap = response.extraData.productMap;
+        ////得到促销规则的ID和类型的Map
+        //$scope.salesTypeMap = response.extraData.salesTypeMap;
+        ////获得促销规则的ID和详细信息的Map
+        //$scope.salesMap = response.extraData.salesMap;
+        ////获得促销规则详情
+        ////$scope.salesList = response.extraData.salesList;
+        ////获得商品标签的ID和名称的Map
+        //$scope.tagMap = response.extraData.tagMap;
+        ////获得商品标签的ID和促销针对的Map
+        //$scope.salesTarget = response.extraData.salesTarget;
+        //
+        ////获得优惠券信息
+        //$scope.couponMap = response.extraData.couponMap;
+        ////获得sku列表
+        //$scope.skuList = response.extraData.skuList;
+        //$scope.skuMap = response.extraData.skuMap;
+        //$scope.urlMap = response.extraData.urlMap;
+        //$scope.proAndSkuInfoMap = response.extraData.proAndSkuInfoMap;
+
+    };
+
+    $scope.bindId = function (response) {
+        $scope.add['PROMOTION_PLAN.PROMOTION_RANGE_ID'] = response.extraData['PROMOTION_RANGE_ID'];
+        promoFactory.addPromoPlan($scope.add, function (response) {
+            modalFactory.showShortAlert("创建plan成功");
+            $scope.$broadcast('pageBar.reload');
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+    }
+
+    $scope.addSalePlan = function () {
+        $scope.add['PROMOTION_PLAN.BEGIN_DATETIME'] = $scope.from;
+        $scope.add['PROMOTION_PLAN.END_DATETIME'] = $scope.to;
+
+        if ($scope.add['PROMOTION_PLAN.NAME']
+            == ''
+            || $scope.add['PROMOTION_PLAN.PROMOTION_DESCRIBE']
+            == ''
+            || $scope.add['PROMOTION_PLAN.PROMOTION_ROLE_ID']
+            == '') {
+            alert('请输入完整信息');
+        } else {
+
+            if ($scope.showCont == false) {
+                promoFactory.addPromoPlan($scope.add, function (response) {
+                    modalFactory.showShortAlert("创建成功");
+                    $scope.$broadcast('pageBar.reload');
+                }, function (response) {
+                    modalFactory.showShortAlert(response.msg);
+                });
+            } else if ($scope.showCont == true) {
+                $scope.add['PROMOTION_RANGE.IS_DEL'] = -1;
+                promoFactory.addPromoRange($scope.add, function (response) {
+                    $scope.bindId(response);
+                }, function (response) {
+                    modalFactory.showShortAlert(response.msg);
+                });
+            }
+        }
+    };
+
+    $scope.detailClick = function (item) {
+        $scope.detaileInfo = clone(item);
+    }
+
+    $scope.modSalePlan = function (form) {
+        salesFactory.ModifySalesProduct(form, function (res) {
+            modalFactory.showShortAlert("修改成功");
+            $scope.$broadcast('pageBar.reload');
+        })
+    };
+
+    $scope.stopSalesPlan = function (item) {
+        if (item['PROMOTION_PLAN.STATE'] != 'cancel') {
+            modalFactory.showAlert("确认停用吗?", function () {
+                item['PROMOTION_PLAN.STATE'] = 'cancel';
+                promoFactory.modPromoPlan(item, function (response) {
+                    modalFactory.showShortAlert("禁用成功");
+                    $scope.$broadcast('pageBar.reload');
+                }, function (response) {
+                    modalFactory.showShortAlert(response.msg);
+                });
+
+            });
+        } else if (item['PROMOTION_PLAN.STATE'] == 'cancel') {
+            item['PROMOTION_PLAN.STATE'] = 'disCancel';
+            promoFactory.modPromoPlan(item, function (response) {
+                modalFactory.showShortAlert("启用成功");
                 $scope.$broadcast('pageBar.reload');
+            }, function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+        }
+    };
+
+    $scope.delSalesPlan = function (item) {
+        modalFactory.showAlert("确认删除吗?", function () {
+            item['PROMOTION_PLAN.IS_DEL'] = 1;
+            promoFactory.modPromoPlan(item, function (response) {
+                modalFactory.showShortAlert("删除成功");
+                $scope.$broadcast('pageBar.reload');
+            }, function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+        });
+    };
+
+    $scope.show = function () {
+        var id = $scope.add['PROMOTION_PLAN.PROMOTION_ROLE_ID'];
+        $scope.salesList.forEach(function (ele) {
+            if (ele['PROMOTION_ROLE.PROMOTION_ROLE_ID'] == id) {
+                if (ele['adaptor']['PROMO_ROLE_ANDSELL.PROMOTION_TYPE'] == "prd") {
+                    $scope.showCont = true;
+                } else {
+                    $scope.showCont = false;
+                }
             }
         })
     }
 
-
-  $scope.bindData = function (response) {
-          console.log(response);
-          $scope.salesPlan = response.data;
-          //商品类别的ID和名称的Map
-          $scope.proClassInfo = response.extraData.proClassMap;
-          //商品的ID和名称的Map
-          $scope.productMap = response.extraData.productMap;
-          //得到促销规则的ID和类型的Map
-          $scope.salesTypeMap = response.extraData.salesTypeMap;
-          //获得促销规则的ID和详细信息的Map
-          $scope.salesMap = response.extraData.salesMap;
-          //获得促销规则详情
-          $scope.salesList = response.extraData.salesList;
-          //获得商品标签的ID和名称的Map
-          $scope.tagMap = response.extraData.tagMap;
-          //获得商品标签的ID和促销针对的Map
-          $scope.salesTarget = response.extraData.salesTarget;
-
-          //获得优惠券信息
-          $scope.couponMap = response.extraData.couponMap;
-          //获得sku列表
-          $scope.skuList = response.extraData.skuList;
-          $scope.skuMap = response.extraData.skuMap;
-          $scope.urlMap = response.extraData.urlMap;
-          $scope.proAndSkuInfoMap = response.extraData.proAndSkuInfoMap;
-
-
-          $scope.salesPlan.forEach(function(ele){
-              $scope.salesList.forEach(function(item){
-                  if(ele['SALES_PLAN.SALE_ID'] == item['SALES.ID']){
-                      var totalArray = new Array();
-                      if(item['SALES.SALE_TYPE'] == 3 ) {
-                          for (var i = 1; i <= 6; i++) {
-                              if (item['SALES.CONDITION_NUM' + i] != null) {
-                                  var jsonInfo = item['SALES.SALE_CONTENT' + i].toString();
-                                  var info = JSON.parse(jsonInfo);
-                                  var array = new Array();
-                                  array.push(item['SALES.CONDITION_NUM' + i]);
-                                  array.push($scope.proAndSkuInfoMap[info['ProId']]);
-                                  array.push(info['Num']);
-                                  array.push($scope.skuMap[info['ProId']]);
-                                  array.push($scope.urlMap[info['ProId']]);
-                                  totalArray.push(array);
-                                  $scope.salesDetailInfo = totalArray;
-                              }
-                              ele['salesInfo'] = $scope.salesDetailInfo;
-                              ele['salesClass'] = item['SALES.SALE_TYPE'];
-                          }
-                      }
-                      else if(item['SALES.SALE_TYPE'] == 4){
-                          for (var i = 1; i <= 6; i++) {
-                              if (item['SALES.CONDITION_NUM' + i] != null) {
-                                  var jsonInfo = item['SALES.SALE_CONTENT' + i].toString();
-                                  var info = JSON.parse(jsonInfo);
-                                  var array = new Array();
-                                  array.push(item['SALES.CONDITION_NUM' + i]);
-                                  array.push($scope.couponMap[info['ProId']]);
-                                  array.push(info['Num']);
-                                  totalArray.push(array);
-                                  $scope.salesDetailInfo = totalArray;
-                              }
-                              ele['salesInfo'] = $scope.salesDetailInfo;
-                              ele['salesClass'] = item['SALES.SALE_TYPE'];
-                          }
-                      }
-                      else if(item['SALES.SALE_TYPE'] == 1||item['SALES.SALE_TYPE'] == 2){
-                          for(var i =1;i<=6;i++){
-                              if(item['SALES.CONDITION_NUM'+i] != null){
-                                  var array = new Array();
-                                  array.push(item['SALES.CONDITION_NUM'+i]);
-                                  array.push(item['SALES.SALE_CONTENT'+i]);
-                                  totalArray.push(array);
-                                  $scope.salesDetailInfo = totalArray;
-                              }
-                              ele['salesInfo'] = $scope.salesDetailInfo;
-                              ele['salesClass'] = item['SALES.SALE_TYPE'];
-                          }
-                      }
-                  }
-              })
-          })
-  };
-
-  $scope.addSalePlan=function () {
-      $scope.add['SALES_PLAN.BEGIN_DATETIME'] = $scope.from;
-      $scope.add['SALES_PLAN.END_DATETIME'] = $scope.to;
-
-      if($scope.add['SALES_PLAN.NAME'] == ''||$scope.add['SALES_PLAN.INTRO'] == ''
-                                            ||$scope.add['SALES_PLAN.SALE_ID']==''){
-          alert('请输入完整信息');
-      }
-      else{
-          var id = $scope.add['SALES_PLAN.SALE_ID'];
-          if($scope.salesTarget[id] == 1){
-              $scope.add['SALES_PLAN.TARGET_OBJ_TYPE'] =-1;
-              console.log($scope.add);
-          }
-          salesFactory.AddSalesPlan($scope.add).get({}, function (response) {
-              if (response.code == 400) {
-                  modalFactory.showShortAlert(response.msg);
-              } else if (response.extraData.state == 'true') {
-                  modalFactory.showShortAlert('新增成功');
-                  $scope.empty();
-                  $("#addSalePlan").modal('hide');
-              }
-              $scope.$broadcast('pageBar.reload');
-          });
-      }
-  };
-
-
-   $scope.detailClick = function (item){
-        $scope.detaileInfo = clone(item);
+    $scope.empty = function () {
+        $scope.add = null;
+        $scope.from = null;
+        $scope.to = null;
     }
-
-
-  $scope.modSalePlan = function (form) {
-      console.log(form);
-      salesFactory.ModifySalesProduct(form).get({}, function (res) {
-          if (res.extraData.state = 'true') {
-              modalFactory.showShortAlert("修改成功");
-          }
-          $scope.$broadcast('pageBar.reload');
-      })
-  };
-
-  $scope.stopSalesPlan = function (item) {
-      if(item['SALES_PLAN.STATE']==1){
-          modalFactory.showAlert("确认停用吗?", function () {
-              item['SALES_PLAN.STATE']=-1;
-              salesFactory.stopSalePlanById(item).get({}, function (res) {
-              if (res.extraData.state = 'true') {
-                  modalFactory.showShortAlert("停用成功");
-              }
-                  $scope.$broadcast('pageBar.reload');
-          });
-      });
-      } else{
-          item['SALES_PLAN.STATE']=1;
-          salesFactory.stopSalePlanById(item).get({}, function (res) {
-              if (res.extraData.state = 'true') {
-                  modalFactory.showShortAlert("启用成功");
-              }
-              $scope.$broadcast('pageBar.reload');
-          });
-      }
-  } ;
-
-  $scope.delSalesPlan = function (item) {
-    modalFactory.showAlert("确认删除吗?", function () {
-        item['SALES_PLAN.IS_DEL'] =1;
-        salesFactory.delSalePlanById(item).get({}, function (res) {
-        if (res.extraData.state = 'true') {
-          modalFactory.showShortAlert("删除成功");
-        }
-            $scope.$broadcast('pageBar.reload');
-      });
-    });
-  };
-
-    $scope.show = function () {
-        var id = $scope.add['SALES_PLAN.SALE_ID'];
-        if($scope.salesTarget[id] == 2){
-            $scope.showCont = true;
-        }else {
-            $scope.showCont = false;
-        }
-    }
-
-  $scope.empty = function () {
-      $scope.add = null;
-      $scope.from = null;
-      $scope.to = null;
-  }
 
     $('#start_hour').datetimepicker({
         language: 'zh-CN',
@@ -342,9 +430,6 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
         startView: 2,
         format: 'yyyy/mm/dd hh:ii',
         todayBtn: 'linked'
-        /* }).on('click', function (ev) {
-         $("#start_hour").datetimepicker("setEndDate", $("#end_hour").val());
-         });*/
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -352,7 +437,6 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
             $scope[$this.attr('ng-model')] = _this.value;
         });
     });
-
 
     $('#end_hour').datetimepicker({
         language: 'zh-CN',
@@ -361,9 +445,6 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
         weekStart: 1,
         format: 'yyyy/mm/dd hh:ii',
         todayBtn: 'linked',
-        /* }).on('click', function (ev) {
-         $("#end_hour").datetimepicker("setStartDate", $("#start_hour").val());
-         });*/
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -372,18 +453,12 @@ angular.module('AndSell.Main').controller('marketing_sales_sales_salesList_Contr
         });
     });
 
-
-
-    $(document).ready(function() {
-        $('#birthday').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
-            console.log(start.toISOString(), end.toISOString(), label);
+    $(document).ready(function () {
+        $('#birthday').daterangepicker({singleDatePicker: true}, function (start, end, label) {
+        });
+        $('#birthdayDate').daterangepicker({singleDatePicker: true}, function (start, end, label) {
         });
     });
 
-    $(document).ready(function() {
-        $('#birthdayDate').daterangepicker({ singleDatePicker: true }, function(start, end, label) {
-            console.log(start.toISOString(), end.toISOString(), label);
-        });
-    });
 });
 

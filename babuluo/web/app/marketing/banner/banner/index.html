@@ -55,9 +55,9 @@
                     <td ng-bind="item['BANNER.INTRO']"></td> <!--规则描述-->
                     <td ng-bind="positionMap[item['BANNER.POSITION_ID']]"></td> <!--横幅位置-->
                     <td class="text-center">
-                        <a ng-show="key!=0" ng-click="changeOrderNumUp(item,key)">↑</a>
+                        <a ng-show="key!=0" ng-click="changeOrderNumUpDown(item,key,1)">↑</a>
                         &nbsp;
-                        <a ng-if="bannerList[key+1]!=undefined" ng-click="changeOrderNumDown(item,key)">↓</a>
+                        <a ng-if="bannerList[key+1]!=undefined" ng-click="changeOrderNumUpDown(item,key,-1)">↓</a>
                     </td> <!--横幅位置-->
                     <td class="text-center">
                         <!--<a show-modal id="#couponDetail" class="btn sbold green" ng-click="detailClick(item)">明细</a>-->
@@ -149,20 +149,30 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                            图片
+                            图片1
                         </label>
-
                         <div class="col-md-8">
                             <label>
-
                                 <input class="hidden" type="file"
-                                       id="image" name='image'
-                                       onchange="angular.element(this).scope().uploadImage(this)"
-                                >
-                                <img ng-src="{{FILE_SERVER_DOMAIN+uploadImageFiles}}?x-oss-process=image/resize,m_fill,h_100,w_300"
+                                       id="image1" name='image1'
+                                       onchange="angular.element(this).scope().uploadImage(this,1)">
+                                <img ng-src="{{FILE_SERVER_DOMAIN+uploadImageFiles1}}?x-oss-process=image/resize,m_fill,h_100,w_300"
                                      class="img-responsive" style="height:100%;width: 400px" alt="添加横幅图片">
                             </label>
-
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            图片2
+                        </label>
+                        <div class="col-md-8">
+                            <label>
+                                <input class="hidden" type="file"
+                                       id="image2" name='image2'
+                                       onchange="angular.element(this).scope().uploadImage(this,2)">
+                                <img ng-src="{{FILE_SERVER_DOMAIN+uploadImageFiles2}}?x-oss-process=image/resize,m_fill,h_100,w_300"
+                                     class="img-responsive" style="height:100%;width: 400px" alt="添加横幅图片">
+                            </label>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -283,23 +293,37 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                            图片
+                            图片1
                         </label>
 
                         <div class="col-md-8">
                             <!--<input type="text" class="form-control"
                                    ng-model="mod['BANNER.PICTURE']">-->
                             <label>
-
                                 <input class="hidden" type="file"
-                                       id="image2" name='image'
-                                       onchange="angular.element(this).scope().uploadImage(this)"
-                                >
-                                <img ng-src="{{FILE_SERVER_DOMAIN+uploadImageFiles}}?x-oss-process=image/resize,m_fill,h_100,w_300"
+                                       id="image3" name='image3'
+                                       onchange="angular.element(this).scope().uploadImage(this,1)">
+                                <img ng-src="{{FILE_SERVER_DOMAIN+uploadImageFiles1}}?x-oss-process=image/resize,m_fill,h_100,w_300"
                                      class="img-responsive" style="height:100%;width: 400px" alt="修改横幅图片">
                             </label>
 
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            图片2
+                        </label>
 
+                        <div class="col-md-8">
+                            <!--<input type="text" class="form-control"
+                                   ng-model="mod['BANNER.PICTURE']">-->
+                            <label>
+                                <input class="hidden" type="file"
+                                       id="image4" name='image4'
+                                       onchange="angular.element(this).scope().uploadImage(this,2)">
+                                <img ng-src="{{FILE_SERVER_DOMAIN+uploadImageFiles2}}?x-oss-process=image/resize,m_fill,h_100,w_300"
+                                     class="img-responsive" style="height:100%;width: 400px" alt="修改横幅图片">
+                            </label>
                         </div>
                     </div>
                     <div class="form-group row">

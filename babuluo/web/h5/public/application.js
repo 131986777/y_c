@@ -1,6 +1,6 @@
 var AndSellRouter = angular.module('AndSell.Router', ['ui.router', 'oc.lazyLoad']);
 var AndSellService = angular.module('AndSell.Service', ['ngResource']);
-var AndSellUI = angular.module('AndSell.UI', ['ngSanitize','weUI']);
+var AndSellUI = angular.module('AndSell.UI', ['ngSanitize', 'weUI']);
 var AndSellData = angular.module("AndSell.data", []);
 var AndSellH5MainModule = angular.module('AndSell.H5.Main', ['AndSell.Service', 'AndSell.Router', 'AndSell.UI']);
 
@@ -41,12 +41,12 @@ AndSellUI.service('modalFactory', function ($rootScope) {
 });
 
 //商品选择sku加入购物车
-AndSellUI.directive('cartModal', function (productFactory,weUI,modalFactory) {
+AndSellUI.directive('cartModal', function (productFactory, weUI, modalFactory) {
     return {
         restrict: 'EA',
         templateUrl: '/AndSell/h5/public/template/cart.html',
         scope: {
-            callback: '&',id: '= id',storeId : '=storeId',show: '= show'
+            callback: '&', id: '= id', storeId: '=storeId', show: '= show'
         },
         controller: function ($scope) {
 
@@ -54,7 +54,7 @@ AndSellUI.directive('cartModal', function (productFactory,weUI,modalFactory) {
             var weuiActionsheet = $("#weui_actionsheet");
 
             $scope.$watch('show', function () {
-                if($scope.show==true&&$scope.id!=undefined){
+                if ($scope.show == true && $scope.id != undefined) {
                     $scope.initData();
                 }
             }, true);
@@ -76,33 +76,33 @@ AndSellUI.directive('cartModal', function (productFactory,weUI,modalFactory) {
             }
 
             $scope.initData = function () {
-                $scope.show=false;
+                $scope.show = false;
                 toggleActionSheet();
                 // current sku select map
                 $scope.currSkuContentSelectMap = {
                     name1: '', name2: '', name3: ''
                 }
 
-                var params={};
-                $scope.product={};
-                $scope.sku={};
+                var params = {};
+                $scope.product = {};
+                $scope.sku = {};
                 weUI.toast.showLoading('加载商品数据');
-                params['STOCK_REALTIME.STORE_ID']=$scope.storeId;
-                params['SHOP_PRODUCT.PRD_ID']=$scope.id;
+                params['STOCK_REALTIME.STORE_ID'] = $scope.storeId;
+                params['SHOP_PRODUCT.PRD_ID'] = $scope.id;
                 productFactory.getProductAllInfoById(params, function (response) {
                     $scope.product = response.data[0];
                     if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                         $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
                         $scope.skuData = $scope.getPrdSkuData($scope.skuList);
 
-                        if($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length>0){
-                            $scope.checkContent(1,$scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
+                        if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length > 0) {
+                            $scope.checkContent(1, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
                         }
                         $scope.getPriceArea();
                         $scope.filterSkuList();
                         $scope.skuSelectable();
                         weUI.toast.hideLoading();
-                    }else{
+                    } else {
                         weUI.toast.hideLoading();
                         weUI.toast.error('未找到规格可用的商品');
                     }
@@ -236,8 +236,8 @@ AndSellUI.directive('cartModal', function (productFactory,weUI,modalFactory) {
                 } else {
                     $scope.sku = undefined;
                 }
-                if($scope.sku!=undefined)
-                setContentsInfo($scope.sku);
+                if ($scope.sku != undefined)
+                    setContentsInfo($scope.sku);
             }
 
             //是否选了所有的规格项
@@ -288,39 +288,39 @@ AndSellUI.directive('cartModal', function (productFactory,weUI,modalFactory) {
             //加入购物车
             $scope.addToCart = function () {
                 if ($scope.sku != undefined) {
-                    if($scope.sku['SHOP_PRODUCT_SKU.STOCK']>0){
-                    var cartInfo = getCookie('cartInfo');
-                    var cartSize = getCookie('cartSize');
-                    if (cartInfo == ''||cartInfo==undefined) {
-                        cartInfo = new Array;
-                        cartSize = {};
+                    if ($scope.sku['SHOP_PRODUCT_SKU.STOCK'] > 0) {
+                        var cartInfo = getCookie('cartInfo');
+                        var cartSize = getCookie('cartSize');
+                        if (cartInfo == '' || cartInfo == undefined) {
+                            cartInfo = new Array;
+                            cartSize = {};
+                        } else {
+                            cartInfo = JSON.parse(cartInfo);
+                            cartSize = JSON.parse(cartSize);
+                        }
+
+                        if (cartInfo.indexOf($scope.sku['SHOP_PRODUCT_SKU.SKU_ID']) < 0) {
+                            cartInfo.push($scope.sku['SHOP_PRODUCT_SKU.SKU_ID']);
+                        }
+
+                        //size in cookie
+                        var size = cartSize[$scope.sku['SHOP_PRODUCT_SKU.SKU_ID']];
+                        if (size != undefined) {
+                            size += $scope.skuSize;
+                        } else {
+                            size = $scope.skuSize;
+                        }
+                        cartSize[$scope.sku['SHOP_PRODUCT_SKU.SKU_ID']] = size;
+
+                        //加入购物车
+                        setCookie('cartSize', JSON.stringify(cartSize));
+                        setCookie('cartInfo', JSON.stringify(cartInfo));
+
+                        weUI.toast.ok('已加入到购物车');
+                        modalFactory.updateCart();
+
+                        $scope.setReturn();
                     } else {
-                        cartInfo = JSON.parse(cartInfo);
-                        cartSize = JSON.parse(cartSize);
-                    }
-
-                    if (cartInfo.indexOf($scope.sku['SHOP_PRODUCT_SKU.SKU_ID']) < 0) {
-                        cartInfo.push($scope.sku['SHOP_PRODUCT_SKU.SKU_ID']);
-                    }
-
-                    //size in cookie
-                    var size = cartSize[$scope.sku['SHOP_PRODUCT_SKU.SKU_ID']];
-                    if (size != undefined) {
-                        size += $scope.skuSize;
-                    } else {
-                        size = $scope.skuSize;
-                    }
-                    cartSize[$scope.sku['SHOP_PRODUCT_SKU.SKU_ID']] = size;
-
-                    //加入购物车
-                    setCookie('cartSize', JSON.stringify(cartSize));
-                    setCookie('cartInfo', JSON.stringify(cartInfo));
-
-                    weUI.toast.ok('已加入到购物车');
-                    modalFactory.updateCart();
-
-                    $scope.setReturn();
-                    }else{
                         weUI.toast.error('该商品已售罄！');
                     }
                 } else {
@@ -339,7 +339,7 @@ AndSellUI.directive('cartModal', function (productFactory,weUI,modalFactory) {
             $scope.moreSize = function () {
                 if ($scope.skuSize < $scope.sku['SHOP_PRODUCT_SKU.STOCK']) {
                     $scope.skuSize++;
-                }else{
+                } else {
                     weUI.toast.ok('已达到该商品最大库存数');
                 }
             }
@@ -354,10 +354,100 @@ AndSellUI.directive('cartModal', function (productFactory,weUI,modalFactory) {
         }
     }
 });
+//支付会员卡选择
+AndSellUI.directive('cardModal', function (weUI, modalFactory, personalFactory) {
+    return {
+        restrict: 'EA',
+        templateUrl: '/AndSell/h5/public/template/cardPay.html',
+        scope: {
+            callback: '&', money: '=money', show: '= show'
+        },
+        controller: function ($scope) {
+
+            var mask = $("#mask");
+            var weuiActionsheet = $("#weui_actionsheet");
+
+            $scope.$watch('show', function () {
+                console.log($scope.show);
+                if ($scope.show == true) {
+                    $scope.initData();
+                }
+            }, true);
+
+            function toggleActionSheet() {
+
+                // 弹出选择框
+                mask.show().addClass('weui_fade_toggle').focus();
+
+                //加focus是为了触发一次页面的重排(reflow or layout thrashing),使mask的transition动画得以正常触发
+                weuiActionsheet.addClass("weui_actionsheet_toggle");
+
+                mask.click(function () {
+                    // 隐藏会员卡选择框
+                    mask.hide().removeClass('weui_fade_toggle');
+                    weuiActionsheet.removeClass("weui_actionsheet_toggle");
+
+                });
+            }
+
+            $scope.initData = function () {
+                toggleActionSheet();
+                $scope.loadMemberCard();
+            };
+
+            $scope.loadMemberCard = function () {
+                weUI.toast.showLoading('正在加载会员卡');
+                personalFactory.getMemberCardByUserId({}, function (response) {
+                    $scope.cardList = response.data;
+                    $scope.choosedCard = JSON.parse(getCookie("payCard"));
+                    if ($scope.cardList.length > 1) {
+                        if (!isEmptyObject($scope.choosedCard)) {
+                            $scope.choosedCardID = $scope.choosedCard['MEMBER_CARD.CARD_ID'];
+                        }
+                        $scope.cardList.forEach(function (ele) {
+                            ele['MEMBER_CARD.CHECKED'] = ele['MEMBER_CARD.CARD_ID'] == $scope.choosedCardID;
+                        });
+
+                    }else {
+                        $scope.cardList[0]['MEMBER_CARD.CHECKED'] = true;
+                        setCookie('payCard', JSON.stringify($scope.cardList[0]));
+                        $scope.chooseCard();
+                    }
+                    weUI.toast.hideLoading();
+
+                }, function (response) {
+                    weUI.toast.hideLoading();
+                    weUI.toast.error(response.msg);
+                });
+                $scope.show = false;
+            };
+
+            $scope.switchCard = function (cl) {
+                $scope.cardList.forEach(function (ele) {
+                    ele['MEMBER_CARD.CHECKED'] = false;
+                });
+                cl['MEMBER_CARD.CHECKED'] = true;
+                setCookie('payCard', JSON.stringify(cl));
+            };
+
+            $scope.chooseCard = function () {
+                $scope.callback();
+                // 隐藏商品选择框
+                mask.hide().removeClass('weui_fade_toggle');
+                weuiActionsheet.removeClass("weui_actionsheet_toggle");
+            };
+        }
+    }
+});
 
 AndSellService.factory("http", function ($http) {
-    var _post = function (url, data,funcSuccess,funcFail) {
-        return $http.post(url, $.param(data), {headers: {'Content-Type': 'application/x-www-form-urlencoded','withCredentials': true}}).success(function (response) {
+    var _post = function (url, data, funcSuccess, funcFail) {
+        return $http.post(url, $.param(data), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'withCredentials': true
+            }
+        }).success(function (response) {
             if (response.code == 0) {
                 if (angular.isFunction(funcSuccess)) {
                     if (funcSuccess != undefined) {
@@ -374,16 +464,27 @@ AndSellService.factory("http", function ($http) {
         });
     };
     return {
-        post: function (url,init) {
+        post: function (url, init) {
             return function (form, funcSuccess, funcFail) {
                 if (form == undefined) {
                     form = {};
                 }
-                if (init != undefined&&angular.isFunction(init)) {
+                if (init != undefined && angular.isFunction(init)) {
                     init(form);
                 }
-                return _post(baseURL + url, form,funcSuccess,funcFail)
+                return _post(baseURL + url, form, funcSuccess, funcFail)
             }
+        }, post_ori: function (url, param, func, error) {
+            return $http.post(url, $.param(param), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function (result) {
+
+                if (angular.isFunction(func)) {
+                    func(result);
+                }
+            }).error(function (err) {
+                if (angular.isFunction(error)) {
+                    error(err);
+                }
+            });
         }
     };
 });
@@ -395,7 +496,7 @@ AndSellService.factory("http", function ($http) {
 AndSellUI.filter('FormatStrDate', function () {
     return function (input) {
         var arr = input.split(/[- : \/]/);
-        var date = new Date(arr[0], arr[1]-1, arr[2]);
+        var date = new Date(arr[0], arr[1] - 1, arr[2]);
         var formatDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
         return formatDate;
     }
@@ -408,7 +509,7 @@ AndSellUI.filter('FormatStrDate', function () {
 AndSellUI.filter('FormatAllDate', function () {
     return function (input) {
         var arr = input.split(/[- : \/]/);
-        var date = new Date(arr[0], arr[1]-1, arr[2], arr[3], arr[4], arr[5]);
+        var date = new Date(arr[0], arr[1] - 1, arr[2], arr[3], arr[4], arr[5]);
         var formatDate = date.getFullYear()
             + "-"
             + (date.getMonth() + 1)
@@ -421,6 +522,24 @@ AndSellUI.filter('FormatAllDate', function () {
             + ":"
             + date.getSeconds();
         return formatDate;
+    }
+});
+
+AndSellUI.filter('strLength', function () {
+    return function (input) {
+        var len = 0;
+        for (var i = 0; i < input.length; i++) {
+            if (input.charCodeAt(i) > 127 || input.charCodeAt(i) == 94) {
+                len += 2;
+            } else {
+                len++;
+            }
+        }
+        if (len > 10) {
+            return input.substring(0, 5) + '…';
+        } else {
+            return input;
+        }
     }
 });
 /**

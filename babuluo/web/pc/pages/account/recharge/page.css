@@ -1,0 +1,221 @@
+/* line 2, ../sass/fundDetail.scss */
+body {
+    font-family: 'Microsoft YaHei';
+    background-color: #f6f6f6;
+}
+
+/* line 7, ../sssass/fundDetail.scss */
+.container-recharge .sidebar1 {
+    background-color: #fff;
+    width: 230px;
+    height: 100%; }
+/* line 11, ../sass/fundDetail.scss */
+.container-recharge .sidebar1 .sidebar-title {
+    font-size: 16px;
+    color: #494949; }
+/* line 15, ../sass/fundDetail.scss */
+.container-recharge .sidebar1 li {
+    font-size: 14px;
+    color: #8c8c8c; }
+/* line 22, ../sass/fundDetail.scss */
+.container-recharge .row-wrap .row-tou {
+    margin-left: 35px;
+    font-size: 25px;
+    padding-left: 0px;
+    padding-top: 35px; }
+/* line 29, ../sass/fundDetail.scss */
+.container-recharge .row-wrap .font {
+    color: #4b4b4b; }
+/* line 32, ../sass/fundDetail.scss */
+.container-recharge .row-wrap .row-nav {
+    width: 880px;
+    margin-left: 40px;
+    font-size: 16px;
+    color: #8a8a8a;
+    margin-top: 20px;
+    border-top: 1px solid #dddcdc;
+    line-height: 4.2; }
+/* line 41, ../sass/fundDetail.scss */
+.container-recharge .row-wrap .money {
+    margin-left: 40px;
+    margin-bottom: 35px;
+    border-bottom: 1px solid #dddddd;
+    padding-bottom: 40px;
+    width: 880px;
+}
+/* line 44, ../sass/fundDetail.scss */
+.container-recharge .row-wrap .money .price {
+    font-size: 35px;
+    margin-left: -6px;
+    margin-right: 30px; }
+/* line 49, ../sass/fundDetail.scss */
+.container-recharge .row-wrap .money .recharge {
+    font-size: 16px;
+    color: #f36e19; }
+/* line 54, ../sass/fundDetail.scss */
+.container-recharge .row-wrap .detail {
+    width: 945px;
+    padding: 10px 40px 0;
+}
+/* line 56, ../sass/fundDetail.scss */
+.container-recharge .row-wrap .detail .detail-fund {
+    width:880px;
+    height:105px;
+    border: 2px solid #ffa469;
+     }
+.container-recharge .row-wrap .detail .detail-fund .fundPos{
+    margin-left: 45px;
+    /* text-align: center; */
+    /* vertical-align: middle; */
+    margin-top: 30px;
+}
+/* line 63, ../sass/fundDetail.scss */
+.container-recharge .row-wrap .detail .detail-fund .fundPos .charge {
+    font-size: 14px;
+    color: #4b4b4b;
+
+}
+.container-recharge .row-wrap .detail .detail-fund .fundPos .chargeTxt{
+   width: 250px;
+    height:40px;
+    border: 1px solid #dcdcdc;
+    padding: 8px;
+    font-size: 14px;
+    color: #4b4b4b;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.container-recharge .row-wrap .detail .mothod{
+    font-size: 18px;
+    color: #4c4c4c;
+    margin-top: 50px;
+}
+.container-recharge .row-wrap .detail .liji{
+    width: 105px;
+    height: 35px;
+    background-color: #f36f1a;
+    text-align: center;
+    line-height: 2;
+    border-radius: 3px;
+    /* border-top: 1px solid #dcdcdc; */
+    margin-top: 30px;
+}
+.container-recharge .row-wrap .detail .liji .chong{
+    color: #fff;
+    font-size: 14px;
+}
+/* line 81, ../sass/fundDetail.scss */
+.container-recharge .row-wrap1 {
+    color: #4b4b4b;
+    height: 100%;
+    width: 960px;
+    background-color: #fff;
+    min-height: 633px;
+    /* padding-left: 3px; */
+}
+.container-recharge .row-wrap .detail .foot {
+    overflow: hidden;
+    width: 875px;
+    margin-top: 20px;
+    border-top: 1px solid #dcdcdc;
+    border-bottom: 1px solid #dcdcdc;
+    padding-bottom: 34px;}
+/* line 75, ../sass/pay.scss */
+.container-recharge .row-wrap .detail .foot .payWay {
+    width: 180px;
+    height: 65px;
+    float: left;
+    /* background-color: red; */
+    margin-right: 25px;}
+.container-recharge .row-wrap .detail .foot .zhifu {
+    width: 200px;
+    height: 70px;
+    display: inline-block;
+    border: 1px solid #dcdcdc;
+    margin-top: 30px;
+    position: relative;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.container-recharge .row-wrap .detail .foot .active{
+    border:1px solid #f36f1a!important;
+}
+.container-recharge .row-wrap .detail .foot .zhifu  .choosed{
+    position: absolute;
+    /* right: initial; */
+    right: 0px;
+    bottom: 0px;
+    border-bottom: 15px solid #f36f1a;
+    border-left: 15px solid transparent;
+}
+
+/* line 84, ../sass/pay.scss */
+.container-recharge .row-wrap .detail .foot .huiyuan {
+    background-image: url(/AndSell/pc/public/css/img/huiyuan.png); }
+/* line 87, ../sass/pay.scss */
+.container-recharge .row-wrap .detail .foot .zhifubao {
+    background-image: url(/AndSell/pc/public/css/img/zhifubao.png); }
+/* line 90, ../sass/pay.scss */
+.container-recharge .row-wrap .detail .foot .weixin {
+    background-image: url(/AndSell/pc/public/css/img/weixin.png); }
+.container-recharge .row-wrap .detail .word{
+    width: 473px;
+    height: 155px;
+    font-size: 12px;
+    color: #929292;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.container-recharge .row-wrap .detail .word p{
+    margin-bottom: 15px;
+}
+
+/*微信支付弹出层*/
+.container-recharge .row-wrap .weixin .modal-content .weixinImg{
+    width: 352px;
+    height: 305px;
+    text-align: center;
+
+}
+.container-recharge .row-wrap .weixin .modal-content .weixinImg .ma{
+    margin-top: 30px;
+
+}
+.container-recharge .row-wrap .weixin .modal-content{
+    border: 1px solid #dcdcdc!important;
+}
+.container-recharge .row-wrap .weixin .modal-body{
+
+    margin-top: 0px!important;
+    margin-bottom: 12px;
+    height: 55px;
+    background-color: #f6f6f6;
+}
+.container-recharge .row-wrap .weixin .modal-body .text-left{
+
+    color: #5b5b5b;
+    /* height: 53px; */
+    font-size: 18px;
+    /* font-weight: 500; */
+    line-height: 1.5;
+}
+.container-recharge .row-wrap .weixin .modal-body .guan{
+    font-size: 30px;
+    color: #808080;
+    float: right;
+    margin-top: -4px;
+    cursor: pointer;
+}
+.container-recharge .row-wrap .weixin .modal-content p{
+    font-size: 14px;
+    color: #4b4b4b;
+    text-align: center;
+    margin-bottom: 10px;
+}
+.container-recharge .row-wrap .weixin .modal-content p .sep{
+    color: #f36f1a;
+}
+.container-recharge .row-wrap .weixin .modal-content{
+    width:370px ; height:440px;margin:0 auto ;margin-top: 200px;
+}

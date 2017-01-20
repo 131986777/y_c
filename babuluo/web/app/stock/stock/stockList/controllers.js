@@ -1,59 +1,59 @@
-angular.module('AndSell.Main').controller('stock_stock_stockList_Controller', function ($scope,  stockFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('stock_stock_stockList_Controller', function ($scope, stockFactory, modalFactory, $q) {
 
     modalFactory.setTitle('实时库存');
-
-
+    $scope.filterstocklog={};
 
     $scope.bindData = function (response) {
-
-        console.log(response);
         $scope.stockList = response.data;
-        $scope.storeQueryList= $scope.stockList;
-        $scope.storeMap= response.extraData.storeMap;
-        $scope.storeList= response.extraData.storeList;
-        $scope.productMap=response.extraData.prdMap;
-        // console.log( $scope.storeMap);
-        // console.log($scope.storeList);
+        $scope.storeQueryList = $scope.stockList;
+        $scope.storeMap = response.extraData.storeMap;
+        $scope.storeList = response.extraData.storeList;
+        $scope.productMap = response.extraData.prdMap;
     };
 
     //根据商品查询
-    $scope.queryStockById = function(pName){
+    $scope.queryStockById = function (pName) {
         $scope.filter['SHOP_PRODUCT.PRD_NAME'] = pName;
     };
 
-    $scope.modify={};
+    $scope.modify = {};
     $scope.modifyStockClick = function (item) {
+        $scope.stockLogList={};
+        $scope.modify = clone(item);
+        $scope.filterstocklog['STOCK_LOG.SHOP_ID']=$scope.modify['STOCK_REALTIME.SHOP_ID'];
+        $scope.filterstocklog['STOCK_LOG.GOODSCODE']=$scope.modify['STOCK_REALTIME.GOODSCODE'];
 
-        $scope.modify=clone(item);
+    };
 
-
+    $scope.detailStockClick = function (item) {
+        $scope.stockLogList={};
+        $scope.modify = clone(item);
+        $scope.filterstocklog['STOCK_LOG.SHOP_ID']=$scope.modify['STOCK_REALTIME.SHOP_ID'];
+        $scope.filterstocklog['STOCK_LOG.GOODSCODE']=$scope.modify['STOCK_REALTIME.GOODSCODE'];
+        $scope.$broadcast('pageBar.reload');
     };
 
     $scope.modifyStock = function () {
 
-
-        stockFactory.modStockOnLine ($scope.modify).get({}, function (response) {
-            if (response.code == 400) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                $("#modifyStock").modal('hide');
-                modalFactory.showShortAlert("修改成功");
-                $scope.$broadcast('pageBar.reload');
-            }
+        stockFactory.modStockOnLine($scope.modify, function (response) {
+            $("#modifyStock").modal('hide');
+            modalFactory.showShortAlert("修改成功");
+            $scope.$broadcast('pageBar.reload');
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     };
 
- /*   $scope.deleteStore = function (id) {
+    $scope.stocklogbindData = function (response) {
+        $scope.stockLogList = response.data;
 
-        modalFactory.showAlert("确认删除吗?", function () {
-            stockFactory.delStoreById(id).get({}, function (res) {
-                if (res.extraData.state = 'true') {
-                    modalFactory.showShortAlert("删除成功");
-                    $scope.$broadcast('pageBar.reload');
-                }
-            });
+        $scope.stockLogList.forEach(function (ele) {
+            ele['STOCK_LOG.UPDATE_DATETIME']=getDate(ele['STOCK_LOG.UPDATE_DATETIME']);
+
         });
+        console.log($scope.stockLogList)
+    };
 
-    }*/
+
 });
 

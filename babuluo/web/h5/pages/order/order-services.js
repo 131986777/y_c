@@ -1,6 +1,6 @@
 AndSellH5MainModule.service('orderFactory', function (http) {
 
-    this.addOrder = http.post('/shop/order/addOrderWithDetail');
+    this.addOrder = http.post('/shop/order/filterOrderType');
 
     this.getOrderById = http.post('/shop/order/getById');
 
@@ -16,10 +16,40 @@ AndSellH5MainModule.service('orderFactory', function (http) {
 
     this.wxPayUndefinedOrder = http.post('/wx/pay/wxPayUndefinedOrder');
 
+    this.wxPayUndefinedOrderForPC = http.post('/wx/pay/wxPayUndefinedOrderForPC');
+
     this.queryWXPayResult = http.post('/wx/pay/wxpayCallback');
 
     this.getOrderStates = http.post('/shop/order/getStateOrdersForAgent')
 
     this.calculateSale = http.post('/sales/salesplan/calculateSale');
 
+    this.addComments = http.post('/shop/comment/add');
+
 })
+
+
+AndSellH5MainModule.service('promoFactory', function (http) {
+
+    this.doPromoCalculate=http.post('/promo/doPromoCalculate');
+
+    this.getPromoRole=http.post('/promo/role/queryAll');
+
+    this.modPromoRole=http.post('/promo/role/modifyById');
+
+    this.getPromoPlan=http.post('/promo/plan/queryAll');
+
+    this.getPromoRange=http.post('/promo/range/myQueryAll');
+
+    this.delPromoRangeDetail=http.post('/promo/rangeDetail/delByRangeId');
+
+    this.addPromoRangeDetail=http.post('/promo/rangeDetail/add');
+
+    this.addPromoPlan=http.post('/promo/plan/add');
+
+    this.modPromoPlan=http.post('/promo/plan/modifyById');
+
+    this.addPromoRange=http.post('/promo/range/add');
+
+})
+

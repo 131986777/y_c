@@ -53,6 +53,19 @@
     </servlet-mapping>
     <!--Hessian-->
 
+    <!--Hessian-->
+    <servlet>
+        <!-- 配置 HessianServlet，Servlet的名字随便配置，例如这里配置成ServiceServlet-->
+        <servlet-name>wxCallBack</servlet-name>
+        <servlet-class>com.weixin.WXPayResultCallBackServlet</servlet-class>
+    </servlet>
+    <!-- 映射 HessianServlet的访问URL地址-->
+    <servlet-mapping>
+        <servlet-name>wxCallBack</servlet-name>
+        <url-pattern>/wxCallBack</url-pattern>
+    </servlet-mapping>
+    <!--Hessian-->
+
     <servlet>
         <servlet-name>aliyun</servlet-name>
         <servlet-class>com.bolanggu.bbl.aliyun.connectALiYun</servlet-class>
@@ -63,28 +76,38 @@
         <url-pattern>/aliYun</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>output</servlet-name>
+        <servlet-class>com.bolanggu.bbl.output.outputQuery</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>output</servlet-name>
+        <url-pattern>/outputQuery</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>updateOrderPay</servlet-name>
         <servlet-class>com.task.servlet.UpdateOrderPayServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
+
     <servlet-mapping>
         <servlet-name>updateOrderPay</servlet-name>
         <url-pattern>/updateOrderPay34433232</url-pattern>
     </servlet-mapping>
 
     <!--<servlet>-->
-        <!--<description>WXPayResult</description>-->
-        <!--<display-name>WXPayResult</display-name>-->
-        <!--<servlet-name>WXPayResult</servlet-name>-->
-        <!--<servlet-class></servlet-class>-->
+    <!--<description>WXPayResult</description>-->
+    <!--<display-name>WXPayResult</display-name>-->
+    <!--<servlet-name>WXPayResult</servlet-name>-->
+    <!--<servlet-class></servlet-class>-->
     <!--</servlet>-->
 
 
     <!--<servlet-mapping>-->
-        <!--<servlet-name>WXPayResult</servlet-name>-->
-        <!--<url-pattern>/wxpay</url-pattern>-->
+    <!--<servlet-name>WXPayResult</servlet-name>-->
+    <!--<url-pattern>/wxpay</url-pattern>-->
     <!--</servlet-mapping>-->
 
 

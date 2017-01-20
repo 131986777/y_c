@@ -7,21 +7,16 @@ angular.module('AndSell.Main').controller('user_role_roleList_Controller', funct
 
     $scope.bindData = function (response) {
         $scope.roleList = response.data;
-        console.log(response);
     };
-
 
     $scope.delRole = function (role) {
         modalFactory.showAlert("确定删除角色：［" + role['USER_ROLE.ROLE_NAME'] + "］?", function () {
             role['USER_ROLE.IS_DEL'] = "1";
-            roleFactory.delRole(role).get({}, function (response) {
-                console.log(response);
-                if (response.extraData.state == 'true') {
-                    modalFactory.showShortAlert("删除成功");
-                    $scope.$broadcast('pageBar.reload');
-                }else {
-                    modalFactory.showShortAlert(response.msg);
-                }
+            roleFactory.delRole(role, function (response) {
+                modalFactory.showShortAlert("删除成功");
+                $scope.$broadcast('pageBar.reload');
+            }, function (response) {
+                modalFactory.showShortAlert(response.msg);
             });
         });
     };

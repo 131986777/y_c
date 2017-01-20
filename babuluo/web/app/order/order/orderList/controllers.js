@@ -80,13 +80,15 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
 
         var params = {};
         params['SHOP_ORDER.TYPE'] = $stateParams.orderType;
-        orderFactory.getStateOrders(params).get({}, function (response) {
+        console.log('hahaha');
+        orderFactory.getStateOrders(params, function (response) {
+            console.log(111);
             $scope.orderSizeMap = response.extraData.stateMap;
         });
 
+        $("html,body").animate({scrollTop:0}, 250);
         $scope.orderList = response.data;
         $scope.orderList.forEach(function (ele) {
-
             ele['SHOP_ORDER.DATETIME_ADD'] = getDate(ele['SHOP_ORDER.DATETIME_ADD']);
             ele.details = JSON.parse(ele['SHOP_ORDER.ORDER_INFO']);
             ele.details.forEach(function (item) {
@@ -103,7 +105,7 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
 
     //订单详情跳转
     $scope.toDetail = function (id) {
-        orderFactory.scanOrder(id).get({}, function (response) {
+        orderFactory.scanOrder({'SHOP_ORDER.ID': id}, function (response) {
             console.log(response);
         });
         $state.go('order/order/orderDetail', {ORDER_ID: id});

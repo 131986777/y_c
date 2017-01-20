@@ -1,7 +1,8 @@
-angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', function ($scope, $http, $stateParams, bannerFactory, modalFactory) {
+angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', function ($q, $scope, $http, $stateParams, bannerFactory, modalFactory) {
 
     modalFactory.setTitle('横幅列表');
-    $scope.uploadImageFiles = '';
+    $scope.uploadImageFiles1 = '';
+    $scope.uploadImageFiles2 = '';
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     connALiYun();
@@ -17,101 +18,76 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
 
     };
 
-    $scope.changeOrderNumUp = function (item, key) {
-
-        var temp = item['BANNER.ORDER_NUM'];
-        var formUp = {};
-        formUp['BANNER.ID'] = item['BANNER.ID'];
-        formUp['BANNER.ORDER_NUM'] = $scope.bannerList[key - 1]['BANNER.ORDER_NUM'];
-        bannerFactory.bannerUpDown(formUp).get({}, function (response) {
-            if (response.extraData.state == 'true') {
-            } else {
-                $scope.$broadcast("to-short-modal", {message: response.msg});
-            }
-        });
-
-        var formDown = {};
-        formDown['BANNER.ID'] = $scope.bannerList[key - 1]['BANNER.ID'];
-        formDown['BANNER.ORDER_NUM'] = temp;
-        bannerFactory.bannerUpDown(formDown).get({}, function (response) {
-            if (response.extraData.state == 'true') {
-            } else {
-                $scope.$broadcast("to-short-modal", {message: response.msg});
-            }
-        });
-        $scope.$broadcast('pageBar.reload');
-    };
-
-    $scope.changeOrderNumDown = function (item, key) {
+    $scope.changeOrderNumUpDown = function (item, key, up) {
 
         var temp = item['BANNER.ORDER_NUM'];
 
         var formDown = {};
         formDown['BANNER.ID'] = item['BANNER.ID'];
-        formDown['BANNER.ORDER_NUM'] = $scope.bannerList[key + 1]['BANNER.ORDER_NUM'];
-        bannerFactory.bannerUpDown(formDown).get({}, function (response) {
-            if (response.extraData.state == 'true') {
-            } else {
-                $scope.$broadcast("to-short-modal", {message: response.msg});
-            }
+        formDown['BANNER.ORDER_NUM'] = $scope.bannerList[key - 1 * Number(up)]['BANNER.ORDER_NUM'];
+        bannerFactory.bannerUpDown(formDown, function (response) {
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
         var formUp = {};
-        formUp['BANNER.ID'] = $scope.bannerList[key + 1]['BANNER.ID'];
+        formUp['BANNER.ID'] = $scope.bannerList[key - 1 * Number(up)]['BANNER.ID'];
         formUp['BANNER.ORDER_NUM'] = temp;
-        bannerFactory.bannerUpDown(formUp).get({}, function (response) {
-            if (response.extraData.state == 'true') {
-            } else {
-                $scope.$broadcast("to-short-modal", {message: response.msg});
-            }
-        });
-        $scope.$broadcast('pageBar.reload');
+
+        var deferred1 = $q.defer();
+        var deferred2 = $q.defer();
+
+        upDown(formDown, deferred1);
+        upDown(formUp, deferred2);
+
+        $q.all([deferred1.promise, deferred2.promise]).then(function (result) {
+            $scope.$broadcast('pageBar.reload');
+        })
+
     };
 
-    $scope.addBannerInfo = function () {
-        //  console.log('add');
+    var upDown = function (form, deferred) {
 
-        $scope.add['BANNER.PICTURE'] = $scope.uploadImageFiles;
-        //  console.log($scope.add['BANNER.PICTURE']);
+        bannerFactory.bannerUpDown(form, function (response) {
+            deferred.resolve(response);
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
+        });
+    }
+
+    $scope.addBannerInfo = function () {
+
+        $scope.add['BANNER.PICTURE'] = $scope.uploadImageFiles1;
+        $scope.add['BANNER.PICTURE2'] = $scope.uploadImageFiles2;
         var startTime = document.getElementById("startTime").value;
         startTime = startTime.replace("T", " ");
-        // console.log(startTime);
         $scope.add['BANNER.BEGIN_DATETIME'] = startTime;  //开始时间
-
 
         var endTime = document.getElementById("endTime").value;
         endTime = endTime.replace("T", " ");
         $scope.add['BANNER.END_DATETIME'] = endTime;  //结束时间
-        //  console.log( $scope.add['BANNER.END_DATETIME']);
 
-        bannerFactory.addBanner($scope.add).get({}, function (response) {
-
-            if (response.code == 400) {
-                modalFactory.showShortAlert(response.msg);
-
-            } else if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert('新增成功');
-                $scope.add = {};
-                $("#addBanner").modal('hide');
-                $scope.$broadcast('pageBar.reload');
-            }
+        bannerFactory.addBanner($scope.add, function (response) {
+            modalFactory.showShortAlert('新增成功');
+            $scope.add = {};
+            $("#addBanner").modal('hide');
+            $scope.$broadcast('pageBar.reload');
+            $scope.uploadImageFiles1 = '';
+            $scope.uploadImageFiles2 = '';
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     };
 
     $scope.modifyTime = function (timeStr) {
-        // console.log(123);
-        // console.log(timeStr);
         var temp = timeStr + '';
         temp = temp.split('.')[0];
         temp = temp.replace(" ", 'T');
-        // console.log(temp);
         return temp;
     };
     $scope.modifyClick = function (item) {
-
         $scope.mod = clone(item);
-        $scope.uploadImageFiles = $scope.mod['BANNER.PICTURE'];
-
-
+        $scope.uploadImageFiles1 = $scope.mod['BANNER.PICTURE'];
+        $scope.uploadImageFiles2 = $scope.mod['BANNER.PICTURE2'];
     };
 
     $scope.modBannerInfo = function () {
@@ -119,28 +95,27 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
 
         mstartTime = mstartTime.replace("T", " ");
 
-        if($scope.mod['BANNER.URL']==''||$scope.mod['BANNER.URL']==undefined){
-           $scope.mod['BANNER.URL']='{$null}';
+        if ($scope.mod['BANNER.URL'] == '' || $scope.mod['BANNER.URL'] == undefined) {
+            $scope.mod['BANNER.URL'] = '{$null}';
         }
 
         $scope.mod['BANNER.BEGIN_DATETIME'] = mstartTime;  //开始时间
-
 
         var mendTime = document.getElementById("mEndTime").value;
         mendTime = mendTime.replace("T", " ");
         $scope.mod['BANNER.END_DATETIME'] = mendTime;  //结束时间
 
+        $scope.mod['BANNER.PICTURE'] = $scope.uploadImageFiles1;
+        $scope.mod['BANNER.PICTURE2'] = $scope.uploadImageFiles2;
 
-        $scope.mod['BANNER.PICTURE'] = $scope.uploadImageFiles;
-
-        bannerFactory.modifyBanner($scope.mod).get({}, function (response) {
-            if (response.code == 400) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                $("#modBanner").modal('hide');
-                modalFactory.showShortAlert("修改成功");
-                $scope.$broadcast('pageBar.reload');
-            }
+        bannerFactory.modifyBanner($scope.mod, function (response) {
+            $("#modBanner").modal('hide');
+            modalFactory.showShortAlert("修改成功");
+            $scope.$broadcast('pageBar.reload');
+            $scope.uploadImageFiles1 = '';
+            $scope.uploadImageFiles2 = '';
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     };
 
@@ -149,33 +124,26 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
         if (item['BANNER.STATE'] == 1) {
             modalFactory.showAlert("确认停用吗?", function () {
                 item['BANNER.STATE'] = -1;
-                bannerFactory.stopBannerById(item).get({}, function (res) {
-                    if (res.extraData.state = 'true') {
-                        modalFactory.showShortAlert("停用成功");
-                        $scope.$broadcast('pageBar.reload');
-                    }
+                bannerFactory.stopBannerById(item, function (res) {
+                    modalFactory.showShortAlert("停用成功");
+                    $scope.$broadcast('pageBar.reload');
                 });
             });
         } else {
             item['BANNER.STATE'] = 1;
-            bannerFactory.stopBannerById(item).get({}, function (res) {
-                if (res.extraData.state = 'true') {
-                    modalFactory.showShortAlert("启用成功");
-                    $scope.$broadcast('pageBar.reload');
-                }
+            bannerFactory.stopBannerById(item, function (res) {
+                modalFactory.showShortAlert("启用成功");
+                $scope.$broadcast('pageBar.reload');
             });
         }
-
 
     };
     $scope.delBanner = function (item) {
 
         modalFactory.showAlert("确认删除吗?", function () {
-            bannerFactory.delBannerById(item).get({}, function (res) {
-                if (res.extraData.state = 'true') {
-                    modalFactory.showShortAlert("删除成功");
-                    $scope.$broadcast('pageBar.reload');
-                }
+            bannerFactory.delBannerById(item, function (res) {
+                modalFactory.showShortAlert("删除成功");
+                $scope.$broadcast('pageBar.reload');
             });
         });
 
@@ -194,16 +162,23 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
     /**
      *  上传商品的图片， 最多上传6个
      **/
-    $scope.uploadImage = function (element) {
-        _uploadFiles(element.files, $scope.uploadImageFiles, 'image', function (errResponse) {
-            //  console.log(errResponse);
-        }, function (successResponse) {
-            $scope.uploadImageFiles = successResponse.url;
-            // console.log(successResponse);
-            // console.log($scope.uploadImageFiles);
-        });
-    };
+    $scope.uploadImage = function (element, index) {
 
+        switch (index) {
+            case 1:
+                _uploadFiles(element.files, $scope.uploadImageFiles1, 'image', function (errResponse) {
+                }, function (successResponse) {
+                    $scope.uploadImageFiles1 = successResponse.url;
+                });
+                break;
+            case 2:
+                _uploadFiles(element.files, $scope.uploadImageFiles2, 'image', function (errResponse) {
+                }, function (successResponse) {
+                    $scope.uploadImageFiles2 = successResponse.url;
+                });
+                break;
+        }
+    };
 
     //上传文件
     var _uploadFiles = function (files, bindToList, type, errCall, successCall) {
@@ -229,7 +204,6 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
             errCall(response);
         });
 
-
     };
 
     var _postFile = function (file1, filetype) {
@@ -239,7 +213,10 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
         var date = new Date();
         var tempArray = file.name.split('.');
         fileSuffix = tempArray[tempArray.length - 1];     //文件后缀名
-        fileName = date.getTime() + (Math.round(Math.random() * 1000)).toString() + '.' + fileSuffix;    //文件名
+        fileName = date.getTime()
+            + (Math.round(Math.random() * 1000)).toString()
+            + '.'
+            + fileSuffix;    //文件名
         fd.append('OSSAccessKeyId', 'LTAIEHpVQat6f83C');
         fd.append('policy', $scope.policy);
         fd.append('Signature', $scope.signature);
@@ -254,7 +231,6 @@ angular.module('AndSell.Main').controller('marketing_banner_banner_Controller', 
             transformRequest: angular.identity, headers: {'Content-Type': undefined}
         });
     };
-
 
 });
 

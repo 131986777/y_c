@@ -11,3 +11,5 @@ $import('marketing/coupon/rule/ruleList');
 $import('marketing/banner/bannerPosition');
 $import('marketing/banner/banner');
 $import('marketing/coupon/coupon/couponList',undefined,true);
+
+$import('marketing/sales/event');

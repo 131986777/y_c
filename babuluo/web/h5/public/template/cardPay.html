@@ -1,0 +1,49 @@
+<!--BEGIN actionSheet-->
+<div id=" actionSheet_wrap " >
+    <div class="weui_mask_transition" id="mask"></div>
+    <div class="weui_actionsheet" id="weui_actionsheet">
+        <span ng-if="cardList.length==0" class="no-coupon">你暂无会员卡！</span>
+        <div ng-repeat="cl in cardList" class="weui_cell" ng-click="switchCard(cl)">
+            <div class="weui_cell_hd">
+                <!--未选中/选中-->
+                <i ng-class="{true:'icon icon-checked',false:'icon icon-check'}[cl['MEMBER_CARD.CHECKED']]" style="margin-right: 30px"></i>
+                <!--<i class="icon icon-checked" style="margin-right: 30px"></i>-->
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+            <div class="card-list" ng-style="cl['MEMBER_CARD.CARD_STYLE']">
+                <div class="card-wrap">
+                    <div class="card-head flexbox">
+                        <div class="cardNum cell">
+                            {{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}
+                        </div>
+                        <div class="cardType cell text-right">
+                            {{cl['MEMBER_CARD.TYPE_NAME']}}
+                        </div>
+                    </div>
+                    <div class="card-detail text-center">
+                        <span>余额</span>{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}
+                        <p ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0" class="froze">
+                            （冻结{{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}}）
+                        </p>
+                    </div>
+                    <div class="card-foot flexbox">
+                        <div class="cardTime cell">
+                            {{cl['MEMBER_CARD.ADD_DATETIME'] |FormatStrDate}}
+                        </div>
+                        <div class="cardVal cell text-center">
+                            <span ng-show="cl['MEMBER_CARD.IS_FACE_VALUE']==1">{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</span>
+                        </div>
+                        <div class="cardSource cell text-right">
+                            {{cl['MEMBER_CARD.SOURCE_NAME']}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+        <div class="action-bar">
+            <div class="weui_actionsheet_cell cell ok add-to-cart" ng-click="chooseCard()">确定</div>
+        </div>
+    </div>
+</div>
+<!--END actionSheet-->

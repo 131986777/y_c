@@ -5,49 +5,51 @@ var AndSellMainModule = angular.module('AndSell.Main', ['AndSell.Service', 'AndS
 
 var AndSellData = angular.module("AndSell.data", []);
 AndSellService.constant('baseURL', '/AndSell/bubu');
+AndSellService.constant('imgURL', 'http://bbl-upload.oss-cn-shanghai.aliyuncs.com/');
 
 AndSellService.factory("http", function ($http) {
-    var _post = function (url, data) {
-        return $http.post(url, $.param(data), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}});
-    };
-
-    var _get = function (url) {
-        return $http.get(url);
-    };
-
-    var _postFile = function (url, file) {
-        var fd = new FormData();
-        fd.append('file', file);
-        return $http.post(url, fd, {
-            transformRequest: angular.identity, headers: {'Content-Type': undefined}
+    var _post = function (url, data, funcSuccess, funcFail) {
+        return $http.post(url, $.param(data), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded', 'withCredentials': true
+            }
+        }).success(function (response) {
+            if (response.code == 0) {
+                if (angular.isFunction(funcSuccess)) {
+                    if (funcSuccess != undefined) {
+                        funcSuccess(response);
+                    }
+                }
+            } else {
+                if (angular.isFunction(funcFail)) {
+                    if (funcFail != undefined) {
+                        funcFail(response);
+                    }
+                }
+            }
         });
     };
-
     return {
-        post: function (url, data, successCallback, errorCallback) {
-            return _post(url, data).success(function (result) {
+        post: function (url, init) {
+            return function (form, funcSuccess, funcFail) {
+                if (form == undefined) {
+                    form = {};
+                }
+                if (init != undefined && angular.isFunction(init)) {
+                    init(form);
+                }
+                return _post(baseURL + url, form, funcSuccess, funcFail)
+            }
+        }, post_ori: function (url, param, func, error) {
+            return $http.post(url, $.param(param), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function (result) {
 
-                if (angular.isFunction(successCallback)) {
-                    successCallback(result);
+                if (angular.isFunction(func)) {
+                    func(result);
                 }
             }).error(function (err) {
-                if (angular.isFunction(errorCallback)) {
-                    errorCallback(err);
+                if (angular.isFunction(error)) {
+                    error(err);
                 }
-            });
-        }, get: function (url, successCallback, errorCallback) {
-            return _get(url).success(function (result) {
-                if (angular.isFunction(successCallback)) {
-                    successCallback(result);
-                }
-            }).error(function (err) {
-                if (angular.isFunction(errorCallback)) {
-                    errorCallback(err);
-                }
-            });
-        }, postFile: function (url, fileData, successCallback) {
-            return _postFile(url, fileData).success(function (response) {
-                successCallback(response);
             });
         }
     };
@@ -248,8 +250,8 @@ AndSellUI.directive('pageBar', function (http, baseURL) {
                 }
                 obj.PN = $scope.currentPage;
                 var url = baseURL + $scope.url;
-                http.post(url, obj, function (data) {
-                    if (data != undefined && data.data.length > 0) {
+                http.post_ori(url, obj, function (data) {
+                    if (data != undefined && data.data.length >= 0) {
                         $scope.pageObject = data.data;
                         var tmp = parseInt(data.extraData.page.querySize
                             / data.extraData.page.pageSize);
@@ -320,7 +322,7 @@ AndSellUI.directive('classSwitchModal', function (http, baseURL, classFactory) {
         controller: function ($scope) {
 
             $scope.getInitData = function () {
-                classFactory.getPrdClassList().get({}, function (response) {
+                classFactory.getPrdClassList({}, function (response) {
                     $scope.classList = response.data;
                 });
             }
@@ -355,7 +357,7 @@ AndSellUI.directive('tagSwitchModal', function (http, baseURL, tagFactory) {
         controller: function ($scope) {
 
             $scope.getInitData = function () {
-                tagFactory.getPrdTagList().get({}, function (response) {
+                tagFactory.getPrdTagList({}, function (response) {
                     $scope.tagList = response.data;
                 });
             }
@@ -380,7 +382,7 @@ AndSellUI.directive('tagSwitchModal', function (http, baseURL, tagFactory) {
     }
 });
 
-AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory, unitFactory, productFactory, tagFactory) {
+AndSellUI.directive('productSwitchModal', function (http, imgURL, baseURL, classFactory, unitFactory, productFactory, tagFactory) {
     return {
         restrict: 'EA',
         templateUrl: '/AndSell/app/components/libs/angular/template/productSwitchModal.html',
@@ -389,14 +391,16 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
         },
         controller: function ($scope) {
 
+            $scope.FILE_SERVER_DOMAIN = imgURL;
+
             $scope.getInitData = function () {
-                tagFactory.getPrdTagList().get({}, function (response) {
+                tagFactory.getPrdTagList({}, function (response) {
                     $scope.tagList = response.data;
                 });
-                classFactory.getPrdClassList().get({}, function (response) {
+                classFactory.getPrdClassList({}, function (response) {
                     $scope.classList = response.data;
                 });
-                unitFactory.getPrdUnitList().get({}, function (response) {
+                unitFactory.getPrdUnitList({}, function (response) {
                     $scope.unitList = response.data;
                 });
             };
@@ -418,10 +422,10 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
             }
 
             $scope.search = function () {
-                $scope.productFilter['SHOP_PRODUCT.SEARCH_CONTENT']= $scope.productFilterSearch;
+                $scope.productFilter['SHOP_PRODUCT.SEARCH_CONTENT'] = $scope.productFilterSearch;
             }
 
-            $scope.existItem =  function (item) {
+            $scope.existItem = function (item) {
                 if ($scope.selectItemList.indexOf(item) < 0) {
                     return true;
                 }
@@ -443,8 +447,8 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
             $scope.setReturn = function () {
                 $scope.callback({data: $scope.selectItemList});
                 $scope.selectItemList = new Array;
-                $scope.productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID']='null';
-                $scope.productFilterSearch='';
+                $scope.productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID'] = 'null';
+                $scope.productFilterSearch = '';
                 $('#productSwitchModal').modal('hide');
             }
         }
@@ -452,7 +456,7 @@ AndSellUI.directive('productSwitchModal', function (http, baseURL, classFactory,
 });
 
 //优惠券模态框
-AndSellUI.directive('couponItemSwitchModal', function (http, baseURL,couponFactory) {
+AndSellUI.directive('couponItemSwitchModal', function (http, baseURL, couponFactory) {
     return {
         restrict: 'EA',
         templateUrl: '/AndSell/app/components/libs/angular/template/couponItemSwitchModal.html',
@@ -462,7 +466,7 @@ AndSellUI.directive('couponItemSwitchModal', function (http, baseURL,couponFacto
         controller: function ($scope) {
 
             $scope.getInitData = function () {
-                couponFactory.getCouponList().get({}, function (response) {
+                couponFactory.getCouponList({}, function (response) {
                     $scope.couponList = response.data;
                 });
             };
@@ -472,7 +476,7 @@ AndSellUI.directive('couponItemSwitchModal', function (http, baseURL,couponFacto
             }
 
             $scope.checkItem = function (item) {
-                $scope.selectItem=item;
+                $scope.selectItem = item;
             }
 
             $scope.setReturn = function () {
@@ -487,7 +491,7 @@ AndSellUI.directive('couponItemSwitchModal', function (http, baseURL,couponFacto
     }
 });
 
-AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFactory, unitFactory, productFactory, tagFactory) {
+AndSellUI.directive('productItemSwitchModal', function (http, baseURL, imgURL, classFactory, unitFactory, productFactory, tagFactory) {
     return {
         restrict: 'EA',
         templateUrl: '/AndSell/app/components/libs/angular/template/productItemSwitchModal.html',
@@ -496,14 +500,16 @@ AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFact
         },
         controller: function ($scope) {
 
+            $scope.FILE_SERVER_DOMAIN = imgURL;
+
             $scope.getInitData = function () {
-                tagFactory.getPrdTagList().get({}, function (response) {
+                tagFactory.getPrdTagList({}, function (response) {
                     $scope.tagList = response.data;
                 });
-                classFactory.getPrdClassList().get({}, function (response) {
+                classFactory.getPrdClassList({}, function (response) {
                     $scope.classList = response.data;
                 });
-                unitFactory.getPrdUnitList().get({}, function (response) {
+                unitFactory.getPrdUnitList({}, function (response) {
                     $scope.unitList = response.data;
                 });
             }
@@ -515,17 +521,17 @@ AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFact
             }
 
             $scope.checkItem = function (item) {
-                $scope.selectItem=item;
+                $scope.selectItem = item;
             }
 
             $scope.search = function () {
-                $scope.productFilter['SHOP_PRODUCT.SEARCH_CONTENT']= $scope.productFilterSearch;
+                $scope.productFilter['SHOP_PRODUCT.SEARCH_CONTENT'] = $scope.productFilterSearch;
             }
 
             $scope.setReturn = function () {
                 $scope.callback({data: $scope.selectItem});
-                $scope.productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID']='null';
-                $scope.productFilterSearch='';
+                $scope.productFilter['SHOP_PRODUCT.SEARCH_CLASS_ID'] = 'null';
+                $scope.productFilterSearch = '';
                 $('#productItemSwitchModal').modal('hide');
             }
             $scope.cancel = function () {
@@ -535,6 +541,7 @@ AndSellUI.directive('productItemSwitchModal', function (http, baseURL, classFact
         }
     }
 });
+
 
 //树形结构
 AndSellUI.directive('treeList', function () {
@@ -547,17 +554,19 @@ AndSellUI.directive('treeList', function () {
         controller: function ($scope) {
 
             $scope.$watch('tree', function () {
-                if($scope.tree!=undefined)
-                $scope.treeData();
+                if ($scope.tree != undefined) {
+                    $scope.treeData();
+                }
             });
 
             // 多级菜单初始化
             $scope.multiMenuInit = function () {
                 function setSubmenu(menu) {
-                    if(menu!= undefined)
-                        if (menu.childList ) {
+                    if (menu != undefined) {
+                        if (menu.childList) {
                             menu.showSubmenu = false; // 默认子菜单隐藏
                         }
+                    }
                 }
 
                 setSubmenu($scope.firstMenu);
@@ -567,17 +576,17 @@ AndSellUI.directive('treeList', function () {
                 setSubmenu($scope.fifthMenu);
             };
 
-            $scope.treeData= function () {
+            $scope.treeData = function () {
 
-                var tree=$scope.tree;
+                var tree = $scope.tree;
                 var root = {};
-                root[tree.keyId]=tree.rootId;
-                root[tree.keyPId]=tree.rootId;
-                root[tree.keyName]='';
+                root[tree.keyId] = tree.rootId;
+                root[tree.keyPId] = tree.rootId;
+                root[tree.keyName] = '';
 
-                $scope.keyName=tree.keyName;
-                $scope.keyId=tree.keyId;
-                $scope.keyPId=tree.keyPId;
+                $scope.keyName = tree.keyName;
+                $scope.keyId = tree.keyId;
+                $scope.keyPId = tree.keyPId;
 
                 $scope.multimenuList = [];
                 var list = new Array;
@@ -586,7 +595,7 @@ AndSellUI.directive('treeList', function () {
                     list.push(element);
                 });
 
-                $scope.multimenuList_origin = convertListWithParent(list,tree.keyPId,tree.keyId, tree.rootId);
+                $scope.multimenuList_origin = convertListWithParent(list, tree.keyPId, tree.keyId, tree.rootId);
                 $scope.multimenuList = [];
                 angular.copy($scope.multimenuList_origin, $scope.multimenuList);
             }
@@ -643,22 +652,113 @@ AndSellUI.directive('treeList', function () {
                 $('[data-toggle="popover"]').popover()
             });
 
-            $scope.setReturn= function (item) {
-                $scope.callback({data:item});
+            $scope.setReturn = function (item) {
+                $scope.callback({data: item});
             }
 
         }
     }
 });
 
+//Money
+AndSellUI.directive('money', function ($filter, $window) {
+
+    //小数位
+    var floatLimit = 2;
+
+    //保留小数并加千位逗号 不够充0
+    function Decimal(x) {
+        var f_x = parseFloat(x);
+        if (isNaN(f_x)) {
+            return 0;
+        }
+        var f_x = Math.round(x * 100) / 100;
+        var s_x = f_x.toString();
+        var pos_decimal = s_x.indexOf('.');
+        if (pos_decimal < 0) {
+            pos_decimal = s_x.length;
+            s_x += '.';
+        }
+        while (s_x.length <= pos_decimal + floatLimit) {
+            s_x += '0';
+        }
+        return s_x.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    }
+
+    //特殊字符处理
+    function filter(value, blur) {
+        value = value.replace(/[^\d.]/g, "");
+        //必须保证第一个为数字而不是.
+        value = value.replace(/^\./g, "");
+        //保证只有出现一个.而没有多个.
+        value = value.replace(/\.{2,}/g, ".");
+        //保证.只出现一次，而不能出现两次以上
+        value = value.replace(".", "$#$").replace(/\./g, "").replace("$#$", ".");
+
+        //去除起始0
+        if (value.length > 1 && value.substring(0, 1) == '0' && value.substring(1, 2) != '.') {
+            value = value.substring(1);
+        }
+
+        var ind = value.indexOf('.');
+        if (ind > -1) {
+            //小数点之后最多两位
+            if (value.split(".")[1].length > floatLimit) {
+                value = value.substring(0, ind + floatLimit + 1);
+            } else if (value.split(".")[1].length == 0 && blur) {
+                //去除结尾.
+                value = value.substring(0, ind);
+
+            }
+        }
+
+        //默认0
+        if (value == '') {
+            value = 0;
+        }
+
+        //自动填充0
+        if (blur) {
+            value = Decimal(value);
+        }
+
+        return value;
+    }
+
+    return {
+        restrict: 'A', require: 'ngModel', link: function (scope, elem, attrs, ctrl, ngModel) {
+
+            elem.bind('focus', function () {
+                var newValue = elem.val();
+                newValue = Number(newValue.replace(/[^0-9\.]+/g, ""));
+                if (isNaN(newValue)) {
+                    newValue = 0;
+                }
+                elem.val(parseFloat(newValue));
+            });
+
+            elem.bind('blur', function () {
+                elem.val(filter(elem.val(), true));
+            });
+
+            ctrl.$viewChangeListeners.push(function () {
+                elem.val(filter(elem.val(), false));
+
+            });
+
+        }
+    };
+});
 
 AndSellService.filter('bytes', function () {
     return function (bytes, precision) {
         if (isNaN(parseFloat(bytes)) || !isFinite(bytes)) return '-';
         if (typeof precision === 'undefined') precision = 1;
-        var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'],
-            number = Math.floor(Math.log(bytes) / Math.log(1024));
-        return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision) + ' ' + units[number];
+        var units = ['bytes', 'kB', 'MB', 'GB', 'TB', 'PB'], number = Math.floor(Math.log(bytes)
+            / Math.log(1024));
+        return (bytes / Math.pow(1024, Math.floor(number))).toFixed(precision)
+            + ' '
+            + units[number];
     }
 });
 

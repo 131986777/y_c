@@ -11,7 +11,7 @@ angular.module('AndSell.Main').controller('order_CashOnDeliveryOrder_detail_Cont
     }
 
     $scope.getOrder= function (id) {
-        orderFactory.getById(id).get({}, function (response) {
+        orderFactory.getById({'SHOP_ORDER.ID':id}, function (response) {
             response.data[0]['SHOP_ORDER.DATETIME_ADD']=getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
             response.data[0]['SHOP_ORDER.DATETIME_PAY']=getDate(response.data[0]['SHOP_ORDER.DATETIME_PAY']);
             response.data[0]['SHOP_ORDER.DATETIME_OUT']=getDate(response.data[0]['SHOP_ORDER.DATETIME_OUT']);
@@ -25,46 +25,45 @@ angular.module('AndSell.Main').controller('order_CashOnDeliveryOrder_detail_Cont
             $scope.orderDetailList.forEach(function (ele) {
                 setContentsInfoForOrder(ele);
             });
-            console.log($scope.orderDetailList);
         });
     }
 
     //取消订单
     $scope.cancelOrder= function () {
-        orderFactory.cancelOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
-            alert('取消订单成功');
+        orderFactory.cancelOrder({'SHOP_ORDER.ID':$scope.order['SHOP_ORDER.ID']}, function () {
+            modalFactory.showShortAlert('取消订单成功');
             $scope.getOrder($scope.order['SHOP_ORDER.ID']);
         });
     }
 
     //出库订单
     $scope.outOrder= function () {
-        orderFactory.outOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
-            alert('订单出库成功');
+        orderFactory.outOrder({'SHOP_ORDER.ID':$scope.order['SHOP_ORDER.ID']}, function () {
+            modalFactory.showShortAlert('订单出库成功');
             $scope.getOrder($scope.order['SHOP_ORDER.ID']);
         });
     }
 
    //发货订单
     $scope.sendOrder= function () {
-        orderFactory.sendOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
-            alert('订单发货成功');
+        orderFactory.sendOrder({'SHOP_ORDER.ID':$scope.order['SHOP_ORDER.ID']}, function () {
+            modalFactory.showShortAlert('订单发货成功');
             $scope.getOrder($scope.order['SHOP_ORDER.ID']);
         });
     }
 
     //确认提货
     $scope.deliveryOrder= function () {
-        orderFactory.deliveryOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
-            alert('提货成功');
+        orderFactory.deliveryOrder({'SHOP_ORDER.ID':$scope.order['SHOP_ORDER.ID']}, function () {
+            modalFactory.showShortAlert('提货成功');
             $scope.getOrder($scope.order['SHOP_ORDER.ID']);
         });
     }
 
     //立即支付
     $scope.payNow= function () {
-        orderFactory.payOrder($scope.order['SHOP_ORDER.ID']).get({}, function () {
-            alert('支付成功');
+        orderFactory.payOrder({'SHOP_ORDER.ID':$scope.order['SHOP_ORDER.ID']}, function () {
+            modalFactory.showShortAlert('支付成功');
             $scope.getOrder($scope.order['SHOP_ORDER.ID']);
         });
     }
@@ -76,7 +75,7 @@ angular.module('AndSell.Main').controller('order_CashOnDeliveryOrder_detail_Cont
 
     //备注修改
     $scope.modifyOrderRemark= function () {
-        orderFactory.modifyOrderRemark($scope.modify).get({}, function (response) {
+        orderFactory.modifyOrderRemark($scope.modify, function (response) {
             $scope.order['SHOP_ORDER.REMARK']=$scope.modify['SHOP_ORDER.REMARK'];
             $('#modifyRemark').modal('hide');
         });

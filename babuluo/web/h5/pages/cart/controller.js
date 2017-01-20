@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function ($scope, $state, orderFactory, productFactory, weUI, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function ($scope, $state, promoFactory, orderFactory, $http, http, productFactory, weUI, modalFactory) {
 
     modalFactory.setTitle('购物车');
     modalFactory.setBottom(true);
@@ -6,11 +6,6 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
-        //$(".haha").css("height", document.documentElement.clientHeight - 100);
-        //var div=document.getElementById('haha');
-        //div.style.height = "250px";
-        //document.getElementById('cartout').style.cssText= 'height : 100 px';
-
         $(".product-list").css("min-height", document.documentElement.clientHeight - 100);
         modalFactory.setCurrentPage('cart');
 
@@ -19,7 +14,6 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
         }
 
         $scope.getCartInfoInCookie();
-
     }
 
     $scope.toDetail = function (id) {
@@ -44,52 +38,26 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
             productFactory.getProductSkuBySkuIds(params, function (response) {
                 $scope.skuList = response.data;
-                var skulistsForOrder = new Array;
+                $scope.skulistsForOrder = new Array;
                 $scope.skuList.forEach(function (ele) {
                     setContentsInfo(ele);
                     ele['SHOP_PRODUCT_SKU.SIZE'] = cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
                     ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
                     ele.isSale = false;
                     ele.isSelect = false;
-                    skulistsForOrder.push({
-                        'prdId': ele['SHOP_PRODUCT_SKU.PRD_ID'],
+                    $scope.skulistsForOrder.push({
+                        'skuId': ele['SHOP_PRODUCT_SKU.SKU_ID'],
+                        'classId': ele['SHOP_PRODUCT.CLASS_ID'],
+                        'tagIds': ele['SHOP_PRODUCT.TAG_ID'],
                         'num': ele['SHOP_PRODUCT_SKU.SIZE'],
-                        'price': ele['SHOP_PRODUCT_SKU.REAL_PRICES']
+                        'unitPrice': ele['SHOP_PRODUCT_SKU.REAL_PRICES'] * 100
                     });
                 });
-                $scope.calculateSaleInfo(skulistsForOrder);
                 $scope.checkAllPrd();
             })
         }
         $scope.updateCartPrice();
-    }
-
-    //计算销售信息
-    $scope.calculateSaleInfo = function (list) {
-        weUI.toast.showLoading('正在查询促销条件');
-        orderFactory.calculateSale({'ORDER_PRD_LIST': JSON.stringify(list)}, function (response) {
-            var newPrdListInOrder = objectToArray(response.extraData.newOrder);
-            var newPriceMap = {};
-            newPrdListInOrder.forEach(function (ele) {
-                newPriceMap[ele['prdId']] = ele['price'];
-            });
-
-            $scope.skuList.forEach(function (ele) {
-                if (newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']] != undefined) {
-                    if (ele['SHOP_PRODUCT_SKU.REAL_PRICES']
-                        != newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']]) {
-                        //价格不一致 参与了促销
-                        ele.isSale = true;
-                    }
-                    ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']];
-                }
-            });
-            weUI.toast.hideLoading();
-            $scope.updateCartPrice();
-        }, function (response) {
-            weUI.toast.hideLoading();
-        });
-    }
+    };
 
     //数量减
     $scope.lessSize = function (item) {
@@ -124,7 +92,6 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
             }
             cartSize[item['SHOP_PRODUCT_SKU.SKU_ID']] += 1;
             setCookie('cartSize', JSON.stringify(cartSize));
-
             $scope.updateCartPrice();
         } else {
             weUI.toast.ok('已达到该商品最大库存数');
@@ -187,17 +154,21 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
     $scope.addOrder = function () {
         if ($scope.totalSize > 0) {
             var list = new Array;
+            var existNoStockPrd = false;
             $scope.skuList.forEach(function (ele) {
                 if (ele.isSelect) {
                     if (ele['SHOP_PRODUCT_SKU.STOCK'] > 0) {
                         list.push(ele['SHOP_PRODUCT_SKU.SKU_ID']);
                     } else {
-                        weUI.toast.error('存在售罄商品');
-                        return;
+                        existNoStockPrd = true;
                     }
                 }
             });
-            $state.go('pages/order/add', {SKU_IDS: list.toString()});
+            if (existNoStockPrd) {
+                weUI.toast.error('存在售罄商品');
+            } else {
+                $state.go('pages/order/add', {SKU_IDS: list.toString()});
+            }
         } else {
             weUI.toast.info('至少选择一项');
         }

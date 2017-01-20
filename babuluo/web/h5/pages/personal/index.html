@@ -4,7 +4,7 @@
             <div class="header">
                 <img class="personal-img" src="../../public/img/login_logo.png">
                 <h5 class="personal-name">
-                    {{phone}}
+                    {{USER_NAME}} <i class="icon-resetName" ng-click="modifyName()"></i>
                 </h5>
                 <div class="personal-info flexbox">
                     <div class="points cell">
@@ -35,9 +35,13 @@
                 </div>
                 <div class="weui_cell no_access">
                     <div class="order-act weui_cell_bd weui_cell_primary flexbox">
-                        <a class="cell" ui-sref="pages/order/list({state:'end'})">
-                            <div class="icon icon-order-ok"></div>
-                            <p class="order-act-txt" >已完成</p>
+                        <!--<a class="cell" ui-sref="pages/order/list({state:'end'})">-->
+                            <!--<div class="icon icon-order-ok"></div>-->
+                            <!--<p class="order-act-txt" >已完成</p>-->
+                        <!--</a> -->
+                        <a class="cell" ui-sref="pages/order/list({state:'out'})">
+                            <div class="icon icon-order-ok"><span class="order-num" ng-if="stateMap.out>0" ng-bind="stateMap.out"></span></div>
+                            <p class="order-act-txt" >待分拣</p>
                         </a>
                         <a class="cell" ui-sref="pages/order/list({state:'pay'})">
                             <div class="icon icon-order-pay"><span class="order-num" ng-if="stateMap.pay>0" ng-bind="stateMap.pay"></span> </div>
@@ -46,7 +50,7 @@
                         <a class="cell" ui-sref="pages/order/list({state:'get'})">
                             <div class="icon icon-order-deliver"><span class="order-num" ng-if="stateMap.get>0" ng-bind="stateMap.get"></span></div>
 
-                            <p class="order-act-txt">待自提</p>
+                            <p class="order-act-txt">待收货</p>
                         </a>
                         <a class="cell" ui-sref="pages/order/list({state:'comment'})">
                             <div class="icon icon-order-evaluate"><span class="order-num" ng-if="stateMap.comment>0" ng-bind="stateMap.comment"></span></div>

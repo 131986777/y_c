@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_personal_Controller', function (orderFactory,userFactory, $scope, $state, personalFactory, modalFactory, weUI, balanceFactory) {
+angular.module('AndSell.H5.Main').controller('pages_personal_Controller', function (orderFactory, userFactory, $scope, $state, personalFactory, modalFactory, weUI, balanceFactory) {
 
     modalFactory.setTitle('我的');
     modalFactory.setBottom(true);
@@ -11,17 +11,31 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
         });
     }
 
-    $scope.getOrderStates= function () {
-        orderFactory.getOrderStates({},function(response){
-            $scope.stateMap=response.extraData.stateMap;
+    $scope.getOrderStates = function () {
+        orderFactory.getOrderStates({}, function (response) {
+            $scope.stateMap = response.extraData.stateMap;
         });
     }
 
-    $scope.queryAccount = function (uid) {
-        var form = {};
-        balanceFactory.queryAccountByUid(form, function (response) {
-            console.log(response);
+    $scope.modifyName = function () {
+        weUI.dialog.confirmInput("修改昵称", $scope.USER_NAME, function (data) {
+            personalFactory.modifyMember({"MEMBER.USER_NAME": data.data}, function (response) {
+                weUI.toast.ok("修改成功");
+                $scope.initLoad();
+            }, function (response) {
+                weUI.toast.error(response.msg);
+            });
+        });
+    }
+
+
+    $scope.queryAccount = function () {
+        balanceFactory.queryAccountByUid({}, function (response) {
             $scope.balanceInfo = response.data;
+            if (!$scope.balanceInfo.length > 0) {
+                $state.go('pages/user/accountLogin');
+                weUI.toast.error('请使用正确的账号登录');
+            }
         }, function (response) {
             weUI.toast.error(response.msg);
         });
@@ -31,9 +45,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
         var form = {};
         form['MEMBER.USER_ID'] = uid;
         personalFactory.getPhone(form, function (response) {
-            console.log(response);
-            $scope.phone = response.data[0]['MEMBER.MOBILE'];
-            console.log($scope.phone);
+            $scope.USER_NAME = response.data[0]['MEMBER.USER_NAME'];
         }, function (response) {
             weUI.toast.error(response.msg);
         });
@@ -59,6 +71,9 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
             $scope.getPhone($scope.uid);
             $scope.getCouponSum($scope.uid);
             $scope.getOrderStates();
+        } else {
+            $state.go('pages/user/accountLogin');
+            weUI.toast.error('登录异常');
         }
     }
 

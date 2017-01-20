@@ -1,36 +1,8 @@
-AndSellMainModule.service('tagFactory', function ($resource, baseURL) {
+AndSellMainModule.service('tagFactory', function (http) {
 
-      this.getPrdTagList = function () {
-        return $resource(baseURL + '/shop/product/tag/queryAll', null, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
+    this.getPrdTagList = http.post('/shop/product/tag/queryAll');
+    this.addPrdTag = http.post('/shop/product/tag/add');
+    this.delPrdTag = http.post('/shop/product/tag/delById');
+    this.modifyPrdTag = http.post('/shop/product/tag/modifyById');
 
-      this.addPrdTag = function (form) {
-        return $resource(baseURL + '/shop/product/tag/add', form, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
-
-      this.delPrdTag = function (id) {
-        return $resource(baseURL
-            + '/shop/product/tag/delById?shop_tag.tag_id=:tag_id', {'tag_id': id}, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
-
-      this.modifyPrdTag = function () {
-        return $resource(baseURL + '/shop/product/tag/modifyById', null, {
-          'update': {
-            method: 'PUT'
-          }
-        });
-      };
-
-    });
+});

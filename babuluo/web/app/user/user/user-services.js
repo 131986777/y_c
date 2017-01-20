@@ -1,49 +1,17 @@
-AndSellMainModule.service('userFactory', function ($resource, baseURL) {
+AndSellMainModule.service('userFactory', function (http) {
 
-    this.modifyState = function (form) {
-        return $resource(baseURL + '/user/user/modifyUserState', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-    this.addUser = function (form) {
-        return $resource(baseURL + '/user/user/add', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-    this.getUserByUID = function (form) {
-        return $resource(baseURL + '/user/user/getById', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
-    this.modUserByUID = function (form) {
-        return $resource(baseURL + '/user/user/modifyById', form, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    };
+    this.modifyState=http.post('/user/user/modifyUserState');
 
-    this.isLogin = function () {
-        return $resource(baseURL+'/login/isLogin',{},{
-            'update':{
-                method:'PUT'
-            }
-        });
-    }
+    this.addUser=http.post('/user/user/add');
 
-    this.logOut = function () {
-        return $resource(baseURL+'/login/logout',{},{
-            'update':{
-                method:'PUT'
-            }
-        });
-    }
+    this.getUserByUID=http.post('/user/user/getById');
 
+    this.modUserByUID=http.post('/user/user/modifyById');
+
+    this.resetPwd=http.post('/user/user/resetPwd');
+
+    this.isLogin=http.post('/login/isLogin');
+
+    this.logOut=http.post('/login/logout');
 
 });

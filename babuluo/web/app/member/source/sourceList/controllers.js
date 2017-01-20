@@ -1,13 +1,11 @@
 angular.module('AndSell.Main').controller('member_source_sourceList_Controller', function ($scope, $stateParams, memberSourceFactory, modalFactory) {
 
-
     modalFactory.setTitle('客户来源管理');
 
     $scope.initLoad = function () {
-        memberSourceFactory.getMemberSourceList().get({}, function (repsonce) {
-            console.log(repsonce.data);
+        memberSourceFactory.getMemberSourceList({}, function (repsonce) {
             $scope.MemberSourceList = repsonce.data;
-        }, null);
+        });
     };
     $scope.initLoad();
 
@@ -15,17 +13,13 @@ angular.module('AndSell.Main').controller('member_source_sourceList_Controller',
         // console.log($scope.add);
         $scope.add['MEMBER_CODE_SOURCE.SERVICE_ID'] = 1;
         $scope.add['MEMBER_CODE_SOURCE.IS_SYS'] = -1;
-        memberSourceFactory.addMemberSource($scope.add).get({}, function (response) {
-            if (response.code == 400) {
-                modalFactory.showShortAlert(response.msg);
-            } else if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert('新增成功');
-                $scope.add = '';
-                $("#addMember").modal('hide');
-                $scope.initLoad();
-
-            }
-
+        memberSourceFactory.addMemberSource($scope.add, function (response) {
+            modalFactory.showShortAlert('新增成功');
+            $scope.add = '';
+            $("#addMember").modal('hide');
+            $scope.initLoad();
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
     };
 
@@ -37,30 +31,24 @@ angular.module('AndSell.Main').controller('member_source_sourceList_Controller',
     $scope.modifyMemberSource = function () {
         $scope.modify['MEMBER_CODE_SOURCE.SERVICE_ID'] = 1;
         $scope.add['MEMBER_CODE_SOURCE.IS_SYS'] = -1;
-    memberSourceFactory.modifyById().get($scope.modify, function (response) {
-        if (response.code == 400) {
-            modalFactory.showShortAlert(response.msg);
-        } else if (response.extraData.state == 'true') {
+        memberSourceFactory.modifyById($scope.modify, function (response) {
             $("#modifyMember").modal('hide');
             modalFactory.showShortAlert("修改成功");
             $scope.initLoad();
-        }
-    });
-};
-
-$scope.deleteMember = function (id) {
-
-    modalFactory.showAlert("确认删除吗?", function () {
-        memberSourceFactory.delMemberSource(id).get({}, function (res) {
-            if (res.extraData.state = 'true') {
-                modalFactory.showShortAlert("删除成功");
-
-                $scope.initLoad();
-            }
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
-    });
+    };
 
-}
+    $scope.deleteMember = function (id) {
 
-})
-;
+        modalFactory.showAlert("确认删除吗?", function () {
+            memberSourceFactory.delMemberSource({'member_code_source.CODE': id}, function (res) {
+                modalFactory.showShortAlert("删除成功");
+                $scope.initLoad();
+            });
+        });
+
+    }
+
+});

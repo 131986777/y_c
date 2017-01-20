@@ -1,0 +1,647 @@
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .collect.active {
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAl9JREFUOBGlVUtrU0EUPmfuy9gGs1DwQZNUE0ILSrYiGAiu3LjwLwiugoFaxY2FLhVrTNxY8Be4EgoupS7culEw0pAX+MBNNaltw713/CaaNMm93FzrwGXOnPnOl2/OOTMhCjk6t+Yv/ywmLoaEkx4W6Lr2PZLcA/5amBgOA+oWk1nbdt4BLIXB56OPWx+mxYlpALXv2M5dNUsidm3q22odNKYq3i7MnWNJVZBqioiZbNPUU5FH9WYQ8VTFgnh5QKqIpCS9t+8sBZGqvUDF3eXkSWfPbUgprTEipl2NrES0svV9zD+yGBIjmPdun43v9+wMM2cgLQPXJWjMjuAPTGYUU75FbqqS6aNFevVIqdZGLA4IxT8K8fuS5HXYaVQnchB5CAsnQdQn5OGF0IT2jImt/yZVOiAMXIYmrfV+KnbuzJ22f9EmzpA6hM5hCNJQhdDc7JP6t35XzDxofzZMM4981YeofzSgcEuPyLwiVaHD4qnF7tJ8AsV7gyPF1Tr0gCDTMHJH12rtQcwYsXKqCwHiTZhnBqDAmallaVouUmo0RnGeCxKrtGuCeWMUFGSz5JeTpArvIVZOV8oFNYcZ6OFFP5wvMd4DX7AfAXLpi/UQdwqpE3gPjvuR+PlwY0/JYjI2uechJrL9FHTRoyv4VtFHO5MkHfKmzkPssDPML47poCPX9YiWPlZpreJbMTSRRmWe/9n7+xO2Nx0eYna5rxhXcwPdcSH2tHVz9mHj60DlTKn5JVZu3xDCzKIWr5Tfr4Ce/zwp1JMo8tFy8/WAzG+Olmvv4b+6XYhfYSnzk5jfaVK2vzXv3FgAAAAASUVORK5CYII=');
+}
+
+/* line 1, ../sass/headers/_crumbsBar.scss */
+.crumbsBar {
+  width: 100%;
+  height: 38px;
+}
+/* line 4, ../sass/headers/_crumbsBar.scss */
+.crumbsBar a {
+  font-size: 13px;
+  color: #4b4b4b;
+  display: inline-block;
+  height: 100%;
+  line-height: 38px;
+  position: relative;
+  margin-right: 20px;
+}
+/* line 12, ../sass/headers/_crumbsBar.scss */
+.crumbsBar a:after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  width: 5px;
+  height: 10px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAMCAYAAABBV8wuAAAAAXNSR0IArs4c6QAAAMVJREFUGBlj2L17Nz8DFsD09+/fXdu3b49El2P6//9/OCMjY+uOHTv8kSUZQZw9e/ao/fnzZzdQQYq7u/tukBgTiHBxcbnFwsLi++/fv3lAO21AYmAdIAYIAI0zAxq9lpmZORCsAyLMwAAUuAk07gNQ0gwucebMGS6gPVuBilYB7ZkGlrh9+zb7mzdvNgAFj3t4eDSDTGDcv38/y8+fP1cDtb/y9PRMBwmCABNQcCaQ/gZUmQkWgRIsQMt2s7GxrQHS/5AlAKe3Tdix/prSAAAAAElFTkSuQmCC');
+  background-repeat: no-repeat;
+  background-size: auto;
+  background-position: center;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* line 26, ../sass/headers/_crumbsBar.scss */
+.crumbsBar a:last-child {
+  color: #b6b6b6;
+}
+/* line 28, ../sass/headers/_crumbsBar.scss */
+.crumbsBar a:last-child:after {
+  display: none;
+}
+
+/* line 1, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar {
+  width: 210px;
+  height: auto;
+  display: inline-block;
+}
+/* line 5, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .title {
+  font-size: 14px;
+  color: #4b4b4b;
+  display: block;
+  width: 100%;
+  height: 38px;
+  line-height: 38px;
+  font-weight: normal;
+  border: 1px solid #ddd;
+  padding: 0 18px;
+}
+/* line 16, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists {
+  width: 100%;
+  height: auto;
+  margin-top: -1px;
+  border: 1px solid #ddd;
+}
+/* line 21, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul {
+  width: 100%;
+  height: auto;
+}
+/* line 24, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li {
+  width: 100%;
+  padding: 0 27px;
+}
+/* line 27, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li img {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 15px auto;
+}
+/* line 33, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li .intro {
+  width: 100%;
+}
+/* line 35, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li .intro p {
+  line-height: 1.7em;
+}
+/* line 38, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li .intro .name, .goodsShowBar .lists ul li .intro .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .goodsShowBar .lists ul li .intro .show {
+  font-size: 14px;
+  color: #4b4b4b;
+}
+/* line 42, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li .intro .price {
+  font-size: 14px;
+  color: #4b4b4b;
+}
+/* line 46, ../sass/sidebars/_goodsShowBar.scss */
+.goodsShowBar .lists ul li .intro .sales {
+  color: #f36e19;
+  font-size: 14px;
+}
+
+/* line 3, ../sass/goodsDetail.scss */
+.goodsDetail {
+  padding: 0 65px;
+  min-height: 300px;
+}
+/* line 6, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+}
+/* line 10, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow {
+  display: inline-block;
+  height: 430px;
+}
+/* line 13, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow .mainPic {
+  height: 100%;
+  width: 430px;
+  margin-right: 10px;
+  display: inline-block;
+}
+/* line 18, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow .mainPic img {
+  width: 100%;
+  height: 100%;
+}
+/* line 23, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow .picList {
+  width: 78px;
+  height: 100%;
+  display: inline-block;
+}
+/* line 27, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow .picList ul {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+/* line 31, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow .picList ul li {
+  width: 100%;
+  height: 78px;
+  margin-bottom: 10px;
+}
+/* line 35, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .picShow .picList ul li img {
+  width: 100%;
+  height: 100%;
+}
+/* line 43, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose {
+  width: 500px;
+  height: 100%;
+  display: inline-block;
+  overflow: hidden;
+  float: right;
+}
+/* line 49, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .title {
+  line-height: 1.8em;
+  padding: 6px 0;
+}
+/* line 52, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .title .goodsName {
+  color: #4c4c4c;
+  font-size: 18px;
+}
+/* line 56, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .title .subTitle {
+  font-size: 12px;
+  color: #a9a9a9;
+}
+/* line 61, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox {
+  margin-top: 10px;
+  width: 100%;
+  height: 100px;
+  padding: 18px;
+  border: 1px solid #ddd;
+}
+/* line 68, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .name, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .name, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .goodsDetailShow .purchaseChoose .priceBox .priceGroup .show, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .show {
+  display: inline-block;
+  width: 54px;
+  color: #4b4b4b;
+  font-size: 14px;
+}
+/* line 74, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .content, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content {
+  display: inline-block;
+}
+/* line 76, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .content .current, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content .current {
+  font-size: 25px;
+  color: #f36e19;
+  margin-right: 6px;
+}
+/* line 80, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .content .current .moneySign, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content .current .moneySign {
+  font-size: 14px;
+}
+/* line 84, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .content .origin, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content .origin {
+  font-size: 16px;
+  color: #a8a8a8;
+  position: relative;
+}
+/* line 88, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .priceGroup .content .origin:after, .goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content .origin:after {
+  content: '';
+  width: calc(100% + 2px);
+  height: 1px;
+  background-color: #a8a8a8;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+}
+/* line 101, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup {
+  margin-top: 20px;
+  line-height: 20px;
+}
+/* line 106, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content .activities {
+  display: inline-block;
+  font-size: 13px;
+  color: #4c4c4c;
+  vertical-align: bottom;
+  line-height: 20px;
+}
+/* line 112, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .priceBox .promotionGroup .content .activities .sign {
+  font-size: 8px;
+  color: #fff;
+  display: inline-block;
+  height: 20px;
+  padding: 0px 5px;
+  line-height: 20px;
+  background-color: #f36f1a;
+  border-radius: 2px;
+  margin-right: 10px;
+}
+/* line 127, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose {
+  margin-top: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+  width: 100%;
+}
+
+
+/* line 132, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards {
+  width: 100%;
+  font-size: 0;
+}
+/* line 136, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .name, .goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .goodsDetailShow .purchaseChoose .categoriesChoose .standards .show {
+  display: inline-block;
+  width: 80px;
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  color: #4b4b4b;
+  border: 1px solid transparent;
+  vertical-align: top;
+}
+/* line 146, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .standardsList {
+  display: inline-block;
+  width: calc(100% - 80px);
+}
+/* line 149, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .standardsList li {
+  display: inline-block;
+  padding: 0 16px;
+  height: 30px;
+  line-height: 30px;
+  color: #4b4b4b;
+  font-size: 14px;
+  margin-right: 10px;
+  margin-bottom: 18px;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+/* line 160, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .categoriesChoose .standards .standardsList li.active {
+  border-color: #f36f1a;
+}
+
+
+/* line 167, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose {
+  display: inline-block;
+  height: 37px;
+  font-size: 0;
+  margin-top: 28px;
+}
+/* line 172, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .name, .goodsDetail .goodsDetailShow .purchaseChoose .countChoose .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .goodsDetailShow .purchaseChoose .countChoose .show {
+  display: inline-block;
+  width: 46px;
+  height: 37px;
+  line-height: 37px;
+  font-size: 14px;
+  color: #4b4b4b;
+  border: 1px solid transparent;
+  vertical-align: top;
+}
+/* line 182, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .numberChange {
+  width: 140px;
+  height: 100%;
+  border: 1px solid #ddd;
+  display: inline-block;
+  position: relative;
+}
+/* line 188, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .numberChange .text {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  border: none;
+  outline: 0;
+  padding: 0 37px;
+  text-align: center;
+  color: #4b4b4b;
+  font-size: 14px;
+}
+/* line 199, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .numberChange .control {
+  width: 37px;
+  height: 37px;
+  position: absolute;
+  border: 1px solid #ddd;
+  top: 50%;
+  transform: translateY(-50%);
+  background-position: center;
+  background-size: auto;
+  background-repeat: no-repeat;
+}
+/* line 209, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .numberChange .control.reduce {
+  left: -1px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAABCAYAAADuHp8EAAAAAXNSR0IArs4c6QAAABBJREFUCB1jPHz48H8GMgAAsuwDStIThe0AAAAASUVORK5CYII=');
+}
+/* line 213, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .countChoose .numberChange .control.add {
+  right: -1px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAYAAABy6+R8AAAAAXNSR0IArs4c6QAAACxJREFUKBVjYMABDh8+/B+HFAMTLgl84sNREyO+UMIXGFjl8Bk2HEOPLD8BABJzCe5N4V7zAAAAAElFTkSuQmCC');
+}
+/* line 220, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup {
+  display: inline-block;
+  height: 45px;
+  margin-top: 18px;
+}
+/* line 224, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup a {
+  display: inline-block;
+  width: auto;
+  height: 100%;
+  vertical-align: top;
+  line-height: 45px;
+  margin-right: 20px;
+}
+/* line 232, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .addToCart {
+  width: 175px;
+  padding-left: 40px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAVCAYAAABCIB6VAAAAAXNSR0IArs4c6QAAAnxJREFUOBGtlc9rE1EQx3eTGKl23UOIt2TTRE8RqfZQ6MGLnmoPHjz7F1REqWdPKt4E6UHsVQ+CFIpHqRcPIoIVDBFqfhGEQBCNMQslZtfPrHnL2yRtpXVgmDffmfm+ebOT1qxWq2u+718zDMNEB+iDQqFwB3soiVG9gB5BE+hR0zSvYw8tZqVSsSGbp+tTsK0KI/4rjHR/EPEpeibPD6TdblvdbrfDBSGmYgew7QgJ865D7ED0hq7faoQXwX2wTYXhruCv4f/QMBnrAvhnmWsoJJdwHALlfD5/WwW48BGYpzC5A2wlHo/fdxynquU9ISbkXyLEFJcILKLn6/X6OVXgeV4azFNYo9EIXjoYDIpgtpZ3Vs7wbE8iltgcRa/lMJQpsWCLChDLZU/BPA0LLqGRKDFPKwEGeclkspjJZL6KI6PAyChuiA+hjMJLJBKzahStVut4r9f7JXFkW/Y4FMjKPEPWxej3+8Uw8A8H13VlXQORUUS2QlA6qdLRDEHZkG9/U43M0DaHVswc+gndEQc5gZ5Gd3jZsciMJYrIZsxAmsOK6nJSdzifGfHlw22h3hgxhEK8RLCFPhwt3Mun9jffaV1yxoghk5WTDzTN+fteRHqMfNe27Y1UKvVzInEsFiuxQhKbZkMe68X7nTudzio5y5I31jHr87FWq72gg9n9iEbiLi98OYL9f3ds3dQVbN0yXd+jiw+WZS2l0+muiumW180zsufk+fxgrmaz2fcSj/xA9AJI7+Jb2Av8Ob2ix/Qz8Vv4WazDj+qmiu1KTAfvhkl9irZUwQSr8gw+fHjedRTNZnOKDi7LluRyufIEwhDiv9Al9tcjb1OBfwAf/CWMOEQFbAAAAABJRU5ErkJggg==');
+  background-position: 10% center;
+  background-size: auto;
+  background-repeat: no-repeat;
+  text-align: center;
+  color: #4b4b4b;
+  font-size: 14px;
+  border: 1px solid #ddd;
+}
+/* line 244, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .buyNow {
+  width: 170px;
+  background-color: #f36f1a;
+  font-size: 14px;
+  color: #fff;
+  text-align: center;
+}
+/* line 251, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .collect {
+  width: 45px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAYAAADEtGw7AAAAAXNSR0IArs4c6QAAAgpJREFUOBGllc1Kw0AQx5u0xfbmQcFS7KciCopXERSDJy8efAXBBxARLwq+hYJP4EkoeBQvXr0oWLFtjNQqXhVb++VvpAmapE1sF4bdnZ357T+zmyQQ8NmKxeKSrusLPsMDIb+BxO21Wq0v+nU/OYqfoFKpNA/0WlGUdjAYnE0mk7deeapXgKwD3ZW+3W4rzWbzZyzzXs1TsWEY2UajkQca7IAaKJ/IZDKPvcCeiuv1+s4vqLDkXLZ7QWWtp2JqO0YZdOKGJNhsKP6MRqPJWCz2ZvrsvQWW+gFKEDD1yxbxz9uTZA78mu4Ky2N3xOUpz5McMPOAwPZxbjCepI+Ks98mT0LuPXaqAjtiMDQoVMQIAwtTpmMV+a+hUEjD/yCLgzQU5zFNam/VuFwuj9dqtUt2TPcJfwiHw8uJROJZ8q3rFo/Hn5ivYIYs/KehshSJRDQTKrkWWCZy6dlVylKWuc9myON3hFkpf8DiZdcCXc6K8BgAPUun07o9zAGWAIKn7YHd5pzJjNuaK7hbsBsAEf7AlUplFMCIG8TNh4gYL9mwfc2huFqtuil4V1X1gORDFH7YIW6lc4BJsupLQhM7BjrJAR1ms9kDGeM7kTVzAz5UDjEOsFlfEnP8Lea4gltAX0xIKpWq4NvkbZWP03nH7wA7/nmAPwFqAC5MmFvPtbzBv1YoFFYRodljvgGvKrWZ/xSY2gAAAABJRU5ErkJggg==');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+  border: 1px solid #ddd;
+}
+/* line 262, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro {
+  margin-top: 40px;
+}
+/* line 264, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro {
+  width: 844px;
+  display: inline-block;
+  float: right;
+}
+/* line 268, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introCategories {
+  width: 100%;
+  height: 40px;
+  border: 1px solid #ddd;
+}
+/* line 272, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introCategories ul {
+  width: 100%;
+  height: 100%;
+}
+/* line 276, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introCategories ul li {
+  display: inline-block;
+  height: 100%;
+}
+/* line 279, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introCategories ul li a {
+  display: inline-block;
+  height: 100%;
+  padding: 0 32px;
+  color: #4b4b4b;
+  font-size: 14px;
+  line-height: 40px;
+  position: relative;
+  margin-right: 10px;
+}
+/* line 288, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introCategories ul li a.active:after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  background-color: #f36e19;
+  bottom: 0;
+  left: 0;
+}
+/* line 302, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent {
+  border: 1px solid #ddd;
+  margin-top: -1px;
+}
+/* line 305, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .imgIntro, .goodsDetail .goodsIntro .detailIntro .introContent evaluateIntro {
+  width: 100%;
+  height: auto;
+  display: none;
+}
+/* line 309, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .imgIntro.active, .goodsDetail .goodsIntro .detailIntro .introContent evaluateIntro.active {
+  display: block;
+}
+/* line 314, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .imgIntro .imgList {
+  width: 100%;
+  font-size: 0;
+}
+/* line 317, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .imgIntro .imgList img {
+  width: 100%;
+  height: auto;
+}
+/* line 324, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro {
+  width: 100%;
+  overflow: hidden;
+}
+/* line 327, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize {
+  padding: 20px 0;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  margin-top: -1px;
+}
+/* line 334, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .totalPer {
+  width: 155px;
+  height: 76px;
+  display: inline-block;
+  position: relative;
+  margin-right: 22px;
+}
+/* line 340, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .totalPer .number, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .totalPer .text {
+  position: absolute;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* line 346, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .totalPer .number {
+  font-size: 40px;
+  color: #f36e19;
+  top: 0;
+}
+/* line 351, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .totalPer .text {
+  color: #4b4b4b;
+  bottom: 0;
+}
+/* line 356, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources {
+  display: inline-block;
+  width: 600px;
+  height: 76px;
+  overflow: hidden;
+}
+/* line 361, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source {
+  display: inline-block;
+  width: auto;
+  height: 15px;
+  margin-bottom: 15.33333px;
+}
+/* line 366, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .name, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show {
+  font-size: 14px;
+  color: #4b4b4b;
+  display: inline-block;
+  width: 100px;
+  height: 100%;
+  line-height: 15px;
+  vertical-align: top;
+}
+/* line 374, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .name .count, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show .count {
+  color: #f36e19;
+}
+/* line 378, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .perBar {
+  width: 227px;
+  height: 100%;
+  background-color: #f4f4f4;
+  display: inline-block;
+}
+/* line 383, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .perBar .currentPer {
+  background-color: #f36e19;
+  width: 0;
+  height: 100%;
+  transition: all .3s ease;
+}
+/* line 390, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .show {
+  margin-left: 10px;
+}
+/* line 397, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists {
+  width: 100%;
+}
+/* line 399, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list {
+  padding: 30px 45px 10px;
+  border: 1px solid #ddd;
+  margin-top: -1px;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  font-size: 0;
+}
+/* line 405, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list:last-child {
+  border-bottom-color: transparent;
+}
+/* line 409, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .favicon {
+  width: 40px;
+  height: 40px;
+  display: inline-block;
+  vertical-align: top;
+  border-radius: 999px;
+  background-color: #f6f6f6;
+  position: relative;
+  overflow: hidden;
+}
+/* line 418, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .favicon img {
+  position: absolute;
+  height: 100%;
+  width: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+/* line 426, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent {
+  width: calc(100% - 50px);
+  margin-left: 10px;
+  display: inline-block;
+}
+/* line 430, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .userInfo {
+  line-height: 1.5;
+}
+/* line 432, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .userInfo span {
+  margin-right: 10px;
+}
+/* line 435, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .userInfo .name, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .userInfo .summarize .evaluateSources .source .show, .goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .summarize .evaluateSources .source .evaluateLists .list .listContent .userInfo .show {
+  font-size: 14px;
+  color: #4b4b4b;
+}
+/* line 439, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .userInfo .time {
+  font-size: 12px;
+  color: #a5a5a5;
+}
+/* line 444, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .text {
+  line-height: 2em;
+  font-size: 13px;
+  color: #a1a1a1;
+  word-break: break-all;
+  white-space: pre-wrap;
+  text-align: justify;
+}
+/* line 452, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .imgList {
+  overflow: hidden;
+  margin-top: 6px;
+}
+/* line 455, ../sass/goodsDetail.scss */
+.goodsDetail .goodsIntro .detailIntro .introContent .evaluateIntro .evaluateLists .list .listContent .imgList img {
+  width: 40px;
+  height: 40px;
+  margin-right: 7px;
+}

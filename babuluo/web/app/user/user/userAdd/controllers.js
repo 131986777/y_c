@@ -7,15 +7,14 @@ angular.module('AndSell.Main').controller('user_user_userAdd_Controller', functi
     $scope.userAdd['USER.ROLE_ID_LIST'] = '';
 
     $scope.initLoad = function () {
-        roleFactory.getRole().get({}, function (response) {
-            console.log(response);
+        roleFactory.getRole({}, function (response) {
             $scope.roleList = response.data;
         });
         $scope.getShopList();
     };
 
     $scope.getShopList = function () {
-        shopFactory.getShopList().get({}, function (response) {
+        shopFactory.getShopList({}, function (response) {
             $scope.shopList = response.data;
         });
     };
@@ -42,21 +41,20 @@ angular.module('AndSell.Main').controller('user_user_userAdd_Controller', functi
         $scope.roleList.forEach(function (ele) {
 
             if (ele['USER_ROLE.CHECKED'] == true) {
-                $scope.userAdd['USER.ROLE_ID_LIST'] = $scope.userAdd['USER.ROLE_ID_LIST'] + "," + ele['USER_ROLE.ID'];
+                $scope.userAdd['USER.ROLE_ID_LIST'] = $scope.userAdd['USER.ROLE_ID_LIST']
+                    + ","
+                    + ele['USER_ROLE.ID'];
             }
             if ($scope.userAdd['USER.ROLE_ID_LIST'].substr(0, 1) == ',') {
                 $scope.userAdd['USER.ROLE_ID_LIST'] = $scope.userAdd['USER.ROLE_ID_LIST'].substr(1);
             }
         });
 
-        userFactory.addUser($scope.userAdd).get({}, function (response) {
-            console.log(response);
-            if (response.extraData.state == 'true') {
-                modalFactory.showShortAlert("添加成功");
-                $state.go('user/user/userList');
-            } else {
-                modalFactory.showShortAlert(response.msg);
-            }
+        userFactory.addUser($scope.userAdd, function (response) {
+            modalFactory.showShortAlert("添加成功");
+            $state.go('user/user/userList');
+        }, function (response) {
+            modalFactory.showShortAlert(response.msg);
         });
 
     }, function () {

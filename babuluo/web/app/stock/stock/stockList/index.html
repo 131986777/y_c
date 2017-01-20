@@ -83,19 +83,17 @@
                     <td class="text-center">{{storeMap[(item['STOCK_REALTIME.STORE_ID'])]}}</td> <!--仓库-->
                     <td ng-bind="item['STOCK_REALTIME.STOCK']" class="text-center"></td> <!--实时库存-->
                     <td ng-bind="item['STOCK_REALTIME.LOCK_STOCK']" class="text-center"></td> <!--锁定库存-->
-                    <td ng-bind="item['STOCK_REALTIME.UPDATE_DATETIME']|FormatAllDate" class="text-center"></td> <!--最后变更-->
+                    <td ng-bind="item['STOCK_REALTIME.UPDATE_DATETIME']" class="text-center"></td> <!--最后变更-->
                     <td class="text-center">
                         <span ng-if="item['SHOP_PRODUCT.REMARK']=='onLine'">线上</span>
                         <span ng-if="item['SHOP_PRODUCT.REMARK']=='offLine'">线下</span>
                     </td>
                     <td class="text-center">
                     <div>
-                        <a type="button">
-                            明细
-                        </a>&nbsp;&nbsp;
+                        <a type="button" show-modal id="#Stockmingxi"
+                           ng-click="detailStockClick(item)">明细</a>
                         <a ng-if="item['SHOP_PRODUCT.REMARK']=='onLine'" type="button" show-modal id="#modifyStock"
                            ng-click="modifyStockClick(item)">修改</a>
-
                     </div>
                     </td>
                 </tr>
@@ -136,13 +134,13 @@
                     </div>
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
-                           锁定库存
+                            锁定库存
                         </label>
 
                         <div class="col-md-8">
                             <input type="text" class="form-control"
                                    ng-model="modify['STOCK_REALTIME.LOCK_STOCK']"
-                                ></div>
+                            ></div>
                     </div>
 
 
@@ -153,6 +151,56 @@
                 <button type="button" ng-click="modifyStock()" class="btn green">确定
                 </button>
                 <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 修改发卡渠道-->
+
+
+
+<!--BEGIN 查看商品明细-->
+<div class="modal fade text-left" id="Stockmingxi" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">商品库存明细</h4>
+            </div>
+
+            <div class="modal-body form-body">
+
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-md-4"> 商品</th>
+                            <th class="col-md-4 text-center"> 库存</th>
+                            <th class="col-md-4">变更时间</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-cloak>
+
+                        <tr ng-repeat="item in stockLogList">
+                            <td ng-bind="modify['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品名字-->
+                            <td class="text-center"ng-bind="item['STOCK_LOG.STOCK']"></td>   <!--商品库存-->
+                            <td ng-bind="item['STOCK_LOG.UPDATE_DATETIME']"></td>   <!--商品库存-->
+                        </tr>
+                    </tbody>
+
+                </table>
+                <div page-bar
+                     filter-obj="filterstocklog"
+                     url="/log/stock/getByShopIdAndPrdSku"
+                     callback="stocklogbindData(response)">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click=" " class="btn green"data-dismiss="modal">确定
                 </button>
             </div>
         </div>
