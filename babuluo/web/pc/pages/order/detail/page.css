@@ -102,38 +102,38 @@
 
 /* line 87, ../sass/orderDetail.scss */
 .containers-order-detail .showBoard .flow_progress .gradient_bar.step_1 {
-    width: 14.28571%;
+    width: 20%;
 }
 
 /* line 87, ../sass/orderDetail.scss */
 .containers-order-detail .showBoard .flow_progress .gradient_bar.step_2 {
-    width: 28.57143%;
+    width: 40%;
 }
 
 /* line 87, ../sass/orderDetail.scss */
 .containers-order-detail .showBoard .flow_progress .gradient_bar.step_3 {
-    width: 42.85714%;
+    width: 60%;
 }
 
 /* line 87, ../sass/orderDetail.scss */
 .containers-order-detail .showBoard .flow_progress .gradient_bar.step_4 {
-    width: 57.14286%;
+    width: 80%;
 }
 
 /* line 87, ../sass/orderDetail.scss */
 .containers-order-detail .showBoard .flow_progress .gradient_bar.step_5 {
-    width: 71.42857%;
-}
-
-/* line 87, ../sass/orderDetail.scss */
-.containers-order-detail .showBoard .flow_progress .gradient_bar.step_6 {
-    width: 85.71429%;
-}
-
-/* line 87, ../sass/orderDetail.scss */
-.containers-order-detail .showBoard .flow_progress .gradient_bar.step_7 {
     width: 100%;
 }
+
+/*!* line 87, ../sass/orderDetail.scss *!*/
+/*.containers-order-detail .showBoard .flow_progress .gradient_bar.step_6 {*/
+    /*width: 85.71429%;*/
+/*}*/
+
+/*!* line 87, ../sass/orderDetail.scss *!*/
+/*.containers-order-detail .showBoard .flow_progress .gradient_bar.step_7 {*/
+    /*width: 100%;*/
+/*}*/
 
 /* line 92, ../sass/orderDetail.scss */
 .containers-order-detail .showBoard .flow_progress .progress_step {
@@ -150,7 +150,7 @@
     font-size: 13px;
     display: inline-block;
     color: #929292;
-    width: 14.28571%;
+    width: 20%;
     height: 100%;
     text-align: center;
     line-height: 24px;
