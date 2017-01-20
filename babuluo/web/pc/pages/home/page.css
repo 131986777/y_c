@@ -1,4 +1,10 @@
 /* line 1, ../sass/homePage.scss */
+.containers{
+    background-color: #fff;
+}
+.container{
+    background-color: #fff;
+}
 .home-page .bannerSlider {
     height: 415px;
     width: 100%;

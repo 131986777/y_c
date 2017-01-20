@@ -59,6 +59,21 @@
 /* line 42, ../sass/productList.scss */
 .container-product-list .productList .effectiveArea .products .eachPro .eachPro1 {
   transition: all .3s ease; }
+.container-product-list .productList .effectiveArea .products .eachPro:hover {
+  box-shadow: 0 0 14px #d6d4d4;
+  border-right: 1px solid #d6d4d4;
+  border-bottom: 1px solid #d6d4d4; }
+/* line 97, ../sass/productList.scss */
+.container-product-list .productList .effectiveArea .products .eachPro:hover .eachPro1 {
+  transform: translateY(-20px); }
+/* line 99, ../sass/productList.scss */
+.container-product-list .productList .effectiveArea .products .eachPro:hover .eachPro1 .proPic {
+  transition: all .1s ease-in-out;
+  transform: scale(0.9, 0.9);
+  margin-bottom: 10px; }
+/* line 104, ../sass/productList.scss */
+.container-product-list .productList .effectiveArea .products .eachPro:hover .eachPro1 .show {
+  opacity: 1; }
 /* line 45, ../sass/productList.scss */
 .container-product-list .productList .effectiveArea .products .eachPro .proPic {
   margin-left: 40px;
@@ -109,18 +124,4 @@
 .container-product-list .productList .effectiveArea .products .eachPro .money {
   color: #ff0000 !important; }
 /* line 92, ../sass/productList.scss */
-.container-product-list .productList .effectiveArea .products .eachPro:hover {
-  box-shadow: 0 0 14px #d6d4d4;
-  border-right: 1px solid #d6d4d4;
-  border-bottom: 1px solid #d6d4d4; }
-/* line 97, ../sass/productList.scss */
-.container-product-list .productList .effectiveArea .products .eachPro:hover .eachPro1 {
-  transform: translateY(-20px); }
-/* line 99, ../sass/productList.scss */
-.container-product-list .productList .effectiveArea .products .eachPro:hover .eachPro1 .proPic {
-  transition: all .1s ease-in-out;
-  transform: scale(0.9, 0.9);
-  margin-bottom: 10px; }
-/* line 104, ../sass/productList.scss */
-.container-product-list .productList .effectiveArea .products .eachPro:hover .eachPro1 .show {
-  opacity: 1; }
+

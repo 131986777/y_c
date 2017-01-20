@@ -325,16 +325,16 @@
 
 }
 
-.row-wrap-order-pay .huiyuan .modal-content .card .eachCard .pos .foot {
+.row-wrap-order-pay .huiyuan .modal-content .card .eachCard .pos .modalFoot {
     font-size: 12px;
 }
 
-.row-wrap-order-pay .huiyuan .modal-content .card .eachCard .pos .foot .time {
+.row-wrap-order-pay .huiyuan .modal-content .card .eachCard .pos .modalFoot .time {
     display: inline-block;
     margin-right: 17px;
 }
 
-.row-wrap-order-pay .huiyuan .modal-content .card .eachCard .pos .foot .time .t_inner {
+.row-wrap-order-pay .huiyuan .modal-content .card .eachCard .pos .modalFoot .time .t_inner {
     display: inline-block;
 }
 

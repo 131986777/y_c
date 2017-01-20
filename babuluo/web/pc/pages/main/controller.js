@@ -146,4 +146,5 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
         })
     }
 
+
 });

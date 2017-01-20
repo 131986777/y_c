@@ -351,6 +351,7 @@
 .containers-order-list .showBoard .orderListShow .list .listBody .listControls .payNow {
   background-color: #f36f1a;
   color: #fff;
+  cursor: pointer;
 }
 /* line 325, ../sass/orderList.scss */
 .containers-order-list .showBoard .orderListShow .list .listBody .listControls .payNow:hover {
@@ -361,6 +362,7 @@
   background-color: #fff;
   color: #8a8a8a;
   border: 1px solid #dcdcdc;
+  cursor: pointer;
 }
 /* line 333, ../sass/orderList.scss */
 .containers-order-list .showBoard .orderListShow .list .listBody .listControls .getDetail:hover {

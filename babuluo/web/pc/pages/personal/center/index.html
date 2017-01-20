@@ -28,8 +28,8 @@
         </div>
         <div class="row-header font">个人中心</div>
         <span ng-if="memberCards.length==0" class="no-coupon">你暂无会员卡！</span>
-        <div class="card" ng-repeat="cl in memberCards">
-            <div class="eachCard" ng-style="cl['MEMBER_CARD.CARD_STYLE']">
+        <div class="card" >
+            <div class="eachCard" ng-repeat="cl in memberCards" ng-style="cl['MEMBER_CARD.CARD_STYLE']">
                 <div class="pos">
                     <p class="num">{{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}</p>
                     <p class="num ka">{{cl['MEMBER_CARD.TYPE_NAME']}}</p>
@@ -49,12 +49,13 @@
                         <p class="time">{{cl['MEMBER_CARD.SOURCE_NAME']}}</p>
                     </div>
                 </div>
-                <div class="eachCard addCard">
-                    <div class="posAdd">
-                        <p class="add">添加新的会员卡请前往门店</p>
-                    </div>
 
+            </div>
+            <div class="eachCard addCard">
+                <div class="posAdd">
+                    <p class="add">添加新的会员卡请前往门店</p>
                 </div>
+
             </div>
         </div>
     </div>

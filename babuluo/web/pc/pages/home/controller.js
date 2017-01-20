@@ -5,8 +5,8 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
     modalFactory.setHeader(true);
 
     modalFactory.setSide(false);
-
-    modalFactory.setLeftMenu(true);
+    //
+    // modalFactory.setLeftMenu(true);
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
     $scope.homeList = new Array();
@@ -17,7 +17,50 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
     $scope.recommThreeList = new Array();
     $scope.recommNineList = new Array();
     $scope.BannerList = new Array();
-
+    $(function(){
+        $(window).scroll(function () {
+            var ling =$(document).scrollTop();
+            document.title=ling;
+            if(ling>300){
+                $(".leftMenu").removeClass('hidden');
+            }
+            if(ling>300 && ling <1100){
+                $('.leftMenu div').siblings('div').css('border','1px solid #f36f1a')
+                $('.leftMenu div').eq(0).siblings('div').css('border','1px solid #ebebeb');
+            }else if(ling>1600 && ling <2100){
+                $('.leftMenu div').siblings('div').css('border','1px solid #f36f1a')
+                $('.leftMenu div').eq(1).siblings('div').css('border','1px solid #ebebeb');
+            }else if(ling>=2600 && ling <3100){
+                $('.leftMenu div').siblings('div').css('border','1px solid #f36f1a')
+                $('.leftMenu div').eq(2).siblings('div').css('border','1px solid #ebebeb');
+            }else if(ling>=3600 && ling <4100){
+                $('.leftMenu div').siblings('div').css('border','1px solid #f36f1a')
+                $('.leftMenu div').eq(3).siblings('div').css('border','1px solid #ebebeb');
+            }else if(ling>=4600 && ling <5100){
+                $('.leftMenu div').siblings('div').css('border','1px solid #f36f1a')
+                $('.leftMenu div').eq(4).siblings('div').css('border','1px solid #ebebeb');
+            }else if(ling>=5600 && ling <6100){
+                $('.leftMenu div').siblings('div').css('border','1px solid #f36f1a')
+                $('.leftMenu div').eq(5).siblings('div').css('border','1px solid #ebebeb');
+            }
+            else if(ling>=6600 && ling <7100){
+                $('.leftMenu div').siblings('div').css('border','1px solid #f36f1a')
+                $('.leftMenu div').eq(6).siblings('div').css('border','1px solid #ebebeb');
+            }
+            else if(ling>=7400 && ling <8100){
+                $('.leftMenu div').siblings('div').css('border','1px solid #f36f1a')
+                $('.leftMenu div').eq(7).siblings('div').css('border','1px solid #ebebeb');
+            }
+            else if(ling>=8400 && ling <9100){
+                $('.leftMenu div').siblings('div').css('border','1px solid #f36f1a')
+                $('.leftMenu div').eq(8).siblings('div').css('border','1px solid #ebebeb');
+            }
+            if(ling<300){
+                // @ 这一句和下一句效果一样。
+                $('.leftMenu').addClass('hidden');
+            }
+        })
+    })
     $scope.myKeyup = function (e) {
         var keycode = window.event ? e.keyCode : e.which;
         if (keycode == 13) {
