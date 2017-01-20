@@ -23,6 +23,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             if ($stateParams.COUPON_INFO != '') {
                 $scope.coupon = JSON.parse($stateParams.COUPON_INFO);
                 if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
+                    console.log("======");
+                    console.log($scope.coupon);
                     var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
                     var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
                     price -= $scope.coupon.MONEY;
@@ -253,6 +255,12 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         });
     }
 
+    $scope.delCoupon= function () {
+        if ($scope.coupon != undefined) {
+            $scope.descCoupon($scope.order['SHOP_ORDER.COUPON_ID']);
+        }
+    }
+
     $scope.descCoupon = function (id) {
         couponFactory.useCoupon({'MEMBER_COUPON.ID': id}, function (response) {
             if (response.code == 0) {
@@ -312,11 +320,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         });
     }
 
-    $scope.delCoupon= function () {
-        if ($scope.coupon != undefined) {
-            $scope.descCoupon($scope.coupon.ID);
-        }
-    }
 
     //立即支付
     $scope.payNow = function () {
@@ -362,6 +365,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 form['SHOP_ORDER.CARD_ID'] = $scope.payCard['MEMBER_CARD.CARD_ID'];
                 form['SHOP_ORDER.CARD_NO'] = $scope.payCard['MEMBER_CARD.CARD_NO'];
                 form['SHOP_ORDER.CARD_BALANCE'] = $scope.payCard['MEMBER_CARD.BALANCE'];
+                form['SHOP_ORDER.COUPON_ID'] = $scope.order['SHOP_ORDER.COUPON_ID'];
+                form['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
                 console.log(form);
                 orderFactory.payOrder(form, function (response) {
                     weUI.toast.hideLoading();

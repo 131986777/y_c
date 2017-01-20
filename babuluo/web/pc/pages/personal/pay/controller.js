@@ -1,6 +1,6 @@
 angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', function (productFactory, $q, userFactory, orderFactory, $stateParams, $interval, $scope, shopFactory, $state, modalFactory, balanceFactory, personalFactory, promoFactory, couponFactory) {
 
-    modalFactory.setTitle("微信支付");
+    modalFactory.setTitle("订单支付");
 
     modalFactory.setHeader(false);
 
@@ -44,37 +44,35 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
 
         $scope.getOrder($stateParams.ORDER_ID, deferred_price);
         $scope.queryAccount(deferred_account);
-
-        var promise = $q.all([deferred_price.promise, deferred_account.promise]);
-
-        promise.then(function (result) {
-
-            $scope.COUPON_INFO = $stateParams.COUPON_INFO;
-            if ($stateParams.COUPON_INFO != '') {
-                $scope.coupon = JSON.parse($stateParams.COUPON_INFO);
-                if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
-                    var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
-                    var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
-                    price -= $scope.coupon.MONEY;
-                    if (price <= 0) {
-                        price = 0.01;
-                    }
-                    $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
-                    $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
-                    $scope.order['SHOP_ORDER.PRICE_OVER'] -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
-                    $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.coupon.ID;
-                }
-
-            }
-
-            if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
-                >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
-                $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
-            } else {
-                $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
-            }
-        });
-
+        // var promise = $q.all([deferred_price.promise, deferred_account.promise]);
+        //
+        // promise.then(function (result) {
+        //
+        //     $scope.COUPON_INFO = $stateParams.COUPON_INFO;
+        //     if ($stateParams.COUPON_INFO != '') {
+        //         $scope.choiceCoupon = JSON.parse($stateParams.COUPON_INFO);
+        //         if ($scope.choiceCoupon != undefined && $scope.coupon.MONEY != undefined) {
+        //             var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
+        //             var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
+        //             price -= $scope.coupon.MONEY;
+        //             if (price <= 0) {
+        //                 price = 0.01;
+        //             }
+        //             $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
+        //             $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
+        //             $scope.order['SHOP_ORDER.PRICE_OVER'] -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
+        //             $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.choiceCoupon.ID;
+        //         }
+        //
+        //     }
+        //
+        //     if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
+        //         >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
+        //         $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
+        //     } else {
+        //         $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
+        //     }
+        // });
     }
 
     $scope.loadMemberCard = function () {
@@ -301,23 +299,6 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         });
     }
 
-    $scope.descCoupon = function (id) {
-        couponFactory.useCoupon({'MEMBER_COUPON.ID': id}, function (response) {
-            if (response.code == 0) {
-                console.log('删除成功');
-            }
-
-        });
-    }
-
-    $scope.goCoupon = function () {
-        $state.go('pages/order/addCoupon', {
-            'PRODUCTS': $scope.order['SHOP_ORDER.ORDER_INFO'],
-            'MONEY': $scope.order['SHOP_ORDER.PRICE_OVER'],
-            'ORDER_ID': $scope.order['SHOP_ORDER.ID']
-        });
-    }
-
     $scope.getOrder = function (id, deferred) {
         orderFactory.getOrderById({'SHOP_ORDER.ID': id}, function (response) {
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
@@ -358,11 +339,6 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         });
     }
 
-    $scope.delCoupon = function () {
-        if ($scope.coupon != undefined) {
-            $scope.descCoupon($scope.coupon.ID);
-        }
-    }
 
     //立即支付
     $scope.payNow = function () {
@@ -404,6 +380,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
 
         personalFactory.getCouponListByUser({}, function (response) {
             $scope.memberCouponList = response.data;       //客户的所有优惠券
+            console.log($scope.memberCouponList)
             $scope.judgeUsableCoupon();
         }, function (response) {
             modalFactory.showShortAlert(response.msg);
@@ -496,7 +473,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         }
         $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - $scope.order['SHOP_ORDER.PRICE_OVER']);
         $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
-        $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.choiceCoupon.ID;
+        $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.choiceCoupon['MEMBER_COUPON.ID'];
     }
 
     $scope.cardPay = function (card) {
@@ -509,11 +486,14 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
                 form['SHOP_ORDER.CARD_ID'] = $scope.payCard['MEMBER_CARD.CARD_ID'];
                 form['SHOP_ORDER.CARD_NO'] = $scope.payCard['MEMBER_CARD.CARD_NO'];
                 form['SHOP_ORDER.CARD_BALANCE'] = $scope.payCard['MEMBER_CARD.BALANCE'];
+                form['SHOP_ORDER.COUPON_ID'] = $scope.order['SHOP_ORDER.COUPON_ID'];
                 form['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
                 console.log(form);
                 orderFactory.payOrder(form, function (response) {
                     modalFactory.showShortAlert('支付成功');
-                    $scope.delCoupon();
+                    if ($scope.choiceCoupon != undefined) {
+                        $scope.delCoupon();
+                    }
                     $scope.toDetail($stateParams.ORDER_ID);
                 }, function (response) {
                     modalFactory.showShortAlert(response.msg);
@@ -524,8 +504,25 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         } else {
             modalFactory.showShortAlert("请选择一张会员卡支付");
         }
-
     };
+
+    $scope.delCoupon = function () {
+        if ($scope.choiceCoupon != undefined) {
+            console.log($scope.choiceCoupon);
+            $scope.descCoupon($scope.order['SHOP_ORDER.COUPON_ID']);
+        }
+    }
+
+    $scope.descCoupon = function (id) {
+        couponFactory.useCoupon({'MEMBER_COUPON.ID': id}, function (response) {
+            if (response.code == 0) {
+                console.log('删除成功');
+            } else {
+                console.log(response.msg);
+            }
+
+        });
+    }
 
     /**
      * 把金额从单位元 转换到分
@@ -594,13 +591,16 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         http.post_ori("/AndSell/wxCallBack", formData, function (res) {
             modalFactory.showShortAlert('订单支付成功');
             $scope.close();
-            $scope.delCoupon();
+            if ($scope.choiceCoupon != undefined) {
+                $scope.delCoupon();
+            }
             $scope.toDetail($stateParams.ORDER_ID);
         }, function (res) {
             modalFactory.showShortAlert('后台确认收款中!');
             $scope.toDetail($stateParams.ORDER_ID);
         });
     }
+
 
     $scope.detailData = function (data) {
 

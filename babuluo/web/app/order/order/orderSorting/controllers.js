@@ -110,6 +110,8 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
         } else {
             $('#add').modal('show');
         }
+        setTimeout($scope.getFocus,300);
+
     };
 
     //点击录入的确定按钮
@@ -329,6 +331,11 @@ angular.module('AndSell.Main').controller('order_order_orderSorting_Controller',
             modalFactory.showShortAlert('分拣失败');
 
         });
+    }
+
+    $scope.getFocus= function () {
+        console.log(11111);
+        document.getElementById("jjjj").focus();
     }
 
 });

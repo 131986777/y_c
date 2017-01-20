@@ -194,7 +194,7 @@
                 <span class="text-left"> 优惠券 </span>
                 <span class="guan" ng-click="close()" aria-hidden="true">&times;</span>
             </div>
-            <div class="coupon" ng-repeat="ul in useableList" ng-click="chooseCoupon(ul)">
+            <div class="coupon" ng-if="useableList.length>0" ng-repeat="ul in useableList" ng-click="chooseCoupon(ul)">
                 <div class="couponNav">
                     <div class="cpPos">
                         <p class="cpTitle">{{ul['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME']}}</p>
@@ -238,6 +238,7 @@
                     </div>
                 </div>
             </div>
+            <div ng-if="useableList.length==0">暂无优惠券</div>
         </div>
     </div>
 </div>

@@ -250,7 +250,7 @@
             <div class="sidebar sidebar1" ng-if="showSideBar">
                 <!-- 订单 -->
                 <div class="sidebar-title ">
-                    订单中心
+                    个人中心
                 </div>
                 <ul>
                     <!--class="selected"-->
@@ -265,6 +265,8 @@
                     <!--ng-class="{true:'active'}[state ==4]"-->
                     <li ui-sref="pages/order/list({state:'comment'})"
                         ng-click="getState(4)">评价晒单
+                    </li>
+                    <li ui-sref="pages/product/collect">我的收藏
                     </li>
                     <!--<li ui-sref="business.payrequestList" ng-class="{true:'active'}[state ==5]"-->
                         <!--ng-click="getState(5)">评价晒单记录-->
