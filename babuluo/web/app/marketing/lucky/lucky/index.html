@@ -1,312 +1,324 @@
-<div class="lottery-wrap">
+<div class="lottery-wrap" ng-init="initData()">
     <div class="lottery-init">
         <form action="" class="form-horizontal">
             <div class="form-group">
                 <label class="radio-title control-label">活动状态：</label>
                 <div class="col-sm-10">
                     <label class="radio-inline">
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="NORMAL"> 开启
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="1"
+                               ng-model="LUCKY_DRAW_STATE"> 开启
                     </label>
                     <label class="radio-inline">
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="YYD"> 关闭
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="0"
+                               ng-model="LUCKY_DRAW_STATE"> 关闭
                     </label>
                 </div>
             </div>
             <div class="form-group">
                 <label class="radio-title control-label">单次积分消耗：</label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control">
+                    <input type="text" class="form-control" ng-model="LUCKY_DRAW_POINT_CONSUME">
                 </div>
             </div>
         </form>
     </div>
-    <div id="lottery" ng-init="initData()" class="lottery">
+    <div id="lottery" class="lottery">
         <table border="0" cellpadding="0" cellspacing="0">
             <tr>
-                <td class="lottery-unit lottery-unit-0">
-                    <div class="rewards">
-                    <span class="price">
-                        8.2
+                <td class="lottery-unit lottery-unit-0" ng-click="showSettingModel(1)">
+                    <div class="rewards" ng-if="luckListAll[0]!=undefined">
+                    <span class="price" ng-if="couponMap.get(luckListAll[0]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[0]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
                     </span>
-                        <span class="symbol">
+                        <span class="symbol" ng-if="couponMap.get(luckListAll[0]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                        <span class="price" ng-if="couponMap.get(luckListAll[0]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[0]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                        <span class="symbol" ng-if="couponMap.get(luckListAll[0]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
                         折
                     </span>
                     </div>
                     <div class="rewards" ng-if="luckListAll[0]==undefined&&show">
                         <span class="symbol">没有奖品</span>
                     </div>
-                    <div class="rewards-info" ng-if="luckListAll[0]!=undefined&&show">
-                        {{luckListAll[0]['LUCKY_DRAW.INTRO']}}
-                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[0]!=undefined&&show">{{luckListAll[0]['LUCKY_DRAW.INTRO']}}</div>
                     <div class="rewards-info" ng-if="luckListAll[0]==undefined&&show">没有奖品</div>
                     <div class="mask"></div>
                 </td>
-                <td class="lottery-unit lottery-unit-1">
-                    <div class="rewards">
-                    <span class="price">
-                        8.2
+                <td class="lottery-unit lottery-unit-1" ng-click="showSettingModel(2)">
+                    <div class="rewards" ng-if="luckListAll[1]!=undefined">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[1]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[1]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
                     </span>
-                        <span class="symbol">
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[1]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                        <span class="price"
+                              ng-if="couponMap.get(luckListAll[1]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[1]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[1]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
                         折
                     </span>
                     </div>
                     <div class="rewards" ng-if="luckListAll[1]==undefined&&show">
                         <span class="symbol">没有奖品</span>
                     </div>
-                    <div class="rewards-info" ng-if="luckListAll[1]!=undefined&&show">
-                        {{luckListAll[1]['LUCKY_DRAW.INTRO']}}
-                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[1]!=undefined&&show">{{luckListAll[1]['LUCKY_DRAW.INTRO']}}</div>
                     <div class="rewards-info" ng-if="luckListAll[1]==undefined&&show">没有奖品</div>
                     <div class="mask"></div>
                 </td>
-                <td class="lottery-unit lottery-unit-2">
-                    <div class="rewards">
-                    <span class="price">
-                        8.2
+                <td class="lottery-unit lottery-unit-2" ng-click="showSettingModel(3)">
+                    <div class="rewards" ng-if="luckListAll[2]!=undefined">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[2]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[2]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
                     </span>
-                        <span class="symbol">
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[2]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                        <span class="price"
+                              ng-if="couponMap.get(luckListAll[2]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[2]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[2]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
                         折
                     </span>
                     </div>
                     <div class="rewards" ng-if="luckListAll[2]==undefined&&show">
                         <span class="symbol">没有奖品</span>
                     </div>
-                    <div class="rewards-info" ng-if="luckListAll[2]!=undefined&&show">
-                        {{luckListAll[2]['LUCKY_DRAW.INTRO']}}
-                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[2]!=undefined&&show">{{luckListAll[2]['LUCKY_DRAW.INTRO']}}</div>
                     <div class="rewards-info" ng-if="luckListAll[2]==undefined&&show">没有奖品</div>
                     <div class="mask"></div>
                 </td>
             </tr>
             <tr>
-                <td class="lottery-unit lottery-unit-7">
-                    <div class="rewards">
-                    <span class="price">
-                        8.2
+                <td class="lottery-unit lottery-unit-7" ng-click="showSettingModel(8)">
+                    <div class="rewards" ng-if="luckListAll[7]!=undefined">
+                   <span class="price"
+                         ng-if="couponMap.get(luckListAll[7]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[7]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
                     </span>
-                        <span class="symbol">
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[7]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                        <span class="price"
+                              ng-if="couponMap.get(luckListAll[7]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[7]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[7]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
                         折
                     </span>
                     </div>
                     <div class="rewards" ng-if="luckListAll[7]==undefined&&show">
                         <span class="symbol">没有奖品</span>
                     </div>
-                    <div class="rewards-info" ng-if="luckListAll[7]!=undefined&&show">
-                        {{luckListAll[7]['LUCKY_DRAW.INTRO']}}
-                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[7]!=undefined&&show">{{luckListAll[7]['LUCKY_DRAW.INTRO']}}</div>
                     <div class="rewards-info" ng-if="luckListAll[7]==undefined&&show">没有奖品</div>
                     <div class="mask"></div>
                 </td>
                 <td>
                     <a class="startBtn"></a>
                 </td>
-                <td class="lottery-unit lottery-unit-3">
-                    <div class="rewards">
-                    <span class="price">
-                        8.2
+                <td class="lottery-unit lottery-unit-3" ng-click="showSettingModel(4)">
+                    <div class="rewards" ng-if="luckListAll[3]!=undefined">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[3]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[3]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
                     </span>
-                        <span class="symbol">
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[3]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                        <span class="price"
+                              ng-if="couponMap.get(luckListAll[3]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[3]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[3]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
                         折
                     </span>
                     </div>
                     <div class="rewards" ng-if="luckListAll[3]==undefined&&show">
                         <span class="symbol">没有奖品</span>
                     </div>
-                    <div class="rewards-info" ng-if="luckListAll[3]!=undefined&&show">
-                        {{luckListAll[3]['LUCKY_DRAW.INTRO']}}
-                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[3]!=undefined&&show">{{luckListAll[3]['LUCKY_DRAW.INTRO']}}</div>
                     <div class="rewards-info" ng-if="luckListAll[3]==undefined&&show">没有奖品</div>
                     <div class="mask"></div>
                 </td>
             </tr>
             <tr>
-                <td class="lottery-unit lottery-unit-6">
-                    <div class="rewards">
-                    <span class="price">
-                        8.2
+                <td class="lottery-unit lottery-unit-6" ng-click="showSettingModel(7)">
+                    <div class="rewards" ng-if="luckListAll[6]!=undefined">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[6]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[6]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
                     </span>
-                        <span class="symbol">
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[6]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                        <span class="price"
+                              ng-if="couponMap.get(luckListAll[6]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[6]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[6]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
                         折
                     </span>
                     </div>
                     <div class="rewards" ng-if="luckListAll[6]==undefined&&show">
                         <span class="symbol">没有奖品</span>
                     </div>
-                    <div class="rewards-info" ng-if="luckListAll[6]!=undefined&&show">
-                        {{luckListAll[6]['LUCKY_DRAW.INTRO']}}
-                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[6]!=undefined&&show">{{luckListAll[6]['LUCKY_DRAW.INTRO']}}</div>
                     <div class="rewards-info" ng-if="luckListAll[6]==undefined&&show">没有奖品</div>
                     <div class="mask"></div>
                 </td>
-                <td class="lottery-unit lottery-unit-5">
-                    <div class="rewards">
-                    <span class="price">
-                        8.2
+                <td class="lottery-unit lottery-unit-5" ng-click="showSettingModel(6)">
+                    <div class="rewards" ng-if="luckListAll[5]!=undefined">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[5]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[5]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
                     </span>
-                        <span class="symbol">
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[5]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                        <span class="price"
+                              ng-if="couponMap.get(luckListAll[5]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[5]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[5]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
                         折
                     </span>
                     </div>
                     <div class="rewards" ng-if="luckListAll[5]==undefined&&show">
                         <span class="symbol">没有奖品</span>
                     </div>
-                    <div class="rewards-info" ng-if="luckListAll[5]!=undefined&&show">
-                        {{luckListAll[5]['LUCKY_DRAW.INTRO']}}
-                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[5]!=undefined&&show">{{luckListAll[5]['LUCKY_DRAW.INTRO']}}</div>
                     <div class="rewards-info" ng-if="luckListAll[5]==undefined&&show">没有奖品</div>
                     <div class="mask"></div>
                 </td>
-                <td class="lottery-unit lottery-unit-4">
-                    <div class="rewards">
-                    <span class="price">
-                        8.2
+                <td class="lottery-unit lottery-unit-4" ng-click="showSettingModel(5)">
+                    <div class="rewards" ng-if="luckListAll[4]!=undefined">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[4]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[4]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
                     </span>
-                        <span class="symbol">
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[4]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                        <span class="price"
+                              ng-if="couponMap.get(luckListAll[4]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[4]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                        <span class="symbol"
+                              ng-if="couponMap.get(luckListAll[4]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
                         折
                     </span>
                     </div>
                     <div class="rewards" ng-if="luckListAll[4]==undefined&&show">
                         <span class="symbol">没有奖品</span>
                     </div>
-                    <div class="rewards-info" ng-if="luckListAll[4]!=undefined&&show">
-                        {{luckListAll[4]['LUCKY_DRAW.INTRO']}}
-                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[4]!=undefined&&show">{{luckListAll[4]['LUCKY_DRAW.INTRO']}}</div>
                     <div class="rewards-info" ng-if="luckListAll[4]==undefined&&show">没有奖品</div>
                     <div class="mask"></div>
                 </td>
             </tr>
         </table>
     </div>
-    <div class="lottery-set">
-        <h4>奖励设置</h4>
-        <form action="" class="form-horizontal">
-            <div class="form-title">
-                一号位
-            </div>
-                <div class="form-group col-sm-6">
-                    <label class="control-label col-sm-4">奖品：</label>
-                    <div class="col-sm-7">
-                        <input type="text" class="form-control">
-                    </div>
+    <div class="modal fade" id="add" role="dialog" aria-labelledby="add">
+        <div class="modal-dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal"
+                            aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h3 class="modal-title">
+                        设置奖品
+                    </h3>
                 </div>
-                <div class="form-group col-sm-6">
-                    <label class="control-label col-sm-4">数量：</label>
-                    <div class="col-sm-7">
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
-
-
-                <div class="form-group col-sm-6">
-                    <label class="control-label col-sm-4">说明：</label>
-                    <div class="col-sm-7">
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
-                <div class="form-group col-sm-6">
-                    <label class="control-label col-sm-4">概率：</label>
-                    <div class="col-sm-7">
-                        <input type="text" class="form-control">
-                    </div>
-                </div>
-
-        </form>
-        <form action="" class="form-horizontal">
-            <div class="form-title">
-                二号位
-            </div>
-            <div class="form-group col-sm-6">
-                <label class="control-label col-sm-4">奖品：</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="form-group col-sm-6">
-                <label class="control-label col-sm-4">数量：</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-
-
-            <div class="form-group col-sm-6">
-                <label class="control-label col-sm-4">说明：</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="form-group col-sm-6">
-                <label class="control-label col-sm-4">概率：</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-
-        </form>
-        <form action="" class="form-horizontal">
-            <div class="form-title">
-                三号位
-            </div>
-            <div class="form-group col-sm-6">
-                <label class="control-label col-sm-4">奖品：</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="form-group col-sm-6">
-                <label class="control-label col-sm-4">数量：</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control">
+                <div class="modal-body">
+                    <form class="form-horizontal" style="margin-left: 50px;" name="editForm" novalidate>
+                        <div class="lottery-set">
+                            <h4>奖励设置</h4>
+                            <form class="form-horizontal">
+                                <div class="form-title" style="margin-left: 20px;">
+                                    {{index}} 号位（<a>置空</a>）
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">
+                                        <span class="required" style="color: red"> * </span>奖品：
+                                    </label>
+                                    <label class="col-sm-4 control-label">
+                                        {{choiceCoupon['COUPON.NAME']}}
+                                    </label>
+                                    <a class="col-sm-3 control-label table-link" data-toggle="modal" data-target="#couponItemSwitchModal" name="name" ng-if="!isChoose">
+                                        选择优惠券
+                                    </a>
+                                    <a class="col-sm-3 control-label table-link" data-toggle="modal" data-target="#couponItemSwitchModal" name="name" ng-if="isChoose">
+                                        重选优惠券
+                                    </a>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">
+                                        <span class="required" style="color: red"> * </span>说明：
+                                    </label>
+                                    <div class="col-sm-7">
+                                        <input class="form-control" type="text"
+                                               name="name" ng-model="INTRO">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">
+                                        <span class="required" style="color: red"> * </span>数量：
+                                    </label>
+                                    <div class="col-sm-7">
+                                        <input class="form-control" type="text"
+                                               name="name" ng-model="NUM">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">
+                                        <span class="required" style="color: red"> * </span>概率：
+                                    </label>
+                                    <div class="col-sm-7">
+                                        <input class="form-control" type="text"
+                                               name="name" ng-model="PRO">
+                                    </div>
+                                    <label class="col-sm-2 control-label">
+                                        （0~1）
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-primary" type="submit"
+                                    ng-click="setPrize(index)">
+                                确定
+                            </button>
+                            <button class="btn btn-default"
+                                    data-dismiss="modal" ng-click="clearForm()">
+                                关闭
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
-
-
-            <div class="form-group col-sm-6">
-                <label class="control-label col-sm-4">说明：</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="form-group col-sm-6">
-                <label class="control-label col-sm-4">概率：</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-
-        </form>
-        <form action="" class="form-horizontal">
-            <div class="form-title">
-                四号位
-            </div>
-            <div class="form-group col-sm-6">
-                <label class="control-label col-sm-4">奖品：</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="form-group col-sm-6">
-                <label class="control-label col-sm-4">数量：</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-
-
-            <div class="form-group col-sm-6">
-                <label class="control-label col-sm-4">说明：</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-            <div class="form-group col-sm-6">
-                <label class="control-label col-sm-4">概率：</label>
-                <div class="col-sm-7">
-                    <input type="text" class="form-control">
-                </div>
-            </div>
-
-        </form>
-
+        </div>
     </div>
+    <coupon-item-switch-modal callback="couponItemSwitch(data)"></coupon-item-switch-modal>
 </div>

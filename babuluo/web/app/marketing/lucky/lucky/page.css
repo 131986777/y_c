@@ -17,7 +17,7 @@ form{
     display: inline-block;
     vertical-align: top;
     width: 500px;
-    margin-left: 80px;
+    /*margin-left: 80px;*/
 }
 .lottery {
     display: inline-block;
