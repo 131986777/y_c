@@ -139,7 +139,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
                 'MONEY': $scope.money,
                 'COUPON_ID': $scope.selectItem['MEMBER_COUPON.COUPON_ID'],
                 'COUPON_NAME': $scope.selectItem['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME'],
-                'ID': $scope.selectItem['.MAX_ID']
+                'ID': $scope.selectItem['MEMBER_COUPON.ID']
             };
 
             json = JSON.stringify(obj);
