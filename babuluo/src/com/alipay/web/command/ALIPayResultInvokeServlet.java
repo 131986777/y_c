@@ -135,6 +135,7 @@ public class ALIPayResultInvokeServlet extends HttpServlet {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             return ENV.DO_MAIN+returnData.getExtraData().get("url");
         } catch (RuleException e) {
             e.printStackTrace();

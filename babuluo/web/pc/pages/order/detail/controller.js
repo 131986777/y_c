@@ -5,6 +5,10 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
 
     modalFactory.setSide(true);
 
+    modalFactory.setCateGory(true);
+
+    modalFactory.setLeftMenu(false);
+
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
@@ -275,6 +279,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
     $scope.getOrder = function (id , deferred) {
         orderFactory.getOrderById({'SHOP_ORDER.ID': id}, function (response) {
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
+            $scope.orderDetailList = JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
             $scope.order = response.data[0];
             $scope.orderDetailList = JSON.parse($scope.order['SHOP_ORDER.ORDER_INFO']);
             $scope.orderDetailList.forEach(function (ele) {
@@ -354,11 +359,11 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
             }
             console.log($scope.step);
         });
-    }
+    };
 
     //取消订单
     $scope.cancelOrder = function () {
-        modalFactory.showAlert("提示", "确认取消该订单", function () {
+        modalFactory.showAlert("确认取消该订单", function () {
             orderFactory.cancelOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
                 modalFactory.showShortAlert('取消订单成功');
                 $scope.getOrder($scope.order['SHOP_ORDER.ID']);
@@ -370,7 +375,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
 
     //确认提货
     $scope.getPrdNow = function () {
-        modalFactory.showAlert("提示", "确认提货", function () {
+        modalFactory.showAlert("确认提货", function () {
             orderFactory.acceptOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
                 if (response.code == 0) {
                     modalFactory.showShortAlert('收货成功');
@@ -431,8 +436,8 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
     $scope.cardPay = function () {
         $scope.payCard = JSON.parse(getCookie("payCard"));
         if (!isEmptyObject($scope.payCard)) {
-            modalFactory.showAlert("提示", "确认支付该订单", function () {
-                var form = $scope.order;
+            modalFactory.showAlert("确认支付该订单", function () {
+                var form = {};
                 form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
                 form['SHOP_ORDER.CARD_ID'] = $scope.payCard['MEMBER_CARD.CARD_ID'];
                 form['SHOP_ORDER.CARD_NO'] = $scope.payCard['MEMBER_CARD.CARD_NO'];
@@ -453,7 +458,6 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
         }
 
     };
-
 
     $scope.toDetail = function (id) {
         $state.go('pages/product/detail', {PRD_ID: id});
@@ -489,7 +493,6 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
             modalFactory.showShortAlert("支付失败");
         });
     }
-
 
     /**
      * 微信支付JSAPI调用

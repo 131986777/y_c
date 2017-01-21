@@ -3,6 +3,13 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
     modalFactory.setTitle("订单列表");
 
     modalFactory.setHeader(false);
+
+    modalFactory.setCateGory(true);
+
+    modalFactory.setSide(true);
+
+    modalFactory.setLeftMenu(false);
+
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
@@ -108,6 +115,11 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
         $state.go('pages/order/detail', {ORDER_ID: id});
     };
 
+    //订单支付跳转
+    $scope.toPay = function (id) {
+        $state.go('pages/personal/pay', {ORDER_ID: id});
+    };
+
     //商品详情跳转
     $scope.toProduct = function (id) {
         $state.go('pages/product/detail', {PRD_ID: id});
@@ -123,7 +135,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
 
     //取消订单
     $scope.cancelOrder = function (id) {
-        modalFactory.showAlert('提示 ', ' 确认取消该订单嘛? ', function () {
+        modalFactory.showAlert(' 确认取消该订单嘛? ', function () {
             orderFactory.cancelOrder({'SHOP_ORDER.ID': id}, function () {
                 modalFactory.showShortAlert('取消订单成功');
                 $scope.initData();
