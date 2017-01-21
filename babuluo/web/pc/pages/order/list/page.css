@@ -324,12 +324,12 @@
   line-height: 40px;
 }
 /* line 302, ../sass/orderList.scss */
-.showBoard .orderListShow .list .listBody .goodsInfo .gift {
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift {
   margin-top: 14px;
   position: relative;
   padding-left: 33px;
 }
-.showBoard .orderListShow .list .listBody .goodsInfo .gift:after {
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift:after {
   content: '赠';
   position: absolute;
   left: 0;
@@ -338,33 +338,33 @@
   font-size: 13px;
   color: #8a8a8a;
 }
-.showBoard .orderListShow .list .listBody .goodsInfo .gift ul {
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift ul {
   position: relative;
 }
-.showBoard .orderListShow .list .listBody .goodsInfo .gift ul li {
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift ul li {
   padding: 0;
   min-height: auto;
   margin: 0;
   margin-bottom: 10px;
   height: 40px;
 }
-.showBoard .orderListShow .list .listBody .goodsInfo .gift ul li * {
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift ul li * {
   margin-right: 18px;
   vertical-align: top;
 }
-.showBoard .orderListShow .list .listBody .goodsInfo .gift ul li img {
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift ul li img {
   width: 40px;
   height: 40px;
   position: relative;
 }
-.showBoard .orderListShow .list .listBody .goodsInfo .gift ul li .gift_name {
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift ul li .gift_name {
   font-size: 14px;
   display: inline-block;
   height: 40px;
   color: #494949;
   line-height: 40px;
 }
-.showBoard .orderListShow .list .listBody .goodsInfo .gift ul li .count {
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift ul li .count {
   font-size: 14px;
   color: #494949;
   line-height: 40px;

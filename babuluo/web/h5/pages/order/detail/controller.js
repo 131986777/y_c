@@ -1,6 +1,4 @@
-
-angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory,balanceFactory, http, weUI, productFactory, promoFactory, orderFactory, modalFactory) {
-
+angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory, balanceFactory, http, weUI, productFactory, promoFactory, orderFactory, modalFactory) {
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
@@ -69,7 +67,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             && $scope.order['SHOP_ORDER.STATE_OUT']
             == 1
             && $scope.order['SHOP_ORDER.STATE_MONEY']
-            == -1)||($scope.order['SHOP_ORDER.STATE_ORDER']
+            == -1) || ($scope.order['SHOP_ORDER.STATE_ORDER']
             == 1
             && $scope.order['SHOP_ORDER.TYPE']
             == '3'
@@ -257,7 +255,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         });
     }
 
-    $scope.delCoupon= function () {
+    $scope.delCoupon = function () {
         if ($scope.coupon != undefined) {
             $scope.descCoupon($scope.order['SHOP_ORDER.COUPON_ID']);
         }
@@ -321,7 +319,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             });
         });
     }
-
 
     //立即支付
     $scope.payNow = function () {
