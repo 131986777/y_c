@@ -13,3 +13,9 @@ AndSellPCMainModule.service('personalFactory', function (http) {
     this.modifyMember = http.post('/member/member/modifyMemberInMobile');
 
 });
+
+AndSellPCMainModule.service("aliPayFactory", function (http) {
+
+    this.aliPayUndefined = http.post('/ali/pay/aliPayUndefined');
+
+})

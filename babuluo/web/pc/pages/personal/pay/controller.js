@@ -59,20 +59,12 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         //                 price = 0.01;
         //             }
         //             $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
-        //             $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
-        //             $scope.order['SHOP_ORDER.PRICE_OVER'] -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
-        //             $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.choiceCoupon.ID;
-        //         }
-        //
-        //     }
-        //
-        //     if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
-        //         >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
-        //         $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
-        //     } else {
-        //         $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
-        //     }
-        // });
+        //             $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] +=
+        // Number($scope.order['SHOP_ORDER.PRICE_COUPON']); $scope.order['SHOP_ORDER.PRICE_OVER']
+        // -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']); $scope.order['SHOP_ORDER.COUPON_ID']
+        // = $scope.choiceCoupon.ID; }  }  if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] >=
+        // $scope.order['SHOP_ORDER.PRICE_OVER']) { $scope.order['SHOP_ORDER.PAY_TYPE'] =
+        // 'ACCOUNT'; } else { $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN'; } });
     }
 
     $scope.loadMemberCard = function () {
@@ -505,6 +497,17 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
             modalFactory.showShortAlert("请选择一张会员卡支付");
         }
     };
+
+    $scope.chooseZhiFuBao= function () {
+        var formData = {
+            PRODUCT_ID: $scope.order['SHOP_ORDER.ID'],
+            FEE: moneyToFee($scope.order['SHOP_ORDER.PRICE_OVER']),
+            BODY: 'ORDER:' + $scope.order['SHOP_ORDER.ORDER_NUM'],
+            ORDER_ID: $scope.order['SHOP_ORDER.ID'],
+            TYPE: 'ORDER'
+        };
+        wxPay(formData);
+    }
 
     $scope.delCoupon = function () {
         if ($scope.choiceCoupon != undefined) {

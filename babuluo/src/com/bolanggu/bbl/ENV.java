@@ -5,6 +5,8 @@ package com.bolanggu.bbl;
  */
 public class ENV {
 
+    //domain
+    public static String DO_MAIN = "http://app.bblycyz.com/AndSell/";
 
     //模式
     public static String STATE = "TEST";//测试模式  不向百年传订单数据
@@ -87,10 +89,10 @@ public class ENV {
     //支付宝即时到账合作伙伴密钥
     public static String ALIPAY_KEY = "9ybppnj0mfpv2h71secymxw3oets636g";
     //支付宝日志输出
-    public static String ALIPAY_LOG = "C:\\";
+    public static String ALIPAY_LOG = "/";
     //支付宝异步通知接口
     public static String ALIPAY_NOTIFY_URL = "http://app.bblycyz.com/AndSell/alipay";
     //支付宝结果跳转页面
-    public static String ALIPAY_RETURN_URL = "http://app.bblycyz.com/AndSell/ui/alipay/return_url.jsp";
+    public static String ALIPAY_RETURN_URL = "http://app.bblycyz.com/AndSell/pc/pages/aliPay/return_url.jsp";
 
 }
