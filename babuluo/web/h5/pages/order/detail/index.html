@@ -235,7 +235,7 @@
                         <h5 class="product-name"
                             ng-bind="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.PRD_NAME']"></h5>
                         <p class="product-cls"
-                           ng-bind="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.SKU_CONTENT_INFO']  +'x'+ detail['SHOP_ORDER_INFO.COUNT']">
+                           ng-bind="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.SKU_CONTENT_INFO']  +'x'+ presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.COUNT']">
                         </p>
                     </div>
                 </div>
@@ -251,12 +251,13 @@
                         <h5 class="product-name"
                             ng-bind="presentMap['order']['SHOP_ORDER_INFO.PRD_NAME']"></h5>
                         <p class="product-cls"
-                           ng-bind="presentMap['order']['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] +'x'+ detail['SHOP_ORDER_INFO.COUNT']"></p>
+                           ng-bind="presentMap['order']['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] +'x'+ presentMap['order']['SHOP_ORDER_INFO.COUNT']"></p>
                     </div>
                 </div>
             </div>
 
         </div>
+
         <div class="payment-info">
             <p>
                 商品总额：<span ng-bind="order['SHOP_ORDER.PRICE_PRD'] | currency : '￥'"></span>

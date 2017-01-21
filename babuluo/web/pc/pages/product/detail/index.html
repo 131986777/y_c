@@ -14,8 +14,8 @@
                     <ul>
                         <li ng-repeat="slide in slides">
                             <img
-                                ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
-                                style="height: 100%;width: 100%;" ng-click="changeCMP(slide.image)">
+                                    ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
+                                    style="height: 100%;width: 100%;" ng-click="changeCMP(slide.image)">
                         </li>
                     </ul>
                 </div>
@@ -30,25 +30,24 @@
                         <span class="name">价格</span>
                         <span class="content">
                             <span class="current"
-                                  ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
-                                  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'">
+                                  ng-bind="nowPrice | currency :'￥'">
                             </span>
-                            <span class="origin" ng-if="sku!=undefined&&sku['isSale']"
-                                  ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'">
+                            <span class="origin" ng-if="oldPrice != null"
+                                  ng-bind="oldPrice | currency :'￥'">
                             </span>
                             <!--<span ng-bind="skuData.minPrice | currency :'￥'"></span> - -->
                             <!--<span ng-bind="skuData.maxPrice | currency :'￥'"></span>-->
                         </span>
                     </div>
-                    <!--<div class="promotionGroup">-->
-                    <!--<span class="name">促销</span>-->
-                    <!--<span class="content">-->
-                    <!--<span class="activities">-->
-                    <!--<span class="sign">下单立减</span>-->
-                    <!--下单立减10.00元，买一送一-->
-                    <!--</span>-->
-                    <!--</span>-->
-                    <!--</div>-->
+                    <div class="promotionGroup" ng-if="planUnitVO['presents'] != null">
+                    <span class="name" >促销</span>
+                    <span class="content">
+                    <span class="activities">
+                    <span class="sign">赠</span>
+                    <span ng-bind="present['SHOP_PRODUCT.PRD_NAME'] + present['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ present['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ planUnitVO['presents'][0]['num']"></span>
+                    </span>
+                    </span>
+                    </div>
                 </div>
                 <div class="categoriesChoose">
                     <div class="standards" ng-if="skuData['SHOP_PRODUCT_SKU.LENGTH']>0">
@@ -221,7 +220,7 @@
                                 </div>
                                 <div class="listContent">
                                     <p class="userInfo"><span class="name">{{proc['MEMBER.USER_NAME']}}</span><span
-                                        class="time">{{proc['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD_TIME']}}</span></p>
+                                            class="time">{{proc['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD_TIME']}}</span></p>
                                     <p class="text">
                                         {{proc['SHOP_COMMENT.PRO_MAIN_COMMENT']}}</p>
                                     <div class="imgList">

@@ -23,21 +23,33 @@
                 </p>
                 <p class="money">
                     <!--现价-->
-          <span ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']!=undefined"
-                ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency :'￥'"></span>
+          <span
+                ng-bind="nowPrice | currency :'￥'"></span>
                     <!--原价-->
-          <span ng-if="sku!=undefined&&sku['isSale']"
-                ng-bind="sku['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] | currency :'￥'"
+                    <!--ng-if="sku!=undefined&&sku['isSale']"-->
+          <span ng-if="oldPrice != null"
+                ng-bind="oldPrice | currency :'￥'"
                 class="del-line"></span>
                 <div ng-if="sku['SHOP_PRODUCT_SKU.REAL_PRICES']==undefined" class="money">
         <span
-            ng-bind="skuData.minPrice | currency :'￥'"></span> -
+            ng-bind="skuData.minPrice | currency :'￥'"></span>
         <span
             ng-bind="skuData.maxPrice | currency :'￥'"></span>
 
                 </div>
                 </p>
                 <p class="code" ng-bind="'商品编码 ：'+sku['SHOP_PRODUCT_SKU.PRD_SKU']">
+                </p>
+            </div>
+        </div>
+        <div class="freePrd-wrap weui_cell" ng-if="planUnitVO['presents'] != null">
+            <div class="product-select-wrap weui_cell_hd">
+                <span class="free-icon">赠</span>
+            </div>
+            <div class="product-detail weui_cell_bd">
+                <img class="freePrd-img" ng-src="{{FILE_SERVER_DOMAIN+present['SHOP_PRODUCT.CMP']}}">
+                <h5 class="product-name" ng-bind="present['SHOP_PRODUCT.PRD_NAME']"></h5>
+                <p class="product-cls" ng-bind="present['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ present['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ planUnitVO['presents'][0]['num']">
                 </p>
             </div>
         </div>

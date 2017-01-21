@@ -20,7 +20,6 @@ $import('pages/order/list', {state: 'all'},true);
 $import('pages/order/review',{ID:''},true);
 $import('pages/order/confirm', {SKU_IDS: '', COUPON_INFO: ''}, true);
 $import('pages/order/detail', {ORDER_ID: ''}, true);
-
 //
 // $import('pages/personal/center', {}, true);
 //$import('pages/personal/card');
@@ -42,5 +41,5 @@ $import('pages/account/recharge',{},true);
 $import('pages/security/modifyPwd', {login_id:''},true);
 
 $import('pages/personal/center', {}, true);
-$import('pages/personal/pay', {ORDER_ID:'',COUPON_INFO:''}, true);
+$import('pages/personal/pay', {ORDER_ID:''}, true);
 

@@ -10,6 +10,20 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
         $scope.getOrder($stateParams.ORDER_ID);
     }
 
+    $scope.bindPresent = function () {
+        $scope.presentMap = {};
+        $scope.orderDetailList.forEach(function (detail) {
+            if (detail['isPresent'] == null) {
+                return
+            }
+            if (detail['orderOrPrd'] == "prd") {
+                $scope.presentMap[detail['blongToSkuId']] = detail;
+            } else if (detail['orderOrPrd'] == "order") {
+                $scope.presentMap['order'] = detail;
+            }
+        });
+    };
+
     $scope.getOrder = function (id) {
         orderFactory.getById({'SHOP_ORDER.ID': id}, function (response) {
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
@@ -31,6 +45,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
             $scope.orderDetailList.forEach(function (ele) {
                 setContentsInfoForOrder(ele);
             });
+            $scope.bindPresent()
             $scope.getPayNumber();
         });
     }

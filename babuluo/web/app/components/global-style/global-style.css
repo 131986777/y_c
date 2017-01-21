@@ -48,3 +48,46 @@ select:not([multiple]) {
 .nav .dropdown-menu {
     padding: 10px 0;
 }
+.order-present{
+    border-top: 1px solid #e0e0e0;
+}
+.items .order-present{
+    border-top: none;
+}
+.present{
+    height:40px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.present .present-info{
+    display: inline-block;
+}
+.present .text{
+    position: absolute;
+    top:9px;
+    left:2px;
+    background-color:#FC5008;
+    border-radius: 2px;
+    padding: 0 4px;
+    color: #fff;
+    font-size: 12px;
+}
+.present .present-info{
+    padding-left: 40px;
+    width:100%;
+}
+.present .present-info img{
+    width: 40px;
+    height:40px;
+    float: left;
+    margin-right: 20px;
+}
+.present .present-info p{
+    height: 20px;
+    font-size: 14px;
+}
+.present .present-info .itemColor {
+    color: #A9A7AB;
+    font-size: 12px;
+}
+
