@@ -143,15 +143,45 @@ angular.module('AndSell.Main').controller('marketing_lucky_lucky_Controller', fu
     $scope.showSettingModel = function (index) {
         $("#add").modal('show');
         $scope.index = index;
+        var item = $scope.luckListAll[index - 1];
+        if (item != undefined) {
+            $scope.choiceCoupon = $scope.couponMap.get($scope.luckListAll[index - 1]['LUCKY_DRAW.PRIZE_ID']);
+            $scope.INTRO = $scope.luckListAll[index - 1]['LUCKY_DRAW.INTRO'];
+            $scope.NUM = $scope.luckListAll[index - 1]['LUCKY_DRAW.TOTAL_NUM'];
+            $scope.PRO = Number($scope.luckListAll[index - 1]['LUCKY_DRAW.PROBILITY']).toFixed(2);
+        } else {
+            $scope.choiceCoupon = undefined;
+            $scope.INTRO = undefined;
+            $scope.NUM = undefined;
+            $scope.PRO = undefined;
+        }
     };
 
     $scope.couponItemSwitch = function (data) {
         $scope.choiceCoupon = data;
-        console.log($scope.choiceCoupon);
-        $scope.isChoose = true;
     };
 
     $scope.setPrize = function (index) {
+        if ($scope.choiceCoupon==undefined){
+            modalFactory.showShortAlert("请选择优惠券");
+            return;
+        }
+        if ($scope.INTRO==undefined){
+            modalFactory.showShortAlert("请输入说明");
+            return;
+        }
+        if ($scope.NUM==undefined){
+            modalFactory.showShortAlert("请输入优惠券总数");
+            return;
+        }
+        if ($scope.PRO==undefined){
+            modalFactory.showShortAlert("请输入该位置的中奖概率");
+            return;
+        }
+        if ($scope.PRO<0||$scope.PRO>1){
+            modalFactory.showShortAlert("请输入0~1之间 的中奖概率");
+            return;
+        }
         var form = {};
         form["LUCKY_DRAW.LOCATION"] = index;
         form["LUCKY_DRAW.INTRO"] = $scope.INTRO;
@@ -167,6 +197,20 @@ angular.module('AndSell.Main').controller('marketing_lucky_lucky_Controller', fu
             } else {
                 modalFactory.showShortAlert(response.msg);
             }
+        });
+    };
+
+    $scope.clearPrize = function (index) {
+        modalFactory.showAlert("确定将此位置奖品置空？", function () {
+            luckyFactory.delLuckyByLocation({"LUCKY_DRAW.LOCATION": index}, function (response) {
+                if (response.code == 0 && response.msg == "ok") {
+                    modalFactory.showShortAlert("置空成功");
+                    $("#add").modal('hide');
+                    $scope.initData();
+                } else {
+                    modalFactory.showShortAlert(response.msg);
+                }
+            });
         });
     };
 

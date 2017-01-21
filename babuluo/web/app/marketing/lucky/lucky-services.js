@@ -9,4 +9,6 @@ AndSellMainModule.service('luckyFactory', function (http) {
 
     this.getCouponInfo = http.post('/coupon/coupon/getById');
 
+    this.delLuckyByLocation = http.post('/marketing/luckyDraw/delByLocation');
+
 });
