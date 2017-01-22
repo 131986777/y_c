@@ -18,6 +18,8 @@ AndSellPCMainModule.service('orderFactory', function (http) {
 
     this.wxPayUndefinedOrderForPC = http.post('/wx/pay/wxPayUndefinedOrderForPC');
 
+    this.aliPayUndefinedOrderForPC = http.post('/ali/pay/aliPayUndefined');
+
     this.queryWXPayResult = http.post('/wx/pay/wxpayCallback');
 
     this.queryWXPayOrder = http.post('/wx/pay/wxPayQueryOrder');

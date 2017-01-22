@@ -82,6 +82,5 @@
 </body>
 <script>
     window.location.href=<%=url%>;
-
 </script>
 </html>

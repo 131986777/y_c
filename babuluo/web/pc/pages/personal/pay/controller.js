@@ -43,7 +43,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         var deferred_price = $q.defer();
 
         var json = localStorage.getItem('order');
-        $scope.order = JSON.parse(json) ;
+        $scope.order = JSON.parse(json);
         $scope.orderDetailList = JSON.parse($scope.order['SHOP_ORDER.ORDER_INFO']);
 
         $scope.queryAccount(deferred_account);
@@ -93,7 +93,6 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
     $scope.toDetail = function (id) {
         $state.go('pages/order/detail', {ORDER_ID: id});
     };
-
 
     $scope.cardPayChecked = function () {
         if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
@@ -145,7 +144,6 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
             });
         });
     }
-
 
     //立即支付
     $scope.payNow = function () {
@@ -207,12 +205,18 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
             $scope.memberCouponList.forEach(function (ele) {
                 var targetObjArray = ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_ID'];  //限定对象数组
                 var weekArray = ele['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'];    //优惠券的星期数组
-                if (ele['MEMBER_COUPON.COUPON_INFO'] != undefined && ele['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO'] != undefined) {
-                    if ((ele['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.CONDITION_PRICE']) / 100 < $scope.order['SHOP_ORDER.PRICE_OVER']) {   //满足使用门槛
+                if (ele['MEMBER_COUPON.COUPON_INFO']
+                    != undefined
+                    && ele['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']
+                    != undefined) {
+                    if ((ele['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.CONDITION_PRICE'])
+                        / 100
+                        < $scope.order['SHOP_ORDER.PRICE_OVER']) {   //满足使用门槛
                         if (weekArray.indexOf(week) != -1) {       //如果今天的星期在优惠券的星期数组
                             if (ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE'] == 1) {   //限定商品
                                 for (i = 0; i < $scope.orderDetailList.length; i++) {   //遍历订单中的每一个商品
-                                    if (targetObjArray.indexOf($scope.orderDetailList[i]['SHOP_ORDER_INFO.SKU_ID']) == -1) {
+                                    if (targetObjArray.indexOf($scope.orderDetailList[i]['SHOP_ORDER_INFO.SKU_ID'])
+                                        == -1) {
                                         break;
                                     }
                                     if (i == $scope.orderDetailList.length - 1) {
@@ -222,7 +226,8 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
                             }
                             if (ele['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE'] == 2) {   //限定类别
                                 for (i = 0; i < $scope.orderDetailList.length; i++) {   //遍历订单中的每一个商品
-                                    if (targetObjArray.indexOf($scope.orderDetailList[i]['SHOP_ORDER_INFO.CLASS_ID']) == -1) {   //该商品id不在限定对象数组中，直接跳出
+                                    if (targetObjArray.indexOf($scope.orderDetailList[i]['SHOP_ORDER_INFO.CLASS_ID'])
+                                        == -1) {   //该商品id不在限定对象数组中，直接跳出
                                         break;
                                     }
                                     if (i == $scope.orderDetailList.length - 1) {
@@ -259,21 +264,25 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         console.log(coupon);
         $scope.choiceCoupon = coupon;
         $scope.ifShowCoupon = false;
-        var price = coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'] / 100;
+        var price = coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']
+            / 100;
         var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
         switch (Number(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE'])) {
             case 1:
-                $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.order['SHOP_ORDER.PRICE_OVER'] - (price);
+                $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.order['SHOP_ORDER.PRICE_OVER']
+                    - (price);
                 break;
             case 2:
-                $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.order['SHOP_ORDER.PRICE_OVER'] * (price);
+                $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.order['SHOP_ORDER.PRICE_OVER']
+                    * (price);
                 break;
         }
 
         if ($scope.order['SHOP_ORDER.PRICE_OVER'] <= 0) {
             $scope.order['SHOP_ORDER.PRICE_OVER'] = 0.01;
         }
-        $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - $scope.order['SHOP_ORDER.PRICE_OVER']);
+        $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark
+            - $scope.order['SHOP_ORDER.PRICE_OVER']);
         $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
         $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.choiceCoupon['MEMBER_COUPON.ID'];
     }
@@ -308,7 +317,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         }
     };
 
-    $scope.chooseZhiFuBao= function () {
+    $scope.chooseZhiFuBao = function () {
         var formData = {
             PRODUCT_ID: $scope.order['SHOP_ORDER.ID'],
             FEE: moneyToFee($scope.order['SHOP_ORDER.PRICE_OVER']),
@@ -316,7 +325,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
             ORDER_ID: $scope.order['SHOP_ORDER.ID'],
             TYPE: 'ORDER'
         };
-        wxPay(formData);
+        aliPay(formData);
     }
 
     $scope.delCoupon = function () {
@@ -344,6 +353,16 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
      */
     function moneyToFee(money) {
         return parseInt(money * 100);
+    }
+
+    function aliPay(formData) {
+        orderFactory.aliPayUndefinedOrderForPC(formData, function (response) {
+            window.location.href = 'https://mapi.alipay.com/gateway.do?'
+                + response.extraData.params;
+            console.log(response);
+        }, function (res) {
+            modalFactory.showShortAlert("支付失败");
+        });
     }
 
     function wxPay(formData) {
@@ -413,7 +432,6 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
             $scope.toDetail($stateParams.ORDER_ID);
         });
     }
-
 
     $scope.detailData = function (data) {
 

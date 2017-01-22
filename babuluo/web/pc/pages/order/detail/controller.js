@@ -1,4 +1,4 @@
-angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory,balanceFactory, http,productFactory, promoFactory, orderFactory, modalFactory) {
+angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory, balanceFactory, http, productFactory, promoFactory, orderFactory, modalFactory) {
     modalFactory.setTitle("订单详情");
 
     modalFactory.setHeader(false);
@@ -17,7 +17,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
         var deferred_account = $q.defer();
         var deferred_price = $q.defer();
 
-        $scope.getOrder($stateParams.ORDER_ID ,deferred_price);
+        $scope.getOrder($stateParams.ORDER_ID, deferred_price);
         $scope.shop = JSON.parse(getCookie('currentShopInfo'));
         $scope.queryAccount(deferred_account);
 
@@ -26,7 +26,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
         promise.then(function (result) {
 
             $scope.COUPON_INFO = $stateParams.COUPON_INFO;
-            if ($stateParams.COUPON_INFO != ''&&$stateParams.COUPON_INFO!=undefined) {
+            if ($stateParams.COUPON_INFO != '' && $stateParams.COUPON_INFO != undefined) {
                 $scope.coupon = JSON.parse($stateParams.COUPON_INFO);
                 if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
                     var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
@@ -70,7 +70,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
             && $scope.order['SHOP_ORDER.STATE_OUT']
             == 1
             && $scope.order['SHOP_ORDER.STATE_MONEY']
-            == -1)||($scope.order['SHOP_ORDER.STATE_ORDER']
+            == -1) || ($scope.order['SHOP_ORDER.STATE_ORDER']
             == 1
             && $scope.order['SHOP_ORDER.TYPE']
             == '3'
@@ -179,10 +179,9 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
         $scope.saveOrder()
     }
 
-
-    $scope.saveOrder = function(){
-        var orderJson = JSON.stringify($scope.order) ;
-        localStorage.setItem('order',orderJson);
+    $scope.saveOrder = function () {
+        var orderJson = JSON.stringify($scope.order);
+        localStorage.setItem('order', orderJson);
     }
 
     $scope.addDetail = function (present) {
@@ -276,7 +275,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
         });
     }
 
-    $scope.getOrder = function (id , deferred) {
+    $scope.getOrder = function (id, deferred) {
         orderFactory.getOrderById({'SHOP_ORDER.ID': id}, function (response) {
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
             $scope.orderDetailList = JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
@@ -285,26 +284,63 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
             $scope.orderDetailList.forEach(function (ele) {
                 setContentsInfoForOrder(ele);
             });
- $scope.initCartRequestVO(deferred);
+            $scope.initCartRequestVO(deferred);
             $scope.step = 0;
             switch ($scope.order['SHOP_ORDER.TYPE']) {
                 case "1":
                     if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1 && $scope.order['SHOP_ORDER.STATE_SEND'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_SEND']
+                        == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1 && $scope.order['SHOP_ORDER.STATE_SEND'] == 1 && $scope.order['SHOP_ORDER.STATE_ACCEPT'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_SEND']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_ACCEPT']
+                        == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1 && ($scope.order['SHOP_ORDER.STATE_DELIVERY'] == 1 || ($scope.order['SHOP_ORDER.STATE_SEND'] == 1 && $scope.order['SHOP_ORDER.STATE_ACCEPT'] == 1)) && $scope.order['SHOP_ORDER.STATE_COMMENT'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1
+                        && ($scope.order['SHOP_ORDER.STATE_DELIVERY']
+                        == 1
+                        || ($scope.order['SHOP_ORDER.STATE_SEND']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_ACCEPT']
+                        == 1))
+                        && $scope.order['SHOP_ORDER.STATE_COMMENT']
+                        == 1) {
                         $scope.step++;
                     }
                     break;
@@ -312,16 +348,44 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
                     if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1 && $scope.order['SHOP_ORDER.STATE_DELIVERY'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_DELIVERY']
+                        == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1 && ($scope.order['SHOP_ORDER.STATE_DELIVERY'] == 1 || ($scope.order['SHOP_ORDER.STATE_SEND'] == 1 && $scope.order['SHOP_ORDER.STATE_ACCEPT'] == 1)) && $scope.order['SHOP_ORDER.STATE_COMMENT'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1
+                        && ($scope.order['SHOP_ORDER.STATE_DELIVERY']
+                        == 1
+                        || ($scope.order['SHOP_ORDER.STATE_SEND']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_ACCEPT']
+                        == 1))
+                        && $scope.order['SHOP_ORDER.STATE_COMMENT']
+                        == 1) {
                         $scope.step++;
                     }
                     break;
@@ -329,13 +393,38 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
                     if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1 && $scope.order['SHOP_ORDER.STATE_DELIVERY'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_DELIVERY']
+                        == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1 && ($scope.order['SHOP_ORDER.STATE_DELIVERY'] == 1 || ($scope.order['SHOP_ORDER.STATE_SEND'] == 1 && $scope.order['SHOP_ORDER.STATE_ACCEPT'] == 1)) && $scope.order['SHOP_ORDER.STATE_COMMENT'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1
+                        && ($scope.order['SHOP_ORDER.STATE_DELIVERY']
+                        == 1
+                        || ($scope.order['SHOP_ORDER.STATE_SEND']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_ACCEPT']
+                        == 1))
+                        && $scope.order['SHOP_ORDER.STATE_COMMENT']
+                        == 1) {
                         $scope.step++;
                     }
                     break;
@@ -343,16 +432,44 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
                     if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1 && $scope.order['SHOP_ORDER.STATE_DELIVERY'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_DELIVERY']
+                        == 1) {
                         $scope.step++;
                     }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1 && $scope.order['SHOP_ORDER.STATE_MONEY'] == 1 && $scope.order['SHOP_ORDER.STATE_OUT'] == 1 && ($scope.order['SHOP_ORDER.STATE_DELIVERY'] == 1 || ($scope.order['SHOP_ORDER.STATE_SEND'] == 1 && $scope.order['SHOP_ORDER.STATE_ACCEPT'] == 1)) && $scope.order['SHOP_ORDER.STATE_COMMENT'] == 1) {
+                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        == 1
+                        && ($scope.order['SHOP_ORDER.STATE_DELIVERY']
+                        == 1
+                        || ($scope.order['SHOP_ORDER.STATE_SEND']
+                        == 1
+                        && $scope.order['SHOP_ORDER.STATE_ACCEPT']
+                        == 1))
+                        && $scope.order['SHOP_ORDER.STATE_COMMENT']
+                        == 1) {
                         $scope.step++;
                     }
                     break;
@@ -387,7 +504,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
         });
     }
 
-    $scope.addPresents = function (){
+    $scope.addPresents = function () {
         if ($scope.presents != undefined) {
             $scope.presents.forEach(function (present) {
                 if (present != null) {
@@ -418,8 +535,9 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
             var formData = {
                 PRODUCT_ID: $scope.order['SHOP_ORDER.ID'],
                 FEE: moneyToFee($scope.order['SHOP_ORDER.PRICE_OVER']),
-                BODY: 'ORDER:' + $scope.order['SHOP_ORDER.ORDER_NUM'],
-                //BODY: '订单' + $scope.order['SHOP_ORDER.ID'],
+                BODY: 'ORDER:'
+                + $scope.order['SHOP_ORDER.ORDER_NUM'], //BODY: '订单' +
+                                                        // $scope.order['SHOP_ORDER.ID'],
                 OPENID: openId,
                 IP: ip,
                 ORDER_ID: $scope.order['SHOP_ORDER.ID'],
@@ -500,37 +618,33 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
      */
     function onBridgeReady(postData, unifiedJson) {
         var post = JSON.parse(postData);
-        WeixinJSBridge.invoke(
-            'getBrandWCPayRequest', {
-                "appId": post.appId,
-                "timeStamp": post.timeStamp,
-                "nonceStr": post.nonceStr,
-                "package": post.package,
-                "signType": post.signType,
-                "paySign": post.paySign
-            },
-            function (res) {
-                if (res.err_msg == "get_brand_wcpay_request:ok") {
-                    modalFactory.showShortAlert('正在查询支付结果,请稍等...');
-                    $scope.wxPayInfo = "正在查询支付结果,请稍等...";
-                    var formData = {
-                        OUT_TRADE_NO: unifiedJson.out_trade_no,
-                        ORDER_ID: $scope.order['SHOP_ORDER.ID'],
-                        TYPE: 'ORDER',
-                        CALLBACK: '-1'
-                    };
-                    orderFactory.queryWXPayResult(formData, function (res) {
-                        modalFactory.showShortAlert('订单支付成功');
-                        $scope.getOrder($scope.order['SHOP_ORDER.ID']);
-                    }, function (res) {
-                        location.reload();
-                    })
-                } else {
-                    modalFactory.showShortAlert("支付失败");
-                }
+        WeixinJSBridge.invoke('getBrandWCPayRequest', {
+            "appId": post.appId,
+            "timeStamp": post.timeStamp,
+            "nonceStr": post.nonceStr,
+            "package": post.package,
+            "signType": post.signType,
+            "paySign": post.paySign
+        }, function (res) {
+            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                modalFactory.showShortAlert('正在查询支付结果,请稍等...');
+                $scope.wxPayInfo = "正在查询支付结果,请稍等...";
+                var formData = {
+                    OUT_TRADE_NO: unifiedJson.out_trade_no,
+                    ORDER_ID: $scope.order['SHOP_ORDER.ID'],
+                    TYPE: 'ORDER',
+                    CALLBACK: '-1'
+                };
+                orderFactory.queryWXPayResult(formData, function (res) {
+                    modalFactory.showShortAlert('订单支付成功');
+                    $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+                }, function (res) {
+                    location.reload();
+                })
+            } else {
+                modalFactory.showShortAlert("支付失败");
             }
-        );
+        });
     }
-
 
 });
