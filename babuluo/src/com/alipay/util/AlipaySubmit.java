@@ -77,8 +77,9 @@ public class AlipaySubmit {
         //除去数组中的空值和签名参数
         Map<String, String> sPara = AlipayCore.paraFilter(sParaTemp);
         //生成签名结果
+        System.out.println("key  "+key);
         String mysign = buildRequestMysign(sPara, key);
-
+        System.out.println("mysign  "+mysign);
         //签名结果与签名方式加入请求提交参数组中
         sPara.put("sign", mysign);
         sPara.put("sign_type", AlipayConfig.sign_type);

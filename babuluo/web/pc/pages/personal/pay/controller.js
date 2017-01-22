@@ -320,8 +320,9 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
     $scope.chooseZhiFuBao = function () {
         var formData = {
             PRODUCT_ID: $scope.order['SHOP_ORDER.ID'],
-            FEE: moneyToFee($scope.order['SHOP_ORDER.PRICE_OVER']),
-            BODY: 'ORDER:' + $scope.order['SHOP_ORDER.ORDER_NUM'],
+            FEE: $scope.order['SHOP_ORDER.PRICE_OVER'],
+            BODY: 'ORDER:'+$scope.order['SHOP_ORDER.ID'],
+            OUT_TRADE_NO: $scope.order['SHOP_ORDER.ID'],
             ORDER_ID: $scope.order['SHOP_ORDER.ID'],
             TYPE: 'ORDER'
         };

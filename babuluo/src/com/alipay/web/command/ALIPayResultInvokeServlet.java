@@ -70,7 +70,7 @@ public class ALIPayResultInvokeServlet extends HttpServlet {
                     //判断该笔订单是否在商户网站中已经做过处理
                     //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 
-                    doCallBack(request, response);
+                    doCallBack(request);
                     //注意：
                     //付款完成后，支付宝系统发送该交易状态通知
                 }
@@ -97,8 +97,7 @@ public class ALIPayResultInvokeServlet extends HttpServlet {
         super.init(arg0);
     }
 
-    public synchronized static String doCallBack(javax.servlet.http.HttpServletRequest request,
-        javax.servlet.http.HttpServletResponse response) {
+    public synchronized static String doCallBack(javax.servlet.http.HttpServletRequest request) {
         try {
             System.out.println("开始调到结果");
             Map<String, String> map = new HashMap<>();
@@ -123,19 +122,19 @@ public class ALIPayResultInvokeServlet extends HttpServlet {
             }
 
             ReturnData returnData = new API().call("/ali/pay/aliPayCallback", map);
-            System.out.println("成功调到结果");
-            response.setHeader("Cache-Control", "no-cache");
-            response.setDateHeader("Expires", 0);
-            response.addHeader("Access-Control-Allow-Origin", "*");
-            response.setContentType("application/json");
-            try {
-                response.getWriter().print(returnData.getReturnJSONStr());
-                response.getWriter().flush();
-                response.getWriter().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
+            //System.out.println("成功调到结果");
+            //response.setHeader("Cache-Control", "no-cache");
+            //response.setDateHeader("Expires", 0);
+            //response.addHeader("Access-Control-Allow-Origin", "*");
+            //response.setContentType("application/json");
+            //try {
+            //    response.getWriter().print(returnData.getReturnJSONStr());
+            //    response.getWriter().flush();
+            //    response.getWriter().close();
+            //} catch (IOException e) {
+            //    e.printStackTrace();
+            //}
+            System.out.println(ENV.DO_MAIN+returnData.getExtraData().get("url"));
             return ENV.DO_MAIN+returnData.getExtraData().get("url");
         } catch (RuleException e) {
             e.printStackTrace();

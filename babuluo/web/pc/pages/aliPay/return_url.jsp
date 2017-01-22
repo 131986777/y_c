@@ -43,7 +43,7 @@
 
         // TODO: 2016.8.18 因为未存支付宝下订单的相关数据 用的一个不好的办法得到相关数据 二期要改
 
-        if (AlipayNotify.verify(params, ENV.ALIPAY_KEY)) {//验证成功
+        if (AlipayNotify.verify(params, ENV.ALIPAY_PID)) {//验证成功
             //////////////////////////////////////////////////////////////////////////////////////////
             //请在这里加上商户的业务逻辑程序代码
 
@@ -62,7 +62,7 @@
                 //判断该笔订单是否在商户网站中已经做过处理
                 //如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 
-                url=ALIPayResultInvokeServlet.doCallBack(request, response);
+                url=ALIPayResultInvokeServlet.doCallBack(request);
                 //注意：
                 //付款完成后，支付宝系统发送该交易状态通知
             }
@@ -81,6 +81,7 @@
 %>
 </body>
 <script>
-    window.location.href=<%=url%>;
+    <%--window.location.href=<%=url%>;--%>
+    window.location.href='http://139.224.60.144/AndSell/pc/pages/main/index.html?#/order/detail/4352/';
 </script>
 </html>

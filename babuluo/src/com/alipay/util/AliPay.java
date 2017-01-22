@@ -27,7 +27,8 @@ public class AliPay {
         sParaTemp.put("body", body);
         sParaTemp.put("subject", body);
         String params =
-            AlipaySubmit.getRequestParams(sParaTemp, "sy6zcif7m285u4htm311yytz6eyks7ce");
+            AlipaySubmit.getRequestParams(sParaTemp,ENV.ALIPAY_KEY);
         return params;
     }
 }
+

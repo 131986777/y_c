@@ -205,9 +205,10 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
             $scope.planUnitList = response.data;
             $scope.planFilter();
             $scope.getPresent()
-            weUI.toast.hideLoading();
+            //weUI.toast.hideLoading();
         }, function (response) {
-            weUI.toast.error(response.msg);
+            //weUI.toast.error(response.msg);
+            modalFactory.showShortAlert(response.msg);
         });
         //orderFactory.calculateSale({'ORDER_PRD_LIST': JSON.stringify(list)}, function (response) {
         //    var newPrdListInOrder = objectToArray(response.extraData.newOrder);

@@ -7,10 +7,11 @@ public class ENV {
 
     //domain
     public static String DO_MAIN = "http://app.bblycyz.com/AndSell/";
+    //public static String DO_MAIN = "http://139.224.60.144/AndSell/";
 
     //模式
-    public static String STATE = "TEST";//测试模式  不向百年传订单数据
-    //public static String STATE = "NORMAL";//正常模式  向百年传订单
+    //public static String STATE = "TEST";//测试模式  不向百年传订单数据
+    public static String STATE = "NORMAL";//正常模式  向百年传订单
 
     //门店接口
     //public static String API_MENDIAN = "http://58.240.110.186:98/BBL/";//线上服
@@ -84,14 +85,14 @@ public class ENV {
      * 支付宝配置信息
      */
     //支付宝即时到账合作伙伴PID
-    public static String ALIPAY_PID = "2088121817954413";
+    public static String ALIPAY_PID = "2088121336481308";
     //支付宝即时到账合作伙伴密钥
-    public static String ALIPAY_KEY = "9ybppnj0mfpv2h71secymxw3oets636g";
+    public static String ALIPAY_KEY = "sy6zcif7m285u4htm311yytz6eyks7ce";
     //支付宝日志输出
     public static String ALIPAY_LOG = "/";
     //支付宝异步通知接口
-    public static String ALIPAY_NOTIFY_URL = "http://app.bblycyz.com/AndSell/alipay";
+    public static String ALIPAY_NOTIFY_URL = DO_MAIN+"alipay";
     //支付宝结果跳转页面
-    public static String ALIPAY_RETURN_URL = "http://app.bblycyz.com/AndSell/pc/pages/aliPay/return_url.jsp";
-
+    public static String ALIPAY_RETURN_URL = DO_MAIN+"pc/pages/aliPay/return_url.jsp";
+    //http://app.bblycyz.com
 }
