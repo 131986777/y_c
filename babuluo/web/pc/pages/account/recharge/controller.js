@@ -156,11 +156,10 @@ angular.module('AndSell.PC.Main').controller('pages_account_recharge_Controller'
         }else{
                 var formData = {
                     PRODUCT_ID: $scope.uid,
-                    NOW_BALANCE: parseInt($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] * 100),
-                    FEE:  parseInt($scope.balanceInfo['CHANGE_VALUE']),
+                    NOW_BALANCE: parseFloat($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']),
+                    FEE:  parseFloat($scope.balanceInfo['CHANGE_VALUE']),
                     BODY: 'RECHRGE ',
-                    OUT_TRADE_NO: $scope.order['SHOP_ORDER.ID'],
-                    IP: ip,
+                    IP: getCookie('ip_nginx'),
                     ORDER_ID: $scope.uid,
                     TYPE: 'ACCOUNT'
                 };
