@@ -14,10 +14,11 @@
 
         </div>
         <div class="bannerSlider">
-            <ul ng-repeat="item in homeList" active="item.active">
+            <!--<ul ng-repeat="item in homeList" active="item.active">-->
+            <ul>
                 <li>
-                    <a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">
-                        <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
+                    <a ng-href="{{homeList[0]['BANNER.URL']}}" ng-if="homeList[0]['is_show']==true">
+                        <img ng-src="{{FILE_SERVER_DOMAIN+homeList[0]['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
                     </a>
                 </li>
             </ul>
