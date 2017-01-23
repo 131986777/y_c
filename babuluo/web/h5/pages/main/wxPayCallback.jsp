@@ -45,7 +45,6 @@
                     params.put("OUT_TRADE_NO", orderId + "");
                     params.put("FEE", fee + "");
                     params.put("CALLBACK", "1");
-                    new API().call("/wx/pay/wxpayCallback", params);
                     String returnStr = HttpClientUtil.doGet("http://app.bblycyz.com/AndSell/wxCallBack",params);
                     result = true;
                 }
