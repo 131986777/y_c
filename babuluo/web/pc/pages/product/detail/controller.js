@@ -429,6 +429,8 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
             if ($scope.sku['SHOP_PRODUCT_SKU.STOCK'] > 0) {
                 var cartInfo = getCookie('cartInfo');
                 var cartSize = getCookie('cartSize');
+                console.log(cartInfo);
+                console.log(cartSize);
                 if (cartInfo == '' || cartInfo == undefined) {
                     cartInfo = new Array;
                     cartSize = {};
@@ -469,7 +471,8 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
     }
 
     $scope.buyNow = function () {
-
+        $scope.addToCart();
+        $state.go('pages/order/confirm', {'SKU_IDS': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID']});
     }
 
     $scope.toShop = function () {
