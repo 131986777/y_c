@@ -1,4 +1,4 @@
-<div class="row-wrap row-wrap1">
+<div class="row-wrap row-wrap-modPwd">
         <div class="row-header1 font">修改密码</div>
         <div class="row-content">
             <form action="" class="bu-form">
@@ -9,11 +9,11 @@
                 </div>
                 <div class="form-group">
                     <div class="pwd">验证码</div>
-                    <div class="yzmPos">
+                    <div class="yzmPos" ng-init="SMSstate='WaitSend'">
                         <input type="text" class="typeIn large-size" placeholder="" ng-model="memberInfo['MEMBER.CHECKCODE']">
-                        <div class="yzm" ng-click="sendSms()" ng-style="h1">获取验证码</div>
-                        <div class="send" ng-style="h2">发送中...</div>
-                        <div class="sended" ng-style="h3">已发送（{{time}}s）</div>
+                        <div class="yzm" ng-if="SMSstate=='WaitSend'" ng-click="sendSms()">获取验证码</div>
+                        <div class="send" ng-if="SMSstate=='Sending'">发送中...</div>
+                        <div class="sended" ng-if="SMSstate=='SendEnd'">已发送（{{time}}s）</div>
                     </div>
 
                 </div>
@@ -29,7 +29,7 @@
                 </div>
             </form>
             <div class="save-btn">
-                <button class="btn btn-info" style="margin-right: 10px" ng-click="updateInfo()" data-dismiss="modal">保存</button>
+                <button class="btn " style="margin-right: 10px" ng-click="updateInfo()" data-dismiss="modal">保存</button>
                 <button class="btn btn-defult" data-dismiss="modal">取消</button>
             </div>
         </div>
