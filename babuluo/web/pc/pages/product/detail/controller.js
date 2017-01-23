@@ -86,16 +86,40 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
             $scope.goodComments = resp.extraData.goodList;
             $scope.midComments = resp.extraData.midList;
             $scope.badComments = resp.extraData.badList;
+            $scope.commentNumber();
         });
 
         $scope.skuSize = 1;
         $scope.caculCart();
+    }
 
 
+    $scope.changeCMP = function (img) {
+        $scope.CMP = img;
+    }
+
+
+    $scope.commentNumber = function () {
+
+        $scope.goodCommentsPercent = $scope.commentsPercents($scope.listLength($scope.goodComments),$scope.proComments.length)+"%";
+        $scope.midCommentsPercent = $scope.commentsPercents($scope.listLength($scope.midComments),$scope.proComments.length)+"%";
+        $scope.badCommentsPercent = $scope.commentsPercents($scope.listLength($scope.badComments),$scope.proComments.length)+"%";
+        $scope.goodcp={
+            'width':$scope.goodCommentsPercent
+        }
+        $scope.midcp={
+            'width':$scope.midCommentsPercent
+        }
+        $scope.badcp={
+            'width':$scope.badCommentsPercent
+        }
     }
 
     $scope.setPrdPicBanner = function (prd) {
         // 添加轮播图源
+        if (prd['SHOP_PRODUCT.CMP'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.CMP']});
+        }
         if (prd['SHOP_PRODUCT.P1'] != undefined) {
             $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.P1']});
         }
