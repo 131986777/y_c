@@ -20,7 +20,7 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
     $(function(){
         $(window).scroll(function () {
             var ling =$(document).scrollTop();
-            document.title=ling;
+            //document.title=ling;
             if(ling>300){
                 $(".leftMenu").removeClass('hidden');
             }
