@@ -96,9 +96,6 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
 
     $scope.setPrdPicBanner = function (prd) {
         // 添加轮播图源
-        if (prd['SHOP_PRODUCT.CMP'] != undefined) {
-            $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.CMP']});
-        }
         if (prd['SHOP_PRODUCT.P1'] != undefined) {
             $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.P1']});
         }
