@@ -3,78 +3,77 @@
     <div class="effectiveArea home-page">
         <div class="leftMenu hidden">
             <div class="categoriePic" id="icon-wine" ng-click="toPrdClassList(3001)"></div>
-            <div class="categoriePic" id="icon-cake"  ng-click="toPrdClassList(3002)"></div>
+            <div class="categoriePic" id="icon-cake" ng-click="toPrdClassList(3002)"></div>
             <div class="categoriePic" id="icon-rice-two" ng-click="toPrdClassList(3003)"></div>
             <div class="categoriePic" id="icon-fruit" ng-click="toPrdClassList(3004)"></div>
-            <div class="categoriePic" id="icon-meat"  ng-click="toPrdClassList(3005)"></div>
+            <div class="categoriePic" id="icon-meat" ng-click="toPrdClassList(3005)"></div>
             <div class="categoriePic" id="icon-snow" ng-click="toPrdClassList(3006)"></div>
-            <div class="categoriePic"  id="icon-egg" ng-click="toPrdClassList(3007)"></div>
+            <div class="categoriePic" id="icon-egg" ng-click="toPrdClassList(3007)"></div>
             <div class="categoriePic" id="icon-juice" ng-click="toPrdClassList(3008)"></div>
             <div class="categoriePic" id="icon-rice-one" ng-click="toPrdClassList(3009)"></div>
 
         </div>
         <div class="bannerSlider">
-            <ul>
-                <li><a href=""><img src="/AndSell/pc/public/css/img/slider_pic_1.png"
-                                    alt=""></a></li>
-                <li><a href=""><img src="/AndSell/pc/public/css/img/slider_pic_1.png"
-                                    alt=""></a></li>
-                <li><a href=""><img src="/AndSell/pc/public/css/img/slider_pic_1.png"
-                                    alt=""></a></li>
+            <ul ng-repeat="item in homeList" active="item.active">
+                <li>
+                    <a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">
+                        <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
+                    </a>
+                </li>
             </ul>
         </div>
         <div class="entryCategories">
             <div class="entry timeLimit" ng-show="limitList.length>0">
-            <h1 class="entryTitle">
-            <span class="name">限时秒杀</span>
-            <div class="timeCount">
-            距离结束还有：<span class="count hours">{{item.hour}}</span>时<span
-            class="count minutes">{{item.minute}}</span>分<span
-            class="count seconds">{{item.second}}</span>秒
-            </div>
-            </h1>
-            <div class="picShow">
-            <ul>
-            <li ng-repeat="item in limitList" ng-if="item['is_show']==true">
-            <a ng-href="{{item['BANNER.URL']}}">
-            <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
-            </a>
-            </li>
-            </ul>
-            </div>
+                <h1 class="entryTitle">
+                    <span class="name">限时秒杀</span>
+                    <div class="timeCount">
+                        距离结束还有：<span class="count hours">{{item.hour}}</span>时<span
+                            class="count minutes">{{item.minute}}</span>分<span
+                            class="count seconds">{{item.second}}</span>秒
+                    </div>
+                </h1>
+                <div class="picShow">
+                    <ul>
+                        <li ng-repeat="item in limitList" ng-if="item['is_show']==true">
+                            <a ng-href="{{item['BANNER.URL']}}">
+                                <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="entry togetherBuy" ng-show="groupList.length>0">
-            <h1 class="entryTitle">
-            <span class="name">团购</span>
-            </h1>
-            <div class="picShow">
-            <ul>
-            <li ng-repeat="item in groupList" ng-if="item['is_show']==true">
-            <a ng-href="{{item['BANNER.URL']}}">
-            <div class="pic">
-            <img ng-if="item['is_show']==true"
-            ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-            ng-href="{{item['BANNER.URL']}}">
-            </div>
-            </a>
-            </li>
-            </ul>
-            </div>
+                <h1 class="entryTitle">
+                    <span class="name">团购</span>
+                </h1>
+                <div class="picShow">
+                    <ul>
+                        <li ng-repeat="item in groupList" ng-if="item['is_show']==true">
+                            <a ng-href="{{item['BANNER.URL']}}">
+                                <div class="pic">
+                                    <img ng-if="item['is_show']==true"
+                                         ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
+                                         ng-href="{{item['BANNER.URL']}}">
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="entry todayRecommend" ng-if="recommendList.length>0||recommNineList.length>0">
-            <h1 class="entryTitle">
-            <span class="name">今日推荐</span>
-            </h1>
-            <div class="picShow">
-            <ul>
-            <li>
-            <a ng-repeat="item in recommendList" ng-href="{{item['BANNER.URL']}}"
-            ng-if="item['is_show']==true">
-            <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
-            </a>
-            </li>
-            </ul>
-            </div>
+                <h1 class="entryTitle">
+                    <span class="name">今日推荐</span>
+                </h1>
+                <div class="picShow">
+                    <ul>
+                        <li>
+                            <a ng-repeat="item in recommendList" ng-href="{{item['BANNER.URL']}}"
+                               ng-if="item['is_show']==true">
+                                <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="entry floorLikeRec" ng-repeat="(key,itemList) in BannerList">
                 <div>
