@@ -6,8 +6,8 @@ package com.bolanggu.bbl;
 public class ENV {
 
     //domain
-    public static String DO_MAIN = "http://app.bblycyz.com/AndSell/";
-    //public static String DO_MAIN = "http://139.224.60.144/AndSell/";
+    //public static String DO_MAIN = "http://app.bblycyz.com/AndSell/";
+    public static String DO_MAIN = "http://139.224.60.144/AndSell/";
 
     //模式
     public static String STATE = "TEST";//测试模式  不向百年传订单数据
