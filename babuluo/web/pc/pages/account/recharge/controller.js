@@ -154,9 +154,29 @@ angular.module('AndSell.PC.Main').controller('pages_account_recharge_Controller'
             $scope.ifWXCodeShow=true;
             $scope.updateBalanceByWx();
         }else{
-
+                var formData = {
+                    PRODUCT_ID: $scope.uid,
+                    NOW_BALANCE: parseFloat($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']),
+                    FEE:  parseFloat($scope.balanceInfo['CHANGE_VALUE']),
+                    BODY: 'RECHRGE ',
+                    IP: getCookie('ip_nginx'),
+                    ORDER_ID: $scope.uid,
+                    TYPE: 'ACCOUNT'
+                };
+                aliPay(formData);
         }
     }
+
+    function aliPay(formData) {
+        orderFactory.aliPayUndefinedOrderForPC(formData, function (response) {
+            window.location.href = 'https://mapi.alipay.com/gateway.do?'
+                + response.extraData.params;
+            console.log(response);
+        }, function (res) {
+            modalFactory.showShortAlert("支付失败");
+        });
+    }
+
 
     $scope.close= function () {
         $scope.ifWXCodeShow=false;

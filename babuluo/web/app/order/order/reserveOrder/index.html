@@ -147,8 +147,11 @@
                                         class="name"> {{order['SHOP_ORDER.REC_CONTACT']}} | </span>
                   <span class="orderNum"
                         ng-bind="'订单号：'+order['SHOP_ORDER.ORDER_NUM']"> | </span><span
-                                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'" class="payWay"> 微信支付 | </span><span
-                                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'" class="payWay"> 会员卡支付 | </span>
+                                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'" class="payWay"> 微信支付 | </span>
+                                    <span
+                                        ng-if="order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'"
+                                        class="payWay"> 会员卡支付 | </span><span
+                                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='ALI'" class="payWay"> 支付宝支付 | </span>
                                     <span ng-bind="order['SHOP_ORDER.SHOP_NAME']"></span>
                                 </div>
                                 <div class="sum col-md-4 text-right">

@@ -14,7 +14,7 @@
 </head>
 <body>
 <%
-    String url="";
+    String url="http://139.224.60.144/AndSell/pc/pages/main/index.html#/pages/order/detail/4221";
 
     //获取支付宝POST过来反馈信息
     Map<String, String> params = new HashMap<String, String>();
@@ -81,7 +81,6 @@
 %>
 </body>
 <script>
-    <%--window.location.href=<%=url%>;--%>
-    window.location.href='http://139.224.60.144/AndSell/pc/pages/main/index.html?#/order/detail/4352/';
+    window.location.href='<%=url%>';
 </script>
 </html>
