@@ -48,10 +48,9 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         }
         productFactory.getProductAllInfoById(params, function (response) {
             $scope.product = response.data[0];
-            $scope.CMP = $scope.FILE_SERVER_DOMAIN + $scope.product['SHOP_PRODUCT.CMP'];
+
             if ($scope.product != undefined) {
-                modalFactory.setTitle($scope.product['SHOP_PRODUCT.PRD_NAME']
-                    + ' - 云厨1站商城 - 十分钟吃饭，优质食品购买平台');
+                modalFactory.setTitle($scope.product['SHOP_PRODUCT.PRD_NAME'] + ' - 云厨1站商城 - 十分钟吃饭，优质食品购买平台');
                 $scope.setPrdPicBanner($scope.product);
                 if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                     $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
@@ -100,6 +99,11 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
     }
 
 
+    $scope.changeCMP = function (img) {
+        $scope.CMP = img;
+    }
+
+
     $scope.commentNumber = function () {
 
         $scope.goodCommentsPercent = $scope.commentsPercents($scope.listLength($scope.goodComments),$scope.proComments.length)+"%";
@@ -114,10 +118,6 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         $scope.badcp={
             'width':$scope.badCommentsPercent
         }
-    }
-
-    $scope.changeCMP = function (img) {
-        $scope.CMP = img;
     }
 
     $scope.setPrdPicBanner = function (prd) {
@@ -142,7 +142,6 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
             $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.P5']});
         }
     }
-
 
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -568,7 +567,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
 
     }
 
-    //切换评论数据源
+    //切换数据源
     $scope.reset = function (val) {
         if (val == 'all') {
             $scope.allComments = $scope.proComments;
