@@ -90,7 +90,7 @@
                 <div class="endPayGroup">
                     <a href="" class="addToCart" ng-click="addToCart()">加入购物车</a>
                     <a href="" class="buyNow" ng-click="buyNow()">立即购买</a>
-                    <a href="" class="collect"></a>
+                    <a href="" class="collect" ng-class="{true:'active'}[collectionState==1]" ng-init="collectionState=-1" ng-click="collectionClick()"></a>
                 </div>
             </div>
 
@@ -99,65 +99,17 @@
             <div class="goodsShowBar">
                 <h2 class="title">商品排行</h2>
                 <div class="lists">
-                    <ul>
+                    <ul ng-repeat="pr in productRanking">
                         <li>
-                            <img src="../images/togetherBuy_pic_1.png" alt="">
+                            <img ng-src="{{FILE_SERVER_DOMAIN+pr['SHOP_PRODUCT.P1']}}" alt="">
                             <div class="intro">
-                                <p class="name">展卉 智利蓝莓 125g*2盒</p>
-                                <p class="price">¥128.00</p>
-                                <p class="sales">月售 1203笔</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="../images/togetherBuy_pic_1.png" alt="">
-                            <div class="intro">
-                                <p class="name">展卉 智利蓝莓 125g*2盒</p>
-                                <p class="price">¥128.00</p>
-                                <p class="sales">月售 1203笔</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="../images/togetherBuy_pic_1.png" alt="">
-                            <div class="intro">
-                                <p class="name">展卉 智利蓝莓 125g*2盒</p>
-                                <p class="price">¥128.00</p>
-                                <p class="sales">月售 1203笔</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="../images/togetherBuy_pic_1.png" alt="">
-                            <div class="intro">
-                                <p class="name">展卉 智利蓝莓 125g*2盒</p>
-                                <p class="price">¥128.00</p>
-                                <p class="sales">月售 1203笔</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="../images/togetherBuy_pic_1.png" alt="">
-                            <div class="intro">
-                                <p class="name">展卉 智利蓝莓 125g*2盒</p>
-                                <p class="price">¥128.00</p>
-                                <p class="sales">月售 1203笔</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="../images/togetherBuy_pic_1.png" alt="">
-                            <div class="intro">
-                                <p class="name">展卉 智利蓝莓 125g*2盒</p>
-                                <p class="price">¥128.00</p>
-                                <p class="sales">月售 1203笔</p>
-                            </div>
-                        </li>
-                        <li>
-                            <img src="../images/togetherBuy_pic_1.png" alt="">
-                            <div class="intro">
-                                <p class="name">展卉 智利蓝莓 125g*2盒</p>
-                                <p class="price">¥128.00</p>
-                                <p class="sales">月售 1203笔</p>
+                                <p class="name">{{pr['SHOP_ORDER_INFO.PRD_NAME']}}</p>
+                                <p class="price">¥{{pr['SHOP_ORDER_INFO.PRICE_NOW']}}</p>
+                                <p class="sales">月售 {{pr['ORDER_COUNT']}}笔</p>
                             </div>
                         </li>
                     </ul>
-                </div>
+                 </div>
             </div>
             <div class="detailIntro">
                 <div class="introCategories" ng-init="prd_detai_model='detail'">

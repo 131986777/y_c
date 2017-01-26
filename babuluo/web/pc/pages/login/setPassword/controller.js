@@ -31,7 +31,6 @@ angular.module('AndSell.PC.Main').controller('pages_login_setPassword_Controller
         var length = phoneNum.toString().length;
         if(length != 11){
             return false;
-
         }
     }
     $scope.reg = function (){
