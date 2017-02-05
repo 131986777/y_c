@@ -9,6 +9,9 @@ AndSellPCMainModule.service('productFactory', function ($resource, http) {
 
     this.getProductByTag = http.post('/shop/product/getByTagIds');
 
+    this.getCommemtByProIdProSku = http.post('/shop/comment/getById');
+
+
     this.getProductAllInfoById = http.post('/shop/product/getByIdWithAllInfoForAgent');
 
     this.getProductSkuBySkuIds = http.post('/shop/product/getBySkuIdWithAllInfoForAgent');

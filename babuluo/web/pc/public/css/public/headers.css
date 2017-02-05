@@ -412,6 +412,9 @@
 /* line 141, ../sass/headers/_goodsCategoriesBar.scss */
 .goodsCategoriesBar .categories ul li .innerContainer:hover [class*="Pic"] {
   border-color: #f36f1a;
+}/* line 141, ../sass/headers/_goodsCategoriesBar.scss */
+.goodsCategoriesBar .categories ul li .innerContainer:hover [class*="Pic"] {
+  border-color: #f36f1a;
 }
 /* line 144, ../sass/headers/_goodsCategoriesBar.scss */
 .goodsCategoriesBar .categories ul li .innerContainer:hover .triangle {

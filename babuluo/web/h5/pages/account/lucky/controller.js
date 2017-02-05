@@ -114,13 +114,40 @@ angular.module('AndSell.H5.Main').controller('pages_account_lucky_Controller', f
         $scope.couponIdList = [];
         $scope.couponMap = new Map();
         eventFactory.queryPosition({}, function (response) {
-            $scope.luckListAll = response.data;
-            response.data.forEach(function (ele) {
-                $scope.unLuckyPosition.remove(Number(ele['LUCKY_DRAW.LOCATION']));
-                if(ele['LUCKY_DRAW.PRIZE_ID']!=undefined){
+            //$scope.luckListAll = response.data;
+            //response.data.forEach(function (ele) {
+            //    $scope.unLuckyPosition.remove(Number(ele['LUCKY_DRAW.LOCATION']));
+            //    if(ele['LUCKY_DRAW.PRIZE_ID']!=undefined){
+            //        $scope.couponIdList.push(ele['LUCKY_DRAW.PRIZE_ID']);
+            //    }
+            //});
+            //eventFactory.getCouponInfo({'COUPON.ID': $scope.couponIdList.toString()}, function (response) {
+            //    response.data.forEach(function (ele) {
+            //        $scope.couponMap.set(ele['COUPON.ID'], ele);
+            //    });
+            //    $scope.show = true;
+            //});
+
+            //index对不上
+            var luckyMap = {}
+            response.data.forEach(function (ele, index) {
+                if (ele['LUCKY_DRAW.PRIZE_ID'] != undefined) {
                     $scope.couponIdList.push(ele['LUCKY_DRAW.PRIZE_ID']);
                 }
+                luckyMap[ele['LUCKY_DRAW.LOCATION'] - 1] = ele;
             });
+            $scope.luckListAll = new Array;
+
+            for (var i = 0; i < 8; i++) {
+                if (luckyMap[i] != undefined) {
+                    luckyMap[i]['IS_PRIZE'] = true;
+                    $scope.luckListAll.push(luckyMap[i]);
+                } else {
+                    $scope.luckListAll.push({'IS_PRIZE': false});
+                }
+            }
+            console.log($scope.luckListAll);
+
             eventFactory.getCouponInfo({'COUPON.ID': $scope.couponIdList.toString()}, function (response) {
                 response.data.forEach(function (ele) {
                     $scope.couponMap.set(ele['COUPON.ID'], ele);
@@ -138,13 +165,14 @@ angular.module('AndSell.H5.Main').controller('pages_account_lucky_Controller', f
                 if (position != 0) {
                     $scope.stop(Number(position));
                     setTimeout(function () {
-                        alert("恭喜您中奖了！奖品为：" + $scope.luckListAll[position]['LUCKY_DRAW.INTRO'] + "！");
+                        var info =$scope.luckListAll[position-1]['LUCKY_DRAW.INTRO'];
+                        alert("恭喜您中奖了！奖品为：" + info + "！");
                     }, 2500);
                 } else {
                     var random = getRandom($scope.unLuckyPosition);
                     $scope.stop(random);
                     setTimeout(function () {
-                        alert("很遗憾您没有中奖。");
+                        weUI.toast.info("很遗憾您没有中奖。");
                     }, 2500);
                 }
             }

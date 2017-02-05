@@ -18,77 +18,78 @@ import java.util.Map;
  */
 public class Kucun {
 
-    public static String run(String meidianID){
+    public static String run(String meidianID) {
         String url = httpPostJson.ERP_DOMAIN + "GetAvailableStock";
 
-        Map map =new HashMap<>();
-        map.put("Sign","F4EBA1DE727A41A91B5D10754BFBF657");
-        map.put("nodecode",meidianID);
+        Map map = new HashMap<>();
+        map.put("Sign", "F4EBA1DE727A41A91B5D10754BFBF657");
+        map.put("nodecode", meidianID);
 
-        String returnStr = HttpClientUtil.doPost(url,map);
+        String returnStr = HttpClientUtil.doPost(url, map);
 
         return returnStr;
-
     }
-
 
     public static void tongbu(String id) {
 
-        System.err.println("run: "+ id);
+        System.err.println("run: " + id);
 
         API api = new API();
 
         try {
 
-//            List<String> list =new ArrayList<String >();
-//            //list.add("100008");
-//            //list.add("100015");
-//            //list.add("100012");
-//            //list.add("100026");
-//            //list.add("100002");
-//            //list.add("100036");
-//            list.add("100003");
+        //            List<String> list =new ArrayList<String >();
+        //            //list.add("100008");
+        //            //list.add("100015");
+        //            //list.add("100012");
+        //            //list.add("100026");
+        //            //list.add("100002");
+        //            //list.add("100036");
+        //            list.add("100003");
 
-//            for (int i = 0; i < list.size(); i++) {
-                String mendianID= id;
-                String returnStr = run(mendianID);
-                JSONObject returnJSOn = JSONObject.parseObject(returnStr);
+        //            for (int i = 0; i < list.size(); i++) {
+        String mendianID = id;
+        String returnStr = run(mendianID);
+        JSONObject returnJSOn = JSONObject.parseObject(returnStr);
 
-                if(returnJSOn.get("returnCode").equals("00")){
+        if (returnJSOn.get("returnCode").equals("00")) {
 
-                    JSONArray returnJSON = (JSONArray)returnJSOn.getJSONArray("goodsInfos");
-                    for (int j = 0; j < returnJSON.size(); j++) {
-                        JSONObject skuStock = returnJSON.getJSONObject(j);
-//                        HashMap map_sku = new HashMap();
-//                        map_sku.put("SHOP_PRODUCT_SKU.PRD_SKU",skuStock.get("goodsCode"));
-//                        ReturnData response = api.call("/shop/product/sku/getByPrdSku", map_sku);
-                        ///  更新库存与价格
-                        HashMap map = new HashMap();
-                        map.put("SHOP_ID",mendianID);
-                        map.put("GOODSCODE",skuStock.get("goodsCode"));
-//                        map.put("PRD_ID",response.getData().get(0).get("SHOP_PRODUCT_SKU.PRD_ID"));
-                        map.put("COUNT",skuStock.get("stockAmount"));
-                        map.put("PRICE",skuStock.getDouble("salePrice"));
-                        ReturnData response2 = api.call("/stock/realtime/updateStockAndPriceFast",map);
+            JSONArray returnJSON = (JSONArray) returnJSOn.getJSONArray("goodsInfos");
+            for (int j = 0; j < returnJSON.size(); j++) {
+                JSONObject skuStock = returnJSON.getJSONObject(j);
+                //                        HashMap map_sku = new HashMap();
+                //                        map_sku.put("SHOP_PRODUCT_SKU.PRD_SKU",skuStock.get("goodsCode"));
+                //                        ReturnData response = api.call("/shop/product/sku/getByPrdSku", map_sku);
+                ///  更新库存与价格
+                HashMap map = new HashMap();
+                map.put("SHOP_ID", mendianID);
+                //map.put("GOODSCODE",skuStock.get("goodsCode"));
+                map.put("SKU_ID", skuStock.get("goodsCode") + "");
+                //                        map.put("PRD_ID",response.getData().get(0).get("SHOP_PRODUCT_SKU.PRD_ID"));
+                map.put("COUNT", skuStock.getDouble("stockAmount") + "");
+                map.put("PRICE", skuStock.getDouble("salePrice") + "");
+                //ReturnData response2 = api.call("/stock/realtime/updateStockAndPrice",map);
+                //String response2 = HttpClientUtil.doPost(
+                //    "http://h5.bblycyz.com/AndSell/bubu/stock/realtime/changeRealtimeStock", map);
+                ReturnData response2 = api.call("/stock/realtime/updateStockAndPriceFast",map);
 
-                        System.err.println("call: " + map.toString() + response2.getReturnJSONStr());
-                    }
-                }else{
-                    System.err.println("百年接口错误: " + returnStr);
-                }
-//            }
-
+                System.err.println("call: " + map.toString() + response2);
+            }
+        } else {
+            System.err.println("百年接口错误: " + returnStr);
+        }
+                    //}
+        //
         } catch (RuleException e) {
             e.printStackTrace();
         }
 
     }
 
-
     public static void main(String[] args) throws IOException {
 
-        List<String> list =new ArrayList<>();
- /*       list.add("100001");
+        List<String> list = new ArrayList<>();
+        list.add("100001");
         list.add("100002");
         list.add("100003");
         list.add("100004");
@@ -164,63 +165,24 @@ public class Kucun {
         list.add("100074");
         list.add("100075");
         list.add("100076");
-        list.add("100077");*/
-        //list.add("100078");
-     /*   list.add("100079");
+        list.add("100077");
+        list.add("100078");
+        list.add("100079");
         list.add("100080");
         list.add("100081");
-        list.add("100082");*/
+        list.add("100082");
         list.add("100083");
         list.add("100084");
-        //list.add("111111");
-        //for (int i = 0; i < list.size(); i++) {
-        //    String arg = list.get(i);
-        //
-        //    Thread t = new Thread(new Runnable(){
-        //        public void run(){
-        //            tongbu(arg);
-        //        }});
-        //    t.start();
-        //
-        //}
+        list.add("111111");
+        for (int i = 0; i < list.size(); i++) {
+            String arg = list.get(i);
 
-
-
-
-        //System.out.println(MD5.MD5Encode("ycyzyy2016"));
-
-        //Map<String,String> map =new HashMap<>();
-        //map.put("ORDER_NUM","009990033222");
-        //map.put("ORDER_INFO","[{\"PRD_ID\":\"800277\",\"PRD_NAME\":\"莲花味精99%\",\"UNIT\":\"袋\",\"BAR_CODE\":\"6901377001000\",\"PRICE_OLD\":1.5,\"PRICE_NOW\":1.5,\"COUNT\":1.0,\"PRICE_SUM\":1.5}]");
-        //String returnStr = HttpClientUtil.doGet("http://app.bblycyz.com/AndSell/bubu/shop/.orderOffline/addOrderForOffline",map);
-        //System.out.println(returnStr);
-        //try {
-            //ReturnData response = new API().call("/shop/product/unit/add", map);
-            //System.out.println(response.toString());
-        //} catch (RuleException e) {
-        //    e.printStackTrace();
-        //}
-
-        String c="appid=wx7c4d78e05a44115e&body=订单4233&mch_id=1298356201&nonce_str=x2oqf7lu03rl8wqvcwb9ww08efwmnuob&notify_url=http://app.bblycyz.com/AndSell/h5/pages/main/wxPayCallback.jsp&out_trade_no=10003467&product_id=4233&spbill_create_ip=null&total_fee=880&trade_type=NATIVE&key=fdbnhlsh6gs79ro4lhr6vutmgnx0flfc";
-        StringBuffer sb = new StringBuffer();
-        sb.append(c);
-        System.out.println(MD5.MD5Encode(new String(sb.toString())));
-        System.out.println(com.tencent.common.MD5.MD5Encode(new String(sb.toString())));
-        System.out.println(com.tencent.common.MD5.MD5Encode(sb.toString()));
-
-        byte[] b = c.getBytes("gbk");//编码
-        String sa = new String(b, "gbk");//解码:用什么字符集编码就用什么字符集解码
-        System.out.println(sa);
-
-        byte[] d = c.getBytes("utf-8");//编码
-        String sa2 = new String(d, "utf-8");//解码:用什么字符集编码就用什么字符集解码
-        System.out.println(sa2);
-
-        System.out.println(com.tencent.common.MD5.MD5Encode(new String(d)));
-        System.out.println(com.tencent.common.MD5.MD5Encode(new String(b)));
+            Thread t = new Thread(new Runnable() {
+                public void run() {
+                    tongbu(arg);
+                }
+            });
+            t.start();
+        }
     }
-
-
-
-
 }
