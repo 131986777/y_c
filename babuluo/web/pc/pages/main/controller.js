@@ -124,7 +124,7 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
     }
 
     $scope.updateUser = function () {
-        userFactory.isLogin({}, function (response) {
+        userFactory.isLogin({'USER_TYPE':'CUSTOMER'}, function (response) {
             $scope.uid = getCookie('ANDSELLID');
             if ($scope.uid != undefined && $scope.uid != '') {
                 $scope.getUser($scope.uid);

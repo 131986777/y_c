@@ -44,7 +44,7 @@
                     请在30分钟之内完成付款，逾期订单将关闭
                 </p>
                 <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.TYPE']=='5'">
-                    请在30分钟之内完成付款，逾期订单将关闭
+                    请在今天之内完成付款，逾期订单将关闭
                 </p>
             </div>
         </div>
@@ -173,20 +173,20 @@
                     </div>
                 </div>
             </div>
-            <div class="payment-info">
-                <p>
-                    订单总额：<span ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
-                </p>
-                <p class="sale">
-                    已优惠：<span ng-bind="order['SHOP_ORDER.PRICE_DISCOUNT'] | currency : '￥'"></span>
-                </p>
-                <p>
-                    付款方式：
-                    <span ng-if="order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'">会员卡支付</span>
-                    <span ng-if="order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'">微信支付</span>
-                    <span ng-if="order['SHOP_ORDER.PAY_TYPE']=='FACE'">自提付款</span>
-                </p>
-            </div>
+            <!--<div class="payment-info">-->
+                <!--<p>-->
+                    <!--订单总额：<span ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>-->
+                <!--</p>-->
+                <!--<p class="sale">-->
+                    <!--已优惠：<span ng-bind="order['SHOP_ORDER.PRICE_DISCOUNT'] | currency : '￥'"></span>-->
+                <!--</p>-->
+                <!--<p>-->
+                    <!--付款方式：-->
+                    <!--<span ng-if="order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'">会员卡支付</span>-->
+                    <!--<span ng-if="order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'">微信支付</span>-->
+                    <!--<span ng-if="order['SHOP_ORDER.PAY_TYPE']=='FACE'">自提付款</span>-->
+                <!--</p>-->
+            <!--</div>-->
         </div>
 
         <div class="product-list weui_cells"

@@ -116,7 +116,7 @@
     <link rel="stylesheet" href="/AndSell/h5/public/libs/weui/dist/lib/weui.css">
     <link rel="stylesheet" href="/AndSell/h5/public/css/style.css">
     <link rel="stylesheet" href="/AndSell/h5/public/libs/swiper/swiper.min.css">
-    <link rel="stylesheet" href="/AndSell/h5/public/libs/weui/weui-modal.css">
+    <%--<link rel="stylesheet" href="/AndSell/h5/public/libs/weui/weui-modal.css">--%>
 
 </head>
 <body class="home-index">

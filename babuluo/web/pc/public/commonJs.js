@@ -242,7 +242,7 @@ function routerPath(base, path, param, css) {
                 'pages/login/phoneLogin',
                 'pages/login/register' ,'pages/login/setPassword', 'pages/security/resetPwd' ,'pages/login/SetPassword'];
             if (filterList.indexOf(path) < 0) {
-                userFactory.isLogin({}, function (response) {
+                userFactory.isLogin({'USER_TYPE':'CUSTOMER'}, function (response) {
                 }, function (response) {
                     $state.go('pages/login/accountLogin');
                 });

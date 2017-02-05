@@ -36,23 +36,23 @@
                     <h2 class="name">
                         <div ng-if="order['SHOP_ORDER.TYPE']=='1'">
                             <span
-                                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
+                                ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
                                 等待付款
                             </span>
                             <span
-                                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">
+                                ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">
                                 等待出库
                             </span>
                             <span
-                                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==-1">
+                                ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==-1">
                                 等待发货
                             </span>
                             <span
-                                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==-1">
+                                ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==-1">
                                 等待收货
                             </span>
                             <span
-                                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1">
+                                ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1">
                                 已完成
                             </span>
                             <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">
@@ -64,18 +64,30 @@
                         <!--</div>-->
                         <div ng-if="order['SHOP_ORDER.TYPE']=='3'">
                             <span
-                                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">待付款</span>
+                                ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">待付款</span>
                             <span
-                                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">待分拣</span>
+                                ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">待分拣</span>
                             <span
-                                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">待自提</span>
+                                ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">待自提</span>
                             <span
-                                    ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">已完成</span>
+                                ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">已完成</span>
                             <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消</span>
                         </div>
-                        <!--<div ng-if="order['SHOP_ORDER.TYPE']=='5'">-->
-                        <!--<span>待付款</span>-->
-                        <!--</div>-->
+                        <div ng-if="order['SHOP_ORDER.TYPE']=='5'">
+
+                            <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1">等待付款</span>
+
+                            <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==-1">等待分拣</span>
+
+                            <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">等待提货</span>
+
+                            <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">已提货</span>
+
+                            <span ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1">已完成</span>
+
+                            <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消</span>
+
+                        </div>
                     </h2>
                     <div class="intro">
                         <ul>
@@ -96,12 +108,13 @@
                 <div class="listBody">
                     <div class="goodsInfo">
                         <ul>
-                            <li ng-repeat=" detail in order.details" ng-if="detail['isPresent']==null">
+                            <li ng-repeat=" detail in order.details"
+                                ng-if="detail['isPresent']==null">
                                 <div class="pic">
                                     <img
-                                            ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}"
-                                            ng-click="toProduct(order['SHOP_ORDER_INFO.PRD_ID'])"
-                                            style="width: 80px;height: 80px;">
+                                        ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}"
+                                        ng-click="toProduct(order['SHOP_ORDER_INFO.PRD_ID'])"
+                                        style="width: 80px;height: 80px;">
                                 </div>
                                 <div class="detail">
                                     <div class="info">
@@ -116,15 +129,19 @@
                                                 <!--<span class="originPrice">¥28.00</span>-->
                                             </span>
                                             <span
-                                                    class="count">x{{detail['SHOP_ORDER_INFO.COUNT']}}</span>
+                                                class="count">x{{detail['SHOP_ORDER_INFO.COUNT']}}</span>
                                         </p>
                                     </div>
-                                    <div class="gift" ng-if="order['presentMap'][detail['SHOP_ORDER_INFO.SKU_ID']]['isPresent']==true">
+                                    <div class="gift"
+                                         ng-if="order['presentMap'][detail['SHOP_ORDER_INFO.SKU_ID']]['isPresent']==true">
                                         <ul>
                                             <li>
-                                                <img ng-src="{{FILE_SERVER_DOMAIN+order['presentMap'][detail['SHOP_ORDER_INFO.SKU_ID']]['SHOP_ORDER_INFO.IMG_URL']}}">
-                                                <span class="gift_name" ng-bind="order['presentMap'][detail['SHOP_ORDER_INFO.SKU_ID']]['SHOP_ORDER_INFO.PRD_NAME']"></span>
-                                                <span class="count" ng-bind="order['presentMap'][detail['SHOP_ORDER_INFO.SKU_ID']]['SHOP_ORDER_INFO.SKU_CONTENT_INFO']+'x'+ order['presentMap'][ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.COUNT']"></span>
+                                                <img
+                                                    ng-src="{{FILE_SERVER_DOMAIN+order['presentMap'][detail['SHOP_ORDER_INFO.SKU_ID']]['SHOP_ORDER_INFO.IMG_URL']}}">
+                                                <span class="gift_name"
+                                                      ng-bind="order['presentMap'][detail['SHOP_ORDER_INFO.SKU_ID']]['SHOP_ORDER_INFO.PRD_NAME']"></span>
+                                                <span class="count"
+                                                      ng-bind="order['presentMap'][detail['SHOP_ORDER_INFO.SKU_ID']]['SHOP_ORDER_INFO.SKU_CONTENT_INFO']+'x'+ order['presentMap'][ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.COUNT']"></span>
                                             </li>
                                         </ul>
                                     </div>
@@ -132,11 +149,14 @@
                             </li>
                         </ul>
                         <div class="gift" ng-if="order['presentMap']['order']['isPresent']==true">
-                                <ul>
+                            <ul>
                                 <li>
-                                    <img ng-src="{{FILE_SERVER_DOMAIN+order['presentMap']['order']['SHOP_ORDER_INFO.IMG_URL']}}">
-                                    <span class="gift_name" ng-bind="order['presentMap']['order']['SHOP_ORDER_INFO.PRD_NAME']"></span>
-                                    <span class="count" ng-bind="order['presentMap']['order']['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] +'x'+ order['presentMap']['order']['SHOP_ORDER_INFO.COUNT']"></span>
+                                    <img
+                                        ng-src="{{FILE_SERVER_DOMAIN+order['presentMap']['order']['SHOP_ORDER_INFO.IMG_URL']}}">
+                                    <span class="gift_name"
+                                          ng-bind="order['presentMap']['order']['SHOP_ORDER_INFO.PRD_NAME']"></span>
+                                    <span class="count"
+                                          ng-bind="order['presentMap']['order']['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] +'x'+ order['presentMap']['order']['SHOP_ORDER_INFO.COUNT']"></span>
                                 </li>
                             </ul>
                         </div>

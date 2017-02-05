@@ -238,7 +238,7 @@ function routerPath(base, path, param, css) {
         loadServiceAndController: function ($ocLazyLoad, userFactory, $state, weUI) {
             var filtertList = ['pages/product/list', 'pages/product/tagPrdList', 'pages/home', 'pages/product/detail', 'pages/cart', 'pages/shop', 'pages/user/accountLogin', 'pages/user/phoneLogin', 'pages/user/register', 'pages/security/resetPwd', 'pages/user/SetPassword'];
             if (filtertList.indexOf(path) < 0) {
-                userFactory.isLogin({}, function (response) {
+                userFactory.isLogin({'USER_TYPE':'CUSTOMER'}, function (response) {
 
                 }, function (response) {
                     $state.go('pages/user/accountLogin');
