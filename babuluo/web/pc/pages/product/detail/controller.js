@@ -449,6 +449,20 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         $scope.totalSize = size;
     }
 
+    //点击收藏按钮事件
+    $scope.collectionClick = function(){
+
+        $scope.collectionState *= -1;
+
+        var parameters = {};
+        parameters['PRODUCT_COLLECTION.USER_ID'] = $scope.uid;
+        parameters['PRODUCT_COLLECTION.PRD_ID'] = $scope.product['SHOP_PRODUCT.PRD_ID'];
+        parameters['PRODUCT_COLLECTION.PRD_SPU'] = $scope.product['SHOP_PRODUCT.PRD_SPU'];
+        parameters['PRODUCT_COLLECTION.COLLECTION_STATE'] = $scope.collectionState;
+
+        productFactory.addAndMod(parameters);
+    };
+
     //加入购物车
     $scope.addToCart = function () {
         if ($scope.sku != undefined) {
