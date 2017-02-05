@@ -11,6 +11,7 @@ AndSellPCMainModule.service('productFactory', function ($resource, http) {
 
     this.getCommemtByProIdProSku = http.post('/shop/comment/getById');
 
+    this.querySalesRankingByShopId = http.post('/shop/order/querySalesRankingByShopId');
 
     this.getProductAllInfoById = http.post('/shop/product/getByIdWithAllInfoForAgent');
 

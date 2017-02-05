@@ -106,9 +106,9 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
 
     $scope.commentNumber = function () {
 
-        $scope.goodCommentsPercent = $scope.commentsPercents($scope.listLength($scope.goodComments),$scope.proComments.length)+"%";
-        $scope.midCommentsPercent = $scope.commentsPercents($scope.listLength($scope.midComments),$scope.proComments.length)+"%";
-        $scope.badCommentsPercent = $scope.commentsPercents($scope.listLength($scope.badComments),$scope.proComments.length)+"%";
+        $scope.goodCommentsPercent = $scope.commentsPercent($scope.listLength($scope.goodComments),$scope.proComments.length)+"%";
+        $scope.midCommentsPercent = $scope.commentsPercent($scope.listLength($scope.midComments),$scope.proComments.length)+"%";
+        $scope.badCommentsPercent = $scope.commentsPercent($scope.listLength($scope.badComments),$scope.proComments.length)+"%";
         $scope.goodcp={
             'width':$scope.goodCommentsPercent
         }
