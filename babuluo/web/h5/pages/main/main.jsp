@@ -27,9 +27,9 @@
 
     boolean cookieHasOpenId = false;
 
-    String openId ;
+    String openId;
     String loginId = "";
-    if(null != cookies){
+    if (null != cookies) {
         for (Cookie cookie : cookies) {
 
             if ("openId".equals(cookie.getName())) {
@@ -39,7 +39,7 @@
                 }
             }
 
-            if("ANDSELLID".equals(cookie.getName())) {
+            if ("ANDSELLID".equals(cookie.getName())) {
                 loginId = cookie.getValue();
             }
 
@@ -78,13 +78,13 @@
 
                 if (StrUtil.isNotNull(loginId)) {
 
-                    Map<String, String> data = new HashMap<String,String>();
+                    Map<String, String> data = new HashMap<String, String>();
 
-                    data.put("MEMBER.USER_ID",loginId);
+                    data.put("MEMBER.USER_ID", loginId);
                     data.put("MEMBER.WX_OPENID", openId);
                     new API().call("/AndSell/bubu/member/member/updateOpenID", data);
 
-                    response.addCookie(new Cookie("hasUpdateOpenId","1"));
+                    response.addCookie(new Cookie("hasUpdateOpenId", "1"));
                 }
             }
         }
@@ -104,10 +104,10 @@
 %>
 
 <!DOCTYPE html>
-<html lang="en"  ng-app="AndSell.H5.Main" ng-controller="H5.MainController">
+<html lang="en" ng-app="AndSell.H5.Main" ng-controller="H5.MainController">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <title ng-bind="title"></title>
 
 
@@ -117,6 +117,8 @@
     <link rel="stylesheet" href="/AndSell/h5/public/css/style.css">
     <link rel="stylesheet" href="/AndSell/h5/public/libs/swiper/swiper.min.css">
     <%--<link rel="stylesheet" href="/AndSell/h5/public/libs/weui/weui-modal.css">--%>
+    <!--高德地图-->
+    <%--<link rel="stylesheet" href="http://cache.amap.com/lbs/static/main1119.css"/>--%>
 
 </head>
 <body class="home-index">
@@ -138,14 +140,14 @@
                 <p class="nav-txt">首页</p>
             </a>
         </li>
-        <li class="cell"  ng-class="{true:'selected'}[currentPage=='fl']">
+        <li class="cell" ng-class="{true:'selected'}[currentPage=='fl']">
             <a ui-sref="pages/product/list" ng-click="toPage('fl')">
                 <i class="icon icon-product-class"></i>
                 <p class="nav-txt">分类</p>
             </a>
         </li>
-        <li class="cell"  ng-class="{true:'selected'}[currentPage=='cart']" >
-            <a ui-sref="pages/cart"  ng-click="toPage('cart')" class="home-nav-cart">
+        <li class="cell" ng-class="{true:'selected'}[currentPage=='cart']">
+            <a ui-sref="pages/cart" ng-click="toPage('cart')" class="home-nav-cart">
                 <i class="icon icon-cart"></i>
                 <p class="nav-txt">购物车</p>
                 <span class="cartNum" ng-if="cartSize!=0" ng-bind="cartSize"></span>
@@ -180,15 +182,20 @@
 <!--微信js sdk-->
 <script src="/AndSell/h5/public/libs/jweixin-1.0.0.js"></script>
 
+<!--高德地图-->
+<script src="http://cache.amap.com/lbs/static/es5.min.js"></script>
+<script type="text/javascript"
+        src="http://webapi.amap.com/maps?v=1.3&key=ef5bbbdf7bca82910095f043224c0138&plugin=AMap.Autocomplete"></script>
+
 <!--importantJs -->
 <script src="/AndSell/h5/public/application.js"></script>
 
 <!--############通用方法区############-->
-<script src="/AndSell/h5/public/commonJs.js"> </script>
+<script src="/AndSell/h5/public/commonJs.js"></script>
 
 
 <!--############ router ############-->
-<script src="router.js"> </script>
+<script src="router.js"></script>
 
 
 <!--############ service ############-->
@@ -200,12 +207,10 @@
 <script src="../user/user-services.js"></script>
 <script src="../account/account-services.js"></script>
 <script src="../security/security-services.js"></script>
-
-
-
+<script src="../shopLbs/lbs-services.js"></script>
 
 <!--############ controller ############-->
-<script src="controller.js"> </script>
+<script src="controller.js"></script>
 
 </html>
 
