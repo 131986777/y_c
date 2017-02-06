@@ -26,6 +26,8 @@ $import('pages/shop', {FROM: ''});
 
 $import('pages/shopLbs',{},true);
 
+$import('pages/shopNavigation',{F_LNG:'',F_LAT:'',T_LNG:'',T_LAT:''},true);
+
 $import('pages/coupon/list');
 
 $import('pages/user/register');
