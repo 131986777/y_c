@@ -24,6 +24,8 @@ $import('pages/personal/coupon');
 
 $import('pages/shop', {FROM: ''});
 
+$import('pages/shopLbs',{},true);
+
 $import('pages/coupon/list');
 
 $import('pages/user/register');
