@@ -10,20 +10,24 @@
 
     <!--############CSS引用区############-->
     <link href="/AndSell/app/components/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/AndSell/app/components/libs/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="/AndSell/app/components/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/AndSell/app/components/libs/bootstrap/dist/css/bootstrap-theme.min.css"
+          rel="stylesheet">
+    <link href="/AndSell/app/components/libs/font-awesome/css/font-awesome.min.css"
+          rel="stylesheet">
     <!--
         <link rel="stylesheet" type="text/css" media="all" href="daterangepicker-bs3.css" />
     -->
     <link href="/AndSell/app/components/libs/iconfont/iconfont.css" rel="stylesheet">
 
     <!--时间选择-->
-    <link href="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
     <!--表单验证-->
     <link href="/AndSell/app/components/form-validator/bootstrapValidator.min.css" rel="stylesheet">
     <!--标签输入框样式-->
     <link href="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.css" rel="stylesheet">
-    <link href="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.bootstrap.css" rel="stylesheet">
+    <link href="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.bootstrap.css"
+          rel="stylesheet">
     <link href="/AndSell/app/components/libs/simple-line-icons/simple-line-icons.min.css"
           rel="stylesheet">
     <link href="/AndSell/app/components/libs/angular/angularBlockUI/angular-block-ui.css"
@@ -57,14 +61,16 @@
         <form class="navbar-form navbar-left" role="search">
             <div class="form-group input-group">
                 <div class="input-group-btn">
-                    <select class="form-control" ng-model="searchType" ng-init="searchType='product'">
+                    <select class="form-control" ng-model="searchType"
+                            ng-init="searchType='product'">
                         <option value="product">搜商品</option>
                         <option value="order">搜订货单</option>
                         <!--<option value="returnOrder">搜退货单</option>-->
                         <option value="member">搜客户</option>
                     </select>
                 </div>
-                <input class="form-control" ng-model="searchContent" type="text" ng-keyup="queryKeyUp($event)">
+                <input class="form-control" ng-model="searchContent" type="text"
+                       ng-keyup="queryKeyUp($event)">
                 <div class="input-group-btn">
                     <button class="btn btn-default" type="button" ng-click="search()">
                         搜索
@@ -148,7 +154,8 @@
                     <img src="../components/images/logo.png">
                 </li>
                 <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1062@')>=0">
-                    <a ui-sref="product/product/productList" class="dropdown-toggle" data-toggle="dropdown"
+                    <a ui-sref="product/product/productList" class="dropdown-toggle"
+                       data-toggle="dropdown"
                        data-hover="dropdown">
                         <i class="iconfont icon-shangpin"></i>
                         商品
@@ -186,18 +193,19 @@
                     </div>
                 </li>
                 <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1063@')>=0">
-                    <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="order/order/orderList({orderType:'3'})"
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       ui-sref="order/order/orderList({orderType:'3'})"
                        data-hover="dropdown">
                         <i class="icon-docs"></i>
                         订单
                     </a>
                     <div class="sub-menu-wrap dropdown-menu" role="menu">
                         <ul class="sub-menu">
-                            <li ng-if="APP_ID_LIST.indexOf('@1075@')>=0">
-                                <a ui-sref="order/order/orderList({orderType:'1'})">
-                                    订货单
-                                </a>
-                            </li>
+                            <!--<li ng-if="APP_ID_LIST.indexOf('@1075@')>=0">-->
+                                <!--<a ui-sref="order/order/orderList({orderType:'1'})">-->
+                                    <!--订货单-->
+                                <!--</a>-->
+                            <!--</li>-->
                             <li ng-if="APP_ID_LIST.indexOf('@1076@')>=0">
                                 <a ui-sref="order/order/orderList({orderType:'3'})">
                                     自提单
@@ -213,7 +221,12 @@
                             </li>
                             <li ng-if="APP_ID_LIST.indexOf('@1111@')>=0">
                                 <a ui-sref="order/order/reserveOrder({orderType:'5'})">
-                                    预约单
+                                    分拣单
+                                </a>
+                            </li>
+                            <li >
+                                <a ui-sref="order/order/reserveOrder">
+                                    线上预约单
                                 </a>
                             </li>
                             <!--<li>-->
@@ -230,7 +243,8 @@
                     </div>
                 </li>
                 <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1064@')>=0">
-                    <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="stock/stock/stockList"
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       ui-sref="stock/stock/stockList"
                        data-hover="dropdown">
                         <i class="iconfont icon-kucun"></i>
                         库存
@@ -251,7 +265,8 @@
                     </div>
                 </li>
                 <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1065@')>=0">
-                    <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="member/member/memberList"
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       ui-sref="member/member/memberList"
                        data-hover="dropdown">
                         <i class="icon-users"></i>
                         客户
@@ -305,7 +320,8 @@
                     </div>
                 </li>
                 <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1066@')>=0">
-                    <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="balance/balance/balanceList"
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       ui-sref="balance/balance/balanceList"
                        data-hover="dropdown">
                         <i class="iconfont icon-zijinyue"></i>
                         财务
@@ -326,7 +342,8 @@
                     </div>
                 </li>
                 <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1067@')>=0">
-                    <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="marketing/coupon/coupon/couponList"
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       ui-sref="marketing/coupon/coupon/couponList"
                        data-hover="dropdown">
                         <i class="icon-graph"></i>
                         营销
@@ -392,7 +409,7 @@
                         <i class="icon-settings"></i>
                         管理
                     </a>
-                    <div class="sub-menu-wrap sub-menu-2 dropdown-menu">
+                    <div class="sub-menu-wrap sub-menu-3 dropdown-menu">
                         <ul class="sub-menu " role="menu">
                             <li ng-if="APP_ID_LIST.indexOf('@1099@')>=0">
                                 <a ui-sref="shop/shop/shopList">
@@ -417,18 +434,18 @@
                                 </a>
                             </li>
                         </ul>
-                        <!--<ul class="sub-menu " role="menu">-->
-                        <!--<li>-->
-                        <!--<a href="#">-->
-                        <!--操作日志-->
-                        <!--</a>-->
-                        <!--</li>-->
-                        <!--<li>-->
-                        <!--<a href="#">-->
-                        <!--系统配置-->
-                        <!--</a>-->
-                        <!--</li>-->
-                        <!--</ul>-->
+                        <ul class="sub-menu " role="menu">
+                            <li>
+                                <a ui-sref="sys/log/sms">
+                                    短信发送记录
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="sys/sys/sysSetting">
+                                    系统配置
+                                </a>
+                            </li>
+                        </ul>
                     </div>
                 </li>
                 <!--<li class="dropdown">-->
@@ -452,7 +469,8 @@
                 <!--</li>-->
 
                 <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1069@')>=0">
-                    <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="card/card/cardAnalysis"
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       ui-sref="card/card/cardAnalysis"
                        data-hover="dropdown">
                         <i class="icon-settings"></i>
                         分析
@@ -558,7 +576,8 @@
 
 <script src="/AndSell/app/components/libs/jquery/dist/jquery.min.js"></script>
 <script src="/AndSell/app/components/libs/angular/angular.min.js"></script>
-<script src="/AndSell/app/components/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script
+    src="/AndSell/app/components/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="/AndSell/app/components/libs/ocLazyLoad.min.js"></script>
 <script src="/AndSell/app/components/libs/angular-resource/angular-resource.min.js"></script>
 <script src="/AndSell/app/components/libs/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -566,20 +585,29 @@
 <script src="/AndSell/app/components/libs/bootstrap-fileinput/bootstrap-fileinput.js"></script>
 <script src="/AndSell/app/components/data-hover/data-hover.js"></script>
 <!--时间选择-->
-<script type="text/javascript" src="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript"
+        src="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript"
+        src="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.zh-CN.js"></script>
 <!--表单验证-->
-<script type="text/javascript" src="/AndSell/app/components/form-validator/bootstrapValidator.min.js"></script>
+<script type="text/javascript"
+        src="/AndSell/app/components/form-validator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="/AndSell/app/components/form-validator/zh_CN.js"></script>
 
 <script src="/AndSell/app/components/dateTime/moment.min.js"></script>
-<script src="/AndSell/app/components/dateTime/bootstrap-daterangepicker/daterangepicker.min.js"></script>
-<script src="/AndSell/app/components/dateTime/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script src="/AndSell/app/components/dateTime/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
-<script src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/AndSell/app/components/dateTime/clockface/js/clockface.js"></script>
-<script src="/AndSell/app/components/dateTime/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
-<script src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script src="/AndSell/app/components/dateTime/date-pickerJs.js"></script>
 <script src="/AndSell/app/components/dateTime/components-date-time-pickers.min.js"></script>
 
@@ -596,7 +624,8 @@
 <script src="/AndSell/app/components/libs/angular/angularBlockUI/angular-block-ui.js"></script>
 <script src="/AndSell/app/components/tree-list/tree-list.js"></script>
 <!-- UEDITOR 配置文件 -->
-<script type="text/javascript" src="/AndSell/app/components/libs/ueditor/ueditor.config.js"></script>
+<script type="text/javascript"
+        src="/AndSell/app/components/libs/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" src="/AndSell/app/components/libs/ueditor/ueditor.all.js"></script>
 <!--标签输入框 -->
 <script src="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.js"></script>

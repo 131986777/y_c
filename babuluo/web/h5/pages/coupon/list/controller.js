@@ -22,7 +22,7 @@ angular.module('AndSell.H5.Main').controller('pages_coupon_list_Controller', fun
             var memberCouponList = response.data;
             console.log(memberCouponList);
             memberCouponList.forEach(function (ele) {
-                $scope.couponSumMap[ele['MEMBER_COUPON.COUPON_ID']] = ele['.NUM_COUPON'];  //将客户所拥有的各优惠券的数量存在map中
+                $scope.couponSumMap[ele['MEMBER_COUPON.COUPON_ID']] = ele['NUM_COUPON'];  //将客户所拥有的各优惠券的数量存在map中
             });
             console.log($scope.couponSumMap);
             weUI.toast.hideLoading();

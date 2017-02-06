@@ -85,6 +85,7 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
 
     $scope.getShop = function (id) {
         shopFactory.getShopById({'SHOP.SHOP_ID': id}, function (response) {
+            if(response.data.length>0)
             $scope.shop = response.data[0];
         });
     }

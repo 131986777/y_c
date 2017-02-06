@@ -68,9 +68,9 @@
                 <tr ng-repeat="item in allStockList ">
                     <td ng-bind="item['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品ID-->
                     <td ng-bind="item['STOCK_REALTIME.UNIT']"  class="text-center"></td> <!--规格ID-->
-                    <td ng-bind="item['.SUMSTOCK']"  class="text-center"></td> <!--实时库存-->
-                    <td ng-bind="item['.LOCKSTOCK']"  class="text-center"></td> <!--锁定库存-->
-                    <td ng-bind="item['.UPDATETIME']|FormatAllDate"  class="text-center"></td> <!--最后变更-->
+                    <td ng-bind="item['SUMSTOCK']"  class="text-center"></td> <!--实时库存-->
+                    <td ng-bind="item['LOCKSTOCK']"  class="text-center"></td> <!--锁定库存-->
+                    <td ng-bind="item['UPDATETIME']|FormatAllDate"  class="text-center"></td> <!--最后变更-->
                     <td  class="text-center">明细</td>
                     <!--<td class="text-center">-->
                         <!--<div >-->

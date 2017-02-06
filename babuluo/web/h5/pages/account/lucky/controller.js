@@ -99,13 +99,10 @@ angular.module('AndSell.H5.Main').controller('pages_account_lucky_Controller', f
     lotteryPlugin.init('lottery');
     $("#lottery a").click(function () {
         lotteryPlugin.start();
-        //
     });
 
-    //$scope.start= function () {
-    //    lotteryPlugin.start();
-    //}
-    //
+
+    $(".lucky-page").css("min-height", document.documentElement.clientHeight);
 
     $scope.initData = function () {
         $scope.show = false;
@@ -114,19 +111,6 @@ angular.module('AndSell.H5.Main').controller('pages_account_lucky_Controller', f
         $scope.couponIdList = [];
         $scope.couponMap = new Map();
         eventFactory.queryPosition({}, function (response) {
-            //$scope.luckListAll = response.data;
-            //response.data.forEach(function (ele) {
-            //    $scope.unLuckyPosition.remove(Number(ele['LUCKY_DRAW.LOCATION']));
-            //    if(ele['LUCKY_DRAW.PRIZE_ID']!=undefined){
-            //        $scope.couponIdList.push(ele['LUCKY_DRAW.PRIZE_ID']);
-            //    }
-            //});
-            //eventFactory.getCouponInfo({'COUPON.ID': $scope.couponIdList.toString()}, function (response) {
-            //    response.data.forEach(function (ele) {
-            //        $scope.couponMap.set(ele['COUPON.ID'], ele);
-            //    });
-            //    $scope.show = true;
-            //});
 
             //index对不上
             var luckyMap = {}

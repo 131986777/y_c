@@ -27,13 +27,23 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     $scope.initData = function () {
         $scope.STORE_ID = 0;
 
-        modalFactory.setCurrentPage('sy');
-
         if (getCookie('currentShop') != undefined) {
-            $scope.shopInfo = ToJson(getCookie('currentShopInfo'));
-            $scope.STORE_ID = $scope.shopInfo['SHOP.REPOS_ID'];
+
+            $scope.shopInfo_Cookie = ToJson(getCookie('currentShopInfo'));
+            shopFactory.getShopById({'SHOP.SHOP_ID': $scope.shopInfo_Cookie['SHOP.SHOP_ID']}, function (response) {
+                if (response.data.length > 0) {
+                    $scope.shopInfo = response.data[0];
+                    $scope.STORE_ID = $scope.shopInfo['SHOP.REPOS_ID'];
+                } else {
+                    modalFactory.setCurrentPage('sy');
+                    $scope.toShop();
+                    return;
+                }
+            });
         } else {
+            modalFactory.setCurrentPage('sy');
             $scope.toShop();
+            return;
         }
 
         var params = {}
@@ -147,10 +157,8 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             }
         });//
 
-
         // 设置轮播图图片间隔
         $scope.myInterval = 4000;
-
 
         shopFactory.getBannerList({}, function (response) {    //横幅列表
 
@@ -159,8 +167,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             dataList.forEach(function (ele) {
                 if (ele['BANNER.POSITION_ID'] == "1012") {   //首页
                     $scope.homeList.push(ele);
-                }
-                else if (ele['BANNER.POSITION_ID'] == "1013") {        //限时抢购
+                } else if (ele['BANNER.POSITION_ID'] == "1013") {        //限时抢购
                     $scope.limitList.push(ele);
                     //获取到限时抢购的开始时间和结束时间
                     var startTime = new Date(ele['BANNER.BEGIN_DATETIME'].split('.')[0]).getTime();    //开始时间
@@ -176,23 +183,18 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                         }
                     }, 1000);   //间隔1秒定时执行
 
-                }
-                else if (ele['BANNER.POSITION_ID'] == "1014") {    //  团购
+                } else if (ele['BANNER.POSITION_ID'] == "1014") {    //  团购
                     $scope.groupList.push(ele);
-                }
-                else if (ele['BANNER.POSITION_ID'] == "1015") {      //活动专区
+                } else if (ele['BANNER.POSITION_ID'] == "1015") {      //活动专区
                     $scope.activityList.push(ele);
-                }
-                else if (ele['BANNER.POSITION_ID'] == "1016") {     //今日推荐
+                } else if (ele['BANNER.POSITION_ID'] == "1016") {     //今日推荐
                     $scope.recommendList.push(ele);
                 }
                 /* if (ele['BANNER.POSITION_ID'] == 1017) {     //今日推荐三连排
                  $scope.recommThreeList.push(ele);
-                 }*/
-                else if (ele['BANNER.POSITION_ID'] == "1018") {     //今日推荐九宫格
+                 }*/ else if (ele['BANNER.POSITION_ID'] == "1018") {     //今日推荐九宫格
                     $scope.recommNineList.push(ele);
-                }
-                else if (["1019", "1020", "1017", "3000", "3001", "3002", "3003", "3004", "3005"].contains(ele['BANNER.POSITION_ID'])) {
+                } else if (["1019", "1020", "1017", "3000", "3001", "3002", "3003", "3004", "3005"].contains(ele['BANNER.POSITION_ID'])) {
                     // console.log(ele['BANNER.POSITION_ID']);
                     var flag = false;
                     for (i = 0; i < $scope.BannerList.length; i++) {
@@ -224,8 +226,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                     if (currentTime > startTime) {
                         if (ele['BANNER.BEGIN_DATETIME'] == null) {
                             ele['is_show'] = true;
-                        }
-                        else {
+                        } else {
                             var endTime = new Date(ele['BANNER.END_DATETIME'].split('.')[0]).getTime();      //结束时间
                             if (currentTime < endTime) {
                                 ele['is_show'] = true;
