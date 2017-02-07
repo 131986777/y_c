@@ -15,13 +15,23 @@
         </div>
         <div class="bannerSlider">
             <!--<ul ng-repeat="item in homeList" active="item.active">-->
-            <ul>
-                <li>
-                    <a ng-href="{{homeList[0]['BANNER.URL']}}" ng-if="homeList[0]['is_show']==true">
-                        <img ng-src="{{FILE_SERVER_DOMAIN+homeList[0]['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
-                    </a>
-                </li>
-            </ul>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" ng-repeat="item in homeList" active="item.active">
+                        <a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">
+                            <img
+                                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--<ul>-->
+                <!--<li>-->
+                    <!--<a ng-href="{{homeList[0]['BANNER.URL']}}" ng-if="homeList[0]['is_show']==true">-->
+                        <!--<img ng-src="{{FILE_SERVER_DOMAIN+homeList[0]['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">-->
+                    <!--</a>-->
+                <!--</li>-->
+            <!--</ul>-->
         </div>
         <div class="entryCategories">
             <div class="entry timeLimit" ng-show="limitList.length>0">
@@ -29,15 +39,16 @@
                     <span class="name">限时秒杀</span>
                     <div class="timeCount">
                         距离结束还有：<span class="count hours">{{item.hour}}</span>时<span
-                            class="count minutes">{{item.minute}}</span>分<span
-                            class="count seconds">{{item.second}}</span>秒
+                        class="count minutes">{{item.minute}}</span>分<span
+                        class="count seconds">{{item.second}}</span>秒
                     </div>
                 </h1>
                 <div class="picShow">
                     <ul>
                         <li ng-repeat="item in limitList" ng-if="item['is_show']==true">
                             <a ng-href="{{item['BANNER.URL']}}">
-                                <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
+                                <img
+                                    ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
                             </a>
                         </li>
                     </ul>
@@ -61,7 +72,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="entry todayRecommend" ng-if="recommendList.length>0||recommNineList.length>0">
+            <div class="entry todayRecommend"
+                 ng-if="recommendList.length>0||recommNineList.length>0">
                 <h1 class="entryTitle">
                     <span class="name">今日推荐</span>
                 </h1>
@@ -70,7 +82,8 @@
                         <li>
                             <a ng-repeat="item in recommendList" ng-href="{{item['BANNER.URL']}}"
                                ng-if="item['is_show']==true">
-                                <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
+                                <img
+                                    ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
                             </a>
                         </li>
                     </ul>
@@ -83,13 +96,15 @@
                         <a ng-href="{{itemList.content[0]['BANNER.URL']}}" class="getAll">查看全部 ></a>
                     </h1>
                     <div class="bannerPic">
-                        <img ng-src="{{FILE_SERVER_DOMAIN+itemList.content[0]['BANNER.PICTURE']+'?x-oss-process=image/resize,w_1200'}}">
+                        <img
+                            ng-src="{{FILE_SERVER_DOMAIN+itemList.content[0]['BANNER.PICTURE']+'?x-oss-process=image/resize,w_1200'}}">
                     </div>
                     <div class="picShow">
                         <div class="recommendArea">
                             <div class="bestRec">
                                 <a href="">
-                                    <img ng-src="{{FILE_SERVER_DOMAIN+itemList.content[0]['BANNER.PICTURE2']+'?x-oss-process=image/resize,w_750'}}">
+                                    <img
+                                        ng-src="{{FILE_SERVER_DOMAIN+itemList.content[0]['BANNER.PICTURE2']+'?x-oss-process=image/resize,w_750'}}">
                                 </a>
                             </div>
                             <div class="normalRec">
@@ -100,7 +115,8 @@
                                                 <img width="150" height="150"
                                                      ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}">
                                             </div>
-                                            <p class="name" ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                                            <p class="name"
+                                               ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
                                             <p class="price">
                                                 <span class="current"
                                                       ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
