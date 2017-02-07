@@ -166,6 +166,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $scope.prdList = new Array;
         $scope.filter['SHOP_PRODUCT.PRD_NAME'] = key;
         $scope.getPrd();
+        $('#search-cancel').hide();
     }
 
     $scope.clearSearchHistory = function () {
