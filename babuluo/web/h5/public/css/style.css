@@ -2935,3 +2935,38 @@ p {
     left:50%;
     margin:-73.5px 0 0 -70px;
 }
+.search-info{
+    display: none;
+}
+.search-history{
+    margin: 10px 0;
+}
+.search-history li,
+.hot-term li,.hot-term .hot-title{
+    background-color: #fff;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 32px;
+    border-bottom: 1px solid #F4F4F4;
+}
+.hot-term .hot-title{
+    position: relative;
+}
+.hot-term .hot-title .hot-term-icon{
+    display: inline-block;
+    position: absolute;
+    top:12px;
+    left:10px;
+    text-align: center;
+    height: 16px;
+    line-height: 16px;
+    width: 16px;
+    border-radius: 2px;
+    color: #fff;
+    background-color: #F36F1C;
+    font-size: 10px;
+}
+.search-history li:last-child{
+    padding-left: 0;
+    text-align: center;
+}
