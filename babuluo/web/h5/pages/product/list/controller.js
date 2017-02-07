@@ -47,6 +47,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
             $stateParams.classId = undefined
         }
         $scope.filter['SHOP_PRODUCT.CLASS_ID'] = $stateParams.classId;
+        $scope.filter['SHOP_PRODUCT.SEARCH_SOURCE'] = "H5";
         $scope.storeId = $scope.STORE_ID;
         $scope.hasNextPage = true;
         $scope.loading = false;  //状态标记
