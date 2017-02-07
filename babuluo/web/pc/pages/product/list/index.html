@@ -3,20 +3,30 @@
         <div class="effectiveArea">
             <div class="rangeTab">
                 <ul>
-                    <li class="menu">默认</li>
-                    <li class="menu">时间</li>
-                    <li class="menu">销量</li>
+                    <li class="menu" ng-click="Prdfilter('name')">默认</li>
+                    <i class="range" ng-if="currFilter.type=='name'&&currFilter.order=='desc'"></i>
+                    <i class="rangeUp" ng-if="currFilter.type=='name'&&currFilter.order=='asc'"></i>
+                    <li class="menu" ng-click="Prdfilter('time')">时间</li>
+                    <i class="range" ng-if="currFilter.type=='time'&&currFilter.order=='desc'"></i>
+                    <i class="rangeUp" ng-if="currFilter.type=='time'&&currFilter.order=='asc'"></i>
+                    <li class="menu" ng-click="Prdfilter('count')">销量</li>
                     <!--<span class="proIcon"><img src="/AndSell/pc/public/css/img/range.png" alt=""></span>-->
-                    <i class="range"></i>
-                    <li class="menu">价格</li>
-                    <li class="menu">评论</li>
+                    <i class="range" ng-if="currFilter.type=='count'&&currFilter.order=='desc'"></i>
+                    <i class="rangeUp" ng-if="currFilter.type=='count'&&currFilter.order=='asc'"></i>
+                    <li class="menu" ng-click="Prdfilter('price')">价格</li>
+                    <i class="range" ng-if="currFilter.type=='price'&&currFilter.order=='desc'"></i>
+                    <i class="rangeUp" ng-if="currFilter.type=='price'&&currFilter.order=='asc'"></i>
+                    <li class="menu" ng-click="Prdfilter('comment')">评论</li>
+                    <i class="range" ng-if="currFilter.type=='comment'&&currFilter.order=='desc'"></i>
+                    <i class="rangeUp" ng-if="currFilter.type=='comment'&&currFilter.order=='asc'"></i>
                 </ul>
             </div>
             <div class="products">
                 <div class="eachPro" ng-repeat="item in prdList">
                     <div class="eachPro1">
                         <div class="proPic">
-                            <img class="img eachPic" ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])"
+                            <img class="img eachPic"
+                                 ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])"
                                  ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"
                                  onerror="nofind();"/>
                         </div>
@@ -27,7 +37,8 @@
                             <span class="detail">{{item['SHOP_PRODUCT.SKULIST'][0]['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']}}</span>
                         </div>
                         <div class="much">
-                            <span class="detail money" ng-if="item['SHOP_PRODUCT.MINSKUPRICE']!=undefined"
+                            <span class="detail money"
+                                  ng-if="item['SHOP_PRODUCT.MINSKUPRICE']!=undefined"
                                   ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥'"></span>
                             <span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>
 

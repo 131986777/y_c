@@ -29,6 +29,14 @@
   background: url(../../../public/css/img/range.png);
   margin-left: 10px;
 }
+
+.container-product-list .productList .effectiveArea .rangeTab .rangeUp {
+  display: inline-block;
+  width: 16px;
+  height: 12px;
+  background: url(../../../public/css/img/range2.png);
+  margin-left: 10px;
+}
 .container-product-list .productList .effectiveArea .rangeTab .proIcon{
  margin-left: 8px;
 }

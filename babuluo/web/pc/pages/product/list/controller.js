@@ -1,4 +1,4 @@
-angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', function (productFactory, $interval, $scope, $state, modalFactory, $state, $stateParams) {
+angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', function (productFactory, $interval, $scope, $state, modalFactory, $state,$stateParams) {
 
     modalFactory.setTitle("商品列表");
 
@@ -8,12 +8,40 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
     //
     // modalFactory.setLeftMenu(true);
 
+    $scope.currFilter = {'type': 'name', 'order': 'desc'};
+
+    $scope.Prdfilter = function (type) {
+        if (type != $scope.currFilter.type) {
+            $scope.currFilter = {
+                'type': type, 'order': 'desc'
+            }
+        } else {
+            $scope.currFilter.order = ($scope.currFilter.order == 'desc' ? 'asc' : 'desc');
+        }
+
+        var order_type = '';
+
+        if (type == 'name') {
+            order_type = 'convert(SHOP_PRODUCT.PRD_NAME using gbk)';
+        } else if (type == 'time') {
+            order_type = 'SHOP_PRODUCT.ADD_DATETIME';
+        } else if (type == 'price') {
+            order_type = 'SHOP_PRODUCT.REAL_PRICES';
+        } else if (type == 'count') {
+            order_type = 'SHOP_PRODUCT.SALES_VOLUME';
+        } else if (type == 'comment') {
+            order_type = 'SHOP_PRODUCT.COMMENT_VOLUME';
+        }
+
+        $scope.filter['SHOP_PRODUCT.ORDER'] = 'HAS_STOCK DESC,SHOP_PRODUCT.CLASS_ID ASC,'+order_type + ' ' + $scope.currFilter.order;
+        console.log($scope.currFilter);
+    }
+
     $scope.nofind = function () {
         var img = event.srcElement;
         img.src = "../../public/css/img/product.png";
         img.onerror = null;
     }
-
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.toShop = function () {
@@ -28,12 +56,11 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
 
     $scope.filter = {
         'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,
+        'SHOP_PRODUCT.CLASS_ID':$stateParams.classId,
         'SHOP_PRODUCT.SEARCH_SOURCE': "PC",
-        'SHOP_PRODUCT.CLASS_ID': $stateParams.classId,
-        'SHOP_PRODUCT.TAG_ID': $stateParams.tagId,
+        'SHOP_PRODUCT.TAG_ID':$stateParams.tagId,
         'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
         'SHOP_PRODUCT.REMARK': 'offLine',
-        'SHOP_PRODUCT.ORDER': 'HAS_STOCK DESC,SHOP_PRODUCT.CLASS_ID ASC,convert(SHOP_PRODUCT.PRD_NAME using gbk) asc '
     };
 
     $scope.bindData = function (response) {

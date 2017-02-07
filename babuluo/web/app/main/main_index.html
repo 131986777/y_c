@@ -435,12 +435,12 @@
                             </li>
                         </ul>
                         <ul class="sub-menu " role="menu">
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1139@')>=0">
                                 <a ui-sref="sys/log/sms">
                                     短信发送记录
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1140@')>=0">
                                 <a ui-sref="sys/sys/sysSetting">
                                     系统配置
                                 </a>
