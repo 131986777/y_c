@@ -82,7 +82,7 @@
                     <span class="name">数量</span>
                     <div class="numberChange">
                         <a ng-click="lessSize()" class="control reduce"></a>
-                        <input type="text" class="text" ng-model="skuSize">
+                        <input type="text" class="text" disabled ng-model="skuSize">
                         <a ng-click="moreSize()" class="control add"></a>
                     </div>
                 </div>
@@ -94,12 +94,12 @@
             </div>
 
         </div>
-        <div class="goodsIntro">
-            <div class="goodsShowBar">
+        <div class="goodsIntro ">
+            <div class="goodsShowBar text-center">
                 <h2 class="title">商品排行</h2>
                 <div class="lists">
                     <ul ng-repeat="pr in productRanking">
-                        <li>
+                        <li ng-click="toDetail(pr['SHOP_ORDER_INFO.PRD_ID'])">
                             <img ng-src="{{FILE_SERVER_DOMAIN+pr['SHOP_PRODUCT.P1']}}" alt="">
                             <div class="intro">
                                 <p class="name">{{pr['SHOP_ORDER_INFO.PRD_NAME']}}</p>

@@ -162,7 +162,7 @@
                         </div>
                     </div>
                     <div class="listControls">
-                        <a ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1"
+                        <a ng-if="(order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.TYPE']==3)||(order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.TYPE']==5)"
                            class="payNow" ng-click="toPay(order['SHOP_ORDER.ID'])">立即支付</a>
                         <a ng-click="toDetail(order['SHOP_ORDER.ID'])" class="getDetail">订单详情</a>
                     </div>

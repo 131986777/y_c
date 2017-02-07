@@ -41,5 +41,6 @@ $import('pages/account/recharge',{},true);
 $import('pages/security/modifyPwd', {login_id:''},true);
 
 $import('pages/personal/center', {}, true);
+$import('pages/personal/coupon', {}, true);
 $import('pages/personal/pay', {ORDER_ID:'',COUPON_INFO:''}, true);
 

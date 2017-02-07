@@ -98,6 +98,10 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         $scope.caculCart();
     }
 
+    //跳转至详情页
+    $scope.toDetail = function (id) {
+        $state.go('pages/product/detail', {PRD_ID: id});
+    }
 
     $scope.changeCMP = function (img) {
         $scope.CMP = img;

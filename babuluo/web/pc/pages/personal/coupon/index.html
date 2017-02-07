@@ -1,0 +1,66 @@
+<div class="row-wrap row-wrap-personal-coupon">
+    <div class="row-content">
+        <div class="row-header font">我的优惠券</div>
+        <span ng-if="memberCouponList.length==0" class="no-coupon">你暂无优惠券！</span>
+        <div class="card">
+            <div class="eachCard" ng-repeat="coupon in memberCouponList">
+                <div class="coupon">
+                    <div class="couponNav">
+                        <div class="cpPos">
+                            <p class="cpTitle">
+                                {{coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME']}}</p>
+                            <div class="cpMoneyPos"
+                                 ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                                <p class="cpMoney">
+                                    {{(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}</p>
+                                <p class="yuan">元</p>
+                            </div>
+                            <div class="cpMoneyPos"
+                                 ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                                <p class="cpMoney">
+                                    {{(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</p>
+                                <p class="yuan">折</p>
+                            </div>
+                            <p class="deadTime">
+                                有效期至{{coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']}}</p>
+                        </div>
+                    </div>
+                    <div class="couponMid">
+                        <span class="cpTime">限定时间（每周</span>
+                    <span
+                        ng-if="parseArray(coupon['MEMBER_COUPON.COUPON_INFO']['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
+                    <span
+                        ng-if="parseArray(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
+                    <span
+                        ng-if="parseArray(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
+                    <span
+                        ng-if="parseArray(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
+                    <span
+                        ng-if="parseArray(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
+                    <span
+                        ng-if="parseArray(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
+                    <span
+                        ng-if="parseArray(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
+                        <span>)</span>
+                        <div class="midPos">
+                            <p class="con">
+                            <span
+                                ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用
+                                ({{detailData(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                                <span
+                                    ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==2">特定商品类别使用
+                                ({{detailData(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                                <span
+                                    ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==3">特定商品标签使用
+                                ({{detailData(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                            </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
