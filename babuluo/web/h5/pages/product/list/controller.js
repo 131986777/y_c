@@ -10,10 +10,12 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
             $('.prdList').css('visibility',"hidden");
             $('.search-bar').css('position',"relative");
             $('#nav-bottom').hide();
+            $('.search-info').show();
         }).blur(function(){
             $('.prdList').css('visibility',"visible");
             $('.search-bar').css('position',"fixed");
             $('#nav-bottom').show();
+            $('.search-info').hide();
         });
         modalFactory.setCurrentPage('fl');
         $('#all-list').css('min-height',document.documentElement.clientHeight-40);
@@ -47,6 +49,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
             $stateParams.classId = undefined
         }
         $scope.filter['SHOP_PRODUCT.CLASS_ID'] = $stateParams.classId;
+        $scope.filter['SHOP_PRODUCT.SEARCH_SOURCE'] = "H5";
         $scope.storeId = $scope.STORE_ID;
         $scope.hasNextPage = true;
         $scope.loading = false;  //状态标记

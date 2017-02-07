@@ -1,4 +1,4 @@
-angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', function (productFactory, $interval, $scope, $state, modalFactory, $state, $stateParams) {
+angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', function (productFactory, $interval, $scope, $state, modalFactory, $state,$stateParams) {
 
     modalFactory.setTitle("商品列表");
 
@@ -42,7 +42,6 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
         img.src = "../../public/css/img/product.png";
         img.onerror = null;
     }
-
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.toShop = function () {
@@ -57,10 +56,11 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
 
     $scope.filter = {
         'SHOP_PRODUCT.PRD_NAME': $stateParams.keyword,
-        'SHOP_PRODUCT.CLASS_ID': $stateParams.classId,
-        'SHOP_PRODUCT.TAG_ID': $stateParams.tagId,
+        'SHOP_PRODUCT.CLASS_ID':$stateParams.classId,
+        'SHOP_PRODUCT.SEARCH_SOURCE': "PC",
+        'SHOP_PRODUCT.TAG_ID':$stateParams.tagId,
         'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
-        'SHOP_PRODUCT.REMARK': 'offLine'
+        'SHOP_PRODUCT.REMARK': 'offLine',
     };
 
     $scope.bindData = function (response) {
