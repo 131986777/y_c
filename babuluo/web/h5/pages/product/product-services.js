@@ -19,4 +19,8 @@ AndSellH5MainModule.service('productFactory', function ($resource, http) {
 
     this.addAndMod = http.post('/user/collection/addAndMod');
 
+    this.getRecentSearch = http.post('/search/history/getRecent');
+
+    this.getHotSearch = http.post('/search/history/getHotHistory');
+
 });

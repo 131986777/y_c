@@ -5,6 +5,10 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
     $scope.initData = function () {
+
+        $scope.getRecentSearch();
+        $scope.getHotSearch();
+
         $("input").focus(function()
         {
             $('.prdList').css('visibility',"hidden");
@@ -45,7 +49,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
                 modalFactory.setTitle('新品上市');
             }
 
-            $scope.filter['SHOP_PRODUCT.TAG_ID']=$stateParams.tagId;
+            $scope.filter['SHOP_PRODUCT.TAG_ID'] = $stateParams.tagId;
         }
 
         if ($stateParams.classId == '') {
@@ -82,23 +86,23 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
 
     //获取商品列表
     $scope.getPrd = function () {
-        $('.prdList').css('visibility',"visible");
-        $('.search-bar').css('position',"fixed");
+        $('.prdList').css('visibility', "visible");
+        $('.search-bar').css('position', "fixed");
         $('#nav-bottom').show();
         if (localStorage.getItem("PRD_LIST") != undefined) {
             $scope.prdList = JSON.parse(localStorage.getItem("PRD_LIST"));
             $scope.classList = JSON.parse(localStorage.getItem("CLASS_LIST"));
-            $scope.filter['SHOP_PRODUCT.CLASS_ID']=localStorage.getItem("CLASS_ID");
-            if(localStorage.getItem("CLASS_ID")=='undefined'){
-                $scope.filter['SHOP_PRODUCT.CLASS_ID']=undefined;
+            $scope.filter['SHOP_PRODUCT.CLASS_ID'] = localStorage.getItem("CLASS_ID");
+            if (localStorage.getItem("CLASS_ID") == 'undefined') {
+                $scope.filter['SHOP_PRODUCT.CLASS_ID'] = undefined;
             }
             $scope.toAnchor(localStorage.getItem("ANCHOR_ID"));
-            if(localStorage.getItem("ANCHOR_PAGE")!=undefined){
-                $scope.filter['PN']=Number(localStorage.getItem("ANCHOR_PAGE"));
+            if (localStorage.getItem("ANCHOR_PAGE") != undefined) {
+                $scope.filter['PN'] = Number(localStorage.getItem("ANCHOR_PAGE"));
             }
-            $scope.page={
-                pageIndex:Number(localStorage.getItem("ANCHOR_PAGE")),
-                pageSize:10
+            $scope.page = {
+                pageIndex: Number(localStorage.getItem("ANCHOR_PAGE")),
+                pageSize: 10
             }
             localStorage.removeItem("PRD_LIST");
             localStorage.removeItem("CLASS_LIST");
@@ -128,10 +132,44 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         }
     }
 
+    //历史搜索
+    $scope.getRecentSearch = function () {
+        productFactory.getRecentSearch({}, function (response) {
+            if (response.code == 0 && response.msg == "ok") {
+                $scope.historyList = response.data;
+            }else {
+                weUI.toast.error("历史搜索记录获取失败");
+            }
+        });
+    }
+
+    //热门搜索
+    $scope.getHotSearch = function () {
+        productFactory.getHotSearch({}, function (response) {
+            if (response.code == 0 && response.msg == "ok") {
+                $scope.hotList = response.data;
+            }else {
+                weUI.toast.error("热门搜索记录获取失败");
+            }
+        });
+    }
+
     //查询商品
     $scope.searchPrd = function () {
         $scope.prdList = new Array;
         $scope.getPrd();
+    }
+
+    //根据历史纪录查询商品
+    $scope.searchPrdByHistory = function (key) {
+        $('.search-info').hide();
+        $scope.prdList = new Array;
+        $scope.filter['SHOP_PRODUCT.PRD_NAME'] = key;
+        $scope.getPrd();
+    }
+
+    $scope.clearSearchHistory = function () {
+
     }
 
     //跳转至之前的商品项
@@ -144,7 +182,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     //跳转至详情页
     $scope.toDetail = function (id) {
         localStorage.setItem("PRD_LIST", JSON.stringify($scope.prdList));
-        localStorage.setItem("CLASS_LIST",  JSON.stringify($scope.classList));
+        localStorage.setItem("CLASS_LIST", JSON.stringify($scope.classList));
         localStorage.setItem("CLASS_ID", clone($scope.filter['SHOP_PRODUCT.CLASS_ID']));
         localStorage.setItem("ANCHOR_ID", id);
         localStorage.setItem("ANCHOR_PAGE", $scope.page.pageIndex);

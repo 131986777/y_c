@@ -15,8 +15,9 @@
     <div class="search-info">
         <div class="search-history">
             <ul>
-                <li>牛肉</li>
-                <li>猪肉</li>
+                <li ng-repeat="history in historyList" ng-click="searchPrdByHistory(history['SEARCH_HISTORY.CONTENT'])">
+                    {{history['SEARCH_HISTORY.CONTENT']}}
+                </li>
                 <li>清除所有记录</li>
             </ul>
         </div>
@@ -26,9 +27,9 @@
                 热门搜索
             </div>
             <ul>
-                <li>洋葱</li>
-                <li>鸡肉</li>
-                <li>红酒</li>
+                <li ng-repeat="hot in hotList" ng-click="searchPrdByHistory(hot['SEARCH_HISTORY.CONTENT'])">
+                    {{hot['SEARCH_HISTORY.CONTENT']}}
+                </li>
             </ul>
         </div>
     </div>
