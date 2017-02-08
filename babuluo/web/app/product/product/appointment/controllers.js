@@ -17,17 +17,26 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
     $scope.getPrd = function (skuIds) {
         $scope.prdMap = {};
         productFactory.getBySkuIdWithAllInfo({"SHOP_PRODUCT_SKU.SKU_IDS": skuIds}, function (response) {
-            response.data.forEach(function(ele){
-                $scope.prdMap[ele['SHOP_PRODUCT_SKU.SKU_ID']]=ele;
+            response.data.forEach(function (ele) {
+                $scope.prdMap[ele['SHOP_PRODUCT_SKU.SKU_ID']] = ele;
             });
         });
     }
 
     $scope.addAppointment = function () {
-        if ($scope.add['APPOINTMENT_PRODUCT.NAME'] == '') {
+        if ($scope.add['APPOINTMENT_PRODUCT.NAME'].trim()
+            == ''
+            || $scope.add['APPOINTMENT_PRODUCT.NAME']
+            == undefined) {
             modalFactory.showShortAlert("请填写名称");
             return;
         }
+
+        if ($scope.add['APPOINTMENT_PRODUCT.SKU_ID'] == undefined) {
+            modalFactory.showShortAlert("请选择商品");
+            return;
+        }
+
         var on = true;
         $scope.appointmentList.forEach(function (ele) {
             if (ele['APPOINTMENT_PRODUCT.SKU_ID'].trim()
@@ -48,10 +57,15 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
         }
     };
 
+    $scope.showUrl= function (skuId) {
+        modalFactory.showAlert("#/pages/product/detail/"+skuId);
+    }
+
     $scope.prdSwitch = function (data) {
         $scope.currPrd = data;
         console.log($scope.currPrd);
         $scope.add['APPOINTMENT_PRODUCT.SKU_ID'] = $scope.currPrd['SHOP_PRODUCT_SKU.SKU_ID'];
+        $scope.add['APPOINTMENT_PRODUCT.PRICE'] = $scope.currPrd['SHOP_PRODUCT_SKU.REAL_PRICES'];
     };
 
     $scope.modifyAppointmentClick = function (item) {

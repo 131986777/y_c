@@ -16,6 +16,7 @@
                         <tr>
                             <th style="width: 120px" class="text-center"> 描述</th>
                             <th style="width: 120px" class="text-center"> 商品</th>
+                            <th style="width: 120px" class="text-center"> 商品上架状态</th>
                             <th style="width: 120px" class="text-center"> 预约价</th>
                             <th style="width: 120px" class="text-center"> 预付款</th>
                             <th style="width: 120px" class="text-center"> 状态</th>
@@ -29,7 +30,12 @@
                             <td class="text-center"
                                 ng-bind="value['APPOINTMENT_PRODUCT.NAME']"></td>
 
-                            <td class="text-center" ng-bind="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']">
+                            <td class="text-center"
+                                ng-bind="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']">
+                            </td>
+                            <td class="text-center" >
+                                <span ng-if="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT_SKU.IS_SALE']==1">正在销售</span>
+                                <span ng-if="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT_SKU.IS_SALE']==-1">下架停售</span>
                             </td>
                             <td class="text-center"
                                 ng-bind="value['APPOINTMENT_PRODUCT.PRICE']"></td>
@@ -51,6 +57,7 @@
                                 <a ng-if="value['APPOINTMENT_PRODUCT.STATE']==-1"
                                    ng-click="modifyAppointmentState(value,1)">启用</a>
                                 <a ng-click="delAppointment(value)">删除</a>
+                                <a ng-click="showUrl(prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT.PRD_ID'])">预约链接</a>
                             </td>
                         </tr>
 
@@ -89,12 +96,9 @@
                             </label>
 
                             <div class="col-md-8">
-                                 <span class="text-center col-md-12" show-modal
-                                       id="#productItemSwitchModal">
+                                 <span class="text-center col-md-12">
                                     <span
-                                        ng-if="modify['APPOINTMENT_PRODUCT.SKU_ID']==undefined">选择商品</span>
-                                    <span ng-if="modify['APPOINTMENT_PRODUCT.SKU_ID']!=undefined"
-                                          ng-bind="prdMap[modify['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']"></span>
+                                        ng-bind="prdMap[modify['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']+'     (不可修改)'"></span>
                                 </span>
                             </div>
                         </div>
@@ -180,7 +184,7 @@
                                       id="#productItemSwitchModal">
                                     <span ng-if="currPrd==undefined">选择商品</span>
                                     <span ng-if="currPrd!=undefined"
-                                          ng-bind="currPrd['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME']"></span>
+                                          ng-bind="currPrd['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'] + '    (点击修改)'"></span>
                                 </span>
                             </div>
                         </div>
