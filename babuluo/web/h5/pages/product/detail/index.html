@@ -24,7 +24,7 @@
                 <p class="money">
                     <!--现价-->
           <span
-                ng-bind="nowPrice | currency :'￥'"></span>
+              ng-bind="nowPrice | currency :'￥'"></span>
                     <!--原价-->
                     <!--ng-if="sku!=undefined&&sku['isSale']"-->
           <span ng-if="oldPrice != null"
@@ -47,9 +47,11 @@
                 <span class="free-icon">赠</span>
             </div>
             <div class="product-detail weui_cell_bd">
-                <img class="freePrd-img" ng-src="{{FILE_SERVER_DOMAIN+present['SHOP_PRODUCT.CMP']}}">
+                <img class="freePrd-img"
+                     ng-src="{{FILE_SERVER_DOMAIN+present['SHOP_PRODUCT.CMP']}}">
                 <h5 class="product-name" ng-bind="present['SHOP_PRODUCT.PRD_NAME']"></h5>
-                <p class="product-cls" ng-bind="present['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ present['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ planUnitVO['presents'][0]['num']">
+                <p class="product-cls"
+                   ng-bind="present['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ present['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ planUnitVO['presents'][0]['num']">
                 </p>
             </div>
         </div>
@@ -121,10 +123,14 @@
 
     <div class="weui_tab tab-default" ng-init="prd_detai_model='detail'">
         <div class="weui_navbar">
-            <a class="weui_navbar_item" ng-class="{true:'weui_bar_item_on'}[prd_detai_model=='detail']" ng-click="prd_detai_model='detail'">
+            <a class="weui_navbar_item"
+               ng-class="{true:'weui_bar_item_on'}[prd_detai_model=='detail']"
+               ng-click="prd_detai_model='detail'">
                 商品详情
             </a>
-            <a class="weui_navbar_item"  ng-class="{true:'weui_bar_item_on'}[prd_detai_model=='comment']" ng-click="prd_detai_model='comment'">
+            <a class="weui_navbar_item"
+               ng-class="{true:'weui_bar_item_on'}[prd_detai_model=='comment']"
+               ng-click="prd_detai_model='comment'">
                 商品评价
             </a>
         </div>
@@ -195,29 +201,47 @@
         </div>
     </div>
 
-  <div class="product-action-wrap action-bar-wrap">
-    <div class="action-bar border-top">
-      <div class="icon-wrap">
-        <i class="icon icon-cart-small" ng-click="toCart()"></i>
-        <span class="cartNum" ng-bind="totalSize"></span>
-        购物车
-      </div>
-      <div class="icon-wrap" ng-click="collectionClick()">
-      <!-- 已收藏 class="icon-collected" -->
-      <i class="icon icon-collect active" ng-class="{true:'icon-collected',false:'icon-collect'}[collectionState==1]" ng-init="collectionState=-1"></i>
-      收藏
-      </div>
-      <a class="add-to-cart cell" ng-click="addToCart()">
-        加入购物车
-      </a>
+    <div class="product-action-wrap action-bar-wrap"
+         ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='NORMAL'">
+        <div class="action-bar border-top">
+            <div class="icon-wrap">
+                <i class="icon icon-cart-small" ng-click="toCart()"></i>
+                <span class="cartNum" ng-bind="totalSize"></span>
+                购物车
+            </div>
+            <div class="icon-wrap" ng-click="collectionClick()">
+                <!-- 已收藏 class="icon-collected" -->
+                <i class="icon icon-collect active"
+                   ng-class="{true:'icon-collected',false:'icon-collect'}[collectionState==1]"
+                   ng-init="collectionState=-1"></i>
+                收藏
+            </div>
+            <a class="add-to-cart cell" ng-click="addToCart()">
+                加入购物车
+            </a>
+        </div>
     </div>
-  </div>
 
-  <!--选择页面遮罩-->
-  <div class="chose-shop" ng-if="STORE_ID==0">
-    <i class="icon-shop"></i>
-    <span>请先选择门店，即可在线购买！</span>
-    <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
-  </div>
+    <div class="product-action-wrap action-bar-wrap"
+         ng-if="sku['SHOP_PRODUCT_SKU.MODEL']!='NORMAL'">
+        <div class="action-bar border-top">
+            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'" ui-sref="pages/order/appointment({SKU_IDS:sku['SHOP_PRODUCT_SKU.SKU_ID']})">
+                去预约
+            </a>
+            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='TUANGOU'" ng-click="toAppointment()">
+                参加团购
+            </a>
+            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='QIANGGOU'" ng-click="toAppointment()">
+                限时抢购
+            </a>
+        </div>
+    </div>
+
+    <!--选择页面遮罩-->
+    <div class="chose-shop" ng-if="STORE_ID==0">
+        <i class="icon-shop"></i>
+        <span>请先选择门店，即可在线购买！</span>
+        <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
+    </div>
 
 </div>

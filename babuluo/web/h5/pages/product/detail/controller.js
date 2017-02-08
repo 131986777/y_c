@@ -49,15 +49,10 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
                     $scope.nowPrice = $scope.skuList[0]['SHOP_PRODUCT_SKU.REAL_PRICES'];
                     //var skulistsForOrder = new Array;
                     //$scope.skuList.forEach(function (ele) {
-                    //    ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = ele['SHOP_PRODUCT_SKU.REAL_PRICES'];
-                    //    ele.isSale = false;
-                    //    ele.isSelect = false;
-                    //    skulistsForOrder.push({
-                    //        'prdId': ele['SHOP_PRODUCT_SKU.PRD_ID'],
-                    //        'num': 1,
-                    //        'price': ele['SHOP_PRODUCT_SKU.REAL_PRICES']
-                    //    });
-                    //});
+                    //    ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] =
+                    // ele['SHOP_PRODUCT_SKU.REAL_PRICES']; ele.isSale = false; ele.isSelect =
+                    // false; skulistsForOrder.push({ 'prdId': ele['SHOP_PRODUCT_SKU.PRD_ID'],
+                    // 'num': 1, 'price': ele['SHOP_PRODUCT_SKU.REAL_PRICES'] }); });
                     $scope.querySkuInfo();
                     $scope.skuData = $scope.getPrdSkuData($scope.skuList);
                     console.log($scope.skuData);
@@ -208,7 +203,8 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         }, function (response) {
             weUI.toast.error(response.msg);
         });
-        //orderFactory.calculateSale({'ORDER_PRD_LIST': JSON.stringify(list)}, function (response) {
+        //orderFactory.calculateSale({'ORDER_PRD_LIST': JSON.stringify(list)}, function (response)
+        // {
         //    var newPrdListInOrder = objectToArray(response.extraData.newOrder);
         //    var newPriceMap = {};
         //    newPrdListInOrder.forEach(function (ele) {
@@ -222,13 +218,9 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         //                //价格不一致 参与了促销
         //                ele.isSale = true;
         //            }
-        //            ele['SHOP_PRODUCT_SKU.REAL_PRICES'] = newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']];
-        //        }
-        //    });
-        //    weUI.toast.hideLoading();
-        //}, function (response) {
-        //    weUI.toast.hideLoading();
-        //});
+        //            ele['SHOP_PRODUCT_SKU.REAL_PRICES'] =
+        // newPriceMap[ele['SHOP_PRODUCT_SKU.PRD_ID']]; } }); weUI.toast.hideLoading(); }, function
+        // (response) { weUI.toast.hideLoading(); });
     }
 
     //获取价格区间
@@ -421,7 +413,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         }
         $scope.totalSize = size;
     }
-
+    
     //加入购物车
     $scope.addToCart = function () {
         if ($scope.sku != undefined) {
