@@ -16,4 +16,9 @@ AndSellMainModule.service('productFactory', function (http) {
     this.modifySku=http.post('/shop/product/sku/modifyById');
     this.getBySkuIdWithAllInfo=http.post('/shop/product/getBySkuIdWithAllInfo');
 
+    this.addAppointmentProduct=http.post('/shop/product/appointment/add');
+    this.modAppointmentProduct=http.post('/shop/product/appointment/modifyById');
+    this.getAppointmentProduct=http.post('/shop/product/appointment/queryAll');
+    this.delAppointmentProduct=http.post('/shop/product/appointment/delById');
+
 });

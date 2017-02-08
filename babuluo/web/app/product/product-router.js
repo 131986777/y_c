@@ -20,6 +20,9 @@ $import('product/unit/unitList');
 //商品标签列表
 $import('product/tag/tagList');
 
+//商品标签列表
+$import('product/product/appointment');
+
 
 
 
