@@ -4,28 +4,31 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
     modalFactory.setBottom(true);
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
+    $scope.historyList = [];
+
     $scope.initData = function () {
 
         $scope.getRecentSearch();
         $scope.getHotSearch();
 
-        $("input").focus(function()
-        {
-            $('.prdList').css('visibility',"hidden");
-            $('.search-bar').css('position',"relative");
+        $("input").focus(function () {
+            $('.prdList').css('visibility', "hidden");
+            $('.search-bar').css('position', "relative");
             $('#nav-bottom').hide();
             $('.search-info').show();
             $('#search-cancel').show();
+            $scope.getRecentSearch();
+            $scope.getHotSearch();
         });
-        $('#search-cancel').click(function(){
-            $('.prdList').css('visibility',"visible");
-            $('.search-bar').css('position',"fixed");
+        $('#search-cancel').click(function () {
+            $('.prdList').css('visibility', "visible");
+            $('.search-bar').css('position', "fixed");
             $('#nav-bottom').show();
             $('.search-info').hide();
             $(this).hide();
         });
         modalFactory.setCurrentPage('fl');
-        $('#all-list').css('min-height',document.documentElement.clientHeight-40);
+        $('#all-list').css('min-height', document.documentElement.clientHeight - 40);
         $scope.STORE_ID = 0;
         if (getCookie('currentShopInfo') != undefined) {
             $scope.STORE_ID = ToJson(getCookie('currentShopInfo'))['SHOP.REPOS_ID']
@@ -40,8 +43,8 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
             'SHOP_PRODUCT.REMARK': 'offLine'
         }
 
-        $scope.TAG_STATE=$stateParams.tagId;
-        if($stateParams.tagId!=''){
+        $scope.TAG_STATE = $stateParams.tagId;
+        if ($stateParams.tagId != '') {
 
             if ($stateParams.tagId == 1024) {
                 modalFactory.setTitle('爆款菜品');
@@ -137,7 +140,7 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         productFactory.getRecentSearch({}, function (response) {
             if (response.code == 0 && response.msg == "ok") {
                 $scope.historyList = response.data;
-            }else {
+            } else {
                 weUI.toast.error("历史搜索记录获取失败");
             }
         });
@@ -148,16 +151,19 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         productFactory.getHotSearch({}, function (response) {
             if (response.code == 0 && response.msg == "ok") {
                 $scope.hotList = response.data;
-            }else {
+            } else {
                 weUI.toast.error("热门搜索记录获取失败");
             }
         });
     }
 
+
     //查询商品
     $scope.searchPrd = function () {
         $scope.prdList = new Array;
         $scope.getPrd();
+        $('.search-info').hide();
+        $('#search-cancel').hide();
     }
 
     //根据历史纪录查询商品
@@ -169,8 +175,18 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         $('#search-cancel').hide();
     }
 
+    //清空历史记录
     $scope.clearSearchHistory = function () {
-
+        weUI.dialog.confirm("提示", "确认删除全部历史搜索？", function () {
+            productFactory.clearSearchHistory({}, function (response) {
+                if (response.code == 0 && response.msg == "ok") {
+                    $scope.getRecentSearch();
+                    weUI.toast.ok("已清空历史搜索");
+                } else {
+                    weUI.toast.error("清空历史搜索失败");
+                }
+            });
+        });
     }
 
     //跳转至之前的商品项
