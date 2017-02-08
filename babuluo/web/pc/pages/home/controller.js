@@ -206,7 +206,7 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
             var dataList = response.data;
 
             dataList.forEach(function (ele) {
-                if (ele['BANNER.POSITION_ID'] == "1012") {   //首页
+                if (ele['BANNER.POSITION_ID'] == "3015") {   //首页
                     $scope.homeList.push(ele);
                 }
                 else if (ele['BANNER.POSITION_ID'] == "1013") {        //限时抢购

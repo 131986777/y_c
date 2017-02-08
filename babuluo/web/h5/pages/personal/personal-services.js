@@ -12,4 +12,5 @@ AndSellH5MainModule.service('personalFactory', function (http) {
 
     this.modifyMember = http.post('/member/member/modifyMemberInMobile');
 
+    this.addAdvice = http.post('/guestbook/guestbook/add');
 });
