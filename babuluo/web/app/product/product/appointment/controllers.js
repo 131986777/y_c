@@ -10,13 +10,13 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
     $scope.initLoad();
 
     $scope.addAppointment = function () {
-        if ($scope.add['EVENT_CONFIG.NAME'] == '') {
+        if ($scope.add['APPOINTMENT_PRODUCT.NAME'] == '') {
             modalFactory.showShortAlert("请填写名称");
             return;
         }
         var on = true;
-        $scope.eventList.forEach(function (ele) {
-            if (ele['EVENT_CONFIG.NAME'].trim() == $scope.add['EVENT_CONFIG.NAME'].trim()) {
+        $scope.appointmentList.forEach(function (ele) {
+            if (ele['APPOINTMENT_PRODUCT.SKU_ID'].trim() == $scope.add['APPOINTMENT_PRODUCT.SKU_ID'].trim()) {
                 modalFactory.showShortAlert("已存在相同事件！");
                 on = false;
             }
@@ -33,12 +33,16 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
         }
     };
 
+    $scope.prdSwitch= function (data) {
+        console.log();
+    }
+
     $scope.modifyAppointmentClick = function (item) {
         $scope.modify = clone(item);
     };
 
     $scope.modifyAppointment = function () {
-        eventFactory.modAppointmentProduct($scope.modify, function (response) {
+        productFactory.modAppointmentProduct($scope.modify, function (response) {
             $("#modify").modal('hide');
             modalFactory.showShortAlert("修改成功");
             $scope.initLoad();
@@ -49,8 +53,8 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
 
     $scope.modifyAppointmentState = function (item, state) {
         modalFactory.showAlert("确定" + (state == -1 ? "停用" : "启用") + "该事件?", function () {
-            item['EVENT_CONFIG.STATE'] = state;
-            eventFactory.modAppointmentProduct(item, function (response) {
+            item['APPOINTMENT_PRODUCT.STATE'] = state;
+            productFactory.modAppointmentProduct(item, function (response) {
                 modalFactory.showShortAlert((state == -1 ? "停用" : "启用") + "成功");
                 $scope.initLoad();
             }, function (response) {
@@ -61,7 +65,7 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
 
     $scope.delAppointment = function (item) {
         modalFactory.showAlert("确认删除吗?", function () {
-            eventFactory.delAppointmentProduct(item, function (res) {
+            productFactory.delAppointmentProduct(item, function (res) {
                 modalFactory.showShortAlert("删除成功");
                 $scope.initLoad();
             });

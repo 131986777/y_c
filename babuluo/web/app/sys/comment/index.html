@@ -1,0 +1,46 @@
+<div class="page-content">
+    <div class="table-content">
+        <div class="table-toolbar" style="padding:14px 0;">
+            <div class="form-inline row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" placeholder="提货码/手机号"
+                               ng-model="queryContent">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right"
+                                ng-click="query()">查询
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th>评论商品</th>
+                <th>评论内容</th>
+                <th>评论人</th>
+                <th>评论时间</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="sms in smsLogList">
+                <td ng-bind="sms['SMS_LOG.PHONE']"></td>
+                <td ng-bind="sms['SMS_LOG.CONTENT']"></td>
+                <td ng-bind="sms['SMS_LOG.CONTENT']"></td>
+                <td ng-bind="sms['SMS_LOG.CONTENT']"></td>
+                <td ng-bind="sms['SMS_LOG.ADD_DATETIME']" class="text-center"></td>
+            </tr>
+            </tbody>
+        </table>
+        <div page-bar
+             filter-obj="filter"
+             url="/sys/sms/queryAll"
+             callback="bindData(response)">
+        </div>
+    </div>
+</div>
