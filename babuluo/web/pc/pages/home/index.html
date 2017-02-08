@@ -20,7 +20,8 @@
                     <div class="swiper-slide" ng-repeat="item in homeList" active="item.active">
                         <a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">
                             <img
-                                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
+                                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}" style="width: 1200px;
+height: 500px;">
                         </a>
                     </div>
                 </div>
