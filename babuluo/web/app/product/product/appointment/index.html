@@ -29,8 +29,8 @@
                             <td class="text-center"
                                 ng-bind="value['APPOINTMENT_PRODUCT.NAME']"></td>
 
-                            <td class="text-center"
-                                ng-bind="value['APPOINTMENT_PRODUCT.PRODUCT_NAME']"></td>
+                            <td class="text-center" ng-bind="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']">
+                            </td>
                             <td class="text-center"
                                 ng-bind="value['APPOINTMENT_PRODUCT.PRICE']"></td>
                             <td class="text-center">
@@ -60,7 +60,7 @@
             </div>
         </div>
     </div>
-  <!--BEGIN 新增单位-->
+    <!--BEGIN 新增单位-->
     <div class="modal fade text-left" id="modify" tabindex="-1" aria-hidden="true"
          style="display: none;">
         <div class="modal-dialog">
@@ -89,9 +89,14 @@
                             </label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="modify['APPOINTMENT_PRODUCT.TYPE']"
-                                       placeholder=""></div>
+                                 <span class="text-center col-md-12" show-modal
+                                       id="#productItemSwitchModal">
+                                    <span
+                                        ng-if="modify['APPOINTMENT_PRODUCT.SKU_ID']==undefined">选择商品</span>
+                                    <span ng-if="modify['APPOINTMENT_PRODUCT.SKU_ID']!=undefined"
+                                          ng-bind="prdMap[modify['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']"></span>
+                                </span>
+                            </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
@@ -109,9 +114,12 @@
                             </label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="modify['APPOINTMENT_PRODUCT.MARK1']"
-                                       placeholder=""></div>
+                                <select ng-model="modify['APPOINTMENT_PRODUCT.NEED_PAY']"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option" value="1">需要</option>
+                                    <option class="nya-bs-option" value="-1">不需要</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
@@ -146,7 +154,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"
                             aria-hidden="true"></button>
-                    <h4 class="modal-title">修改事件</h4>
+                    <h4 class="modal-title">新增预约商品</h4>
                 </div>
                 <div class="modal-body form-body text-right">
 
@@ -168,11 +176,12 @@
                             </label>
 
                             <div class="col-md-8">
-                                <!--<input type="text" class="form-control"-->
-                                       <!--ng-model="add['APPOINTMENT_PRODUCT.SKU_ID']"-->
-                                       <!--ng-init="add['APPOINTMENT_PRODUCT.SKU_ID']=''"-->
-                                       <!--placeholder="">-->
-                                <span show-modal id="#productItemSwitchModal">选择商品</span>
+                                <span class="text-center col-md-12" show-modal
+                                      id="#productItemSwitchModal">
+                                    <span ng-if="currPrd==undefined">选择商品</span>
+                                    <span ng-if="currPrd!=undefined"
+                                          ng-bind="currPrd['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME']"></span>
+                                </span>
                             </div>
                         </div>
                         <div class="form-group row">
@@ -181,7 +190,7 @@
                             </label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control"
+                                <input type="text" money class="form-control"
                                        ng-model="add['APPOINTMENT_PRODUCT.PRICE']"
                                        ng-init="add['APPOINTMENT_PRODUCT.PRICE']=''"
                                        placeholder=""></div>
@@ -192,10 +201,13 @@
                             </label>
 
                             <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="add['APPOINTMENT_PRODUCT.NEED_PAY']"
-                                       ng-init="add['APPOINTMENT_PRODUCT.NEED_PAY']=''"
-                                       placeholder=""></div>
+                                <select ng-model="add['APPOINTMENT_PRODUCT.NEED_PAY']"
+                                        ng-init="add['APPOINTMENT_PRODUCT.NEED_PAY']='-1'"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option" value="1">需要</option>
+                                    <option class="nya-bs-option" value="-1">不需要</option>
+                                </select>
+                            </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">

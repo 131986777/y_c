@@ -3,11 +3,25 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
     modalFactory.setTitle('预约商品');
 
     $scope.initLoad = function () {
-        productFactory.getAppointmentProduct({}, function (repsonce) {
-            $scope.appointmentList = repsonce.data;
+        productFactory.getAppointmentProduct({}, function (repsonse) {
+            $scope.appointmentList = repsonse.data;
+            var prdList = new Array;
+            $scope.appointmentList.forEach(function (ele) {
+                prdList.push(ele['APPOINTMENT_PRODUCT.SKU_ID']);
+            });
+            $scope.getPrd(prdList.toString());
         });
     };
     $scope.initLoad();
+
+    $scope.getPrd = function (skuIds) {
+        $scope.prdMap = {};
+        productFactory.getBySkuIdWithAllInfo({"SHOP_PRODUCT_SKU.SKU_IDS": skuIds}, function (response) {
+            response.data.forEach(function(ele){
+                $scope.prdMap[ele['SHOP_PRODUCT_SKU.SKU_ID']]=ele;
+            });
+        });
+    }
 
     $scope.addAppointment = function () {
         if ($scope.add['APPOINTMENT_PRODUCT.NAME'] == '') {
@@ -16,7 +30,8 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
         }
         var on = true;
         $scope.appointmentList.forEach(function (ele) {
-            if (ele['APPOINTMENT_PRODUCT.SKU_ID'].trim() == $scope.add['APPOINTMENT_PRODUCT.SKU_ID'].trim()) {
+            if (ele['APPOINTMENT_PRODUCT.SKU_ID'].trim()
+                == $scope.add['APPOINTMENT_PRODUCT.SKU_ID'].trim()) {
                 modalFactory.showShortAlert("已存在相同事件！");
                 on = false;
             }
@@ -33,9 +48,11 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
         }
     };
 
-    $scope.prdSwitch= function (data) {
-        console.log();
-    }
+    $scope.prdSwitch = function (data) {
+        $scope.currPrd = data;
+        console.log($scope.currPrd);
+        $scope.add['APPOINTMENT_PRODUCT.SKU_ID'] = $scope.currPrd['SHOP_PRODUCT_SKU.SKU_ID'];
+    };
 
     $scope.modifyAppointmentClick = function (item) {
         $scope.modify = clone(item);
