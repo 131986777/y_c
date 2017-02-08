@@ -21,6 +21,7 @@ $import('pages/order/review',{ID:''});
 $import('pages/personal', {}, true);
 $import('pages/personal/card');
 $import('pages/personal/coupon');
+$import('pages/personal/advice');
 
 $import('pages/shop', {FROM: ''});
 

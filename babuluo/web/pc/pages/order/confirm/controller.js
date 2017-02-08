@@ -303,7 +303,6 @@ angular.module('AndSell.PC.Main').controller('pages_order_confirm_Controller', f
                 });
                 setCookie('cartSize', JSON.stringify($scope.cartSize));
                 setCookie('cartInfo', JSON.stringify($scope.cartInfo));
-
                 modalFactory.updateCart();
                 console.log($scope.coupon);
                 if ($scope.coupon != undefined) {

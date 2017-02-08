@@ -14,10 +14,14 @@
     </form>
     <div class="search-info">
         <div class="search-history">
-            <ul>
-                <li>牛肉</li>
-                <li>猪肉</li>
-                <li>清除所有记录</li>
+            <ul ng-if="historyList.length>0">
+                <li ng-repeat="history in historyList" ng-click="searchPrdByHistory(history['SH.CONTENT'])">
+                    {{history['SH.CONTENT']}}
+                </li>
+                <li ng-click="clearSearchHistory()">清除历史搜索</li>
+            </ul>
+            <ul ng-if="historyList.length==0">
+                <li>暂无历史搜索</li>
             </ul>
         </div>
         <div class="hot-term">
@@ -26,9 +30,9 @@
                 热门搜索
             </div>
             <ul>
-                <li>洋葱</li>
-                <li>鸡肉</li>
-                <li>红酒</li>
+                <li ng-repeat="hot in hotList" ng-click="searchPrdByHistory(hot['SEARCH_HISTORY.CONTENT'])">
+                    {{hot['SEARCH_HISTORY.CONTENT']}}
+                </li>
             </ul>
         </div>
     </div>

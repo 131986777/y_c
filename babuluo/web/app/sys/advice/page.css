@@ -1,0 +1,31 @@
+
+.orderNav{
+    margin-bottom: 20px;
+
+}
+.orderNav li{
+    width: 96px;
+    text-align: center;
+    border-left: 1px solid #e0e0e0;
+
+}
+.orderNav li a{
+    padding: 0;
+    display: inline-block;
+    font-size: 16px;
+    text-decoration: none;
+    color: rgb(51,51,51);
+}
+.orderNav li.first{
+    border-left: 0;
+}
+
+.orderNav>li.active>a,
+.orderNav>li.active>a:focus,
+.orderNav>li.active>a:hover{
+    color: #DC5424;
+
+}
+.orderNav>li>a>span{
+    color: #DC5424;
+}
