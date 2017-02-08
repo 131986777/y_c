@@ -4,15 +4,14 @@
         <div class="weui_cells weui_cells_form">
             <div class="weui_cell">
                 <div class="weui_cell_bd weui_cell_primary">
-                    <textarea class="weui_input" type="text" style="padding: 5px"
-                              placeholder="    请输入您的建议或者意见，我们竭诚为你服务！" cols="20" rows="10"
-                             />
+                    <textarea class="weui_input" type="text" style="padding: 5px" ng-model="CONTENT"
+                              placeholder="    请输入您的建议或者意见，我们竭诚为你服务！" cols="20" rows="10"/>
                 </div>
             </div>
         </div>
 
         <div class="weui_btn_area">
-            <button class="weui_btn my-btn-default" type="submit">提交</button>
+            <button class="weui_btn my-btn-default" type="submit" ng-click="addAdvice()">提交</button>
         </div>
 
     </div>
