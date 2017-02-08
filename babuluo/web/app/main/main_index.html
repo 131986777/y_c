@@ -160,7 +160,7 @@
                         <i class="iconfont icon-shangpin"></i>
                         商品
                     </a>
-                    <div class="sub-menu-wrap sub-menu-2  dropdown-menu" role="menu">
+                    <div class="sub-menu-wrap sub-menu-3  dropdown-menu" role="menu">
                         <ul class="sub-menu " role="menu">
                             <li class="" ng-if="APP_ID_LIST.indexOf('@1070@')>=0">
                                 <a ui-sref="product/product/productAdd">
@@ -170,6 +170,23 @@
                             <li ng-if="APP_ID_LIST.indexOf('@1071@')>=0">
                                 <a ui-sref="product/product/productList">
                                     商品列表
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="sub-menu " role="menu">
+                            <li>
+                                <a ui-sref="product/class/classList">
+                                    预约商品
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="product/tag/tagList">
+                                    团购商品
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="product/unit/unitList">
+                                    抢购商品
                                 </a>
                             </li>
                         </ul>
@@ -202,9 +219,9 @@
                     <div class="sub-menu-wrap dropdown-menu" role="menu">
                         <ul class="sub-menu">
                             <!--<li ng-if="APP_ID_LIST.indexOf('@1075@')>=0">-->
-                                <!--<a ui-sref="order/order/orderList({orderType:'1'})">-->
-                                    <!--订货单-->
-                                <!--</a>-->
+                            <!--<a ui-sref="order/order/orderList({orderType:'1'})">-->
+                            <!--订货单-->
+                            <!--</a>-->
                             <!--</li>-->
                             <li ng-if="APP_ID_LIST.indexOf('@1076@')>=0">
                                 <a ui-sref="order/order/orderList({orderType:'3'})">
@@ -360,21 +377,26 @@
                                     优惠券
                                 </a>
                             </li>
-                            <li ng-if="APP_ID_LIST.indexOf('@1093@')>=0">
-                                <a href="#">
-                                    事件营销
-                                </a>
-                            </li>
+                            <!--<li ng-if="APP_ID_LIST.indexOf('@1093@')>=0">-->
+                            <!--<a href="#">-->
+                            <!--事件营销-->
+                            <!--</a>-->
+                            <!--</li>-->
                             <li ng-if="APP_ID_LIST.indexOf('@1094@')>=0">
                                 <a ui-sref="marketing/sales/event">
                                     事件
                                 </a>
                             </li>
-                            <!--<li>-->
-                            <!--<a ui-sref="marketing/sales/activity">-->
-                            <!--充值活动-->
-                            <!--</a>-->
-                            <!--</li>-->
+                            <li ng-if="APP_ID_LIST.indexOf('@1143@')>=0">
+                                <a ui-sref="marketing/lucky/lucky">
+                                    积分抽奖
+                                </a>
+                            </li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1144@')>=0">
+                                <a ui-sref="marketing/sales/activity">
+                                    充值活动
+                                </a>
+                            </li>
                         </ul>
 
                         <ul class="sub-menu " role="menu">
@@ -445,7 +467,7 @@
                                     系统配置
                                 </a>
                             </li>
-                            <li  ng-if="APP_ID_LIST.indexOf('@1142@')>=0">
+                            <li ng-if="APP_ID_LIST.indexOf('@1142@')>=0">
                                 <a ui-sref="sys/advice">
                                     建议 | 投诉
                                 </a>
