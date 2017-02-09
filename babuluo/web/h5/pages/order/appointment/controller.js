@@ -50,7 +50,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             $scope.skuList = response.data;
             $scope.skulistsForOrder = new Array;
             $scope.skuList.forEach(function (ele) {
-                ele['SHOP_PRODUCT_SKU.SIZE'] = $scope.cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
+                ele['SHOP_PRODUCT_SKU.SIZE'] = $stateParams.COUNT;
                 ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = moneyFormat(ele['SHOP_PRODUCT_SKU.REAL_PRICES']);
                 ele.isSelect = false;
                 ele.isSale = false;

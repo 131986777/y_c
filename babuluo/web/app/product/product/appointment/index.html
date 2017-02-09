@@ -82,16 +82,6 @@
                     <form class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 预约描述:
-                            </label>
-
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="modify['APPOINTMENT_PRODUCT.NAME']"
-                                       placeholder=""></div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
                                 <span class="required"> * </span> 商品:
                             </label>
 
@@ -101,6 +91,16 @@
                                         ng-bind="prdMap[modify['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']+'     (不可修改)'"></span>
                                 </span>
                             </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 预约描述:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control"
+                                       ng-model="modify['APPOINTMENT_PRODUCT.NAME']"
+                                       placeholder=""></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
@@ -165,17 +165,6 @@
                     <form class="form-horizontal">
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 预约描述:
-                            </label>
-
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="add['APPOINTMENT_PRODUCT.NAME']"
-                                       ng-init="add['APPOINTMENT_PRODUCT.NAME']=''"
-                                       placeholder=""></div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
                                 <span class="required"> * </span> 商品:
                             </label>
 
@@ -187,6 +176,17 @@
                                           ng-bind="currPrd['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'] + '    (点击修改)'"></span>
                                 </span>
                             </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 预约商品描述:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control"
+                                       ng-model="add['APPOINTMENT_PRODUCT.NAME']"
+                                       ng-init="add['APPOINTMENT_PRODUCT.NAME']=''"
+                                       placeholder=""></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
