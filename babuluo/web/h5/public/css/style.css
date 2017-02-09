@@ -2973,3 +2973,15 @@ p {
 #search-cancel{
     display: none;
 }
+.consult{
+    padding:25px 20px;
+    font-size: 16px;
+    line-height: 1.8;
+    border-bottom: 1px solid #D9D9D9;
+}
+.consult .consult-time{
+    color: #959595;
+}
+.consult .consult-reply{
+    color: #F36F1C;
+}
