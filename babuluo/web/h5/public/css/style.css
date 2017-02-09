@@ -2973,15 +2973,32 @@ p {
 #search-cancel{
     display: none;
 }
-.consult{
+.consult-wrap{
     padding:25px 20px;
     font-size: 16px;
     line-height: 1.8;
     border-bottom: 1px solid #D9D9D9;
+    overflow: hidden;
 }
-.consult .consult-time{
+.consult{
+    overflow: hidden;
+    padding-left: 90px;
+}
+.consult .consult-date{
     color: #959595;
 }
-.consult .consult-reply{
+.consult.consult-reply{
     color: #F36F1C;
+
+}
+.consult-wrap .consult .content{
+    float: left;
+    width:100%;
+}
+.consult-wrap .consult .left{
+    float: left;
+    width:90px;
+    margin-left: -100%;
+    position: relative;
+    left: -90px;
 }
