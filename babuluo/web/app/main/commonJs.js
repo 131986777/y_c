@@ -205,7 +205,7 @@ function routerPath(base, path, param, css) {
     router.templateUrl = url + "/index.html";
     router.resolve = {
         loadServiceAndController: function ($ocLazyLoad, userFactory) {
-            userFactory.isLogin({}, function (response) {
+            userFactory.isLogin({'USER_TYPE':'ADMIN'}, function (response) {
             }, function (response) {
                 window.location.href = '../login/index.html';
             });

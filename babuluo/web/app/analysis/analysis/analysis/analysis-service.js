@@ -52,6 +52,7 @@ AndSellMainModule.service('analysisFactory', function ($resource, baseURL) {
     };
     //查询无效会员总数
     this.getInvalidTotalCard = function () {
+        console.log("---------------------");
         return $resource(baseURL+"/stat/member_card__invalid_total",{},{
             'update':{
                 method:"PUT"
@@ -60,6 +61,7 @@ AndSellMainModule.service('analysisFactory', function ($resource, baseURL) {
     }
     //查询会员总数
     this.getTotalCard = function () {
+        console.log("--------------0000-------");
         return $resource(baseURL+"/stat/member_card_total",{},{
             'update':{
                 method:"PUT"
