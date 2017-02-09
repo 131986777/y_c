@@ -142,7 +142,7 @@
         <!--</div>-->
 
         <div class="payment-list weui_cells" ng-if="needPay==1">
-            <div class="balance weui_cell" ng-click="cardPay()">
+            <div class="balance weui_cell" ng-click="cardPayChecked()">
                 <div class="icon-wrap weui_cell_bd">
                     <i class="icon icon-userpay"></i>
                 </div>
@@ -155,7 +155,7 @@
                        ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT']"></i>
                 </div>
             </div>
-            <div class="balance weui_cell" ng-click="wxPay()">
+            <div class="balance weui_cell" ng-click="wxPayChecked()">
                 <div class="icon-wrap weui_cell_bd">
                     <i class="icon icon-wepay"></i>
                 </div>
@@ -198,4 +198,9 @@
             </a>
         </div>
     </div>
+
+
+    <card-modal money="money" show="cardModalShow"
+                callback="cardPay()"></card-modal>
+
 </div>

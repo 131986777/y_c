@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller', function ($scope, $state, balanceFactory, promoFactory, $stateParams, weUI, $http, http, couponFactory, productFactory, orderFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller', function ($scope, $state, $q, balanceFactory, promoFactory, $stateParams, weUI, $http, http, couponFactory, productFactory, orderFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('新增预约');
     modalFactory.setBottom(false);
@@ -11,6 +11,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
     $scope.initData = function () {
 
         $scope.canCommit = false;
+        var deferred_account = $q.defer();
+        var deferred_price = $q.defer();
 
         $scope.cookiePickupPerson = JSON.parse(getCookie("pickupPerson"));
 
@@ -20,24 +22,15 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
         }
 
         $scope.order = {};
-        $scope.cartInfo = getCookie('cartInfo');
-        $scope.cartSize = getCookie('cartSize');
-        if ($scope.cartInfo == '') {
-            $scope.cartInfo = new Array;
-            $scope.cartSize = {};
-        } else {
-            $scope.cartInfo = JSON.parse($scope.cartInfo);
-            $scope.cartSize = JSON.parse($scope.cartSize);
-        }
 
         $scope.shop = JSON.parse(getCookie('currentShopInfo'));
+        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
+        $scope.queryAccount(deferred_account);
 
         $scope.skuIds = $stateParams.SKU_IDS;
         var params = {};
         var skuIdLists = new Array;
-        console.log($scope.skuIds);
         $scope.skuIds.split(",").forEach(function (ele, index) {
-            console.log(index);
             skuIdLists.push(ele);
         })
         if (skuIdLists.length == 0) {
@@ -67,15 +60,74 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
                     'num': ele['SHOP_PRODUCT_SKU.SIZE'],
                     'unitPrice': ele['SHOP_PRODUCT_SKU.REAL_PRICES'] * 100
                 });
+                deferred_price.resolve();
             });
-            console.log($scope.skulistsForOrder);
             $scope.updateOrderPrice();
             $scope.canCommit = true;
             //$scope.calculatePromotion();
         });
 
         $scope.commitClick = true;
+
+        var promise = $q.all([deferred_price.promise, deferred_account.promise]);
+
+        promise.then(function (result) {
+            $scope.COUPON_INFO = $stateParams.COUPON_INFO;
+            if ($stateParams.COUPON_INFO != '') {
+                $scope.coupon = JSON.parse($stateParams.COUPON_INFO);
+                if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
+                    console.log("======");
+                    console.log($scope.coupon);
+                    var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
+                    var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
+                    price -= $scope.coupon.MONEY;
+                    if (price <= 0) {
+                        price = 0.01;
+                    }
+                    $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
+                    $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
+                    $scope.order['SHOP_ORDER.PRICE_OVER'] -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
+                    $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.coupon.ID;
+                }
+
+            }
+
+            if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
+                >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
+                $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
+            } else {
+                $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
+            }
+        });
     }
+
+    $scope.queryAccount = function (deferred) {
+        var form = {};
+        balanceFactory.queryAccountByUid({}, function (response) {
+            $scope.balanceInfo = response.data;
+            if ($scope.balanceInfo.length > 0) {
+                deferred.resolve();
+            } else {
+                $state.go('pages/user/accountLogin');
+                weUI.toast.error('请使用正确的账号登录');
+            }
+        }, function (response) {
+            weUI.toast.error(response.msg);
+        });
+    }
+
+    $scope.cardPayChecked = function () {
+        if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
+            >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
+            $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
+        } else {
+            weUI.toast.info('会员卡余额不足，请先充值');
+        }
+    };
+
+    $scope.wxPayChecked = function () {
+        $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
+    };
 
     ////计算促销结果
     //$scope.calculatePromotion = function () {
@@ -163,7 +215,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
     //    } //    }) //}) //$scope.planUnitList.forEach(function (unit) { //    if (unit['skuVOs']
     // == null || unit['skuVOs'].length == 0) { //        $scope.presents.forEach(function
     // (present) { //            if (unit['presents'] == null || unit['presents'].length == 0) { //
-    //                return; //            } //            if (unit['presents'][0]['skuId'] //                == present['SHOP_PRODUCT_SKU.SKU_ID']) { //                $scope.orderPresent = present; //                $scope.orderPresentNum = unit['presents'][0]['num']; //            } //        }) //    } //});  }); } $scope.updateOrderPrice();  if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] >= $scope.order['SHOP_ORDER.PRICE_OVER']) { $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT'; } else { $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN'; } $scope.canCommit = true;  }
+    //                return; //            } //            if (unit['presents'][0]['skuId'] //
+    //            == present['SHOP_PRODUCT_SKU.SKU_ID']) { //                $scope.orderPresent =
+    // present; //                $scope.orderPresentNum = unit['presents'][0]['num']; //
+    //  } //        }) //    } //});  }); } $scope.updateOrderPrice();  if
+    // ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
+    // $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT'; } else {
+    // $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN'; } $scope.canCommit = true;  }
 
     //计算订单价格
     $scope.updateOrderPrice = function () {
@@ -229,15 +287,14 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             weUI.toast.showLoading('正在下单');
 
             var params = $scope.order;
-            params['SHOP_ORDER.TYPE'] = $scope.cookiePickupPerson.type;//订货单
-            if ($scope.cookiePickupPerson.type
-                == 3
-                && $scope.order['SHOP_ORDER.PAY_TYPE']
-                == 'FACE') {
-                params['SHOP_ORDER.TYPE'] = 4;//自提付款单
-            }
+            //params['SHOP_ORDER.TYPE'] = $scope.cookiePickupPerson.type;//订货单
+
+            params['SHOP_ORDER.TYPE'] = 4;//自提付款单
+
             params['SHOP_ORDER.REC_CONTACT'] = $scope.cookiePickupPerson.man;//收货人
             params['SHOP_ORDER.REC_PHONE'] = $scope.cookiePickupPerson.phone;//联系电话
+            params['SHOP_ORDER.SHOP_NAME'] = $scope.shop['SHOP.SHOP_NAME'];//门店信息
+            params['SHOP_ORDER.SHOP_ID'] = $scope.shop['SHOP.SHOP_ID'];//门店ID
             if ($scope.cookiePickupPerson.type == 1) {
                 params['SHOP_ORDER.REC_TYPE'] = 1;//收货方式为快递
                 params['SHOP_ORDER.REC_ADDR'] = noUndefinedAndNull($scope.cookiePickupPerson.shengshi)
@@ -245,8 +302,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
                 params['SHOP_ORDER.GET_PRD_DATETIME'] = $scope.cookiePickupPerson.getTime;//送货时间
             } else {
                 params['SHOP_ORDER.REC_TYPE'] = 2;//收货方式为自提
-                params['SHOP_ORDER.SHOP_NAME'] = $scope.shop['SHOP.SHOP_NAME'];//门店信息
-                params['SHOP_ORDER.SHOP_ID'] = $scope.shop['SHOP.SHOP_ID'];//门店ID
                 params['SHOP_ORDER.GET_PRD_DATETIME'] = noUndefinedAndNull($scope.cookiePickupPerson.getTime);//提货时间
             }
 
@@ -255,21 +310,14 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
 
                 weUI.toast.hideLoading();
 
-                weUI.toast.ok('下单成功');
+                //weUI.toast.ok('下单成功');
                 //成功之后删除购物车内容
-                $scope.skuIds.split(',').forEach(function (ele) {
-                    $scope.cartInfo.remove(ele);
-                    if ($scope.cartSize[ele] != undefined) {
-                        $scope.cartSize[ele] = 0;
-                    }
-                });
-                setCookie('cartSize', JSON.stringify($scope.cartSize));
-                setCookie('cartInfo', JSON.stringify($scope.cartInfo));
-
-                modalFactory.updateCart();
 
                 $scope.commitClick = true;
-                console.log(response);
+
+                if($scope.needPay==1){
+                    $scope.payNow
+                }
                 window.location.replace("#/pages/order/detail/"
                     + response.extraData.ORDER_ID
                     + '/Add/');
@@ -341,6 +389,141 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
         } else {
             return tmoDate;
         }
+    }
+
+    //立即支付
+    $scope.payNow = function () {
+        //alert(getCookie('openId'));
+        /**
+         * 如果是需要微信支付的类型
+         * 调用微信统一下单的接口
+         */
+        if ($scope.presents != undefined) {
+            $scope.presents.forEach(function (present) {
+                $scope.addDetail(present);
+            })
+        }
+        $scope.order['SHOP_ORDER.ORDER_INFO'] = JSON.stringify($scope.orderDetailList);
+        if ($scope.order['SHOP_ORDER.PAY_TYPE'] == 'WEIXIN') {
+            var ip = getCookie('ip');
+            var openId = getCookie('openId');
+            var formData = {
+                PRODUCT_ID: $scope.order['SHOP_ORDER.ID'],
+                FEE: moneyToFee($scope.order['SHOP_ORDER.PRICE_OVER']),
+                BODY: 'ORDER:' + $scope.order['SHOP_ORDER.ORDER_NUM'],
+                OPENID: openId,
+                IP: ip,
+                ORDER_ID: $scope.order['SHOP_ORDER.ID'],
+                TYPE: 'ORDER'
+            };
+
+            wxPay(formData);
+
+        } else if ($scope.order['SHOP_ORDER.PAY_TYPE'] == 'ACCOUNT') {
+            $scope.cardModalShow = true;
+        }
+    };
+
+    $scope.cardPay = function () {
+        console.log(getCookie("payCard"));
+        $scope.payCard = JSON.parse(getCookie("payCard"));
+        if (!isEmptyObject($scope.payCard)) {
+            weUI.dialog.confirm("提示", "确认支付该订单？", function () {
+                weUI.toast.showLoading('正在支付');
+                var form = $scope.order;
+                form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
+                form['SHOP_ORDER.CARD_ID'] = $scope.payCard['MEMBER_CARD.CARD_ID'];
+                form['SHOP_ORDER.CARD_NO'] = $scope.payCard['MEMBER_CARD.CARD_NO'];
+                form['SHOP_ORDER.CARD_BALANCE'] = $scope.payCard['MEMBER_CARD.BALANCE'];
+                form['SHOP_ORDER.COUPON_ID'] = $scope.order['SHOP_ORDER.COUPON_ID'];
+                form['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
+                console.log(form);
+                orderFactory.payOrder(form, function (response) {
+                    weUI.toast.hideLoading();
+                    weUI.toast.ok('支付成功');
+                    $scope.cardModalShow = false;
+                    $scope.delCoupon();
+                    $state.go("pages/personal");
+                }, function (response) {
+                    weUI.toast.hideLoading();
+                    weUI.toast.error(response.msg);
+                });
+            }, function () {
+
+            });
+        } else {
+            weUI.toast.info("请选择一张会员卡支付");
+        }
+
+    };
+
+    /**
+     * 把金额从单位元 转换到分
+     * @param money
+     * @returns {Number}
+     */
+    function moneyToFee(money) {
+        return parseInt(money * 100);
+    }
+
+    function wxPay(formData) {
+        orderFactory.wxPayUndefinedOrder(formData, function (response) {
+            if (typeof WeixinJSBridge == "undefined") {
+                if (document.addEventListener) {
+                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                } else if (document.attachEvent) {
+                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                }
+            } else {
+                onBridgeReady(response.extraData.unifiedOrderJsonResult, response.extraData.returnMap);
+            }
+        }, function (res) {
+            weUI.wx_pay.error("支付失败");
+        });
+
+        //orderFactory.wxPayUndefinedOrderForPC(formData, function (response) {
+        //  console.log(response);
+        //}, function (res) {
+        //    weUI.wx_pay.error("支付失败");
+        //});
+    }
+
+    /**
+     * 微信支付JSAPI调用
+     * * @param postData
+     */
+    function onBridgeReady(postData, unifiedJson) {
+        var post = JSON.parse(postData);
+        WeixinJSBridge.invoke('getBrandWCPayRequest', {
+            "appId": post.appId,
+            "timeStamp": post.timeStamp,
+            "nonceStr": post.nonceStr,
+            "package": post.package,
+            "signType": post.signType,
+            "paySign": post.paySign
+        }, function (res) {
+            if (res.err_msg == "get_brand_wcpay_request:ok") {
+                weUI.toast.ok('正在查询支付结果,请稍等...');
+                $scope.wxPayInfo = "正在查询支付结果,请稍等...";
+                var formData = {
+                    OUT_TRADE_NO: unifiedJson.out_trade_no,
+                    ORDER_ID: $scope.order['SHOP_ORDER.ID'],
+                    TYPE: 'ORDER',
+                    CALLBACK: '-1'
+                };
+                http.post_ori("http://app.bblycyz.com/AndSell/wxCallBack", formData, function (res) {
+                    weUI.toast.ok('订单支付成功');
+                    $scope.delCoupon();
+                    location.reload();
+                }, function (res) {
+                    weUI.toast.ok('后台确认收款中!');
+                    location.reload();
+                });
+            } else {
+                weUI.wx_pay.error("支付失败");
+            }
+        });
     }
 
 });
