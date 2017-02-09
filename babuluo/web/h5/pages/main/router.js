@@ -15,7 +15,7 @@ $import('pages/order/appointment', {SKU_IDS: '1060', COUNT: '0'});
 $import('pages/order/list', {state: 'all'});
 $import('pages/order/detail', {ORDER_ID: '1030', FROM: 'List', COUPON_INFO: ''});
 $import('pages/order/addCoupon', {ORDER_ID: '1030', PRODUCTS: '{}', MONEY: '0'});
-$import('pages/order/addAddress', {SKU_IDS: '1060'});
+$import('pages/order/addAddress', {SKU_IDS: '1060',TYPE:'NORMAL'});
 $import('pages/order/CashOnDeliveryOrder');
 $import('pages/order/review', {ID: ''});
 

@@ -44,6 +44,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             window.history.back();
             return;
         }
+        if (skuIdLists.length > 1) {
+            weUI.toast.info('预约商品异常');
+            window.history.back();
+            return;
+        }
         params['SHOP_PRODUCT_SKU.SKU_IDS'] = skuIdLists.toString();
         params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         productFactory.getProductSkuBySkuIds(params, function (response) {
@@ -52,6 +57,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             $scope.skuList.forEach(function (ele) {
                 ele['SHOP_PRODUCT_SKU.SIZE'] = $stateParams.COUNT;
                 ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = moneyFormat(ele['SHOP_PRODUCT_SKU.REAL_PRICES']);
+                $scope.needPay = ele['SHOP_PRODUCT_SKU.NEED_PAY'];
                 ele.isSelect = false;
                 ele.isSale = false;
                 $scope.skulistsForOrder.push({
@@ -147,7 +153,17 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
     // $scope.presentMap['order'] = present; $scope.orderPresentNum = unit['presents'][0]['num'];
     // }else { present['orderOrPrd'] = "prd" ; present['blongToSkuId'] = unit['skuVOs'][0]['skuId']
     // ; $scope.presentMap[ present['blongToSkuId'] ] = present; } present['SHOP_PRODUCT_SKU.SIZE']
-    // = unit['presents'][0]['num'] $scope.skuList.push(present) ; } }) })  //旧逻辑 //$scope.skuList.forEach(function (ele) { //    $scope.presents.forEach(function (present) { //        if (ele['planUnit'] == null) { //            return; //        } //        if (null == ele['planUnit']['presents']) { //            return; //        } //        if (ele['planUnit']['presents'][0]['skuId'] //            == present['SHOP_PRODUCT_SKU.SKU_ID']) { //            ele['present'] = present; //            ele['hasPresent'] = true; //        } else { //            ele['hasPresent'] = false; //        } //    }) //}) //$scope.planUnitList.forEach(function (unit) { //    if (unit['skuVOs'] == null || unit['skuVOs'].length == 0) { //        $scope.presents.forEach(function (present) { //            if (unit['presents'] == null || unit['presents'].length == 0) { //                return; //            } //            if (unit['presents'][0]['skuId'] //                == present['SHOP_PRODUCT_SKU.SKU_ID']) { //                $scope.orderPresent = present; //                $scope.orderPresentNum = unit['presents'][0]['num']; //            } //        }) //    } //});  }); } $scope.updateOrderPrice();  if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] >= $scope.order['SHOP_ORDER.PRICE_OVER']) { $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT'; } else { $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN'; } $scope.canCommit = true;  }
+    // = unit['presents'][0]['num'] $scope.skuList.push(present) ; } }) })  //旧逻辑
+    // //$scope.skuList.forEach(function (ele) { //    $scope.presents.forEach(function (present) {
+    // //        if (ele['planUnit'] == null) { //            return; //        } //        if
+    // (null == ele['planUnit']['presents']) { //            return; //        } //        if
+    // (ele['planUnit']['presents'][0]['skuId'] //            ==
+    // present['SHOP_PRODUCT_SKU.SKU_ID']) { //            ele['present'] = present; //
+    // ele['hasPresent'] = true; //        } else { //            ele['hasPresent'] = false; //
+    //    } //    }) //}) //$scope.planUnitList.forEach(function (unit) { //    if (unit['skuVOs']
+    // == null || unit['skuVOs'].length == 0) { //        $scope.presents.forEach(function
+    // (present) { //            if (unit['presents'] == null || unit['presents'].length == 0) { //
+    //                return; //            } //            if (unit['presents'][0]['skuId'] //                == present['SHOP_PRODUCT_SKU.SKU_ID']) { //                $scope.orderPresent = present; //                $scope.orderPresentNum = unit['presents'][0]['num']; //            } //        }) //    } //});  }); } $scope.updateOrderPrice();  if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] >= $scope.order['SHOP_ORDER.PRICE_OVER']) { $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT'; } else { $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN'; } $scope.canCommit = true;  }
 
     //计算订单价格
     $scope.updateOrderPrice = function () {

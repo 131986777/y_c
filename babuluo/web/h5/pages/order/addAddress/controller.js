@@ -10,7 +10,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
 
         $scope.shop = JSON.parse(getCookie('currentShopInfo'))['SHOP.SHOP_NAME'];
         //document.getElementById('datetime-picker').value = getNowFormatDate();
-        document.getElementById('city-picker').value = '江苏省 南京市 ';
+        //document.getElementById('city-picker').value = '江苏省 南京市 ';
 
         $scope.date=$scope.setTime();
 
@@ -66,7 +66,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
             phone: $scope.phone,
             shop: $scope.shop,
             type: $scope.addressType,
-            shengshi: document.getElementById('city-picker').value,
+            shengshi: $scope.area,
             address: $scope.address,
             getTime: $scope.date
         };
@@ -111,8 +111,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
 
 
 
-    $("#city-picker").cityPicker({
-        title: "请选择所在地区"
-    });
+    //$("#city-picker").cityPicker({
+    //    title: "请选择所在地区"
+    //});
 });
 
