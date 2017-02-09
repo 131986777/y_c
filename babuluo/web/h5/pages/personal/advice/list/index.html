@@ -1,20 +1,22 @@
-<div class="consult-wrap">
-    <div class="consult">
-        <div class="content consult-date">
-            2010-12-11 18:12:00
+<div ng-init="initData()">
+    <div class="consult-wrap" ng-repeat="advice in adviceList">
+        <div class="consult">
+            <div class="content consult-date">
+                {{advice['GUESTBOOK.ADD_DATETIME']}}
+            </div>
+            <div class="left">咨询时间：</div>
         </div>
-        <div class="left">咨询时间：</div>
-    </div>
-    <div class="consult">
-        <div class="content">
-            请发一份食谱。
+        <div class="consult">
+            <div class="content">
+                {{advice['GUESTBOOK.GUESTBOOK_CONTENT']}}
+            </div>
+            <div class="left">咨询内容：</div>
         </div>
-        <div class="left">咨询内容：</div>
-    </div>
-    <div class="consult consult-reply">
-        <div class="content">
-            您好，祝您生活愉快您好，祝您生活愉快您好，祝您生活愉快您好，祝您生活愉快您好，祝您生活愉快您好，祝您生活愉快您好，祝您生活愉快
+        <div ng-if="advice['GUESTBOOK.STATE']==1" class="consult consult-reply">
+            <div class="content">
+                {{advice['GUESTBOOK.ANSWER_CONTENT']}}
+            </div>
+            <div class="left">客服回复：</div>
         </div>
-        <div class="left">京东回复：</div>
     </div>
 </div>
