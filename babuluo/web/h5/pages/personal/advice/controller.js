@@ -4,7 +4,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_advice_Controller',
     modalFactory.setBottom(false);
 
     $scope.addAdvice = function () {
-        if ($scope.CONTENT != undefined) {
+        if ($scope.CONTENT != undefined&&$scope.CONTENT.trim() != '') {
             personalFactory.addAdvice({"GUESTBOOK.GUESTBOOK_CONTENT": $scope.CONTENT}, function (response) {
                 if (response.code == 0 && response.msg == "ok") {
                     weUI.toast.ok("我们已收到您的建议或者意见，请耐心等待回复。");
