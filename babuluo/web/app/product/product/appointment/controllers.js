@@ -66,6 +66,7 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
         console.log($scope.currPrd);
         $scope.add['APPOINTMENT_PRODUCT.SKU_ID'] = $scope.currPrd['SHOP_PRODUCT_SKU.SKU_ID'];
         $scope.add['APPOINTMENT_PRODUCT.PRICE'] = $scope.currPrd['SHOP_PRODUCT_SKU.REAL_PRICES'];
+        $scope.add['APPOINTMENT_PRODUCT.NAME'] = $scope.currPrd['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'];
     };
 
     $scope.modifyAppointmentClick = function (item) {

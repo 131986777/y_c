@@ -1,12 +1,13 @@
-angular.module('AndSell.H5.Main').filter('formatDate',function(){
-   return function(value){
-       if('' == value)return '';
-       else{
-           return value.substr(0,19);
-       }
-   }
+angular.module('AndSell.H5.Main').filter('formatDate', function () {
+    return function (value) {
+        if ('' == value) {
+            return '';
+        } else {
+            return value.substr(0, 19);
+        }
+    }
 });
-var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function (userFactory,orderFactory ,promoFactory,$timeout, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
+var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function (userFactory, orderFactory, promoFactory, $timeout, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
 
     // modalFactory.setTitle('商品详情');
 
@@ -42,7 +43,8 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         productFactory.getProductAllInfoById(params, function (response) {
             $scope.product = response.data[0];
             if ($scope.product != undefined) {
-                modalFactory.setTitle($scope.product['SHOP_PRODUCT.PRD_NAME']+' - 云厨1站商城 - 十分钟吃饭，优质食品购买平台');
+                modalFactory.setTitle($scope.product['SHOP_PRODUCT.PRD_NAME']
+                    + ' - 云厨1站商城 - 十分钟吃饭，优质食品购买平台');
                 $scope.setPrdPicBanner($scope.product);
                 if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                     $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
@@ -72,16 +74,12 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         });
 
         //商品评论
-        productFactory.getCommemtByProIdProSku({'SHOP_COMMENT.PRO_ID':$stateParams['PRD_ID']},function (resp) {
+        productFactory.getCommemtByProIdProSku({'SHOP_COMMENT.PRO_ID': $stateParams['PRD_ID']}, function (resp) {
             $scope.proComments = resp.data;
             $scope.allComments = $scope.proComments;
             $scope.goodComments = resp.extraData.goodList;
             $scope.midComments = resp.extraData.midList;
             $scope.badComments = resp.extraData.badList;
-            console.log("1: "+$scope.goodComments.length);
-            console.log($.isEmptyObject(resp.extraData['midList']));
-            console.log("3: "+$scope.badComments.length);
-            console.log("4: "+$scope.proComments.length);
         });
 
         $scope.skuSize = 1;
@@ -151,19 +149,19 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         })
     }
 
-    $scope.planFilter = function() {
-        if ($scope.planUnitList == null){
+    $scope.planFilter = function () {
+        if ($scope.planUnitList == null) {
             return
         }
-        $scope.planUnitList.forEach(function(unit){
-            if ( null == unit){
+        $scope.planUnitList.forEach(function (unit) {
+            if (null == unit) {
                 return
             }
-            if ( unit['skuVOs'] == null || unit['skuVOs'].length == 0){
+            if (unit['skuVOs'] == null || unit['skuVOs'].length == 0) {
                 return
             }
             $scope.planUnitVO = unit;
-            if (unit['afterSumPrice']<unit['beforeSumPrice']){
+            if (unit['afterSumPrice'] < unit['beforeSumPrice']) {
                 $scope.oldPrice = $scope.nowPrice
                 $scope.nowPrice = unit['afterSumPrice'] / 100
             }
@@ -413,7 +411,21 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         }
         $scope.totalSize = size;
     }
-    
+
+    $scope.toAppointment = function () {
+        if ($scope.sku != undefined) {
+            if ($scope.sku['SHOP_PRODUCT_SKU.STOCK'] > 0) {
+                $state.go('pages/order/appointment', {
+                    'SKU_IDS': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID'], 'COUNT': $scope.skuSize
+                });
+            } else {
+                weUI.toast.error('该规格已售罄');
+            }
+        } else {
+            weUI.toast.info('请选择规格！');
+        }
+    }
+
     //加入购物车
     $scope.addToCart = function () {
         if ($scope.sku != undefined) {
@@ -486,35 +498,35 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
 
     //切换数据源
     $scope.reset = function (val) {
-        if(val=='all'){
+        if (val == 'all') {
             $scope.allComments = $scope.proComments;
         }
-        if(val=='good'){
+        if (val == 'good') {
             $scope.allComments = $scope.goodComments;
         }
-        if(val=='mid'){
+        if (val == 'mid') {
             $scope.allComments = $scope.midComments;
         }
-        if(val=='bad'){
+        if (val == 'bad') {
             $scope.allComments = $scope.badComments;
         }
     };
 
     //判断数据长度
     $scope.listLength = function (val) {
-      if($.isEmptyObject(val)){
-          return 0;
-      } else{
-          return [val].length;
-      }
+        if ($.isEmptyObject(val)) {
+            return 0;
+        } else {
+            return [val].length;
+        }
     };
 
     //点击收藏按钮事件
-    $scope.collectionClick = function(){
+    $scope.collectionClick = function () {
 
         $scope.collectionState *= -1;
 
-       var parameters = {};
+        var parameters = {};
         parameters['PRODUCT_COLLECTION.USER_ID'] = $scope.uid;
         parameters['PRODUCT_COLLECTION.PRD_ID'] = $scope.product['SHOP_PRODUCT.PRD_ID'];
         parameters['PRODUCT_COLLECTION.PRD_SPU'] = $scope.product['SHOP_PRODUCT.PRD_SPU'];
