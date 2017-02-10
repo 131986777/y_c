@@ -24,17 +24,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointmentList_Contro
         };
         if (type == 'all') {
             //全部订单
-        } else if (type == 'out') {
-            $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            //$scope.filter['SHOP_ORDER.STATE_MONEY']=-1;
-            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
         } else if (type == 'end') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
             $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = 1;
         } else if (type == 'pay') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = -1;
+            $scope.filter['SHOP_ORDER.NEED_PAY'] = 1;
         } else if (type == 'get') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
@@ -42,8 +38,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointmentList_Contro
         } else if (type == 'comment') {
             //待评价订单
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = 1
+            $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = 1;
             $scope.filter['SHOP_ORDER.STATE_COMMENT'] = -1;
         }
         $scope.getOrder();

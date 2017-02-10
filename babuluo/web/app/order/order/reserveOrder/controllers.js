@@ -1,6 +1,6 @@
 angular.module('AndSell.Main').controller('order_order_reserveOrder_Controller', function ($scope, $state, $stateParams, orderFactory, modalFactory) {
 
-    modalFactory.setTitle('预订单');
+    modalFactory.setTitle('分拣单');
     modalFactory.setBottom(false);
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
@@ -19,15 +19,6 @@ angular.module('AndSell.Main').controller('order_order_reserveOrder_Controller',
         }
         if ($stateParams.orderType != '0') {
             $scope.filter['SHOP_ORDER.TYPE'] = $scope.orderType;
-            if ($stateParams.orderType == '1') {
-                modalFactory.setTitle('订货单');
-            } else if ($stateParams.orderType == '3') {
-                modalFactory.setTitle('自提单');
-
-            }
-            else if($stateParams.orderType == '5'){
-                modalFactory.setTitle('预订单')
-            }
         }
         if (type == 'all') {
             //全部订单
