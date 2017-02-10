@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', function ($scope, $stateParams, orderFactory, modalFactory) {
+angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', function (http, $scope, $stateParams, orderFactory, modalFactory) {
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
@@ -23,6 +23,27 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
             }
         });
     };
+
+    /**
+     * 查看物流
+     * */
+    $scope.queryLogistics = function (logistics_NUM) {
+        if (logistics_NUM == undefined) {
+            $scope.alert("无物流单号，请填写物流单号后查看物流跟踪信息！");
+            return;
+        }
+        var url = "../../queryLogistics";
+        modalFactory.showShortAlert("正在查询，请稍候...");
+        http.post_ori(url, {logisticsNum: logistics_NUM}, function (response) {
+            if (response.status == 0) {
+                $scope.logisticsResult = response.result.list;
+                $('#queryLogistics').modal('show');
+            } else {
+                modalFactory.showShortAlert("暂无物流信息");
+            }
+        });
+    };
+
 
     $scope.getOrder = function (id) {
         orderFactory.getById({'SHOP_ORDER.ID': id}, function (response) {

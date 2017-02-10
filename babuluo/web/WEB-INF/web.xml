@@ -87,6 +87,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>delivery</servlet-name>
+        <servlet-class>com.bolanggu.bbl.delivery.queryDelivery</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>delivery</servlet-name>
+        <url-pattern>/queryLogistics</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>updateOrderPay</servlet-name>
         <servlet-class>com.task.servlet.UpdateOrderPayServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
