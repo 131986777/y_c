@@ -315,9 +315,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
 
                 $scope.commitClick = true;
 
-                if($scope.needPay==1){
-                    $scope.payNow
-                }
                 window.location.replace("#/pages/order/detail/"
                     + response.extraData.ORDER_ID
                     + '/Add/');

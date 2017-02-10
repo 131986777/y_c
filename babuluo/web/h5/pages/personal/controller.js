@@ -12,7 +12,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
     }
 
     $scope.getOrderStates = function () {
-        orderFactory.getOrderStates({}, function (response) {
+        orderFactory.getOrderStates({'SHOP_ORDER.TYPE':'1,3,5'}, function (response) {
             $scope.stateMap = response.extraData.stateMap;
         });
     }
