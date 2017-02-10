@@ -380,10 +380,9 @@
                                         <li ng-bind="'物流公司： '+order['SHOP_ORDER.LOGISTICS_INFO']['COMPANY']"></li>
                                         <li ng-bind="'物流单号： '+order['SHOP_ORDER.LOGISTICS_INFO']['NUM']"></li>
                                     </ul>
-                                    <a class="btn btn-detail pull-right" show-modal
+                                    <a class="btn btn-detail pull-right"
                                        ng-if="order['SHOP_ORDER.LOGISTICS_INFO']!=undefined&&order['SHOP_ORDER.LOGISTICS_INFO']!=''"
-                                       id="#modifyLogistics"
-                                       ng-click="logisticsModifyClick()">查询物流度</a>
+                                       ng-click="queryLogistics(order['SHOP_ORDER.LOGISTICS_INFO']['NUM'])">查询物流</a>
                                     <a class="btn btn-detail pull-right" show-modal
                                        id="#modifyLogistics"
                                        ng-if="order['SHOP_ORDER.LOGISTICS_INFO']!=undefined&&order['SHOP_ORDER.LOGISTICS_INFO']!=''"
@@ -666,6 +665,54 @@
                         <button type="button" class="btn green" ng-click="modifyOrderRemark()">确定
                         </button>
                         <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <!--BEGIN 修改订单备注-->
+        <div class="modal fade text-left" id="queryLogistics" tabindex="-1"
+             aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true"></button>
+                        <h4 class="modal-title">物流跟踪</h4>
+                    </div>
+                    <div class="modal-body form-body text-right">
+                        <table ng-show="logisticsResult!=undefined" class="table table-bordered table-hover"
+                               id="logisticsState">
+                            <thead>
+                            <tr>
+                                <td class="text-left col-md-5"
+                                    style="text-align: center">
+                                    时间
+                                </td>
+                                <td class="text-left col-md-7"
+                                    style="text-align: center">
+                                    地点和跟踪进度
+                                </td>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr ng-repeat="logistics in logisticsResult">
+                                <td class="text-center"><span
+                                        ng-bind="logistics.time"></span>
+                                </td>
+                                <td class="text-left"><span
+                                        ng-bind="logistics.status"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn green  btn-outline" data-dismiss="modal">确定
                         </button>
                     </div>
                 </div>
