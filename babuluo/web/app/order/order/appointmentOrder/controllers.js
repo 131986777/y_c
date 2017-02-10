@@ -27,9 +27,23 @@ angular.module('AndSell.Main').controller('order_order_appointmentOrder_Controll
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = -1;
             $scope.filter['SHOP_ORDER.NEED_PAY'] = 1;
+        } else if (type == 'send') {
+            $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
+            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
+            $scope.filter['SHOP_ORDER.NEED_PAY'] = 1;
+            $scope.filter['SHOP_ORDER.REC_TYPE'] = 1;
+            $scope.filter['SHOP_ORDER.STATE_SEND'] = -1;
         } else if (type == 'get') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
+            $scope.filter['SHOP_ORDER.REC_TYPE'] = 2;
+            $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = -1;
+        } else if (type == 'delivery') {
+            $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
+            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
+            $scope.filter['SHOP_ORDER.NEED_PAY'] = 1;
+            $scope.filter['SHOP_ORDER.REC_TYPE'] = 1;
+            $scope.filter['SHOP_ORDER.STATE_SEND'] = 1;
             $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = -1;
         } else if (type == 'comment') {
             //待评价订单

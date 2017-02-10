@@ -11,9 +11,19 @@
                 <li ng-class="{true:' active'}[state=='pay']" ng-click="filterStateOrder('pay')"><a
                     href="">待付款<span
                     ng-if="orderSizeMap.pay>0" ng-bind="'('+orderSizeMap.pay+')'"></span></a></li>
+                <li ng-class="{true:' active'}[state=='send']" ng-click="filterStateOrder('send')">
+                    <a href="">待发货<span
+                        ng-if="orderSizeMap.send>0" ng-bind="'('+orderSizeMap.send+')'"></span></a>
+                </li>
                 <li ng-class="{true:' active'}[state=='get']" ng-click="filterStateOrder('get')"><a
-                    href="">已预约<span
-                    ng-if="orderSizeMap.get>0" ng-bind="'('+orderSizeMap.get+')'"></span></a></li>
+                    href="">待自提<span
+                    ng-if="orderSizeMap.get>0" ng-bind="'('+orderSizeMap.get+')'"></span></a>
+                </li>
+                <li ng-class="{true:' active'}[state=='delivery']"
+                    ng-click="filterStateOrder('delivery')"><a
+                    href="">待收货<span
+                    ng-if="orderSizeMap.delivery>0" ng-bind="'('+orderSizeMap.delivery+')'"></span></a>
+                </li>
                 <li ng-class="{true:' active'}[state=='comment']"
                     ng-click="filterStateOrder('comment')"><a href="">待评价<span
                     ng-if="orderSizeMap.comment>0"
@@ -115,7 +125,7 @@
 
             <div class="orders">
 
-                <div >
+                <div>
                     <div class="orderItem " ng-repeat=" order in orderList"
                          ng-class="{true:'unfinished'}[order['SHOP_ORDER.STATE_ORDER']==1&&((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1)||(order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1))]">
                         <div class="imformation orderUnpayed">
@@ -125,13 +135,20 @@
                             </div>
                             <div class="unpayed"
                                  ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1)||(order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1))">
-                                已预约
+                                <span ng-if="order['SHOP_ORDER.NEED_PAY']==-1"> 已预约</span>
+                                <span
+                                    ng-if="order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2"> 已预约，并付款，待自提</span>
+                                <span
+                                    ng-if="order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==1"> 已发货，待收货</span>
+                                <span
+                                    ng-if="order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==-1"> 待发货</span>
                             </div>
                             <div class="payed"
                                  ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1)||(order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1))">
                                 已完成
                             </div>
-                            <div class="unpayed" ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消</div>
+                            <div class="unpayed" ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消
+                            </div>
                             <div class="row">
                                 <div class="details col-md-8">
                                     <span class="time"

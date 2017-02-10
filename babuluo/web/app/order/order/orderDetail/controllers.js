@@ -41,6 +41,12 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
                 != '') {
                 $scope.order['SHOP_ORDER.ERP_NUM'] = JSON.parse($scope.order['SHOP_ORDER.ERP_REMARK']).orderCode;
             }
+            if ($scope.order['SHOP_ORDER.LOGISTICS_INFO']
+                != undefined
+                && $scope.order['SHOP_ORDER.LOGISTICS_INFO']
+                != '') {
+                $scope.order['SHOP_ORDER.LOGISTICS_INFO'] = JSON.parse($scope.order['SHOP_ORDER.LOGISTICS_INFO']);
+            }
             $scope.orderType = $scope.order['SHOP_ORDER.TYPE'];
             $scope.orderDetailList.forEach(function (ele) {
                 setContentsInfoForOrder(ele);
@@ -90,11 +96,16 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
     }
 
     //发货订单
-    $scope.sendOrder = function () {
+    $scope.sendOrder = function (logistics) {
         modalFactory.showAlert("商品均已发货？", function () {
-            orderFactory.sendOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function () {
+            orderFactory.sendOrder({
+                'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID'],
+                'SHOP_ORDER.LOGISTICS_INFO': JSON.stringify(logistics)
+            }, function () {
+                $('#sendOrder').modal('hide');
                 modalFactory.showShortAlert('订单发货成功');
                 $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+
             });
         });
     }
@@ -129,6 +140,24 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
         orderFactory.modifyOrderRemark($scope.modify, function (response) {
             $scope.order['SHOP_ORDER.REMARK'] = $scope.modify['SHOP_ORDER.REMARK'];
             $('#modifyRemark').modal('hide');
+        });
+    }
+
+    $scope.logisticsModifyClick = function () {
+        $scope.logistics = {
+            'COMPANY': $scope.order['SHOP_ORDER.LOGISTICS_INFO']['COMPANY'],
+            'NUM': $scope.order['SHOP_ORDER.LOGISTICS_INFO']['NUM']
+        }
+    }
+
+    //备注修改
+    $scope.modifyOrderLogistics = function () {
+        orderFactory.modifyOrderLogistics({
+            'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID'],
+            'SHOP_ORDER.LOGISTICS_INFO': JSON.stringify($scope.logistics)
+        }, function (response) {
+            $scope.order['SHOP_ORDER.LOGISTICS_INFO'] = $scope.logistics;
+            $('#modifyLogistics').modal('hide');
         });
     }
 

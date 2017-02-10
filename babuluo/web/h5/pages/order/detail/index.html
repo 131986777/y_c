@@ -35,7 +35,11 @@
                     <span
                         ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1">已预约!</span>
                     <span
-                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.NEED_PAY']==1">已预约且已付款，待收货!</span>
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2">已预约且已付款，待自提!</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==-1">已预约且已付款，待发货</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==1">已预约且已付款，待收货</span>
                     <span
                         ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&order['SHOP_ORDER.NEED_PAY']==1">订单已完成！</span>
                     <span
@@ -79,7 +83,7 @@
                 <p ng-bind="'联系方式：'+order['SHOP_ORDER.REC_PHONE']">
                 </p>
             </div>
-            <div class="col-xs-12" ng-show="order['SHOP_ORDER.TYPE']=='3'">
+            <div class="col-xs-12" ng-show="order['SHOP_ORDER.REC_TYPE']==2">
                 <p ng-bind="'提货时间：'+order['SHOP_ORDER.GET_PRD_DATETIME']">
 
                 </p>
@@ -93,12 +97,18 @@
                 </p>
             </div>
 
-            <div class="col-xs-12" ng-show="order['SHOP_ORDER.TYPE']=='1'">
+            <div class="col-xs-12" ng-show="order['SHOP_ORDER.REC_TYPE']==1">
                 <p ng-bind="'收货地址：'+order['SHOP_ORDER.REC_ADDR']">
                 </p>
 
                 <p>
                     提货方式：快递
+                </p>
+                <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==1">
+                    <span ng-if="order['SHOP_ORDER.LOGISTICS_INFO']!=undefined&&order['SHOP_ORDER.LOGISTICS_INFO']!=''" ng-bind="'物流公司：'+order['SHOP_ORDER.LOGISTICS_INFO']['COMPANY']"></span>
+                </p>
+                <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==1">
+                    <span ng-if="order['SHOP_ORDER.LOGISTICS_INFO']!=undefined&&order['SHOP_ORDER.LOGISTICS_INFO']!=''" ng-bind="'物流单号：'+order['SHOP_ORDER.LOGISTICS_INFO']['NUM']"></span>
                 </p>
             </div>
 
@@ -372,11 +382,8 @@
             </div>
 
             <div class="btn-wrap" ng-if="order['SHOP_ORDER.TYPE']=='4'">
-                <a class="btn-cancel btn" ng-click="cancelOrder()" ng-if="order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
-                    取消订单
-                </a>
                 <a class="btn my-btn-default" ng-click="cancelOrder()"
-                   ng-if="order['SHOP_ORDER.NEED_PAY']==-1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">
+                   ng-if="(order['SHOP_ORDER.NEED_PAY']==-1&&order['SHOP_ORDER.STATE_DELIVERY']==-1)||(order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.STATE_MONEY']==-1)">
                     取消订单
                 </a>
                 <a class="btn my-btn-default" ng-click="payNow()"
@@ -386,8 +393,8 @@
             </div>
 
             <div class="btn-wrap"
-                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.TYPE']=='1'">
-                <a class="btn my-btn-default" ng-click="getPrdNow()">
+                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">
+                <a class="btn my-btn-default" ng-click="deliveryOrder()">
                     确认收货
                 </a>
             </div>

@@ -27,6 +27,16 @@
     background-color: #eee;
     border-radius:10px;
 }
+.progressList .step-2{
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+.progressList .step-3{
+    float: left;
+    width: 33.3%;
+    text-align: center;
+}
 .progressList .step-4{
     float: left;
     width: 24%;
@@ -61,7 +71,15 @@
 .progressTime ul{
     overflow: hidden;
 }
-.progressTime .step-4{
+.progressTime .step-2{
+    float: left;
+    width: 50%;
+    text-align: center;
+}.progressTime .step-3{
+    float: left;
+    width: 33.33%;
+    text-align: center;
+}.progressTime .step-4{
     float: left;
     width: 25%;
     text-align: center;
