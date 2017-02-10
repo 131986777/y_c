@@ -1,6 +1,6 @@
-angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', function (productFactory, $interval, $stateParams, $scope, $state, modalFactory, orderFactory) {
+angular.module('AndSell.PC.Main').controller('pages_order_appointmentList_Controller', function (productFactory, $interval, $stateParams, $scope, $state, modalFactory, orderFactory) {
 
-    modalFactory.setTitle("订单列表");
+    modalFactory.setTitle("我的预约列表");
 
     modalFactory.setHeader(false);
 
@@ -9,6 +9,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
     modalFactory.setSide(true);
 
     modalFactory.setLeftMenu(false);
+
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
@@ -26,45 +27,43 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
 
         $scope.state = type;
         $scope.filter = {
-            PAGE_SIZE: 5, PN: 1,'SHOP_ORDER.TYPE':'3,5'
+            PAGE_SIZE: 5, PN: 1, 'SHOP_ORDER.TYPE': '4'
         };
         if (type == 'all') {
             //全部订单
-        } else if (type == 'out') {
-            $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            //$scope.filter['SHOP_ORDER.STATE_MONEY']=-1;
-            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_OUT'] = -1;
         } else if (type == 'end') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
             $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_OUT'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_SEND'] = 1;
         } else if (type == 'pay') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_OUT'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = -1;
+            $scope.filter['SHOP_ORDER.NEED_PAY'] = 1;
+        } else if (type == 'send') {
+            $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
+            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
+            $scope.filter['SHOP_ORDER.NEED_PAY'] = 1;
+            $scope.filter['SHOP_ORDER.REC_TYPE'] = 1;
+            $scope.filter['SHOP_ORDER.STATE_SEND'] = -1;
         } else if (type == 'get') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_OUT'] = 1;
+            $scope.filter['SHOP_ORDER.REC_TYPE'] = 2;
             $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = -1;
-        } else if (type == 'accept') {
+        } else if (type == 'delivery') {
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
             $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_OUT'] = 1;
+            $scope.filter['SHOP_ORDER.NEED_PAY'] = 1;
+            $scope.filter['SHOP_ORDER.REC_TYPE'] = 1;
             $scope.filter['SHOP_ORDER.STATE_SEND'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_ACCEPT'] = -1;
+            $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = -1;
         } else if (type == 'comment') {
             //待评价订单
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_MONEY'] = 1;
-            $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = 1
-            //$scope.filter['SHOP_ORDER.STATE_OUT']=1
-            //$scope.filter['SHOP_ORDER.STATE_SEND']=1
-            //$scope.filter['SHOP_ORDER.STATE_ACCEPT']=1
+            $scope.filter['SHOP_ORDER.STATE_DELIVERY'] = 1;
             $scope.filter['SHOP_ORDER.STATE_COMMENT'] = -1;
+        } else if (type == 'cancel') {
+            //待评价订单
+            $scope.filter['SHOP_ORDER.STATE_ORDER'] = -1;
         }
         $scope.getOrder();
     }
@@ -87,7 +86,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
 
 
     $scope.getOrderStates = function () {
-        orderFactory.getOrderStates({'SHOP_ORDER.TYPE':'3,5'}, function (response) {
+        orderFactory.getOrderStates({'SHOP_ORDER.TYPE':'4'}, function (response) {
             $scope.orderSizeMap = response.extraData.stateMap;
         });
     };
@@ -161,4 +160,5 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
     $scope.$on('$destroy', function () {
         $(document.body).infinite().off("infinite");
     })
+
 });
