@@ -1,8 +1,8 @@
 /* line 1, ../sass/homePage.scss */
-.containers{
+.home-page .containers{
     background-color: #fff;
 }
-.container{
+.home-page .container{
     background-color: #fff;
 }
 .home-page .bannerSlider {

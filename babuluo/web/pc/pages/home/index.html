@@ -1,6 +1,6 @@
-<div class="containers " ng-init="initData()">
+<div class="home-page">
+    <div class="containers " ng-init="initData()">
 
-    <div class="effectiveArea home-page">
         <div class="leftMenu hidden">
             <div class="categoriePic" id="icon-wine" ng-click="toPrdClassList(3001)"></div>
             <div class="categoriePic" id="icon-cake" ng-click="toPrdClassList(3002)"></div>
@@ -20,18 +20,19 @@
                     <div class="swiper-slide" ng-repeat="item in homeList" active="item.active">
                         <a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">
                             <img
-                                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}" style="width: 1200px;
+                                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
+                                style="width: 1200px;
 height: 500px;">
                         </a>
                     </div>
                 </div>
             </div>
             <!--<ul>-->
-                <!--<li>-->
-                    <!--<a ng-href="{{homeList[0]['BANNER.URL']}}" ng-if="homeList[0]['is_show']==true">-->
-                        <!--<img ng-src="{{FILE_SERVER_DOMAIN+homeList[0]['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">-->
-                    <!--</a>-->
-                <!--</li>-->
+            <!--<li>-->
+            <!--<a ng-href="{{homeList[0]['BANNER.URL']}}" ng-if="homeList[0]['is_show']==true">-->
+            <!--<img ng-src="{{FILE_SERVER_DOMAIN+homeList[0]['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">-->
+            <!--</a>-->
+            <!--</li>-->
             <!--</ul>-->
         </div>
         <div class="entryCategories">
@@ -81,7 +82,8 @@ height: 500px;">
                 <div class="picShow">
                     <ul>
                         <li>
-                            <a ng-repeat="item in recommendList" ng-href="{{item['BANNER.URL']}}"
+                            <a ng-repeat="item in recommendList"
+                               ng-href="{{item['BANNER.URL']}}"
                                ng-if="item['is_show']==true">
                                 <img
                                     ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
@@ -94,7 +96,8 @@ height: 500px;">
                 <div>
                     <h1 class="entryTitle">{{key+1}}F
                         <span class="name">{{itemList.name}}</span>
-                        <a ng-href="{{itemList.content[0]['BANNER.URL']}}" class="getAll">查看全部 ></a>
+                        <a ng-href="{{itemList.content[0]['BANNER.URL']}}" class="getAll">查看全部
+                            ></a>
                     </h1>
                     <div class="bannerPic">
                         <img

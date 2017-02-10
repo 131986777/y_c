@@ -13,6 +13,7 @@ $import('pages/product/list', {keyword: '', classId: '', tagId: ''}, true);
 //
 // $import('pages/order/add', {SKU_IDS: '1060', COUPON_INFO: ''});
 $import('pages/order/list', {state: 'all'},true);
+$import('pages/order/appointmentList', {state: 'all'},true);
 //$import('pages/order/detail', {ORDER_ID: '1030',FROM:'List'});
 //$import('pages/order/addCoupon', {SKU_IDS: '1060', pickupPerson: '{}', PRODUCTS: '{}', MONEY:
 // '0'}); $import('pages/order/addAddress', {SKU_IDS: '1060'});
