@@ -4,7 +4,7 @@
             <div class="form-inline row">
                 <div class="col-md-4">
                     <div class="form-group">
-                        <input type="text" class="form-control" id="name" placeholder="提货码/手机号"
+                        <input type="text" class="form-control" id="name" placeholder="商品/手机号/内容"
                                ng-model="queryContent">
                     </div>
                     <div class="form-group">
@@ -28,19 +28,139 @@
             </tr>
             </thead>
             <tbody>
-            <tr ng-repeat="sms in smsLogList">
-                <td ng-bind="sms['SMS_LOG.PHONE']"></td>
-                <td ng-bind="sms['SMS_LOG.CONTENT']"></td>
-                <td ng-bind="sms['SMS_LOG.CONTENT']"></td>
-                <td ng-bind="sms['SMS_LOG.CONTENT']"></td>
-                <td ng-bind="sms['SMS_LOG.ADD_DATETIME']" class="text-center"></td>
+            <tr ng-repeat="sms in allComments">
+                <td ng-bind="sms['SHOP_PRODUCT.PRD_NAME']"></td>
+                <td ng-bind="sms['SHOP_COMMENT.PRO_MAIN_COMMENT']"></td>
+                <td ng-bind="sms['MEMBER.USER_NAME']"></td>
+                <td ng-bind="sms['SHOP_COMMENT.PRO_MAIN_COMMENT_TIME']"></td>
+                <td>
+                    <a class="table-link" data-toggle="modal" data-target="#showMore"  ng-click="showDetailById(sms)">更多</a>
+                    <a class="table-link" data-toggle="modal" ng-click="isShow(sms)">
+                        <span ng-show="sms['SHOP_COMMENT.STATE'] == 1">停用</span>
+                        <span ng-show="sms['SHOP_COMMENT.STATE'] == -1">启用</span>
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>
         <div page-bar
              filter-obj="filter"
-             url="/sys/sms/queryAll"
+             url="/shop/comment/queryAll"
              callback="bindData(response)">
         </div>
     </div>
+
+    <div class="modal fade" id="showMore" role="dialog" aria-labelledby="edit" style="display: none;">
+        <div class="modal-dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h3 class="modal-title">
+                        更多评论信息
+                    </h3>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal ng-pristine ng-valid" name="editForm" novalidate="">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                评论商品：
+                            </label>
+                            <label class="col-sm-7 control-label ng-binding" style="text-align: left">
+                                {{comment['SHOP_PRODUCT.PRD_NAME']}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                评论内容：
+                            </label>
+                            <label class="col-sm-7 control-label ng-binding" style="text-align: left">
+                                {{comment['SHOP_COMMENT.PRO_MAIN_COMMENT']}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                评论添加：
+                            </label>
+                            <label class="col-sm-7 control-label ng-binding" style="text-align: left">
+                                {{comment['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD']}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                评论回复：
+                            </label>
+                            <label class="col-sm-7 control-label ng-binding" style="text-align: left">
+                                {{comment['SHOP_COMMENT.PRO_MAIN_COMMENT_RETURN']}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                评论回复添加：
+                            </label>
+                            <label class="col-sm-7 control-label ng-binding" style="text-align: left">
+                                {{comment['SHOP_COMMENT.PRO_MAIN_COMMENT_RETURN_ADD']}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                评论人：
+                            </label>
+                            <label class="col-sm-7 control-label ng-binding" style="text-align: left">
+                                {{comment['MEMBER.USER_NAME']}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                评论时间：
+                            </label>
+                            <label class="col-sm-7 control-label ng-binding" style="text-align: left">
+                                {{comment['SHOP_COMMENT.PRO_MAIN_COMMENT_TIME']}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                               等级：
+                            </label>
+                            <label class="col-sm-7 control-label ng-binding" style="text-align: left">
+                                {{comment['SHOP_COMMENT.STAR']}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                是否匿名：
+                            </label>
+                            <label class="col-sm-7 control-label ng-binding" style="text-align: left" ng-show="comment['SHOP_COMMENT.USER_ANONYMOUS']==1">
+                                是
+                            </label>
+                            <label class="col-sm-7 control-label ng-binding" style="text-align: left" ng-show="comment['SHOP_COMMENT.USER_ANONYMOUS']==--1">
+                                不是
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                是否可见：
+                            </label>
+                            <label class="col-sm-7 control-label ng-binding" style="text-align: left" ng-show="comment['SHOP_COMMENT.STATE']==1">
+                                是
+                            </label>
+                            <label class="col-sm-7 control-label ng-binding" style="text-align: left" ng-show="comment['SHOP_COMMENT.STATE']==-1">
+                                不是
+                            </label>
+                        </div>
+                        <!--<div class="modal-footer">
+                             <button class="btn btn-primary" type="submit">
+                                 保存
+                             </button>
+                             <button class="btn btn-default" data-dismiss="modal">
+                                 关闭
+                             </button>
+                         </div>-->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
