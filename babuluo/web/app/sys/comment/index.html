@@ -32,12 +32,12 @@
                 <td ng-bind="sms['SHOP_PRODUCT.PRD_NAME']"></td>
                 <td ng-bind="sms['SHOP_COMMENT.PRO_MAIN_COMMENT']"></td>
                 <td ng-bind="sms['MEMBER.USER_NAME']"></td>
-                <td ng-bind="sms['SHOP_COMMENT.PRO_MAIN_COMMENT_TIME']"></td>
+                <td ng-bind="sms['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD_TIME']"></td>
                 <td>
                     <a class="table-link" data-toggle="modal" data-target="#showMore"  ng-click="showDetailById(sms)">更多</a>
                     <a class="table-link" data-toggle="modal" ng-click="isShow(sms)">
-                        <span ng-show="sms['SHOP_COMMENT.STATE'] == 1">停用</span>
-                        <span ng-show="sms['SHOP_COMMENT.STATE'] == -1">启用</span>
+                        <span ng-show="sms['SHOP_COMMENT.STATE'] == 1">隐藏</span>
+                        <span ng-show="sms['SHOP_COMMENT.STATE'] == -1">显示</span>
                     </a>
                 </td>
             </tr>

@@ -22,6 +22,12 @@ angular.module('AndSell.PC.Main').controller('pages_product_collect_Controller',
         console.log($scope.userCollections);
     }
 
+    //跳转至详情页
+    $scope.toDetail = function (id) {
+        $state.go('pages/product/detail', {PRD_ID: id});
+    }
+
+
     //加入购物车
     $scope.addToCart = function (sku) {
         var cartInfo = getCookie('cartInfo');
