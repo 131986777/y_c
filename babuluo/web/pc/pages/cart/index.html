@@ -4,22 +4,22 @@
             <div class="controlBar">
                 <div class="effectiveArea">
                     <div class="storeInfo storeInfo1">
-                        <p class="storeName">莲花新城店</p>
-                        <p class="number"><span class="phoneNumber">025-66018138</span><span
-                            class="openTime">7:30－21:30</span></p>
-                        <p class="addressInfo">建邺区莲花新城北苑6栋24-8</p>
+                        <p class="storeName" ng-bind="shop['SHOP.SHOP_NAME']"></p>
+                        <p class="number"><span class="phoneNumber" ng-bind="shop['SHOP.TELEPHONE']"></span><span
+                            class="openTime" ng-bind="shop['SHOP.OPEN_TIME']+' — '+shop['SHOP.CLOSE_TIME']"></span></p>
+                        <p class="addressInfo" ng-bind="shop['SHOP.ADDR']"></p>
                     </div>
-                    <div class="toolbar toolbar1">
-                        <!-- 搜索框 -->
-                        <div class="row-input">
-                            <input type="text" ng-model="searchInfo" placeholder="商品"
-                                   ng-keyup="myKeyup($event)">
-                            <div class="btn-search">
-                                <i class="icon-search" ng-click="search()"></i>
-                            </div>
-                        </div>
+                    <!--<div class="toolbar toolbar1">-->
+                        <!--&lt;!&ndash; 搜索框 &ndash;&gt;-->
+                        <!--<div class="row-input">-->
+                            <!--<input type="text" ng-model="searchInfo" placeholder="商品"-->
+                                   <!--ng-keyup="myKeyup($event)">-->
+                            <!--<div class="btn-search">-->
+                                <!--<i class="icon-search" ng-click="search()"></i>-->
+                            <!--</div>-->
+                        <!--</div>-->
 
-                    </div>
+                    <!--</div>-->
                 </div>
             </div>
             <div class="row-wrap1" ng-init="initData()">
