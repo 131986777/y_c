@@ -42,6 +42,7 @@ angular.module('AndSell.Main').controller('card_card_cardType_Controller', funct
 
     $scope.selectCardColor = function (color) {
         $scope.add['MEMBER_CARD_TYPE.BG_COLOR'] = color;
+        $scope.modify['MEMBER_CARD_TYPE.BG_COLOR'] = color;
     }
 
     $scope.deleteCardType = function (id) {
