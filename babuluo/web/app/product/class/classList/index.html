@@ -49,25 +49,25 @@
                 </div>
                 <div class="modal-body form-body text-right">
 
-                    <form class="form-horizontal">
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">所属分类:
-                            </label>
+                    <form class="form-horizontal"    ng-init="add['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID']='BASIC'">
+                        <!--<div class="form-group row">-->
+                            <!--<label class="col-md-3 control-label">所属分类:-->
+                            <!--</label>-->
 
-                            <div class="col-md-8">
-                                <select ng-model="add['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID']"
-                                        ng-init="add['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID']='BASIC'"
-                                        class="nya-bs-select form-control">
-                                    <option class="nya-bs-option" value="BASIC">根分类</option>
-                                    <option class="nya-bs-option"
-                                            ng-repeat="value in productClassList"
-                                            ng-bind="value['SHOP_PRODUCT_CLASS.CLASS_NAME']"
-                                            value="{{value['SHOP_PRODUCT_CLASS.CLASS_ID']}}">
-                                    </option>
-                                </select>
+                            <!--<div class="col-md-8">-->
+                                <!--<select ng-model="add['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID']"-->
+                                     <!---->
+                                        <!--class="nya-bs-select form-control">-->
+                                    <!--<option class="nya-bs-option" value="BASIC">根分类</option>-->
+                                    <!--<option class="nya-bs-option"-->
+                                            <!--ng-repeat="value in productClassList"-->
+                                            <!--ng-bind="value['SHOP_PRODUCT_CLASS.CLASS_NAME']"-->
+                                            <!--value="{{value['SHOP_PRODUCT_CLASS.CLASS_ID']}}">-->
+                                    <!--</option>-->
+                                <!--</select>-->
 
-                            </div>
-                        </div>
+                            <!--</div>-->
+                        <!--</div>-->
 
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
@@ -84,7 +84,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" ng-click="addProductClass()" class="btn green">确定
+                    <button type="button" ng-click="addProductClass()" data-dismiss="modal" class="btn green">确定
                     </button>
                     <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
                     </button>

@@ -20,13 +20,13 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
         $scope.getOrderStates();
     }
 
-    $scope.filterStateOrder = function (type) {
+    $scope.filterStateOrder = function (type,content) {
         $scope.getDataReady = false;
         $scope.orderList = new Array;
 
         $scope.state = type;
         $scope.filter = {
-            PAGE_SIZE: 5, PN: 1,'SHOP_ORDER.TYPE':'3,5'
+            PAGE_SIZE: 5, PN: 1,'SHOP_ORDER.TYPE':'3,5','SHOP_ORDER.FILTER_CONTENT':content
         };
         if (type == 'all') {
             //全部订单
@@ -67,6 +67,10 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
             $scope.filter['SHOP_ORDER.STATE_COMMENT'] = -1;
         }
         $scope.getOrder();
+    }
+
+    $scope.filterOrderQuery= function () {
+        $scope.filterStateOrder($stateParams.state,$scope.filter['SHOP_ORDER.FILTER_CONTENT']);
     }
 
     $scope.bindPresent = function (){

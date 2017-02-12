@@ -4,8 +4,8 @@
         <div class="showTitle">
             <h1 class="title">我的订单</h1>
             <div class="searchGroup">
-                <input type="text" class="text" placeholder="搜索商品">
-                <input type="text" class="button">
+                <input type="text" class="text" ng-model="filter['SHOP_ORDER.FILTER_CONTENT']"  placeholder="搜索商品">
+                <input type="text" class="button" ng-click="filterOrderQuery()">
             </div>
             <div class="categoriesToggle">
                 <ul>

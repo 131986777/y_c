@@ -42,8 +42,8 @@ angular.module('AndSell.Main').controller('product_class_classList_Controller', 
 
         modalFactory.showAlert("确认删除吗?", function () {
             classFactory.delPrdClass({'SHOP_PRODUCT_CLASS.CLASS_ID': id}, function (res) {
-                modalfactory.showshortalert("删除成功");
-                $scope.initload();
+                modalFactory.showShortAlert("删除成功");
+                $scope.initLoad();
             });
         });
     }
