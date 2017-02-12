@@ -48,6 +48,10 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
                 $scope.setPrdPicBanner($scope.product);
                 if ($scope.product['SHOP_PRODUCT.SKU_LIST'].length > 0) {
                     $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
+                    if($scope.skuList[0]['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'){
+                        //预约不设置库存上限
+                        $scope.skuList[0]['SHOP_PRODUCT_SKU.STOCK']=100;
+                    }
                     $scope.nowPrice = $scope.skuList[0]['SHOP_PRODUCT_SKU.REAL_PRICES'];
                     //var skulistsForOrder = new Array;
                     //$scope.skuList.forEach(function (ele) {

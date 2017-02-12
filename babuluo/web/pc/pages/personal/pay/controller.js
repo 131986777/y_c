@@ -42,32 +42,34 @@ angular.module('AndSell.PC.Main').controller('pages_personal_pay_Controller', fu
         var deferred_account = $q.defer();
         var deferred_price = $q.defer();
 
-        var json = localStorage.getItem('order');
-        $scope.order = JSON.parse(json);
-        $scope.orderDetailList = JSON.parse($scope.order['SHOP_ORDER.ORDER_INFO']);
+        orderFactory.getOrderById({'SHOP_ORDER.ID': $stateParams.ORDER_ID}, function (response) {
+            response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
+            $scope.order = response.data[0];
+            $scope.orderDetailList = JSON.parse($scope.order['SHOP_ORDER.ORDER_INFO']);
+        });
 
         $scope.queryAccount(deferred_account);
-        // var promise = $q.all([deferred_price.promise, deferred_account.promise]);
-        //
-        // promise.then(function (result) {
-        //
-        //     $scope.COUPON_INFO = $stateParams.COUPON_INFO;
-        //     if ($stateParams.COUPON_INFO != '') {
-        //         $scope.choiceCoupon = JSON.parse($stateParams.COUPON_INFO);
-        //         if ($scope.choiceCoupon != undefined && $scope.coupon.MONEY != undefined) {
-        //             var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
-        //             var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
-        //             price -= $scope.coupon.MONEY;
-        //             if (price <= 0) {
-        //                 price = 0.01;
-        //             }
-        //             $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
-        //             $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] +=
-        // Number($scope.order['SHOP_ORDER.PRICE_COUPON']); $scope.order['SHOP_ORDER.PRICE_OVER']
-        // -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']); $scope.order['SHOP_ORDER.COUPON_ID']
-        // = $scope.choiceCoupon.ID; }  }  if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] >=
-        // $scope.order['SHOP_ORDER.PRICE_OVER']) { $scope.order['SHOP_ORDER.PAY_TYPE'] =
-        // 'ACCOUNT'; } else { $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN'; } });
+         //var promise = $q.all([deferred_price.promise, deferred_account.promise]);
+         //
+         //promise.then(function (result) {
+         //
+         //    $scope.COUPON_INFO = $stateParams.COUPON_INFO;
+         //    if ($stateParams.COUPON_INFO != '') {
+         //        $scope.choiceCoupon = JSON.parse($stateParams.COUPON_INFO);
+         //        if ($scope.choiceCoupon != undefined && $scope.coupon.MONEY != undefined) {
+         //            var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
+         //            var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
+         //            price -= $scope.coupon.MONEY;
+         //            if (price <= 0) {
+         //                price = 0.01;
+         //            }
+         //            $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
+         //            $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] +=
+         //Number($scope.order['SHOP_ORDER.PRICE_COUPON']); $scope.order['SHOP_ORDER.PRICE_OVER']
+         //-= Number($scope.order['SHOP_ORDER.PRICE_COUPON']); $scope.order['SHOP_ORDER.COUPON_ID']
+         //= $scope.choiceCoupon.ID; }  }  if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] >=
+         //$scope.order['SHOP_ORDER.PRICE_OVER']) { $scope.order['SHOP_ORDER.PAY_TYPE'] =
+         //'ACCOUNT'; } else { $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN'; } });
     }
 
     $scope.loadMemberCard = function () {

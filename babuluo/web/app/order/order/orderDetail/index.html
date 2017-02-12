@@ -234,7 +234,7 @@
                                 预约
                             </li>
                             <li class="step-3"
-                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1]">
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
                                 预付款
                             </li>
                             <li class="step-3 step-last"
@@ -249,11 +249,11 @@
                                 预约
                             </li>
                             <li class="step-4"
-                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1]">
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
                                 预付款
                             </li>
                             <li class="step-4"
-                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1]">
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_SEND']==1]">
                                 发货
                             </li>
                             <li class="step-4 step-last"
@@ -264,7 +264,7 @@
                         <ul class="progressList"
                             ng-if="order['SHOP_ORDER.TYPE']=='4'&&order['SHOP_ORDER.NEED_PAY']==-1">
                             <li class="step-2 step-first"
-                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1]">
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1]">
                                 预约
                             </li>
                             <li class="step-2 step-last"
