@@ -389,6 +389,17 @@
   font-size: 14px;
   border: 1px solid #ddd;
 }
+
+/* line 232, ../sass/goodsDetail.scss */
+.goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .appointment {
+  width: 175px;
+  background-size: auto;
+  margin-right: 300px;
+  text-align: center;
+  background-color: #f36f1a;
+  color: #fff;
+  font-size: 14px;
+}
 /* line 244, ../sass/goodsDetail.scss */
 .goodsDetail .goodsDetailShow .purchaseChoose .endPayGroup .buyNow {
   width: 170px;

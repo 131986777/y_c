@@ -69,6 +69,11 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
                     $scope.querySkuInfo();
                     $scope.skuData = $scope.getPrdSkuData($scope.skuList);
 
+                    if($scope.skuList[0]['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'){
+                        //预约不设置库存上限
+                        $scope.skuList[0]['SHOP_PRODUCT_SKU.STOCK']=100;
+                    }
+
                     if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length > 0) {
                         $scope.checkContent(1, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
                     }
@@ -342,6 +347,20 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
             $scope.skuSelectable();
         } else {
             modalFactory.showShortAlert('该规格不存在！或者已下架');
+        }
+    }
+
+    $scope.toAppointment = function () {
+        if ($scope.sku != undefined) {
+            if ($scope.sku['SHOP_PRODUCT_SKU.STOCK'] > 0) {
+                $state.go('pages/order/appointment', {
+                    'SKU_IDS': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID'], 'COUNT': $scope.skuSize
+                });
+            } else {
+                modalFactory.showShortAlert('该规格已售罄');
+            }
+        } else {
+            modalFactory.showShortAlert('请选择规格！');
         }
     }
 
@@ -645,6 +664,14 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         parameters['PRODUCT_COLLECTION.COLLECTION_STATE'] = $scope.collectionState;
 
         productFactory.addAndMod(parameters);
+
+        if($scope.collectionState==1){
+            modalFactory.showShortAlert("收藏成功");
+        }
+        if($scope.collectionState==-1){
+            modalFactory.showShortAlert("取消收藏成功");
+        }
+
     };
 
 });

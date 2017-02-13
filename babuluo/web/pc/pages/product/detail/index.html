@@ -86,10 +86,17 @@
                         <a ng-click="moreSize()" class="control add"></a>
                     </div>
                 </div>
-                <div class="endPayGroup">
+                <div class="endPayGroup" ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='NORMAL'">
                     <a href="" class="addToCart" ng-click="addToCart()">加入购物车</a>
                     <a href="" class="buyNow" ng-click="buyNow()">立即购买</a>
                     <a href="" class="collect" ng-class="{true:'active'}[collectionState==1]" ng-init="collectionState=-1" ng-click="collectionClick()"></a>
+                </div>
+
+                <div class="endPayGroup" ng-if="sku['SHOP_PRODUCT_SKU.MODEL']!='NORMAL'">
+                    <a href="" class="appointment" ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'" ng-click="toAppointment()">去预约</a>
+                    <a href="" class="appointment" ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='TUANGOU'"  ng-click="toAppointment()">参加团购</a>
+                    <a href="" class="appointment" ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='QIANGGOU'"  ng-click="toAppointment()">限时抢购</a>
+
                 </div>
             </div>
 

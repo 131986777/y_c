@@ -278,7 +278,6 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
     $scope.getOrder = function (id, deferred) {
         orderFactory.getOrderById({'SHOP_ORDER.ID': id}, function (response) {
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
-            $scope.orderDetailList = JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
             $scope.order = response.data[0];
             $scope.orderDetailList = JSON.parse($scope.order['SHOP_ORDER.ORDER_INFO']);
             $scope.orderDetailList.forEach(function (ele) {
@@ -390,42 +389,79 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
                     }
                     break;
                 case "4":
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1) {
-                        $scope.step++;
-                    }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                    if ($scope.order['SHOP_ORDER.TYPE']
+                        == '4'
+                        && $scope.order['SHOP_ORDER.NEED_PAY']
                         == 1
-                        && $scope.order['SHOP_ORDER.STATE_MONEY']
+                        && $scope.order['SHOP_ORDER.REC_TYPE']
+                        == 2) {
+                        if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1) {
+                            $scope.step++;
+                        }
+                        if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                            == 1
+                            && $scope.order['SHOP_ORDER.STATE_MONEY']
+                            == 1) {
+                            $scope.step++;
+                        }
+                        if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                            == 1
+                            && $scope.order['SHOP_ORDER.STATE_MONEY']
+                            == 1
+                            && $scope.order['SHOP_ORDER.STATE_DELIVERY']
+                            == 1) {
+                            $scope.step++;
+                        }
+                    } else if ($scope.order['SHOP_ORDER.TYPE']
+                        == '4'
+                        && $scope.order['SHOP_ORDER.NEED_PAY']
                         == 1
-                        && $scope.order['SHOP_ORDER.STATE_OUT']
+                        && $scope.order['SHOP_ORDER.REC_TYPE']
                         == 1) {
-                        $scope.step++;
-                    }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
-                        == 1
-                        && $scope.order['SHOP_ORDER.STATE_MONEY']
-                        == 1
-                        && $scope.order['SHOP_ORDER.STATE_OUT']
-                        == 1
-                        && $scope.order['SHOP_ORDER.STATE_DELIVERY']
-                        == 1) {
-                        $scope.step++;
-                    }
-                    if ($scope.order['SHOP_ORDER.STATE_ORDER']
-                        == 1
-                        && $scope.order['SHOP_ORDER.STATE_MONEY']
-                        == 1
-                        && $scope.order['SHOP_ORDER.STATE_OUT']
-                        == 1
-                        && ($scope.order['SHOP_ORDER.STATE_DELIVERY']
-                        == 1
-                        || ($scope.order['SHOP_ORDER.STATE_SEND']
-                        == 1
-                        && $scope.order['SHOP_ORDER.STATE_ACCEPT']
-                        == 1))
-                        && $scope.order['SHOP_ORDER.STATE_COMMENT']
-                        == 1) {
-                        $scope.step++;
+                        console.log('step');
+                        console.log($scope.step);
+                        if ($scope.order['SHOP_ORDER.STATE_ORDER'] == 1) {
+                            $scope.step++;
+                        }
+                        if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                            == 1
+                            && $scope.order['SHOP_ORDER.STATE_MONEY']
+                            == 1) {
+                            $scope.step++;
+                        }
+                        if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                            == 1
+                            && $scope.order['SHOP_ORDER.STATE_MONEY']
+                            == 1
+                            && $scope.order['SHOP_ORDER.STATE_SEND']
+                            == 1
+                           ) {
+                            $scope.step++;
+                        }
+                        if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                            == 1
+                            && $scope.order['SHOP_ORDER.STATE_MONEY']
+                            == 1
+                            && $scope.order['SHOP_ORDER.STATE_DELIVERY']
+                            == 1) {
+                            $scope.step++;
+                        }
+                        console.log($scope.step);
+                    } else if ($scope.order['SHOP_ORDER.TYPE']
+                        == '4'
+                        && $scope.order['SHOP_ORDER.NEED_PAY']
+                        == -1) {
+
+                        if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                            == 1) {
+                            $scope.step++;
+                        }
+                        if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                            == 1
+                            && $scope.order['SHOP_ORDER.STATE_DELIVERY']
+                            == 1) {
+                            $scope.step++;
+                        }
                     }
                     break;
                 case "5":
@@ -474,6 +510,7 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
                     }
                     break;
             }
+
             console.log($scope.step);
         });
     };
@@ -535,9 +572,8 @@ angular.module('AndSell.PC.Main').controller('pages_order_detail_Controller', fu
             var formData = {
                 PRODUCT_ID: $scope.order['SHOP_ORDER.ID'],
                 FEE: moneyToFee($scope.order['SHOP_ORDER.PRICE_OVER']),
-                BODY: 'ORDER:'
-                + $scope.order['SHOP_ORDER.ORDER_NUM'], //BODY: '订单' +
-                                                        // $scope.order['SHOP_ORDER.ID'],
+                BODY: 'ORDER:' + $scope.order['SHOP_ORDER.ORDER_NUM'], //BODY: '订单' +
+                                                                       // $scope.order['SHOP_ORDER.ID'],
                 OPENID: openId,
                 IP: ip,
                 ORDER_ID: $scope.order['SHOP_ORDER.ID'],

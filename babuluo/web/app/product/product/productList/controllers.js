@@ -34,15 +34,15 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
         $scope.classList = response.extraData.classList;
         $scope.classMap = response.extraData.classMap;
 
-        //获取数据
-        var data = {
-            keyName: 'SHOP_PRODUCT_CLASS.CLASS_NAME',
-            keyId: 'SHOP_PRODUCT_CLASS.CLASS_ID',
-            keyPId: 'SHOP_PRODUCT_CLASS.PARENT_CLASS_ID',
-            rootId: 0,
-            lists: $scope.classList
-        }
-        $scope.tree = data;
+        ////获取数据
+        //var data = {
+        //    keyName: 'SHOP_PRODUCT_CLASS.CLASS_NAME',
+        //    keyId: 'SHOP_PRODUCT_CLASS.CLASS_ID',
+        //    keyPId: 'SHOP_PRODUCT_CLASS.PARENT_CLASS_ID',
+        //    rootId: 0,
+        //    lists: $scope.classList
+        //}
+        //$scope.tree = data;
 
     };
 
@@ -60,7 +60,7 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
         modalFactory.showAlert("确定" + info + "这 " + ids.split(",").length + " 条商品吗?", function () {
             productFactory.setProductState(params, function () {
                 ids.split(',').forEach(function (ele) {
-                    $scope.productMap.get(ele)['SHOP_PRODUCT.IS_SALE'] = SALE_STATE;
+                    $scope.productMap[ele]['SHOP_PRODUCT.IS_SALE'] = SALE_STATE;
                 })
                 modalFactory.showShortAlert(info + '成功!');
             });

@@ -18,7 +18,12 @@ angular.module('AndSell.PC.Main').controller('pages_cart_Controller', function (
         }
 
         $scope.getCartInfoInCookie();
+        $scope.updateShop();
 
+    }
+
+    $scope.updateShop = function () {
+        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
     }
 
     $scope.toDetail = function (id) {

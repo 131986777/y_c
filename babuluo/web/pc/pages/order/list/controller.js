@@ -17,16 +17,16 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
         $scope.loading = false;  //状态标记
         modalFactory.setCurrentPage('wd');
         $scope.filterStateOrder($stateParams.state);
-
+        $scope.getOrderStates();
     }
 
-    $scope.filterStateOrder = function (type) {
+    $scope.filterStateOrder = function (type,content) {
         $scope.getDataReady = false;
         $scope.orderList = new Array;
 
         $scope.state = type;
         $scope.filter = {
-            PAGE_SIZE: 5, PN: 1
+            PAGE_SIZE: 5, PN: 1,'SHOP_ORDER.TYPE':'3,5','SHOP_ORDER.FILTER_CONTENT':content
         };
         if (type == 'all') {
             //全部订单
@@ -69,6 +69,10 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
         $scope.getOrder();
     }
 
+    $scope.filterOrderQuery= function () {
+        $scope.filterStateOrder($stateParams.state,$scope.filter['SHOP_ORDER.FILTER_CONTENT']);
+    }
+
     $scope.bindPresent = function (){
         $scope.orderList.forEach(function (ele) {
             ele['presentMap'] = {}
@@ -84,6 +88,13 @@ angular.module('AndSell.PC.Main').controller('pages_order_list_Controller', func
             })
         });
     }
+
+
+    $scope.getOrderStates = function () {
+        orderFactory.getOrderStates({'SHOP_ORDER.TYPE':'3,5'}, function (response) {
+            $scope.orderSizeMap = response.extraData.stateMap;
+        });
+    };
 
     $scope.getOrder = function () {
         orderFactory.getOrder($scope.filter, function (response) {

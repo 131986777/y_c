@@ -52,7 +52,6 @@ angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller',
             $scope.queryAccount($scope.uid);
             $scope.getPhone($scope.uid);
             $scope.getCouponSum($scope.uid);
-            $scope.getOrderStates();
         } else {
             $state.go('pages/login/accountLogin');
             modalFactory.showShortAlert('登录异常');
@@ -64,11 +63,6 @@ angular.module('AndSell.PC.Main').controller('pages_personal_center_Controller',
     }
 
 
-    $scope.getOrderStates = function () {
-        orderFactory.getOrderStates({}, function (response) {
-            $scope.stateMap = response.extraData.stateMap;
-        });
-    };
 
     $scope.initLoad();
 

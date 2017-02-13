@@ -280,12 +280,27 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     $scope.getOrder = function (id, deferred) {
         orderFactory.getOrderById({'SHOP_ORDER.ID': id}, function (response) {
+
+            $scope.orderConfig = {type: 'normal', needPay: 1};
+
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
             $scope.orderDetailList = JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
             $scope.order = response.data[0];
+            if ($scope.order['SHOP_ORDER.LOGISTICS_INFO']
+                != undefined
+                && $scope.order['SHOP_ORDER.LOGISTICS_INFO']
+                != '') {
+                $scope.order['SHOP_ORDER.LOGISTICS_INFO'] = JSON.parse($scope.order['SHOP_ORDER.LOGISTICS_INFO']);
+            }
             $scope.orderDetailList.forEach(function (ele) {
                 setContentsInfoForOrder(ele);
             });
+            if ($scope.orderDetailList.length == 1) {
+                if ($scope.orderDetailList[0]['model'] != 'NORMAL') {
+                    $scope.orderConfig.type = $scope.orderDetailList[0]['model'] == 1;
+                    $scope.orderConfig.needPay = $scope.orderDetailList[0]['eddPay'] == 1;
+                }
+            }
             $scope.initCartRequestVO(deferred);
             //$scope.bindPresent();
         });
@@ -302,6 +317,16 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             }, function (response) {
                 weUI.toast.hideLoading();
                 weUI.toast.error(response.msg);
+            });
+        });
+    }
+
+    //确认提货
+    $scope.deliveryOrder = function () {
+        weUI.dialog.confirm("提示", "确认收货？", function () {
+            orderFactory.deliveryOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function () {
+                weUI.toast.ok('收货成功');
+                $scope.getOrder($scope.order['SHOP_ORDER.ID']);
             });
         });
     }

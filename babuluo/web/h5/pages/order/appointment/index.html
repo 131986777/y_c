@@ -1,7 +1,7 @@
 <div class="container-fluid order-add" ng-init="initData()" style="padding-bottom: 55px" >
     <div class="row">
         <div class="weui_cells weui_cells_access" style="margin-bottom: 0">
-            <a class="order-address weui_cell" ui-sref="pages/order/addAddress({SKU_IDS:skuIds})">
+            <a class="order-address weui_cell" ui-sref="pages/order/addAddress({SKU_IDS:skuIds,TYPE:'APPOINTMENT'})">
                 <div ng-show="!EmptyPick&&cookiePickupPerson.type==3" class="detail weui_cell_bd weui_cell_primary">
                     <p class="">提 货 人：{{cookiePickupPerson.man}}</p>
                     <p class="">手机号码：{{cookiePickupPerson.phone}}</p>
@@ -141,8 +141,8 @@
         <!--</div>-->
         <!--</div>-->
 
-        <!--<div class="payment-list weui_cells" >-->
-            <!--<div class="balance weui_cell" ng-click="cardPay()">-->
+        <!--<div class="payment-list weui_cells" ng-if="needPay==1">-->
+            <!--<div class="balance weui_cell" ng-click="cardPayChecked()">-->
                 <!--<div class="icon-wrap weui_cell_bd">-->
                     <!--<i class="icon icon-userpay"></i>-->
                 <!--</div>-->
@@ -155,7 +155,7 @@
                        <!--ng-class="{true:' icon-checked',false:'icon-check'}[order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT']"></i>-->
                 <!--</div>-->
             <!--</div>-->
-            <!--<div class="balance weui_cell" ng-click="wxPay()">-->
+            <!--<div class="balance weui_cell" ng-click="wxPayChecked()">-->
                 <!--<div class="icon-wrap weui_cell_bd">-->
                     <!--<i class="icon icon-wepay"></i>-->
                 <!--</div>-->
@@ -191,8 +191,10 @@
                 <p class="sale" ng-if="onSalePrice!=0">( 已优惠 {{onSalePrice}} 元 )</p>
             </div>
             <a class="payment-check" ng-click="commitOrder()">
-                提交订单
+                预约商品
             </a>
+
         </div>
     </div>
+
 </div>

@@ -48,7 +48,8 @@
                 <p class="addressInfo" ng-bind="shop['SHOP.ADDR']"></p>
             </div>
             <div class="searchBar">
-                <input type="text" class="search" ng-model="key.prdKeyword" ng-keyup="myKeyup($event)">
+                <input type="text" class="search" ng-model="key.prdKeyword"
+                       ng-keyup="myKeyup($event)">
                 <a class="searchBtn" ng-click="searchPrd()">搜索</a>
             </div>
             <div class="myShoppingCart">
@@ -88,7 +89,8 @@
                 <ul>
                     <li>
                         <div class="innerContainer">
-                            <div class="categoriePic icon-wine" ng-click="toPrdClassList(3001)"></div>
+                            <div class="categoriePic icon-wine"
+                                 ng-click="toPrdClassList(3001)"></div>
                             <p class="categorieName">酱卤</p>
                             <!--<div class="triangle"></div>-->
                             <!--<div class="detailedList">-->
@@ -254,24 +256,20 @@
                     个人中心
                 </div>
                 <ul>
+                    <li ui-sref="pages/personal/center">个人信息</li>
                     <!--class="selected"-->
-                    <li  ui-sref="pages/order/list({state:'all'})">我的订单
-                    </li>
+                    <li ui-sref="pages/order/list({state:'all'})">我的订单</li>
                     <!--<li ui-sref="business.priceAudit" ng-class="{true:'active'}[state ==2]"-->
-                        <!--ng-click="getState(2)">团购订单-->
+                    <!--ng-click="getState(2)">团购订单-->
                     <!--</li>-->
                     <!--<li ui-sref="business.purchaseList" ng-class="{true:'active'}[state ==3]"-->
-                        <!--ng-click="getState(3)">我的预售-->
+                    <!--ng-click="getState(3)">我的预售-->
                     <!--</li>-->
                     <!--ng-class="{true:'active'}[state ==4]"-->
-                    <li ui-sref="pages/order/list({state:'comment'})"
-                        ng-click="getState(4)">评价晒单
-                    </li>
-                    <li ui-sref="pages/product/collect">我的收藏
-                    </li>
-                    <!--<li ui-sref="business.payrequestList" ng-class="{true:'active'}[state ==5]"-->
-                        <!--ng-click="getState(5)">评价晒单记录-->
-                    <!--</li>-->
+                    <li ui-sref="pages/order/list({state:'comment'})">评价晒单</li>
+                    <li ui-sref="pages/order/appointmentList({state:'all'})">我的预约</li>
+                    <li ui-sref="pages/product/collect">我的收藏</li>
+                    <li ui-sref="pages/personal/coupon">优惠券</li>
                 </ul>
                 <!-- 库存 -->
                 <div class="sidebar-title">
@@ -283,13 +281,6 @@
                 </ul>
                 <!-- 库存 -->
                 <div class="sidebar-title">
-                    个人中心
-                </div>
-                <ul>
-                    <li ui-sref="pages/personal/center">个人信息</li>
-                    <li ui-sref="pages/personal/coupon">优惠券</li>
-                </ul>
-                <div class="sidebar-title">
                     安全中心
                 </div>
                 <ul>
@@ -297,10 +288,10 @@
                 </ul>
                 <!--&lt;!&ndash; 库存 &ndash;&gt;-->
                 <!--<div class="sidebar-title">-->
-                    <!--其他功能-->
+                <!--其他功能-->
                 <!--</div>-->
                 <!--<ul>-->
-                    <!--<li>浏览历史</li>-->
+                <!--<li>浏览历史</li>-->
                 <!--</ul>-->
             </div>
 

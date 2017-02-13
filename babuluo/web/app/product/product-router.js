@@ -20,8 +20,11 @@ $import('product/unit/unitList');
 //商品标签列表
 $import('product/tag/tagList');
 
-//商品标签列表
+//预约商品
 $import('product/product/appointment');
+
+//抢购商品
+$import('product/product/panic');
 
 
 

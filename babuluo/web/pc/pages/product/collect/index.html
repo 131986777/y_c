@@ -10,193 +10,29 @@
 
         </div>
         <div class="orderListShow">
-            <div class="eachPro">
-                <div class="eachPro1">
+            <div class="eachPro" ng-repeat="uc in userCollections">
+                <div class="eachPro1"   ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])" >
                     <div class="proPic">
-                        <img class="img eachPic" src="/AndSell/pc/public/css/img/product.png"/>
+                        <img class="img eachPic" ng-src="{{uc['SHOP_PRODUCT.CMP']}}"/>
                     </div>
                     <div class="proInfo">
                     <span class="detail">
-                        展卉 智利蓝莓 125克*2盒
+
                     </span>
                     </div>
                     <div class="proInfo">
                     <span class="detail">
-                        新鲜进口水果 自营水果
+                        {{uc['SHOP_PRODUCT.PRD_NAME']}}
                     </span>
                     </div>
                     <div class="much">
-                        <span class="detail money" >￥12.00</span>
+                        <span class="detail money" ng-bind="uc['SHOP_PRODUCT.REAL_PRICES'] | currency : '￥'"></span>
                         <!--<span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>-->
-
                     </div>
                     <div class="but show">
-                        <div>
-                            <img class="img" src="/AndSell/pc/public/css/img/buyCar.png" alt="">
-                            <span class="buy">加入购物车</span>
-                        </div>
-                        <div ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0">
-                            <span class="buy">已售罄</span>
-                        </div>
-                    </div>
-                </div>
+                        <div ng-click="toDetail(item['SHOP_PRODUCT.PRD_ID'])">
 
-            </div>
-            <div class="eachPro">
-                <div class="eachPro1">
-                    <div class="proPic">
-                        <img class="img eachPic" src="/AndSell/pc/public/css/img/product.png"/>
-                    </div>
-                    <div class="proInfo">
-                    <span class="detail">
-                        展卉 智利蓝莓 125克*2盒
-                    </span>
-                    </div>
-                    <div class="proInfo">
-                    <span class="detail">
-                        新鲜进口水果 自营水果
-                    </span>
-                    </div>
-                    <div class="much">
-                        <span class="detail money" >￥12.00</span>
-                        <!--<span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>-->
-
-                    </div>
-                    <div class="but show">
-                        <div>
-                            <img class="img" src="/AndSell/pc/public/css/img/buyCar.png" alt="">
-                            <span class="buy">加入购物车</span>
-                        </div>
-                        <div ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0">
-                            <span class="buy">已售罄</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="eachPro">
-                <div class="eachPro1">
-                    <div class="proPic">
-                        <img class="img eachPic" src="/AndSell/pc/public/css/img/product.png"/>
-                    </div>
-                    <div class="proInfo">
-                    <span class="detail">
-                        展卉 智利蓝莓 125克*2盒
-                    </span>
-                    </div>
-                    <div class="proInfo">
-                    <span class="detail">
-                        新鲜进口水果 自营水果
-                    </span>
-                    </div>
-                    <div class="much">
-                        <span class="detail money" >￥12.00</span>
-                        <!--<span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>-->
-
-                    </div>
-                    <div class="but show">
-                        <div>
-                            <img class="img" src="/AndSell/pc/public/css/img/buyCar.png" alt="">
-                            <span class="buy">加入购物车</span>
-                        </div>
-                        <div ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0">
-                            <span class="buy">已售罄</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="eachPro">
-                <div class="eachPro1">
-                    <div class="proPic">
-                        <img class="img eachPic" src="/AndSell/pc/public/css/img/product.png"/>
-                    </div>
-                    <div class="proInfo">
-                    <span class="detail">
-                        展卉 智利蓝莓 125克*2盒
-                    </span>
-                    </div>
-                    <div class="proInfo">
-                    <span class="detail">
-                        新鲜进口水果 自营水果
-                    </span>
-                    </div>
-                    <div class="much">
-                        <span class="detail money" >￥12.00</span>
-                        <!--<span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>-->
-
-                    </div>
-                    <div class="but show">
-                        <div>
-                            <img class="img" src="/AndSell/pc/public/css/img/buyCar.png" alt="">
-                            <span class="buy">加入购物车</span>
-                        </div>
-                        <div ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0">
-                            <span class="buy">已售罄</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="eachPro">
-                <div class="eachPro1">
-                    <div class="proPic">
-                        <img class="img eachPic" src="/AndSell/pc/public/css/img/product.png"/>
-                    </div>
-                    <div class="proInfo">
-                    <span class="detail">
-                        展卉 智利蓝莓 125克*2盒
-                    </span>
-                    </div>
-                    <div class="proInfo">
-                    <span class="detail">
-                        新鲜进口水果 自营水果
-                    </span>
-                    </div>
-                    <div class="much">
-                        <span class="detail money" >￥12.00</span>
-                        <!--<span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>-->
-
-                    </div>
-                    <div class="but show">
-                        <div>
-                            <img class="img" src="/AndSell/pc/public/css/img/buyCar.png" alt="">
-                            <span class="buy">加入购物车</span>
-                        </div>
-                        <div ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0">
-                            <span class="buy">已售罄</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="eachPro">
-                <div class="eachPro1">
-                    <div class="proPic">
-                        <img class="img eachPic" src="/AndSell/pc/public/css/img/product.png"/>
-                    </div>
-                    <div class="proInfo">
-                    <span class="detail">
-                        展卉 智利蓝莓 125克*2盒
-                    </span>
-                    </div>
-                    <div class="proInfo">
-                    <span class="detail">
-                        新鲜进口水果 自营水果
-                    </span>
-                    </div>
-                    <div class="much">
-                        <span class="detail money" >￥12.00</span>
-                        <!--<span ng-if="item['SHOP_PRODUCT.MINSKUPRICE']==undefined"> 暂无规格</span>-->
-
-                    </div>
-                    <div class="but show">
-                        <div>
-                            <img class="img" src="/AndSell/pc/public/css/img/buyCar.png" alt="">
-                            <span class="buy">加入购物车</span>
-                        </div>
-                        <div ng-if="item['SHOP_PRODUCT.HAS_STOCK']==0">
-                            <span class="buy">已售罄</span>
+                            <span class="buy">查看商品</span>
                         </div>
                     </div>
                 </div>
@@ -205,8 +41,8 @@
         </div>
         <div page-bar
              filter-obj="filter"
-             url="/shop/product/queryAllForAgent"
-             callback="bindData(response)">
+             url="/user/collection/queryByUserId"
+             callback="queryData(response)">
         </div>
     </div>
 
