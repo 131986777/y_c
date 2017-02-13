@@ -1,6 +1,6 @@
 var AndSellRouter = angular.module('AndSell.Router', ['ui.router', 'oc.lazyLoad']);
 var AndSellService = angular.module('AndSell.Service', ['ngResource']);
-var AndSellUI = angular.module('AndSell.UI', ['nya.bootstrap.select', 'ngTagsInput', 'AndSell.Service','focus-if']);
+var AndSellUI = angular.module('AndSell.UI', ['nya.bootstrap.select', 'ngTagsInput', 'AndSell.Service', 'focus-if']);
 var AndSellMainModule = angular.module('AndSell.Main', ['AndSell.Service', 'AndSell.Router', 'AndSell.UI']);
 
 var AndSellData = angular.module("AndSell.data", []);
@@ -40,8 +40,14 @@ AndSellService.factory("http", function ($http) {
                 }
                 return _post(baseURL + url, form, funcSuccess, funcFail)
             }
-        }, post_ori: function (url, param, func, error) {
-            return $http.post(url, $.param(param), {headers: {'Content-Type': 'application/x-www-form-urlencoded'}}).success(function (result) {
+        }, post_ori: function (url, param, func, error, content) {
+            var header = {
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }
+            if (content != undefined) {
+                header.headers['Content-Type'] = content;
+            }
+            return $http.post(url, $.param(param), header).success(function (result) {
 
                 if (angular.isFunction(func)) {
                     func(result);
@@ -54,6 +60,41 @@ AndSellService.factory("http", function ($http) {
         }
     };
 });
+
+AndSellUI.directive('fileModel', ['$parse', function ($parse) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attrs) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+
+            element.bind('change', function () {
+                scope.$apply(function () {
+                    modelSetter(scope, element[0].files[0]);
+                });
+            });
+        }
+    };
+}]);
+
+AndSellUI.service('fileUpload', ['$http', function ($http) {
+    this.uploadFileToUrl = function (file, uploadUrl, func, error) {
+        var fd = new FormData();
+        fd.append('file', file);
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        }).success(function (result) {
+            if (angular.isFunction(func)) {
+                func(result);
+            }
+        }).error(function (err) {
+            if (angular.isFunction(error)) {
+                error(err);
+            }
+        });
+    }
+}]);
 
 AndSellUI.directive('stringToNumber', function () {
     return {
@@ -68,8 +109,8 @@ AndSellUI.directive('stringToNumber', function () {
     };
 });
 
-AndSellUI.directive('autoFocus', function(){
-    return function(scope, element){
+AndSellUI.directive('autoFocus', function () {
+    return function (scope, element) {
         element[0].focus();
     };
 });

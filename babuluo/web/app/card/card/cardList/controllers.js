@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('card_card_cardList_Controller', function (http, $scope, $stateParams, cardFactory, modalFactory) {
+angular.module('AndSell.Main').controller('card_card_cardList_Controller', function (http, $scope, $stateParams, cardFactory, modalFactory, fileUpload) {
 
     modalFactory.setTitle('已开会员卡');
 
@@ -175,6 +175,44 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
         });
     };
 
+    $scope.downMoban = function () {
+        var url = "/AndSell/file/download/储值卡导入模板.xlsx".replace("/app","");
+        console.log(url);
+        window.location.href = url;
+    };
+
+    $scope.uploadFile = function () {
+
+        var file = $scope.myFile;
+        if (file == undefined) {
+            modalFactory.showShortAlert("请选择文件");
+            return;
+        }
+        if (file.type == "application/vnd.ms-excel" || file.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+            var uploadUrl = "../../SimpleFileupload";
+            fileUpload.uploadFileToUrl(file, uploadUrl,function (response) {
+                if (response == "success") {
+                    $scope.importValueCard(file.name);
+                    $("#czkCardIn").modal('hide');
+                }
+            });
+
+        } else {
+            modalFactory.showShortAlert("请导入Excel文件");
+            $scope.myFile = undefined;
+        }
+    };
+
+    $scope.importValueCard = function (fileName) {
+        var url = "../../importValueCard";
+        $scope.file = {};
+        $scope.file['fileUrl'] = fileName;
+        modalFactory.showShortAlert("正在导入，请稍等，请勿进行其他操作。");
+        http.post_ori(url, $scope.file, function (response) {
+            console.log(response);
+        });
+    };
+
     $scope.isNull = function (str) {
         return str == null || str == '';
     };
@@ -197,7 +235,7 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
         todayHighlight: true,
         weekStart: 1,
         startView: 2,
-        minView:'month',
+        minView: 'month',
         format: 'yyyy/mm/dd',
         todayBtn: 'linked'
     }).on("hide", function () {
@@ -213,7 +251,7 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
         autoclose: true,
         todayHighlight: true,
         weekStart: 1,
-        minView:'month',
+        minView: 'month',
         format: 'yyyy/mm/dd',
         todayBtn: 'linked'
     }).on("hide", function () {
