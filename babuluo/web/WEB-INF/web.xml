@@ -97,6 +97,26 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>importValueCard</servlet-name>
+        <servlet-class>com.bolanggu.bbl.input.input</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>importValueCard</servlet-name>
+        <url-pattern>/importValueCard</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SimpleFileupload</servlet-name>
+        <servlet-class>com.bolanggu.bbl.input.SimpleFileupload</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SimpleFileupload</servlet-name>
+        <url-pattern>/SimpleFileupload</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>updateOrderPay</servlet-name>
         <servlet-class>com.task.servlet.UpdateOrderPayServlet</servlet-class>
         <load-on-startup>1</load-on-startup>

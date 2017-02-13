@@ -102,7 +102,8 @@
                     <button type="button" class="btn btn-default pull-right" data-toggle="modal"
                             data-target="#cardList"><i class="fa fa-plus"></i>开卡
                     </button>
-                    <button type="button" class="btn btn-default pull-right" show-modal id="#czkCardIn"><i class="fa fa-plus"></i>储值卡导入
+                    <button type="button" class="btn btn-default pull-right" show-modal id="#czkCardIn">
+                        <i class="fa fa-plus"></i>储值卡导入
                     </button>
                 </div>
             </div>
@@ -153,7 +154,6 @@
         </div>
     </div>
 
-    <!-MODAL-->
     <div class="modal fade" id="cardList">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -303,19 +303,24 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-hidden="true"></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
                     <h4 class="modal-title">储值卡导入</h4>
                 </div>
-                <div class="modal-body form-body text-right">
-                    <button type="submit" class="btn btn-default" ng-click="queryMemberById(memberId)">上传Excel附件
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-outline" ng-click="addCard()">确定
-                    </button>
-                    <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
-                    </button>
-                </div>
+                <form method="post">
+                    <div class="modal-body form-body text-right">
+                        <button class="btn btn-primary btn-outline" ng-click="downMoban()">下载模板
+                        </button>
+                        <input type="file" file-model="myFile" class="btn btn-default"
+                               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+                        </input>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary btn-outline" ng-click="uploadFile()">确定
+                        </button>
+                        <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </form>
             </div> <!-- modal-content-->
         </div>
     </div>

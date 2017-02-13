@@ -76,10 +76,11 @@ public class ENV {
 
     public static String WX_TOKEN_GRANT_TYPE = "client_credential";
 
-
     public static String GENERATED_EXCEL_FILE = "/download/file/GeneratedExcelFile/";
 
+    public static String UPLOAD_EXCEL_FILE = "/file/upload/";
 
+    public static String TEMP_FILE = "/file/temp/";
 
     /**
      * 支付宝配置信息
