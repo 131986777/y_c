@@ -176,8 +176,7 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
     };
 
     $scope.downMoban = function () {
-        var url = "/AndSell/file/download/储值卡导入模板.xlsx".replace("/app","");
-        console.log(url);
+        var url = "/AndSell/file/download/储值卡导入模板.xlsx";
         window.location.href = url;
     };
 
