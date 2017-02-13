@@ -78,7 +78,12 @@ p {
 .bg-grey, .order-list-page .tab-default {
     background-color: #F4F4F4;
 }
-
+#search-cancel{
+    font-size: 20px;
+    top:-1px;
+    margin-right: 10px;
+    color:#a4a4a4;
+}
 .red {
     color: #EF4F4F;
 }
