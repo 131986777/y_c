@@ -176,7 +176,7 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
     };
 
     $scope.downMoban = function () {
-        var url = "/AndSell/file/download/储值卡导入模板.xlsx";
+        var url = "/AndSell/file/download/ValueCard.xlsx";
         window.location.href = url;
     };
 
@@ -189,7 +189,7 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
         }
         if (file.type == "application/vnd.ms-excel" || file.type == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
             var uploadUrl = "../../SimpleFileupload";
-            fileUpload.uploadFileToUrl(file, uploadUrl,function (response) {
+            fileUpload.uploadFileToUrl(file, uploadUrl, function (response) {
                 if (response == "success") {
                     $scope.importValueCard(file.name);
                     $("#czkCardIn").modal('hide');
@@ -208,7 +208,10 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
         $scope.file['fileUrl'] = fileName;
         modalFactory.showShortAlert("正在导入，请稍等，请勿进行其他操作。");
         http.post_ori(url, $scope.file, function (response) {
-            console.log(response);
+            if (response == "success") {
+                modalFactory.showShortAlert("储值卡导入成功");
+                $scope.$broadcast('pageBar.reload');
+            }
         });
     };
 

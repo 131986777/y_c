@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +26,7 @@ public class input extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        PrintWriter pw = resp.getWriter();
         String fileUrl = getClass()
                 .getClassLoader()
                 .getResource("/")
@@ -37,7 +39,7 @@ public class input extends HttpServlet {
         Map map = poi.readMore(fileUrl, false, 0, 0);
         List<List<String>> list = (List<List<String>>) map.get("储值卡导入");
         importValueCard(list);
-
+        pw.write("success");
     }
 
     @Override
@@ -48,7 +50,7 @@ public class input extends HttpServlet {
     private void importValueCard(List<List<String>> list) throws RuleException {
 
         String card_no = null;
-        String balance = null;
+        double balance = 0;
         String shop_id = "0";
 
         for (int i = 1; i < list.size(); i++) {
@@ -59,7 +61,7 @@ public class input extends HttpServlet {
             }
 
             if (StrUtil.isNotNull(list.get(i).get(1))) {
-                balance = list.get(i).get(1);
+                balance = Double.parseDouble(list.get(i).get(1))*100;
             }
 
             if (StrUtil.isNotNull(list.get(i).get(2))) {
