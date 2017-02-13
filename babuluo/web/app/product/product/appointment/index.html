@@ -19,6 +19,7 @@
                             <th style="width: 120px" class="text-center"> 商品上架状态</th>
                             <th style="width: 120px" class="text-center"> 预约价</th>
                             <th style="width: 120px" class="text-center"> 预付款</th>
+                            <th style="width: 120px" class="text-center"> 库存</th>
                             <th style="width: 120px" class="text-center"> 状态</th>
                             <th style="width: 120px" class="text-center"> 备注</th>
                             <th style="width: 180px" class="text-center"> 操作</th>
@@ -33,9 +34,11 @@
                             <td class="text-center"
                                 ng-bind="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']">
                             </td>
-                            <td class="text-center" >
-                                <span ng-if="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT_SKU.IS_SALE']==1">正在销售</span>
-                                <span ng-if="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT_SKU.IS_SALE']==-1">下架停售</span>
+                            <td class="text-center">
+                                <span
+                                    ng-if="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT_SKU.IS_SALE']==1">正在销售</span>
+                                <span
+                                    ng-if="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT_SKU.IS_SALE']==-1">下架停售</span>
                             </td>
                             <td class="text-center"
                                 ng-bind="value['APPOINTMENT_PRODUCT.PRICE']"></td>
@@ -43,6 +46,8 @@
                                 <span ng-if="value['APPOINTMENT_PRODUCT.NEED_PAY']==1">需要</span>
                                 <span ng-if="value['APPOINTMENT_PRODUCT.NEED_PAY']==-1">不需要</span>
                             </td>
+                            <td class="text-center"
+                                ng-bind="value['APPOINTMENT_PRODUCT.STOCK']"></td>
                             <td class="text-center">
                                 <span ng-if="value['APPOINTMENT_PRODUCT.STATE']==-1">停用</span>
                                 <span ng-if="value['APPOINTMENT_PRODUCT.STATE']==1">启用</span>
@@ -124,6 +129,18 @@
                                     <option class="nya-bs-option" value="1">需要</option>
                                     <option class="nya-bs-option" value="-1">不需要</option>
                                 </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 库存数量:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="number" class="form-control"
+                                       ng-model="modify['APPOINTMENT_PRODUCT.STOCK']"
+                                       ng-init="modify['APPOINTMENT_PRODUCT.STOCK']=''"
+                                       placeholder="">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -212,6 +229,19 @@
                                     <option class="nya-bs-option" value="1">需要</option>
                                     <option class="nya-bs-option" value="-1">不需要</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 库存数量:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="number" class="form-control"
+                                       ng-model="add['APPOINTMENT_PRODUCT.STOCK']"
+                                       ng-init="add['APPOINTMENT_PRODUCT.STOCK']=''"
+                                       placeholder="">
                             </div>
                         </div>
                         <div class="form-group row">

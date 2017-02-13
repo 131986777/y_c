@@ -102,6 +102,8 @@
                     <button type="button" class="btn btn-default pull-right" data-toggle="modal"
                             data-target="#cardList"><i class="fa fa-plus"></i>开卡
                     </button>
+                    <button type="button" class="btn btn-default pull-right" show-modal id="#czkCardIn"><i class="fa fa-plus"></i>储值卡导入
+                    </button>
                 </div>
             </div>
         </div>
@@ -254,7 +256,7 @@
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 checkbox-inline">
-                                <input type="checkbox" id="inlineCheckbox" ng-model="isFaceValue" value="option">设置面额
+                                <input type="checkbox" id="" ng-model="isFaceValue" value="option">设置面额
                             </label>
                             <div ng-show="isFaceValue" class="col-md-8">
                                 <input type="text"
@@ -286,6 +288,27 @@
                         </div>
 
                     </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-outline" ng-click="addCard()">确定
+                    </button>
+                    <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div> <!-- modal-content-->
+        </div>
+    </div>
+
+    <div class="modal fade" id="czkCardIn">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true"></button>
+                    <h4 class="modal-title">储值卡导入</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+                    <button type="submit" class="btn btn-default" ng-click="queryMemberById(memberId)">上传Excel附件
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary btn-outline" ng-click="addCard()">确定
