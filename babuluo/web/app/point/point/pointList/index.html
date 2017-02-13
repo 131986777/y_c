@@ -77,7 +77,7 @@
                             <button type="button" class="btn btn-default pull-right"
                                     ng-click="outPutQuery()">导出
                             </button>
-                            <button type="button" class="btn btn-default pull-right" data-toggle="modal"
+                            <button type="button" ng-if="APP_ID_LIST.indexOf('@1160@')>=0" class="btn btn-default pull-right" data-toggle="modal"
                                     data-target="#point"
                                     ng-click=empty()>调整积分
                             </button>
