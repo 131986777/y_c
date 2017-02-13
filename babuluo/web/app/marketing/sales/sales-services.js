@@ -56,3 +56,15 @@ AndSellMainModule.service('eventFactory', function (http) {
     this.getEvent=http.post('/sales/event/queryAll');
 
 });
+
+AndSellMainModule.service('activityFactory', function (http) {
+
+    this.addTopUp=http.post('/sales/activity/add');
+
+    this.modTopUp=http.post('/sales/activity/modifyById');
+
+    this.delTopUp=http.post('/sales/activity/delById');
+
+    this.getTopUps=http.post('/sales/activity/queryAll');
+
+});

@@ -7,7 +7,7 @@
             <!--<input type="text" class="button">-->
             <!--</div>-->
         </div>
-        <div class="infos">收货信息</div>
+        <div class="infos" ng-init="order['SHOP_ORDER.REC_TYPE']=2"><span ng-class="{true:'active'}[order['SHOP_ORDER.REC_TYPE']==2]" ng-click="order['SHOP_ORDER.REC_TYPE']=2">门店自提 </span>  |  <span  ng-class="{true:'active'}[order['SHOP_ORDER.REC_TYPE']==1]" ng-click="order['SHOP_ORDER.REC_TYPE']=1"> 快递收货</span></div>
         <form action="" class="bu-form">
             <div class="form-group">
                 <div class="pwd">收货人</div>
@@ -16,11 +16,17 @@
                 <input type="text" class="typeIn large-size" ng-model="pickMan.phone">
             </div>
 
-            <div class="form-group">
+            <div class="form-group" ng-if="order['SHOP_ORDER.REC_TYPE']==2">
                 <div class="pwd">提货门店</div>
                 <input type="text" disabled class="typeIn large-size" ng-model="shopName">
                 <div class="pwd right">提货时间</div>
                 <input type="text" disabled class="typeIn large-size" ng-model="date">
+            </div>
+            <div class="form-group" ng-if="order['SHOP_ORDER.REC_TYPE']==1">
+                <div class="pwd">收件地区</div>
+                <input type="text" disabled class="typeIn large-size" ng-model="shengshi" ng-init="shengshi='江苏 南京 '">
+                <div class="pwd right">详细地址</div>
+                <input type="text" class="typeIn large-size" ng-model="address">
             </div>
             <!--<div class="form-group">-->
                 <!--<div class="pwd">提货发票</div>-->
@@ -78,7 +84,7 @@
                 <span>合计</span>
                 <span class="youhui">（已优惠{{onSalePrice}}）</span>
                 <span class="sep1" ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
-                <div class="buy" ng-click="commitOrder()">确认下单</div>
+                <div class="buy" ng-click="commitOrder()">确认预约</div>
             </div>
         </div>
     </div>

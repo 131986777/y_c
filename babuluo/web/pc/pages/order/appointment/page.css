@@ -76,6 +76,10 @@
     color: #4b4b4b;
 }
 
+.containers-order-confirm .row-content .infos .active{
+    color: #f36e19;
+}
+
 .containers-order-confirm .row-content .bu-form {
     margin-top: 50px;
 }

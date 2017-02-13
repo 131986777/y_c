@@ -69,10 +69,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
                     $scope.querySkuInfo();
                     $scope.skuData = $scope.getPrdSkuData($scope.skuList);
 
-                    if($scope.skuList[0]['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'){
-                        //预约不设置库存上限
-                        $scope.skuList[0]['SHOP_PRODUCT_SKU.STOCK']=100;
-                    }
+
 
                     if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length > 0) {
                         $scope.checkContent(1, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);

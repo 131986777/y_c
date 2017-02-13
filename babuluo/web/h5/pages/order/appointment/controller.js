@@ -5,9 +5,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
-    $scope.money = $stateParams.MONEY;   //优惠券返回的价格
-    // $scope.memberCouponId=$stateParams.COUPON_ID;      //  要删除的id
-
     $scope.initData = function () {
 
         $scope.canCommit = false;
@@ -23,7 +20,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
 
         $scope.order = {};
 
-        $scope.shop = JSON.parse(getCookie('currentShopInfo'));
         $scope.shop = JSON.parse(getCookie('currentShopInfo'));
         $scope.queryAccount(deferred_account);
 
@@ -76,8 +72,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             if ($stateParams.COUPON_INFO != '') {
                 $scope.coupon = JSON.parse($stateParams.COUPON_INFO);
                 if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
-                    console.log("======");
-                    console.log($scope.coupon);
+
                     var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
                     var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
                     price -= $scope.coupon.MONEY;
