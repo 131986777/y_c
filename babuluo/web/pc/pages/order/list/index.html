@@ -112,18 +112,18 @@
                 <div class="listBody">
                     <div class="goodsInfo">
                         <ul>
-                            <li ng-repeat=" detail in order.details"
+                            <li ng-repeat="detail in order.details"
                                 ng-if="detail['isPresent']==null">
                                 <div class="pic">
                                     <img
                                         ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}"
-                                        ng-click="toProduct(order['SHOP_ORDER_INFO.PRD_ID'])"
+                                        ng-click="toProduct(detail['SHOP_ORDER_INFO.PRD_ID'])"
                                         style="width: 80px;height: 80px;">
                                 </div>
                                 <div class="detail">
                                     <div class="info">
                                         <p class="infoTitle"
-                                           ng-click="toProduct(order['SHOP_ORDER_INFO.PRD_ID'])">
+                                           ng-click="toProduct(detail['SHOP_ORDER_INFO.PRD_ID'])">
                                             {{detail['SHOP_ORDER_INFO.PRD_NAME']}}</p>
                                         <p class="standards">【
                                             {{detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']}} 】</p>
