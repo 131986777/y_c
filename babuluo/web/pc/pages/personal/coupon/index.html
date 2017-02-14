@@ -21,7 +21,7 @@
                                     {{(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</p>
                                 <p class="yuan">折</p>
                             </div>
-                            <p class="deadTime">
+                            <p class="deadTime" ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']!=undefined">
                                 有效期至{{coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']}}</p>
                         </div>
                     </div>
@@ -43,6 +43,9 @@
                     </div>
                     <div class="midPos">
                         <p class="con">
+                            <span ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==-1">
+                                不限定使用对象
+                            </span>
                             <span ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用
                                 ({{detailData(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
                             </span>
