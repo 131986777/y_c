@@ -17,15 +17,16 @@ angular.module('AndSell.H5.Main').controller('pages_user_register_Controller', f
         }
     }
 
-    $scope.checkPassword = function () {
-        if ($scope.memberInfo['MEMBER.LOGIN_PWD'] != $scope.memberInfo['MEMBER.password']) {
-            weUI.toast.error('两次密码不一致，请检查密码');
-        }
-    }
 
     $scope.reg = function () {
-        $scope.checkPwd();
-        $scope.checkPassword();
+        if ($scope.memberInfo['MEMBER.LOGIN_PWD'].length < 6) {
+            modalFactory.showShortAlert('密码长度不得小于6位');
+            return;
+        }
+        if ($scope.memberInfo['MEMBER.LOGIN_PWD'] != $scope.memberInfo['MEMBER.password']) {
+            weUI.toast.error('两次密码不一致，请检查密码');
+            return;
+        }
         var form = {};
         form['MEMBER.LOGIN_ID'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
         form['MEMBER.MOBILE'] = $scope.memberInfo['MEMBER.LOGIN_ID'];
