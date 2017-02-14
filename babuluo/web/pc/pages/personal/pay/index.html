@@ -76,53 +76,46 @@
                                     {{(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</p>
                                 <p class="yuan">折</p>
                             </div>
-                            <p class="deadTime" ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']!=undefined">
+                            <p class="deadTime"
+                               ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']!=undefined">
                                 有效期至{{choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']}}</p>
                         </div>
                     </div>
                     <div class="couponMid"
-                         ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']=='0,0,0,0,0,0,0'">
+                         ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']=='0,0,0,0,0,0,0'">
                         <span class="cpTime">不限定使用时间</span>
                     </div>
                     <div class="couponMid">
-                        <span class="cpTime"
-                              ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">限定时间（每周</span>
-                        <span
-                            ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
-                        <span
-                            ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
-                        <span
-                            ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
-                        <span
-                            ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
-                        <span
-                            ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
-                        <span
-                            ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
-                        <span
-                            ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
-                        <span>)</span>
+                        <div ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">
+                            <span class="cpTime"
+                                  ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">限定时间（每周</span>
+                            <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
+                            <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
+                            <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
+                            <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
+                            <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
+                            <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
+                            <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
+                            <span>)</span>
+                        </div>
                         <div class="midPos">
                             <p class="con">
-                                 <span ng-if="coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==-1">
-                                不限定使用对象
-                            </span>
-                            <span
-                                ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用
-                                ({{detailData(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
-                            </span>
-                                <span
-                                    ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==2">特定商品类别使用
-                                ({{detailData(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
-                            </span>
-                                <span
-                                    ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==3">特定商品标签使用
-                                ({{detailData(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
-                            </span>
+                                <span ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']=='-1'">
+                                    不限定使用对象
+                                </span>
+                                <span ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用
+                                    ({{detailData(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                                </span>
+                                <span ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==2">特定商品类别使用
+                                    ({{detailData(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                                </span>
+                                <span ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==3">特定商品标签使用
+                                    ({{detailData(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
+                                </span>
                                 <span>
-                                满<span style="color:rgb(255,151,50)">{{(coupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.CONDITION_PRICE']/100).toFixed(2)}}</span>元可使用
-                            </span>
-                                <span>已领{{coupon['NUM_COUPON']}}张</span>
+                                    满<span style="color:rgb(255,151,50)">{{(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.CONDITION_PRICE']/100).toFixed(2)}}</span>元可使用
+                                </span>
+                                <span>已领{{choiceCoupon['NUM_COUPON']}}张</span>
                             </p>
                         </div>
                     </div>
@@ -245,41 +238,40 @@
                                 {{(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</p>
                             <p class="yuan">折</p>
                         </div>
-                        <p class="deadTime">
+                        <p class="deadTime" ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']!=undefined">
                             有效期至{{ul['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']}}</p>
                     </div>
                 </div>
                 <div class="couponMid">
-                    <span class="cpTime">限定时间（每周</span>
-                    <span
-                        ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
-                    <span
-                        ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
-                    <span
-                        ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
-                    <span
-                        ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
-                    <span
-                        ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
-                    <span
-                        ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
-                    <span
-                        ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
-                    <span>)</span>
+                    <div ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">
+                        <span class="cpTime">限定时间（每周</span>
+                        <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
+                        <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
+                        <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
+                        <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
+                        <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
+                        <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
+                        <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
+                        <span>)</span>
+                    </div>
                     <div class="midPos">
                         <p class="con">
-                            <span
-                                ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用
+                            <span ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']=='-1'">
+                                    不限定使用对象
+                            </span>
+                            <span ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用
                                 ({{detailData(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
                             </span>
-                            <span
-                                ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==2">特定商品类别使用
+                            <span ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==2">特定商品类别使用
                                 ({{detailData(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
                             </span>
-                            <span
-                                ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==3">特定商品标签使用
+                            <span ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==3">特定商品标签使用
                                 ({{detailData(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}})
                             </span>
+                            <span>
+                                满<span style="color:rgb(255,151,50)">{{(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.CONDITION_PRICE']/100).toFixed(2)}}</span>元可使用
+                            </span>
+                            <span>已领{{ul['NUM_COUPON']}}张</span>
                         </p>
                     </div>
                 </div>
