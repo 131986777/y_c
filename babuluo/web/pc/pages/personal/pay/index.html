@@ -87,8 +87,7 @@
                     </div>
                     <div class="couponMid">
                         <div ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">
-                            <span class="cpTime"
-                                  ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">限定时间（每周</span>
+                            <span class="cpTime" ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">限定时间（每周</span>
                             <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
                             <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
                             <span ng-if="parseArray(choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
@@ -243,7 +242,10 @@
                     </div>
                 </div>
                 <div class="couponMid">
-                    <div ng-if="choiceCoupon['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">
+                    <div ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']=='0,0,0,0,0,0,0'">
+                        <span class="cpTime">不限定使用时间</span>
+                    </div>
+                    <div ng-if="ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">
                         <span class="cpTime">限定时间（每周</span>
                         <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
                         <span ng-if="parseArray(ul['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
