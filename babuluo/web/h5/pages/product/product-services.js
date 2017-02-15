@@ -23,6 +23,8 @@ AndSellH5MainModule.service('productFactory', function ($resource, http) {
 
     this.getHotSearch = http.post('/search/history/getHotHistory');
 
+    this.isInCollection = http.post('/user/collection/queryByUserIdAndPrdSku');
+
     this.clearSearchHistory = http.post('/search/history/clearHistoryByUserID');
 
 });

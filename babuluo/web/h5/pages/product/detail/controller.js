@@ -71,6 +71,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
                 if ($scope.product['SHOP_PRODUCT.HAS_STOCK'] == undefined) {
                     $scope.noStore = true;
                 }
+                $scope.isInCollection();
             }
         });
 
@@ -493,7 +494,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         if ($scope.skuSize < $scope.sku['SHOP_PRODUCT_SKU.STOCK']) {
             $scope.skuSize = clone($scope.skuSize) + 1
         } else {
-            weUI.toast.ok('已达到该商品最大库存数');
+            weUI.toast.error('已达到该商品最大库存数');
         }
 
     }
@@ -523,6 +524,21 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         }
     };
 
+    $scope.isInCollection = function () {
+        var parameters = {};
+        parameters['PRODUCT_COLLECTION.USER_ID'] = $scope.uid;
+        parameters['PRODUCT_COLLECTION.PRD_SPU'] = $scope.product['SHOP_PRODUCT.PRD_SPU'];
+        parameters['PRODUCT_COLLECTION.COLLECTION_STATE'] = 1;
+        productFactory.isInCollection(parameters, function (response) {
+            if (response.data.length > 0) {
+                $scope.collectionState = 1;
+
+            } else {
+                $scope.collectionState = -1;
+            }
+        })
+    }
+
     //点击收藏按钮事件
     $scope.collectionClick = function () {
 
@@ -535,9 +551,15 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         parameters['PRODUCT_COLLECTION.COLLECTION_STATE'] = $scope.collectionState;
 
         productFactory.addAndMod(parameters);
+
+        if ($scope.collectionState == 1) {
+            weUI.toast.ok("收藏成功");
+        }
+        if ($scope.collectionState == -1) {
+            weUI.toast.ok("取消收藏成功");
+        }
     };
 
-    $scope.isCollection = 'false';
 
     var swiper = new Swiper('.swiper-container', {
         paginationClickable: true,

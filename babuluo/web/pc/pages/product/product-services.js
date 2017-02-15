@@ -26,5 +26,7 @@ AndSellPCMainModule.service('productFactory', function ($resource, http) {
 
     this.addAndMod = http.post('/user/collection/addAndMod');
 
+    this.isInCollection = http.post('/user/collection/queryByUserIdAndPrdSku');
+
     this.getPresentsBySkuIds = http.post('/shop/product/getBySkuIdWithAllInfo');
 });

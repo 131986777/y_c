@@ -7,7 +7,7 @@ angular.module('AndSell.PC.Main').filter('formatDate', function () {
     }
 });
 
-angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', function (productFactory, $interval, $scope, $state, $stateParams, modalFactory, orderFactory,promoFactory) {
+angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', function (productFactory, $interval, $scope, $state, $stateParams, modalFactory, orderFactory, promoFactory) {
 
     modalFactory.setTitle("商品详细");
 
@@ -35,7 +35,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
             name1: '', name2: '', name3: ''
         }
 
-        productFactory.querySalesRankingByShopId({'PAGE_SIZE':'10','PN':'1'},function (resq) {
+        productFactory.querySalesRankingByShopId({'PAGE_SIZE': '10', 'PN': '1'}, function (resq) {
             $scope.productRanking = resq.data;
         });
 
@@ -70,7 +70,6 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
                     $scope.skuData = $scope.getPrdSkuData($scope.skuList);
 
 
-
                     if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length > 0) {
                         $scope.checkContent(1, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
                     }
@@ -83,6 +82,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
                 if ($scope.product['SHOP_PRODUCT.HAS_STOCK'] == undefined) {
                     $scope.noStore = true;
                 }
+                $scope.isInCollection();
             }
         });
 
@@ -112,17 +112,17 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
 
     $scope.commentNumber = function () {
 
-        $scope.goodCommentsPercent = $scope.commentsPercent($scope.listLength($scope.goodComments),$scope.proComments.length)+"%";
-        $scope.midCommentsPercent = $scope.commentsPercent($scope.listLength($scope.midComments),$scope.proComments.length)+"%";
-        $scope.badCommentsPercent = $scope.commentsPercent($scope.listLength($scope.badComments),$scope.proComments.length)+"%";
-        $scope.goodcp={
-            'width':$scope.goodCommentsPercent
+        $scope.goodCommentsPercent = $scope.commentsPercent($scope.listLength($scope.goodComments), $scope.proComments.length) + "%";
+        $scope.midCommentsPercent = $scope.commentsPercent($scope.listLength($scope.midComments), $scope.proComments.length) + "%";
+        $scope.badCommentsPercent = $scope.commentsPercent($scope.listLength($scope.badComments), $scope.proComments.length) + "%";
+        $scope.goodcp = {
+            'width': $scope.goodCommentsPercent
         }
-        $scope.midcp={
-            'width':$scope.midCommentsPercent
+        $scope.midcp = {
+            'width': $scope.midCommentsPercent
         }
-        $scope.badcp={
-            'width':$scope.badCommentsPercent
+        $scope.badcp = {
+            'width': $scope.badCommentsPercent
         }
     }
 
@@ -130,7 +130,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         // 添加轮播图源
         if (prd['SHOP_PRODUCT.CMP'] != undefined) {
             $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.CMP']});
-            $scope.changeCMP( FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.CMP']);
+            $scope.changeCMP(FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.CMP']);
         }
         if (prd['SHOP_PRODUCT.P1'] != undefined) {
             $scope.slides.push({image: FILE_SERVER_DOMAIN + prd['SHOP_PRODUCT.P1']});
@@ -189,19 +189,19 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         })
     }
 
-    $scope.planFilter = function() {
-        if ($scope.planUnitList == null){
+    $scope.planFilter = function () {
+        if ($scope.planUnitList == null) {
             return
         }
-        $scope.planUnitList.forEach(function(unit){
-            if ( null == unit){
+        $scope.planUnitList.forEach(function (unit) {
+            if (null == unit) {
                 return
             }
-            if ( unit['skuVOs'] == null || unit['skuVOs'].length == 0){
+            if (unit['skuVOs'] == null || unit['skuVOs'].length == 0) {
                 return
             }
             $scope.planUnitVO = unit;
-            if (unit['afterSumPrice']<unit['beforeSumPrice']){
+            if (unit['afterSumPrice'] < unit['beforeSumPrice']) {
                 $scope.oldPrice = $scope.nowPrice
                 $scope.nowPrice = unit['afterSumPrice'] / 100
             }
@@ -469,20 +469,6 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         $scope.totalSize = size;
     }
 
-    //点击收藏按钮事件
-    $scope.collectionClick = function(){
-
-        $scope.collectionState *= -1;
-
-        var parameters = {};
-        parameters['PRODUCT_COLLECTION.USER_ID'] = $scope.uid;
-        parameters['PRODUCT_COLLECTION.PRD_ID'] = $scope.product['SHOP_PRODUCT.PRD_ID'];
-        parameters['PRODUCT_COLLECTION.PRD_SPU'] = $scope.product['SHOP_PRODUCT.PRD_SPU'];
-        parameters['PRODUCT_COLLECTION.COLLECTION_STATE'] = $scope.collectionState;
-
-        productFactory.addAndMod(parameters);
-    };
-
     //加入购物车
     $scope.addToCart = function () {
         if ($scope.sku != undefined) {
@@ -623,36 +609,41 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
         if ($.isEmptyObject(val)) {
             return 0;
         } else {
-            for(var item in val){
+            for (var item in val) {
                 index++;
             }
             return index;
         }
     };
 
-    var swiper = new Swiper('.swiper-container', {
-        paginationClickable: true,
-        spaceBetween: 300,
-        centeredSlides: true,
-        autoplay: 3500,
-        autoplayDisableOnInteraction: false,
-        observer: true,
-        observeParents: true
-    });
-
     //好评百分比，中评百分比，差评百分比
     $scope.commentsPercent = function (fra, nums) {
         if (nums == 0) {
             return 0;
         }
-        var i =  fra/nums*100;
+        var i = fra / nums * 100;
         return i;
     }
 
-    //点击收藏按钮事件
-    $scope.collectionClick = function(){
+    $scope.isInCollection = function () {
+        var parameters = {};
+        parameters['PRODUCT_COLLECTION.USER_ID'] = $scope.uid;
+        parameters['PRODUCT_COLLECTION.PRD_SPU'] = $scope.product['SHOP_PRODUCT.PRD_SPU'];
+        parameters['PRODUCT_COLLECTION.COLLECTION_STATE'] = 1;
+        productFactory.isInCollection(parameters, function (response) {
+            if (response.data.length > 0) {
+                $scope.collectionState = 1;
 
-        $scope.collectionState *= -1;
+            } else {
+                $scope.collectionState = -1;
+            }
+        })
+    }
+
+    //点击收藏按钮事件
+    $scope.collectionClick = function () {
+
+        $scope.collectionState = $scope.collectionState * -1;
 
         var parameters = {};
         parameters['PRODUCT_COLLECTION.USER_ID'] = $scope.uid;
@@ -662,10 +653,10 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
 
         productFactory.addAndMod(parameters);
 
-        if($scope.collectionState==1){
+        if ($scope.collectionState == 1) {
             modalFactory.showShortAlert("收藏成功");
         }
-        if($scope.collectionState==-1){
+        if ($scope.collectionState == -1) {
             modalFactory.showShortAlert("取消收藏成功");
         }
 
