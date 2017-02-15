@@ -457,33 +457,69 @@
                         <i class="icon-settings"></i>
                         分析
                     </a>
-                    <div class="sub-menu-wrap sub-menu-3 dropdown-menu">
+                    <div class="sub-menu-wrap sub-menu-2 dropdown-menu">
                         <ul class="sub-menu " role="menu">
-                            <li ng-if="APP_ID_LIST.indexOf('@1103@')>=0">
+                            <li>
                                 <a ui-sref="analysis/analysis/cardAnalysis">
                                     会员态势
                                 </a>
                             </li>
-                            <li ng-if="APP_ID_LIST.indexOf('@1104@')>=0">
+                            <li>
+                                <a ui-sref="analysis/analysis/guestAnalysis">
+                                    来客分析
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="sub-menu " role="menu">
+                            <li>
                                 <a ui-sref="analysis/analysis/compareAnalysis">
                                     作战室
                                 </a>
                             </li>
-                            <li ng-if="APP_ID_LIST.indexOf('@1112@')>=0">
+                            <li>
                                 <a ui-sref="analysis/analysis/liveAnalysis">
                                     直播间
                                 </a>
                             </li>
                         </ul>
+                    </div>
+                </li>
+                <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1066@')>=0">
+                    <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="card/card/cardAnalysis"
+                       data-hover="dropdown">
+                        <i class="icon-settings"></i>
+                        分析2
+                    </a>
+                    <div class="sub-menu-wrap sub-menu-3 dropdown-menu">
                         <ul class="sub-menu " role="menu">
-                            <li ng-if="APP_ID_LIST.indexOf('@1105@')>=0">
+                            <li>
                                 <a ui-sref="analysis/analysis/orderAnalysis">
                                     线上销售态势
                                 </a>
                             </li>
-                            <li ng-if="APP_ID_LIST.indexOf('@1106@')>=0">
+                            <li>
                                 <a ui-sref="analysis/analysis/offlineOrderAnalysis">
                                     线下销售态势
+                                </a>
+                            </li>
+
+                        </ul>
+                        <ul class="sub-menu " role="menu">
+                            <li>
+                                <a ui-sref="analysis/analysis/dailyAnalysis">
+                                    线上经营日报
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="analysis/analysis/offlineDailyAnalysis">
+                                    线下经营日报
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="sub-menu " role="menu">
+                            <li>
+                                <a ui-sref="analysis/analysis/formAnalysis">
+                                    线上商品报表
                                 </a>
                             </li>
                             <li>
@@ -491,26 +527,6 @@
                                     线下销售报表
                                 </a>
                             </li>
-                        </ul>
-                        <ul class="sub-menu " role="menu">
-                            <li ng-if="APP_ID_LIST.indexOf('@1107@')>=0">
-                                <a ui-sref="analysis/analysis/dailyAnalysis">
-                                    线上经营日报
-                                </a>
-                            </li>
-                            <li ng-if="APP_ID_LIST.indexOf('@1108@')>=0">
-                                <a ui-sref="analysis/analysis/offlineDailyAnalysis">
-                                    线下经营日报
-                                </a>
-                            </li>
-                            <li>
-                                <a ui-sref="analysis/analysis/formAnalysis">
-                                    线上商品报表
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="sub-menu " role="menu">
-
                         </ul>
                     </div>
                 </li>
