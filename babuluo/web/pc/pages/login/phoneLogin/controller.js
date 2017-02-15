@@ -4,36 +4,32 @@ angular.module('AndSell.PC.Main').controller('pages_login_phoneLogin_Controller'
 
     modalFactory.setHeader(false);
 
+    modalFactory.setSide(false);
+
+    modalFactory.setLeftMenu(false);
+
     $scope.sendwait = true;
     $scope.sending = false;
     $scope.sended = false;
+
     $scope.memberInfo = {};
+
     $scope.sendSms = function () {
-        if ($scope.memberInfo['PHONE'] == undefined) {
-            modalFactory.showShortAlert('请输入手机号');
-            return;
-        }
+
+        $scope.sendwait = false;
+        $scope.sending = true;
+
         var send = function () {
             var form = {};
             form['PHONE'] = $scope.memberInfo['PHONE'];
             userFactory.phoneSms(form, function (response) {
-                console.log(form);
-                $('.codeLogin').fadeOut();
-                $('.send').fadeIn();
-                $scope.time = 60;
-                $scope.sending = false;
                 $scope.sended = true;
-                if (response.msg == 'ok') {
-                    $('.send').fadeOut();
-                    $('.sended').fadeIn();
-                }
+                $scope.sending = false;
+                $scope.time = 60;
                 $scope.timer = $interval(function () {
                     if ($scope.time == 0) {
-                        $('.codeLogin').fadeIn();
-                        $('.sended').fadeOut();
-                        $scope.sendwait = true;
-                        $scope.send = false;
                         $scope.sended = false;
+                        $scope.sendwait = true;
                         $scope.time = 60;
                         $interval.cancel($scope.timer);
                     }
@@ -52,6 +48,7 @@ angular.module('AndSell.PC.Main').controller('pages_login_phoneLogin_Controller'
     $scope.login = function () {
         var loginEvent = function () {
             userFactory.phoneLogin($scope.memberInfo, function (response) {
+                modalFactory.updateUser();
                 $state.go('pages/home');
             }, function (response) {
                 modalFactory.showShortAlert(response.msg);
