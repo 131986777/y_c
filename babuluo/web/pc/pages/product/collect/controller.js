@@ -10,14 +10,14 @@ angular.module('AndSell.PC.Main').controller('pages_product_collect_Controller',
 
     $scope.filter = {};
 
-    $scope.initData = function(){
-        $scope.filter['PRODUCT_COLLECTION.USER_ID'] = getCookie('ANDSELLID');;
+    $scope.initData = function () {
+        $scope.filter['PRODUCT_COLLECTION.USER_ID'] = getCookie('ANDSELLID');
     }
 
     $scope.queryData = function (resp) {
         $scope.userCollections = resp.data;
         $scope.userCollections.forEach(function (ele) {
-           ele['SHOP_PRODUCT.CMP'] = FILE_SERVER_DOMAIN+ele['SHOP_PRODUCT.CMP'];
+            ele['SHOP_PRODUCT.CMP'] = FILE_SERVER_DOMAIN + ele['SHOP_PRODUCT.CMP'];
         });
         console.log($scope.userCollections);
     }
@@ -25,6 +25,10 @@ angular.module('AndSell.PC.Main').controller('pages_product_collect_Controller',
     //跳转至详情页
     $scope.toDetail = function (id) {
         $state.go('pages/product/detail', {PRD_ID: id});
+    }
+
+    $scope.search = function () {
+        $scope.filter['SHOP_PRODUCT.PRD_NAME'] = $scope.searchContent;
     }
 
 
