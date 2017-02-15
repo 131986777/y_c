@@ -36,7 +36,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                     $scope.order['SHOP_ORDER.PRICE_OVER'] -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
                     $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.coupon.ID;
                 }
-
             }
 
             if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
@@ -46,7 +45,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
             }
         });
-
     }
 
     $scope.initCartRequestVO = function (deferred) {
