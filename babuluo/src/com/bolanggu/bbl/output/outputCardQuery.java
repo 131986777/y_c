@@ -170,13 +170,18 @@ public class outputCardQuery {
                 state = "冻结";
             }
 
+            String cardNo = jsonObject.getString("MEMBER_CARD.CARD_NO");
+            if (cardNo.length()==12||cardNo.length()==14){
+                cardNo = cardNo.substring(0,cardNo.length()-4);
+            }
+
             SXSSFRow row = cardSheet.createRow(rowIndex++);
             row.setHeightInPoints(25);
             SXSSFCell cell0 = row.createCell(0);
             cell0.setCellValue(analyseIndex++);
             cell0.setCellStyle(cellStyle);
             SXSSFCell cell1 = row.createCell(1);
-            cell1.setCellValue(jsonObject.getString("MEMBER_CARD.CARD_NO"));
+            cell1.setCellValue(cardNo);
             cell1.setCellStyle(cellStyle);
             SXSSFCell cell2 = row.createCell(2);
             cell2.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER_CARD.MEMBER_NAME")));
