@@ -25,7 +25,9 @@
                 <th class="text-center">结束日期</th>
                 <th class="text-center">门店ID</th>
                 <th class="text-center">门店名称</th>
-                <th class="text-center">新增会员数</th>
+                <th class="text-center">新增会员</th>
+                <th class="text-center">VIP会员</th>
+                <th class="text-center">普通会员</th>
                 <th class="text-center">销售金额</th>
                 <th class="text-center">日平均销售</th>
                 <th class="text-center">卡充值总额</th>
@@ -37,7 +39,7 @@
                 <th class="text-center">平均单价</th>
                 <th class="text-center">销售数量</th>
                 <th class="text-center">折让总金额</th>
-                <th class="text-center">手工折扣</th>
+                <!--<th class="text-center">手工折扣</th>-->
                 <th class="text-center">自动折扣</th>
             </tr>
             </thead>
@@ -49,6 +51,10 @@
                 <td><span ng-bind="VALUE['SHOP_NAME']"></span></td>
                 <td><span ng-if="VALUE['SHOP_VALUE']['ADD_CARD']!=0"><span
                         ng-bind="VALUE['SHOP_VALUE']['ADD_CARD']"></span></span></td>
+                <td><span ng-if="VALUE['SHOP_VALUE']['NEW_CARD_VIP']!=0"><span
+                        ng-bind="VALUE['SHOP_VALUE']['NEW_CARD_VIP']"></span></span></td>
+                <td><span ng-if="VALUE['SHOP_VALUE']['NEW_CARD_PT']!=0"><span
+                        ng-bind="VALUE['SHOP_VALUE']['NEW_CARD_PT']"></span></span></td>
                 <td><span ng-if="VALUE['SHOP_VALUE']['MONEY_COUNT']!=0"><span
                         ng-bind="VALUE['SHOP_VALUE']['MONEY_COUNT']/100 | currency:'￥'"></span></span></td>
                 <td><span ng-if="VALUE['SHOP_VALUE']['AVG_MONEY_COUNT']!=0"><span
@@ -71,14 +77,16 @@
                         ng-bind="VALUE['SHOP_VALUE']['TOTAL_UNIT'] | number:3"></span></span></td>
                 <td><span ng-if="VALUE['SHOP_VALUE']['MONEY_DISCOUNT']!=0"><span
                         ng-bind="VALUE['SHOP_VALUE']['MONEY_DISCOUNT']/100 | currency:'￥'"></span></span></td>
-                <td><span ng-if="VALUE['SHOP_VALUE']['HAND_DISCOUNT']!=0"><span
-                        ng-bind="VALUE['SHOP_VALUE']['HAND_DISCOUNT']/100 | currency:'￥'"></span></span></td>
+                <!--<td><span ng-if="VALUE['SHOP_VALUE']['HAND_DISCOUNT']!=0"><span-->
+                        <!--ng-bind="VALUE['SHOP_VALUE']['HAND_DISCOUNT']/100 | currency:'￥'"></span></span></td>-->
                 <td><span ng-if="VALUE['SHOP_VALUE']['AUTO_DISCOUNT']!=0"><span
                         ng-bind="VALUE['SHOP_VALUE']['AUTO_DISCOUNT']/100 | currency:'￥'"></span></span></td>
             </tr>
             <tr align="center">
                 <td colspan=4>合计</td>
                 <td><span ng-bind="ADD_CARD"></span></td>
+                <td><span ng-bind="NEW_CARD_VIP"></span></td>
+                <td><span ng-bind="NEW_CARD_PT"></span></td>
                 <td><span ng-bind="MONEY_COUNT | currency:'￥' "></span></td>
                 <td><span ng-bind="AVG_MONEY_COUNT | currency:'￥'"></span></td>
                 <td><span ng-bind="TOTAL_CARD_MONEY | currency:'￥'"></span></td>
@@ -90,7 +98,7 @@
                 <td><span ng-bind="AVG_UNIT_MONEY | currency:'￥' "></span></td>
                 <td><span ng-bind="TOTAL_UNIT | number:3"></span></td>
                 <td><span ng-bind="MONEY_DISCOUNT | currency:'￥' "></span></td>
-                <td><span ng-bind="HAND_DISCOUNT | currency:'￥' "></span></td>
+                <!--<td><span ng-bind="HAND_DISCOUNT | currency:'￥' "></span></td>-->
                 <td><span ng-bind="AUTO_DISCOUNT | currency:'￥' "></span></td>
             </tr>
             </tbody>
