@@ -1,7 +1,8 @@
-<div class="page-content" ng-init="sdsdsa()">
+<div class="page-content">
   <div class="table-content">
     <div class="table-operbar">
       <div class="table-toolbar text-right">
+        <a show-modal id="#shopSwitchModal"> shop select </a>
         <button show-modal id="#add" class="btn btn-default sbold green"><i
             class="fa fa-plus"></i> 新增活动
         </button>
@@ -105,7 +106,7 @@
               <div class="col-md-8">
                 <input type="text" class="form-control"
                        ng-model="add['ACTIVITY.ACTIVIVTY_TYPE']"
-                       ng-init="add['ACTIVITY.ACTIVIVTY_TYPE'='']"
+                       ng-init="add['ACTIVITY.ACTIVIVTY_TYPE']=''"
                        placeholder=""></div>
             </div>
             <div class="form-group row">
@@ -116,7 +117,7 @@
               <div class="col-md-8">
                 <input type="text" class="form-control"
                        ng-model="add['ACTIVITY.LIMIT_TIMES']"
-                       ng-init="add['ACTIVITY.LIMIT_TIMES'='']"
+                       ng-init="add['ACTIVITY.LIMIT_TIMES']=''"
                        placeholder=""></div>
             </div>
             <div class="form-group row">
@@ -127,7 +128,7 @@
               <div class="col-md-8">
                 <input type="text" class="form-control"
                        ng-model="add['ACTIVITY.LIMIT_VALUE']"
-                       ng-init="add['ACTIVITY.LIMIT_VALUE'='']"
+                       ng-init="add['ACTIVITY.LIMIT_VALUE']=''"
                        placeholder=""></div>
             </div>
             <div class="form-group row">
@@ -136,7 +137,7 @@
               </label>
 
               <div class="col-md-8">
-                <select class="form-control" ng-model="add['ACTIVITY.GAINS_TYPE']" ng-init="add['ACTIVITY.GAINS_TYPE'='']"
+                <select class="form-control" ng-model="add['ACTIVITY.GAINS_TYPE']" ng-init="add['ACTIVITY.GAINS_TYPE']=''"
                         style=" padding: .3em 1.5em .3em .5em;">
                   <option value="金额">金额</option>
                   <option value="商品">商品</option>
@@ -184,7 +185,7 @@
                 <span class="required"></span> 起始时间:
               </label>
               <div class="col-md-8">
-                  <input class="start_hour col-md-12"  type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="开始时间" name="from" ng-model="add['ACTIVITY.START_DATETIME']" ng-init="add['ACTIVITY.START_DATETIME'='']" data-date-format="yyyy/mm/dd hh:ii" style="margin-right: 10px">
+                  <input class="start_hour col-md-12"  type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="开始时间" name="from" ng-model="add['ACTIVITY.START_DATETIME']" ng-init="add['ACTIVITY.START_DATETIME']=''" data-date-format="yyyy/mm/dd hh:ii" style="margin-right: 10px">
               </div>
             </div>
             <div class="form-group row" ng-show="add['ACTIVITY.TIME_STATE']==1">
@@ -192,7 +193,7 @@
                 <span class="required"></span> 结束时间:
               </label>
               <div class="col-md-8">
-                <input class="end_hour col-md-12" type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="結束时间" name="from" ng-model="add['ACTIVITY.END_DATETIME']" ng-init="add['ACTIVITY.END_DATETIME'='']" data-date-format="yyyy/mm/dd hh:ii" style="margin-right: 10px">
+                <input class="end_hour col-md-12" type="text" class="form-control ng-pristine ng-untouched ng-valid ng-empty" placeholder="結束时间" name="from" ng-model="add['ACTIVITY.END_DATETIME']" ng-init="add['ACTIVITY.END_DATETIME']=''" data-date-format="yyyy/mm/dd hh:ii" style="margin-right: 10px">
               </div>
             </div>
             <div class="form-group row">
@@ -202,7 +203,7 @@
               <div class="col-md-8">
                 <input type="text" class="form-control"
                        ng-model="add['ACTIVITY.REMARK']"
-                       ng-init="add['ACTIVITY.REMARK'='']"
+                       ng-init="add['ACTIVITY.REMARK']=''"
                        placeholder="">
               </div>
             </div>
@@ -213,7 +214,7 @@
               <div class="col-md-8">
                 <input type="text" class="form-control"
                        ng-model="add['ACTIVITY.REPEATED_GAINS']"
-                       ng-init="add['ACTIVITY.REPEATED_GAINS'='']"
+                       ng-init="add['ACTIVITY.REPEATED_GAINS']=''"
                        placeholder="">
               </div>
             </div>
@@ -224,7 +225,7 @@
               <div class="col-md-8">
                 <input type="text" class="form-control "
                        ng-model="add['ACTIVITY.INTRO']"
-                       ng-init="add['ACTIVITY.INTRO'='']"
+                       ng-init="add['ACTIVITY.INTRO']=''"
                        placeholder="">
               </div>
             </div>
@@ -406,4 +407,5 @@
   </div>
 </div>
 <!-- END CONTENT -->
+<shop-switch-modal  callback="shopSwitch(data)"></shop-switch-modal>
 

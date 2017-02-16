@@ -502,6 +502,75 @@ AndSellUI.directive('productSwitchModal', function (http, imgURL, baseURL, class
     }
 });
 
+AndSellUI.directive('shopSwitchModal', function (http, imgURL, baseURL,  districtFactory, shopFactory) {
+    return {
+        restrict: 'EA',
+        templateUrl: '/AndSell/app/components/libs/angular/template/shopSwitchModal.html',
+        scope: {
+            callback: '&'
+        },
+        controller: function ($scope) {
+
+            $scope.FILE_SERVER_DOMAIN = imgURL;
+
+            $scope.getInitData = function () {
+                districtFactory.getDistrictList({}, function (response) {
+                    $scope.districtList = response.data;
+                    $scope.districtMap = listToMap($scope.districtList,'DISTRICT.DISTRICT_ID');
+                    console.log($scope.districtMap);
+                });
+            };
+
+            $scope.shopList = new Array;
+
+            $scope.bindShopData = function (response) {
+                $scope.shopList = response.data;
+            }
+
+            $scope.selectItemList = new Array;
+
+            $scope.checkItem = function (item) {
+                if (item['SHOP.IS_SELECT']) {
+                    $scope.insertItem(item);
+                } else {
+                    $scope.removeItem(item);
+                }
+            }
+
+            $scope.search = function () {
+                $scope.shopFilter['SHOP.SHOP_NAME'] = $scope.shopFilterSearch;
+            }
+
+            $scope.existItem = function (item) {
+                if ($scope.selectItemList.indexOf(item) < 0) {
+                    return true;
+                }
+                return false;
+            }
+
+            $scope.insertItem = function (item) {
+                if ($scope.selectItemList.indexOf(item) < 0) {
+                    $scope.selectItemList.push(item);
+                }
+            }
+
+            $scope.removeItem = function (item) {
+                if ($scope.selectItemList.indexOf(item) >= 0) {
+                    $scope.selectItemList.remove(item);
+                }
+            }
+
+            $scope.setReturn = function () {
+                $scope.callback({data: $scope.selectItemList});
+                $scope.selectItemList = new Array;
+                $scope.shopFilter['SHOP.DISTRICT_ID'] = 'null';
+                $scope.shopFilterSearch = '';
+                $('#shopSwitchModal').modal('hide');
+            }
+        }
+    }
+});
+
 //优惠券模态框
 AndSellUI.directive('couponItemSwitchModal', function (http, baseURL, couponFactory) {
     return {

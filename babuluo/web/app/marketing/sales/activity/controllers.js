@@ -9,7 +9,7 @@ angular.module('AndSell.Main').controller('marketing_sales_activity_Controller',
     };
     $scope.initLoad();
 
-    $scope.gainsTypeOptions=['满减','满送','慢加'];
+    $scope.gainsTypeOptions = ['满减', '满送', '慢加'];
 
     $scope.addActivity = function () {
         if ($scope.add['ACTIVITY.NAME'] == '') {
@@ -96,6 +96,9 @@ angular.module('AndSell.Main').controller('marketing_sales_activity_Controller',
 
     }
 
+    $scope.shopSwitch = function (data) {
+        console.log(data);
+    }
 
     $('.start_hour').datetimepicker({
         language: 'zh-CN',
@@ -136,7 +139,5 @@ angular.module('AndSell.Main').controller('marketing_sales_activity_Controller',
             console.log(start.toISOString(), end.toISOString(), label);
         });
     });
-
-
 
 });
