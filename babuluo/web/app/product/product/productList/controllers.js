@@ -43,7 +43,6 @@ angular.module('AndSell.Main').controller('product_product_productList_Controlle
         //    lists: $scope.classList
         //}
         //$scope.tree = data;
-
     };
 
     //改变商品上下架状态
