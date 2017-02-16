@@ -176,7 +176,7 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
     };
 
     $scope.downMoban = function () {
-        var url = "/AndSell/file/download/ValueCard.xlsx";
+        var url = "/AndSell/file/download/template/ValueCard.xlsx";
         window.location.href = url;
     };
 
