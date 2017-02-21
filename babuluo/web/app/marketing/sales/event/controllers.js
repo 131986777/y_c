@@ -22,6 +22,7 @@ angular.module('AndSell.Main').controller('marketing_sales_event_Controller', fu
             }
         });
         if (on) {
+            $scope.add['EVENT_CONFIG.SHOP_ID_LIST'] = $scope.choicedShopID;
             eventFactory.addEvent($scope.add, function (response) {
                 $("#add").modal('hide');
                 modalFactory.showShortAlert('新增成功');
@@ -38,6 +39,7 @@ angular.module('AndSell.Main').controller('marketing_sales_event_Controller', fu
     };
 
     $scope.modifyEvent = function () {
+        $scope.modify['EVENT_CONFIG.SHOP_ID_LIST'] = $scope.choicedShopID;
         eventFactory.modEvent($scope.modify, function (response) {
             $("#modify").modal('hide');
             modalFactory.showShortAlert("修改成功");
@@ -66,7 +68,16 @@ angular.module('AndSell.Main').controller('marketing_sales_event_Controller', fu
                 $scope.initLoad();
             });
         });
+    };
 
+    $scope.choicedShopID = '';
+
+    $scope.shopSwitch = function (data) {
+        data.forEach(function (ele) {
+            $scope.choicedShopID = $scope.choicedShopID + "," + ele['SHOP.SHOP_ID'];
+        });
+        $scope.choicedShopID = $scope.choicedShopID.substring(1);
+        modalFactory.showShortAlert("参与门店配置成功");
     }
 
 });

@@ -37,6 +37,7 @@ angular.module('AndSell.Main').controller('marketing_sales_activity_Controller',
             return;
         }
         var on = true;
+        $scope.add['ACTIVITY.SHOP_ID_LIST'] = $scope.choicedShopID;
         $scope.topUpList.forEach(function (ele) {
             if (ele['ACTIVITY.NAME'].trim() == $scope.add['ACTIVITY.NAME'].trim()) {
                 modalFactory.showShortAlert("已存在相同事件！");
@@ -61,6 +62,7 @@ angular.module('AndSell.Main').controller('marketing_sales_activity_Controller',
     };
 
     $scope.modifyActivity = function () {
+        $scope.modify['ACTIVITY.SHOP_ID_LIST'] = $scope.choicedShopID;
         activityFactory.modTopUp($scope.modify, function (response) {
             $("#modify").modal('hide');
             modalFactory.showShortAlert("修改成功");
@@ -96,8 +98,14 @@ angular.module('AndSell.Main').controller('marketing_sales_activity_Controller',
 
     }
 
+    $scope.choicedShopID = '';
+
     $scope.shopSwitch = function (data) {
-        console.log(data);
+        data.forEach(function (ele) {
+            $scope.choicedShopID = $scope.choicedShopID + "," + ele['SHOP.SHOP_ID'];
+        });
+        $scope.choicedShopID = $scope.choicedShopID.substring(1);
+        modalFactory.showShortAlert("参与门店配置成功");
     }
 
     $('.start_hour').datetimepicker({

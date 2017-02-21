@@ -18,7 +18,7 @@
                 <select ng-model="shopFilter['SHOP.DISTRICT_ID']"
                         ng-init="shopFilter['SHOP.DISTRICT_ID']='null'"
                         class="nya-bs-select form-control input-small">
-                  <option  class="nya-bs-option" value="null">全部类别</option>
+                  <option  class="nya-bs-option" value="null">全部区域</option>
                   <option class="nya-bs-option"
                           ng-repeat="district in districtList"
                           value="{{district['DISTRICT.DISTRICT_ID']}}"
@@ -35,7 +35,7 @@
                 <thead>
                 <tr>
                   <th class="col-md-7"> 门店名称</th>
-                  <th class="col-md-5"> 分类名称</th>
+                  <th class="col-md-5"> 区域名称</th>
                 </th>
                 </tr>
                 </thead>
