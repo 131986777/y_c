@@ -3,7 +3,7 @@
         <div class="table-operbar">
             <div class="table-toolbar text-right">
                 <button show-modal id="#add" class="btn btn-default sbold green"><i
-                    class="fa fa-plus"></i> 新增预约商品
+                    class="fa fa-plus"></i> 新增抢购
                 </button>
             </div>
 
@@ -11,53 +11,62 @@
             <div class="multi-menu multi-menu-bordered" ng-cloak>
 
                 <div class="table-scrollable">
-                    <table class="table table-striped table-hover">
+                    <table class="table table-striped table-hover" ng-init="queryAllSeckill()">
                         <thead>
                         <tr>
-                            <th style="width: 120px" class="text-center"> 描述</th>
+                            <th style="width: 120px" class="text-center"> 名称</th>
                             <th style="width: 120px" class="text-center"> 商品</th>
-                            <th style="width: 120px" class="text-center"> 商品上架状态</th>
-                            <th style="width: 120px" class="text-center"> 预约价</th>
-                            <th style="width: 120px" class="text-center"> 预付款</th>
+                            <th style="width: 120px" class="text-center"> 类型</th>
                             <th style="width: 120px" class="text-center"> 状态</th>
-                            <th style="width: 120px" class="text-center"> 备注</th>
+                            <th style="width: 120px" class="text-center"> 单人最大购买数量</th>
+                            <th style="width: 120px" class="text-center"> 单价</th>
+                            <th style="width: 120px" class="text-center"> 开始时间</th>
+                            <th style="width: 180px" class="text-center"> 结束时间</th>
+                            <th style="width: 180px" class="text-center"> 总数</th>
+                            <th style="width: 180px" class="text-center"> 余数</th>
                             <th style="width: 180px" class="text-center"> 操作</th>
                         </tr>
                         </thead>
 
                         <tbody ng-cloak class="text-center" style="vertical-align: middle">
-                        <tr ng-repeat=" value in appointmentList">
+                        <tr ng-repeat=" seckill in seckillList">
                             <td class="text-center"
-                                ng-bind="value['APPOINTMENT_PRODUCT.NAME']"></td>
+                                ng-bind="seckill['SECKILL.NAME']"></td>
 
                             <td class="text-center"
-                                ng-bind="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']">
+                                ng-bind="prdMap[seckill['SECKILL.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']">
                             </td>
                             <td class="text-center" >
-                                <span ng-if="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT_SKU.IS_SALE']==1">正在销售</span>
-                                <span ng-if="prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT_SKU.IS_SALE']==-1">下架停售</span>
+                                <span ng-if="seckill['SECKILL.TYPE']=='time'">限时秒杀</span>
+                                <span ng-if="seckill['SECKILL.TYPE']=='num'">限量秒杀</span>
+                                <span ng-if="seckill['SECKILL.TYPE']=='timeAndNum'">限时限量秒杀</span>
+                            </td>
+                            <td class="text-center" >
+                                <span ng-if="seckill['SECKILL.STATE']=='cancel'">禁用中</span>
+                                <span ng-if="seckill['SECKILL.STATE']=='disCancel'">启用中</span>
                             </td>
                             <td class="text-center"
-                                ng-bind="value['APPOINTMENT_PRODUCT.PRICE']"></td>
-                            <td class="text-center">
-                                <span ng-if="value['APPOINTMENT_PRODUCT.NEED_PAY']==1">需要</span>
-                                <span ng-if="value['APPOINTMENT_PRODUCT.NEED_PAY']==-1">不需要</span>
-                            </td>
-                            <td class="text-center">
-                                <span ng-if="value['APPOINTMENT_PRODUCT.STATE']==-1">停用</span>
-                                <span ng-if="value['APPOINTMENT_PRODUCT.STATE']==1">启用</span>
-                            </td>
+                                ng-bind="seckill['SECKILL.LIMIT_NUM']"></td>
                             <td class="text-center"
-                                ng-bind="value['APPOINTMENT_PRODUCT.REMARK']"></td>
+                                ng-bind="seckill['priceShow']"></td>
+                            <td class="text-center"
+                                ng-bind="seckill['SECKILL.BEGIN_DATETIME']"></td>
+                            <td class="text-center"
+                                ng-bind="seckill['SECKILL.END_DATETIME']"></td>
+                            <td class="text-center"
+                                ng-bind="seckill['SECKILL.SUM_NUM']"></td>
+                            <td class="text-center"
+                                ng-bind="seckill['SECKILL.SURPLUS_NUM']"></td>
+
                             <td class="text-center">
                                 <a show-modal id="#modify"
-                                   ng-click="modifyAppointmentClick(value)">修改</a>
-                                <a ng-if="value['APPOINTMENT_PRODUCT.STATE']==1"
-                                   ng-click="modifyAppointmentState(value,-1)">停用</a>
-                                <a ng-if="value['APPOINTMENT_PRODUCT.STATE']==-1"
-                                   ng-click="modifyAppointmentState(value,1)">启用</a>
-                                <a ng-click="delAppointment(value)">删除</a>
-                                <a ng-click="showUrl(prdMap[value['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT.PRD_ID'])">预约链接</a>
+                                   ng-click="bindToModify(seckill)"
+                                   >修改</a>
+                                <a ng-if="seckill['SECKILL.STATE']=='disCancel'"
+                                   ng-click="changeState(seckill,'disCancel')">停用</a>
+                                <a ng-if="seckill['SECKILL.STATE']=='cancel'"
+                                   ng-click="changeState(seckill,'cancel')">启用</a>
+                                <a ng-click="deleteSeckill(seckill)">删除</a>
                             </td>
                         </tr>
 
@@ -67,7 +76,7 @@
             </div>
         </div>
     </div>
-    <!--BEGIN 新增单位-->
+    <!--BEGIN 修改单位-->
     <div class="modal fade text-left" id="modify" tabindex="-1" aria-hidden="true"
          style="display: none;">
         <div class="modal-dialog">
@@ -75,90 +84,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"
                             aria-hidden="true"></button>
-                    <h4 class="modal-title">修改预约商品</h4>
-                </div>
-                <div class="modal-body form-body text-right">
-
-                    <form class="form-horizontal">
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 商品:
-                            </label>
-
-                            <div class="col-md-8">
-                                 <span class="text-center col-md-12">
-                                    <span
-                                        ng-bind="prdMap[modify['APPOINTMENT_PRODUCT.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']+'     (不可修改)'"></span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 预约描述:
-                            </label>
-
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="modify['APPOINTMENT_PRODUCT.NAME']"
-                                       placeholder=""></div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 预约价:
-                            </label>
-
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="modify['APPOINTMENT_PRODUCT.PRICE']"
-                                       placeholder=""></div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 预付款:
-                            </label>
-
-                            <div class="col-md-8">
-                                <select ng-model="modify['APPOINTMENT_PRODUCT.NEED_PAY']"
-                                        class="nya-bs-select form-control">
-                                    <option class="nya-bs-option" value="1">需要</option>
-                                    <option class="nya-bs-option" value="-1">不需要</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 备注:
-                            </label>
-
-                            <div class="col-md-8">
-                                <input type="text" class="form-control"
-                                       ng-model="modify['APPOINTMENT_PRODUCT.REMARK']"
-                                       placeholder=""></div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" ng-click="modifyAppointment()" class="btn green">确定
-                    </button>
-                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
-                    </button>
-                </div>
-            </div>
-            <!-- /.modal-content -->
-        </div>
-        <!-- /.modal-dialog -->
-    </div>
-    <!--END 新增单位-->
-
-    <!--BEGIN 修改单位-->
-    <div class="modal fade text-left" id="add" tabindex="-1"
-         aria-hidden="true" style="display: none;">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"
-                            aria-hidden="true"></button>
-                    <h4 class="modal-title">新增预约商品</h4>
+                    <h4 class="modal-title">修改抢购</h4>
                 </div>
                 <div class="modal-body form-body text-right">
 
@@ -171,63 +97,111 @@
                             <div class="col-md-8">
                                 <span class="text-center col-md-12" show-modal
                                       id="#productItemSwitchModal">
-                                    <span ng-if="currPrd==undefined">选择商品</span>
-                                    <span ng-if="currPrd!=undefined"
-                                          ng-bind="currPrd['SHOP_PRODUCT_SKU.PRD_INFO']['SHOP_PRODUCT.PRD_NAME'] + '    (点击修改)'"></span>
+                                    <span ng-if="sku==undefined">选择商品</span>
+                                    <span ng-if="sku!=undefined"
+                                          ng-bind="sku['prdName'] + '    (点击修改)'"></span>
                                 </span>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 预约商品描述:
+                                <span class="required"> * </span> 抢购名称:
                             </label>
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control"
-                                       ng-model="add['APPOINTMENT_PRODUCT.NAME']"
-                                       ng-init="add['APPOINTMENT_PRODUCT.NAME']=''"
+                                       ng-model="seckillToModify['SECKILL.NAME']"
                                        placeholder=""></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 预约价:
+                                <span class="required"> * </span> 抢购详细描述:
                             </label>
 
                             <div class="col-md-8">
-                                <input type="text" money class="form-control"
-                                       ng-model="add['APPOINTMENT_PRODUCT.PRICE']"
-                                       ng-init="add['APPOINTMENT_PRODUCT.PRICE']=''"
+                                <input type="text" class="form-control"
+                                       ng-model="seckillToModify['SECKILL.DESCRIBES']"
                                        placeholder=""></div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 预付款:
+                                <span class="required"> * </span> 抢购类型:
                             </label>
 
                             <div class="col-md-8">
-                                <select ng-model="add['APPOINTMENT_PRODUCT.NEED_PAY']"
-                                        ng-init="add['APPOINTMENT_PRODUCT.NEED_PAY']='-1'"
+                                <select ng-model="seckillToModify['SECKILL.TYPE']"
                                         class="nya-bs-select form-control">
-                                    <option class="nya-bs-option" value="1">需要</option>
-                                    <option class="nya-bs-option" value="-1">不需要</option>
+                                    <option class="nya-bs-option" value="time">限时抢购</option>
+                                    <option class="nya-bs-option" value="num">限量抢购</option>
+                                    <option class="nya-bs-option" value="timeAndNum">限时限量抢购</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
-                                <span class="required"> * </span> 备注:
+                                <span class="required"> * </span> 单人最大购买数量:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text"  class="form-control"
+                                       ng-model="seckillToModify['SECKILL.LIMIT_NUM']"
+                                       placeholder=""></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 单价
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" money class="form-control"
+                                       ng-model="seckillToModify['priceShow']"
+                                       placeholder=""></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 开始时间
+                            </label>
+                            <div
+                                    class="col-md-8 "
+                                    data-date="10/11/2012"
+                                    language="zh-CN"
+                                    data-date-format="yyyy-mm-dd">
+                                <input id="start_hour_panic_modify" type="text" class="form-control "
+                                       placeholder=""
+                                       ng-model="seckillToModify['SECKILL.BEGIN_DATETIME']"
+                                       data-date-format="yyyy/mm/dd hh:ii" style="">
+                            </div>
+                        </div>
+                        <div class="form-group row" ng-show="seckillToModify['SECKILL.TYPE']!='num'">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 结束时间
+                            </label>
+
+                            <div
+                                    class="col-md-8 "
+                                    data-date="10/11/2012"
+                                    language="zh-CN"
+                                    data-date-format="yyyy-mm-dd">
+                                <input id="end_hour_panic_modify" type="text" class="form-control "
+                                       placeholder=""
+                                       ng-model="seckillToModify['SECKILL.END_DATETIME']"
+                                       data-date-format="yyyy/mm/dd hh:ii" style="">
+                            </div>
+                        </div>
+                        <div class="form-group row" ng-if="seckillToModify['SECKILL.TYPE']!='time'">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 总数
                             </label>
 
                             <div class="col-md-8">
                                 <input type="text" class="form-control"
-                                       ng-model="add['APPOINTMENT_PRODUCT.REMARK']"
-                                       ng-init="add['APPOINTMENT_PRODUCT.REMARK']=''"
+                                       ng-model="seckillToModify['SECKILL.SUM_NUM']"
                                        placeholder=""></div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn green" ng-click="addAppointment()">确定
+                    <button type="button" ng-click="modifySeckill()" class="btn green">确定
                     </button>
                     <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
                     </button>
@@ -237,8 +211,149 @@
         </div>
         <!-- /.modal-dialog -->
     </div>
+    <!--END 修改单位-->
 
-    <product-item-switch-modal callback="prdSwitch(data)"></product-item-switch-modal>
+    <!--BEGIN 新增单位-->
+    <div class="modal fade text-left" id="add" tabindex="-1"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true"></button>
+                    <h4 class="modal-title">新增抢购</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+
+                    <form class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 商品:
+                            </label>
+
+                            <div class="col-md-8">
+                                <span class="text-center col-md-12" show-modal
+                                      id="#productItemSwitchModal">
+                                    <span ng-if="sku==undefined">选择商品</span>
+                                    <span ng-if="sku!=undefined"
+                                          ng-bind="sku['prdName'] + '    (点击修改)'"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> * </span> 抢购名称:
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="seckill['SECKILL.NAME']"
+                                   ng-init="seckill['SECKILL.NAME']=''"
+                                   placeholder=""></div>
+                    </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 抢购详细描述:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control"
+                                       ng-model="seckill['SECKILL.DESCRIBES']"
+                                       ng-init="seckill['SECKILL.DESCRIBES']=''"
+                                       placeholder=""></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 抢购类型:
+                            </label>
+
+                            <div class="col-md-8">
+                                <select ng-model="seckill['SECKILL.TYPE']"
+                                        ng-init="seckill['SECKILL.TYPE']='time'"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option" value="time">限时抢购</option>
+                                    <option class="nya-bs-option" value="num">限量抢购</option>
+                                    <option class="nya-bs-option" value="timeAndNum">限时限量抢购</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 单人最大购买数量:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text"  class="form-control"
+                                       ng-model="seckill['SECKILL.LIMIT_NUM']"
+                                       placeholder=""></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 单价
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" money class="form-control"
+                                       ng-model="seckill['priceShow']"
+                                       placeholder=""></div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 开始时间
+                            </label>
+                            <div
+                                    class="col-md-8 "
+                                    data-date="10/11/2012"
+                                    language="zh-CN"
+                                    data-date-format="yyyy-mm-dd">
+                                <input id="start_hour_panic" type="text" class="form-control "
+                                       placeholder=""
+                                       ng-model="seckill['SECKILL.BEGIN_DATETIME']"
+                                       data-date-format="yyyy/mm/dd hh:ii" style="">
+                            </div>
+                        </div>
+                        <div class="form-group row" ng-show="seckill['SECKILL.TYPE']!='num'">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 结束时间
+                            </label>
+
+                            <div
+                                    class="col-md-8 "
+                                    data-date="10/11/2012"
+                                    language="zh-CN"
+                                    data-date-format="yyyy-mm-dd">
+                                <input id="end_hour_panic" type="text" class="form-control "
+                                       placeholder=""
+                                       ng-model="seckill['SECKILL.END_DATETIME']"
+                                       data-date-format="yyyy/mm/dd hh:ii" style="">
+                            </div>
+                        </div>
+                        <div class="form-group row" ng-if="seckill['SECKILL.TYPE']!='time'">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 总数
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control"
+                                       ng-model="seckill['SECKILL.SUM_NUM']"
+                                       placeholder=""></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn green" ng-click="addSeckill()">确定
+                    </button>
+                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--END 新增单位-->
+
+    <product-item-switch-modal callback="bindSku(data)"></product-item-switch-modal>
 
 </div>
 <!-- END CONTENT -->

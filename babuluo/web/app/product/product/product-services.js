@@ -22,3 +22,15 @@ AndSellMainModule.service('productFactory', function (http) {
     this.delAppointmentProduct=http.post('/shop/product/appointment/delById');
 
 });
+
+AndSellMainModule.service('groupBuyingFactory',function(http){
+    this.addGroupBuying=http.post('/promo/groupBuying/groupBuying/add');
+    this.queryAllGroupBuying=http.post('/promo/groupBuying/groupBuying/queryAll');
+    this.modifyById=http.post('/promo/groupBuying/groupBuying/modifyById');
+})
+
+AndSellMainModule.service('seckillFactory',function(http){
+    this.addSeckill=http.post('/promo/seckill/seckill/add') ;
+    this.queryAllSeckill=http.post('/promo/seckill/seckill/queryAll') ;
+    this.modifySeckill = http.post('/promo/seckill/seckill/modifyById') ;
+})
