@@ -62,6 +62,7 @@ angular.module('AndSell.PC.Main').controller('pages_product_list_Controller', fu
         'STOCK_REALTIME.STORE_ID': $scope.STORE_ID,
         'SHOP_PRODUCT.REMARK': 'offLine',
     };
+    $scope.Prdfilter('name');//默认按名称排序
 
     $scope.bindData = function (response) {
 
