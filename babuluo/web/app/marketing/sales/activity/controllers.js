@@ -63,6 +63,7 @@ angular.module('AndSell.Main').controller('marketing_sales_activity_Controller',
 
     $scope.modifyActivity = function () {
         $scope.modify['ACTIVITY.SHOP_ID_LIST'] = $scope.choicedShopID;
+        $scope.modify['ACTIVITY.SHOP_ID_LIST']= setNullValue($scope.modify['ACTIVITY.SHOP_ID_LIST']);
         activityFactory.modTopUp($scope.modify, function (response) {
             $("#modify").modal('hide');
             modalFactory.showShortAlert("修改成功");
@@ -101,10 +102,13 @@ angular.module('AndSell.Main').controller('marketing_sales_activity_Controller',
     $scope.choicedShopID = '';
 
     $scope.shopSwitch = function (data) {
+        $scope.choicedShopID = '';
         data.forEach(function (ele) {
             $scope.choicedShopID = $scope.choicedShopID + "," + ele['SHOP.SHOP_ID'];
         });
-        $scope.choicedShopID = $scope.choicedShopID.substring(1);
+        if ($scope.choicedShopID.length > 0) {
+            $scope.choicedShopID = $scope.choicedShopID.substring(1);
+        }
         modalFactory.showShortAlert("参与门店配置成功");
     }
 

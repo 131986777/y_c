@@ -40,6 +40,7 @@ angular.module('AndSell.Main').controller('marketing_sales_event_Controller', fu
 
     $scope.modifyEvent = function () {
         $scope.modify['EVENT_CONFIG.SHOP_ID_LIST'] = $scope.choicedShopID;
+        $scope.modify['EVENT_CONFIG.SHOP_ID_LIST'] = setNullValue($scope.modify['EVENT_CONFIG.SHOP_ID_LIST']);
         eventFactory.modEvent($scope.modify, function (response) {
             $("#modify").modal('hide');
             modalFactory.showShortAlert("修改成功");
@@ -73,10 +74,13 @@ angular.module('AndSell.Main').controller('marketing_sales_event_Controller', fu
     $scope.choicedShopID = '';
 
     $scope.shopSwitch = function (data) {
+        $scope.choicedShopID = '';
         data.forEach(function (ele) {
             $scope.choicedShopID = $scope.choicedShopID + "," + ele['SHOP.SHOP_ID'];
         });
-        $scope.choicedShopID = $scope.choicedShopID.substring(1);
+        if ($scope.choicedShopID.length > 0) {
+            $scope.choicedShopID = $scope.choicedShopID.substring(1);
+        }
         modalFactory.showShortAlert("参与门店配置成功");
     }
 

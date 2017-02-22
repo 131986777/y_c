@@ -46,6 +46,7 @@ angular.module('AndSell.H5.Main').controller('pages_personal_Controller', functi
         form['MEMBER.USER_ID'] = uid;
         personalFactory.getPhone(form, function (response) {
             $scope.USER_NAME = response.data[0]['MEMBER.USER_NAME'];
+            $scope.phone = response.data[0]['MEMBER.LOGIN_ID'];
         }, function (response) {
             weUI.toast.error(response.msg);
         });

@@ -25,7 +25,7 @@
                           ng-bind="district['DISTRICT.DISTRICT_NAME']"></option>
                 </select>
               </div>
-
+              <button style="margin-left: 15px" ng-click="selectAll()">本页全选</button>
             </div>
           </div>
 
@@ -81,7 +81,6 @@
           <div page-bar
                class="col-md-8"
                filter-obj="shopFilter"
-               ng-init="shopFilter.selectPageSize='5'"
                url="/shop/shop/queryAll"
                callback="bindShopData(response)">
           </div>

@@ -63,8 +63,7 @@ AndSellService.factory("http", function ($http) {
 
 AndSellUI.directive('fileModel', ['$parse', function ($parse) {
     return {
-        restrict: 'A',
-        link: function (scope, element, attrs) {
+        restrict: 'A', link: function (scope, element, attrs) {
             var model = $parse(attrs.fileModel);
             var modelSetter = model.assign;
 
@@ -82,8 +81,7 @@ AndSellUI.service('fileUpload', ['$http', function ($http) {
         var fd = new FormData();
         fd.append('file', file);
         $http.post(uploadUrl, fd, {
-            transformRequest: angular.identity,
-            headers: {'Content-Type': undefined}
+            transformRequest: angular.identity, headers: {'Content-Type': undefined}
         }).success(function (result) {
             if (angular.isFunction(func)) {
                 func(result);
@@ -502,7 +500,7 @@ AndSellUI.directive('productSwitchModal', function (http, imgURL, baseURL, class
     }
 });
 
-AndSellUI.directive('shopSwitchModal', function (http, imgURL, baseURL,  districtFactory, shopFactory) {
+AndSellUI.directive('shopSwitchModal', function (http, imgURL, baseURL, districtFactory, shopFactory) {
     return {
         restrict: 'EA',
         templateUrl: '/AndSell/app/components/libs/angular/template/shopSwitchModal.html',
@@ -516,8 +514,7 @@ AndSellUI.directive('shopSwitchModal', function (http, imgURL, baseURL,  distric
             $scope.getInitData = function () {
                 districtFactory.getDistrictList({}, function (response) {
                     $scope.districtList = response.data;
-                    $scope.districtMap = listToMap($scope.districtList,'DISTRICT.DISTRICT_ID');
-                    console.log($scope.districtMap);
+                    $scope.districtMap = listToMap($scope.districtList, 'DISTRICT.DISTRICT_ID');
                 });
             };
 
@@ -525,17 +522,18 @@ AndSellUI.directive('shopSwitchModal', function (http, imgURL, baseURL,  distric
 
             $scope.bindShopData = function (response) {
                 $scope.shopList = response.data;
+                $scope.shopMap = listToMap($scope.shopList, 'SHOP.SHOP_ID');
+            }
+
+            $scope.selectAll=function(){
+                console.log('inini');
+                console.log($scope.shopList);
+                $scope.shopList.forEach(function(ele){
+                    $scope.insertItem(ele);
+                });
             }
 
             $scope.selectItemList = new Array;
-
-            $scope.checkItem = function (item) {
-                if (item['SHOP.IS_SELECT']) {
-                    $scope.insertItem(item);
-                } else {
-                    $scope.removeItem(item);
-                }
-            }
 
             $scope.search = function () {
                 $scope.shopFilter['SHOP.SHOP_NAME'] = $scope.shopFilterSearch;
@@ -657,7 +655,6 @@ AndSellUI.directive('productItemSwitchModal', function (http, baseURL, imgURL, c
         }
     }
 });
-
 
 //树形结构
 AndSellUI.directive('treeList', function () {

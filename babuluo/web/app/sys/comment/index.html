@@ -22,7 +22,7 @@
             <tr>
                 <th>评论商品</th>
                 <th>评论内容</th>
-                <th>评论人</th>
+                <th>评论人手机号</th>
                 <th>评论时间</th>
                 <th class="text-center">操作</th>
             </tr>
@@ -31,7 +31,7 @@
             <tr ng-repeat="sms in allComments">
                 <td ng-bind="sms['SHOP_PRODUCT.PRD_NAME']"></td>
                 <td ng-bind="sms['SHOP_COMMENT.PRO_MAIN_COMMENT']"></td>
-                <td ng-bind="sms['MEMBER.USER_NAME']"></td>
+                <td ng-bind="sms['MEMBER.LOGIN_ID']"></td>
                 <td ng-bind="sms['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD_TIME']"></td>
                 <td>
                     <a class="table-link" data-toggle="modal" data-target="#showMore"  ng-click="showDetailById(sms)">更多</a>

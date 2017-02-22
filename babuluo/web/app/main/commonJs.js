@@ -54,9 +54,9 @@ var filterTableFromList = function (list, tablename) {
 };
 
 //obj to array
-function objectToArray(object){
-    var tmp=[];
-    for(var key in object){
+function objectToArray(object) {
+    var tmp = [];
+    for (var key in object) {
         //key是属性,object[key]是值
         tmp.push(object[key]);//往数组中放属性
     }
@@ -108,13 +108,13 @@ function isEmptyObject(e) {
     return !0
 }
 
-function getCookie(name)
-{
-    var arr,reg=new RegExp("(^| )"+name+"=([^;]*)(;|$)");
-    if(arr=document.cookie.match(reg))
+function getCookie(name) {
+    var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+    if (arr = document.cookie.match(reg)) {
         return decodeURI(arr[2]);
-    else
+    } else {
         return null;
+    }
 }
 
 //   get Sku  content info
@@ -162,11 +162,13 @@ function setContentsInfoForOrder_OFFLINE(sku) {
 //list to map   by  key
 function listToMap(list, key) {
     var map = {};
-    list.forEach(function (ele) {
-        if (ele[key] != undefined) {
-            map[ele[key]]=ele;
-        }
-    });
+    if (list != undefined) {
+        list.forEach(function (ele) {
+            if (ele[key] != undefined) {
+                map[ele[key]] = ele;
+            }
+        });
+    }
     return map;
 }
 
@@ -205,7 +207,7 @@ function routerPath(base, path, param, css) {
     router.templateUrl = url + "/index.html";
     router.resolve = {
         loadServiceAndController: function ($ocLazyLoad, userFactory) {
-            userFactory.isLogin({'USER_TYPE':'ADMIN'}, function (response) {
+            userFactory.isLogin({'USER_TYPE': 'ADMIN'}, function (response) {
             }, function (response) {
                 window.location.href = '../login/index.html';
             });
@@ -267,5 +269,12 @@ function ajaxPost(url, data, fnSucceed, fnFail, fnLoading) {
         }
     }
     ajax.send(data);
+}
 
+function setNullValue(i) {
+    if (i == undefined || i == '') {
+        i = '{$null}';
+        return '{$null}';
+    }
+    return i;
 }

@@ -52,7 +52,12 @@
                             <td class="text-center" ng-bind="value['ACTIVITY.REMARK']"></td>
                             <td class="text-center" ng-bind="value['ACTIVITY.REPEATED_GAINS']"></td>
                             <td class="text-center" ng-bind="value['ACTIVITY.INTRO']"></td>
-                            <td class="text-center" ng-bind="value['ACTIVITY.SHOP_LIST']"></td>
+                            <td class="text-center">
+                                <span ng-bind="value['ACTIVITY.SHOP_LIST']"
+                                      ng-if="value['ACTIVITY.SHOP_LIST']!=undefined&&value['ACTIVITY.SHOP_LIST']!=''"></span>
+                                <span
+                                    ng-if="value['ACTIVITY.SHOP_LIST']==undefined||value['ACTIVITY.SHOP_LIST']==''">全部门店</span>
+                            </td>
 
                             <td class="text-center">
                                 <a show-modal id="#modify"
@@ -244,8 +249,8 @@
                                 <span class="required"></span> 参与门店:
                             </label>
                             <div class="col-md-8">
-                                <a class="col-md-3 control-label" show-modal id="#shopSwitchModal">
-                                    <div>选择门店</div>
+                                <a class="col-md-12 control-label text-center" show-modal id="#shopSwitchModal">
+                                    <div>选择门店参与(默认所有门店参与)</div>
                                 </a>
                             </div>
                         </div>
@@ -426,8 +431,8 @@
                                 <span class="required"></span> 参与门店:
                             </label>
                             <div class="col-md-8">
-                                <a class="col-md-3 control-label" show-modal id="#shopSwitchModal">
-                                    选择门店
+                                <a class="col-md-12 control-label text-center" show-modal id="#shopSwitchModal">
+                                    <div>选择门店参与(默认所有门店参与)</div>
                                 </a>
                             </div>
                         </div>

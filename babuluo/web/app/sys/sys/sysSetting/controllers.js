@@ -3,7 +3,7 @@
  */
 angular.module('AndSell.Main').controller('sys_sys_sysSetting_Controller', function ($scope, $state, $stateParams, modalFactory, sysConfigFactory) {
 
-    modalFactory.setTitle('系统设置');
+    modalFactory.setTitle('系统配置');
     modalFactory.setBottom(true);
 
     $scope.initLoad = function () {
