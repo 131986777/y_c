@@ -89,7 +89,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             $scope.sumPrice();
             $scope.bindUnit();
             $scope.getPresent();
-            deferred.resolve();
+            if (deferred != undefined) {
+                deferred.resolve();
+            }
             weUI.toast.hideLoading();
         }, function (response) {
             weUI.toast.error(response.msg);
@@ -221,7 +223,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 $scope.presentMap['order'] = detail;
             }
         });
-        deferred.resolve();
+        if (deferred != undefined) {
+            deferred.resolve();
+        }
     };
 
     $scope.cardPayChecked = function () {
