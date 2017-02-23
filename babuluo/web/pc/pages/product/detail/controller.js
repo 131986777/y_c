@@ -554,13 +554,14 @@ angular.module('AndSell.PC.Main').controller('pages_product_detail_Controller', 
                 $scope.cartSize = cartInfo.length;
                 $scope.caculCart();
                 modalFactory.updateCart();
+                $state.go('pages/order/confirm', {'SKU_IDS': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID']});
             } else {
                 modalFactory.showShortAlert('该规格已售罄');
             }
         } else {
             modalFactory.showShortAlert('请选择规格！');
         }
-        $state.go('pages/order/confirm', {'SKU_IDS': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID']});
+
     }
 
     $scope.toShop = function () {

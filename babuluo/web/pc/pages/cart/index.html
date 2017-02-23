@@ -3,7 +3,7 @@
         <div class="effectiveArea">
             <div class="controlBar">
                 <div class="effectiveArea">
-                    <div class="storeInfo storeInfo1">
+                    <div class="storeInfo storeInfo1" ui-sref="pages/shop">
                         <p class="storeName" ng-bind="shop['SHOP.SHOP_NAME']"></p>
                         <p class="number"><span class="phoneNumber" ng-bind="shop['SHOP.TELEPHONE']"></span><span
                             class="openTime" ng-bind="shop['SHOP.OPEN_TIME']+' — '+shop['SHOP.CLOSE_TIME']"></span></p>
@@ -70,7 +70,7 @@
                                 </div>
                             </td>
                             <td>
-                                <div class="parent">
+                                <div class="parent" ng-click="toDetail(sku['SHOP_PRODUCT.PRD_ID'])">
                                     <div class="pic">
                                         <img class="proPic"
                                              ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
@@ -89,7 +89,7 @@
                             <td>
                                 <div class="num">
                                     <lable class="num-decrement" ng-click="lessSize(sku)"></lable>
-                                    <input class="txt" type="" name="" ng-change="updateCartPrice()"
+                                    <input class="txt" type="" name="" disabled ng-change="updateCartPrice()"
                                            ng-model="sku['SHOP_PRODUCT_SKU.SIZE']"/>
                                     <lable class="num-increment" ng-click="moreSize(sku)"></lable>
                                 </div>
