@@ -105,11 +105,15 @@ AndSellPCMainModule.controller('PC.MainController', function ($scope, $state, mo
 
     $scope.updateShop();
 
+    $scope.categoriesPosi = 0;
+
     $scope.toPrdTagList = function (id) {
+        $scope.categoriesPosi = 0;
         $state.go('pages/product/list', {tagId: id,classId: ''});
     }
 
     $scope.toPrdClassList = function (id) {
+        $scope.categoriesPosi = id;
         $state.go('pages/product/list', {classId: id});
     }
 

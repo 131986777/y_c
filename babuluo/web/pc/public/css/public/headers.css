@@ -416,6 +416,10 @@
 .goodsCategoriesBar .categories ul li .innerContainer:hover [class*="Pic"] {
   border-color: #f36f1a;
 }
+.goodsCategoriesBar .categories ul li .borderLight  [class*="Pic"] {
+  border-color: #f36f1a;
+}
+
 /* line 144, ../sass/headers/_goodsCategoriesBar.scss */
 .goodsCategoriesBar .categories ul li .innerContainer:hover .triangle {
   opacity: 1;
