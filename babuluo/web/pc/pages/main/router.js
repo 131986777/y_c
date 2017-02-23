@@ -22,6 +22,7 @@ $import('pages/order/appointment', {SKU_IDS: '', COUNT: '0', COUPON_INFO: ''},tr
 // $import('pages/order/CashOnDeliveryOrder');
 $import('pages/order/review',{ID:''},true);
 $import('pages/order/confirm', {SKU_IDS: '', COUPON_INFO: ''}, true);
+$import('pages/order/confirmSeckill', {}, true);
 $import('pages/order/detail', {ORDER_ID: ''}, true);
 //
 // $import('pages/personal/center', {}, true);

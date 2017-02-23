@@ -1,12 +1,12 @@
 /* line 1, ../sass/homePage.scss */
-.home-page .containers{
+.containers{
     background-color: #fff;
 }
-.home-page .container{
+.container{
     background-color: #fff;
 }
 .home-page .bannerSlider {
-    height: 500px;
+    height: 415px;
     width: 100%;
     overflow-x: hidden;
     font-size: 0;
@@ -94,22 +94,23 @@
 /* line 67, ../sass/homePage.scss */
 .home-page .entryCategories .entry.timeLimit .timeCount {
     height: 100%;
-    display: inline-block;
+    /* display: inline-block; */
     font-size: 14px;
-    color: #4b4b4b;
-    position: absolute;
-    height: 30px;
-    font-size: 14px;
-    line-height: 30px;
+    color: #4c4c4c;
+    position: relative;
+    height: 22px;
+    font-size: 12px;
+    line-height: 41px;
     right: 58px;
     vertical-align: top;
+    top: 10px;
 }
 
 /* line 78, ../sass/homePage.scss */
 .home-page .entryCategories .entry.timeLimit .timeCount .count {
     display: inline-block;
-    margin: 0 4px;
-    font-size: 18px;
+    margin: 3px 4px;
+    font-size: 11px;
     color: #fff;
     width: 30px;
     height: 100%;
@@ -123,7 +124,19 @@
 .home-page .entryCategories .entry.timeLimit .picShow {
     height: 175px;
 }
-
+.home-page .entryCategories .entry.timeLimit .proShow {
+    margin-top: 20px;
+    width: 100%;
+}
+/* line 99, ../sass/homePage.scss */
+.home-page .entryCategories .entry.timeLimit .proShow ul li {
+    width: 585px;
+    height: 100%;
+    display: inline-block;
+}
+.home-page .entryCategories .entry.timeLimit .proShow ul li :first-child{
+   margin-right: 18px!important;
+}
 /* line 95, ../sass/homePage.scss */
 .home-page .entryCategories .entry.timeLimit .picShow ul {
     width: 100%;
@@ -137,7 +150,138 @@
     height: 100%;
     display: inline-block;
 }
+.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit{
+    width:100%;
+    height:205px;
+    border: 1px solid #d6d6d6;
+    display: inline-block;
+    position: relative;
+}
 
+.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo{
+    width: 398px;
+    height: 100%;
+    /* float: left; */
+    margin-left: 185px;
+    padding-left:13px;
+
+}
+.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo .timeCount{
+    width:370px;
+    height:33px;
+    background-color:#F4F4F4 ;
+
+}
+
+.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo .price{
+    margin-top: 20px;
+    color:#666;
+    font-size: 12px;
+}
+.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo .price p{
+    display: inline-block;
+}
+.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo .price .nowPrice{
+    font-size: 18px!important;
+    color: #ff0000;
+}
+.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo .price  .del{
+  text-decoration: line-through;
+    color: #999;
+}
+.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo .buy{
+    width:110px;
+    height:30px;
+    background-color: #f36f1a;
+    font-size: 14px;
+    color: white;
+    text-align: center;
+    margin-top: 30px;
+    line-height: 2.1;
+    -moz-border-radius:3px;
+    border-radius: 3px;
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li {
+    width:385px!important;
+    margin-right: 17px;
+    margin-bottom: 20px;
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li:last-child {
+
+    margin-right: 0px;
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit{
+    height:147px;
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .img{
+    width:125px;
+    height:125px;
+
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .img .pic{
+  width: 100%;
+    height: 100%;
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo{
+    width: 260px;
+    height: 100%;
+    /* float: left; */
+    margin-left: 125px;
+    padding-left:13px;
+
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .timeCount{
+    width:225px;
+    height:25px;
+    background-color:#F4F4F4 ;
+
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .title{
+    margin-top: -5px;
+    font-size: 12px;
+    border-bottom: 1px dashed #d6d6d6;
+    line-height: 2.7;
+    /* padding-right: 12px; */
+    width: 220px;
+    color: #333;
+    margin-left: 15px;
+    padding-top: 15px;
+
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .price{
+    margin-top: 10px;
+    color:#666;
+    font-size: 12px;
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .price p{
+    display: inline-block;
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .price .nowPrice{
+    font-size: 18px!important;
+    color: #ff0000;
+    margin-right: 18px;
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .price  .del{
+    text-decoration: line-through;
+    color: #999;
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .buy{
+    width: 85px;
+    height: 25px;
+    background-color: #f36f1a;
+    font-size: 13px;
+    color: white;
+    text-align: center;
+    margin-top: 10px;
+    line-height: 2;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-left: 14px;
+}
 /* line 103, ../sass/homePage.scss */
 .home-page .entryCategories .entry.timeLimit .picShow ul li a {
     display: inline-block;
