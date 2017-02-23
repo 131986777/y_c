@@ -30,25 +30,25 @@ AndSellH5MainModule.service('orderFactory', function (http) {
 
 AndSellH5MainModule.service('promoFactory', function (http) {
 
-    this.doPromoCalculate=http.post('/promo/doPromoCalculate');
+    this.doPromoCalculate=http.post('/promo/promotion/myInterface/doPromoCalculate');
 
-    this.getPromoRole=http.post('/promo/role/queryAll');
+    this.getPromoRole=http.post('/promo/promotion/role/queryAll');
 
-    this.modPromoRole=http.post('/promo/role/modifyById');
+    this.modPromoRole=http.post('/promo/promotion/role/modifyById');
 
-    this.getPromoPlan=http.post('/promo/plan/queryAll');
+    this.getPromoPlan=http.post('/promo/promotion/plan/queryAll');
 
-    this.getPromoRange=http.post('/promo/range/myQueryAll');
+    this.getPromoRange=http.post('/promo/promotion/range/myQueryAll');
 
-    this.delPromoRangeDetail=http.post('/promo/rangeDetail/delByRangeId');
+    this.delPromoRangeDetail=http.post('/promo/promotion/rangeDetail/delByRangeId');
 
-    this.addPromoRangeDetail=http.post('/promo/rangeDetail/add');
+    this.addPromoRangeDetail=http.post('/promo/promotion/rangeDetail/add');
 
-    this.addPromoPlan=http.post('/promo/plan/add');
+    this.addPromoPlan=http.post('/promo/promotion/plan/add');
 
-    this.modPromoPlan=http.post('/promo/plan/modifyById');
+    this.modPromoPlan=http.post('/promo/promotion/plan/modifyById');
 
-    this.addPromoRange=http.post('/promo/range/add');
+    this.addPromoRange=http.post('/promo/promotion/range/add');
 
 })
 

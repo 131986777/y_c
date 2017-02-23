@@ -26,7 +26,8 @@ $import('product/product/appointment');
 //抢购商品
 $import('product/product/panic');
 
-
+//团购商品
+$import('product/product/groupBuying');
 
 
 
