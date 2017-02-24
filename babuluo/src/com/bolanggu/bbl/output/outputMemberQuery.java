@@ -66,7 +66,8 @@ public class outputMemberQuery {
         cardSheet.setColumnWidth(6, 4000);
         cardSheet.setColumnWidth(7, 4000);
         cardSheet.setColumnWidth(8, 4000);
-        cardSheet.setColumnWidth(9, 6000);
+        cardSheet.setColumnWidth(9, 4000);
+        cardSheet.setColumnWidth(10, 6000);
 
         //字体预设置
         XSSFFont font = (XSSFFont) analyseBook.createFont();
@@ -86,7 +87,7 @@ public class outputMemberQuery {
         font4.setFontHeightInPoints((short) 11);
         font4.setColor(Font.COLOR_RED);
         //合并大标题的单元格
-        cardSheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 9));
+        cardSheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 10));
 
         //大标题样式
         CellStyle titleStyle = analyseBook.createCellStyle();
@@ -185,7 +186,7 @@ public class outputMemberQuery {
             SXSSFCell cell5 = row.createCell(5);
             cell5.setCellValue(jsonObject.getString("MEMBER.SHOP"));
             cell5.setCellStyle(cellStyle);
-            SXSSFCell cell6 = row.createCell(5);
+            SXSSFCell cell6 = row.createCell(6);
             cell6.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER.ID_NUMBER"), ""));
             cell6.setCellStyle(cellStyle);
             SXSSFCell cell7 = row.createCell(7);
