@@ -82,11 +82,11 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
 
     $scope.myKeyup = function (e) {
         var keycode = window.event ? e.keyCode : e.which;
-        if (keycode == 13) {
-            $scope.getPrd();
+        if   (keycode == 13) {
             $('.search-info').hide();
             $('#search-cancel').hide();
             $("input").blur();
+            $scope.getPrd();
         }
     };
 
