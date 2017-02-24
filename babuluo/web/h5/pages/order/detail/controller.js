@@ -18,31 +18,35 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         var promise = $q.all([deferred_price.promise, deferred_account.promise]);
 
         promise.then(function (result) {
-
-            $scope.COUPON_INFO = $stateParams.COUPON_INFO;
-            if ($stateParams.COUPON_INFO != '') {
-                $scope.coupon = JSON.parse($stateParams.COUPON_INFO);
-                if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
-                    console.log("======");
-                    console.log($scope.coupon);
-                    var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
-                    var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
-                    price -= $scope.coupon.MONEY;
-                    if (price <= 0) {
-                        price = 0.01;
+            if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                == 1
+                && $scope.order['SHOP_ORDER.STATE_MONEY']
+                == -1) {
+                $scope.COUPON_INFO = $stateParams.COUPON_INFO;
+                if ($stateParams.COUPON_INFO != '') {
+                    $scope.coupon = JSON.parse($stateParams.COUPON_INFO);
+                    if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
+                        console.log("======");
+                        console.log($scope.coupon);
+                        var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
+                        var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
+                        price -= $scope.coupon.MONEY;
+                        if (price <= 0) {
+                            price = 0.01;
+                        }
+                        $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
+                        $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
+                        $scope.order['SHOP_ORDER.PRICE_OVER'] -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
+                        $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.coupon.ID;
                     }
-                    $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
-                    $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
-                    $scope.order['SHOP_ORDER.PRICE_OVER'] -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
-                    $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.coupon.ID;
                 }
-            }
 
-            if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
-                >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
-                $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
-            } else {
-                $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
+                if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
+                    >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
+                    $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
+                } else {
+                    $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
+                }
             }
         });
     }
@@ -303,7 +307,12 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                     $scope.orderConfig.needPay = $scope.orderDetailList[0]['eddPay'] == 1;
                 }
             }
-            $scope.initCartRequestVO(deferred);
+            if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                == 1
+                && $scope.order['SHOP_ORDER.STATE_MONEY']
+                == -1) {
+                $scope.initCartRequestVO(deferred);
+            }
             //$scope.bindPresent();
         });
     }
@@ -382,7 +391,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     $scope.cardPay = function () {
 
-        function pay(){
+        function pay() {
             console.log(getCookie("payCard"));
             $scope.payCard = JSON.parse(getCookie("payCard"));
             if (!isEmptyObject($scope.payCard)) {
@@ -419,7 +428,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
 
     };
 
-    $scope.submitOrder= function (callback) {
+    $scope.submitOrder = function (callback) {
         orderFactory.modifyOrderById($scope.order, function (response) {
             callback();
         });
@@ -444,7 +453,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     }
 
     function wxPay(formData) {
-        function pay(){
+        function pay() {
             orderFactory.wxPayUndefinedOrder(formData, function (response) {
                 if (typeof WeixinJSBridge == "undefined") {
                     if (document.addEventListener) {
@@ -460,6 +469,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 weUI.wx_pay.error("支付失败");
             });
         }
+
         $scope.submitOrder(pay);
         //orderFactory.wxPayUndefinedOrderForPC(formData, function (response) {
         //  console.log(response);
