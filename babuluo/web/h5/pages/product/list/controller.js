@@ -84,6 +84,9 @@ angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', fu
         var keycode = window.event ? e.keyCode : e.which;
         if (keycode == 13) {
             $scope.getPrd();
+            $('.search-info').hide();
+            $('#search-cancel').hide();
+            $("input").blur();
         }
     };
 
