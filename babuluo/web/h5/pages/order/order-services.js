@@ -4,6 +4,8 @@ AndSellH5MainModule.service('orderFactory', function (http) {
 
     this.getOrderById = http.post('/shop/order/getById');
 
+    this.modifyOrderById = http.post('/shop/order/modifyById');
+
     this.getOrder = http.post('/shop/order/queryAllForAgent');
 
     this.cancelOrder = http.post('/shop/order/cancelOrder');

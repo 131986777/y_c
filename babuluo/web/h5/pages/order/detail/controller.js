@@ -381,37 +381,49 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     };
 
     $scope.cardPay = function () {
-        console.log(getCookie("payCard"));
-        $scope.payCard = JSON.parse(getCookie("payCard"));
-        if (!isEmptyObject($scope.payCard)) {
-            weUI.dialog.confirm("提示", "确认支付该订单？", function () {
-                weUI.toast.showLoading('正在支付');
-                var form = $scope.order;
-                form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
-                form['SHOP_ORDER.CARD_ID'] = $scope.payCard['MEMBER_CARD.CARD_ID'];
-                form['SHOP_ORDER.CARD_NO'] = $scope.payCard['MEMBER_CARD.CARD_NO'];
-                form['SHOP_ORDER.CARD_BALANCE'] = $scope.payCard['MEMBER_CARD.BALANCE'];
-                form['SHOP_ORDER.COUPON_ID'] = $scope.order['SHOP_ORDER.COUPON_ID'];
-                form['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
-                console.log(form);
-                orderFactory.payOrder(form, function (response) {
-                    weUI.toast.hideLoading();
-                    weUI.toast.ok('支付成功');
-                    $scope.cardModalShow = false;
-                    $scope.delCoupon();
-                    $state.go("pages/personal");
-                }, function (response) {
-                    weUI.toast.hideLoading();
-                    weUI.toast.error(response.msg);
-                });
-            }, function () {
 
-            });
-        } else {
-            weUI.toast.info("请选择一张会员卡支付");
+        function pay(){
+            console.log(getCookie("payCard"));
+            $scope.payCard = JSON.parse(getCookie("payCard"));
+            if (!isEmptyObject($scope.payCard)) {
+                weUI.dialog.confirm("提示", "确认支付该订单？", function () {
+                    weUI.toast.showLoading('正在支付');
+                    var form = $scope.order;
+                    form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
+                    form['SHOP_ORDER.CARD_ID'] = $scope.payCard['MEMBER_CARD.CARD_ID'];
+                    form['SHOP_ORDER.CARD_NO'] = $scope.payCard['MEMBER_CARD.CARD_NO'];
+                    form['SHOP_ORDER.CARD_BALANCE'] = $scope.payCard['MEMBER_CARD.BALANCE'];
+                    form['SHOP_ORDER.COUPON_ID'] = $scope.order['SHOP_ORDER.COUPON_ID'];
+                    form['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
+                    console.log(form);
+                    orderFactory.payOrder(form, function (response) {
+                        weUI.toast.hideLoading();
+                        weUI.toast.ok('支付成功');
+                        $scope.cardModalShow = false;
+                        $scope.delCoupon();
+                        $state.go("pages/personal");
+                    }, function (response) {
+                        weUI.toast.hideLoading();
+                        weUI.toast.error(response.msg);
+                    });
+                }, function () {
+
+                });
+
+            } else {
+                weUI.toast.info("请选择一张会员卡支付");
+            }
         }
 
+        $scope.submitOrder(pay);
+
     };
+
+    $scope.submitOrder= function (callback) {
+        orderFactory.modifyOrderById($scope.order, function (response) {
+            callback();
+        });
+    }
 
     $scope.toDetail = function (id) {
         $state.go('pages/product/detail', {PRD_ID: id});
@@ -432,21 +444,23 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     }
 
     function wxPay(formData) {
-        orderFactory.wxPayUndefinedOrder(formData, function (response) {
-            if (typeof WeixinJSBridge == "undefined") {
-                if (document.addEventListener) {
-                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-                } else if (document.attachEvent) {
-                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        function pay(){
+            orderFactory.wxPayUndefinedOrder(formData, function (response) {
+                if (typeof WeixinJSBridge == "undefined") {
+                    if (document.addEventListener) {
+                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                    } else if (document.attachEvent) {
+                        document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                    }
+                } else {
+                    onBridgeReady(response.extraData.unifiedOrderJsonResult, response.extraData.returnMap);
                 }
-            } else {
-                onBridgeReady(response.extraData.unifiedOrderJsonResult, response.extraData.returnMap);
-            }
-        }, function (res) {
-            weUI.wx_pay.error("支付失败");
-        });
-
+            }, function (res) {
+                weUI.wx_pay.error("支付失败");
+            });
+        }
+        $scope.submitOrder(pay);
         //orderFactory.wxPayUndefinedOrderForPC(formData, function (response) {
         //  console.log(response);
         //}, function (res) {

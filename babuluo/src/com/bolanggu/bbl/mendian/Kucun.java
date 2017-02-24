@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.pabula.api.API;
 import com.pabula.api.data.ReturnData;
+import com.pabula.common.util.DateUtil;
 import com.pabula.common.util.HttpClientUtil;
 import com.pabula.common.util.MD5;
 import com.pabula.fw.exception.RuleException;
@@ -174,15 +175,19 @@ public class Kucun {
         list.add("100083");
         list.add("100084");
         list.add("111111");
-        for (int i = 0; i < list.size(); i++) {
-            String arg = list.get(i);
+        //for (int i = 0; i < list.size(); i++) {
+        //    String arg = list.get(i);
+        //
+        //    Thread t = new Thread(new Runnable() {
+        //        public void run() {
+        //            tongbu(arg);
+        //        }
+        //    });
+        //    t.start();
+        //}
 
-            Thread t = new Thread(new Runnable() {
-                public void run() {
-                    tongbu(arg);
-                }
-            });
-            t.start();
-        }
+        System.out.println(
+            DateUtil.getXDaysBefore(1).substring(0,10)
+        );
     }
 }
