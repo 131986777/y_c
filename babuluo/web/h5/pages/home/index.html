@@ -28,7 +28,7 @@
   <!-- END 搜索 -->
 
   <!-- BEGIN 导航 -->
-  <div class="home-nav flexbox text-center">
+  <div class="home-nav flexbox text-center" ng-init="queryByStateAndTime()">
     <div class="col cell" ng-click="toPrdList()">
       <a class="nav-wrap icon-nav-all"></a>
       <p>全部菜品</p>
@@ -50,17 +50,17 @@
   <!-- END 导航 -->
 
   <!-- 限时抢购 -->
-  <div class="limit" ng-repeat="item in limitList" ng-if="item['is_show']==true">
+  <div class="limit"  ng-repeat="seckill in seckillList" >
     <a ng-href="{{item['BANNER.URL']}}"><img
-        ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"></a>
+            ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['sku_id']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"></a>
     <div class="limit-desc">
       <div class="desc-text">
          <a class="btn btn-buy">立即抢购</a>
           <span class="limit-time">
               <span style="display:inline-block;width: 10px;height: 10px"></span>
-              <span>{{item.hour}}</span>:
-              <span>{{item.minute}}</span>:
-              <span>{{item.second}}</span>
+              <span>{{seckill['hour']}}</span>:
+              <span>{{seckill['min']}}</span>:
+              <span>{{seckill['sec']}}</span>
           </span>
       </div>
     </div>

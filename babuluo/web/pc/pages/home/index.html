@@ -47,17 +47,17 @@ height: 500px;">
                 </h1>
                 <div class="proShow">
                     <ul class="second" >
-                        <li ng-repeat="seckill in seckillList" ng-if="seckill['type']=='time'||seckill['type']=='timeAndNum'">
+                        <li ng-repeat="(index,seckill) in seckillList" ng-if="seckill['type']=='time'||seckill['type']=='timeAndNum'">
                             <div class="picLimit">
                                 <div class="img">
                                     <img class="pic" src="" alt="" ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['sku_id']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
                                 </div>
                                 <div class="limtInfo">
                                     <div class="timeCount" style="right: -10px;padding-left: 5px;line-height: 20px;" >
-                                        距离结束还有：<span class="count hours" style="width: 20px;height: 20px;margin-right: 5px!important;" ng-bind="seckill['hour']"></span>时<span
-                                        class="count minutes" style="width: 20px;height: 20px;" ng-bind="seckill['min']"></span>分<span
-                                        class="count seconds" style="width: 20px;height: 20px;" ng-bind="seckill['sec']"></span>秒
-                                    </div>
+                                        距离结束还有：<span class="count hours" style="width: 20px;height: 20px;margin-right: 5px!important;" id="hour{{index}}" ></span>时<span
+                                        class="count minutes" style="width: 20px;height: 20px;" id="min{{index}}"  ></span>分<span
+                                        class="count seconds" style="width: 20px;height: 20px;" id="sec{{index}}"  ></span>秒
+                                    </div >
                                     <p class="title" ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT.PRD_NAME']"></p>
                                     <div class="price">
                                         <p class="">快抢价</p>

@@ -208,7 +208,6 @@
 <script src="../account/account-services.js"></script>
 <script src="../security/security-services.js"></script>
 <script src="../shopLbs/lbs-services.js"></script>
-
 <!--############ controller ############-->
 <script src="controller.js"></script>
 
