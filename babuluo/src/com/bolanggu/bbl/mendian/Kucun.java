@@ -186,8 +186,6 @@ public class Kucun {
         //    t.start();
         //}
 
-        System.out.println(
-            DateUtil.getXDaysBefore(1).substring(0,10)
-        );
+
     }
 }
