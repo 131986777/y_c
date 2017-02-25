@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory, weUI,seckillFactory) {
 
     modalFactory.setTitle('云厨1站商城 - 十分钟吃饭，优质食品购买平台');
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
@@ -291,6 +291,81 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         }
         return false;
     }
+    /***************************************************秒杀部分*************************************************************/
+        //请求到的所有秒杀
+    $scope.seckillList=[];
+    //秒杀的商品详情
+    $scope.prdMap=[];
 
+
+    /**
+     * 请求所有启用的已经开始的秒杀
+     */
+    $scope.queryByStateAndTime=function(){
+        seckillFactory.queryByStateAndTime({},function(response){
+            var promoReturn =response['extraData']['promoReturn'];
+            $scope.seckillList=promoReturn['data'];
+            $scope.queryPrd();
+            $scope.timeUnit();
+        })
+    }
+
+    /**
+     * 请求秒杀的商品
+     */
+    $scope.queryPrd=function(){
+        var skuIds="";
+        $scope.seckillList.forEach(function(ele){
+            if (skuIds!=""){
+                skuIds+=",";
+            }
+            skuIds+=ele['sku_id'];
+        })
+        productFactory.getProductSkuBySkuIds({"SHOP_PRODUCT_SKU.SKU_IDS": skuIds}, function (response) {
+            response.data.forEach(function (ele) {
+                $scope.prdMap[ele['SHOP_PRODUCT_SKU.SKU_ID']] = ele;
+            },function(response){
+                alert("请求商品失败")
+            });
+        });
+    }
+
+    /**
+     * 倒计时，每秒调用函数
+     */
+    $scope.timeUnit=function(){
+        setInterval($scope.initTime(), 1000);
+    }
+
+    /**
+     * 剩余时间
+     */
+    $scope.initTime=function(){
+        $scope.seckillList.forEach(function(ele){
+            if (ele['type']=='time'||ele['type']=='timeAndNum'){
+                var end = new Date(ele['end_datetime']).getTime();
+                var now = new Date().getTime();
+                if (end<now){
+                    ele['hour']='已'
+                    ele['min']='过'
+                    ele['sec']='期'
+                }else {
+                    var time = (end - now) / 1000;
+                    ele['hour'] = parseInt(time / 3600);
+                    ele['min'] = parseInt(time / 60 - ele['hour'] * 60);
+                    ele['sec'] = parseInt(time - ele['hour'] * 3600 - ele['min'] * 60);
+                }
+            }
+        })
+    }
+
+    /**
+     * 抢购
+     */
+    $scope.goSeckill=function(seckill){
+        var json = JSON.stringify(seckill);
+        setCookie('seckill', json);
+        $state.go('pages/order/confirmSeckill', {});
+    }
 });
 
