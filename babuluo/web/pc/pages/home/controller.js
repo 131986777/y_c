@@ -411,6 +411,7 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
     $scope.goSeckill=function(seckill){
         var json = JSON.stringify(seckill);
         setCookie('seckill', json);
+        w.terminate();
         $state.go('pages/order/confirmSeckill', {});
     }
 

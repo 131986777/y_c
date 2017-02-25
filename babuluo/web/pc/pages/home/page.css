@@ -130,13 +130,17 @@
 }
 /* line 99, ../sass/homePage.scss */
 .home-page .entryCategories .entry.timeLimit .proShow ul li {
-    width: 585px;
+    width: 385px;
     height: 100%;
     display: inline-block;
+    margin-right: 17px;
+    margin-bottom: 17px;
 }
-.home-page .entryCategories .entry.timeLimit .proShow ul li :first-child{
-   margin-right: 18px!important;
+.home-page .entryCategories .entry.timeLimit .proShow ul li:nth-child(3n){
+
+    margin-right: 0px;
 }
+
 /* line 95, ../sass/homePage.scss */
 .home-page .entryCategories .entry.timeLimit .picShow ul {
     width: 100%;
@@ -150,125 +154,85 @@
     height: 100%;
     display: inline-block;
 }
-.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit{
-    width:100%;
-    height:205px;
+
+
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit{
+    width:385px;
+    height:145px;
     border: 1px solid #d6d6d6;
     display: inline-block;
     position: relative;
 }
-
-.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo{
-    width: 398px;
-    height: 100%;
-    /* float: left; */
-    margin-left: 185px;
-    padding-left:13px;
-
-}
-.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo .timeCount{
-    width:370px;
-    height:33px;
-    background-color:#F4F4F4 ;
-
-}
-
-.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo .price{
-    margin-top: 20px;
-    color:#666;
-    font-size: 12px;
-}
-.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo .price p{
-    display: inline-block;
-}
-.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo .price .nowPrice{
-    font-size: 18px!important;
-    color: #ff0000;
-}
-.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo .price  .del{
-  text-decoration: line-through;
-    color: #999;
-}
-.home-page .entryCategories .entry.timeLimit .proShow ul li .picLimit .limtInfo .buy{
-    width:110px;
-    height:30px;
-    background-color: #f36f1a;
-    font-size: 14px;
-    color: white;
-    text-align: center;
-    margin-top: 30px;
-    line-height: 2.1;
-    -moz-border-radius:3px;
-    border-radius: 3px;
-}
-.home-page .entryCategories .entry.timeLimit .proShow .second li {
-    width:385px!important;
-    margin-right: 17px;
-    margin-bottom: 20px;
-}
-.home-page .entryCategories .entry.timeLimit .proShow .second li:last-child {
-
-    margin-right: 0px;
-}
-.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit{
-    height:147px;
-}
 .home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .img{
-    width:125px;
-    height:125px;
-
+    width: 125px;
+    height: 125px;
     float: left;
     margin-left: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    margin-right: 10px;
 }
 .home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .img .pic{
   width: 100%;
     height: 100%;
 }
 .home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo{
-    width: 260px;
+    /* width: 383px; */
     height: 100%;
-    /* float: left; */
-    margin-left: 125px;
-    padding-left:13px;
+    /* margin-left: 15px; */
+    /* padding-left: 125px; */
+    display: inline-grid;
+    /* display: inline-block; */
+    /* width: 100%; */
+    float: right;
+    /* margin-left: 125px; */
+    margin-top: -143px;
 
 }
-.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .timeCount{
-    width:225px;
-    height:25px;
-    background-color:#F4F4F4 ;
-
-}
-.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .title{
-    margin-top: -5px;
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .time{
     font-size: 12px;
-    border-bottom: 1px dashed #d6d6d6;
-    line-height: 2.7;
-    /* padding-right: 12px; */
-    width: 220px;
-    color: #333;
-    margin-left: 15px;
-    padding-top: 15px;
-
-}
-.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .price{
+    margin-left: 20px;
+    width: 225px;
     margin-top: 10px;
-    color:#666;
+    background-color: #f4f4f4;
+    height: 26px;
+    line-height: 26px;
+    padding-left: 5px;
+    margin-right: 10px;
+
+ }
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .title{
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px dashed #d6d6d6;
+    width: 230px;
+    margin-top: 0px;
+    margin-left: 20px;
+    line-height: 2.3;
+
+ }
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .price{
+    font-size: 14px;
+    color: #333;
+    padding-left: 20px;
+    margin-top: 7px;
+
+}
+.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .time .kuang{
+
+    min-width: 19px;
+    height: 19px;
+    background-color: #4A4A4A;
     font-size: 12px;
-}
-.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .price p{
+    color: white;
     display: inline-block;
+    border-radius: 3px;
+    vertical-align: middle;
+    line-height: 19px;
+    text-align: center;
 }
-.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .price .nowPrice{
-    font-size: 18px!important;
-    color: #ff0000;
-    margin-right: 18px;
-}
-.home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .price  .del{
-    text-decoration: line-through;
-    color: #999;
-}
+
+
 .home-page .entryCategories .entry.timeLimit .proShow .second li .picLimit .limtInfo .buy{
     width: 85px;
     height: 25px;
@@ -280,7 +244,7 @@
     line-height: 2;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    margin-left: 14px;
+    margin-left: 18px;
 }
 /* line 103, ../sass/homePage.scss */
 .home-page .entryCategories .entry.timeLimit .picShow ul li a {

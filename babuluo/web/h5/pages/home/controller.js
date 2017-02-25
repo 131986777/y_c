@@ -306,7 +306,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             var promoReturn =response['extraData']['promoReturn'];
             $scope.seckillList=promoReturn['data'];
             $scope.queryPrd();
-            $scope.timeUnit();
+            startWorker();
         })
     }
 
@@ -331,17 +331,10 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     }
 
     /**
-     * 倒计时，每秒调用函数
-     */
-    $scope.timeUnit=function(){
-        setInterval($scope.initTime(), 1000);
-    }
-
-    /**
      * 剩余时间
      */
     $scope.initTime=function(){
-        $scope.seckillList.forEach(function(ele){
+        $scope.seckillList.forEach(function(ele,index){
             if (ele['type']=='time'||ele['type']=='timeAndNum'){
                 var end = new Date(ele['end_datetime']).getTime();
                 var now = new Date().getTime();
@@ -355,6 +348,9 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                     ele['min'] = parseInt(time / 60 - ele['hour'] * 60);
                     ele['sec'] = parseInt(time - ele['hour'] * 3600 - ele['min'] * 60);
                 }
+                document.getElementById("hour"+index).innerHTML=ele['hour'];
+                document.getElementById("min"+index).innerHTML=ele['min'];
+                document.getElementById("sec"+index).innerHTML=ele['sec'];
             }
         })
     }
@@ -365,7 +361,27 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     $scope.goSeckill=function(seckill){
         var json = JSON.stringify(seckill);
         setCookie('seckill', json);
-        $state.go('pages/order/confirmSeckill', {});
+        w.terminate();
+        $state.go('pages/order/addSeckill');
+    }
+
+    /**
+     * 开启线程
+     * 监听回馈
+     */
+    var w;
+    function startWorker()
+    {
+        if(typeof(Worker)!=="undefined")
+        {
+            if(typeof(w)=="undefined")
+            {
+                w=new Worker("/AndSell/h5/pages/home/home_worker.js");
+            }
+            w.onmessage = function (event) {
+                $scope.initTime();
+            };
+        }
     }
 });
 

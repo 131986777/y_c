@@ -45,6 +45,8 @@ $import('pages/account/lucky', {}, true);
 
 $import('pages/security/resetPwd');
 
+$import('pages/order/addSeckill');
+
 
 
 

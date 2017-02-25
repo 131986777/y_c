@@ -50,23 +50,25 @@ height: 500px;">
                         <li ng-repeat="(index,seckill) in seckillList" ng-if="seckill['type']=='time'||seckill['type']=='timeAndNum'">
                             <div class="picLimit">
                                 <div class="img">
-                                    <img class="pic" src="" alt="" ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['sku_id']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
+                                    <img class="pic" src="" alt="" ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['sku_id']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_125,w_125">
                                 </div>
                                 <div class="limtInfo">
-                                    <div class="timeCount" style="right: -10px;padding-left: 5px;line-height: 20px;" >
-                                        距离结束还有：<span class="count hours" style="width: 20px;height: 20px;margin-right: 5px!important;" id="hour{{index}}" ></span>时<span
-                                        class="count minutes" style="width: 20px;height: 20px;" id="min{{index}}"  ></span>分<span
-                                        class="count seconds" style="width: 20px;height: 20px;" id="sec{{index}}"  ></span>秒
-                                    </div >
-                                    <p class="title" ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT.PRD_NAME']"></p>
+                                    <div class="time">
+                                        距离结束还有：
+                                        <span class="kuang" id="hour{{index}}"></span>
+                                        <span class="des">时</span>
+                                        <span class="kuang" id="min{{index}}"></span>
+                                        <span class="des">分</span>
+                                        <span class="kuang" id="sec{{index}}"></span>
+                                        <span class="des">秒</span>
+                                    </div>
+                                    <div class="title" ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT.PRD_NAME']"></div>
                                     <div class="price">
-                                        <p class="">快抢价</p>
-                                        <p class="nowPrice" ng-bind="seckill['unit_price']/100"></p>
-                                        <p class="del" ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT_SKU.REAL_PRICES']"></p>
+                                        <span>快抢价</span>
+                                        <span style="font-size: 18px;color: #FF0000;margin-left: 10px;   margin-right: 10px;"  ng-bind="seckill['unit_price']/100"></span>
+                                        <span style="color: #666;text-decoration: line-through;"  ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT_SKU.REAL_PRICES']"></span>
                                     </div>
-                                    <div class="buy" ng-click="goSeckill(seckill)">
-                                        立即购买
-                                    </div>
+                                    <div class="buy" ng-click="goSeckill(seckill)">立即抢购</div>
                                 </div>
                             </div>
                         </li>
@@ -79,9 +81,9 @@ height: 500px;">
 
                                     <p class="title" style="margin-top: 20px;" ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT.PRD_NAME']"></p>
                                     <div class="price">
-                                        <p class="">快抢价</p>
-                                        <p class="nowPrice" ng-bind="seckill['unit_price']/100"></p>
-                                        <p class="del" ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT_SKU.REAL_PRICES']"></p>
+                                        <span>快抢价</span>
+                                        <span style="font-size: 18px;color: #FF0000;margin-left: 10px;   margin-right: 10px;"  ng-bind="seckill['unit_price']/100"></span>
+                                        <span style="color: #666;text-decoration: line-through;"  ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT_SKU.REAL_PRICES']"></span>
                                     </div>
                                     <div class="buy" ng-click="goSeckill(seckill)">
                                         立即购买
@@ -91,6 +93,52 @@ height: 500px;">
                         </li>
                     </ul>
                 </div>
+                <!--<div class="proShow">-->
+                    <!--<ul class="second" >-->
+                        <!--<li ng-repeat="(index,seckill) in seckillList" ng-if="seckill['type']=='time'||seckill['type']=='timeAndNum'">-->
+                            <!--<div class="picLimit">-->
+                                <!--<div class="img">-->
+                                    <!--<img class="pic" src="" alt="" ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['sku_id']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">-->
+                                <!--</div>-->
+                                <!--<div class="limtInfo">-->
+                                    <!--<div class="timeCount" style="right: -10px;padding-left: 5px;line-height: 20px;" >-->
+                                        <!--距离结束还有：<span class="count hours" style="width: 20px;height: 20px;margin-right: 5px!important;" id="hour{{index}}" ></span>时<span-->
+                                        <!--class="count minutes" style="width: 20px;height: 20px;" id="min{{index}}"  ></span>分<span-->
+                                        <!--class="count seconds" style="width: 20px;height: 20px;" id="sec{{index}}"  ></span>秒-->
+                                    <!--</div >-->
+                                    <!--<p class="title" ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT.PRD_NAME']"></p>-->
+                                    <!--<div class="price">-->
+                                        <!--<p class="">快抢价</p>-->
+                                        <!--<p class="nowPrice" ng-bind="seckill['unit_price']/100"></p>-->
+                                        <!--<p class="del" ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT_SKU.REAL_PRICES']"></p>-->
+                                    <!--</div>-->
+                                    <!--<div class="buy" ng-click="goSeckill(seckill)">-->
+                                        <!--立即购买-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                        <!--<li ng-repeat="seckill in seckillList" ng-if="seckill['type']=='num'">-->
+                            <!--<div class="picLimit">-->
+                                <!--<div class="img">-->
+                                    <!--<img class="pic" src="" alt="" ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['sku_id']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">-->
+                                <!--</div>-->
+                                <!--<div class="limtInfo">-->
+
+                                    <!--<p class="title" style="margin-top: 20px;" ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT.PRD_NAME']"></p>-->
+                                    <!--<div class="price">-->
+                                        <!--<p class="">快抢价</p>-->
+                                        <!--<p class="nowPrice" ng-bind="seckill['unit_price']/100"></p>-->
+                                        <!--<p class="del" ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT_SKU.REAL_PRICES']"></p>-->
+                                    <!--</div>-->
+                                    <!--<div class="buy" ng-click="goSeckill(seckill)">-->
+                                        <!--立即购买-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
             </div>
             <!--<div class="entry togetherBuy" ng-show="groupList.length>0">-->
                 <!--<h1 class="entryTitle">-->

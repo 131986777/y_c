@@ -79,6 +79,20 @@ angular.module('AndSell.PC.Main').controller('pages_order_confirmSeckill_Control
      * 秒杀是否成功
      */
     $scope.goSeckill=function(){
+        if (!$scope.canCommit) {
+            return;
+        }
+
+        if ($scope.order['SHOP_ORDER.PRICE_OVER'] <= 0) {
+            modalFactory.showShortAlert('订单异常,请重新下单');
+            window.history.back();
+            return
+        }
+        if (isEmptyObject($scope.pickMan)) {
+            modalFactory.showShortAlert('请填写提货信息');
+            return;
+        }
+
         var form = {};
         form['SECKILL_ID']=$scope.seckill['seckill_id'];
         form['NUM']=1;
@@ -97,20 +111,6 @@ angular.module('AndSell.PC.Main').controller('pages_order_confirmSeckill_Control
 
     //提交订单
     $scope.commitOrder = function () {
-
-        if (!$scope.canCommit) {
-            return;
-        }
-
-        if ($scope.order['SHOP_ORDER.PRICE_OVER'] <= 0) {
-            modalFactory.showShortAlert('订单异常,请重新下单');
-            window.history.back();
-            return
-        }
-        if (isEmptyObject($scope.pickMan)) {
-            modalFactory.showShortAlert('请填写提货信息');
-            return;
-        }
 
         if ($scope.commitClick) {
             $scope.commitClick = false;
