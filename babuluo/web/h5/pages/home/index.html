@@ -1,260 +1,313 @@
 <div ng-init="initData()" style="padding-bottom: 53px">
-  <!-- BEGIN 搜索 -->
-  <div style="margin: 0 auto;display: none;font-size: 0">
-  <img src="../../public/img/icon-linkLogo.png" >
-  </div>
-  <div class="search-wrap weui_cells">
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" ng-repeat="item in homeList" active="item.active">
-          <a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">
-            <img ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
-          </a>
-        </div>
-      </div>
+    <!-- BEGIN 搜索 -->
+    <div style="margin: 0 auto;display: none;font-size: 0">
+        <img src="../../public/img/icon-linkLogo.png">
     </div>
-
-    <div class="search-content">
-      <div ui-sref="pages/shop" class="shopName">
-        <span spa ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
-        <span class="glyphicon glyphicon-chevron-down"  ></span>
-      </div>
-      <form class="searchHolder">
-        <i class="icon-search" ng-click="searchPrd()"></i>
-        <input type="search" ng-model="prdKeyword" ng-keyup="myKeyup($event)" placeholder="搜索商品">
-      </form>
-    </div>
-  </div>
-  <!-- END 搜索 -->
-
-  <!-- BEGIN 导航 -->
-  <div class="home-nav flexbox text-center" ng-init="queryByStateAndTime()">
-    <div class="col cell" ng-click="toPrdList()">
-      <a class="nav-wrap icon-nav-all"></a>
-      <p>全部菜品</p>
-    </div>
-    <div class="col cell" ng-click="toPrdTagList(1024)">
-      <a class="nav-wrap icon-nav-bao"></a>
-      <p>爆款菜品</p>
-    </div>
-    <div class="col cell"
-         ng-click="toPrdTagList(1023)">
-      <a class="nav-wrap icon-nav-xin"></a>
-      <p>新品上市</p>
-    </div>
-    <div class="col cell" ng-click="toOrderList()">
-      <a class="nav-wrap icon-nav-order"></a>
-      <p>我的订单</p>
-    </div>
-  </div>
-  <!-- END 导航 -->
-
-  <!-- 限时抢购 -->
-  <div class="limit"  ng-repeat="seckill in seckillList" >
-    <a ng-href="{{item['BANNER.URL']}}"><img
-            ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['sku_id']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"></a>
-    <div class="limit-desc">
-      <div class="desc-text">
-         <a class="btn btn-buy">立即抢购</a>
-          <span class="limit-time">
-              <span style="display:inline-block;width: 10px;height: 10px"></span>
-              <span>{{seckill['hour']}}</span>:
-              <span>{{seckill['min']}}</span>:
-              <span>{{seckill['sec']}}</span>
-          </span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 团购 -->
-  <div class="group" ng-repeat="item in groupList" ng-if="item['is_show']==true">
-    <a ng-href="{{item['BANNER.URL']}}">
-      <img ng-if="item['is_show']==true"
-           ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-           ng-href="{{item['BANNER.URL']}}"></a>
-  </div>
-
-  <!-- 活动专区 -->
-  <div class="product-wrap">
-    <div class="headTitle" ng-if="activityList.length>0">活动专区</div>
-    <div class="product-content" ng-repeat="item in activityList">
-      <a ng-if="item['is_show']==true" ng-href="{{item['BANNER.URL']}}"><img
-          ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-          style="height: auto;width: 100%;"></a>
-    </div>
-
-    <!-- BEGIN 今日推荐 -->
-    <div class="product-special" style="font-size: 0;" ng-if="recommendList.length>0||recommNineList.length>0">
-      <div class="weui_cells weui_cells_access special-head">
-        <a class="weui_cell" href="#">
-          <div class="weui_cell_bd weui_cell_primary text-center">
-            <p><i class="icon-wrap icon-special"></i>今日推荐</p>
-          </div>
-          <div class="weui_cell_ft"></div>
-        </a>
-      </div>
-
-      <div class="special-content">
-        <ul class="list-unstyled">
-          <li>
-            <a ng-repeat="item in recommendList" ng-href="{{item['BANNER.URL']}}"
-               ng-if="item['is_show']==true"><img
-                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}" style="min-height: 189px"></a>
-            <div class="thumbnail-list list-unstyled flexbox">
-              <div class="cell" ng-repeat=" item in tagProductList['1035']"
-                   ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
-                <div class="desc">
-                  <p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+    <div class="search-wrap weui_cells">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" ng-repeat="item in homeList" active="item.active">
+                    <a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">
+                        <img
+                            ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
+                    </a>
                 </div>
-              </div>
             </div>
-          </li>
-          <li>
-            <a ng-repeat="item in recommNineList" ng-href="{{item['BANNER.URL']}}"
-               ng-if="item['is_show']==true"><img
-                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!-- END 今日推荐 -->
-
-    <!-- BEGIN 分类 -->
-    <div class="product-list">
-      <div class="item" ng-repeat="itemList in BannerList">
-        <div class="item-title">
-          <i class="icon-wrap icon-luwei" ng-if="itemList.id=='1020'"></i>
-          <i class="icon-wrap icon-shushi" ng-if="itemList.id=='1019'"></i>
-          <i class="icon-wrap icon-peicai" ng-if="itemList.id=='1017'"></i>
-          <i class="icon-wrap icon-fruit" ng-if="itemList.id=='3000'"></i>
-          <i class="icon-wrap icon-egg" ng-if="itemList.id=='3001'"></i>
-          <i class="icon-wrap icon-dong" ng-if="itemList.id=='3003'"></i>
-          <i class="icon-wrap icon-meat" ng-if="itemList.id=='3002'"></i>
-          <i class="icon-wrap icon-wine" ng-if="itemList.id=='3004'"></i>
-          <i class="icon-wrap icon-oil" ng-if="itemList.id=='3005'"></i>
-          <span>{{itemList.name}}</span>
         </div>
-        <ul class="list-unstyled">
-          <li ng-repeat="item in itemList.content" ng-if="item['is_show']==true">
-            <a ng-href="{{item['BANNER.URL']}}">
-              <img
-                  ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-                  class="weui_cells" style="height: auto;">
-            </a>
 
-            <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='1020'">
-              <li class="cell" ng-repeat=" item in tagProductList['1036']"
-                  ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
-                <div class="desc">
-                  <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                </div>
-              </li>
-            </ul>
-            <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='1019'">
-              <li class="cell" ng-repeat=" item in tagProductList['1037']"
-                  ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
-                <div class="desc">
-                  <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                </div>
-              </li>
-            </ul>
-            <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='1017'">
-              <li class="cell" ng-repeat=" item in tagProductList['3000']"
-                  ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
-                <div class="desc">
-                  <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                </div>
-              </li>
-            </ul>
-            <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3000'">
-              <li class="cell" ng-repeat=" item in tagProductList['3001']"
-                  ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
-                <div class="desc">
-                  <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                </div>
-              </li>
-            </ul>
-            <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3001'">
-              <li class="cell" ng-repeat=" item in tagProductList['3004']"
-                  ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
-                <div class="desc">
-                  <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                </div>
-              </li>
-            </ul>
-            <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3002'">
-              <li class="cell" ng-repeat=" item in tagProductList['3002']"
-                  ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
-                <div class="desc">
-                  <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                </div>
-              </li>
-            </ul>
-            <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3003'">
-              <li class="cell" ng-repeat=" item in tagProductList['3003']"
-                  ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
-                <div class="desc">
-                  <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                </div>
-              </li>
-            </ul>
-            <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3004'">
-              <li class="cell" ng-repeat=" item in tagProductList['3005']"
-                  ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
-                <div class="desc">
-                  <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                </div>
-              </li>
-            </ul>
-            <ul class="thumbnail-list list-unstyled flexbox" ng-if="itemList.id=='3005'">
-              <li class="cell" ng-repeat=" item in tagProductList['3006']"
-                  ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
-                <a><img class="thumbnail" ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
-                <div class="desc">
-                  <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
-                </div>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+        <div class="search-content">
+            <div ui-sref="pages/shop" class="shopName">
+                <span spa ng-bind="shopInfo['SHOP.SHOP_NAME']"></span>
+                <span class="glyphicon glyphicon-chevron-down"></span>
+            </div>
+            <form class="searchHolder">
+                <i class="icon-search" ng-click="searchPrd()"></i>
+                <input type="search" ng-model="prdKeyword" ng-keyup="myKeyup($event)"
+                       placeholder="搜索商品">
+            </form>
+        </div>
     </div>
-  </div>
+    <!-- END 搜索 -->
 
-  <!--选择页面遮罩-->
-  <div class="chose-shop" ng-if="STORE_ID==0">
-    <i class="icon-shop"></i>
-    <span>请先选择门店，即可在线购买！</span>
-    <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
-  </div>
+    <!-- BEGIN 导航 -->
+    <div class="home-nav flexbox text-center" ng-init="queryByStateAndTime()">
+        <div class="col cell" ng-click="toPrdList()">
+            <a class="nav-wrap icon-nav-all"></a>
+            <p>全部菜品</p>
+        </div>
+        <div class="col cell" ng-click="toPrdTagList(1024)">
+            <a class="nav-wrap icon-nav-bao"></a>
+            <p>爆款菜品</p>
+        </div>
+        <div class="col cell"
+             ng-click="toPrdTagList(1023)">
+            <a class="nav-wrap icon-nav-xin"></a>
+            <p>新品上市</p>
+        </div>
+        <div class="col cell" ng-click="toOrderList()">
+            <a class="nav-wrap icon-nav-order"></a>
+            <p>我的订单</p>
+        </div>
+    </div>
+    <!-- END 导航 -->
+
+    <!-- 限时抢购 -->
+    <div class="limit" style="border-bottom: 1px solid #d6d6d6"
+         ng-repeat="(index,seckill) in seckillList">
+        <a ng-href="{{item['BANNER.URL']}}">
+            <img src="" style="    width: 7rem;height: 7rem;margin: 10px;"
+                 ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['sku_id']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"></a>
+        <div
+            style="display: inline-block;vertical-align: top;margin-top: 12px;font-size: 12px; width: calc(100% - 10em);" ng-if="seckill['type']=='time'||seckill['type']=='timeAndNum'">
+            <div
+                style="width: 100%;    height: 22px;  background-color: #eaeaea; border-radius: 15px;line-height: 22px;"
+                >
+                <img style="width: 10px;height: 10px;    margin-left: 8px;"
+                     src="../../public/img/limit.png" alt="">
+                距结束:
+        <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
+    line-height: 17px;" id="hour{{index}}"></span>
+                <span>时</span>
+        <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
+    line-height: 17px;" id="min{{index}}"></span>
+                <span>分</span>
+        <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
+    line-height: 17px;" id="sec{{index}}"></span>
+                <span>秒</span>
+            </div>
+            <p style="margin-top: 14px; margin-bottom: 15px;"
+               ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT.PRD_NAME']"></p>
+            <span style="font-size: 12px;color: #f46f1a"
+                  ng-bind="seckill['unit_price']/100|currency : '￥'"></span>
+            <span style="font-size: 12px;color: #d6d6d6;text-decoration: line-through;"
+                  ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT_SKU.REAL_PRICES']|currency : '￥'"></span>
+            <a class="btn btn-buy" style="    width: 75px;    height: 28px;   background-color: #f46f1a;    color: white;   font-size: 12px;    line-height: 15px;
+     margin-top: -12px;  float: right;" ng-click="goSeckill(seckill)">立即抢购</a>
+        </div>
+        <div
+            style="display: inline-block;vertical-align: top;margin-top: 12px;font-size: 12px; width: calc(100% - 10em);"
+            ng-if="seckill['type']=='num'">
+            <p style="margin-top: 14px; margin-bottom: 15px;"
+               ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT.PRD_NAME']"></p>
+            <span style="font-size: 12px;color: #f46f1a" ng-bind="seckill['unit_price']/100|currency : '￥'"></span>
+            <span style="font-size: 12px;color: #d6d6d6;text-decoration: line-through;"
+                  ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT_SKU.REAL_PRICES']|currency : '￥'"></span>
+            <a class="btn btn-buy" style="    width: 75px;    height: 28px;   background-color: #f46f1a;    color: white;   font-size: 12px;    line-height: 15px;
+     margin-top: -12px;  float: right;" ng-click="goSeckill(seckill)">立即抢购</a>
+        </div>
+    </div>
+
+
+    <!-- 团购 -->
+    <div class="group" ng-repeat="item in groupList" ng-if="item['is_show']==true">
+        <a ng-href="{{item['BANNER.URL']}}">
+            <img ng-if="item['is_show']==true"
+                 ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
+                 ng-href="{{item['BANNER.URL']}}"></a>
+    </div>
+
+    <!-- 活动专区 -->
+    <div class="product-wrap">
+        <div class="headTitle" ng-if="activityList.length>0">活动专区</div>
+        <div class="product-content" ng-repeat="item in activityList">
+            <a ng-if="item['is_show']==true" ng-href="{{item['BANNER.URL']}}"><img
+                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
+                style="height: auto;width: 100%;"></a>
+        </div>
+
+        <!-- BEGIN 今日推荐 -->
+        <div class="product-special" style="font-size: 0;"
+             ng-if="recommendList.length>0||recommNineList.length>0">
+            <div class="weui_cells weui_cells_access special-head">
+                <a class="weui_cell" href="#">
+                    <div class="weui_cell_bd weui_cell_primary text-center">
+                        <p><i class="icon-wrap icon-special"></i>今日推荐</p>
+                    </div>
+                    <div class="weui_cell_ft"></div>
+                </a>
+            </div>
+
+            <div class="special-content">
+                <ul class="list-unstyled">
+                    <li>
+                        <a ng-repeat="item in recommendList" ng-href="{{item['BANNER.URL']}}"
+                           ng-if="item['is_show']==true"><img
+                            ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
+                            style="min-height: 189px"></a>
+                        <div class="thumbnail-list list-unstyled flexbox">
+                            <div class="cell" ng-repeat=" item in tagProductList['1035']"
+                                 ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                <a><img class="thumbnail"
+                                        ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                                <div class="desc">
+                                    <p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>
+                  <span class="price"
+                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a ng-repeat="item in recommNineList" ng-href="{{item['BANNER.URL']}}"
+                           ng-if="item['is_show']==true"><img
+                            ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- END 今日推荐 -->
+
+        <!-- BEGIN 分类 -->
+        <div class="product-list">
+            <div class="item" ng-repeat="itemList in BannerList">
+                <div class="item-title">
+                    <i class="icon-wrap icon-luwei" ng-if="itemList.id=='1020'"></i>
+                    <i class="icon-wrap icon-shushi" ng-if="itemList.id=='1019'"></i>
+                    <i class="icon-wrap icon-peicai" ng-if="itemList.id=='1017'"></i>
+                    <i class="icon-wrap icon-fruit" ng-if="itemList.id=='3000'"></i>
+                    <i class="icon-wrap icon-egg" ng-if="itemList.id=='3001'"></i>
+                    <i class="icon-wrap icon-dong" ng-if="itemList.id=='3003'"></i>
+                    <i class="icon-wrap icon-meat" ng-if="itemList.id=='3002'"></i>
+                    <i class="icon-wrap icon-wine" ng-if="itemList.id=='3004'"></i>
+                    <i class="icon-wrap icon-oil" ng-if="itemList.id=='3005'"></i>
+                    <span>{{itemList.name}}</span>
+                </div>
+                <ul class="list-unstyled">
+                    <li ng-repeat="item in itemList.content" ng-if="item['is_show']==true">
+                        <a ng-href="{{item['BANNER.URL']}}">
+                            <img
+                                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
+                                class="weui_cells" style="height: auto;">
+                        </a>
+
+                        <ul class="thumbnail-list list-unstyled flexbox"
+                            ng-if="itemList.id=='1020'">
+                            <li class="cell" ng-repeat=" item in tagProductList['1036']"
+                                ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                <a><img class="thumbnail"
+                                        ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                                <div class="desc">
+                                    <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                  <span class="price"
+                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="thumbnail-list list-unstyled flexbox"
+                            ng-if="itemList.id=='1019'">
+                            <li class="cell" ng-repeat=" item in tagProductList['1037']"
+                                ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                <a><img class="thumbnail"
+                                        ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                                <div class="desc">
+                                    <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                  <span class="price"
+                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="thumbnail-list list-unstyled flexbox"
+                            ng-if="itemList.id=='1017'">
+                            <li class="cell" ng-repeat=" item in tagProductList['3000']"
+                                ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                <a><img class="thumbnail"
+                                        ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                                <div class="desc">
+                                    <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                  <span class="price"
+                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="thumbnail-list list-unstyled flexbox"
+                            ng-if="itemList.id=='3000'">
+                            <li class="cell" ng-repeat=" item in tagProductList['3001']"
+                                ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                <a><img class="thumbnail"
+                                        ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                                <div class="desc">
+                                    <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                  <span class="price"
+                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="thumbnail-list list-unstyled flexbox"
+                            ng-if="itemList.id=='3001'">
+                            <li class="cell" ng-repeat=" item in tagProductList['3004']"
+                                ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                <a><img class="thumbnail"
+                                        ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                                <div class="desc">
+                                    <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                  <span class="price"
+                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="thumbnail-list list-unstyled flexbox"
+                            ng-if="itemList.id=='3002'">
+                            <li class="cell" ng-repeat=" item in tagProductList['3002']"
+                                ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                <a><img class="thumbnail"
+                                        ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                                <div class="desc">
+                                    <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                  <span class="price"
+                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="thumbnail-list list-unstyled flexbox"
+                            ng-if="itemList.id=='3003'">
+                            <li class="cell" ng-repeat=" item in tagProductList['3003']"
+                                ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                <a><img class="thumbnail"
+                                        ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                                <div class="desc">
+                                    <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                  <span class="price"
+                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="thumbnail-list list-unstyled flexbox"
+                            ng-if="itemList.id=='3004'">
+                            <li class="cell" ng-repeat=" item in tagProductList['3005']"
+                                ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                <a><img class="thumbnail"
+                                        ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                                <div class="desc">
+                                    <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                  <span class="price"
+                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="thumbnail-list list-unstyled flexbox"
+                            ng-if="itemList.id=='3005'">
+                            <li class="cell" ng-repeat=" item in tagProductList['3006']"
+                                ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
+                                <a><img class="thumbnail"
+                                        ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
+                                <div class="desc">
+                                    <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
+                  <span class="price"
+                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--选择页面遮罩-->
+    <div class="chose-shop" ng-if="STORE_ID==0">
+        <i class="icon-shop"></i>
+        <span>请先选择门店，即可在线购买！</span>
+        <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
+    </div>
 
 </div>
