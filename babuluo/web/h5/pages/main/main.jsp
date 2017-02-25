@@ -197,7 +197,6 @@
 <!--############ router ############-->
 <script src="router.js"></script>
 
-
 <!--############ service ############-->
 <script src="../product/product-services.js"></script>
 <script src="../order/order-services.js"></script>
@@ -208,6 +207,8 @@
 <script src="../account/account-services.js"></script>
 <script src="../security/security-services.js"></script>
 <script src="../shopLbs/lbs-services.js"></script>
+<script src="../home/home-services.js"></script>
+
 <!--############ controller ############-->
 <script src="controller.js"></script>
 
