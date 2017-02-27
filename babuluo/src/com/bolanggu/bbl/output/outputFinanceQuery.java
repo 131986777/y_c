@@ -207,11 +207,12 @@ public class outputFinanceQuery {
                 Balance = "￥" + Balance;
             }
 
-            String cardNo = StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER_CARD.CARD_NO"),"");
+            String cardNo = StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_NO"),"");
+            System.out.println(" cardNo  :  "+cardNo);
             if (cardNo.length()==12||cardNo.length()==14){
                 cardNo = cardNo.substring(0,cardNo.length()-4);
             }
-
+            System.out.println(" cardNo  end  :  "+cardNo);
             SXSSFRow row = financeSheet.createRow(rowIndex++);
             row.setHeightInPoints(25);
             SXSSFCell cell0 = row.createCell(0);
