@@ -286,6 +286,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
 
             params['SHOP_ORDER.TYPE'] = 4;//自提付款单
 
+            params['SHOP_ORDER.SPECIAL_MODEL'] = 'APPOINTMENT';//特殊状态为预约
             params['SHOP_ORDER.REC_CONTACT'] = $scope.cookiePickupPerson.man;//收货人
             params['SHOP_ORDER.REC_PHONE'] = $scope.cookiePickupPerson.phone;//联系电话
             params['SHOP_ORDER.SHOP_NAME'] = $scope.shop['SHOP.SHOP_NAME'];//门店信息
