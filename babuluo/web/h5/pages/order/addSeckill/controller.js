@@ -90,7 +90,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
             var promoReturn = response['extraData']['promoReturn'];
             //成功就下单 不成功提示信息
             if (promoReturn['state']==0){
-                $scope.commitOrder();
+                $scope.commitOrder($scope.seckill['seckill_id'], 1 ,memberId);
             }else if (promoReturn['state']==1){
                 alert(promoReturn['message']);
             }
@@ -98,13 +98,15 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
     }
 
     //提交订单
-    $scope.commitOrder = function () {
+    $scope.commitOrder = function (seckillId,num ,memberId) {
 
         if ($scope.commitClick) {
             $scope.commitClick = false;
             weUI.toast.showLoading('正在下单');
 
             var params = $scope.order;
+            params['SHOP_ORDER.SPECIAL_MODEL'] = "SECKILL_"+seckillId;//秒杀的ID
+
             params['SHOP_ORDER.TYPE'] = $scope.cookiePickupPerson.type;//订货单
             if ($scope.cookiePickupPerson.type
                 == 3
@@ -142,6 +144,14 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
                     + '/Add/');
 
             }, function (response) {
+                //添加订单失败的话就要回退秒杀！
+                var form = {};
+                form['SECKILL_ID']=seckillId;
+                form['MEMBER_ID']=memberId;
+                form['NUM']=num;
+                seckillFactory.backspaceSeckill(form,function(response){
+                })
+
                 weUI.toast.hideLoading();
                 $scope.commitClick = true;
                 weUI.toast.error(response.msg);

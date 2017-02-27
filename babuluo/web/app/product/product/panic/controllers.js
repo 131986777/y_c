@@ -37,7 +37,11 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
     $scope.addSeckill = function(){
         var form = $scope.seckill;
         //数据非空验证
-        if (form['SECKILL.NAME'] == undefined||form['SECKILL.DESCRIBES'] == undefined||form['SECKILL.TYPE'] == undefined||form['SECKILL.LIMIT_NUM'] == undefined||form['SECKILL.BEGIN_DATETIME'] == undefined||form['SECKILL.END_DATETIME'] == undefined||form['SECKILL.SUM_NUM'] == undefined||$scope.sku['skuId'] == undefined||form['priceShow'] == undefined){
+        if (form['SECKILL.NAME'] == undefined||form['SECKILL.DESCRIBES'] == undefined||form['SECKILL.TYPE'] == undefined||form['SECKILL.LIMIT_NUM'] == undefined||form['SECKILL.BEGIN_DATETIME'] == undefined||$scope.sku['skuId'] == undefined||form['priceShow'] == undefined){
+            alert("请填写完整表单信息") ;
+            return
+        }
+        if(form['SECKILL.END_DATETIME'] == undefined&&form['SECKILL.TYPE'] != 'num'||form['SECKILL.SUM_NUM'] == undefined&&form['SECKILL.TYPE'] != 'time'){
             alert("请填写完整表单信息") ;
             return
         }
@@ -171,6 +175,24 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
     /**
      * 时间选择器
      */
+    $('#pickup_hour_panic').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        format: 'yyyy/mm/dd hh:ii',
+        todayBtn: 'linked',
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+    /**
+     * 时间选择器
+     */
     $('#start_hour_panic_modify').datetimepicker({
         language: 'zh-CN',
         autoclose: true,
@@ -191,6 +213,24 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
      * 时间选择器
      */
     $('#end_hour_panic_modify').datetimepicker({
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        format: 'yyyy/mm/dd hh:ii',
+        todayBtn: 'linked',
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
+
+    /**
+     * 时间选择器
+     */
+    $('#pickup_hour_panic_modify').datetimepicker({
         language: 'zh-CN',
         autoclose: true,
         todayHighlight: true,
