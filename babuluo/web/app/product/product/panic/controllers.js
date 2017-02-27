@@ -37,8 +37,10 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
     $scope.addSeckill = function(){
         var form = $scope.seckill;
         //数据非空验证
-        if (form['SECKILL.NAME'] == undefined||form['SECKILL.DESCRIBES'] == undefined||form['SECKILL.TYPE'] == undefined||form['SECKILL.LIMIT_NUM'] == undefined||form['SECKILL.BEGIN_DATETIME'] == undefined||form['SECKILL.END_DATETIME'] == undefined||form['SECKILL.SUM_NUM'] == undefined||$scope.sku['skuId'] == undefined||form['priceShow'] == undefined){
-            alert("请填写完整表单信息") ;
+        if (form['SECKILL.NAME'] == undefined||form['SECKILL.DESCRIBES'] == undefined||form['SECKILL.TYPE'] == undefined
+            ||form['SECKILL.LIMIT_NUM'] == undefined||form['SECKILL.BEGIN_DATETIME'] == undefined||
+            $scope.sku['skuId'] == undefined||form['priceShow'] == undefined){
+             modalFactory.showShortAlert("请填写完整表单信息") ;
             return
         }
         //组装数据
@@ -46,9 +48,10 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         form['SECKILL.UNIT_PRICE'] = form['priceShow']*100;
         //请求接口
         seckillFactory.addSeckill(form , function (response) {
-            alert("添加成功")
+            $scope.queryAllSeckill();
+             modalFactory.showShortAlert("添加成功")
         },function(response){
-            alert("添加失败")
+             modalFactory.showShortAlert("添加失败")
         })
     }
 
@@ -70,7 +73,7 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
             //根据skuIds拿到prd对象
             $scope.getPrd(skuIds) ;
         },function(response){
-            alert("请求数据失败");
+             modalFactory.showShortAlert("请求数据失败");
         })
     }
 
@@ -93,7 +96,7 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         var form = $scope.seckillToModify;
         //数据非空验证
         if (form['SECKILL.BEGIN_DATETIME'] == undefined ){
-            alert("请填写完整表单信息") ;
+             modalFactory.showShortAlert("请填写完整表单信息") ;
             return
         }
         //组装数据
@@ -101,9 +104,10 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         form['SECKILL.UNIT_PRICE'] = form['priceShow']*100;
         //请求接口
         seckillFactory.modifySeckill(form , function (response) {
-            alert("修改成功")
+            $scope.queryAllSeckill();
+            modalFactory.showShortAlert("修改成功")
         },function(response){
-            alert("修改失败")
+            modalFactory.showShortAlert("修改失败")
         })
     }
 
@@ -113,9 +117,10 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
     $scope.changeState = function( seckill,  type){
         seckill['SECKILL.STATE']=type ;
         seckillFactory.modifySeckill(seckill , function(response){
-            alert('修改成功') ;
+            $scope.queryAllSeckill();
+            modalFactory.showShortAlert('修改成功') ;
         },function(response){
-            alert('修改失败') ;
+            modalFactory.showShortAlert('修改失败') ;
         })
     }
 
@@ -126,9 +131,10 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
     $scope.deleteSeckill = function(seckill){
         seckill['SECKILL.IS_DEL'] = 1 ;
         seckillFactory.modifySeckill(seckill , function(response){
-            alert('删除成功') ;
+            $scope.queryAllSeckill();
+            modalFactory.showShortAlert('删除成功') ;
         },function(response){
-            alert('删除失败') ;
+             modalFactory.showShortAlert('删除失败') ;
         })
     }
     /**
