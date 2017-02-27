@@ -207,6 +207,11 @@ public class outputFinanceQuery {
                 Balance = "￥" + Balance;
             }
 
+            String cardNo = StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER_CARD.CARD_NO"),"");
+            if (cardNo.length()==12||cardNo.length()==14){
+                cardNo = cardNo.substring(0,cardNo.length()-4);
+            }
+
             SXSSFRow row = financeSheet.createRow(rowIndex++);
             row.setHeightInPoints(25);
             SXSSFCell cell0 = row.createCell(0);
@@ -225,7 +230,7 @@ public class outputFinanceQuery {
             cell4.setCellValue(jsonObject.getString("FINANCE_LIST.EVENT"));
             cell4.setCellStyle(cellStyle);
             SXSSFCell cell5 = row.createCell(5);
-            cell5.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_NO"), ""));
+            cell5.setCellValue(cardNo);
             cell5.setCellStyle(cellStyle);
             SXSSFCell cell6 = row.createCell(6);
             cell6.setCellValue(cardBalanceBefore);
