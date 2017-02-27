@@ -18,31 +18,35 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         var promise = $q.all([deferred_price.promise, deferred_account.promise]);
 
         promise.then(function (result) {
-
-            $scope.COUPON_INFO = $stateParams.COUPON_INFO;
-            if ($stateParams.COUPON_INFO != '') {
-                $scope.coupon = JSON.parse($stateParams.COUPON_INFO);
-                if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
-                    console.log("======");
-                    console.log($scope.coupon);
-                    var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
-                    var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
-                    price -= $scope.coupon.MONEY;
-                    if (price <= 0) {
-                        price = 0.01;
+            if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                == 1
+                && $scope.order['SHOP_ORDER.STATE_MONEY']
+                == -1) {
+                $scope.COUPON_INFO = $stateParams.COUPON_INFO;
+                if ($stateParams.COUPON_INFO != '') {
+                    $scope.coupon = JSON.parse($stateParams.COUPON_INFO);
+                    if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
+                        console.log("======");
+                        console.log($scope.coupon);
+                        var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
+                        var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
+                        price -= $scope.coupon.MONEY;
+                        if (price <= 0) {
+                            price = 0.01;
+                        }
+                        $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
+                        $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
+                        $scope.order['SHOP_ORDER.PRICE_OVER'] -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
+                        $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.coupon.ID;
                     }
-                    $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
-                    $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
-                    $scope.order['SHOP_ORDER.PRICE_OVER'] -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
-                    $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.coupon.ID;
                 }
-            }
 
-            if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
-                >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
-                $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
-            } else {
-                $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
+                if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
+                    >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
+                    $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
+                } else {
+                    $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
+                }
             }
         });
     }
@@ -303,7 +307,12 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                     $scope.orderConfig.needPay = $scope.orderDetailList[0]['eddPay'] == 1;
                 }
             }
-            $scope.initCartRequestVO(deferred);
+            if ($scope.order['SHOP_ORDER.STATE_ORDER']
+                == 1
+                && $scope.order['SHOP_ORDER.STATE_MONEY']
+                == -1) {
+                $scope.initCartRequestVO(deferred);
+            }
             //$scope.bindPresent();
         });
     }
@@ -381,37 +390,49 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     };
 
     $scope.cardPay = function () {
-        console.log(getCookie("payCard"));
-        $scope.payCard = JSON.parse(getCookie("payCard"));
-        if (!isEmptyObject($scope.payCard)) {
-            weUI.dialog.confirm("提示", "确认支付该订单？", function () {
-                weUI.toast.showLoading('正在支付');
-                var form = $scope.order;
-                form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
-                form['SHOP_ORDER.CARD_ID'] = $scope.payCard['MEMBER_CARD.CARD_ID'];
-                form['SHOP_ORDER.CARD_NO'] = $scope.payCard['MEMBER_CARD.CARD_NO'];
-                form['SHOP_ORDER.CARD_BALANCE'] = $scope.payCard['MEMBER_CARD.BALANCE'];
-                form['SHOP_ORDER.COUPON_ID'] = $scope.order['SHOP_ORDER.COUPON_ID'];
-                form['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
-                console.log(form);
-                orderFactory.payOrder(form, function (response) {
-                    weUI.toast.hideLoading();
-                    weUI.toast.ok('支付成功');
-                    $scope.cardModalShow = false;
-                    $scope.delCoupon();
-                    $state.go("pages/personal");
-                }, function (response) {
-                    weUI.toast.hideLoading();
-                    weUI.toast.error(response.msg);
-                });
-            }, function () {
 
-            });
-        } else {
-            weUI.toast.info("请选择一张会员卡支付");
+        function pay() {
+            console.log(getCookie("payCard"));
+            $scope.payCard = JSON.parse(getCookie("payCard"));
+            if (!isEmptyObject($scope.payCard)) {
+                weUI.dialog.confirm("提示", "确认支付该订单？", function () {
+                    weUI.toast.showLoading('正在支付');
+                    var form = $scope.order;
+                    form['SHOP_ORDER.ID'] = $scope.order['SHOP_ORDER.ID'];
+                    form['SHOP_ORDER.CARD_ID'] = $scope.payCard['MEMBER_CARD.CARD_ID'];
+                    form['SHOP_ORDER.CARD_NO'] = $scope.payCard['MEMBER_CARD.CARD_NO'];
+                    form['SHOP_ORDER.CARD_BALANCE'] = $scope.payCard['MEMBER_CARD.BALANCE'];
+                    form['SHOP_ORDER.COUPON_ID'] = $scope.order['SHOP_ORDER.COUPON_ID'];
+                    form['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
+                    console.log(form);
+                    orderFactory.payOrder(form, function (response) {
+                        weUI.toast.hideLoading();
+                        weUI.toast.ok('支付成功');
+                        $scope.cardModalShow = false;
+                        $scope.delCoupon();
+                        $state.go("pages/personal");
+                    }, function (response) {
+                        weUI.toast.hideLoading();
+                        weUI.toast.error(response.msg);
+                    });
+                }, function () {
+
+                });
+
+            } else {
+                weUI.toast.info("请选择一张会员卡支付");
+            }
         }
 
+        $scope.submitOrder(pay);
+
     };
+
+    $scope.submitOrder = function (callback) {
+        orderFactory.modifyOrderById($scope.order, function (response) {
+            callback();
+        });
+    }
 
     $scope.toDetail = function (id) {
         $state.go('pages/product/detail', {PRD_ID: id});
@@ -432,21 +453,24 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     }
 
     function wxPay(formData) {
-        orderFactory.wxPayUndefinedOrder(formData, function (response) {
-            if (typeof WeixinJSBridge == "undefined") {
-                if (document.addEventListener) {
-                    document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
-                } else if (document.attachEvent) {
-                    document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
-                    document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+        function pay() {
+            orderFactory.wxPayUndefinedOrder(formData, function (response) {
+                if (typeof WeixinJSBridge == "undefined") {
+                    if (document.addEventListener) {
+                        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+                    } else if (document.attachEvent) {
+                        document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+                    }
+                } else {
+                    onBridgeReady(response.extraData.unifiedOrderJsonResult, response.extraData.returnMap);
                 }
-            } else {
-                onBridgeReady(response.extraData.unifiedOrderJsonResult, response.extraData.returnMap);
-            }
-        }, function (res) {
-            weUI.wx_pay.error("支付失败");
-        });
+            }, function (res) {
+                weUI.wx_pay.error("支付失败");
+            });
+        }
 
+        $scope.submitOrder(pay);
         //orderFactory.wxPayUndefinedOrderForPC(formData, function (response) {
         //  console.log(response);
         //}, function (res) {
