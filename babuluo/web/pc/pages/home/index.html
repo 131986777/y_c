@@ -50,7 +50,7 @@ height: 500px;">
                         <li ng-repeat="(index,seckill) in seckillList" >
                             <div class="picLimit">
                                 <div class="img">
-                                    <img class="pic" src="" alt="" ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['sku_id']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
+                                    <img class="pic" src="" alt="" ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['sku_id']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_125,w_125">
                                 </div>
                                 <div class="limtInfo">
                                     <div class="timeCount"
@@ -68,9 +68,7 @@ height: 500px;">
                                         <p class="nowPrice" ng-bind="seckill['unit_price']/100 | currency : '￥'"></p>
                                         <p class="del" ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT_SKU.REAL_PRICES'] | currency : '￥'"></p>
                                     </div>
-                                    <div class="buy" ng-click="goSeckill(seckill)">
-                                        立即购买
-                                    </div>
+                                    <div class="buy" ng-click="goSeckill(seckill)">立即抢购</div>
                                 </div>
                             </div>
 

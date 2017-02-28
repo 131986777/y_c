@@ -4,5 +4,4 @@ AndSellPCMainModule.service('seckillFactory', function (http) {
     this.goSeckill=http.post('/promo/seckill/myInterface/goSeckill');
 
     this.backspaceSeckill=http.post('/promo/seckill/myInterface/backspaceOrder');
-
 })
