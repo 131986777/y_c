@@ -389,11 +389,12 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         }
     };
 
-    $scope.cardPay = function () {
-
+    $scope.cardPay = function (data) {
+        console.log(data);
         function pay() {
-            console.log(getCookie("payCard"));
-            $scope.payCard = JSON.parse(getCookie("payCard"));
+            //console.log(getCookie("payCard"));
+            //$scope.payCard = JSON.parse(getCookie("payCard"));
+            $scope.payCard = data;
             if (!isEmptyObject($scope.payCard)) {
                 weUI.dialog.confirm("提示", "确认支付该订单？", function () {
                     weUI.toast.showLoading('正在支付');

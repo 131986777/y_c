@@ -407,9 +407,12 @@ AndSellUI.directive('cardModal', function (weUI, modalFactory, personalFactory) 
                         $scope.cardList.forEach(function (ele) {
                             ele['MEMBER_CARD.CHECKED'] = ele['MEMBER_CARD.CARD_ID'] == $scope.choosedCardID;
                         });
+                        $scope.cardList[0]['MEMBER_CARD.CHECKED'] = true;
+                        $scope.cardCheck=$scope.cardList[0];
 
                     }else {
                         $scope.cardList[0]['MEMBER_CARD.CHECKED'] = true;
+                        $scope.cardCheck=$scope.cardList[0];
                         setCookie('payCard', JSON.stringify($scope.cardList[0]));
                         $scope.chooseCard();
                     }
@@ -427,11 +430,12 @@ AndSellUI.directive('cardModal', function (weUI, modalFactory, personalFactory) 
                     ele['MEMBER_CARD.CHECKED'] = false;
                 });
                 cl['MEMBER_CARD.CHECKED'] = true;
+                $scope.cardCheck=cl;
                 setCookie('payCard', JSON.stringify(cl));
             };
 
             $scope.chooseCard = function () {
-                $scope.callback();
+                $scope.callback({data: $scope.cardCheck});
                 // 隐藏商品选择框
                 mask.hide().removeClass('weui_fade_toggle');
                 weuiActionsheet.removeClass("weui_actionsheet_toggle");
