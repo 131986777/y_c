@@ -434,8 +434,8 @@ angular.module('AndSell.PC.Main').controller('pages_home_Controller', function (
         }
     }
     $scope.$on('$destroy', function () {
-        if(w!=undefined)
-        w.terminate() //终止一个worker线程v
+        if(undefined!= w)
+            w.terminate() //终止一个worker线程v
     })
 
 });

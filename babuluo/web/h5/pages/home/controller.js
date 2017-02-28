@@ -385,7 +385,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     }
 
     $scope.$on('$destroy', function () {
-        if(w!=undefined)
+        if(undefined!= w)
         w.terminate() //终止一个worker线程v
     })
 });

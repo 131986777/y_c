@@ -174,17 +174,17 @@
                             </li>
                         </ul>
                         <ul class="sub-menu " role="menu">
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1196@')>=0">
                                 <a ui-sref="product/product/appointment">
                                     预约商品
                                 </a>
-                            </li>
-                            <li>
+                            </li >
+                            <li ng-if="APP_ID_LIST.indexOf('@1197@')>=0">
                                 <a ui-sref="product/product/groupBuying">
                                     团购商品
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1198@')>=0">
                                 <a ui-sref="product/product/panic">
                                     抢购商品
                                 </a>
@@ -450,7 +450,7 @@
                                     短信发送记录
                                 </a>
                             </li>
-                            <li >
+                            <li ng-if="APP_ID_LIST.indexOf('@1199@')>=0">
                                 <a ui-sref="sys/comment">
                                     商品评论管理
                                 </a>
@@ -481,7 +481,7 @@
                         <ul class="sub-menu " role="menu">
                             <li ng-if="APP_ID_LIST.indexOf('@1140@')>=0">
                                 <a ui-sref="sys/sys/sysSetting">
-                                    系统配置
+                                      系统配置
                                 </a>
                             </li>
                             <li ng-if="APP_ID_LIST.indexOf('@1142@')>=0">
@@ -521,24 +521,24 @@
                     </a>
                     <div class="sub-menu-wrap sub-menu-top sub-menu-2 dropdown-menu">
                         <ul class="sub-menu " role="menu">
-                            <li>
+                            <li  ng-if="APP_ID_LIST.indexOf('@1103@')>=0">
                                 <a ui-sref="analysis/analysis/cardAnalysis">
                                     会员态势
                                 </a>
                             </li>
-                            <li>
+                            <li  ng-if="APP_ID_LIST.indexOf('@1203@')>=0">
                                 <a ui-sref="analysis/analysis/guestAnalysis">
                                     来客分析
                                 </a>
                             </li>
                         </ul>
                         <ul class="sub-menu " role="menu">
-                            <li>
+                            <li  ng-if="APP_ID_LIST.indexOf('@1104@')>=0">
                                 <a ui-sref="analysis/analysis/compareAnalysis">
                                     作战室
                                 </a>
                             </li>
-                            <li>
+                            <li  ng-if="APP_ID_LIST.indexOf('@1112@')>=0">
                                 <a ui-sref="analysis/analysis/liveAnalysis">
                                     直播间
                                 </a>
@@ -546,7 +546,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1066@')>=0">
+                <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1200@')>=0">
                     <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="card/card/cardAnalysis"
                        data-hover="dropdown">
                         <i class="icon-settings"></i>
@@ -554,12 +554,12 @@
                     </a>
                     <div class="sub-menu-wrap sub-menu-3 sub-menu-top dropdown-menu">
                         <ul class="sub-menu " role="menu">
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1105@')>=0">
                                 <a ui-sref="analysis/analysis/orderAnalysis">
                                     线上销售态势
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1106@')>=0">
                                 <a ui-sref="analysis/analysis/offlineOrderAnalysis">
                                     线下销售态势
                                 </a>
@@ -567,24 +567,24 @@
 
                         </ul>
                         <ul class="sub-menu " role="menu">
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1107@')>=0">
                                 <a ui-sref="analysis/analysis/dailyAnalysis">
                                     线上经营日报
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1108@')>=0">
                                 <a ui-sref="analysis/analysis/offlineDailyAnalysis">
                                     线下经营日报
                                 </a>
                             </li>
                         </ul>
                         <ul class="sub-menu " role="menu">
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1200@')>=0">
                                 <a ui-sref="analysis/analysis/formAnalysis">
                                     线上商品报表
                                 </a>
                             </li>
-                            <li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1200@')>=0">
                                 <a ui-sref="analysis/analysis/offlineFormAnalysis">
                                     线下销售报表
                                 </a>
