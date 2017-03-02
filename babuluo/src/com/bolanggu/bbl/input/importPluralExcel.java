@@ -1,5 +1,9 @@
 package com.bolanggu.bbl.input;
 
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -74,7 +78,32 @@ public class importPluralExcel {
 
         /** 检查文件是否存在 */
 
-        File file = new File(filePath);
+        //File file = new File(filePath);
+        //
+        //System.out.println("111");
+        //System.out.println(filePath);
+        //System.out.println(file == null);
+        //System.out.println(file.exists());
+        //System.out.println(file.getAbsolutePath());
+
+        URL url = null;
+        try {
+            url = new URL("file:///"+filePath);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        URI uri = null;
+        try {
+            uri = url.toURI();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        File file = new File(uri);
+
+        System.out.println("222");
+        System.out.println(file == null);
+        System.out.println(file.exists());
+        System.out.println(file.getAbsolutePath());
 
         if (file == null || !file.exists()) {
 
@@ -119,8 +148,19 @@ public class importPluralExcel {
             }
 
             /** 调用本类提供的根据流读取的方法 */
-
-            File file = new File(filePath);
+            URL url = null;
+            try {
+                url = new URL("file:///"+filePath);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            }
+            URI uri = null;
+            try {
+                uri = url.toURI();
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            File file = new File(uri);
 
             is = new FileInputStream(file);
 
