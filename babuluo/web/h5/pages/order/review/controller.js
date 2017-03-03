@@ -45,8 +45,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_review_Controller', fu
             $scope.addComment(params,i);
         }
         $q.all(promise).then(function () {
-            //$state.go('pages/order/detail',{ORDER_ID: $stateParams.ID});
             weUI.toast.info("提交成功");
+            //$state.go('pages/order/detail',{ORDER_ID: $stateParams.ID,FROM:"REVIEW"});
             window.history.back();
         });
     };
