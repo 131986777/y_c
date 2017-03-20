@@ -1,8 +1,7 @@
 package com.weixin;
 
 import com.bolanggu.bbl.ENV;
-//import com.bubu.wx.pay.MatrixToImageWriter;
-import com.bubu.wx.pay.MatrixToImageWriter;
+//import com.weixin.MatrixToImageWriter;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -192,35 +191,6 @@ public class WXPay {
         return null;
     }
 
-    public static void addUnifiedOrderData(Map<String, Object> resultMap, String resultXML,
-        HashMap<String, String> paramMap) {
-        Object returnCode = resultMap.get("return_code");
-
-        if (resultMap != null) {
-
-            if ("SUCCESS".equals(returnCode)) {
-                Object resultCode = resultMap.get("result_code");
-                if ("SUCCESS".equals(resultCode)) {
-                    //统一下单成功
-                    // todo 保存相关信息
-                    //OrderWxPayListVO vo = new OrderWxPayListVO();
-                    //vo.setSERVICE_ID(UserHelper.getServiceID(request));
-                    //vo.setCODE_URL((String) resultMap.get("code_url"));
-                    //vo.setOUT_TRADE_NO(paramMap.get("out_trade_no"));//唯一流水号
-                    //vo.setPREPAY_ID((String) resultMap.get("prepay_id"));
-                    //vo.setRESULT_XML(resultXML);
-                    //vo.setREMARK(paramMap.get("product_id"));//订单ID
-                    //vo.setPAY_STATE(OrderWxPayListVO.PAY_FAILED);
-                    //try {
-                    //    new OrderWxPayListBean().addOrderWxPayList(vo);
-                    //} catch (DataAccessException e) {
-                    //    e.printStackTrace();
-                    //}
-                }
-            }
-        }
-    }
-
     /**
      * 订单查询
      */
@@ -367,40 +337,6 @@ public class WXPay {
         return sb.toString();
     }
 
-    ///**
-    // * 生成二维码
-    // *
-    // * @param content
-    // * @param response
-    // */
-    //public static void encodeQrcode(String content, HttpServletResponse response) {
-    //    //if (StringUtils.isBlank(content))
-    //    //    return;
-    //    //spsl
-    //    if (StrUtil.isNull(content)) {
-    //        return;
-    //    }
-    //    MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-    //    Map hints = new HashMap();
-    //    hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
-    //    BitMatrix bitMatrix = null;
-    //    try {
-    //        bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 300, 300, hints);
-    //        BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
-    //
-    //        try {
-    //            ImageIO.write(image, "jpg", response.getOutputStream());
-    //        } catch (IOException e) {
-    //            // TODO Auto-generated catch block
-    //            e.printStackTrace();
-    //        }
-    //    } catch (WriterException e1) {
-    //        // TODO Auto-generated catch block
-    //        e1.printStackTrace();
-    //    }
-    //}
-    //
-
     /**
      * 生成二维码
      */
@@ -499,9 +435,4 @@ public class WXPay {
         return map;
     }
 
-    public static void main(String[] args) {
-
-        //        unifiedOrder("127.0.0.1", "fdskfjdskfj;dsjfds", "3232", "body", 12300);
-        refundOrder("10003693", 1800);
-    }
 }

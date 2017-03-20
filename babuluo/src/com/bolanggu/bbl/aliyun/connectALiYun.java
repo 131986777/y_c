@@ -19,10 +19,6 @@ public class connectALiYun extends HttpServlet {
     // AccessKey请登录https://ak-console.aliyun.com/#/查看
     // private String accessKeyId = "LTAImVQlWKQXIQcD";
     private String accessKeySecret = ENV.ALIYUN_SERCT;
-    // 你之前创建的bucket，确保这个bucket已经创建
-    // private String bucketName = "jiaorder-file";
-    // 上传文件后的object名称
-    //private String key = "myImage";
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

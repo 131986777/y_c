@@ -1,5 +1,6 @@
 package com.weixin;
 
+import com.google.zxing.WriterException;
 /**
  * Created by xq on 2016.8.15 17 50.
  */

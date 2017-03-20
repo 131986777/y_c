@@ -77,7 +77,7 @@ angular.module('AndSell.PC.Main').controller('pages_account_recharge_Controller'
 
         wxPay(formData);
     };
-
+s
 
     function wxPay(formData) {
         orderFactory.wxPayUndefinedOrderForPC(formData, function (response) {

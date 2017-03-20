@@ -1,4 +1,4 @@
-package com.bubu.wx.pay;
+package com.weixin;
 
 import com.google.zxing.common.BitMatrix;
 import java.awt.image.BufferedImage;

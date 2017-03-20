@@ -55,34 +55,4 @@ public class httpPostJson {
         }
         return null;
     }
-
-    public static void main(String[] args) throws IOException {
-
-        //Map map = new HashMap<>();
-        //map.put("Sign",ENV.API_MENDIAN_CERT);
-        //String returnStr = HttpClientUtil.doPost(ENV.API_MENDIAN+"GetGoodsInfo",map);
-        //JSONArray array =(JSONArray)JSONObject.parseObject(returnStr).get("goodsInfos");
-        //API api=new API();
-        //for (int i=0; i< array.size();i++) {
-        //    JSONObject obj=array.getJSONObject(i);
-        //    Map sku = new HashMap<>();
-        //    sku.put("SHOP_PRODUCT_SKU.BAR_CODE",obj.get("baseBarCode"));
-        //    sku.put("SHOP_PRODUCT_SKU.PRD_SKU",obj.get("goodsCode"));
-        //    if(!obj.get("baseBarCode").equals("")&&obj.get("baseBarCode")!=null) {
-        //        try {
-        //            if (JSONObject.parseObject(
-        //                api.call("/shop/product/sku/modifyByPrdSku", sku).getReturnJSONStr())
-        //                .getInteger("code") == 0) {
-        //                System.out.println((i * 100 / array.size()) + "%  Success : " + sku.get(
-        //                    "SHOP_PRODUCT_SKU.PRD_SKU"));
-        //            } else {
-        //                System.out.println((i * 100 / array.size()) + "%  Fail : " + sku.get(
-        //                    "SHOP_PRODUCT_SKU.PRD_SKU"));
-        //            }
-        //        } catch (RuleException e) {
-        //            e.printStackTrace();
-        //        }
-        //    }
-        //}
-    }
 }
