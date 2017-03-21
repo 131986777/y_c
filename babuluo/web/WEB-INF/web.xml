@@ -135,4 +135,11 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <servlet-mapping>
+        <servlet-name>updateOrderPay</servlet-name>
+        <url-pattern>/updateOrderPay34433232</url-pattern>
+    </servlet-mapping>
+
+
+
 </web-app>
