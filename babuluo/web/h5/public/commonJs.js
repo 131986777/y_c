@@ -97,6 +97,22 @@ function getDate(dateStr) {
     }
 }
 
+function GetDateStr(AddDayCount, date) {
+    function formatNum(num) {
+        return num < 10 ? '0' + num : num;
+    }
+
+    var dd = new Date();
+    if (undefined != date) {
+        dd = new Date(date);
+    }
+    dd.setDate(dd.getDate() + AddDayCount);//获取AddDayCount天后的日期
+    var y = dd.getFullYear();
+    var m = formatNum(dd.getMonth() + 1);//获取当前月份的日期
+    var d = formatNum(dd.getDate());
+    return y + "-" + m + "-" + d;
+}
+
 /*
  *删除数组元素.
  */
@@ -238,7 +254,7 @@ function routerPath(base, path, param, css) {
         loadServiceAndController: function ($ocLazyLoad, userFactory, $state, weUI) {
             var filtertList = ['pages/product/list', 'pages/product/tagPrdList', 'pages/home', 'pages/product/detail', 'pages/cart', 'pages/shop', 'pages/user/accountLogin', 'pages/user/phoneLogin', 'pages/user/register', 'pages/security/resetPwd', 'pages/user/SetPassword'];
             if (filtertList.indexOf(path) < 0) {
-                userFactory.isLogin({'USER_TYPE':'CUSTOMER'}, function (response) {
+                userFactory.isLogin({'USER_TYPE': 'CUSTOMER'}, function (response) {
 
                 }, function (response) {
                     $state.go('pages/user/accountLogin');

@@ -138,7 +138,75 @@
 
                             <div class="col-md-8">
                                 <input type="number" class="form-control"
+                                       string-to-number
                                        ng-model="modify['APPOINTMENT_PRODUCT.STOCK']"
+                                       placeholder="">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 提货时间类型:
+                            </label>
+
+                            <div class="col-md-8">
+                                <select ng-model="modify['APPOINTMENT_PRODUCT.TIME_TYPE']"
+                                        ng-change="modify['APPOINTMENT_PRODUCT.START_TIME']=modify['APPOINTMENT_PRODUCT.TIME_TYPE']=='WEEK'?'1':''"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option" value="WEEK">按周</option>
+                                    <option class="nya-bs-option" value="DAY">按天</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" ng-show="modify['APPOINTMENT_PRODUCT.TIME_TYPE']=='WEEK'">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 提货时间(周):
+                            </label>
+                            <div class="col-md-8">
+                                <select ng-model="modify['APPOINTMENT_PRODUCT.START_TIME']"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option" value="0">全部</option>
+                                    <option class="nya-bs-option" value="1">周一</option>
+                                    <option class="nya-bs-option" value="2">周二</option>
+                                    <option class="nya-bs-option" value="3">周三</option>
+                                    <option class="nya-bs-option" value="4">周四</option>
+                                    <option class="nya-bs-option" value="5">周五</option>
+                                    <option class="nya-bs-option" value="6">周六</option>
+                                    <option class="nya-bs-option" value="7">周日</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row" ng-show="modify['APPOINTMENT_PRODUCT.TIME_TYPE']=='DAY'">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 提货时间(天):
+                            </label>
+                            <div class="col-md-8">
+                                <input id="startDay" type="text" ng-model="modify['APPOINTMENT_PRODUCT.START_TIME']" class="form-control inputWidth"  placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 可提货天数:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="number" string-to-number class="form-control"
+                                       ng-model="modify['APPOINTMENT_PRODUCT.STILL_DAY']"
+                                       placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 下单间隔:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="number" class="form-control" string-to-number
+                                       ng-model="modify['APPOINTMENT_PRODUCT.END_DAY']"
                                        placeholder="">
                             </div>
                         </div>
@@ -239,7 +307,76 @@
                             <div class="col-md-8">
                                 <input type="number" class="form-control"
                                        ng-model="add['APPOINTMENT_PRODUCT.STOCK']"
-                                       ng-init="add['APPOINTMENT_PRODUCT.STOCK']=''"
+                                       ng-init="add['APPOINTMENT_PRODUCT.STOCK']=1"
+                                       placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 提货时间类型:
+                            </label>
+
+                            <div class="col-md-8">
+                                <select ng-model="add['APPOINTMENT_PRODUCT.TIME_TYPE']"
+                                        ng-init="add['APPOINTMENT_PRODUCT.TIME_TYPE']='WEEK'"
+                                        ng-change="add['APPOINTMENT_PRODUCT.START_TIME']==add['APPOINTMENT_PRODUCT.TIME_TYPE']=='WEEK'?'1':''"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option" value="WEEK">按周</option>
+                                    <option class="nya-bs-option" value="DAY">按天</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" ng-show="add['APPOINTMENT_PRODUCT.TIME_TYPE']=='WEEK'">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 提货时间(周):
+                            </label>
+                            <div class="col-md-8">
+                                <select ng-model="add['APPOINTMENT_PRODUCT.START_TIME']"
+                                        ng-init="add['APPOINTMENT_PRODUCT.START_TIME']='1'"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option" value="1">周一</option>
+                                    <option class="nya-bs-option" value="2">周二</option>
+                                    <option class="nya-bs-option" value="3">周三</option>
+                                    <option class="nya-bs-option" value="4">周四</option>
+                                    <option class="nya-bs-option" value="5">周五</option>
+                                    <option class="nya-bs-option" value="6">周六</option>
+                                    <option class="nya-bs-option" value="7">周日</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row" ng-show="add['APPOINTMENT_PRODUCT.TIME_TYPE']=='DAY'">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 提货时间(天):
+                            </label>
+                            <div class="col-md-8">
+                                <input id="startDay" type="text" ng-model="add['APPOINTMENT_PRODUCT.START_TIME']" class="form-control inputWidth"  placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 可提货天数:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="number" class="form-control"
+                                       ng-model="add['APPOINTMENT_PRODUCT.STILL_DAY']"
+                                       ng-init="add['APPOINTMENT_PRODUCT.STILL_DAY']=1"
+                                       placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 下单间隔:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="number" class="form-control"
+                                       ng-model="add['APPOINTMENT_PRODUCT.END_DAY']"
+                                       ng-init="add['APPOINTMENT_PRODUCT.END_DAY']=1"
                                        placeholder="">
                             </div>
                         </div>

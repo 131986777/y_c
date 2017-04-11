@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller', function ($scope, $state, $q, balanceFactory, promoFactory, $stateParams, weUI, $http, http, couponFactory, productFactory, orderFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller', function ($scope, $state, $q, appointmentFactory, balanceFactory, promoFactory, $stateParams, weUI, $http, http, couponFactory, productFactory, orderFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('新增预约');
     modalFactory.setBottom(false);
@@ -11,11 +11,26 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
         var deferred_account = $q.defer();
         var deferred_price = $q.defer();
 
-        $scope.cookiePickupPerson = JSON.parse(getCookie("pickupPerson"));
+        $scope.cookiePickupPerson = JSON.parse(getCookie("pickupPersonAppointment"));
 
         $scope.EmptyPick = isEmptyObject($scope.cookiePickupPerson);
         if (!$scope.EmptyPick) {
-            $scope.cookiePickupPerson.getTime = setTime();
+            var param = {
+                'APPOINTMENT_PRODUCT.SKU_ID': $stateParams.SKU_IDS
+            };
+            appointmentFactory.queryAll(param, function (response) {
+                if (response.data.length > 0) {
+                    if (!($scope.cookiePickupPerson.skuIds
+                        == $stateParams.SKU_IDS
+                        && $scope.cookiePickupPerson.currDay
+                        == GetDateStr(0))) {
+                        $scope.cookiePickupPerson.getTime = getDate(response.data[0]);
+                    }
+                } else {
+                    weUI.toast("商品未参加预约活动~");
+                    history.back();
+                }
+            });
         }
 
         $scope.order = {};
@@ -321,6 +336,42 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
                 weUI.toast.error(response.msg);
             });
         }
+    }
+
+    function getDate(item) {
+
+        var endDay = item['APPOINTMENT_PRODUCT.END_DAY'];
+        var type = item['APPOINTMENT_PRODUCT.TIME_TYPE'];
+        var still = item['APPOINTMENT_PRODUCT.STILL_DAY'];
+        var startTime = item['APPOINTMENT_PRODUCT.START_TIME'];
+        var next = true;
+        var dayList = new Array;
+        if (type == 'WEEK') {
+            var currTime = new Date().getDay();
+            if (currTime == 0) {
+                currTime = 7;//周日
+            }
+
+            if (startTime - currTime > endDay) {
+                next = false;
+            }
+            var day;
+
+            if (next) {
+                day = Number(startTime) + 7 - Number(currTime);
+            } else {
+                day = Number(startTime) - Number(currTime);
+            }
+            for (var i = 0; i < still; i++) {
+                dayList.push(GetDateStr(Number(day) + Number(i)) + '   08:00-19:00');
+            }
+
+        } else if (type == 'DAY') {
+            for (var i = 0; i < still; i++) {
+                dayList.push(GetDateStr(Number(i), startTime) + '   08:00-19:00');
+            }
+        }
+        return dayList[0];
     }
 
     function setTime() {

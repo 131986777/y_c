@@ -46,7 +46,8 @@ public class outputFinanceQuery {
         return bean;
     }
 
-    public SXSSFSheet GenerateExcelSheet(SXSSFWorkbook analyseBook, String parameter) throws RuleException {
+    public SXSSFSheet GenerateExcelSheet(SXSSFWorkbook analyseBook, String parameter)
+        throws RuleException {
 
         JSONObject paramJson = JSON.parseObject(parameter);
 
@@ -75,6 +76,7 @@ public class outputFinanceQuery {
         financeSheet.setColumnWidth(12, 3000);
         financeSheet.setColumnWidth(13, 4000);
         financeSheet.setColumnWidth(14, 5000);
+        financeSheet.setColumnWidth(15, 5000);
 
         //字体预设置
         XSSFFont font = (XSSFFont) analyseBook.createFont();
@@ -94,7 +96,7 @@ public class outputFinanceQuery {
         font4.setFontHeightInPoints((short) 11);
         font4.setColor(XSSFFont.COLOR_RED);
         //合并大标题的单元格
-        financeSheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 14));
+        financeSheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 15));
 
         //大标题样式
         CellStyle titleStyle = analyseBook.createCellStyle();
@@ -121,7 +123,6 @@ public class outputFinanceQuery {
         CellStyle totalStyle = analyseBook.createCellStyle();
         totalStyle.setAlignment(XSSFCellStyle.ALIGN_RIGHT);
         totalStyle.setFont(font4);
-
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         NumberFormat NumFormat = NumberFormat.getCurrencyInstance(Locale.CHINA);
@@ -181,6 +182,9 @@ public class outputFinanceQuery {
         SXSSFCell balance = rowTitle.createCell(14);
         balance.setCellValue("账户余额");
         balance.setCellStyle(title2Style);
+        SXSSFCell intro = rowTitle.createCell(15);
+        intro.setCellValue("变更说明");
+        intro.setCellStyle(title2Style);
         int analyseIndex = 1;//序号
 
         for (int i = 0; i < jsonArray.size(); i++) {
@@ -194,25 +198,30 @@ public class outputFinanceQuery {
                 changeType = "支出";
             }
 
-            String cardBalance = StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_BALANCE"), "");
+            String cardBalance = StrUtil.getNotNullStringValue(
+                jsonObject.getString("FINANCE_LIST.EVENT_CARD_BALANCE"), "");
             String cardBalanceBefore = "";
             if (!"".equals(cardBalance)) {
                 cardBalance = "￥" + cardBalance;
-                cardBalanceBefore = StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.BEFORE_CARD_BALANCE"), "");
+                cardBalanceBefore = StrUtil.getNotNullStringValue(
+                    jsonObject.getString("FINANCE_LIST.BEFORE_CARD_BALANCE"), "");
                 cardBalanceBefore = "￥" + cardBalanceBefore;
             }
 
-            String Balance = StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.BALANCE"));
+            String Balance =
+                StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.BALANCE"));
             if (!"".equals(Balance)) {
                 Balance = "￥" + Balance;
             }
 
-            String cardNo = StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_NO"),"");
-            System.out.println(" cardNo  :  "+cardNo);
-            if (cardNo.length()==12||cardNo.length()==14){
-                cardNo = cardNo.substring(0,cardNo.length()-4);
+            String cardNo =
+                StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_NO"),
+                    "");
+            System.out.println(" cardNo  :  " + cardNo);
+            if (cardNo.length() == 12 || cardNo.length() == 14) {
+                cardNo = cardNo.substring(0, cardNo.length() - 4);
             }
-            System.out.println(" cardNo  end  :  "+cardNo);
+            System.out.println(" cardNo  end  :  " + cardNo);
             SXSSFRow row = financeSheet.createRow(rowIndex++);
             row.setHeightInPoints(25);
             SXSSFCell cell0 = row.createCell(0);
@@ -222,7 +231,8 @@ public class outputFinanceQuery {
             cell1.setCellValue(jsonObject.getString("FINANCE_LIST.ADD_DATETIME").replace(".0", ""));
             cell1.setCellStyle(cellStyle);
             SXSSFCell cell2 = row.createCell(2);
-            cell2.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.TRUE_NAME"), ""));
+            cell2.setCellValue(
+                StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.TRUE_NAME"), ""));
             cell2.setCellStyle(cellStyle);
             SXSSFCell cell3 = row.createCell(3);
             cell3.setCellValue(jsonObject.getString("FINANCE_LIST.MEMBER_MOBILE"));
@@ -240,36 +250,47 @@ public class outputFinanceQuery {
             cell7.setCellValue(cardBalance);
             cell7.setCellStyle(cellStyle);
             SXSSFCell cell8 = row.createCell(8);
-            cell8.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_TYPE"), ""));
+            cell8.setCellValue(
+                StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_CARD_TYPE"),
+                    ""));
             cell8.setCellStyle(cellStyle);
             SXSSFCell cell9 = row.createCell(9);
-            cell9.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.CARD_SHOP"), ""));
+            cell9.setCellValue(
+                StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.CARD_SHOP"), ""));
             cell9.setCellStyle(cellStyle);
             SXSSFCell cell10 = row.createCell(10);
-            cell10.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.SHOP"), ""));
+            cell10.setCellValue(
+                StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.SHOP"), ""));
             cell10.setCellStyle(cellStyle);
             SXSSFCell cell11 = row.createCell(11);
-            cell11.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.OPER_USER_ID"), ""));
+            cell11.setCellValue(
+                StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.OPER_USER_ID"),
+                    ""));
             cell11.setCellStyle(cellStyle);
             SXSSFCell cell12 = row.createCell(12);
             cell12.setCellValue(changeType);
             cell12.setCellStyle(cellStyle);
             SXSSFCell cell13 = row.createCell(13);
-            cell13.setCellValue(NumFormat.format(jsonObject.getDouble("FINANCE_LIST.CHANGE_VALUE")));
+            cell13.setCellValue(
+                NumFormat.format(jsonObject.getDouble("FINANCE_LIST.CHANGE_VALUE")));
             cell13.setCellStyle(cellStyle);
             SXSSFCell cell14 = row.createCell(14);
             cell14.setCellValue(Balance);
             cell14.setCellStyle(cellStyle);
+            SXSSFCell cell15 = row.createCell(15);
+            cell15.setCellValue(
+                StrUtil.getNotNullStringValue(jsonObject.getString("FINANCE_LIST.EVENT_INTRO"),""));
+            cell15.setCellStyle(cellStyle);
         }
 
         SXSSFRow rowM = financeSheet.createRow(rowIndex);
         rowM.setHeightInPoints(25);
-//        Cell cellMan = rowM.createCell(0);
-//        cellMan.setCellValue("操作人：");
-//        cellMan.setCellStyle(cellStyle);
-//        Cell cellManValue = rowM.createCell(1);
-//        cellManValue.setCellValue("");
-//        cellManValue.setCellStyle(cellStyle);
+        //        Cell cellMan = rowM.createCell(0);
+        //        cellMan.setCellValue("操作人：");
+        //        cellMan.setCellStyle(cellStyle);
+        //        Cell cellManValue = rowM.createCell(1);
+        //        cellManValue.setCellValue("");
+        //        cellManValue.setCellStyle(cellStyle);
         rowM.createCell(0).setCellValue("");
         rowM.createCell(1).setCellValue("");
         rowM.createCell(2).setCellValue("");
@@ -283,15 +304,14 @@ public class outputFinanceQuery {
         rowM.createCell(10).setCellValue("");
         rowM.createCell(11).setCellValue("");
         rowM.createCell(12).setCellValue("");
-        SXSSFCell cellTime = rowM.createCell(13);
+        rowM.createCell(13).setCellValue("");
+        SXSSFCell cellTime = rowM.createCell(14);
         cellTime.setCellValue("导出时间：");
         cellTime.setCellStyle(cellStyle);
-        SXSSFCell cellTimeValue = rowM.createCell(14);
+        SXSSFCell cellTimeValue = rowM.createCell(15);
         cellTimeValue.setCellValue(dateFormat.format(DateUtil.getCurrTime()));
         cellTimeValue.setCellStyle(cellStyle);
 
         return financeSheet;
-
     }
-
 }

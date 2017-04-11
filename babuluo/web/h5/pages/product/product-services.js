@@ -28,3 +28,7 @@ AndSellH5MainModule.service('productFactory', function ($resource, http) {
     this.clearSearchHistory = http.post('/search/history/clearHistoryByUserID');
 
 });
+
+AndSellH5MainModule.service('appointmentFactory', function (http) {
+    this.queryAll = http.post('/shop/product/appointment/queryAll');
+})

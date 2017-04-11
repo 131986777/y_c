@@ -42,7 +42,7 @@
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
                         <div class="store-name weui_cell weui_cell_select"
-                             >
+                        >
                             <div class="weui_cell_bd weui_cell_primary">
                                 <select class="weui_select">
                                     <option selected value="0">{{shop}}</option>
@@ -58,12 +58,13 @@
                         <label class="weui_label">所在地区：</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary" ng-init="area='江苏省 南京市 '">
-                        <input class="weui_input" type="text"  ng-model="area" style="margin-left: 15px"
+                        <input class="weui_input" type="text" ng-model="area"
+                               style="margin-left: 15px"
                                placeholder="请选择所在地区">
                     </div>
                 </div>
 
-                  <div class="weui_cell" ng-show="addressType == 1">
+                <div class="weui_cell" ng-show="addressType == 1">
                     <div class="weui_cell_hd">
                         <label class="weui_label">详细地址：</label>
                     </div>
@@ -80,7 +81,13 @@
                         <label class="weui_label">提货时间：</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <span ng-bind="date" style="margin-left: 15px"></span>
+                        <input class="datetime-picker weui_input" type="text"
+                               id="datetime-picker" style="margin-left: 15px"
+                               ng-model="date"
+                               value="" placeholder="请选择预计送达时间">
+                        <!--<p class="title"  ng-show="addressType == 3" style="margin-bottom: 0">-->
+                        <!--提货时间：<span ng-bind="date"></span>-->
+                        <!--</p>-->
                     </div>
                 </div>
             </div>

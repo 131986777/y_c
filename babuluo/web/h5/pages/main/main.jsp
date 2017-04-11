@@ -110,7 +110,7 @@
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
     <title ng-bind="title"></title>
 
-
+    <link rel="stylesheet" href="/AndSell/h5/public/libs/weui/dist/css/jquery-weui.min.css">
     <link rel="stylesheet" href="/AndSell/h5/public/libs/bootstrap/dist/css/bootstrap.min.css">
     <!--<link rel="stylesheet" href="/AndSell/h5/public/libs/weui/dist/css/jquery-weui.min.css">-->
     <link rel="stylesheet" href="/AndSell/h5/public/libs/weui/dist/lib/weui.css">
