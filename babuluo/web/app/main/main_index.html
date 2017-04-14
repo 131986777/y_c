@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta meta id="viewport" name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title ng-bind="title"></title>
 
@@ -127,10 +128,10 @@
                         </a>
                     </li>
                     <!--<li>-->
-                        <!--<a href="../sys/sysSetting.jsp">-->
-                            <!--<i class="icon-settings"></i>-->
-                            <!--系统设置-->
-                        <!--</a>-->
+                    <!--<a href="../sys/sysSetting.jsp">-->
+                    <!--<i class="icon-settings"></i>-->
+                    <!--系统设置-->
+                    <!--</a>-->
                     <!--</li>-->
                 </ul>
             </li>
@@ -178,7 +179,7 @@
                                 <a ui-sref="product/product/appointment">
                                     预约商品
                                 </a>
-                            </li >
+                            </li>
                             <li ng-if="APP_ID_LIST.indexOf('@1197@')>=0">
                                 <a ui-sref="product/product/groupBuying">
                                     团购商品
@@ -481,7 +482,7 @@
                         <ul class="sub-menu " role="menu">
                             <li ng-if="APP_ID_LIST.indexOf('@1140@')>=0">
                                 <a ui-sref="sys/sys/sysSetting">
-                                      系统配置
+                                    系统配置
                                 </a>
                             </li>
                             <li ng-if="APP_ID_LIST.indexOf('@1142@')>=0">
@@ -521,24 +522,24 @@
                     </a>
                     <div class="sub-menu-wrap sub-menu-top sub-menu-2 dropdown-menu">
                         <ul class="sub-menu " role="menu">
-                            <li  ng-if="APP_ID_LIST.indexOf('@1103@')>=0">
+                            <li ng-if="APP_ID_LIST.indexOf('@1103@')>=0">
                                 <a ui-sref="analysis/analysis/cardAnalysis">
                                     会员态势
                                 </a>
                             </li>
-                            <li  ng-if="APP_ID_LIST.indexOf('@1203@')>=0">
+                            <li ng-if="APP_ID_LIST.indexOf('@1203@')>=0">
                                 <a ui-sref="analysis/analysis/guestAnalysis">
                                     来客分析
                                 </a>
                             </li>
                         </ul>
                         <ul class="sub-menu " role="menu">
-                            <li  ng-if="APP_ID_LIST.indexOf('@1104@')>=0">
+                            <li ng-if="APP_ID_LIST.indexOf('@1104@')>=0">
                                 <a ui-sref="analysis/analysis/compareAnalysis">
                                     作战室
                                 </a>
                             </li>
-                            <li  ng-if="APP_ID_LIST.indexOf('@1112@')>=0">
+                            <li ng-if="APP_ID_LIST.indexOf('@1112@')>=0">
                                 <a ui-sref="analysis/analysis/liveAnalysis">
                                     直播间
                                 </a>
@@ -592,6 +593,23 @@
                         </ul>
                     </div>
                 </li>
+                <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1069@')>=0">
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       ui-sref="card/card/cardAnalysis"
+                       data-hover="dropdown">
+                        <i class="icon-settings"></i>
+                        团购
+                    </a>
+                    <div class="sub-menu-wrap sub-menu-top sub-menu-1 dropdown-menu">
+                        <ul class="sub-menu " role="menu">
+                            <li ng-if="APP_ID_LIST.indexOf('@1103@')>=0">
+                                <a ui-sref="groupbuy/groupbuy/ruleList">
+                                    规则列表
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </div>
 
@@ -637,7 +655,7 @@
 <script src="/AndSell/app/components/libs/jquery/dist/jquery.min.js"></script>
 <script src="/AndSell/app/components/libs/angular/angular.min.js"></script>
 <script
-    src="/AndSell/app/components/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+        src="/AndSell/app/components/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="/AndSell/app/components/libs/ocLazyLoad.min.js"></script>
 <script src="/AndSell/app/components/libs/angular-resource/angular-resource.min.js"></script>
 <script src="/AndSell/app/components/libs/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -656,18 +674,18 @@
 
 <script src="/AndSell/app/components/dateTime/moment.min.js"></script>
 <script
-    src="/AndSell/app/components/dateTime/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+        src="/AndSell/app/components/dateTime/bootstrap-daterangepicker/daterangepicker.min.js"></script>
 <script
-    src="/AndSell/app/components/dateTime/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+        src="/AndSell/app/components/dateTime/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script
-    src="/AndSell/app/components/dateTime/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+        src="/AndSell/app/components/dateTime/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
 <script
-    src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+        src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/AndSell/app/components/dateTime/clockface/js/clockface.js"></script>
 <script
-    src="/AndSell/app/components/dateTime/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+        src="/AndSell/app/components/dateTime/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
 <script
-    src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+        src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script src="/AndSell/app/components/dateTime/date-pickerJs.js"></script>
 <script src="/AndSell/app/components/dateTime/components-date-time-pickers.min.js"></script>
 
@@ -714,6 +732,7 @@
 <script src="/AndSell/app/user/user-router.js"></script><!--管理员相关路由中心-->
 <script src="/AndSell/app/analysis/analysis-router.js"></script><!--数据分析相关路由-->
 <script src="/AndSell/app/sys/sys-router.js"></script><!--系统设置相关路由-->
+<script src="/AndSell/app/groupbuy/groupbuy-router.js"></script><!--团购相关路由-->
 
 
 <!--############service集合区############-->
@@ -745,7 +764,7 @@
 <script src="/AndSell/app/analysis/analysis/analysis-service.js"></script><!--数据分析-->
 <script src="/AndSell/app/sys/sys/sys-services.js"></script><!--数据分析-->
 <script src="/AndSell/app/sys/advice/advice-services.js"></script><!--数据分析-->
-
+<script src="/AndSell/app/groupbuy/groupbuy/groupbuy-service.js"></script><!--团购相关-->
 <!--############controller集合区(以后尝试 切换时注入)############-->
 <script src="main_controller.js"></script>
 

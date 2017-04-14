@@ -9,7 +9,7 @@
                 <div class="swiper-slide" ng-repeat="item in homeList" active="item.active">
                     <a ng-href="{{item['BANNER.URL']}}" ng-if="item['is_show']==true">
                         <img
-                            ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
+                                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}">
                     </a>
                 </div>
             </div>
@@ -51,10 +51,11 @@
     </div>
     <!-- END 导航 -->
 
-    <!-- 限时抢购 -->
+    <!--团购-->
     <div class="limit" style="border-bottom: 1px solid #d6d6d6">
         <a>
-            <img src="" style="    width: 7rem;height: 7rem;margin: 10px;"></a>
+            <img src="http://upload.ddrjz.com/picture/0122/14534225761_big.jpg"
+                 style="    width: 7rem;height: 7rem;margin: 10px;"></a>
         <div
                 style="display: inline-block;vertical-align: top;margin-top: 12px;font-size: 12px; width: calc(100% - 10em);">
             <div style="width: 100%;    height: 22px;  background-color: #eaeaea; border-radius: 15px;line-height: 22px;">
@@ -62,44 +63,46 @@
                      src="../../public/img/limit.png" alt="">
                 距结束:
                 <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
-    line-height: 17px;">23</span>
+    line-height: 17px;" >10</span>
                 <span>时</span>
                 <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
-    line-height: 17px;">34</span>
+    line-height: 17px;" >9</span>
                 <span>分</span>
                 <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
-    line-height: 17px;">34</span>
+    line-height: 17px;" >8</span>
                 <span>秒</span>
             </div>
-            <p style="margin-top: 14px; margin-bottom: 15px;">33魂牵梦萦奇才</p>
+            <p style="margin-top: 14px; margin-bottom: 15px;">来啊快活啊</p>
             <span style="font-size: 12px;color: #f46f1a">￥434</span>
             <span style="font-size: 12px;color: #d6d6d6;text-decoration: line-through;"
-                 ></span>
+            ></span>
             <a class="btn btn-buy" style="    width: 75px;    height: 28px;   background-color: #f46f1a;    color: white;   font-size: 12px;    line-height: 15px;
      margin-top: -12px;  float: right;">去参团</a>
         </div>
 
     </div>
+    <!-- 限时抢购 -->
     <div class="limit" style="border-bottom: 1px solid #d6d6d6"
          ng-repeat="(index,seckill) in seckillList">
         <a ng-href="{{item['BANNER.URL']}}">
             <img src="" style="    width: 7rem;height: 7rem;margin: 10px;"
                  ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['sku_id']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"></a>
         <div
-            style="display: inline-block;vertical-align: top;margin-top: 12px;font-size: 12px; width: calc(100% - 10em);" ng-if="seckill['type']=='time'||seckill['type']=='timeAndNum'">
+                style="display: inline-block;vertical-align: top;margin-top: 12px;font-size: 12px; width: calc(100% - 10em);"
+                ng-if="seckill['type']=='time'||seckill['type']=='timeAndNum'">
             <div
-                style="width: 100%;    height: 22px;  background-color: #eaeaea; border-radius: 15px;line-height: 22px;"
-                >
+                    style="width: 100%;    height: 22px;  background-color: #eaeaea; border-radius: 15px;line-height: 22px;"
+            >
                 <img style="width: 10px;height: 10px;    margin-left: 8px;"
                      src="../../public/img/limit.png" alt="">
                 距结束:
-        <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
+                <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
     line-height: 17px;" id="hour{{index}}"></span>
                 <span>时</span>
-        <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
+                <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
     line-height: 17px;" id="min{{index}}"></span>
                 <span>分</span>
-        <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
+                <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
     line-height: 17px;" id="sec{{index}}"></span>
                 <span>秒</span>
             </div>
@@ -113,8 +116,8 @@
      margin-top: -12px;  float: right;" ng-click="goSeckill(seckill)">立即抢购</a>
         </div>
         <div
-            style="display: inline-block;vertical-align: top;margin-top: 12px;font-size: 12px; width: calc(100% - 10em);"
-            ng-if="seckill['type']=='num'">
+                style="display: inline-block;vertical-align: top;margin-top: 12px;font-size: 12px; width: calc(100% - 10em);"
+                ng-if="seckill['type']=='num'">
             <p style="margin-top: 14px; margin-bottom: 15px;"
                ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT.PRD_NAME']"></p>
             <span style="font-size: 12px;color: #f46f1a" ng-bind="seckill['unit_price']/100|currency : '￥'"></span>
@@ -139,8 +142,8 @@
         <div class="headTitle" ng-if="activityList.length>0">活动专区</div>
         <div class="product-content" ng-repeat="item in activityList">
             <a ng-if="item['is_show']==true" ng-href="{{item['BANNER.URL']}}"><img
-                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-                style="height: auto;width: 100%;"></a>
+                    ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
+                    style="height: auto;width: 100%;"></a>
         </div>
 
         <!-- BEGIN 今日推荐 -->
@@ -160,8 +163,8 @@
                     <li>
                         <a ng-repeat="item in recommendList" ng-href="{{item['BANNER.URL']}}"
                            ng-if="item['is_show']==true"><img
-                            ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-                            style="min-height: 189px"></a>
+                                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
+                                style="min-height: 189px"></a>
                         <div class="thumbnail-list list-unstyled flexbox">
                             <div class="cell" ng-repeat=" item in tagProductList['1035']"
                                  ui-sref="pages/product/detail({PRD_ID:item['SHOP_PRODUCT.PRD_ID']})">
@@ -169,8 +172,8 @@
                                         ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
                                 <div class="desc">
                                     <p><a ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></a></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                    <span class="price"
+                                          ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
                                 </div>
                             </div>
                         </div>
@@ -178,7 +181,7 @@
                     <li>
                         <a ng-repeat="item in recommNineList" ng-href="{{item['BANNER.URL']}}"
                            ng-if="item['is_show']==true"><img
-                            ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"></a>
+                                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"></a>
                     </li>
                 </ul>
             </div>
@@ -204,8 +207,8 @@
                     <li ng-repeat="item in itemList.content" ng-if="item['is_show']==true">
                         <a ng-href="{{item['BANNER.URL']}}">
                             <img
-                                ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-                                class="weui_cells" style="height: auto;">
+                                    ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
+                                    class="weui_cells" style="height: auto;">
                         </a>
 
                         <ul class="thumbnail-list list-unstyled flexbox"
@@ -216,8 +219,8 @@
                                         ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
                                 <div class="desc">
                                     <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                    <span class="price"
+                                          ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
                                 </div>
                             </li>
                         </ul>
@@ -229,8 +232,8 @@
                                         ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
                                 <div class="desc">
                                     <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                    <span class="price"
+                                          ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
                                 </div>
                             </li>
                         </ul>
@@ -242,8 +245,8 @@
                                         ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
                                 <div class="desc">
                                     <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                    <span class="price"
+                                          ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
                                 </div>
                             </li>
                         </ul>
@@ -255,8 +258,8 @@
                                         ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
                                 <div class="desc">
                                     <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                    <span class="price"
+                                          ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
                                 </div>
                             </li>
                         </ul>
@@ -268,8 +271,8 @@
                                         ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
                                 <div class="desc">
                                     <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                    <span class="price"
+                                          ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
                                 </div>
                             </li>
                         </ul>
@@ -281,8 +284,8 @@
                                         ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
                                 <div class="desc">
                                     <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                    <span class="price"
+                                          ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
                                 </div>
                             </li>
                         </ul>
@@ -294,8 +297,8 @@
                                         ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
                                 <div class="desc">
                                     <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                    <span class="price"
+                                          ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
                                 </div>
                             </li>
                         </ul>
@@ -307,8 +310,8 @@
                                         ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
                                 <div class="desc">
                                     <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                    <span class="price"
+                                          ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
                                 </div>
                             </li>
                         </ul>
@@ -320,8 +323,8 @@
                                         ng-src="{{FILE_SERVER_DOMAIN+item['SHOP_PRODUCT.CMP']}}"></a>
                                 <div class="desc">
                                     <p ng-bind="item['SHOP_PRODUCT.PRD_NAME']"></p>
-                  <span class="price"
-                        ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
+                                    <span class="price"
+                                          ng-bind="item['SHOP_PRODUCT.MINSKUPRICE'] | currency : '￥' "></span>
                                 </div>
                             </li>
                         </ul>
