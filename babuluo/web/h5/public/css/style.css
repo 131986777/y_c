@@ -3007,3 +3007,119 @@ p {
     position: relative;
     left: -90px;
 }
+/*团购*/
+@media (device-height:568px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone5 */
+    .group-wrap .groups .eachgroup .group-pos{
+        margin-top: -34px;
+    }
+}
+.orange{
+    color:#ff630d;
+}
+.colorgray{
+    color:#666;
+}
+.group-wrap .group-money{
+    font-size: 14px;
+}
+.group-wrap .groupTilte{
+    font-size: 17px;
+    color:#333;
+}
+.group-wrap .groupNum{
+    float: right;
+    font-size:14px;
+    margin-top: 15px;
+}
+.group-wrap .num{
+   margin:0px 5px 0 5px;
+}
+.group-wrap .groupNum .group-btn{
+    width: 22px;
+    height: 22px;
+    line-height: 0px;
+    text-align: center;
+    background-color: #fff;
+    color: #1da2ff;
+    font-size: 22px;
+    border: none;
+    border: 1px solid #1da2ff;
+    border-radius: 3px;
+}
+.group-wrap .groupNum .group-btn:focus{
+   outline:none;
+}
+.group-wrap .groupNum .numColor{
+    color:#fff;
+    background-color: #1da2ff;
+}
+.group-wrap .group-tishi{
+    font-size: 14px;
+    color:#666;
+    background-color: #fcf1e5;
+    padding: 17px;
+    margin-bottom: 10px;
+}
+.group-wrap .groups{
+ background-color: #fff;
+}
+.group-wrap .groups .groups-nav{
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #d6d6d6;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+.group-wrap .groups .eachgroup{
+    padding: 17px 10px 20px 10px;
+    font-size: 14px;
+    color: #333;
+    height: 70px;
+    border-bottom: 1px solid #d6d6d6;
+}
+.group-wrap .groups .eachgroup:last-child{
+   border:none;
+}
+.group-wrap .groups .eachgroup .group-img{
+    width:33px;
+    height:33px;
+    margin-right: 10px;
+}
+.group-wrap .groups .eachgroup .group-pos{
+    text-align: right;
+    display: inline-block;
+    float: right;
+}
+.group-wrap .groups .eachgroup .group-over{
+    display: inline-block;
+    margin-left: 9px;
+    /* padding-top: 10px; */
+    vertical-align: middle;
+}
+.group-wrap .groups .eachgroup .group-over .group-cha{
+   text-align: right;
+    margin-bottom: 5px;
+}
+.group-wrap .groups .eachgroup .group-over .grouptime{
+    font-size: 12px;
+}
+.group-sign{
+    width: 55px;
+    height: 30px;
+    background-color: #1da2ff;
+    color: #fff;
+    text-align: center;
+    line-height: 30px;
+    outline: none;
+    border-radius: 3px;
+    border: none;
+    font-size: 12px;
+    margin-left: 15px;
+}
+.kaiBtn{
+    width:100%!important;
+    height: 45px!important;
+    line-height: 45px!important;
+    margin-left: 0px!important;
+}

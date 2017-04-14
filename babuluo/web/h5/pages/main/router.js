@@ -47,7 +47,7 @@ $import('pages/security/resetPwd');
 
 $import('pages/order/addSeckill');
 
-
-
-
-
+$import('pages/groupBuy/myGroup');
+$import('pages/groupBuy/inviteGroup');
+$import('pages/groupBuy/moreGroup');
+$import('pages/groupBuy/ownGroup');

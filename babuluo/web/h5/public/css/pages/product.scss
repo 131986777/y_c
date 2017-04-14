@@ -12,7 +12,7 @@
     -moz-box-orient: vertical;
     flex-direction: column;
 
-    > .weui_navbar_item {
+    .weui_navbar_item {
         @include border(top);
 
         color: $colorBase;
@@ -24,7 +24,7 @@
         }
     }
 
-    > .weui_bar_item_on {
+     .weui_bar_item_on {
         color: #fff;
         background-color: $colorDefault;
     }
