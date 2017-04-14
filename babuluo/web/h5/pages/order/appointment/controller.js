@@ -292,6 +292,15 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             return;
         }
 
+        if($scope.cookiePickupPerson.man==undefined||$scope.cookiePickupPerson.phone==undefined){
+            weUI.toast.error('提货信息不全！');
+            return;
+        }
+        if($scope.cookiePickupPerson.man.trim()==''||($scope.cookiePickupPerson.man+'').trim()==''){
+            weUI.toast.error('提货信息不全！');
+            return;
+        }
+
         if ($scope.commitClick) {
             $scope.commitClick = false;
             weUI.toast.showLoading('正在下单');

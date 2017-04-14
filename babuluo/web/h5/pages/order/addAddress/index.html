@@ -31,7 +31,7 @@
                         <select class="weui_select" ng-model="addressType">
                             <!--<option value="0">提货方式</option>-->
                             <option value="3">门店自提</option>
-                            <option value="1">快递收货</option>
+                            <option value="1" ng-if="fromType=='SECKILL'">快递收货</option>
                         </select>
                     </div>
                 </div>

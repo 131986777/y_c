@@ -10,6 +10,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
 
         $scope.shop = JSON.parse(getCookie('currentShopInfo'))['SHOP.SHOP_NAME'];
 
+        $scope.fromType=$stateParams.TYPE;
+        console.log("fromType : "+$scope.fromType);
         var param = {
             'APPOINTMENT_PRODUCT.SKU_ID': $stateParams.SKU_IDS
         };
