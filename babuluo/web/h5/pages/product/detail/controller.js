@@ -50,6 +50,9 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
                     $scope.skuList = $scope.product['SHOP_PRODUCT.SKU_LIST'];
 
                     $scope.nowPrice = $scope.skuList[0]['SHOP_PRODUCT_SKU.REAL_PRICES'];
+                    if ($scope.skuList[0]['SHOP_PRODUCT_SKU.MODEL'] == 'APPOINTMENT') {
+                        $scope.oldPrice = $scope.skuList[0]['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'];
+                    }
                     //var skulistsForOrder = new Array;
                     //$scope.skuList.forEach(function (ele) {
                     //    ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] =
@@ -164,8 +167,8 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
             }
             $scope.planUnitVO = unit;
             if (unit['afterSumPrice'] < unit['beforeSumPrice']) {
-                $scope.oldPrice = $scope.nowPrice
-                $scope.nowPrice = unit['afterSumPrice'] / 100
+                $scope.oldPrice = $scope.nowPrice;
+                $scope.nowPrice = unit['afterSumPrice'] / 100;
             }
         })
     }
@@ -559,7 +562,6 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
             weUI.toast.ok("取消收藏成功");
         }
     };
-
 
     var swiper = new Swiper('.swiper-container', {
         paginationClickable: true,

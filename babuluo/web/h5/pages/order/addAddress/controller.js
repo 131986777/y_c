@@ -103,8 +103,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
             shengshi: $scope.area,
             address: $scope.address,
             getTime: $("#datetime-picker")[0].value,
-            skuIds:$stateParams.SKU_IDS,
-            currDay:GetDateStr(0)
+            skuIds: $stateParams.SKU_IDS,
+            currDay: GetDateStr(0)
         };
         console.log($scope.PickupPerson);
         if ($scope.appointment) {
@@ -117,7 +117,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
 
     function getDate(item) {
 
-        var endDay = item['APPOINTMENT_PRODUCT.END_DAY'];
+        var endHours = item['APPOINTMENT_PRODUCT.END_DAY'];//下单间隔小时
         var type = item['APPOINTMENT_PRODUCT.TIME_TYPE'];
         var still = item['APPOINTMENT_PRODUCT.STILL_DAY'];
         var startTime = item['APPOINTMENT_PRODUCT.START_TIME'];
@@ -125,12 +125,23 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
         var dayList = new Array;
         if (type == 'WEEK') {
             var currTime = new Date().getDay();
+            var currHours = new Date().getHours();
+            var endDay = Math.ceil(Number(endHours / 24));
             if (currTime == 0) {
                 currTime = 7;//周日
             }
-
-            if (startTime - currTime > endDay) {
+            if ((startTime - currTime) > endDay) {
                 next = false;
+            } else {
+                if ((startTime - currTime) > (endDay - 1)) {
+                    if ((24 - currHours) > (endHours - (endDay - 1) * 24)) {
+                        next = false;
+                    } else {
+                        next = true;
+                    }
+                } else {
+                    next = true;
+                }
             }
             var day;
 
