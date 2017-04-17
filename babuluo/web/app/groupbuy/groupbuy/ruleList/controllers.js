@@ -197,7 +197,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         todayHighlight: true,
         weekStart: 1,
         startView: 2,
-        format: 'yyyy/mm/dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii:00',
         todayBtn: 'linked'
     }).on("hide", function () {
         var $this = $(this);
@@ -215,7 +215,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         autoclose: true,
         todayHighlight: true,
         weekStart: 1,
-        format: 'yyyy/mm/dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii:00',
         todayBtn: 'linked',
     }).on("hide", function () {
         var $this = $(this);
@@ -235,7 +235,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         todayHighlight: true,
         weekStart: 1,
         startView: 2,
-        format: 'yyyy/mm/dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii:00',
         todayBtn: 'linked'
     }).on("hide", function () {
         var $this = $(this);
@@ -253,7 +253,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         autoclose: true,
         todayHighlight: true,
         weekStart: 1,
-        format: 'yyyy/mm/dd hh:ii',
+        format: 'yyyy-mm-dd hh:ii:00',
         todayBtn: 'linked',
     }).on("hide", function () {
         var $this = $(this);
