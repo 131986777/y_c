@@ -1,4 +1,4 @@
-<div class="bg-grey product-detail-page group-wrap">
+<div class="bg-grey product-detail-page group-wrap" ng-init="initPage()">
     <!-- BEGIN 商品详情图片 -->
     <div class="weui_navbar" style="background-color: #fff;">
         <div class="weui_cell" style="width: 100%;">
@@ -11,11 +11,10 @@
     </div>
     <div class="swiper-container" style="height: 306px;width: 100%;">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" ng-repeat="slide in slides">
+            <div class="swiper-slide" ng-repeat="img in imgList  track by $index">
                 <a>
-                    <img
-                            ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
-                            style="height: 100%;width: 100%;">
+                    <img ng-src="http://bbl-upload.oss-cn-shanghai.aliyuncs.com/{{img}}"
+                         style="height: 100%;width: 100%;">
                 </a>
             </div>
         </div>
@@ -35,7 +34,7 @@
                     <span style="font-size:25px;">￥123.00</span>
                     <!--原价-->
                     <!--ng-if="sku!=undefined&&sku['isSale']"-->
-                    <span  class="del-line" style="font-size: 13px;">￥399.00</span>
+                    <span class="del-line" style="font-size: 13px;">￥399.00</span>
 
                 </p>
                 <div class="groupNum">
@@ -93,7 +92,9 @@
             </div>
 
         </div>
-        <div class="checkall">查看全部团 <div class="check_ft"></div></div>
+        <div class="checkall">查看全部团
+            <div class="check_ft"></div>
+        </div>
     </div>
     <div class="weui_tab tab-default pro-detail">
         <div class="weui_navbar" style="background-color: #fff;">
@@ -131,13 +132,13 @@
     <div class="product-action-wrap action-bar-wrap"
          ng-if="sku['SHOP_PRODUCT_SKU.MODEL']!='NORMAL'">
         <div class="action-bar border-top">
-            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'" ng-click="toAppointment()">
+            <a class="add-to-cart cell" ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'" ng-click="toAppointment()">
                 去预约
             </a>
-            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='TUANGOU'" ng-click="toAppointment()">
+            <a class="add-to-cart cell" ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='TUANGOU'" ng-click="toAppointment()">
                 参加团购
             </a>
-            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='QIANGGOU'" ng-click="toAppointment()">
+            <a class="add-to-cart cell" ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='QIANGGOU'" ng-click="toAppointment()">
                 限时抢购
             </a>
         </div>

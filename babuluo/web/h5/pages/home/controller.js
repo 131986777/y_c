@@ -466,10 +466,15 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         })
     }
     $scope.goGbp = function (gbp) {
-        var json = JSON.stringify(gbp);
-        setCookie('GBP', json);
-        w.terminate();
-        $state.go('pages/groupBuy/groupDetail');
+        setCookie('GBP', JSON.stringify(gbp));
+        setCookie("GBP_PRD", JSON.stringify($scope.groupPrdMap[gbp['GROUP_BUY_PLAN.SKU_ID']]))
+        gw.terminate();
+        if (gbp['GROUP_BUY_PLAN.TYPE'] == 'MANAGE') {
+            $state.go('pages/groupBuy/moreGroup');
+        } else if (gbp['GROUP_BUY_PLAN.TYPE'] == 'MEMBER') {
+            $state.go('pages/groupBuy/myGroup');
+        }
+
     }
 });
 
