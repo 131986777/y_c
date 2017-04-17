@@ -1,7 +1,7 @@
 <!--BEGIN actionSheet-->
-<div id=" actionSheet_wrap " >
+<div id=" actionSheet_wrap ">
     <div class="weui_mask_transition" id="mask"></div>
-    <div class="weui_actionsheet" id="weui_actionsheet">
+    <div class="weui_actionsheet" id="weui_actionsheet"  style="max-height: 500px;overflow-y: scroll">
         <span ng-if="cardList.length==0" class="no-coupon">你暂无会员卡！</span>
         <div ng-repeat="cl in cardList" class="weui_cell" ng-click="switchCard(cl)">
             <div class="weui_cell_hd">
@@ -42,7 +42,7 @@
             </div>
         </div>
         <div class="action-bar">
-            <div class="weui_actionsheet_cell cell ok add-to-cart" ng-click="chooseCard()">确定</div>
+            <div class="weui_actionsheet_cell cell ok add-to-cart" ng-click="chooseCard()">选择该卡</div>
         </div>
     </div>
 </div>

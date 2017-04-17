@@ -4,26 +4,30 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title ng-bind="title"></title>
 
     <!--############CSS引用区############-->
     <link href="/AndSell/app/components/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/AndSell/app/components/libs/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
-    <link href="/AndSell/app/components/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/AndSell/app/components/libs/bootstrap/dist/css/bootstrap-theme.min.css"
+          rel="stylesheet">
+    <link href="/AndSell/app/components/libs/font-awesome/css/font-awesome.min.css"
+          rel="stylesheet">
     <!--
         <link rel="stylesheet" type="text/css" media="all" href="daterangepicker-bs3.css" />
     -->
     <link href="/AndSell/app/components/libs/iconfont/iconfont.css" rel="stylesheet">
 
     <!--时间选择-->
-    <link href="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
     <!--表单验证-->
     <link href="/AndSell/app/components/form-validator/bootstrapValidator.min.css" rel="stylesheet">
     <!--标签输入框样式-->
     <link href="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.css" rel="stylesheet">
-    <link href="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.bootstrap.css" rel="stylesheet">
+    <link href="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.bootstrap.css"
+          rel="stylesheet">
     <link href="/AndSell/app/components/libs/simple-line-icons/simple-line-icons.min.css"
           rel="stylesheet">
     <link href="/AndSell/app/components/libs/angular/angularBlockUI/angular-block-ui.css"
@@ -47,8 +51,6 @@
             src="http://webapi.amap.com/maps?v=1.3&key=ef5bbbdf7bca82910095f043224c0138&plugin=AMap.Autocomplete"></script>
 
 
-
-
 </head>
 
 <body>
@@ -58,78 +60,80 @@
     <div class="container-fluid">
         <form class="navbar-form navbar-left" role="search">
             <div class="form-group input-group">
-                <!--<div class="input-group-btn">-->
-                    <!--<select class="form-control" ng-model="searchType" ng-init="searchType='product'">-->
+                <div class="input-group-btn">
+                    <!--<select class="form-control" ng-model="searchType"-->
+                            <!--ng-init="searchType='product'">-->
                         <!--<option value="product">搜商品</option>-->
                         <!--<option value="order">搜订货单</option>-->
                         <!--&lt;!&ndash;<option value="returnOrder">搜退货单</option>&ndash;&gt;-->
                         <!--<option value="member">搜客户</option>-->
                     <!--</select>-->
-                <!--</div>-->
-                <!--<input class="form-control" ng-model="searchContent" type="text" ng-keyup="queryKeyUp($event)">-->
-                <!--<div class="input-group-btn">-->
-                    <!--<button class="btn btn-default" type="button" ng-click="search()">-->
-                        <!--搜索-->
-                    <!--</button>-->
-                <!--</div>-->
+                </div>
+                <input class="form-control" ng-model="searchContent" type="text"
+                       ng-keyup="queryKeyUp($event)">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="search()">
+                        搜索
+                    </button>
+                </div>
                 <audio autoplay></audio>
             </div>
         </form>
         <ul class="nav navbar-nav navbar-right" style="margin-right:5px">
-            <!--<li class="dropdown">-->
-                <!--<a class="dropdown-toggle" data-toggle="dropdown"-->
-                   <!--data-hover="dropdown">-->
-                    <!--<i class="icon-user"></i>&nbsp;-->
-                    <!--用户-->
-                <!--</a>-->
-                <!--<ul class="dropdown-menu" role="menu">-->
-                    <!--<li>-->
-                        <!--<a ui-sref="#">-->
-                            <!--<i class="icon-user"></i>-->
-                            <!--我的信息-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="../config/passwordModify.jsp">-->
-                            <!--<i class="icon-lock"></i>-->
-                            <!--修改密码-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
-                        <!--<a href="../sys/sysSetting.jsp">-->
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"
+                   data-hover="dropdown">
+                    <i class="icon-user"></i>&nbsp;
+                    用户
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a ui-sref="#">
+                            <i class="icon-user"></i>
+                            我的信息
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../config/passwordModify.jsp">
+                            <i class="icon-lock"></i>
+                            修改密码
+                        </a>
+                    </li>
+                    <li>
+                        <!--<a ui-sref="sys/sys/sysSetting">-->
                             <!--<i class="icon-settings"></i>-->
                             <!--系统设置-->
                         <!--</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</li>-->
-            <!--<li class="dropdown">-->
-                <!--<a class="dropdown-toggle" data-toggle="dropdown"-->
-                   <!--data-hover="dropdown">-->
-                    <!--<i class="icon-heart"></i>-->
-                    <!--客服-->
-                <!--</a>-->
-                <!--<ul class="dropdown-menu" role="menu">-->
-                    <!--<li>-->
-                        <!--<a ui-sref="#">-->
-                            <!--<i class="icon-emoticon-smile"></i>-->
-                            <!--在线客服-->
-                        <!--</a>-->
-                    <!--</li>-->
-                    <!--<li>-->
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"
+                   data-hover="dropdown">
+                    <i class="icon-heart"></i>
+                    客服
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a ui-sref="#">
+                            <i class="icon-emoticon-smile"></i>
+                            在线客服
+                        </a>
+                    </li>
+                    <li>
                         <!--<a href="../config/passwordModify.jsp">-->
                             <!--<i class="icon-call-end"></i>-->
                             <!--电话 400-6565-747-->
                         <!--</a>-->
-                    <!--</li>-->
+                    </li>
                     <!--<li>-->
-                        <!--<a href="../sys/sysSetting.jsp">-->
-                            <!--<i class="icon-settings"></i>-->
-                            <!--系统设置-->
-                        <!--</a>-->
+                    <!--<a href="../sys/sysSetting.jsp">-->
+                    <!--<i class="icon-settings"></i>-->
+                    <!--系统设置-->
+                    <!--</a>-->
                     <!--</li>-->
-                <!--</ul>-->
-            <!--</li>-->
+                </ul>
+            </li>
             <li class="dropdown">
                 <a href="" ng-click="logout()">
                     <i class="icon-logout"></i>
@@ -147,153 +151,63 @@
         <div class="sidebar">
             <ul class="nav nav-sidebar nav-sidebar-default">
                 <li class="logo text-center">
-                    <img  src="../components/images/logo.png">
+                    <img src="../components/images/logo.png">
                 </li>
-                <!--<li class="dropdown">-->
-                    <!--<a ui-sref="product/product/productList" class="dropdown-toggle" data-toggle="dropdown"-->
-                       <!--data-hover="dropdown">-->
-                        <!--<i class="iconfont icon-shangpin"></i>-->
-                        <!--商品-->
-                    <!--</a>-->
-                    <!--<div class="sub-menu-wrap sub-menu-2  dropdown-menu" role="menu">-->
-                        <!--<ul class="sub-menu " role="menu">-->
-                            <!--<li class="">-->
-                                <!--<a ui-sref="product/product/productAdd">-->
-                                    <!--商品录入-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="product/product/productList">-->
-                                    <!--商品列表-->
-                                <!--</a>-->
-                            <!--</li>-->
 
-                        <!--</ul>-->
-                        <!--<ul class="sub-menu " role="menu">-->
-                            <!--<li>-->
-                                <!--<a ui-sref="product/class/classList">-->
-                                    <!--商品分类-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="product/tag/tagList">-->
-                                    <!--商品标签-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="product/unit/unitList">-->
-                                    <!--商品单位-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                <!--</li>-->
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="order/order/orderList({orderType:'3'})"
+                <li class="dropdown" >
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       ui-sref="order/order/orderList({orderType:'3'})"
                        data-hover="dropdown">
                         <i class="icon-docs"></i>
                         订单
                     </a>
                     <div class="sub-menu-wrap dropdown-menu" role="menu">
-                        <ul class="sub-menu ">
-                            <!--<li>-->
-                                <!--<a ui-sref="order/order/orderList({orderType:'1'})">-->
-                                    <!--订货单-->
-                                <!--</a>-->
+                        <ul class="sub-menu">
+                            <!--<li ng-if="APP_ID_LIST.indexOf('@1075@')>=0">-->
+                            <!--<a ui-sref="order/order/orderList({orderType:'1'})">-->
+                            <!--订货单-->
+                            <!--</a>-->
                             <!--</li>-->
-                            <li>
+                            <li >
                                 <a ui-sref="order/order/orderList({orderType:'3'})">
                                     自提单
                                 </a>
                             </li>
-                            <!--<li>-->
-                                <!--<a ui-sref="order/order/orderList({orderType:'2'})">-->
-                                    <!--退货单-->
+                            <!--<li ng-if="APP_ID_LIST.indexOf('@1077@')>=0">-->
+                                <!--<a ui-sref="order/order/refundOrder">-->
+                                    <!--退款单-->
+                                <!--</a>-->
+                                <!--&lt;!&ndash;<a ui-sref="order/order/paymentOrder">&ndash;&gt;-->
+                                <!--&lt;!&ndash;付款单&ndash;&gt;-->
+                                <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                            <!--</li>-->
+                            <!--<li ng-if="APP_ID_LIST.indexOf('@1111@')>=0">-->
+                                <!--<a ui-sref="order/order/reserveOrder({orderType:'5'})">-->
+                                    <!--分拣单-->
                                 <!--</a>-->
                             <!--</li>-->
+                            <li >
+                                <a ui-sref="order/order/appointmentOrder">
+                                    线上预约单
+                                </a>
+                            </li>
                             <!--<li>-->
-                                <!--<a ui-sref="order/order/offlineOrderList">-->
-                                    <!--线下订单-->
-                                <!--</a>-->
+                            <!--<a ui-sref="order/order/orderList({orderType:'2'})">-->
+                            <!--退货单-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<a ui-sref="order/order/offlineOrderList">-->
+                            <!--线下订单-->
+                            <!--</a>-->
                             <!--</li>-->
                         </ul>
                     </div>
                 </li>
-                <!--<li class="dropdown">-->
-                    <!--<a class="dropdown-toggle" data-toggle="dropdown" ui-sref="stock/stock/stockList"-->
-                       <!--data-hover="dropdown">-->
-                        <!--<i class="iconfont icon-kucun"></i>-->
-                        <!--库存-->
-                    <!--</a>-->
-                    <!--<div class="sub-menu-wrap dropdown-menu" role="menu">-->
-                        <!--<ul class="sub-menu ">-->
-                            <!--<li>-->
-                                <!--<a ui-sref="stock/store/storeList">-->
-                                    <!--仓库列表-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="stock/stock/stockList">-->
-                                    <!--实时库存-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                <!--</li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a class="dropdown-toggle" data-toggle="dropdown" ui-sref="member/member/memberList"-->
-                       <!--data-hover="dropdown">-->
-                        <!--<i class="icon-users"></i>-->
-                        <!--客户-->
-                    <!--</a>-->
-                    <!--<div class="sub-menu-wrap sub-menu-2 dropdown-menu">-->
-                        <!--<ul class="sub-menu " role="menu">-->
-                            <!--<li>-->
-                                <!--<a ui-sref="member/member/memberList">-->
-                                    <!--客户列表-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="member/source/sourceList">-->
-                                    <!--客户来源-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="member/group/groupList">-->
-                                    <!--客户分组-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="member/type/typeList">-->
-                                    <!--客户类型-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
 
-                        <!--<ul class="sub-menu" role="menu">-->
-                            <!--<li>-->
-                                <!--<a ui-sref="member/member/memberCoupon">-->
-                                    <!--客户优惠券-->
-                                <!--</a>-->
-                                <!--<a ui-sref="card/card/cardList">-->
-                                    <!--已开会员卡-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="card/card/cardType">-->
-                                    <!--会员卡类型-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="card/card/cardSource">-->
-                                    <!--发卡渠道-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                <!--</li>-->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" ui-sref="balance/balance/balanceList"
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       ui-sref="balance/balance/balanceList"
                        data-hover="dropdown">
                         <i class="iconfont icon-zijinyue"></i>
                         财务
@@ -313,124 +227,6 @@
                         </ul>
                     </div>
                 </li>
-                <!--<li class="dropdown">-->
-                    <!--<a class="dropdown-toggle" data-toggle="dropdown" ui-sref="marketing/coupon/coupon/couponList"-->
-                       <!--data-hover="dropdown">-->
-                        <!--<i class="icon-graph"></i>-->
-                        <!--营销-->
-
-                    <!--</a>-->
-                    <!--<div class="sub-menu-wrap sub-menu-3 dropdown-menu">-->
-                        <!--<ul class="sub-menu " role="menu">-->
-
-                            <!--<li>-->
-                                <!--<a ui-sref="marketing/sales/sales/salesList">-->
-                                    <!--交易促销-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="marketing/coupon/coupon/couponList">-->
-                                    <!--优惠券-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a href="#">-->
-                                    <!--事件营销-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-
-                        <!--<ul class="sub-menu " role="menu">-->
-                            <!--<li>-->
-                                <!--<a ui-sref="marketing/banner/banner">-->
-                                    <!--横幅-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="marketing/banner/bannerPosition">-->
-                                    <!--横幅位置-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                        <!--<ul class="sub-menu " role="menu">-->
-                            <!--<li>-->
-                                <!--<a ui-sref="marketing/sales/rule/ruleList">-->
-                                    <!--促销规则-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="marketing/coupon/rule/ruleList">-->
-                                    <!--优惠券规则-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                <!--</li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a class="dropdown-toggle" data-toggle="dropdown" ui-sref="shop/shop/shopList"-->
-                       <!--data-hover="dropdown">-->
-                        <!--<i class="icon-settings"></i>-->
-                        <!--管理-->
-                    <!--</a>-->
-                    <!--<div class="sub-menu-wrap sub-menu-3 dropdown-menu">-->
-                        <!--<ul class="sub-menu " role="menu">-->
-                            <!--<li>-->
-                                <!--<a ui-sref="shop/shop/shopList">-->
-                                    <!--门店-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="shop/shop_district/districtList">-->
-                                    <!--门店区域-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                        <!--<ul class="sub-menu " role="menu">-->
-                            <!--<li>-->
-                                <!--<a ui-sref="user/user/userList">-->
-                                    <!--员工-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a ui-sref="user/role/roleList">-->
-                                    <!--角色-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                        <!--<ul class="sub-menu " role="menu">-->
-                            <!--<li>-->
-                                <!--<a href="#">-->
-                                    <!--操作日志-->
-                                <!--</a>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<a href="#">-->
-                                    <!--系统配置-->
-                                <!--</a>-->
-                            <!--</li>-->
-                        <!--</ul>-->
-                    <!--</div>-->
-                <!--</li>-->
-                <!--<li class="dropdown">-->
-                    <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#"-->
-                       <!--data-hover="dropdown">-->
-                        <!--<i class="icon-settings"></i>-->
-                        <!--DEMO-->
-                    <!--</a>-->
-                    <!--<div class="sub-menu-wrap dropdown-menu">-->
-                        <!--<ul class="sub-menu " role="menu">-->
-                            <!--<li>-->
-                                <!--<a ui-sref="demo-add">-->
-                                    <!--DEMO1-->
-                                <!--</a>-->
-                                <!--<a ui-sref="demoModify">-->
-                                    <!--Switch-->
-                                <!--</a>-->
-                            <!--</li>-->
-
-                        <!--</ul>-->
-                    <!--</div>-->
-                <!--</li>-->
             </ul>
         </div>
 
@@ -475,7 +271,8 @@
 
 <script src="/AndSell/app/components/libs/jquery/dist/jquery.min.js"></script>
 <script src="/AndSell/app/components/libs/angular/angular.min.js"></script>
-<script src="/AndSell/app/components/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script
+    src="/AndSell/app/components/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="/AndSell/app/components/libs/ocLazyLoad.min.js"></script>
 <script src="/AndSell/app/components/libs/angular-resource/angular-resource.min.js"></script>
 <script src="/AndSell/app/components/libs/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -483,22 +280,36 @@
 <script src="/AndSell/app/components/libs/bootstrap-fileinput/bootstrap-fileinput.js"></script>
 <script src="/AndSell/app/components/data-hover/data-hover.js"></script>
 <!--时间选择-->
-<script type="text/javascript" src="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.min.js"></script>
-<script type="text/javascript" src="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+<script type="text/javascript"
+        src="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript"
+        src="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.zh-CN.js"></script>
 <!--表单验证-->
-<script type="text/javascript" src="/AndSell/app/components/form-validator/bootstrapValidator.min.js"></script>
+<script type="text/javascript"
+        src="/AndSell/app/components/form-validator/bootstrapValidator.min.js"></script>
 <script type="text/javascript" src="/AndSell/app/components/form-validator/zh_CN.js"></script>
 
 <script src="/AndSell/app/components/dateTime/moment.min.js"></script>
-<script src="/AndSell/app/components/dateTime/bootstrap-daterangepicker/daterangepicker.min.js"></script>
-<script src="/AndSell/app/components/dateTime/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script src="/AndSell/app/components/dateTime/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
-<script src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script src="/AndSell/app/components/dateTime/clockface/js/clockface.js"></script>
-<script src="/AndSell/app/components/dateTime/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
-<script src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
 <script src="/AndSell/app/components/dateTime/date-pickerJs.js"></script>
 <script src="/AndSell/app/components/dateTime/components-date-time-pickers.min.js"></script>
+
+<!--导出数据-->
+<script src="/AndSell/app/analysis/analysis/analysis-outputexcel.js"></script>
+<!--ECharts-->
+<script type="application/javascript" src="/AndSell/app/components/libs/echarts.min.js"></script>
 
 <!-- 时间选择 -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
@@ -508,10 +319,14 @@
 <script src="/AndSell/app/components/libs/angular/angularBlockUI/angular-block-ui.js"></script>
 <script src="/AndSell/app/components/tree-list/tree-list.js"></script>
 <!-- UEDITOR 配置文件 -->
-<script type="text/javascript" src="/AndSell/app/components/libs/ueditor/ueditor.config.js"></script>
+<script type="text/javascript"
+        src="/AndSell/app/components/libs/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" src="/AndSell/app/components/libs/ueditor/ueditor.all.js"></script>
 <!--标签输入框 -->
 <script src="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.js"></script>
+
+<script src="/AndSell/app/components/libs/ngFocusIf/focusIf.min.js"></script>
+
 <!--importantJs -->
 <script src="application.js"></script>
 <!--############通用方法区############-->
@@ -532,6 +347,8 @@
 <script src="/AndSell/app/stock/stock-router.js"></script><!--库存相关路由中心-->
 <script src="/AndSell/app/marketing/marketing-router.js"></script><!--营销相关路由中心-->
 <script src="/AndSell/app/user/user-router.js"></script><!--管理员相关路由中心-->
+<script src="/AndSell/app/analysis/analysis-router.js"></script><!--数据分析相关路由-->
+<script src="/AndSell/app/sys/sys-router.js"></script><!--系统设置相关路由-->
 
 
 <!--############service集合区############-->
@@ -551,6 +368,7 @@
 <script src="/AndSell/app/stock/totalStock/totalStock-services.js"></script><!--总库存-->
 <script src="/AndSell/app/stock/store/store-services.js"></script><!--仓库-->
 <script src="/AndSell/app/marketing/coupon/coupon-services.js"></script><!--优惠券-->
+<script src="/AndSell/app/marketing/lucky/lucky-services.js"></script><!--抽奖-->
 <script src="/AndSell/app/marketing/sales/sales-services.js"></script><!--促销-->
 <script src="/AndSell/app/marketing/banner/banner-services.js"></script><!--横幅-->
 <script src="/AndSell/app/demo/demo/demo-services.js"></script><!--demo 示例使用-->
@@ -559,7 +377,9 @@
 <script src="/AndSell/app/balance/balance/balance-services.js"></script><!--资金示例使用-->
 <script src="/AndSell/app/card/card/card-services.js"></script><!--demo2 示例使用-->
 <script src="/AndSell/app/order/order/order-services.js"></script><!--demo2 示例使用-->
-<script src="/AndSell/app/login/login-services.js"></script><!--demo2 示例使用-->
+<script src="/AndSell/app/analysis/analysis/analysis-service.js"></script><!--数据分析-->
+<script src="/AndSell/app/sys/sys/sys-services.js"></script><!--数据分析-->
+<script src="/AndSell/app/sys/advice/advice-services.js"></script><!--数据分析-->
 
 <!--############controller集合区(以后尝试 切换时注入)############-->
 <script src="main_controller.js"></script>
@@ -567,10 +387,6 @@
 <script src="/AndSell/app/demo/demo/demoAdd/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/demo/demo/demoList/controllers.js"></script><!--demoList 示例使用-->
 <script src="/AndSell/app/demo/demo/demoModify/controllers.js"></script><!--demoModify 示例使用-->
-
-<!--语音订单提醒-->
-<script src="/AndSell/app/main/orderLongPolling.js"></script>
-
 
 </body>
 </html>

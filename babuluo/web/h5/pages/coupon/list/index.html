@@ -22,7 +22,7 @@
         <div class="coupon-detail">
             <div class="coupon-desc">
                 <p class="limit-time">
-                    <span ng-if="item['COUPON.USE_TIME_CYCLE']=='0,0,0,0,0,0,0'">不限定使用时间</span>
+                    <span ng-if="item['COUPON.USE_TIME_CYCLE']=='0,0,0,0,0,0,0'">正价商品可用</span>
                     <span ng-if="item['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">限定时间(每周</span>
                     <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
                     <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
