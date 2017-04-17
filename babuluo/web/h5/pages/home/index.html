@@ -52,34 +52,36 @@
     <!-- END 导航 -->
 
     <!--团购-->
-    <div class="limit" style="border-bottom: 1px solid #d6d6d6">
-        <a>
-            <img src="http://upload.ddrjz.com/picture/0122/14534225761_big.jpg"
-                 style="    width: 7rem;height: 7rem;margin: 10px;"></a>
-        <div
-                style="display: inline-block;vertical-align: top;margin-top: 12px;font-size: 12px; width: calc(100% - 10em);">
+    <div class="limit" style="border-bottom: 1px solid #d6d6d6" ng-show="showGbp"
+         ng-repeat="(index,GBP) in groupBuyPlanList">
+        <a ng-href="{{item['BANNER.URL']}}">
+            <img src="" style="    width: 7rem;height: 7rem;margin: 10px;"
+                 ng-src="{{FILE_SERVER_DOMAIN+groupPrdMap[GBP['GROUP_BUY_PLAN.SKU_ID']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">
+        </a>
+        <div style="display: inline-block;vertical-align: top;margin-top: 12px;font-size: 12px; width: calc(100% - 10em);">
             <div style="width: 100%;    height: 22px;  background-color: #eaeaea; border-radius: 15px;line-height: 22px;">
                 <img style="width: 10px;height: 10px;    margin-left: 8px;"
                      src="../../public/img/limit.png" alt="">
                 距结束:
                 <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
-    line-height: 17px;" >10</span>
+    line-height: 17px;" id="gbpHour{{index}}"></span>
                 <span>时</span>
                 <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
-    line-height: 17px;" >9</span>
+    line-height: 17px;" id="gbpMin{{index}}"></span>
                 <span>分</span>
                 <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
-    line-height: 17px;" >8</span>
+    line-height: 17px;" id="gbpSec{{index}}"></span>
                 <span>秒</span>
             </div>
-            <p style="margin-top: 14px; margin-bottom: 15px;">来啊快活啊</p>
-            <span style="font-size: 12px;color: #f46f1a">￥434</span>
+            <p style="margin-top: 14px; margin-bottom: 15px;"
+               ng-bind="groupPrdMap[GBP['GROUP_BUY_PLAN.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']"></p>
+            <span style="font-size: 12px;color: #f46f1a"
+                  ng-bind="GBP['GROUP_BUY_PLAN.GROUP_PRICE'] |currency : '￥'"></span>
             <span style="font-size: 12px;color: #d6d6d6;text-decoration: line-through;"
             ></span>
             <a class="btn btn-buy" style="    width: 75px;    height: 28px;   background-color: #f46f1a;    color: white;   font-size: 12px;    line-height: 15px;
-     margin-top: -12px;  float: right;">去参团</a>
+     margin-top: -12px;  float: right;" ng-click="goGbp(GBP)">去参团</a>
         </div>
-
     </div>
     <!-- 限时抢购 -->
     <div class="limit" style="border-bottom: 1px solid #d6d6d6"

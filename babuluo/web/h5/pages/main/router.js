@@ -53,4 +53,4 @@ $import('pages/groupBuy/moreGroup');
 $import('pages/groupBuy/ownGroup');
 $import('pages/groupBuy/allGroup');
 $import('pages/groupBuy/allGroupper');
-$import('pages/groupBuy/groupDeatil');
+$import('pages/groupBuy/groupDetail');
