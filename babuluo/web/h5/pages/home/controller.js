@@ -462,7 +462,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         var json = JSON.stringify(gbp);
         setCookie('GBP', json);
         w.terminate();
-        $state.go('pages/groupBuy/allGroup');
+        $state.go('pages/groupBuy/groupDetail');
     }
 });
 
