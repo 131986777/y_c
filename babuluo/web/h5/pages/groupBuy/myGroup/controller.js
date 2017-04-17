@@ -1,6 +1,5 @@
 angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller', function ($interval, $scope, $state, weUI, modalFactory, groupBuyMemberFactory, groupBuyGroupFactory, shopFactory, weUI) {
     modalFactory.setTitle("团购详情");
-
     $scope.initPage = function () {
         var gbp = getCookie("GBP");
         var gbpPrd = getCookie("GBP_PRD");
@@ -10,28 +9,40 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
         getImgURIS($scope.GBP_PRD)
     }
 
-    $scope.imgList = new Array();
+    $scope.slides = new Array();
     function getImgURIS(prdDetail) {
-        if (prdDetail['SHOP_PRODUCT.CMP'] != null) {
-            $scope.imgList.push(prdDetail['SHOP_PRODUCT.CMP']);
+        // 添加轮播图源
+        if (prdDetail['SHOP_PRODUCT.CMP'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prdDetail['SHOP_PRODUCT.CMP']});
         }
-        if (prdDetail['SHOP_PRODUCT.P1'] != null) {
-            $scope.imgList.push(prdDetail['SHOP_PRODUCT.CMP']);
+        if (prdDetail['SHOP_PRODUCT.P1'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prdDetail['SHOP_PRODUCT.P1']});
         }
-        if (prdDetail['SHOP_PRODUCT.P2'] != null) {
-            $scope.imgList.push(prdDetail['SHOP_PRODUCT.CMP']);
+        if (prdDetail['SHOP_PRODUCT.P2'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prdDetail['SHOP_PRODUCT.P2']});
         }
-        if (prdDetail['SHOP_PRODUCT.P3'] != null) {
-            $scope.imgList.push(prdDetail['SHOP_PRODUCT.CMP']);
+        if (prdDetail['SHOP_PRODUCT.P3'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prdDetail['SHOP_PRODUCT.P3']});
         }
-        if (prdDetail['SHOP_PRODUCT.P4'] != null) {
-            $scope.imgList.push(prdDetail['SHOP_PRODUCT.CMP']);
+        if (prdDetail['SHOP_PRODUCT.P4'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prdDetail['SHOP_PRODUCT.P4']});
         }
-        if (prdDetail['SHOP_PRODUCT.P5'] != null) {
-            $scope.imgList.push(prdDetail['SHOP_PRODUCT.CMP']);
+        if (prdDetail['SHOP_PRODUCT.P5'] != undefined) {
+            $scope.slides.push({image: FILE_SERVER_DOMAIN + prdDetail['SHOP_PRODUCT.P5']});
         }
     }
 
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        spaceBetween: 300,
+        centeredSlides: true,
+        autoplay: 4500,
+        autoplayDisableOnInteraction: false,
+        observer: true,
+        observeParents: true,
+        autoplayDisableOnInteraction: false
+    });
     $scope.gbgList = [];
     function getGbgList(gbpId) {
         groupBuyGroupFactory.getAllGroupByGbpId({"GROUP_BUY_GROUP.GROUP_BUY_PLAN_ID": gbpId}, function (response) {
@@ -55,4 +66,22 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
             $scope.gbmList = response.data;
         })
     }
+
+    $scope.showDetail = false;
+    $scope.clickDetail = function () {
+        if ($scope.showDetail) {
+            $scope.showDetail = false;
+        } else {
+            $scope.showDetail = true;
+        }
+    }
+    var swiper = new Swiper('.swiper-container', {
+        paginationClickable: true,
+        spaceBetween: 300,
+        centeredSlides: true,
+        autoplay: 3500,
+        autoplayDisableOnInteraction: false,
+        observer: true,
+        observeParents: true
+    });
 });

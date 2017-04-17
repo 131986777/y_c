@@ -26,7 +26,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
     $scope.initData = function () {
         $scope.STORE_ID = 0;
-        $scope.queryAllGroupBuyPlanByState();
+
         if (getCookie('currentShop') != undefined) {
 
             $scope.shopInfo_Cookie = ToJson(getCookie('currentShopInfo'));
@@ -155,6 +155,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                     }
                 });
             }
+            $scope.queryAllGroupBuyPlanByState();
         });//
 
         // 设置轮播图图片间隔
@@ -397,9 +398,9 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             $scope.groupBuyPlanList = response.data;
             if ($scope.groupBuyPlanList.length > 0) {
                 $scope.showGbp = true;
+                $scope.queryPrdByGroupBuyPlan();
+                startWorkerByGbp()
             }
-            $scope.queryPrdByGroupBuyPlan();
-            startWorkerByGbp()
         }, function (response) {
             alert("请求团购商品失败。")
         })
@@ -447,7 +448,10 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     $scope.initDataByGroupBuyPlan = function () {
         $scope.groupBuyPlanList.forEach(function (ele, index) {
             if (ele['GROUP_BUY_PLAN.STATE'] == 'IN_SALE') {
-                var end = new Date(ele['GROUP_BUY_PLAN.END_DATETIME']).getTime();
+                var tempDate = ele['GROUP_BUY_PLAN.END_DATETIME'];
+                var yMd = tempDate.split(" ")[0].split("-");
+                var Hms = tempDate.split(" ")[1].split(":");
+                var end = new Date(yMd[0]+'/'+yMd[1]+'/'+yMd[2]+' '+Hms[0]+':'+Hms[1]+'00').getTime();
                 var now = new Date().getTime();
                 if (end < now) {
                     ele['hour'] = '已'

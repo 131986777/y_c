@@ -52,7 +52,7 @@
     <!-- END 导航 -->
 
     <!--团购-->
-    <div class="limit" style="border-bottom: 1px solid #d6d6d6" ng-show="showGbp"
+    <div class="limit" style="margin-bottom: 10px;" ng-show="showGbp"
          ng-repeat="(index,GBP) in groupBuyPlanList">
         <a ng-href="{{item['BANNER.URL']}}">
             <img src="" style="    width: 7rem;height: 7rem;margin: 10px;"
@@ -64,13 +64,13 @@
                      src="../../public/img/limit.png" alt="">
                 距结束:
                 <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
-    line-height: 17px;" id="gbpHour{{index}}"></span>
+    line-height: 17px;" id="gbpHour{{index}}">00</span>
                 <span>时</span>
                 <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
-    line-height: 17px;" id="gbpMin{{index}}"></span>
+    line-height: 17px;" id="gbpMin{{index}}">00</span>
                 <span>分</span>
                 <span style="display:inline-block; min-width:17px;height: 17px;background-color: #5c5c5b;color: #fff;font-size: 12px;border-radius:3px;text-align: center;
-    line-height: 17px;" id="gbpSec{{index}}"></span>
+    line-height: 17px;" id="gbpSec{{index}}">00</span>
                 <span>秒</span>
             </div>
             <p style="margin-top: 14px; margin-bottom: 15px;"

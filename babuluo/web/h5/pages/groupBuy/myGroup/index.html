@@ -9,14 +9,16 @@
 
         </div>
     </div>
-    <div class="swiper-container" style="height: 306px;width: 100%;">
+    <div class="swiper-container" style="height: 306px;width: 100%;margin-top:36px;">
         <div class="swiper-wrapper">
-            <div class="swiper-slide" ng-repeat="img in imgList  track by $index">
+            <div class="swiper-slide" ng-repeat="slide in slides">
                 <a>
-                    <img ng-src="http://bbl-upload.oss-cn-shanghai.aliyuncs.com/{{img}}"
-                         style="height: 100%;width: 100%;">
+                    <img
+                            ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
+                            style="height: 100%;width: 100%;">
                 </a>
             </div>
+            L
         </div>
     </div>
 
@@ -24,23 +26,24 @@
         <div class="weui_cell">
             <div class="basic-info weui_cell_bd weui_cell_primary">
                 <h4 class="name">
-                    <span class="groupTilte">冬季阳光葵花籽黑南瓜冬季阳光葵花籽黑南瓜</span>
+                    <span class="groupTilte" ng-bind="GBP_PRD['SHOP_PRODUCT.PRD_NAME']"></span>
 
                 </h4>
 
                 <p class="money group-money" style="float: left;">
                     <!--现价-->
                     团购价
-                    <span style="font-size:25px;">￥123.00</span>
+                    <span style="font-size:25px;" ng-bind="GBP['GROUP_BUY_PLAN.GROUP_PRICE'] |currency : '￥'"></span>
                     <!--原价-->
                     <!--ng-if="sku!=undefined&&sku['isSale']"-->
-                    <span class="del-line" style="font-size: 13px;">￥399.00</span>
+                    <span class="del-line" style="font-size: 13px;"
+                          ng-bind="GBP_PRD['SHOP_PRODUCT_SKU.REAL_PRICES'] |currency : '￥'"></span>
 
                 </p>
                 <div class="groupNum">
 
                     <button class="group-btn">-</button>
-                    <span class="num">8</span>
+                    <span class="num">1</span>
                     <button class="group-btn numColor">+</button>
                 </div>
 
@@ -50,7 +53,7 @@
 
     </div>
 
-    <div class="group-tishi">支付开团并邀请3人参团，人数不足自动退款</div>
+    <div class="group-tishi">支付开团并邀请{{GBP['GROUP_BUY_PLAN.SUM_COUNT']}}人参团，人数不足自动退款</div>
     <div class="groups">
         <p class="groups-nav">以下小伙伴正在发起团购，你也可以直接参与</p>
         <div class="eachgroup">
@@ -97,18 +100,18 @@
         </div>
     </div>
     <div class="weui_tab tab-default pro-detail">
-        <div class="weui_navbar" style="background-color: #fff;">
+        <div class="weui_navbar" style="background-color: #fff;"
+        >
             <div class="weui_cell" style="width: 100%;">
-                <div style="font-size: 16px" href="#/pages/order/list/all">
+                <div style="font-size: 16px" ui-sref="pages/product/detail({'PRD_ID':GBP_PRD['SHOP_PRODUCT.PRD_ID']})">
                     商品详情
                 </div>
                 <div class="weui_cell_ft"></div>
             </div>
         </div>
 
-
     </div>
-    <div class="kaiBtn group-sign">开团：￥1999.00</div>
+    <div class="kaiBtn group-sign">开团：{{GBP['GROUP_BUY_PLAN.GROUP_PRICE'] |currency : '￥'}}</div>
     <div class="product-action-wrap action-bar-wrap"
          ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='NORMAL'">
         <div class="action-bar border-top">
