@@ -52,7 +52,8 @@
     <!-- END 导航 -->
 
     <!--团购-->
-    <div class="limit" style="border-bottom: 1px solid #d6d6d6" ng-repeat="(index,GBP) in groupBuyPlanList">
+    <div class="limit" style="border-bottom: 1px solid #d6d6d6" ng-show="showGbp"
+         ng-repeat="(index,GBP) in groupBuyPlanList">
         <a ng-href="{{item['BANNER.URL']}}">
             <img src="" style="    width: 7rem;height: 7rem;margin: 10px;"
                  ng-src="{{FILE_SERVER_DOMAIN+groupPrdMap[GBP['GROUP_BUY_PLAN.SKU_ID']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220">

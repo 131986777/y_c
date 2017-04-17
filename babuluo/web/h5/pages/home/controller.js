@@ -26,7 +26,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
 
     $scope.initData = function () {
         $scope.STORE_ID = 0;
-
+        $scope.queryAllGroupBuyPlanByState();
         if (getCookie('currentShop') != undefined) {
 
             $scope.shopInfo_Cookie = ToJson(getCookie('currentShopInfo'));
@@ -155,7 +155,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                     }
                 });
             }
-            $scope.queryAllGroupBuyPlanByState();
         });//
 
         // 设置轮播图图片间隔
@@ -389,12 +388,16 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     })
     /***************************************************团购部分*************************************************************/
     //请求到的所有团购
+    $scope.showGbp = false;
     $scope.groupBuyPlanList = [];
     //团购的商品详情
     $scope.groupPrdMap = [];
     $scope.queryAllGroupBuyPlanByState = function () {
         groupBuyPlanFactory.queryAllByState({}, function (response) {
             $scope.groupBuyPlanList = response.data;
+            if ($scope.groupBuyPlanList.length > 0) {
+                $scope.showGbp = true;
+            }
             $scope.queryPrdByGroupBuyPlan();
             startWorkerByGbp()
         }, function (response) {
@@ -437,6 +440,10 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         }
     }
 
+    $scope.$on('$destroy', function () {
+        if (undefined != gw)
+            gw.terminate() //终止一个worker线程v
+    })
     $scope.initDataByGroupBuyPlan = function () {
         $scope.groupBuyPlanList.forEach(function (ele, index) {
             if (ele['GROUP_BUY_PLAN.STATE'] == 'IN_SALE') {
