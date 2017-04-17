@@ -1,0 +1,41 @@
+<div class="bg-grey product-detail-page group-wrap">
+    <!-- BEGIN 商品详情图片 -->
+    <div class="weui_navbar" style="background-color: #fff;">
+        <div class="weui_cell" style="width: 100%;">
+            <div class="weui_cell_fr"></div>
+            <div style="font-size: 16px;margin-left: 20px;" href="#/pages/order/list/all">
+                全部团员
+            </div>
+
+        </div>
+    </div>
+
+    <div class="groups" style="margin-top: 45px;">
+        <div class="eachgroup" style="height: 45px;">
+            <span>客户001</span>
+            <span class="word-fr">23:23:00 参团</span>
+
+        </div>
+        <div class="eachgroup" style="height: 45px;">
+            <span>客户001</span>
+            <span class="word-fr">23:23:00 参团</span>
+
+        </div>
+        <div class="eachgroup" style="height: 45px;">
+            <span>客户001</span>
+            <span class="word-fr">23:23:00 参团</span>
+
+        </div>
+    </div>
+
+
+
+
+    <!--选择页面遮罩-->
+    <div class="chose-shop" ng-if="STORE_ID==0">
+        <i class="icon-shop"></i>
+        <span>请先选择门店，即可在线购买！</span>
+        <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
+    </div>
+
+</div>

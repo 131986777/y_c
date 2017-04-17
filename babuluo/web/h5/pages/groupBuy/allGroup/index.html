@@ -4,56 +4,13 @@
         <div class="weui_cell" style="width: 100%;">
             <div class="weui_cell_fr"></div>
             <div style="font-size: 16px;margin-left: 20px;" href="#/pages/order/list/all">
-                团购
+                全部团
             </div>
 
         </div>
     </div>
-    <div class="swiper-container" style="height: 306px;width: 100%;">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide" ng-repeat="slide in slides">
-                <a>
-                    <img
-                            ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
-                            style="height: 100%;width: 100%;">
-                </a>
-            </div>
-        </div>
-    </div>
 
-    <div class="weui_cells" style="margin-bottom: 0px;">
-        <div class="weui_cell">
-            <div class="basic-info weui_cell_bd weui_cell_primary">
-                <h4 class="name">
-                    <span class="groupTilte">冬季阳光葵花籽黑南瓜冬季阳光葵花籽黑南瓜</span>
-
-                </h4>
-
-                <p class="money group-money" style="float: left;">
-                    <!--现价-->
-                    团购价
-                    <span style="font-size:25px;">￥123.00</span>
-                    <!--原价-->
-                    <!--ng-if="sku!=undefined&&sku['isSale']"-->
-                    <span  class="del-line" style="font-size: 13px;">￥399.00</span>
-
-                </p>
-                <div class="groupNum">
-
-                    <button class="group-btn">-</button>
-                    <span class="num">8</span>
-                    <button class="group-btn numColor">+</button>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <div class="group-tishi">支付开团并邀请3人参团，人数不足自动退款</div>
-    <div class="groups">
-        <p class="groups-nav">以下小伙伴正在发起团购，你也可以直接参与</p>
+    <div class="groups" style="margin-top: 45px;">
         <div class="eachgroup">
             <img class="group-img" src="" alt="">
             <span>客户001</span>
@@ -93,21 +50,8 @@
             </div>
 
         </div>
-        <div class="checkall">查看全部团 <div class="check_ft"></div></div>
     </div>
-    <div class="weui_tab tab-default pro-detail">
-        <div class="weui_navbar" style="background-color: #fff;">
-            <div class="weui_cell" style="width: 100%;">
-                <div style="font-size: 16px" href="#/pages/order/list/all">
-                    商品详情
-                </div>
-                <div class="weui_cell_ft"></div>
-            </div>
-        </div>
 
-
-    </div>
-    <div class="kaiBtn group-sign">开团：￥1999.00</div>
     <div class="product-action-wrap action-bar-wrap"
          ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='NORMAL'">
         <div class="action-bar border-top">

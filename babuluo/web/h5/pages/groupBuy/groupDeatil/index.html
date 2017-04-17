@@ -9,17 +9,6 @@
 
         </div>
     </div>
-    <div class="swiper-container" style="height: 306px;width: 100%;">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide" ng-repeat="slide in slides">
-                <a>
-                    <img
-                            ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
-                            style="height: 100%;width: 100%;">
-                </a>
-            </div>
-        </div>
-    </div>
 
     <div class="weui_cells" style="margin-bottom: 0px;">
         <div class="weui_cell">
@@ -50,8 +39,12 @@
         </div>
 
     </div>
-
-    <div class="group-tishi">还差100人开团，剩余时间：23：23：00</div>
+    <div class="time-wrap">
+        <img class="pic-time"
+             src="../../public/img/limit.png" alt="">
+        <span>已开团，距离成团还差2人</span>
+        <p class="last-time">剩余时间：23：23：00</p>
+    </div>
     <!--<div class="group-tishi" style="text-align: center;">人数不够自动退款</div>-->
     <div class="person-nav">
         参团人员
@@ -59,6 +52,7 @@
     <div class="groups">
         <div class="eachgroup" style="height: 45px;">
             <span>客户001</span>
+            <span class="red">团长</span>
             <span class="word-fr">23:23:00 参团</span>
 
         </div>
@@ -67,21 +61,9 @@
             <span class="word-fr">23:23:00 参团</span>
 
         </div>
-        <div class="checkall">查看全部团 <div class="check_ft"></div></div>
     </div>
-    <div class="weui_tab tab-default pro-detail">
-        <div class="weui_navbar" style="background-color: #fff;">
-            <div class="weui_cell" style="width: 100%;">
-                <div style="font-size: 16px" href="#/pages/order/list/all">
-                    商品详情
-                </div>
-                <div class="weui_cell_ft"></div>
-            </div>
-        </div>
 
-
-    </div>
-    <div class="kaiBtn group-sign">开团：￥1999.00</div>
+    <div class="kaiBtn group-sign">参团：￥1999.00</div>
 
 
 

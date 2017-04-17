@@ -1,5 +1,14 @@
 <div class="bg-grey product-detail-page group-wrap">
     <!-- BEGIN 商品详情图片 -->
+    <div class="weui_navbar" style="background-color: #fff;">
+        <div class="weui_cell" style="width: 100%;">
+            <div class="weui_cell_fr"></div>
+            <div style="font-size: 16px;margin-left: 20px;" href="#/pages/order/list/all">
+                团购
+            </div>
+
+        </div>
+    </div>
     <div class="swiper-container" style="height: 306px;width: 100%;">
         <div class="swiper-wrapper">
             <div class="swiper-slide" ng-repeat="slide in slides">
@@ -58,85 +67,24 @@
             </div>
 
         </div>
+        <div class="group-tishi" style="text-align: center;">人数不够自动退款</div>
     </div>
-    <div class="group-tishi" style="text-align: center;">人数不够自动退款</div>
-    <div class="weui_tab tab-default">
-        <div class="weui_navbar">
-            <a class="weui_navbar_item">
 
-                商品详情
-            </a>
-            <a class="weui_navbar_item">
-                商品评价
-            </a>
-        </div>
-        <div class="weui_tab_bd">
-            <div id="tab1" ng-class="{true:'weui_tab_bd_item_active'}[prd_detai_model=='detail']"
-                 class="weui_tab_bd_item">
-                <span ng-bind-html="product['SHOP_PRODUCT.SHOP_DES']"></span>
-            </div>
-            <div id="tab2" ng-class="{true:'weui_tab_bd_item_active'}[prd_detai_model=='comment']"
-                 class="weui_tab_bd_item">
-                <div class="review-nav flexbox">
-                    <a href="review-all" ng-click="reset('all')" class="col cell text-center"
-                       data-toggle="tab">
-                        <span>{{proComments.length}}</span>
-                        <p>全部</p>
-                    </a>
-                    <a href="#review-good" ng-click="reset('good')" class="col cell text-center"
-                       data-toggle="tab">
-                        <span>{{listLength(goodComments)}}</span>
-                        <p>好评</p>
-                    </a>
-                    <a href="#review-middle" ng-click="reset('mid')" class="col cell text-center"
-                       data-toggle="tab">
-                        <span>{{listLength(midComments)}}</span>
-                        <p>中评</p>
-                    </a>
-                    <a href="#review-bad" ng-click="reset('bad')" class="col cell text-center"
-                       data-toggle="tab">
-                        <span>{{listLength(badComments)}}</span>
-                        <p>差评</p>
-                    </a>
+    <div class="weui_tab tab-default pro-detail">
+        <div class="weui_navbar" style="background-color: #fff;">
+            <div class="weui_cell" style="width: 100%;">
+                <div style="font-size: 16px" href="#/pages/order/list/all">
+                    商品详情
                 </div>
-                <div class="tab-content">
-                    <!--   全部评价 -->
-                    <div id="" class="tab-pane active" ng-repeat="proc in allComments">
-                        <div class="review-wrap">
-                            <div class="review-content">
-                                <div class="review-head flexbox">
-                                    <div class="userName cell" ng-bind="proc['MEMBER.USER_NAME']">
-                                        <!--吃遍美食-->
-                                        <span class="item-star"
-                                              style="margin-left: 8px;">一星差评</span>
-                                        <span class="item-star" style="margin-left: 8px;"
-                                              ng-show="proc['SHOP_COMMENT.STAR']=='5'">五星好评</span>
-                                        <span class="item-star" style="margin-left: 8px;"
-                                              ng-show="proc['SHOP_COMMENT.STAR']=='4'">四星好评</span>
-                                        <span class="item-star" style="margin-left: 8px;"
-                                              ng-show="proc['SHOP_COMMENT.STAR']=='3'">三星中评</span>
-                                        <span class="item-star" style="margin-left: 8px;"
-                                              ng-show="proc['SHOP_COMMENT.STAR']=='2'">二星中评</span>
-                                        <span class="item-star" style="margin-left: 8px;"
-                                              ng-show="proc['SHOP_COMMENT.STAR']=='1'">一星差评</span>
-                                    </div>
-                                    <div class="userTime cell text-right"
-                                         ng-bind="proc['SHOP_COMMENT.PRO_MAIN_COMMENT_ADD_TIME']">
-                                        <!--2016 09 29 14:52-->
-                                    </div>
-                                </div>
-                                <div class="review-detail">
-                                    {{proc['SHOP_COMMENT.PRO_MAIN_COMMENT']}}
-                                </div>
-                                <img class="userIcon" ng-src="{{proc['MEMBER.HEADIMG_URL']}}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <div class="weui_cell_ft"></div>
             </div>
         </div>
-        <div class="kaiBtn group-sign">开团：￥1999.00</div>
+
+
     </div>
+    <div class="kaiBtn group-sign">开团：￥1999.00</div>
+</div>
+
 
     <div class="product-action-wrap action-bar-wrap"
          ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='NORMAL'">
