@@ -395,6 +395,10 @@ p {
     background: url("../img/icon-personal.png") no-repeat -72px 0;
     background-size: 96px 50px;
 }
+.icon-tuangou{
+    background: url("../img/tuangou.png") no-repeat;
+    background-size: 25px 25px;
+}
 .icon-recharge{
     background: url("../img/icon-personal.png") no-repeat -72px -25px;
     background-size: 96px 50px;
@@ -3022,6 +3026,10 @@ p {
 .group-wrap .group-money{
     font-size: 14px;
 }
+.group-wrap .group-nav{
+    background-color: #fff;
+    margin-bottom:10px;
+}
 .group-wrap .groupTilte{
     font-size: 17px;
     color:#333;
@@ -3224,4 +3232,17 @@ p {
     width: 15px;
     position: relative;
     top: -2px;
+}
+.group-wrap .groupPic{
+    width: 100px;
+    height:98px;
+    margin-right: 10px;
+}
+.group-wrap .left-des{
+    margin-left:110px;
+}
+.group-wrap .own-protitle{
+    font-size: 14px;
+    color:#666;
+    border-bottom: 1px dashed #d6d6d6;
 }
