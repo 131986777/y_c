@@ -3234,15 +3234,33 @@ p {
     top: -2px;
 }
 .group-wrap .groupPic{
-    width: 100px;
-    height:98px;
+    width: 75px;
+    height:75px;
     margin-right: 10px;
 }
+.group-wrap .groupline{
+    margin: 10px 0px 10px 0px;
+    border: 1px dashed #d6d6d6;
+}
 .group-wrap .left-des{
-    margin-left:110px;
+    margin-left:85px;
 }
 .group-wrap .own-protitle{
     font-size: 14px;
     color:#666;
-    border-bottom: 1px dashed #d6d6d6;
+}
+.group-wrap .left-time{
+    font-size: 12px;
+}
+.group-wrap .left-sep{
+    font-size: 14px;
+    color:#1da1ff;
+    float: right;
+}
+.group-wrap .group-invite{
+    font-size: 14px;
+    color: #333;
+    position: relative;
+    border-top: 1px solid #d6d6d6;
+    padding: 10px 0px 10px 15px;
 }
