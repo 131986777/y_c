@@ -1,4 +1,4 @@
-<div class="bg-grey product-detail-page group-wrap">
+<div class="bg-grey product-detail-page group-wrap" ng-init="initPage()">
     <!-- BEGIN 商品详情图片 -->
     <div class="group-nav" style="background-color: #fff;">
         <div class="weui_cell" style="width: 100%;">
@@ -11,79 +11,19 @@
     </div>
 
     <div class="groups">
-        <div class="eachgroup">
+        <div class="eachgroup" ng-repeat="gbm in gbmList" ng-if="gbm['GROUP_BUY_MEMBER.IS_LEADER']==1">
             <img class="group-img" src="" alt="">
-            <span>客户001</span>
+            <span ng-bind="memberInfoList[gbm['GROUP_BUY_MEMBER.UID']]['MEMBER_INFO.TRUE_NAME']"></span>
             <div class="group-pos">
                 <div class="group-over">
-                    <p class="orange group-cha">还差一人成团</p>
+                    <p class="orange group-cha">
+                        还差{{surplusSize-surplusSizeList[gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']]}}人成团</p>
                     <p class="colorgray grouptime">剩余 23：39：00 结束</p>
 
                 </div>
-                <button class="group-sign">参团</button>
+                <button class="group-sign" ng-click="goGroupBuy(gbm)">参团</button>
             </div>
 
-        </div>
-        <div class="eachgroup">
-            <img class="group-img" src="" alt="">
-            <span>客户001</span>
-            <div class="group-pos">
-                <div class="group-over">
-                    <p class="orange group-cha">还差一人成团</p>
-                    <p class="colorgray grouptime">剩余 23：39：00 结束</p>
-
-                </div>
-                <button class="group-sign">参团</button>
-            </div>
-
-        </div>
-        <div class="eachgroup">
-            <img class="group-img" src="" alt="">
-            <span>客户001</span>
-            <div class="group-pos">
-                <div class="group-over">
-                    <p class="orange group-cha">还差一人成团</p>
-                    <p class="colorgray grouptime">剩余 23：39：00 结束</p>
-
-                </div>
-                <button class="group-sign">参团</button>
-            </div>
-
-        </div>
-    </div>
-
-    <div class="product-action-wrap action-bar-wrap"
-         ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='NORMAL'">
-        <div class="action-bar border-top">
-            <div class="icon-wrap">
-                <i class="icon icon-cart-small" ng-click="toCart()"></i>
-                <span class="cartNum" ng-bind="totalSize"></span>
-                购物车
-            </div>
-            <div class="icon-wrap" ng-click="collectionClick()">
-                <!-- 已收藏 class="icon-collected" -->
-                <i class="icon icon-collect active"
-                   ng-class="{true:'icon-collected',false:'icon-collect'}[collectionState==1]"></i>
-                收藏
-            </div>
-            <a class="add-to-cart cell" ng-click="addToCart()">
-                加入购物车
-            </a>
-        </div>
-    </div>
-
-    <div class="product-action-wrap action-bar-wrap"
-         ng-if="sku['SHOP_PRODUCT_SKU.MODEL']!='NORMAL'">
-        <div class="action-bar border-top">
-            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'" ng-click="toAppointment()">
-                去预约
-            </a>
-            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='TUANGOU'" ng-click="toAppointment()">
-                参加团购
-            </a>
-            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='QIANGGOU'" ng-click="toAppointment()">
-                限时抢购
-            </a>
         </div>
     </div>
 

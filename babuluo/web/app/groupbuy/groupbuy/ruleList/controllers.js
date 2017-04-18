@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller', function ($scope, $stateParams, productFactory, modalFactory, groupBuyPlanFactory, $q) {
+angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller', function ($scope, $stateParams, groupBuyGroupFactory, productFactory, modalFactory, groupBuyPlanFactory, $q) {
 
     modalFactory.setTitle('规则列表');
 
@@ -64,7 +64,6 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
                 $scope.groupBuyPlan = {};
                 addSign = false;
                 deferred = $q.defer();
-
                 getPrdPromise = deferred.promise;
             }, function (response) {
                 modalFactory.showShortAlert("添加失败");
@@ -76,6 +75,13 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         })
     };
 
+    function addGroupBuyGroup(form) {
+        groupBuyGroupFactory.addGroupBuyGroup(form, function (response) {
+
+        }, function (response) {
+
+        });
+    }
 
     /**
      * 请求所有的团购数据

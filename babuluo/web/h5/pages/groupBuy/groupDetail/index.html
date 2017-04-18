@@ -1,4 +1,4 @@
-<div class="bg-grey product-detail-page group-wrap">
+<div class="bg-grey product-detail-page group-wrap" ng-init="initPage()">
     <!-- BEGIN 商品详情图片 -->
     <div class="group-nav" style="background-color: #fff;">
         <div class="weui_cell" style="width: 100%;">
@@ -14,23 +14,24 @@
         <div class="weui_cell">
             <div class="basic-info weui_cell_bd weui_cell_primary">
                 <h4 class="name">
-                    <span class="groupTilte">冬季阳光葵花籽黑南瓜冬季阳光葵花籽黑南瓜</span>
+                    <span class="groupTilte" ng-bind="gbpPrd['SHOP_PRODUCT.PRD_NAME']"></span>
 
                 </h4>
 
                 <p class="money group-money" style="float: left;">
                     <!--现价-->
                     团购价
-                    <span style="font-size:25px;">￥123.00</span>
+                    <span style="font-size:25px;" ng-bind="gbp['GROUP_BUY_PLAN.GROUP_PRICE'] |currency : '￥'"></span>
                     <!--原价-->
                     <!--ng-if="sku!=undefined&&sku['isSale']"-->
-                    <span  class="del-line" style="font-size: 13px;">￥399.00</span>
+                    <span class="del-line" style="font-size: 13px;"
+                          ng-bind="gbpPrd['SHOP_PRODUCT_SKU.REAL_PRICES'] |currency : '￥'"></span>
 
                 </p>
                 <div class="groupNum">
 
                     <button class="group-btn">-</button>
-                    <span class="num">8</span>
+                    <span class="num">1</span>
                     <button class="group-btn numColor">+</button>
                 </div>
 
@@ -42,29 +43,27 @@
     <div class="time-wrap">
         <img class="pic-time"
              src="../../public/img/limit.png" alt="">
-        <span>已开团，距离成团还差2人</span>
-        <p class="last-time">剩余时间：23：23：00</p>
+        <span>已开团，距离成团还差{{surplusSize}}人</span>
+        <p class="last-time">剩余时间:
+            <span id="gbpHour"></span>:
+            <span id="gbpMin"></span>:
+            <span id="gbpSec"></span></p>
     </div>
     <!--<div class="group-tishi" style="text-align: center;">人数不够自动退款</div>-->
     <div class="person-nav">
         参团人员
     </div>
     <div class="groups">
-        <div class="eachgroup" style="height: 45px;">
-            <span>客户001</span>
-            <span class="red">团长</span>
-            <span class="word-fr">23:23:00 参团</span>
+        <div class="eachgroup" style="height: 45px;" ng-repeat="gbm in currentGbgUserList">
+            <span ng-bind="memberInfoList[gbm['GROUP_BUY_MEMBER.UID']]['MEMBER_INFO.TRUE_NAME']"></span>
+            <span class="red" ng-if="gbm['GROUP_BUY_MEMBER.IS_LEADER'] == 1">团长</span>
+            <span class="word-fr">{{gbm['GROUP_BUY_MEMBER.ADD_DATETIME']}}参团</span>
 
         </div>
-        <div class="eachgroup" style="height: 45px;">
-            <span>客户001</span>
-            <span class="word-fr">23:23:00 参团</span>
 
-        </div>
     </div>
 
-    <div class="kaiBtn group-sign">参团：￥1999.00</div>
-
+    <div class="kaiBtn group-sign">参团:{{gbp['GROUP_BUY_PLAN.GROUP_PRICE'] |currency : '￥'}}</div>
 
 
     <!--选择页面遮罩-->

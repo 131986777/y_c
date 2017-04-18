@@ -1,4 +1,4 @@
-<div class="bg-grey product-detail-page group-wrap">
+<div class="bg-grey product-detail-page group-wrap" ng-init="initPage()">
     <!-- BEGIN 商品详情图片 -->
     <div class="group-nav" style="background-color: #fff;">
         <div class="weui_cell" style="width: 100%;">
@@ -11,19 +11,9 @@
     </div>
 
     <div class="groups">
-        <div class="eachgroup" style="height: 45px;">
-            <span>客户001</span>
-            <span class="word-fr">23:23:00 参团</span>
-
-        </div>
-        <div class="eachgroup" style="height: 45px;">
-            <span>客户001</span>
-            <span class="word-fr">23:23:00 参团</span>
-
-        </div>
-        <div class="eachgroup" style="height: 45px;">
-            <span>客户001</span>
-            <span class="word-fr">23:23:00 参团</span>
+        <div class="eachgroup" style="height: 45px;" ng-repeat="gbm in gbmList">
+            <span ng-bind="memberInfoList[gbm['GROUP_BUY_MEMBER.UID']]['MEMBER_INFO.TRUE_NAME']"></span>
+            <span class="word-fr">{{gbm['GROUP_BUY_MEMBER.ADD_DATETIME']}}参团</span>
 
         </div>
     </div>

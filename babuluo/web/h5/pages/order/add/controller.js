@@ -1,5 +1,6 @@
 angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', function ($scope, $state, balanceFactory, promoFactory, $stateParams, weUI, $http, http, couponFactory, productFactory, orderFactory, modalFactory, weUI) {
 
+
     modalFactory.setTitle('新增订单');
     modalFactory.setBottom(false);
 

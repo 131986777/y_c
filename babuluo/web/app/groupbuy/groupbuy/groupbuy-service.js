@@ -7,3 +7,6 @@ AndSellMainModule.service('groupBuyPlanFactory', function (http) {
     this.modifyById = http.post("/group/buy/plan/modifyById");
     this.queryAllByState = http.post("/group/buy/plan/queryAllByState");
 });
+AndSellMainModule.service('groupBuyGroupFactory', function (http) {
+    this.addGroupBuyGroup = http.post("/group/buy/group/add");
+});

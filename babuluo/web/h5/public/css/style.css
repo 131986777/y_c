@@ -3203,6 +3203,8 @@ p {
     height: 45px!important;
     line-height: 45px!important;
     margin-left: 0px!important;
+    position: fixed;
+    bottom:0px;
 }
 .word-fr{
     float: right;

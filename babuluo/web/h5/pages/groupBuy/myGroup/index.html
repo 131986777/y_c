@@ -56,46 +56,19 @@
     <div class="group-tishi">支付开团并邀请{{GBP['GROUP_BUY_PLAN.SUM_COUNT']}}人参团，人数不足自动退款</div>
     <div class="groups">
         <p class="groups-nav">以下小伙伴正在发起团购，你也可以直接参与</p>
-        <div class="eachgroup">
+        <div class="eachgroup" ng-repeat="gbm in gbmList" ng-if="gbm['GROUP_BUY_MEMBER.IS_LEADER'] == 1">
             <img class="group-img" src="" alt="">
-            <span>客户001</span>
+            <span ng-bind="memberInfoList[gbm['GROUP_BUY_MEMBER.UID']]['MEMBER_INFO.TRUE_NAME']"></span>
             <div class="group-pos">
                 <div class="group-over">
-                    <p class="orange group-cha">还差一人成团</p>
+                    <p class="orange group-cha">还差{{surplusSize-surplusSizeList[gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']]}}人成团</p>
                     <p class="colorgray grouptime">剩余 23：39：00 结束</p>
-
                 </div>
-                <button class="group-sign">参团</button>
+                <button class="group-sign" ng-click="goGroupBuy(gbm)">参团</button>
             </div>
 
         </div>
-        <div class="eachgroup">
-            <img class="group-img" src="" alt="">
-            <span>客户001</span>
-            <div class="group-pos">
-                <div class="group-over">
-                    <p class="orange group-cha">还差一人成团</p>
-                    <p class="colorgray grouptime">剩余 23：39：00 结束</p>
-
-                </div>
-                <button class="group-sign">参团</button>
-            </div>
-
-        </div>
-        <div class="eachgroup">
-            <img class="group-img" src="" alt="">
-            <span>客户001</span>
-            <div class="group-pos">
-                <div class="group-over">
-                    <p class="orange group-cha">还差一人成团</p>
-                    <p class="colorgray grouptime">剩余 23：39：00 结束</p>
-
-                </div>
-                <button class="group-sign">参团</button>
-            </div>
-
-        </div>
-        <div class="checkall">查看全部团
+        <div class="checkall" ng-click="goAllGroup()">查看全部团
             <div class="check_ft"></div>
         </div>
     </div>
@@ -110,38 +83,9 @@
                 <div class="weui_cell_ft"></div>
             </div>
         </div>
-
     </div>
     <div class="kaiBtn group-sign">开团：{{GBP['GROUP_BUY_PLAN.GROUP_PRICE'] |currency : '￥'}}</div>
     <!-- BEGIN footer-nav -->
-    <nav class="nav-fixed-bottom" ng-if="navShow" role="navigation">
-        <ul class="nav-list flexbox" style="padding: 6px 0">
-            <li class="cell" ng-class="{true:'selected'}[currentPage=='sy']">
-                <a ui-sref="pages/home" ng-click="toPage('sy')">
-                    <i class="icon icon-home"></i>
-                    <p class="nav-txt">首页</p>
-                </a>
-            </li>
-            <li class="cell" ng-class="{true:'selected'}[currentPage=='fl']">
-                <a ui-sref="pages/product/list" ng-click="toPage('fl')">
-                    <i class="icon icon-product-class"></i>
-                    <p class="nav-txt">分类</p>
-                </a>
-            </li>
-            <li class="cell" ng-class="{true:'selected'}[currentPage=='cart']">
-                <a ui-sref="pages/cart" ng-click="toPage('cart')" class="home-nav-cart">
-                    <i class="icon icon-cart"></i>
-                    <p class="nav-txt">购物车</p>
-                    <span class="cartNum" ng-if="cartSize!=0" ng-bind="cartSize"></span>
-                </a>
-            </li>
-            <li class="cell" ng-class="{true:'selected'}[currentPage=='wd']">
-                <a ui-sref="pages/personal" ng-click="toPage('wd')">
-                    <i class="icon icon-personal"></i>
-                    <p class="nav-txt">我的</p>
-                </a>
-            </li>
-        </ul>
-    </nav>
+
     <!-- END footer-nav -->
 </div>
