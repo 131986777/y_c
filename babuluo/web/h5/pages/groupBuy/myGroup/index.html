@@ -99,11 +99,12 @@
             <div class="check_ft"></div>
         </div>
     </div>
-    <div class="weui_tab tab-default pro-detail">
+    <div class="weui_tab tab-default pro-detail"
+         ui-sref="pages/product/detail({'PRD_ID':GBP_PRD['SHOP_PRODUCT.PRD_ID']})">
         <div class="weui_navbar" style="background-color: #fff;"
         >
             <div class="weui_cell" style="width: 100%;">
-                <div style="font-size: 16px" ui-sref="pages/product/detail({'PRD_ID':GBP_PRD['SHOP_PRODUCT.PRD_ID']})">
+                <div style="font-size: 16px">
                     商品详情
                 </div>
                 <div class="weui_cell_ft"></div>
@@ -112,40 +113,37 @@
 
     </div>
     <div class="kaiBtn group-sign">开团：{{GBP['GROUP_BUY_PLAN.GROUP_PRICE'] |currency : '￥'}}</div>
-    <div class="product-action-wrap action-bar-wrap"
-         ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='NORMAL'">
-        <div class="action-bar border-top">
-            <div class="icon-wrap">
-                <i class="icon icon-cart-small" ng-click="toCart()"></i>
-                <span class="cartNum" ng-bind="totalSize"></span>
-                购物车
-            </div>
-            <div class="icon-wrap" ng-click="collectionClick()">
-                <!-- 已收藏 class="icon-collected" -->
-                <i class="icon icon-collect active"
-                   ng-class="{true:'icon-collected',false:'icon-collect'}[collectionState==1]"></i>
-                收藏
-            </div>
-            <a class="add-to-cart cell" ng-click="addToCart()">
-                加入购物车
-            </a>
-        </div>
-    </div>
-
-    <div class="product-action-wrap action-bar-wrap"
-         ng-if="sku['SHOP_PRODUCT_SKU.MODEL']!='NORMAL'">
-        <div class="action-bar border-top">
-            <a class="add-to-cart cell" ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'" ng-click="toAppointment()">
-                去预约
-            </a>
-            <a class="add-to-cart cell" ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='TUANGOU'" ng-click="toAppointment()">
-                参加团购
-            </a>
-            <a class="add-to-cart cell" ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='QIANGGOU'" ng-click="toAppointment()">
-                限时抢购
-            </a>
-        </div>
-    </div>
+    <!-- BEGIN footer-nav -->
+    <nav class="nav-fixed-bottom" ng-if="navShow" role="navigation">
+        <ul class="nav-list flexbox" style="padding: 6px 0">
+            <li class="cell" ng-class="{true:'selected'}[currentPage=='sy']">
+                <a ui-sref="pages/home" ng-click="toPage('sy')">
+                    <i class="icon icon-home"></i>
+                    <p class="nav-txt">首页</p>
+                </a>
+            </li>
+            <li class="cell" ng-class="{true:'selected'}[currentPage=='fl']">
+                <a ui-sref="pages/product/list" ng-click="toPage('fl')">
+                    <i class="icon icon-product-class"></i>
+                    <p class="nav-txt">分类</p>
+                </a>
+            </li>
+            <li class="cell" ng-class="{true:'selected'}[currentPage=='cart']">
+                <a ui-sref="pages/cart" ng-click="toPage('cart')" class="home-nav-cart">
+                    <i class="icon icon-cart"></i>
+                    <p class="nav-txt">购物车</p>
+                    <span class="cartNum" ng-if="cartSize!=0" ng-bind="cartSize"></span>
+                </a>
+            </li>
+            <li class="cell" ng-class="{true:'selected'}[currentPage=='wd']">
+                <a ui-sref="pages/personal" ng-click="toPage('wd')">
+                    <i class="icon icon-personal"></i>
+                    <p class="nav-txt">我的</p>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- END footer-nav -->
 
     <!--选择页面遮罩-->
     <div class="chose-shop" ng-if="STORE_ID==0">
