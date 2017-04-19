@@ -1,4 +1,4 @@
-<div class="bg-grey product-detail-page group-wrap">
+<div class="bg-grey product-detail-page group-wrap" ng-init="initPage()">
     <!-- BEGIN 商品详情图片 -->
     <div class="" style="background-color: #fff;">
         <div class="weui_cell" style="width: 100%;">
@@ -10,24 +10,35 @@
         </div>
     </div>
 
-    <div class="weui_cells" style="margin-bottom: 10px;">
+    <div class="weui_cells" style="margin-bottom: 10px;" ng-repeat="(index,gbp) in gbpList">
         <div class="weui_cell">
             <div class="basic-info weui_cell_bd weui_cell_primary">
-                <img src="../../public/img/gift0.jpg" alt="" class="groupPic">
+                <img src="http://bbl-upload.oss-cn-shanghai.aliyuncs.com/{{groupPrdMap[gbp['GROUP_BUY_PLAN.SKU_ID']]['SHOP_PRODUCT.CMP']}}"
+                     alt="" class="groupPic">
                 <div class="left-des">
                     <h4 class="name">
-                        <span class="own-protitle">籽黑南瓜冬季阳光葵花籽黑南瓜</span>
+                        <span class="own-protitle"
+                              ng-bind="groupPrdMap[gbp['GROUP_BUY_PLAN.SKU_ID']]['SHOP_PRODUCT.PRD_NAME']"></span>
 
                     </h4>
                     <div class="groupline"></div>
-                    <p class="left-time">剩余：23:23:00 结束 <span class="left-sep">还差1人成团</span></p>
+                    <p class="left-time">剩余:
+                        <span id="gbpHour{{index}}">00</span>:
+                        <span id="gbpMin{{index}}">00</span>:
+                        <span id="gbpSec{{index}}">00</span>
+                        结束
+                        <span class="left-sep" ng-if="gbp['GROUP_BUY_PLAN.SUM_COUNT']-gbgSurpSizeList[gbp['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID']] > 0">还差{{gbp['GROUP_BUY_PLAN.SUM_COUNT']-gbgSurpSizeList[gbp['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID']]}}人成团</span>
+                        <span class="left-sep" ng-if="gbp['GROUP_BUY_PLAN.SUM_COUNT']-gbgSurpSizeList[gbp['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID']] == 0">已开团</span>
+                    </p>
                     <p class="money group-money" style="float: left;font-size: 13px;">
                         <!--现价-->
                         团购价
-                        <span style="font-size:16px;">￥123.00</span>
+                        <span style="font-size:16px;"
+                              ng-bind="gbp['GROUP_BUY_PLAN.GROUP_PRICE'] |currency : '￥'"></span>
                         <!--原价-->
                         <!--ng-if="sku!=undefined&&sku['isSale']"-->
-                        <span  class="del-line" style="font-size: 10px;">￥399.00</span>
+                        <span class="del-line" style="font-size: 10px;"
+                              ng-bind="groupPrdMap[gbp['GROUP_BUY_PLAN.SKU_ID']]['SHOP_PRODUCT_SKU.REAL_PRICES'] |currency : '￥'"></span>
 
                     </p>
                 </div>
@@ -37,64 +48,6 @@
         </div>
 
     </div>
-
-    <div class="weui_cells" style="margin-bottom: 10px;">
-        <div class="weui_cell">
-            <div class="basic-info weui_cell_bd weui_cell_primary">
-                <img src="../../public/img/gift0.jpg" alt="" class="groupPic">
-                <div class="left-des">
-                    <h4 class="name">
-                        <span class="own-protitle">籽黑南瓜冬季阳光葵花籽黑南瓜</span>
-
-                    </h4>
-                    <div class="groupline"></div>
-                    <p class="left-time"> <span class="left-sep">已成团</span></p>
-                    <p class="money group-money" style="float: left;font-size: 13px;">
-                        <!--现价-->
-                        团购价
-                        <span style="font-size:16px;">￥123.00</span>
-                        <!--原价-->
-                        <!--ng-if="sku!=undefined&&sku['isSale']"-->
-                        <span  class="del-line" style="font-size: 10px;">￥399.00</span>
-
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-    <div class="weui_cells" style="margin-bottom: 10px;">
-        <div class="weui_cell">
-            <div class="basic-info weui_cell_bd weui_cell_primary">
-                <img src="../../public/img/gift0.jpg" alt="" class="groupPic">
-                <div class="left-des">
-                    <h4 class="name">
-                        <span class="own-protitle">籽黑南瓜冬季阳光葵花籽黑南瓜</span>
-
-                    </h4>
-                    <div class="groupline"></div>
-                    <p class="left-time"> <span class="left-sep">已成团</span></p>
-                    <p class="money group-money" style="float: left;font-size: 13px;">
-                        <!--现价-->
-                        团购价
-                        <span style="font-size:16px;">￥123.00</span>
-                        <!--原价-->
-                        <!--ng-if="sku!=undefined&&sku['isSale']"-->
-                        <span  class="del-line" style="font-size: 10px;">￥399.00</span>
-
-                    </p>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-    <div class="kaiBtn group-sign">参团：￥1999.00</div>
-
-
 
     <!--选择页面遮罩-->
     <div class="chose-shop" ng-if="STORE_ID==0">

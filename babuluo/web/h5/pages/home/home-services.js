@@ -8,4 +8,5 @@ AndSellH5MainModule.service('seckillFactory', function (http) {
 
 AndSellH5MainModule.service('groupBuyPlanFactory', function (http) {
     this.queryAllByState = http.post("/group/buy/plan/queryAllByState");
+    this.getByGbpIds = http.post("/group/buy/plan/getByGbpIds");
 });
