@@ -30,9 +30,9 @@
                 </p>
                 <div class="groupNum">
 
-                    <button class="group-btn">-</button>
-                    <span class="num">1</span>
-                    <button class="group-btn numColor">+</button>
+                    <button class="group-btn" ng-click="downCount()">-</button>
+                    <span class="num" ng-bind="sumCount"></span>
+                    <button class="group-btn numColor" ng-click="upCount()">+</button>
                 </div>
 
             </div>
@@ -63,7 +63,7 @@
 
     </div>
 
-    <div class="kaiBtn group-sign">参团:{{gbp['GROUP_BUY_PLAN.GROUP_PRICE'] |currency : '￥'}}</div>
+    <div class="kaiBtn group-sign">参团:{{sumPrice |currency : '￥'}}</div>
 
 
     <!--选择页面遮罩-->

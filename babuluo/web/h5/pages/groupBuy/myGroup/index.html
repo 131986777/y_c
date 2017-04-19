@@ -42,9 +42,9 @@
                 </p>
                 <div class="groupNum">
 
-                    <button class="group-btn">-</button>
-                    <span class="num">1</span>
-                    <button class="group-btn numColor">+</button>
+                    <button class="group-btn" ng-click="downCount()">-</button>
+                    <span class="num" ng-bind="sumCount"></span>
+                    <button class="group-btn numColor" ng-click="upCount()">+</button>
                 </div>
 
             </div>
@@ -56,13 +56,15 @@
     <div class="group-tishi">支付开团并邀请{{GBP['GROUP_BUY_PLAN.SUM_COUNT']}}人参团，人数不足自动退款</div>
     <div class="groups">
         <p class="groups-nav">以下小伙伴正在发起团购，你也可以直接参与</p>
-        <div class="eachgroup" ng-repeat="gbm in gbmList" ng-if="gbm['GROUP_BUY_MEMBER.IS_LEADER'] == 1">
+        <div class="eachgroup" ng-show="showGbg" ng-repeat="gbm in gbmList"
+             ng-if="gbm['GROUP_BUY_MEMBER.IS_LEADER'] == 1">
             <img class="group-img" src="" alt="">
             <span ng-bind="memberInfoList[gbm['GROUP_BUY_MEMBER.UID']]['MEMBER_INFO.TRUE_NAME']"></span>
             <div class="group-pos">
                 <div class="group-over">
-                    <p class="orange group-cha">还差{{surplusSize-surplusSizeList[gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']]}}人成团</p>
-                    <p class="colorgray grouptime">剩余 23：39：00 结束</p>
+                    <p class="orange group-cha">
+                        还差{{surplusSize-surplusSizeList[gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']]}}人成团</p>
+                    <p class="colorgray grouptime">剩余:{{showDate}}结束</p>
                 </div>
                 <button class="group-sign" ng-click="goGroupBuy(gbm)">参团</button>
             </div>
@@ -84,7 +86,7 @@
             </div>
         </div>
     </div>
-    <div class="kaiBtn group-sign">开团：{{GBP['GROUP_BUY_PLAN.GROUP_PRICE'] |currency : '￥'}}</div>
+    <div class="kaiBtn group-sign">开团：{{sumPrice |currency : '￥'}}</div>
     <!-- BEGIN footer-nav -->
 
     <!-- END footer-nav -->

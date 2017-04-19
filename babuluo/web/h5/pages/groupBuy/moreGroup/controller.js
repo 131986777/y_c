@@ -2,11 +2,13 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
     modalFactory.setTitle("团购详情");
     $scope.initPage = function () {
         modalFactory.setBottom(false);
+        $scope.showMembers = false;
         var gbp = getCookie("GBP");
         var gbpPrd = getCookie("GBP_PRD");
         $scope.GBP = JSON.parse(gbp);
         $scope.GBP_PRD = JSON.parse(gbpPrd);
         $scope.surplusSize = $scope.GBP['GROUP_BUY_PLAN.SUM_COUNT'];
+        $scope.sumPrice = $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'];
         getGbgList($scope.GBP['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'])
         getImgURIS($scope.GBP_PRD)
         $scope.endDate = $scope.GBP['GROUP_BUY_PLAN.END_DATETIME'];
@@ -89,6 +91,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
     $scope.memberInfoList = {};
     function getMemberInfo(ids) {
         memberFactory.getMemberByUID({"MEMBER_INFO.USER_ID": ids}, function (response) {
+            $scope.showMembers = true;
             response.data.forEach(function (ele) {
                 $scope.memberInfoList[ele['MEMBER_INFO.USER_ID']] = ele;
             })
@@ -165,15 +168,18 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
     }
 
 
-    $scope.sumCount = 0;
+    $scope.sumCount = 1;
 
     $scope.downCount = function () {
         $scope.sumCount -= 1;
-        if ($scope.sumCount < 0) {
-            $scope.sumCount = 0;
+        $scope.sumPrice = $scope.sumCount * $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'];
+        if ($scope.sumCount <= 0) {
+            $scope.sumPrice = $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'];
+            $scope.sumCount = 1;
         }
     }
     $scope.upCount = function () {
         $scope.sumCount += 1;
+        $scope.sumPrice = $scope.sumCount * $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'];
     }
 });

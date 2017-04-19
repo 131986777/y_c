@@ -397,7 +397,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         groupBuyPlanFactory.queryAllByState({}, function (response) {
             $scope.groupBuyPlanList = response.data;
             if ($scope.groupBuyPlanList.length > 0) {
-                $scope.showGbp = true;
                 $scope.queryPrdByGroupBuyPlan();
                 startWorkerByGbp()
             }
@@ -417,6 +416,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             skuIds += ele['GROUP_BUY_PLAN.SKU_ID'];
         })
         productFactory.getProductSkuBySkuIds({"SHOP_PRODUCT_SKU.SKU_IDS": skuIds}, function (response) {
+            $scope.showGbp = true;
             response.data.forEach(function (ele) {
                 $scope.groupPrdMap[ele['SHOP_PRODUCT_SKU.SKU_ID']] = ele;
             }, function (response) {
@@ -478,6 +478,8 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         if (gbp['GROUP_BUY_PLAN.TYPE'] == 'MANAGE') {
             $state.go('pages/groupBuy/moreGroup');
         } else if (gbp['GROUP_BUY_PLAN.TYPE'] == 'MEMBER') {
+            removeCookie("SUM_COUNT");
+            removeCookie("SUM_PRICE");
             $state.go('pages/groupBuy/myGroup');
         }
 

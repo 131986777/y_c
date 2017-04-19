@@ -8,7 +8,12 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
         $scope.GBP = JSON.parse(gbp);
         $scope.GBP_PRD = JSON.parse(gbpPrd);
         $scope.surplusSize = $scope.GBP['GROUP_BUY_PLAN.SUM_COUNT'];
-        getGbgList($scope.GBP['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'])
+        $scope.sumCount = getCookie("SUM_COUNT") == null ? 1 : parseInt(getCookie("SUM_COUNT"));
+        $scope.sumPrice = $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'] * $scope.sumCount;
+        $scope.showGbg = false;
+        $scope.showDate = $scope.GBP['GROUP_BUY_PLAN.END_DATETIME'];
+        initDate();
+        getGbgList($scope.GBP['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID']);
         getImgURIS($scope.GBP_PRD)
     }
 
@@ -103,6 +108,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
     $scope.memberInfoList = {};
     function getMemberInfo(ids) {
         memberFactory.getMemberByUID({"MEMBER_INFO.USER_ID": ids}, function (response) {
+            $scope.showGbg = true;
             response.data.forEach(function (ele) {
                 $scope.memberInfoList[ele['MEMBER_INFO.USER_ID'].toString()] = ele;
             })
@@ -127,6 +133,8 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
         removeCookie("GBM_USER_INFO");
         removeCookie("GBM_SURP_LIST");
         removeCookie("surplusSize");
+        removeCookie("SUM_COUNT");
+        setCookie("SUM_COUNT", $scope.sumCount);
         setCookie("surplusSize", $scope.surplusSize);
         setCookie("GBM", JSON.stringify($scope.gbmList));
         setCookie("GBM_USER_INFO", JSON.stringify($scope.memberInfoList));
@@ -141,10 +149,42 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
         removeCookie("GBM_USER_INFO");
         removeCookie("GBM_SURP_LIST");
         removeCookie("surplusSize");
+        removeCookie("SUM_COUNT");
+        setCookie("SUM_COUNT", $scope.sumCount);
         setCookie("surplusSize", $scope.surplusSize);
         setCookie("GBM", JSON.stringify($scope.gbmList));
         setCookie("GBM_USER_INFO", JSON.stringify($scope.memberInfoList));
         setCookie("GBM_SURP_LIST", JSON.stringify($scope.surplusSizeList));
         $state.go("pages/groupBuy/allGroup");
+    }
+    $scope.sumCount = 1;
+
+    $scope.downCount = function () {
+        $scope.sumCount -= 1;
+        $scope.sumPrice = $scope.sumCount * $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'];
+        if ($scope.sumCount <= 0) {
+            $scope.sumPrice = $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'];
+            $scope.sumCount = 1;
+        }
+    }
+    $scope.upCount = function () {
+        $scope.sumCount += 1;
+        $scope.sumPrice = $scope.sumCount * $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'];
+    }
+
+
+    function initDate() {
+        var tempDate = $scope.showDate;
+        var yMd = tempDate.split(" ")[0].split("-");
+        var Hms = tempDate.split(" ")[1].split(":");
+        var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1] + '00').getTime();
+        var now = new Date().getTime();
+        if (end < now) {
+            $scope.showDate = "已";
+        } else {
+            var time = (end - now) / 1000;
+            $scope.showDate = parseInt(time / 3600) + "时" + parseInt(time / 60 - parseInt(time / 3600) * 60) +"分";
+        }
+
     }
 });

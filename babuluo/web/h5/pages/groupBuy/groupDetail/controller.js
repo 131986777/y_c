@@ -12,6 +12,8 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_groupDetail_Control
         $scope.gbmList = JSON.parse(gbm);
         $scope.surplusSize = $scope.gbp['GROUP_BUY_PLAN.SUM_COUNT'];
         $scope.endDate = $scope.gbp['GROUP_BUY_PLAN.END_DATETIME'];
+        $scope.sumCount = getCookie("SUM_COUNT") == null ? 1 : parseInt(getCookie("SUM_COUNT"));
+        $scope.sumPrice = $scope.gbp['GROUP_BUY_PLAN.GROUP_PRICE'] * $scope.sumCount;
         startWorkerByGbm();
         getCurrentGbgUser(currentGbmGgbId)
 
@@ -66,4 +68,18 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_groupDetail_Control
         if (undefined != gw)
             gw.terminate() //终止一个worker线程v
     })
+
+
+    $scope.downCount = function () {
+        $scope.sumCount -= 1;
+        $scope.sumPrice = $scope.sumCount * $scope.gbp['GROUP_BUY_PLAN.GROUP_PRICE'];
+        if ($scope.sumCount <= 0) {
+            $scope.sumPrice = $scope.gbp['GROUP_BUY_PLAN.GROUP_PRICE'];
+            $scope.sumCount = 1;
+        }
+    }
+    $scope.upCount = function () {
+        $scope.sumCount += 1;
+        $scope.sumPrice = $scope.sumCount * $scope.gbp['GROUP_BUY_PLAN.GROUP_PRICE'];
+    }
 });
