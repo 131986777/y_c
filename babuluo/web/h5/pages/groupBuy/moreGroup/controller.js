@@ -182,4 +182,16 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
         $scope.sumCount += 1;
         $scope.sumPrice = $scope.sumCount * $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'];
     }
+
+    //用户点击参团
+    //生成订单
+    //在团用户表中添加一条记录
+    //支付
+    $scope.goGroup = function () {
+        var param = {
+            "SUK_ID": $scope.GBP['GROUP_BUY_PLAN.SKU_ID'],
+            "SUM_COUNT": $scope.sumCount
+        }
+        $state.go("pages/order/addGroupBuy(" + JSON.stringify(param) + ")");
+    }
 });

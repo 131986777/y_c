@@ -4,6 +4,7 @@
 AndSellH5MainModule.service('groupBuyPlanFactory', function (http) {
     this.getByGbpIds = http.post("/group/buy/plan/getByGbpIds");
     this.queryAllByState = http.post("/group/buy/plan/queryAllByState");
+    this.getBySkuIdAndStat = http.post("/group/buy/plan/getBySkuIdAndStat");
 });
 AndSellH5MainModule.service('groupBuyGroupFactory', function (http) {
     this.getAllGroupByGbpId = http.post("/group/buy/group/getAllByGbpId");
