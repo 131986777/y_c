@@ -10,7 +10,6 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
         $scope.surplusSize = $scope.GBP['GROUP_BUY_PLAN.SUM_COUNT'];
         $scope.sumCount = getCookie("SUM_COUNT") == null ? 1 : parseInt(getCookie("SUM_COUNT"));
         $scope.sumPrice = $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'] * $scope.sumCount;
-        $scope.showGbg = false;
         $scope.showDate = $scope.GBP['GROUP_BUY_PLAN.END_DATETIME'];
         initDate();
         getGbgList($scope.GBP['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID']);
@@ -72,17 +71,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
     function getGbmList(gbpIds) {
         groupBuyMemberFactory.getAllMemberInGbgIds({"GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS": gbpIds}, function (response) {
             $scope.gbmList = response.data;
-            var ids = "";
-            $scope.gbmList.forEach(function (ele) {
-                if (ids != "") {
-                    ids += ",";
-                }
-                ids += ele['GROUP_BUY_MEMBER.UID'];
-            })
-            if (ids != "") {
-                getMemberInfo(ids);
-                getSurplusSizeList();
-            }
+            getSurplusSizeList();
         })
     }
 
@@ -103,18 +92,6 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
         observer: true,
         observeParents: true
     });
-
-    //获取用户信息
-    $scope.memberInfoList = {};
-    function getMemberInfo(ids) {
-        memberFactory.getMemberByUID({"MEMBER_INFO.USER_ID": ids}, function (response) {
-            $scope.showGbg = true;
-            response.data.forEach(function (ele) {
-                $scope.memberInfoList[ele['MEMBER_INFO.USER_ID'].toString()] = ele;
-            })
-        })
-    }
-
     //获取各个团剩余参团人数
     $scope.surplusSizeList = {};
     function getSurplusSizeList() {
@@ -122,39 +99,23 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
             if ($scope.surplusSizeList[ele['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']] == undefined) {
                 $scope.surplusSizeList[ele['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']] = 1;
             } else {
-                $scope.surplusSizeList[ele['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']] += $scope.surplusSizeList[ele['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']];
+                $scope.surplusSizeList[ele['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']] += 1;
             }
         });
     }
 
     //用户点击去参团
     $scope.goGroupBuy = function (gbm) {
-        removeCookie("GBM");
-        removeCookie("GBM_USER_INFO");
-        removeCookie("GBM_SURP_LIST");
-        removeCookie("surplusSize");
         removeCookie("SUM_COUNT");
         setCookie("SUM_COUNT", $scope.sumCount);
-        setCookie("surplusSize", $scope.surplusSize);
-        setCookie("GBM", JSON.stringify($scope.gbmList));
-        setCookie("GBM_USER_INFO", JSON.stringify($scope.memberInfoList));
-        setCookie("GBM_SURP_LIST", JSON.stringify($scope.surplusSizeList));
-        removeCookie("CURRENT_GBM_GBG_ID");
-        setCookie("CURRENT_GBM_GBG_ID", gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']);
-        $state.go("pages/groupBuy/groupDetail");
+        $state.go("pages/groupBuy/groupDetail", {GBG_ID: gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']});
     }
     //查看全部团
     $scope.goAllGroup = function () {
-        removeCookie("GBM");
-        removeCookie("GBM_USER_INFO");
-        removeCookie("GBM_SURP_LIST");
         removeCookie("surplusSize");
         removeCookie("SUM_COUNT");
         setCookie("SUM_COUNT", $scope.sumCount);
         setCookie("surplusSize", $scope.surplusSize);
-        setCookie("GBM", JSON.stringify($scope.gbmList));
-        setCookie("GBM_USER_INFO", JSON.stringify($scope.memberInfoList));
-        setCookie("GBM_SURP_LIST", JSON.stringify($scope.surplusSizeList));
         $state.go("pages/groupBuy/allGroup");
     }
     $scope.sumCount = 1;
@@ -183,8 +144,16 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
             $scope.showDate = "已";
         } else {
             var time = (end - now) / 1000;
-            $scope.showDate = parseInt(time / 3600) + "时" + parseInt(time / 60 - parseInt(time / 3600) * 60) +"分";
+            $scope.showDate = parseInt(time / 3600) + "时" + parseInt(time / 60 - parseInt(time / 3600) * 60) + "分";
         }
 
+    }
+
+    $scope.goGroup = function () {
+        var param = {
+            SKU_ID: $scope.GBP['GROUP_BUY_PLAN.SKU_ID'].toString(),
+            SUM_COUNT: $scope.sumCount.toString()
+        }
+        $state.go("pages/order/addGroupBuy", param);
     }
 });

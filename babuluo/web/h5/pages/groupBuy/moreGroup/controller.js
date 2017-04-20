@@ -2,7 +2,6 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
     modalFactory.setTitle("团购详情");
     $scope.initPage = function () {
         modalFactory.setBottom(false);
-        $scope.showMembers = false;
         var gbp = getCookie("GBP");
         var gbpPrd = getCookie("GBP_PRD");
         $scope.GBP = JSON.parse(gbp);
@@ -72,32 +71,10 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
 
         groupBuyMemberFactory.getAllMemberInGbgIds({"GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS": gbpIds}, function (response) {
             $scope.gbmList = response.data;
-            var ids = "";
-            $scope.gbmList.forEach(function (ele) {
-                if (ids != "") {
-                    ids += ",";
-                }
-                ids += ele['GROUP_BUY_MEMBER.UID'];
-            })
             $scope.surplusSize -= $scope.gbmList.length;
-            if (ids != "") {
-                $scope.gbmListSub = $scope.gbmList.slice(0, 5);
-                getMemberInfo(ids);
-            }
+            $scope.gbmListSub = $scope.gbmList.slice(0, 5);
         })
     }
-
-    //获取用户信息
-    $scope.memberInfoList = {};
-    function getMemberInfo(ids) {
-        memberFactory.getMemberByUID({"MEMBER_INFO.USER_ID": ids}, function (response) {
-            $scope.showMembers = true;
-            response.data.forEach(function (ele) {
-                $scope.memberInfoList[ele['MEMBER_INFO.USER_ID']] = ele;
-            })
-        })
-    }
-
 
     $scope.showDetail = false;
     $scope.clickDetail = function () {
@@ -161,9 +138,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
     $scope.showAllGroupMember = function () {
         gw.terminate();
         removeCookie("GBM");
-        removeCookie("GBM_USER_INFO");
         setCookie("GBM", JSON.stringify($scope.gbmList));
-        setCookie("GBM_USER_INFO", JSON.stringify($scope.memberInfoList));
         $state.go("pages/groupBuy/allGroupper");
     }
 
@@ -189,9 +164,9 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
     //支付
     $scope.goGroup = function () {
         var param = {
-            "SUK_ID": $scope.GBP['GROUP_BUY_PLAN.SKU_ID'],
-            "SUM_COUNT": $scope.sumCount
+            SKU_ID: $scope.GBP['GROUP_BUY_PLAN.SKU_ID'].toString(),
+            SUM_COUNT: $scope.sumCount.toString()
         }
-        $state.go("pages/order/addGroupBuy(" + JSON.stringify(param) + ")");
+        $state.go("pages/order/addGroupBuy", param);
     }
 });

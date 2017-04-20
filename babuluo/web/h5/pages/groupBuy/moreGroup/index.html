@@ -61,9 +61,9 @@
         参团人员
     </div>
     <div class="groups">
-        <div class="eachgroup" ng-show="showMembers" ng-repeat="gbm in gbmListSub">
+        <div class="eachgroup" ng-repeat="gbm in gbmListSub">
             <img class="group-img" src="" alt="">
-            <span ng-bind="memberInfoList[gbm['GROUP_BUY_MEMBER.UID']]['MEMBER_INFO.TRUE_NAME']"></span>
+            <span ng-bind="gbm['GROUP_BUY_MEMBER.USER_NAME']"></span>
             <div class="group-pos">
                 <div class="group-over">
                     <p class="colorgray grouptime" style="margin-top: 10px;">

@@ -56,10 +56,10 @@
     <div class="group-tishi">支付开团并邀请{{GBP['GROUP_BUY_PLAN.SUM_COUNT']}}人参团，人数不足自动退款</div>
     <div class="groups">
         <p class="groups-nav">以下小伙伴正在发起团购，你也可以直接参与</p>
-        <div class="eachgroup" ng-show="showGbg" ng-repeat="gbm in gbmList"
+        <div class="eachgroup"  ng-repeat="gbm in gbmList"
              ng-if="gbm['GROUP_BUY_MEMBER.IS_LEADER'] == 1">
             <img class="group-img" src="" alt="">
-            <span ng-bind="memberInfoList[gbm['GROUP_BUY_MEMBER.UID']]['MEMBER_INFO.TRUE_NAME']"></span>
+            <span ng-bind="gbm['GROUP_BUY_MEMBER.USER_NAME']"></span>
             <div class="group-pos">
                 <div class="group-over">
                     <p class="orange group-cha">
@@ -86,7 +86,7 @@
             </div>
         </div>
     </div>
-    <div class="kaiBtn group-sign">开团：{{sumPrice |currency : '￥'}}</div>
+    <div class="kaiBtn group-sign" ng-click="goGroup()">开团：{{sumPrice |currency : '￥'}}</div>
     <!-- BEGIN footer-nav -->
 
     <!-- END footer-nav -->

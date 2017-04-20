@@ -2,8 +2,6 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_allGroupper_Control
     $scope.initPage = function () {
         modalFactory.setBottom(false);
         var gbm = getCookie("GBM");
-        var gbmUserInfo = getCookie("GBM_USER_INFO");
         $scope.gbmList = JSON.parse(gbm);
-        $scope.memberInfoList = JSON.parse(gbmUserInfo);
     };
 });

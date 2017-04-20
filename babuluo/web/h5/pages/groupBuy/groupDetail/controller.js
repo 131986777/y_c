@@ -1,32 +1,31 @@
-angular.module('AndSell.H5.Main').controller('pages_groupBuy_groupDetail_Controller', function (productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory, weUI, seckillFactory) {
+angular.module('AndSell.H5.Main').controller('pages_groupBuy_groupDetail_Controller', function (groupBuyMemberFactory, $stateParams, productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory, weUI, seckillFactory) {
     $scope.initPage = function () {
         modalFactory.setBottom(false);
-        var currentGbmGgbId = parseInt(getCookie("CURRENT_GBM_GBG_ID"));
         var gbpPrd = getCookie("GBP_PRD");
-        var gbmUserInfo = getCookie("GBM_USER_INFO");
         var gbp = getCookie("GBP");
-        var gbm = getCookie("GBM");
+        $scope.gbgId = $stateParams.GBG_ID;
+        getCurrentGbgUser($scope.gbgId)
         $scope.gbp = JSON.parse(gbp);
-        $scope.memberInfoList = JSON.parse(gbmUserInfo);
         $scope.gbpPrd = JSON.parse(gbpPrd);
-        $scope.gbmList = JSON.parse(gbm);
         $scope.surplusSize = $scope.gbp['GROUP_BUY_PLAN.SUM_COUNT'];
         $scope.endDate = $scope.gbp['GROUP_BUY_PLAN.END_DATETIME'];
         $scope.sumCount = getCookie("SUM_COUNT") == null ? 1 : parseInt(getCookie("SUM_COUNT"));
         $scope.sumPrice = $scope.gbp['GROUP_BUY_PLAN.GROUP_PRICE'] * $scope.sumCount;
         startWorkerByGbm();
-        getCurrentGbgUser(currentGbmGgbId)
-
 
     }
     $scope.currentGbgUserList = [];
     function getCurrentGbgUser(gbgId) {
-        $scope.gbmList.forEach(function (ele) {
-            if (ele['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID'] == gbgId) {
-                $scope.currentGbgUserList.push(ele);
-                $scope.surplusSize -= 1;
-            }
+        groupBuyMemberFactory.getAllMemberInGbgIds({'GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS': gbgId}, function (response) {
+            $scope.gbmList = response.data;
+            $scope.gbmList.forEach(function (ele) {
+                if (ele['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID'] == gbgId) {
+                    $scope.currentGbgUserList.push(ele);
+                    $scope.surplusSize -= 1;
+                }
+            })
         })
+
     }
 
     function initDate() {
@@ -81,5 +80,15 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_groupDetail_Control
     $scope.upCount = function () {
         $scope.sumCount += 1;
         $scope.sumPrice = $scope.sumCount * $scope.gbp['GROUP_BUY_PLAN.GROUP_PRICE'];
+    }
+
+    $scope.goGroup = function () {
+        removeCookie("GBG_ID");
+        setCookie("GBG_ID", $scope.gbgId);
+        var param = {
+            SKU_ID: $scope.gbp['GROUP_BUY_PLAN.SKU_ID'].toString(),
+            SUM_COUNT: $scope.sumCount.toString()
+        }
+        $state.go("pages/order/addGroupBuy", param);
     }
 });

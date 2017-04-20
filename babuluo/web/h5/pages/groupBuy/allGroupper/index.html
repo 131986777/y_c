@@ -12,7 +12,7 @@
 
     <div class="groups">
         <div class="eachgroup" style="height: 45px;" ng-repeat="gbm in gbmList">
-            <span ng-bind="memberInfoList[gbm['GROUP_BUY_MEMBER.UID']]['MEMBER_INFO.TRUE_NAME']"></span>
+            <span ng-bind="gbm['GROUP_BUY_MEMBER.USER_NAME']"></span>
             <span class="word-fr">{{gbm['GROUP_BUY_MEMBER.ADD_DATETIME']}}参团</span>
 
         </div>

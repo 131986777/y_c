@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller', function (groupBuyPlanFactory, $scope, $state, $q, balanceFactory, $stateParams, weUI, $http, http, couponFactory, productFactory, orderFactory, modalFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller', function (memberFactory, groupBuyMemberFactory, groupBuyGroupFactory, groupBuyPlanFactory, $scope, $state, $q, balanceFactory, $stateParams, weUI, $http, http, couponFactory, productFactory, orderFactory, modalFactory, weUI) {
 
     modalFactory.setTitle('团购商品');
     modalFactory.setBottom(false);
@@ -6,28 +6,30 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
-
+        $scope.gbgId = getCookie("GBG_ID");
+        removeCookie("GBG_ID");
         $scope.canCommit = false;
-
-        var gbp = getCookie("GBP");
-        $scope.GBP = JSON.parse(gbp);
-        $scope.orderInfo = JSON.parse(getCookie("ORDER_INFO"));
+        $scope.gbpEntity = '';
         var deferred_account = $q.defer();
         var deferred_price = $q.defer();
-
+        var deferred_storage = $q.defer();
+        var deferred_partake = $q.defer();
+        $scope.gbmStorage = false;
         $scope.cookiePickup = JSON.parse(getCookie("pickupPerson"));
 
         $scope.EmptyPick = isEmptyObject($scope.cookiePickup);
         if (!$scope.EmptyPick) {
             var param = {
-                'GROUP_BUY_PLAN.SKU_ID': $scope.GBP['GROUP_BUY_PLAN.SKU_ID']
+                'GROUP_BUY_PLAN.SKU_ID': $stateParams.SKU_ID
             };
             groupBuyPlanFactory.getBySkuIdAndStat(param, function (response) {
                 if (response.data.length > 0) {
-                }
-                else {
+                    $scope.gbpEntity = response.data[0];
+                    deferred_partake.resolve();
+                } else {
                     weUI.toast("商品未参加团购活动~");
                     history.back();
+                    return;
                 }
             })
         }
@@ -36,30 +38,23 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
 
         $scope.shop = JSON.parse(getCookie('currentShopInfo'));
         $scope.queryAccount(deferred_account);
+        $scope.isGbpStoraeg(deferred_storage, deferred_partake);
 
-        $scope.skuIds = $scope.GBP['GROUP_BUY_PLAN.SKU_ID']
+        $scope.skuIds = $stateParams.SKU_ID;
         var params = {};
-        var skuIdLists = new Array;
-        $scope.skuIds.split(",").forEach(function (ele, index) {
-                skuIdLists.push(ele);
-        })
-        if (skuIdLists.length == 0) {
-            window.history.back();
-            return;
-        }
-        if (skuIdLists.length > 1) {
+        if ($scope.skuIds == undefined) {
             weUI.toast.info('团购商品异常');
             window.history.back();
             return;
         }
-        params['SHOP_PRODUCT_SKU.SKU_IDS'] = skuIdLists.toString();
+        params['SHOP_PRODUCT_SKU.SKU_IDS'] = $scope.skuIds;
         params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         productFactory.getProductSkuBySkuIds(params, function (response) {
             $scope.skuList = response.data;
             $scope.skulistsForOrder = new Array;
             $scope.skuList.forEach(function (ele) {
-                ele['SHOP_PRODUCT_SKU.SIZE'] = $stateParams.COUNT;
-                ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = moneyFormat(ele['SHOP_PRODUCT_SKU.REAL_PRICES']);
+                ele['SHOP_PRODUCT_SKU.SIZE'] = $stateParams.SUM_COUNT;
+                ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = moneyFormat(ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD']);
                 $scope.needPay = ele['SHOP_PRODUCT_SKU.NEED_PAY'];
                 ele.isSelect = false;
                 ele.isSale = false;
@@ -82,25 +77,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
         var promise = $q.all([deferred_price.promise, deferred_account.promise]);
 
         promise.then(function (result) {
-            // $scope.COUPON_INFO = $stateParams.COUPON_INFO;
-            // if ($stateParams.COUPON_INFO != '') {
-            //     $scope.coupon = JSON.parse($stateParams.COUPON_INFO);
-            //     if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
-            //
-            //         var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
-            //         var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
-            //         price -= $scope.coupon.MONEY;
-            //         if (price <= 0) {
-            //             price = 0.01;
-            //         }
-            //         $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
-            //         $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
-            //         $scope.order['SHOP_ORDER.PRICE_OVER'] -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
-            //         $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.coupon.ID;
-            //     }
-            //
-            // }
-
             if ($scope.balanceInfo[0]['MEMBER_ACCOUNT.BALANCE']
                 >= $scope.order['SHOP_ORDER.PRICE_OVER']) {
                 $scope.order['SHOP_ORDER.PAY_TYPE'] = 'ACCOUNT';
@@ -108,10 +84,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
                 $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
             }
         });
+
     }
 
     $scope.queryAccount = function (deferred) {
-        var form = {};
         balanceFactory.queryAccountByUid({}, function (response) {
             $scope.balanceInfo = response.data;
             if ($scope.balanceInfo.length > 0) {
@@ -138,6 +114,75 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
         $scope.order['SHOP_ORDER.PAY_TYPE'] = 'WEIXIN';
     };
 
+    //判断团购是否还有剩余的名额
+    $scope.isGbpStoraeg = function (deferred, deferred_partake) {
+        deferred_partake.promise.then(function (res) {
+            if ($scope.gbgId == null) {
+                var gbmId = $scope.gbpEntity['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'];
+                groupBuyGroupFactory.getAllGroupByGbpId({'GROUP_BUY_GROUP.GROUP_BUY_PLAN_ID': gbmId}, function (response) {
+                    $scope.gbgEntity = response.data[0];
+                    var gbgIds = '';
+                    response.data.forEach(function (ele) {
+                        if (gbgIds != "") {
+                            gbgIds += ",";
+                        }
+                        gbgIds += ele['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID'];
+                    })
+                    if (gbgIds == '') {
+                        return;
+                    }
+                    groupBuyMemberFactory.getAllMemberInGbgIds({'GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS': gbgIds}, function (response) {
+                        deferred.resolve();
+                        $scope.gbmStorage = response.data.length < $scope.gbpEntity['GROUP_BUY_PLAN.SUM_COUNT'];
+                    })
+                })
+            } else {
+                groupBuyMemberFactory.getAllMemberInGbgIds({'GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS': $scope.gbgId}, function (response) {
+                    deferred.resolve();
+                    $scope.gbmStorage = response.data.length < $scope.gbpEntity['GROUP_BUY_PLAN.SUM_COUNT'];
+                })
+            }
+
+        });
+    }
+
+    //添加团购相关信息
+    $scope.addGbm = function (orderId) {
+        var param = {};
+        //gbp type = manage
+        if ($scope.gbpEntity['GROUP_BUY_PLAN.TYPE'] == 'MANAGE') {
+            param['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID'] = $scope.gbgEntity['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID'];
+            param['GROUP_BUY_MEMBER.UID'] = getCookie("ANDSELLID");
+            param['GROUP_BUY_MEMBER.USER_NAME'] = $scope.cookiePickup['man'];
+            param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'WAIT_PAY';
+            param['GROUP_BUY_MEMBER.ORDER_ID'] = orderId;
+            groupBuyMemberFactory.add(param);
+        } else {
+            //gbp type = member
+            if ($scope.gbgId == null) {
+                //这个是单独开一个团购
+                param['GROUP_BUY_GROUP.GROUP_BUY_PLAN_ID'] = $scope.gbpEntity['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'];
+                param['GROUP_BUY_GROUP.STATE'] = 'IN';
+                groupBuyGroupFactory.add(param, function (response) {
+                    param = {};
+                    param['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID'] = response.extraData.GBG_ID;
+                    param['GROUP_BUY_MEMBER.IS_LEADER'] = 1;
+                    param['GROUP_BUY_MEMBER.UID'] = getCookie("ANDSELLID");
+                    param['GROUP_BUY_MEMBER.USER_NAME'] = $scope.cookiePickup['man'];
+                    param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'WAIT_PAY';
+                    param['GROUP_BUY_MEMBER.ORDER_ID'] = orderId;
+                    groupBuyMemberFactory.add(param);
+                });
+            } else {
+                param['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID'] = $scope.gbgId;
+                param['GROUP_BUY_MEMBER.UID'] = getCookie("ANDSELLID");
+                param['GROUP_BUY_MEMBER.USER_NAME'] = $scope.cookiePickup['man'];
+                param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'WAIT_PAY';
+                param['GROUP_BUY_MEMBER.ORDER_ID'] = orderId;
+                groupBuyMemberFactory.add(param);
+            }
+        }
+    };
 
     //计算订单价格
     $scope.updateOrderPrice = function () {
@@ -175,10 +220,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
 
     //提交订单
     $scope.commitOrder = function () {
+        if (!$scope.gbmStorage) {
+            weUI.toast.error('来晚了哦,团购已满员。');
+            return;
+        }
         if (!$scope.canCommit) {
             return;
         }
-
         if ($scope.order['SHOP_ORDER.PRICE_OVER'] <= 0) {
             weUI.toast.error('订单异常,请重新下单');
             window.history.back();
@@ -189,6 +237,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
             return;
         }
 
+        //判断是否有订单库存
+
         if ($scope.commitClick) {
             $scope.commitClick = false;
             weUI.toast.showLoading('正在下单');
@@ -198,7 +248,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
 
             params['SHOP_ORDER.TYPE'] = 4;//自提付款单
 
-            params['SHOP_ORDER.SPECIAL_MODEL'] = 'APPOINTMENT';//特殊状态为团购
+            params['SHOP_ORDER.SPECIAL_MODEL'] = 'GROUPBUY';//特殊状态为团购
             params['SHOP_ORDER.REC_CONTACT'] = $scope.cookiePickup.man;//收货人
             params['SHOP_ORDER.REC_PHONE'] = $scope.cookiePickup.phone;//联系电话
             params['SHOP_ORDER.SHOP_NAME'] = $scope.shop['SHOP.SHOP_NAME'];//门店信息
@@ -215,7 +265,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
 
             params['SHOP_ORDER.DETAILS'] = JSON.stringify($scope.skuList);//sku信息
             orderFactory.addOrder(params, function (response) {
-
+                $scope.addGbm(response.extraData.ORDER_ID);
                 weUI.toast.hideLoading();
 
                 //weUI.toast.ok('下单成功');
@@ -226,7 +276,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
                 window.location.replace("#/pages/order/detail/"
                     + response.extraData.ORDER_ID
                     + '/Add/');
-
             }, function (response) {
                 weUI.toast.hideLoading();
                 $scope.commitClick = true;
@@ -235,12 +284,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
         }
     }
 
+
     function getDate(item) {
 
-        var endDay = item['APPOINTMENT_PRODUCT.END_DAY'];
-        var type = item['APPOINTMENT_PRODUCT.TIME_TYPE'];
-        var still = item['APPOINTMENT_PRODUCT.STILL_DAY'];
-        var startTime = item['APPOINTMENT_PRODUCT.START_TIME'];
+        var endDay = item['GROUPBUY_PRODUCT.END_DAY'];
+        var type = item['GROUPBUY_PRODUCT.TIME_TYPE'];
+        var still = item['GROUPBUY_PRODUCT.STILL_DAY'];
+        var startTime = item['GROUPBUY_PRODUCT.START_TIME'];
         var next = true;
         var dayList = new Array;
         if (type == 'WEEK') {
