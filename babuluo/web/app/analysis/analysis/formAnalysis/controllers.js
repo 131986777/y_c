@@ -15,13 +15,20 @@ angular.module('AndSell.Main').controller('analysis_analysis_formAnalysis_Contro
     $scope.getGroupByRange = function () {
         var startDay = $scope.groupRange['STARTDAY'];
         var endDay = $scope.groupRange['ENDDAY'];
+        var shopid=$scope.groupRange['SHOPID'];
+        var productname=$scope.groupRange['PRODUCTNAME']
+        var rank=$scope.groupRange['rank']
         $scope.FORMSOURCE = "";
-        getFormSource(startDay,endDay);
-    }
+        getFormSource(startDay,endDay,shopid,productname,rank);
+    };
+    //获得门店
+    $scope.bindData = function (response) {
+        $scope.memberList = response.data;
+        $scope.shopList = response.extraData.shopList;
+    };
 
-    function getFormSource(startDay,endDay) {
+    function getFormSource(startDay,endDay,shopid,productname,rank) {
         analysisFactory.getFormChangeByRange(startDay,endDay).get({},function (response) {
-            console.log(response);
             if((response.data).length==0){
                 modalFactory.showShortAlert("所选日期无数据！")
                 return;
@@ -29,12 +36,49 @@ angular.module('AndSell.Main').controller('analysis_analysis_formAnalysis_Contro
             var flag = response.data;
             var temp;
             var array = new Array();
+            var shop;
             for(var i=0;i<flag.length;i++){
                 temp = JSON.parse(flag[i]['MANAGE_DATA_ANALYSIS.SOURCE']);
-                for(var j=0;j<temp.length;j++){
-                    array.push(temp[j])
+                if(shopid=='null'&&(productname==undefined||productname=='')){
+                	for(var j=0;j<temp.length;j++){
+                    		array.push(temp[j])
+                    }
+                }
+                //只找该商品的
+                if(shopid=='null'&& productname!=undefined){
+                	for(var j=0;j<temp.length;j++){
+                		if(temp[j].PRODUCT_NAME==productname ||temp[j].PRODUCT_SKU==productname){
+                		array.push(temp[j])
+                		}
+                	}
+                }
+                //只找该门店
+                if(shopid!=='null' && (productname==undefined||productname=='')){
+               		for(var j=0;j<temp.length;j++){
+                		if(temp[j].SHOP_ID==shopid){
+                    		array.push(temp[j])
+                    	}
+               		}	
+                }
+                //只找该门店的某种商品
+                if(shopid!=='null' && productname!=undefined){
+               		for(var j=0;j<temp.length;j++){
+                		if(temp[j].SHOP_ID==shopid &&(temp[j].PRODUCT_NAME==productname||temp[j].PRODUCT_SKU==productname)){
+                    		array.push(temp[j])
+                    	}
+               		}	
                 }
             }
+            if(rank=='SHOPID_ASC'){
+            	array.sort(function(a,b){
+                    return a.SHOP_ID - b.SHOP_ID;
+                });
+            }else{
+            	array.sort(function(a,b){
+                    return Date.parse(b.ORDER_DATETIME) - Date.parse(a.ORDER_DATETIME);
+                });
+            }
+//            console.log(array);
             $scope.FORMSOURCE = array;
         },null);
     }
