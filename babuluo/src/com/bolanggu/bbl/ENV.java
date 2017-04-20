@@ -1,5 +1,8 @@
 package com.bolanggu.bbl;
 
+import com.bolanggu.bbl.sms.BBLSMSUtil;
+import com.weixin.WXPay;
+
 /**
  * Created by pabula on 2016/11/13.
  */
@@ -14,9 +17,9 @@ public class ENV {
     public static String STATE = "NORMAL";//正常模式  向百年传订单
 
     //门店接口
-    //public static String API_MENDIAN = "http://58.240.110.186:98/BBL/";//线上服
-    public static String API_MENDIAN = "http://58.240.110.186:99/BBL/"; //测试服
-    //public static String API_MENDIAN = "http://192.168.1.69:99/BBL/"; //BBL内网
+    //public static String API_MENDIAN = "http://221.226.190.86:98/BBL/";//线上服
+    public static String API_MENDIAN = "http://221.226.190.86:99/BBL/"; //测试服
+    //public static String API_MENDIAN = "http://192.168.1.68:99/BBL/"; //BBL内网
 
     //阿里云KEY
     public static String ALIYUN_KEY = "LTAIEHpVQat6f83C";
@@ -36,7 +39,7 @@ public class ENV {
     //阿里云上传后URL
     public static String ALIYUN_UPLOAD_URL =
         "http://bbl-upload.oss-cn-shanghai.aliyuncs.com/" + ALIYUN_UPLOAD_MAIN_DIR + "/";
-        //BBL客户的
+    //BBL客户的
 
     //阿里云上传在内容编辑器中，缩略图尺寸
     public static String ALIYUN_UPLOAD_IMG_SIZE = "?x-oss-process=image/resize,w_750";
@@ -67,4 +70,24 @@ public class ENV {
     public static String UPLOAD_EXCEL_FILE = "/file/upload/";
 
     public static String TEMP_FILE = "/file/temp/";
+
+    /**
+     * 支付宝配置信息
+     */
+    //支付宝即时到账合作伙伴PID
+    public static String ALIPAY_PID = "2088121336481308";
+    //支付宝即时到账合作伙伴密钥
+    public static String ALIPAY_KEY = "sy6zcif7m285u4htm311yytz6eyks7ce";
+    //支付宝日志输出
+    public static String ALIPAY_LOG = "/";
+    //支付宝异步通知接口
+    public static String ALIPAY_NOTIFY_URL = DO_MAIN + "alipay";
+    //支付宝结果跳转页面
+    public static String ALIPAY_RETURN_URL = DO_MAIN + "pc/pages/aliPay/return_url.jsp";
+    //http://app.bblycyz.com
+
+    //054
+    public static void main(String[] args) {
+        System.out.println(WXPay.queryOrder("10004039"));
+    }
 }
