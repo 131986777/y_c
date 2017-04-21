@@ -78,7 +78,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_formAnalysis_Contro
                     return Date.parse(b.ORDER_DATETIME) - Date.parse(a.ORDER_DATETIME);
                 });
             }
-//            console.log(array);
+            console.log(array);
             $scope.FORMSOURCE = array;
         },null);
     }
