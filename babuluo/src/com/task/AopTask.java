@@ -20,4 +20,43 @@ public class AopTask {
             e.printStackTrace();
         }
     }
+
+    //将任务暂停
+    public static void pauseJob(String gbpId) {
+        SchedulerManager.pauseJob(gbpId, "START_JOB_GROUP:" + gbpId);
+        SchedulerManager.pauseJob(gbpId, "END_JOB_GROUP:" + gbpId);
+    }
+
+    //将任务重启
+    public static void resumeJob(String gbpId) {
+        SchedulerManager.resumeJob(gbpId, "START_JOB_GROUP:" + gbpId);
+        SchedulerManager.resumeJob(gbpId, "END_JOB_GROUP:" + gbpId);
+    }
+
+    //将任务删除
+    public static void removeJob(String gbpId) {
+        SchedulerManager.removeJob(gbpId,
+                "START_JOB_GROUP:" + gbpId,
+                "START_TRIGGER:" + gbpId,
+                "START_TRIGGER_GROUP:" + gbpId);
+
+        SchedulerManager.removeJob(gbpId,
+                "STOP_JOB_GROUP:" + gbpId,
+                "STOP_TRIGGER:" + gbpId,
+                "STOP_TRIGGER_GROUP:" + gbpId);
+    }
+
+    //更新任务执行时间
+    public static void updateJob(String gbpId, String start, String end) {
+        SchedulerManager.modifyJobCron(gbpId,
+                "START_JOB_GROUP:" + gbpId,
+                "START_TRIGGER:" + gbpId,
+                "START_TRIGGER_GROUP:" + gbpId,
+                CronUtil.getCronByDateStr(start));
+        SchedulerManager.modifyJobCron(gbpId,
+                "STOP_JOB_GROUP:" + gbpId,
+                "STOP_TRIGGER:" + gbpId,
+                "STOP_TRIGGER_GROUP:" + gbpId,
+                CronUtil.getCronByDateStr(end));
+    }
 }

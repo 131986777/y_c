@@ -109,13 +109,13 @@ public class SchedulerManager {
      * @param jobName 任务名称
      * @param newCron 新的触发时间
      */
-    public static void modifyJobCron(String jobName, String newCron) {
+    public static void modifyJobCron(String jobName, String jobGroupName, String triggerName, String triggerGroupName, String newCron) {
         try {
             sched = schedulerFactory.getScheduler();
-            CronTrigger trigger = (CronTrigger) sched.getTrigger(new TriggerKey(jobName, TRIGGER_GROUP_NAME));
+            CronTrigger trigger = (CronTrigger) sched.getTrigger(new TriggerKey(triggerName, triggerGroupName));
             String oldCron = trigger.getCronExpression();
             if (!oldCron.equals(newCron)) {
-                JobDetail detail = sched.getJobDetail(JobKey.jobKey(jobName, JOB_GROUP_NAME));
+                JobDetail detail = sched.getJobDetail(JobKey.jobKey(jobName, jobGroupName));
                 LOG.debug("----------[MODIFY JOB CRON SUCCESS]----------");
                 Class clazz = detail.getJobClass();
                 removeJob(jobName);
