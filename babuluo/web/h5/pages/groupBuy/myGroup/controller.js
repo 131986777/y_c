@@ -135,7 +135,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
         var tempDate = $scope.showDate;
         var yMd = tempDate.split(" ")[0].split("-");
         var Hms = tempDate.split(" ")[1].split(":");
-        var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1] + '00').getTime();
+        var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1] + ':00').getTime();
         var now = new Date().getTime();
         if (end < now) {
             $scope.showDate = "已";

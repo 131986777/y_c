@@ -99,7 +99,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
         var tempDate = $scope.endDate;
         var yMd = tempDate.split(" ")[0].split("-");
         var Hms = tempDate.split(" ")[1].split(":");
-        var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1] + '00').getTime();
+        var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1] + ':00').getTime();
         var now = new Date().getTime();
         if (end < now) {
             document.getElementById("gbpHour" + index).innerHTML = '已'

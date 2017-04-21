@@ -22,6 +22,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_allGroup_Controller
                 if (ids != "") {
                     ids += ",";
                 }
+
                 ids += ele['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID'];
             })
             if (ids != "") {
@@ -54,7 +55,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_allGroup_Controller
         var tempDate = $scope.showDate;
         var yMd = tempDate.split(" ")[0].split("-");
         var Hms = tempDate.split(" ")[1].split(":");
-        var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1] + '00').getTime();
+        var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1] + ':00').getTime();
         var now = new Date().getTime();
         if (end < now) {
             $scope.showDate = "已";

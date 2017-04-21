@@ -44,6 +44,8 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
      */
     $scope.addGroupBuyPlan = function () {
         var form = $scope.groupBuyPlan;
+        form['GROUP_BUY_PLAN.BEGIN_DATETIME'] = $scope.groupBuyPlan['GROUP_BUY_PLAN.BEGIN_DATETIME'] + ":00";
+        form['GROUP_BUY_PLAN.END_DATETIME'] = $scope.groupBuyPlan['GROUP_BUY_PLAN.END_DATETIME'] + ":00";
         //表单验证
         if (form['GROUP_BUY_PLAN.GROUP_BUY_NAME'] == undefined || form['GROUP_BUY_PLAN.GROUP_BUY_INFO'] == undefined || form['GROUP_BUY_PLAN.TYPE'] == undefined || form['GROUP_BUY_PLAN.BEGIN_DATETIME'] == undefined || form['GROUP_BUY_PLAN.END_DATETIME'] == undefined || form['GROUP_BUY_PLAN.SUM_COUNT'] == undefined || form['GROUP_BUY_PLAN.GROUP_PRICE'] == undefined || $scope.sku == undefined) {
             modalFactory.showShortAlert("请填写完整表单信息");
@@ -75,13 +77,6 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         })
     };
 
-    function addGroupBuyGroup(form) {
-        groupBuyGroupFactory.addGroupBuyGroup(form, function (response) {
-
-        }, function (response) {
-
-        });
-    }
 
     /**
      * 请求所有的团购数据
@@ -135,6 +130,8 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
      */
     $scope.modifyGroupBuyPlan = function () {
         var form = $scope.groupBuyPlanToModify;
+        form['GROUP_BUY_PLAN.BEGIN_DATETIME'] = $scope.groupBuyPlanToModify['GROUP_BUY_PLAN.BEGIN_DATETIME'] + ":00";
+        form['GROUP_BUY_PLAN.END_DATETIME'] = $scope.groupBuyPlanToModify['GROUP_BUY_PLAN.END_DATETIME'] + ":00";
         //表单验证
         if (form['GROUP_BUY_PLAN.GROUP_BUY_NAME'] == undefined || form['GROUP_BUY_PLAN.GROUP_BUY_INFO'] == undefined || form['GROUP_BUY_PLAN.TYPE'] == undefined || form['GROUP_BUY_PLAN.BEGIN_DATETIME'] == undefined || form['GROUP_BUY_PLAN.END_DATETIME'] == undefined || form['GROUP_BUY_PLAN.SUM_COUNT'] == undefined || form['GROUP_BUY_PLAN.GROUP_PRICE'] == undefined || $scope.sku == undefined) {
             modalFactory.showShortAlert("请填写完整表单信息");
@@ -181,6 +178,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         })
     }
 
+
     /**
      * 逻辑删除
      * @param groupBuyPlan
@@ -203,7 +201,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         todayHighlight: true,
         weekStart: 1,
         startView: 2,
-        format: 'yyyy-mm-dd HH',
+        format: 'yyyy-mm-dd hh:ii',
         todayBtn: 'linked'
     }).on("hide", function () {
         var $this = $(this);
@@ -221,7 +219,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         autoclose: true,
         todayHighlight: true,
         weekStart: 1,
-        format: 'yyyy-mm-dd HH',
+        format: 'yyyy-mm-dd hh:ii:00',
         todayBtn: 'linked',
     }).on("hide", function () {
         var $this = $(this);
