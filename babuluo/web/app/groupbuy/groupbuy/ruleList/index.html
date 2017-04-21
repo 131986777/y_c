@@ -59,6 +59,10 @@
                                 <a show-modal id="#modify"
                                    ng-click="initModify(VALUE)"
                                 >修改</a>
+                                <a ng-if="VALUE['GROUP_BUY_PLAN.STATE']=='END_SALE'"
+                                   ng-click="changeState(VALUE,'IN_SALE')">启用</a>
+                                <a ng-if="VALUE['GROUP_BUY_PLAN.STATE']=='IS_CANCEL'"
+                                   ng-click="changeState(VALUE,'IN_SALE')">启用</a>
                                 <a ng-if="VALUE['GROUP_BUY_PLAN.STATE']=='NOT_SALE'"
                                    ng-click="changeState(VALUE,'IN_SALE')">启用</a>
                                 <a ng-if="VALUE['GROUP_BUY_PLAN.STATE']=='IN_SALE'"
@@ -177,7 +181,7 @@
                                 <input id="start_hour_group_modify" type="text" class="form-control "
                                        placeholder=""
                                        ng-model="groupBuyPlanToModify['GROUP_BUY_PLAN.BEGIN_DATETIME']"
-                                       data-date-format="yyyy-mm-dd hh:ii:00" style="">
+                                       data-date-format="yyyy-MM-dd HH" style="">
                             </div>
                         </div>
                         <div class="form-group row">
@@ -193,7 +197,7 @@
                                 <input id="end_hour_group_modify" type="text" class="form-control "
                                        placeholder=""
                                        ng-model="groupBuyPlanToModify['GROUP_BUY_PLAN.END_DATETIME']"
-                                       data-date-format="yyyy-mm-dd hh:ii:00" style="">
+                                       data-date-format="yyyy-MM-dd HH" style="">
                             </div>
                         </div>
                     </form>

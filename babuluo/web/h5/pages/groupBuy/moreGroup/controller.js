@@ -60,6 +60,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
                 ids += ele['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID'];
             })
             if (ids != "") {
+                $scope.GBG_IDS = ids;
                 getGbmList(ids);
             }
         });
@@ -137,9 +138,9 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
     //显示该团下的所有参团用户
     $scope.showAllGroupMember = function () {
         gw.terminate();
-        removeCookie("GBM");
-        setCookie("GBM", JSON.stringify($scope.gbmList));
-        $state.go("pages/groupBuy/allGroupper");
+        // removeCookie("GBM");
+        // setCookie("GBM", JSON.stringify($scope.gbmList));
+        $state.go("pages/groupBuy/allGroupper", {GBG_IDS: $scope.GBG_IDS});
     }
 
 

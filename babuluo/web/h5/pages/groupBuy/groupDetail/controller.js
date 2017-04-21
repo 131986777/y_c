@@ -75,11 +75,18 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_groupDetail_Control
         if ($scope.sumCount <= 0) {
             $scope.sumPrice = $scope.gbp['GROUP_BUY_PLAN.GROUP_PRICE'];
             $scope.sumCount = 1;
+            setCookieSumCount(1);
         }
     }
     $scope.upCount = function () {
         $scope.sumCount += 1;
+        setCookieSumCount($scope.sumCount);
         $scope.sumPrice = $scope.sumCount * $scope.gbp['GROUP_BUY_PLAN.GROUP_PRICE'];
+    }
+
+    function setCookieSumCount(count) {
+        removeCookie("SUM_COUNT");
+        setCookie("SUM_COUNT", count);
     }
 
     $scope.goGroup = function () {

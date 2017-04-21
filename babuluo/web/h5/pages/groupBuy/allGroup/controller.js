@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_groupBuy_allGroup_Controller', function (groupBuyGroupFactory, groupBuyMemberFactory, productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory, weUI, seckillFactory) {
+angular.module('AndSell.H5.Main').controller('pages_groupBuy_allGroup_Controller', function (groupBuyGroupFactory, groupBuyMemberFactory, productFactory, $interval, $scope, $state, weUI, modalFactory) {
 
 
     $scope.initPage = function () {

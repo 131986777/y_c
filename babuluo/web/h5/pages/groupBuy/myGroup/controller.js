@@ -112,13 +112,10 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
     }
     //查看全部团
     $scope.goAllGroup = function () {
-        removeCookie("surplusSize");
         removeCookie("SUM_COUNT");
         setCookie("SUM_COUNT", $scope.sumCount);
-        setCookie("surplusSize", $scope.surplusSize);
         $state.go("pages/groupBuy/allGroup");
     }
-    $scope.sumCount = 1;
 
     $scope.downCount = function () {
         $scope.sumCount -= 1;

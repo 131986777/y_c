@@ -451,7 +451,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                 var tempDate = ele['GROUP_BUY_PLAN.END_DATETIME'];
                 var yMd = tempDate.split(" ")[0].split("-");
                 var Hms = tempDate.split(" ")[1].split(":");
-                var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1] + '00').getTime();
+                var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1]+":00").getTime();
                 var now = new Date().getTime();
                 if (end < now) {
                     ele['hour'] = '已'
@@ -479,7 +479,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             $state.go('pages/groupBuy/moreGroup');
         } else if (gbp['GROUP_BUY_PLAN.TYPE'] == 'MEMBER') {
             removeCookie("SUM_COUNT");
-            removeCookie("SUM_PRICE");
             $state.go('pages/groupBuy/myGroup');
         }
 

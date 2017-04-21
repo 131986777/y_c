@@ -246,7 +246,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
             var params = $scope.order;
             //params['SHOP_ORDER.TYPE'] = $scope.cookiePickup.type;//订货单
 
-            params['SHOP_ORDER.TYPE'] = 4;//自提付款单
+            params['SHOP_ORDER.TYPE'] = 6;//团购单
 
             params['SHOP_ORDER.SPECIAL_MODEL'] = 'GROUPBUY';//特殊状态为团购
             params['SHOP_ORDER.REC_CONTACT'] = $scope.cookiePickup.man;//收货人
