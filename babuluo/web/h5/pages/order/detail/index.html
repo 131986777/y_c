@@ -57,6 +57,23 @@
                         ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">订单已完成！</span>
                     <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
                 </h4>
+                <h4 class="suc-title" ng-if="order['SHOP_ORDER.TYPE']=='6'">
+                    <span
+                            ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==1">已参团，待付款！</span>
+                    <span
+                            ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1">已参团!</span>
+                    <span
+                            ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2">已参团且已付款，待成团!</span>
+                    <span
+                            ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==-1">已参团且已付款，待发货</span>
+                    <span
+                            ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==1">已参团且已付款，待收货</span>
+                    <span
+                            ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&order['SHOP_ORDER.NEED_PAY']==1">订单已完成！</span>
+                    <span
+                            ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&order['SHOP_ORDER.NEED_PAY']==-1">订单已完成！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
+                </h4>
                 <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.TYPE']=='4'&&order['SHOP_ORDER.NEED_PAY']==1">
                     请在30分钟之内完成付款，逾期订单将关闭
                 </p>
@@ -65,6 +82,9 @@
                 </p>
                 <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.TYPE']=='5'">
                     请在今天之内完成付款，逾期订单将关闭
+                </p>
+                <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.TYPE']=='6'">
+                    请在5分钟之内完成付款，逾期预约将取消
                 </p>
             </div>
         </div>
@@ -396,7 +416,17 @@
                     立即付款
                 </a>
             </div>
-
+            <div class="btn-wrap" ng-if="order['SHOP_ORDER.TYPE']=='6'">
+                <a class="btn my-btn-default" ng-click="cancelOrderByGroupBuy()"
+                   ng-if="(order['SHOP_ORDER.NEED_PAY']==-1&&order['SHOP_ORDER.STATE_DELIVERY']==-1)||
+                   ((order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.STATE_MONEY']==-1)||(order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&&order['SHOP_ORDER.STATE_DELIVERY']==-1))">
+                    取消订单
+                </a>
+                <a class="btn my-btn-default" ng-click="payNow()"
+                   ng-if="order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
+                    立即付款
+                </a>
+            </div>
             <div class="btn-wrap"
                  ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">
                 <a class="btn my-btn-default" ng-click="deliveryOrder()">

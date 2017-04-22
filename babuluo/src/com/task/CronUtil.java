@@ -40,4 +40,17 @@ public class CronUtil {
         String[] fileds = df.format(date).split("-");
         return fileds[5] + " " + fileds[4] + " " + fileds[3] + " " + fileds[2] + " " + fileds[1] + " ? " + fileds[0];
     }
+
+    //判断时间是否在当前时间全面
+    //如果是 返回false；
+    public static boolean dateTimeEquals(String dateStr) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date date = df.parse(dateStr);
+            return date.after(new Date());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

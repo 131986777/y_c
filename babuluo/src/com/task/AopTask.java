@@ -48,15 +48,15 @@ public class AopTask {
 
     //更新任务执行时间
     public static void updateJob(String gbpId, String start, String end) {
-        SchedulerManager.modifyJobCron(gbpId,
-                "START_JOB_GROUP:" + gbpId,
-                "START_TRIGGER:" + gbpId,
-                "START_TRIGGER_GROUP:" + gbpId,
-                CronUtil.getCronByDateStr(start));
-        SchedulerManager.modifyJobCron(gbpId,
-                "STOP_JOB_GROUP:" + gbpId,
-                "STOP_TRIGGER:" + gbpId,
-                "STOP_TRIGGER_GROUP:" + gbpId,
-                CronUtil.getCronByDateStr(end));
+        JSONObject jo = new JSONObject();
+        jo.put("GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID", gbpId);
+        jo.put("GROUP_BUY_PLAN.BEGIN_DATETIME", start);
+        jo.put("GROUP_BUY_PLAN.END_DATETIME", end);
+        try {
+            InitGroupBuyTask.taskDetail(jo);
+        } catch (RuleException e) {
+            e.printStackTrace();
+        }
+
     }
 }

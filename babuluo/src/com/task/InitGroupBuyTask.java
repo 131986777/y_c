@@ -33,13 +33,14 @@ public class InitGroupBuyTask {
     public static void taskDetail(JSONObject gbp) throws RuleException {
         String gbpId = gbp.getString("GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID");
         String dateStr = gbp.getString("GROUP_BUY_PLAN.BEGIN_DATETIME");
-        if (dateTimeEquals(dateStr)) {
+        if (CronUtil.dateTimeEquals(dateStr)) {
             SchedulerManager.addJob(gbpId,
                     "START_JOB_GROUP:" + gbpId,
                     "START_TRIGGER:" + gbpId,
                     "START_TRIGGER_GROUP:" + gbpId,
                     CronUtil.getCronByDateStr(dateStr),
                     GroupBuyPlanStartTask.class);
+            //把任务标记为关闭
         } else {
             //如果在定时任务执行时任务还没有启动就把任务起启动
             new API().call("/group/buy/plan/modifyById", new HashMap<String, String>() {{
@@ -48,7 +49,7 @@ public class InitGroupBuyTask {
             }});
         }
         dateStr = gbp.getString("GROUP_BUY_PLAN.END_DATETIME");
-        if (dateTimeEquals(dateStr)) {
+        if (CronUtil.dateTimeEquals(dateStr)) {
             SchedulerManager.addJob(gbpId,
                     "STOP_JOB_GROUP:" + gbpId,
                     "STOP_TRIGGER:" + gbpId,
@@ -65,16 +66,5 @@ public class InitGroupBuyTask {
         }
     }
 
-    //判断时间是否在当前时间全面
-    //如果是 返回false；
-    private static boolean dateTimeEquals(String dateStr) {
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        try {
-            Date date = df.parse(dateStr);
-            return date.after(new Date());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
+
 }

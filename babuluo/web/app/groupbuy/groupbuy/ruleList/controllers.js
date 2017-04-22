@@ -130,8 +130,16 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
      */
     $scope.modifyGroupBuyPlan = function () {
         var form = $scope.groupBuyPlanToModify;
-        form['GROUP_BUY_PLAN.BEGIN_DATETIME'] = $scope.groupBuyPlanToModify['GROUP_BUY_PLAN.BEGIN_DATETIME'] + ":00";
-        form['GROUP_BUY_PLAN.END_DATETIME'] = $scope.groupBuyPlanToModify['GROUP_BUY_PLAN.END_DATETIME'] + ":00";
+        if ($scope.groupBuyPlanToModify['GROUP_BUY_PLAN.BEGIN_DATETIME'].length == 16) {
+            form['GROUP_BUY_PLAN.BEGIN_DATETIME'] = $scope.groupBuyPlanToModify['GROUP_BUY_PLAN.BEGIN_DATETIME'] + ":00";
+        } else {
+            form['GROUP_BUY_PLAN.BEGIN_DATETIME'] = $scope.groupBuyPlanToModify['GROUP_BUY_PLAN.BEGIN_DATETIME'].split('.')[0];
+        }
+        if ($scope.groupBuyPlanToModify['GROUP_BUY_PLAN.END_DATETIME'].length == 16) {
+            form['GROUP_BUY_PLAN.END_DATETIME'] = $scope.groupBuyPlanToModify['GROUP_BUY_PLAN.END_DATETIME'] + ":00";
+        } else {
+            form['GROUP_BUY_PLAN.END_DATETIME'] = $scope.groupBuyPlanToModify['GROUP_BUY_PLAN.END_DATETIME'].split('.')[0];
+        }
         //表单验证
         if (form['GROUP_BUY_PLAN.GROUP_BUY_NAME'] == undefined || form['GROUP_BUY_PLAN.GROUP_BUY_INFO'] == undefined || form['GROUP_BUY_PLAN.TYPE'] == undefined || form['GROUP_BUY_PLAN.BEGIN_DATETIME'] == undefined || form['GROUP_BUY_PLAN.END_DATETIME'] == undefined || form['GROUP_BUY_PLAN.SUM_COUNT'] == undefined || form['GROUP_BUY_PLAN.GROUP_PRICE'] == undefined || $scope.sku == undefined) {
             modalFactory.showShortAlert("请填写完整表单信息");
@@ -170,8 +178,10 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
      * @param type
      */
     $scope.changeState = function (groupBuyPlan, type) {
-        groupBuyPlan['GROUP_BUY_PLAN.STATE'] = type;
-        groupBuyPlanFactory.modifyById(groupBuyPlan, function (response) {
+        var param = {};
+        param['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'] = groupBuyPlan['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'];
+        param['GROUP_BUY_PLAN.STATE'] = type;
+        groupBuyPlanFactory.modifyById(param, function (response) {
             modalFactory.showShortAlert("改变状态成功");
         }, function (response) {
             modalFactory.showShortAlert("改变状态失败");
@@ -184,8 +194,10 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
      * @param groupBuyPlan
      */
     $scope.deleteGroupBuyPlan = function (groupBuyPlan) {
-        groupBuyPlan['GROUP_BUY_PLAN.IS_DEL'] = 1;
-        groupBuyPlanFactory.modifyById(groupBuyPlan, function (response) {
+        var param = {};
+        param['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'] = groupBuyPlan['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'];
+        param['GROUP_BUY_PLAN.IS_DEL'] = 1;
+        groupBuyPlanFactory.modifyById(param, function (response) {
             modalFactory.showShortAlert("删除成功");
         }, function (response) {
             modalFactory.showShortAlert("删除失败");

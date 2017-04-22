@@ -24,6 +24,8 @@ public class UpdateOrderPayJob implements Job {
 
         System.out.println("UpdateOrderPayJob.execute");
 
+        //修改api(shop_order.DATETIME_OUT < curdate()   and  STATE_ORDER = 1  and  STATE_OUT = 1  and  STATE_MONEY = -1 and  TYPE = 6)
+
         try {
             Map orderMap = new HashMap<>();
             ReturnData orderResponse =

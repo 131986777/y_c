@@ -6,8 +6,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
-        $scope.gbgId = getCookie("GBG_ID");
-        removeCookie("GBG_ID");
+        $scope.gbgId = parseInt($stateParams.GBG_ID);
         $scope.canCommit = false;
         $scope.gbpEntity = '';
         var deferred_account = $q.defer();
@@ -117,32 +116,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
     //判断团购是否还有剩余的名额
     $scope.isGbpStoraeg = function (deferred, deferred_partake) {
         deferred_partake.promise.then(function (res) {
-            if ($scope.gbgId == null) {
-                var gbmId = $scope.gbpEntity['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'];
-                groupBuyGroupFactory.getAllGroupByGbpId({'GROUP_BUY_GROUP.GROUP_BUY_PLAN_ID': gbmId}, function (response) {
-                    $scope.gbgEntity = response.data[0];
-                    var gbgIds = '';
-                    response.data.forEach(function (ele) {
-                        if (gbgIds != "") {
-                            gbgIds += ",";
-                        }
-                        gbgIds += ele['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID'];
-                    })
-                    if (gbgIds == '') {
-                        return;
-                    }
-                    groupBuyMemberFactory.getAllMemberInGbgIds({'GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS': gbgIds}, function (response) {
-                        deferred.resolve();
-                        $scope.gbmStorage = response.data.length < $scope.gbpEntity['GROUP_BUY_PLAN.SUM_COUNT'];
-                    })
-                })
-            } else {
-                groupBuyMemberFactory.getAllMemberInGbgIds({'GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS': $scope.gbgId}, function (response) {
-                    deferred.resolve();
-                    $scope.gbmStorage = response.data.length < $scope.gbpEntity['GROUP_BUY_PLAN.SUM_COUNT'];
-                })
-            }
-
+            groupBuyMemberFactory.getAllMemberInGbgIds({'GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS': $scope.gbgId}, function (response) {
+                deferred.resolve();
+                $scope.gbmStorage = response.data.length < $scope.gbpEntity['GROUP_BUY_PLAN.SUM_COUNT'];
+            })
         });
     }
 
@@ -151,7 +128,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
         var param = {};
         //gbp type = manage
         if ($scope.gbpEntity['GROUP_BUY_PLAN.TYPE'] == 'MANAGE') {
-            param['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID'] = $scope.gbgEntity['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID'];
+            param['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID'] = $scope.gbgId;
             param['GROUP_BUY_MEMBER.UID'] = getCookie("ANDSELLID");
             param['GROUP_BUY_MEMBER.USER_NAME'] = $scope.cookiePickup['man'];
             param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'WAIT_PAY';
@@ -159,7 +136,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
             groupBuyMemberFactory.add(param);
         } else {
             //gbp type = member
-            if ($scope.gbgId == null) {
+            if ($scope.gbgId == 0) {
                 //这个是单独开一个团购
                 param['GROUP_BUY_GROUP.GROUP_BUY_PLAN_ID'] = $scope.gbpEntity['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'];
                 param['GROUP_BUY_GROUP.STATE'] = 'IN';

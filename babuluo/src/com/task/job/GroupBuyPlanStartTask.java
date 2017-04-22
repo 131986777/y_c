@@ -2,6 +2,7 @@ package com.task.job;
 
 import com.pabula.api.API;
 import com.pabula.fw.exception.RuleException;
+import com.task.SchedulerManager;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -24,6 +25,9 @@ public class GroupBuyPlanStartTask implements Job {
         String gbpId = context.getJobDetail().getKey().getName();
         try {
             runTask(gbpId);
+            if (!SchedulerManager.jobIsComplete("START_TRIGGER:" + gbpId, "START_TRIGGER_GROUP:" + gbpId)) {
+                runTask(gbpId);
+            }
         } catch (RuleException e) {
             e.printStackTrace();
         }

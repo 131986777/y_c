@@ -166,7 +166,8 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
     $scope.goGroup = function () {
         var param = {
             SKU_ID: $scope.GBP['GROUP_BUY_PLAN.SKU_ID'].toString(),
-            SUM_COUNT: $scope.sumCount.toString()
+            SUM_COUNT: $scope.sumCount.toString(),
+            GBG_ID : $scope.gbgList[0]['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID']
         }
         $state.go("pages/order/addGroupBuy", param);
     }

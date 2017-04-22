@@ -110,16 +110,21 @@ public class SchedulerManager {
      * @param newCron 新的触发时间
      */
     public static void modifyJobCron(String jobName, String jobGroupName, String triggerName, String triggerGroupName, String newCron) {
+        if (!jobIsNormal(triggerName, triggerGroupName)) {
+            return;
+        }
         try {
             sched = schedulerFactory.getScheduler();
             CronTrigger trigger = (CronTrigger) sched.getTrigger(new TriggerKey(triggerName, triggerGroupName));
-            String oldCron = trigger.getCronExpression();
-            if (!oldCron.equals(newCron)) {
-                JobDetail detail = sched.getJobDetail(JobKey.jobKey(jobName, jobGroupName));
-                LOG.debug("----------[MODIFY JOB CRON SUCCESS]----------");
-                Class clazz = detail.getJobClass();
-                removeJob(jobName);
-                addJob(jobName, newCron, clazz);
+            if (trigger != null) {
+                String oldCron = trigger.getCronExpression();
+                if (!oldCron.equals(newCron)) {
+                    JobDetail detail = sched.getJobDetail(JobKey.jobKey(jobName, jobGroupName));
+                    LOG.debug("----------[MODIFY JOB CRON SUCCESS]----------");
+                    Class clazz = detail.getJobClass();
+                    removeJob(jobName, jobGroupName, triggerName, triggerGroupName);
+                    addJob(jobName, jobGroupName, triggerName, triggerGroupName, newCron, clazz);
+                }
             }
         } catch (SchedulerException e) {
             throw new RuntimeException(e);
@@ -133,6 +138,9 @@ public class SchedulerManager {
      * @param triggerGroupName 触发器组名
      */
     public static void removeJob(String jobName, String jobGroupName, String triggerName, String triggerGroupName) {
+        if (!jobIsNormal(triggerName, triggerGroupName)) {
+            return;
+        }
         try {
             sched = schedulerFactory.getScheduler();
             //停止触发器
@@ -178,8 +186,11 @@ public class SchedulerManager {
      * @param clazz            任务实体类
      */
     public static void addJob(String jobName, String jobGroupName, String triggerName, String triggerGroupName, String cron, Class<? extends Job> clazz) {
+        if ( jobIsNormal(triggerName, triggerGroupName)) {
+            modifyJobCron(jobName, jobGroupName, triggerName, triggerGroupName, cron);
+            return;
+        }
         try {
-
             sched = schedulerFactory.getScheduler();
             JobDetail detail = JobBuilder
                     .newJob(clazz)
@@ -199,5 +210,105 @@ public class SchedulerManager {
         } catch (SchedulerException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * 判断任务是否正常
+     *
+     * @param triggerName      触发器名称
+     * @param triggerGroupName 触发器组名
+     * @return 返回任务状态
+     */
+    private static boolean jobIsNormal(String triggerName, String triggerGroupName) {
+        try {
+            sched = schedulerFactory.getScheduler();
+            Trigger.TriggerState state = sched.getTriggerState(TriggerKey.triggerKey(triggerName, triggerGroupName));
+            if (state == Trigger.TriggerState.NORMAL) {
+                return true;
+            }
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * 判断任务是否存在
+     *
+     * @param triggerName      触发器名称
+     * @param triggerGroupName 触发器组名
+     * @return 返回状态
+     */
+    private static boolean jobIsNone(String triggerName, String triggerGroupName) {
+        try {
+            sched = schedulerFactory.getScheduler();
+            Trigger.TriggerState state = sched.getTriggerState(TriggerKey.triggerKey(triggerName, triggerGroupName));
+            if (state == Trigger.TriggerState.NONE) {
+                return true;
+            }
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * 判断一个任务是否是暂停状态
+     *
+     * @param triggerName      触发器名称
+     * @param triggerGroupName 触发器组名
+     * @return 返回状态
+     */
+    private static boolean jobIsPaused(String triggerName, String triggerGroupName) {
+        try {
+            sched = schedulerFactory.getScheduler();
+            Trigger.TriggerState state = sched.getTriggerState(TriggerKey.triggerKey(triggerName, triggerGroupName));
+            if (state == Trigger.TriggerState.PAUSED) {
+                return true;
+            }
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * 判断一个任务是否是完成
+     *
+     * @param triggerName      触发器名称
+     * @param triggerGroupName 触发器组名
+     * @return 返回状态
+     */
+    public static boolean jobIsComplete(String triggerName, String triggerGroupName) {
+        try {
+            sched = schedulerFactory.getScheduler();
+            Trigger.TriggerState state = sched.getTriggerState(TriggerKey.triggerKey(triggerName, triggerGroupName));
+            if (state == Trigger.TriggerState.COMPLETE) {
+                return true;
+            }
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * 判断一个任务是否是出错
+     *
+     * @param triggerName      触发器名称
+     * @param triggerGroupName 触发器组名
+     * @return 返回状态
+     */
+    private static boolean jobIsError(String triggerName, String triggerGroupName) {
+        try {
+            sched = schedulerFactory.getScheduler();
+            Trigger.TriggerState state = sched.getTriggerState(TriggerKey.triggerKey(triggerName, triggerGroupName));
+            if (state == Trigger.TriggerState.ERROR) {
+                return true;
+            }
+        } catch (SchedulerException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

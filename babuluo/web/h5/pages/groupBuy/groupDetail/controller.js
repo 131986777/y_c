@@ -3,8 +3,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_groupDetail_Control
         modalFactory.setBottom(false);
         var gbpPrd = getCookie("GBP_PRD");
         var gbp = getCookie("GBP");
-        $scope.gbgId = $stateParams.GBG_ID;
-        getCurrentGbgUser($scope.gbgId)
+        getCurrentGbgUser($stateParams.GBG_ID);
         $scope.gbp = JSON.parse(gbp);
         $scope.gbpPrd = JSON.parse(gbpPrd);
         $scope.surplusSize = $scope.gbp['GROUP_BUY_PLAN.SUM_COUNT'];
@@ -90,11 +89,10 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_groupDetail_Control
     }
 
     $scope.goGroup = function () {
-        removeCookie("GBG_ID");
-        setCookie("GBG_ID", $scope.gbgId);
         var param = {
             SKU_ID: $scope.gbp['GROUP_BUY_PLAN.SKU_ID'].toString(),
-            SUM_COUNT: $scope.sumCount.toString()
+            SUM_COUNT: $scope.sumCount.toString(),
+            GBG_ID: $stateParams.GBG_ID
         }
         $state.go("pages/order/addGroupBuy", param);
     }
