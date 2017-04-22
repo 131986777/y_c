@@ -451,7 +451,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                 var tempDate = ele['GROUP_BUY_PLAN.END_DATETIME'];
                 var yMd = tempDate.split(" ")[0].split("-");
                 var Hms = tempDate.split(" ")[1].split(":");
-                var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1]+":00").getTime();
+                var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1] + ":00").getTime();
                 var now = new Date().getTime();
                 if (end < now) {
                     ele['hour'] = '已'
@@ -470,16 +470,15 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         })
     }
     $scope.goGbp = function (gbp) {
-        removeCookie("GBP");
-        removeCookie("GBP_PRD");
-        setCookie('GBP', JSON.stringify(gbp));
-        setCookie("GBP_PRD", JSON.stringify($scope.groupPrdMap[gbp['GROUP_BUY_PLAN.SKU_ID']]))
+        var param = {};
+        param['GBP_ID'] = gbp['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'];
+        param['PRD_ID'] = $scope.groupPrdMap[gbp['GROUP_BUY_PLAN.SKU_ID']]['SHOP_PRODUCT_SKU.SKU_ID'];
         gw.terminate();
         if (gbp['GROUP_BUY_PLAN.TYPE'] == 'MANAGE') {
-            $state.go('pages/groupBuy/moreGroup');
+            $state.go('pages/groupBuy/moreGroup',param);
         } else if (gbp['GROUP_BUY_PLAN.TYPE'] == 'MEMBER') {
             removeCookie("SUM_COUNT");
-            $state.go('pages/groupBuy/myGroup');
+            $state.go('pages/groupBuy/myGroup',param);
         }
 
     }

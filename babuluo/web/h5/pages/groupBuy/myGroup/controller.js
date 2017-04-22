@@ -1,19 +1,32 @@
-angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller', function ($interval, $scope, $state, weUI, modalFactory, groupBuyMemberFactory, groupBuyGroupFactory, memberFactory, shopFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller', function (groupBuyPlanFactory, productFactory, $interval, $scope, $state, weUI, $stateParams, modalFactory, groupBuyMemberFactory, groupBuyGroupFactory, memberFactory, shopFactory, weUI) {
     modalFactory.setTitle("团购详情");
 
     $scope.initPage = function () {
         modalFactory.setBottom(false);
-        var gbp = getCookie("GBP");
-        var gbpPrd = getCookie("GBP_PRD");
-        $scope.GBP = JSON.parse(gbp);
-        $scope.GBP_PRD = JSON.parse(gbpPrd);
-        $scope.surplusSize = $scope.GBP['GROUP_BUY_PLAN.SUM_COUNT'];
-        $scope.sumCount = getCookie("SUM_COUNT") == null ? 1 : parseInt(getCookie("SUM_COUNT"));
-        $scope.sumPrice = $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'] * $scope.sumCount;
-        $scope.showDate = $scope.GBP['GROUP_BUY_PLAN.END_DATETIME'];
-        initDate();
-        getGbgList($scope.GBP['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID']);
-        getImgURIS($scope.GBP_PRD)
+        getGbpEntity($stateParams.GBP_ID);
+        getPrdEntity($stateParams.PRD_ID);
+
+
+    }
+    $scope.GBP = '';
+    function getGbpEntity(gbpId) {
+        groupBuyPlanFactory.getByGbpIds({'GROUP_BUY_PLAN.GROUP_BUY_PLAN_IDS': gbpId}, function (response) {
+            $scope.GBP = response.data[0];
+            $scope.surplusSize = $scope.GBP['GROUP_BUY_PLAN.SUM_COUNT'];
+            $scope.sumCount = getCookie("SUM_COUNT") == null ? 1 : parseInt(getCookie("SUM_COUNT"));
+            $scope.sumPrice = $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'] * $scope.sumCount;
+            $scope.showDate = $scope.GBP['GROUP_BUY_PLAN.END_DATETIME'];
+            getGbgList($scope.GBP['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID']);
+            initDate();
+        })
+    }
+
+    $scope.GBP_PRD = '';
+    function getPrdEntity(prdId) {
+        productFactory.getProductSkuBySkuIds({"SHOP_PRODUCT_SKU.SKU_IDS": prdId}, function (response) {
+            $scope.GBP_PRD = response.data[0];
+            getImgURIS($scope.GBP_PRD);
+        })
     }
 
     $scope.slides = new Array();

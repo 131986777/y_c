@@ -1,17 +1,30 @@
-angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controller', function (memberFactory, groupBuyMemberFactory, groupBuyGroupFactory, productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory, weUI, seckillFactory) {
+angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controller', function ($stateParams, groupBuyPlanFactory, memberFactory, groupBuyMemberFactory, groupBuyGroupFactory, productFactory, $interval, $scope, $state, weUI, modalFactory) {
     modalFactory.setTitle("团购详情");
     $scope.initPage = function () {
         modalFactory.setBottom(false);
-        var gbp = getCookie("GBP");
-        var gbpPrd = getCookie("GBP_PRD");
-        $scope.GBP = JSON.parse(gbp);
-        $scope.GBP_PRD = JSON.parse(gbpPrd);
-        $scope.surplusSize = $scope.GBP['GROUP_BUY_PLAN.SUM_COUNT'];
-        $scope.sumPrice = $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'];
-        getGbgList($scope.GBP['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'])
-        getImgURIS($scope.GBP_PRD)
-        $scope.endDate = $scope.GBP['GROUP_BUY_PLAN.END_DATETIME'];
-        startWorkerByGbp();
+        getGbpEntity($stateParams.GBP_ID);
+        getPrdEntity($stateParams.PRD_ID);
+
+
+    }
+    $scope.GBP = '';
+    function getGbpEntity(gbpId) {
+        groupBuyPlanFactory.getByGbpIds({'GROUP_BUY_PLAN.GROUP_BUY_PLAN_IDS': gbpId}, function (response) {
+            $scope.GBP = response.data[0];
+            $scope.surplusSize = $scope.GBP['GROUP_BUY_PLAN.SUM_COUNT'];
+            $scope.sumPrice = $scope.GBP['GROUP_BUY_PLAN.GROUP_PRICE'];
+            $scope.endDate = $scope.GBP['GROUP_BUY_PLAN.END_DATETIME'];
+            startWorkerByGbp();
+            getGbgList($scope.GBP['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'])
+        })
+    }
+
+    $scope.GBP_PRD = '';
+    function getPrdEntity(prdId) {
+        productFactory.getProductSkuBySkuIds({"SHOP_PRODUCT_SKU.SKU_IDS": prdId}, function (response) {
+            $scope.GBP_PRD = response.data[0];
+            getImgURIS($scope.GBP_PRD)
+        })
     }
 
     $scope.slides = new Array();
@@ -167,7 +180,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
         var param = {
             SKU_ID: $scope.GBP['GROUP_BUY_PLAN.SKU_ID'].toString(),
             SUM_COUNT: $scope.sumCount.toString(),
-            GBG_ID : $scope.gbgList[0]['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID']
+            GBG_ID: $scope.gbgList[0]['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID']
         }
         $state.go("pages/order/addGroupBuy", param);
     }
