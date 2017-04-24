@@ -80,14 +80,26 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointmentList_Contro
     $scope.getOrder = function () {
         weUI.toast.showLoading('正在加载');
         orderFactory.getOrder($scope.filter, function (response) {
-            console.log(response);
-            Array.prototype.push.apply($scope.orderList, response.data);//数组合并
-            $scope.orderList.forEach(function (ele) {
-                ele.details = JSON.parse(ele['SHOP_ORDER.ORDER_INFO']);
-                ele.details.forEach(function (item) {
-                    setContentsInfoForOrder(item);
-                });
-                ele['SHOP_ORDER.DATETIME_ADD'] = getDate(ele['SHOP_ORDER.DATETIME_ADD']);
+            var orderNumList = new Array;
+            var orderList1 = new Array;
+            var list = angular.copy($scope.orderList);
+            list.forEach(function (ele) {
+                if (orderNumList.toString().indexOf(ele['SHOP_ORDER.ORDER_NUM']) < 0) {
+                    orderNumList.push(ele['SHOP_ORDER.ORDER_NUM']);
+                    orderList1.push(ele);
+                }
+            });
+            $scope.orderList = orderList1;
+            response.data.forEach(function (ele) {
+                if (orderNumList.toString().indexOf(ele['SHOP_ORDER.ORDER_NUM']) < 0) {
+                    orderNumList.push(ele['SHOP_ORDER.ORDER_NUM']);
+                    ele.details = JSON.parse(ele['SHOP_ORDER.ORDER_INFO']);
+                    ele.details.forEach(function (item) {
+                        setContentsInfoForOrder(item);
+                    });
+                    ele['SHOP_ORDER.DATETIME_ADD'] = getDate(ele['SHOP_ORDER.DATETIME_ADD']);
+                    $scope.orderList.push(ele)
+                }
             });
             $scope.page = response.extraData.page;
             if ($scope.page.querySize > $scope.page.pageIndex * $scope.page.pageSize) {
