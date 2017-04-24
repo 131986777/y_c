@@ -37,7 +37,7 @@ public class GroupBuyPlanStopTask implements Job {
     public void runTask(String gbpId) throws RuleException {
         //讲团状态改为已经结束
         new API().call("/group/buy/plan/modifyById", new HashMap<String, String>() {{
-            put("GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID", gbpId);
+            put("GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID", gbpId.trim());
             put("GROUP_BUY_PLAN.STATE", "END_SALE");
         }});
         //判断团购是商家开团 还是用户开团
