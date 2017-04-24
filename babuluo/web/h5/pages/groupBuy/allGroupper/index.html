@@ -1,24 +1,21 @@
 <div class="bg-grey product-detail-page group-wrap" ng-init="initPage()">
-    <!-- BEGIN 商品详情图片 -->
-    <div class="group-nav" style="background-color: #fff;">
-        <div class="weui_cell" style="width: 100%;">
-            <div class="weui_cell_fr"></div>
-            <div style="font-size: 16px;margin-left: 20px;" href="#/pages/order/list/all">
-                全部团员
-            </div>
+    <!--&lt;!&ndash; BEGIN 商品详情图片 &ndash;&gt;-->
+    <!--<div class="group-nav" style="background-color: #fff;">-->
+    <!--<div class="weui_cell" style="width: 100%;">-->
+    <!--<div class="weui_cell_fr"></div>-->
+    <!--<div style="font-size: 16px;margin-left: 20px;" href="#/pages/order/list/all">-->
+    <!--全部团员-->
+    <!--</div>-->
 
-        </div>
-    </div>
+    <!--</div>-->
+    <!--</div>-->
 
     <div class="groups">
         <div class="eachgroup" style="height: 45px;" ng-repeat="gbm in gbmList">
             <span ng-bind="gbm['GROUP_BUY_MEMBER.USER_NAME']"></span>
             <span class="word-fr">{{gbm['GROUP_BUY_MEMBER.ADD_DATETIME']}}参团</span>
-
         </div>
     </div>
-
-
 
 
     <!--选择页面遮罩-->

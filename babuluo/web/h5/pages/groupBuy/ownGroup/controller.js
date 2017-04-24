@@ -8,6 +8,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_ownGroup_Controller
 
     //根据用户id查询 用户参与团购信息
     $scope.gbmList = [];
+    $scope.gbmState = {};
     function getGbmListByUserId(userId) {
         groupBuyMemberFactory.getByUserId({"GROUP_BUY_MEMBER.UID": userId}, function (response) {
             $scope.gbmList = response.data;
@@ -26,11 +27,13 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_ownGroup_Controller
 
     //根据用户团购表中的团表去查询团信息
     $scope.gbgList = [];
+    $scope.gbgState = {};
     function getGbgListByGbgIds(gbgIds) {
         groupBuyGroupFactory.getByGbgIds({"GROUP_BUY_GROUP.GROUP_BUY_GROUP_IDS": gbgIds}, function (response) {
             $scope.gbgList = response.data;
             var gbpIds = "";
             $scope.gbgList.forEach(function (ele) {
+                $scope.gbgState[ele['GROUP_BUY_GROUP.GROUP_BUY_PLAN_ID']] = ele['GROUP_BUY_GROUP.STATE'];
                 if (gbpIds != "") {
                     gbpIds += ",";
                 }
@@ -45,7 +48,6 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_ownGroup_Controller
 
     //根据团规则ids 查询团规则
     $scope.gbpList = [];
-
     function getGbpListByGbpIds(gbpIds) {
         groupBuyPlanFactory.getByGbpIds({"GROUP_BUY_PLAN.GROUP_BUY_PLAN_IDS": gbpIds}, function (response) {
             $scope.gbpList = response.data;
@@ -57,9 +59,8 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_ownGroup_Controller
                 skuIds += ele['GROUP_BUY_PLAN.SKU_ID'];
             });
             if (skuIds != "") {
-                startWorkerByGbp();
+                getRes();
                 getPrdListBySkuIds(skuIds);
-
             }
 
         });
@@ -87,6 +88,38 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_ownGroup_Controller
         });
     }
 
+    //拼接团购结果
+    $scope.gbmRes = [];
+    function getRes() {
+        $scope.gbmList.forEach(function (gbm) {
+            var gbgId = gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID'];
+            $scope.gbgList.forEach(function (gbg) {
+                var gbpId = gbg['GROUP_BUY_GROUP.GROUP_BUY_PLAN_ID']
+                if (gbgId == gbg['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID']) {
+                    $scope.gbpList.forEach(function (gbp) {
+                        if (gbpId == gbp['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID']) {
+                            var param = {};
+                            param['GBM_ID'] = gbm['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'];
+                            param['GBG_ID'] = gbg['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID'];
+                            param['GBP_ID'] = gbp['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'];
+                            param['SKU_ID'] = gbp['GROUP_BUY_PLAN.SKU_ID'];
+                            param['SURP_SIZE'] = gbp['GROUP_BUY_PLAN.SUM_COUNT'] - $scope.gbgSurpSizeList[gbp['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID']];
+                            param['GBG_STAT'] = gbg['GROUP_BUY_GROUP.STATE'];
+                            param['END_DATETIME'] = gbp['GROUP_BUY_PLAN.END_DATETIME'];
+                            param['MONEY_STATE'] = gbm['GROUP_BUY_MEMBER.MONEY_STATE'];
+                            param['ORDER_ID'] = gbm['GROUP_BUY_MEMBER.ORDER_ID'];
+                            param['GROUP_PRICE'] = gbp['GROUP_BUY_PLAN.GROUP_PRICE'];
+
+                            $scope.gbmRes.push(param);
+                        }
+                    })
+                }
+            })
+        });
+        startWorkerByGbp();
+        console.log($scope.gbmRes)
+    }
+
     /**
      * 开启线程
      * 监听回馈
@@ -109,9 +142,9 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_ownGroup_Controller
             gw.terminate() //终止一个worker线程v
     });
     $scope.initDataByGroupBuyPlan = function () {
-        $scope.gbpList.forEach(function (ele, index) {
-            if (ele['GROUP_BUY_PLAN.STATE'] == 'IN_SALE') {
-                var tempDate = ele['GROUP_BUY_PLAN.END_DATETIME'];
+        $scope.gbmRes.forEach(function (ele, index) {
+            if (ele['MONEY_STATE'] == 'WAIT_PAY') {
+                var tempDate = ele['END_DATETIME'];
                 var yMd = tempDate.split(" ")[0].split("-");
                 var Hms = tempDate.split(" ")[1].split(":");
                 var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1] + ':00').getTime();

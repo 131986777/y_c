@@ -1,18 +1,31 @@
-angular.module('AndSell.H5.Main').controller('pages_groupBuy_groupDetail_Controller', function (groupBuyMemberFactory, $stateParams, productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory, weUI, seckillFactory) {
+angular.module('AndSell.H5.Main').controller('pages_groupBuy_groupDetail_Controller', function (groupBuyPlanFactory, groupBuyMemberFactory, $stateParams, productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory, weUI, seckillFactory) {
     $scope.initPage = function () {
         modalFactory.setBottom(false);
-        var gbpPrd = getCookie("GBP_PRD");
-        var gbp = getCookie("GBP");
         getCurrentGbgUser($stateParams.GBG_ID);
-        $scope.gbp = JSON.parse(gbp);
-        $scope.gbpPrd = JSON.parse(gbpPrd);
-        $scope.surplusSize = $scope.gbp['GROUP_BUY_PLAN.SUM_COUNT'];
-        $scope.endDate = $scope.gbp['GROUP_BUY_PLAN.END_DATETIME'];
+        getGbpEntity($stateParams.GBP_ID);
+        getPrdEntity($stateParams.PRD_ID);
         $scope.sumCount = getCookie("SUM_COUNT") == null ? 1 : parseInt(getCookie("SUM_COUNT"));
-        $scope.sumPrice = $scope.gbp['GROUP_BUY_PLAN.GROUP_PRICE'] * $scope.sumCount;
-        startWorkerByGbm();
+
 
     }
+    $scope.gbpPrd = '';
+    function getPrdEntity(prdId) {
+        productFactory.getProductSkuBySkuIds({"SHOP_PRODUCT_SKU.SKU_IDS": prdId}, function (response) {
+            $scope.gbpPrd = response.data[0];
+        })
+    }
+
+    $scope.gbp = '';
+    function getGbpEntity(gbpId) {
+        groupBuyPlanFactory.getByGbpIds({'GROUP_BUY_PLAN.GROUP_BUY_PLAN_IDS': gbpId}, function (response) {
+            $scope.gbp = response.data[0];
+            $scope.surplusSize = $scope.gbp['GROUP_BUY_PLAN.SUM_COUNT'];
+            $scope.endDate = $scope.gbp['GROUP_BUY_PLAN.END_DATETIME'];
+            $scope.sumPrice = $scope.gbp['GROUP_BUY_PLAN.GROUP_PRICE'] * $scope.sumCount;
+            startWorkerByGbm();
+        })
+    }
+
     $scope.currentGbgUserList = [];
     function getCurrentGbgUser(gbgId) {
         groupBuyMemberFactory.getAllMemberInGbgIds({'GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS': gbgId}, function (response) {
@@ -24,7 +37,6 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_groupDetail_Control
                 }
             })
         })
-
     }
 
     function initDate() {

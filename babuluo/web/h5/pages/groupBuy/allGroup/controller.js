@@ -1,17 +1,29 @@
-angular.module('AndSell.H5.Main').controller('pages_groupBuy_allGroup_Controller', function (groupBuyGroupFactory, groupBuyMemberFactory, productFactory, $interval, $scope, $state, weUI, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_groupBuy_allGroup_Controller', function (groupBuyPlanFactory, $stateParams, groupBuyGroupFactory, groupBuyMemberFactory, productFactory, $interval, $scope, $state, weUI, modalFactory) {
 
 
     $scope.initPage = function () {
         modalFactory.setBottom(false);
-        $scope.GBP = JSON.parse(getCookie("GBP"));
-        $scope.surplusSize = $scope.GBP['GROUP_BUY_PLAN.SUM_COUNT'];
-        $scope.showDate = $scope.GBP['GROUP_BUY_PLAN.END_DATETIME'];
-        getGbgList($scope.GBP['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID']);
-        initDate();
+        getGbpEntity($stateParams.GBP_ID);
+
     }
+    $scope.GBP = '';
+    function getGbpEntity(gbpId) {
+        groupBuyPlanFactory.getByGbpIds({'GROUP_BUY_PLAN.GROUP_BUY_PLAN_IDS': gbpId}, function (response) {
+            $scope.GBP = response.data[0];
+            $scope.surplusSize = $scope.GBP['GROUP_BUY_PLAN.SUM_COUNT'];
+            $scope.showDate = $scope.GBP['GROUP_BUY_PLAN.END_DATETIME'];
+            getGbgList($scope.GBP['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID']);
+            initDate();
+        })
+    }
+
     //用户点击去参团
     $scope.goGroupBuy = function (gbm) {
-        $state.go("pages/groupBuy/groupDetail", {GBG_ID: gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']});
+        $state.go("pages/groupBuy/groupDetail", {
+            GBP_ID: $stateParams.GBP_ID,
+            GBG_ID: gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID'],
+            PRD_ID:$stateParams.PRD_ID
+        });
     }
     $scope.gbgList = [];
     function getGbgList(gbpId) {

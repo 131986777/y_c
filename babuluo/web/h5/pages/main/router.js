@@ -51,6 +51,6 @@ $import('pages/groupBuy/myGroup', {GBP_ID: '0', PRD_ID: '0'});
 $import('pages/groupBuy/inviteGroup');
 $import('pages/groupBuy/moreGroup', {GBP_ID: '0', PRD_ID: '0'});
 $import('pages/groupBuy/ownGroup');
-$import('pages/groupBuy/allGroup');
+$import('pages/groupBuy/allGroup',{GBP_ID: '0',PRD_ID:'0'});
 $import('pages/groupBuy/allGroupper', {GBG_IDS: "0"});
-$import('pages/groupBuy/groupDetail', {GBG_ID: '0'});
+$import('pages/groupBuy/groupDetail', {GBP_ID: '0',GBG_ID: '0',PRD_ID:'0'});

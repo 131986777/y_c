@@ -36,7 +36,14 @@ public class UpdateOrderPayJob implements Job {
             List<JSONObject> orderList = orderResponse.getData();
 
             for (int i = 0; i < orderList.size(); i++) {
-                if (orderList.get(i).getString("SHOP_ORDER.TYPE").equals("6")) {
+                if (orderList.get(i).getInteger("SHOP_ORDER.TYPE") == 6) {
+                    if (gbmOrderIds == "") {
+                        gbmOrderIds += orderList.get(i).getString("SHOP_ORDER.ID");
+                    } else {
+                        gbmOrderIds += "," + orderList.get(i).getString("SHOP_ORDER.ID");
+                    }
+                }
+                if (orderList.get(i).getInteger("SHOP_ORDER.TYPE") == 6) {
                     gbmOrderIds += "," + orderList.get(i).getString("SHOP_ORDER.ID");
                 }
                 ids += "," + orderList.get(i).getString("SHOP_ORDER.ID");
@@ -57,14 +64,14 @@ public class UpdateOrderPayJob implements Job {
         System.out.println(orderIds + "  团购订单超时取消。。。");
         if (!orderIds.equals("")) {
             ReturnData gbmData = new API().call("/group/buy/member/getByOrderIds", new HashMap<String, String>() {{
-                put("GROUP_BUY_MEMBER.ORDER_ID", orderIds);
+                put("GROUP_BUY_MEMBER.ORDER_IDS", orderIds);
             }});
             List<JSONObject> gbmList = gbmData.getData();
             for (JSONObject jo : gbmList) {
                 jo.put("GROUP_BUY_MEMBER.IS_DEL", "-1");
                 jo.put("GROUP_BUY_MEMBER.MONEY_STATE", "OVER_TIME");
                 new API().call("/group/buy/member/modifyById", jo);
-                if (jo.getString("GROUP_BUY_MEMBER.IS_LEADER").equals("1")) {
+                if (jo.getInteger("GROUP_BUY_MEMBER.IS_LEADER") == 1) {
                     //判断其团下有没有其他人
                     ReturnData gbmDataByGbg = new API().call("/group/buy/member/getInGbgIds", new HashMap<String, String>() {{
                         put("GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS", jo.getString("GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID"));
@@ -86,7 +93,5 @@ public class UpdateOrderPayJob implements Job {
                 }
             }
         }
-
     }
-
 }

@@ -121,13 +121,18 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_myGroup_Controller'
     $scope.goGroupBuy = function (gbm) {
         removeCookie("SUM_COUNT");
         setCookie("SUM_COUNT", $scope.sumCount);
-        $state.go("pages/groupBuy/groupDetail", {GBG_ID: gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']});
+        $state.go("pages/groupBuy/groupDetail", {
+            GBP_ID: $stateParams.GBP_ID,
+            GBG_ID: gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID'],
+            PRD_ID: $stateParams.PRD_ID
+        })
+        ;
     }
     //查看全部团
     $scope.goAllGroup = function () {
         removeCookie("SUM_COUNT");
         setCookie("SUM_COUNT", $scope.sumCount);
-        $state.go("pages/groupBuy/allGroup");
+        $state.go("pages/groupBuy/allGroup", {GBP_ID: $stateParams.GBP_ID, PRD_ID: $stateParams.PRD_ID});
     }
 
     $scope.downCount = function () {
