@@ -101,6 +101,10 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_groupDetail_Control
     }
 
     $scope.goGroup = function () {
+        if($scope.surplusSize == 0){
+            weUI.toast.info("团购已满员。");
+            return;
+        }
         var param = {
             SKU_ID: $scope.gbp['GROUP_BUY_PLAN.SKU_ID'].toString(),
             SUM_COUNT: $scope.sumCount.toString(),

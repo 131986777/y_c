@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', function (http, $scope, $stateParams, orderFactory, modalFactory) {
+angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', function (http, $scope, $stateParams, orderFactory, modalFactory,groupBuyPlanFactory,groupBuyGroupFactory,groupBuyMemberFactory) {
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
@@ -138,6 +138,12 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
                 modalFactory.showShortAlert('提货成功');
                 $scope.getOrder($scope.order['SHOP_ORDER.ID']);
             });
+            if($scope.order['SHOP_ORDER.TYPE'] == 6){
+                orderFactory.modifyOrderById({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID'],'SHOP_ORDER.SPECIAL_MODEL':'GROUPBUY_SUCCESS'},function (response) {
+                    console.log(response);
+                });
+            }
+
         });
     }
 
@@ -181,5 +187,63 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
             $('#modifyLogistics').modal('hide');
         });
     }
+    //取消团购单
+    $scope.cancelOrderByGroupBuy = function () {
+        $scope.cancelOrder();
+        cancelGpm($scope.order['SHOP_ORDER.ID'], $scope.order['SHOP_ORDER.STATE_MONEY']);
 
+    }
+    //取消团购相关操作
+    function cancelGpm(orderId, moneyState) {
+        //获得团购客户记录
+        groupBuyMemberFactory.getByOrderId({'GROUP_BUY_MEMBER.ORDER_IDS': orderId}, function (response) {
+            if (response.data.length == 1) {
+                $scope.gbm = response.data[0];
+                //获得该团购记录的主团
+                groupBuyGroupFactory.getByGbgIds({'GROUP_BUY_GROUP.GROUP_BUY_GROUP_IDS': $scope.gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']}, function (response) {
+                    if (response.data.length == 1) {
+                        $scope.gbg = response.data[0];
+                        //获得主团下的团规则
+                        groupBuyPlanFactory.getByGbpIds({'GROUP_BUY_PLAN.GROUP_BUY_PLAN_IDS': $scope.gbg['GROUP_BUY_GROUP.GROUP_BUY_PLAN_ID']}, function (response) {
+                            if (response.data.length == 1) {
+                                $scope.gbp = response.data[0];
+                                //如果该团委商家开团
+                                //这只要将这个团客户记录标记为删除
+                                var param = {};
+                                param['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'] = $scope.gbm['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'];
+                                if (moneyState == 1) {
+                                    param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'HAVE_REFUND';
+                                } else {
+                                    param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'IS_CANCEL';
+                                }
+                                param['GROUP_BUY_MEMBER.IS_DEL'] = 1;
+                                groupBuyMemberFactory.modifyById(param);
+                                if ($scope.gbm['GROUP_BUY_MEMBER.IS_LEADER'] == 1) {
+                                    groupBuyMemberFactory.getAllMemberInGbgIds({'GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS': $scope.gbg['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID']}, function (response) {
+                                        if (response.data.length > 1) {
+                                            for (var i = 0; i < response.data.length; i++) {
+                                                if (response.data[i]['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'] != $scope.gbm['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID']) {
+                                                    param = {};
+                                                    param['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'] = response.data[0]['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'];
+                                                    param['GROUP_BUY_MEMBER.IS_LEADER'] = 1;
+                                                    groupBuyMemberFactory.modifyById(param);
+                                                    break;
+                                                }
+                                            }
+                                        } else {
+                                            //将团删除；
+                                            param = {};
+                                            param['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID'] = $scope.gbg['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID'];
+                                            param['GROUP_BUY_GROUP.STATE'] = 'FAIL';
+                                            groupBuyGroupFactory.modifyById(param);
+                                        }
+                                    })
+                                }
+                            }
+                        })
+                    }
+                })
+            }
+        });
+    }
 });

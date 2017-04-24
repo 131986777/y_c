@@ -64,19 +64,41 @@ public class GroupBuyPlanStopTask implements Job {
                     put("GROUP_BUY_GROUP.STATE", "FAIL");
                 }});
                 log.debug("**********[GROUP BUY GROUP FILED IN :" + gbgEntity.getString("GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID") + "]**********");
-                //团购未满足要把所有团用户订单取消掉
+
                 for (JSONObject gbm : gbmData.getData()) {
+                    //将团客户的付款状态改变  如果是已经付款 改为已退款
+                    //如果是未付款 改为取消
+                    if ("HAVE_PAY".equals(gbm.getString("GROUP_BUY_MEMBER.MONEY_STATE"))) {
+                        new API().call("/group/buy/member/modifyById", new HashMap<String, String>() {{
+                            put("GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID", gbm.getString("GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID"));
+                            put("GROUP_BUY_MEMBER.MONEY_STATE", "HAVE_REFUND");
+                        }});
+                    } else {
+                        new API().call("/group/buy/member/modifyById", new HashMap<String, String>() {{
+                            put("GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID", gbm.getString("GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID"));
+                            put("GROUP_BUY_MEMBER.MONEY_STATE", "IS_CANCEL");
+                        }});
+                    }
+                    //团购未满足要把所有团用户订单取消掉
                     new API().call("/shop/order/cancelOrder", new HashMap<String, String>() {{
                         put("SHOP_ORDER.ID", gbm.getString("GROUP_BUY_MEMBER.ORDER_ID"));
                     }});
                     log.debug("**********[GROUP BUY MEMBER CANCEL ORDER :" + gbm.getString("GROUP_BUY_MEMBER.ORDER_ID") + " SUCCESS]**********");
                 }
+
             } else {
                 //将团改为成功
                 new API().call("/group/buy/group/modifyById", new HashMap<String, String>() {{
                     put("GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID", gbgEntity.getString("GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID"));
                     put("GROUP_BUY_GROUP.STATE", "DONE");
                 }});
+//                改变用户订单状态为已经成团
+                for (JSONObject gbmEntity : gbmData.getData()) {
+                    new API().call("/shop/order/modifyById", new HashMap<String, Object>() {{
+                        put("SHOP_ORDER.ID", gbmEntity.getString("GROUP_BUY_MEMBER.ORDER_ID"));
+                        put("SHOP_ORDER.SPECIAL_MODEL", "GROUPBUY_WAIT");
+                    }});
+                }
                 log.debug("**********[GROUP BUY GROUP DONE IN :" + gbgEntity.getString("GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID") + "]**********");
             }
         }

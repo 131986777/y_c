@@ -181,7 +181,7 @@
                                 </a>
                             </li>
                             <li ng-if="APP_ID_LIST.indexOf('@1197@')>=0">
-                                <a ui-sref="product/product/groupBuying">
+                                <a ui-sref="groupbuy/groupbuy/ruleList">
                                     团购商品
                                 </a>
                             </li>
@@ -245,6 +245,11 @@
                             <li ng-if="APP_ID_LIST.indexOf('@1141@')>=0">
                                 <a ui-sref="order/order/appointmentOrder">
                                     线上预约单
+                                </a>
+                            </li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1141@')>=0">
+                                <a ui-sref="order/order/groupBuyOrder">
+                                    团购单
                                 </a>
                             </li>
                             <!--<li>-->
@@ -588,23 +593,6 @@
                             <li ng-if="APP_ID_LIST.indexOf('@1200@')>=0">
                                 <a ui-sref="analysis/analysis/offlineFormAnalysis">
                                     线下销售报表
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1069@')>=0">
-                    <a class="dropdown-toggle" data-toggle="dropdown"
-                       ui-sref="card/card/cardAnalysis"
-                       data-hover="dropdown">
-                        <i class="icon-settings"></i>
-                        团购
-                    </a>
-                    <div class="sub-menu-wrap sub-menu-top sub-menu-1 dropdown-menu">
-                        <ul class="sub-menu " role="menu">
-                            <li ng-if="APP_ID_LIST.indexOf('@1103@')>=0">
-                                <a ui-sref="groupbuy/groupbuy/ruleList">
-                                    规则列表
                                 </a>
                             </li>
                         </ul>

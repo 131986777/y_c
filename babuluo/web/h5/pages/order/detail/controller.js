@@ -528,7 +528,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
     //团购单取消订单
     $scope.cancelOrderByGroupBuy = function () {
         weUI.dialog.confirm("提示", "确认取消该订单", function () {
-            cancelGpm($scope.order['SHOP_ORDER.ID']);
+            cancelGpm($scope.order['SHOP_ORDER.ID'], $scope.order['SHOP_ORDER.STATE_MONEY']);
             weUI.toast.showLoading('正在取消');
             //将这个订单所在团购取消掉
             orderFactory.cancelOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
@@ -542,7 +542,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         });
     }
     //取消团购相关操作
-    function cancelGpm(orderId) {
+    function cancelGpm(orderId, moneyState) {
         //获得团购客户记录
         groupBuyMemberFactory.getByOrderId({'GROUP_BUY_MEMBER.ORDER_IDS': orderId}, function (response) {
             if (response.data.length == 1) {
@@ -559,7 +559,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                                 //这只要将这个团客户记录标记为删除
                                 var param = {};
                                 param['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'] = $scope.gbm['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'];
-                                param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'IS_CANCEL';
+                                if (moneyState == 1) {
+                                    param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'HAVE_REFUND';
+                                } else {
+                                    param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'IS_CANCEL';
+                                }
                                 param['GROUP_BUY_MEMBER.IS_DEL'] = 1;
                                 groupBuyMemberFactory.modifyById(param);
                                 if ($scope.gbm['GROUP_BUY_MEMBER.IS_LEADER'] == 1) {

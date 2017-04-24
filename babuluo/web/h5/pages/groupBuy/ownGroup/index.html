@@ -11,25 +11,29 @@
     <!--</div>-->
 
     <div class="weui_cells" style="margin-bottom: 10px;" ng-repeat="(index,gbp) in gbmRes">
-        <div class="weui_cell">
+        <div class="weui_cell" ui-sref="pages/order/detail({'ORDER_ID':gbp['ORDER_ID']})">
             <div class="basic-info weui_cell_bd weui_cell_primary">
                 <img src="http://bbl-upload.oss-cn-shanghai.aliyuncs.com/{{groupPrdMap[gbp['SKU_ID']]['SHOP_PRODUCT.CMP']}}"
                      alt="" class="groupPic">
                 <div class="left-des">
+                    <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'FAIL'">失败</span>
+                    <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'IN'">进行中</span>
+                    <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'DONE'">成功</span>
                     <h4 class="name">
                         <span class="own-protitle"
                               ng-bind="groupPrdMap[gbp['SKU_ID']]['SHOP_PRODUCT.PRD_NAME']"></span>
-
                     </h4>
+
                     <div class="groupline"></div>
                     <p class="left-time">剩余:
                         <span id="gbpHour{{index}}">0</span>:
                         <span id="gbpMin{{index}}">0</span>:
                         <span id="gbpSec{{index}}">0</span>
-                        结束
-                        <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'FAIL'">失败</span>
-                        <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'IN'">进行中</span>
-                        <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'DONE'">成功</span>
+                        <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'WAIT_PAY'">待支付</span>
+                        <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'HAVE_PAY'">已支付</span>
+                        <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'IS_CANCEL'">已取消</span>
+                        <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'IN_REFUND'">退款中</span>
+                        <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'HAVE_REFUND'">已退款</span>
                         <span class="del-line" style="font-size: 10px;" ng-if="gbp['SURP_SIZE'] > 0">还差{{gbp['SURP_SIZE']}}人成团</span>
                         <span class="del-line" style="font-size: 10px;" ng-if="gbp['SURP_SIZE'] == 0">已成团</span>
                     </p>

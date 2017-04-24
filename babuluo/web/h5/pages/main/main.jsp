@@ -6,102 +6,102 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%--<%--%>
-    <%--/**--%>
-     <%--* 1. 判断cookie 里面有没有openid, 如果没有, 则判断paramater 里面有没有code ,如果用也没有则说明, 没有微信个人呢信息--%>
-     <%--* 则需要请求个人信息openid--%>
-     <%--*/--%>
-    <%--/**--%>
-     <%--* 设置ip地址--%>
-     <%--*/--%>
-    <%--//String ip = request.getRemoteHost();--%>
-    <%--//String ip = request.getHeader("Host");  //上了nginx与tomcat集群后，要用这个获得--%>
-    <%--String ip = request.getHeader("X-Real-IP");  //上了nginx与tomcat集群后，要用这个获得--%>
-<%--//    String ip = "117.89.49.108";--%>
-    <%--Cookie ipCookie = new Cookie("ip", ip);--%>
-    <%--response.addCookie(ipCookie);--%>
+<%
+    /**
+     * 1. 判断cookie 里面有没有openid, 如果没有, 则判断paramater 里面有没有code ,如果用也没有则说明, 没有微信个人呢信息
+     * 则需要请求个人信息openid
+     */
+    /**
+     * 设置ip地址
+     */
+    //String ip = request.getRemoteHost();
+    //String ip = request.getHeader("Host");  //上了nginx与tomcat集群后，要用这个获得
+    String ip = request.getHeader("X-Real-IP");  //上了nginx与tomcat集群后，要用这个获得
+//    String ip = "117.89.49.108";
+    Cookie ipCookie = new Cookie("ip", ip);
+    response.addCookie(ipCookie);
 
-    <%--Cookie[] cookies = request.getCookies();--%>
+    Cookie[] cookies = request.getCookies();
 
-    <%--String code = request.getParameter("code");--%>
+    String code = request.getParameter("code");
 
-    <%--boolean cookieHasOpenId = false;--%>
+    boolean cookieHasOpenId = false;
 
-    <%--String openId;--%>
-    <%--String loginId = "";--%>
-    <%--if (null != cookies) {--%>
-        <%--for (Cookie cookie : cookies) {--%>
+    String openId;
+    String loginId = "";
+    if (null != cookies) {
+        for (Cookie cookie : cookies) {
 
-            <%--if ("openId".equals(cookie.getName())) {--%>
-                <%--openId = cookie.getValue();--%>
-                <%--if (StrUtil.isNotNull(openId)) {--%>
-                    <%--cookieHasOpenId = true;--%>
-                <%--}--%>
-            <%--}--%>
+            if ("openId".equals(cookie.getName())) {
+                openId = cookie.getValue();
+                if (StrUtil.isNotNull(openId)) {
+                    cookieHasOpenId = true;
+                }
+            }
 
-            <%--if ("ANDSELLID".equals(cookie.getName())) {--%>
-                <%--loginId = cookie.getValue();--%>
-            <%--}--%>
+            if ("ANDSELLID".equals(cookie.getName())) {
+                loginId = cookie.getValue();
+            }
 
-        <%--}--%>
-    <%--}--%>
+        }
+    }
 
-    <%--/**--%>
-     <%--* 如果cookie 里面没有openid,--%>
-     <%--*/--%>
-    <%--if (!cookieHasOpenId) {--%>
-        <%--/**--%>
-         <%--* 并且没有code ,则需要重定向--%>
-         <%--*/--%>
-        <%--if (StrUtil.isNull(code)) {--%>
-            <%--/**--%>
-             <%--* 根据code 获取openid--%>
-             <%--*/--%>
+    /**
+     * 如果cookie 里面没有openid,
+     */
+    if (!cookieHasOpenId) {
+        /**
+         * 并且没有code ,则需要重定向
+         */
+        if (StrUtil.isNull(code)) {
+            /**
+             * 根据code 获取openid
+             */
 
-            <%--String url = OAuthUtil.getURLByOAuth("http://app.bblycyz.com/AndSell/h5/pages/main/main.jsp");--%>
+            String url = OAuthUtil.getURLByOAuth("http://app.bblycyz.com/AndSell/h5/pages/main/main.jsp");
 
-            <%--response.sendRedirect(url);--%>
-            <%--return;--%>
-        <%--} else {--%>
+            response.sendRedirect(url);
+            return;
+        } else {
 
-            <%--openId = OAuthUtil.getOpenID(code);--%>
+            openId = OAuthUtil.getOpenID(code);
 
-            <%--if (StrUtil.isNotNull(openId)) {--%>
+            if (StrUtil.isNotNull(openId)) {
 
-                <%--Cookie cook = new Cookie("openId", openId);--%>
-                <%--response.addCookie(cook);--%>
+                Cookie cook = new Cookie("openId", openId);
+                response.addCookie(cook);
 
-                <%--/**--%>
-                 <%--* 如果有loginId, 表示已经登陆了, 则更新openid--%>
-                 <%--* 更新openid--%>
-                 <%--*/--%>
+                /**
+                 * 如果有loginId, 表示已经登陆了, 则更新openid
+                 * 更新openid
+                 */
 
-                <%--if (StrUtil.isNotNull(loginId)) {--%>
+                if (StrUtil.isNotNull(loginId)) {
 
-                    <%--Map<String, String> data = new HashMap<String, String>();--%>
+                    Map<String, String> data = new HashMap<String, String>();
 
-                    <%--data.put("MEMBER.USER_ID", loginId);--%>
-                    <%--data.put("MEMBER.WX_OPENID", openId);--%>
-                    <%--new API().call("/AndSell/bubu/member/member/updateOpenID", data);--%>
+                    data.put("MEMBER.USER_ID", loginId);
+                    data.put("MEMBER.WX_OPENID", openId);
+                    new API().call("/AndSell/bubu/member/member/updateOpenID", data);
 
-                    <%--response.addCookie(new Cookie("hasUpdateOpenId", "1"));--%>
-                <%--}--%>
-            <%--}--%>
-        <%--}--%>
-    <%--}--%>
+                    response.addCookie(new Cookie("hasUpdateOpenId", "1"));
+                }
+            }
+        }
+    }
 
-    <%--String path = request.getServletPath();--%>
+    String path = request.getServletPath();
 
 
-    <%--boolean hasMoreParam = request.getParameterNames().hasMoreElements();--%>
+    boolean hasMoreParam = request.getParameterNames().hasMoreElements();
 
-    <%--if (!hasMoreParam) {--%>
-        <%--String url = "http://app.bblycyz.com/AndSell/h5/pages/main/main.jsp".replace(path, path + "?t=1");--%>
-        <%--response.sendRedirect(url);--%>
-        <%--return;--%>
-    <%--}--%>
+    if (!hasMoreParam) {
+        String url = "http://app.bblycyz.com/AndSell/h5/pages/main/main.jsp".replace(path, path + "?t=1");
+        response.sendRedirect(url);
+        return;
+    }
 
-<%--%>--%>
+%>
 
 <!DOCTYPE html>
 <html lang="en" ng-app="AndSell.H5.Main" ng-controller="H5.MainController">

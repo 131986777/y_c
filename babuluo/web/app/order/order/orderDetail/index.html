@@ -5,9 +5,9 @@
             <div class="row orderHead">
                 <div class="col-md-6 orderNum">
                     <span ng-bind="'订单编号：'+order['SHOP_ORDER.ORDER_NUM']"></span>
-          <span
-              ng-if="order['SHOP_ORDER.ERP_REMARK']!=undefined&&order['SHOP_ORDER.ERP_REMARK']!=''"
-              ng-bind="' | 线下单号：'+order['SHOP_ORDER.ERP_NUM']"></span>
+                    <span
+                            ng-if="order['SHOP_ORDER.ERP_REMARK']!=undefined&&order['SHOP_ORDER.ERP_REMARK']!=''"
+                            ng-bind="' | 线下单号：'+order['SHOP_ORDER.ERP_NUM']"></span>
                 </div>
 
                 <div class="col-md-6 buttons text-right">
@@ -44,7 +44,21 @@
                                 ng-click="cancelOrder()">取消订单
                         </button>
                     </div>
+                    <div ng-if="orderType=='6'">
 
+                        <button class="btn btn-default"
+                                ng-if="order['SHOP_ORDER.STATE_DELIVERYTE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==-1"
+                        <!--show-modal id="#sendOrder">发货-->
+                        </button>
+                        <button class="btn btn-default"
+                                ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2"
+                                ng-click="deliveryOrder()">已提货
+                        </button>
+                        <button class="btn btn-default"
+                                ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.NEED_PAY']==-1&&order['SHOP_ORDER.STATE_DELIVERY']==-1"
+                                ng-click="cancelOrderByGroupBuy()">取消订单
+                        </button>
+                    </div>
                     <div ng-if="orderType=='1'">
                         <button class="btn btn-default"
                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1"
@@ -156,6 +170,28 @@
                             已完成
                         </div>
                     </div>
+                    <div ng-if="orderType=='6'">
+                        <div class="payed"
+                             ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2&&order['SHOP_ORDER.SPECIAL_MODEL']=='GROUPBUY'">
+                            预付款团购单：已付款，待成团
+                        </div>
+                        <div class="payed"
+                             ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2&&order['SHOP_ORDER.SPECIAL_MODEL']=='GROUPBUY_WAIT'">
+                            预付款团购单：已成团，待自提
+                        </div>
+                        <div class="payed"
+                             ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==1">
+                            预付款团购单：待收货
+                        </div>
+                        <div class="payed"
+                             ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1">
+                            团购单：预约成功(未付款)
+                        </div>
+                        <div class="payed"
+                             ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">
+                            已完成
+                        </div>
+                    </div>
                     <div ng-if="orderType=='1'">
                         <div class="payed"
                              ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">
@@ -205,6 +241,7 @@
                                 交易成功
                             </li>
                         </ul>
+
                         <ul class="progressList" ng-if="order['SHOP_ORDER.TYPE']=='3'">
                             <li class="step-5 step-first"
                                 ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1]">
@@ -274,7 +311,7 @@
                         </ul>
                         <ul class="progressList" ng-if="order['SHOP_ORDER.TYPE']=='5'">
                             <li class="step-5 step-first"
-                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1">
                                 下单
                             </li>
                             <li class="step-5"
@@ -290,6 +327,48 @@
                                 提货
                             </li>
                             <li class="step-5 step-last"
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
+                                交易成功
+                            </li>
+                        </ul>
+                        <ul class="progressList"
+                            ng-if="order['SHOP_ORDER.TYPE']=='6'&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2">
+                            <li class="step-3 step-first"
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.SPECIAL_MODEL'] == 'GROUPBUY']">
+                                参团
+                            </li>
+                            <li class="step-3"
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.SPECIAL_MODEL'] == 'GROUPBUY_WAIT']">
+                                成团
+                            </li>
+                            <li class="step-3 step-last"
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&order['SHOP_ORDER.SPECIAL_MODEL'] == 'GROUPBUY_SUCCESS']">
+                                提货
+                            </li>
+                        </ul>
+                        <ul class="progressList"
+                            ng-if="order['SHOP_ORDER.TYPE']=='6' &&order['SHOP_ORDER.REC_TYPE'] == 1 ">
+                            <li class="step-6 step-first"
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                                下单
+                            </li>
+                            <li class="step-6"
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
+                                付款
+                            </li>
+                            <li class="step-6"
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
+                                出库
+                            </li>
+                            <li class="step-6"
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1]">
+                                发货
+                            </li>
+                            <li class="step-6"
+                                ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1]">
+                                收货
+                            </li>
+                            <li class="step-6 step-last"
                                 ng-class="{true:'step-active'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
                                 交易成功
                             </li>
@@ -366,7 +445,8 @@
                         <div class="panel panel-default">
                             <div class="panel-heading text-center">
                                 <h4 class="panel-title ">
-                                    <a class="collapsed" data-toggle="collapse" ng-init="showLogistics=false" ng-click="showLogistics=!showLogistics">
+                                    <a class="collapsed" data-toggle="collapse" ng-init="showLogistics=false"
+                                       ng-click="showLogistics=!showLogistics">
                                         物流信息<span class="caret"></span>
                                     </a>
                                 </h4>
@@ -391,25 +471,26 @@
                             </div>
                         </div><!-- 物流 -->
                         <!--<div class="panel panel-default">-->
-                            <!--<div class="panel-heading text-center">-->
-                                <!--<h4 class="panel-title ">-->
-                                    <!--<a class="collapsed" data-toggle="collapse"  ng-init="showLog=false" ng-click="showLog=!showLog">-->
-                                        <!--订单日志<span class="caret"></span>-->
-                                    <!--</a>-->
-                                <!--</h4>-->
-                            <!--</div>-->
-                            <!--<div id="diary" class="panel-collapse collapse "  ng-class="{true:'in'}[showLog]">-->
-                                <!--<div class="panel-body">-->
-                                    <!--<ul>-->
-                                        <!--<li>2016年10月3日：..........</li>-->
-                                    <!--</ul>-->
-                                <!--</div>-->
-                            <!--</div>-->
+                        <!--<div class="panel-heading text-center">-->
+                        <!--<h4 class="panel-title ">-->
+                        <!--<a class="collapsed" data-toggle="collapse"  ng-init="showLog=false" ng-click="showLog=!showLog">-->
+                        <!--订单日志<span class="caret"></span>-->
+                        <!--</a>-->
+                        <!--</h4>-->
+                        <!--</div>-->
+                        <!--<div id="diary" class="panel-collapse collapse "  ng-class="{true:'in'}[showLog]">-->
+                        <!--<div class="panel-body">-->
+                        <!--<ul>-->
+                        <!--<li>2016年10月3日：..........</li>-->
+                        <!--</ul>-->
+                        <!--</div>-->
+                        <!--</div>-->
                         <!--</div>&lt;!&ndash; 日志 &ndash;&gt;-->
                         <div class="panel panel-default ">
                             <div class="panel-heading text-center">
                                 <h4 class="panel-title">
-                                    <a class="collapsed" data-toggle="collapse"  ng-init="showRemark=false" ng-click="showRemark=!showRemark">
+                                    <a class="collapsed" data-toggle="collapse" ng-init="showRemark=false"
+                                       ng-click="showRemark=!showRemark">
                                         订单备注信息<span class="caret"></span>
                                     </a>
                                 </h4>
@@ -447,7 +528,7 @@
                                         </td>
                                         <td class="price text-center"
                                             ng-if="order['SHOP_ORDER.STATE_OUT']==-1"><span
-                                            ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span>
+                                                ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span>
                                             元 x
                                             <span class="itemCount"
                                                   ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span>
@@ -455,14 +536,14 @@
                                         <td class="price text-center"
                                             ng-if="order['SHOP_ORDER.STATE_OUT']==1">
                                             <div
-                                                ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
+                                                    ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
                                                 <p ng-bind="stocklist.weight+' X '+stocklist.count"></p>
                                             </div>
                                         </td>
                                         <td class="price text-center"
                                             ng-if="order['SHOP_ORDER.STATE_OUT']==1">
                                             <div
-                                                ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
+                                                    ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
                                                 <p ng-bind="stocklist.price | currency : '￥'"></p>
                                             </div>
                                         </td>
@@ -478,9 +559,9 @@
                                     <div class="text">赠</div>
                                     <div class="present-info">
                                         <img
-                                            ng-src="{{FILE_SERVER_DOMAIN+presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.IMG_URL']}}">
+                                                ng-src="{{FILE_SERVER_DOMAIN+presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.IMG_URL']}}">
                                         <span
-                                            ng-bind="presentMap[detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.PRD_NAME']"></span><br>
+                                                ng-bind="presentMap[detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.PRD_NAME']"></span><br>
                                         <span class="itemColor"
                                               ng-bind="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.SKU_CONTENT_INFO']  +'x'+ presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.COUNT']"></span>
                                     </div>
@@ -491,9 +572,9 @@
                                 <div class="present">
                                     <div class="present-info">
                                         <img
-                                            ng-src="{{FILE_SERVER_DOMAIN+presentMap['order']['SHOP_ORDER_INFO.IMG_URL']}}">
+                                                ng-src="{{FILE_SERVER_DOMAIN+presentMap['order']['SHOP_ORDER_INFO.IMG_URL']}}">
                                         <span
-                                            ng-bind="presentMap['order']['SHOP_ORDER_INFO.PRD_NAME']"></span><br>
+                                                ng-bind="presentMap['order']['SHOP_ORDER_INFO.PRD_NAME']"></span><br>
                                         <span class="itemColor"
                                               ng-bind="presentMap['order']['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] +'x'+ presentMap['order']['SHOP_ORDER_INFO.COUNT']"></span>
                                     </div>
@@ -544,9 +625,9 @@
                                             <span ng-if="order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'">会员卡支付</span>
                                             <span ng-if="order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'">微信支付</span>
                                             <span
-                                                ng-if="order['SHOP_ORDER.PAY_TYPE']=='ALI'">支付宝支付</span>
+                                                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='ALI'">支付宝支付</span>
                                             <span
-                                                ng-if="order['SHOP_ORDER.PAY_TYPE']=='FACE'">自提付款</span>
+                                                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='FACE'">自提付款</span>
                                         </td>
                                     </tr>
                                     <tr ng-if="order['SHOP_ORDER.ERP_REMARK']!=undefined&&order['SHOP_ORDER.ERP_REMARK']!=''">

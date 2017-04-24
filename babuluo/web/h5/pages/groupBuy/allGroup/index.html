@@ -15,12 +15,18 @@
             <span ng-bind="gbm['GROUP_BUY_MEMBER.USER_NAME']"></span>
             <div class="group-pos">
                 <div class="group-over">
-                    <p class="orange group-cha">
+                    <p class="orange group-cha" ng-if="surplusSize-surplusSizeList[gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']] >0">
                         还差{{surplusSize-surplusSizeList[gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']]}}人成团</p>
+                    <p class="orange group-cha" ng-if="surplusSize-surplusSizeList[gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']] ==0">
+                        已满员
+                    </p>
                     <p class="colorgray grouptime">剩余:{{showDate}}结束</p>
 
                 </div>
-                <button class="group-sign" ng-click="goGroupBuy(gbm)">参团</button>
+                <button class="group-sign"
+                        ng-if="surplusSize-surplusSizeList[gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']] >0"
+                        ng-click="goGroupBuy(gbm)">参团
+                </button>
             </div>
 
         </div>

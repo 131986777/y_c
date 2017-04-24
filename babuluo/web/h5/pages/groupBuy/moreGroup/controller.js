@@ -177,6 +177,10 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_moreGroup_Controlle
     //在团用户表中添加一条记录
     //支付
     $scope.goGroup = function () {
+        if ($scope.surplusSize == 0) {
+            weUI.toast.info("团购已满员。");
+            return;
+        }
         var param = {
             SKU_ID: $scope.GBP['GROUP_BUY_PLAN.SKU_ID'].toString(),
             SUM_COUNT: $scope.sumCount.toString(),

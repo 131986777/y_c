@@ -1,6 +1,7 @@
 angular.module('AndSell.H5.Main').controller('pages_groupBuy_ownGroup_Controller', function (groupBuyPlanFactory, groupBuyGroupFactory, groupBuyMemberFactory, productFactory, $interval, $scope, $state, modalFactory, shopFactory) {
     $scope.initPage = function () {
         //获取用户id
+        modalFactory.setTitle('我的团购');
         var userId = getCookie("ANDSELLID");
         getGbmListByUserId(userId);
     }
@@ -118,6 +119,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_ownGroup_Controller
         });
         startWorkerByGbp();
         console.log($scope.gbmRes)
+        $scope.gbmRes.reverse();
     }
 
     /**
@@ -143,7 +145,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_ownGroup_Controller
     });
     $scope.initDataByGroupBuyPlan = function () {
         $scope.gbmRes.forEach(function (ele, index) {
-            if (ele['MONEY_STATE'] == 'WAIT_PAY') {
+            if (ele['MONEY_STATE'] == 'WAIT_PAY' || ele['MONEY_STATE'] == 'HAVE_PAY') {
                 var tempDate = ele['END_DATETIME'];
                 var yMd = tempDate.split(" ")[0].split("-");
                 var Hms = tempDate.split(" ")[1].split(":");
