@@ -13,7 +13,7 @@
     <div class="weui_cells" style="margin-bottom: 10px;" ng-repeat="(index,gbp) in gbmRes">
         <div class="weui_cell" ui-sref="pages/order/detail({'ORDER_ID':gbp['ORDER_ID']})">
             <div class="basic-info weui_cell_bd weui_cell_primary">
-                <img src="http://bbl-upload.oss-cn-shanghai.aliyuncs.com/{{groupPrdMap[gbp['SKU_ID']]['SHOP_PRODUCT.CMP']}}"
+                <img ng-src="http://bbl-upload.oss-cn-shanghai.aliyuncs.com/{{groupPrdMap[gbp['SKU_ID']]['SHOP_PRODUCT.CMP']}}"
                      alt="" class="groupPic">
                 <div class="left-des">
                     <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'FAIL'">失败</span>
