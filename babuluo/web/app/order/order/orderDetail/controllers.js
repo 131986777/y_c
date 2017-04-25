@@ -216,7 +216,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
                                 } else {
                                     param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'IS_CANCEL';
                                 }
-                                param['GROUP_BUY_MEMBER.IS_DEL'] = 1;
+                                // param['GROUP_BUY_MEMBER.IS_DEL'] = 1;
                                 groupBuyMemberFactory.modifyById(param);
                                 if ($scope.gbm['GROUP_BUY_MEMBER.IS_LEADER'] == 1) {
                                     groupBuyMemberFactory.getAllMemberInGbgIds({'GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS': $scope.gbg['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID']}, function (response) {

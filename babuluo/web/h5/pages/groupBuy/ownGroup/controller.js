@@ -72,7 +72,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_ownGroup_Controller
     function getSurplusList() {
         $scope.gbgList.forEach(function (ele) {
             groupBuyMemberFactory.getAllMemberInGbgIds({"GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS": ele['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID']}, function (response) {
-                $scope.gbgSurpSizeList[ele['GROUP_BUY_GROUP.GROUP_BUY_PLAN_ID']] = response.data.length;
+                $scope.gbgSurpSizeList[ele['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID']] = response.data.length;
             })
         });
     }
@@ -104,7 +104,7 @@ angular.module('AndSell.H5.Main').controller('pages_groupBuy_ownGroup_Controller
                             param['GBG_ID'] = gbg['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID'];
                             param['GBP_ID'] = gbp['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'];
                             param['SKU_ID'] = gbp['GROUP_BUY_PLAN.SKU_ID'];
-                            param['SURP_SIZE'] = gbp['GROUP_BUY_PLAN.SUM_COUNT'] - $scope.gbgSurpSizeList[gbp['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID']];
+                            param['SURP_SIZE'] = gbp['GROUP_BUY_PLAN.SUM_COUNT'] - $scope.gbgSurpSizeList[gbg['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID']];
                             param['GBG_STAT'] = gbg['GROUP_BUY_GROUP.STATE'];
                             param['END_DATETIME'] = gbp['GROUP_BUY_PLAN.END_DATETIME'];
                             param['MONEY_STATE'] = gbm['GROUP_BUY_MEMBER.MONEY_STATE'];

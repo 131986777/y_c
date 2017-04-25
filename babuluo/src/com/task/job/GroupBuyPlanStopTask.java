@@ -92,7 +92,7 @@ public class GroupBuyPlanStopTask implements Job {
                     put("GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID", gbgEntity.getString("GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID"));
                     put("GROUP_BUY_GROUP.STATE", "DONE");
                 }});
-//                改变用户订单状态为已经成团
+                //改变用户订单状态为已经成团
                 for (JSONObject gbmEntity : gbmData.getData()) {
                     new API().call("/shop/order/modifyById", new HashMap<String, Object>() {{
                         put("SHOP_ORDER.ID", gbmEntity.getString("GROUP_BUY_MEMBER.ORDER_ID"));

@@ -34,6 +34,7 @@
                         <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'IS_CANCEL'">已取消</span>
                         <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'IN_REFUND'">退款中</span>
                         <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'HAVE_REFUND'">已退款</span>
+                        <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'OVER_TIME'">超时取消</span>
                         <span class="del-line" style="font-size: 10px;" ng-if="gbp['SURP_SIZE'] > 0">还差{{gbp['SURP_SIZE']}}人成团</span>
                         <span class="del-line" style="font-size: 10px;" ng-if="gbp['SURP_SIZE'] == 0">已成团</span>
                     </p>

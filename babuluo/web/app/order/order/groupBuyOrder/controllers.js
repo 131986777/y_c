@@ -39,6 +39,7 @@ angular.module('AndSell.Main').controller('order_order_groupBuyOrder_Controller'
             $scope.filter['SHOP_ORDER.NEED_PAY'] = 1;
             $scope.filter['SHOP_ORDER.REC_TYPE'] = 1;
             $scope.filter['SHOP_ORDER.STATE_SEND'] = -1;
+            $scope.filter['SHOP_ORDER.SPECIAL_MODEL'] = 'GROUPBUY_WAIT';
         } else if (type == 'get') {
             //待自提
             $scope.filter['SHOP_ORDER.STATE_ORDER'] = 1;

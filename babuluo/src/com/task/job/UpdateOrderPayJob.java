@@ -43,9 +43,6 @@ public class UpdateOrderPayJob implements Job {
                         gbmOrderIds += "," + orderList.get(i).getString("SHOP_ORDER.ID");
                     }
                 }
-                if (orderList.get(i).getInteger("SHOP_ORDER.TYPE") == 6) {
-                    gbmOrderIds += "," + orderList.get(i).getString("SHOP_ORDER.ID");
-                }
                 ids += "," + orderList.get(i).getString("SHOP_ORDER.ID");
                 Map map = new HashMap<>();
                 map.put("SHOP_ORDER.ID", orderList.get(i).getString("SHOP_ORDER.ID"));
@@ -68,29 +65,28 @@ public class UpdateOrderPayJob implements Job {
             }});
             List<JSONObject> gbmList = gbmData.getData();
             for (JSONObject jo : gbmList) {
-                jo.put("GROUP_BUY_MEMBER.IS_DEL", "-1");
-                jo.put("GROUP_BUY_MEMBER.MONEY_STATE", "OVER_TIME");
-                new API().call("/group/buy/member/modifyById", jo);
-                if (jo.getInteger("GROUP_BUY_MEMBER.IS_LEADER") == 1) {
+                if ("1".equals(jo.getString("GROUP_BUY_MEMBER.IS_LEADER"))) {
                     //判断其团下有没有其他人
                     ReturnData gbmDataByGbg = new API().call("/group/buy/member/getInGbgIds", new HashMap<String, String>() {{
                         put("GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS", jo.getString("GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID"));
                     }});
-                    if (gbmDataByGbg.getData().size() == 1) {
-                        new API().call("", new HashMap<String, String>() {{
-                            put("GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID", jo.getString("GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID"));
-                            put("GROUP_BUY_GROUP.IS_DEL", "1");
-                        }});
-                    } else {
+                    if (gbmDataByGbg.getData().size() > 1) {
                         for (JSONObject jo2 : gbmDataByGbg.getData()) {
-                            if (!jo2.getString("GROUP_BUY_MEMBER.IS_LEADER").equals("1")) {
+                            if (!"1".equals(jo2.getString("GROUP_BUY_MEMBER.IS_LEADER"))) {
                                 jo2.put("GROUP_BUY_MEMBER.IS_LEADER", "1");
                                 new API().call("/group/buy/member/modifyById", jo2);
                                 break;
                             }
                         }
+                    } else {
+                        new API().call("/group/buy/group/modifyById", new HashMap<String, String>() {{
+                            put("GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID", jo.getString("GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID"));
+                            put("GROUP_BUY_GROUP.IS_DEL", "1");
+                        }});
                     }
                 }
+                jo.put("GROUP_BUY_MEMBER.MONEY_STATE", "OVER_TIME");
+                new API().call("/group/buy/member/modifyById", jo);
             }
         }
     }
