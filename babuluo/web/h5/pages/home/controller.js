@@ -480,7 +480,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             removeCookie("SUM_COUNT");
             $state.go('pages/groupBuy/myGroup',param);
         }
-
     }
 });
 
