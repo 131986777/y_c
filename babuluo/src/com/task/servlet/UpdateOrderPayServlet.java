@@ -1,5 +1,7 @@
 package com.task.servlet;
 
+import com.task.InitGroupBuyTask;
+import com.task.SchedulerManager;
 import com.task.trigger.UpdateOrderPayTrigger;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -16,6 +18,7 @@ public class UpdateOrderPayServlet extends HttpServlet {
         super();
         updateOrderPayTrigger.init();
         updateOrderPayTrigger.start();
+        InitGroupBuyTask.execute();
     }
 
     private static UpdateOrderPayTrigger updateOrderPayTrigger = new UpdateOrderPayTrigger();
@@ -23,6 +26,7 @@ public class UpdateOrderPayServlet extends HttpServlet {
 
     public void destroy() {
         updateOrderPayTrigger.shutdown();
+        SchedulerManager.shutdownJob();
         super.destroy();
     }
 

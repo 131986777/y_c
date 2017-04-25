@@ -12,6 +12,7 @@ AndSellMainModule.service('orderFactory', function (http) {
     this.modifyOrderRemark=http.post('/shop/order/modifyOrderRemark');
     this.modifyOrderLogistics=http.post('/shop/order/modifyOrderLogistics');
     this.scanOrder=http.post('/shop/order/scanOrder');
+    this.modifyOrderById = http.post("/shop/order/modifyById");
 
     this.getWXPayItemByOrderId= http.post('/order/wx/pay/list/getByOrderId');
     this.getFinanceItemByOrderId= http.post('/member/balance/getByOrderId');

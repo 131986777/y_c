@@ -1,0 +1,42 @@
+<div class="bg-grey product-detail-page group-wrap" ng-init="initPage()">
+    <!-- BEGIN 商品详情图片 -->
+    <!--<div class="group-nav" style="background-color: #fff;">-->
+    <!--<div class="weui_cell" style="width: 100%;">-->
+    <!--<div class="weui_cell_fr"></div>-->
+    <!--<div style="font-size: 16px;margin-left: 20px;" href="#/pages/order/list/all">-->
+    <!--全部团-->
+    <!--</div>-->
+
+    <!--</div>-->
+    <!--</div>-->
+    <div class="groups">
+        <div class="eachgroup" ng-repeat="gbm in gbmList" ng-if="gbm['GROUP_BUY_MEMBER.IS_LEADER']==1">
+            <img class="group-img" src="" alt="">
+            <span ng-bind="gbm['GROUP_BUY_MEMBER.USER_NAME']"></span>
+            <div class="group-pos">
+                <div class="group-over">
+                    <p class="orange group-cha" ng-if="surplusSize-surplusSizeList[gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']] >0">
+                        还差{{surplusSize-surplusSizeList[gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']]}}人成团</p>
+                    <p class="orange group-cha" ng-if="surplusSize-surplusSizeList[gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']] ==0">
+                        已满员
+                    </p>
+                    <p class="colorgray grouptime">剩余:{{showDate}}结束</p>
+
+                </div>
+                <button class="group-sign"
+                        ng-if="surplusSize-surplusSizeList[gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']] >0"
+                        ng-click="goGroupBuy(gbm)">参团
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!--选择页面遮罩-->
+    <div class="chose-shop" ng-if="STORE_ID==0">
+        <i class="icon-shop"></i>
+        <span>请先选择门店，即可在线购买！</span>
+        <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
+    </div>
+
+</div>

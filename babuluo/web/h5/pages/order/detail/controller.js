@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory, balanceFactory, http, weUI, productFactory, promoFactory, orderFactory, modalFactory) {
+angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory, balanceFactory, http, weUI, productFactory, promoFactory, orderFactory, modalFactory, groupBuyMemberFactory, groupBuyPlanFactory, groupBuyGroupFactory) {
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
@@ -331,7 +331,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             });
         });
     }
-
     //确认提货
     $scope.deliveryOrder = function () {
         weUI.dialog.confirm("提示", "确认收货？", function () {
@@ -355,6 +354,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
             });
         });
     }
+
 
     //立即支付
     $scope.payNow = function () {
@@ -411,6 +411,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                         weUI.toast.ok('支付成功');
                         $scope.cardModalShow = false;
                         $scope.delCoupon();
+
+                        //修改团购订单状态
+                        if ($scope.order['SHOP_ORDER.TYPE'] == 6) {
+                            paySuccessUpdateGbmStatus($scope.order['SHOP_ORDER.ID'])
+                        }
                         $state.go("pages/personal");
                     }, function (response) {
                         weUI.toast.hideLoading();
@@ -505,6 +510,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
                 http.post_ori("http://app.bblycyz.com/AndSell/wxCallBack", formData, function (res) {
                     weUI.toast.ok('订单支付成功');
                     $scope.delCoupon();
+                    //修改团购订单状态
+                    if ($scope.order['SHOP_ORDER.TYPE'] == 6) {
+                        paySuccessUpdateGbmStatus($scope.order['SHOP_ORDER.ID'])
+                    }
                     location.reload();
                 }, function (res) {
                     weUI.toast.ok('后台确认收款中!');
@@ -516,4 +525,86 @@ angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', fu
         });
     }
 
+    //团购单取消订单
+    $scope.cancelOrderByGroupBuy = function () {
+        weUI.dialog.confirm("提示", "确认取消该订单", function () {
+            cancelGpm($scope.order['SHOP_ORDER.ID'], $scope.order['SHOP_ORDER.STATE_MONEY']);
+            weUI.toast.showLoading('正在取消');
+            //将这个订单所在团购取消掉
+            orderFactory.cancelOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
+                weUI.toast.hideLoading();
+                weUI.toast.ok('取消订单成功');
+                $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+            }, function (response) {
+                weUI.toast.hideLoading();
+                weUI.toast.error(response.msg);
+            });
+        });
+    }
+    //取消团购相关操作
+    function cancelGpm(orderId, moneyState) {
+        //获得团购客户记录
+        groupBuyMemberFactory.getByOrderId({'GROUP_BUY_MEMBER.ORDER_IDS': orderId}, function (response) {
+            if (response.data.length == 1) {
+                $scope.gbm = response.data[0];
+                //获得该团购记录的主团
+                groupBuyGroupFactory.getByGbgIds({'GROUP_BUY_GROUP.GROUP_BUY_GROUP_IDS': $scope.gbm['GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID']}, function (response) {
+                    if (response.data.length == 1) {
+                        $scope.gbg = response.data[0];
+                        //获得主团下的团规则
+                        groupBuyPlanFactory.getByGbpIds({'GROUP_BUY_PLAN.GROUP_BUY_PLAN_IDS': $scope.gbg['GROUP_BUY_GROUP.GROUP_BUY_PLAN_ID']}, function (response) {
+                            if (response.data.length == 1) {
+                                $scope.gbp = response.data[0];
+                                //如果该团委商家开团
+                                //这只要将这个团客户记录标记为删除
+                                var param = {};
+                                if ($scope.gbm['GROUP_BUY_MEMBER.IS_LEADER'] == 1) {
+                                    groupBuyMemberFactory.getAllMemberInGbgIds({'GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS': $scope.gbg['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID']}, function (response) {
+                                        if (response.data.length > 1) {
+                                            for (var i = 0; i < response.data.length; i++) {
+                                                if (response.data[i]['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'] != $scope.gbm['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID']) {
+                                                    param = {};
+                                                    param['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'] = response.data[i]['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'];
+                                                    param['GROUP_BUY_MEMBER.IS_LEADER'] = 1;
+                                                    groupBuyMemberFactory.modifyById(param);
+                                                    break;
+                                                }
+                                            }
+                                        } else {
+                                            //将团删除；
+                                            param = {};
+                                            param['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID'] = $scope.gbg['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID'];
+                                            param['GROUP_BUY_GROUP.STATE'] = 'FAIL';
+                                            groupBuyGroupFactory.modifyById(param);
+                                        }
+                                    })
+                                }
+                                param = {};
+                                param['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'] = $scope.gbm['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'];
+                                if (moneyState == 1) {
+                                    param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'HAVE_REFUND';
+                                } else {
+                                    param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'IS_CANCEL';
+                                }
+                                // param['GROUP_BUY_MEMBER.IS_DEL'] = 1;
+                                groupBuyMemberFactory.modifyById(param);
+                            }
+                        })
+                    }
+                })
+            }
+        });
+    }
+
+    // 修改订单状态为已付款
+    function paySuccessUpdateGbmStatus(orderId) {
+        //获得团购客户记录
+        groupBuyMemberFactory.getByOrderId({'GROUP_BUY_MEMBER.ORDER_IDS': orderId}, function (response) {
+            if (response.data.length == 1) {
+                $scope.gbm = response.data[0];
+                $scope.gbm['GROUP_BUY_MEMBER.MONEY_STATE'] = 'HAVE_PAY';
+                groupBuyMemberFactory.modifyById($scope.gbm);
+            }
+        })
+    }
 })

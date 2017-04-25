@@ -1,0 +1,131 @@
+<div class="bg-grey product-detail-page group-wrap">
+    <!-- BEGIN 商品详情图片 -->
+    <div class="group-nav" style="background-color: #fff;">
+        <div class="weui_cell" style="width: 100%;">
+            <div class="weui_cell_fr"></div>
+            <div style="font-size: 16px;margin-left: 20px;" href="#/pages/order/list/all">
+                团购
+            </div>
+
+        </div>
+    </div>
+    <div class="swiper-container" style="height: 306px;width: 100%;">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" ng-repeat="slide in slides">
+                <a>
+                    <img
+                            ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
+                            style="height: 100%;width: 100%;">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="weui_cells" style="margin-bottom: 0px;">
+        <div class="weui_cell">
+            <div class="basic-info weui_cell_bd weui_cell_primary">
+                <h4 class="name">
+                    <span class="groupTilte">冬季阳光葵花籽黑南瓜冬季阳光葵花籽黑南瓜</span>
+
+                </h4>
+
+                <p class="money group-money" style="float: left;">
+                    <!--现价-->
+                    团购价
+                    <span style="font-size:25px;">￥123.00</span>
+                    <!--原价-->
+                    <!--ng-if="sku!=undefined&&sku['isSale']"-->
+                    <span  class="del-line" style="font-size: 13px;">￥399.00</span>
+
+                </p>
+                <div class="groupNum">
+
+                    <button class="group-btn">-</button>
+                    <span class="num">8</span>
+                    <button class="group-btn numColor">+</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="groups">
+        <p class="groups-nav">以下小伙伴正在发起团购，你也可以直接参与</p>
+        <div class="eachgroup">
+            <img class="group-img" src="" alt="">
+            <span>客户001</span>
+            <div class="group-pos">
+                <div class="group-over">
+                    <p class="orange group-cha">还差一人成团</p>
+                    <p class="colorgray grouptime">剩余 23：39：00 结束</p>
+
+                </div>
+                <button class="group-sign">参团</button>
+            </div>
+
+        </div>
+        <div class="group-tishi" style="text-align: center;">人数不够自动退款</div>
+    </div>
+
+    <div class="weui_tab tab-default pro-detail">
+        <div class="weui_navbar" style="background-color: #fff;">
+            <div class="weui_cell" style="width: 100%;">
+                <div style="font-size: 16px" href="#/pages/order/list/all">
+                    商品详情
+                </div>
+                <div class="weui_cell_ft"></div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="kaiBtn group-sign">开团：￥1999.00</div>
+</div>
+
+
+    <div class="product-action-wrap action-bar-wrap"
+         ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='NORMAL'">
+        <div class="action-bar border-top">
+            <div class="icon-wrap">
+                <i class="icon icon-cart-small" ng-click="toCart()"></i>
+                <span class="cartNum" ng-bind="totalSize"></span>
+                购物车
+            </div>
+            <div class="icon-wrap" ng-click="collectionClick()">
+                <!-- 已收藏 class="icon-collected" -->
+                <i class="icon icon-collect active"
+                   ng-class="{true:'icon-collected',false:'icon-collect'}[collectionState==1]"></i>
+                收藏
+            </div>
+            <a class="add-to-cart cell" ng-click="addToCart()">
+                加入购物车
+            </a>
+        </div>
+    </div>
+
+    <div class="product-action-wrap action-bar-wrap"
+         ng-if="sku['SHOP_PRODUCT_SKU.MODEL']!='NORMAL'">
+        <div class="action-bar border-top">
+            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'" ng-click="toAppointment()">
+                去预约
+            </a>
+            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='TUANGOU'" ng-click="toAppointment()">
+                参加团购
+            </a>
+            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='QIANGGOU'" ng-click="toAppointment()">
+                限时抢购
+            </a>
+        </div>
+    </div>
+
+    <!--选择页面遮罩-->
+    <div class="chose-shop" ng-if="STORE_ID==0">
+        <i class="icon-shop"></i>
+        <span>请先选择门店，即可在线购买！</span>
+        <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
+    </div>
+
+</div>

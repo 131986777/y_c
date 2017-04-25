@@ -16,7 +16,7 @@ $import('pages/order/appointmentList', {state: 'all'});
 $import('pages/order/list', {state: 'all'});
 $import('pages/order/detail', {ORDER_ID: '1030', FROM: 'List', COUPON_INFO: ''});
 $import('pages/order/addCoupon', {ORDER_ID: '1030', PRODUCTS: '{}', MONEY: '0'});
-$import('pages/order/addAddress', {SKU_IDS: '1060',TYPE:'NORMAL'},true);
+$import('pages/order/addAddress', {SKU_IDS: '1060', TYPE: 'NORMAL'}, true);
 $import('pages/order/CashOnDeliveryOrder');
 $import('pages/order/review', {ID: ''});
 
@@ -46,8 +46,11 @@ $import('pages/account/lucky', {}, true);
 $import('pages/security/resetPwd');
 
 $import('pages/order/addSeckill');
-
-
-
-
-
+$import('pages/order/addGroupBuy', {SKU_ID: '0', SUM_COUNT: '0', GBG_ID: '0'});
+$import('pages/groupBuy/myGroup', {GBP_ID: '0', PRD_ID: '0'});
+$import('pages/groupBuy/inviteGroup');
+$import('pages/groupBuy/moreGroup', {GBP_ID: '0', PRD_ID: '0'});
+$import('pages/groupBuy/ownGroup');
+$import('pages/groupBuy/allGroup',{GBP_ID: '0',PRD_ID:'0'});
+$import('pages/groupBuy/allGroupper', {GBG_IDS: "0"});
+$import('pages/groupBuy/groupDetail', {GBP_ID: '0',GBG_ID: '0',PRD_ID:'0'});

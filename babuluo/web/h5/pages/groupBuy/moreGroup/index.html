@@ -1,0 +1,93 @@
+<div class="bg-grey product-detail-page group-wrap" ng-init="initPage()">
+    <!-- BEGIN 商品详情图片 -->
+    <!--<div class="weui_navbar" style="background-color: #fff;">-->
+    <!--<div class="weui_cell" style="width: 100%;">-->
+    <!--<div class="weui_cell_fr"></div>-->
+    <!--<div style="font-size: 16px;margin-left: 20px;" href="#/pages/order/list/all">-->
+    <!--团购-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--margin-top:36px;-->
+    <div class="swiper-container" style="height: 306px;width: 100%;">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" ng-repeat="slide in slides">
+                <a>
+                    <img
+                            ng-src="{{slide.image}}?x-oss-process=image/resize,m_fill,h_800,w_800"
+                            style="height: 100%;width: 100%;">
+                </a>
+            </div>
+            L
+        </div>
+    </div>
+
+    <div class="weui_cells" style="margin-bottom: 0px;">
+        <div class="weui_cell">
+            <div class="basic-info weui_cell_bd weui_cell_primary">
+                <h4 class="name">
+                    <span class="groupTilte" ng-bind="GBP_PRD['SHOP_PRODUCT.PRD_NAME']"></span>
+
+                </h4>
+
+                <p class="money group-money" style="float: left;">
+                    <!--现价-->
+                    团购价
+                    <span style="font-size:25px;" ng-bind="GBP['GROUP_BUY_PLAN.GROUP_PRICE'] |currency : '￥'"></span>
+                    <!--原价-->
+                    <!--ng-if="sku!=undefined&&sku['isSale']"-->
+                    <span class="del-line" style="font-size: 13px;"
+                          ng-bind="GBP_PRD['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] |currency : '￥'"></span>
+
+                </p>
+                <div class="groupNum">
+
+                    <button class="group-btn" ng-click="downCount()">-</button>
+                    <span class="num" ng-bind="sumCount"></span>
+                    <button class="group-btn numColor" ng-click="upCount()">+</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <div class="group-tishi">还差{{surplusSize}}人开团，剩余时间：
+        <span id="gbpHour">00</span>:
+        <span id="gbpMin">00</span>:
+        <span id="gbpSec">00</span></div>
+    <!--<div class="group-tishi" style="text-align: center;">人数不够自动退款</div>-->
+    <div class="person-nav">
+        参团人员
+    </div>
+    <div class="groups">
+        <div class="eachgroup" ng-repeat="gbm in gbmListSub">
+            <img class="group-img" src="" alt="">
+            <span ng-bind="gbm['GROUP_BUY_MEMBER.USER_NAME']"></span>
+            <div class="group-pos">
+                <div class="group-over">
+                    <p class="colorgray grouptime" style="margin-top: 10px;">
+                        参团时间:{{gbm['GROUP_BUY_MEMBER.ADD_DATETIME']}}</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="checkall" ng-click="showAllGroupMember()">查看团员
+            <div class="check_ft"></div>
+        </div>
+    </div>
+    <div class="weui_tab tab-default pro-detail"
+         ui-sref="pages/product/detail({'PRD_ID':GBP_PRD['SHOP_PRODUCT.PRD_ID']})">
+        <div class="weui_navbar" style="background-color: #fff;"
+        >
+            <div class="weui_cell" style="width: 100%;">
+                <div style="font-size: 16px">
+                    商品详情
+                </div>
+                <div class="weui_cell_ft"></div>
+            </div>
+        </div>
+
+    </div>
+    <div class="kaiBtn group-sign"  ng-click="goGroup()">参团：{{sumPrice |currency : '￥'}}</div>
+</div>

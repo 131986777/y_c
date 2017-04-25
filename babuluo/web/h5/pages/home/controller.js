@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory, weUI,seckillFactory) {
+angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (groupBuyPlanFactory, productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory, weUI, seckillFactory) {
 
     modalFactory.setTitle('云厨1站商城 - 十分钟吃饭，优质食品购买平台');
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
@@ -155,6 +155,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                     }
                 });
             }
+            $scope.queryAllGroupBuyPlanByState();
         });//
 
         // 设置轮播图图片间隔
@@ -292,19 +293,19 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         return false;
     }
     /***************************************************秒杀部分*************************************************************/
-        //请求到的所有秒杀
-    $scope.seckillList=[];
+    //请求到的所有秒杀
+    $scope.seckillList = [];
     //秒杀的商品详情
-    $scope.prdMap=[];
+    $scope.prdMap = [];
 
 
     /**
      * 请求所有启用的已经开始的秒杀
      */
-    $scope.queryByStateAndTime=function(){
-        seckillFactory.queryByStateAndTime({},function(response){
-            var promoReturn =response['extraData']['promoReturn'];
-            $scope.seckillList=promoReturn['data'];
+    $scope.queryByStateAndTime = function () {
+        seckillFactory.queryByStateAndTime({}, function (response) {
+            var promoReturn = response['extraData']['promoReturn'];
+            $scope.seckillList = promoReturn['data'];
             $scope.queryPrd();
             startWorker();
         })
@@ -313,18 +314,18 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     /**
      * 请求秒杀的商品
      */
-    $scope.queryPrd=function(){
-        var skuIds="";
-        $scope.seckillList.forEach(function(ele){
-            if (skuIds!=""){
-                skuIds+=",";
+    $scope.queryPrd = function () {
+        var skuIds = "";
+        $scope.seckillList.forEach(function (ele) {
+            if (skuIds != "") {
+                skuIds += ",";
             }
-            skuIds+=ele['sku_id'];
+            skuIds += ele['sku_id'];
         })
         productFactory.getProductSkuBySkuIds({"SHOP_PRODUCT_SKU.SKU_IDS": skuIds}, function (response) {
             response.data.forEach(function (ele) {
                 $scope.prdMap[ele['SHOP_PRODUCT_SKU.SKU_ID']] = ele;
-            },function(response){
+            }, function (response) {
                 alert("请求商品失败")
             });
         });
@@ -333,24 +334,24 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     /**
      * 剩余时间
      */
-    $scope.initTime=function(){
-        $scope.seckillList.forEach(function(ele,index){
-            if (ele['type']=='time'||ele['type']=='timeAndNum'){
+    $scope.initTime = function () {
+        $scope.seckillList.forEach(function (ele, index) {
+            if (ele['type'] == 'time' || ele['type'] == 'timeAndNum') {
                 var end = new Date(ele['end_datetime']).getTime();
                 var now = new Date().getTime();
-                if (end<now){
-                    ele['hour']='已'
-                    ele['min']='过'
-                    ele['sec']='期'
-                }else {
+                if (end < now) {
+                    ele['hour'] = '已'
+                    ele['min'] = '过'
+                    ele['sec'] = '期'
+                } else {
                     var time = (end - now) / 1000;
                     ele['hour'] = parseInt(time / 3600);
                     ele['min'] = parseInt(time / 60 - ele['hour'] * 60);
                     ele['sec'] = parseInt(time - ele['hour'] * 3600 - ele['min'] * 60);
                 }
-                document.getElementById("hour"+index).innerHTML=ele['hour'];
-                document.getElementById("min"+index).innerHTML=ele['min'];
-                document.getElementById("sec"+index).innerHTML=ele['sec'];
+                document.getElementById("hour" + index).innerHTML = ele['hour'];
+                document.getElementById("min" + index).innerHTML = ele['min'];
+                document.getElementById("sec" + index).innerHTML = ele['sec'];
             }
         })
     }
@@ -358,7 +359,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     /**
      * 抢购
      */
-    $scope.goSeckill=function(seckill){
+    $scope.goSeckill = function (seckill) {
         var json = JSON.stringify(seckill);
         setCookie('seckill', json);
         w.terminate();
@@ -370,13 +371,11 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
      * 监听回馈
      */
     var w;
-    function startWorker()
-    {
-        if(typeof(Worker)!=="undefined")
-        {
-            if(typeof(w)=="undefined")
-            {
-                w=new Worker("/AndSell/h5/pages/home/home_worker.js");
+
+    function startWorker() {
+        if (typeof(Worker) !== "undefined") {
+            if (typeof(w) == "undefined") {
+                w = new Worker("/AndSell/h5/pages/home/home_worker.js");
             }
             w.onmessage = function (event) {
                 $scope.initTime();
@@ -385,8 +384,103 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
     }
 
     $scope.$on('$destroy', function () {
-        if(undefined!= w)
-        w.terminate() //终止一个worker线程v
+        if (undefined != w)
+            w.terminate() //终止一个worker线程v
     })
+    /***************************************************团购部分*************************************************************/
+    //请求到的所有团购
+    $scope.showGbp = false;
+    $scope.groupBuyPlanList = [];
+    //团购的商品详情
+    $scope.groupPrdMap = [];
+    $scope.queryAllGroupBuyPlanByState = function () {
+        groupBuyPlanFactory.queryAllByState({}, function (response) {
+            $scope.groupBuyPlanList = response.data;
+            if ($scope.groupBuyPlanList.length > 0) {
+                $scope.queryPrdByGroupBuyPlan();
+                startWorkerByGbp()
+            }
+        }, function (response) {
+            alert("请求团购商品失败。")
+        })
+    }
+    /**
+     * 请求团购的商品
+     */
+    $scope.queryPrdByGroupBuyPlan = function () {
+        var skuIds = "";
+        $scope.groupBuyPlanList.forEach(function (ele) {
+            if (skuIds != "") {
+                skuIds += ",";
+            }
+            skuIds += ele['GROUP_BUY_PLAN.SKU_ID'];
+        })
+        productFactory.getProductSkuBySkuIds({"SHOP_PRODUCT_SKU.SKU_IDS": skuIds}, function (response) {
+            $scope.showGbp = true;
+            response.data.forEach(function (ele) {
+                $scope.groupPrdMap[ele['SHOP_PRODUCT_SKU.SKU_ID']] = ele;
+            }, function (response) {
+                alert("请求商品失败")
+            });
+        });
+    }
+    /**
+     * 开启线程
+     * 监听回馈
+     */
+    var gw;
+
+    function startWorkerByGbp() {
+        if (typeof(Worker) !== "undefined") {
+            if (typeof(gw) == "undefined") {
+                gw = new Worker("/AndSell/h5/pages/home/home_worker.js");
+            }
+            gw.onmessage = function (event) {
+                $scope.initDataByGroupBuyPlan();
+            };
+        }
+    }
+
+    $scope.$on('$destroy', function () {
+        if (undefined != gw)
+            gw.terminate() //终止一个worker线程v
+    })
+    $scope.initDataByGroupBuyPlan = function () {
+        $scope.groupBuyPlanList.forEach(function (ele, index) {
+            if (ele['GROUP_BUY_PLAN.STATE'] == 'IN_SALE') {
+                var tempDate = ele['GROUP_BUY_PLAN.END_DATETIME'];
+                var yMd = tempDate.split(" ")[0].split("-");
+                var Hms = tempDate.split(" ")[1].split(":");
+                var end = new Date(yMd[0] + '/' + yMd[1] + '/' + yMd[2] + ' ' + Hms[0] + ':' + Hms[1] + ":00").getTime();
+                var now = new Date().getTime();
+                if (end < now) {
+                    ele['hour'] = '已'
+                    ele['min'] = '过'
+                    ele['sec'] = '期'
+                } else {
+                    var time = (end - now) / 1000;
+                    ele['hour'] = parseInt(time / 3600);
+                    ele['min'] = parseInt(time / 60 - ele['hour'] * 60);
+                    ele['sec'] = parseInt(time - ele['hour'] * 3600 - ele['min'] * 60);
+                }
+                document.getElementById("gbpHour" + index).innerHTML = ele['hour'];
+                document.getElementById("gbpMin" + index).innerHTML = ele['min'];
+                document.getElementById("gbpSec" + index).innerHTML = ele['sec'];
+            }
+        })
+    }
+    $scope.goGbp = function (gbp) {
+        var param = {};
+        param['GBP_ID'] = gbp['GROUP_BUY_PLAN.GROUP_BUY_PLAN_ID'];
+        param['PRD_ID'] = $scope.groupPrdMap[gbp['GROUP_BUY_PLAN.SKU_ID']]['SHOP_PRODUCT_SKU.SKU_ID'];
+        gw.terminate();
+        if (gbp['GROUP_BUY_PLAN.TYPE'] == 'MANAGE') {
+            $state.go('pages/groupBuy/moreGroup',param);
+        } else if (gbp['GROUP_BUY_PLAN.TYPE'] == 'MEMBER') {
+            removeCookie("SUM_COUNT");
+            $state.go('pages/groupBuy/myGroup',param);
+        }
+
+    }
 });
 
