@@ -121,7 +121,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
                 $scope.gbmStorage = response.data.length < $scope.gbpEntity['GROUP_BUY_PLAN.SUM_COUNT'];
             })
         });
-    }
+    };
 
     //添加团购相关信息
     $scope.addGbm = function (orderId) {
