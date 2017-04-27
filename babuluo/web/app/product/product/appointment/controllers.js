@@ -105,6 +105,22 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
 
     }
 
+    $('#startDay1').datetimepicker({
+        minView: "month",
+        language: 'zh-CN',
+        autoclose: true,
+        todayHighlight: true,
+        weekStart: 1,
+        startView: 2,
+        format: 'yyyy-mm-dd',
+        todayBtn: 'linked'
+    }).on("hide", function () {
+        var $this = $(this);
+        var _this = this;
+        $scope.$apply(function () {
+            $scope[$this.attr('ng-model')] = _this.value;
+        });
+    });
     $('#startDay').datetimepicker({
         minView: "month",
         language: 'zh-CN',

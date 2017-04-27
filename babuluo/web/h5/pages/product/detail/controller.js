@@ -52,6 +52,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
                     $scope.nowPrice = $scope.skuList[0]['SHOP_PRODUCT_SKU.REAL_PRICES'];
                     if ($scope.skuList[0]['SHOP_PRODUCT_SKU.MODEL'] == 'APPOINTMENT') {
                         $scope.oldPrice = $scope.skuList[0]['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'];
+                        $scope.appointmentState=$scope.skuList[0]['SHOP_PRODUCT_SKU.MODEL_STATE'];
                     }
                     //var skulistsForOrder = new Array;
                     //$scope.skuList.forEach(function (ele) {

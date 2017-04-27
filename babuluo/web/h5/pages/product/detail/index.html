@@ -224,8 +224,11 @@
     <div class="product-action-wrap action-bar-wrap"
          ng-if="sku['SHOP_PRODUCT_SKU.MODEL']!='NORMAL'">
         <div class="action-bar border-top">
-            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'" ng-click="toAppointment()">
+            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'&&appointmentState==1" ng-click="toAppointment()">
                 去预约
+            </a>
+            <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='APPOINTMENT'&&appointmentState==-1" >
+                该活动已结束
             </a>
             <a class="add-to-cart cell"  ng-if="sku['SHOP_PRODUCT_SKU.MODEL']=='TUANGOU'" ng-click="toAppointment()">
                 参加团购
