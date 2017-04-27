@@ -1,4 +1,20 @@
-angular.module('AndSell.Main').controller('card_card_cardList_Controller', function (http, $scope, $stateParams, cardFactory, modalFactory, fileUpload) {
+var app=angular.module('app',[])
+app.service('loginServer', function() {
+	//获取当前用户角色，门店的看不了，储值卡导入和开卡
+	this.getcookie = function getcookie(name){
+		var strcookie=document.cookie;
+		var arrcookie=strcookie.split("; ");
+		for(var i=0;i<arrcookie.length;i++){
+		var arr=arrcookie[i].split("=");
+		if(arr[0]==name)return arr[1];
+		}
+		return "";
+	}
+
+
+});
+
+angular.module('AndSell.Main').controller('card_card_cardList_Controller', function (http, $scope,loginServer, $stateParams, cardFactory, modalFactory, fileUpload) {
 
     modalFactory.setTitle('已开会员卡');
 
@@ -17,6 +33,7 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
         $scope.sourceList = response.extraData.sourceList;
         $scope.shopList = response.extraData.shopList;
         $scope.typeListMap = response.extraData.typeListMap;
+        $scope.ACCOUNT_TYPE= loginServer.getcookie('ACCOUNT_TYPE');        
         console.log(response);
     };
 
