@@ -99,10 +99,11 @@
                     <button type="button" class="btn btn-default pull-right"
                             ng-click="outPutQuery()">导出
                     </button>
-                    <button type="button" class="btn btn-default pull-right" data-toggle="modal"
+                    
+                    <button ng-show="ACCOUNT_TYPE!='SHOP'" type="button" class="btn btn-default pull-right" data-toggle="modal"
                             data-target="#cardList"><i class="fa fa-plus"></i>开卡
                     </button>
-                    <button type="button" class="btn btn-default pull-right" show-modal id="#czkCardIn">
+                    <button ng-show="ACCOUNT_TYPE!=='SHOP'" type="button" class="btn btn-default pull-right" show-modal id="#czkCardIn">
                         <i class="fa fa-plus"></i>储值卡导入
                     </button>
                 </div>
