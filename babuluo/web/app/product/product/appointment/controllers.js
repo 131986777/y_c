@@ -121,6 +121,7 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
             $scope[$this.attr('ng-model')] = _this.value;
         });
     });
+
     $('#startDay').datetimepicker({
         minView: "month",
         language: 'zh-CN',
