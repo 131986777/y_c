@@ -291,7 +291,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             weUI.toast.error('请填写提货信息');
             return;
         }
-
+        if (isEmptyObject($scope.cookiePickupPerson.getTime)) {
+            weUI.toast.error('请选择提货时间');
+            return;
+        }
         if($scope.cookiePickupPerson.man==undefined||$scope.cookiePickupPerson.phone==undefined){
             weUI.toast.error('提货信息不全！');
             return;
