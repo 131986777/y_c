@@ -1,5 +1,5 @@
 AndSellMainModule.service('stockFactory', function (http) {
 
-    this.modStockOnLine= http.post('/stock/realtime/modifyById');
+    this.modStockOnLine= http.post('/stock/realtime/modifyByOnLine');
 
 });
