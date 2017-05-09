@@ -195,7 +195,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
                      day = Number(strDay) - Number(currTime);
                  }
                  
-                     dayList.push(GetDateStr(Number(strDay) ) + '   08:00-19:00');
+                     dayList.push(GetDateStr(Number(day) ) + '   08:00-19:00');
             }    
            
         }
