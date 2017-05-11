@@ -300,7 +300,18 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             weUI.toast.error('提货信息不全！');
             return;
         }
-
+        
+        var orderDate = $scope.cookiePickupPerson.getTime.substring(0,10)+' 00:00:00';
+        var endHours = Number($scope.cookiePickupPerson.endHours);
+        var date = new Date(orderDate.replace(/\-/gi,"/")).getTime() - endHours*60*60*1000;
+        var currDate = new Date().getTime();
+        if(currDate > date){
+        	weUI.toast.error('请重新选择提货日期！');
+            return;
+        }
+       /* var orderDate = $scope.cookiePickupPerson.getTime.substring(0,10);
+        var endHours = Number($scope.cookiePickupPerson.endHours);*/
+        
         if ($scope.commitClick) {
             $scope.commitClick = false;
             weUI.toast.showLoading('正在下单');
@@ -315,6 +326,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             params['SHOP_ORDER.REC_PHONE'] = $scope.cookiePickupPerson.phone;//联系电话
             params['SHOP_ORDER.SHOP_NAME'] = $scope.shop['SHOP.SHOP_NAME'];//门店信息
             params['SHOP_ORDER.SHOP_ID'] = $scope.shop['SHOP.SHOP_ID'];//门店ID
+           
             if ($scope.cookiePickupPerson.type == 1) {
                 params['SHOP_ORDER.REC_TYPE'] = 1;//收货方式为快递
                 params['SHOP_ORDER.REC_ADDR'] = noUndefinedAndNull($scope.cookiePickupPerson.shengshi)
@@ -326,6 +338,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             }
 
             params['SHOP_ORDER.DETAILS'] = JSON.stringify($scope.skuList);//sku信息
+            params['ORDER_DATE'] = $scope.cookiePickupPerson.getTime.substring(0,10)+ ' 00:00:00';
+            params['END_HOURS'] = Number($scope.cookiePickupPerson.endHours);
             orderFactory.addOrder(params, function (response) {
 
                 weUI.toast.hideLoading();
@@ -355,6 +369,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
         var startTime = item['APPOINTMENT_PRODUCT.START_TIME'];
         var next = true;
         var dayList = new Array;
+        var getDay = new Array();
         if (type == 'WEEK') {
             var currTime = new Date().getDay();
             var currHours = new Date().getHours();
@@ -390,6 +405,51 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             for (var i = 0; i < still; i++) {
                 dayList.push(GetDateStr(Number(i), startTime) + '   08:00-19:00');
             }
+        }else if(type=='WEEK_COMB'){
+        	var currTime = new Date().getDay();//获得周几
+            var currHours = new Date().getHours();//获得当前小时
+            var endDay = Math.ceil(Number(endHours / 24));
+            console.log(endDay)
+            if (currTime == 0) {
+                currTime = 7;//周日
+            }
+            var strs= new Array(); //定义一数组
+            var strDay = null;
+            strs=startTime.split(","); //字符分割     strs=strs.substring(0,(strs.length-1));
+            for (i=0;i<strs.length ;i++ )
+            {
+            	strDay=(strs[i]);
+            	 if ((strDay - currTime) > endDay) {
+                     next = false;
+                 } else {
+                     if ((strDay - currTime) > (endDay - 1)) {
+                         if ((24 - currHours) > (endHours - (endDay - 1) * 24)) {
+                             next = false;
+                         } else {
+                             next = true;
+                         }
+                     } else {
+                         next = true;
+                     }
+                 }
+                 var day;
+
+                 if (next) {
+                     day = Number(strDay) + 7 - Number(currTime);
+                 } else {
+                     day = Number(strDay) - Number(currTime);
+                 }
+                 getDay.push(Number(day));
+                 
+            }
+            var minDay = getDay[0];
+            for(var i=1;i<getDay.length;i++){
+            	if(minDay > getDay[i]){
+            		minDay = getDay[i]
+            	}
+            }
+            dayList.push(GetDateStr(Number(minDay) ) + '   08:00-19:00');
+            console.info(dayList);
         }
         return dayList[0];
     }
@@ -589,5 +649,21 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             }
         });
     }
-
+    
+    /**
+     * 
+     * @param date1   格式2017-04-05
+     * @param date2
+     * @returns
+     */
+    function getMinTime(date1,date2){
+    	datetime1 = new Date(date1.replace(/\-/gi,"/")).getTime();
+    	datetime2 = new Date(date2.replace(/\-/gi,"/")).getTime();
+    	if(datetime1 > datetime2){
+    		return date2;
+    	}else{
+    		return date1;
+    	}
+    }
+    
 });
