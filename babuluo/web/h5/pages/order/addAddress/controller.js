@@ -106,7 +106,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
             address: $scope.address,
             getTime: $("#datetime-picker")[0].value,
             skuIds: $stateParams.SKU_IDS,
-            currDay: GetDateStr(0)
+            currDay: GetDateStr(0),
+            endHours: $scope.endHours
         };
         console.log($scope.PickupPerson);
         if ($scope.appointment) {

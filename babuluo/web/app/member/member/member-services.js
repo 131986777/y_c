@@ -22,5 +22,5 @@ AndSellMainModule.service('memberFactory', function (http) {
     this.addMemberCoupon=http.post( '/member/coupon/add');
     this.modCouponLeft=http.post('/coupon/coupon/modLeftNum');
     this.getAllCoupon=http.post('/coupon/coupon/queryAll');
-
+    this.getMemberByUID = http.post('/member/memberData/getById');
 });

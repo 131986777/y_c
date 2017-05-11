@@ -79,7 +79,7 @@ public class BBLSMSUtil {
 //	    System.out.println("剩余：："+sheng);
 
 	    //发送调用
-		xml=t.SendMessage("", "jksc228", "jksc22833", "13966667756", "【云厨1站】 您的验证码：88888", "").toString();
+		xml=t.SendMessage("", "jksc228", "jksc22833", "13257915508", "【云厨1站】 您的验证码：88888", "").toString();
         System.out.println(xml);
 //        xmlentity.setReturnstatus("returnstatus");
 //        xmlentity.setMessage("message");
@@ -150,7 +150,7 @@ public class BBLSMSUtil {
             //设置发送内容的编码方式
             String send_content=URLEncoder.encode(content.replaceAll("<br/>", " "), "UTF-8");//发送内容
 
-            url=new URL("http://sh2.ipyy.com/sms.aspx?action=send&userid="+userid+"&account="+account+"&password="+password+"&mobile="+mobile+"&content="+send_content+"&sendTime="+sendTime+"");
+            url=new URL("http://sh2.cshxsp.com/smsJson.aspx?action=send&userid="+userid+"&account="+account+"&password="+password+"&mobile="+mobile+"&content="+send_content+"&sendTime="+sendTime+"");
             System.out.println(url);
             con = (HttpURLConnection)url.openConnection();
 

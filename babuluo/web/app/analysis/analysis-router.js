@@ -9,6 +9,7 @@ $import('analysis/analysis/cardAnalysis', undefined, true);
 //订单相关
 $import('analysis/analysis/orderAnalysis', undefined, true);
 $import('analysis/analysis/offlineOrderAnalysis', undefined, true);
+$import('analysis/analysis/reserveAnalysis', undefined, true);
 //作战室相关
 $import('analysis/analysis/compareAnalysis', undefined, true);
 //直播相关

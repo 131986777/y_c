@@ -52,7 +52,9 @@
                         <div class="coupon-contain">
                             <div class="coupon-desc">
                                 <p class="limit-time">
-                                    <span>限定时间(每周</span>
+                                    <span ng-if="item['COUPON.USE_TIME_CYCLE']=='0,0,0,0,0,0,0'">正价商品可用</span>
+                                    <span ng-if="item['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">限定时间(每周</span>
+
                                     <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
                                     <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
                                     <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
@@ -60,7 +62,7 @@
                                     <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
                                     <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
                                     <span ng-if="parseArray(item['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
-                                    <span>)</span>
+                                    <span  ng-if="item['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">)</span>
                                 </p>
                                 <p class="limit-item">
 
@@ -96,7 +98,7 @@
                                            class="start" ng-click="stopCoupon(item)"></a>&lt;!&ndash;启用&ndash;&gt;
                                         <a class="del" ng-click="delCoupon(item)"></a>
                                     </div>&lt;!&ndash; 图标 &ndash;&gt;-->
-                                    <span>{{item['MEMBER_COUPON.MEMBER_LOGIN_ID']}}</span>
+                                    <span>{{item['MEMBER.LOGIN_ID']}}</span>
                                 </div>
                             </div>
                         </div>
@@ -172,7 +174,7 @@
 
                             <div class="col-md-8">
                                 <select  class="nya-bs-select form-control"
-                                         ng-model="coupon"
+                                         ng-model="modCoupon"
                                          ng-options="coupon['COUPON.ID'] as coupon['COUPON.NAME'] for coupon in couponData" >
                                     <option class="nya-bs-option" value="">选择优惠券</option>
                                 </select>

@@ -6,12 +6,13 @@ angular.module('AndSell.Main').controller('member_member_memberCoupon_Controller
     $scope.initData = function (){
         memberFactory.getAllCoupon({},function(resp) {
             $scope.couponData = resp.data;
+            $scope.couponMap=listToMap($scope.couponData,'COUPON.ID');
         });
         console.log($scope.couponData);
     };
 
     $scope.bindData = function (response) {
-        $scope.userDetailMap = response.extraData.userDetailMap;
+        //$scope.userDetailMap = response.extraData.userDetailMap;
         // $scope.couponData = response.extraData.couponList;
         $scope.ruleList = response.extraData.ruleList;
         $scope.couponList = response.data;
@@ -48,7 +49,8 @@ angular.module('AndSell.Main').controller('member_member_memberCoupon_Controller
         } else if ($scope.memberDetail == undefined) {
             modalFactory.showShortAlert('请先查询相关信息');
         } else {
-
+            console.log($scope.modCoupon);
+            $scope.coupon=$scope.couponMap[$scope.modCoupon];
             $scope.add['MEMBER_COUPON.COUPON_ID'] = $scope.coupon['COUPON.ID'];
             $scope.add['MEMBER_COUPON.EXPIRED_TIME'] = $scope.coupon['COUPON.END_DATETIME'];
             $scope.add['MEMBER_COUPON.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];

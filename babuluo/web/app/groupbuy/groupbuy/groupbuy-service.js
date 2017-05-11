@@ -21,6 +21,3 @@ AndSellMainModule.service('groupBuyMemberFactory', function (http) {
     this.getByOrderId = http.post("/group/buy/member/getByOrderIds");
     this.modifyById = http.post("/group/buy/member/modifyById")
 });
-AndSellMainModule.service('memberFactory', function (http) {
-    this.getMemberByUID = http.post('/member/memberData/getById');
-});
