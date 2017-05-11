@@ -17,8 +17,8 @@ angular.module('AndSell.Main').controller('analysis_analysis_reserveAnalysis_Con
     //查询事件
     $scope.getGroupByRange = function () {
        
-        var startDay = $scope.groupRange['STARTDAY'];
-        var endDay = $scope.groupRange['ENDDAY'];
+        var startDay = $scope.STARTDAY
+        var endDay = $scope.ENDDAY
         getOfflineFormSource(startDay, endDay);
 
     }  
@@ -27,6 +27,11 @@ angular.module('AndSell.Main').controller('analysis_analysis_reserveAnalysis_Con
     obj=[
     	{SHOP_ID:100001,SHOP_NAME:'翠屏国际',SKU_1_VALUE:['龙虾蒜泥','龙虾十三香','龙虾香辣','端午礼盒'],COUNT:[{COUNT1:1,COUNT2:2,COUNT3:3},{COUNT1:2,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3}]},
     	{SHOP_ID:100002,SHOP_NAME:'翠EW国际',SKU_1_VALUE:['龙虾蒜泥','龙虾十三香','龙虾香辣','端午礼盒'],COUNT:[{COUNT1:2,COUNT2:2,COUNT3:3},{COUNT1:2,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3}]},
+    	{SHOP_ID:100003,SHOP_NAME:'翠QW国际',SKU_1_VALUE:['龙虾蒜泥','龙虾十三香','龙虾香辣','端午礼盒'],COUNT:[{COUNT1:3,COUNT2:2,COUNT3:3},{COUNT1:2,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3}]},
+    	{SHOP_ID:100003,SHOP_NAME:'翠QW国际',SKU_1_VALUE:['龙虾蒜泥','龙虾十三香','龙虾香辣','端午礼盒'],COUNT:[{COUNT1:3,COUNT2:2,COUNT3:3},{COUNT1:2,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3}]},	
+    	{SHOP_ID:100003,SHOP_NAME:'翠QW国际',SKU_1_VALUE:['龙虾蒜泥','龙虾十三香','龙虾香辣','端午礼盒'],COUNT:[{COUNT1:3,COUNT2:2,COUNT3:3},{COUNT1:2,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3}]},
+    	{SHOP_ID:100003,SHOP_NAME:'翠QW国际',SKU_1_VALUE:['龙虾蒜泥','龙虾十三香','龙虾香辣','端午礼盒'],COUNT:[{COUNT1:3,COUNT2:2,COUNT3:3},{COUNT1:2,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3}]},
+    	{SHOP_ID:100003,SHOP_NAME:'翠QW国际',SKU_1_VALUE:['龙虾蒜泥','龙虾十三香','龙虾香辣','端午礼盒'],COUNT:[{COUNT1:3,COUNT2:2,COUNT3:3},{COUNT1:2,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3}]},
     	{SHOP_ID:100003,SHOP_NAME:'翠QW国际',SKU_1_VALUE:['龙虾蒜泥','龙虾十三香','龙虾香辣','端午礼盒'],COUNT:[{COUNT1:3,COUNT2:2,COUNT3:3},{COUNT1:2,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3}]},
     	{SHOP_ID:100004,SHOP_NAME:'翠EW国际',SKU_1_VALUE:['龙虾蒜泥','龙虾十三香','龙虾香辣','端午礼盒'],COUNT:[{COUNT1:4,COUNT2:2,COUNT3:3},{COUNT1:2,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3},{COUNT1:5,COUNT2:2,COUNT3:3}]}  	
     ]

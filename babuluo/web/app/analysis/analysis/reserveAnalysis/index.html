@@ -5,10 +5,10 @@
             <div class="col-md-6 fixWidth">
               
                             <input id="start_hour" type="text" class="form-control inputWidth" placeholder="起始时间"
-                                   name="from" ng-model="filter['FINANCE_LIST.ADD_DATETIME_FROM']">
+                                   name="from" ng-model="STARTDAY">
                             <span>-</span>
                             <input id="end_hour" type="text" class="form-control inputWidth" placeholder="截止时间"
-                                   name="to" ng-model="filter['FINANCE_LIST.ADD_DATETIME_TO']"
+                                   name="to" ng-model="ENDDAY"
                                    data-date-format="yyyy/mm/dd hh:ii">
                </div>        
             <button class="btn " type="button" ng-click="getGroupByRange()">查询</button>
