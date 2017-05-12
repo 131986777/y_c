@@ -41,7 +41,7 @@
               
             </tr>
             <tr align="center">
-               <td colspan=2 style="vertical-align: middle;">合计</td>
+               <td colspan=2 style="vertical-align: middle;" ng-if="OLDLIST.length>0">合计</td>
                <td ng-repeat=" states in TOTAL" align="left">
            			<div>实订单：<span ng-bind="states['state1']"></span></div>
            			<div>取消订单：<span ng-bind="states['state2']"></span></div>

@@ -79,6 +79,18 @@ AndSellMainModule.service('analysisFactory', function ($resource, baseURL) {
             }
         });
     };
+    //根据日期范围查询预定相关数据
+    this.getReserve = function (startDay, endDay) {
+									
+        return $resource(baseURL + "/stat/appoinment_data_analysis_by_add_datetime?", {
+            'datetime_start': startDay,
+            'datetime_end': endDay
+        }, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
     //根据日期范围查询线上店铺动态
     this.getshopDailyChangeByRange = function (startDay, endDay) {
         return $resource(baseURL + "/stat/manage_data_analysis_by_range?STARTDAY=:STARTDAY&ENDDAY=:ENDDAY&FLAG=ANALYSIS_DAILY", {
