@@ -18,7 +18,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
     $scope.initData = function () {
 
         console.log(JSON.parse(getCookie('currentShopInfo')));
-
+//        $scope.sku['SHOP_PRODUCT_SKU.STOCK']=10;
         // 设置轮播图图片间隔
         $scope.myInterval = 4000;
         // 轮播图数据初始化
@@ -65,6 +65,9 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
                     console.log($scope.skuData);
                     if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length > 0) {
                         $scope.checkContent(1, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
+                    }
+                    if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT2'].length > 0) {
+                        $scope.checkContent(2, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT2'][0]);
                     }
                     $scope.getPriceArea();
                     $scope.filterSkuList();
@@ -293,15 +296,22 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
 
     //规格单选
     $scope.checkContent = function (num, content) {
+
         if ($scope.currSkuSelectClassMap[num][content] != cannotSelectCLass) {
             $scope.lastCheck = {
                 num: num, content: clone($scope.currSkuContentSelectMap['name' + num])
             };
             if ($scope.currSkuContentSelectMap['name' + num] != content) {
                 $scope.currSkuContentSelectMap['name' + num] = content;
-            } else {
-                $scope.currSkuContentSelectMap['name' + num] = '';
             }
+
+            //取sku价格
+            if (num == 1){
+            var sku = $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'];
+            var index = sku.indexOf(content);
+            $scope.nowPrice = $scope.skuList[index]['SHOP_PRODUCT_SKU.REAL_PRICES'];
+	    }
+
 
             $scope.filterSkuList();
             $scope.skuSelectable();
@@ -384,6 +394,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
     //控制sku可选 和不可选的calss
     $scope.skuSelectable = function () {
         var currSkuData = $scope.getPrdSkuData($scope.currSkuList);
+console.log($scope.skuData);
         [1, 2, 3].forEach(function (index) {
             if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT' + index] != undefined) {
                 $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT' + index].forEach(function (e) {
@@ -494,6 +505,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
     }
 
     $scope.moreSize = function () {
+//    	$scope.sku['SHOP_PRODUCT_SKU.STOCK']==90;
         console.log($scope.sku['SHOP_PRODUCT_SKU.STOCK']);
         if ($scope.skuSize < $scope.sku['SHOP_PRODUCT_SKU.STOCK']) {
             $scope.skuSize = clone($scope.skuSize) + 1
@@ -573,6 +585,6 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
         observer: true,
         observeParents: true
     });
-
 });
+
 

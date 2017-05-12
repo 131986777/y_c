@@ -106,7 +106,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
             address: $scope.address,
             getTime: $("#datetime-picker")[0].value,
             skuIds: $stateParams.SKU_IDS,
-            currDay: GetDateStr(0)
+            currDay: GetDateStr(0),
+            endHours: $scope.endHours
         };
         console.log($scope.PickupPerson);
         if ($scope.appointment) {
@@ -120,15 +121,15 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
     function getDate(item) {
 
         var endHours = item['APPOINTMENT_PRODUCT.END_DAY'];//下单间隔小时
-        var type = item['APPOINTMENT_PRODUCT.TIME_TYPE'];
-        var still = item['APPOINTMENT_PRODUCT.STILL_DAY'];
-        var startTime = item['APPOINTMENT_PRODUCT.START_TIME'];
+        var type = item['APPOINTMENT_PRODUCT.TIME_TYPE'];//提货类型 week day
+        var still = item['APPOINTMENT_PRODUCT.STILL_DAY']; //可提货天数
+        var startTime = item['APPOINTMENT_PRODUCT.START_TIME'];//提货时间//周几6
         var next = true;
         var dayList = new Array;
         if (type == 'WEEK') {
-            var currTime = new Date().getDay();
-            var currHours = new Date().getHours();
-            var endDay = Math.ceil(Number(endHours / 24));
+            var currTime = new Date().getDay();//获得周几 5
+            var currHours = new Date().getHours();//获得当前小时9
+            var endDay = Math.ceil(Number(endHours / 24));1
             if (currTime == 0) {
                 currTime = 7;//周日
             }
@@ -156,10 +157,48 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
                 dayList.push(GetDateStr(Number(day) + Number(i)) + '   08:00-19:00');
             }
 
-        } else if (type == 'DAY') {
+        } else if (type == 'DAY') {      	
             for (var i = 0; i < still; i++) {
                 dayList.push(GetDateStr(Number(i), startTime) + '   08:00-19:00');
             }
+        }else if(type=='WEEK_COMB'){
+        	var currTime = new Date().getDay();//获得周几
+            var currHours = new Date().getHours();//获得当前小时
+            var endDay = Math.ceil(Number(endHours / 24));
+            console.log(endDay)
+            if (currTime == 0) {
+                currTime = 7;//周日
+            }
+            var strs= new Array(); //定义一数组
+            var strDay = null;
+            strs=startTime.split(","); //字符分割     strs=strs.substring(0,(strs.length-1));
+            for (i=0;i<strs.length ;i++ )
+            {
+            	strDay=(strs[i]);
+            	 if ((strDay - currTime) > endDay) {
+                     next = false;
+                 } else {
+                     if ((strDay - currTime) > (endDay - 1)) {
+                         if ((24 - currHours) > (endHours - (endDay - 1) * 24)) {
+                             next = false;
+                         } else {
+                             next = true;
+                         }
+                     } else {
+                         next = true;
+                     }
+                 }
+                 var day;
+
+                 if (next) {
+                     day = Number(strDay) + 7 - Number(currTime);
+                 } else {
+                     day = Number(strDay) - Number(currTime);
+                 }
+                 
+                     dayList.push(GetDateStr(Number(day) ) + '   08:00-19:00');
+            }    
+           
         }
 
         $("#datetime-picker").picker({

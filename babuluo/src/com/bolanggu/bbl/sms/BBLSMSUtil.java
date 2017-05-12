@@ -112,7 +112,7 @@ public class BBLSMSUtil {
     public StringBuffer SelSum(String userid,String account,String password)
     {
         try {
-            url=new URL("http://sh2.cshxsp.com/smsJson.aspx?action=overage&userid="+userid+"&account="+account+"&password="+password+"");
+            url=new URL("http://sh2.ipyy.com/sms.aspx?action=overage&userid="+userid+"&account="+account+"&password="+password+"");
             con = (HttpURLConnection)url.openConnection();
             //br=new BufferedReader(new InputStreamReader(url.openStream()));
             br=new  BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));

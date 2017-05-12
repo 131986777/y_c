@@ -1,5 +1,5 @@
 angular.module('AndSell.Main').controller('product_product_appointment_Controller', function ($scope, $stateParams, productFactory, modalFactory) {
-
+	$('.multiselect').multiselect({setMaxOptionNum:4,selectedHtmlValue:'多选',setmax:3,setWidth:'100%'});
     modalFactory.setTitle('预约商品');
 
     $scope.initLoad = function () {
@@ -22,7 +22,13 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
             });
         });
     }
-
+    // 初始化多选ADD
+   $('.table-toolbar>button').click(function(){
+	   $('.newSelectTitle>span').html('多选')
+	   $('.newOptions>li[data-select=true]>i').remove()
+	   $('.newOptions>li[data-select=true]').removeAttr('data-select')
+	   $('.multiselect>option[data-select=true]').removeAttr('data-select')
+    })
     $scope.addAppointment = function () {
         if ($scope.add['APPOINTMENT_PRODUCT.NAME'].trim()
             == ''
@@ -46,6 +52,18 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
             }
         });
         if (on) {
+        	if($scope.add['APPOINTMENT_PRODUCT.TIME_TYPE']=='WEEK_COMB'){//tianjia自定义
+        		var t=$('#add .newSelectTitle span').html()//获得选中多个星期的值
+            	t=t.substring(0,(t.length-1));
+        		var weekdays='';
+            	var strs=t.split(","); //字符分割
+            	 for (var i = 0; i < strs.length; i++) {
+            		 weekdays=weekdays+($scope.moth(strs[i]))+","
+        		}
+            	 
+            	 weekdays=weekdays.substring(0,(weekdays.length-1));
+            	 $scope.add['APPOINTMENT_PRODUCT.START_TIME']=weekdays;
+        	}
             productFactory.addAppointmentProduct($scope.add, function (response) {
                 $("#add").modal('hide');
                 modalFactory.showShortAlert('新增成功');
@@ -70,11 +88,46 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
     };
 
     $scope.modifyAppointmentClick = function (item) {
+    	//初始化
+    	$('.newSelectTitle>span').html('多选')
+		$('.newOptions>li[data-select=true]>i').remove()
+		$('.newOptions>li[data-select=true]').removeAttr('data-select')
+		$('.multiselect>option[data-select=true]').removeAttr('data-select')
+		
+		//赋值
         $scope.modify = clone(item);
+    	console.log($scope.modify)
+    	var weekday='';//转化汉子
+            	var strss=$scope.modify['APPOINTMENT_PRODUCT.START_TIME'].split(","); //字符分割
+            	 for (var i = 0; i < strss.length; i++) {
+            		 weekday=weekday+($scope.remoth(strss[i]))+","
+        		}
+    	$('#modify .newSelectTitle span').html(weekday)
+    	//$('.newOptions>li[data-select=true]>i').remove()
+    	for(var i=0; i<strss.length; i++){
+    		$('#modify .newOptions li').eq(strss[i]-1).attr('data-select','true')
+    		$('#modify .newOptions li').eq(strss[i]-1).append('<i class="fa fa-check arrow"></i>')
+    		$('#modify .multiselect option').eq(strss[i]-1).attr('data-select','true')
+    	}
+    	
+    	
+
     };
 
     $scope.modifyAppointment = function () {
+    	if($scope.modify['APPOINTMENT_PRODUCT.TIME_TYPE']=='WEEK_COMB'){// 
+    		var t=$('#modify .newSelectTitle span').html()//获得选中多个星期的值
+        	t=t.substring(0,(t.length-1));
+    		var weekdays='';
+        	var strs=t.split(","); //字符分割
+        	 for (var i = 0; i < strs.length; i++) {
+        		 weekdays=weekdays+($scope.moth(strs[i]))+","
+    		}
+        	 weekdays= weekdays.substring(0,(weekdays.length-1));
+        	 $scope.modify['APPOINTMENT_PRODUCT.START_TIME']=weekdays;
+    	}
         productFactory.modAppointmentProduct($scope.modify, function (response) {
+        	console.log($scope.modify);
             $("#modify").modal('hide');
             modalFactory.showShortAlert("修改成功");
             $scope.initLoad();
@@ -138,5 +191,34 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
             $scope[$this.attr('ng-model')] = _this.value;
         });
     });
+    
+    $scope.moth=function(ms)  { //日期转换
+    	ms
+		var sy
+		var m = [1, 2, 3, 4, 5, 6, 7]
+		var M = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+		for(var i = 0; i < M.length; i++) {
+			if(M[i] == ms) {
+				sy = i
+				break 
+			}
+
+		}  
+		return m[sy] 
+	} 
+    $scope.remoth=function(ms)  { //日期转换
+    	ms
+		var sy
+		var M = [1, 2, 3, 4, 5, 6, 7]
+		var m= ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+		for(var i = 0; i < M.length; i++) {
+			if(M[i] == ms) {
+				sy = i
+				break 
+			}
+
+		}  
+		return m[sy] 
+	}    	
 
 });

@@ -13,8 +13,8 @@ public class ENV {
     public static String DO_MAIN = "http://139.224.60.144/AndSell/";
 
     //模式
-    public static String STATE = "TEST";//测试模式  不向百年传订单数据
-    //public static String STATE = "NORMAL";//正常模式  向百年传订单
+    //public static String STATE = "TEST";//测试模式  不向百年传订单数据
+    public static String STATE = "NORMAL";//正常模式  向百年传订单
 
     //门店接口
     //public static String API_MENDIAN = "http://221.226.190.86:98/BBL/";//线上服
