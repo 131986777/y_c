@@ -10,9 +10,9 @@ angular.module('AndSell.Main').controller('analysis_analysis_reserveAnalysis_Con
     console.log(CurentTime(0))
     //日期初始化
     $scope.initLoad = function () {
-        getOfflineFormSource("2017-01-01 00:00",CurentTime(0));
+        getOfflineFormSource(CurentToTime(0),CurentTime(0));
         dataStatus($scope); 
-        $scope.STARTDAY="2017-01-01 00:00"
+        $scope.STARTDAY=CurentToTime(0)
         $scope.ENDDAY=CurentTime(0)
     }
     //查询事件
@@ -128,7 +128,41 @@ function CurentTime(addtime)   //当前时间
         if (mm < 10) clock += '0';   
         clock += mm;   
         return(clock);
-    }   
+    }
+
+    function CurentToTime(addtime)   //当前时间
+    {   
+        var now = new Date();    
+        var year = now.getFullYear();       //年   
+        var month = now.getMonth() + 1;     //月   
+        var day = now.getDate();            //日
+
+        var hh = 0 //时
+        var mm = 0
+         
+        var clock = year + "-";   
+         
+        if(month < 10)   
+            clock += "0";   
+         
+        clock += month + "-";   
+         
+        if(day < 10)   
+            clock += "0";   
+             
+        clock += day + " ";   
+         
+        if(hh < 10)   
+            clock += "0";   
+             
+        clock += hh + ":";   
+        if (mm < 10) clock += '0';   
+        clock += mm;   
+        return(clock);
+    } 
+    
+    
+    
 function dataStatus($scope) {
   $('#start_hour').datetimepicker({
         language: 'zh-CN',
