@@ -66,7 +66,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
                     if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'].length > 0) {
                         $scope.checkContent(1, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'][0]);
                     }
-                    if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT2'].length > 0) {
+                    if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT2'] != undefined && $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT2'].length > 0) {
                         $scope.checkContent(2, $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT2'][0]);
                     }
                     $scope.getPriceArea();

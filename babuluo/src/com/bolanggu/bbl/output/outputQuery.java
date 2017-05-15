@@ -32,7 +32,7 @@ public class outputQuery extends HttpServlet {
         PrintWriter pw = resp.getWriter();
 
         try {
-            SXSSFWorkbook analyseBook = new SXSSFWorkbook();
+            SXSSFWorkbook analyseBook = new SXSSFWorkbook(10000);
 
             switch (type) {
                 case "finance":
@@ -53,6 +53,7 @@ public class outputQuery extends HttpServlet {
             DateFormat format = new SimpleDateFormat("yyyyMMddhhMMss");
             Date date = new Date();
             String filename = type + format.format(date) + ".xlsx";
+            System.out.println("filename====="+filename);
             File filePath = null;
             File filePathDir = null;
             filePath = new File(getClass()

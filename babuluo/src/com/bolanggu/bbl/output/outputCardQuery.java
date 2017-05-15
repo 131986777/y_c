@@ -7,6 +7,8 @@ import com.pabula.api.API;
 import com.pabula.api.data.ReturnData;
 import com.pabula.common.util.DateUtil;
 import com.pabula.common.util.StrUtil;
+import com.pabula.db.ConnectionHelper;
+import com.pabula.fw.exception.DataAccessException;
 import com.pabula.fw.exception.RuleException;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
@@ -17,6 +19,7 @@ import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
+import java.sql.*;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -41,7 +44,7 @@ public class outputCardQuery {
         return bean;
     }
 
-    public SXSSFSheet GenerateExcelSheet(SXSSFWorkbook analyseBook, String parameter) throws RuleException {
+    public SXSSFSheet GenerateExcelSheet(SXSSFWorkbook analyseBook, String parameter) throws RuleException,DataAccessException {
 
         JSONObject paramJson = JSON.parseObject(parameter);
 
@@ -49,10 +52,8 @@ public class outputCardQuery {
         for (Map.Entry<String, Object> entry : paramJson.entrySet()) {
             map.put(entry.getKey(), entry.getValue());
         }
-
-        ReturnData outputDetail = new API().call("/member/membercard/queryAll", map);
-        //解析主要数据
-        JSONArray jsonArray = JSONArray.parseArray(outputDetail.getData().toString());
+        
+      //解析主要数据
         SXSSFSheet cardSheet = analyseBook.createSheet("会员卡表");
         cardSheet.setColumnWidth(0, 2500);
         cardSheet.setColumnWidth(1, 6000);
@@ -64,8 +65,8 @@ public class outputCardQuery {
         cardSheet.setColumnWidth(7, 4000);
         cardSheet.setColumnWidth(8, 6000);
         cardSheet.setColumnWidth(9, 3000);
-
-        //字体预设置
+        
+      //字体预设置
         XSSFFont font = (XSSFFont) analyseBook.createFont();
         font.setFontName("微软雅黑");
         font.setFontHeightInPoints((short) 14);
@@ -117,8 +118,7 @@ public class outputCardQuery {
         int rowIndex = 0;//行数
 
 
-
-        //地区分析开始
+        //表头开始
         SXSSFRow analyseTitle = cardSheet.createRow(rowIndex++);
         analyseTitle.setHeightInPoints(25);
         SXSSFCell cellTitle1 = analyseTitle.createCell(0);
@@ -157,58 +157,115 @@ public class outputCardQuery {
         SXSSFCell money = rowTitle.createCell(9);
         money.setCellValue("状态");
         money.setCellStyle(title2Style);
-        int analyseIndex = 1;//序号
-
-        for (int i = 0; i < jsonArray.size(); i++) {
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-            String state;
-
-            if (jsonObject.getInteger("MEMBER_CARD.STATE") == 1) {
-                state = "正常";
-            } else {
-                state = "冻结";
-            }
-
-            String cardNo = jsonObject.getString("MEMBER_CARD.CARD_NO");
-            if (cardNo.length()==12||cardNo.length()==14){
-                cardNo = cardNo.substring(0,cardNo.length()-4);
-            }
-
-            SXSSFRow row = cardSheet.createRow(rowIndex++);
-            row.setHeightInPoints(25);
-            SXSSFCell cell0 = row.createCell(0);
-            cell0.setCellValue(analyseIndex++);
-            cell0.setCellStyle(cellStyle);
-            SXSSFCell cell1 = row.createCell(1);
-            cell1.setCellValue(cardNo);
-            cell1.setCellStyle(cellStyle);
-            SXSSFCell cell2 = row.createCell(2);
-            cell2.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER_CARD.MEMBER_NAME")));
-            cell2.setCellStyle(cellStyle);
-            SXSSFCell cell3 = row.createCell(3);
-            cell3.setCellValue(jsonObject.getString("MEMBER_CARD.MEMBER_PHONE"));
-            cell3.setCellStyle(cellStyle);
-            SXSSFCell cell4 = row.createCell(4);
-            cell4.setCellValue("￥" + jsonObject.getString("MEMBER_CARD.BALANCE"));
-            cell4.setCellStyle(cellStyle);
-            SXSSFCell cell5 = row.createCell(5);
-            cell5.setCellValue(jsonObject.getString("MEMBER_CARD.SOURCE_NAME"));
-            cell5.setCellStyle(cellStyle);
-            SXSSFCell cell6 = row.createCell(6);
-            cell6.setCellValue(jsonObject.getString("MEMBER_CARD.TYPE_NAME"));
-            cell6.setCellStyle(cellStyle);
-            SXSSFCell cell7 = row.createCell(7);
-            cell7.setCellValue(StrUtil.getNotNullStringValue(jsonObject.getString("MEMBER_CARD.SHOP"), ""));
-            cell7.setCellStyle(cellStyle);
-            SXSSFCell cell8 = row.createCell(8);
-            cell8.setCellValue(jsonObject.getString("MEMBER_CARD.ADD_DATETIME").replace(".0",""));
-            cell8.setCellStyle(cellStyle);
-            SXSSFCell cell9 = row.createCell(9);
-            cell9.setCellValue(state);
-            cell9.setCellStyle(cellStyle);
+        
+        Connection conn=null;
+        Statement stmt=null;
+        ResultSet rs=null;
+        String sqlStr = "select a.CARD_NO as `MEMBER_CARD.CARD_NO`,"+
+                "b.TRUE_NAME as `MEMBER_CARD.MEMBER_NAME`,"+
+                "me.MOBILE as `MEMBER_CARD.MEMBER_PHONE`,"+
+                "FORMAT(c.BALANCE/100,2) as `MEMBER_CARD.BALANCE`,"+
+                "mcs.`NAME` as `MEMBER_CARD.SOURCE_NAME`,"+
+                "e.`NAME` as `MEMBER_CARD.TYPE_NAME`,"+
+                "d.SHOP_NAME as `MEMBER_CARD.SHOP`,"+
+                "a.ADD_DATETIME as `MEMBER_CARD.ADD_DATETIME`,"+
+                "a.STATE as `MEMBER_CARD.STATE` from member_card a "+
+                "left join member_info b ON a.USER_ID = b.USER_ID "+
+                "left join member_account c ON a.USER_ID = c.USER_ID "+
+                "left join shop d ON a.SHOP_ID = d.SHOP_ID "+
+                "left join member_card_type e ON a.TYPE_ID = e.ID "+
+                "left join member me ON a.USER_ID=me.USER_ID "+
+                "left join member_card_source mcs ON a.SOURCE_ID=mcs.ID where IS_DEL=-1";
+        if(map.containsKey("MEMBER_CARD.SOURCE_ID") && !"null".equals(map.get("MEMBER_CARD.SOURCE_ID"))){
+        	sqlStr += " and a.SOURCE_ID="+map.get("MEMBER_CARD.SOURCE_ID");
         }
+        if(map.containsKey("MEMBER_CARD.TYPE_ID") && !"null".equals(map.get("MEMBER_CARD.TYPE_ID"))){
+        	sqlStr += " and a.TYPE_ID="+map.get("MEMBER_CARD.TYPE_ID");
+        }
+        if(map.containsKey("MEMBER_CARD.SHOP_ID") && !"null".equals(map.get("MEMBER_CARD.SHOP_ID"))){
+        	sqlStr += " and a.SHOP_ID=" + map.get("MEMBER_CARD.SHOP_ID");
+        }
+        if(map.containsKey("MEMBER_CARD.USER_ID") && !"null".equals(map.get("MEMBER_CARD.USER_ID"))){
+        	sqlStr += " and a.USER_ID=" + map.get("MEMBER_CARD.USER_ID");
+        }
+        if(map.containsKey("MEMBER_CARD.CARD_NO") && !"null".equals(map.get("MEMBER_CARD.CARD_NO"))){
+        	sqlStr += " and a.CARD_NO like '%" + map.get("MEMBER_CARD.USER_ID")+"%'";
+        }
+        if(map.containsKey("MEMBER_CARD.STATE") && !"null".equals(map.get("MEMBER_CARD.STATE"))){
+        	sqlStr += " and a.STATE in ("+map.get("MEMBER_CARD.STATE") + ")";
+        }
+        if(map.containsKey("MEMBER_CARD.ADD_DATETIME_FROM") && !"null".equals(map.get("MEMBER_CARD.ADD_DATETIME_FROM"))){
+        	sqlStr += " and TO_DAYS(a.ADD_DATETIME) > TO_DAYS('" + map.get("MEMBER_CARD.ADD_DATETIME_FROM") + "')";
+        }
+        if(map.containsKey("MEMBER_CARD.ADD_DATETIME_TO") && !"null".equals(map.get("MEMBER_CARD.ADD_DATETIME_TO"))){
+        	sqlStr += " and TO_DAYS(a.ADD_DATETIME) > TO_DAYS('" + map.get("MEMBER_CARD.ADD_DATETIME_TO") + "')";
+        }
+        if(map.containsKey("MEMBER_CARD.ADD_DATETIME") && !"null".equals(map.get("MEMBER_CARD.ADD_DATETIME"))){
+        	sqlStr += "order by a."+map.get("MEMBER_CARD.ADD_DATETIME");
+        }
+        
+        try{
+        	conn=ConnectionHelper.getConnection("AndSell");
+            stmt=conn.createStatement();
+            rs=stmt.executeQuery(sqlStr);
+            int serial_num = 1;
+            String state = "";
+            while(rs.next()){
+                // 遍历每一行
 
+                if (rs.getInt("MEMBER_CARD.STATE") == 1) {
+                    state = "正常";
+                } else {
+                    state = "冻结";
+                }
+
+                String cardNo = rs.getString("MEMBER_CARD.CARD_NO");
+                if (cardNo.length()==12||cardNo.length()==14){
+                    cardNo = cardNo.substring(0,cardNo.length()-4);
+                }
+
+                SXSSFRow row = cardSheet.createRow(rowIndex++);
+                row.setHeightInPoints(25);
+                SXSSFCell cell0 = row.createCell(0);
+                cell0.setCellValue(serial_num++);
+                cell0.setCellStyle(cellStyle);
+                SXSSFCell cell1 = row.createCell(1);
+                cell1.setCellValue(cardNo);
+                cell1.setCellStyle(cellStyle);
+                SXSSFCell cell2 = row.createCell(2);
+                cell2.setCellValue(StrUtil.getNotNullStringValue(rs.getString("MEMBER_CARD.MEMBER_NAME")));
+                cell2.setCellStyle(cellStyle);
+                SXSSFCell cell3 = row.createCell(3);
+                cell3.setCellValue(rs.getString("MEMBER_CARD.MEMBER_PHONE"));
+                cell3.setCellStyle(cellStyle);
+                SXSSFCell cell4 = row.createCell(4);
+                cell4.setCellValue("￥" + rs.getString("MEMBER_CARD.BALANCE"));
+                cell4.setCellStyle(cellStyle);
+                SXSSFCell cell5 = row.createCell(5);
+                cell5.setCellValue(rs.getString("MEMBER_CARD.SOURCE_NAME"));
+                cell5.setCellStyle(cellStyle);
+                SXSSFCell cell6 = row.createCell(6);
+                cell6.setCellValue(rs.getString("MEMBER_CARD.TYPE_NAME"));
+                cell6.setCellStyle(cellStyle);
+                SXSSFCell cell7 = row.createCell(7);
+                cell7.setCellValue(StrUtil.getNotNullStringValue(rs.getString("MEMBER_CARD.SHOP"), ""));
+                cell7.setCellStyle(cellStyle);
+                SXSSFCell cell8 = row.createCell(8);
+                cell8.setCellValue(rs.getString("MEMBER_CARD.ADD_DATETIME").replace(".0",""));
+                cell8.setCellStyle(cellStyle);
+                SXSSFCell cell9 = row.createCell(9);
+                cell9.setCellValue(state);
+                cell9.setCellStyle(cellStyle);
+            }
+        }catch(SQLException e){
+        	e.printStackTrace();
+            throw new DataAccessException("[CommonDAO select 执行失败]", e);
+        }finally{
+        	 ConnectionHelper.close(rs);
+             ConnectionHelper.close(stmt);
+             ConnectionHelper.close(conn);
+        }
+        
         SXSSFRow rowM = cardSheet.createRow(rowIndex);
         rowM.setHeightInPoints(25);
         rowM.createCell(0).setCellValue("");
@@ -225,10 +282,9 @@ public class outputCardQuery {
         cellTimeValue.setCellValue(dateFormat.format(DateUtil.getCurrTime()));
         cellTimeValue.setCellStyle(cellStyle);
         rowM.createCell(9).setCellValue("");
-
-        //总计结束
+        
+      //总计结束
         return cardSheet;
-
     }
 
 }
