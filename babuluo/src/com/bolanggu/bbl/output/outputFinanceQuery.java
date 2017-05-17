@@ -265,7 +265,7 @@ public class outputFinanceQuery {
 		System.out.println("sql==========="+sqlStr);
 		String changeType="";
 		try{
-			conn=ConnectionHelper.getConnection("AndSell");
+			conn=ConnectionHelper.getConnection("andsell_read");
             stmt=conn.createStatement();
             rs=stmt.executeQuery(sqlStr);
             while(rs.next()){
