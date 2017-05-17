@@ -205,7 +205,7 @@ public class outputCardQuery {
         }
         
         try{
-        	conn=ConnectionHelper.getConnection("AndSell");
+        	conn=ConnectionHelper.getConnection("andsell_read");
             stmt=conn.createStatement();
             rs=stmt.executeQuery(sqlStr);
             int serial_num = 1;

@@ -7,6 +7,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
 
         $scope.addressType = '3';
         $scope.PickupPerson = {};
+        
+        $scope.endHours = 0;
 
         $scope.shop = JSON.parse(getCookie('currentShopInfo'))['SHOP.SHOP_NAME'];
 
@@ -18,6 +20,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
         appointmentFactory.queryAll(param, function (response) {
             if (response.data.length > 0) {
                 $scope.appointment = true;
+                $scope.endHours = response.data[0]['APPOINTMENT_PRODUCT.END_DAY'];
                 getDate(response.data[0]);
             } else {
                 $scope.appointment = false;
@@ -126,10 +129,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
         var startTime = item['APPOINTMENT_PRODUCT.START_TIME'];//提货时间//周几6
         var next = true;
         var dayList = new Array;
+        var getDay = new Array();
         if (type == 'WEEK') {
             var currTime = new Date().getDay();//获得周几 5
             var currHours = new Date().getHours();//获得当前小时9
-            var endDay = Math.ceil(Number(endHours / 24));1
+            var endDay = Math.ceil(Number(endHours / 24));
             if (currTime == 0) {
                 currTime = 7;//周日
             }
@@ -196,9 +200,16 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
                      day = Number(strDay) - Number(currTime);
                  }
                  
-                     dayList.push(GetDateStr(Number(day) ) + '   08:00-19:00');
+                 getDay.push(Number(day));
+                 //dayList.push(GetDateStr(Number(day) ) + '   08:00-19:00');
             }    
-           
+            var minDay = getDay[0];
+            for(var i=1;i<getDay.length;i++){
+            	if(minDay > getDay[i]){
+            		minDay = getDay[i]
+            	}
+            }
+            dayList.push(GetDateStr(Number(minDay) ) + '   08:00-19:00');
         }
 
         $("#datetime-picker").picker({
