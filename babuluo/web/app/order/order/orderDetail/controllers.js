@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', function (http, $scope, $stateParams, orderFactory, modalFactory,groupBuyPlanFactory,groupBuyGroupFactory,groupBuyMemberFactory) {
+angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', function (http, $scope, $stateParams, orderFactory, modalFactory) {
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
@@ -139,7 +139,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
     	if(code==checkcode){
     		$scope.deliveryOrder();//确认提货
     	}else{
-    		 modalFactory.showShortAlert("提货玛不正确，请重新输入验证码！");
+    		 modalFactory.showShortAlert("提货码不正确，请重新输入验证码！");
            //  return;
     	}
     }
