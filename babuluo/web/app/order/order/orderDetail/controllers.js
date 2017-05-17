@@ -46,6 +46,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
 
 
     $scope.getOrder = function (id) {
+    	
         orderFactory.getById({'SHOP_ORDER.ID': id}, function (response) {
             response.data[0]['SHOP_ORDER.DATETIME_ADD'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ADD']);
             response.data[0]['SHOP_ORDER.DATETIME_PAY'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_PAY']);
@@ -54,6 +55,7 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
             response.data[0]['SHOP_ORDER.DATETIME_DELIVERY'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_DELIVERY']);
             response.data[0]['SHOP_ORDER.DATETIME_COMMENT'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_COMMENT']);
             response.data[0]['SHOP_ORDER.DATETIME_ACCEPT'] = getDate(response.data[0]['SHOP_ORDER.DATETIME_ACCEPT']);
+            response.data[0]['SHOP_ORDER.REC_CHECKCODE']=response.data[0]['SHOP_ORDER.REC_CHECKCODE'];
             $scope.orderDetailList = JSON.parse(response.data[0]['SHOP_ORDER.ORDER_INFO']);
             $scope.order = response.data[0];
             if ($scope.order['SHOP_ORDER.ERP_REMARK']
@@ -130,12 +132,27 @@ angular.module('AndSell.Main').controller('order_order_orderDetail_Controller', 
             });
         });
     }
-
+  //预约商品提货玛验证
+    $scope.veritycode=function(){
+    	var checkcode=$scope.order['SHOP_ORDER.REC_CHECKCODE'];
+    	var code=$scope.order['SHOP_ORDER.REC_CHECKCODE1'];
+    	if(code==checkcode){
+    		$scope.deliveryOrder();//确认提货
+    	}else{
+    		 modalFactory.showShortAlert("提货玛不正确，请重新输入验证码！");
+           //  return;
+    	}
+    }
     //确认提货
     $scope.deliveryOrder = function () {
         modalFactory.showAlert("确定客户已经拿走所有商品嘛？", function () {
+//        	document.all("verity").style["display"]="none";//就是这里 
+        	$('#verity').css('display','none')
+        	$('.modal-backdrop').css('display','none')
+        	$('body').removeClass('modal-open')
             orderFactory.deliveryOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function () {
                 modalFactory.showShortAlert('提货成功');
+                
                 $scope.getOrder($scope.order['SHOP_ORDER.ID']);
             });
             if($scope.order['SHOP_ORDER.TYPE'] == 6){

@@ -1,5 +1,49 @@
 <div class="page-content" ng-init="initData()">
 
+<!--订单提货玛验证--!>
+ <div class="modal fade" id="verity"  name="verity" role="dialog" aria-labelledby="verity">
+            <div class="modal-dialog" aria-hidden="true">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" type="button" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-title">
+                            提货玛验证
+                        </h3>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" name="editForm"
+                              ng-submit="" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required" style="color: red"> * </span>提货玛：
+                                </label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" type="text"
+                                           name="name" ng-model="order['SHOP_ORDER.REC_CHECKCODE1']"
+                                           required>
+                                </div>
+                            </div>
+                                                 
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit"
+                                        ng-click="veritycode()">
+                                    确定
+                                </button>
+                                <button class="btn btn-default"
+                                        data-dismiss="modal" ng-click="clearForm()">
+                                    关闭
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     <div class="table-operbar">
         <div class="table-toolbar">
             <div class="row orderHead">
@@ -22,7 +66,7 @@
                         </button>
                         <button class="btn btn-default"
                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1"
-                                ng-click="deliveryOrder()">提货
+                                 data-toggle="modal" data-target="#verity">提货
                         </button>
                         <button class="btn btn-default"
                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.STATE_OUT']==-1&&order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&&order['SHOP_ORDER.STATE_MONEY']==1))"
@@ -37,7 +81,7 @@
                         </button>
                         <button class="btn btn-default"
                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2"
-                                ng-click="deliveryOrder()">已提货
+                                data-toggle="modal" data-target="#verity">已提货
                         </button>
                         <button class="btn btn-default"
                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.NEED_PAY']==-1&&order['SHOP_ORDER.STATE_DELIVERY']==-1"
@@ -52,7 +96,7 @@
                         </button>
                         <button class="btn btn-default"
                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2"
-                                ng-click="deliveryOrder()">已提货
+                                 data-toggle="modal" data-target="#verity">已提货
                         </button>
                         <button class="btn btn-default"
                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.NEED_PAY']==-1&&order['SHOP_ORDER.STATE_DELIVERY']==-1"
@@ -91,7 +135,7 @@
                         </button>
                         <button class="btn btn-default"
                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1"
-                                ng-click="deliveryOrder()">提货
+                               data-toggle="modal" data-target="#verity">提货
                         </button>
                         <button class="btn btn-default"
                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.STATE_OUT']==-1&&order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&&order['SHOP_ORDER.STATE_MONEY']==1))"
@@ -607,10 +651,10 @@
                                         <td class="title">提货&nbsp门店：</td>
                                         <td ng-bind="order['SHOP_ORDER.SHOP_NAME']"></td>
                                     </tr>
-                                    <tr ng-if="order['SHOP_ORDER.TYPE']=='3'">
+                                   <!--  <tr ng-if="order['SHOP_ORDER.TYPE']=='3'">
                                         <td class="title">提&nbsp&nbsp货&nbsp&nbsp&nbsp码：</td>
                                         <td ng-bind="order['SHOP_ORDER.REC_CHECKCODE']"></td>
-                                    </tr>
+                                    </tr> -->
 
                                     <tr ng-if="order['SHOP_ORDER.TYPE']=='1'">
                                         <td class="title">收货&nbsp地址：</td>
