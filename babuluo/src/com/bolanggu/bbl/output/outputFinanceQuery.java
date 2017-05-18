@@ -22,6 +22,8 @@ import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -40,6 +42,9 @@ import java.util.Map;
 public class outputFinanceQuery {
 
     private static outputFinanceQuery bean;
+    
+    private Logger log = LoggerFactory.getLogger(outputCardQuery.class);
+
 
     public static outputFinanceQuery newInstance() {
         if (null == bean) {
@@ -101,17 +106,7 @@ public class outputFinanceQuery {
         font4.setFontName("微软雅黑");
         font4.setFontHeightInPoints((short) 11);
         font4.setColor(XSSFFont.COLOR_RED);
-        //合并大标题的单元格
-        financeSheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 15));
 
-        //大标题样式
-        CellStyle titleStyle = analyseBook.createCellStyle();
-
-        titleStyle.setAlignment(CellStyle.ALIGN_CENTER);
-        titleStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
-        titleStyle.setFillForegroundColor(HSSFColor.GREY_50_PERCENT.index);
-        titleStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
-        titleStyle.setFont(font);
 
         //第二行样式
         CellStyle title2Style = analyseBook.createCellStyle();
@@ -135,11 +130,6 @@ public class outputFinanceQuery {
 
         int rowIndex = 0;//行数
         //地区分析开始
-        SXSSFRow analyseTitle = financeSheet.createRow(rowIndex++);
-        analyseTitle.setHeightInPoints(25);
-        SXSSFCell cellTitle1 = analyseTitle.createCell(0);
-        cellTitle1.setCellStyle(titleStyle);
-        cellTitle1.setCellValue("资金明细记录");
 
         SXSSFRow rowTitle = financeSheet.createRow(rowIndex++);
         rowTitle.setHeightInPoints(25);
@@ -260,9 +250,9 @@ public class outputFinanceQuery {
 			sqlStr +=" AND a.CHANGE_VALUE <="+ Integer.parseInt(map.get("FINANCE_LIST.MONEY_TO").toString())*100;
 		}
 		
-		sqlStr += "order by a.ADD_DATETIME desc";
+		sqlStr += " order by a.ADD_DATETIME desc";
 		
-		System.out.println("sql==========="+sqlStr);
+		log.info("sql==========="+sqlStr);
 		String changeType="";
 		try{
 			conn=ConnectionHelper.getConnection("andsell_read");
@@ -370,36 +360,6 @@ public class outputFinanceQuery {
             ConnectionHelper.close(conn);
 		}
 
-
-        SXSSFRow rowM = financeSheet.createRow(rowIndex);
-        rowM.setHeightInPoints(25);
-        //        Cell cellMan = rowM.createCell(0);
-        //        cellMan.setCellValue("操作人：");
-        //        cellMan.setCellStyle(cellStyle);
-        //        Cell cellManValue = rowM.createCell(1);
-        //        cellManValue.setCellValue("");
-        //        cellManValue.setCellStyle(cellStyle);
-        rowM.createCell(0).setCellValue("");
-        rowM.createCell(1).setCellValue("");
-        rowM.createCell(2).setCellValue("");
-        rowM.createCell(3).setCellValue("");
-        rowM.createCell(4).setCellValue("");
-        rowM.createCell(5).setCellValue("");
-        rowM.createCell(6).setCellValue("");
-        rowM.createCell(7).setCellValue("");
-        rowM.createCell(8).setCellValue("");
-        rowM.createCell(9).setCellValue("");
-        rowM.createCell(10).setCellValue("");
-        rowM.createCell(11).setCellValue("");
-        rowM.createCell(12).setCellValue("");
-        rowM.createCell(13).setCellValue("");
-        SXSSFCell cellTime = rowM.createCell(14);
-        cellTime.setCellValue("导出时间：");
-        cellTime.setCellStyle(cellStyle);
-        SXSSFCell cellTimeValue = rowM.createCell(15);
-        rowM.createCell(16).setCellValue("");
-        cellTimeValue.setCellValue(dateFormat.format(DateUtil.getCurrTime()));
-        cellTimeValue.setCellStyle(cellStyle);
 
         return financeSheet;
     }
