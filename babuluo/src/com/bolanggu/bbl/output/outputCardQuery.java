@@ -10,6 +10,8 @@ import com.pabula.common.util.StrUtil;
 import com.pabula.db.ConnectionHelper;
 import com.pabula.fw.exception.DataAccessException;
 import com.pabula.fw.exception.RuleException;
+import com.task.job.GroupBuyPlanStopTask;
+
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.usermodel.Font;
@@ -19,6 +21,9 @@ import org.apache.poi.xssf.streaming.SXSSFRow;
 import org.apache.poi.xssf.streaming.SXSSFSheet;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import org.apache.poi.xssf.usermodel.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 
 import java.text.DateFormat;
@@ -32,6 +37,8 @@ import java.util.Map;
 public class outputCardQuery {
 
     private static outputCardQuery bean;
+    
+    private Logger log = LoggerFactory.getLogger(outputCardQuery.class);
 
     public static outputCardQuery newInstance() {
         if (null == bean) {
@@ -83,17 +90,7 @@ public class outputCardQuery {
         font4.setFontName("微软雅黑");
         font4.setFontHeightInPoints((short) 11);
         font4.setColor(Font.COLOR_RED);
-        //合并大标题的单元格
-        cardSheet.addMergedRegion(new CellRangeAddress(0, 0, 0, 9));
 
-        //大标题样式
-        CellStyle titleStyle = analyseBook.createCellStyle();
-
-        titleStyle.setAlignment(XSSFCellStyle.ALIGN_CENTER);
-        titleStyle.setVerticalAlignment(XSSFCellStyle.VERTICAL_CENTER);
-        titleStyle.setFillForegroundColor(HSSFColor.GREY_40_PERCENT.index);
-        titleStyle.setFillPattern(XSSFCellStyle.SOLID_FOREGROUND);
-        titleStyle.setFont(font);
 
         //第二行样式
         CellStyle title2Style = analyseBook.createCellStyle();
@@ -119,11 +116,6 @@ public class outputCardQuery {
 
 
         //表头开始
-        SXSSFRow analyseTitle = cardSheet.createRow(rowIndex++);
-        analyseTitle.setHeightInPoints(25);
-        SXSSFCell cellTitle1 = analyseTitle.createCell(0);
-        cellTitle1.setCellStyle(titleStyle);
-        cellTitle1.setCellValue("资金明细记录");
 
         SXSSFRow rowTitle = cardSheet.createRow(rowIndex++);
         rowTitle.setHeightInPoints(25);
@@ -201,10 +193,11 @@ public class outputCardQuery {
         	sqlStr += " and TO_DAYS(a.ADD_DATETIME) > TO_DAYS('" + map.get("MEMBER_CARD.ADD_DATETIME_TO") + "')";
         }
         if(map.containsKey("MEMBER_CARD.ADD_DATETIME") && !"null".equals(map.get("MEMBER_CARD.ADD_DATETIME"))){
-        	sqlStr += "order by a."+map.get("MEMBER_CARD.ADD_DATETIME");
+        	sqlStr += " order by a."+map.get("MEMBER_CARD.ADD_DATETIME");
         }
         
         try{
+        	log.info("sql==========="+sqlStr);
         	conn=ConnectionHelper.getConnection("andsell_read");
             stmt=conn.createStatement();
             rs=stmt.executeQuery(sqlStr);
@@ -266,22 +259,6 @@ public class outputCardQuery {
              ConnectionHelper.close(conn);
         }
         
-        SXSSFRow rowM = cardSheet.createRow(rowIndex);
-        rowM.setHeightInPoints(25);
-        rowM.createCell(0).setCellValue("");
-        rowM.createCell(1).setCellValue("");
-        rowM.createCell(2).setCellValue("");
-        rowM.createCell(3).setCellValue("");
-        rowM.createCell(4).setCellValue("");
-        rowM.createCell(5).setCellValue("");
-        rowM.createCell(6).setCellValue("");
-        SXSSFCell cellTime = rowM.createCell(7);
-        cellTime.setCellValue("导出时间：");
-        cellTime.setCellStyle(cellStyle);
-        SXSSFCell cellTimeValue = rowM.createCell(8);
-        cellTimeValue.setCellValue(dateFormat.format(DateUtil.getCurrTime()));
-        cellTimeValue.setCellStyle(cellStyle);
-        rowM.createCell(9).setCellValue("");
         
       //总计结束
         return cardSheet;

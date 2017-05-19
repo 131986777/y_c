@@ -3,6 +3,8 @@ package com.bolanggu.bbl.output;
 
 import com.bolanggu.bbl.ENV;
 import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +23,8 @@ import java.util.Date;
  */
 public class outputQuery extends HttpServlet {
 
+	private Logger log = LoggerFactory.getLogger(outputQuery.class);
+	
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -81,6 +85,7 @@ public class outputQuery extends HttpServlet {
             pw.close();
         } catch (Exception e) {
             e.printStackTrace();
+            log.info(e.getMessage());
             pw.print("failure");
         }
     }
