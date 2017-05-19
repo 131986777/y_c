@@ -157,23 +157,37 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
     };
 
     $scope.frezzeCard = function (item) {
-        modalFactory.showAlert("确认冻结卡号：" + item['MEMBER_CARD.CARD_NO'] + "吗？", function () {
-            cardFactory.frezzeCard(item, function () {
-                item['MEMBER_CARD.STATE'] = -1;
-            }, function (response) {
-                modalFactory.showShortAlert(response.msg);
-            });
-        });
+    	//item['FINANCE_LIST.EVENT_INTRO']=prompt("请输入冻结卡备注","");
+    	modalFactory.showPrompt("请输入冻结操作者及原因",function(response){
+    	  item['FINANCE_LIST.EVENT_INTRO']=response;
+      	  if (item['FINANCE_LIST.EVENT_INTRO']!=null && item['FINANCE_LIST.EVENT_INTRO']!="")
+      	    {
+      		  modalFactory.showAlert("确认冻结卡号：" + item['MEMBER_CARD.CARD_NO'] + "吗？", function () {
+      	            cardFactory.frezzeCard(item, function () {
+      	                item['MEMBER_CARD.STATE'] = -1;
+      	            }, function (response) {
+      	                modalFactory.showShortAlert(response.msg);
+      	            });
+      	        });
+      	    }else{  modalFactory.showAlert("冻结失败！请输入冻结卡操作者和原因！");}
+    	});
     }
 
     $scope.FrozenCard = function (item) {
-        modalFactory.showAlert("确认解冻卡号：" + item['MEMBER_CARD.CARD_NO'] + "吗？", function () {
-            cardFactory.FrozenCard(item, function () {
-                item['MEMBER_CARD.STATE'] = 1;
-            }, function (response) {
-                modalFactory.showShortAlert(response.msg);
-            });
-        });
+    	//item['FINANCE_LIST.EVENT_INTRO']=prompt("请输入冻结卡备注","");
+    	 item['FINANCE_LIST.EVENT_INTRO']=null;
+    	modalFactory.showPrompt("请输入解冻卡操作者及原因",function(a){
+    		item['FINANCE_LIST.EVENT_INTRO']=a
+    		  if (item['FINANCE_LIST.EVENT_INTRO']!=null && item['FINANCE_LIST.EVENT_INTRO']!=""){
+        		  modalFactory.showAlert("确认解冻卡号：" + item['MEMBER_CARD.CARD_NO'] + "吗？", function () {
+        	            cardFactory.FrozenCard(item, function () {
+        	                item['MEMBER_CARD.STATE'] = 1;
+        	            }, function (response) {
+        	                modalFactory.showShortAlert(response.msg);
+        	            });
+        	        });
+        	  }else{ modalFactory.showAlert("启用失败！请输入启用卡操作者和原因！");}
+    	});
     }
 
     $scope.outPutQuery = function () {
