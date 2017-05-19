@@ -1,4 +1,4 @@
-﻿angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory, balanceFactory, http, weUI, productFactory, promoFactory, orderFactory, modalFactory) {
+﻿﻿angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory, balanceFactory, http, weUI, productFactory, promoFactory, orderFactory, modalFactory) {
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
@@ -319,17 +319,25 @@
 
     //取消订单
     $scope.cancelOrder = function () {
-        weUI.dialog.confirm("提示", "确认取消该订单", function () {
-            weUI.toast.showLoading('正在取消');
-            orderFactory.cancelOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
-                weUI.toast.hideLoading();
-                weUI.toast.ok('取消订单成功');
-                $scope.getOrder($scope.order['SHOP_ORDER.ID']);
-            }, function (response) {
-                weUI.toast.hideLoading();
-                weUI.toast.error(response.msg);
+    	var datetime=$scope.order['SHOP_ORDER.GET_PRD_DATETIME'].substring(0,10)+ ' 19:00:00';
+    	var nowdate=new Date().getTime();//当前时间
+    	var olddate=new Date(datetime.replace(/\-/gi,"/")).getTime();
+    	if(olddate<nowdate){
+    		weUI.toast.error('当前时间不可退款！');
+    	}else{
+    		weUI.dialog.confirm("提示", "确认取消该订单", function () {
+                weUI.toast.showLoading('正在取消');
+                orderFactory.cancelOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {
+                    weUI.toast.hideLoading();
+                    weUI.toast.ok('取消订单成功');
+                    $scope.getOrder($scope.order['SHOP_ORDER.ID']);
+                }, function (response) {
+                    weUI.toast.hideLoading();
+                    weUI.toast.error(response.msg);
+                });
             });
-        });
+    	}
+        
     }
 
     //确认提货
