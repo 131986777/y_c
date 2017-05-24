@@ -294,7 +294,7 @@
                         <i class="icon-users"></i>
                         客户
                     </a>
-                    <div class="sub-menu-wrap sub-menu-2 dropdown-menu">
+                    <div class="sub-menu-wrap sub-menu-3 dropdown-menu">
                         <ul class="sub-menu" role="menu">
                             <li ng-if="APP_ID_LIST.indexOf('@1081@')>=0">
                                 <a ui-sref="member/member/memberList">
@@ -337,6 +337,13 @@
                             <li ng-if="APP_ID_LIST.indexOf('@1088@')>=0">
                                 <a ui-sref="card/card/cardSource">
                                     发卡渠道
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="sub-menu" role="menu">
+                        	<li ng-if="APP_ID_LIST.indexOf('@1146@')>=0">
+                                <a ui-sref="member/recharge/rechargeAdd">
+                                    客户万元充值
                                 </a>
                             </li>
                         </ul>
@@ -624,6 +631,8 @@
     <div message-modal></div>
     <!--短时间提示后隐藏的非阻塞提示框 -->
     <div short-message-modal></div>
+    <!--回调提示框 -->
+    <div return-message-modal></div>
 
 </div>
 
@@ -764,6 +773,7 @@
 <script src="/AndSell/app/sys/sys/sys-services.js"></script><!--数据分析-->
 <script src="/AndSell/app/sys/advice/advice-services.js"></script><!--数据分析-->
 <script src="/AndSell/app/groupbuy/groupbuy/groupbuy-service.js"></script><!--团购相关-->
+<script src="/AndSell/app/member/recharge/memberRecharge-services.js"></script><!--万元充值相关-->
 <!--############controller集合区(以后尝试 切换时注入)############-->
 <script src="main_controller.js"></script>
 
