@@ -26,7 +26,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
                     $scope.gbpEntity = response.data[0];
                     deferred_partake.resolve();
                 } else {
-                    weUI.toast("商品未参加团购活动~");
+                    weUI.toast.ok("商品未参加团购活动~");
                     history.back();
                     return;
                 }

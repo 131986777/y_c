@@ -67,12 +67,14 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
                 addSign = false;
                 deferred = $q.defer();
                 getPrdPromise = deferred.promise;
+                modalFactory.reload();
             }, function (response) {
                 modalFactory.showShortAlert("添加失败");
                 //表单置空
                 $scope.groupBuyPlan = {};
                 addSign = false;
                 getPrdPromise = deferred.promise;
+                modalFactory.reload();
             })
         })
     };
@@ -160,6 +162,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
                 addSign = false;
                 deferred = $q.defer();
                 getPrdPromise = deferred.promise;
+                modalFactory.reload();
             }, function (response) {
                 modalFactory.showShortAlert("修改失败");
                 //表单置空
@@ -167,6 +170,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
                 addSign = false;
                 deferred = $q.defer();
                 getPrdPromise = deferred.promise;
+                modalFactory.reload();
             })
         });
 
@@ -183,6 +187,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         param['GROUP_BUY_PLAN.STATE'] = type;
         groupBuyPlanFactory.modifyById(param, function (response) {
             modalFactory.showShortAlert("改变状态成功");
+            modalFactory.reload();
         }, function (response) {
             modalFactory.showShortAlert("改变状态失败");
         })
