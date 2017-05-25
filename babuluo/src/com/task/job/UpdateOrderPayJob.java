@@ -63,16 +63,25 @@ public class UpdateOrderPayJob implements Job {
             ReturnData gbmData = new API().call("/group/buy/member/getByOrderIds", new HashMap<String, String>() {{
                 put("GROUP_BUY_MEMBER.ORDER_IDS", orderIds);
             }});
-            List<JSONObject> gbmList = gbmData.getData();
-            for (JSONObject jo : gbmList) {
+            for (JSONObject jo : gbmData.getData()) {
+                jo.put("GROUP_BUY_MEMBER.MONEY_STATE", "OVER_TIME");
+                new API().call("/group/buy/member/modifyById", jo);
                 if ("1".equals(jo.getString("GROUP_BUY_MEMBER.IS_LEADER"))) {
                     //判断其团下有没有其他人
-                    ReturnData gbmDataByGbg = new API().call("/group/buy/member/getInGbgIds", new HashMap<String, String>() {{
-                        put("GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS", jo.getString("GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID"));
+                    ReturnData gbmDataByGbg = new API().call("/group/buy/member/getGbmsByGbgIdAndNoLeader", new HashMap<String, String>() {{
+                        put("GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID", jo.getString("GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID"));
                     }});
-                    if (gbmDataByGbg.getData().size() > 1) {
+                    boolean flag;
+                    if (gbmDataByGbg.getData().size() > 0) {
                         for (JSONObject jo2 : gbmDataByGbg.getData()) {
-                            if (!"1".equals(jo2.getString("GROUP_BUY_MEMBER.IS_LEADER"))) {
+                            flag = false;
+                            for (JSONObject jo3 : gbmData.getData()) {
+                                if (jo2.getString("GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID") .equals( jo3.getString("GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID"))) {
+                                    flag = true;
+                                    break;
+                                }
+                            }
+                            if (!flag) {
                                 jo2.put("GROUP_BUY_MEMBER.IS_LEADER", "1");
                                 new API().call("/group/buy/member/modifyById", jo2);
                                 break;
@@ -85,8 +94,6 @@ public class UpdateOrderPayJob implements Job {
                         }});
                     }
                 }
-                jo.put("GROUP_BUY_MEMBER.MONEY_STATE", "OVER_TIME");
-                new API().call("/group/buy/member/modifyById", jo);
             }
         }
     }

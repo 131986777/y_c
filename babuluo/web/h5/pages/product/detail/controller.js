@@ -585,6 +585,18 @@ console.log($scope.skuData);
         observer: true,
         observeParents: true
     });
+    //引导用户去参加团购
+    $scope.goGroupBuy = function () {
+        var param = {};
+        param['GBP_ID'] = $scope.sku['SHOP_PRODUCT_SKU.GBP_ID'];
+        param['PRD_ID'] = $scope.sku['SHOP_PRODUCT_SKU.SKU_ID'];
+        if ($scope.sku['SHOP_PRODUCT_SKU.GBP_TYPE'] == 'MANAGE') {
+            $state.go('pages/groupBuy/moreGroup',param);
+        } else if ($scope.sku['SHOP_PRODUCT_SKU.GBP_TYPE'] == 'MEMBER') {
+            removeCookie("SUM_COUNT");
+            $state.go('pages/groupBuy/myGroup',param);
+        }
+    };
 });
 
 

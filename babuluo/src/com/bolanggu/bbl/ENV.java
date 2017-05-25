@@ -86,8 +86,25 @@ public class ENV {
     public static String ALIPAY_RETURN_URL = DO_MAIN + "pc/pages/aliPay/return_url.jsp";
     //http://app.bblycyz.com
 
+
+    public static void a(String[] c){
+        System.out.println(c);
+    }
+
+    public static void a(String c){
+        System.out.println(c);
+    }
+
+    public static java.lang.String send(java.lang.String receiver, java.lang.String MSTempateCode, java.util.Map<java.lang.String,java.lang.String> receiverParams) throws java.lang.Exception {
+        return "2";
+    }
+
+    public static java.lang.String send(java.lang.String[] receivers, java.lang.String MSTempateCode, java.util.Map<java.lang.String,java.lang.String> receiverParams) throws java.lang.Exception {
+        return "1";
+    }
+
     //054
     public static void main(String[] args) {
-        System.out.println(WXPay.queryOrder("10004039"));
+        a("123");
     }
 }

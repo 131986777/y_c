@@ -1,4 +1,4 @@
-﻿﻿angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory, balanceFactory, http, weUI,groupBuyMemberFactory, productFactory, promoFactory,groupBuyGroupFactory, orderFactory, modalFactory) {
+﻿angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory, balanceFactory, http, weUI,groupBuyMemberFactory, productFactory, promoFactory,groupBuyGroupFactory, orderFactory, modalFactory) {
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
@@ -572,9 +572,17 @@
                                 //如果该团委商家开团
                                 //这只要将这个团客户记录标记为删除
                                 var param = {};
+                                param['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'] = $scope.gbm['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'];
+                                if (moneyState == 1) {
+                                    param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'HAVE_REFUND';
+                                } else {
+                                    param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'IS_CANCEL';
+                                }
                                 if ($scope.gbm['GROUP_BUY_MEMBER.IS_LEADER'] == 1) {
-                                    groupBuyMemberFactory.getAllMemberInGbgIds({'GROUP_BUY_MEMBER.GROUP_BUY_GROUP_IDS': $scope.gbg['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID']}, function (response) {
-                                        if (response.data.length > 1) {
+                                    //getAllMemberInGbgIds  //GROUP_BUY_GROUP_IDS
+                                    groupBuyMemberFactory.getGbmsByGbgIdAndNoLeader({'GROUP_BUY_MEMBER.GROUP_BUY_GROUP_ID': $scope.gbg['GROUP_BUY_GROUP.GROUP_BUY_GROUP_ID']}, function (response) {
+                                        //0
+                                        if (response.data.length > 0) {
                                             for (var i = 0; i < response.data.length; i++) {
                                                 if (response.data[i]['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'] != $scope.gbm['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID']) {
                                                     param = {};
@@ -593,14 +601,6 @@
                                         }
                                     })
                                 }
-                                param = {};
-                                param['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'] = $scope.gbm['GROUP_BUY_MEMBER.GROUP_BUY_MEMBER_ID'];
-                                if (moneyState == 1) {
-                                    param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'HAVE_REFUND';
-                                } else {
-                                    param['GROUP_BUY_MEMBER.MONEY_STATE'] = 'IS_CANCEL';
-                                }
-                                // param['GROUP_BUY_MEMBER.IS_DEL'] = 1;
                                 groupBuyMemberFactory.modifyById(param);
                             }
                         })

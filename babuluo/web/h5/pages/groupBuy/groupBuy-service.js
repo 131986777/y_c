@@ -14,6 +14,7 @@ AndSellH5MainModule.service('groupBuyGroupFactory', function (http) {
 });
 AndSellH5MainModule.service('groupBuyMemberFactory', function (http) {
     this.getAllMemberInGbgIds = http.post("/group/buy/member/getInGbgIds");
+    this.getGbmsByGbgIdAndNoLeader = http.post("/group/buy/member/getGbmsByGbgIdAndNoLeader");
     this.getByUserId = http.post("/group/buy/member/getByUserId	");
     this.add = http.post("/group/buy/member/add");
     this.getByOrderId = http.post("/group/buy/member/getByOrderIds");
