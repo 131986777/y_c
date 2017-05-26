@@ -26,7 +26,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
                     $scope.gbpEntity = response.data[0];
                     deferred_partake.resolve();
                 } else {
-                    weUI.toast("商品未参加团购活动~");
+                    weUI.toast.ok("商品未参加团购活动~");
                     history.back();
                     return;
                 }
@@ -50,6 +50,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
         params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         productFactory.getProductSkuBySkuIds(params, function (response) {
             $scope.skuList = response.data;
+            $scope.oldStock = $scope.skuList[0]['SHOP_PRODUCT_SKU.STOCK'];
             $scope.skulistsForOrder = new Array;
             $scope.skuList.forEach(function (ele) {
                 ele['SHOP_PRODUCT_SKU.SIZE'] = $stateParams.SUM_COUNT;
@@ -121,7 +122,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
                 $scope.gbmStorage = response.data.length < $scope.gbpEntity['GROUP_BUY_PLAN.SUM_COUNT'];
             })
         });
-    }
+    };
 
     //添加团购相关信息
     $scope.addGbm = function (orderId) {
@@ -197,6 +198,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_addGroupBuy_Controller
 
     //提交订单
     $scope.commitOrder = function () {
+        if ($scope.oldStock == 0 || $stateParams.SUM_COUNT > $scope.oldStock) {
+            weUI.toast.error('库存不足。');
+            return;
+        }
         if (!$scope.gbmStorage) {
             weUI.toast.error('来晚了哦,团购已满员。');
             return;

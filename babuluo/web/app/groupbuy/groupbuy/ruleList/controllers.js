@@ -12,7 +12,11 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
     var getPrdPromise = deferred.promise;
     var addSign = false;
 
-
+    $scope.reloadPage = function () {
+        //要添加的规则对象
+        $scope.groupBuyPlanList = '';
+        $scope.queryAllGroupBuyPlan();
+    };
     /**
      * 绑定angularJs指令返回的sku
      * @param data
@@ -59,20 +63,24 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
             form['GROUP_BUY_PLAN.BAR_CODE'] = $scope.prdMap[$scope.sku['skuId']]['SHOP_PRODUCT_SKU.BAR_CODE'];
             form['GROUP_BUY_PLAN.SKU_ID'] = $scope.sku['skuId'];
             form['GROUP_BUY_PLAN.STATE'] = 'NOT_SALE';
+            $("#add").modal('hide');
             //请求接口
             groupBuyPlanFactory.addGroupBuyPlan(form, function (response) {
                 modalFactory.showShortAlert("添加成功");
+                $scope.reloadPage();
                 //表单置空
                 $scope.groupBuyPlan = {};
                 addSign = false;
                 deferred = $q.defer();
                 getPrdPromise = deferred.promise;
+                modalFactory.reload();
             }, function (response) {
                 modalFactory.showShortAlert("添加失败");
                 //表单置空
                 $scope.groupBuyPlan = {};
                 addSign = false;
                 getPrdPromise = deferred.promise;
+                modalFactory.reload();
             })
         })
     };
@@ -96,22 +104,6 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         }, function (response) {
             modalFactory.showShortAlert("请求数据失败");
         })
-    }
-
-    /**
-     * 初始化详细信息
-     * @param groupBuyPlan
-     */
-    $scope.initDescribes = function (groupBuyPlan) {
-        $scope.groupBuyPlanToDescribes = groupBuyPlan;
-        var json = groupBuyPlan['GROUP_BUY_PLAN.JSON'];
-        if (groupBuyPlan['GROUP_BUY_PLAN.TYPE'] == 'ladderPrd' || groupBuyPlan['GROUP_BUY_PLAN.TYPE'] == 'unLadderPrd') {
-            $scope.roleListPrd = JSON.parse(json);
-            $scope.initPrice($scope.roleListPrd)
-        } else if (groupBuyPlan['GROUP_BUY_PLAN.TYPE'] == 'unLadderMember' || groupBuyPlan['GROUP_BUY_PLAN.TYPE'] == 'ladderMember') {
-            $scope.roleListMember = JSON.parse(json);
-            $scope.initPrice($scope.roleListMember)
-        }
     }
 
     /**
@@ -153,13 +145,17 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
             form['GROUP_BUY_PLAN.PRD_ID'] = $scope.prdMap[$scope.sku['skuId']]['SHOP_PRODUCT.PRD_ID'];
             form['GROUP_BUY_PLAN.BAR_CODE'] = $scope.prdMap[$scope.sku['skuId']]['SHOP_PRODUCT_SKU.BAR_CODE'];
             //请求接口
+            $("#modify").modal('hide');
+            $scope.reloadPage();
             groupBuyPlanFactory.modifyById(form, function (response) {
                 modalFactory.showShortAlert("修改成功");
+                $scope.reloadPage();
                 //表单置空
                 $scope.groupBuyPlanToModify = {};
                 addSign = false;
                 deferred = $q.defer();
                 getPrdPromise = deferred.promise;
+                modalFactory.reload();
             }, function (response) {
                 modalFactory.showShortAlert("修改失败");
                 //表单置空
@@ -167,6 +163,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
                 addSign = false;
                 deferred = $q.defer();
                 getPrdPromise = deferred.promise;
+                modalFactory.reload();
             })
         });
 
@@ -183,6 +180,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         param['GROUP_BUY_PLAN.STATE'] = type;
         groupBuyPlanFactory.modifyById(param, function (response) {
             modalFactory.showShortAlert("改变状态成功");
+            $scope.reloadPage();
         }, function (response) {
             modalFactory.showShortAlert("改变状态失败");
         })
@@ -199,6 +197,7 @@ angular.module('AndSell.Main').controller('groupbuy_groupbuy_ruleList_Controller
         param['GROUP_BUY_PLAN.IS_DEL'] = 1;
         groupBuyPlanFactory.modifyById(param, function (response) {
             modalFactory.showShortAlert("删除成功");
+            $scope.reloadPage();
         }, function (response) {
             modalFactory.showShortAlert("删除失败");
         })

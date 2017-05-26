@@ -43,12 +43,9 @@ AndSellUI.service('modalFactory', function ($rootScope) {
 //商品选择sku加入购物车
 AndSellUI.directive('cartModal', function (productFactory, weUI, modalFactory) {
     return {
-        restrict: 'EA',
-        templateUrl: '/AndSell/h5/public/template/cart.html',
-        scope: {
+        restrict: 'EA', templateUrl: '/AndSell/h5/public/template/cart.html', scope: {
             callback: '&', id: '= id', storeId: '=storeId', show: '= show'
-        },
-        controller: function ($scope) {
+        }, controller: function ($scope) {
 
             var mask = $("#mask");
             var weuiActionsheet = $("#weui_actionsheet");
@@ -236,8 +233,9 @@ AndSellUI.directive('cartModal', function (productFactory, weUI, modalFactory) {
                 } else {
                     $scope.sku = undefined;
                 }
-                if ($scope.sku != undefined)
+                if ($scope.sku != undefined) {
                     setContentsInfo($scope.sku);
+                }
             }
 
             //是否选了所有的规格项
@@ -271,7 +269,8 @@ AndSellUI.directive('cartModal', function (productFactory, weUI, modalFactory) {
                 var currSkuData = $scope.getPrdSkuData($scope.currSkuList);
                 [1, 2, 3].forEach(function (index) {
                     if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT' + index] != undefined) {
-                        $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT' + index].forEach(function (e) {
+                        $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT'
+                        + index].forEach(function (e) {
                             if ($scope.currSkuContentSelectMap['name' + index]
                                 == ''
                                 && currSkuData['SHOP_PRODUCT_SKU.SKU_CONTENT' + index].indexOf(e)
@@ -357,12 +356,9 @@ AndSellUI.directive('cartModal', function (productFactory, weUI, modalFactory) {
 //支付会员卡选择
 AndSellUI.directive('cardModal', function (weUI, modalFactory, personalFactory) {
     return {
-        restrict: 'EA',
-        templateUrl: '/AndSell/h5/public/template/cardPay.html',
-        scope: {
+        restrict: 'EA', templateUrl: '/AndSell/h5/public/template/cardPay.html', scope: {
             callback: '&', money: '=money', show: '= show'
-        },
-        controller: function ($scope) {
+        }, controller: function ($scope) {
 
             var mask = $("#mask");
             var weuiActionsheet = $("#weui_actionsheet");
@@ -391,11 +387,13 @@ AndSellUI.directive('cardModal', function (weUI, modalFactory, personalFactory) 
             }
 
             $scope.initData = function () {
+                console.log('iiit');
                 toggleActionSheet();
                 $scope.loadMemberCard();
             };
 
             $scope.loadMemberCard = function () {
+                $scope.choosedCardID = 0;
                 weUI.toast.showLoading('正在加载会员卡');
                 personalFactory.getMemberCardByUserId({}, function (response) {
                     $scope.cardList = response.data;
@@ -404,15 +402,21 @@ AndSellUI.directive('cardModal', function (weUI, modalFactory, personalFactory) 
                         if (!isEmptyObject($scope.choosedCard)) {
                             $scope.choosedCardID = $scope.choosedCard['MEMBER_CARD.CARD_ID'];
                         }
-                        $scope.cardList.forEach(function (ele) {
-                            ele['MEMBER_CARD.CHECKED'] = ele['MEMBER_CARD.CARD_ID'] == $scope.choosedCardID;
-                        });
-                        $scope.cardList[0]['MEMBER_CARD.CHECKED'] = true;
-                        $scope.cardCheck=$scope.cardList[0];
 
-                    }else {
+                        $scope.cardList.forEach(function (ele) {
+                            ele['MEMBER_CARD.CHECKED'] = (ele['MEMBER_CARD.CARD_ID']
+                            == $scope.choosedCardID);
+                            if (ele['MEMBER_CARD.CHECKED'] == true) {
+                                $scope.cardCheck = ele;
+                            }
+                        });
+                        if ($scope.choosedCardID == 0) {
+                            $scope.cardList[0]['MEMBER_CARD.CHECKED'] = true;
+                            $scope.cardCheck = $scope.cardList[0];
+                        }
+                    } else {
                         $scope.cardList[0]['MEMBER_CARD.CHECKED'] = true;
-                        $scope.cardCheck=$scope.cardList[0];
+                        $scope.cardCheck = $scope.cardList[0];
                         setCookie('payCard', JSON.stringify($scope.cardList[0]));
                         $scope.chooseCard();
                     }
@@ -430,7 +434,7 @@ AndSellUI.directive('cardModal', function (weUI, modalFactory, personalFactory) 
                     ele['MEMBER_CARD.CHECKED'] = false;
                 });
                 cl['MEMBER_CARD.CHECKED'] = true;
-                $scope.cardCheck=cl;
+                $scope.cardCheck = cl;
                 setCookie('payCard', JSON.stringify(cl));
             };
 
@@ -448,8 +452,7 @@ AndSellService.factory("http", function ($http) {
     var _post = function (url, data, funcSuccess, funcFail) {
         return $http.post(url, $.param(data), {
             headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'withCredentials': true
+                'Content-Type': 'application/x-www-form-urlencoded', 'withCredentials': true
             }
         }).success(function (response) {
             if (response.code == 0) {

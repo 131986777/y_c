@@ -16,9 +16,9 @@
                 <img ng-src="http://bbl-upload.oss-cn-shanghai.aliyuncs.com/{{groupPrdMap[gbp['SKU_ID']]['SHOP_PRODUCT.CMP']}}"
                      alt="" class="groupPic">
                 <div class="left-des">
-                    <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'FAIL'">失败</span>
-                    <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'IN'">进行中</span>
-                    <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'DONE'">成功</span>
+                    <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'FAIL'">团购失败</span>
+                    <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'IN'">团购进行中</span>
+                    <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'DONE'">团购成功</span>
                     <h4 class="name">
                         <span class="own-protitle"
                               ng-bind="groupPrdMap[gbp['SKU_ID']]['SHOP_PRODUCT.PRD_NAME']"></span>
