@@ -144,9 +144,8 @@ AndSellUI.service('modalFactory', function ($rootScope) {
             message: msg, callback: func
         });
     };
-    
-    this.showReturnAlert = function (msg, func) {
-        $rootScope.$broadcast("to-return-modal", {
+    this.showPrompt = function (msg, func) {
+        $rootScope.$broadcast("to-short-input", {
             message: msg, callback: func
         });
     };
@@ -224,6 +223,59 @@ AndSellUI.directive('shortMessageModal', function ($timeout) {
         }
     };
 });
+
+AndSellUI.directive('showPrompt', function () {
+	return {
+        scope: {
+            title: '@title', btnLeft: '@cancel', btnRight: '@confirm'
+        },
+        templateUrl: "/AndSell/app/components/libs/angular/template/shortInput.html",
+        restrict: 'EA',
+        transclude: true,
+        link: function postLink(scope, element, attrs) {
+
+            scope.title = '默认提示';
+
+            scope.remark =null;
+            
+            scope.btnLeft = '取消';
+            
+            scope.callback = {};
+
+            scope.btnRight = '确认';
+
+            scope.ifShow = false;
+
+            scope.$on('to-short-input', function (d, data) {
+                scope.title = data.message;
+                scope.callback = data.callback;
+                scope.ifShow = true;
+                return true;
+            });
+
+            scope.btnLeftClick = function () {
+                scope.ifShow = false;
+            };
+
+            scope.btnRightClick = function (id) {
+            	 scope.ifShow = false;
+                 if (undefined != scope.callback) {
+                	 
+                     scope.callback(id);
+                    
+                 }
+                   
+            };
+        }
+    };
+	
+   
+});
+
+
+
+
+
 
 AndSellUI.directive('showModal', function () {
     return {
