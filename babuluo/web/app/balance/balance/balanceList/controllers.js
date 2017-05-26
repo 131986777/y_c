@@ -210,13 +210,6 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
             });
 			
 		});
-        http.post_ori(url, $scope.outputList, function (response) {
-            if (response != "failure") {
-                location.href = "/AndSell" + response;
-            } else {
-                modalFactory.showShortAlert("导出失败");
-            }
-        });
     };
 
     $scope.getFinanceListById = function (balanceInfo) {
