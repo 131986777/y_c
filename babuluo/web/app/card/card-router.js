@@ -16,5 +16,6 @@
 });*/
 
 $import('card/card/cardList',undefined,true);
+$import('card/card/cardActivite',undefined,true);
 $import('card/card/cardType',undefined,true);
 $import('card/card/cardSource');

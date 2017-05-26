@@ -1,6 +1,6 @@
 angular.module('AndSell.Main').controller('member_recharge_rechargeAdd_Controller', function ($scope, $interval,$stateParams, modalFactory,memberRechargeFactory) {
 
-	modalFactory.setTitle('万元用户充值');
+	modalFactory.setTitle('储值卡绑定');
 
     $scope.initLoad = function () {
         
@@ -61,14 +61,32 @@ angular.module('AndSell.Main').controller('member_recharge_rechargeAdd_Controlle
 	    return false;
 	}
 	
+	
 	$scope.commitForm = function(){
+		
 		if($scope.value['CARD_RECGARGE'] == '' || $scope.value['CARD_RECGARGE'] == undefined || !IsCard($scope.value['CARD_RECGARGE'])){
 			modalFactory.showShortAlert("请填写正确的黄卡卡号");
 			return false;
 		}
-		if($scope.value['CARD_STORE'] == '' || $scope.value['CARD_STORE'] == undefined || !IsCard($scope.value['CARD_STORE'])){
-			modalFactory.showShortAlert("请填写正确的储值卡卡号");
+		
+		if($scope.value['TOTAL'] == '' || $scope.value['TOTAL'] == undefined){
+			modalFactory.showShortAlert("请填写赠送总额");
 			return false;
+		}
+		
+		var cardsArray = new Array();
+		
+		var cards = $('.storecard');
+		for(var i=0;i<cards.length;i++){
+			var flag = i+1;
+			var card = cards.eq(i).val();
+			if(card == '' || card == undefined || !IsCard(card)){
+				modalFactory.showShortAlert("第"+flag+"个填写正确的储值卡卡号");
+				return false;
+			}
+			var cardInfo = {};
+			cardInfo['CARD_NO'] = card;
+			cardsArray.push(cardInfo);
 		}
 		if($scope.value['PHONE'] == '' || $scope.value['PHONE'] == undefined){
 			modalFactory.showShortAlert("请填写手机号");
@@ -78,10 +96,7 @@ angular.module('AndSell.Main').controller('member_recharge_rechargeAdd_Controlle
 			modalFactory.showShortAlert("请填写验证码");
 			return false;
 		}
-		if($scope.value['NAME'] == '' || $scope.value['NAME'] == undefined){
-			modalFactory.showShortAlert("请填写姓名");
-			return false;
-		}
+		
 		if($scope.value['ID_NUMBER'] !='' && $scope.value['ID_NUMBER'] != undefined && !IsIdCard($scope.value['ID_NUMBER'])){
 			modalFactory.showShortAlert("请填写合法的身份证号");
 			return false;
@@ -90,6 +105,7 @@ angular.module('AndSell.Main').controller('member_recharge_rechargeAdd_Controlle
 		modalFactory.showAlert("请检查卡号,确认开卡?", function () {
 			var form = {};
 			form = $scope.value;
+			form['CARDLIST'] = angular.toJson(cardsArray);
 			memberRechargeFactory.commitCard(form,function(response){
 				console.log(response);
 				if(response.code == 0){
@@ -99,6 +115,13 @@ angular.module('AndSell.Main').controller('member_recharge_rechargeAdd_Controlle
 	            modalFactory.showShortAlert(response.msg);
 	        });
         });
+	 }
+	
+	$scope.addCard = function (){
+		var html = "<input class=\"form-control storecard\" "+
+            "name=\"number\" type=\"text\""+
+            "placeholder=\"请输入赠送储蓄卡卡号\">";
+		$('#store').append(html);
 	}
 
    

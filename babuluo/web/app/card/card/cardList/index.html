@@ -103,7 +103,7 @@
                     <button ng-show="ACCOUNT_TYPE!='SHOP'" type="button" class="btn btn-default pull-right" data-toggle="modal"
                             data-target="#cardList"><i class="fa fa-plus"></i>开卡
                     </button>
-                    <button ng-show="ACCOUNT_TYPE!=='SHOP'" type="button" class="btn btn-default pull-right" show-modal id="#czkCardIn">
+                    <button ng-show="ACCOUNT_TYPE!=='SHOP'" type="button" class="btn btn-default pull-right" ng-click="initState()" show-modal id="#czkCardIn">
                         <i class="fa fa-plus"></i>储值卡导入
                     </button>
                 </div>
@@ -310,10 +310,11 @@
                 <form method="post">
                     <div class="modal-body form-body text-right">
                         <button class="btn btn-primary btn-outline" ng-click="downMoban()">下载模板
-                        </button>
+                        </button>  
                         <input type="file" file-model="myFile" class="btn btn-default"
                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
                         </input>
+                        <input type="checkbox"  ng-change="changeState()" ng-model="STATE_CHECK" class="md-check"/> 是否冻结
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-primary btn-outline" ng-click="uploadFile()">确定

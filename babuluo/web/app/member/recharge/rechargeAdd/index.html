@@ -12,19 +12,29 @@
                           <input class="form-control"
                                ng-model="value['CARD_RECGARGE']"
                                name="number" type="text"
-                               placeholder="请输入冲入1万元的黄卡卡号">
+                               placeholder="请输入充值的黄卡卡号">
                    
                    
                 </div>
             </div>
             <div class="form-group">
                 <span class="icon-required">*</span>
-                <label class="control-label col-sm-1 right form-input-title">储蓄卡</label>
+                <label class="control-label col-sm-1 right form-input-title">赠送总额</label>
                 <div class="col-sm-4">
                     <input class="form-control"
-                               ng-model="value['CARD_STORE']"
+                               ng-model="value['TOTAL']"
                                name="number" type="text"
-                               placeholder="请输入赠送2千元的储蓄卡卡号">
+                               placeholder="">
+                </div> 
+            </div>
+            <div class="form-group">
+                <span class="icon-required">*&nbsp;<img alt="添加卡号" src="../../pc/public/css/img/plus.png" style="width:30px;height:30px;vertical-align: middle;" ng-click="addCard()"></span>
+                <label class="control-label col-sm-1 right form-input-title">储蓄卡</label>
+                <div class="col-sm-4" id="store">
+                    <input class="form-control storecard" 
+                               name="number" type="text"
+                               placeholder="请输入赠送储蓄卡卡号">
+                                       
                 </div>
             </div>
             <div class="form-group">
@@ -51,17 +61,8 @@
                 </div>
             </div> 
             
-             <div class="form-group">
-                <span class="icon-required">*</span>
-                <label class="control-label col-sm-1 right form-input-title">姓名</label>
-                <div class="col-sm-4">
-                    <input class="form-control"
-                               ng-model="value['NAME']"
-                               name="number" type="text"
-                               placeholder="">
-                </div> 
-            </div> 
-           <div class="form-group">
+              
+           <!-- <div class="form-group">
                 <span class="icon-required" style="color:#000000">（选填）</span>
                 <label class="control-label col-sm-1 right form-input-title">身份证</label>
                 <div class="col-sm-4">
@@ -88,7 +89,7 @@
                     <input class="form-control"
                                ng-model="value['BIRTHDAY']"
                                name="number" type="text"
-                               placeholder="格式:1970-01-01">
+                               placeholder="格式  1970-01-01">
                 </div> 
             </div>
              <div class="form-group">
@@ -100,13 +101,13 @@
                                name="number" type="text"
                                placeholder="">
                 </div> 
-            </div>
+            </div> -->
             <div class="form-group" style="margin-top: 30px;">
             	<span class="icon-required" style="color:#000000"></span>
                 <label class="control-label col-sm-1 right form-input-title"></label>
             	    <div class="col-sm-4 text-center">
             	    	     <div class="btn-group " role="group" aria-label="...">
-							  <button type="button" class="btn btn-default " style="border-radius: 19px;" ng-click="commitForm()">确认充值</button>
+							  <button type="button" class="btn btn-default " style="border-radius: 19px;" ng-click="commitForm()">确认绑定</button>
             	   	</div> 
              
             </div>
