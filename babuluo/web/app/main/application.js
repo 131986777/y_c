@@ -217,7 +217,7 @@ AndSellUI.directive('shortMessageModal', function ($timeout) {
                     if (undefined != scope.callback) {
                         scope.callback();
                     }
-                }, 800);
+                }, 2000);
                 return true;
             });
         }
@@ -283,6 +283,35 @@ AndSellUI.directive('showModal', function () {
             elements[0].onclick = function () {
                 $(this.id).modal('show');
             }
+        }
+    };
+});
+
+AndSellUI.directive('returnMessageModal', function () {
+    return {
+        scope: {
+            title: '@title'
+        },
+        templateUrl: "../components/libs/angular/template/shortmodal.html",
+        restrict: 'EA',
+        transclude: true,
+        link: function postLink(scope, element, attrs) {
+
+            scope.title = '默认提示';
+
+            scope.ifShow = false;
+            scope.callback = {};
+
+            scope.$on('to-return-modal', function (d, data) {
+                scope.title = data.message;
+                scope.callback = data.callback;
+                scope.ifShow = true;
+                  if (undefined != scope.callback) {
+                        scope.callback(scope);
+                    }
+				
+                return true;
+            });
         }
     };
 });
