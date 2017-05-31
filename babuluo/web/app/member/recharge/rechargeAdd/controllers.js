@@ -1,6 +1,6 @@
 angular.module('AndSell.Main').controller('member_recharge_rechargeAdd_Controller', function ($scope, $interval,$stateParams, modalFactory,memberRechargeFactory) {
 
-	modalFactory.setTitle('储值卡绑定');
+	modalFactory.setTitle('储值卡绑定激活');
 
     $scope.initLoad = function () {
         
@@ -118,11 +118,22 @@ angular.module('AndSell.Main').controller('member_recharge_rechargeAdd_Controlle
 	 }
 	
 	$scope.addCard = function (){
-		var html = "<input class=\"form-control storecard\" "+
-            "name=\"number\" type=\"text\""+
-            "placeholder=\"请输入赠送储蓄卡卡号\">";
-		$('#store').append(html);
+		var html ='<div class="form-group" style="margin-bottom: 0px";>'
+        +'<span class="icon-required">*&nbsp;<img alt="添加卡号" src="../../pc/public/css/img/jian.png" style="width:30px;height:30px;vertical-align: middle;"  class="jian"></span>'
+        +'<label class="control-label col-sm-1 right form-input-title"></label>'
+        +'<div class="col-sm-4" id="store">'
+        +'<input class="form-control storecard" '
+        +' name="number" type="text"'
+        +' placeholder="请输入赠送储蓄卡卡号">'
+                               
+        +'</div>'
+        +'</div>'
+      
+		$('.inputs').append(html);
 	}
+	$(".inputs").on("click",".jian", function() {
+	     $(this).parent().parent().remove();
+	 });
 
    
 });
