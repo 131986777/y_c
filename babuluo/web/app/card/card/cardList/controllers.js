@@ -210,10 +210,24 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
         var url = "/AndSell/file/download/template/ValueCard.xlsx";
         window.location.href = url;
     };
+    
+    $scope.initState = function(){
+    	$scope.STATE_CHECK = false;
+    }
+    
+    $scope.changeState = function(){
+    	if($scope.STATE_CHECK == true){
+        	modalFactory.showShortAlert("冻结导入的所有卡");
+        }
+    }
 
     $scope.uploadFile = function () {
 
         var file = $scope.myFile;
+        var state = 1;
+        if($scope.STATE_CHECK == true){
+        	state =  -1;
+        }
         if (file == undefined) {
             modalFactory.showShortAlert("请选择文件");
             return;
@@ -222,7 +236,7 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
             var uploadUrl = "../../SimpleFileupload";
             fileUpload.uploadFileToUrl(file, uploadUrl, function (response) {
                 if (response == "success") {
-                    $scope.importValueCard(file.name);
+                    $scope.importValueCard(file.name,state);
                     $("#czkCardIn").modal('hide');
                 }
             });
@@ -233,10 +247,11 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
         }
     };
 
-    $scope.importValueCard = function (fileName) {
+    $scope.importValueCard = function (fileName,state) {
         var url = "../../importValueCard";
         $scope.file = {};
         $scope.file['fileUrl'] = fileName;
+        $scope.file['STATE'] = state;
         modalFactory.showShortAlert("正在导入，请稍等，请勿进行其他操作。");
         http.post_ori(url, $scope.file, function (response) {
             if (response == "success") {

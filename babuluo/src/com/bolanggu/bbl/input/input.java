@@ -34,6 +34,7 @@ public class input extends HttpServlet {
         throws ServletException, IOException {
 
         PrintWriter pw = resp.getWriter();
+        int state = Integer.parseInt(req.getParameter("STATE"));
         String fileUrl = getClass()
             .getClassLoader()
             .getResource("/")
@@ -46,7 +47,7 @@ public class input extends HttpServlet {
 
         Map map = poi.readMore(fileUrl, false, 0, 0);
         List<List<String>> list = (List<List<String>>) map.get("储值卡导入");
-        importValueCard(list);
+        importValueCard(list,state);
         pw.write("success");
     }
 
@@ -56,7 +57,7 @@ public class input extends HttpServlet {
         doPost(req, resp);
     }
 
-    private void importValueCard(List<List<String>> list) throws RuleException {
+    private void importValueCard(List<List<String>> list,int state) throws RuleException {
 
         String card_no = null;
         double balance = 0;
@@ -81,6 +82,7 @@ public class input extends HttpServlet {
             map.put("CARD_NO", card_no);
             map.put("BALANCE", balance);
             map.put("SHOP_ID", shop_id);
+            map.put("MEMBER_CARD.STATE", state);
             System.out.println(map);
             new API().call("/member/membercard/addValueCard", map);
         }

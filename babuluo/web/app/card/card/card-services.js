@@ -29,6 +29,8 @@ AndSellMainModule.service('cardFactory', function (http) {
     this.frezzeCard = http.post('/member/membercard/frezzeCard');
 
     this.FrozenCard = http.post('/member/membercard/FrozenCard');
+    
+    this.modifyState = http.post('/member/membercard/modifyCardState');
 
 });
 
