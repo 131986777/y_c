@@ -61,6 +61,11 @@ angular.module('AndSell.Main').controller('member_recharge_rechargeAdd_Controlle
 	    return false;
 	}
 	
+	var IsRechargeCard = function (card){
+		var myReg = /^\d{10}$/;
+	    if (myReg.test(card)) return true;
+	    return false;
+	}
 	
 	$scope.commitForm = function(){
 		
@@ -80,7 +85,7 @@ angular.module('AndSell.Main').controller('member_recharge_rechargeAdd_Controlle
 		for(var i=0;i<cards.length;i++){
 			var flag = i+1;
 			var card = cards.eq(i).val();
-			if(card == '' || card == undefined || !IsCard(card)){
+			if(card == '' || card == undefined || !IsRechargeCard(card)){
 				modalFactory.showShortAlert("第"+flag+"个填写正确的储值卡卡号");
 				return false;
 			}

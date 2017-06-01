@@ -12,8 +12,8 @@ angular.module('AndSell.Main').controller('card_card_cardActivite_Controller', f
 	
 	
 	
-	var IsCard = function (card){
-		var myReg = /^\d{8}$/;
+    var IsCard = function (card){
+		var myReg = /^\d{10}$/;
 	    if (myReg.test(card)) return true;
 	    return false;
 	}
