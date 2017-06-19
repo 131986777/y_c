@@ -80,7 +80,8 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
             }
 
             if ($stateParams.FROM == '') {
-                $state.go('pages/home');
+            	history.back();
+                //$state.go('pages/home');
             } else {
                 window.location.href = $stateParams.FROM;
             }

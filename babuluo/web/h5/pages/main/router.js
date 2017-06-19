@@ -6,7 +6,7 @@ $import('pages/cart');
 $import('pages/payment/check_out', {ORDER_ID: '1023'});
 $import('pages/payment/check_out_success');
 
-$import('pages/product/detail', {PRD_ID: '1242'});
+$import('pages/product/detail', {PRD_ID: '1242',SOURCE:''});
 $import('pages/product/list', {keyword: '', classId: undefined, tagId: ''});
 $import('pages/product/tagPrdList', {tagId: '1023'});
 
