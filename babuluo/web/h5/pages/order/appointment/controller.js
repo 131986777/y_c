@@ -20,6 +20,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             };
             appointmentFactory.queryAll(param, function (response) {
                 if (response.data.length > 0) {
+                	$scope.cookiePickupPerson.endHours = response.data[0]['APPOINTMENT_PRODUCT.END_DAY'];
                     if (!($scope.cookiePickupPerson.skuIds
                         == $stateParams.SKU_IDS
                         && $scope.cookiePickupPerson.currDay
