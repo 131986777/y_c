@@ -16,6 +16,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
     $scope.prdSkuMap = new Map();
 
     $scope.initData = function () {
+    	
 
         console.log(JSON.parse(getCookie('currentShopInfo')));
 //        $scope.sku['SHOP_PRODUCT_SKU.STOCK']=10;
@@ -437,6 +438,7 @@ console.log($scope.skuData);
     $scope.toAppointment = function () {
         if ($scope.sku != undefined) {
             if ($scope.sku['SHOP_PRODUCT_SKU.STOCK'] > 0) {
+            	setCookie($stateParams.PRD_ID+'_dist',$stateParams.SOURCE);
                 $state.go('pages/order/appointment', {
                     'SKU_IDS': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID'], 'COUNT': $scope.skuSize
                 });
@@ -479,6 +481,7 @@ console.log($scope.skuData);
                 //加入购物车
                 setCookie('cartSize', JSON.stringify(cartSize));
                 setCookie('cartInfo', JSON.stringify(cartInfo));
+                setCookie($stateParams.PRD_ID+'_dist',$stateParams.SOURCE);
 
                 weUI.toast.ok('已加入到购物车');
 

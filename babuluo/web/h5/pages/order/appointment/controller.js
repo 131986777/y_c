@@ -20,6 +20,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             };
             appointmentFactory.queryAll(param, function (response) {
                 if (response.data.length > 0) {
+                	$scope.cookiePickupPerson.endHours = response.data[0]['APPOINTMENT_PRODUCT.END_DAY'];
                     if (!($scope.cookiePickupPerson.skuIds
                         == $stateParams.SKU_IDS
                         && $scope.cookiePickupPerson.currDay
@@ -64,6 +65,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
                 $scope.needPay = ele['SHOP_PRODUCT_SKU.NEED_PAY'];
                 ele.isSelect = false;
                 ele.isSale = false;
+                ele['SOURCE'] = getCookie(ele['SHOP_PRODUCT.PRD_ID']+'_dist');
                 $scope.skulistsForOrder.push({
                     'skuId': ele['SHOP_PRODUCT_SKU.SKU_ID'],
                     'classId': ele['SHOP_PRODUCT.CLASS_ID'],

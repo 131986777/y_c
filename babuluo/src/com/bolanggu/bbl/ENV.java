@@ -85,6 +85,8 @@ public class ENV {
     //支付宝结果跳转页面
     public static String ALIPAY_RETURN_URL = DO_MAIN + "pc/pages/aliPay/return_url.jsp";
     //http://app.bblycyz.com
+    
+    public static String DIST_DOMAIN = "http://127.0.0.1:8081/dist";
 
     //054
     public static void main(String[] args) {

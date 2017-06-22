@@ -97,10 +97,10 @@ angular.module('AndSell.Main').controller('member_recharge_rechargeAdd_Controlle
 			modalFactory.showShortAlert("请填写手机号");
 			return false;
 		}
-		if($scope.value['CODE'] == '' || $scope.value['CODE'] == undefined){
+		/*if($scope.value['CODE'] == '' || $scope.value['CODE'] == undefined){
 			modalFactory.showShortAlert("请填写验证码");
 			return false;
-		}
+		}*/
 		
 		if($scope.value['ID_NUMBER'] !='' && $scope.value['ID_NUMBER'] != undefined && !IsIdCard($scope.value['ID_NUMBER'])){
 			modalFactory.showShortAlert("请填写合法的身份证号");

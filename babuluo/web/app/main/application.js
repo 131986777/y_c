@@ -144,6 +144,13 @@ AndSellUI.service('modalFactory', function ($rootScope) {
             message: msg, callback: func
         });
     };
+    
+    this.showReturnAlert = function (msg, func) {
+        $rootScope.$broadcast("to-return-modal", {
+            message: msg, callback: func
+        });
+    };
+    
     this.showPrompt = function (msg, func) {
         $rootScope.$broadcast("to-short-input", {
             message: msg, callback: func

@@ -57,6 +57,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_add_Controller', funct
                 ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = moneyFormat(ele['SHOP_PRODUCT_SKU.REAL_PRICES']);
                 ele.isSelect = false;
                 ele.isSale = false;
+                ele['SOURCE'] = getCookie(ele['SHOP_PRODUCT.PRD_ID']+'_dist');
                 $scope.skulistsForOrder.push({
                     'skuId': ele['SHOP_PRODUCT_SKU.SKU_ID'],
                     'classId': ele['SHOP_PRODUCT.CLASS_ID'],

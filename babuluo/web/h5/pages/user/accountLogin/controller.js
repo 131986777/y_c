@@ -2,7 +2,7 @@ angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller
 
     modalFactory.setTitle('登录');
     modalFactory.setBottom(false);
-
+    
     $scope.myKeyup = function(e){
         var keycode = window.event?e.keyCode:e.which;
         if(keycode==13){
@@ -16,8 +16,10 @@ angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller
         userFactory.login(form, function (response) {
             weUI.toast.hideLoading();
             weUI.toast.info('登录成功');
-            if($stateParams.FROM!=''&&$stateParams.FROM!=undefined&&$stateParams.FROM!='undefined'){
-                window.location.href=$stateParams.FROM;
+            var from = localStorage.path;
+            console.log('from===='+from);
+            if(from!=''&&from!=undefined&&from!='undefined'){
+                window.location.href=from;
             }else{
                 $state.go('pages/home');
             }
@@ -33,13 +35,14 @@ angular.module('AndSell.H5.Main').controller('pages_user_accountLogin_Controller
         });
     }
 
-    $scope.initData= function () {
+    /*$scope.initData= function () {
+    	
         var state = {
             title: "main",
             url: "#/pages/home"
         };
         window.history.pushState(state, "main", "#/pages/home");
-    }
+    }*/
 
 });
 

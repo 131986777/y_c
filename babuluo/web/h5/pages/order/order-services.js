@@ -9,6 +9,8 @@ AndSellH5MainModule.service('orderFactory', function (http) {
     this.getOrder = http.post('/shop/order/queryAllForAgent');
 
     this.cancelOrder = http.post('/shop/order/cancelOrder');
+    //取消订单佣金回退
+    this.cancelOrder_dist = http.post('../../../dist/bubu/dist/income/cancelorder');
 
     this.payOrder = http.post('/shop/order/payOrder');
 
