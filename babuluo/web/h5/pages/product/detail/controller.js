@@ -232,6 +232,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
 
     //获取价格区间
     $scope.getPriceArea = function () {
+    	
         var minPrice = 0;
         var maxPrice = 0;
         $scope.skuList.forEach(function (ele) {
@@ -296,7 +297,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
 
     //规格单选
     $scope.checkContent = function (num, content) {
-
+    	
         if ($scope.currSkuSelectClassMap[num][content] != cannotSelectCLass) {
             $scope.lastCheck = {
                 num: num, content: clone($scope.currSkuContentSelectMap['name' + num])
@@ -309,6 +310,9 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
             if (num == 1){
             var sku = $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT1'];
             var index = sku.indexOf(content);
+            console.log($scope.skuList[index] );
+            console.log($scope.skuList[index]['SHOP_PRODUCT_SKU.REAL_PRICES'])
+            $scope.oldPrice = $scope.skuList[index]['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'];
             $scope.nowPrice = $scope.skuList[index]['SHOP_PRODUCT_SKU.REAL_PRICES'];
 	    }
 
@@ -395,6 +399,7 @@ var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Con
     $scope.skuSelectable = function () {
         var currSkuData = $scope.getPrdSkuData($scope.currSkuList);
 console.log($scope.skuData);
+
         [1, 2, 3].forEach(function (index) {
             if ($scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT' + index] != undefined) {
                 $scope.skuData['SHOP_PRODUCT_SKU.SKU_CONTENT' + index].forEach(function (e) {
