@@ -1,7 +1,7 @@
 angular.module('AndSell.H5.Main').controller('pages_user_phoneLogin_Controller', function ($http, $scope, $state, $interval, $stateParams, userFactory, modalFactory, weUI) {
 
     $scope.memberInfo={'PHONE':'','RANDCODE':''};
-
+    
     $scope.sendSms = function () {
 
         var send= function () {
@@ -34,7 +34,12 @@ angular.module('AndSell.H5.Main').controller('pages_user_phoneLogin_Controller',
     $scope.login= function () {
         var loginEvent= function () {
             userFactory.phoneLogin($scope.memberInfo, function (response) {
-                $state.go('pages/home');
+            	var from = localStorage.path;
+            	if(from!=''&&from!=undefined&&from!='undefined'){
+            		window.location.href=from;
+                }else{
+                    $state.go('pages/home');
+                }
             },function(response){
                 weUI.toast.error(response.msg);
             });
@@ -55,6 +60,18 @@ angular.module('AndSell.H5.Main').controller('pages_user_phoneLogin_Controller',
                 did();
             }
         }
+    }
+    
+    $scope.initData= function () {
+    	if($stateParams.FROM!=''&&$stateParams.FROM!=undefined&&$stateParams.FROM!='undefined'){
+    		/*var from = "#/"+$stateParams.FROM;
+            var state = {
+                title: "",
+                url: from
+            };
+            window.history.pushState(state, "main", from);*/
+    	}
+    	
     }
 
 });

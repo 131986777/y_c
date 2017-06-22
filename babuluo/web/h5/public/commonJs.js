@@ -257,6 +257,7 @@ function routerPath(base, path, param, css) {
                 userFactory.isLogin({'USER_TYPE': 'CUSTOMER'}, function (response) {
 
                 }, function (response) {
+                    localStorage.path = window.location.href;
                     $state.go('pages/user/accountLogin');
                 });
             }

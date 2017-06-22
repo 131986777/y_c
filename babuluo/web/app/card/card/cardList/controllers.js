@@ -191,19 +191,23 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
     }
 
     $scope.outPutQuery = function () {
-
+    	$('#ouputBtn').attr("disabled","disabled");
         var url = "../../outputQuery";
         $scope.outputList = {};
         $scope.outputList['type'] = "card";
         $scope.outputList['param'] = JSON.stringify($scope.filter);
-        modalFactory.showShortAlert("正在导出 请稍等");
-        http.post_ori(url, $scope.outputList, function (response) {
-            if (response != "failure") {
-                location.href = "/AndSell" + response;
-            } else {
-                modalFactory.showShortAlert("导出失败");
-            }
-        });
+        modalFactory.showReturnAlert("正在导出 请稍等",function(scope){
+        	http.post_ori(url, $scope.outputList, function (response) {
+        		scope.ifShow = false;
+        		$('#ouputBtn').removeAttr("disabled");
+                if (response != "failure") {
+                    location.href = "/AndSell" + response;
+                } else {
+                    modalFactory.showShortAlert("导出失败");
+                }
+            });
+			
+		});
     };
 
     $scope.downMoban = function () {

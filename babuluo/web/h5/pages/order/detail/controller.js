@@ -329,6 +329,9 @@
         if (olddate < nowdate) {
             weUI.toast.error('当前时间不可退款！');
         } else {
+        	 //取消订单佣金回退
+            orderFactory.cancelOrder_dist({'DIST_INCOME.ORDER_NUM': $scope.order['SHOP_ORDER.ORDER_NUM']}, function (response) {
+            });
             weUI.dialog.confirm("提示", "确认取消该订单", function () {
                 weUI.toast.showLoading('正在取消');
                 orderFactory.cancelOrder({'SHOP_ORDER.ID': $scope.order['SHOP_ORDER.ID']}, function (response) {

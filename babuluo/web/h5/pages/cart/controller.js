@@ -100,6 +100,7 @@ angular.module('AndSell.H5.Main').controller('pages_cart_Controller', function (
 
     //删除购物车商品
     $scope.delShopCart = function (sku) {
+    	removeCookie(sku['SHOP_PRODUCT.PRD_ID']+'_dist');
         $scope.skuList.remove(sku);
         var cartInfo = getCookie('cartInfo');
         var cartSize = getCookie('cartSize');
