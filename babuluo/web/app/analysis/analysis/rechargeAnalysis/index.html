@@ -1,0 +1,60 @@
+<div class="container-fluid" ng-init="initLoad()">
+    <!--时间选择导航-->
+    <div class="row timeBar">
+        <div class="col-md-12">
+            <div class="col-md-6 fixWidth">
+              
+                            <input id="start_hour" type="text" class="form-control inputWidth" placeholder="起始时间"
+                                   name="from" ng-model="STARTDAY">
+                            <span>-</span>
+                            <input id="end_hour" type="text" class="form-control inputWidth" placeholder="截止时间"
+                                   name="to" ng-model="ENDDAY"
+                                   data-date-format="yyyy/mm/dd hh:ii">
+                            
+               </div>
+                 <div class="col-md-3">
+               <select class="form-control " >  
+                   		<option value='00'>全部门店</option>
+                   		<option  ng-repeat="lie in list" ng-bind="lie['SHOP.SHOP_NAME']" >{{lie['SHOP.SHOP_ID']}}</option>
+                            </select>
+                             </div>        
+            <button class="btn " type="button" ng-click="getGroupByRange()">查询</button>
+            <button class="btn alignRight" type="button" onclick="outPutMethod('offlineFormTable')">导出</button>
+            <div class="clear"></div>
+       
+    </div>
+    
+</div>
+ 
+<div class="table-content">
+    <div class="table-toolbar">
+        <table class="table table-bordered table-hover table-striped" id="offlineFormTable">
+            <thead>
+            <tr >
+                <th class="text-center" ng-bind="name" ng-repeat='name in TITLE' ></th>      
+            </tr>        
+            </thead>
+            <tbody>
+            <tr ng-repeat="VALUE in OLDLIST" align="center">
+            	<td style="vertical-align: middle;"><span ng-bind="VALUE['SHOP_ID']"></span></td>
+            	<td style="vertical-align: middle;"><span ng-bind="VALUE['SHOP_NAME']"></span></td>
+           		<td ng-bind="VALUE['SHOP_RECHARGE']" align="center">
+           			
+           		</td>
+            	
+            	
+           
+              
+            </tr>
+            <tr align="center">
+               <td colspan=2 style="vertical-align: middle;" ng-if="OLDLIST.length>0">合计</td>
+               <td ng-bind="all" align="center">
+           		
+           		</td>
+            	
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

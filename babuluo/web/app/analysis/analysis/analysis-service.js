@@ -113,6 +113,18 @@ AndSellMainModule.service('analysisFactory', function ($resource, baseURL) {
             }
         });
     };
+    //获取一定日期内的充值数据
+    this.getOrderAnalysisByRechange = function (startDay, endDay,id) {
+        return $resource("http://app.bblycyz.com/AndSell/bubu/stat/recharge_data_analysis_by_shop_datetime", {
+            'DATETIME_START': startDay,
+            'DATETIME_END': endDay,
+            'SHOP_ID':id
+        }, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    };
     //查询无效会员总数
     this.getInvalidTotalCard = function () {
         return $resource(baseURL + "/stat/member_card__invalid_total", {}, {
@@ -120,10 +132,18 @@ AndSellMainModule.service('analysisFactory', function ($resource, baseURL) {
                 method: "PUT"
             }
         });
-    }
+    };
     //查询会员总数
     this.getTotalCard = function () {
         return $resource(baseURL + "/stat/member_card_total", {}, {
+            'update': {
+                method: "PUT"
+            }
+        });
+    };
+    //查询门店列表
+    this.getList = function () {
+        return $resource("http://app.bblycyz.com/AndSell/bubu/shop/shop/queryAll", {}, {
             'update': {
                 method: "PUT"
             }
