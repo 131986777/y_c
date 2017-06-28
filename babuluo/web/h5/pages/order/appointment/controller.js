@@ -408,7 +408,14 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
 
         } else if (type == 'DAY') {
             for (var i = 0; i < still; i++) {
-                dayList.push(GetDateStr(Number(i), startTime) + '   08:00-19:00');
+            	var orderDate = GetDateStr(Number(i), startTime)+' 00:00:00';
+                var endHours = Number(endHours);
+                
+                var date = new Date(orderDate.replace(/\-/gi,"/")).getTime() - endHours*60*60*1000;
+                var currDate = new Date().getTime();
+                if(currDate < date){
+                	dayList.push(GetDateStr(Number(i), startTime) + '   08:00-19:00');
+                 }
             }
         }else if(type=='WEEK_COMB'){
         	var currTime = new Date().getDay();//获得周几
