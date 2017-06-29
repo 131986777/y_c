@@ -76,7 +76,7 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
     };
 
     $scope.showUrl= function (skuId) {
-        modalFactory.showAlert("#/pages/product/detail/"+skuId);
+        modalFactory.showAlert("#/pages/product/detail/"+skuId+"/");
     }
 
     $scope.prdSwitch = function (data) {
