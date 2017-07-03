@@ -3,7 +3,7 @@
  */
 
 angular.module('AndSell.Main').controller('analysis_analysis_rechargeAnalysis_Controller', function ($scope, $stateParams, analysisFactory, modalFactory) {
-	console.log('111');
+	
 	analysisFactory.getList().get({},function (response) {
         
         $scope.list=response.data;
@@ -60,7 +60,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_rechargeAnalysis_Co
     console.log($('select').eq(1).val())
     analysisFactory.getOrderAnalysisByRechange(startDay, endDay,$('select').eq(1).val()).get({}, function (response) {
     	console.log(response)
-    	 
+    	
 	 var obj=[]
 	 if(response.data.length==0){
 	 	modalFactory.showShortAlert("所选日期无数据！")
@@ -73,7 +73,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_rechargeAnalysis_Co
   
    
     var total=[]
-    var title=['门店ID','门店名称','充值金额']
+    var title=['门店ID','门店名称','充值金额','操作']
     var all=0
    		 for(var k=0; k<obj.length ;k++){
 	    	all+=Number(obj[k]['SHOP_RECHARGE'])

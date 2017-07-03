@@ -11,6 +11,8 @@ $import('analysis/analysis/orderAnalysis', undefined, true);
 $import('analysis/analysis/offlineOrderAnalysis', undefined, true);
 $import('analysis/analysis/reserveAnalysis', undefined, true);
 $import('analysis/analysis/rechargeAnalysis', undefined, true);
+//资金明细列表
+$import('analysis/analysis/rechargeInfo',{id: '',STARTDAY:'',ENDDAY:''},true);
 //作战室相关
 $import('analysis/analysis/compareAnalysis', undefined, true);
 //直播相关

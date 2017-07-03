@@ -38,13 +38,11 @@
             <tr ng-repeat="VALUE in OLDLIST" align="center">
             	<td style="vertical-align: middle;"><span ng-bind="VALUE['SHOP_ID']"></span></td>
             	<td style="vertical-align: middle;"><span ng-bind="VALUE['SHOP_NAME']"></span></td>
-           		<td ng-bind="VALUE['SHOP_RECHARGE']" align="center">
-           			
-           		</td>
-            	
-            	
-           
-              
+           		<td ng-bind="VALUE['SHOP_RECHARGE']" align="center"></td>
+           		<td ng-value="VALUE['SHOP_ID']" align="center">   
+           		<a class="table-link" ui-sref="analysis/analysis/rechargeInfo({id:VALUE['SHOP_ID'],STARTDAY:'{{STARTDAY}}',ENDDAY:'{{ENDDAY}}' })">
+                                    充值详情
+                    </a></td>
             </tr>
             <tr align="center">
                <td colspan=2 style="vertical-align: middle;" ng-if="OLDLIST.length>0">合计</td>
