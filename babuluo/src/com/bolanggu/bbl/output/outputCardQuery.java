@@ -187,10 +187,10 @@ public class outputCardQuery {
         	sqlStr += " and a.STATE in ("+map.get("MEMBER_CARD.STATE") + ")";
         }
         if(map.containsKey("MEMBER_CARD.ADD_DATETIME_FROM") && !"null".equals(map.get("MEMBER_CARD.ADD_DATETIME_FROM"))){
-        	sqlStr += " and TO_DAYS(a.ADD_DATETIME) > TO_DAYS('" + map.get("MEMBER_CARD.ADD_DATETIME_FROM") + "')";
+        	sqlStr += " and TO_DAYS(a.ADD_DATETIME) >= TO_DAYS('" + map.get("MEMBER_CARD.ADD_DATETIME_FROM") + "')";
         }
         if(map.containsKey("MEMBER_CARD.ADD_DATETIME_TO") && !"null".equals(map.get("MEMBER_CARD.ADD_DATETIME_TO"))){
-        	sqlStr += " and TO_DAYS(a.ADD_DATETIME) > TO_DAYS('" + map.get("MEMBER_CARD.ADD_DATETIME_TO") + "')";
+        	sqlStr += " and TO_DAYS(a.ADD_DATETIME) <= TO_DAYS('" + map.get("MEMBER_CARD.ADD_DATETIME_TO") + "')";
         }
         if(map.containsKey("MEMBER_CARD.ADD_DATETIME") && !"null".equals(map.get("MEMBER_CARD.ADD_DATETIME"))){
         	sqlStr += " order by a."+map.get("MEMBER_CARD.ADD_DATETIME");
