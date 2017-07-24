@@ -139,6 +139,26 @@
         <servlet-name>updateOrderPay</servlet-name>
         <url-pattern>/updateOrderPay34433232</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>shopOrder</servlet-name>
+        <servlet-class>com.task.servlet.ShopOrderServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>shopOrder</servlet-name>
+        <url-pattern>/shopOrder</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>queryOrder</servlet-name>
+        <servlet-class>com.bolanggu.bbl.orderAnalysis.orderQuery</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>queryOrder</servlet-name>
+        <url-pattern>/queryOrder</url-pattern>
+    </servlet-mapping>
+    
 
 
 
