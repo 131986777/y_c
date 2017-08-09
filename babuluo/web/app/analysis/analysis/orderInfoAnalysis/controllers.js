@@ -10,7 +10,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderInfoAnalysis_C
     
     //初始化
     $scope.initLoad = function () {
-    	var title=['门店','订单号','购买人','手机号','商品','数量','金额','时间'];
+    	var title=['门店','订单号','购买人','手机号','商品','数量','金额','时间','提货状态'];
     	$scope.TITLE=title;
     	
     	analysisFactory.getList().get({},function (response) {
@@ -70,7 +70,6 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderInfoAnalysis_C
     	}
     	var url = "../../queryOrder";
         $scope.filter['SHOP_ID'] = $('#shop').val();
-        console.log('REC_PHONE===='+$scope.filter['REC_PHONE']);
         $scope.orderList = {};
         $scope.orderList['type'] = "orderInfo";
         $scope.orderList['param'] = JSON.stringify($scope.filter);
@@ -91,7 +90,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderInfoAnalysis_C
         var url = "../../outputQuery";
         $scope.filter['SHEET_NAME'] = "线上商品订单";
         $scope.filter['SHOP_ID'] = $('#shop').val();
-        $scope.filter['COLUMN_WIDTH'] = [6000,6000,4000,4000,4000,2500,2500,4000,4000,4000];
+        $scope.filter['COLUMN_WIDTH'] = [6000,6000,4000,4000,4000,2500,2500,4000,4000,4000,4000];
         $scope.outputList = {};
         $scope.outputList['type'] = "orderInfo";
         $scope.outputList['param'] = JSON.stringify($scope.filter);

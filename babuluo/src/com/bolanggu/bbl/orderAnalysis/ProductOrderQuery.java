@@ -132,7 +132,7 @@ public enum ProductOrderQuery {
 		sql.append("SELECT a.PRD_NAME AS `PRD_NAME`,COUNT(a.ID) AS `ORDER_COUNT`,");
 		sql.append("SUM(a.COUNT) AS `PRD_COUNT`,a.SKU_1_VALUE AS `SKU_UNIT`,");
 		sql.append("CAST(SUM(a.PRICE_SUM) AS DECIMAL(10,2))  AS `PRICE_SUM`,a.SKU AS `SKU`");
-		sql.append(" FROM shop_order_info"+month+" a INNER JOIN shop_order"+month+" b ON b.ID = a.ORDER_ID");
+		sql.append(" FROM shop_order_info a INNER JOIN shop_order b ON b.ID = a.ORDER_ID");
 		sql.append(" WHERE b.STATE_ORDER=1 AND b.STATE_MONEY=1");
 		if(map.containsKey("DATETIME_ADD_FROM") && !"null".equals(map.get("DATETIME_ADD_FROM"))){
 			sql.append(" AND b.DATETIME_ADD >='"+map.get("DATETIME_ADD_FROM")+" 00:00:00'");
@@ -163,8 +163,8 @@ public enum ProductOrderQuery {
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT c.SHOP_NAME AS `SHOP_NAME`,COUNT(a.ID) AS `ORDER_COUNT`,SUM(a.COUNT) AS `PRD_COUNT`,");
 		sql.append("a.SKU_1_VALUE AS `SKU_UNIT`,CAST(SUM(a.PRICE_SUM) AS DECIMAL(10,2)) AS `PRICE_SUM`");
-		sql.append(" FROM shop_order_info"+month+" a");
-		sql.append(" INNER JOIN shop_order"+month+" b ON a.ORDER_ID=b.ID");
+		sql.append(" FROM shop_order_info a");
+		sql.append(" INNER JOIN shop_order b ON a.ORDER_ID=b.ID");
 		sql.append(" INNER JOIN shop c ON b.SHOP_ID = c.SHOP_ID");
 		sql.append(" WHERE b.STATE_ORDER=1 AND b.STATE_MONEY=1");
 		if(map.containsKey("DATETIME_ADD_FROM") && !"null".equals(map.get("DATETIME_ADD_FROM"))){
@@ -197,8 +197,8 @@ public enum ProductOrderQuery {
 		String month = getMonth(map);
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT CAST(SUM(a.PRICE_SUM) AS DECIMAL(10,2)) AS `PRICE_SUM`,DATE_FORMAT(b.DATETIME_ADD,'%Y-%m-%d') AS `ADDTIME`");
-		sql.append(" from shop_order_info"+month+" a");
-		sql.append(" INNER JOIN shop_order"+month+" b ON a.ORDER_ID=b.ID");
+		sql.append(" from shop_order_info a");
+		sql.append(" INNER JOIN shop_order b ON a.ORDER_ID=b.ID");
 		sql.append(" WHERE b.STATE_ORDER=1 AND b.STATE_MONEY=1");
 		if(map.containsKey("DATETIME_ADD_FROM") && !"null".equals(map.get("DATETIME_ADD_FROM"))){
 			sql.append(" AND b.DATETIME_ADD >='"+map.get("DATETIME_ADD_FROM")+" 00:00:00'");
@@ -223,9 +223,10 @@ public enum ProductOrderQuery {
 		String month = getMonth(map);
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT a.SHOP_NAME,a.ORDER_NUM,c.TRUE_NAME,a.REC_PHONE,b.PRD_NAME,b.SKU_1_VALUE,");
-		sql.append("b.COUNT,a.PAY_TYPE,FORMAT(b.PRICE_SUM*b.COUNT,2) AS `PRICE_SUM`,a.DATETIME_ADD");
-		sql.append(" FROM shop_order"+month+" a");
-		sql.append(" INNER JOIN shop_order_info"+month+" b ON a.ID=b.ORDER_ID ");
+		sql.append("b.COUNT,a.PAY_TYPE,FORMAT(b.PRICE_SUM*b.COUNT,2) AS `PRICE_SUM`,a.DATETIME_ADD,");
+		sql.append("CASE a.STATE_OUT WHEN 1 THEN '已提货' WHEN -1 THEN '未提货' END AS `STATE_OUT`");
+		sql.append(" FROM shop_order a");
+		sql.append(" INNER JOIN shop_order_info b ON a.ID=b.ORDER_ID ");
 		sql.append(" INNER JOIN member_info c ON a.UID=c.USER_ID");
 		sql.append(" WHERE a.STATE_ORDER = 1 AND a.STATE_MONEY=1");
 		if(map.containsKey("DATETIME_ADD_FROM") && !"null".equals(map.get("DATETIME_ADD_FROM"))){
