@@ -19,12 +19,12 @@
             </div>
             <div class="form-group">
                 <span class="icon-required">*</span>
-                <label class="control-label col-sm-1 right form-input-title">赠送总额</label>
+                <label class="control-label col-sm-1 right form-input-title">充值金额</label>
                 <div class="col-sm-4">
                     <input class="form-control"
-                               ng-model="value['TOTAL']"
+                               ng-model="value['TOTAL_RECHARGE']"
                                name="number" type="text"
-                               placeholder="">
+                               placeholder="填写黄卡充值金额" ng-blur="">
                 </div> 
             </div>
             <div class="inputs" style="margin-bottom: 15px;">
@@ -38,6 +38,16 @@
 	                                       
 	                </div>
 	            </div>
+            </div>
+            <div class="form-group">
+                <span class="icon-required">*</span>
+                <label class="control-label col-sm-1 right form-input-title">赠送总额</label>
+                <div class="col-sm-4">
+                    <input class="form-control"
+                               ng-model="value['TOTAL']"
+                               name="number" type="text"
+                               placeholder="充值送金额">
+                </div> 
             </div>
             <div class="form-group">
                 <span class="icon-required">*</span>
