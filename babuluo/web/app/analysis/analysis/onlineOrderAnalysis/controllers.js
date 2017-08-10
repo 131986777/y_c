@@ -10,7 +10,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_onlineOrderAnalysis
     
     //初始化
     $scope.initLoad = function () {
-    	var title=['商品名称','订单数量','商品销售量','规格','销售额','操作'];
+    	var title=['商品名称','订单数量','商品编码','商品货号','商品销售量','规格','销售额','操作'];
     	$scope.TITLE=title;
     	
     	analysisFactory.getList().get({},function (response) {
