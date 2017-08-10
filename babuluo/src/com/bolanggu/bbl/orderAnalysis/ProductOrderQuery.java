@@ -224,6 +224,7 @@ public enum ProductOrderQuery {
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT a.SHOP_NAME,a.ORDER_NUM,c.TRUE_NAME,a.REC_PHONE,b.PRD_NAME,b.SKU_1_VALUE,");
 		sql.append("b.COUNT,a.PAY_TYPE,FORMAT(b.PRICE_SUM*b.COUNT,2) AS `PRICE_SUM`,a.DATETIME_ADD,");
+		sql.append("b.PRD_ID as `PRD`,b.SKU AS `SKU`,");
 		sql.append("CASE a.STATE_OUT WHEN 1 THEN '已提货' WHEN -1 THEN '未提货' END AS `STATE_OUT`");
 		sql.append(" FROM shop_order a");
 		sql.append(" INNER JOIN shop_order_info b ON a.ID=b.ORDER_ID ");
