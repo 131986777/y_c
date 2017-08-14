@@ -4,7 +4,17 @@ angular.module('AndSell.Main').controller('member_member_memberList_Controller',
     modalFactory.setTitle('客户管理');
 
     modalFactory.setBottom(false);
+    $scope.getCookie = function(name) {
+		var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
 
+		if(arr = document.cookie.match(reg))
+
+			return unescape(arr[2]);
+		else
+			return null;
+	}
+    $scope.cookies=  $scope.getCookie('ADM')
+ 
     $scope.initData = function () {
         $scope.memberAdd = {};
         $scope.memberEdited = {};
