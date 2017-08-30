@@ -1,6 +1,6 @@
 angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (groupBuyPlanFactory, productFactory, $interval, $scope, $state, weUI, modalFactory, shopFactory, weUI, seckillFactory) {
 
-    modalFactory.setTitle('云厨1站商城 - 十分钟吃饭，优质食品购买平台');
+    modalFactory.setTitle('云厨1站商城 - 回家吃饭，优质食品购买平台');
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
     modalFactory.setBottom(true);
     $scope.homeList = new Array();

@@ -51,13 +51,27 @@ public class outputQuery extends HttpServlet {
                 case "member":
                     outputMemberQuery.newInstance().GenerateExcelSheet(analyseBook, parameter);
                     break;
+                case "offlineProduct":
+                	outputListQuery.INSTANCE.GenerateExcelSheet(analyseBook, parameter, type);
+                	break;
+                case "offlineShopProduct":
+                	outputListQuery.INSTANCE.GenerateExcelSheet(analyseBook, parameter, type);
+                	break;
+                case "onlineProductOrder":
+                	outputListQuery.INSTANCE.GenerateExcelSheet(analyseBook, parameter, type);
+                	break;
+                case "onlineShopProductOrder":
+                	outputListQuery.INSTANCE.GenerateExcelSheet(analyseBook, parameter, type);
+                	break;
+                case "orderInfo":
+                	outputListQuery.INSTANCE.GenerateExcelSheet(analyseBook, parameter, type);
+                	break;
             }
 
             FileOutputStream os = null;
             DateFormat format = new SimpleDateFormat("yyyyMMddhhMMss");
             Date date = new Date();
             String filename = type + format.format(date) + ".xlsx";
-            System.out.println("filename====="+filename);
             File filePath = null;
             File filePathDir = null;
             filePath = new File(getClass()

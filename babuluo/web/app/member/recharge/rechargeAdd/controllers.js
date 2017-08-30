@@ -67,17 +67,29 @@ angular.module('AndSell.Main').controller('member_recharge_rechargeAdd_Controlle
 	    return false;
 	}
 	
+	var rechargeRule = {"10000":2000,"5000":800,"3000":400,"1000":100}
+	
+	var cardRule = {"2000":95,"800":94,"400":93,"100":92}
+	
 	$scope.commitForm = function(){
 		
 		if($scope.value['CARD_RECGARGE'] == '' || $scope.value['CARD_RECGARGE'] == undefined || !IsCard($scope.value['CARD_RECGARGE'])){
 			modalFactory.showShortAlert("请填写正确的黄卡卡号");
 			return false;
 		}
-		
+		if($scope.value['TOTAL_RECHARGE'] == '' || $scope.value['TOTAL_RECHARGE'] == undefined){
+			modalFactory.showShortAlert("请填写充值总额");
+			return false;
+		}
 		if($scope.value['TOTAL'] == '' || $scope.value['TOTAL'] == undefined){
 			modalFactory.showShortAlert("请填写赠送总额");
 			return false;
 		}
+		if(rechargeRule[$scope.value['TOTAL_RECHARGE']] != $scope.value['TOTAL']){
+			modalFactory.showShortAlert("充值与赠送金额不匹配!");
+			return false;
+		}
+		
 		
 		var cardsArray = new Array();
 		
@@ -87,6 +99,10 @@ angular.module('AndSell.Main').controller('member_recharge_rechargeAdd_Controlle
 			var card = cards.eq(i).val();
 			if(card == '' || card == undefined || !IsRechargeCard(card)){
 				modalFactory.showShortAlert("第"+flag+"个填写正确的储值卡卡号");
+				return false;
+			}
+			if(cardRule[$scope.value['TOTAL']] != card.substring(0,2)){
+				modalFactory.showShortAlert("第"+flag+"个储值卡号段不匹配");
 				return false;
 			}
 			var cardInfo = {};

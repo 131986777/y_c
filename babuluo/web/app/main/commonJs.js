@@ -278,3 +278,7 @@ function setNullValue(i) {
     }
     return i;
 }
+
+function isNull(str){
+	return str == null || str == '' || str == undefined;
+}

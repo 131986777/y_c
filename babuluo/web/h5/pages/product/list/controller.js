@@ -1,6 +1,6 @@
 angular.module('AndSell.H5.Main').controller('pages_product_list_Controller', function ($location, $anchorScroll, weUI, $scope, $state, $stateParams, productFactory, modalFactory) {
 
-    modalFactory.setTitle('云厨1站商城 - 十分钟吃饭，优质食品购买平台');
+    modalFactory.setTitle('云厨1站商城 - 回家吃饭，优质食品购买平台');
     modalFactory.setBottom(true);
 
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;

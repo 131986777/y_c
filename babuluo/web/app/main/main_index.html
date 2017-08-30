@@ -39,6 +39,7 @@
     <link href="/AndSell/app/components/tree-list/tree-list.css" rel="stylesheet">
     <link href="/AndSell/app/components/nav/nav-bottom.css" rel="stylesheet">
     <link href="/AndSell/app/components/operbar/operbar.css" rel="stylesheet">
+    <link href="/AndSell/app/components/select/bootstrap-select.min.css" rel="stylesheet">
 
     <!-- BEGIN PAGE LEVEL PLUGINS -->
 
@@ -587,6 +588,11 @@
                                     线下销售态势
                                 </a>
                             </li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1200@')>=0">
+                            	<a ui-sref="analysis/analysis/orderInfoAnalysis">
+                  	线上订单详情
+                            	</a>
+                            </li>
 
                         </ul>
                         <ul class="sub-menu " role="menu">
@@ -610,13 +616,13 @@
                         </ul>
                         <ul class="sub-menu " role="menu">
                             <li ng-if="APP_ID_LIST.indexOf('@1200@')>=0">
-                                <a ui-sref="analysis/analysis/formAnalysis">
-                                    线上商品报表
+                                <a ui-sref="analysis/analysis/onlineOrderAnalysis">
+                                    线上订单报表
                                 </a>
                             </li>
                             <li ng-if="APP_ID_LIST.indexOf('@1200@')>=0">
-                                <a ui-sref="analysis/analysis/offlineFormAnalysis">
-                                    线下销售报表
+                                <a ui-sref="analysis/analysis/offlineProductAnalysis">
+                                    线下订单报表
                                 </a>
                             </li>
                               <li ng-if="APP_ID_LIST.indexOf('@1200@')>=0">
@@ -732,6 +738,9 @@
 <script src="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.js"></script>
 
 <script src="/AndSell/app/components/libs/ngFocusIf/focusIf.min.js"></script>
+
+<script src="/AndSell/app/components/select/bootstrap-select.js"></script>
+<script src="/AndSell/app/components/select/defaults-zh_CN.min.js"></script>
 
 <!--importantJs -->
 <script src="application.js"></script>
