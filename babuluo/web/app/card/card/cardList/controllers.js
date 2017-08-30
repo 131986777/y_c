@@ -21,6 +21,16 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
     $scope.cardAdd = {};
     $scope.isFaceValue = false;
     $scope.memberDetail = {};
+    $scope.getCookie = function(name) {
+		var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+
+		if(arr = document.cookie.match(reg))
+
+			return unescape(arr[2]);
+		else
+			return null;
+	}
+    $scope.cookies=  $scope.getCookie('ADM')
 
     $scope.filter = {
         'MEMBER_CARD.STATE': '-1,1'
@@ -187,6 +197,23 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
         	            });
         	        });
         	  }else{ modalFactory.showAlert("启用失败！请输入启用卡操作者和原因！");}
+    	});
+    }
+    //卡解绑
+    $scope.unwrap = function (item) {
+    	//item['FINANCE_LIST.EVENT_INTRO']=prompt("请输入冻结卡备注","");
+    	 item['FINANCE_LIST.EVENT_INTRO']=null;
+    	modalFactory.showPrompt("请输入解绑卡操作者及原因",function(a){
+    		item['FINANCE_LIST.EVENT_INTRO']=a
+    		  if (item['FINANCE_LIST.EVENT_INTRO']!=null && item['FINANCE_LIST.EVENT_INTRO']!=""){
+        		  modalFactory.showAlert("卡号绑错，确认解绑卡号：" + item['MEMBER_CARD.CARD_NO'] + "吗？", function () {
+        	            cardFactory.unwrap(item, function () {
+        	                item['MEMBER_CARD.STATE'] = -1;
+        	            }, function (response) {
+        	                modalFactory.showShortAlert(response.msg);
+        	            });
+        	        });
+        	  }else{ modalFactory.showAlert("解绑失败！请输入解绑卡操作者和原因！");}
     	});
     }
 
