@@ -52,7 +52,7 @@ public class outputCardQuery {
     }
 
     public SXSSFSheet GenerateExcelSheet(SXSSFWorkbook analyseBook, String parameter) throws RuleException,DataAccessException {
-
+    	
         JSONObject paramJson = JSON.parseObject(parameter);
 
         Map<String, Object> map = new HashMap<>();
@@ -156,7 +156,7 @@ public class outputCardQuery {
         String sqlStr = "select a.CARD_NO as `MEMBER_CARD.CARD_NO`,"+
                 "b.TRUE_NAME as `MEMBER_CARD.MEMBER_NAME`,"+
                 "me.MOBILE as `MEMBER_CARD.MEMBER_PHONE`,"+
-                "FORMAT(c.BALANCE/100,2) as `MEMBER_CARD.BALANCE`,"+
+                "FORMAT(a.BALANCE/100,2) as `MEMBER_CARD.BALANCE`,"+
                 "mcs.`NAME` as `MEMBER_CARD.SOURCE_NAME`,"+
                 "e.`NAME` as `MEMBER_CARD.TYPE_NAME`,"+
                 "d.SHOP_NAME as `MEMBER_CARD.SHOP`,"+
