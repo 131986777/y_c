@@ -80,7 +80,7 @@
                             <i class="fa fa-plus"></i>新增客户
                         </a>
                     </div>
-                    <button ng-if="cookies=='admin'" type="button" class="btn btn-default pull-right"
+                    <button ng-if="cookies=='ADMIN'" type="button" class="btn btn-default pull-right"
                             ng-click="outPutQuery()">导出
                     </button>
                 </div>
@@ -115,10 +115,10 @@
                     <a class="table-link" ui-sref="member/member/memberInfo({id:ml['MEMBER.USER_ID']})">
                         客户详情
                     </a>
-                    <a class="table-link" ng-if="cookies=='admin'" ng-click="delMemberListById(ml)">
+                    <a class="table-link" ng-if="cookies=='ADMIN'" ng-click="delMemberListById(ml)">
                         删除
                     </a>
-                    <a class="table-link" ng-click="changeState(ml)" ng-if="cookies=='admin'">
+                    <a class="table-link" ng-click="changeState(ml)" ng-if="cookies=='ADMIN'">
                         <span ng-show="ml['MEMBER.USE_STATE'] == 1">停用</span>
                         <span ng-show="ml['MEMBER.USE_STATE'] == -1">启用</span>
                     </a>

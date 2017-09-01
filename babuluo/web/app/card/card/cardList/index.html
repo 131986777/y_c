@@ -142,6 +142,10 @@
                     <a class="table-link">
                         <span ng-show="cl['MEMBER_CARD.STATE']==1" ng-click="frezzeCard(cl)">冻结</span>
                         <span ng-show="cl['MEMBER_CARD.STATE']==-1" ng-click="FrozenCard(cl)">启用</span>
+                       
+                    </a>
+                    <a class="table-link" >
+                     <span ng-if="cl['MEMBER_CARD.STATE']==1 && cookies=='ADMIN'"  ng-click="unwrap(cl)">卡解绑</span>
                     </a>
                 </td>
             </tr>
