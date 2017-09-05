@@ -22,6 +22,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
 
         var json=getCookie('seckill');
         $scope.seckill=JSON.parse(json);
+        $scope.cookiePickupPerson.getTime = GetDateStr(0,$scope.seckill['pick_up_goods_time']) + '   08:00-19:00';
+        console.log($scope.seckill);
 
         $scope.shop = JSON.parse(getCookie('currentShopInfo'));
 
@@ -30,7 +32,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
         params['SHOP_PRODUCT_SKU.SKU_IDS'] = $scope.seckill['sku_id'];
         params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         productFactory.getProductSkuBySkuIds(params, function (response) {
+        	console.log("==========getProductSkuBySkuIds=============");
             $scope.skuList = response.data;
+            console.log($scope.skuList);
             $scope.skulistsForOrder = new Array;
             $scope.skuList.forEach(function (ele) {
                 ele['SHOP_PRODUCT_SKU.SIZE'] = $scope.cartSize[ele['SHOP_PRODUCT_SKU.SKU_ID']];
@@ -108,12 +112,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
             params['SHOP_ORDER.SPECIAL_MODEL'] = "SECKILL_"+seckillId;//秒杀的ID
 
             params['SHOP_ORDER.TYPE'] = $scope.cookiePickupPerson.type;//订货单
-            if ($scope.cookiePickupPerson.type
-                == 3
-                && $scope.order['SHOP_ORDER.PAY_TYPE']
-                == 'FACE') {
-                params['SHOP_ORDER.TYPE'] = 4;//自提付款单
-            }
+            params['SHOP_ORDER.TYPE'] = 4;//自提付款单
             params['SHOP_ORDER.REC_CONTACT'] = $scope.cookiePickupPerson.man;//收货人
             params['SHOP_ORDER.REC_PHONE'] = $scope.cookiePickupPerson.phone;//联系电话
             if ($scope.cookiePickupPerson.type == 1) {
@@ -127,8 +126,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
                 params['SHOP_ORDER.SHOP_ID'] = $scope.shop['SHOP.SHOP_ID'];//门店ID
                 params['SHOP_ORDER.GET_PRD_DATETIME'] = noUndefinedAndNull($scope.cookiePickupPerson.getTime);//提货时间
             }
+            
+            params['ORDER_DATE'] = $scope.cookiePickupPerson.getTime.substring(0,10)+ ' 00:00:00';
+            params['END_HOURS'] = 0;
 
             params['SHOP_ORDER.DETAILS'] = JSON.stringify($scope.skuList);//sku信息
+            console.log('=======DETAILS======');
+            console.log(params['SHOP_ORDER.DETAILS']);
             orderFactory.addOrder(params, function (response) {
 
                 weUI.toast.hideLoading();
@@ -139,6 +143,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
 
                 $scope.commitClick = true;
                 console.log(response);
+                console.log("orderId========="+response.extraData.ORDER_ID);
                 window.location.replace("#/pages/order/detail/"
                     + response.extraData.ORDER_ID
                     + '/Add/');

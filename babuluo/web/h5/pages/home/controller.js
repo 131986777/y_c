@@ -306,6 +306,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         seckillFactory.queryByStateAndTime({}, function (response) {
             var promoReturn = response['extraData']['promoReturn'];
             $scope.seckillList = promoReturn['data'];
+            console.log( $scope.seckillList)
             $scope.queryPrd();
             startWorker();
         })
@@ -338,12 +339,33 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         $scope.seckillList.forEach(function (ele, index) {
             if (ele['type'] == 'time' || ele['type'] == 'timeAndNum') {
                 var end = new Date(ele['end_datetime']).getTime();
+                var start=new Date(ele['begin_datetime']);
                 var now = new Date().getTime();
+               
                 if (end < now) {
-                    ele['hour'] = '已'
-                    ele['min'] = '过'
-                    ele['sec'] = '期'
-                } else {
+                    ele['hour'] = '已';
+                    ele['min'] = '过';
+                    ele['sec'] = '期';
+                	 $('#hour'+index).parent().parent().find('button').attr("disabled","true");
+                } 
+                else if(start>now) {
+                	 /*ele['hour'] = '未';
+                     ele['min'] = '开';
+                     ele['sec'] = '始';*/
+                    $('#hour'+index).parent().parent().find('button').attr("disabled","true");
+                    $('#hour'+index).prev().html('距开始');
+                    var time = (start - now) / 1000;
+                    ele['hour'] = parseInt(time / 3600);
+                    ele['min'] = parseInt(time / 60 - ele['hour'] * 60);
+                    ele['sec'] = parseInt(time - ele['hour'] * 3600 - ele['min'] * 60);
+                }
+                else if(start==now){
+                	  $('#hour'+index).parent().parent().find('button').removeAttr("disabled");
+                		$('#hour'+index).prev().html('距结束');
+                }
+                else if(start<now && end>now) {
+                	$('#hour'+index).parent().parent().find('button').removeAttr("disabled");
+            		$('#hour'+index).prev().html('距结束');
                     var time = (end - now) / 1000;
                     ele['hour'] = parseInt(time / 3600);
                     ele['min'] = parseInt(time / 60 - ele['hour'] * 60);

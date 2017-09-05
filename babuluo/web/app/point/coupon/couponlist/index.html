@@ -1,0 +1,243 @@
+<div class="table-content">
+<div class="table-operbar">
+    <div class="table-toolbar text-right">
+            <button   show-modal id="#addCoupon" class="btn btn-default sbold green" >
+                <i class="fa fa-plus"></i> 新增积分优惠券</button>
+    </div>
+        <div class="table-scrollable">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+		            <tr >
+		                <th class="text-center" ng-bind="name" ng-repeat='name in TITLE' ></th>      
+		            </tr>        
+	            </thead>
+                <tbody ng-cloak>
+                <tr ng-repeat="item in PointCouponList">
+
+                    <!--<td ng-bind="item['member_code_source.CODE']" ></td>-->
+                    <td ng-bind="item['POINT_COUPON.COUPON_NAME']"></td>
+                    <td ng-bind="item['POINT_COUPON.CODE']"></td>
+                    <td ng-bind="item['POINT_COUPON.VALUE']"></td>
+                    <td ng-bind="item['POINT_COUPON.NUM_LIMIT']"></td>
+                    <td ng-bind="item['POINT_COUPON.NUM']"></td>
+                    <td ng-bind="item['POINT_COUPON.POINT_NEED']"></td>
+                    <td ng-bind="item['POINT_COUPON.FINISH_DATETIME']"></td>
+                    <td>
+                    	<span ng-bind="item['POINT_COUPON.BEGIN_DATETIME']"></span>~
+                    	<span ng-bind="item['POINT_COUPON.END_DATETIME']"></span>
+                    </td>
+                    <td ng-bind="item['POINT_COUPON.STATE']==-1?'停用':'正常'"></td>
+                    <td class="text-center">
+                    	<a type="button" show-modal id="#modifyCoupon"
+                           ng-click="modifyCouponClick(item)">修改</a>
+                        <a type="button" ng-bind="item['POINT_COUPON.STATE']==-1?'启用':'停用'"
+                           ng-click="modifyState(item['POINT_COUPON.ID'],item['POINT_COUPON.STATE'])" ></a>
+                        <a type="button" ng-click="deleteCouponClick(item['POINT_COUPON.ID'])" >
+                            删除
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+</div>
+</div>
+<!--BEGIN 新增客户类型-->
+<div class="modal fade text-left" id="addCoupon" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">添加优惠券</h4>
+            </div>
+            <div class="modal-body form-body text-right">
+                <form class="form-horizontal">
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> * </span> 优惠券名称
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['POINT_COUPON.COUPON_NAME']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                          简介
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['POINT_COUPON.CODE']"
+                                   ng-init="add['POINT_COUPON.CODE']=''"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                         <span class="required"> * </span> 优惠券面值
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['POINT_COUPON.VALUE']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                          <span class="required"> * </span>优惠券总量
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['POINT_COUPON.NUM_LIMIT']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                         <span class="required"> * </span> 需要积分
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="add['POINT_COUPON.POINT_NEED']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                          <span class="required"> * </span>兑换截止时间
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control finishDate" id="finishDate"
+                                   ng-model="add['POINT_COUPON.FINISH_DATETIME']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                          <span class="required"> * </span>优惠券有效期
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control startDate" id="startDate"
+                                   ng-model="add['POINT_COUPON.BEGIN_DATETIME']"
+                                   placeholder="">~<input type="text" class="form-control endDate" id="endDate"
+                                   ng-model="add['POINT_COUPON.END_DATETIME']"
+                                   placeholder=""></div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="addCouponClick()" class="btn green">确定
+                </button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 新增客户来源-->
+
+<!--BEGIN 修改客户类型-->
+<div class="modal fade text-left" id="modifyCoupon" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">修改积分优惠券</h4>
+            </div>
+            <div class="modal-body form-body text-right">
+
+                <form class="form-horizontal">
+					<div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required"> * </span> 优惠券名称
+                        </label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="modify['POINT_COUPON.COUPON_NAME']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                          简介
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="modify['POINT_COUPON.CODE']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                          优惠券面值
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="modify['POINT_COUPON.VALUE']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                          优惠券总量
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="modify['POINT_COUPON.NUM_LIMIT']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                          需要积分
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="modify['POINT_COUPON.POINT_NEED']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                          兑换截止时间
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control finishDate" id="modifyFinishDate"
+                                   ng-model="modify['POINT_COUPON.FINISH_DATETIME']"
+                                   placeholder=""></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                          优惠券有效期
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control startDate" id="startDate"
+                                   ng-model="modify['POINT_COUPON.BEGIN_DATETIME']"
+                                   placeholder="">~
+                            <input type="text" class="form-control endDate" id="endDate"
+                                   ng-model="modify['POINT_COUPON.END_DATETIME']"
+                                   placeholder=""></div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="modifyCoupon()" class="btn green">确定
+                </button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!--END 修改客户类型-->
+
