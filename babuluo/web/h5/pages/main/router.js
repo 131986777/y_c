@@ -40,7 +40,13 @@ $import('pages/user/phoneLogin', {FROM: ''});
 $import('pages/user/SetPassword', {LOGIN_ID: '0'});
 
 $import('pages/account/balance');
+
+//积分新增
 $import('pages/account/recharge');
+$import('pages/account/integral');
+$import('pages/account/details');
+$import('pages/account/list');
+//
 $import('pages/account/lucky', {}, true);
 
 $import('pages/security/resetPwd');

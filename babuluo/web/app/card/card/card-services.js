@@ -31,6 +31,8 @@ AndSellMainModule.service('cardFactory', function (http) {
     this.FrozenCard = http.post('/member/membercard/FrozenCard');
     
     this.modifyState = http.post('/member/membercard/modifyCardState');
+    //卡号解绑
+    this.unwrap = http.post('/member/membercard/unwrap');
 
 });
 
