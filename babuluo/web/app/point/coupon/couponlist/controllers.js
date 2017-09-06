@@ -38,7 +38,7 @@ angular.module('AndSell.Main').controller('point_coupon_couponlist_Controller', 
     
     $scope.addCouponClick = function () {
         console.log($scope.add);
-        if(isNull($scope.add['POINT_COUPON.NAME'])){
+        if(isNull($scope.add['POINT_COUPON.COUPON_NAME'])){
         	modalFactory.showShortAlert('优惠券名不能为空!');
         	return false;
         }
