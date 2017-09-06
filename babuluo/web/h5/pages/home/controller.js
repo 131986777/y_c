@@ -309,9 +309,10 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             console.log( $scope.seckillList)
             $scope.queryPrd();
             startWorker();
+          
         })
     }
-
+    
     /**
      * 请求秒杀的商品
      */
@@ -326,6 +327,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         productFactory.getProductSkuBySkuIds({"SHOP_PRODUCT_SKU.SKU_IDS": skuIds}, function (response) {
             response.data.forEach(function (ele) {
                 $scope.prdMap[ele['SHOP_PRODUCT_SKU.SKU_ID']] = ele;
+              
             }, function (response) {
                 alert("请求商品失败")
             });
@@ -364,12 +366,20 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                 		$('#hour'+index).prev().html('距结束');
                 }
                 else if(start<now && end>now) {
-                	$('#hour'+index).parent().parent().find('button').removeAttr("disabled");
-            		$('#hour'+index).prev().html('距结束');
-                    var time = (end - now) / 1000;
-                    ele['hour'] = parseInt(time / 3600);
-                    ele['min'] = parseInt(time / 60 - ele['hour'] * 60);
-                    ele['sec'] = parseInt(time - ele['hour'] * 3600 - ele['min'] * 60);
+                	if(parseInt(ele['surplus_num']) == 0){
+                		$('#hour'+index).parent().parent().find('button').attr("disabled","true");
+                		ele['hour'] = '已';
+                        ele['min'] = '抢';
+                        ele['sec'] = '光';
+                	}else{
+                		$('#hour'+index).parent().parent().find('button').removeAttr("disabled");
+                		$('#hour'+index).prev().html('距结束');
+                        var time = (end - now) / 1000;
+                        ele['hour'] = parseInt(time / 3600);
+                        ele['min'] = parseInt(time / 60 - ele['hour'] * 60);
+                        ele['sec'] = parseInt(time - ele['hour'] * 3600 - ele['min'] * 60);
+                	}
+                	
                 }
                
                 $("#hour" + index).html(ele['hour']);
