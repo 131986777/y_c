@@ -155,7 +155,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                     }
                 });
             }
-            $scope.queryAllGroupBuyPlanByState();
+            //$scope.queryAllGroupBuyPlanByState();
         });//
 
         // 设置轮播图图片间隔
@@ -371,6 +371,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                     ele['min'] = parseInt(time / 60 - ele['hour'] * 60);
                     ele['sec'] = parseInt(time - ele['hour'] * 3600 - ele['min'] * 60);
                 }
+                console.log(ele['hour']);
                 document.getElementById("hour" + index).innerHTML = ele['hour'];
                 document.getElementById("min" + index).innerHTML = ele['min'];
                 document.getElementById("sec" + index).innerHTML = ele['sec'];
@@ -410,7 +411,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             w.terminate() //终止一个worker线程v
     })
     /***************************************************团购部分*************************************************************/
-    //请求到的所有团购
+   /* //请求到的所有团购
     $scope.showGbp = false;
     $scope.groupBuyPlanList = [];
     //团购的商品详情
@@ -426,9 +427,9 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             alert("请求团购商品失败。")
         })
     }
-    /**
+    *//**
      * 请求团购的商品
-     */
+     *//*
     $scope.queryPrdByGroupBuyPlan = function () {
         var skuIds = "";
         $scope.groupBuyPlanList.forEach(function (ele) {
@@ -446,10 +447,10 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             });
         });
     }
-    /**
+    *//**
      * 开启线程
      * 监听回馈
-     */
+     *//*
     var gw;
 
     function startWorkerByGbp() {
@@ -502,6 +503,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             removeCookie("SUM_COUNT");
             $state.go('pages/groupBuy/myGroup',param);
         }
-    }
+    }*/
 });
 

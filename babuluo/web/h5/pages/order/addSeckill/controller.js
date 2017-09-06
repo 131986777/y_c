@@ -22,9 +22,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
 
         var json=getCookie('seckill');
         $scope.seckill=JSON.parse(json);
-        $scope.cookiePickupPerson.getTime = GetDateStr(0,$scope.seckill['pick_up_goods_time']) + '   08:00-19:00';
-        console.log($scope.seckill);
+        if (!$scope.EmptyPick) {
+            $scope.cookiePickupPerson.getTime = GetDateStr(0,$scope.seckill['pick_up_goods_time']) + '   08:00-19:00';
 
+        }
+        console.log($scope.seckill);
         $scope.shop = JSON.parse(getCookie('currentShopInfo'));
 
 
