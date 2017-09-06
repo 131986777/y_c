@@ -150,7 +150,8 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         weekStart: 1,
         startView: 2,
         format: 'yyyy/mm/dd hh:ii',
-        todayBtn: 'linked'
+        todayBtn: 'linked',
+        pickerPosition:'top-left'
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -169,6 +170,7 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         weekStart: 1,
         format: 'yyyy/mm/dd hh:ii',
         todayBtn: 'linked',
+        pickerPosition:'top-left'
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -187,6 +189,7 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         weekStart: 1,
         format: 'yyyy/mm/dd hh:ii',
         todayBtn: 'linked',
+        pickerPosition:'top-left'
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -205,7 +208,8 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         weekStart: 1,
         startView: 2,
         format: 'yyyy/mm/dd hh:ii',
-        todayBtn: 'linked'
+        todayBtn: 'linked',
+        pickerPosition:'top-left'
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -224,6 +228,7 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         weekStart: 1,
         format: 'yyyy/mm/dd hh:ii',
         todayBtn: 'linked',
+        pickerPosition:'top-left'
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -242,6 +247,7 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         weekStart: 1,
         format: 'yyyy/mm/dd hh:ii',
         todayBtn: 'linked',
+        pickerPosition:'top-left'
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;

@@ -337,11 +337,11 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
      */
     $scope.initTime = function () {
         $scope.seckillList.forEach(function (ele, index) {
+        
             if (ele['type'] == 'time' || ele['type'] == 'timeAndNum') {
-                var end = new Date(ele['end_datetime']).getTime();
-                var start=new Date(ele['begin_datetime']);
+                var end =new Date(ele['end_datetime'].replace(/-/g, "/")).getTime();
+                var start=new Date(ele['begin_datetime'].replace(/-/g, "/")).getTime();
                 var now = new Date().getTime();
-               
                 if (end < now) {
                     ele['hour'] = '已';
                     ele['min'] = '过';
@@ -371,10 +371,10 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                     ele['min'] = parseInt(time / 60 - ele['hour'] * 60);
                     ele['sec'] = parseInt(time - ele['hour'] * 3600 - ele['min'] * 60);
                 }
-                console.log(ele['hour']);
-                document.getElementById("hour" + index).innerHTML = ele['hour'];
-                document.getElementById("min" + index).innerHTML = ele['min'];
-                document.getElementById("sec" + index).innerHTML = ele['sec'];
+               
+                $("#hour" + index).html(ele['hour']);
+                $("#min" + index).html(ele['min']);
+                $("#sec" + index).html(ele['sec']);
             }
         })
     }
