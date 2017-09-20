@@ -68,7 +68,7 @@ angular.module('AndSell.Main').controller('marketing_coupon_coupon_couponList_Co
             + $scope.Saturday
             + ','
             + $scope.Sunday;
-
+        targetObjArray=targetObjArray.join(',')
         $scope.add['COUPON.TARGET_OBJ_ID'] = targetObjArray;   //数据库中会以逗号隔开
 
         couponFactory.addCouponInfo($scope.add, function (response) {
