@@ -304,8 +304,8 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
      */
     $scope.queryByStateAndTime = function () {
         seckillFactory.queryByStateAndTime({}, function (response) {
-            var promoReturn = response['extraData']['promoReturn'];
-            $scope.seckillList = promoReturn['data'];
+            //var promoReturn = response['extraData']['promoReturn'];
+            $scope.seckillList = response;
             console.log( $scope.seckillList)
             $scope.queryPrd();
             startWorker();
@@ -341,8 +341,8 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         $scope.seckillList.forEach(function (ele, index) {
         
             if (ele['type'] == 'time' || ele['type'] == 'timeAndNum') {
-                var end =new Date(ele['end_datetime'].replace(/-/g, "/")).getTime();
-                var start=new Date(ele['begin_datetime'].replace(/-/g, "/")).getTime();
+                var end =new Date(ele['endDatetime']);
+                var start=new Date(ele['beginDatetime']);
                 var now = new Date().getTime();
                 if (end < now) {
                     ele['hour'] = '已';
@@ -366,7 +366,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                 		$('#hour'+index).prev().html('距结束');
                 }
                 else if(start<now && end>now) {
-                	if(parseInt(ele['surplus_num']) == 0){
+                	if(parseInt(ele['surplusNum']) == 0){
                 		$('#hour'+index).parent().parent().find('button').attr("disabled","true");
                 		ele['hour'] = '已';
                         ele['min'] = '抢';

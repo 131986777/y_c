@@ -96,7 +96,7 @@
           
         <a ng-href="{{item['BANNER.URL']}}">
             <img src="" style="    width: 7rem;height: 7rem;margin: 10px;"
-                 ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['sku_id']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"></a>
+                 ng-src="{{FILE_SERVER_DOMAIN+prdMap[seckill['skuId']]['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"></a>
         <div
                 style="display: inline-block;vertical-align: top;margin-top: 12px;margin-bottom: 12px;font-size: 12px; width: calc(100% - 10em);"
                 ng-if="seckill['type']=='time'||seckill['type']=='timeAndNum'">
@@ -117,11 +117,11 @@
                 <span>秒</span>
             </div>
             <p style="margin-top: 14px; margin-bottom: 15px;">
-               <span ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT.PRD_NAME']"></span><span style="float:right;width: 75px;text-align: center; color:red">共<span ng-bind="seckill['sum_num']"></span>份</span></p>
+               <span ng-bind="prdMap[seckill['skuId']]['SHOP_PRODUCT.PRD_NAME']"></span><span style="float:right;width: 75px;text-align: center; color:red">共<span ng-bind="seckill['sumNum']"></span>份</span></p>
             <span style="font-size: 12px;color: #f46f1a"
-                  ng-bind="seckill['unit_price']/100|currency : '￥'"></span>
+                  ng-bind="seckill['unitPrice']/100|currency : '￥'"></span>
             <span style="font-size: 12px;color: #d6d6d6;text-decoration: line-through;"
-                  ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT_SKU.REAL_PRICES']|currency : '￥'"></span>
+                  ng-bind="prdMap[seckill['skuId']]['SHOP_PRODUCT_SKU.REAL_PRICES']|currency : '￥'"></span>
             <button class="btn btn-buy" style="    width: 75px;    height: 28px;   background-color: #f46f1a;    color: white;   font-size: 12px;    line-height: 15px;
      margin-top: -12px;  float: right;" ng-click="goSeckill(seckill)" >立即抢购</button>
         </div>
@@ -129,10 +129,10 @@
                 style="display: inline-block;vertical-align: top;margin-top: 12px;font-size: 12px; width: calc(100% - 10em);"
                 ng-if="seckill['type']=='num'">
             <p style="margin-top: 14px; margin-bottom: 15px;"
-               ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT.PRD_NAME']"></p>
-            <span style="font-size: 12px;color: #f46f1a" ng-bind="seckill['unit_price']/100|currency : '￥'"></span>
+               ng-bind="prdMap[seckill['skuId']]['SHOP_PRODUCT.PRD_NAME']"></p>
+            <span style="font-size: 12px;color: #f46f1a" ng-bind="seckill['unitPrice']/100|currency : '￥'"></span>
             <span style="font-size: 12px;color: #d6d6d6;text-decoration: line-through;"
-                  ng-bind="prdMap[seckill['sku_id']]['SHOP_PRODUCT_SKU.REAL_PRICES']|currency : '￥'"></span>
+                  ng-bind="prdMap[seckill['skuId']]['SHOP_PRODUCT_SKU.REAL_PRICES']|currency : '￥'"></span>
             <button class="btn btn-buy" style="    width: 75px;    height: 28px;   background-color: #f46f1a;    color: white;   font-size: 12px;    line-height: 15px;
      margin-top: -12px;  float: right;" ng-click="goSeckill(seckill)" >立即抢购</button>
         </div>

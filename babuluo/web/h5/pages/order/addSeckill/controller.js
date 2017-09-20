@@ -23,7 +23,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
         var json=getCookie('seckill');
         $scope.seckill=JSON.parse(json);
         if (!$scope.EmptyPick) {
-            $scope.cookiePickupPerson.getTime = GetDateStr(0,$scope.seckill['pick_up_goods_time'].replace(/-/g, "/")) + '   08:00-19:00';
+            $scope.cookiePickupPerson.getTime = GetDateStr(0,$scope.seckill['pickUpGoodsTime']) + '   08:00-19:00';
 
         }
         console.log($scope.seckill);
@@ -31,7 +31,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
 
 
         var params={}
-        params['SHOP_PRODUCT_SKU.SKU_IDS'] = $scope.seckill['sku_id'];
+        params['SHOP_PRODUCT_SKU.SKU_IDS'] = $scope.seckill['skuId'];
         params['STOCK_REALTIME.STORE_ID'] = JSON.parse(getCookie('currentShopInfo'))['SHOP.REPOS_ID'];
         productFactory.getProductSkuBySkuIds(params, function (response) {
         	console.log("==========getProductSkuBySkuIds=============");
@@ -43,7 +43,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
                 ele['SHOP_PRODUCT_SKU.REAL_PRICES_OLD'] = moneyFormat(ele['SHOP_PRODUCT_SKU.REAL_PRICES']);
                 ele.isSelect = false;
                 ele.isSale = false;
-                ele['SHOP_PRODUCT_SKU.REAL_PRICES']=$scope.seckill['unit_price']/100;
+                ele['SHOP_PRODUCT_SKU.REAL_PRICES']=$scope.seckill['unitPrice']/100;
                 ele['SHOP_PRODUCT_SKU.SIZE']=1;
             });
 
@@ -59,13 +59,13 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
 
     //计算订单价格
     $scope.updateOrderPrice = function () {
-        $scope.order['SHOP_ORDER.PRICE_PRD'] = $scope.seckill['unit_price']/100;;
+        $scope.order['SHOP_ORDER.PRICE_PRD'] = $scope.seckill['unitPrice']/100;;
         $scope.order['SHOP_ORDER.PRICE_SALE'] = 0; // 促销价格
-        $scope.order['SHOP_ORDER.PRICE_PRD'] = $scope.seckill['unit_price']/100;
+        $scope.order['SHOP_ORDER.PRICE_PRD'] = $scope.seckill['unitPrice']/100;
         $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] = 0;
         $scope.order['SHOP_ORDER.PRICE_COUPON'] = 0;
-        $scope.order['SHOP_ORDER.PRICE_ORDER'] = $scope.seckill['unit_price']/100;
-        $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.seckill['unit_price']/100;
+        $scope.order['SHOP_ORDER.PRICE_ORDER'] = $scope.seckill['unitPrice']/100;
+        $scope.order['SHOP_ORDER.PRICE_OVER'] = $scope.seckill['unitPrice']/100;
 
 
     }
@@ -88,15 +88,16 @@ angular.module('AndSell.H5.Main').controller('pages_order_addSeckill_Controller'
             return;
         }
         var form = {};
-        form['SECKILL_ID']=$scope.seckill['seckill_id'];
+        form['SECKILL_ID']=$scope.seckill['seckillId'];
         form['NUM']=1;
         var memberId=getCookie("ANDSELLID");
         form['MEMBER_ID']=memberId;
         seckillFactory.goSeckill(form,function(response){
-            var promoReturn = response['extraData']['promoReturn'];
+            var promoReturn = response;
+            console.log(promoReturn);
             //成功就下单 不成功提示信息
             if (promoReturn['state']==0){
-                $scope.commitOrder($scope.seckill['seckill_id'], 1 ,memberId);
+                $scope.commitOrder($scope.seckill['seckillId'], 1 ,memberId);
             }else if (promoReturn['state']==1){
                 alert(promoReturn['message']);
             }
