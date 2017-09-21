@@ -322,7 +322,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             if (skuIds != "") {
                 skuIds += ",";
             }
-            skuIds += ele['sku_id'];
+            skuIds += ele['skuId'];
         })
         productFactory.getProductSkuBySkuIds({"SHOP_PRODUCT_SKU.SKU_IDS": skuIds}, function (response) {
             response.data.forEach(function (ele) {
