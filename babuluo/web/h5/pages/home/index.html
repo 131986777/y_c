@@ -117,13 +117,13 @@
                 <span>秒</span>
             </div>
             <p style="margin-top: 14px; margin-bottom: 15px;">
-               <span ng-bind="prdMap[seckill['skuId']]['SHOP_PRODUCT.PRD_NAME']"></span><span style="float:right;width: 75px;text-align: center; color:red">共<span ng-bind="seckill['sumNum']"></span>份</span></p>
+               <span ng-bind="prdMap[seckill['skuId']]['SHOP_PRODUCT.PRD_NAME']"></span><span style="float:right;width: 75px;text-align: center; color:red">共<span ng-bind="seckill['sumNum']"></span>份</span>
             <span style="font-size: 12px;color: #f46f1a"
                   ng-bind="seckill['unitPrice']/100|currency : '￥'"></span>
             <span style="font-size: 12px;color: #d6d6d6;text-decoration: line-through;"
-                  ng-bind="prdMap[seckill['skuId']]['SHOP_PRODUCT_SKU.REAL_PRICES']|currency : '￥'"></span>
+                  ng-bind="prdMap[seckill['skuId']]['SHOP_PRODUCT_SKU.REAL_PRICES']|currency : '￥'"></span></p>
             <button class="btn btn-buy" style="    width: 75px;    height: 28px;   background-color: #f46f1a;    color: white;   font-size: 12px;    line-height: 15px;
-     margin-top: -12px;  float: right;" ng-click="goSeckill(seckill)" >立即抢购</button>
+    			  float: right;" ng-click="goSeckill(seckill)" >立即抢购</button>
         </div>
         <div
                 style="display: inline-block;vertical-align: top;margin-top: 12px;font-size: 12px; width: calc(100% - 10em);"
