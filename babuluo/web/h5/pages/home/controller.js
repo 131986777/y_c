@@ -396,7 +396,18 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         var json = JSON.stringify(seckill);
         setCookie('seckill', json);
         w.terminate();
-        $state.go('pages/order/addSeckill');
+        var formt = {};
+        formt['SECKILL_ID']=seckill['seckillId'];
+        seckillFactory.getSeckillSurNum(formt, function (response) {
+           var surNum = response;
+           console.log("surNum===="+surNum);
+           if(surNum > 0){
+        	   $state.go('pages/order/addSeckill');
+           }else{
+        	   alert("商品已被抢光");
+           }
+        })
+        
     }
 
     /**
