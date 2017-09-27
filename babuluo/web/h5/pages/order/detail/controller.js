@@ -1,4 +1,4 @@
-﻿angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory, balanceFactory, http, weUI,groupBuyMemberFactory, productFactory, promoFactory,groupBuyGroupFactory, orderFactory, modalFactory) {
+﻿﻿angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory, balanceFactory, http, weUI,groupBuyMemberFactory, productFactory, promoFactory,groupBuyGroupFactory, orderFactory, modalFactory) {
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
@@ -77,6 +77,11 @@
             == 1
             && $scope.order['SHOP_ORDER.TYPE']
             == '3'
+            && $scope.order['SHOP_ORDER.STATE_MONEY']
+            == -1)||($scope.order['SHOP_ORDER.STATE_ORDER']
+            == 1
+            && $scope.order['SHOP_ORDER.TYPE']
+            == '4'
             && $scope.order['SHOP_ORDER.STATE_MONEY']
             == -1)) {
             $scope.calculatePromotion(deferred);
