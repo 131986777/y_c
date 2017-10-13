@@ -346,7 +346,7 @@
     <div class="orderDetail-pay"
          ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&((order['SHOP_ORDER.TYPE']=='5'&&order['SHOP_ORDER.STATE_OUT']==1)||(order['SHOP_ORDER.TYPE']=='3')||(order['SHOP_ORDER.TYPE']=='4'&&order['SHOP_ORDER.NEED_PAY']==1))">
         <div class="weui_cells weui_cells_access">
-            <div class="weui_cell" ng-click="goCoupon()"  ng-if="order['SHOP_ORDER.TYPE']=='5'||order['SHOP_ORDER.TYPE']=='3'">
+            <div class="weui_cell" ng-click="goCoupon()"  ng-if="order['SHOP_ORDER.TYPE']=='5'||order['SHOP_ORDER.TYPE']=='3'||order['SHOP_ORDER.TYPE']=='4'">
                 <div class="weui_cell_bd">
                     <span ng-if="COUPON_INFO!=''" ng-bind="coupon.COUPON_NAME"></span>
                     <span ng-if="COUPON_INFO==''">使用优惠券</span>

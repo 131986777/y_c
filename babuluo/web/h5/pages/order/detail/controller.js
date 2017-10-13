@@ -26,7 +26,7 @@
                 if ($stateParams.COUPON_INFO != '') {
                     $scope.coupon = JSON.parse($stateParams.COUPON_INFO);
                     if ($scope.coupon != undefined && $scope.coupon.MONEY != undefined) {
-                        console.log("======");
+                        console.log("======"+$scope.order);
                         console.log($scope.coupon);
                         var price_mark = $scope.order['SHOP_ORDER.PRICE_OVER'];
                         var price = $scope.order['SHOP_ORDER.PRICE_OVER'];
@@ -36,7 +36,9 @@
                         }
                         $scope.order['SHOP_ORDER.PRICE_COUPON'] = moneyFormat(price_mark - price);
                         $scope.order['SHOP_ORDER.PRICE_DISCOUNT'] += Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
-                        $scope.order['SHOP_ORDER.PRICE_OVER'] -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
+                       // $scope.order['SHOP_ORDER.PRICE_OVER'] -= Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
+                        $scope.order['SHOP_ORDER.PRICE_OVER'] = Number($scope.order['SHOP_ORDER.PRICE_PRD']) - Number($scope.order['SHOP_ORDER.PRICE_COUPON']);
+
                         $scope.order['SHOP_ORDER.COUPON_ID'] = $scope.coupon.ID;
                     }
                 }
@@ -331,6 +333,35 @@
         var datetime = $scope.order['SHOP_ORDER.GET_PRD_DATETIME'].substring(0, 10) + ' 19:00:00';
         var nowdate = new Date().getTime();//当前时间
         var olddate = new Date(datetime.replace(/\-/gi, "/")).getTime();
+        var SKU_ID=JSON.parse($scope.order['SHOP_ORDER.ORDER_INFO'])[0]['SHOP_ORDER_INFO.SKU_ID'];
+	       if($scope.order['SHOP_ORDER.SPECIAL_MODEL']=="APPOINTMENT"){
+	    	   var datetime = $scope.order['SHOP_ORDER.GET_PRD_DATETIME'].substring(0, 10) + ' 00:00:00';
+	    	   olddate = new Date(datetime.replace(/\-/gi, "/")).getTime();
+	    	   var aDataSet=null;
+	           $.ajax({  
+	               type : "post",  
+	                url : "http://localhost:8080/AndSell/bubu/shop/product/appointment/queryAll",  
+	                data : "APPOINTMENT_PRODUCT.SKU_ID=" + SKU_ID,  
+	                async : false,  
+	                success : function(data){  
+	                 // data = eval("(" + data + ")");  
+	                  aDataSet = data; 
+	                  console.log(aDataSet);
+	                }  
+	           });  
+	           console.log(aDataSet.data[0]['APPOINTMENT_PRODUCT.END_DAY']);
+	   	    console.log(aDataSet.data[0]['APPOINTMENT_PRODUCT.END_DAY']*3600000);
+	   	   var pzx= aDataSet.data[0]['APPOINTMENT_PRODUCT.END_DAY']*3600000;
+	           console.log(aDataSet);
+	           console.log("当前时间"+nowdate);
+	           console.log("订单提货时间"+olddate);
+	           console.log("截单时间"+(olddate-pzx));
+	           if ((olddate-pzx)< nowdate) {
+	               weUI.toast.error('预约商品已过截单时间，无法申请退款，如有需要请联系客服！');
+	               return
+	           } 
+       }
+       
         if (olddate < nowdate) {
             weUI.toast.error('当前时间不可退款！');
         } else {
