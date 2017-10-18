@@ -182,7 +182,27 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
       	    }else{  modalFactory.showAlert("冻结失败！请输入冻结卡操作者和原因！");}
     	});
     }
-
+//销卡
+    $scope.pinCard = function (item) {
+    	//item['FINANCE_LIST.EVENT_INTRO']=prompt("请输入冻结卡备注","");
+    	modalFactory.showPrompt("请输入销卡操作者及原因",function(response){
+    	  item['FINANCE_LIST.EVENT_INTRO']=response;
+      	  if (item['FINANCE_LIST.EVENT_INTRO']!=null && item['FINANCE_LIST.EVENT_INTRO']!="")
+      	    { item['REMARK']=item['FINANCE_LIST.EVENT_INTRO'];
+      	      item['CARD_NO']=item['MEMBER_CARD.CARD_NO'];
+      	      item['PHONE']=item['MEMBER_CARD.MEMBER_LOGIN_ID'];
+      		  modalFactory.showAlert("确认线上销卡：" + item['MEMBER_CARD.CARD_NO'] + "吗？", function () {
+      	          console.log(item); 
+      			  cardFactory.pinCard(item, function () {
+      	               
+      	            }, function (response) {
+      	                modalFactory.showShortAlert(response.msg);
+      	            });
+      	        });
+      	    }else{  modalFactory.showAlert("线上销卡失败！请输入销卡操作者和原因！");}
+    	});
+    } 
+    
     $scope.FrozenCard = function (item) {
     	//item['FINANCE_LIST.EVENT_INTRO']=prompt("请输入冻结卡备注","");
     	 item['FINANCE_LIST.EVENT_INTRO']=null;
