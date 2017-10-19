@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_account_balance_Controller', function ($scope, $state, $stateParams, balanceFactory,weUI) {
+angular.module('AndSell.H5.Main').controller('pages_account_amount_Controller', function ($scope, $state, $stateParams, balanceFactory,weUI) {
 
     $scope.balanceDetail = "收支明细";
     $scope.initLoad  = function () {
@@ -21,10 +21,6 @@ angular.module('AndSell.H5.Main').controller('pages_account_balance_Controller',
         form['FINANCE_LIST.USER_ID'] = uid;
         balanceFactory.queryAccountByUid(form, function (response) {
             $scope.balance = response.data[0]['MEMBER_ACCOUNT.BALANCE'];
-            $scope.point = response.data[0]['MEMBER_ACCOUNT.POINT'];
-            
-            $scope.balance_gifi_left = response.extraData.rechageInfo[0]['BALANCE_GIFT_LEFT'];
-            $scope.balance_left = response.extraData.rechageInfo[0]['BALANCE_LEFT']
         });
     }
 

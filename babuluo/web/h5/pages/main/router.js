@@ -44,8 +44,11 @@ $import('pages/account/balance');
 //积分新增
 $import('pages/account/recharge');
 $import('pages/account/integral');
-$import('pages/account/details');
+$import('pages/account/details',{SHOP_ID: ''});
+$import('pages/account/detailReady',{SHOP_ID: ''});
 $import('pages/account/list');
+//账户余额修改页
+$import('pages/account/amount');
 //
 $import('pages/account/lucky', {}, true);
 
@@ -60,3 +63,4 @@ $import('pages/groupBuy/ownGroup');
 $import('pages/groupBuy/allGroup',{GBP_ID: '0',PRD_ID:'0'});
 $import('pages/groupBuy/allGroupper', {GBG_IDS: "0"});
 $import('pages/groupBuy/groupDetail', {GBP_ID: '0',GBG_ID: '0',PRD_ID:'0'});
+$import('pages/product/rc');

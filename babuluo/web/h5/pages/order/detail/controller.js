@@ -2,12 +2,14 @@
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
-
+    
     $scope.FILE_SERVER_DOMAIN = FILE_SERVER_DOMAIN;
 
     $scope.initData = function () {
+    	
         modalFactory.setCurrentPage('wd');
-
+      
+        
         var deferred_account = $q.defer();
         var deferred_price = $q.defer();
 
@@ -16,7 +18,7 @@
         $scope.queryAccount(deferred_account);
 
         var promise = $q.all([deferred_price.promise, deferred_account.promise]);
-
+        	
         promise.then(function (result) {
             if ($scope.order['SHOP_ORDER.STATE_ORDER']
                 == 1
@@ -54,8 +56,15 @@
             }
         });
     }
-
+  
     $scope.initCartRequestVO = function (deferred) {
+    	
+//    	  判断新加提示是否出现order['SHOP_ORDER.ORDER_NUM']
+      $scope.YY=$scope.order['SHOP_ORDER.ORDER_NUM'].substr(0,[1])
+      console.log($scope.YY)
+    	
+    	
+    	
         $scope.skulistsForOrder = [];
         $scope.orderDetailList.forEach(function (detail) {
             $scope.skulistsForOrder.push({
@@ -624,4 +633,10 @@
             }
         })
     }
+    
+  //判断新加提示是否出现order['SHOP_ORDER.ORDER_NUM']
+//    $scope.YY=$scope.order['SHOP_ORDER.ORDER_NUM'].substr(1,[1])
+//    console.log($scope.YY)
+    
+    
 });

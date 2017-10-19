@@ -132,7 +132,7 @@
 
 
     <!-- 团购 -->
-    <div class="group" ng-repeat="item in groupList" ng-if="item['is_show']==true">
+    <div class="group" ng-repeat="item in groupList" ng-if="item['is_show']==true" style="margin-bottom:5px">
         <a ng-href="{{item['BANNER.URL']}}">
             <img ng-if="item['is_show']==true"
                  ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
