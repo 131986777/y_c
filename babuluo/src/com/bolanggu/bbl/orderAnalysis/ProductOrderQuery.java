@@ -131,7 +131,7 @@ public enum ProductOrderQuery {
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT a.PRD_NAME AS `PRD_NAME`,COUNT(a.ID) AS `ORDER_COUNT`,");
 		sql.append("SUM(a.COUNT) AS `PRD_COUNT`,a.SKU_1_VALUE AS `SKU_UNIT`,a.PRD_ID AS `PRD`,");
-		sql.append("CAST(SUM(a.PRICE_SUM) AS DECIMAL(10,2))  AS `PRICE_SUM`,a.SKU AS `SKU`");
+		sql.append("CAST(SUM(a.PRICE_SUM*a.COUNT) AS DECIMAL(10,2))  AS `PRICE_SUM`,a.SKU AS `SKU`");
 		sql.append(" FROM shop_order_info a INNER JOIN shop_order b ON b.ID = a.ORDER_ID");
 		sql.append(" WHERE b.STATE_ORDER=1 AND b.STATE_MONEY=1");
 		if(map.containsKey("DATETIME_ADD_FROM") && !"null".equals(map.get("DATETIME_ADD_FROM"))){
@@ -162,7 +162,7 @@ public enum ProductOrderQuery {
 		String month = getMonth(map);
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT c.SHOP_NAME AS `SHOP_NAME`,COUNT(a.ID) AS `ORDER_COUNT`,SUM(a.COUNT) AS `PRD_COUNT`,");
-		sql.append("a.SKU_1_VALUE AS `SKU_UNIT`,CAST(SUM(a.PRICE_SUM) AS DECIMAL(10,2)) AS `PRICE_SUM`");
+		sql.append("a.SKU_1_VALUE AS `SKU_UNIT`,CAST(SUM(a.PRICE_SUM*a.COUNT) AS DECIMAL(10,2)) AS `PRICE_SUM`");
 		sql.append(" FROM shop_order_info a");
 		sql.append(" INNER JOIN shop_order b ON a.ORDER_ID=b.ID");
 		sql.append(" INNER JOIN shop c ON b.SHOP_ID = c.SHOP_ID");

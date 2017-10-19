@@ -155,7 +155,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                     }
                 });
             }
-            $scope.queryAllGroupBuyPlanByState();
+            //$scope.queryAllGroupBuyPlanByState();
         });//
 
         // 设置轮播图图片间隔
@@ -304,13 +304,15 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
      */
     $scope.queryByStateAndTime = function () {
         seckillFactory.queryByStateAndTime({}, function (response) {
-            var promoReturn = response['extraData']['promoReturn'];
-            $scope.seckillList = promoReturn['data'];
+            //var promoReturn = response['extraData']['promoReturn'];
+            $scope.seckillList = response;
+            console.log( $scope.seckillList)
             $scope.queryPrd();
             startWorker();
+          
         })
     }
-
+    
     /**
      * 请求秒杀的商品
      */
@@ -320,11 +322,12 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             if (skuIds != "") {
                 skuIds += ",";
             }
-            skuIds += ele['sku_id'];
+            skuIds += ele['skuId'];
         })
         productFactory.getProductSkuBySkuIds({"SHOP_PRODUCT_SKU.SKU_IDS": skuIds}, function (response) {
             response.data.forEach(function (ele) {
                 $scope.prdMap[ele['SHOP_PRODUCT_SKU.SKU_ID']] = ele;
+              
             }, function (response) {
                 alert("请求商品失败")
             });
@@ -336,22 +339,52 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
      */
     $scope.initTime = function () {
         $scope.seckillList.forEach(function (ele, index) {
+        
             if (ele['type'] == 'time' || ele['type'] == 'timeAndNum') {
-                var end = new Date(ele['end_datetime']).getTime();
+                var end =new Date(ele['endDatetime']);
+                var start=new Date(ele['beginDatetime']);
                 var now = new Date().getTime();
                 if (end < now) {
-                    ele['hour'] = '已'
-                    ele['min'] = '过'
-                    ele['sec'] = '期'
-                } else {
-                    var time = (end - now) / 1000;
+                    ele['hour'] = '已';
+                    ele['min'] = '过';
+                    ele['sec'] = '期';
+                	 $('#hour'+index).parent().parent().find('button').attr("disabled","true");
+                } 
+                else if(start>now) {
+                	 /*ele['hour'] = '未';
+                     ele['min'] = '开';
+                     ele['sec'] = '始';*/
+                    $('#hour'+index).parent().parent().find('button').attr("disabled","true");
+                    $('#hour'+index).prev().html('距开始');
+                    var time = (start - now) / 1000;
                     ele['hour'] = parseInt(time / 3600);
                     ele['min'] = parseInt(time / 60 - ele['hour'] * 60);
                     ele['sec'] = parseInt(time - ele['hour'] * 3600 - ele['min'] * 60);
                 }
-                document.getElementById("hour" + index).innerHTML = ele['hour'];
-                document.getElementById("min" + index).innerHTML = ele['min'];
-                document.getElementById("sec" + index).innerHTML = ele['sec'];
+                else if(start==now){
+                	  $('#hour'+index).parent().parent().find('button').removeAttr("disabled");
+                		$('#hour'+index).prev().html('距结束');
+                }
+                else if(start<now && end>now) {
+                	if(parseInt(ele['surplusNum']) == 0){
+                		$('#hour'+index).parent().parent().find('button').attr("disabled","true");
+                		ele['hour'] = '已';
+                        ele['min'] = '抢';
+                        ele['sec'] = '光';
+                	}else{
+                		$('#hour'+index).parent().parent().find('button').removeAttr("disabled");
+                		$('#hour'+index).prev().html('距结束');
+                        var time = (end - now) / 1000;
+                        ele['hour'] = parseInt(time / 3600);
+                        ele['min'] = parseInt(time / 60 - ele['hour'] * 60);
+                        ele['sec'] = parseInt(time - ele['hour'] * 3600 - ele['min'] * 60);
+                	}
+                	
+                }
+               
+                $("#hour" + index).html(ele['hour']);
+                $("#min" + index).html(ele['min']);
+                $("#sec" + index).html(ele['sec']);
             }
         })
     }
@@ -363,7 +396,18 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         var json = JSON.stringify(seckill);
         setCookie('seckill', json);
         w.terminate();
-        $state.go('pages/order/addSeckill');
+        var formt = {};
+        formt['SECKILL_ID']=seckill['seckillId'];
+        seckillFactory.getSeckillSurNum(formt, function (response) {
+           var surNum = response;
+           console.log("surNum===="+surNum);
+           if(surNum > 0){
+        	   $state.go('pages/order/addSeckill');
+           }else{
+        	   alert("商品已被抢光");
+           }
+        })
+        
     }
 
     /**
@@ -388,7 +432,7 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             w.terminate() //终止一个worker线程v
     })
     /***************************************************团购部分*************************************************************/
-    //请求到的所有团购
+   /* //请求到的所有团购
     $scope.showGbp = false;
     $scope.groupBuyPlanList = [];
     //团购的商品详情
@@ -404,9 +448,9 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             alert("请求团购商品失败。")
         })
     }
-    /**
+    *//**
      * 请求团购的商品
-     */
+     *//*
     $scope.queryPrdByGroupBuyPlan = function () {
         var skuIds = "";
         $scope.groupBuyPlanList.forEach(function (ele) {
@@ -424,10 +468,10 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             });
         });
     }
-    /**
+    *//**
      * 开启线程
      * 监听回馈
-     */
+     *//*
     var gw;
 
     function startWorkerByGbp() {
@@ -480,6 +524,6 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
             removeCookie("SUM_COUNT");
             $state.go('pages/groupBuy/myGroup',param);
         }
-    }
+    }*/
 });
 

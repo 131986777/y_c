@@ -108,9 +108,9 @@ public enum GetSQL {
 		String month = getMonth(map);
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT a.PRD_NAME AS `商品名称`,COUNT(a.ID) AS `订单量`,");
-		sql.append("COUNT(a.COUNT) AS `商品销售量`,a.SKU_1_VALUE AS `规格`,");
+		sql.append("SUM(a.COUNT) AS `商品销售量`,a.SKU_1_VALUE AS `规格`,");
 		sql.append("a.SKU AS `商品编码`,a.PRD_ID AS `商品货号`,");
-		sql.append("CAST(SUM(a.PRICE_SUM) AS DECIMAL(10,2))  AS `销售总额`");
+		sql.append("CAST(SUM(a.PRICE_SUM*a.COUNT) AS DECIMAL(10,2))  AS `销售总额`");
 		sql.append(" FROM shop_order_info a INNER JOIN shop_order b ON b.ID = a.ORDER_ID");
 		sql.append(" WHERE b.STATE_ORDER=1 AND b.STATE_MONEY=1");
 		if(map.containsKey("DATETIME_ADD_FROM") && !"null".equals(map.get("DATETIME_ADD_FROM"))){

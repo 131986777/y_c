@@ -33,6 +33,8 @@ AndSellMainModule.service('cardFactory', function (http) {
     this.modifyState = http.post('/member/membercard/modifyCardState');
     //卡号解绑
     this.unwrap = http.post('/member/membercard/unwrap');
+    //线上销卡
+    this.pinCard=http.post('/member/membercard/pinCard');
 
 });
 

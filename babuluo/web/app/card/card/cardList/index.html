@@ -146,8 +146,13 @@
                     </a>
                     <a class="table-link" >
                      <span ng-if="cl['MEMBER_CARD.STATE']==1 && cookies=='ADMIN'"  ng-click="unwrap(cl)">卡解绑</span>
+                    </a><!-- ng-if="APP_ID_LIST.indexOf('@1109@')>=0 -->
+                    
+                     <a class="table-link" >
+                     <span ng-if="cl['MEMBER_CARD.STATE']==-1 && APP_ID_LIST.indexOf('@1109@')>=0"  ng-click="pinCard(cl)">线上销卡</span>
                     </a>
                 </td>
+                
             </tr>
             </tbody>
         </table>

@@ -62,16 +62,5 @@ angular.module('AndSell.H5.Main').controller('pages_user_phoneLogin_Controller',
         }
     }
     
-    $scope.initData= function () {
-    	if($stateParams.FROM!=''&&$stateParams.FROM!=undefined&&$stateParams.FROM!='undefined'){
-    		/*var from = "#/"+$stateParams.FROM;
-            var state = {
-                title: "",
-                url: from
-            };
-            window.history.pushState(state, "main", from);*/
-    	}
-    	
-    }
 
 });

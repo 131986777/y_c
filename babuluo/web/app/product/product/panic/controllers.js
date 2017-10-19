@@ -108,11 +108,24 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         //请求接口
         seckillFactory.modifySeckill(form , function (response) {
             $scope.queryAllSeckill();
+            $scope.flushDB();
             modalFactory.showShortAlert("修改成功")
         },function(response){
             modalFactory.showShortAlert("修改失败")
         })
     }
+    
+    $scope.flushDB = function(){
+    	$.ajax({
+	    	type:"get",
+	    	url:"http://yx.bblycyz.com/seckill/rest/seckill/flushDB",//url写异域的请求地址
+	    	dataType:"jsonp",//加上datatype
+	    	//jsonpCallback:"callback",//设置一个回调函数，名字随便取，和的函下面数里的名字相同就行
+	    	success:function(response){
+	    		console.log(response);
+	    	}
+    	})
+    };
 
     /**
      * 禁用或启用秒杀计划
@@ -150,7 +163,8 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         weekStart: 1,
         startView: 2,
         format: 'yyyy/mm/dd hh:ii',
-        todayBtn: 'linked'
+        todayBtn: 'linked',
+        pickerPosition:'top-left'
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -169,6 +183,7 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         weekStart: 1,
         format: 'yyyy/mm/dd hh:ii',
         todayBtn: 'linked',
+        pickerPosition:'top-left'
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -187,6 +202,7 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         weekStart: 1,
         format: 'yyyy/mm/dd hh:ii',
         todayBtn: 'linked',
+        pickerPosition:'top-left'
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -205,7 +221,8 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         weekStart: 1,
         startView: 2,
         format: 'yyyy/mm/dd hh:ii',
-        todayBtn: 'linked'
+        todayBtn: 'linked',
+        pickerPosition:'top-left'
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -224,6 +241,7 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         weekStart: 1,
         format: 'yyyy/mm/dd hh:ii',
         todayBtn: 'linked',
+        pickerPosition:'top-left'
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
@@ -242,6 +260,7 @@ angular.module('AndSell.Main').controller('product_product_panic_Controller', fu
         weekStart: 1,
         format: 'yyyy/mm/dd hh:ii',
         todayBtn: 'linked',
+        pickerPosition:'top-left'
     }).on("hide", function () {
         var $this = $(this);
         var _this = this;
