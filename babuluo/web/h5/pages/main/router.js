@@ -64,3 +64,10 @@ $import('pages/groupBuy/allGroup',{GBP_ID: '0',PRD_ID:'0'});
 $import('pages/groupBuy/allGroupper', {GBG_IDS: "0"});
 $import('pages/groupBuy/groupDetail', {GBP_ID: '0',GBG_ID: '0',PRD_ID:'0'});
 $import('pages/product/rc');
+
+
+
+
+// 后期临时活动  temporary
+$import('pages/temporary/bonus');
+$import('pages/temporary/list');
