@@ -1,0 +1,58 @@
+<div class="page-content" ng-init="initData()">
+    <div class="table-content">
+        <div class="table-operbar">
+            <div class="table-toolbar">
+                <div class="form-inline row">
+                    <div class="form-group col-md-4">
+                        <select ng-model="searchType"
+                                ng-init="searchType='LOGIN_ID'"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="LOGIN_ID">
+                                账号
+                            </option>
+                            <option class="nya-bs-option" value="CARD_NO">
+                                卡号
+                            </option>
+                        </select>
+                        <input type="text" class="form-control" placeholder="" ng-model="queryContent">
+                        <button type="submit" class="btn btn-default"
+                                ng-click="query()">
+                            搜索
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+
+        <div class="table-scrollable">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+	                <th> 客户帐号</th>
+	                <th> 客户姓名</th>
+	                <th> 卡号</th>
+	                <th> 充值账户余额</th>
+	                <th> 赠送账户余额</th>
+                </tr>
+                </thead>
+                <tbody ng-cloak>
+                <tr ng-repeat='recharge in rechargeList'>
+                    <td ng-bind="recharge['MEMBER.LOGIN_ID']"></td>
+                    <td ng-bind="recharge['MEMBER_INFO.TRUE_NAME']"></td>
+                    <td ng-bind="recharge['MEMBER_CARD_RECHARGE.CARD_NO']"></td>
+                    <td ng-bind="recharge['BALANCE_LEFT'] | number:2"></td>
+                    <td ng-bind="recharge['BALANCE_GIFT_LEFT'] | number:2"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div page-bar
+             filter-obj="filter"
+             url="/member/recharge/getUserAccount"
+             callback="bindData(response)">
+        </div>
+    </div>
+</div>

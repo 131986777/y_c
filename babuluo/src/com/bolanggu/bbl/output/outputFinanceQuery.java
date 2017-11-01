@@ -86,8 +86,10 @@ public class outputFinanceQuery {
         financeSheet.setColumnWidth(11, 4000);
         financeSheet.setColumnWidth(12, 3000);
         financeSheet.setColumnWidth(13, 4000);
-        financeSheet.setColumnWidth(14, 5000);
-        financeSheet.setColumnWidth(15, 5000);
+        financeSheet.setColumnWidth(14, 4000);
+        financeSheet.setColumnWidth(15, 4000);
+        financeSheet.setColumnWidth(16, 5000);
+        financeSheet.setColumnWidth(17, 5000);
 
         //字体预设置
         XSSFFont font = (XSSFFont) analyseBook.createFont();
@@ -178,10 +180,16 @@ public class outputFinanceQuery {
         SXSSFCell money = rowTitle.createCell(14);
         money.setCellValue("变更金额");
         money.setCellStyle(title2Style);
-        SXSSFCell balance = rowTitle.createCell(15);
+        SXSSFCell moneyaccount = rowTitle.createCell(15);
+        moneyaccount.setCellValue("充值账户变更金额");
+        moneyaccount.setCellStyle(title2Style);
+        SXSSFCell moneygift = rowTitle.createCell(16);
+        moneygift.setCellValue("赠送账户变更金额");
+        moneygift.setCellStyle(title2Style);
+        SXSSFCell balance = rowTitle.createCell(17);
         balance.setCellValue("账户余额");
         balance.setCellStyle(title2Style);
-        SXSSFCell intro = rowTitle.createCell(16);
+        SXSSFCell intro = rowTitle.createCell(18);
         intro.setCellValue("变更说明");
         intro.setCellStyle(title2Style);
         int analyseIndex = 1;//序号
@@ -208,7 +216,9 @@ public class outputFinanceQuery {
 			+" d.SHOP_NAME AS `FINANCE_LIST.SHOP`,"
 			+" g.SHOP_NAME AS `FINANCE_LIST.CARD_SHOP`,"
 			+" a.OPER_USER_ID AS `FINANCE_LIST.OPER_USER_ID`,"
-			+" a.EVENT_INTRO AS `FINANCE_LIST.EVENT_INTRO`"
+			+" a.EVENT_INTRO AS `FINANCE_LIST.EVENT_INTRO`,"
+			+" FORMAT(a.CHANGE_ACCOUNT_VALUE/100,2) AS `FINANCE_LIST.CHANGE_ACCOUNT_VALUE`,"
+			+" FORMAT(a.CHANGE_GIFT_VALUE/100,2) AS `FINANCE_LIST.CHANGE_GIFT_VALUE`"
 			+" FROM finance_list a "
 			+" LEFT JOIN member b ON a.USER_ID=b.USER_ID"
 			+" LEFT JOIN member_info c ON a.USER_ID=c.USER_ID "
@@ -344,10 +354,18 @@ public class outputFinanceQuery {
                 cell13.setCellValue(
                     NumFormat.format(rs.getDouble("FINANCE_LIST.CHANGE_VALUE")));
                 cell13.setCellStyle(cellStyle);
-                SXSSFCell cell14 = row.createCell(15);
+                SXSSFCell cell16 = row.createCell(15);
+                cell16.setCellValue(
+                		NumFormat.format(rs.getDouble("FINANCE_LIST.CHANGE_ACCOUNT_VALUE")));
+                cell16.setCellStyle(cellStyle);
+                SXSSFCell cell17 = row.createCell(16);
+                cell17.setCellValue(
+                		NumFormat.format(rs.getDouble("FINANCE_LIST.CHANGE_GIFT_VALUE")));
+                cell17.setCellStyle(cellStyle);
+                SXSSFCell cell14 = row.createCell(17);
                 cell14.setCellValue(Balance);
                 cell14.setCellStyle(cellStyle);
-                SXSSFCell cell15 = row.createCell(16);
+                SXSSFCell cell15 = row.createCell(18);
                 cell15.setCellValue(
                     StrUtil.getNotNullStringValue(rs.getString("FINANCE_LIST.EVENT_INTRO"),""));
                 cell15.setCellStyle(cellStyle);

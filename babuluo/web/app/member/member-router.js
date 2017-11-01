@@ -13,3 +13,4 @@ $import('member/member/memberAddress',{id: ''});
 $import('member/member/memberCard',{id: ''},true);
 
 $import('member/recharge/rechargeAdd',undefined,true);
+$import('member/recharge/rechargeList',undefined,true);

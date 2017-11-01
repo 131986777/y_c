@@ -18,7 +18,7 @@ angular.module('AndSell.H5.Main').controller('pages_account_balance_Controller',
 
     $scope.queryAccountListByUid = function(uid){
         var form = {};
-        form['FINANCE_LIST.USER_ID'] = uid;
+        form['MEMBER_ACCOUNT.USER_ID'] = uid;
         balanceFactory.queryAccountByUid(form, function (response) {
             $scope.balance = response.data[0]['MEMBER_ACCOUNT.BALANCE'];
             $scope.point = response.data[0]['MEMBER_ACCOUNT.POINT'];
