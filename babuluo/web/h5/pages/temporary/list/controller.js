@@ -1,4 +1,4 @@
-angular.module('AndSell.H5.Main').controller('pages_account_list_Controller', function($scope, $state, $stateParams, modalFactory, eventFactory, weUI) {
+angular.module('AndSell.H5.Main').controller('pages_temporary_list_Controller', function($scope, $state, $stateParams, modalFactory, eventFactory, weUI) {
 
 	modalFactory.setTitle("兑换记录");
 	modalFactory.setBottom(false);

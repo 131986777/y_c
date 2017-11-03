@@ -225,7 +225,7 @@ function routerPath(base, path, param, css) {
     var url = base + path;
 
     var controller = {
-        name: 'app', insertBefore: '#app-level', files: [url + '/controller.js']
+        name: 'app', insertBefore: '#app-level', files: [url + '/controller.js?v=20170927']
     };
 
     var pageCss = {

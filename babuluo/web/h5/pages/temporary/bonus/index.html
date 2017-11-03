@@ -1,0 +1,56 @@
+<style>
+.bonus a {
+		position: absolute;
+	}
+	
+	.bonus .integral {
+		white-space: nowrap;
+		background: red;
+		top: 34%;
+		left: 40%;
+		font-size: 17px;
+	}
+	
+	.bonus .jifen {
+		width: 34%;
+		background: red;
+		height: 7rem;
+	}
+	
+	.bonus .two {
+		top: 38%;
+		left: 11%;
+	}
+	
+	.bonus .five {
+		top: 38%;
+		left: 54%;
+	}
+	
+	.bonus .ten {
+		top: 49%;
+		left: 11%;
+	}
+	
+	.bonus .cards {
+		width: 25%;
+		background: red;
+		height: 2.3rem;
+		top: 33%;
+		left: 67%;
+	}
+}
+</style>
+<div>
+
+	<div style="position: relative;" class="bonus">
+		<img src="../temporary/bonus/back.jpg" width="100%" />
+		<a class="integral"><span ng-bind-template="{{jifen}}">4432</span><span ng-model="ss">分</span></a>
+		<a class="cards" ui-sref="pages/temporary/list"></a>
+		<a class="two jifen">4432</a>
+		<a class="five jifen">442</a>
+		<a class="ten jifen">44 2</a>
+
+	</div>
+
+</div>

@@ -168,6 +168,7 @@
                 <!--<th> 操作员</th>-->
                 <th> 类型</th>
                 <th class="text-center"> 交易金额</th>
+                <th class="text-center"> 充值/赠送交易金额</th>
                 <th class="text-center"> 账户可用余额</th>
                 <th class="text-center"> 操作</th>
                 </tr>
@@ -195,6 +196,9 @@
                         <span style="color:black" ng-show="balanceInfo['FINANCE_LIST.CHANGE_VALUE']>0">{{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}</span>
                         <span style="color:red" ng-show="balanceInfo['FINANCE_LIST.CHANGE_VALUE']<=0">{{balanceInfo['FINANCE_LIST.CHANGE_VALUE'] | currency :'￥'}}</span>
                     </td>
+                     <td class="text-center">
+                     	<span style="color:black" ng-show="balanceInfo['FINANCE_LIST.CHANGE_VALUE']<=0">{{balanceInfo['FINANCE_LIST.CHANGE_ACCOUNT_VALUE']/100 | currency :'￥'}}/{{balanceInfo['FINANCE_LIST.CHANGE_GIFT_VALUE']/100 | currency :'￥'}}</span>
+                     </td>
                     <td class="text-center">
                         <div ng-if="balanceInfo['FINANCE_LIST.USER_ID']!=undefined">
                             <span style="color:black" ng-show="balanceInfo['FINANCE_LIST.BALANCE']>0">{{balanceInfo['FINANCE_LIST.BALANCE']  | currency : '￥'}}</span>
