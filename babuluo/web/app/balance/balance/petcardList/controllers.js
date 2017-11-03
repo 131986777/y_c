@@ -147,7 +147,51 @@ angular.module('AndSell.Main').controller('balance_balance_petcardList_Controlle
             modalFactory.showShortAlert(response.msg);
         });
     };
-
+    //财务销卡
+  //销卡
+    $scope.pinCard = function () {
+//    	console.log($scope.cardList);
+//    	console.log($scope.cardTotalMoney);
+//    	console.log($scope.cardBackMoney);
+    	var item={};
+    	//先销vip卡
+    	item['FINANCE_LIST.EVENT_INTRO']='财务销vip无忧卡';
+    	item['REMARK']='财务销vip无忧卡';
+    	 $scope.cardList.forEach(function (ele) {
+	    	item['CARD_NO']=ele['FINANCE_LIST.EVENT_CARD_NO'];
+	    	item['MEMBER_CARD.CARD_NO']=ele['FINANCE_LIST.EVENT_CARD_NO'];
+	    	item['PHONE']=ele['FINANCE_LIST.MEMBER_MOBILE'];
+	    	item['MEMBER_CARD.USER_ID']=ele['FINANCE_LIST.USER_ID'];
+	    	 console.log(item); 
+	    	 cardFactory.pinCard(item, function (response) {
+               console.log(response);
+               var params={};
+               params['FINANCE_LIST.ID']=ele['FINANCE_LIST.ID'];
+               params['FINANCE_LIST.EVENT']='VIP卡冻结';
+               cardFactory.modfiyRebatesCard(params, function (response) {
+                }, function (response) {
+                    modalFactory.showShortAlert(response.msg);
+                });
+               modalFactory.showShortAlert("销卡成功");
+               $("#balance").modal('hide');
+               $scope.$broadcast('pageBar.reload');
+            }, function (response) {
+                modalFactory.showShortAlert(response.msg);
+            });
+	    	
+         });
+    	//vip销卡成功返点黄卡balanceFactory
+		 if($scope.cardBackMoney>0 && $scope.cardTotalMoney>=3000){
+			 var yellowCard= $scope.cardList[0]['FINANCE_LIST.EVENT_INTRO'];
+			 item['YELLOWCARD']=yellowCard.substring(2,yellowCard.length);
+			 item['CARDBACKMONEY']=$scope.cardBackMoney;
+			 item['REMARK']=$scope.cardList.length+"张无忧VIP卡共消费"+$scope.cardTotalMoney+"元，需要返点"+$scope.cardBackMoney;
+			 console.log(item);
+			 balanceFactory.backYellowCard(item,function(){
+				 
+			 })
+		 }
+    } 
     //根据登录ID查询财务信息
     $scope.queryFinanceByLoginId = function (content) {
         if ($scope.lastSearch != content || $scope.lastSearchType != $scope.searchType) {
@@ -215,7 +259,53 @@ angular.module('AndSell.Main').controller('balance_balance_petcardList_Controlle
     $scope.getFinanceListById = function (balanceInfo) {
         $scope.finMore = clone(balanceInfo);
     };
-
+    //弹窗需要退的卡
+    $scope.getalert = function (balanceInfo) {
+        $scope.finMore = clone(balanceInfo);
+        var item={};
+        var arr = new Array('92000009118526','8003599238', '80038553', '80015193','80022650','80022640'); 
+        item['MEMBER_CARD.USER_ID'] =balanceInfo['FINANCE_LIST.USER_ID'];
+        balanceFactory.checkRebatesCard(item, function (response) {
+        //查看申请退vip卡需要返点的钱
+        	 $scope.cardList = response.data;
+             var map = {};
+             var money = 0;//已经消费金额
+             var backmoney = 0;//需要返还的金额（两张卡消费金额大于等于3000，返现金额到门店会员卡，金额为消费金额的5%）
+        	 $scope.cardList.forEach(function (ele) {
+              //  map[ele['MEMBER_CARD.CARD_ID']] = ele;
+        		// alert(arr.indexOf(ele['FINANCE_LIST.EVENT_CARD_NO']));
+		          if(arr.indexOf(ele['FINANCE_LIST.EVENT_CARD_NO'])==-1){
+		        	  money = money + (5000-Number(ele['FINANCE_LIST.BEFORE_CARD_BALANCE']))
+		        	  ele['FINANCE_LIST.CHANGE_GIFT_VALUE']=5000-Number(ele['FINANCE_LIST.BEFORE_CARD_BALANCE']) ;
+		        	  console.log(money);
+		          }else{
+		        	  console.log(money);
+		        	  money = money + (10000-Number(ele['FINANCE_LIST.BEFORE_CARD_BALANCE']));
+		        	  ele['FINANCE_LIST.CHANGE_GIFT_VALUE']=10000-Number(ele['FINANCE_LIST.BEFORE_CARD_BALANCE']);
+		        	  
+		          }
+		        	  
+             });
+        	 console.log($scope.cardList);
+        	 $scope.cardMap = map;
+            
+             console.log("消费达到多少钱"+money)
+             if(money>=3000){
+            	 backmoney=(money*0.05).toFixed(2);
+            	// alert("需要返点的黄卡的金额"+backmoney);
+            	 console.log("需要返点的黄卡的金额"+backmoney);
+             }else{
+            	 backmoney=0;
+            	 console.log("消费没有达到不返点"+backmoney);
+             }
+             $scope.cardTotalMoney = money.toFixed(2);  //已经消费的金额
+             $scope.cardBackMoney = backmoney; //需要返点的金额
+             console.log( $scope.cardTotalMoney);
+             console.log( $scope.cardBackMoney); 
+            console.log(response.data);
+        });
+    };
+	  
     $scope.delete = function () {
         $scope.modifyvalue = null;
         $scope.afterModify = null;

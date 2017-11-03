@@ -35,6 +35,9 @@ AndSellMainModule.service('cardFactory', function (http) {
     this.unwrap = http.post('/member/membercard/unwrap');
     //线上销卡
     this.pinCard=http.post('/member/membercard/pinCard');
-
+    //检查返点的卡是否一致
+    this.checkRebatesCard=http.post('/member/balance/checkRebatesCard');
+    //销卡之后状态该成完成
+    this.modfiyRebatesCard=http.post('/member/balance/modifyById');
 });
 

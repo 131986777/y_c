@@ -55,6 +55,10 @@
                             线上销卡明细
                             </option>
                
+                        </option>
+                                 <option class="nya-bs-option" value="门店VIP卡冻结">
+                           需要处理的退vip卡
+                            </option>
                         </select>
 
                         <select ng-model="filter['FINANCE_LIST.SHOP_ID']"
@@ -182,7 +186,11 @@
                     </td>
                     <td class="text-center">
                         <a class="table-link" data-toggle="modal" data-target="#showMore"
+                        ng-if="balanceInfo['FINANCE_LIST.EVENT']!='门店VIP卡冻结'"
                            ng-click="getFinanceListById(balanceInfo)">更多</a>
+                          <a class="table-link" data-toggle="modal" data-target="#balance"
+                           ng-if="balanceInfo['FINANCE_LIST.EVENT']=='门店VIP卡冻结'"
+                           ng-click="getalert(balanceInfo)">查看</a>   
                     </td>
                 </tr>
                 </tbody>
@@ -268,10 +276,58 @@
     <div class="modal fade" id="balance">
         <div class="modal-dialog">
             <div class="modal-content">
-               
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">
+                    </button>
+                    <h4 class="modal-title">返点明细</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+                    <form class="form-horizontal">
+                     <div class="table-scrollable">
+           				 <table class="table table-bordered table-hover table-striped">
+           				 	<thead>
+           				 	<th>申请时间</th>
+           				 	<th>姓名</th>
+           				 	<th>退的vip卡</th>
+           				 	<th>卡内余额</th>
+           				 	<th>已经消费了</th>
+           				 	<th>返点的黄卡卡号</th>
+           				 	</tr>
+           				 	</thead>
+           				 	 <tbody ng-cloak>
+                				<tr ng-repeat='balanceInfo in cardList'>
+                				<td ng-bind="balanceInfo['FINANCE_LIST.ADD_DATETIME'] | FormatAllDate"></td>
+			                    <td ng-bind="balanceInfo['FINANCE_LIST.TRUE_NAME']"></td>
+			                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_CARD_NO']"></td>
+			                    <td ng-bind="balanceInfo['FINANCE_LIST.BEFORE_CARD_BALANCE']"></td>
+			                    <td ng-bind="balanceInfo['FINANCE_LIST.CHANGE_GIFT_VALUE']"></td>
+			                    <td ng-bind="balanceInfo['FINANCE_LIST.EVENT_INTRO'].substring(2, balanceInfo['FINANCE_LIST.EVENT_INTRO'].length)"></td>
+			                    </tr>
+               				 </tbody>
+           				 </table>
+           				  <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                               申请退的vip消费总额：
+                            </label>
+                            <label class="col-sm-7 control-label" style="text-align: left">
+                                {{cardTotalMoney | currency :'￥'}}
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">
+                                消费（满3000）返消费的5%黄卡总额：
+                            </label>
+                            <label class="col-sm-7 control-label" style="text-align: left">
+                                {{cardBackMoney | currency :'￥'}}
+                            </label>
+                        </div>
+           			   </div>	 
+                    </form>
+                 </div>   
               
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary btn-outline" ng-click="saveAccount()">确定
+                    <button type="button" class="btn btn-primary btn-outline" ng-click="pinCard()">确定销卡
                     </button>
                     <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
                     </button>

@@ -40,7 +40,7 @@
                                 所有类型
                             </option>
                             <option class="nya-bs-option"
-                                    ng-repeat="value in typeList"
+                                    ng-repeat="value in typeListMap['997']"
                                     ng-bind="value['MEMBER_CARD_TYPE.NAME']"
                                     value="{{value['MEMBER_CARD_TYPE.ID']}}">
                             </option>
@@ -140,13 +140,14 @@
                 </td>
                 <td class="text-center">
                     <a class="table-link">
-                        <span ng-show="cl['MEMBER_CARD.STATE']==1" ng-click="frezzeCard(cl)">冻结</span>
+                        <span ng-show="cl['MEMBER_CARD.STATE']==1 && cl['MEMBER_CARD.TYPE_NAME']!='门店VIP卡'" ng-click="frezzeCard(cl)">冻结</span>
+						 <span ng-show="cl['MEMBER_CARD.STATE']==1 && cl['MEMBER_CARD.TYPE_NAME']=='门店VIP卡'"data-toggle="modal" ng-click="empty(cl)" data-target="#balance">退VIP</span>
                         <span ng-show="cl['MEMBER_CARD.STATE']==-1" ng-click="FrozenCard(cl)">启用</span>
                        
                     </a>
                     <a class="table-link" >
                      <span ng-if="cl['MEMBER_CARD.STATE']==1 && cookies=='ADMIN'"  ng-click="unwrap(cl)">卡解绑</span>
-                    </a><!-- ng-if="APP_ID_LIST.indexOf('@1109@')>=0 -->
+                    </a>
                     
                      <a class="table-link" >
                      <span ng-if="cl['MEMBER_CARD.STATE']==-1 && APP_ID_LIST.indexOf('@1109@')>=0"  ng-click="pinCard(cl)">线上销卡</span>
@@ -336,5 +337,78 @@
         </div>
     </div>
 
+
+ <div class="modal fade" id="balance">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">
+                    </button>
+                    <h4 class="modal-title">申请退vip卡</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+                    <form class="form-horizontal">
+                        <!-- <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 总余额:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="cardTotalMoney"></h5>
+                            </div>
+                        </div> -->
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 control-label">
+                                <span class="required"> * </span>返点的会员卡:
+                            </label>
+                            <div class="col-sm-8">
+                                <select ng-model="MEMBER_CARD_ID"
+                                       
+                                        ng-change="getCardBalance(MEMBER_CARD_ID)"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option" value="null">
+                                        选择返点的会员卡
+                                    </option>
+                                    <option class="nya-bs-option"
+                                            ng-repeat="(key,value) in cardListy"
+                                            ng-bind="value['MEMBER_CARD.CARD_NO']"
+                                            value="{{value['MEMBER_CARD.CARD_NO']}}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" ng-if="memberDetail.select">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 当前卡余额:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="memberDetail['MEMBER.BALANCE']"></h5>
+                            </div>
+                        </div> 
+
+                       <!--  <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 申请退vip操作人以及原因
+                            </label>
+
+                            <div class="col-md-8">
+                                <input name="compId" class="form-control" ng-model="introduction">
+                            </div>
+                        </div> -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-outline" ng-click="savePinCard()">确定
+                    </button>
+                    <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <!-- END CONTENT -->

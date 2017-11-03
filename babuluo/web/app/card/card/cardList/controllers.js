@@ -17,7 +17,7 @@ app.service('loginServer', function() {
 angular.module('AndSell.Main').controller('card_card_cardList_Controller', function (http, $scope,loginServer, $stateParams, cardFactory, modalFactory, fileUpload) {
 
     modalFactory.setTitle('已开会员卡');
-
+    $scope.item={};
     $scope.cardAdd = {};
     $scope.isFaceValue = false;
     $scope.memberDetail = {};
@@ -202,9 +202,107 @@ angular.module('AndSell.Main').controller('card_card_cardList_Controller', funct
       	    }else{  modalFactory.showAlert("线上销卡失败！请输入销卡操作者和原因！");}
     	});
     } 
-    
+   //申请退vip卡
+    $scope.empty = function (item) {
+    	 $scope.item=item;
+    	 cardFactory.getMemberCardList({'MEMBER_CARD.USER_ID':  item['MEMBER_CARD.USER_ID']}, function (response) {
+             var cardList=[];
+             var vipcardList=[];
+             var map = {};
+             var money = 0;
+             for (var int = 0; int < response.data.length; int++) {
+                     map[response.data[int]['MEMBER_CARD.CARD_ID']] = response.data[int];
+                     money = money + Number(response.data[int]['MEMBER_CARD.BALANCE']);
+              
+            	 var obj={}
+            	if( response.data[int]['MEMBER_CARD.TYPE_ID']==3007){
+            		obj=response.data[int];
+            		cardList.push(obj);
+            	}
+			}
+             $scope.cardMap = map;
+             $scope.cardTotalMoney = moneyFormat(money);
+             $scope.cardListy = cardList;
+             console.log($scope.MEMBER_CARD_ID)
+             $scope.MEMBER_CARD_ID='null';
+             console.log(response.data);
+         });
+
+    }
+    //销卡
+    $scope.getCardBalance = function (id) {
+        var card = $scope.cardMap[id];
+        if (card != undefined) {
+            $scope.memberDetail['MEMBER.BALANCE'] = card['MEMBER_CARD.BALANCE'];
+            $scope.memberDetail['MEMBER.CARD_ID'] = card['MEMBER_CARD.CARD_ID'];
+            $scope.memberDetail['MEMBER.CARD_NO'] = card['MEMBER_CARD.CARD_NO'];
+            $scope.memberDetail['MEMBER.CARD_TYPE_ID'] = card['MEMBER_CARD.TYPE_ID'];
+            $scope.memberDetail.select = true;
+        } else {
+            $scope.memberDetail['MEMBER.BALANCE'] = undefined;
+            $scope.memberDetail['MEMBER.CARD_ID'] = undefined;
+            $scope.memberDetail['MEMBER.CARD_NO'] = undefined;
+            $scope.memberDetail.select = false;
+        }
+    };
+    $scope.savePinCard=function(){
+    	if($scope.MEMBER_CARD_ID=='null'||$scope.MEMBER_CARD_ID==''||$scope.MEMBER_CARD_ID==null||$scope.MEMBER_CARD_ID==undefined){
+    		modalFactory.showAlert('请选择返点的会员卡')
+    		return;
+    	}
+    	
+    	console.log($scope.MEMBER_CARD_ID)
+    	console.log($scope.item);
+    	var item={};
+    	item=$scope.item;
+    	//检验返点的卡是否一致
+//    		cardFactory.checkRebatesCard(item, function (response) {
+//    		console.log("212");
+//    		console.log(response.data);
+//    		$scope.RebatesCard=response.data;
+//    		if (response.data.length != 0) {
+////   			for (var int = 0; int < response.data.length; int++) {
+////	   				if(response.data[int]['FINANCE_LIST.EVENT_INTRO']!=("返点"+$scope.MEMBER_CARD_ID)){
+////	   					response.data[int]['FINANCE_LIST.EVENT_INTRO']
+////	   				modalFactory.showAlert('请选择同一返点的会员卡')
+////	  				return false;
+////	  				
+////	   				}
+////				}
+//    				  if($scope.RebatesCard[0]['FINANCE_LIST.EVENT_INTRO']!=("返点"+$scope.MEMBER_CARD_ID)){
+//    					  console.log($scope.RebatesCard[0]['FINANCE_LIST.EVENT_INTRO']);
+//    					  it=true;
+//    					  return;
+//    				  }
+//    		}
+//			});
+    	//检验卡是否一致
+	    	   var aDataSet=null;
+	           $.ajax({  
+	               type : "post",  
+	                url : "http://localhost:8080/AndSell/bubu/member/balance/checkRebatesCard",  
+	                data : "MEMBER_CARD.USER_ID=" + $scope.item['MEMBER_CARD.USER_ID'],  
+	                async : false,  
+	                success : function(data){  
+	                  aDataSet = data.data; 
+	                  console.log(aDataSet);
+	                }  
+	           }); 
+	           if (aDataSet.length != 0) {
+	        	   if(aDataSet[0]['FINANCE_LIST.EVENT_INTRO']!=("返点"+$scope.MEMBER_CARD_ID)){
+		        	   modalFactory.showAlert('请选择同一返点的会员卡');
+		        	   return;
+		           }
+	           }
+    	 item['FINANCE_LIST.EVENT_INTRO']="返点"+$scope.MEMBER_CARD_ID;//需要返点的卡
+		   cardFactory.frezzeCard(item, function () {
+			item['MEMBER_CARD.STATE'] = -1;
+			 $("#balance").modal('hide');  
+			}, function (response) {
+			modalFactory.showShortAlert(response.msg);
+			});
+    }
     $scope.FrozenCard = function (item) {
-    	//item['FINANCE_LIST.EVENT_INTRO']=prompt("请输入冻结卡备注","");
     	 item['FINANCE_LIST.EVENT_INTRO']=null;
     	modalFactory.showPrompt("请输入解冻卡操作者及原因",function(a){
     		item['FINANCE_LIST.EVENT_INTRO']=a
