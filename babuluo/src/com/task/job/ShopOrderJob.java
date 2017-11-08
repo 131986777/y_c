@@ -86,6 +86,9 @@ public class ShopOrderJob implements Job{
 			  sql.append("`DATETIME_CANCEL` datetime DEFAULT NULL,");
 			  sql.append("`DATETIME_DELIVERY` datetime DEFAULT NULL,");
 			  sql.append("`STATE_COMMENT` int(11) DEFAULT NULL,");
+			  sql.append("`PAY_CODE` varchar(255) DEFAULT NULL,");
+			  sql.append("`PAY_NAME` varchar(255) DEFAULT NULL,");
+			  sql.append("`PAY_AMOUNT` bigint(11) DEFAULT NULL,");
 			  sql.append("PRIMARY KEY (`ID`),");
 			  sql.append("KEY `ss` (`ID`) USING HASH,");
 			  sql.append("KEY `date` (`DATETIME_ADD`),");
