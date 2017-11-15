@@ -222,13 +222,13 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                 if (ele['BANNER.END_DATETIME'] == null && ele['BANNER.BEGIN_DATETIME'] == null) {
                     ele['is_show'] = true;
                 } else if (ele['BANNER.BEGIN_DATETIME'] != null) {
-                    var startTime = new Date(ele['BANNER.BEGIN_DATETIME'].split('.')[0]).getTime();    //开始时间
+                    var startTime = new Date(ele['BANNER.BEGIN_DATETIME'].split('.')[0].replace(/\-/g, "/")).getTime();    //开始时间
                     var currentTime = new Date().getTime();      //当前时间 毫秒
                     if (currentTime > startTime) {
                         if (ele['BANNER.BEGIN_DATETIME'] == null) {
                             ele['is_show'] = true;
                         } else {
-                            var endTime = new Date(ele['BANNER.END_DATETIME'].split('.')[0]).getTime();      //结束时间
+                            var endTime = new Date(ele['BANNER.END_DATETIME'].split('.')[0].replace(/\-/g, "/")).getTime();      //结束时间
                             if (currentTime < endTime) {
                                 ele['is_show'] = true;
                             }

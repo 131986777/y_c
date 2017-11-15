@@ -37,7 +37,8 @@
                 </p>
                 <p class="limit-time"
                    ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']=='0,0,0,0,0,0,0'">
-                    <span>正价商品可用</span>
+                    <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE'] !=3">正价商品可用</span>
+                    <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE'] ==3">线上线下可用</span>
                 </p>
                 <p class="limit-class">
                     <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用

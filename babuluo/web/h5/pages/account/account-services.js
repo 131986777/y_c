@@ -13,7 +13,7 @@ AndSellH5MainModule.service('eventFactory', function (http) {
 	this.getCoupond= http.post('/point/coupon/getById');
 	this.getList= http.post('/offline/coupon/queryByUserId');
 	this.exchange= http.post('/offline/coupon/add');
-	
+	this.exchanges= http.post('/member/coupon/getCouponByPoint');
 	
 	
     this.getEventByType = http.post('/sales/event/getByType');
@@ -24,6 +24,7 @@ AndSellH5MainModule.service('eventFactory', function (http) {
 
 
     this.getCouponInfo = http.post('/coupon/coupon/getById');
+    
   
 
 });

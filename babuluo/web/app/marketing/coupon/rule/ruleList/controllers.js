@@ -25,7 +25,7 @@ angular.module('AndSell.Main').controller('marketing_coupon_rule_ruleList_Contro
 
         $scope.mod = clone(item);
         $scope.mod['COUPON_RULE.ID'] = item['COUPON_RULE.ID'];
-        if (item['COUPON_RULE.TYPE'] == 1) {
+        if (item['COUPON_RULE.TYPE'] == 1 || item['COUPON_RULE.TYPE'] == 3) {
             $scope.mod['COUPON_RULE.FACE_VALUE'] = (item['COUPON_RULE.FACE_VALUE']
             / 100).toFixed(2);
         } else {

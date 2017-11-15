@@ -126,7 +126,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addCoupon_Controller',
             //读取到选中的优惠券的面值
             var faceValue = $scope.selectItem['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'];
             var type = $scope.selectItem['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE'];
-            if (type == '1') {   //减价
+            if (type == '1' || type == '3') {   //减价
                 $scope.money = (faceValue / 100).toFixed(2);
             } else if (type == '2') {  //打折
                 // console.log(456);

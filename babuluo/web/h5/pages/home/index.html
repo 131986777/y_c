@@ -137,7 +137,19 @@
      margin-top: -12px;  float: right;" ng-click="goSeckill(seckill)" >立即抢购</button>
         </div>
     </div>
-
+    
+    <!-- 活动专区 -->
+     <div class="item-title"  ng-if="activityList.length>0"    style="    font-size: 20px;line-height: 50px;margin-bottom: 0; text-align: center; height: 50px;">
+                <i class="icon-wrap icon-luwei" style="height: 20px;width: 20px; display: inline-block;    background: url('../../public/img/activity.png');background-size:100%" ></i>
+              
+                <span style="border-bottom: 1px solid rgb(245,169,24); padding: 0 15px 5px;    font-size: 20px;line-height: 50px;margin-bottom: 0;text-align: center; height: 50px;">活动专区</span>
+   </div> 
+        <div class="product-content" ng-repeat="item in activityList">
+            <a ng-if="item['is_show']==true" ng-href="{{item['BANNER.URL']}}">
+            <img
+                    ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
+                    style="height: auto;width: 100%;"></a>
+        </div>
 
     <!-- 团购 -->
 
@@ -147,8 +159,7 @@
                     <span style="border-bottom: 1px solid rgb(245,169,24); padding: 0 15px 5px;    font-size: 20px;line-height: 50px;margin-bottom: 0;text-align: center; height: 50px;">预约商品</span>
        </div>  
                 
-    <div class="group" ng-repeat="item in groupList" ng-if="item['is_show']==true">
-
+    <div class="group" ng-repeat="item in groupList" ng-if="item['is_show']==true" style="margin-bottom: 10px;">
         <a ng-href="{{item['BANNER.URL']}}">
             <img ng-if="item['is_show']==true"
                  ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
@@ -157,12 +168,6 @@
 
     <!-- 活动专区 -->
     <div class="product-wrap">
-        <div class="headTitle" ng-if="activityList.length>0">活动专区</div>
-        <div class="product-content" ng-repeat="item in activityList">
-            <a ng-if="item['is_show']==true" ng-href="{{item['BANNER.URL']}}"><img
-                    ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"
-                    style="height: auto;width: 100%;"></a>
-        </div>
 
         <!-- BEGIN 今日推荐 -->
         <div class="product-special" style="font-size: 0;"
@@ -360,3 +365,28 @@
     </div>
 
 </div>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?10d86961f13f568fa9bded341229b215";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<script type='text/javascript'>
+      var _vds = _vds || [];
+      window._vds = _vds;
+      (function(){
+        _vds.push(['setAccountId', '96f7be9d5db84660']);
+        (function() {
+          var vds = document.createElement('script');
+          vds.type='text/javascript';
+          vds.async = true;
+          vds.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'dn-growing.qbox.me/vds.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(vds, s);
+        })();
+      })();
+  </script>
+  <script type='text/javascript' src='https://assets.growingio.com/sdk/wx/vds-wx-plugin.js'></script>

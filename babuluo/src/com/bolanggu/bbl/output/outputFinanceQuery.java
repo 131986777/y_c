@@ -217,8 +217,8 @@ public class outputFinanceQuery {
 			+" g.SHOP_NAME AS `FINANCE_LIST.CARD_SHOP`,"
 			+" a.OPER_USER_ID AS `FINANCE_LIST.OPER_USER_ID`,"
 			+" a.EVENT_INTRO AS `FINANCE_LIST.EVENT_INTRO`,"
-			+" FORMAT(a.CHANGE_ACCOUNT_VALUE/100,2) AS `FINANCE_LIST.CHANGE_ACCOUNT_VALUE`,"
-			+" FORMAT(a.CHANGE_GIFT_VALUE/100,2) AS `FINANCE_LIST.CHANGE_GIFT_VALUE`"
+			+" a.CHANGE_ACCOUNT_VALUE/100 AS `FINANCE_LIST.CHANGE_ACCOUNT_VALUE`,"
+			+" a.CHANGE_GIFT_VALUE/100 AS `FINANCE_LIST.CHANGE_GIFT_VALUE`"
 			+" FROM finance_list a "
 			+" LEFT JOIN member b ON a.USER_ID=b.USER_ID"
 			+" LEFT JOIN member_info c ON a.USER_ID=c.USER_ID "
@@ -357,10 +357,12 @@ public class outputFinanceQuery {
                 SXSSFCell cell16 = row.createCell(15);
                 cell16.setCellValue(
                 		NumFormat.format(rs.getDouble("FINANCE_LIST.CHANGE_ACCOUNT_VALUE")));
+
                 cell16.setCellStyle(cellStyle);
                 SXSSFCell cell17 = row.createCell(16);
                 cell17.setCellValue(
                 		NumFormat.format(rs.getDouble("FINANCE_LIST.CHANGE_GIFT_VALUE")));
+
                 cell17.setCellStyle(cellStyle);
                 SXSSFCell cell14 = row.createCell(17);
                 cell14.setCellValue(Balance);
