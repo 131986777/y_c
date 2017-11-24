@@ -149,6 +149,18 @@
         <servlet-name>shopOrder</servlet-name>
         <url-pattern>/shopOrder</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>vipcardBackMoney</servlet-name>
+        <servlet-class>com.task.servlet.VipCardBackMoneyServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>vipcardBackMoney</servlet-name>
+        <url-pattern>/vipcardBackMoney</url-pattern>
+    </servlet-mapping>
+    
     <servlet>
         <servlet-name>queryOrder</servlet-name>
         <servlet-class>com.bolanggu.bbl.orderAnalysis.orderQuery</servlet-class>
