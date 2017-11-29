@@ -16,9 +16,14 @@
                         <tbody ng-cloak>
 
                         <tr ng-repeat="value in districtList">
-                            <td class="col-md-10" style="text-align: left">
+                            <td class="col-md-5" style="text-align: left">
                                 <i class="fa fa-folder-o"></i>
                                 {{value['DISTRICT.DISTRICT_NAME']}}
+                            </td>
+                            
+                            <td class="col-md-5" style="text-align: left">
+                                <i class="fa fa-folder-o"></i>
+                                {{value['DISTRICT.CITY'] == 1?'南京':'常州'}}
                             </td>
 
                             <td class="col-md-2 text-right">
@@ -50,6 +55,30 @@
                 <div class="modal-body form-body text-right">
 
                     <form class="form-horizontal">
+                    
+	                    <div class="form-group">
+	                            <label class="col-md-3 control-label">
+	                                <span class="required" style="color: red"> * </span> 地区:
+	                            </label>
+	
+	                            <div class="col-md-8">
+	                            	<select ng-model="add['DISTRICT.CITY']"
+                                        ng-init="add['DISTRICT.CITY']='1'"
+                                        class="nya-bs-select form-control">
+                                        
+                                        <option class="nya-bs-option"
+				                                value="1">
+				                                南京
+				                        </option>
+				                        
+				                        <option class="nya-bs-option"
+				                                value="2">
+				                                常州
+				                        </option>
+                                    
+                                    </select>
+	                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
@@ -86,8 +115,33 @@
                             aria-hidden="true"></button>
                     <h4 class="modal-title">修改区域</h4>
                 </div>
+                
+                
                 <div class="modal-body form-body text-right">
                     <form class="form-horizontal">
+                    
+                    	<div class="form-group">
+                          <label class="col-md-3 control-label">
+                              <span class="required" style="color: red"> * </span> 地区:
+                          </label>
+
+                          <div class="col-md-8">
+		                          	<select ng-model="modify['DISTRICT.CITY']"
+		                                     class="nya-bs-select form-control">
+		                                     
+		                                     <option class="nya-bs-option"
+			                                value="1">
+			                                南京
+			                        </option>
+			                        
+			                        <option class="nya-bs-option"
+			                                value="2">
+			                                常州
+			                        </option>
+		                                 
+		                                 </select>
+		                          </div>
+		                </div>
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
                                 <span class="required" style="color: red"> * </span> 区域名称:

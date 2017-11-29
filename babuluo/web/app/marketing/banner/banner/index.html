@@ -41,7 +41,8 @@
                 <tr>
                     <th class="col-md-1">横幅名称</th>
                     <th class="col-md-2">横幅描述</th>
-                    <th class="col-md-2">横幅位置</th>
+                    <th class="col-md-1">横幅位置</th>
+                    <th class="col-md-1">横幅所属地区</th>
                     <th class="col-md-1 text-center">排序</th>
                     <th class="col-md-1 text-center"> 操作</th>
                 </tr>
@@ -59,6 +60,7 @@
                         &nbsp;
                         <a ng-if="bannerList[key+1]!=undefined" ng-click="changeOrderNumUpDown(item,key,-1)">↓</a>
                     </td> <!--横幅位置-->
+                    <td class="text-center" ng-bind="item['BANNER.CITY'] == 1?'南京':'常州'"></td>
                     <td class="text-center">
                         <!--<a show-modal id="#couponDetail" class="btn sbold green" ng-click="detailClick(item)">明细</a>-->
                         <a show-modal id="#modBanner" ng-click="modifyClick(item)">修改</a>
@@ -187,6 +189,31 @@
                                    placeholder="请输入超链接的URL">
                         </div>
                     </div>
+                    
+                    <div class="form-group row">
+                          <label class="col-md-3 control-label">
+                              <span class="required" style="color: red"> * </span> 地区:
+                          </label>
+
+                          <div class="col-md-8">
+		                          	<select ng-model="add['BANNER.CITY']"
+		                          			  ng-init="add['BANNER.CITY']='1'"
+		                                     class="nya-bs-select form-control">
+		                                     
+		                                     <option class="nya-bs-option"
+			                                value="1">
+			                                南京
+			                        </option>
+			                        
+			                        <option class="nya-bs-option"
+			                                value="2">
+			                                常州
+			                        </option>
+		                                 
+		                                 </select>
+		                          </div>
+		                </div>
+                    
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
                             开始时间
@@ -336,6 +363,30 @@
                                    ng-model="mod['BANNER.URL']">
                         </div>
                     </div>
+                    
+                    <div class="form-group row">
+                          <label class="col-md-3 control-label">
+                              <span class="required" style="color: red"> * </span> 地区:
+                          </label>
+
+                          <div class="col-md-8">
+		                          	<select ng-model="mod['BANNER.CITY']"
+		                                     class="nya-bs-select form-control">
+		                                     
+		                                     <option class="nya-bs-option"
+			                                value="1">
+			                                南京
+			                        </option>
+			                        
+			                        <option class="nya-bs-option"
+			                                value="2">
+			                                常州
+			                        </option>
+		                                 
+		                                 </select>
+		                          </div>
+		                </div>
+                    
                     <div class="form-group row">
                         <label class="col-md-3 control-label">
                             开始时间
