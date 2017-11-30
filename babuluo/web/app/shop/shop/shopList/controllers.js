@@ -15,7 +15,22 @@ angular.module('AndSell.Main').controller('shop_shop_shopList_Controller', funct
     $scope.bindData = function (response) {
         $scope.shopList = response.data;
         $scope.districtList = response.extraData.districtList;
+        $scope.districtList_bak = response.extraData.districtList;
+        $scope.changeShop($scope.filter['SHOP.CITY']);
     };
+    
+    $scope.changeShop = function(city){
+    	var disList = new Array();
+    	for(var i=0;i<$scope.districtList_bak.length;i++){
+    		var item = $scope.districtList_bak[i];
+    		if(item['DISTRICT.CITY'] == city){
+    			disList.push(item);
+    		}
+    	}
+    	
+    	$scope.cuurDistrictList = disList;
+    }
+    
 
     $scope.addShopList = function () {
 

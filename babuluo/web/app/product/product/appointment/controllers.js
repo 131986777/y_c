@@ -46,7 +46,9 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
         var on = true;
         $scope.appointmentList.forEach(function (ele) {
             if (ele['APPOINTMENT_PRODUCT.SKU_ID'].trim()
-                == $scope.add['APPOINTMENT_PRODUCT.SKU_ID'].trim()) {
+                == $scope.add['APPOINTMENT_PRODUCT.SKU_ID'].trim()
+                 && ele['APPOINTMENT_PRODUCT.CITY'].trim()
+                == $scope.add['APPOINTMENT_PRODUCT.CITY']) {
                 modalFactory.showShortAlert("该商品已经存在预约配置！");
                 on = false;
             }

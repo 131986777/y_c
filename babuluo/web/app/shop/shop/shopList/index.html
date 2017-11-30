@@ -3,6 +3,24 @@
             <div class="table-toolbar">
                 <div class="form-inline">
                     <label class="control-label">筛选：</label>
+                    <select ng-model="filter['SHOP.CITY']"
+                    		ng-init = "filter['SHOP.CITY'] = '1'"
+                    		ng-change="changeShop(filter['SHOP.CITY'])"
+                            class="nya-bs-select form-control" data-width="80px">
+                       <option class="nya-bs-option" value="null">
+                            门店地区
+                        </option>           
+                      <option class="nya-bs-option"
+                  		  	  value="1">
+                              南京
+                      </option>
+                      
+                      <option class="nya-bs-option"
+                              value="2">
+                              常州
+                      </option>
+		                                 
+		            </select>
                     <select ng-model="filter['SHOP.DISTRICT_ID']"
                             ng-init="filter['SHOP.DISTRICT_ID']='null'"
                             class="nya-bs-select form-control " data-width="80px">
@@ -10,7 +28,7 @@
                             门店区域
                         </option>
                         <option class="nya-bs-option"
-                                ng-repeat="value in districtList"
+                                ng-repeat="value in cuurDistrictList "
                                 ng-bind="value['DISTRICT.DISTRICT_NAME']"
                                 value="{{value['DISTRICT.DISTRICT_ID']}}">
                         </option>
@@ -27,6 +45,7 @@
             <tr>
                 <th>店名</th>
                 <th>区域</th>
+                <th>地区</th>
                 <th>地理位置</th>
                 <th>电话</th>
                 <th class="text-center">门店管理员</th>
@@ -41,6 +60,10 @@
                     <span ng-show="sl['SHOP.IS_USE']==-1" style="color: red">(已关停)</span>
                 </td>
                 <td ng-bind="sl['SHOP.SHOP_DISTRICT_NAME']"></td>
+                <td>
+                	<span ng-if="sl['SHOP.CITY'] == 1">南京</span>
+                	<span ng-if="sl['SHOP.CITY'] == 2">常州</span>
+                </td>
                 <td><a class="table-link" ng-click="showMap(sl)">查看地图</a></td>
                 <td ng-bind="sl['SHOP.TELEPHONE']" ></td>
                 <td class="text-center">暂无</td>
@@ -101,6 +124,31 @@
                                        required>
                             </div>
                         </div>
+                        
+                        <div class="form-group">
+                          <label class="col-md-3 control-label">
+                              <span class="required" style="color: red"> * </span> 地区:
+                          </label>
+
+                          <div class="col-md-7">
+		                          	<select ng-model="shopAdd['SHOP.CITY']"
+		                          			  ng-init="shopAdd['SHOP.CITY']='1'"
+		                                     class="nya-bs-select form-control">
+		                                     
+		                                     <option class="nya-bs-option"
+			                                value="1">
+			                                南京
+			                        </option>
+			                        
+			                        <option class="nya-bs-option"
+			                                value="2">
+			                                常州
+			                        </option>
+		                                 
+		                                 </select>
+		                          </div>
+		                </div>
+                        
                         <div class="form-group">
                             <label class="col-sm-3 control-label">
                                 <span class="required" style="color: red"> * </span>区域：
@@ -250,6 +298,31 @@
                                        name="telephone" ng-model="shopEdited['SHOP.TELEPHONE']">
                             </div>
                         </div>
+                        
+                        
+                        <div class="form-group">
+                          <label class="col-md-3 control-label">
+                              <span class="required" style="color: red"> * </span> 地区:
+                          </label>
+
+                          <div class="col-md-7">
+		                          	<select ng-model="shopEdited['SHOP.CITY']"
+		                                     class="nya-bs-select form-control">
+		                                     
+		                                     <option class="nya-bs-option"
+			                                value="1">
+			                                南京
+			                        </option>
+			                        
+			                        <option class="nya-bs-option"
+			                                value="2">
+			                                常州
+			                        </option>
+		                                 
+		                                 </select>
+		                          </div>
+		                </div>
+                        
                         <div class="form-group">
                             <label class="col-sm-3 control-label">
                                 <span class="required" style="color: red"> * </span>区域：

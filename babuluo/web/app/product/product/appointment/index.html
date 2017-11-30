@@ -17,10 +17,11 @@
                             <th style="width: 120px" class="text-center"> 描述</th>
                             <th style="width: 120px" class="text-center"> 商品</th>
                             <th style="width: 120px" class="text-center"> 商品上架状态</th>
-                            <th style="width: 120px" class="text-center"> 预约价</th>
+                            <th style="width: 80px" class="text-center"> 预约价</th>
                             <th style="width: 120px" class="text-center"> 预付款</th>
-                            <th style="width: 120px" class="text-center"> 库存</th>
-                            <th style="width: 120px" class="text-center"> 状态</th>
+                            <th style="width: 80px" class="text-center"> 库存</th>
+                            <th style="width: 80px" class="text-center"> 状态</th>
+                            <th style="width: 120px" class="text-center">地区</th>
                             <th style="width: 120px" class="text-center"> 备注</th>
                             <th style="width: 180px" class="text-center"> 操作</th>
                         </tr>
@@ -52,6 +53,7 @@
                                 <span ng-if="value['APPOINTMENT_PRODUCT.STATE']==-1">停用</span>
                                 <span ng-if="value['APPOINTMENT_PRODUCT.STATE']==1">启用</span>
                             </td>
+                            <td class="text-center" ng-bind="value['APPOINTMENT_PRODUCT.CITY']==1?'南京':'常州'"></td>
                             <td class="text-center"
                                 ng-bind="value['APPOINTMENT_PRODUCT.REMARK']"></td>
                             <td class="text-center">
@@ -131,6 +133,31 @@
                                 </select>
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                          <label class="col-md-3 control-label">
+                              <span class="required" style="color: red"> * </span> 地区:
+                          </label>
+
+                          <div class="col-md-8">
+		                          	<select ng-model="modify['APPOINTMENT_PRODUCT.CITY']"
+		                                     class="nya-bs-select form-control">
+		                                     
+		                                     <option class="nya-bs-option"
+			                                value="1">
+			                                南京
+			                        </option>
+			                        
+			                        <option class="nya-bs-option"
+			                                value="2">
+			                                常州
+			                        </option>
+		                                 
+		                                 </select>
+		                          </div>
+		                </div>
+                        
+                        
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
                                 <span class="required"> * </span> 库存数量:
@@ -318,6 +345,30 @@
                                 </select>
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                          <label class="col-md-3 control-label">
+                              <span class="required" style="color: red"> * </span> 地区:
+                          </label>
+
+                          <div class="col-md-8">
+		                          	<select ng-model="add['APPOINTMENT_PRODUCT.CITY']"
+		                          			  ng-init="add['APPOINTMENT_PRODUCT.CITY']='1'"
+		                                     class="nya-bs-select form-control">
+		                                     
+		                                     <option class="nya-bs-option"
+			                                value="1">
+			                                南京
+			                        </option>
+			                        
+			                        <option class="nya-bs-option"
+			                                value="2">
+			                                常州
+			                        </option>
+		                                 
+		                                 </select>
+		                          </div>
+		                </div>
 
                         <div class="form-group row">
                             <label class="col-md-3 control-label">

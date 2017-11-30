@@ -10,5 +10,5 @@ AndSellMainModule.service('pointFactory', function (http) {
     this.delCouponById = http.post('/point/coupon/delById');
     
     //兑换记录
-    this.getOfflineCoupon = http.post('/offline/coupon/modifyById');
+    this.getOfflineCoupon = http.post('/member/coupon/falseDel');
 });
