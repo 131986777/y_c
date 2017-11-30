@@ -36,6 +36,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
             });
             $scope.shopList = sorting(list);
             $scope.shopMap = shopMap;
+            $scope.chooseCity(1);
             $scope.getRecentShopList();
             weUI.toast.hideLoading();
         }, function (response) {
@@ -64,6 +65,7 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
 
     $scope.shopSelect = function (shop) {
         setCookie('currentShop', shop['SHOP.SHOP_ID']);
+        setCookie('currentCity',shop['SHOP.CITY']);
         if ($scope.cookieShopIdList.indexOf(shop['SHOP.SHOP_ID']) >= 0) {
             $scope.cookieShopIdList.remove(shop['SHOP.SHOP_ID']);
         }
@@ -92,12 +94,28 @@ angular.module('AndSell.H5.Main').controller('pages_shop_Controller', function (
         $scope.currDistrictId = districtId;
         var list = new Array;
         $scope.shopList.forEach(function (ele) {
-            if (ele['SHOP.DISTRICT_ID'] == districtId || districtId == 0) {
+            if ((ele['SHOP.DISTRICT_ID'] == districtId || districtId == 0) && ele['SHOP.CITY'] == $scope.currCity) {
                 list.push(ele);
             }
         });
         $scope.currshopList = list;
     };
+    
+    $scope.chooseCity = function (cityId){
+    	$scope.currCity = cityId;
+    	var list = new Array;
+    	$scope.districtList.forEach(function(ele){
+    		if(ele['DISTRICT.CITY'] == cityId){
+    			 list.push(ele);
+    		}
+    	});
+    	$scope.cuurDistrictList = list;
+    	$scope.cuurDistrictList.push({
+            'DISTRICT.DISTRICT_NAME':'全部区域',
+            'DISTRICT.DISTRICT_ID':0
+        });
+    	
+    }
 
     $scope.initLoad();
 
