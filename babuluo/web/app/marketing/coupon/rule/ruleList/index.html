@@ -15,7 +15,7 @@
                         </option>
                         <option class="nya-bs-option" value="1">减价</option>
                         <option class="nya-bs-option" value="2">打折</option>
-                        <option class="nya-bs-option" value="3">电子现金金</option>
+                        <option class="nya-bs-option" value="3">电子现金券</option>
 
                     </select>
                 </div> <!-- select-center  -->
@@ -50,7 +50,7 @@
                     </td><!--规格名称-->
                     <td ng-if="item['COUPON_RULE.TYPE']==1">减价</td> <!--规格类型-减-->
                     <td ng-if="item['COUPON_RULE.TYPE']==2">打折</td> <!--规格类型-折-->
-                    <td ng-if="item['COUPON_RULE.TYPE']==3">电子现金金</td> <!-- 电子现金金 -->
+                    <td ng-if="item['COUPON_RULE.TYPE']==3">电子现金券</td> <!-- 电子现金金 -->
                     <td ng-bind="item['COUPON_RULE.INTRO']"></td> <!--规则描述-->
                     <td class="text-center">
                         <span ng-if="item['COUPON_RULE.TYPE']==1 || item['COUPON_RULE.TYPE']==3">{{(item['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}元</span>
@@ -112,7 +112,7 @@
                                     class="nya-bs-select form-control">
                                 <option class="nya-bs-option" value='1'>减价</option>
                                 <option class="nya-bs-option" value='2'>打折</option>
-                                <option class="nya-bs-option" value='3'>电子现金金</option>
+                                <option class="nya-bs-option" value='3'>电子现金券</option>
                             </select>
                         </div>
                     </div>

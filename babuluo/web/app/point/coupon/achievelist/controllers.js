@@ -1,6 +1,6 @@
 angular.module('AndSell.Main').controller('point_coupon_achievelist_Controller', function (http,$scope,pointFactory,modalFactory) {
 	//设置页面Title
-    modalFactory.setTitle('积分兑换记录');
+    modalFactory.setTitle('年货大集入场券兑换');
 
     modalFactory.setBottom(false);
     
@@ -34,14 +34,12 @@ angular.module('AndSell.Main').controller('point_coupon_achievelist_Controller',
     };
 
     $scope.search = function () {
-        $scope.filter['OFFLINE_COUPON.QUERY_CONTENT'] = $scope.queryContent;
+        $scope.filter['MEMBER_COUPON.QUERY_CONTENT'] = $scope.queryContent;
     };
 
    $scope.changeState = function(id){
 	   modalFactory.showAlert("确认兑换吗?", function () {
-	   $scope.modify = {};
-	   $scope.modify['']
-	   	pointFactory.getOfflineCoupon({'OFFLINE_COUPON.ID': id,'OFFLINE_COUPON.IS_USE':1}, function (res) {
+	   pointFactory.getOfflineCoupon({'MEMBER_COUPON.ID': id}, function (res) {
 	           modalFactory.showShortAlert("兑换成功");
 	           location.reload();
 	       }, function (response) {

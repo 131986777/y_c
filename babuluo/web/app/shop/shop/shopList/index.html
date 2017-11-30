@@ -60,7 +60,10 @@
                     <span ng-show="sl['SHOP.IS_USE']==-1" style="color: red">(已关停)</span>
                 </td>
                 <td ng-bind="sl['SHOP.SHOP_DISTRICT_NAME']"></td>
-                <td ng-bind="sl['SHOP.CITY'] == 2?'常州':'南京'"></td>
+                <td>
+                	<span ng-if="sl['SHOP.CITY'] == 1">南京</span>
+                	<span ng-if="sl['SHOP.CITY'] == 2">常州</span>
+                </td>
                 <td><a class="table-link" ng-click="showMap(sl)">查看地图</a></td>
                 <td ng-bind="sl['SHOP.TELEPHONE']" ></td>
                 <td class="text-center">暂无</td>
