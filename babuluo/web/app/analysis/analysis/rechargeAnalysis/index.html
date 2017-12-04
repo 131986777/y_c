@@ -13,11 +13,16 @@
                             
                </div>
                  <div class="col-md-3">
-               <select class="form-control " >  
+               			<!-- <select class="form-control " >  
                    		<option value='00'>全部门店</option>
                    		<option  ng-repeat="lie in list" ng-bind="lie['SHOP.SHOP_NAME']" >{{lie['SHOP.SHOP_ID']}}</option>
-                            </select>
-                             </div>        
+                        </select> -->
+                         <select   id="shop" class="selectpicker show-tick form-control  col-md-6"  data-live-search="true"
+		               		  ng-model="FINANCE_LIST.SHOP_ID" 
+		               		  ng-init="FINANCE_LIST.SHOP_ID='00'">
+		               		 	<option value='00' selected="true">全部门店</option>
+		                </select>
+                 </div>        
             <button class="btn " type="button" ng-click="getGroupByRange()">查询</button>
             <button class="btn alignRight" type="button" onclick="outPutMethod('offlineFormTable')">导出</button>
             <div class="clear"></div>

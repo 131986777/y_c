@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('point_point_pointList_Controller', function (http, $scope, shopFactory, $stateParams, cardFactory, memberFactory, pointFactory, modalFactory) {
+angular.module('AndSell.Main').controller('point_point_pointList_Controller', function (http, $scope, shopFactory, $stateParams, analysisFactory,cardFactory, memberFactory, pointFactory, modalFactory) {
 
     modalFactory.setTitle('积分管理');
     modalFactory.setBottom(false);
@@ -13,6 +13,17 @@ angular.module('AndSell.Main').controller('point_point_pointList_Controller', fu
         $scope.getShop();
         $scope.lastSearch = '';
         $scope.lastSearchType = 'LOGIN_ID';
+        analysisFactory.getList().get({},function (response) {
+            $scope.list=response.data;
+            angular.forEach($scope.list,function(data){
+            	$("#shop").append("<option value='"+data['SHOP.SHOP_ID']+"'>"+data['SHOP.SHOP_NAME']+"</option>"); 
+            });
+            $('.selectpicker').selectpicker({  
+                'selectedText': 'cat'  
+            });
+            $('.selectpicker').selectpicker('refresh');
+            
+        },null);
     };
 
     $scope.getShop = function () {

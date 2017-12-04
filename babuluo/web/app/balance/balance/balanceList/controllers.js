@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function ($q, http, $scope, $stateParams, cardFactory, memberFactory, balanceFactory, modalFactory, shopFactory) {
+angular.module('AndSell.Main').controller('balance_balance_balanceList_Controller', function ($q, http, $scope, $stateParams, cardFactory,analysisFactory, memberFactory, balanceFactory, modalFactory, shopFactory) {
     modalFactory.setTitle('资金明细');
     modalFactory.setBottom(false);
 
@@ -17,6 +17,17 @@ angular.module('AndSell.Main').controller('balance_balance_balanceList_Controlle
         balanceFactory.getAllUsefulActivity({},function (response) {
             $scope.activitys=response.data;
         });
+        analysisFactory.getList().get({},function (response) {
+            $scope.list=response.data;
+            angular.forEach($scope.list,function(data){
+            	$("#shop").append("<option value='"+data['SHOP.SHOP_ID']+"'>"+data['SHOP.SHOP_NAME']+"</option>"); 
+            });
+            $('.selectpicker').selectpicker({  
+                'selectedText': 'cat'  
+            });
+            $('.selectpicker').selectpicker('refresh');
+            
+        },null);
     }
 
     $scope.getShop = function () {

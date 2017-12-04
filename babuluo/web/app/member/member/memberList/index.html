@@ -52,7 +52,7 @@
                                 value="{{value['MEMBER_CODE_GROUP.ID']}}">
                         </option>
                     </select>
-                    <select ng-model="filter['MEMBER.SHOP_ID']"
+                    <!-- <select ng-model="filter['MEMBER.SHOP_ID']"
                             ng-init="filter['MEMBER.SHOP_ID']='null'"
                             class="nya-bs-select form-control">
                         <option class="nya-bs-option" value="null">
@@ -61,7 +61,12 @@
                         <option class="nya-bs-option" ng-repeat="shop in shopList"
                                 ng-bind="shop['SHOP.SHOP_NAME']" value="{{shop['SHOP.SHOP_ID']}}">
                         </option>
-                    </select>
+                    </select> -->
+                    <select   id="shop" class="selectpicker show-tick form-control  col-md-6"  data-live-search="true"
+		               		  ng-model="filter['MEMBER.SHOP_ID']" 
+		               		  ng-init="filter['MEMBER.SHOP_ID']='null'">
+		               		 	<option value='null' selected="true">全部门店</option>
+		             </select>	
                     <label class="control-label">排序：</label>
                     <select ng-model="filter['MEMBER.REG_DATETIME']"
                             ng-init="filter['MEMBER.REG_DATETIME']='REG_DATETIME DESC'"

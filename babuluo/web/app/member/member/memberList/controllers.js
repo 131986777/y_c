@@ -1,4 +1,4 @@
-angular.module('AndSell.Main').controller('member_member_memberList_Controller', function (http, $scope, memberFactory, $stateParams, memberGroupFactory, modalFactory, $q) {
+angular.module('AndSell.Main').controller('member_member_memberList_Controller', function (http, $scope, memberFactory, $stateParams, memberGroupFactory,analysisFactory, modalFactory, $q) {
 
     //设置页面Title
     modalFactory.setTitle('客户管理');
@@ -24,6 +24,17 @@ angular.module('AndSell.Main').controller('member_member_memberList_Controller',
             $scope.queryContent = $stateParams.keyword;
             $scope.queryMember();
         }
+        analysisFactory.getList().get({},function (response) {
+            $scope.list=response.data;
+            angular.forEach($scope.list,function(data){
+            	$("#shop").append("<option value='"+data['SHOP.SHOP_ID']+"'>"+data['SHOP.SHOP_NAME']+"</option>"); 
+            });
+            $('.selectpicker').selectpicker({  
+                'selectedText': 'cat'  
+            });
+            $('.selectpicker').selectpicker('refresh');
+            
+        },null);
     };
 
     $scope.bindData = function (response) {

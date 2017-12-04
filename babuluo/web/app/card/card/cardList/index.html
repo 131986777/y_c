@@ -45,7 +45,7 @@
                                     value="{{value['MEMBER_CARD_TYPE.ID']}}">
                             </option>
                         </select>
-                        <select ng-model="filter['MEMBER_CARD.SHOP_ID']"
+                        <!-- <select ng-model="filter['MEMBER_CARD.SHOP_ID']"
                                 ng-init="filter['MEMBER_CARD.SHOP_ID']='null'"
                                 class="nya-bs-select form-control" style="width: 90px">
                             <option class="nya-bs-option" value="null">
@@ -56,7 +56,12 @@
                                     ng-bind="value['SHOP.SHOP_NAME']"
                                     value="{{value['SHOP.SHOP_ID']}}">
                             </option>
-                        </select>
+                        </select> -->
+                        <select   id="shop" class="selectpicker show-tick form-control  col-md-6"  data-live-search="true"
+		               		  ng-model="filter['MEMBER_CARD.SHOP_ID']" 
+		               		  ng-init="filter['MEMBER_CARD.SHOP_ID']='null'">
+		               		 	<option value='null' selected="true">全部门店</option>
+		                </select>	
                         <select ng-model="timeType"
                                 ng-init="timeType='all'"
                                 ng-change="filterTime(timeType)"
