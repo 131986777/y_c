@@ -164,9 +164,13 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
         shopFactory.getBannerList({}, function (response) {    //横幅列表
 
             var dataList = response.data;
+            var currCity = getCookie('currentCity');
+            if(getCookie('currentCity') == undefined){
+            	currCity = 1;
+            }
 
             dataList.forEach(function (ele) {
-                if (ele['BANNER.POSITION_ID'] == "1012") {   //首页
+                if (ele['BANNER.POSITION_ID'] == "1012" && ele['BANNER.CITY'] == currCity) {   //首页
                     $scope.homeList.push(ele);
                 } else if (ele['BANNER.POSITION_ID'] == "1013") {        //限时抢购
                     $scope.limitList.push(ele);
@@ -184,9 +188,9 @@ angular.module('AndSell.H5.Main').controller('pages_home_Controller', function (
                         }
                     }, 1000);   //间隔1秒定时执行
 
-                } else if (ele['BANNER.POSITION_ID'] == "1014") {    //  团购
+                } else if (ele['BANNER.POSITION_ID'] == "1014" && ele['BANNER.CITY'] == currCity) {    //  团购
                     $scope.groupList.push(ele);
-                } else if (ele['BANNER.POSITION_ID'] == "1015") {      //活动专区
+                } else if (ele['BANNER.POSITION_ID'] == "1015" && ele['BANNER.CITY'] == currCity) {      //活动专区
                     $scope.activityList.push(ele);
                 } else if (ele['BANNER.POSITION_ID'] == "1016") {     //今日推荐
                     $scope.recommendList.push(ele);

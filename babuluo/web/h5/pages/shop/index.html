@@ -37,11 +37,26 @@
         <!--区域选择-->
         <div class="shop-recent">
             <div class="title">
+                选择地点
+            </div>
+            <div class="shop-list">
+                <div class="shops history">
+                    <a ng-click="chooseCity(1)"
+                       class="shop-name"
+                       ng-class="{true:'active'}[1==currCity]">南京</a>
+                    <a ng-click="chooseCity(2)"
+                       class="shop-name"
+                        ng-class="{true:'active'}[2==currCity]">常州</a>
+                </div>
+            </div>
+        </div>
+        <div class="shop-recent">
+            <div class="title">
                 选择区域
             </div>
             <div class="shop-list">
                 <div class="shops history">
-                    <a ng-repeat="district in districtList"
+                    <a ng-repeat="district in cuurDistrictList"
                        ng-click="chooseDistrict(district['DISTRICT.DISTRICT_ID'])"
                        class="shop-name"
                        ng-class="{true:'active'}[district['DISTRICT.DISTRICT_ID']==currDistrictId]">{{district['DISTRICT.DISTRICT_NAME']}}</a>
