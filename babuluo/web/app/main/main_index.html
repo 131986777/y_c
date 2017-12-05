@@ -343,11 +343,6 @@
                         </ul>
                         <ul class="sub-menu" role="menu">
                         	<li ng-if="APP_ID_LIST.indexOf('@1146@')>=0">
-                                <a ui-sref="member/recharge/rechargeAdd">
-                                    储值卡绑定
-                                </a>
-                            </li>
-                        	<li ng-if="APP_ID_LIST.indexOf('@1146@')>=0">
                                 <a ui-sref="point/coupon/achievelist">
                                     年货大集兑换
                                 </a>
@@ -459,11 +454,6 @@
                             <li ng-if="APP_ID_LIST.indexOf('@1098@')>=0">
                                 <a ui-sref="marketing/coupon/rule/ruleList">
                                     优惠券规则
-                                </a>
-                            </li>
-                            <li ng-if="APP_ID_LIST.indexOf('@1098@')>=0">
-                                <a ui-sref="point/coupon/couponlist">
-                                    积分优惠券
                                 </a>
                             </li>
                         </ul>
@@ -784,7 +774,6 @@
 <script src="/AndSell/app/user/user-router.js"></script><!--管理员相关路由中心-->
 <script src="/AndSell/app/analysis/analysis-router.js"></script><!--数据分析相关路由-->
 <script src="/AndSell/app/sys/sys-router.js"></script><!--系统设置相关路由-->
-<script src="/AndSell/app/groupbuy/groupbuy-router.js"></script><!--团购相关路由-->
 
 
 <!--############service集合区############-->
@@ -816,7 +805,6 @@
 <script src="/AndSell/app/analysis/analysis/analysis-service.js"></script><!--数据分析-->
 <script src="/AndSell/app/sys/sys/sys-services.js"></script><!--数据分析-->
 <script src="/AndSell/app/sys/advice/advice-services.js"></script><!--数据分析-->
-<script src="/AndSell/app/groupbuy/groupbuy/groupbuy-service.js"></script><!--团购相关-->
 <script src="/AndSell/app/member/recharge/memberRecharge-services.js"></script><!--万元充值相关-->
 <!--############controller集合区(以后尝试 切换时注入)############-->
 <script src="main_controller.js"></script>

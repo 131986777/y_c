@@ -249,13 +249,13 @@
                                 </a>
                             </li>
                             <li ng-if="APP_ID_LIST.indexOf('@1146@')>=0">
-                                <a ui-sref="member/recharge/rechargeAdd">
-                                    储值卡绑定
+                                <a ui-sref="point/coupon/achievelist">
+                                    年货大集兑换
                                 </a>
                             </li>
-                            <li ng-if="APP_ID_LIST.indexOf('@1146@')>=0">
-                                <a ui-sref="point/coupon/achievelist">
-                                    优惠券兑换
+                        	<li ng-if="APP_ID_LIST.indexOf('@1146@')>=0">
+                                <a ui-sref="member/recharge/rechargeList">
+                                    用户充值列表
                                 </a>
                             </li>
                         </ul>
@@ -279,7 +279,9 @@
     <div short-message-modal></div>
     <!--回调提示框 -->
     <div return-message-modal></div>
-	<div show-prompt></div>
+	<!--回调提示框冻结卡操作 -->
+    <div show-prompt></div>
+
 </div>
 
 <!--############Footer############-->

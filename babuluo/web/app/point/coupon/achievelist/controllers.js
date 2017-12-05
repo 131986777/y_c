@@ -37,13 +37,25 @@ angular.module('AndSell.Main').controller('point_coupon_achievelist_Controller',
         $scope.filter['MEMBER_COUPON.QUERY_CONTENT'] = $scope.queryContent;
     };
 
-   $scope.changeState = function(id){
-	   modalFactory.showAlert("确认兑换吗?", function () {
-	   pointFactory.getOfflineCoupon({'MEMBER_COUPON.ID': id}, function (res) {
-	           modalFactory.showShortAlert("兑换成功");
-	           location.reload();
-	       }, function (response) {
-	           modalFactory.showShortAlert(response.msg);
+   $scope.changeState = function(id,name){
+	   modalFactory.showAlert(name+",确认兑换吗?", function () {
+		   var date = new Date();
+		   var year = date.getFullYear();
+		   var month = date.getMonth()+1;
+		   var day = date.getDate();
+		   var hour = date.getHours();
+		   var minute = date.getMinutes();
+		   var second = date.getSeconds();
+           var shop = getCookie('SHOP_ID');
+           var form = {};
+          form['MEMBER_COUPON.ORDER_NO'] = shop +':'+ year + "-" + month + "-" + day + " " +hour+":"+minute+":"+second;
+          form['MEMBER_COUPON.ID'] = id;
+          form['MEMBER_COUPON.IS_DEL'] = 1;
+		   pointFactory.getOfflineCoupon(form, function (res) {
+		           modalFactory.showShortAlert("兑换成功");
+		           location.reload();
+		       }, function (response) {
+		           modalFactory.showShortAlert(response.msg);
 	       });
        });
 	  
