@@ -61,16 +61,12 @@
                             </option>
                         </select>
 
-                        <select ng-model="filter['FINANCE_LIST.SHOP_ID']"
-                                ng-init="filter['FINANCE_LIST.SHOP_ID']='null'"
-                                class="nya-bs-select form-control">
-                            <option class="nya-bs-option" value="null">
-                                所有门店
-                            </option>
-                            <option class="nya-bs-option" ng-repeat="shop in shopList"
-                                    ng-bind="shop['SHOP.SHOP_NAME']" value="{{shop['SHOP.SHOP_ID']}}">
-                            </option>
-                        </select>
+                       
+                         <select   id="shop" class="selectpicker show-tick form-control  col-md-6"  data-live-search="true"
+		               		  ng-model="filter['FINANCE_LIST.SHOP_ID']" 
+		               		  ng-init="filter['FINANCE_LIST.SHOP_ID']='null'">
+		               		 	<option value='null' selected="true">全部门店</option>
+		                </select>	
                         <select ng-model="timeType"
                                 ng-init="timeType='all'"
                                 ng-change="filterTime(timeType)"

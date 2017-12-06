@@ -17,6 +17,17 @@ angular.module('AndSell.Main').controller('analysis_analysis_rechargeAnalysis_Co
         dataStatus($scope); 
         $scope.STARTDAY=CurentToTime(0)
         $scope.ENDDAY=CurentTime(0)
+        analysisFactory.getList().get({},function (response) {
+            $scope.list=response.data;
+            angular.forEach($scope.list,function(data){
+            	$("#shop").append("<option value='"+data['SHOP.SHOP_ID']+"'>"+data['SHOP.SHOP_NAME']+"</option>"); 
+            });
+            $('.selectpicker').selectpicker({  
+                'selectedText': 'cat'  
+            });
+            $('.selectpicker').selectpicker('refresh');
+            
+        },null);
     }
     //查询事件
     $scope.getGroupByRange = function () {

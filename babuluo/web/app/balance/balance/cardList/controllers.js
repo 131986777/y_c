@@ -14,7 +14,7 @@ app.service('loginServer', function() {
 
 });
 
-angular.module('AndSell.Main').controller('balance_balance_cardList_Controller', function (http, $scope,loginServer, $stateParams, cardFactory, modalFactory, fileUpload) {
+angular.module('AndSell.Main').controller('balance_balance_cardList_Controller', function (http, $scope,loginServer, $stateParams, cardFactory,analysisFactory, modalFactory, fileUpload) {
 
     modalFactory.setTitle('会员详情');
 
@@ -35,6 +35,17 @@ angular.module('AndSell.Main').controller('balance_balance_cardList_Controller',
         $scope.typeListMap = response.extraData.typeListMap;
         $scope.ACCOUNT_TYPE= loginServer.getcookie('ACCOUNT_TYPE');        
         console.log(response);
+        analysisFactory.getList().get({},function (response) {
+            $scope.list=response.data;
+            angular.forEach($scope.list,function(data){
+            	$("#shop").append("<option value='"+data['SHOP.SHOP_ID']+"'>"+data['SHOP.SHOP_NAME']+"</option>"); 
+            });
+            $('.selectpicker').selectpicker({  
+                'selectedText': 'cat'  
+            });
+            $('.selectpicker').selectpicker('refresh');
+            
+        },null);
     };
 
     $scope.queryMemberById = function (loginId) {

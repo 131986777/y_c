@@ -118,6 +118,12 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
         } else {
             setCookie("pickupPerson", JSON.stringify($scope.PickupPerson));
         }
+       var re =  /^1\d{10}$/;
+       // var re = /^1[34578]\d{9}$/
+			if (!re.test($scope.phone)) {
+				weUI.toast.error("请输入真确的手机号");
+				return
+			}
         history.back();
     };
 
