@@ -1,7 +1,7 @@
 AndSellH5MainModule.service('balanceFactory', function (http) {
 
     this.queryByUid = http.post('/member/balance/getBalanceByUid');
-
+    this.exchanges= http.post('/member/coupon/getCouponByPoint');
     this.queryAccountByUid = http.post('/member/account/queryAccountByUid');
 
 });
