@@ -149,6 +149,16 @@
         <servlet-name>shopOrder</servlet-name>
         <url-pattern>/shopOrder</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>NewYearShopping</servlet-name>
+        <servlet-class>com.task.servlet.NewYearShoppingServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>NewYearShopping</servlet-name>
+        <url-pattern>/NewYearShopping</url-pattern>
+    </servlet-mapping>
     
     <servlet>
         <servlet-name>vipcardBackMoney</servlet-name>
