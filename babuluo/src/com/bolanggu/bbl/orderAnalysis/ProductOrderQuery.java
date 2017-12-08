@@ -127,7 +127,6 @@ public enum ProductOrderQuery {
 	 */
 	public List getOnlineOrder(String parameter){
 		Map<String, Object> map = jsonStringToMap(parameter);
-		System.out.println("=============="+parameter);
 		String month = getMonth(map);
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT a.PRD_NAME AS `PRD_NAME`,COUNT(a.ID) AS `ORDER_COUNT`,");
