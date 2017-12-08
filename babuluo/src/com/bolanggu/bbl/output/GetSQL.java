@@ -125,6 +125,12 @@ public enum GetSQL {
 		if(map.containsKey("SHOP_ID") && !"null".equals(map.get("SHOP_ID"))){
 			sql.append(" AND b.SOURCE_SHOP = '"+map.get("SHOP_ID")+"'");
 		}
+		if(map.containsKey("PRD_ID") && !"null".equals(map.get("SHOP_ID"))){
+			sql.append(" AND a.PRD_ID = '"+map.get("PRD_ID")+"'");
+		}
+		if(map.containsKey("GET_PRD_DATETIME") && !"null".equals(map.get("GET_PRD_DATETIME"))){
+			sql.append(" AND DATE_FORMAT(b.GET_PRD_DATETIME,'%Y-%m-%d') = '"+map.get("GET_PRD_DATETIME")+"'");
+		}
 		sql.append(" GROUP BY a.PRD_ID,a.SKU");
 		return sql.toString();
 	}
@@ -137,7 +143,7 @@ public enum GetSQL {
 		Map<String, Object> map = jsonStringToMap(parameter);
 		String month = getMonth(map);
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT c.SHOP_NAME AS `门店名称`,COUNT(a.ID) AS `订单数量`,SUM(a.COUNT) AS `商品销售量`,");
+		sql.append("SELECT c.SHOP_ID AS `门店ID`,c.SHOP_NAME AS `门店名称`,COUNT(a.ID) AS `订单数量`,SUM(a.COUNT) AS `商品销售量`,");
 		sql.append("a.SKU_1_VALUE AS `规格`,CAST(SUM(a.PRICE_SUM) AS DECIMAL(10,2)) AS `销售总额`");
 		sql.append(" FROM shop_order_info a");
 		sql.append(" INNER JOIN shop_order b ON a.ORDER_ID=b.ID");
@@ -157,6 +163,12 @@ public enum GetSQL {
 		}
 		if(map.containsKey("SHOP_ID") && !"null".equals(map.get("SHOP_ID"))){
 			sql.append(" AND b.SHOP_ID = '"+map.get("SHOP_ID")+"'");
+		}
+		if(map.containsKey("PRD_ID") && !"null".equals(map.get("SHOP_ID"))){
+			sql.append(" AND a.PRD_ID = '"+map.get("PRD_ID")+"'");
+		}
+		if(map.containsKey("GET_PRD_DATETIME") && !"null".equals(map.get("GET_PRD_DATETIME"))){
+			sql.append(" AND DATE_FORMAT(b.GET_PRD_DATETIME,'%Y-%m-%d') = '"+map.get("GET_PRD_DATETIME")+"'");
 		}
 		sql.append(" GROUP BY b.SHOP_ID");
 		return sql.toString();

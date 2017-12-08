@@ -1,0 +1,46 @@
+<div class="container-fluid" ng-init="initLoad()">
+    <!--时间选择导航-->
+    <div class="row timeBar">
+        <div class="col-md-12">
+        	<button class="btn" type="button" ng-click="goBack()">返回</button>
+            <button class="btn" type="button" id="ouputBtn" ng-click="outPutQuery()">导出</button>
+            <div class="clear"></div>
+    	</div>
+    
+</div>
+
+<div id="main" style="height: 300px;"></div>
+ 
+<div class="table-content">
+    <div class="table-toolbar">
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr >
+                <th class="text-center" ng-bind="name" ng-repeat='name in TITLE' ></th>      
+            </tr>        
+            </thead>
+            <tbody>
+            <tr ng-repeat="VALUE in OLDLIST" align="center">
+           	    <td style="vertical-align: middle;"><span ng-bind="VALUE['SHOP_ID']"></span></td>
+            	<td style="vertical-align: middle;"><span ng-bind="VALUE['SHOP_NAME']"></span></td>
+            	<td style="vertical-align: middle;"><span ng-bind="VALUE['ORDER_COUNT']"></span></td>
+           		<td align="center">
+           			<span ng-bind="VALUE['PRD_COUNT']"></span>
+           		</td>
+           		<td align="center">
+           			<span ng-bind="VALUE['SKU_UNIT']"></span>
+           		</td>
+           		<td ng-bind="VALUE['PRICE_SUM']" align="center"></td>
+            </tr>
+            <tr align="center" ng-if="OLDLIST.length>0">
+               <td colspan=5 style="vertical-align: middle;">合计</td>
+               <td ng-bind="all" align="center">
+           		
+           		</td>
+            	
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

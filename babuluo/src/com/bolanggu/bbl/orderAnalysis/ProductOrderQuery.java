@@ -146,7 +146,12 @@ public enum ProductOrderQuery {
 		if(map.containsKey("SHOP_ID") && !"null".equals(map.get("SHOP_ID"))){
 			sql.append(" AND b.SHOP_ID = '"+map.get("SHOP_ID")+"'");
 		}
-		
+		if(map.containsKey("GET_PRD_DATETIME") && !"null".equals(map.get("GET_PRD_DATETIME"))){
+			sql.append(" AND DATE_FORMAT(b.GET_PRD_DATETIME,'%Y-%m-%d') = '"+map.get("GET_PRD_DATETIME")+"'");
+		}
+		if(map.containsKey("PRD_ID") && !"null".equals(map.get("PRD_ID"))){
+			sql.append(" AND a.PRD_ID = '"+map.get("PRD_ID")+"'");
+		}
 		sql.append(" GROUP BY a.PRD_ID,a.SKU");
 		List list = executeQuery(sql.toString());
 		return list;
@@ -161,7 +166,7 @@ public enum ProductOrderQuery {
 		Map<String, Object> map = jsonStringToMap(parameter);
 		String month = getMonth(map);
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT c.SHOP_NAME AS `SHOP_NAME`,COUNT(a.ID) AS `ORDER_COUNT`,SUM(a.COUNT) AS `PRD_COUNT`,");
+		sql.append("SELECT c.SHOP_ID AS `SHOP_ID`, c.SHOP_NAME AS `SHOP_NAME`,COUNT(a.ID) AS `ORDER_COUNT`,SUM(a.COUNT) AS `PRD_COUNT`,");
 		sql.append("a.SKU_1_VALUE AS `SKU_UNIT`,CAST(SUM(a.PRICE_SUM*a.COUNT) AS DECIMAL(10,2)) AS `PRICE_SUM`");
 		sql.append(" FROM shop_order_info a");
 		sql.append(" INNER JOIN shop_order b ON a.ORDER_ID=b.ID");
@@ -181,6 +186,12 @@ public enum ProductOrderQuery {
 		}
 		if(map.containsKey("SHOP_ID") && !"null".equals(map.get("SHOP_ID"))){
 			sql.append(" AND b.SHOP_ID = '"+map.get("SHOP_ID")+"'");
+		}
+		if(map.containsKey("GET_PRD_DATETIME") && !"null".equals(map.get("GET_PRD_DATETIME"))){
+			sql.append(" AND DATE_FORMAT(b.GET_PRD_DATETIME,'%Y-%m-%d') = '"+map.get("GET_PRD_DATETIME")+"'");
+		}
+		if(map.containsKey("PRD_ID") && !"null".equals(map.get("PRD_ID"))){
+			sql.append(" AND a.PRD_ID = '"+map.get("PRD_ID")+"'");
 		}
 		sql.append(" GROUP BY b.SHOP_ID");
 		List list = executeQuery(sql.toString());
@@ -211,6 +222,12 @@ public enum ProductOrderQuery {
 		}
 		if(map.containsKey("SHOP_ID") && !"null".equals(map.get("SHOP_ID"))){
 			sql.append(" AND b.SHOP_ID = '"+map.get("SHOP_ID")+"'");
+		}
+		if(map.containsKey("GET_PRD_DATETIME") && !"null".equals(map.get("GET_PRD_DATETIME"))){
+			sql.append(" AND DATE_FORMAT(b.GET_PRD_DATETIME,'%Y-%m-%d') = '"+map.get("GET_PRD_DATETIME")+"'");
+		}
+		if(map.containsKey("PRD_ID") && !"null".equals(map.get("PRD_ID"))){
+			sql.append(" AND a.PRD_ID = '"+map.get("PRD_ID")+"'");
 		}
 		sql.append(" GROUP BY ADDTIME");
 		List list = executeQuery(sql.toString());

@@ -149,4 +149,12 @@ AndSellMainModule.service('analysisFactory', function ($resource, baseURL) {
             }
         });
     }
+    //查询预约商品列表
+    this.getAppointmentProduct=function(){
+    	 return $resource(baseURL +"/shop/product/appointment/queryAll", {}, {
+             'update': {
+                 method: "PUT"
+             }
+         });
+    } 
 });
