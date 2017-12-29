@@ -72,3 +72,5 @@ $import('pages/product/rc');
 $import('pages/temporary/bonus');
 $import('pages/temporary/list');
 $import('pages/temporary/years');
+$import('pages/temporary/wjdcqh');
+$import('pages/temporary/sign');
