@@ -25,7 +25,7 @@ public class NewYearShoppingJob implements Job{
 	
 	private Logger log = LoggerFactory.getLogger(NewYearShoppingJob.class);
 	
-	public static String CONTENT = "【云厨1站】恭喜您获得云厨一站年货大集入场券一张，请在2018年1月10日之前至云厨一站任一门店领取并登记报名（过期自动失效）";
+	public static String CONTENT = "【云厨1站】恭喜您获得云厨一站年货大集入场券一张，请在2018年1月10日之前至云厨一站任一门店领取并登记报名（过期自动失效，仅限南京地区）";
 
 
 	@Override
@@ -61,7 +61,9 @@ public class NewYearShoppingJob implements Job{
             StringBuffer sql = new StringBuffer();
             sql.append("SELECT SUM(a.CHANGE_VALUE) AS `SPEND`,a.USER_ID AS `USER_ID`,c.MOBILE AS `MOBILE`");
             sql.append(" FROM finance_list a LEFT JOIN member c ON a.USER_ID=c.USER_ID");
+            sql.append(" LEFT JOIN shop d ON c.SHOP_ID = d.SHOP_ID");
             sql.append(" WHERE (a.`EVENT`='线下消费' OR a.`EVENT`='线上消费')");
+            sql.append(" AND d.CITY <> 2");
             sql.append(" AND a.ADD_DATETIME > '2017-12-10 00:00:00' AND a.ADD_DATETIME < '2018-01-10 00:00:00'");
             //sql.append(" AND a.USER_ID NOT IN");
             //sql.append(" (SELECT b.USER_ID FROM member_coupon b WHERE b.COUPON_ID=3025 GROUP BY b.USER_ID HAVING COUNT(1) >= 1)");
@@ -86,7 +88,7 @@ public class NewYearShoppingJob implements Job{
             	}
             }
             StringBuffer sql_tmp = new StringBuffer();
-            sql_tmp.append("SELECT USER_ID,COUNT(1) AS `COUPON_COUNT` FROM member_coupon WHERE COUPON_ID = 3025 GROUP BY USER_ID");
+            sql_tmp.append("SELECT USER_ID,COUNT(1) AS `COUPON_COUNT` FROM member_coupon WHERE COUPON_ID = 3025 AND IS_DEL=-1 GROUP BY USER_ID");
             /*sql_tmp.append("SELECT SUM(a.CHANGE_VALUE) AS `SPEND`,a.USER_ID AS `USER_ID`,c.MOBILE AS `MOBILE`");
             sql_tmp.append(" FROM finance_list a LEFT JOIN member c ON a.USER_ID=c.USER_ID");
             sql_tmp.append(" WHERE a.CHANGE_TYPE='decrease'");

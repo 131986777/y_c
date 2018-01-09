@@ -191,7 +191,7 @@ public enum GetSQL {
 		sql.append("CASE a.STATE_OUT WHEN 1 THEN '已提货' WHEN -1 THEN '未提货' END AS `提货状态`");
 		sql.append(" FROM shop_order a");
 		sql.append(" INNER JOIN shop_order_info b ON a.ID=b.ORDER_ID ");
-		sql.append(" INNER JOIN member_info c ON a.UID=c.USER_ID");
+		sql.append(" LEFT JOIN member_info c ON a.UID=c.USER_ID");
 		sql.append(" WHERE a.STATE_ORDER = 1 AND a.STATE_MONEY=1");
 		if(map.containsKey("DATETIME_ADD_FROM") && !"null".equals(map.get("DATETIME_ADD_FROM"))){
 			sql.append(" AND a.DATETIME_ADD >='"+map.get("DATETIME_ADD_FROM")+" 00:00:00'");
