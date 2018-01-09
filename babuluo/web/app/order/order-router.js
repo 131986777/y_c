@@ -13,6 +13,8 @@ $import('order/order/orderSorting',{ORDER_ID: '1030'},true);
 
 $import('order/order/refundOrder',{},true);
 
+$import('order/order/giftList',{},true);
+
 $import('order/order/reserveOrder',{orderType:'5'},true);
 
 $import('order/order/appointmentOrder',{orderType:'4'},true);

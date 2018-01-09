@@ -1,5 +1,5 @@
 angular.module('AndSell.Main').controller('product_product_appointment_Controller', function ($scope, $stateParams, productFactory, modalFactory) {
-	$('.multiselect').multiselect({setMaxOptionNum:4,selectedHtmlValue:'多选',setmax:3,setWidth:'100%'});
+	$('.multiselect').multiselect({setMaxOptionNum:4,selectedHtmlValue:'多选',setmax:7,setWidth:'100%'});
     modalFactory.setTitle('预约商品');
 
     $scope.initLoad = function () {

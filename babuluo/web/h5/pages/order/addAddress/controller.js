@@ -185,7 +185,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
             var endDay = Math.ceil(Number(endHours / 24));
             console.log(endDay)
             if (currTime == 0) {
-                currTime = 7;//周日
+              //currTime = 7;//周日
             }
             var strs= new Array(); //定义一数组
             var strDay = null;
@@ -193,6 +193,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
             for (i=0;i<strs.length ;i++ )
             {
             	strDay=(strs[i]);
+//            	if(strDay-currTime<0){
+//            		strDay=strDay+7;
+//            	}///1,2,3,4,5,6,7   ,   7
             	 if ((strDay - currTime) > endDay) {
                      next = false;
                  } else {
