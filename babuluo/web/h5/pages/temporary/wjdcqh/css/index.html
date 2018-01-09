@@ -1,0 +1,413 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>云厨一站 问卷调查</title>
+
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<link rel="stylesheet" href="css/main.css">
+		<script src="js/rem.js"></script>
+	</head>
+	<style type="text/css">
+		.start {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #FFFFFF;
+			z-index: 10;
+			text-align: center;
+			font-family: "微软雅黑";
+			/*Safari and Chrome*/
+		}
+		
+		.end {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #FFFFFF;
+			z-index: 8;
+			text-align: center;
+			font-family: "微软雅黑";
+			/*Safari and Chrome*/
+			display: none;
+		}
+		
+		.title {
+			margin-top: 1.5rem;
+			font-size: .9rem;
+			color: #3775e2;
+		}
+		
+		.message {
+			/* position: absolute; */
+			/* left: 50%; */
+			/* top: 50%; */
+			width: 100%;
+			/* margin-left: -50%; */
+			height: 4rem;
+			/* margin-top: -2rem; */
+			margin-top: 1rem;
+		}
+		
+		.prompt {
+			font-size: .38rem;
+			/* margin-bottom: .3rem; */
+			color: #000000;
+		}
+		
+		input {
+			margin: auto;
+			display: block;
+			height: .6rem;
+			width: 3.08rem;
+			border: 1px solid #000000;
+			text-align: center;
+			font-size: 13px;
+			color: #3775e2;
+			line-height: .6rem;
+		}
+		
+		#logo {
+			width: 1.26rem;
+			height: 1.25rem;
+			background: red;
+			margin-top: 1rem;
+			left: 50%;
+			display: inline-block;
+			bottom: .64rem;
+			background: url(images/logo.png);
+			background-size: 100% 100%;
+		}
+		
+		.submits {
+			/*			position: absolute;*/
+			color: #FFFFFF;
+			background: #3775e2;
+			width: 2rem;
+			height: .56rem;
+			bottom: 3rem;
+			left: 50%;
+			/*margin-left: -1rem;*/
+			border: 0;
+			border-radius: 10px;
+			line-height: .56rem;
+		}
+		
+		.swiper-slide {
+			padding: 10px;
+			box-sizing: border-box;
+		}
+		
+		.mind .swiper-wrapper {
+			padding: 0;
+		}
+		
+		.mind .swiper-slide dt {
+			line-height: 26px;
+			font-size: 15px;
+		}
+		
+		.res {
+			color: #f65d5a;
+			height: 3.2rem;
+			line-height: 3.2rem;
+			font-size: 1.6rem;
+		}
+	</style>
+
+	<body>
+		<div class="start">
+			<div class="title">
+				云厨知识答题
+			</div>
+			<div class="message">
+				<div class="prompt">请输入你的姓名</div>
+				<div id="c">
+					<input type="" name="" id="" value="" class="username" />
+				</div>
+
+				<p class="prompt">请输入你的部门</p>
+
+				<input type="" name="" id="" value="" class="dpm" />
+
+				<p class="prompt">请输入你的手机号</p>
+
+				<input type="" name="" id="" value="" class="mobile" />
+
+			</div>
+			<div><button class="submits">提交</button></div>
+
+			<div id="logo">
+
+			</div>
+		</div>
+		<div class="mind">
+			<div class="swiper-container">
+				<div class="mindtop"> <span class="swiper-button-prev swiper-button-blue"></span>
+					<h4>云厨一站 问卷调查</h4>
+					<span class="swiper-button-next swiper-button-blue"></span> </div>
+				<div class="swiper-wrapper">
+
+				</div>
+				<div class="swiper-pagination"></div>
+				<div class="mindfot">
+					<div class="fl-left" id="numok"><img src="images/mindok.png"><span>交卷</span></div>
+					<div class="fl-right" id="showall"><img src="images/mindnum.png"><span id="curnum">1</span>/<span id="totnum"></span></div>
+					<div class="clearfix"></div>
+				</div>
+				<div class="maskwhite"></div>
+				<div class="subjuan">
+					<p>提示</p>
+					<p>您已经回答了<span id="subnum"></span>题，确定要交卷么？</p>
+					<div class="subyn">
+						<div class="fl-left" id="subno">取消</div>
+						<div class="fl-right" id="subyes">交卷</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="tishi">
+					<p>提示</p>
+					<p>你一共还有<span id="num"></span>题未打完</p>
+					<div class="tj">
+						<div class="fl-left" id="sub">确定</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<div class="end">
+			<div class="title">
+				最终得分
+			</div>
+			<div class="res">
+				15
+			</div>
+
+		</div>
+
+		<script src="js/jquery.min.js"></script>
+		<script src="js/swiper.min.js"></script>
+
+		<script type="text/javascript">
+			function ajaxGet(url, func) {
+				$.ajax({
+					type: 'GET',
+					url: url,
+					async: false,
+					dataType: 'json',
+
+					success: function(result) {
+
+						func(result);
+					}
+				});
+			}
+
+			function ajaxPost(url, data, fnSucceed, fnFail, fnLoading) {
+				$.ajax({
+					url: url,
+					datatype: 'json',
+					type: 'get',
+					data: data,
+					success: function(result) {
+						fnSucceed(result);
+					}
+				});
+
+			}
+
+			function Trim(str, is_global) {
+				var result;
+				result = str.replace(/(^\s+)|(\s+$)/g, "");
+				if(is_global.toLowerCase() == "g") {
+					result = result.replace(/\s/g, "");
+				}
+				return result;
+			}
+			$("input").focus(function() {
+
+				var u = navigator.userAgent,
+					app = navigator.appVersion;
+				var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+				var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+				if(isAndroid) {
+					//	        alert("安卓机！")
+					var scrollT = function() {
+						$("html,body").animate({
+							scrollTop: $(".message").offset().top
+						}, 300);
+
+					}
+					scrollT()
+
+				}
+				if(isIOS) {
+					//	        alert("苹果果机！")
+				}
+
+			})
+
+			//题获取
+			ajaxGet('http://10.10.14.51:8080/lottery/rest/lottery/getQuestion', function(re) {
+
+					var qes = JSON.parse(re.data)
+					console.log(qes)
+					var xq = ['A', 'B', 'C', 'D']
+					for(var i = 0; i < qes.length; i++) { //qes.length
+						var html = ''
+
+						for(var k = 0; k < qes[i].question.length; k++) {
+							var yes = ''
+
+							if(qes[i].answer == xq[k]) {
+								yes = 'yes'
+							}
+							html = html + '<dd class=' + yes + ' >' + xq[k] + '、' + Trim(qes[i].question[k], 'g') + '</dd>'
+
+						}
+						console.log(html)
+						$('.swiper-wrapper').append('<dl class="swiper-slide">' +
+							'<dt>' + (i + 1) + '、' + Trim(qes[i].title, 'g') + '</dt>' +
+							html +
+							'</dl>')
+
+					}
+
+				})
+				//					'<dd class=su>B、含脂肪</dd>' +
+				//					'<dd>C、含糖</dd>' +
+
+			//题目轮播
+			var swiper = new Swiper('.swiper-container', {
+
+				pagination: '.swiper-pagination',
+
+				prevButton: '.swiper-button-prev',
+				nextButton: '.swiper-button-next',
+
+				paginationClickable: true,
+
+				paginationBulletRender: function(index, className) {
+					$("#totnum").text(index + 1); //总页码
+					return '<span class="' + className + '">' + (index + 1) + '</span>';
+
+				},
+
+				onSlideChangeEnd: function(swiper) {
+					$("#curnum").text(swiper.activeIndex + 1); //当前页
+				}
+
+			});
+
+			//点击底部出现题目数
+			$("#showall").click(function() {
+				$(".maskwhite").toggle();
+				$(".swiper-pagination").toggle();
+			});
+
+			//选择答案
+			$("dl.swiper-slide dd").click(function() {
+				$(this).parent("dl").find("dd").removeClass("chance");
+				$(this).addClass("chance");
+				var indexnum = $(this).parent("dl").index();
+				$(".swiper-pagination span").eq(indexnum).addClass("curr");
+			});
+
+			//交卷
+			$("#numok").click(function() {
+
+				$(".swiper-pagination").hide();
+
+				var allnum = $("#totnum").text();
+				$("#subnum").text(allnum);
+				var lengths = $(".swiper-pagination span.curr").length;
+
+				if(lengths == allnum) {
+					$(".maskwhite").show();
+					$(".subjuan").show();
+					$("#subno").click(function() { //取消
+						$(".maskwhite").hide();
+						$(".subjuan").hide();
+					});
+					$("#subyes").click(function() { //ok
+
+						var i = 0
+						for(var x = 0; x < $('.chance').length; x++) {
+							if($('.chance').eq(x).hasClass('yes')) {
+								i++
+							}
+						}
+						$('.res').html(i)
+						console.log('恭喜你答对了' + i + '题')
+						var obj = {}
+						obj.username = $('.username').val()
+						obj.grade = $('.res').html()
+						obj.mobile = $('.mobile').val()
+						obj.dept = $('.dpm').val()
+
+						ajaxPost('http://yx.bblycyz.com/lottery/rest/lottery/gradeSubmit', obj, function(re) {
+							console.log(re.success)
+							if(re.success == false) {
+
+							} else {
+								$('.end').css('display', 'block')
+
+							}
+						})
+
+					});
+				} else {
+					$("#num").text(allnum - lengths);
+					$(".maskwhite").show();
+					$(".tishi").show();
+					$('#sub').click(function() {
+						$(".maskwhite").hide();
+						$(".tishi").hide();
+					})
+				}
+
+			});
+
+			$('.submits').click(function() {
+				if($('.username').val() == '') {
+					alert('姓名不能为空')
+					return
+				}
+				if($('.mobile').val() == '') {
+					alert('手机号不能为空')
+					return
+				}
+				if($('.dpm').val() == '') {
+					alert('部门不能为空')
+					return
+				}
+				var objs = {}
+				objs.mobile = $('.mobile').val()
+				objs.dept = $('.dpm').val()
+				ajaxPost('http://yx.bblycyz.com/lottery/rest/lottery/hasInvolved', objs, function(re) {
+					console.log(re.success)
+					if(re.data == false) {
+						setTimeout(function() {
+							$('.start').css('display', 'none')
+						}, 1000)
+						$('.start').animate({
+							opacity: '0'
+						}, 1000)
+					} else {
+						alert(re.message)
+					}
+				})
+
+			})
+		</script>
+	</body>
+
+</html>

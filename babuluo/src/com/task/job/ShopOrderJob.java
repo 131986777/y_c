@@ -93,6 +93,7 @@ public class ShopOrderJob implements Job{
 			  sql.append("KEY `ss` (`ID`) USING HASH,");
 			  sql.append("KEY `date` (`DATETIME_ADD`),");
 			  sql.append("KEY `SOURCE_SHOP_INDEX` (`SOURCE_SHOP`),");
+			  sql.append("KEY `ORDER_INDEX` (`SOURCE_SHOP, ORDER_NUM`),");
 			  sql.append("KEY `SHOP_TIME_INDEX` (`SOURCE_SHOP`,`DATETIME_ADD`)");
 			  sql.append(") ENGINE=InnoDB AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8;");
 			log.info("sql======"+sql.toString());
