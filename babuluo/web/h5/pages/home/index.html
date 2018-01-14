@@ -144,7 +144,7 @@
               
                 <span style="border-bottom: 1px solid rgb(245,169,24); padding: 0 15px 5px;    font-size: 20px;line-height: 50px;margin-bottom: 0;text-align: center; height: 50px;">活动专区</span>
    </div> 
-        <div class="product-content" ng-repeat="item in activityList">
+        <div class="product-content" ng-repeat="item in activityList" style="margin-bottom: 10px;">
             <a ng-if="item['is_show']==true" ng-href="{{item['BANNER.URL']}}">
             <img
                     ng-src="{{FILE_SERVER_DOMAIN+item['BANNER.PICTURE']+'?x-oss-process=image/resize,w_750'}}"

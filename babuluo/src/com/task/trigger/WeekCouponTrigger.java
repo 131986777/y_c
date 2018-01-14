@@ -9,13 +9,14 @@ import org.quartz.SchedulerFactory;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
 
-import com.task.job.NewYearShoppingJob;
+import com.task.job.WeekCouponJob;
 
-public class NewYearShoppingTrigger {
+public class WeekCouponTrigger {
 	
-	private static final String CRONSTR = "0 0 22 * * ?";
+	//private static final String CRONSTR = "0 0 7 ? * SAT 2018";
+	private static final String CRONSTR = "0 27 13 ? * THU 2018";
 
-	public NewYearShoppingTrigger (){
+	public WeekCouponTrigger (){
 		
 	}
 	
@@ -24,6 +25,9 @@ public class NewYearShoppingTrigger {
     private boolean hasStart = false;
 
 
+    
+    
+    
     public void init() {
 
         if(hasInit){
@@ -33,11 +37,11 @@ public class NewYearShoppingTrigger {
         SchedulerFactory schedulerFactory = new StdSchedulerFactory();
         try{
             scheduler = schedulerFactory.getScheduler();
-            JobDetail jobDetail = JobBuilder.newJob(NewYearShoppingJob.class).withIdentity("job4","group1").build();
+            JobDetail jobDetail = JobBuilder.newJob(WeekCouponJob.class).withIdentity("job1","group3").build();
 
             CronTrigger cronTrigger = TriggerBuilder.newTrigger()
                 .newTrigger()
-                .withIdentity("trigger4", "group1")
+                .withIdentity("trigger1", "group3")
                 .withSchedule(CronScheduleBuilder.cronSchedule(CRONSTR)).build();//使用的是cron调度器  高级
 
             scheduler.scheduleJob(jobDetail, cronTrigger);

@@ -5,7 +5,7 @@
         <div class="coupon-head">
             <div class="coupon-info">
                 <p class="couponType">{{item['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME']}}</p>
-                <p class="couponTime" ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']!=null">有效期至<span>{{item['MEMBER_COUPON.COUPON_INFO']['COUPON.END_DATETIME']|FormatAllDate}}</span></span>
+                <p class="couponTime" ng-if="item['MEMBER_COUPON.EXPIRED_TIME']!=null">有效期至<span>{{item['MEMBER_COUPON.EXPIRED_TIME']|FormatAllDate}}</span></span>
                 </p>
                 <div class="coupon-value">
                       <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
