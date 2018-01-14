@@ -1,0 +1,117 @@
+<div class="page-content" ng-init="initData()">
+<!--订单提货码验证-->
+ 			<div class="modal fade" id="verity"  name="verity" role="dialog" aria-labelledby="verity">
+            <div class="modal-dialog" aria-hidden="true">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button class="close" type="button" data-dismiss="modal"
+                                aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h3 class="modal-title">
+                                               兑换码验证
+                        </h3>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal" name="editForm"
+                              ng-submit="" novalidate>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">
+                                    <span class="required" style="color: red"> * </span>兑换码：
+                                </label>
+                                <div class="col-sm-7">
+                                    <input class="form-control" type="text"
+                                           name="name" ng-model="gift['GIFT_ACTITY.REC_CHECKCODE1']"
+                                           required>
+                                </div>
+                            </div>
+                                                 
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" type="submit"
+                                        ng-click="veritycode(gift['GIFT_ACTITY.REC_CHECKCODE1'])">
+                                    确定
+                                </button>
+                                <button class="btn btn-default"
+                                        data-dismiss="modal" ng-click="clearForm()">
+                                    关闭
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    <div class="table-content">
+        <div class="table-toolbar" style="padding:10px 0;">
+            <div class="form-inline row">
+                <div class="col-md-6">
+                    <div class="form-group">
+	                     充值时间: 	<input  class="form-control" id="startDate" type="text" ng-model="filter['GIFT_ACTITY.START_ACHIEVE_DATETIME']" data-date-format="yyyy-mm-dd hh:ii:ss" >
+	                     ~<input  class="form-control " id="endDate" type="text" ng-model="filter['GIFT_ACTITY.END_ACHIEVE_DATETIME']" data-date-format="yyyy-mm-dd hh:ii:ss" >
+                	</div>
+                </div>
+                <div class="col-md-1">
+         			<div class="form-group">
+	                	<select ng-model="filter['GIFT_ACTITY.STATE']"
+	                        ng-init="filter['GIFT_ACTITY.STATE'] = 'null'"
+	                        class="nya-bs-select form-control">
+		                        <option class="nya-bs-option" value="null">全部状态</option>
+		                        <option class="nya-bs-option" value="1">未兑换</option>
+		                        <option class="nya-bs-option" value="-1">已兑换</option>
+		                </select>
+	            	</div>
+	            </div>
+                <div class="col-md-4">
+	            	<div class="form-group">
+                        <input type="text" class="form-control" id="name" placeholder="手机号"
+                               ng-model="queryContent">
+                               <button type="submit" class="btn btn-default" ng-click="search()"><span
+                    class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                    <!-- <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right"
+                                ng-click="query()">查询
+                        </button>
+                    </div> -->
+<!--                     <label class="control-label">筛选：</label> --> 
+                   
+                </div>
+            </div>
+         </div>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            	<th class="text-center" ng-bind="name" ng-repeat='name in TITLE' ></th>
+            	<th ng-if="APP_ID_LIST.indexOf('@1109@')>=0" >兑换码</td>
+            </thead>
+            <tbody ng-repeat="gift in giftList">
+	            <tr>
+	            	<td ng-bind="gift['GIFT_ACTITY.GIFT']" class="text-center" style="vertical-align: middle;"></td>
+	            	<td ng-bind="gift['GIFT_ACTITY.TRUE_NAME']" class="text-center" style="vertical-align: middle;"></td>
+	            	<td ng-bind="gift['GIFT_ACTITY.MOBILE']" class="text-center" style="vertical-align: middle;"></td>
+	            	<td class="text-center" style="vertical-align: middle;">
+	            		<span ng-bind="gift['GIFT_ACTITY.ADD_DATETIME'] | FormatAllDate"></span>
+	            	</td>
+	            	<td ng-bind="gift['GIFT_ACTITY.GET_DATETIME'] " class="text-center" style="vertical-align: middle;"></td>
+	            	<td class="text-center" style="vertical-align: middle;">
+	            		<element ng-switch="gift['GIFT_ACTITY.STATE']">
+	                		<element ng-switch-when="1"><span class="label label-warning">未兑换</span></element>
+	                		<element ng-switch-when="-1"><span class="label label-success">已兑换</span></element>
+	                	</element>
+	            	</td>
+	            	<td ng-bind="gift['GIFT_ACTITY.SHOP'] " class="text-center" style="vertical-align: middle;"></td>
+	                <td class="text-center">
+	                	<button class="btn btn-default"  ng-if="gift['GIFT_ACTITY.STATE']== 1" data-toggle="modal" ng-click="saveCheckCode(gift['GIFT_ACTITY.ID'],gift['GIFT_ACTITY.GIFT'],gift['GIFT_ACTITY.REC_CHECKCODE'])" data-target="#verity">确认兑换</button>
+	                	<!-- ng-click="changeState(gift['GIFT_ACTITY.ID'],gift['GIFT_ACTITY.GIFT'])">确认兑换</button> -->
+	                </td>
+	                 <td ng-if="APP_ID_LIST.indexOf('@1109@')>=0" ng-bind="gift['GIFT_ACTITY.REC_CHECKCODE']"></td>
+	            </tr>
+            </tbody>
+        </table>
+        <div page-bar
+             filter-obj="filter"
+             url="/gift/gift/queryAll"
+             callback="bindData(response)">
+        </div>
+    </div>
+</div>

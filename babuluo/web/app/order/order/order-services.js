@@ -17,7 +17,7 @@ AndSellMainModule.service('orderFactory', function (http) {
     this.getWXPayItemByOrderId= http.post('/order/wx/pay/list/getByOrderId');
     this.getFinanceItemByOrderId= http.post('/member/balance/getByOrderId');
 
-
+    this.getGift = http.post('/gift/gift/queryAll');
     this.getRefundOrder = http.post('/shop/order/refund/queryAll');
     this.refundOrder = http.post('/shop/order/refund/refundOrder');
     this.RemarkRefundOrder = http.post('/shop/order/refund/remarkOrder');
@@ -25,5 +25,6 @@ AndSellMainModule.service('orderFactory', function (http) {
     this.getBySkuId = http.post('/shop/product/getBySkuIdWithAllInfo');
 
     this.modifyBySortComplete = http.post('/shop/order/modifyBySortComplete');
+    this.getOffGift=http.post('/gift/gift/modifyById');
 
 });
