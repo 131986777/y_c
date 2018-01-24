@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+
+		<meta charset="UTF-8">
+
+		<title>云厨一站 拼图</title>
+
+		<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+		<script src="../temporary/pTAct/js/jquery-3.1.1.js"></script>
+		<script src="../temporary/pTAct/js/rem.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+		<style type="text/css">
+			html,
+			body,
+			ul,
+			li,
+			ol,
+			dl,
+			dd,
+			dt,
+			p,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			form,
+			fieldset,
+			legend,
+			img {
+				margin: 0;
+				padding: 0
+			}
+			
+			body,
+			html {
+				height: 100%;
+			}
+			
+			body {
+				background: url(../temporary/pTAct/img/start2.jpg);
+				background-size: 100% 100%;
+			}
+			
+			#picbox {
+				width: 300px;
+				height: 300px;
+				background: url('../temporary/pTAct/img/logo-300.png');
+				position: relative;
+				left: 50%;
+				top: 29.5%;
+				margin-left: -150px;
+			}
+			
+			.pic {
+				width: 75px;
+				height: 75px;
+				float: left;
+				background: url('../temporary/pTAct/img/logo-300.png');
+				position: absolute;
+				transition: all 0.1s ease 0s;
+			}
+			
+			.controller {
+				text-align: center;
+				position: relative;
+			}
+			
+			.times {
+				position: absolute;
+				text-align: center;
+				width: 100%;
+				color: #6d2421;
+				top: 0;
+				left: 0;
+				height: 32px;
+				line-height: 32px;
+				font-size: 20px;
+			}
+			
+			.go {
+				position: absolute;
+				text-align: center;
+				bottom: 10px;
+				width: 100%;
+				font-size: 17px;
+			}
+			
+			#go {
+				width: 5rem;
+				height: 2rem;
+				color: #FFFFFF;
+				display: inline-block;
+				line-height: 2rem;
+				background: url(../temporary/pTAct/img/back-botton.png);
+				background-size: 100% 100%;
+			}
+			
+			#mark {
+				width: 5rem;
+				height: 2rem;
+				color: #FFFFFF;
+				display: inline-block;
+				line-height: 2rem;
+				background: url(../temporary/pTAct/img/back-botton.png);
+				background-size: 100% 100%;
+			}
+			
+			#zhe {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				z-index: 9;
+			}
+			
+			#back-pt {
+				padding: 15px;
+				padding-top: 33px;
+				position: absolute;
+				left: 50%;
+				top: 27%;
+				width: 300px;
+				background: #f7c756;
+				background-size: 100% 100%;
+				left: 50%;
+				margin-left: -150px;
+				border-radius: 12px;
+			}
+			
+			.message {
+				opacity: 1;
+				width: 5.7rem;
+				background-size: cover;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				height: 5.6rem;
+				margin-left: -2.85rem;
+				margin-top: -2.8rem;
+				border-radius: 4px;
+				z-index: -1;
+				background: #f5f5f5;
+				border-radius: .08rem;
+			}
+			
+			.zc>input {
+				margin-top: .2rem;
+			}
+			
+			.phone-zc {
+				margin-top: 0;
+			}
+			
+			.bth-zc {
+				margin-top: 0 !important;
+			}
+			
+			.chuai_box {
+				width: 100%;
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background: rgba(0, 0, 0, 0.5);
+				text-align: center;
+				text-align: -webkit-center;
+				z-index: 100;
+				line-height: .6rem;
+			}
+			
+			.titles {
+				margin-top: .3rem;
+				font-size: .38rem;
+				color: #e85a41;
+			}
+			
+			.bth {
+				text-align: center;
+				background: #e85a41;
+				color: #F5F5F5;
+				font-size: .36rem;
+			}
+			
+			input {
+				box-sizing: border-box;
+				margin-top: .28rem;
+				width: 4.54rem;
+				font-size: .38rem;
+				border-radius: .06rem;
+				padding: .2rem;
+				border: 0;
+				background: #e1e1e1;
+				color: #1a1a1a;
+				height: .78rem;
+				-moz-box-shadow: .38rem .38rem .38rem rgba(101, 79, 15, 0.18) inset;
+				-webkit-box-shadow: 0.38rem 0.38rem 0.38rem rgba(101, 79, 15, 0.18) inset;
+				box-shadow: 0rem 0rem 0.38rem rgba(101, 79, 15, 0.18) inset;
+				margin-bottom: .2rem;
+			}
+			
+			.re {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%;
+				background: url(../temporary/pTAct/img/back.jpg);
+				background-size: 100% 100%;
+				display: none;
+			}
+			
+			.answer {
+				display: inline-table;
+				width: 5.6rem;
+				height: 1.6rem;
+				font-size: .6rem;
+				color: #fff;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -2.8rem;
+				margin-top: -.8rem;
+			}
+			
+			.start-page {
+				width: 100%;
+				height: 100%;
+				background: url(../temporary/pTAct/img/backs.jpg) no-repeat;
+				background-size: 100% 100%;
+				position: relative;
+				z-index: 100;
+			}
+			
+			.start {
+				width: 52%;
+				height: 12%;
+				display: inline-block;
+				position: absolute;
+				left: 24%;
+				top: 50%;
+			}
+			
+			.result {
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.9);
+				position: relative;
+				z-index: 101;
+				color: #FFFFFF;
+				font-size: 16px;
+			}
+			
+			#times {
+				font-weight: bold;
+				font-size: 24px;
+			}
+			
+			.row-content {
+				height: 100%;
+			}
+			
+			.row-content>.ng-scope {
+				height: 100%;
+			}
+			
+			.marks {
+				width: 300px;
+				height: 300px;
+				background: url(../temporary/pTAct/img/logo-300.png);
+				position: absolute;
+				left: 50%;
+				top: 29.5%;
+				margin-left: -150px;
+			}
+			
+			.result3 {
+				float: left;
+				padding: 12px;
+			}
+			
+			.result2 {
+				display: none;
+			}
+			
+			.result1 {
+				display: none;
+			}
+			
+			.ranking {
+				position: absolute;
+				top: 1%;
+				right: 24%;
+				width: 32%;
+				height: 5.5%;
+			}
+			
+			.rule {
+				position: absolute;
+				top: 1%;
+				right: 3%;
+				width: 20%;
+				height: 5.5%;
+			}
+			
+			ul li {
+				display: flex;
+				display: -webkit-flex;
+			}
+			
+			ul li .left {
+				text-align: left;
+				flex: 1;
+			}
+			
+			ul li .center {
+				text-align: center;
+				flex: 1;
+			}
+			
+			ul li .right {
+				flex: 1;
+				text-align: right;
+			}
+			
+			.names {
+				font-size: 16px;
+				font-weight: 700;
+			}
+			
+			.content {
+				height: 46px;
+				line-height: 46px;
+			}
+			
+			.actRule {
+				display: none;
+			}
+			
+			.rankList {
+				display: none;
+			}
+			
+			.AR {
+				display: none;
+			}
+			.borders{
+				    border-radius: 5px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="start-page">
+			<div class="rule"></div>
+			<div class="ranking"></div>
+			<div class="start">
+
+			</div>
+		</div>
+		<div class="result result2">
+			<div style="text-align: center;     padding-top: 3rem;"> <img src="../temporary/pTAct/img/defeat.png" style="width: 80%;" /> </div>
+			<div style="text-align: center; margin-top: 30px; font-size: 20px;"><span>您的成绩为：</span> <span>59.54</span> <span>秒</span> </div>
+			<div style="text-align: center;margin-top: 10px;">成绩必须高于30秒才能抽奖 </div>
+			<div style="text-align: center;margin-top: 33px;"><span>最佳成绩为：</span><span>39.12</span><span>秒</span> </div>
+			<!--<div style="text-align: center;margin-top: 18px;"><span>你的排名为：N0.</span><span>1</span></div>-->
+			<div style="text-align: center">
+				<div class="borders" style="margin-top:13px;width:80%;background: #fd8307; display: inline-block; height: 47px;line-height: 47px;">在玩一次</div>
+			</div>
+			<div style="text-align: center">
+				<div class="borders" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;margin-right: 2%;">排行榜</div>
+				<div class="borders" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;">返回首页 </div>
+			</div>
+
+		</div>   
+		<div class="result result1">
+			<div style="text-align: center;     padding-top: 3rem;"> <img src="../temporary/pTAct/img/success.png" style="width: 80%;" /> </div>
+			<div style="text-align: center; margin-top: 30px; font-size: 20px;"><span>您的成绩为：</span> <span>59.54</span> <span>秒</span> </div>
+			<div style="text-align: center;margin-top: 10px;">成绩必须高于30秒才能抽奖 </div>
+			<div style="text-align: center;margin-top: 33px;"><span>最佳成绩为：</span><span>39.12</span><span>秒</span> </div>
+			<!--<div style="text-align: center;margin-top: 18px;"><span>你的排名为：N0.</span><span>1</span></div>-->
+			<div style="text-align: center;margin-top: 18px;"><span>今天还有</span><span>3</span><span>次机会</span></div>
+			<div style="text-align: center">
+				<div class="borders" style="margin-top:13px;width:80%;background: #fd8307; display: inline-block; height: 47px;line-height: 47px;">马上抽奖</div>
+			</div>
+			<div style="text-align: center">
+				<div class="borders" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;margin-right: 2%;">排行榜</div>
+				<div class="borders" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;">在玩一次 </div>
+			</div>
+
+		</div>
+		<div class="AR" style="position: absolute;position: absolute;width: 100%; height: 100%;top: 0; left: 0;">
+			<div class="result result3">
+				<div class="" style="height: 2.5rem; display: flex;  display: -webkit-flex; justify-content: center;-webkit-justify-content: center;  align-items: center;">
+					<div style="padding: 0.85rem; text-align: center; width: 40%;display: inline-block; flex:1;-webkit-flex:1;">活动说明</div>
+					<div style=" width: 1px; height: 0.8rem;background: #FFFFFF; display: inline-block;"></div>
+					<div style="padding: 0.85rem; text-align: center;width: 40%;display: inline-block; flex:1;-webkit-flex:1;">排行榜</div>
+
+				</div>
+				<div style="display: flex;  display: -webkit-flex;">
+					<div class="actIco" style="display: inline-block; text-align: center;flex:1;-webkit-flex:1;visibility:hidden"> <img src="../temporary/pTAct/img/Selected.png" style="width: 100px;text-align: center;" /></div>
+					<div class="listIco" style="display: inline-block; text-align: center;flex:1;-webkit-flex:1; visibility:hidden"> <img src="../temporary/pTAct/img/Selected.png" style="width: 100px;text-align: center;" /></div>
+				</div>
+				<div class="rankList">
+					<div style="height: 48px;line-height: 48px;">当前排名为：<span>481</span><span>（仅显示前5）</span></div>
+					<div style="padding: 0 25px;">
+						<ul>
+							<li class="names">
+								<div class="left">排行</div>
+								<div class="center">昵称</div>
+								<div class="right"> 成绩</div>
+							</li>
+							<li>
+								<div class="left content">NO.1</div>
+								<div class="center content"> 昵称 </div>
+								<div class="right content"> 36.5秒</div>
+							</li>
+							<li>
+								<div class="left content">NO.1</div>
+								<div class="center content"> 昵称 </div>
+								<div class="right content"> 36.5秒</div>
+							</li>
+							<li>
+								<div class="left content">NO.1</div>
+								<div class="center content"> 昵称 </div>
+								<div class="right content"> 36.5秒</div>
+							</li>
+							<li>
+								<div class="left content">NO.1</div>
+								<div class="center content"> 昵称 </div>
+								<div class="right content"> 36.5秒</div>
+							</li>
+							<li>
+								<div class="left content">NO.1</div>
+								<div class="center content"> 昵称 </div>
+								<div class="right content"> 36.5秒</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="actRule">
+					暂无说明
+				</div>
+			</div>
+
+		</div>
+
+		<div class="audio_div" style="background:url(http://oss.szzbmy.com/rp2/apps/static/widget/music/music_c0fda01.gif) transparent no-repeat center center;position: fixed;width: 50px;height: 50px;z-index: 1000;top: 7%;right: 2%;">
+			<div class="music" style="background: url(http://oss.szzbmy.com/rp2/apps/static/widget/music/music_off_8d94020.png) transparent no-repeat center center; width: 30px;height: 30px;background-size: 100%;margin:0 auto;padding-top: 50%;"></div>
+			<audio id="mp3Btn" src="music/1.mp3" loop="loop">
+
+			</audio>
+		</div>
+
+		<div id="back-pt">
+			<p class="times"><span style="font-size: 14px;padding-right: 5px;">时间</span><span id='times'>0.00</span><span style="padding-left: 5px;">s</span></p>
+
+			<div id='picbox'>
+
+				<div id="zhe">
+
+				</div>
+
+				<div class="pic" data-index='1' style='background-position:0px 0px;left:0px;top:0px;'></div>
+
+				<div class="pic" data-index='2' style='background-position:-75px 0px;left:75px;top:0px;'></div>
+
+				<div class="pic" data-index='3' style='background-position:-150px 0px;left:150px;top:0px;'></div>
+
+				<div class="pic" data-index='4' style='background-position:-225px -0rem;left:225px;top:0rem;'></div>
+				<div class="pic" data-index='5' style='background-position:0px -75px;left:0px;top:75px;'></div>
+
+				<div class="pic" data-index='6' style='background-position:-75px -75px;left:75px;top:75px;'></div>
+
+				<div class="pic" data-index='7' style='background-position:-150px -75px;left:150px;top:75px;'></div>
+
+				<div class="pic" data-index='8' style='background-position:-225px -75px;left:225px;top:75px;'></div>
+				<div class="pic" data-index='9' style='background-position:0px -150px;left:0px;top:150px;'></div>
+				<div class="pic" data-index='10' style='background-position:-75px -150px;left:75px;top:150px;'></div>
+
+				<div class="pic" data-index='11' style='background-position:-150px  -150px;left:150px;top:150px;'></div>
+
+				<div class="pic" data-index='12' style='background-position:-225px -150px;left:225px;top:150px;'></div>
+				<div class="pic" data-index='13' style='background-position:0px -225px;left:0;top:225px;'></div>
+				<div class="pic" data-index='14' style='background-position:-75px -225px;left:75px;top:225px;'></div>
+				<div class="pic" data-index='15' style='background-position:-150px -225px;left:150px;top:225px;'></div>
+
+				<div class="pic" data-index='16' style='background-position:-225px -225px;left:225px;top:225px;'></div>
+
+			</div>
+		</div>
+		<div class="go">
+			<div id='go'>开始</div>
+			<div id='mark'>提示</div>
+		</div>
+		<div class="chuai_box" style="display: none;">
+			<div class="marks">
+
+			</div>
+		</div>
+		<div class="re">
+			<div class="answer"> 恭喜,<span class="username"></span>用时<span class="time"></span>完成了拼图</div>
+		</div>
+		<script>
+			function ajaxPost(url, data, fnSucceed, fnFail, fnLoading) {
+				$.ajax({
+					url: url,
+					datatype: 'json',
+					type: 'get',
+					data: data,
+					success: function(result) {
+						fnSucceed(result);
+					}
+				});
+
+			}
+
+			//	start-page  逻辑
+			$('.start').click(function() {
+				$('.start-page').animate({
+					opacity: 0
+				}, 500);
+				setTimeout(function() {
+					$('.start-page').css('display', 'none')
+				}, 500)
+			})
+
+			// 首先禁止body
+			document.body.ontouchmove = function(e) {
+				e.preventDefault();
+			};
+
+			var kg = 1;
+			// 然后取得触摸点的坐标
+			var startX = 0,
+				startY = 0;
+			//touchstart事件
+			function touchSatrtFunc(evt) {
+				try {
+					//					evt.preventDefault(); //阻止触摸时浏览器的缩放、滚动条滚动等
+					var touch = evt.touches[0]; //获取第一个触点
+					var x = Number(touch.pageX); //页面触点X坐标
+					var y = Number(touch.pageY); //页面触点Y坐标
+					//记录触点初始位置
+					startX = x;
+					startY = y;
+
+				} catch(e) {
+					alert('touchSatrtFunc：' + e.message);
+				}
+			}
+
+			var picbox = document.getElementById('picbox');
+
+			var pic = document.querySelectorAll('.pic');
+
+			var picWidth = pic[0].offsetWidth;
+
+			var picHeight = pic[0].offsetHeight;
+
+			var picboxWidth = picbox.offsetWidth;
+
+			var picboxHeight = picbox.offsetHeight;
+
+			var go = document.getElementById('go');
+			var mark = document.getElementById('mark');
+			var zhe = document.getElementById('zhe');
+			var times = document.getElementById('times'); //定时。用于扩展
+			var kg = 0;
+			var dx, dy, newLeft, newtop, startTime, endTime;
+
+			go.addEventListener('touchstart', function() {
+				//				$('.chuai_box').css('display', 'block')
+				Reset()
+				start()
+				//				console.log(zhe)
+				zhe.style.display = 'none'
+				go.innerHTML = '重新开始'
+				for(var i = 0; i < pic.length; i++) {
+
+					pic[i].style.display = "block"; //设置显示拼图，游戏开始
+
+				}
+
+				picbox.style.background = "transparent";
+
+				for(var i = 0; i < 20; i++) { //随机打乱
+
+					var a = Math.floor(Math.random() * 16);
+
+					var b = Math.floor(Math.random() * 16);
+
+					if(a != b) {
+
+						random(a, b);
+
+					}
+
+				}
+			})
+			mark.addEventListener('touchstart', function() {
+				$('.chuai_box').css('display', 'block')
+
+			})
+			for(var i = 0; i < pic.length; i++) {
+
+				pic[i].addEventListener('touchstart', function(e) {
+					e.preventDefault();
+
+					this.style.zIndex = 100; //设置拖拽元素的z-index值，使其在最上面。
+					//					console.log(e.targetTouches[0].pageX - this.offsetLeft)
+					//					console.log(e.targetTouches[1].pageX - this.offsetLeft)
+					dx = e.targetTouches[0].pageX - this.offsetLeft; //记录触发拖拽的水平状态发生改变时的位置
+
+					dy = e.targetTouches[0].pageY - this.offsetTop; //记录触发拖拽的垂直状态发生改变时的位置
+
+					this.startX = this.offsetLeft; //记录当前初始状态水平发生改变时的位置
+
+					this.startY = this.offsetTop; //offsetTop等取得的值与this.style.left获取的值区别在于前者不带px,后者带px
+
+					this.style.transition = 'none';
+
+				});
+
+				pic[i].addEventListener('touchmove', function(e) {
+
+					newLeft = e.targetTouches[0].pageX - dx; //记录拖拽的水平状态发生改变时的位置
+
+					newtop = e.targetTouches[0].pageY - dy;
+
+					if(newLeft <= -picWidth / 2) { //限制边界代码块，拖拽区域不能超出边界的一半
+
+						newLeft = -picWidth / 2;
+
+					} else if(newLeft >= (picboxWidth - picWidth / 2)) {
+
+						newLeft = (picboxWidth - picWidth / 2);
+
+					}
+
+					if(newtop <= -picHeight / 2) {
+
+						newtop = -picWidth / 2;
+
+					} else if(newtop >= (picboxHeight - picHeight / 2)) {
+
+						newtop = (picboxHeight - picHeight / 2);
+
+					}
+
+					this.style.left = newLeft + 'px';
+
+					this.style.top = newtop + 'px'; //设置目标元素的left,top
+
+				});
+
+				pic[i].addEventListener('touchend', function(e) {
+
+					this.style.zIndex = 0;
+
+					this.style.transition = 'all 0.05s ease 0s'; //添加css3动画效果
+
+					this.endX = e.changedTouches[0].pageX - dx;
+
+					this.endY = e.changedTouches[0].pageY - dy; //记录滑动结束时的位置，与进入元素对比，判断与谁交换
+
+					var obj = change(e.target, this.endX, this.endY); //调用交换函数
+
+					if(obj == e.target) { //如果交换函数返回的是自己
+
+						obj.style.left = this.startX + 'px';
+
+						obj.style.top = this.startY + 'px';
+
+					} else { //否则
+
+						var _left = obj.style.left;
+
+						obj.style.left = this.startX + 'px';
+
+						this.style.left = _left;
+
+						var _top = obj.style.top;
+
+						obj.style.top = this.startY + 'px';
+
+						this.style.top = _top;
+
+						var _index = obj.getAttribute('data-index');
+
+						obj.setAttribute('data-index', this.getAttribute('data-index'));
+
+						this.setAttribute('data-index', _index); //交换函数部分，可提取
+
+					}
+
+				});
+
+				pic[i].addEventListener('transitionend', function() {
+
+					if(isSuccess()) {
+						stop()
+						kg++
+						if(kg == 2) {
+
+							console.log('成功了！'); //此处监听事件有bug，会添加上多次事件。
+							$('.result1').css('display', 'block')
+						}
+
+					} else {
+
+						// pic[i].removeEventListener('transitionend');
+
+					}
+
+				})
+
+			}
+
+			function change(obj, x, y) { //交换函数，判断拖动元素的位置是不是进入到目标原始1/2，这里采用绝对值得方式
+
+				for(var i = 0; i < pic.length; i++) { //还必须判断是不是当前原素本身。将自己排除在外
+
+					if(Math.abs(pic[i].offsetLeft - x) <= picWidth / 2 && Math.abs(pic[i].offsetTop - y) <= picHeight / 2 && pic[i] != obj)
+
+						return pic[i];
+
+				}
+
+				return obj; //返回当前
+
+			}
+
+			function random(a, b) { //随机打乱函数，其中交换部分，可以提取出来封装
+
+				var aEle = pic[a];
+
+				var bEle = pic[b];
+
+				var _left;
+
+				_left = aEle.style.left;
+
+				aEle.style.left = bEle.style.left;
+
+				bEle.style.left = _left;
+
+				var _top;
+
+				_top = aEle.style.top;
+
+				aEle.style.top = bEle.style.top;
+
+				bEle.style.top = _top;
+
+				var _index;
+
+				_index = aEle.getAttribute("data-index");
+
+				aEle.setAttribute("data-index", bEle.getAttribute("data-index"));
+
+				bEle.setAttribute("data-index", _index);
+
+			}
+
+			function isSuccess() { //判断成功标准
+				console.log(kg)
+				var str = ''
+
+				for(var i = 0; i < pic.length; i++) {
+
+					str += pic[i].getAttribute('data-index');
+
+				}
+
+				if(str == '12345678910111213141516') {
+
+					return true;
+
+				}
+
+				return false;
+
+			}
+
+			var hour, minute, second; //时 分 秒
+			hour = minute = second = 0; //初始化
+			var millisecond = 0; //毫秒
+			var int;
+
+			function Reset() //重置
+			{
+				window.clearInterval(int);
+				millisecond = hour = minute = second = 0;
+				document.getElementById('times').value = '00.00.00';
+			}
+
+			function start() //开始
+			{
+				int = setInterval(timer, 10);
+			}
+
+			function timer() //计时
+			{
+				millisecond = millisecond + 1;
+				if(millisecond >= 100) {
+					millisecond = 0;
+
+					second = second + 1;
+				}
+
+				if(millisecond < 10) {
+					milliseconds = '0' + millisecond
+				} else {
+					milliseconds = millisecond
+				}
+				document.getElementById('times').innerHTML = second + '.' +
+					milliseconds;
+			}
+
+			function stop() //暂停
+			{
+				window.clearInterval(int);
+			}
+			$("input").focus(function() {
+
+			});
+
+			$('.chuai_box').on('touchstart', function() {
+				$('.chuai_box').css('display', 'none')
+			})
+		</script>
+		<script>
+			function audioAutoPlay(id) {
+				var audio = document.getElementById(id);
+				audio.play();
+				document.addEventListener("WeixinJSBridgeReady", function() {
+					audio.play();
+				}, false);
+			}
+			audioAutoPlay('mp3Btn');
+			var audios = document.getElementById('mp3Btn');
+			$('.audio_div').click(function() {
+				//防止冒泡
+				event.stopPropagation();
+				if(audios.paused) //如果当前是暂停状态
+				{
+					$('.audio_div').css("background", "url(http://oss.szzbmy.com/rp2/apps/static/widget/music/music_c0fda01.gif) transparent no-repeat center center");
+					audios.play(); //播放
+					return;
+				}
+
+				//当前是播放状态
+				$('.audio_div').css("background", "url('')");
+
+				audios.pause(); //暂停
+			});
+		</script>
+		<script>
+			$('.ranking').click(function() {
+				$('.AR').css('display', 'block')
+				$('.listIco').css('visibility', 'visible')
+				$('.rankList').css('display', 'block')
+			})
+			$('.rule').click(function() {
+
+				$('.AR').css('display', 'block')
+				$('.actIco').css('visibility', 'visible')
+				$('.actRule').css('display', 'block')
+			})
+		</script>
+	</body>
+
+</html>

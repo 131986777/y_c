@@ -74,3 +74,6 @@ $import('pages/temporary/list');
 $import('pages/temporary/years');
 $import('pages/temporary/wjdcqh');
 $import('pages/temporary/sign');
+$import('pages/temporary/ycnhj');
+$import('pages/temporary/ycnhjs');
+$import('pages/temporary/pTAct');
