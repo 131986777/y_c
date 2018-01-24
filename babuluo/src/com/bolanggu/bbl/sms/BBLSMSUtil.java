@@ -5,14 +5,27 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import com.pabula.common.util.RandomNum;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BBLSMSUtil {
 
@@ -22,8 +35,9 @@ public class BBLSMSUtil {
     URL url=null;
     HttpURLConnection con;
     String line;
-
-
+    private Logger log = LoggerFactory.getLogger(BBLSMSUtil.class);
+    
+    private static HttpClient httpclient;
 
     public String reg(String phone){
         RandomNum randomNum = new RandomNum();
@@ -79,8 +93,9 @@ public class BBLSMSUtil {
 //	    System.out.println("剩余：："+sheng);
 
 	    //发送调用
-		xml=t.SendMessage("", "jksc228", "jksc22833", "18255162781", "【云厨1站】 您的验证码：88888", "").toString();
-        System.out.println(xml);
+		xml=t.SendMessage("", "jksc228", "jksc22833", "18255162781", "【云厨1站】您的验证码：123456", "").toString();
+		System.out.println(xml);
+		t.readStringXml(xml);
 //        xmlentity.setReturnstatus("returnstatus");
 //        xmlentity.setMessage("message");
 //        xmlentity.setRemainpoint("remainpoint");
@@ -148,22 +163,46 @@ public class BBLSMSUtil {
 
         try {
             //设置发送内容的编码方式
-            String send_content=URLEncoder.encode(content.replaceAll("<br/>", " "), "UTF-8");//发送内容
+            //String send_content=URLEncoder.encode(content.replaceAll("<br/>", " "), "UTF-8");//发送内容
 
             //url=new URL("http://sh2.cshxsp.com/smsJson.aspx?action=send&userid="+userid+"&account="+account+"&password="+password+"&mobile="+mobile+"&content="+send_content+"&sendTime="+sendTime+"");
-            url=new URL("http://sh2.ipyy.com/sms.aspx?action=send&userid="+userid+"&account="+account+"&password="+password+"&mobile="+mobile+"&content="+send_content+"&sendTime="+sendTime+"");
-            System.out.println(url);
-            con = (HttpURLConnection)url.openConnection();
-
-            br=new  BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
+            //url=new URL("http://sh2.ipyy.com/sms.aspx?action=send&userid="+userid+"&account="+account+"&password="+password+"&mobile="+mobile+"&content="+send_content+"&sendTime="+sendTime+"");
+            //url=new URL("https://sh2.ipyy.com/sms.aspx?action=send&userid="+userid+"&account="+account+"&password="+password+"&mobile="+mobile+"&content="+send_content+"&sendTime="+sendTime+"");
+            //con = (HttpURLConnection)url.openConnection();
+            //br=new  BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
             //br=new BufferedReader(new InputStreamReader(url.openStream()));
-
-            while((line=br.readLine())!=null)
+            /*while((line=br.readLine())!=null)
             {
                 //追加字符串获得XML形式的字符串
                 sub.append(line+"");
                 //System.out.println("提取数据 :  "+line);
-            }
+            }*/
+            //https方式
+        	System.out.println(mobile+"发送短信======"+content);
+            String url = "https://sh2.ipyy.com/sms.aspx";
+            httpclient = new SSLClient();
+            HttpPost post = new HttpPost(url);
+            post.setHeader("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+            List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+            nvps.add(new BasicNameValuePair("action","send"));
+    		nvps.add(new BasicNameValuePair("userid", userid));
+    		nvps.add(new BasicNameValuePair("account", account)); 	
+    		nvps.add(new BasicNameValuePair("password", password));		
+    		nvps.add(new BasicNameValuePair("mobile", mobile));		//多个手机号用逗号分隔
+    		nvps.add(new BasicNameValuePair("content", content));
+    		nvps.add(new BasicNameValuePair("sendTime", sendTime));
+    		nvps.add(new BasicNameValuePair("extno", ""));
+    		post.setEntity(new UrlEncodedFormEntity(nvps,HTTP.UTF_8));
+    		HttpResponse response = httpclient.execute(post);
+    		System.out.println(response.getStatusLine());
+			HttpEntity entity = response.getEntity();
+			// 将字符转化为XML
+			line=EntityUtils.toString(entity, "UTF-8");
+			System.out.println(line);
+			
+            sub.append(line);
+            log.info("mobile="+mobile+"&content="+content);
+            readStringXml(line);
             br.close();
 
         } catch (IOException e) {
@@ -220,18 +259,18 @@ public class BBLSMSUtil {
             //拿到根节点的名称
             //System.out.println("根节点名称："+rootElt.getName());
 
-            //获取根节点下的子节点的值
-            String returnstatus=rootElt.elementText("returnstatus").trim();
-            String message=rootElt.elementText("message").trim();
-            String payinfo=rootElt.elementText("payinfo").trim();
-            String overage=rootElt.elementText("overage").trim();
-            String sendTotal=rootElt.elementText("sendTotal").trim();
+         // 获取根节点下的子节点的值
+		String returnstatus = rootElt.elementText("returnstatus").trim();
+		String message = rootElt.elementText("message").trim();
+		String remainpoint = rootElt.elementText("remainpoint").trim();
+		String taskID = rootElt.elementText("taskID").trim();
+		String successCounts = rootElt.elementText("successCounts").trim();
 
-            System.out.println("返回状态为："+returnstatus);
-            System.out.println("返回信息提示："+message);
-            System.out.println("返回支付方式："+payinfo);
-            System.out.println("返回剩余短信条数："+overage);
-            System.out.println("返回总条数："+sendTotal);
+		log.info("返回状态为：" + returnstatus);
+		log.info("返回信息提示：" + message);
+		log.info("返回余额：" + remainpoint);
+		log.info("返回任务批次：" + taskID); 
+		log.info("返回成功条数：" + successCounts);
 
         } catch (DocumentException e) {
             // TODO Auto-generated catch block

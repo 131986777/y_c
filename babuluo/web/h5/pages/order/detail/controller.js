@@ -1,4 +1,4 @@
-﻿﻿angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory, balanceFactory, http, weUI,groupBuyMemberFactory, productFactory, promoFactory,groupBuyGroupFactory, orderFactory, modalFactory) {
+﻿﻿﻿angular.module('AndSell.H5.Main').controller('pages_order_detail_Controller', function ($scope, $state, $stateParams, $q, couponFactory, balanceFactory, http, weUI,groupBuyMemberFactory, productFactory, promoFactory,groupBuyGroupFactory, orderFactory, modalFactory) {
 
     modalFactory.setTitle('订单详情');
     modalFactory.setBottom(false);
@@ -299,7 +299,7 @@
     $scope.goCoupon = function () {
         $state.go('pages/order/addCoupon', {
             'PRODUCTS': $scope.order['SHOP_ORDER.ORDER_INFO'],
-            'MONEY': $scope.order['SHOP_ORDER.PRICE_OVER'],
+            'MONEY': $scope.order['SHOP_ORDER.PRICE_PRD'],
             'ORDER_ID': $scope.order['SHOP_ORDER.ID']
         });
     }

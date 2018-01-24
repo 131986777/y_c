@@ -7,21 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.task.trigger.NewYearShoppingTrigger;
+import com.task.trigger.WeekCouponTrigger;
 
-public class NewYearShoppingServlet  extends HttpServlet{
+public class WeekCouponServlet  extends HttpServlet{
 	
-	public static NewYearShoppingTrigger newYearTask = new NewYearShoppingTrigger();
+	public static WeekCouponTrigger weekCouponTask = new WeekCouponTrigger();
 	
-	public NewYearShoppingServlet (){
+	public WeekCouponServlet (){
 		super();
-		newYearTask.init();
-		newYearTask.start();
+		weekCouponTask.init();
+		weekCouponTask.start();
 
 	}
 	
 	 public void destroy() {
-		 newYearTask.shutdown();
+		 weekCouponTask.shutdown();
 		 super.destroy();
 	 }
 	 

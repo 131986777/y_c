@@ -193,6 +193,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
             for (i=0;i<strs.length ;i++ )
             {
             	strDay=(strs[i]);
+            	
             	 if ((strDay - currTime) > endDay) {
                      next = false;
                  } else {

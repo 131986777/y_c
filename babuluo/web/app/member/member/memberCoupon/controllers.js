@@ -38,21 +38,34 @@ angular.module('AndSell.Main').controller('member_member_memberCoupon_Controller
         $scope.detailArray = item.split("<br>");
     };
 
-    $scope.coupon = {};
-    $scope.add = {};
-    $scope.add['MEMBER_COUPON.COUPON_ID'] = '';
-    $scope.add['MEMBER_COUPON.EXPIRED_TIME'] = '';
-
+ 
     $scope.addMemberCoupon = function () {
+    	 $scope.coupon = {};
+    	 $scope.add = {};
         if ($scope.memberId == undefined || $scope.memberId == '') {
             modalFactory.showShortAlert('请输入登录名称并查询相关信息！');
-        } else if ($scope.memberDetail == undefined) {
+        } else if ($scope.memberDetail['MEMBER.USER_ID'] == undefined) {
             modalFactory.showShortAlert('请先查询相关信息');
         } else {
             console.log($scope.modCoupon);
             $scope.coupon=$scope.couponMap[$scope.modCoupon];
+            console.log($scope.coupon);
             $scope.add['MEMBER_COUPON.COUPON_ID'] = $scope.coupon['COUPON.ID'];
-            $scope.add['MEMBER_COUPON.EXPIRED_TIME'] = $scope.coupon['COUPON.END_DATETIME'];
+            //刘墨社群打折券
+            var nowdate = new Date().getTime();
+            var expiredTime = new Date(nowdate + 7 * 24 * 60 * 60 * 1000);
+            var year = expiredTime.getFullYear(); //获取完整的年份(4位,1970-????)
+            var month = expiredTime.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+            if (month < 10) {
+                month = "0" + month;
+            }
+            var day = expiredTime.getDate(); //获取当前日(1-31)
+            if (day < 10) {
+                day = "0" + day;
+            }         
+            $scope.add['MEMBER_COUPON.EXPIRED_TIME']= year + "-" + month + "-" + day + " 00:00:00";
+            console.log( $scope.add['MEMBER_COUPON.EXPIRED_TIME']);
+           // $scope.add['MEMBER_COUPON.EXPIRED_TIME'] = $scope.coupon['COUPON.END_DATETIME'];
             $scope.add['MEMBER_COUPON.USER_ID'] = $scope.memberDetail['MEMBER.USER_ID'];
 
             $scope.coupon['COUPON.NUM_LEFT'] = $scope.coupon['COUPON.NUM_LEFT'] - 1;

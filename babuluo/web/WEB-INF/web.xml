@@ -150,14 +150,14 @@
         <url-pattern>/shopOrder</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>NewYearShopping</servlet-name>
-        <servlet-class>com.task.servlet.NewYearShoppingServlet</servlet-class>
+        <servlet-name>WeekCouponServlet</servlet-name>
+        <servlet-class>com.task.servlet.WeekCouponServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>NewYearShopping</servlet-name>
-        <url-pattern>/NewYearShopping</url-pattern>
+        <servlet-name>WeekCouponServlet</servlet-name>
+        <url-pattern>/WeekCouponServlet</url-pattern>
     </servlet-mapping>
     
     <servlet>
