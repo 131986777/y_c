@@ -11,6 +11,7 @@
 		<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
 		<script src="../temporary/pTAct/js/jquery-3.1.1.js"></script>
 		<script src="../temporary/pTAct/js/rem.js"></script>
+
 		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
 
 		<style type="text/css">
@@ -349,8 +350,46 @@
 			.AR {
 				display: none;
 			}
-			.borders{
-				    border-radius: 5px;
+			
+			.borders {
+				border-radius: 5px;
+			}
+			
+			.lottery {
+				width: 100%;
+				height: 100%;
+				background: rgba(0, 0, 0, 0.9);
+				position: absolute;
+				z-index: 101;
+				    top: 0;
+				    left: 0;
+			}
+			
+			@keyframes tada {
+				from {
+					transform: scale3d(1, 1, 1);
+				}
+				10%,
+				20% {
+					transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+				}
+				30%,
+				50%,
+				70%,
+				90% {
+					transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+				}
+				40%,
+				60%,
+				80% {
+					transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+				}
+				to {
+					transform: scale3d(1, 1, 1);
+				}
+			}
+			.lotteryStart{
+				animation:tada 1s forwards ;
 			}
 		</style>
 
@@ -371,14 +410,14 @@
 			<div style="text-align: center;margin-top: 33px;"><span>最佳成绩为：</span><span>39.12</span><span>秒</span> </div>
 			<!--<div style="text-align: center;margin-top: 18px;"><span>你的排名为：N0.</span><span>1</span></div>-->
 			<div style="text-align: center">
-				<div class="borders" style="margin-top:13px;width:80%;background: #fd8307; display: inline-block; height: 47px;line-height: 47px;">在玩一次</div>
+				<div class="borders  again" style="margin-top:13px;width:80%;background: #fd8307; display: inline-block; height: 47px;line-height: 47px; ">在玩一次</div>
 			</div>
 			<div style="text-align: center">
-				<div class="borders" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;margin-right: 2%;">排行榜</div>
-				<div class="borders" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;">返回首页 </div>
+				<div class="borders ranks " style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;margin-right: 2%;">排行榜</div>
+				<div class="borders  again" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;">返回首页 </div>
 			</div>
 
-		</div>   
+		</div>
 		<div class="result result1">
 			<div style="text-align: center;     padding-top: 3rem;"> <img src="../temporary/pTAct/img/success.png" style="width: 80%;" /> </div>
 			<div style="text-align: center; margin-top: 30px; font-size: 20px;"><span>您的成绩为：</span> <span>59.54</span> <span>秒</span> </div>
@@ -387,20 +426,21 @@
 			<!--<div style="text-align: center;margin-top: 18px;"><span>你的排名为：N0.</span><span>1</span></div>-->
 			<div style="text-align: center;margin-top: 18px;"><span>今天还有</span><span>3</span><span>次机会</span></div>
 			<div style="text-align: center">
-				<div class="borders" style="margin-top:13px;width:80%;background: #fd8307; display: inline-block; height: 47px;line-height: 47px;">马上抽奖</div>
+				<div class="borders startL" style="margin-top:13px;width:80%;background: #fd8307; display: inline-block; height: 47px;line-height: 47px;">马上抽奖</div>
 			</div>
 			<div style="text-align: center">
-				<div class="borders" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;margin-right: 2%;">排行榜</div>
-				<div class="borders" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;">在玩一次 </div>
+				<div class="borders ranks" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;margin-right: 2%;">排行榜</div>
+				<div class="borders again" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;">在玩一次 </div>
 			</div>
 
 		</div>
 		<div class="AR" style="position: absolute;position: absolute;width: 100%; height: 100%;top: 0; left: 0;">
 			<div class="result result3">
+				<span style="position: absolute;left: 26px;top: 20px;font-size: 20px;z-index: 1000;" class="gb">X</span>
 				<div class="" style="height: 2.5rem; display: flex;  display: -webkit-flex; justify-content: center;-webkit-justify-content: center;  align-items: center;">
-					<div style="padding: 0.85rem; text-align: center; width: 40%;display: inline-block; flex:1;-webkit-flex:1;">活动说明</div>
+					<div style="padding: 0.85rem; text-align: center; width: 40%;display: inline-block; flex:1;-webkit-flex:1;" class="hdsm">活动说明</div>
 					<div style=" width: 1px; height: 0.8rem;background: #FFFFFF; display: inline-block;"></div>
-					<div style="padding: 0.85rem; text-align: center;width: 40%;display: inline-block; flex:1;-webkit-flex:1;">排行榜</div>
+					<div style="padding: 0.85rem; text-align: center;width: 40%;display: inline-block; flex:1;-webkit-flex:1;" class="phb">排行榜</div>
 
 				</div>
 				<div style="display: flex;  display: -webkit-flex;">
@@ -450,7 +490,15 @@
 			</div>
 
 		</div>
-
+		<div class="lottery" style="text-align: center;display: none;">
+			<div style="position: relative; width: 100%;height: 100%;">
+			<div style="width: 60%;display: inline-block;">
+				<img src="../temporary/pTAct/img/cj.png" style="width: 100%;    margin-top: 2rem;" class=" cjs"></img_src>
+				<img src="../temporary/pTAct/img/bt.png" style="width: 100%;    margin-top: 2rem;"></img_src>
+			</div>
+			</div>
+		</div>
+		
 		<div class="audio_div" style="background:url(http://oss.szzbmy.com/rp2/apps/static/widget/music/music_c0fda01.gif) transparent no-repeat center center;position: fixed;width: 50px;height: 50px;z-index: 1000;top: 7%;right: 2%;">
 			<div class="music" style="background: url(http://oss.szzbmy.com/rp2/apps/static/widget/music/music_off_8d94020.png) transparent no-repeat center center; width: 30px;height: 30px;background-size: 100%;margin:0 auto;padding-top: 50%;"></div>
 			<audio id="mp3Btn" src="music/1.mp3" loop="loop">
@@ -492,7 +540,7 @@
 				<div class="pic" data-index='15' style='background-position:-150px -225px;left:150px;top:225px;'></div>
 
 				<div class="pic" data-index='16' style='background-position:-225px -225px;left:225px;top:225px;'></div>
-
+l
 			</div>
 		</div>
 		<div class="go">
@@ -710,6 +758,7 @@
 						if(kg == 2) {
 
 							console.log('成功了！'); //此处监听事件有bug，会添加上多次事件。
+							$('#zhe').show()
 							$('.result1').css('display', 'block')
 						}
 
@@ -863,18 +912,63 @@
 			});
 		</script>
 		<script>
-			$('.ranking').click(function() {
+			function rank() {
 				$('.AR').css('display', 'block')
 				$('.listIco').css('visibility', 'visible')
 				$('.rankList').css('display', 'block')
-			})
-			$('.rule').click(function() {
+			}
 
+			function rule() {
 				$('.AR').css('display', 'block')
 				$('.actIco').css('visibility', 'visible')
 				$('.actRule').css('display', 'block')
+			}
+
+			function gb() {
+				$('.AR').css('display', 'none')
+				$('.actIco').css('visibility', 'hidden')
+				$('.listIco').css('visibility', 'hidden')
+				$('.actRule').css('display', 'none')
+				$('.rankList').css('display', 'none')
+
+			}
+
+			function gbResult() {
+				$('.result1').css('display', 'none')
+				$('.result2').css('display', 'none')
+			}
+			$('.ranking').click(function() {
+				rank()
+			})
+			$('.rule').click(function() {
+				rule()
+
+			})
+			$('.ranks').click(function() {
+				rank()
+			})
+			$('.gb').click(function() {
+				gb()
+			})
+			$('.hdsm').click(function() {
+				gb()
+				rule()
+			})
+			$('.phb').click(function() {
+				gb()
+				rank()
+			})
+			$('.again').click(function() {
+				gbResult()
+			})
+			$('.startL').click(function(){
+				$('.lottery').css('display','block')
+			})
+			$('.cjs').click(function(){
+				$('.cjs').addClass("lotteryStart")
 			})
 		</script>
+
 	</body>
 
 </html>
