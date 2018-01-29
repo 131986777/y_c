@@ -25,6 +25,7 @@ $import('pages/personal/card');
 $import('pages/personal/coupon');
 $import('pages/personal/advice');
 $import('pages/personal/advice/list');
+$import('pages/personal/giveaway');
 
 $import('pages/shop', {FROM: ''});
 

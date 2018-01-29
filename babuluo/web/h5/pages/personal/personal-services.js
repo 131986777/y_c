@@ -15,4 +15,6 @@ AndSellH5MainModule.service('personalFactory', function (http) {
     this.addAdvice = http.post('/guestbook/guestbook/add');
 
     this.getMyAdvice = http.post('/guestbook/guestbook/getGuestbookByUserId');
+    
+    this.getGift = http.post('/gift/gift/queryAll');
 });
