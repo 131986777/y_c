@@ -19,7 +19,10 @@
                             <th style="width: 120px" class="text-center"> 商品上架状态</th>
                             <th style="width: 80px" class="text-center"> 预约价</th>
                             <th style="width: 120px" class="text-center"> 预付款</th>
-                            <th style="width: 80px" class="text-center"> 库存</th>
+                            <th style="width: 40px" class="text-center"> 库存</th>
+                            <th style="width: 40px" class="text-center"> 已出库存</th>
+                            <th style="width: 120px" class="text-center"> 修改时间</th>
+                            <th style="width: 40px" class="text-center"> 额定库存</th>
                             <th style="width: 80px" class="text-center"> 状态</th>
                             <th style="width: 120px" class="text-center">地区</th>
                             <th style="width: 120px" class="text-center"> 备注</th>
@@ -49,6 +52,12 @@
                             </td>
                             <td class="text-center"
                                 ng-bind="value['APPOINTMENT_PRODUCT.STOCK']"></td>
+                            <td class="text-center"
+                                ng-bind="value['APPOINTMENT_PRODUCT.SALE_STOCK']"></td>
+                            <td class="text-center"
+                                >{{value['APPOINTMENT_PRODUCT.LAST_MODIFY_TIME']}}</td>
+                            <td class="text-center"
+                                >{{value['APPOINTMENT_PRODUCT.LAST_RECORD']}}</td>
                             <td class="text-center">
                                 <span ng-if="value['APPOINTMENT_PRODUCT.STATE']==-1">停用</span>
                                 <span ng-if="value['APPOINTMENT_PRODUCT.STATE']==1">启用</span>
