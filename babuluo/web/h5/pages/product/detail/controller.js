@@ -7,7 +7,7 @@ angular.module('AndSell.H5.Main').filter('formatDate', function () {
         }
     }
 });
-var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function (userFactory, orderFactory, promoFactory, $timeout, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
+var app = angular.module('AndSell.H5.Main').controller('pages_product_detail_Controller', function (userFactory, orderFactory,appointmentFactory, promoFactory, $timeout, $scope, $state, $stateParams, productFactory, modalFactory, weUI) {
 
     // modalFactory.setTitle('商品详情');
 
@@ -437,11 +437,49 @@ console.log($scope.skuData);
 
     $scope.toAppointment = function () {
         if ($scope.sku != undefined) {
+        	console.log($scope.sku);
             if ($scope.sku['SHOP_PRODUCT_SKU.STOCK'] > 0) {
-            	setCookie($stateParams.PRD_ID+'_dist',$stateParams.SOURCE);
-                $state.go('pages/order/appointment', {
-                    'SKU_IDS': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID'], 'COUNT': $scope.skuSize
+            	var param = {
+                        'APPOINTMENT_PRODUCT.SKU_ID': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID']
+                };
+            	appointmentFactory.queryAll(param, function (response) {
+                    if (response.data.length > 0) {
+                    	var num_limit = parseInt(response.data[0]['APPOINTMENT_PRODUCT.NUM_LIMIT']);
+                    	console.log("num_limit===="+num_limit);
+                        if(num_limit != undefined && num_limit > 0){
+                        	if($scope.skuSize >= num_limit){
+                        		weUI.toast.error('该规格商品只限买'+num_limit+'份');
+                        	}else{
+                        		var orderParam = {
+                        				"SHOP_ORDER.SKU" : $scope.sku['SHOP_PRODUCT_SKU.PRD_SKU'],
+                        				"SHOP_ORDER.UID" :$scope.uid 
+                        		};
+                        		console.log(orderParam);
+                        		orderFactory.findUserShopOrderWithSku(orderParam, function(re){
+                        			if(re.data.length > 0 && num_limit <= re.data[0]['SUM_COUNT']){
+                        				weUI.toast.error('该规格商品只限买'+num_limit+'份，您已不能购买');
+                        			}else{
+                        				setCookie($stateParams.PRD_ID+'_dist',$stateParams.SOURCE);
+                                        $state.go('pages/order/appointment', {
+                                            'SKU_IDS': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID'], 'COUNT': $scope.skuSize
+                                        });
+                        			}
+                        		});
+                        	}
+                        }else{
+                        	setCookie($stateParams.PRD_ID+'_dist',$stateParams.SOURCE);
+                            $state.go('pages/order/appointment', {
+                                'SKU_IDS': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID'], 'COUNT': $scope.skuSize
+                            });
+                        }
+                    }else{
+                    	setCookie($stateParams.PRD_ID+'_dist',$stateParams.SOURCE);
+                        $state.go('pages/order/appointment', {
+                            'SKU_IDS': $scope.sku['SHOP_PRODUCT_SKU.SKU_ID'], 'COUNT': $scope.skuSize
+                        });
+                    }
                 });
+            	
             } else {
                 weUI.toast.error('该规格已售罄');
             }
