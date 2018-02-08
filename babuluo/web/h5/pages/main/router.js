@@ -25,6 +25,7 @@ $import('pages/personal/card');
 $import('pages/personal/coupon');
 $import('pages/personal/advice');
 $import('pages/personal/advice/list');
+$import('pages/personal/giveaway');
 
 $import('pages/shop', {FROM: ''});
 
@@ -74,3 +75,6 @@ $import('pages/temporary/list');
 $import('pages/temporary/years');
 $import('pages/temporary/wjdcqh');
 $import('pages/temporary/sign');
+$import('pages/temporary/ycnhj');
+$import('pages/temporary/ycnhjs');
+$import('pages/temporary/pTAct');

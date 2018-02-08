@@ -128,6 +128,9 @@ angular.module('AndSell.Main').controller('product_product_appointment_Controlle
         	 weekdays= weekdays.substring(0,(weekdays.length-1));
         	 $scope.modify['APPOINTMENT_PRODUCT.START_TIME']=weekdays;
     	}
+    	$scope.modify['APPOINTMENT_PRODUCT.LAST_RECORD']=$scope.modify['APPOINTMENT_PRODUCT.STOCK']
+    	var nowdate=new Date();
+    	$scope.modify['APPOINTMENT_PRODUCT.LAST_MODIFY_TIME']=nowdate.getFullYear()+"-"+(nowdate.getMonth()+1)+"-"+nowdate.getDay()+" "+nowdate.getHours()+":"+nowdate.getMinutes()+":"+nowdate.getSeconds();
         productFactory.modAppointmentProduct($scope.modify, function (response) {
         	console.log($scope.modify);
             $("#modify").modal('hide');

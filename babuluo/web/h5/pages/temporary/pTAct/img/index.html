@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+
+		<meta charset="UTF-8">
+
+		<title>云厨一站 拼图</title>
+
+		<meta name="viewport" id="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+		<script src="js/jquery-3.1.1.js"></script>
+		<script src="js/rem.js"></script>
+		<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+		<style type="text/css">
+			html,
+			body,
+			ul,
+			li,
+			ol,
+			dl,
+			dd,
+			dt,
+			p,
+			h1,
+			h2,
+			h3,
+			h4,
+			h5,
+			h6,
+			form,
+			fieldset,
+			legend,
+			img {
+				margin: 0;
+				padding: 0
+			}
+			
+			body,
+			html {
+				height: 100%;
+			}
+			
+			body {
+				background: url(img/back.jpg);
+				background-size: 100% 100%;
+			}
+			
+			#picbox {
+				width: 6rem;
+				height: 6rem;
+				background: url('img/logo-300.png');
+				position: relative;
+				left: 50%;
+				top: 29.5%;
+				/*top: 26.5%;*/
+				margin-left: -3rem;
+			}
+			
+			.pic {
+				width: 1.5rem;
+				height: 1.5rem;
+				float: left;
+				background: url('img/logo-300.png');
+				position: absolute;
+				transition: all 0.1s ease 0s;
+			}
+			
+			@media only screen and (min-width: 310px) and (max-width:340px) {
+				#picbox {
+					width: 6rem;
+					height: 6rem;
+					background: url('img/logo-256.png');
+					position: relative;
+				}
+				.pic {
+					width: 1.5rem;
+					height: 1.5rem;
+					float: left;
+					background: url('img/logo-256.png');
+					position: absolute;
+				}
+			}
+			
+			@media only screen and (min-width: 341px) and (max-width:370px) {
+				#picbox {
+					width: 6rem;
+					height: 6rem;
+					background: url('img/logo-288.png');
+					position: relative;
+				}
+				.pic {
+					width: 1.5rem;
+					height: 1.5rem;
+					float: left;
+					background: url('img/logo-288.png');
+					position: absolute;
+				}
+			}
+			
+			@media only screen and (min-width: 370px) and (max-width:380px) {
+				#picbox {
+					width: 6rem;
+					height: 6rem;
+					background: url('img/logo-300.png');
+					position: relative;
+				}
+				.pic {
+					width: 1.5rem;
+					height: 1.5rem;
+					float: left;
+					background: url('img/logo-300.png');
+					position: absolute;
+				}
+			}
+			
+			@media screen and (min-width:381px) {
+				#picbox {
+					width: 6rem;
+					height: 6rem;
+					background: url('img/logo-332.png');
+					position: relative;
+				}
+				.pic {
+					width: 1.5rem;
+					height: 1.5rem;
+					float: left;
+					background: url('img/logo-332.png');
+					position: absolute;
+				}
+			}
+			
+			.controller {
+				text-align: center;
+				position: relative;
+			}
+			
+			#times {
+				position: absolute;
+				text-align: center;
+				width: 100%;
+				color: #fff;
+				top: 19%;
+				left: 0;
+				font-size: 20px;
+			}
+			
+			.go {
+				position: absolute;
+				text-align: center;
+				top: 88%;
+				width: 100%;
+				font-size: 17px;
+			}
+			
+			#go {
+				width: 2.5rem;
+				height: 1rem;
+				color: #FFFFFF;
+				display: inline-block;
+				line-height: 1rem;
+				background: url(img/back-botton.png);
+				background-size: 100% 100%;
+			}
+			
+			#zhe {
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				z-index: 100;
+			}
+			
+			#back-pt {
+				padding: .3rem;
+				position: absolute;
+				/* left: 50%; */
+				top: 27%;
+				width: 6rem;
+				background: url(img/backs.png);
+				background-size: 100% 100%;
+				left: 50%;
+				margin-left: -3.3rem;
+			}
+			
+			.message {
+				opacity: 1;
+				width: 5.7rem;
+				background-size: cover;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				height: 5.6rem;
+				margin-left: -2.85rem;
+				margin-top: -2.8rem;
+				border-radius: 4px;
+				z-index: -1;
+				background: #f5f5f5;
+				border-radius: .08rem;
+			}
+			
+			.zc> input {
+				margin-top: .2rem;
+			}
+			
+			.phone-zc {
+				margin-top: 0;
+			}
+			
+			.bth-zc {
+				margin-top: 0 !important;
+			}
+			
+			.chuai_box {
+				width: 100%;
+				position: fixed;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				background: rgba(0, 0, 0, 0.5);
+				text-align: center;
+				text-align: -webkit-center;
+				z-index: 100;
+				line-height: .6rem;
+			}
+			
+			.titles {
+				margin-top: .3rem;
+				font-size: .38rem;
+				color: #e85a41;
+			}
+			
+			.bth {
+				text-align: center;
+				background: #e85a41;
+				color: #F5F5F5;
+				font-size: .36rem;
+			}
+			
+			input {
+				box-sizing: border-box;
+				margin-top: .28rem;
+				width: 4.54rem;
+				font-size: .38rem;
+				border-radius: .06rem;
+				padding: .2rem;
+				border: 0;
+				background: #e1e1e1;
+				color: #1a1a1a;
+				height: .78rem;
+				-moz-box-shadow: .38rem .38rem .38rem rgba(101, 79, 15, 0.18) inset;
+				-webkit-box-shadow: 0.38rem 0.38rem 0.38rem rgba(101, 79, 15, 0.18) inset;
+				box-shadow: 0rem 0rem 0.38rem rgba(101, 79, 15, 0.18) inset;
+				margin-bottom: .2rem;
+			}
+			
+			.re {
+				position: absolute;
+				top: 0;
+				left: 0;
+				height: 100%;
+				width: 100%;
+				background: url(img/back.jpg);
+				background-size: 100% 100%;
+				display: none;
+			}
+			
+			.answer {
+				display: inline-table;
+				width: 5.6rem;
+				height: 1.6rem;
+				font-size: .6rem;
+				/* width: 80%; */
+				color: #fff;
+				position: absolute;
+				/* margin: 0 auto; */
+				left: 50%;
+				top: 50%;
+				margin-left: -2.8rem;
+				margin-top: -.8rem;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="audio_div" style="background:url(http://oss.szzbmy.com/rp2/apps/static/widget/music/music_c0fda01.gif) transparent no-repeat center center;position: fixed;width: 50px;height: 50px;z-index: 1000;top: 0;right: 0;">
+			<div class="music" style="background: url(http://oss.szzbmy.com/rp2/apps/static/widget/music/music_off_8d94020.png) transparent no-repeat center center; width: 30px;height: 30px;background-size: 100%;margin:0 auto;padding-top: 50%;"></div>
+			<audio id="mp3Btn" src="music/1.mp3" loop="loop">
+
+			</audio>
+		</div>
+		<p id='times'>0分0秒0毫秒</p>
+		<div id="back-pt">
+			<div id='picbox'>
+
+				<div id="zhe">
+
+				</div>
+				<div class="pic" data-index='1' style='background-position:0px 0px;left:0px;top:0px;'></div>
+
+				<div class="pic" data-index='2' style='background-position:-1.5rem 0px;left:1.5rem;top:0px;'></div>
+
+				<div class="pic" data-index='3' style='background-position:-3rem 0px;left:3rem;top:0px;'></div>
+
+				<div class="pic" data-index='4' style='background-position:-4.5rem -0rem;left:4.5rem;top:0rem;'></div>
+				<div class="pic" data-index='5' style='background-position:0px -1.5rem;left:0px;top:1.5rem;'></div>
+
+				<div class="pic" data-index='6' style='background-position:-1.5rem -1.5rem;left:1.5rem;top:1.5rem;'></div>
+
+				<div class="pic" data-index='7' style='background-position:-3rem -1.5rem;left:3rem;top:1.5rem;'></div>
+
+				<div class="pic" data-index='8' style='background-position:-4.5rem -1.5rem;left:4.5rem;top:1.5rem;'></div>
+				<div class="pic" data-index='9' style='background-position:0px -3rem;left:0px;top:3rem;'></div>
+				<div class="pic" data-index='10' style='background-position:-1.5rem -3rem;left:1.5rem;top:3rem;'></div>
+
+				<div class="pic" data-index='11' style='background-position:-3rem  -3rem;left:3rem;top:3rem;'></div>
+
+				<div class="pic" data-index='12' style='background-position:-4.5rem -3rem;left:4.5rem;top:3rem;'></div>
+				<div class="pic" data-index='13' style='background-position:0px -4.5rem;left:0;top:4.5rem;'></div>
+				<div class="pic" data-index='14' style='background-position:-1.5rem -4.5rem;left:1.5rem;top:4.5rem;'></div>
+				<div class="pic" data-index='15' style='background-position:-3rem -4.5rem;left:3rem;top:4.5rem;'></div>
+
+				<div class="pic" data-index='16' style='background-position:-4.5rem -4.5rem;left:4.5rem;top:4.5rem;'></div>
+
+			</div>
+		</div>
+		<div class="go">
+			<div id='go'>开始</div>
+		</div>
+		<div class="chuai_box" style="display: none;">
+			<div class="message zc">
+				<div class="titles">请输入你的姓名</div>
+				<input type="text" name="" id="" value="" class="phone-zc" placeholder="请输入你的姓名" /><br />
+				<input type="text" name="" id="" value="" class="mobile" placeholder="请输入手机号" /><br />
+				<input type="text" name="" id="" value="" class="dpm" placeholder="请输入你部门" /><br />
+				<input class="bth bth-zc" id="tj" value="提交" readonly>
+
+				</input>
+			</div>
+		</div>
+		<div class="re">
+			<div class="answer"> 恭喜,<span class="username"></span>用时<span class="time"></span>完成了拼图</div>
+		</div>
+		<script>
+			function ajaxPost(url, data, fnSucceed, fnFail, fnLoading) {
+				$.ajax({
+					url: url,
+					datatype: 'json',
+					type: 'get',
+					data: data,
+					success: function(result) {
+						fnSucceed(result);
+					}
+				});
+
+			}
+
+			// 首先禁止body
+			document.body.ontouchmove = function(e) {
+				e.preventDefault();
+			};
+
+			var kg = 1;
+			// 然后取得触摸点的坐标
+			var startX = 0,
+				startY = 0;
+			//touchstart事件
+			function touchSatrtFunc(evt) {
+				try {
+					//					evt.preventDefault(); //阻止触摸时浏览器的缩放、滚动条滚动等
+					var touch = evt.touches[0]; //获取第一个触点
+					var x = Number(touch.pageX); //页面触点X坐标
+					var y = Number(touch.pageY); //页面触点Y坐标
+					//记录触点初始位置
+					startX = x;
+					startY = y;
+
+				} catch(e) {
+					alert('touchSatrtFunc：' + e.message);
+				}
+			}
+			//			document.addEventListener('touchstart', touchSatrtFunc, false);
+
+			// 然后对允许滚动的条件进行判断，这里讲滚动的元素指向body
+			//			var _ss = document.body;
+			//			_ss.ontouchmove = function(ev) {
+			//				var _point = ev.touches[0],
+			//					_top = _ss.scrollTop;
+			//				// 什么时候到底部
+			//				var _bottomFaVal = _ss.scrollHeight - _ss.offsetHeight;
+			//				// 到达顶端
+			//				if(_top === 0) {
+			//					// 阻止向下滑动
+			//					if(_point.clientY > startY) {
+			//						ev.preventDefault();
+			//					} else {
+			//						// 阻止冒泡
+			//						// 正常执行
+			//						ev.stopPropagation();
+			//					}
+			//				} else if(_top === _bottomFaVal) {
+			//					// 到达底部 如果想禁止页面滚动和上拉加载，讲这段注释放开，也就是在滚动到页面底部的制售阻止默认事件
+			//					// 阻止向上滑动
+			//					 if (_point.clientY < startY) {
+			//					     ev.preventDefault();
+			//					 } else {
+			//					     // 阻止冒泡
+			//					     // 正常执行
+			//					     ev.stopPropagation();
+			//					 }
+			//				} else if(_top > 0 && _top < _bottomFaVal) {
+			//					ev.stopPropagation();
+			//				} else {
+			//					ev.preventDefault();
+			//				}
+			//			};
+			var picbox = document.getElementById('picbox');
+
+			var pic = document.querySelectorAll('.pic');
+
+			var picWidth = pic[0].offsetWidth;
+
+			var picHeight = pic[0].offsetHeight;
+
+			var picboxWidth = picbox.offsetWidth;
+
+			var picboxHeight = picbox.offsetHeight;
+
+			var go = document.getElementById('go');
+			var tj = document.getElementById('tj');
+			var zhe = document.getElementById('zhe');
+			var times = document.getElementById('times'); //定时。用于扩展
+			var kg = 0;
+			var dx, dy, newLeft, newtop, startTime, endTime;
+
+			go.addEventListener('touchstart', function() {
+				$('.chuai_box').css('display', 'block')
+
+			})
+			tj.addEventListener('touchstart', function() {
+				if($('.phone-zc').val() == '') {
+					alert('姓名不能为空')
+					return
+				}
+				if($('.mobile').val() == '') {
+					alert('手机号不能为空')
+					return
+				}
+				if($('.dpm').val() == '') {
+					alert('部门不能为空')
+					return
+				}
+
+				var objs = {}
+				objs.mobile = $('.mobile').val()
+				objs.dept = $('.dpm').val()
+				ajaxPost('http://yx.bblycyz.com/lottery/rest/lottery/isRepeat', objs, function(re) {
+					console.log(re.success)
+					if(re.data == false) {
+						$('.chuai_box').css('display', 'none')
+							//				startTime = Date.parse(new Date()); //获取到期1970年1月1日到当前时间的毫秒数，这个方法不常见，这里为试用
+						Reset()
+						start()
+							//				console.log(zhe)
+						zhe.style.display = 'none'
+						go.innerHTML = '重新开始'
+						for(var i = 0; i < pic.length; i++) {
+
+							pic[i].style.display = "block"; //设置显示拼图，游戏开始
+
+						}
+
+						picbox.style.background = "transparent";
+
+						for(var i = 0; i < 20; i++) { //随机打乱
+
+							var a = Math.floor(Math.random() * 16);
+
+							var b = Math.floor(Math.random() * 16);
+
+							if(a != b) {
+
+								random(a, b);
+
+							}
+
+						}
+					} else {
+						alert(re.message)
+					}
+
+				})
+
+			})
+
+			for(var i = 0; i < pic.length; i++) {
+
+				pic[i].addEventListener('touchstart', function(e) {
+					e.preventDefault();
+
+					this.style.zIndex = 100; //设置拖拽元素的z-index值，使其在最上面。
+
+					dx = e.targetTouches[0].pageX - this.offsetLeft; //记录触发拖拽的水平状态发生改变时的位置
+
+					dy = e.targetTouches[0].pageY - this.offsetTop; //记录触发拖拽的垂直状态发生改变时的位置
+
+					this.startX = this.offsetLeft; //记录当前初始状态水平发生改变时的位置
+
+					this.startY = this.offsetTop; //offsetTop等取得的值与this.style.left获取的值区别在于前者不带px,后者带px
+
+					this.style.transition = 'none';
+
+				});
+
+				pic[i].addEventListener('touchmove', function(e) {
+
+					newLeft = e.targetTouches[0].pageX - dx; //记录拖拽的水平状态发生改变时的位置
+
+					newtop = e.targetTouches[0].pageY - dy;
+
+					if(newLeft <= -picWidth / 2) { //限制边界代码块，拖拽区域不能超出边界的一半
+
+						newLeft = -picWidth / 2;
+
+					} else if(newLeft >= (picboxWidth - picWidth / 2)) {
+
+						newLeft = (picboxWidth - picWidth / 2);
+
+					}
+
+					if(newtop <= -picHeight / 2) {
+
+						newtop = -picWidth / 2;
+
+					} else if(newtop >= (picboxHeight - picHeight / 2)) {
+
+						newtop = (picboxHeight - picHeight / 2);
+
+					}
+
+					this.style.left = newLeft + 'px';
+
+					this.style.top = newtop + 'px'; //设置目标元素的left,top
+
+				});
+
+				pic[i].addEventListener('touchend', function(e) {
+
+					this.style.zIndex = 0;
+
+					this.style.transition = 'all 0.1s ease 0s'; //添加css3动画效果
+
+					this.endX = e.changedTouches[0].pageX - dx;
+
+					this.endY = e.changedTouches[0].pageY - dy; //记录滑动结束时的位置，与进入元素对比，判断与谁交换
+
+					var obj = change(e.target, this.endX, this.endY); //调用交换函数
+
+					if(obj == e.target) { //如果交换函数返回的是自己
+
+						obj.style.left = this.startX + 'px';
+
+						obj.style.top = this.startY + 'px';
+
+					} else { //否则
+
+						var _left = obj.style.left;
+
+						obj.style.left = this.startX + 'px';
+
+						this.style.left = _left;
+
+						var _top = obj.style.top;
+
+						obj.style.top = this.startY + 'px';
+
+						this.style.top = _top;
+
+						var _index = obj.getAttribute('data-index');
+
+						obj.setAttribute('data-index', this.getAttribute('data-index'));
+
+						this.setAttribute('data-index', _index); //交换函数部分，可提取
+
+					}
+
+				});
+
+				pic[i].addEventListener('transitionend', function() {
+
+					if(isSuccess()) {
+						stop()
+						kg++
+						if(kg == 2) {
+							$('#zhe').show()
+							var obj = {}
+							obj.username = $('.phone-zc').val()
+							obj.time = $('#times').html()
+							obj.mobile = $('.mobile').val()
+							obj.dept = $('.dpm').val()
+							ajaxPost('http://yx.bblycyz.com/lottery/rest/lottery/insertJigsaw', obj, function(re) {
+								console.log(re.success)
+								if(re.success == true) {
+									$('.username').html($('.phone-zc').val())
+									$('.time').html($('#times').html())
+									$('.re').show()
+								}
+							})
+
+							console.log('成功了！'); //此处监听事件有bug，会添加上多次事件。
+						}
+
+					} else {
+
+						// pic[i].removeEventListener('transitionend');
+
+					}
+
+				})
+
+			}
+
+			function change(obj, x, y) { //交换函数，判断拖动元素的位置是不是进入到目标原始1/2，这里采用绝对值得方式
+
+				for(var i = 0; i < pic.length; i++) { //还必须判断是不是当前原素本身。将自己排除在外
+
+					if(Math.abs(pic[i].offsetLeft - x) <= picWidth / 2 && Math.abs(pic[i].offsetTop - y) <= picHeight / 2 && pic[i] != obj)
+
+						return pic[i];
+
+				}
+
+				return obj; //返回当前
+
+			}
+
+			function random(a, b) { //随机打乱函数，其中交换部分，可以提取出来封装
+
+				var aEle = pic[a];
+
+				var bEle = pic[b];
+
+				var _left;
+
+				_left = aEle.style.left;
+
+				aEle.style.left = bEle.style.left;
+
+				bEle.style.left = _left;
+
+				var _top;
+
+				_top = aEle.style.top;
+
+				aEle.style.top = bEle.style.top;
+
+				bEle.style.top = _top;
+
+				var _index;
+
+				_index = aEle.getAttribute("data-index");
+
+				aEle.setAttribute("data-index", bEle.getAttribute("data-index"));
+
+				bEle.setAttribute("data-index", _index);
+
+			}
+
+			function isSuccess() { //判断成功标准
+				console.log(kg)
+				var str = ''
+
+				for(var i = 0; i < pic.length; i++) {
+
+					str += pic[i].getAttribute('data-index');
+
+				}
+
+				if(str == '12345678910111213141516') {
+
+					return true;
+
+				}
+
+				return false;
+
+			}
+
+			var hour, minute, second; //时 分 秒
+			hour = minute = second = 0; //初始化
+			var millisecond = 0; //毫秒
+			var int;
+
+			function Reset() //重置
+			{
+				window.clearInterval(int);
+				millisecond = hour = minute = second = 0;
+				document.getElementById('times').value = '00.00.00';
+			}
+
+			function start() //开始
+			{
+				int = setInterval(timer, 10);
+			}
+
+			function timer() //计时
+			{
+				millisecond = millisecond + 1;
+				if(millisecond >= 100) {
+					millisecond = 0;
+					second = second + 1;
+				}
+
+				if(second >= 60) {
+					second = 0;
+					minute = minute + 1;
+				}
+
+				if(minute >= 60) {
+					minute = 0;
+					hour = hour + 1;
+				}
+				document.getElementById('times').innerHTML = minute + '分' + second + '秒' +
+					millisecond + '毫秒';
+			}
+
+			function stop() //暂停
+			{
+				window.clearInterval(int);
+			}
+			$("input").focus(function() {
+
+			});
+		</script>
+		<script>
+			function audioAutoPlay(id) {
+				var audio = document.getElementById(id);
+				audio.play();
+				document.addEventListener("WeixinJSBridgeReady", function() {
+					audio.play();
+				}, false);
+			}
+			audioAutoPlay('mp3Btn');
+			var audios = document.getElementById('mp3Btn');
+			$('.audio_div').click(function() {
+				//防止冒泡
+				event.stopPropagation();
+				if(audios.paused) //如果当前是暂停状态
+				{
+					$('.audio_div').css("background", "url(http://oss.szzbmy.com/rp2/apps/static/widget/music/music_c0fda01.gif) transparent no-repeat center center");
+					audios.play(); //播放
+					return;
+				}
+
+				//当前是播放状态
+				$('.audio_div').css("background", "url('')");
+
+				audios.pause(); //暂停
+			});
+		</script>
+	</body>
+
+</html>
