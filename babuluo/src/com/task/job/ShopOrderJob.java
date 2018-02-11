@@ -12,6 +12,7 @@ import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.bolanggu.bbl.utils.TaskRedisLock;
 import com.pabula.db.ConnectionHelper;
 
 public class ShopOrderJob implements Job{
@@ -30,6 +31,9 @@ public class ShopOrderJob implements Job{
         Statement stmt=null;
         ResultSet rs=null;
         try{
+        	
+        	TaskRedisLock.redisLock("ShopOrderJob");
+        	
         	conn=ConnectionHelper.getConnection("andsell");
             stmt=conn.createStatement();
             stmt.execute(sqlStr.toString());
