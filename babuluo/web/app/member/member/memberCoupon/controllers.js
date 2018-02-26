@@ -52,8 +52,15 @@ angular.module('AndSell.Main').controller('member_member_memberCoupon_Controller
             console.log($scope.coupon);
             $scope.add['MEMBER_COUPON.COUPON_ID'] = $scope.coupon['COUPON.ID'];
             //刘墨社群打折券
+            var limt= $scope.coupon['COUPON.USE_TIME_LIMIT'];
             var nowdate = new Date().getTime();
-            var expiredTime = new Date(nowdate + 7 * 24 * 60 * 60 * 1000);
+            if(limt!=''||limt!=undefined){
+            	  console.log(limt);
+            	var expiredTime = new Date(nowdate + limt * 24 * 60 * 60 * 1000);
+            }else{
+            	  console.log(limt);
+            	 var expiredTime = new Date(nowdate + 7 * 24 * 60 * 60 * 1000);
+            }
             var year = expiredTime.getFullYear(); //获取完整的年份(4位,1970-????)
             var month = expiredTime.getMonth() + 1; //获取当前月份(0-11,0代表1月)
             if (month < 10) {

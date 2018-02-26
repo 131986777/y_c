@@ -29,6 +29,8 @@ AndSellH5MainModule.service('orderFactory', function (http) {
     this.calculateSale = http.post('/sales/salesplan/calculateSale');
 
     this.addComments = http.post('/shop/comment/add');
+    
+    this.findUserShopOrderWithSku = http.post('/shop/order/findUserShopOrderWithSku');
 
 })
 

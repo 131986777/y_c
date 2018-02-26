@@ -149,16 +149,7 @@
         <servlet-name>shopOrder</servlet-name>
         <url-pattern>/shopOrder</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>WeekCouponServlet</servlet-name>
-        <servlet-class>com.task.servlet.WeekCouponServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>WeekCouponServlet</servlet-name>
-        <url-pattern>/WeekCouponServlet</url-pattern>
-    </servlet-mapping>
+    
     
     <servlet>
         <servlet-name>vipcardBackMoney</servlet-name>

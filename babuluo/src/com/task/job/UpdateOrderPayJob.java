@@ -1,6 +1,8 @@
 package com.task.job;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bolanggu.bbl.utils.RedisCache;
+import com.bolanggu.bbl.utils.TaskRedisLock;
 import com.pabula.api.API;
 import com.pabula.api.data.ReturnData;
 import com.pabula.fw.exception.RuleException;
@@ -23,10 +25,12 @@ public class UpdateOrderPayJob implements Job {
             throws JobExecutionException {
 
         System.out.println("UpdateOrderPayJob.execute");
+        
 
         //修改api(shop_order.DATETIME_OUT < curdate()   and  STATE_ORDER = 1  and  STATE_OUT = 1  and  STATE_MONEY = -1 and  TYPE = 6)
 
         try {
+        	TaskRedisLock.redisLock("UpdateOrderPay");
             Map orderMap = new HashMap<>();
             ReturnData orderResponse =
                     new API().call("/shop/order/getWaitPayOrder", orderMap);
@@ -50,8 +54,9 @@ public class UpdateOrderPayJob implements Job {
             }
             System.out.println(orderList.size() + "单 超时未支付 已被取消取消  ids = " + ids);
             updateGroupBuyMember(gbmOrderIds);
-        } catch (RuleException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            System.out.println(e);
         }
 
     }

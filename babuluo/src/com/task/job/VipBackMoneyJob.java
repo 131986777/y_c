@@ -1,6 +1,7 @@
 package com.task.job;
 
 import com.alibaba.fastjson.JSONObject;
+import com.bolanggu.bbl.utils.TaskRedisLock;
 import com.pabula.api.API;
 import com.pabula.api.data.ReturnData;
 import com.pabula.fw.exception.RuleException;
@@ -27,6 +28,7 @@ public class VipBackMoneyJob implements Job {
         //修改api(shop_order.DATETIME_OUT < curdate()   and  STATE_ORDER = 1  and  STATE_OUT = 1  and  STATE_MONEY = -1 and  TYPE = 6)
 
         try {
+        	TaskRedisLock.redisLock("VipBackMoneyJob");
             Map orderMap = new HashMap<>();
             ReturnData orderResponse =
                     new API().call("/member/balance/feedback", orderMap);
@@ -37,7 +39,7 @@ public class VipBackMoneyJob implements Job {
            
             System.out.println("VIP无忧卡，季度返点错误  "+orderResponse.getMsg()  );
           //  updateGroupBuyMember(gbmOrderIds);
-        } catch (RuleException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

@@ -19,7 +19,10 @@
                             <th style="width: 120px" class="text-center"> 商品上架状态</th>
                             <th style="width: 80px" class="text-center"> 预约价</th>
                             <th style="width: 120px" class="text-center"> 预付款</th>
-                            <th style="width: 80px" class="text-center"> 库存</th>
+                            <th style="width: 40px" class="text-center"> 库存</th>
+                            <th style="width: 40px" class="text-center"> 已出库存</th>
+                            <th style="width: 120px" class="text-center"> 修改时间</th>
+                            <th style="width: 40px" class="text-center"> 额定库存</th>
                             <th style="width: 80px" class="text-center"> 状态</th>
                             <th style="width: 120px" class="text-center">地区</th>
                             <th style="width: 120px" class="text-center"> 备注</th>
@@ -49,6 +52,12 @@
                             </td>
                             <td class="text-center"
                                 ng-bind="value['APPOINTMENT_PRODUCT.STOCK']"></td>
+                            <td class="text-center"
+                                ng-bind="value['APPOINTMENT_PRODUCT.SALE_STOCK']"></td>
+                            <td class="text-center"
+                                >{{value['APPOINTMENT_PRODUCT.LAST_MODIFY_TIME']}}</td>
+                            <td class="text-center"
+                                >{{value['APPOINTMENT_PRODUCT.LAST_RECORD']}}</td>
                             <td class="text-center">
                                 <span ng-if="value['APPOINTMENT_PRODUCT.STATE']==-1">停用</span>
                                 <span ng-if="value['APPOINTMENT_PRODUCT.STATE']==1">启用</span>
@@ -170,6 +179,19 @@
                                        placeholder="">
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 每人限购:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="number" class="form-control"
+                                       string-to-number
+                                       ng-model="modify['APPOINTMENT_PRODUCT.NUM_LIMIT']"
+                                       placeholder="0代表不限购">
+                            </div>
+                        </div>
 
 
                         <div class="form-group row">
@@ -254,6 +276,27 @@
                             <div class="col-md-8">
                                 <input type="number" class="form-control" string-to-number
                                        ng-model="modify['APPOINTMENT_PRODUCT.END_DAY']"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 提货时间(时:分):
+                            </label>
+
+                            <div class="col-md-3">
+                                <input type="text" class="form-control time"
+                                       ng-model="modify['APPOINTMENT_PRODUCT.TIME_START']"
+                                       ng-init="modify['APPOINTMENT_PRODUCT.TIME_START']='08:00'"
+                                       placeholder="">
+                            </div>
+                             <label class="col-md-1 control-label">
+                                  <span>到</span>  
+                            </label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control time"
+                                       ng-model="modify['APPOINTMENT_PRODUCT.TIME_END']"
+                                       ng-init="modify['APPOINTMENT_PRODUCT.TIME_END']='19:00'"
                                        placeholder="">
                             </div>
                         </div>
@@ -382,6 +425,19 @@
                                        placeholder="">
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 每人限购:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="number" class="form-control"
+                                       ng-model="add['APPOINTMENT_PRODUCT.NUM_LIMIT']"
+                                       ng-init="add['APPOINTMENT_PRODUCT.NUM_LIMIT']=0"
+                                       placeholder="0代表不限购">
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
@@ -472,6 +528,29 @@
                                        placeholder="">
                             </div>
                         </div>
+                        
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 提货时间(时:分):
+                            </label>
+
+                            <div class="col-md-3">
+                                <input type="text" class="form-control time"
+                                       ng-model="add['APPOINTMENT_PRODUCT.TIME_START']"
+                                       ng-init="add['APPOINTMENT_PRODUCT.TIME_START']='08:00'"
+                                       placeholder="">
+                            </div>
+                             <label class="col-md-1 control-label">
+                                  <span>到</span>  
+                            </label>
+                            <div class="col-md-3">
+                                <input type="text" class="form-control time"
+                                       ng-model="add['APPOINTMENT_PRODUCT.TIME_END']"
+                                       ng-init="add['APPOINTMENT_PRODUCT.TIME_END']='19:00'"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        
                         <div class="form-group row">
                             <label class="col-md-3 control-label">
                                 <span class="required"> * </span> 备注:

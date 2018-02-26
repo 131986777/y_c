@@ -18,7 +18,6 @@ public class ShopOrderServlet extends HttpServlet{
 		super();
 		shopOrderTaskTrigger.init();
 		shopOrderTaskTrigger.start();
-
 	}
 	
 	 public void destroy() {

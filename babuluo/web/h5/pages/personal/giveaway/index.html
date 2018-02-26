@@ -1,0 +1,28 @@
+<div ng-init="initData()">
+    <div class="consult-wrap" ng-repeat="gift in giftList">
+        <div class="consult">
+            <div class="content consult-date">
+                {{gift['GIFT_ACTITY.ADD_DATETIME']}}
+            </div>
+            <div class="left">充值时间：</div>
+        </div>
+         <div class="consult" ng-if="gift['GIFT_ACTITY.STATE']==-1">
+            <div class="content consult-date">
+                {{gift['GIFT_ACTITY.GET_DATETIME']}}
+            </div>
+            <div class="left">兑换时间：</div>
+        </div>
+        <div class="consult">
+            <div class="content">
+                {{gift['GIFT_ACTITY.GIFT']}}
+            </div>
+            <div class="left">赠品名称：</div>
+        </div>
+        <div ng-if="gift['GIFT_ACTITY.STATE']==1" class="consult consult-reply">
+            <div class="content">
+                {{gift['GIFT_ACTITY.REC_CHECKCODE']}}
+            </div>
+            <div class="left">兑换码：</div>
+        </div>
+    </div>
+</div>
