@@ -2,6 +2,6 @@ angular.module('AndSell.H5.Main').controller('pages_temporary_pTAct_Controller',
 //
 	 modalFactory.setBottom(false);
 //	 $scope.navShow=false
-	 modalFactory.setTitle("云厨一站,签到活动");
+	 modalFactory.setTitle("云厨年货拼拼乐");
 
 });

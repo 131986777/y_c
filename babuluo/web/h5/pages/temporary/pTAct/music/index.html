@@ -95,30 +95,20 @@
 			#go {
 				width: 5rem;
 				height: 2rem;
-				color: #ef3426;
+				color: #FFFFFF;
 				display: inline-block;
 				line-height: 2rem;
-				background: url(../temporary/pTAct/img/back-botton1.png);
+				background: url(../temporary/pTAct/img/back-botton.png);
 				background-size: 100% 100%;
 			}
 			
 			#mark {
 				width: 5rem;
 				height: 2rem;
-				color: #ef3426;
+				color: #FFFFFF;
 				display: inline-block;
 				line-height: 2rem;
-				background: url(../temporary/pTAct/img/back-botton1.png);
-				background-size: 100% 100%;
-			}
-			
-			#gift {
-				width: 5rem;
-				height: 2rem;
-				color: #ef3426;
-				display: inline-block;
-				line-height: 2rem;
-				background: url(../temporary/pTAct/img/back-botton1.png);
+				background: url(../temporary/pTAct/img/back-botton.png);
 				background-size: 100% 100%;
 			}
 			
@@ -256,7 +246,7 @@
 			.start-page {
 				width: 100%;
 				height: 100%;
-				background: url(../temporary/pTAct/img/backsss.jpg) no-repeat;
+				background: url(../temporary/pTAct/img/backs.jpg) no-repeat;
 				background-size: 100% 100%;
 				position: relative;
 				z-index: 100;
@@ -268,7 +258,7 @@
 				display: inline-block;
 				position: absolute;
 				left: 24%;
-			    top: 45%;
+				top: 50%;
 			}
 			
 			.result {
@@ -330,16 +320,16 @@
 			.ranking {
 				position: absolute;
 				top: 1%;
-				right: 3%;
+				right: 24%;
 				width: 32%;
 				height: 5.5%;
 			}
 			
 			.rule {
 				position: absolute;
-				top: 58%;
-				right: 29%;
-				width: 41%;
+				top: 1%;
+				right: 3%;
+				width: 20%;
 				height: 5.5%;
 			}
 			
@@ -375,7 +365,7 @@
 			
 			.actRule {
 				display: none;
-			    line-height: 30px;
+				    line-height: 35px;
 			}
 			
 			.rankList {
@@ -429,8 +419,6 @@
 			}
 		</style>
 		<script>
-								alert('活动已结束，感谢参与')
-			
 			function ptMath(aa) {
 				console.log(aa)
 				var urls
@@ -526,8 +514,8 @@
 
 	<body>
 		<div class="start-page">
-			<div class="rule"  ></div>
-			<div class="ranking"></div>
+			<div class="rule" style="background: red;"></div>
+			<div class="ranking" style="background: yellow;"></div>
 			<div class="start">
 
 			</div>
@@ -535,11 +523,11 @@
 		<div class="result result2">
 			<div style="text-align: center;     padding-top: 3rem;"> <img src="../temporary/pTAct/img/defeat.png" style="width: 80%;" /> </div>
 			<div style="text-align: center; margin-top: 30px; font-size: 20px;"><span>您的成绩为：</span> <span class="score">59.54</span> <span>秒</span> </div>
-			<div style="text-align: center;margin-top: 10px;">成绩必须低于30秒才能抽奖 </div>
+			<div style="text-align: center;margin-top: 10px;">成绩必须高于30秒才能抽奖 </div>
 			<div style="text-align: center;margin-top: 33px;"><span>最佳成绩为：</span><span class='bestScore'>39.12</span><span>秒</span> </div>
 			<!--<div style="text-align: center;margin-top: 18px;"><span>你的排名为：N0.</span><span>1</span></div>-->
 			<div style="text-align: center">
-				<div class="borders  again" style="margin-top:13px;width:80%;background: #fd8307; display: inline-block; height: 47px;line-height: 47px; ">再玩一次</div>
+				<div class="borders  again" style="margin-top:13px;width:80%;background: #fd8307; display: inline-block; height: 47px;line-height: 47px; ">在玩一次</div>
 			</div>
 			<div style="text-align: center">
 				<div class="borders ranks " style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;margin-right: 2%;">排行榜</div>
@@ -550,7 +538,7 @@
 		<div class="result result1">
 			<div style="text-align: center;     padding-top: 3rem;"> <img src="../temporary/pTAct/img/success.png" style="width: 80%;" /> </div>
 			<div style="text-align: center; margin-top: 30px; font-size: 20px;"><span>您的成绩为：</span> <span class="score">59.54</span> <span>秒</span> </div>
-			<div style="text-align: center;margin-top: 10px;">成绩必须低于30秒才能抽奖 </div>
+			<div style="text-align: center;margin-top: 10px;">成绩必须高于30秒才能抽奖 </div>
 			<div style="text-align: center;margin-top: 33px;"><span>最佳成绩为：</span><span class='bestScore'>39.12</span><span>秒</span> </div>
 			<!--<div style="text-align: center;margin-top: 18px;"><span>你的排名为：N0.</span><span>1</span></div>-->
 			<div style="text-align: center;margin-top: 18px;"><span>今天</span><span class="frequency"></span></div>
@@ -559,7 +547,7 @@
 			</div>
 			<div style="text-align: center">
 				<div class="borders ranks" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;margin-right: 2%;">排行榜</div>
-				<div class="borders again" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;">再玩一次 </div>
+				<div class="borders again" style="margin-top:10px;width:38%;background: #41be63; display: inline-block; height: 47px;line-height: 47px;">在玩一次 </div>
 			</div>
 
 		</div>
@@ -577,7 +565,7 @@
 					<div class="listIco" style="display: inline-block; text-align: center;flex:1;-webkit-flex:1; visibility:hidden"> <img src="../temporary/pTAct/img/Selected.png" style="width: 100px;text-align: center;" /></div>
 				</div>
 				<div class="rankList">
-					<!--<div style="height: 48px;line-height: 48px;">当前排名为：<span>481</span><span>（仅显示前5）</span></div>-->
+					<div style="height: 48px;line-height: 48px;">当前排名为：<span>481</span><span>（仅显示前5）</span></div>
 					<div style="padding: 0 25px;">
 						<ul>
 							<li class="names">
@@ -611,16 +599,10 @@
 				</div>
 				<div class="actRule">
 					<p>活动时间2.1-2.3</p>
-					<p>1. 用户首先注册并登录，才能参加游戏； </p>
-					<p>2. 开始游戏前随机抽取本轮拼图的图案，然后开始游戏；</p>
-					<p>3. 30秒内完成获得抽奖机会1次，每天完成拼图最多获得3次。
-						<p>奖品设置：</p>
-					<p>一等奖：价值158元零食礼盒，</p>
-					<p>二等奖：线上年货礼盒抵用券10元，</p>
-					<p>三等奖：线上线下无敌券5元，</p>
-					<p>参与奖：线上线下无敌券1元，</p>
-					<p>（抵用券、礼盒券和无敌券的有效期均为到账户后7天内</p>
-					<p>4. 分享1次多3次抽奖机会，每天分享最多获得3次抽奖机会。</p>
+					<p>1. 用户首先注册并登录，才能参加游戏；  </p>
+     				<p>2. 开始游戏前随机抽取本轮拼图的图案，然后开始游戏；</p>
+					<p>3. 30秒内完成获得抽奖机会1次，每天完成拼图最多获得3次（奖品设置：礼盒抵用券10元，零食礼盒，线上线下无敌券5元，线上线下无敌券1元，抵用券、礼盒券和无敌券的有效期均为到账户后7天内）；</p>
+					<p>4. 分享多3次抽奖机会，每天分享最多获得3次。</p>
 				</div>
 			</div>
 
@@ -678,12 +660,8 @@
 			</div>
 		</div>
 		<div class="go">
-			<div id='mark'>提示</div>
 			<div id='go'>开始</div>
-
-			<a  href="http://app.bblycyz.com/AndSell/h5/pages/main/main_bak.html#/pages/personal/coupon">
-				<div id='gift'>奖品列表</div>
-			</a>
+			<div id='mark'>提示</div>
 		</div>
 		<div class="chuai_box" style="display: none;">
 			<div class="marks">
@@ -762,19 +740,19 @@
 				wx.ready(function() {
 					wx.onMenuShareTimeline({
 						title: '我正在参加云厨年货拼拼乐活动，拼智商游戏，奖品拿到手软！', // 分享标题4让风吹   
-						link: 'http://app.bblycyz.com/AndSell/h5/pages/main/main_bak.html#/pages/temporary/pTAct', // 分享链接
+						link:'http://app.bblycyz.com/AndSell/h5/pages/main/main_bak.html#/pages/temporary/pTAct', // 分享链接
 
 						imgUrl: 'http://app.bblycyz.com/AndSell/wxshare/h5/share/img/backs.jpg', // 分享图标
 
 						success: function(res) {
 							// 用户确认分享后执行的回调函数
 							console.log('succsee')
-
+							
 							const obj = {}
 							obj['jigsaw.USER_ID'] = getCookie('ANDSELLID')
 
 							ajaxPost('http://app.bblycyz.com/AndSell/bubu/jigsaw/WxShare', obj, function(re) {
-								if(re.code == 0) {
+								if(re.code==0){
 									alert('分享成功')
 								}
 							})
@@ -789,7 +767,7 @@
 					wx.onMenuShareAppMessage({
 						title: '我正在参加云厨年货拼拼乐活动，拼智商游戏，奖品拿到手软！', // 分享标题
 						desc: '我正在参加云厨年货拼拼乐活动，拼智商游戏，奖品拿到手软！',
-						link: 'http://app.bblycyz.com/AndSell/h5/pages/main/main_bak.html#/pages/temporary/pTAct', // 分享链接
+						link:'http://app.bblycyz.com/AndSell/h5/pages/main/main_bak.html#/pages/temporary/pTAct', // 分享链接
 						imgUrl: 'http://app.bblycyz.com/AndSell/wxshare/h5/share/img/backs.jpg', // 分享图标
 						type: '', // 分享类型,music、video或link，不填默认为link
 						dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
@@ -799,10 +777,11 @@
 							obj['jigsaw.USER_ID'] = getCookie('ANDSELLID')
 
 							ajaxPost('http://app.bblycyz.com/AndSell/bubu/jigsaw/WxShare', obj, function(re) {
-								if(re.code == 0) {
+								if(re.code==0){
 									alert('分享成功')
 								}
 							})
+							
 
 						},
 						cancel: function() {
@@ -1066,20 +1045,20 @@
 		<script>
 			function rank() {
 				//排行榜
+				
+		ajaxGet('http://app.bblycyz.com/AndSell/bubu/jigsaw/queryAll', function(res) {
+				console.log(res)
+				$('.lists').remove()
+				for(var i = 0; i < 5; i++) {
 
-				ajaxGet('http://app.bblycyz.com/AndSell/bubu/jigsaw/queryAll', function(res) {
-					console.log(res)
-					$('.lists').remove()
-					for(var i = 0; i < 5; i++) {
+					$('ul').append('<li class="lists">' +
+						'<div class="left content">NO.' + (i + 1) + '</div>' +
+						'<div class="center content"> ' + res.data[i]['JIGSAW.MEMBER_NAME'] + ' </div>' +
+						'<div class="right content"> ' + res.data[i]['JIGSAW.TIME'] + '秒</div>' +
+						'</li>')
+				}
 
-						$('ul').append('<li class="lists">' +
-							'<div class="left content">NO.' + (i + 1) + '</div>' +
-							'<div class="center content"> ' + res.data[i]['JIGSAW.MEMBER_NAME'] + ' </div>' +
-							'<div class="right content"> ' + res.data[i]['JIGSAW.TIME'] + '秒</div>' +
-							'</li>')
-					}
-
-				})
+			})
 				$('.AR').css('display', 'block')
 				$('.listIco').css('visibility', 'visible')
 				$('.rankList').css('display', 'block')
@@ -1140,16 +1119,7 @@
 				$('.lottery').css('display', 'block')
 			})
 			//点击抽奖摇晃动效
-			var kt = 1
 			$('.cjs').click(function() {
-				if(kt > 1) {
-					return
-				}
-				setTimeout(function() {
-					kt = 1
-				}, 10000)
-				kt = kt + 1
-				console.log(kt)
 				$('.cjs').addClass("lotteryStart")
 				setTimeout(function() {
 					const obj = {}
@@ -1157,10 +1127,11 @@
 					obj['jigsaw_gIft.SCORE'] = $('#times').html()
 					ajaxPost('http://app.bblycyz.com/AndSell/bubu/jigsaw_gift/getGift?', obj, function(res) {
 						console.log(res)
-						if(res.code == 0) {
-							alert(res.extraData.msg)
-
-						} else {
+						if(res.code==0){
+						alert(res.extraData.msg)
+							
+						}
+						else{
 							alert(res.msg)
 						}
 
@@ -1172,111 +1143,103 @@
 			})
 			setTimeout(function() {
 				for(var i = 0; i < pic.length; i++) {
-
+			
 					pic[i].addEventListener('touchstart', function(e) {
 						e.preventDefault();
-						if($('.sss').length > 1) {
-
-						} else {
-
-							this.style.zIndex = 100; //设置拖拽元素的z-index值，使其在最上面。
-							//					console.log(e.targetTouches[0].pageX - this.offsetLeft)
-							//					console.log(e.targetTouches[1].pageX - this.offsetLeft)
-							dx = e.targetTouches[0].pageX - this.offsetLeft; //记录触发拖拽的水平状态发生改变时的位置
-
-							dy = e.targetTouches[0].pageY - this.offsetTop; //记录触发拖拽的垂直状态发生改变时的位置
-
-							this.startX = this.offsetLeft; //记录当前初始状态水平发生改变时的位置
-
-							this.startY = this.offsetTop; //offsetTop等取得的值与this.style.left获取的值区别在于前者不带px,后者带px
-
-							this.style.transition = 'none';
-						}
-
+						
+						
 						console.log($(this).addClass('sss'))
+						
+						this.style.zIndex = 100; //设置拖拽元素的z-index值，使其在最上面。
+						//					console.log(e.targetTouches[0].pageX - this.offsetLeft)
+						//					console.log(e.targetTouches[1].pageX - this.offsetLeft)
+						dx = e.targetTouches[0].pageX - this.offsetLeft; //记录触发拖拽的水平状态发生改变时的位置
+
+						dy = e.targetTouches[0].pageY - this.offsetTop; //记录触发拖拽的垂直状态发生改变时的位置
+
+						this.startX = this.offsetLeft; //记录当前初始状态水平发生改变时的位置
+
+						this.startY = this.offsetTop; //offsetTop等取得的值与this.style.left获取的值区别在于前者不带px,后者带px
+
+						this.style.transition = 'none';
 
 					});
 
 					pic[i].addEventListener('touchmove', function(e) {
-						if($('.sss').length > 1) {
+						if($('.sss').length>1){
+							
+						}
+						
+						newLeft = e.targetTouches[0].pageX - dx; //记录拖拽的水平状态发生改变时的位置
 
-						} else {
-							newLeft = e.targetTouches[0].pageX - dx; //记录拖拽的水平状态发生改变时的位置
+						newtop = e.targetTouches[0].pageY - dy;
 
-							newtop = e.targetTouches[0].pageY - dy;
+						if(newLeft <= -picWidth / 2) { //限制边界代码块，拖拽区域不能超出边界的一半
 
-							if(newLeft <= -picWidth / 2) { //限制边界代码块，拖拽区域不能超出边界的一半
+							newLeft = -picWidth / 2;
 
-								newLeft = -picWidth / 2;
+						} else if(newLeft >= (picboxWidth - picWidth / 2)) {
 
-							} else if(newLeft >= (picboxWidth - picWidth / 2)) {
-
-								newLeft = (picboxWidth - picWidth / 2);
-
-							}
-
-							if(newtop <= -picHeight / 2) {
-
-								newtop = -picWidth / 2;
-
-							} else if(newtop >= (picboxHeight - picHeight / 2)) {
-
-								newtop = (picboxHeight - picHeight / 2);
-
-							}
-
-							this.style.left = newLeft + 'px';
-
-							this.style.top = newtop + 'px'; //设置目标元素的left,top
+							newLeft = (picboxWidth - picWidth / 2);
 
 						}
+
+						if(newtop <= -picHeight / 2) {
+
+							newtop = -picWidth / 2;
+
+						} else if(newtop >= (picboxHeight - picHeight / 2)) {
+
+							newtop = (picboxHeight - picHeight / 2);
+
+						}
+
+						this.style.left = newLeft + 'px';
+
+						this.style.top = newtop + 'px'; //设置目标元素的left,top
 
 					});
 
 					pic[i].addEventListener('touchend', function(e) {
-
-						if($('.sss').length > 1) {
-
-						} else {
-							this.style.zIndex = 0;
-
-							this.style.transition = 'all 0.05s ease 0s'; //添加css3动画效果
-
-							this.endX = e.changedTouches[0].pageX - dx;
-
-							this.endY = e.changedTouches[0].pageY - dy; //记录滑动结束时的位置，与进入元素对比，判断与谁交换
-
-							var obj = change(e.target, this.endX, this.endY); //调用交换函数
-
-							if(obj == e.target) { //如果交换函数返回的是自己
-
-								obj.style.left = this.startX + 'px';
-
-								obj.style.top = this.startY + 'px';
-
-							} else { //否则
-
-								var _left = obj.style.left;
-
-								obj.style.left = this.startX + 'px';
-
-								this.style.left = _left;
-
-								var _top = obj.style.top;
-
-								obj.style.top = this.startY + 'px';
-
-								this.style.top = _top;
-
-								var _index = obj.getAttribute('data-index');
-
-								obj.setAttribute('data-index', this.getAttribute('data-index'));
-
-								this.setAttribute('data-index', _index); //交换函数部分，可提取
-
-							}
-						}
+					
 						$(this).removeClass('sss')
+						this.style.zIndex = 0;
+
+						this.style.transition = 'all 0.05s ease 0s'; //添加css3动画效果
+
+						this.endX = e.changedTouches[0].pageX - dx;
+
+						this.endY = e.changedTouches[0].pageY - dy; //记录滑动结束时的位置，与进入元素对比，判断与谁交换
+
+						var obj = change(e.target, this.endX, this.endY); //调用交换函数
+
+						if(obj == e.target) { //如果交换函数返回的是自己
+
+							obj.style.left = this.startX + 'px';
+
+							obj.style.top = this.startY + 'px';
+
+						} else { //否则
+
+							var _left = obj.style.left;
+
+							obj.style.left = this.startX + 'px';
+
+							this.style.left = _left;
+
+							var _top = obj.style.top;
+
+							obj.style.top = this.startY + 'px';
+
+							this.style.top = _top;
+
+							var _index = obj.getAttribute('data-index');
+
+							obj.setAttribute('data-index', this.getAttribute('data-index'));
+
+							this.setAttribute('data-index', _index); //交换函数部分，可提取
+
+						}
 
 					});
 
@@ -1286,35 +1249,30 @@
 							stop()
 							kg++
 							if(kg == 2) {
-								alert('活动已结束，感谢参与')
-//								var objs = {}
-//								objs['USER_ID'] = getCookie('ANDSELLID')
-//								objs['time'] = $('#times').html()
-//								if($('#times').html()<2){
-//									alert('服务器拥挤，请刷新页面后重试')
-//									return
-//								}
-//								ajaxPost('http://app.bblycyz.com/AndSell/bubu/jigsaw/getid', objs, function(re) {
-//									if(re.code == 0) {
-//										$('.bestScore').html(re.extraData.bestScore)
-//										$('.score').html(re.extraData.score)
-//										$('#zhe').show()
-//										console.log(re.extraData.score > 30)
-//										if(re.extraData.score > 30) {
-//
-//											$('.result2').css('display', 'block')
-//										} else {
-//											$('.result1').css('display', 'block')
-//										}
-//
-//									}
-//								})
-//								const obj = {}
-//								obj['JIGSAW_GIFT.USER_ID'] = getCookie('ANDSELLID')
-//								ajaxPost('http://app.bblycyz.com/AndSell/bubu/jigsaw_gift/getChance', obj, function(re) {
-//									console.log(re)
-//									$('.frequency').html(re.extraData.msg)
-//								})
+								var objs = {}
+								objs['USER_ID'] = getCookie('ANDSELLID')
+								objs['time'] = $('#times').html()
+								ajaxPost('http://app.bblycyz.com/AndSell/bubu/jigsaw/getid', objs, function(re) {
+									if(re.code == 0) {
+										$('.bestScore').html(re.extraData.bestScore)
+										$('.score').html(re.extraData.score)
+										$('#zhe').show()
+										console.log(re.extraData.score > 30)
+										if(re.extraData.score > 100) {
+
+											$('.result2').css('display', 'block')
+										} else {
+											$('.result1').css('display', 'block')
+										}
+
+									}
+								})
+								const obj = {}
+								obj['JIGSAW_GIFT.USER_ID'] = getCookie('ANDSELLID')
+								ajaxPost('http://app.bblycyz.com/AndSell/bubu/jigsaw_gift/getChance', obj, function(re) {
+									console.log(re)
+									$('.frequency').html(re.extraData.msg)
+								})
 								console.log('成功了！');
 
 							}

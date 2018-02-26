@@ -77,3 +77,5 @@ $import('pages/temporary/sign');
 $import('pages/temporary/ycnhj');
 $import('pages/temporary/ycnhjs');
 $import('pages/temporary/pTAct');
+$import('pages/temporary/vote');
+$import('pages/temporary/luck');
