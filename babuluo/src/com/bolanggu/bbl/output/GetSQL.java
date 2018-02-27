@@ -143,8 +143,10 @@ public enum GetSQL {
 		Map<String, Object> map = jsonStringToMap(parameter);
 		String month = getMonth(map);
 		StringBuffer sql = new StringBuffer();
-		sql.append("SELECT c.SHOP_ID AS `门店ID`,c.SHOP_NAME AS `门店名称`,COUNT(a.ID) AS `订单数量`,SUM(a.COUNT) AS `商品销售量`,");
-		sql.append("a.SKU_1_VALUE AS `规格`,CAST(SUM(a.PRICE_SUM) AS DECIMAL(10,2)) AS `销售总额`");
+		sql.append("SELECT c.SHOP_ID AS `门店ID`,c.SHOP_NAME AS `门店名称`,a.PRD_NAME AS '商品名',COUNT(a.ID) AS `订单数量`,SUM(a.COUNT) AS `商品销售量`,");
+		sql.append("a.SKU_1_VALUE AS `规格`,CAST(SUM(a.PRICE_SUM*a.COUNT) AS DECIMAL(10,2)) AS `销售总额`,");
+		sql.append("a.SKU AS `商品编码`,a.PRD_ID AS `商品货号`,b.GET_PRD_DATETIME AS '提货时间',");
+		sql.append("CAST(SUM(a.PRICE_SUM*a.COUNT) AS DECIMAL(10,2))  AS `销售总额`");
 		sql.append(" FROM shop_order_info a");
 		sql.append(" INNER JOIN shop_order b ON a.ORDER_ID=b.ID");
 		sql.append(" INNER JOIN shop c ON b.SHOP_ID = c.SHOP_ID");

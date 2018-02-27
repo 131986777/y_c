@@ -167,7 +167,8 @@ public enum ProductOrderQuery {
 		String month = getMonth(map);
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT c.SHOP_ID AS `SHOP_ID`, c.SHOP_NAME AS `SHOP_NAME`,COUNT(a.ID) AS `ORDER_COUNT`,SUM(a.COUNT) AS `PRD_COUNT`,");
-		sql.append("a.SKU_1_VALUE AS `SKU_UNIT`,CAST(SUM(a.PRICE_SUM*a.COUNT) AS DECIMAL(10,2)) AS `PRICE_SUM`");
+		sql.append("a.SKU_1_VALUE AS `SKU_UNIT`,CAST(SUM(a.PRICE_SUM*a.COUNT) AS DECIMAL(10,2)) AS `PRICE_SUM`,");
+		sql.append("a.PRD_NAME as `PRD_NAME`,a.SKU as `SKU`, b.GET_PRD_DATETIME as `GET_PRD_DATETIME`");
 		sql.append(" FROM shop_order_info a");
 		sql.append(" INNER JOIN shop_order b ON a.ORDER_ID=b.ID");
 		sql.append(" INNER JOIN shop c ON b.SHOP_ID = c.SHOP_ID");
