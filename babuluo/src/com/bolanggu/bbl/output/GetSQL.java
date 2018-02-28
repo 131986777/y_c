@@ -189,7 +189,7 @@ public enum GetSQL {
 		sql.append("SELECT a.SHOP_NAME AS `门店`,a.ORDER_NUM AS `订单号`,c.TRUE_NAME AS `购买人`,");
 		sql.append("a.REC_PHONE AS `手机号`,b.PRD_NAME AS `商品`,b.SKU_1_VALUE AS `规格`,");
 		sql.append("b.PRD_ID as `货号`,b.SKU AS `商品编码`,");
-		sql.append("b.COUNT AS `数量`,a.PAY_TYPE AS 	`支付类型`,FORMAT(b.PRICE_SUM*b.COUNT,2) AS `金额`,a.DATETIME_ADD AS `购买时间`,");
+		sql.append("b.COUNT AS `数量`,a.PAY_TYPE AS 	`支付类型`,FORMAT(b.PRICE_SUM*b.COUNT,2) AS `金额`,a.DATETIME_ADD AS `购买时间`,a.GET_PRD_DATETIME AS '提货时间',");
 		sql.append("CASE a.STATE_OUT WHEN 1 THEN '已提货' WHEN -1 THEN '未提货' END AS `提货状态`");
 		sql.append(" FROM shop_order a");
 		sql.append(" INNER JOIN shop_order_info b ON a.ID=b.ORDER_ID ");
@@ -213,6 +213,18 @@ public enum GetSQL {
 		if(isNull(map,"SHOP_ID")){
 			sql.append(" AND a.SHOP_ID = '"+map.get("SHOP_ID")+"'");
 		}
+		if(isNull(map,"STATE_OUT")){
+			sql.append(" AND a.STATE_OUT = '"+map.get("STATE_OUT")+"'");
+		}
+		if(map.containsKey("DATETIME_GET_FROM") && !"null".equals(map.get("DATETIME_GET_FROM"))){
+			sql.append(" AND a.GET_PRD_DATETIME >='"+map.get("DATETIME_GET_FROM")+" 00:00:00'");
+		}
+		if(map.containsKey("DATETIME_GET_TO") && !"null".equals(map.get("DATETIME_GET_TO"))){
+			sql.append(" AND a.GET_PRD_DATETIME <='"+map.get("DATETIME_GET_TO")+" 23:59:59'");
+		}
+		if(map.containsKey("GET_PRD_DATETIME") && !"null".equals(map.get("GET_PRD_DATETIME"))){
+			sql.append(" AND DATE_FORMAT(a.GET_PRD_DATETIME,'%Y-%m-%d') in ('"+map.get("GET_PRD_DATETIME")+"')");
+		} 
 		sql.append(" ORDER BY a.DATETIME_ADD DESC");
 		return sql.toString();
 	}
