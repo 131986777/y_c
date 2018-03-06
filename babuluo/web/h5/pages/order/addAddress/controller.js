@@ -100,6 +100,11 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
     }
 
     $scope.submit = function () {
+    	console.log($("#datetime-picker")[0].value)
+    	if($("#datetime-picker")[0].value=="请选择提货日期"){
+    		weUI.toast.error('请选择提货日期')
+    		return
+    	}
         $scope.PickupPerson = {
             man: $scope.man,
             phone: $scope.phone,
@@ -118,10 +123,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
         } else {
             setCookie("pickupPerson", JSON.stringify($scope.PickupPerson));
         }
-       var re =  /^1\d{10}$/;
+		 var re =  /^1\d{10}$/;
        // var re = /^1[34578]\d{9}$/
 			if (!re.test($scope.phone)) {
-				weUI.toast.error("请输入真确的手机号");
+				weUI.toast.error("请输入正确的手机号");
 				return
 			}
         history.back();
@@ -133,8 +138,10 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
         var type = item['APPOINTMENT_PRODUCT.TIME_TYPE'];//提货类型 week day
         var still = item['APPOINTMENT_PRODUCT.STILL_DAY']; //可提货天数
         var startTime = item['APPOINTMENT_PRODUCT.START_TIME'];//提货时间//周几6
+        var timeRange = '   '+item['APPOINTMENT_PRODUCT.TIME_START']+'-'+item['APPOINTMENT_PRODUCT.TIME_END'];
         var next = true;
         var dayList = new Array;
+        dayList.push('请选择提货日期')
         var getDay = new Array();
         if (type == 'WEEK') {
             var currTime = new Date().getDay();//获得周几 5
@@ -164,7 +171,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
                 day = Number(startTime) - Number(currTime);
             }
             for (var i = 0; i < still; i++) {
-                dayList.push(GetDateStr(Number(day) + Number(i)) + '   08:00-19:00');
+                dayList.push(GetDateStr(Number(day) + Number(i)) + timeRange);//'   08:00-19:00');
             }
 
         } else if (type == 'DAY') {      	
@@ -176,7 +183,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
                 var currDate = new Date().getTime();
                 //console.log("提货时间"+date+"====当前时间==="+currDate)
                 if(currDate < date){
-                	dayList.push(GetDateStr(Number(i), startTime) + '   08:00-19:00');
+                	dayList.push(GetDateStr(Number(i), startTime) + timeRange);//'   08:00-19:00');
                  }
             }
         }else if(type=='WEEK_COMB'){
@@ -185,7 +192,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
             var endDay = Math.ceil(Number(endHours / 24));
             console.log(endDay)
             if (currTime == 0) {
-                currTime = 7;//周日
+              //  currTime = 7;//周日
             }
             var strs= new Array(); //定义一数组
             var strDay = null;
@@ -193,7 +200,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
             for (i=0;i<strs.length ;i++ )
             {
             	strDay=(strs[i]);
-            	
+				//if(strDay-currTime<0){
+				//	strDay=strDay+7;
+				//}
             	 if ((strDay - currTime) > endDay) {
                      next = false;
                  } else {
@@ -224,7 +233,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
             		minDay = getDay[i]
             	}
             }
-            dayList.push(GetDateStr(Number(minDay) ) + '   08:00-19:00');
+            dayList.push(GetDateStr(Number(minDay) ) + timeRange);//'   08:00-19:00');
         }
 
         $("#datetime-picker").picker({
