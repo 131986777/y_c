@@ -167,7 +167,8 @@ public enum ProductOrderQuery {
 		String month = getMonth(map);
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT c.SHOP_ID AS `SHOP_ID`, c.SHOP_NAME AS `SHOP_NAME`,COUNT(a.ID) AS `ORDER_COUNT`,SUM(a.COUNT) AS `PRD_COUNT`,");
-		sql.append("a.SKU_1_VALUE AS `SKU_UNIT`,CAST(SUM(a.PRICE_SUM*a.COUNT) AS DECIMAL(10,2)) AS `PRICE_SUM`");
+		sql.append("a.SKU_1_VALUE AS `SKU_UNIT`,CAST(SUM(a.PRICE_SUM*a.COUNT) AS DECIMAL(10,2)) AS `PRICE_SUM`,");
+		sql.append("a.PRD_NAME as `PRD_NAME`,a.SKU as `SKU`, b.GET_PRD_DATETIME as `GET_PRD_DATETIME`");
 		sql.append(" FROM shop_order_info a");
 		sql.append(" INNER JOIN shop_order b ON a.ORDER_ID=b.ID");
 		sql.append(" INNER JOIN shop c ON b.SHOP_ID = c.SHOP_ID");
@@ -240,7 +241,7 @@ public enum ProductOrderQuery {
 		String month = getMonth(map);
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT a.SHOP_NAME,a.ORDER_NUM,c.TRUE_NAME,a.REC_PHONE,b.PRD_NAME,b.SKU_1_VALUE,");
-		sql.append("b.COUNT,a.PAY_TYPE,FORMAT(b.PRICE_SUM*b.COUNT,2) AS `PRICE_SUM`,a.DATETIME_ADD,");
+		sql.append("b.COUNT,a.PAY_TYPE,FORMAT(b.PRICE_SUM*b.COUNT,2) AS `PRICE_SUM`,a.DATETIME_ADD,a.GET_PRD_DATETIME,");
 		sql.append("b.PRD_ID as `PRD`,b.SKU AS `SKU`,");
 		sql.append("CASE a.STATE_OUT WHEN 1 THEN '已提货' WHEN -1 THEN '未提货' END AS `STATE_OUT`");
 		sql.append(" FROM shop_order a");
@@ -265,6 +266,18 @@ public enum ProductOrderQuery {
 		if(isNull(map,"SHOP_ID")){
 			sql.append(" AND a.SHOP_ID = '"+map.get("SHOP_ID")+"'");
 		}
+		if(isNull(map,"STATE_OUT")){
+			sql.append(" AND a.STATE_OUT = '"+map.get("STATE_OUT")+"'");
+		}
+		if(map.containsKey("DATETIME_GET_FROM") && !"null".equals(map.get("DATETIME_GET_FROM"))){
+			sql.append(" AND a.GET_PRD_DATETIME >='"+map.get("DATETIME_GET_FROM")+" 00:00:00'");
+		}
+		if(map.containsKey("DATETIME_GET_TO") && !"null".equals(map.get("DATETIME_GET_TO"))){
+			sql.append(" AND a.GET_PRD_DATETIME <='"+map.get("DATETIME_GET_TO")+" 23:59:59'");
+		}
+		if(map.containsKey("GET_PRD_DATETIME") && !"null".equals(map.get("GET_PRD_DATETIME"))){
+			sql.append(" AND DATE_FORMAT(a.GET_PRD_DATETIME,'%Y-%m-%d') in ('"+map.get("GET_PRD_DATETIME")+"')");
+		} 
 		sql.append(" ORDER BY a.DATETIME_ADD DESC");
 		System.out.println(sql.toString());
 		List list = executeQuery(sql.toString());

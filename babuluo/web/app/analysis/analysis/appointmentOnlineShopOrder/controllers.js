@@ -11,7 +11,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_appointmentOnlineSh
     
     //初始化
     $scope.initLoad = function () {
-    	var title=['门店编码','门店','订单数量','商品销售量','规格','销售额'];
+    	var title=['门店编码','门店','商品','商品编码','提货时间','订单数量','商品销售量','规格','销售额'];
     	$scope.TITLE=title;
     	$scope.filter = JSON.parse($stateParams.FILTER);
     	$scope.filter['SKU'] = $stateParams.SKU;
@@ -64,7 +64,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_appointmentOnlineSh
     	$('#ouputBtn').attr("disabled","disabled");
         var url = "../../outputQuery";
         $scope.filter['SHEET_NAME'] = "线上商品订单";
-        $scope.filter['COLUMN_WIDTH'] = [2500,6000,4000,4000,2500,4000];
+        $scope.filter['COLUMN_WIDTH'] = [2500,4000,4000,2000,2000,4500,4000,6500,4000];
         console.log($scope.filter);
         $scope.outputList = {};
         $scope.outputList['type'] = "onlineShopProductOrder";

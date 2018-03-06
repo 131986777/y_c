@@ -10,7 +10,7 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderInfoAnalysis_C
     
     //初始化
     $scope.initLoad = function () {
-    	var title=['门店','订单号','购买人','手机号','货号','商品编码','商品','数量','金额','时间','提货状态'];
+    	var title=['门店','订单号','购买人','手机号','货号','商品编码','商品','数量','金额','时间','提货时间','提货状态'];
     	$scope.TITLE=title;
     	
     	analysisFactory.getList().get({},function (response) {
@@ -57,6 +57,17 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderInfoAnalysis_C
            format: 'yyyy-mm-dd',
            todayBtn: 'linked',
        });
+       $('#get_hour').datetimepicker({ 
+           language: 'zh-CN',
+           minView: "month",
+           autoclose: true,
+           todayHighlight: true,
+           weekStart: 1,
+           initialDate:today,
+           format: 'yyyy-mm-dd',
+           todayBtn: 'linked',
+       });
+      //  $scope.filter['DATETIME_GET_FROM'] = getCurrentTime();
     	$scope.filter['DATETIME_ADD_FROM'] = getCurrentTime();
     	$scope.filter['DATETIME_ADD_TO'] = getCurrentTime();
     	$scope.getProdutOrderList();
@@ -68,6 +79,28 @@ angular.module('AndSell.Main').controller('analysis_analysis_orderInfoAnalysis_C
     		 modalFactory.showShortAlert("开始和截止时间不能为空！");
              return;
     	}
+    	delete $scope.filter['GET_PRD_DATETIME'];
+    	var url = "../../queryOrder";
+        $scope.filter['SHOP_ID'] = $('#shop').val();
+        $scope.orderList = {};
+        $scope.orderList['type'] = "orderInfo";
+        $scope.orderList['param'] = JSON.stringify($scope.filter);
+        http.post_ori(url, $scope.orderList, function (response) {
+        	$scope.OLDLIST = response;
+        	var sum = 0;
+        	angular.forEach($scope.OLDLIST,function(data){
+        		sum += parseFloat(data['PRICE_SUM']);
+            });
+        	console.log(sum);
+            $scope.all=sum.toFixed(2)+"元";
+        });
+    }
+  //查询昨日未提货订单
+    $scope.getYesterdayProdutOrderList = function(){
+    	delete $scope.filter['DATETIME_ADD_FROM']; 
+    	//$scope.filter['DATETIME_ADD_FROM']='';
+    	delete $scope.filter['DATETIME_ADD_TO'];
+    	$scope.filter['GET_PRD_DATETIME']=getYesterdayTime();
     	var url = "../../queryOrder";
         $scope.filter['SHOP_ID'] = $('#shop').val();
         $scope.orderList = {};
@@ -119,6 +152,13 @@ function getCurrentTime(){
     var day = now.getDate();            //日
     return year+"-"+p(month)+"-"+p(day);
 }
+//获取昨天时间
+function getYesterdayTime(){
+     var day1 = new Date();
+     day1.setTime(day1.getTime()-24*60*60*1000);
+     return day1.getFullYear()+"-" + p(day1.getMonth()+1) + "-" + p(day1.getDate());
+}
+
 function p(s) {
     return s < 10 ? '0' + s: s;
 }

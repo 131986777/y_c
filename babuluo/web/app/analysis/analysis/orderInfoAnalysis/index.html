@@ -24,7 +24,35 @@
             <div class="clear"></div>
        
     </div>
-    
+    <div class="col-md-12">
+	    <div class="col-md-8 fixWidth">
+	               <!--<input id="get_hour" type="text" class="form-control inputWidth"  readonly="readonly" placeholder="提货时间"
+	                         name="from" ng-model="filter['DATETIME_GET_FROM']" data-date-format="yyyy-mm-dd">
+	                   <span>-</span>
+	                  <input id="start_hour" type="text" class="form-control inputWidth"  readonly="readonly" placeholder="起始时间"
+                         name="from" ng-model="filter['GET_PRD_DATETIME']" data-date-format="yyyy-mm-dd">
+	                  <input id="end_hour" type="text" class="form-control inputWidth"  readonly="readonly" placeholder="截止时间"
+	                         name="to" ng-model="filter['DATETIME_GET_TO']"
+	                         data-date-format="yyyy-mm-dd"> -->
+	                   
+	                 <select id="state" ng-model="filter['STATE_OUT']"
+                                ng-init="filter['STATE_OUT']='null'"
+                                >
+                            <option class="nya-bs-option" value="null">
+                               全部状态
+                            </option>
+                            <option class="nya-bs-option" value="-1">
+                                未提货
+                            </option>
+                            <option class="nya-bs-option" value="1">
+                                已提货
+                            </option>
+                        </select> 
+	               		 <label> :提货状态</label>   
+	   </div>
+	   <button class="btn " type="button" ng-click="getYesterdayProdutOrderList()">昨日未提货订单</button>
+	   
+    </div>
 </div>
  
 <div class="table-content">
@@ -61,6 +89,7 @@
            			<span ng-bind="VALUE['PRICE_SUM']"></span>
            		</td>
            		<td ng-bind="VALUE['DATETIME_ADD'] | FormatAllDate" align="center"></td>
+           		<td ng-bind="VALUE['GET_PRD_DATETIME']" align="center"></td>
            		<td ng-bind="VALUE['STATE_OUT']" align="center"></td>
            		
             </tr>
