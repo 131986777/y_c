@@ -447,7 +447,7 @@ console.log($scope.skuData);
                     	var num_limit = parseInt(response.data[0]['APPOINTMENT_PRODUCT.NUM_LIMIT']);
                     	console.log("num_limit===="+num_limit);
                         if(num_limit != undefined && num_limit > 0){
-                        	if($scope.skuSize >= num_limit){
+                        	if($scope.skuSize > num_limit){
                         		weUI.toast.error('该规格商品只限买'+num_limit+'份');
                         	}else{
                         		var orderParam = {
@@ -455,7 +455,16 @@ console.log($scope.skuData);
                         				"SHOP_ORDER.UID" :$scope.uid 
                         		};
                         		console.log(orderParam);
+                        		if($scope.uid == null || $scope.uid == undefined){
+                        			weUI.toast.error('请先登录商城!');
+                        			localStorage.path = window.location.href;
+                        			console.log(localStorage.path);
+                        			$state.go('pages/user/accountLogin');
+                        		}
                         		orderFactory.findUserShopOrderWithSku(orderParam, function(re){
+                        			if(re.code != 0){
+                        				weUI.toast.error(re.msg);
+                        			}
                         			if(re.data.length > 0 && num_limit <= re.data[0]['SUM_COUNT']){
                         				weUI.toast.error('该规格商品只限买'+num_limit+'份，您已不能购买');
                         			}else{
