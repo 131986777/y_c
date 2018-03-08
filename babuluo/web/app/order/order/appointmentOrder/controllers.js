@@ -81,13 +81,38 @@ angular.module('AndSell.Main').controller('order_order_appointmentOrder_Controll
     $scope.searchOrder = function () {
         $scope.filter['SHOP_ORDER.FILTER_CONTENT'] = $scope.orderFilter;
     }
-
+    //查询订单提货日期
+    $scope.searchOrderbyInfo = function () {
+//    	$scope.filterStateOrder($scope.order_state);
+    	console.log($scope.filter['GET_PRD_DATETIME']);
+    	
+//        $scope.filter['SHOP_ORDER.FILTER_CONTENT'] = $scope.orderFilter;
+    }
+    var date = new Date();
+	$('#start_hour').datetimepicker({
+		 	minView: "month",
+       language: 'zh-CN',
+       autoclose: true,
+       todayHighlight: true,
+       weekStart: 1,
+       startView: 2,
+       format: 'yyyy-mm-dd',
+       initialDate:date,
+       todayBtn: 'linked'
+   }).on('changeDate',function(e){
+   	var startTime = e.date;
+   	$('#end_hour').datetimepicker('setStartDate',startTime);
+//   	var endTime = getLastDayOdMonth(e.date.getFullYear(),e.date.getMonth()+1);
+//   	$('#end_hour').datetimepicker('setEndDate',endTime); 
+   }).on('show',function(){
+   });
     //订单详情跳转
     $scope.toDetail = function (id) {
         orderFactory.scanOrder({'SHOP_ORDER.ID': id}, function (response) {
             console.log(response);
         });
-        $state.go('order/order/orderDetail', {ORDER_ID: id});
+        //$state.go('order/order/orderDetail', {ORDER_ID: id});
+		window.open("http://app.bblycyz.com/AndSell/app/main/main_index.html#/order/order/orderDetail/"+id);
     }
 
     //分拣跳转

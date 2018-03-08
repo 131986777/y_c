@@ -125,7 +125,11 @@ angular.module('AndSell.Main').controller('order_order_orderList_Controller', fu
         orderFactory.scanOrder({'SHOP_ORDER.ID': id}, function (response) {
             console.log(response);
         });
-        $state.go('order/order/orderDetail', {ORDER_ID: id});
+        // $state.go('order/order/orderDetail', {ORDER_ID: id}); 
+		//var url =$state.herf('order/order/orderDetail', {ORDER_ID: id});
+		window.open("http://app.bblycyz.com/AndSell/app/main/main_index.html#/order/order/orderDetail/"+id);
+		//window.open(app.bblycyz.com/AndSell/app/main/main_index.html,'_blank');
+		//window.open(app.bblycyz.com/AndSell/app/main/main_index.html#/order/order/orderDetail/+id);
     }
 
 });

@@ -12,6 +12,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
         var deferred_price = $q.defer();
 
         $scope.cookiePickupPerson = JSON.parse(getCookie("pickupPersonAppointment"));
+        
+        console.info("$scope.cookiePickupPerson============"+$scope.cookiePickupPerson);
 
         $scope.EmptyPick = isEmptyObject($scope.cookiePickupPerson);
         if (!$scope.EmptyPick) {
@@ -20,7 +22,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             };
             appointmentFactory.queryAll(param, function (response) {
                 if (response.data.length > 0) {
-                	$scope.cookiePickupPerson.endHours = response.data[0]['APPOINTMENT_PRODUCT.END_DAY'];
+					$scope.cookiePickupPerson.endHours = response.data[0]['APPOINTMENT_PRODUCT.END_DAY'];
                     if (!($scope.cookiePickupPerson.skuIds
                         == $stateParams.SKU_IDS
                         && $scope.cookiePickupPerson.currDay
@@ -65,7 +67,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
                 $scope.needPay = ele['SHOP_PRODUCT_SKU.NEED_PAY'];
                 ele.isSelect = false;
                 ele.isSale = false;
-                ele['SOURCE'] = getCookie(ele['SHOP_PRODUCT.PRD_ID']+'_dist');
+               // ele['SOURCE'] = getCookie(ele['SHOP_PRODUCT.PRD_ID']+'_dist');
                 $scope.skulistsForOrder.push({
                     'skuId': ele['SHOP_PRODUCT_SKU.SKU_ID'],
                     'classId': ele['SHOP_PRODUCT.CLASS_ID'],
@@ -329,6 +331,8 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             params['SHOP_ORDER.SPECIAL_MODEL'] = 'APPOINTMENT';//特殊状态为预约
             params['SHOP_ORDER.REC_CONTACT'] = $scope.cookiePickupPerson.man;//收货人
             params['SHOP_ORDER.REC_PHONE'] = $scope.cookiePickupPerson.phone;//联系电话
+            params['SHOP_ORDER.REMARK']=$scope.cookiePickupPerson.remark;
+          
             params['SHOP_ORDER.SHOP_NAME'] = $scope.shop['SHOP.SHOP_NAME'];//门店信息
             params['SHOP_ORDER.SHOP_ID'] = $scope.shop['SHOP.SHOP_ID'];//门店ID
            
@@ -408,7 +412,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
 
         } else if (type == 'DAY') {
             for (var i = 0; i < still; i++) {
-            	var orderDate = GetDateStr(Number(i), startTime)+' 00:00:00';
+                var orderDate = GetDateStr(Number(i), startTime)+' 00:00:00';
                 var endHours = Number(endHours);
                 
                 var date = new Date(orderDate.replace(/\-/gi,"/")).getTime() - endHours*60*60*1000;
@@ -423,7 +427,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             var endDay = Math.ceil(Number(endHours / 24));
             console.log(endDay)
             if (currTime == 0) {
-                currTime = 7;//周日
+               // currTime = 7;//周日
             }
             var strs= new Array(); //定义一数组
             var strDay = null;
@@ -431,6 +435,9 @@ angular.module('AndSell.H5.Main').controller('pages_order_appointment_Controller
             for (i=0;i<strs.length ;i++ )
             {
             	strDay=(strs[i]);
+				//if(strDay - currTime<0){
+				//	strDay=strDay+7;
+				//}
             	 if ((strDay - currTime) > endDay) {
                      next = false;
                  } else {

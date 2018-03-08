@@ -1,221 +1,1 @@
-<div class="page-content" ng-init="initData()">
-    <div class="table-operbar">
-        <div class="table-toolbar">
-
-            <ul class="orderNav  nav-justified list-unstyled ">
-                <li ng-class="{true:' active'}[state=='all']" ng-click="filterStateOrder('all')"
-                    class="first"><a href="">所有订单</a></li>
-                <li ng-class="{true:' active'}[state=='end']" ng-click="filterStateOrder('end')"><a
-                    href="">已完成</a>
-                </li>
-                <li ng-class="{true:' active'}[state=='pay']" ng-click="filterStateOrder('pay')"><a
-                    href="">待付款<span
-                    ng-if="orderSizeMap.pay>0" ng-bind="'('+orderSizeMap.pay+')'"></span></a></li>
-                <li ng-class="{true:' active'}[state=='send']" ng-click="filterStateOrder('send')">
-                    <a href="">待发货<span
-                        ng-if="orderSizeMap.send>0" ng-bind="'('+orderSizeMap.send+')'"></span></a>
-                </li>
-                <li ng-class="{true:' active'}[state=='get']" ng-click="filterStateOrder('get')"><a
-                    href="">待自提<span
-                    ng-if="orderSizeMap.get>0" ng-bind="'('+orderSizeMap.get+')'"></span></a>
-                </li>
-                <li ng-class="{true:' active'}[state=='delivery']"
-                    ng-click="filterStateOrder('delivery')"><a
-                    href="">待收货<span
-                    ng-if="orderSizeMap.delivery>0" ng-bind="'('+orderSizeMap.delivery+')'"></span></a>
-                </li>
-                <li ng-class="{true:' active'}[state=='comment']"
-                    ng-click="filterStateOrder('comment')"><a href="">待评价<span
-                    ng-if="orderSizeMap.comment>0"
-                    ng-bind="'('+orderSizeMap.comment+')'"></span></a></li>
-                <li ng-class="{true:' active'}[state=='cancel']"
-                    ng-click="filterStateOrder('cancel')"><a href="">已取消</a></li>
-            </ul>
-
-
-            <!-- 所有订单 -->
-            <div class="form-group form-inline ">
-                <input type="text" class="form-control" ng-model="orderFilter"
-                       placeholder="输入商品名称/订单号">
-                <button type="submit" class="btn btn-default" ng-click="searchOrder()"><span
-                    class="glyphicon glyphicon-search"></span></button>
-                <!--<a class="collapsed" data-toggle="collapse"  href="#term" style="padding-left: 10px;color: rgb(51,51,51);">更多筛选条件<span class="caret"></span></a>-->
-                <!--<div class="btn-group pull-right">-->
-                <!--<button type="button" class="btn btn-default">打印订单</button>-->
-                <!--<button type="button" class="btn btn-default">+ 新增订货单</button>-->
-                <!--</div>-->
-            </div>
-            <!-- 筛选框 -->
-            <div id="term" class="panel-collapse collapse">
-                <div class="panel-body">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <form class="form-horizontal">
-                                <div class="form-group">
-                                    <label class="col-md-5">订单类型</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control">
-                                            <option value="">全部</option>
-                                            <option value="">待付款</option>
-                                            <option value="">待发货</option>
-                                            <option value="">待收货</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-5">评价状态</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control">
-                                            <option value="">全部</option>
-                                            <option value="">已评价</option>
-                                            <option value="">待评价</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-6">
-                            <form class="form-horizontal">
-                                <div class="form-group form-inline">
-                                    <label class="col-md-3 text-right">成交时间</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" placeholder="起始时间">
-                                        --
-                                        <input type="text" class="form-control" placeholder="结束时间">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-3 text-right">交易状态</label>
-                                    <div class="col-md-4">
-                                        <select class="form-control">
-                                            <option value="">全部</option>
-                                            <option value="">已支付</option>
-                                            <option value="">待支付</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-md-3">
-                            <form class="form-horizontal">
-                                <div class="form-group">
-                                    <label for="name" class="col-md-5">卖家昵称</label>
-                                    <div class="col-md-7">
-                                        <input type="text" class="form-group" id="name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-md-5">售后服务</label>
-                                    <div class="col-md-7">
-                                        <select class="form-control">
-                                            <option value="">全部</option>
-                                            <option value="">退货</option>
-                                            <option value="">换货</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-info btn-outline class">确定</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="orders">
-
-                <div>
-                    <div class="orderItem " ng-repeat=" order in orderList"
-                         ng-class="{true:'unfinished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1)||(order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1))]">
-                        <div class="imformation orderUnpayed">
-                            <div class="unpayed"
-                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==1">
-                                等待付款
-                            </div>
-                            <div class="unpayed"
-                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1)||(order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1))">
-                                <span ng-if="order['SHOP_ORDER.NEED_PAY']==-1"> 已预约</span>
-                                <span
-                                    ng-if="order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2"> 已预约，并付款，待自提</span>
-                                <span
-                                    ng-if="order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==1"> 已发货，待收货</span>
-                                <span
-                                    ng-if="order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==-1"> 待发货</span>
-                            </div>
-                            <div class="payed"
-                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1)||(order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1))">
-                                已完成
-                            </div>
-                            <div class="unpayed" ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消
-                            </div>
-                            <div class="row">
-                                <div class="details col-md-8">
-                                    <span class="time"
-                                          ng-bind="order['SHOP_ORDER.DATETIME_ADD']"> | </span>
-                                    <span
-                                        class="name"> {{order['SHOP_ORDER.REC_CONTACT']}} | </span>
-                  <span class="orderNum"
-                        ng-bind="'订单号：'+order['SHOP_ORDER.ORDER_NUM']"> | </span><span
-                                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'" class="payWay"> 微信支付 | </span>
-                                    <span
-                                        ng-if="order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'"
-                                        class="payWay"> 会员卡支付 | </span><span
-                                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='ALI'" class="payWay"> 支付宝支付 | </span>
-                                    <span ng-bind="order['SHOP_ORDER.SHOP_NAME']"></span>
-                                </div>
-                                <div class="sum col-md-4 text-right">
-                                    <p> 订单金额：<span
-                                        ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
-                                        元
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product">
-                            <div class="productList pull-left">
-                                <ul class="list-unstyled">
-                                    <li ng-repeat=" detail in order.details">
-                                        <div class="productInfo">
-                                            <img class="pull-left"
-                                                 ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}"
-                                                 style="width: 80px;height: 80px;">
-                                            <p class="itemName"
-                                               ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']"></p>
-                                            <p class="itemPrice"><span
-                                                ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span>
-                                                元 x
-                                                <span class="itemNum"
-                                                      ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span>
-                                            </p>
-                                            <p class="itemColor"
-                                               ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']"></p>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="buttons pull-right">
-                                <button class="btn btn-detail btn-block"
-                                        ng-click="toDetail(order['SHOP_ORDER.ID'])">
-                                    订单详情
-                                </button>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div page-bar
-                 filter-obj="filter"
-                 url="/shop/order/queryAll"
-                 callback="getOrder(response)">
-            </div>
-
-        </div>
-
-    </div>
-</div>
-
-</div>
-</div>
+<div class="page-content" ng-init="initData()">    <div class="table-operbar">        <div class="table-toolbar">            <ul class="orderNav  nav-justified list-unstyled ">                <li ng-class="{true:' active'}[state=='all']" ng-click="filterStateOrder('all')"                    class="first"><a href="">所有订单</a></li>                <li ng-class="{true:' active'}[state=='end']" ng-click="filterStateOrder('end')"><a                    href="">已完成</a>                </li>                <li ng-class="{true:' active'}[state=='pay']" ng-click="filterStateOrder('pay')"><a                    href="">待付款<span                    ng-if="orderSizeMap.pay>0" ng-bind="'('+orderSizeMap.pay+')'"></span></a></li>                <li ng-class="{true:' active'}[state=='send']" ng-click="filterStateOrder('send')">                    <a href="">待发货<span                        ng-if="orderSizeMap.send>0" ng-bind="'('+orderSizeMap.send+')'"></span></a>                </li>                <li ng-class="{true:' active'}[state=='get']" ng-click="filterStateOrder('get')"><a                    href="">待自提<span                    ng-if="orderSizeMap.get>0" ng-bind="'('+orderSizeMap.get+')'"></span></a>                </li>                <li ng-class="{true:' active'}[state=='delivery']"                    ng-click="filterStateOrder('delivery')"><a                    href="">待收货<span                    ng-if="orderSizeMap.delivery>0" ng-bind="'('+orderSizeMap.delivery+')'"></span></a>                </li>                <li ng-class="{true:' active'}[state=='comment']"                    ng-click="filterStateOrder('comment')"><a href="">待评价<span                    ng-if="orderSizeMap.comment>0"                    ng-bind="'('+orderSizeMap.comment+')'"></span></a></li>                <li ng-class="{true:' active'}[state=='cancel']"                    ng-click="filterStateOrder('cancel')"><a href="">已取消</a></li>            </ul>            <!-- 所有订单 -->            <div class="form-group form-inline ">                <input type="text" class="form-control" ng-model="orderFilter"                       placeholder="输入商品名称/订单号">                <button type="submit" class="btn btn-default" ng-click="searchOrder()"><span                    class="glyphicon glyphicon-search"></span></button>                <a class="collapsed" data-toggle="collapse"  href="#term" style="padding-left: 10px;color: rgb(51,51,51);">更多筛选条件<span class="caret"></span></a>                <!--<div class="btn-group pull-right">-->                <!--<button type="button" class="btn btn-default">打印订单</button>-->                <!--<button type="button" class="btn btn-default">+ 新增订货单</button>-->                <!--</div>-->            </div>            <!-- 筛选框 -->            <div id="term" class="panel-collapse collapse">                <div class="panel-body">                    <div class="row">                        <div class="col-md-3">                            <form class="form-horizontal">                                <div class="form-group"><!--                                     <label class="col-md-5">订单类型</label>                                    <div class="col-md-7">                                        <select class="form-control" ng-model="order_state"	                                    ng-init="order_state = 'all'">                                            <option value="all">全部</option>                                            <option value="send">已完成</option>                                            <option value="pay">待付款</option>                                            <option value="get">待自提</option>                                        </select>                                    </div> -->                                </div>                                <div class="form-group">                                    <!-- <label class="col-md-5">评价状态</label>                                    <div class="col-md-7">/mnt/bbl/webapps/h5/app/order/order/appointmentOrder                                        <select class="form-control">                                            <option value="">全部</option>                                            <option value="">已评价</option>                                            <option value="">待评价</option>                                        </select>                                    </div> -->                                </div>                            </form>                        </div>                        <div class="col-md-6">                            <form class="form-horizontal">                                <div class="form-group form-inline">                                    <label class="col-md-3 text-right">提货时间</label>                                    <div class="col-md-9">                                         <input id="start_hour" type="text" class="form-control inputWidth"  readonly="readonly" placeholder="提货时间"                                          name="from" ng-model="filter['SHOP_ORDER.GET_PRD_DATETIME']" data-date-format="yyyy-mm-dd">                                       <!--  --                                        <input type="text" class="form-control" placeholder="结束时间"> -->                                    </div>                                </div>                                <div class="form-group">                                   <!--  <label class="col-md-3 text-right">交易状态</label>                                    <div class="col-md-4">                                        <select class="form-control">                                            <option value="">全部</option>                                            <option value="">已支付</option>                                            <option value="">待支付</option>                                        </select>                                    </div> -->                                </div>                            </form>                        </div>                        <div class="col-md-3">                            <form class="form-horizontal">                                <!-- <div class="form-group">                                    <label for="name" class="col-md-5">卖家昵称</label>                                    <div class="col-md-7">                                        <input type="text" class="form-group" id="name">                                    </div>                                </div> -->                               <!--  <div class="form-group">                                    <label class="col-md-5">售后服务</label>                                    <div class="col-md-7">                                        <select class="form-control">                                            <option value="">全部</option>                                            <option value="">退货</option>                                            <option value="">换货</option>                                        </select>                                    </div>                                </div> -->                            </form>                        </div>                    </div>                    <div class="text-center">                         <!--                         <button type="submit" ng-click="searchOrderbyInfo()" class="btn btn-info btn-outline class">确定</button> -->                    </div>                </div>            </div>            <div class="orders">                <div>                    <div class="orderItem " ng-repeat=" order in orderList"                         ng-class="{true:'unfinished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1)||(order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1))]">                        <div class="imformation orderUnpayed">                            <div class="unpayed"                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==1">                                等待付款                            </div>                            <div class="unpayed"                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1)||(order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1))">                                <span ng-if="order['SHOP_ORDER.NEED_PAY']==-1"> 已预约</span>                                <span                                    ng-if="order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2"> 已预约，并付款，待自提</span>                                <span                                    ng-if="order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==1"> 已发货，待收货</span>                                <span                                    ng-if="order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==-1"> 待发货</span>                            </div>                            <div class="payed"                                 ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1)||(order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1))">                                已完成                            </div>                            <div class="unpayed" ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">已取消                            </div>                            <div class="row">                                <div class="details col-md-8">                                    <span class="time"                                          ng-bind="order['SHOP_ORDER.DATETIME_ADD']"> | </span>                                    <span                                        class="name"> {{order['SHOP_ORDER.REC_CONTACT']}} | </span>                  <span class="orderNum"                        ng-bind="'订单号：'+order['SHOP_ORDER.ORDER_NUM']"> | </span><span                                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='WEIXIN'" class="payWay"> 微信支付 | </span>                                    <span                                        ng-if="order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'"                                        class="payWay"> 会员卡支付 | </span><span                                    ng-if="order['SHOP_ORDER.PAY_TYPE']=='ALI'" class="payWay"> 支付宝支付 | </span>                                    <span ng-bind="order['SHOP_ORDER.SHOP_NAME']"></span>                                </div>                                <div class="sum col-md-4 text-right">                                    <p> 订单金额：<span                                        ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>                                        元                                    </p>                                </div>                            </div>                        </div>                        <div class="product">                            <div class="productList pull-left">                                <ul class="list-unstyled">                                    <li ng-repeat=" detail in order.details">                                        <div class="productInfo">                                            <img class="pull-left"                                                 ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}"                                                 style="width: 80px;height: 80px;">                                            <p class="itemName"                                               ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']"></p>                                            <p class="itemPrice"><span                                                ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'"></span>                                                元 x                                                <span class="itemNum"                                                      ng-bind="detail['SHOP_ORDER_INFO.COUNT']"></span>                                            </p>                                            <p class="itemColor"                                               ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']"></p>                                        </div>                                    </li>                                </ul>                            </div>                            <div class="buttons pull-right">                                <button class="btn btn-detail btn-block"                                        ng-click="toDetail(order['SHOP_ORDER.ID'])">                                    订单详情                                </button>                            </div>                        </div>                    </div>                </div>            </div>            <div page-bar                 filter-obj="filter"                 url="/shop/order/queryAll"                 callback="getOrder(response)">            </div>        </div>    </div></div></div></div>

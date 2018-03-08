@@ -41,7 +41,24 @@ angular.module('AndSell.Main').controller('member_member_memberData_Controller',
         //取消事件
         $state.go('member/member/memberList');
     });
-
+    var date = new Date();
+	$('#start_hour').datetimepicker({
+		 	minView: "month",
+       language: 'zh-CN',
+       autoclose: true,
+       todayHighlight: true,
+       weekStart: 1,
+       startView: 2,
+       format: 'yyyy-mm-dd',
+       initialDate:date,
+       todayBtn: 'linked'
+   }).on('changeDate',function(e){
+   	var startTime = e.date;
+   	$('#end_hour').datetimepicker('setStartDate',startTime);
+//   	var endTime = getLastDayOdMonth(e.date.getFullYear(),e.date.getMonth()+1);
+//   	$('#end_hour').datetimepicker('setEndDate',endTime); 
+   }).on('show',function(){
+   });
     $scope.onSubmit = function () {
         if ($scope.memberData['MEMBER_INFO.TRUE_NAME'] == undefined) {
             modalFactory.showAlert("真实姓名不能为空。");

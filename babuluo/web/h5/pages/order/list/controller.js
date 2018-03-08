@@ -20,7 +20,7 @@ angular.module('AndSell.H5.Main').controller('pages_order_list_Controller', func
 
         $scope.state = type;
         $scope.filter = {
-            PAGE_SIZE: 5, PN: 1, 'SHOP_ORDER.TYPE': '3,5'
+            PAGE_SIZE: 5, PN: 1, 'SHOP_ORDER.TYPE': '3,4,5'
         };
         if (type == 'all') {
             //全部订单
