@@ -254,7 +254,6 @@ angular.module('AndSell.H5.Main').controller('pages_order_addAddress_Controller'
 			console.log(GetDateStr(Number(minDay)-endDay));
 			$scope.remark=GetDateStr(Number(minDay)-endDay);
             dayList.push(GetDateStr(Number(minDay) ) + timeRange);//'   08:00-19:00');
-			console.log(dayList);
         }
 
         $("#datetime-picker").picker({
