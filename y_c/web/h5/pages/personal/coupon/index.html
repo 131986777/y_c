@@ -1,0 +1,90 @@
+<body>
+<div class="coupon-list">
+    <span ng-if="memberCouponList.length==0" class="no-coupon">你暂无优惠券！</span>
+    <div class="coupon-wrap" ng-repeat="(key,item) in memberCouponList">
+        <div class="coupon-head">
+            <div class="coupon-info">
+                <p class="couponType">{{item['MEMBER_COUPON.COUPON_INFO']['COUPON.NAME']}}</p>
+                <p class="couponTime" ng-if="item['MEMBER_COUPON.EXPIRED_TIME']!=null">有效期至<span>{{item['MEMBER_COUPON.EXPIRED_TIME']|FormatAllDate}}</span></span>
+                </p>
+                <div class="coupon-value">
+                      <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                                    <span>{{(item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/100).toFixed(2)}}</span>
+                                    <span class='valueType'>元</span>
+                                </span>
+                    <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                                    <span>{{(item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE']/10).toFixed(1)}}</span>
+                                    <span class='valueType'>折</span>
+
+                    </span>
+                </div>
+            </div>
+        </div> <!-- END coupon-head -->
+
+        <div class="coupon-detail">
+            <div class="coupon-desc">
+                <p class="limit-time"
+                   ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']!='0,0,0,0,0,0,0'">
+                    <span>限定时间(每周</span>
+                    <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[0]==1">一</span>
+                    <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[1]==2">二</span>
+                    <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[2]==3">三</span>
+                    <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[3]==4">四</span>
+                    <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[4]==5">五</span>
+                    <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[5]==6">六</span>
+                    <span ng-if="parseArray(item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE'])[6]==7">日</span>
+                    <span>)</span>
+                </p>
+                <p class="limit-time"
+                   ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.USE_TIME_CYCLE']=='0,0,0,0,0,0,0'">
+                    <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE'] !=3">正价商品可用</span>
+                    <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.TYPE'] ==3">线上线下可用</span>
+                </p>
+                <p class="limit-class">
+                    <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==1">特定商品使用
+                        （{{detailData(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}}）
+                        <!-- <a data-toggle="modal" data-target="#detail" class="btn sbold green" ng-click="detailClick(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])">
+                           查看详情
+                         </a>-->
+                                </span>
+                    <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==2">特定商品类别使用
+                               （{{detailData(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}}）
+                    </span>
+                    <span ng-if="item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_TYPE']==3">特定商品标签使用
+                                （{{detailData(item['MEMBER_COUPON.COUPON_INFO']['COUPON.TARGET_OBJ_INFO'])}}）
+                                </span>
+                </p>
+                <p class="couponCount">
+                    满<span style="color:rgb(255,151,50)">{{(item['MEMBER_COUPON.COUPON_INFO']['COUPON.RULE_INFO']['COUPON_RULE.CONDITION_PRICE']/100).toFixed(2)}}</span>元可使用
+
+                    <span class="pull-right">已领{{item['NUM_COUPON']}}张</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="coupon-wrap">
+         <div class="coupon-head head-disabled">
+             <div class="coupon-info">
+                 <p class="couponType">周末优惠</p>
+                 <p class="couponTime">有效期至2017-2-18 18:55:00</p>
+                 <div class="coupon-value">
+                     <span>40</span>
+                     <span class="valueType">元</span>
+                 </div>
+             </div>
+         </div> &lt;!&ndash; END coupon-head &ndash;&gt;
+
+         <div class="coupon-detail detail-disabled">
+             <div class="coupon-desc">
+                 <p class="limit-time">限定时间（每周<span>一 四</span>）</p>
+                 <p class="limit-class">限定<span>商品类别</span>使用</p>
+                 <p class="couponCount">(剩余1000张)
+                     <a class="pull-right" style="color:rgb(255,151,50)">立即领取</a>
+                 </p>
+                 <div class="coupon-state"></div>
+             </div>
+         </div>
+     </div>-->
+</div>
+
+

@@ -1,0 +1,70 @@
+<div class="page-content">
+        <div class="table-toolbar">
+                <!-- BEGIN 导航标签 -->
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a ui-sref="member/member/memberInfo({id:memberId})"> 客户信息 </a>
+                    </li>
+                    <li>
+                        <a ui-sref="member/member/memberData({id:memberId})">
+                            资料 </a>
+                    </li>
+                    <li class="active">
+                        <a> 账户 </a>
+                    </li>
+                    <li>
+                        <a ui-sref="member/member/memberAddress({id:memberId})"> 收件地址 </a>
+                    </li>
+                    <li>
+                        <a ui-sref="member/member/memberCard({id:memberId})"> 会员卡 </a>
+                    </li>
+                </ul>
+                <!-- END 导航标签 -->
+        </div>
+        <form class="form-horizontal" novalidate="novalidate">
+            <h4>账户</h4>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">余额</label>
+                <div class="col-sm-2">
+                    <label class="control-label">可用：</label>
+                    <label class="control-label" ng-bind="account['MEMBER_ACCOUNT.BALANCE'] | currency : '￥'"></label>
+                </div>
+                <div class="col-sm-2">
+                    <label class="control-label">冻结：</label>
+                    <label class="control-label" ng-bind="account['MEMBER_ACCOUNT.FREEZE_BALANCE'] | currency : '￥'"></label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">积分</label>
+                <div class="col-sm-2">
+                    <label class="control-label">可用：</label>
+                    <label class="control-label" ng-bind="account['MEMBER_ACCOUNT.POINT']"></label>
+                </div>
+                <div class="col-sm-2">
+                    <label class="control-label">冻结：</label>
+                    <label class="control-label" ng-bind="account['MEMBER_ACCOUNT.FREEZE_POINT']"></label>
+                </div>
+            </div>
+                <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">分销收入</label>
+                <div class="col-sm-2">
+                    <label class="control-label">可用：</label>
+                    <label class="control-label" ng-bind="account['MEMBER_ACCOUNT.DIST_POINT']| currency : '￥'"></label>
+                </div>
+               
+             
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-1 right form-input-title">分组</label>
+                <div class="col-sm-4">
+                    <select ng-model="member['MEMBER.GROUP_ID']"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option"
+                                ng-repeat="value in groupList"
+                                ng-bind="value['MEMBER_CODE_GROUP.NAME']"
+                                value="{{value['MEMBER_CODE_GROUP.ID']}}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </form>

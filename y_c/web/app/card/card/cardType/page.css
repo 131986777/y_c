@@ -1,0 +1,56 @@
+.card {
+    border-radius: 10px;
+    color: #fff;
+    position: relative;
+    margin: 20px 44px 0px;
+}
+.cardList-wrap{
+    overflow:hidden;
+    width: 1020px;
+    margin: 0 auto;
+}
+.balance {
+    line-height: 138px;
+    text-align: center;
+    font-size: 38px;
+    position: relative;
+}
+
+.cardTitle {
+    padding: 14px 20px 0 20px;
+    font-size: 22px;
+}
+
+.cardFooter {
+    padding: 0 20px 5px 20px;
+    font-size: 14px;
+}
+
+.cardFooter a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.color {
+    width: 36px;
+    height: 36px;
+    float: left;
+    margin-right: 3px;
+    margin-top: 3px;
+}
+
+.center-block {
+    overflow: hidden;
+
+}
+
+.cardDesc {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.nav li {
+    margin-right: 5px;
+}
+

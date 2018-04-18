@@ -1,0 +1,67 @@
+<div class="bg-grey product-detail-page group-wrap" ng-init="initPage()">
+    <!-- BEGIN 商品详情图片 -->
+    <!--<div class="" style="background-color: #fff;">-->
+    <!--<div class="weui_cell" style="width: 100%;">-->
+    <!--<div class="weui_cell_fr"></div>-->
+    <!--<div style="font-size: 16px;margin-left: 20px;" href="#/pages/order/list/all">-->
+    <!--我的团购-->
+    <!--</div>-->
+
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="weui_cells" style="margin-bottom: 10px;" ng-repeat="(index,gbp) in gbmRes">
+        <div class="weui_cell" ui-sref="pages/order/detail({'ORDER_ID':gbp['ORDER_ID']})">
+            <div class="basic-info weui_cell_bd weui_cell_primary">
+                <img ng-src="http://bbl-upload.oss-cn-shanghai.aliyuncs.com/{{groupPrdMap[gbp['SKU_ID']]['SHOP_PRODUCT.CMP']}}"
+                     alt="" class="groupPic">
+                <div class="left-des">
+                    <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'FAIL'">团购失败</span>
+                    <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'IN'">团购进行中</span>
+                    <span class="left-sep" ng-if="gbp['GBG_STAT'] == 'DONE'">团购成功</span>
+                    <h4 class="name">
+                        <span class="own-protitle"
+                              ng-bind="groupPrdMap[gbp['SKU_ID']]['SHOP_PRODUCT.PRD_NAME']"></span>
+                    </h4>
+
+                    <div class="groupline"></div>
+                    <p class="left-time">剩余:
+                        <span id="gbpHour{{index}}">0</span>:
+                        <span id="gbpMin{{index}}">0</span>:
+                        <span id="gbpSec{{index}}">0</span>
+                        <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'WAIT_PAY'">待支付</span>
+                        <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'HAVE_PAY'">已支付</span>
+                        <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'IS_CANCEL'">已取消</span>
+                        <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'IN_REFUND'">退款中</span>
+                        <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'HAVE_REFUND'">已退款</span>
+                        <span class="left-sep" ng-if="gbp['MONEY_STATE'] == 'OVER_TIME'">超时取消</span>
+                        <span class="del-line" style="font-size: 10px;" ng-if="gbp['SURP_SIZE'] > 0">还差{{gbp['SURP_SIZE']}}人成团</span>
+                        <span class="del-line" style="font-size: 10px;" ng-if="gbp['SURP_SIZE'] == 0">已成团</span>
+                    </p>
+                    <p class="money group-money" style="float: left;font-size: 13px;">
+                        <!--现价-->
+                        团购价
+                        <span style="font-size:16px;"
+                              ng-bind="gbp['GROUP_PRICE'] |currency : '￥'"></span>
+                        <!--原价-->
+                        <!--ng-if="sku!=undefined&&sku['isSale']"-->
+                        <span class="del-line" style="font-size: 10px;"
+                              ng-bind="groupPrdMap[gbp['SKU_ID']]['SHOP_PRODUCT_SKU.REAL_PRICES'] |currency : '￥'"></span>
+
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--选择页面遮罩-->
+    <div class="chose-shop" ng-if="STORE_ID==0">
+        <i class="icon-shop"></i>
+        <span>请先选择门店，即可在线购买！</span>
+        <button class="btn btn-default btn-chose" ng-click="toShop()">立即选择</button>
+    </div>
+
+</div>

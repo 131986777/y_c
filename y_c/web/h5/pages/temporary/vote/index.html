@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>云厨年货节</title>
+		<script src="../temporary/vote/js/rem.js"></script>
+		<!--<script src="js/rem.js"></script>-->
+		<!--<script src=".../temporary/ycnhj/jquery.min.js"></script>-->
+	</head>
+	<style>
+		body,
+		html,
+		img {
+			margin: 0;
+			padding: 0;
+		}
+		
+		.backs {
+			width: 100%;
+			height: 126.15rem;
+			background: url(../temporary/vote/img.jpg);
+			background-size: 100% 100%;
+			position: relative;
+		}
+		
+		.empty {
+			width: 100%;
+			height: 10.65%;
+		}
+		
+		.shop {
+			width: 100%;
+			height: 3.19%;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			text-align: right;
+		}
+		
+		.check-box {
+			background: url(../temporary/vote/wxz.png);
+			background-size: 100%;
+			width: 30px;
+			height: 30px;
+			margin-right: 8%;
+		}
+		
+		.checks {
+			background: url(../temporary/vote/xz.png);
+			background-size: 100%;
+		}
+		
+		.submit {
+			width: 100%;
+			height: 3.19%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: right;
+		}
+		
+		.submit-bth {
+			width: 38%;
+			height: 54%;
+
+		}
+	</style>
+
+	<body>
+		<div id="wrapper">
+			<!--<img src="../temporary/ycnhjs/img.jpg" style="width: 100%;"/>-->
+			<div style="position: relative;" class="bonus">
+				<div class="backs">
+					<div class="empty"></div>
+					<div class="shop">
+						<div class="check-box" name='梅汁排骨'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='苏式熏鱼'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='秘制口水鸡'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='五香酱牛肉'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='椒香口条'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='金牌酱猪手'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='南乳凤爪'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='盐水鹅翅'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='香卤鹌鹑蛋'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='四喜烤麸'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='扬州狮子头'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='红烧带鱼'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='苏式红烧肉'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='红烧鱼块'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='云厨八珍香鸡'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='鸡汁素鸡'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='蚝皇香菇'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='桂花糖芋苗'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='金陵盐水鸭'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='桂花糯米藕'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='酒酿赤豆元宵'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='葱油黄金鸡'></div>
+					</div>
+					<div class="shop">
+ 						<div class="check-box" name='梅干菜烧笋干'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='红烧牛肉'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='咸鱼烧肉'></div>
+					</div>
+					<div class="shop">
+						<div class="check-box" name='香滋松板肉'></div>
+					</div>
+					<div class="submit">
+						<div class="submit-bth"  ng-click="luck()"></div>
+					</div>
+
+				</div>
+			</div>
+
+		</div>
+
+		</div>
+
+	</body>
+	<script>
+		
+		
+		var shops=''
+		$('.shop').click(function() {
+			$('.shop').find('.check-box').removeClass('checks')
+			console.log($(this).find('.check-box'))
+			$(this).find('.check-box').addClass('checks')
+			shops=$(this).find('.check-box').attr('name')
+			console.log(shops)
+		})
+		
+	</script>
+
+</html>

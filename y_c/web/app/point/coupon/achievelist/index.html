@@ -1,0 +1,70 @@
+<div class="page-content" ng-init="initData()">
+    <div class="table-content">
+        <div class="table-toolbar" style="padding:10px 0;">
+            <div class="form-inline row">
+                <div class="col-md-6">
+                    <div class="form-group">
+	                     兑换时间: 	<input  class="form-control" id="startDate" type="text" ng-model="filter['MEMBER_COUPON.START_ACHIEVE_DATETIME']" data-date-format="yyyy-mm-dd hh:ii:ss" >
+	                     ~<input  class="form-control " id="endDate" type="text" ng-model="filter['MEMBER_COUPON.END_ACHIEVE_DATETIME']" data-date-format="yyyy-mm-dd hh:ii:ss" >
+                	</div>
+                </div>
+                <div class="col-md-1">
+         			<div class="form-group">
+	                	<select ng-model="filter['MEMBER_COUPON.IS_DEL']"
+	                        ng-init="filter['MEMBER_COUPON.IS_DEL'] = 'null'"
+	                        class="nya-bs-select form-control">
+		                        <option class="nya-bs-option" value="null">全部状态</option>
+		                        <option class="nya-bs-option" value="-1">未兑换</option>
+		                        <option class="nya-bs-option" value="1">已兑换</option>
+		                </select>
+	            	</div>
+	            </div>
+                <div class="col-md-4">
+	            	<div class="form-group">
+                        <input type="text" class="form-control" id="name" placeholder="姓名/手机号"
+                               ng-model="queryContent">
+                               <button type="submit" class="btn btn-default" ng-click="search()"><span
+                    class="glyphicon glyphicon-search"></span></button>
+                    </div>
+                    <!-- <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right"
+                                ng-click="query()">查询
+                        </button>
+                    </div> -->
+<!--                     <label class="control-label">筛选：</label> --> 
+                   
+                </div>
+            </div>
+         </div>
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            	<th class="text-center" ng-bind="name" ng-repeat='name in TITLE' ></th>
+            </thead>
+            <tbody ng-repeat="coupon in offlineCouponList">
+	            <tr>
+	            	<td ng-bind="coupon['COUPON.NAME']" class="text-center" style="vertical-align: middle;"></td>
+	            	<td ng-bind="coupon['MEMBER_INFO.TRUE_NAME']" class="text-center" style="vertical-align: middle;"></td>
+	            	<td ng-bind="coupon['MEMBER.MOBILE']" class="text-center" style="vertical-align: middle;"></td>
+	            	<td class="text-center" style="vertical-align: middle;">
+	            		<span ng-bind="coupon['MEMBER_COUPON.EXPIRED_TIME'] | FormatAllDate"></span>
+	            	</td>
+	            	<td ng-bind="coupon['MEMBER_COUPON.ACHIEVE_DATETIME'] | FormatAllDate" class="text-center" style="vertical-align: middle;"></td>
+	            	<td class="text-center" style="vertical-align: middle;">
+	            		<element ng-switch="coupon['MEMBER_COUPON.IS_DEL']">
+	                		<element ng-switch-when="-1"><span class="label label-warning">未兑换</span></element>
+	                		<element ng-switch-when="1"><span class="label label-success">已兑换</span></element>
+	                	</element>
+	            	</td>
+	                <td class="text-center">
+	                	<button class="btn btn-default"  ng-if="coupon['MEMBER_COUPON.IS_DEL']== -1" ng-click="changeState(coupon['MEMBER_COUPON.ID'],coupon['MEMBER_INFO.TRUE_NAME'])">确认兑换</button>
+	                </td>
+	            </tr>
+            </tbody>
+        </table>
+        <div page-bar
+             filter-obj="filter"
+             url="/member/coupon/getCouponListByCouponId"
+             callback="bindData(response)">
+        </div>
+    </div>
+</div>

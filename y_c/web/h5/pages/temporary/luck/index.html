@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>云厨年货节</title>
+		<script src="../temporary/luck/js/rem.js"></script>
+		<!--<script src="js/rem.js"></script>-->
+		<!--<script src=".../temporary/ycnhj/jquery.min.js"></script>-->
+	</head>
+	<style>
+		body,
+		html,
+		img {
+			margin: 0;
+			padding: 0;
+		}
+		
+		body:after {
+			content: "";
+			display: block;
+			position: absolute;
+			background: url("../temporary/vote/xz.png") no-repeat -10000px width: 0;
+			height: 0
+		}
+		
+		.backs {
+			width: 100%;
+			height: 32.82rem;
+			background: url(../temporary/luck/backs.jpg);
+			background-size: 100% 100%;
+			position: relative;
+		}
+		
+		.empty {
+			width: 100%;
+			height: 10.65%;
+		}
+		
+		.shop {
+			width: 100%;
+			height: 3.19%;
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
+			text-align: right;
+		}
+		
+		.check-box {
+			background: url(../temporary/vote/wxz.png);
+			background-size: 100%;
+			width: 30px;
+			height: 30px;
+			margin-right: 8%;
+		}
+		
+		.checks {
+			background: url(../temporary/vote/xz.png);
+			background-size: 100%;
+		}
+		
+		.submit {
+			width: 100%;
+			height: 3.19%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			text-align: right;
+		}
+		
+		.submit-bth {
+			width: 38%;
+			height: 54%;
+			background: yellow;
+		}
+		
+		.lottery {
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.9);
+			position: absolute;
+			z-index: 101;
+			top: 0;
+			left: 0;
+		}
+		
+		@keyframes tada {
+			from {
+				transform: scale3d(1, 1, 1);
+			}
+			10%,
+			20% {
+				transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+			}
+			30%,
+			50%,
+			70%,
+			90% {
+				transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+			}
+			40%,
+			60%,
+			80% {
+				transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+			}
+			to {
+				transform: scale3d(1, 1, 1);
+			}
+		}
+		
+		.lotteryStart {
+			animation: tada 1s forwards;
+		}
+	</style>
+
+	<body>
+		<div id="wrapper">
+			<!--<img src="../temporary/luck/backs.jpg" style="width: 100%;"/>-->
+			<div style="position: relative;" class="bonus">
+				<div class="backs">
+					<div style="position: absolute; width: 50%;height: 10%;top: 74%;left: 25%;" class="bths"></div>
+				</div>
+
+			</div>
+
+		</div>
+		<div class="lottery" style="text-align: center;display: none;">
+			<div style="position: relative; width: 100%;height: 100%;">
+				<div style="width: 60%;display: inline-block;">
+					<img src="../temporary/luck/cj.png" style="width: 100%;    margin-top: 2rem;" class=" cjs"></img_src>
+					<img src="../temporary/luck/bt.png" style="width: 100%;    margin-top: 2rem;"></img_src>
+				</div>
+			</div>
+		</div>
+
+		</div>
+
+	</body>
+	<script>
+		function getCookie(name) {
+			var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");　　
+			return(arr = document.cookie.match(reg)) ? unescape(arr[2]) : null;
+		}
+
+		function ajaxPost(url, data, fnSucceed, fnFail, fnLoading) {
+			$.ajax({
+				url: url,
+				datatype: 'json',
+				type: 'get',
+				async: false,
+				data: data,
+				success: function(result) {
+					fnSucceed(result);
+				}
+			});
+
+		}
+		$('.bths').click(function() {
+
+			$('.lottery').show()
+		})
+		var kt = 1
+		$('.cjs').click(function() {
+			if(kt > 1) {
+				return
+			}
+
+			kt = kt + 1
+
+			$('.cjs').addClass("lotteryStart")
+
+			setTimeout(function() {
+				var obj
+				obj = {}
+				obj['VOTE_PRODUCT.user_id'] = getCookie('ANDSELLID');
+				ajaxPost('http://app.bblycyz.com/AndSell/bubu/vote/product/addvote', obj, function(res) {
+					if(res.code == 0) {
+						alert(res.extraData.msg)
+					} else {
+						if(res.msg == 'Index: 0, Size: 0') {
+							alert('请先投票再来参与')
+						} else {
+							alert(res.msg)
+
+						}
+
+					}
+				})
+					$('.lottery').css('display', 'none')
+					$('.cjs').removeClass("lotteryStart")
+		
+		},1000)
+			
+			})
+	</script>
+
+</html>

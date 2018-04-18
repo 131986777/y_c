@@ -1,0 +1,30 @@
+<div class="page-content">
+        <div class="table-toolbar">
+                <!-- BEGIN 导航标签 -->
+                <ul class="nav nav-tabs">
+                    <li>
+                        <a ui-sref="member/member/memberInfo({id:memberId})"> 客户信息 </a>
+                    </li>
+                    <li>
+                        <a ui-sref="member/member/memberData({id:memberId})"> 资料 </a>
+                    </li>
+                    <li>
+                        <a ui-sref="member/member/memberAccount({id:memberId})"> 账户 </a>
+                    </li>
+
+                    <li class="active">
+                        <a> 收件地址 </a>
+                    </li>
+                    <li>
+                        <a ui-sref="member/member/memberCard({id:memberId})"> 会员卡 </a>
+                    </li>
+                </ul>
+                <!-- END 导航标签 -->
+            <div ng-repeat="item in addressList|orderBy:'MEMBER_ADDRESS.IS_DEFAULT':true">
+                <!--<input ng-if="item['MEMBER_ADDRESS.IS_DEFAULT']==1" type="checkbox" checked="checked" disabled/>-->
+                <label>{{item['MEMBER_ADDRESS.ADDR_GUO']+item['MEMBER_ADDRESS.ADDR_SHENG']+item['MEMBER_ADDRESS.ADDR_SHI']+item['MEMBER_ADDRESS.ADDR_XIAN']+item['MEMBER_ADDRESS.ADDR_QU']+item['MEMBER_ADDRESS.ADDR']+"
+                    "+item['MEMBER_ADDRESS.ZIP_CODE']}}</label>&nbsp;<span ng-if="item['MEMBER_ADDRESS.IS_DEFAULT']==1">(默认地址)</span><br>
+                <label>{{item['MEMBER_ADDRESS.NAME']}}&nbsp;&nbsp;{{item['MEMBER_ADDRESS.MOBILE']}}</label>
+            </div>
+        </div>
+</div>

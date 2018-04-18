@@ -1,0 +1,75 @@
+<div class="review-page order-add bg-grey nav-bottom">
+<div class="product-list" ng-init="initData()">
+    <div class="review-content" ng-repeat="detail in orderDetailList">
+        <!-- BEGIN 商品信息-->
+        <div class="product-wrap weui_cell">
+            <div class="product-img-wrap weui_cell_hd">
+                    <img ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}" class="product-img">
+            </div>
+            <div class="content weui_cell_bd weui_cell_primary">
+                <h5 class="product-name" ng-bind="detail['SHOP_ORDER_INFO.PRD_NAME']">
+                    <!--美国无籽黑提无籽黑提美国无籽黑提无籽黑提-->
+                </h5>
+                <p class="product-cls" ng-bind="detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']">
+                    <!--规格:100g-->
+                </p>
+                <p class="product-cls">
+                    <!--编号：101005808-->
+                </p>
+            </div>
+            <div class="ext weui_cell_ft">
+                <p class="product-money" ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM'] | currency : '￥'">
+                    <!--￥96.00-->
+                </p>
+                <p class="product-num" ng-bind="'X '+detail['SHOP_ORDER_INFO.COUNT']">
+                    <!--&times;2-->
+                </p>
+            </div>
+        </div>
+        <!-- END 商品信息-->
+        <!-- BEGIN 评论 -->
+        <div class="review-wrap">
+            <div class="stars">
+                <h5>满意度</h5>
+                <div class="star-bg">
+
+                    <input id="starScore1_{{$index}}" type="radio" class="score score-1" value="1" ng-model="star[$index]"/>
+                    <label for="starScore1_{{$index}}" class="star star-1"></label>
+
+                    <input id="starScore2_{{$index}}" type="radio" class="score score-2" value="2" mg-model="star[$index]"/>
+                    <label for="starScore2_{{$index}}" class="star star-2"></label>
+
+                    <input id="starScore3_{{$index}}" type="radio" class="score score-3" value="3" ng-model="star[$index]"/>
+                    <label for="starScore3_{{$index}}" class="star star-3"></label>
+
+                    <input id="starScore4_{{$index}}" type="radio" class="score score-4" value="4" ng-model="star[$index]"/>
+                    <label for="starScore4_{{$index}}" class="star star-4"></label>
+
+                    <input id="starScore5_{{$index}}" type="radio" class="score score-5" value="5" ng-model="star[$index]"/>
+                    <label for="starScore5_{{$index}}" class="star star-5"></label>
+
+                </div>
+                <h5>评价</h5>
+                <textarea rows="10" placeholder="输入您对商品的评价~" ng-model="evaluate[$index]"></textarea>
+            </div>
+        
+        </div>
+
+    </div>
+
+</div>
+<div class="payment-wrap action-bar-wrap">
+    <div class="action-bar border-top">
+        <div class="payment-info cell" ng-init="flag='1'">
+            <p class="sale" ng-click="clickIn()">
+                <i class="icon icon-checked pull-left" ng-show="flag=='1'"></i>
+                <i class="icon pull-left" ng-show="flag=='-1'"></i>
+                匿名评价
+            </p>
+        </div>
+        <button class="payment-check"  ng-click="commitData()">
+            发表评论
+        </button>
+    </div>
+</div>
+</div>

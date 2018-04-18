@@ -1,0 +1,102 @@
+<div class="order-address" ng-init="initData()">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="weui_cells weui_cells_form">
+                <div class="head bg-grey">联系人</div>
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">收货人：</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" type="text"
+                               ng-model="man" placeholder="请输入收货人的姓名">
+                    </div>
+                </div>
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">联系方式：</label>
+                    </div>
+
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" type="number"
+                               ng-model="phone" placeholder="请输入联系方式">
+                    </div>
+                </div>
+                <div class="head bg-grey">详细信息</div>
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">提货方式：</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <select class="weui_select" ng-model="addressType">
+                            <!--<option value="0">提货方式</option>-->
+                            <option value="3">门店自提</option>
+                            <!-- <option value="1" ng-if="fromType=='SECKILL'">快递收货</option> -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="weui_cell" ng-show="addressType == 3">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">所在门店：</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <div class="store-name weui_cell weui_cell_select"
+                        >
+                            <div class="weui_cell_bd weui_cell_primary">
+                                <select class="weui_select">
+                                    <option selected value="0">{{shop}}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="weui_cell" ng-show="addressType == 1">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">所在地区：</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary" ng-init="area='江苏省 南京市 '">
+                        <input class="weui_input" type="text" ng-model="area"
+                               style="margin-left: 15px"
+                               placeholder="请选择所在地区">
+                    </div>
+                </div>
+
+                <div class="weui_cell" ng-show="addressType == 1">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">详细地址：</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" type="text" style="margin-left: 15px"
+                               ng-model="address"
+                               placeholder="街道、楼牌号等">
+                    </div>
+                </div>
+
+
+                <div class="weui_cell" ng-show="addressType == 3">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">提货时间：</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="datetime-picker weui_input" type="text"
+                               id="datetime-picker" style="margin-left: 15px"
+                               ng-model="date"
+                               value="" placeholder="请选择预计送达时间">
+                        <!--<p class="title"  ng-show="addressType == 3" style="margin-bottom: 0">-->
+                        <!--提货时间：<span ng-bind="date"></span>-->
+                        <!--</p>-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="weui_btn_area">
+            <button class="weui_btn" type="button" ng-click="submit()">提交</button>
+        </div>
+    </div>
+</div>
+</div>

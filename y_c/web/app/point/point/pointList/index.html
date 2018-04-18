@@ -1,0 +1,282 @@
+<div class="page-content" ng-init="initData()">
+    <div class="table-content">
+        <div class="table-operbar">
+            <div class="table-toolbar">
+                <div class="row">
+                    <div class="form-inline form-group">
+                        <div class="form-group col-md-4">
+                            <select ng-model="searchType"
+                                    ng-init="searchType='LOGIN_ID'"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value="LOGIN_ID">
+                                    账号
+                                </option>
+                                <option class="nya-bs-option" value="CARD_NO">
+                                    卡号
+                                </option>
+                            </select>
+                            <input type="text" class="form-control" ng-model="loginId">
+                            <button type="submit" class="btn btn-default" ng-click="queryPointByLoginId(loginId)">搜索
+                            </button>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label>筛选：</label>
+                            <select ng-model="filter['MEMBER_POINT_LIST.CHANGE_TYPE']"
+                                    ng-init="filter['MEMBER_POINT_LIST.CHANGE_TYPE']='null'"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value="null">
+                                    所有收支
+                                </option>
+                                <option class="nya-bs-option" value="decrease">
+                                    支出
+                                </option>
+                                <option class="nya-bs-option" value="increase">
+                                    收入
+                                </option>
+                            </select>
+                           <!--  <select ng-model="filter['MEMBER_POINT_LIST.SHOP_ID']"
+                                    ng-init="filter['MEMBER_POINT_LIST.SHOP_ID']='null'"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value="null">
+                                    所有门店
+                                </option>
+                                <option class="nya-bs-option" ng-repeat="shop in shopList"
+                                        ng-bind="shop['SHOP.SHOP_NAME']" value="{{shop['SHOP.SHOP_ID']}}">
+                                </option>
+                            </select> -->
+                             <select   id="shop" class="selectpicker show-tick form-control  col-md-6"  data-live-search="true"
+		               		  ng-model="filter['MEMBER_POINT_LIST.SHOP_ID']" 
+		               		  ng-init="filter['MEMBER_POINT_LIST.SHOP_ID']='null'">
+		               		 	<option value='null' selected="true">全部门店</option>
+		                    </select>	
+                            <select ng-model="timeType"
+                                    ng-init="timeType='all'"
+                                    ng-change="filterTime(timeType)"
+                                    class="nya-bs-select form-control">
+                                <option class="nya-bs-option" value="all">
+                                    所有时间
+                                </option>
+                                <option class="nya-bs-option" value="aim">
+                                    时间段内
+                                </option>
+                            </select>
+                            <div style="display:inline-block;margin:10px 0 0 36px" ng-show="timeType=='aim'"
+                                 data-date="10/11/2012"
+                                 language="zh-CN"
+                                 data-date-format="yyyy-mm-dd">
+                                <input id="start_hour" type="text" class="form-control " placeholder="起始时间"
+                                       name="from" ng-model="filter['MEMBER_POINT_LIST.ADD_DATETIME_FROM']"
+                                       data-date-format="yyyy/mm/dd hh:ii" style="margin-right: 10px"> 至
+                            </div>
+
+                            <div style="display: inline-block;margin: 10px 0 0 10px;" ng-show="timeType=='aim'"
+                                 data-date="10/11/2012"
+                                 language="zh-CN"
+                                 data-date-format="yyyy-mm-dd">
+                                <input id="end_hour" type="text" class="form-control " placeholder="截止时间"
+                                       name="to" ng-model="filter['MEMBER_POINT_LIST.ADD_DATETIME_TO']"
+                                       data-date-format="yyyy/mm/dd hh:ii">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <button type="button" class="btn btn-default pull-right"
+                                    ng-click="outPutQuery()">导出
+                            </button>
+                            <button type="button" ng-if="APP_ID_LIST.indexOf('@1160@')>=0" class="btn btn-default pull-right" data-toggle="modal"
+                                    data-target="#point"
+                                    ng-click=empty()>调整积分
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>会员编号</th>
+                    <th>手机号</th>
+                    <th>时间</th>
+                    <th>事件</th>
+                    <th>说明</th>
+                    <th>交易卡号</th>
+                    <th>操作门店</th>
+                    <th>操作员</th>
+                    <th> 类型</th>
+                    <th class="text-center">变更积分</th>
+                    <th class="text-center">剩余积分</th>
+                </tr>
+                </thead>
+
+                <tbody ng-cloak>
+                <tr ng-repeat='pointInfo in pointList'>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.USER_ID' ]"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.MEMBER_MOBILE']"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.ADD_DATETIME'] | FormatAllDate"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT']"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT_INTRO']"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.EVENT_CARD_NO']"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.SHOP']"></td>
+                    <td ng-bind="pointInfo['MEMBER_POINT_LIST.OPER_USER_ID']"></td>
+                    <td>
+                        <span style="color:red" ng-if="pointInfo['MEMBER_POINT_LIST.CHANGE_TYPE']=='decrease'">支出</span>
+                        <span style="color:green" ng-if="pointInfo['MEMBER_POINT_LIST.CHANGE_TYPE']=='increase'">收入</span>
+                    </td>
+                    <td class="text-center">
+                        <span style="color:black" ng-show="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']>0">{{pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']}}</span>
+                        <span style="color:red" ng-show="pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']<=0">{{pointInfo['MEMBER_POINT_LIST.CHANGE_POINT']}}</span>
+                    </td>
+                    <td class="text-center">
+                        <span style="color:black" ng-show="pointInfo['MEMBER_POINT_LIST.POINT']>0">{{pointInfo['MEMBER_POINT_LIST.POINT']}}</span>
+                        <span style="color:red" ng-show="pointInfo['MEMBER_POINT_LIST.POINT']<=0">{{pointInfo['MEMBER_POINT_LIST.POINT']}}</span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div page-bar
+             filter-obj="filter"
+             url="/member/point/queryAll"
+             callback="bindData(response)">
+        </div>
+    </div>
+    <!--BEGIN 修正-->
+    <div class="modal fade" id="point">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true"></button>
+                    <h4 class="modal-title">调整会员积分</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+                    <form class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 会员:
+                            </label>
+
+                            <div class="col-md-8 text-left form-inline">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="请输入会员登录ID" ng-model="memberId">
+                                </div>
+
+                                <!--调用根据ID查询用户信息的API：/member/member/getById-->
+                                <button type="submit" class="btn btn-default" ng-click="queryById(memberId)">查询</button>
+                                <span class="help-block"
+                                      ng-show="editForm.name.$error.required && !editForm.name.$pristine">
+                                         请先输入会员ID
+                                     </span>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 姓名:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="memberDetail['MEMBER.USER_NAME']"></h5>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 手机:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="memberDetail['MEMBER.MOBILE']"></h5>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 邮箱:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="memberDetail['MEMBER.EMAIL']"></h5>
+
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 当前积分:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="memberDetail['MEMBER.POINT']"></h5>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 调整类型:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <label class="radio-inline">
+                                    <input type="radio" name="types" value="1" ng-model="changeType"
+                                           ng-click="delete()"> 新增
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="types" value="0" ng-model="changeType"
+                                           ng-click="delete()"> 减少
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 调整数值:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control"
+                                       ng-model="modifyvalue"
+                                       ng-blur="getDynamicBala()"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 调整原因:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input name="compId" class="form-control" ng-model="introduction">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 调整后积分:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5>{{afterModify}}</h5>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-outline" ng-click="saveAccount()">确定
+                    </button>
+                    <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- END CONTENT -->

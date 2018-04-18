@@ -1,0 +1,12 @@
+.form-title{
+    padding:10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+}
+.radio,.checkbox{
+    display: inline-block;
+}
+.radio-title{
+    float: left;
+    width:180px;
+}

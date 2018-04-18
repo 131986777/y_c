@@ -1,0 +1,49 @@
+<div class="recharge">
+    <div class="weui_cells weui_cells_form">
+
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <label class="weui_label">当前金额:</label>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <span>{{balanceInfo[0]['MEMBER_ACCOUNT.BALANCE'] | currency : '￥'}}</span>
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <label class="weui_label">充值金额:</label>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <input type="number" class="weui_input"
+                       placeholder="请输入充值金额" ng-model="balanceInfo['CHANGE_VALUE']">
+            </div>
+        </div>
+        <div class="weui_cell">
+            <div class="weui_cell_hd">
+                <label class="weui_label">充值方式:</label>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                <span ng-init="addressType=0;">微信</span>
+                <!--<select class="weui_select" ng-model="addressType">-->
+                <!--<option value="0">微信</option>-->
+                <!--<option value="1">支付宝</option>-->
+                <!--</select>-->
+            </div>
+        </div>
+    </div>
+
+    <div class="reminder">
+        <p ng-if="eventList.length>0">感恩回馈，充值返送，{{eventContent}}（友情提醒：充值金额等于{{eventMoney}}方可返送）</p>
+        <!--<p>感恩回馈，充值返送，200送10，1000送150（友情提醒：充值金额需等于200、1000方可返送）</p>-->
+        <p></p>
+        <p>温馨提示：</p>
+        <p>1、充值成功后，余额可能存在延迟现象，一般1到5分钟内到账，如有问题，请咨询客服；</p>
+        <p>2、充值金额输入值不许是不小于10且不大于50000的正整数；</p>
+        <p>3、您只能用储蓄卡进行充值，如遇到任何支付问题可以查看在线支付帮助；</p>
+        <p>4、充值完成后，您可以进入账户充值记录页面进行查看余额充值状态。</p>
+    </div>
+
+    <div class="weui_btn_area">
+        <button class="weui_btn my-btn-default" type="submit" ng-click="updateBalance()">立即充值</button>
+    </div>
+</div>

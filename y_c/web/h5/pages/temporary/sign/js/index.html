@@ -1,0 +1,356 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>云厨一站会员年终调查</title>
+		<script src="../temporary/sign/js/rem.js"></script>
+	</head>
+
+	<style>
+		.row-content {
+			height: 100%;
+		}
+		
+		.ng-scope {
+			height: 100%;
+		}
+		
+		body,
+		html,
+		{
+			margin: 0;
+			padding: 0;
+		}
+		
+		body {
+			padding: 0;
+		}
+		
+		.calendar ul,
+		li {
+			margin: 0;
+			padding: 0;
+		}
+		
+		.calendar {
+			width: 12.5rem;
+			position: absolute;
+			top: 47.5%;
+			left: 16.2%;
+		}
+		
+		.package {
+			position: absolute;
+			height: 1rem;
+			/* background: yellow; */
+			top: 3%;
+			width: 2.5rem;
+			right: .2rem;
+			text-align: center;
+			line-height: 1rem;
+		}
+		
+		.sign {
+			width: 14.2rem;
+			position: absolute;
+			height: 3rem;
+			top: 82.5%;
+			left: 12.2%;
+			font-size: 20px;
+		}
+		
+		.exchange {
+			width: 2.9rem;
+			position: absolute;
+			height: 0.5rem;
+			top: 89%;
+			left: 12.2%;
+			font-size: 20px;
+			/*background: yellow;*/
+		}
+		
+		.calendar ul {
+			display: -webkit-flex;
+			display: flex;
+		}
+		
+		.calendar>ul>li {
+			list-style: none;
+			float: left;
+			width: 2.3rem;
+			height: 1.6rem;
+			text-align: center;
+			line-height: 1.6rem;
+			font-size: .7rem;
+		}
+		
+		.bg {
+			position: relative;
+		}
+		
+		.calendar {
+			font-size: 0.17rem;
+		}
+		
+		.zhe {
+			position: absolute;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			background: rgba(0, 0, 0, 0.7);
+			display: none;
+			z-index: 2;
+			opacity: 0;
+		}
+		
+		.sc {
+			width: 2.9rem;
+			position: absolute;
+			height: 0.5rem;
+			top: 29.5%;
+			left: 12.2%;
+			font-size: 20px;
+		}
+		
+		.day {
+			width: 1.8rem;
+			position: absolute;
+			height: 1.6rem;
+			top: 38.5%;
+			left: 47.2%;
+			font-size: 1.2rem;
+			line-height: 1.6rem;
+			text-align: center;
+		}
+		
+		.signS {
+			margin-top: 5rem;
+			/*display: none;*/
+		}
+		
+		.exchangeS {}
+		
+		.submit {
+			position: absolute;
+			width: 40%;
+			/*background: red;*/
+			top: 62.5%;
+			left: 30%;
+			height: 8%;
+			font-size: .15rem;
+		}
+		
+		.delete {
+			/* border-radius: 50%; */
+			text-align: center;
+			position: absolute;
+			/* line-height: 73%; */
+			width: 14%;
+			/* background: red; */
+			top: 18.5%;
+			left: 74%;
+			height: 8%;
+			font-size: .4rem;
+		}
+		
+		.phone {
+			border: 0;
+			position: absolute;
+			top: 35%;
+			left: 36%;
+			height: .18rem;
+			width: 1.4rem;
+			font-size: .2rem;
+		}
+		
+		.shop {
+			border: 0;
+			position: absolute;
+			top: 44.5%;
+			left: 40%;
+			height: 5%;
+			font-size: .15rem;
+		}
+		
+		.fade-enter-active,
+		.fade-leave-active {
+			transition: opacity .5s
+		}
+		
+		.img {
+			background: url(../temporary/sign/bg.jpg);
+			width: 100%;
+			height: 33.3rem;
+			background-size: 100% 100%;
+		}
+	</style>
+
+	<body>
+		<div class="bg">
+			<div class="img"></div>
+			<div class="calendar">
+				<ul>
+					<li></li>
+					<li class="xz">1</li>
+					<li class="xz">2</li>
+					<li class="xz">3</li>
+					<li class="xz">4</li>
+					<li class="xz">5</li>
+					<li class="xz">6</li>
+
+				</ul>
+				<ul>
+					<li class="xz">7</li>
+					<li class="xz">8</li>
+					<li class="xz">9</li>
+					<li class="xz">10</li>
+					<li class="xz">11</li>
+					<li class="xz">12</li>
+					<li class="xz">13</li>
+
+				</ul>
+				<ul>
+					<li class="xz">14</li>
+					<li class="xz">15</li>
+					<li class="xz">16</li>
+					<li class="xz">17</li>
+					<li class="xz">18</li>
+					<li class="xz">19</li>
+					<li class="xz">20</li>
+
+				</ul>
+				<ul>
+					<li class="xz">21</li>
+					<li class="xz">22</li>
+					<li class="xz">23</li>
+					<li class="xz">24</li>
+					<li class="xz">25</li>
+					<li class="xz">26</li>
+					<li class="xz">27</li>
+
+				</ul>
+				<ul>
+					<li class="xz">28</li>
+					<li class="xz">29</li>
+					<li class="xz">30</li>
+					<li class="xz">31</li>
+					<li></li>
+					<li></li>
+					<li></li>
+
+				</ul>
+			</div>
+			<div class="package" @click="package">
+
+			</div>
+			<div class="sign">
+
+			</div>
+			<div class="exchange" @click="exchange">
+
+			</div>
+			<div class="sc" @click="sc">
+
+			</div>
+			<div class='day'></div>
+			<div class="zhe">
+				<div class="signS" v-if="signS"> <img src="../temporary/sign/sucessful.png" width="100%" /></div>
+			</div>
+		</div>
+
+	</body>
+	<script>
+		function ajaxGet(url, func) {
+			$.ajax({
+				type: 'GET',
+				url: url,
+				async: false,
+				dataType: 'json',
+
+				success: function(result) {
+
+					func(result);
+				}
+			});
+		}
+
+		function ajaxPost(url, data, fnSucceed, fnFail, fnLoading) {
+			$.ajax({
+				url: url,
+				datatype: 'json',
+				type: 'get',
+				data: data,
+				success: function(result) {
+					fnSucceed(result);
+				}
+			});
+
+		}
+		var getcookie = function(name) {
+			var strcookie = document.cookie;
+			var arrcookie = strcookie.split("; ");
+			for(var i = 0; i < arrcookie.length; i++) {
+				var arr = arrcookie[i].split("=");
+				if(arr[0] == name) return arr[1];
+			}
+			return "";
+		}
+		//初始化页面
+		function start() {
+			var objs = {} //
+			objs['SIGN_IN.USER_ID'] = getcookie('ANDSELLID');
+			ajaxPost('http://app.bblycyz.com/AndSell/bubu/sign/sigin/getByUserId', objs, function(res) {
+				if(res.code == 0) {
+					$('.day').html(res.data[0]['SIGN_IN.ACOUNT'])
+					$('.package').html(res.extraData['POINT'])
+					for(var i = 0; i < $('.xz').length; i++) {
+						if(res.extraData.map[i] == 1) {
+							$('.xz').eq(i).css('background', 'yellow');
+						}
+					}
+				}
+
+			})
+		}
+		start()
+
+		$('.sign').click(function() {
+			var obj = {};
+			//this.getcookie('openid')
+			//new Date().getDate()
+			$(".zhe").css('display', 'block')
+
+			obj['SIGN_IN.USER_ID'] = getcookie('ANDSELLID');
+			obj['SIGN_IN.SDAY'] = new Date().getDate();
+			obj['TIME'] = new Date().getTime()
+			ajaxPost('http://app.bblycyz.com/AndSell/bubu/sign/sigin/signday', obj, function(res) {
+				console.log(res)
+				if(res.code == 0) {
+					$(".zhe").animate({
+						opacity: '1'
+					}, 500);
+					//					$('.day').html(Number($('.day').html()) + 1);
+					//					$('li').eq(new Date().getDate()).css('background', 'yellow');
+					start()
+
+				} else {
+					alert(res.msg)
+				}
+
+			})
+		})
+		$(".zhe").click(function() {
+			$(".zhe").animate({
+				opacity: '0'
+			}, 500);
+			setTimeout(function() {
+				$('.zhe').css('display', 'none')
+			}, 500)
+		})
+	
+	</script>
+
+</html>

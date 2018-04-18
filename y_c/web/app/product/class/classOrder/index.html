@@ -1,0 +1,200 @@
+<div class="page-content" >
+    <!-- BEGIN 内容区 -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+
+            <div class="table-operbar row">
+
+                <tree-list tree="tree" callback="click(data)"></tree-list>
+
+            </div>
+
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END 内容区 -->
+
+    <!-- END CONTAINER -->
+
+
+    <!--BEGIN 新增分类-->
+    <div class="modal fade text-left" id="addClass" ng-enter="addProductClass()" tabindex="-1" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true"></button>
+                    <h4 class="modal-title">添加商品分类</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+
+                    <form class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">所属分类
+                            </label>
+
+                            <div class="col-md-8">
+
+                                <div class="btn-group dropdown dropdown-form-control multi-menu" ng-init="add['SHOP_PRODUCT_CLASS.PARENT_CLASS_ID']=0;parentName ='根分类'">
+                                    <button type="button"
+                                            class="btn btn-default dropdown-toggle"
+                                            data-toggle="dropdown">
+                                        <span ng-bind="parentName"></span>
+
+                                        <i class="fa fa-angle-down"></i>
+                                    </button>
+                                    <div class="dropdown-menu first-menu">
+
+                                        <div class="first-menu-item" ng-init="multiMenuInit()"
+                                             ng-repeat="(key, firstMenu) in multimenuList2">
+
+                                            <div class="item" ng-click="changeBtn(firstMenu)">
+                                                <i class="fa" ng-click="toggleMenu(firstMenu)"
+                                                   ng-class="firstMenu.showSubmenu ? 'fa-angle-up' : 'fa-angle-down'"
+                                                   data-stopPropagation="true" ng-show="firstMenu.childList"></i>
+                                                <i class="fa" ng-show="!firstMenu.childList"></i>
+                                                <span ng-bind="firstMenu['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
+
+
+                                            </div>
+
+                                            <div class="second-menu" ng-show="firstMenu.showSubmenu">
+                                                <div class="second-menu-item"
+                                                     ng-repeat="(key, secondMenu) in firstMenu.childList">
+                                                    <div class="item" ng-click="changeBtn(secondMenu)">
+                                                        <i class="fa" ng-click="toggleMenu(secondMenu)"
+                                                           ng-class="secondMenu.showSubmenu ? 'fa-angle-up' : 'fa-angle-down'"
+                                                           data-stopPropagation="true" ng-show="secondMenu.childList"></i>
+                                                        <i class="fa" ng-show="!secondMenu.childList"></i>
+                                                        <span ng-bind="secondMenu['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
+
+                                                    </div>
+
+                                                    <div class="third-menu" ng-show="secondMenu.showSubmenu">
+                                                        <div class="third-menu-item"
+                                                             ng-repeat="(key, thirdMenu) in secondMenu.childList">
+                                                            <div class="item" ng-click="changeBtn(thirdMenu)">
+                                                                <i class="fa" ng-click="toggleMenu(thirdMenu)"
+                                                                   ng-class="thirdMenu.showSubmenu ? 'fa-angle-up' : 'fa-angle-down'"
+                                                                   data-stopPropagation="true" ng-show="thirdMenu.childList"></i>
+                                                                <i class="fa" ng-show="!thirdMenu.childList"></i>
+                                                                <span ng-bind="thirdMenu['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
+
+                                                            </div>
+
+                                                            <div class="fourth-menu" ng-show="thirdMenu.showSubmenu">
+                                                                <div class="fourth-menu-item"
+                                                                     ng-repeat="(key, fourthMenu) in thirdMenu.childList">
+                                                                    <div class="item" ng-click="changeBtn(fourthMenu)">
+                                                                        <i class="fa" ng-click="toggleMenu(fourthMenu)"
+                                                                           ng-class="fourthMenu.showSubmenu ? 'fa-angle-up' : 'fa-angle-down'"
+                                                                           data-stopPropagation="true" ng-show="fourthMenu.childList"></i>
+                                                                        <i class="fa"
+                                                                           ng-show="!fourthMenu.childList"></i>
+                                                                        <span ng-bind="fourthMenu['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
+
+                                                                    </div>
+
+                                                                    <div class="fifth-menu" ng-show="fourthMenu.showSubmenu">
+                                                                        <div class="fifth-menu-item"
+                                                                             ng-repeat="(key, fifthMenu) in fourthMenu.childList">
+                                                                            <div class="item"  ng-click="changeBtn(fifthMenu)">
+                                                                                <i class="fa"
+                                                                                   ng-click="toggleMenu(fifthMenu)"
+                                                                                   ng-class="fifthMenu.showSubmenu ? 'fa-angle-up' : 'fa-angle-down'"
+                                                                                   data-stopPropagation="true" ng-show="fifthMenu.childList"></i>
+                                                                                <i class="fa"
+                                                                                   ng-show="!fifthMenu.childList"></i>
+                                                                                <span ng-bind="fifthMenu['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
+
+                                                                            </div>
+
+                                                                            <div class="sixth-menu" ng-show="fifthMenu.showSubmenu">
+                                                                                <div class="sixth-menu-item"
+                                                                                     ng-repeat="(key, sixthMenu) in fifthMenu.childList">
+                                                                                    <div class="item" ng-click="changeBtn(sixthMenu)">
+                                                                                        <i class="fa"></i>
+                                                                                        <span ng-bind="sixthMenu['SHOP_PRODUCT_CLASS.CLASS_NAME']"></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 分类名称
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" ng-model="add['SHOP_PRODUCT_CLASS.CLASS_NAME']" ng-init="add['SHOP_PRODUCT_CLASS.CLASS_NAME']=''"
+                                       placeholder=""></div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="addProductClass()" class="btn green">确定</button>
+                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--END 新增分类-->
+
+    <!--BEGIN 修改分类-->
+    <div class="modal fade text-left" id="modifyClass"ng-enter="modifyProductClass()" tabindex="-1"
+         aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true"></button>
+                    <h4 class="modal-title">修改商品分类</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+                    <form class="form-horizontal">
+
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 分类名称:
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" ng-model="modify['SHOP_PRODUCT_CLASS.CLASS_NAME']"
+                                       ng-init="modify['SHOP_PRODUCT_CLASS.CLASS_NAME']=''" placeholder=""></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn green" ng-click="modifyProductClass()">确定</button>
+                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- END 内容区 -->
+    <div message-modal></div>
+    <div short-message-modal></div>
+</div>

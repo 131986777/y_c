@@ -1,0 +1,287 @@
+<div class="page-content" >
+    <form class="form-horizontal" >
+        <div class="form-group">
+            <label  class="col-sm-1 control-label">名称：</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" ng-model="salesInfo['SALES.NAME']">
+            </div>
+        </div>
+        <div class="form-group">
+            <label  class="col-sm-1 control-label">描述：</label>
+            <div class="col-sm-2">
+                <input type="text" class="form-control" ng-model="salesInfo['SALES.INTRO']">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-1 col-sm-10">
+                <div class=" pull-left">
+                    <label class="checkbox">
+                        <input id="meiman" type="checkbox" ng-model="salesInfo['SALES.CONDITION_TYPE']">每满
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group" >
+            <div class="col-sm-1">规则：</div>
+                <div class="manjian-ruler col-sm-8" >
+
+                <!-- 满减 -->
+                <div class="manjian radio">
+                    <label>
+                        <input type="radio" name="promation"   value="1" ng-model="salesInfo['SALES.SALE_TYPE']">
+                        满减
+                    </label>
+                    <div class="content" ng-show="salesInfo['SALES.SALE_TYPE'] == 1">
+                        <div class="detailBox" ng-if="salesInfo['SALES.CONDITION_NUM1']>0">
+                            <div class="detai " >
+                                订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >，立减￥
+                                         <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']">
+                            </div>
+                        </div>
+                        <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM1']>0">
+                            <div class="detai ">
+                                订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM2']" >，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT2']"><a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox" ng-if="salesInfo['SALES.CONDITION_NUM3']>0">
+                            <div class="detai ">
+                                订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM3']" >，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT3']"><a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM4']>0">
+                            <div class="detai ">
+                                订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM4']" >，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT4']"><a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM5']>0">
+                            <div class="detai ">
+                                订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM5']" >，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT5']"><a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                        <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM6']>0">
+                            <div class="detai ">
+                                订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM6']" >，立减￥
+                                <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT6']"><a class="itemDel">删除</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 满折 -->
+                    <div class="manjian radio">
+                        <label>
+                            <input type="radio" name="promation"   value="1" ng-model="salesInfo['SALES.SALE_TYPE']">
+                            满减
+                        </label>
+                        <div class="content" ng-show="salesInfo['SALES.SALE_TYPE'] == 2">
+                            <div class="detailBox" ng-if="salesInfo['SALES.CONDITION_NUM1']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >，打
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']">折
+                                </div>
+                            </div>
+                            <div class="detailBox ">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM2']" >，打
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT2']">折<a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                            <div class="detailBox" ng-if="salesInfo['SALES.CONDITION_NUM3']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM3']" >，打
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT3']">折<a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                            <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM4']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM4']" >，打
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT4']">折<a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                            <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM5']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM5']" >，打
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT5']">折<a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                            <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM6']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM6']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT6']"><a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <!-- 满赠（商品） -->
+                    <div class="manjian radio">
+                        <label>
+                            <input type="radio" name="promation"   value="1" ng-model="salesInfo['SALES.SALE_TYPE']">
+                            满减
+                        </label>
+                        <div class="content" ng-show="salesInfo['SALES.SALE_TYPE'] == 3">
+                            <div class="detailBox" ng-if="salesInfo['SALES.CONDITION_NUM1']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']">
+                                </div>
+                            </div>
+                            <div class="detailBox ">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM2']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT2']"><a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                            <div class="detailBox" ng-if="salesInfo['SALES.CONDITION_NUM3']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM3']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT3']"><a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                            <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM4']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM4']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT4']"><a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                            <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM5']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM5']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT5']"><a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                            <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM6']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM6']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT6']"><a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                <!-- 满赠（优惠券） -->
+                    <div class="manjian radio">
+                        <label>
+                            <input type="radio" name="promation"   value="1" ng-model="salesInfo['SALES.SALE_TYPE']">
+                            满减
+                        </label>
+                        <div class="content" ng-show="salesInfo['SALES.SALE_TYPE'] == 4">
+                            <div class="detailBox" ng-if="salesInfo['SALES.CONDITION_NUM1']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM1']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT1']">
+                                </div>
+                            </div>
+                            <div class="detailBox ">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM2']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT2']"><a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                            <div class="detailBox" ng-if="salesInfo['SALES.CONDITION_NUM3']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM3']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT3']"><a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                            <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM4']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM4']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT4']"><a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                            <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM5']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM5']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT5']"><a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                            <div class="detailBox " ng-if="salesInfo['SALES.CONDITION_NUM6']>0">
+                                <div class="detai ">
+                                    订单金额满￥<input class="" type="text"  ng-model="salesInfo['SALES.CONDITION_NUM6']" >，立减￥
+                                    <input type="text" name=""  ng-model="salesInfo['SALES.SALE_CONTENT6']"><a class="itemDel">删除</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+                <div class="meimanjian-ruler col-sm-8 hidden">
+
+                <!-- 满减 -->
+                <div class="manjian radio">
+                    <label>
+                        <input type="radio" name="promation"  value="option1" >
+                        每满减
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+
+                            <div class="detail">
+                                订单金额每满￥<input class="" type="text">，立减￥<input type="text" name="">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 满折 -->
+                <div class="manzhe radio">
+                    <label>
+                        <input type="radio" name="promation"  value="option2">
+                        每满折
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+
+                            <div class="detail">
+                                订单金额每满￥<input class="" type="text">，打<input type="text" name="">折
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- 满赠（商品） -->
+                <div class="manzeng-product radio">
+                    <label>
+                        <input type="radio" name="promation" id="promation3" value="option3">
+                        每满赠（商品）
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+                            <div class="detail">
+                                订单金额每满￥<input class="" type="text">，获赠品<span><a href="#">（选择赠送商品）</a></span><input type="text" name="">件
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="manzeng-ticket radio">
+                    <label>
+                        <input type="radio" name="promation" id="promation4" value="option4">
+                        每满赠（优惠券）
+                    </label>
+                    <div class="content hidden">
+                        <div class="detailBox">
+
+                            <div class="detail">
+                                订单金额每满￥<input class="" type="text">，获赠优惠券<span><a href="#">（选择赠送优惠券）</a></span><input type="text" name="">张。
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AndSell.PC.Main" ng-controller="PC.MainController">
+<head>
+    <meta charset="UTF-8">
+    <title ng-bind="title"></title>
+
+    <link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/AndSell/pc/public/libs/bootstrap/dist/css/bootstrap-theme.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="/AndSell/pc/public/css/public/style.css">
+    <link rel="stylesheet" href="/AndSell/pc/public/css/public/componentsGallery.css">
+    <link rel="stylesheet" href="/AndSell/pc/public/css/public/screen.css" media="screen">
+    <link rel="stylesheet" href="/AndSell/pc/public/css/public/headers.css">
+    <link rel="stylesheet" href="/AndSell/pc/public/css/public/footers.css">
+    <link rel="stylesheet" href="/AndSell/pc/public/libs/swiper/swiper.min.css">
+
+
+</head>
+<body>
+<header>
+    <div class="userBar">
+        <div class="effectiveArea">
+            <div class="sloganGroup">
+                <a ui-sref="pages/home" class="welcomeInfo">你好，欢迎来到云厨1站</a>
+            </div>
+            <div class="loginGroup">
+                <a class="logoIn" ng-if="USER!=undefined" ng-bind="USER['MEMBER.USER_NAME']"></a>
+                <a ui-sref="pages/login/accountLogin" class="logoIn" ng-if="USER==undefined">请登录</a>
+                <a ui-sref="pages/login/register" class="signIn" ng-if="USER==undefined">免费注册</a>
+                <a class="signIn" ng-click="logOut()" ng-if="USER!=undefined">退出</a>
+            </div>
+            <div class="seviceGroup">
+                <a ui-sref="pages/personal/center" ng-if="USER!=undefined" class="personalCenter">个人中心</a>
+                <a ng-if="USER!=undefined" class="clientSevice">客户服务</a>
+                <a class="followUs">关注我们</a>
+            </div>
+        </div>
+    </div>
+    <div class="controlBar" ng-if="showControllerBar">
+        <div class="effectiveArea">
+            <div class="storeInfo" ui-sref="pages/shop">
+                <p class="storeName" ng-if="shop==undefined">点击选择门店</p>
+                <p class="storeName" ng-bind="shop['SHOP.SHOP_NAME']"></p>
+                <p class="number"><span class="phoneNumber" ng-bind="shop['SHOP.TELEPHONE']"></span><span
+                    class="openTime"
+                    ng-bind="shop['SHOP.OPEN_TIME']+' — '+shop['SHOP.CLOSE_TIME']"></span></p>
+                <p class="addressInfo" ng-bind="shop['SHOP.ADDR']"></p>
+            </div>
+            <div class="searchBar">
+                <input type="text" class="search" ng-model="key.prdKeyword"
+                       ng-keyup="myKeyup($event)" placeholder="请输入商品名称">
+                <a class="searchBtn" ng-click="searchPrd()">搜索</a>
+            </div>
+            <div class="myShoppingCart">
+                <a ui-sref="pages/cart">我的购物车</a>
+                <span class="messageCount" ng-bind="cartSize"></span>
+            </div>
+        </div>
+    </div>
+    <div class="menuBar" ng-if="showMenuBar">
+        <div class="effectiveArea">
+            <div class="categories" ng-init="menuBarPosi ='sy'">
+                <ul>
+                    <li><a ui-sref="pages/home" ng-class="{true:'active'}[menuBarPosi =='sy']"
+                           ng-click="menuBarPosi = sy">首页</a></li>
+                    <li><a ui-sref="pages/product/list"
+                           ng-class="{true:'active'}[menuBarPosi =='sycp']"
+                           ng-click="menuBarPosi = 'sycp';toPrdTagList('')">所有菜品</a></li>
+                    <li><a ui-sref="pages/product/list"
+                           ng-class="{true:'active'}[menuBarPosi =='bkcp']"
+                           ng-click="menuBarPosi = 'bkcp';toPrdTagList(1024)">爆款菜品</a></li>
+                    <li><a ui-sref="pages/product/list"
+                           ng-class="{true:'active'}[menuBarPosi =='xpss']"
+                           ng-click="menuBarPosi = 'xpss';toPrdTagList(1023)">新品上市</a></li>
+                    <li><a ui-sref="pages/product/list"
+                           ng-class="{true:'active'}[menuBarPosi =='slsc']"
+                           ng-click="menuBarPosi = 'slsc'">时令蔬菜</a></li>
+                    <li><a ui-sref="pages/order/list"
+                           ng-class="{true:'active'}[menuBarPosi =='wddd']"
+                           ng-click="menuBarPosi = 'wddd'">我的订单</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="goodsCategoriesBar" ng-if="showGoodsCategoriesBar">
+        <div class="effectiveArea">
+            <div class="categories">
+                <ul>
+                    <li>
+                        <div class="innerContainer"
+                             ng-class="{true:'borderLight'}[categoriesPosi == 3001]">
+                            <div class="categoriePic icon-wine"
+                                 ng-click="toPrdClassList(3001)"
+
+                            ></div>
+                            <p class="categorieName">酱卤</p>
+                            <!--<div class="triangle"></div>-->
+                            <!--<div class="detailedList">-->
+                            <!--<ul class="listCategories">-->
+                            <!--<li>-->
+                            <!--<p class="listName">牛羊</p>-->
+                            <!--<ul class="categoriesDetail">-->
+                            <!--<li><a href="">澳洲牛肉</a></li>-->
+                            <!--<li><a href="">冷鲜肉</a></li>-->
+                            <!--<li><a href="">安格斯牛肉</a></li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<p class="listName">牛羊</p>-->
+                            <!--<ul class="categoriesDetail">-->
+                            <!--<li><a href="">澳洲牛肉</a></li>-->
+                            <!--<li><a href="">冷鲜肉</a></li>-->
+                            <!--<li><a href="">安格斯牛肉</a></li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<p class="listName">牛羊</p>-->
+                            <!--<ul class="categoriesDetail">-->
+                            <!--<li><a href="">澳洲牛肉</a></li>-->
+                            <!--<li><a href="">冷鲜肉</a></li>-->
+                            <!--<li><a href="">安格斯牛肉</a></li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<p class="listName">牛羊</p>-->
+                            <!--<ul class="categoriesDetail">-->
+                            <!--<li><a href="">澳洲牛肉</a></li>-->
+                            <!--<li><a href="">冷鲜肉</a></li>-->
+                            <!--<li><a href="">安格斯牛肉</a></li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<p class="listName">牛羊</p>-->
+                            <!--<ul class="categoriesDetail">-->
+                            <!--<li><a href="">澳洲牛肉</a></li>-->
+                            <!--<li><a href="">冷鲜肉</a></li>-->
+                            <!--<li><a href="">安格斯牛肉</a></li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<p class="listName">牛羊</p>-->
+                            <!--<ul class="categoriesDetail">-->
+                            <!--<li><a href="">澳洲牛肉</a></li>-->
+                            <!--<li><a href="">冷鲜肉</a></li>-->
+                            <!--<li><a href="">安格斯牛肉</a></li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<p class="listName">牛羊</p>-->
+                            <!--<ul class="categoriesDetail">-->
+                            <!--<li><a href="">澳洲牛肉</a></li>-->
+                            <!--<li><a href="">冷鲜肉</a></li>-->
+                            <!--<li><a href="">安格斯牛肉</a></li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<p class="listName">牛羊</p>-->
+                            <!--<ul class="categoriesDetail">-->
+                            <!--<li><a href="">澳洲牛肉</a></li>-->
+                            <!--<li><a href="">冷鲜肉</a></li>-->
+                            <!--<li><a href="">安格斯牛肉</a></li>-->
+                            <!--</ul>-->
+                            <!--</li>-->
+                            <!--</ul>-->
+
+                            <!--</div>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="innerContainer" ng-click="toPrdClassList(3002)"
+                             ng-class="{true:'borderLight'}[categoriesPosi == 3002]">
+                            <div class="categoriePic icon-cake"></div>
+                            <p class="categorieName">熟食</p>
+                            <!--<div class="triangle"></div>-->
+                            <!--<div class="detailedList"></div>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="innerContainer" ng-click="toPrdClassList(3003)"
+                             ng-class="{true:'borderLight'}[categoriesPosi == 3003]">
+                            <div class="categoriePic icon-rice-two"></div>
+                            <p class="categorieName">组配菜</p>
+                            <!--<div class="triangle"></div>-->
+                            <!--<div class="detailedList"></div>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="innerContainer" ng-click="toPrdClassList(3004)"
+                             ng-class="{true:'borderLight'}[categoriesPosi == 3004]">
+                            <div class="categoriePic icon-fruit"></div>
+                            <p class="categorieName">水果</p>
+                            <!--<div class="triangle"></div>-->
+                            <!--<div class="detailedList"></div>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="innerContainer" ng-click="toPrdClassList(3005)"
+                             ng-class="{true:'borderLight'}[categoriesPosi == 3005]">
+                            <div class="categoriePic icon-meat"></div>
+                            <p class="categorieName">冷鲜肉</p>
+                            <!--<div class="triangle"></div>-->
+                            <!--<div class="detailedList"></div>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="innerContainer" ng-click="toPrdClassList(3006)"
+                             ng-class="{true:'borderLight'}[categoriesPosi == 3006]">
+                            <div class="categoriePic icon-snow"></div>
+                            <p class="categorieName">冻品</p>
+                            <!--<div class="triangle"></div>-->
+                            <!--<div class="detailedList"></div>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="innerContainer" ng-click="toPrdClassList(3007)"
+                             ng-class="{true:'borderLight'}[categoriesPosi == 3007]">
+                            <div class="categoriePic icon-egg"></div>
+                            <p class="categorieName">禽蛋</p>
+                            <!--<div class="triangle"></div>-->
+                            <!--<div class="detailedList"></div>-->
+                        </div>
+                    </li>
+
+                    <li>
+                        <div class="innerContainer" ng-click="toPrdClassList(3008)"
+                             ng-class="{true:'borderLight'}[categoriesPosi == 3008]">
+                            <div class="categoriePic icon-juice"></div>
+                            <p class="categorieName">酒水饮品</p>
+                            <!--<div class="triangle"></div>-->
+                            <!--<div class="detailedList"></div>-->
+                        </div>
+                    </li>
+                    <li>
+                        <div class="innerContainer" ng-click="toPrdClassList(3009)"
+                             ng-class="{true:'borderLight'}[categoriesPosi == 3009]">
+                            <div class="categoriePic icon-rice-one"></div>
+                            <p class="categorieName">粮油干调</p>
+                            <!--<div class="triangle"></div>-->
+                            <!--<div class="detailedList"></div>-->
+                        </div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="productList">
+        <div class="leftMenu" ng-if="showLeftMenu">
+            <div class="categoriePic icon-wine" ng-click="toPrdClassList(3001)"></div>
+            <div class="categoriePic icon-cake" ng-click="toPrdClassList(3002)"></div>
+            <div class="categoriePic icon-rice-two" ng-click="toPrdClassList(3003)"></div>
+            <div class="categoriePic icon-fruit" ng-click="toPrdClassList(3004)"></div>
+            <div class="categoriePic icon-meat" ng-click="toPrdClassList(3005)"></div>
+            <div class="categoriePic icon-snow" ng-click="toPrdClassList(3006)"></div>
+            <div class="categoriePic icon-egg" ng-click="toPrdClassList(3007)"></div>
+            <div class="categoriePic icon-juice" ng-click="toPrdClassList(3008)"></div>
+            <div class="categoriePic icon-rice-one" ng-click="toPrdClassList(3009)"></div>
+
+        </div>
+        <div class="effectiveArea">
+            <div class="sidebar sidebar1" ng-if="showSideBar">
+                <!-- 订单 -->
+                <div class="sidebar-title ">
+                    个人中心
+                </div>
+                <ul>
+                    <li ui-sref="pages/personal/center">个人信息</li>
+                    <!--class="selected"-->
+                    <li ui-sref="pages/order/list({state:'all'})">我的订单</li>
+                    <!--<li ui-sref="business.priceAudit" ng-class="{true:'active'}[state ==2]"-->
+                    <!--ng-click="getState(2)">团购订单-->
+                    <!--</li>-->
+                    <!--<li ui-sref="business.purchaseList" ng-class="{true:'active'}[state ==3]"-->
+                    <!--ng-click="getState(3)">我的预售-->
+                    <!--</li>-->
+                    <!--ng-class="{true:'active'}[state ==4]"-->
+                    <li ui-sref="pages/order/list({state:'comment'})">评价晒单</li>
+                    <li ui-sref="pages/order/appointmentList({state:'all'})">我的预约</li>
+                    <li ui-sref="pages/product/collect">我的收藏</li>
+
+                </ul>
+                <!-- 库存 -->
+                <div class="sidebar-title">
+                    资产中心
+                </div>
+                <ul>
+                    <li ui-sref="pages/account/balance">余额</li>
+                    <li ui-sref="pages/personal/coupon">优惠券</li>
+                    <!--<li>优惠券</li>-->
+                </ul>
+                <!-- 库存 -->
+                <div class="sidebar-title">
+                    安全中心
+                </div>
+                <ul>
+                    <li ui-sref="pages/security/modifyPwd">修改密码</li>
+                </ul>
+                <!--&lt;!&ndash; 库存 &ndash;&gt;-->
+                <!--<div class="sidebar-title">-->
+                <!--其他功能-->
+                <!--</div>-->
+                <!--<ul>-->
+                <!--<li>浏览历史</li>-->
+                <!--</ul>-->
+            </div>
+
+            <!--带确定和取消的阻塞提示框 -->
+            <div message-modal></div>
+            <!--短时间提示后隐藏的非阻塞提示框 -->
+            <div short-message-modal></div>
+            <div ui-view="" class="ng-scope" style="overflow-x:hidden;overflow-y:hidden "></div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    <div class="qualityPledge">
+        <ul>
+            <li>
+                <div class="showGroup quality">
+                    <p class="title">正品保障</p>
+                    <p class="noting">正品保障，提供发票</p>
+                </div>
+            </li>
+            <li>
+                <div class="showGroup delivery">
+                    <p class="title">一分钟到店</p>
+                    <p class="noting">一分钟到店，自提看货</p>
+                </div>
+            </li>
+            <li>
+                <div class="showGroup afterSale">
+                    <p class="title">无忧售后</p>
+                    <p class="noting">遇到问题立即退换</p>
+                </div>
+            </li>
+            <li>
+                <div class="showGroup shoppingCart">
+                    <p class="title">显示消费体验</p>
+                    <p class="noting">线上立体服务</p>
+                </div>
+            </li>
+            <li>
+                <div class="showGroup advisory">
+                    <p class="title">全国免费咨询电话</p>
+                    <p class="phoneNumber">400-000-9185</p>
+                    <p class="noting">正品保障，提供发票</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="pageFooter">
+        <div class="linkGroup">
+            <ul>
+                <li><a href="">常见问题</a></li>
+                <li><a href="">服务条款</a></li>
+                <li><a href="">门店中心</a></li>
+                <li><a href="">关于我们</a></li>
+                <li><a href="">联系我们</a></li>
+                <li><a href="">法律声明</a></li>
+            </ul>
+        </div>
+        <div class="extraInfo">
+            <p><span class="website">www.bblycyz.com</span><span>备案/许可证编号：苏ICP备15041132号</span></p>
+            <p>南京云厨1站新鲜蔬菜直供</p>
+        </div>
+    </div>
+</footer>
+</body>
+
+<!--############JS引用区############-->
+<script src="/AndSell/pc/public/libs/jquery/dist/jquery.min.js"></script>
+<script src="/AndSell/pc/public/libs/angular/angular.min.js"></script>
+<script src="/AndSell/pc/public/libs/angular/angular-sanitize.js"></script>
+<script src="/AndSell/pc/public/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="/AndSell/pc/public/libs/ocLazyLoad.min.js"></script>
+<script src="/AndSell/pc/public/libs/angular-resource/angular-resource.min.js"></script>
+<script src="/AndSell/pc/public/libs/swiper/jquery-weui.min.js"></script>
+<script src="/AndSell/pc/public/libs/cookie.js"></script>
+<script src="/AndSell/pc/public/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/AndSell/pc/public/libs/swiper/swiper.jquery.min.js"></script>
+<!--importantJs -->
+<script src="/AndSell/pc/public/application.js"></script>
+
+<!--############通用方法区############-->
+<script src="/AndSell/pc/public/commonJs.js"></script>
+
+<!--############ router ############-->
+<script src="router.js"></script>
+
+<!--############ service ############-->
+<script src="../product/product-services.js"></script>
+<script src="../order/order-services.js"></script>
+<script src="../personal/personal-services.js"></script>
+<script src="../shop/shop-services.js"></script>
+<script src="../coupon/coupon-services.js"></script>
+<script src="../login/user-services.js"></script>
+<script src="../account/account-services.js"></script>
+<script src="../security/security-services.js"></script>
+<script src="../home/home-services.js"></script>
+
+
+<!--############ controller ############-->
+<script src="controller.js"></script>
+
+</html>

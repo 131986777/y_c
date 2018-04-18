@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery select插件</title>
+<script src="js/jquery.js"></script>
+<script src="js/select.jquery.js"></script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+	<select class="multiselect">
+		<option value="">A</option>
+		<option value="">B</option>
+		<option value="">C</option>
+		<option value="">D</option>
+		<option value="">E</option>
+		<option value="">F</option>
+		<option value="">G</option>
+	</select>
+	
+	<!--<select class="multiselect" id="single">
+		<option value="">A</option>
+		<option value="">B</option>
+		<option value="">C</option>
+		<option value="">D</option>
+		<option value="">E</option>
+		<option value="">F</option>
+		<option value="">G</option>
+	</select>-->
+	
+	<script>
+		$('.multiselect').multiselect({setMaxOptionNum:4,selectedHtmlValue:'多选'});
+		$('#single').multiselect({multiple:false,selectedHtmlValue:'单选'});
+	</script>
+</body>
+</html>

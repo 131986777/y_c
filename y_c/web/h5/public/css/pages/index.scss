@@ -1,0 +1,109 @@
+.index {
+    height: (6590px / 2);
+
+    background: url("../img/index_bg.jpg") no-repeat;
+    background-size: 100% (6590px / 2);
+
+    .store-link {
+        display: inline-block;
+
+        position: absolute;
+        top: 50px;
+        right: 30px;
+
+        padding: 6px;
+        border-radius: 20px;
+
+        text-decoration: underline;
+
+        color: #860000;
+        background-color: rgb(251, 251, 251);
+
+    }
+
+    .product-list {
+        width: 100%;
+        max-width: 343px;
+        margin: (1338px / 2) auto 0;
+
+        font-size: 12px;
+        text-align: center;
+
+        .product-wrap {
+            margin-bottom: 15px;
+            padding: 9px;
+            max-width: 175px;
+
+            border: 1px solid #860000;
+
+            background-color: #fff;
+        }
+
+        .product-img {
+            width: 100%;
+            max-width: 150px;
+        }
+
+        .product-name {
+            overflow: hidden;
+
+            height: 2em;
+
+            font-size: 12px;
+            word-wrap: break-word;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+
+        .product-price {
+            line-height: 1.5;
+
+            .curr {
+                color: #860000;
+            }
+
+            .orig {
+                color: #727171;
+            }
+        }
+
+        .cart {
+            display: inline-block;
+
+            margin-top: 9px;
+            width: 100%;
+            max-width: 142px;
+            height: 29px;
+
+            background: url("../img/index_add_to_cart.png") no-repeat center;
+            background-size: contain;
+        }
+    }
+
+    .cart-wrap {
+        position: fixed;
+        right: 30px;
+        bottom: 20px;
+        z-index: 10;
+
+        .cart-link {
+            display: block;
+
+            width: 63px;
+            height: 63px;
+
+            background: url("../img/index_cart.png") no-repeat center;
+            background-size: 63px 63px;
+        }
+
+        .num {
+            position: absolute;
+            top: 5px;
+            right: 15px;
+
+            color: #860000;
+        }
+    }
+}

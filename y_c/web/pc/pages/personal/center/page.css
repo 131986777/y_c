@@ -1,0 +1,188 @@
+.row-wrap-personal-center{
+    float: right;
+    width: 965px;
+    min-height: 633px;
+    background-color: white;
+}
+.row-wrap-personal-center .row-content{
+    margin-bottom: 30px;
+}
+.row-wrap-personal-center .row-content .info{
+    width: 965px;
+    height: 130px;
+    margin-top: 20px;
+}
+.row-wrap-personal-center .row-content .info .imgPer{
+    width: 130px;
+    height:130px;
+    background-image: url(/AndSell/pc/public/css/img/personImg.png);
+    display: inline-block;
+}
+.row-wrap-personal-center .row-content .info .addInfo{
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 35px;
+    vertical-align: top;
+    margin-top: 20px;
+}
+.row-wrap-personal-center .row-content .info .addInfo .pos{
+    margin-bottom: 25px;
+}
+
+.row-wrap-personal-center .row-content .info .addInfo .name{
+    font-size: 25px;
+    color: #494949;
+}
+.row-wrap-personal-center .row-content .info .addInfo .phone{
+    color: #8c8c8c;
+    display: inline-block;
+}
+.row-wrap-personal-center .row-content .info .addInfo .num{
+    color: #4c4c4c;
+    display: inline-block;
+}
+.row-wrap-personal-center .row-content .info .addInfo .security{
+    color: #f36e19;
+    cursor: pointer;
+}
+.row-wrap-personal-center .row-content .info .detail{
+    font-size: 14px;
+    display: inline-block;
+    margin-left: 100px;
+    vertical-align: top;
+    margin-top: 65px;
+}
+.row-wrap-personal-center .row-content .info .detail .each{
+   margin-bottom: 10px;
+}
+.row-wrap-personal-center .row-content .info .detail .count{
+    display: inline-block;
+    color: #8c8c8c;
+    width: 80px;
+
+}
+.row-wrap-personal-center .row-content .info .detail .detInfo{
+    display: inline-block;
+    color: #4c4c4c;
+}
+.row-wrap-personal-center .font{
+    color: #4b4b4b;
+    font-size: 18px;
+    height: 90px;
+    line-height: 100px;
+    padding-left: 40px;
+    border-bottom: 1px solid #e0e0e0;
+}
+.row-wrap-personal-center .card{
+    overflow: hidden;
+}
+.row-wrap-personal-center .card .eachCard{
+    width: 365px;
+    height: 180px;
+    /*background: -webkit-linear-gradient(left bottom, #f7ad38 , #e09117); !* Safari 5.1 - 6.0 *!*/
+    /*background: -o-linear-gradient(top right,  #f7ad38 , #e09117); !* Opera 11.1 - 12.0 *!*/
+    /*background: -moz-linear-gradient(top right,  #f7ad38 , #e09117); !* Firefox 3.6 - 15 *!*/
+    /*background: linear-gradient(to top right,  #f7ad38 , #e09117); !* 标准的语法（必须放在最后） *!*/
+    border-radius: 5px;
+    float: left;
+    margin-right: 65px;
+    margin-left: 12px;
+    margin-top: 35px;
+}
+.row-wrap-personal-center .card .orange{
+
+    background: -webkit-linear-gradient(left bottom, #f7ad38 , #e09117); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right,  #f7ad38 , #e09117); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right,  #f7ad38 , #e09117); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right,  #f7ad38 , #e09117); /* 标准的语法（必须放在最后） */
+
+}
+.row-wrap-personal-center .card .blue{
+
+    background: -webkit-linear-gradient(left bottom, #24aca6 , #189991); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right,  #24aca6 , #189991); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right, #24aca6 , #189991); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right,  #24aca6 , #189991); /* 标准的语法（必须放在最后） */
+
+}
+.row-wrap-personal-center .card .black{
+
+    background: -webkit-linear-gradient(left bottom, #414143 , #2d2e30); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(top right,  #414143 , #2d2e30); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(top right,  #414143 , #2d2e30); /* Firefox 3.6 - 15 */
+    background: linear-gradient(to top right,  #414143 , #2d2e30); /* 标准的语法（必须放在最后） */
+
+}
+.row-wrap-personal-center .card .eachCard .pos{
+    margin-left: 15px;
+    /* margin-top: 3px; */
+    padding-top: 15px;
+    height: 100%;
+    margin-right: 15px;
+    color: white;
+}
+.row-wrap-personal-center .card .addCard {
+
+    background-color: #c1c1c1!important;
+}
+.row-wrap-personal-center .card .eachCard .pos .num{
+    display: inline-block;
+    font-size: 22px;
+}
+.row-wrap-personal-center .card .eachCard .posAdd{
+    height: 180px;
+    background-color: #F5F5F5;
+}
+.row-wrap-personal-center .card .addCard .posAdd .add{
+    font-size: 22px;
+    text-align: center;
+    line-height:8;
+    color: #4b4b4b;
+    cursor: pointer;
+}
+.row-wrap-personal-center .card .eachCard .pos .ka{
+    float: right;
+}
+.row-wrap-personal-center .card .eachCard .pos .mid{
+
+    margin-left: 70px;
+    font-size: 14px;
+
+}
+.row-wrap-personal-center .icon-resetName {
+    display: inline-block;
+    background: url("/AndSell/pc/public/css/img/icon-resetName.png") no-repeat;
+    background-size: 15px 15px;
+    vertical-align: bottom;
+    margin-left: 10px;
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+}
+.row-wrap-personal-center .card .eachCard .pos .m{
+    width: 165px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    margin-top: 34px;
+
+}
+.row-wrap-personal-center .card .eachCard .pos .m .word{
+    display: inline-block;
+    line-height: 2;
+}
+.row-wrap-personal-center .card .eachCard .pos .m .money{
+    display: inline-block;
+    font-size: 22px;
+    line-height: 2;
+
+}
+.row-wrap-personal-center .card .eachCard .pos .foot{
+    font-size: 12px;
+}
+.row-wrap-personal-center .card .eachCard .pos .foot .time{
+    display: inline-block;
+    margin-right: 17px;
+}
+.row-wrap-personal-center .card .eachCard .pos .foot .time .t_inner{
+    display: inline-block;
+}

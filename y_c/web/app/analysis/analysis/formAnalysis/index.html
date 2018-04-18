@@ -1,0 +1,115 @@
+<div class="container-fluid" ng-init="initLoad()">
+    <div class="table-toolbar">
+            <div class="form-inline row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <!-- <input type="text" class="form-control" id="name" placeholder="登陆ID/手机号"
+                               ng-model="queryContent"> -->
+                              <input id="startDay" type="text" ng-model="groupRange['STARTDAY']" ng-init="groupRange['STARTDAY']=START" class="form-control inputWidth"  placeholder="">
+                                <span>-</span>
+                              <input id="endDay" type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=END"  class="form-control inputWidth"  placeholder="">
+                   				
+                    </div>
+                     
+                </div>
+                <div class="col-md-8">
+                    <label class="control-label">筛选：</label>
+                     <select style="width:90px" ng-model="groupRange['SHOPID']"
+                            ng-init="groupRange['SHOPID']='null'"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="null">
+                            所属门店
+                        </option>
+                        <option class="nya-bs-option" ng-repeat="shop in shopList"
+                                ng-bind="shop['SHOP.SHOP_NAME']" value="{{shop['SHOP.SHOP_ID']}}">
+                        </option>
+                    </select>
+                    <label class="control-label">商品名称：</label>
+                    <div class="form-group">
+                        <input style="width:150px" type="text" class="form-control" id="name" placeholder="商品名称/编码"
+                               ng-model="groupRange['PRODUCTNAME']">
+                    </div>
+                    <label class="control-label">排序方式：</label> 
+                     <select ng-model="groupRange['rank']" 
+                     ng-init="groupRange['rank']='SALE_DESC'"
+                      class="nya-bs-select form-control"
+                     data-width="80px">
+                        <option class="nya-bs-option" value="SALE_DESC">
+                            销售时间↓
+                        </option>
+                        <option class="nya-bs-option" value="SHOPID_ASC">
+                            门店id↑
+                        </option>
+                    </select> 
+                       <button type="button" class="btn btn-default "
+                                   ng-click="getGroupByRange()">查询
+                      </button>
+            <button class="btn alignRight  pull-right"  type="button" onclick="outPutMethod('formTable')">导出</button>
+                </div>
+                
+            </div>
+        </div>
+</div>
+
+    <div class="table-content">
+        <div class="table-toolbar">
+            <table class="table table-bordered table-hover table-striped" id="formTable">
+                <thead>
+                <tr>
+                    <th class="text-center">门店ID</th>
+                    <th class="text-center">门店名称</th>
+                    <th class="text-center">单据号</th>
+                    <th class="text-center">会员卡号</th>
+                    <th class="text-center">支付积分</th>
+                    <th class="text-center">销售时间</th>
+                    <th class="text-center">单内序号</th>
+                    <th class="text-center">商品类型</th>
+                    <th class="text-center">商品编码</th>
+                    <th class="text-center">商品条码</th>
+                    <th class="text-center">商品货号</th>
+                    <th class="text-center">商品名称</th>
+                    <th class="text-center">规格型号</th>
+                    <th class="text-center">基本单位</th>
+                    <th class="text-center">商品分类</th>
+                    <th class="text-center">销售单价</th>
+                    <th class="text-center">销售数量</th>
+                    <th class="text-center">销售收入</th>
+                    <th class="text-center">支付信息</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- <tr align="center" ng-repeat="VALUE in FORMSOURCE | filter: '天地新城店' track by VALUE.SHOP_NAME "> -->
+                 <tr align="center" ng-repeat="VALUE in FORMSOURCE ">
+                   
+                    <td><span ng-bind="VALUE['SHOP_ID']"></span></td>
+                    <td><span ng-bind="VALUE['SHOP_NAME']"></span></td>
+                    <td><span ng-bind="VALUE['ORDER_NUM']"></span></td>
+                    <td><span ng-bind="VALUE['CARD_NO']"></span></td>
+                    <td><span ng-bind="VALUE['PRICE_POINT']"></span></td>
+                    <td><span ng-bind="VALUE['ORDER_DATETIME']"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_INDEX']"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_TYPE']"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_SKU']"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_BAR_CODE']"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_ID']"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_NAME']"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_SKU_VALUE']"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_UNIT']"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_CLASS']"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_PRICE_NOW'] | currency:'￥'"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_COUNT']"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_PRICE_SUM'] | currency:'￥'"></span></td>
+                    <td><span ng-bind="VALUE['PRODUCT_PAY']"></span></td>
+
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div page-bar
+             filter-obj="filter"
+             url="/member/member/queryAll"
+             callback="bindData(response)">
+        </div>
+    </div>
+</div>

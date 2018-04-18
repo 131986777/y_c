@@ -1,0 +1,95 @@
+<div class="table-operbar">
+    <div class="table-toolbar">
+        <div class="row">
+            <!-- BEGIN 导航标签 -->
+            <ul class="nav nav-tabs">
+                <li >
+                    <a ui-sref="stock/stock/stockList"> 分库存 </a>
+                </li>
+                <li class="active">
+                    <a> 总库存 </a>
+                </li>
+            </ul>
+            <!-- END 导航标签 -->
+        </div>
+    </div>
+        <div class="form-inline form-group">
+            <div class="table-operbar">
+                <div class="form-inline row">
+                    <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="商品名称" ng-model="pName">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right"
+                                ng-click="queryStockByName(pName)">查询
+                        </button>
+                    </div>
+                    </div>
+                    <div class="col-md-5">
+                    <label class="control-label">筛选：</label>
+                    <select ng-model="filter['STOCK_REALTIME.ORDER']"
+                            ng-init="filter['STOCK_REALTIME.ORDER']='MAX(UPDATE_DATETIME) DESC'"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="MAX(UPDATE_DATETIME) DESC">
+                            最后更新
+                        </option>
+                        <option class="nya-bs-option" value="LOCK_STOCK DESC">
+                            锁定库存降序
+                        </option>
+                        <option class="nya-bs-option" value="LOCK_STOCK ASC">
+                            锁定库存升序
+                        </option>
+                        <option class="nya-bs-option" value="STOCK DESC">
+                            实时库存降序
+                        </option>
+
+                        <option class="nya-bs-option" value="STOCK ASC">
+                            实时库存升序
+                        </option>
+                    </select>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-scrollable">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                    <th class="col-md-3"> 商品</th>
+                    <th class="col-md-1 text-center"> 单位</th>
+                    <th class="col-md-1 text-center"> 实时库存</th>
+                    <th class="col-md-1 text-center"> 带锁库存</th>
+                    <th class="col-md-1.5 text-center"> 最后变更</th>
+                    <th class="col-md-1 text-center"> 操作</th>
+                </tr>
+                </thead>
+                <tbody ng-cloak>
+                <tr ng-repeat="item in allStockList ">
+                    <td ng-bind="item['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品ID-->
+                    <td ng-bind="item['STOCK_REALTIME.UNIT']"  class="text-center"></td> <!--规格ID-->
+                    <td ng-bind="item['SUMSTOCK']"  class="text-center"></td> <!--实时库存-->
+                    <td ng-bind="item['LOCKSTOCK']"  class="text-center"></td> <!--锁定库存-->
+                    <td ng-bind="item['UPDATETIME']|FormatAllDate"  class="text-center"></td> <!--最后变更-->
+                    <td  class="text-center">明细</td>
+                    <!--<td class="text-center">-->
+                        <!--<div >-->
+                            <!--<a type="button" show-modal id="#modifySource"-->
+                               <!--ng-click="modifyCardSourceClick(item)">修改</a>-->
+                            <!--<a type="button" ng-click="deleteCardSource(item['MEMBER_CARD_SOURCE.ID'])">-->
+                                <!--删除-->
+                            <!--</a>-->
+                        <!--</div>-->
+                    <!--</td>-->
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    <div page-bar
+         filter-obj="filter"
+         url="/stock/realtime/queryBySkuId"
+         callback="bindData(response)">
+    </div>
+</div>
+
+

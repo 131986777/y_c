@@ -1,0 +1,75 @@
+<div class="page-content">
+    <form action="" class="form-horizontal">
+
+
+        <div class="form-title">
+            订单设置
+        </div>
+        <div class="form-group">
+            <label class="radio-title control-label">订单模式：</label>
+            <div class="col-sm-10">
+                <label class="radio-inline">
+                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="NORMAL" ng-model="ORDER_MODE"> 普通单
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="YYD" ng-model="ORDER_MODE"> 预订分拣单
+                </label>
+            </div>
+        </div>
+
+        <div class="form-title">
+            库存设置
+        </div>
+        <div class="form-group">
+            <label class="radio-title control-label">线下库存阈值：</label>
+            <div class="col-sm-10">
+                <label class="radio-inline">
+                    <input type="radio" value="55" name="sortRadio" ng-model="INVENTORY_THRESHOLD"> 55%
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" value="65" name="sortRadio" ng-model="INVENTORY_THRESHOLD"> 65%
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" value="75" name="sortRadio" ng-model="INVENTORY_THRESHOLD"> 75%
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" value="85" name="sortRadio" ng-model="INVENTORY_THRESHOLD"> 85%
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" value="95" name="sortRadio" ng-model="INVENTORY_THRESHOLD"> 95%
+                </label>
+            </div>
+        </div>
+
+        <!--<div class="form-title">-->
+            <!--支付设置-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="radio-title control-label">微信APP_ID：</label>-->
+            <!--<div class="col-sm-4">-->
+                <!--<input type="text" class="form-control" ng-model="WX_APP_ID">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="radio-title control-label">微信WX_APP_SECRET：</label>-->
+            <!--<div class="col-sm-4">-->
+                <!--<input type="text" class="form-control" ng-model="WX_APP_SECRET">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="radio-title control-label">微信MCHID：</label>-->
+            <!--<div class="col-sm-4">-->
+                <!--<input type="text" class="form-control" ng-model="WX_MCHID">-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="form-group">-->
+            <!--<label class="radio-title control-label">微信KEY：</label>-->
+            <!--<div class="col-sm-4">-->
+                <!--<input type="text" class="form-control" ng-model="WX_KEY">-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+    </form>
+</div>
+<!-- END CONTENT -->

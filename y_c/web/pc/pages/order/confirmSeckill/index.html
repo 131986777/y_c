@@ -1,0 +1,73 @@
+<div class="containers-order-confirm" ng-init="initData()">
+    <div class="row-content">
+        <div class="showTitle">
+            <h1 class="title">确认下单</h1>
+            <!--<div class="searchGroup">-->
+            <!--<input type="text" class="text" placeholder="搜索商品">-->
+            <!--<input type="text" class="button">-->
+            <!--</div>-->
+        </div>
+        <div class="infos">收货信息</div>
+        <form action="" class="bu-form">
+            <div class="form-group">
+                <div class="pwd">收货人</div>
+                <input type="text" class="typeIn large-size" ng-model="pickMan.man">
+                <div class="pwd right">联系电话</div>
+                <input type="text" class="typeIn large-size" ng-model="pickMan.phone">
+            </div>
+
+            <div class="form-group">
+                <div class="pwd">提货门店</div>
+                <input type="text" disabled class="typeIn large-size" ng-model="shopName">
+                <div class="pwd right">提货时间</div>
+                <input type="text" disabled class="typeIn large-size" ng-model="date">
+            </div>
+            <!--<div class="form-group">-->
+            <!--<div class="pwd">提货发票</div>-->
+            <!--<input type="password" class="typeIn large-size" placeholder="">-->
+            <!--</div>-->
+        </form>
+        <div class="order_info">
+            <div class="infos">商品列表</div>
+            <div class="order_show">
+                <div class="pic_card">
+                    <ul>
+                        <li ng-repeat="sku in skuList">
+                            <div class="pos">
+                                <img ng-src="{{FILE_SERVER_DOMAIN+sku['SHOP_PRODUCT.CMP']}}?x-oss-process=image/resize,m_fill,h_220,w_220"
+                                     ng-click="toDetail(detail['SHOP_ORDER_INFO.PRD_ID'])">
+                                <div class="goods_intro">
+                                    <p class="goods_name" ng-bind="sku['SHOP_PRODUCT.PRD_NAME']"></p>
+                                    <p class="goods_size"
+                                       ng-bind="sku['SHOP_PRODUCT_SKU.SKU_CONTENT_INFO']"></p>
+                                    <p class="goods_size"
+                                       ng-bind="'编号:'+sku['SHOP_PRODUCT_SKU.PRD_SKU']"></p>
+                                </div>
+                                <div class="price">
+                                    <span ng-bind="seckill['unit_price']/100 | currency :'￥'"></span>
+                                    <span class="price_count" ng-bind="'x'+sku['SHOP_PRODUCT_SKU.SIZE']"></span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="remarkInfo">
+            <span class="infos">备注信息</span>
+            <input class="remarkTxt" type="text" placeholder="请填入备注信息" ng-model="order['SHOP_ORDER.REMARK']">
+        </div>
+        <div class="foot">
+            <div class="footFirst">
+                <span>共</span>
+                <span class="sep">1</span>
+                <span>件商品</span>
+            </div>
+            <div class="footSecond">
+                <span>合计</span>
+                <span class="sep1" ng-bind="order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'"></span>
+                <div class="buy" ng-click="goSeckill()">确认下单</div>
+            </div>
+        </div>
+    </div>
+</div>

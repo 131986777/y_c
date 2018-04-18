@@ -1,0 +1,130 @@
+<div class="page-content">
+    <div class="col-sm-12">
+        <form class="form-horizontal" novalidate="novalidate">
+            <div class="form-group">
+            <span class="icon-required">*</span>
+                <label class="control-label col-sm-1 right form-input-title">
+                       
+                    黄卡    
+                </label>
+                <div class="col-sm-4">
+                 
+                          <input class="form-control"
+                               ng-model="value['CARD_RECGARGE']"
+                               name="number" type="text"
+                               placeholder="请输入充值的黄卡卡号">
+                   
+                   
+                </div>
+            </div>
+            <div class="form-group">
+                <span class="icon-required">*</span>
+                <label class="control-label col-sm-1 right form-input-title">充值金额</label>
+                <div class="col-sm-4">
+                    <input class="form-control"
+                               ng-model="value['TOTAL_RECHARGE']"
+                               name="number" type="text"
+                               placeholder="填写黄卡充值金额" ng-blur="">
+                </div> 
+            </div>
+            <div class="inputs" style="margin-bottom: 15px;">
+	            <div class="form-group" style="margin-bottom: 0px;">
+	                <!-- <span class="icon-required">*&nbsp;<img alt="添加卡号" src="../../pc/public/css/img/plus.png" style="width:30px;height:30px;vertical-align: middle;" ng-click="addCard()"></span> -->
+	                <label class="control-label col-sm-1 right form-input-title">储蓄卡</label>
+	                <div class="col-sm-4" id="store">
+	                    <input class="form-control storecard" 
+	                               name="number" type="text"
+	                               placeholder="请输入赠送储蓄卡卡号">
+	                                       
+	                </div>
+	            </div>
+            </div>
+            <div class="form-group">
+                <span class="icon-required">*</span>
+                <label class="control-label col-sm-1 right form-input-title">赠送总额</label>
+                <div class="col-sm-4">
+                    <input class="form-control"
+                               ng-model="value['TOTAL']"
+                               name="number" type="text"
+                               placeholder="充值送金额">
+                </div> 
+            </div>
+            <div class="form-group">
+                <span class="icon-required">*</span>
+                <label class="control-label col-sm-1 right form-input-title">手机号</label>
+                <div class="col-sm-4">
+                    <input class="form-control"
+                               ng-model="value['PHONE']"
+                               name="number" type="text"
+                               placeholder="请输入顾客的手机号码">
+                </div>
+            </div> 
+             <!-- <div class="form-group">
+                 <div class="btn-group" role="group" aria-label="...">
+			  <button type="button" class="btn btn-default bths" style="border-radius: 19px;" ng-click="sendSms()">获取验证码</button>
+			 
+			</div>
+                  <label class="control-label col-sm-1 right form-input-title"></label>
+                 <div class="col-sm-4">
+                    <input class="form-control"
+                               ng-model="value['CODE']"
+                               name="number" type="text"
+                               placeholder="请输入短信验证码">
+                </div>
+            </div>  -->
+            
+              
+           <!-- <div class="form-group">
+                <span class="icon-required" style="color:#000000">（选填）</span>
+                <label class="control-label col-sm-1 right form-input-title">身份证</label>
+                <div class="col-sm-4">
+                    <input class="form-control"
+                               ng-model="value['ID_NUMBER']"
+                               name="number" type="text" 
+                               placeholder="">
+                </div> 
+            </div>
+             <div class="form-group">
+                <span class="icon-required" style="color:#000000">（选填）</span>
+                <label class="control-label col-sm-1 right form-input-title">性别</label>
+                <div class="col-sm-4">
+                    <input class="form-control"
+                               ng-model="value['SEX']"
+                               name="number" type="text"
+                               placeholder="">
+                </div> 
+            </div>
+               <div class="form-group">
+                <span class="icon-required" style="color:#000000">（选填）</span>
+                <label class="control-label col-sm-1 right form-input-title">出生年月</label>
+                <div class="col-sm-4">
+                    <input class="form-control"
+                               ng-model="value['BIRTHDAY']"
+                               name="number" type="text"
+                               placeholder="格式  1970-01-01">
+                </div> 
+            </div>
+             <div class="form-group">
+                <span class="icon-required" style="color:#000000">（选填）</span>
+                <label class="control-label col-sm-1 right form-input-title">家庭住址</label>
+                <div class="col-sm-4">
+                    <input class="form-control"
+                               ng-model="value['ADDR']"
+                               name="number" type="text"
+                               placeholder="">
+                </div> 
+            </div> -->
+            <div class="form-group" style="margin-top: 30px;">
+            	<span class="icon-required" style="color:#000000"></span>
+                <label class="control-label col-sm-1 right form-input-title"></label>
+            	    <div class="col-sm-4 text-center">
+            	    	     <div class="btn-group " role="group" aria-label="...">
+							  <button type="button" class="btn btn-default " style="border-radius: 19px;" ng-click="commitForm()">确认绑定</button>
+            	   	</div> 
+             
+            </div>
+           
+        </form>
+         
+    </div>
+</div>

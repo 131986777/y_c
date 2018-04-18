@@ -1,0 +1,250 @@
+<div class="lucky-page" style="padding-top: 40px">
+    <div id="lottery" ng-init="initData()" class="lottery" >
+        <table border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td class="lottery-unit lottery-unit-0">
+                    <div class="rewards" ng-if="luckListAll[0]['IS_PRIZE']!=false">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[0]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[0]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[0]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[0]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[0]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[0]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[0]['IS_PRIZE']==false&&show">
+                        <span class="symbol">谢谢参与</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[0]['IS_PRIZE']!=false&&show">
+                        {{luckListAll[0]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[0]['IS_PRIZE']==false&&show">谢谢参与</div>
+                    <div class="mask"></div>
+                </td>
+                <td class="lottery-unit lottery-unit-1">
+                    <div class="rewards" ng-if="luckListAll[1]['IS_PRIZE']!=false">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[1]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[1]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[1]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[1]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[1]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[1]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[1]['IS_PRIZE']==false&&show">
+                        <span class="symbol">谢谢参与</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[1]['IS_PRIZE']!=false&&show">
+                        {{luckListAll[1]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[1]['IS_PRIZE']==false&&show">谢谢参与</div>
+                    <div class="mask"></div>
+                </td>
+                <td class="lottery-unit lottery-unit-2">
+                    <div class="rewards" ng-if="luckListAll[2]['IS_PRIZE']!=false">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[2]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[2]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[2]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[2]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[2]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[2]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[2]['IS_PRIZE']==false&&show">
+                        <span class="symbol">谢谢参与</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[2]['IS_PRIZE']!=false&&show">
+                        {{luckListAll[2]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[2]['IS_PRIZE']==false&&show">谢谢参与</div>
+                    <div class="mask"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="lottery-unit lottery-unit-7">
+                    <div class="rewards" ng-if="luckListAll[7]['IS_PRIZE']!=false">
+                   <span class="price"
+                         ng-if="couponMap.get(luckListAll[7]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[7]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[7]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[7]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[7]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[7]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[7]['IS_PRIZE']==false&&show">
+                        <span class="symbol">谢谢参与</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[7]['IS_PRIZE']!=false&&show">
+                        {{luckListAll[7]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[7]['IS_PRIZE']==false&&show">谢谢参与</div>
+                    <div class="mask"></div>
+                </td>
+                <td>
+                    <a class="startBtn"></a>
+                </td>
+                <td class="lottery-unit lottery-unit-3">
+                    <div class="rewards" ng-if="luckListAll[3]['IS_PRIZE']!=false">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[3]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[3]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[3]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[3]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[3]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[3]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[3]['IS_PRIZE']==false&&show">
+                        <span class="symbol">谢谢参与</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[3]['IS_PRIZE']!=false&&show">
+                        {{luckListAll[3]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[3]['IS_PRIZE']==false&&show">谢谢参与</div>
+                    <div class="mask"></div>
+                </td>
+            </tr>
+            <tr>
+                <td class="lottery-unit lottery-unit-6">
+                    <div class="rewards" ng-if="luckListAll[6]['IS_PRIZE']!=false">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[6]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[6]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[6]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[6]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[6]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[6]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[6]['IS_PRIZE']==false&&show">
+                        <span class="symbol">谢谢参与</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[6]['IS_PRIZE']!=false&&show">
+                        {{luckListAll[6]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[6]['IS_PRIZE']==false&&show">谢谢参与</div>
+                    <div class="mask"></div>
+                </td>
+                <td class="lottery-unit lottery-unit-5">
+                    <div class="rewards" ng-if="luckListAll[5]['IS_PRIZE']!=false">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[5]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[5]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[5]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[5]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[5]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[5]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[5]['IS_PRIZE']==false&&show">
+                        <span class="symbol">谢谢参与</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[5]['IS_PRIZE']!=false&&show">
+                        {{luckListAll[5]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[5]['IS_PRIZE']==false&&show">谢谢参与</div>
+                    <div class="mask"></div>
+                </td>
+                <td class="lottery-unit lottery-unit-4">
+                    <div class="rewards" ng-if="luckListAll[4]['IS_PRIZE']!=false">
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[4]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        {{(couponMap.get(luckListAll[4]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/100}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[4]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==1">
+                        元
+                    </span>
+                    <span class="price"
+                          ng-if="couponMap.get(luckListAll[4]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        {{(couponMap.get(luckListAll[4]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.FACE_VALUE'])/10}}
+                    </span>
+                    <span class="symbol"
+                          ng-if="couponMap.get(luckListAll[4]['LUCKY_DRAW.PRIZE_ID'])['COUPON.RULE_INFO']['COUPON_RULE.TYPE']==2">
+                        折
+                    </span>
+                    </div>
+                    <div class="rewards" ng-if="luckListAll[4]['IS_PRIZE']==false&&show">
+                        <span class="symbol">谢谢参与</span>
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[4]['IS_PRIZE']!=false&&show">
+                        {{luckListAll[4]['LUCKY_DRAW.INTRO']}}
+                    </div>
+                    <div class="rewards-info" ng-if="luckListAll[4]['IS_PRIZE']==false&&show">谢谢参与</div>
+                    <div class="mask"></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+        <div style="margin-top: 40px;color: #4D0300" class="text-center">
+            <h4 class="lucky-desc">积分抽奖说明</h4>
+            <!--text-decoration: underline;">积分抽奖说明</h4>-->
+        </div>
+    <div style="color: #4D0300;margin-left: 25%">
+        <h5 >1、 我以为，我会哭</h5>
+        <h5 >2、 但是我，没有</h5>
+        <h5 >3、 我只是怔怔望着你的脚步</h5>
+    <h5 >4、 给你我最后的祝福</h5>
+        </div>
+</div>

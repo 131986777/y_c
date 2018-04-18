@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="zh-CN" ng-app="AndSell.Main" ng-controller="MainController">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title ng-bind="title"></title>
+
+    <!--############CSS引用区############-->
+    <link href="/AndSell/app/components/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/AndSell/app/components/libs/bootstrap/dist/css/bootstrap-theme.min.css"
+          rel="stylesheet">
+    <link href="/AndSell/app/components/libs/font-awesome/css/font-awesome.min.css"
+          rel="stylesheet">
+    <!--
+        <link rel="stylesheet" type="text/css" media="all" href="daterangepicker-bs3.css" />
+    -->
+    <link href="/AndSell/app/components/libs/iconfont/iconfont.css" rel="stylesheet">
+
+    <!--时间选择-->
+    <link href="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.min.css"
+          rel="stylesheet">
+    <!--表单验证-->
+    <link href="/AndSell/app/components/form-validator/bootstrapValidator.min.css" rel="stylesheet">
+    <!--标签输入框样式-->
+    <link href="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.css" rel="stylesheet">
+    <link href="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.bootstrap.css"
+          rel="stylesheet">
+    <link href="/AndSell/app/components/libs/simple-line-icons/simple-line-icons.min.css"
+          rel="stylesheet">
+    <link href="/AndSell/app/components/libs/angular/angularBlockUI/angular-block-ui.css"
+          rel="stylesheet">
+    <link href="/AndSell/app/components/global-style/global-style.css" rel="stylesheet">
+
+    <link href="/AndSell/app/components/sidebar/sidebar.css" rel="stylesheet">
+    <link href="/AndSell/app/components/tree-list/tree-list.css" rel="stylesheet">
+    <link href="/AndSell/app/components/nav/nav-bottom.css" rel="stylesheet">
+    <link href="/AndSell/app/components/operbar/operbar.css" rel="stylesheet">
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!--高德地图-->
+    <script type="text/javascript"
+            src="http://webapi.amap.com/maps?v=1.3&key=ef5bbbdf7bca82910095f043224c0138&plugin=AMap.Autocomplete"></script>
+
+
+</head>
+
+<body>
+
+<!--############Nav############-->
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group input-group">
+                <div class="input-group-btn">
+                    <!--<select class="form-control" ng-model="searchType"-->
+                            <!--ng-init="searchType='product'">-->
+                        <!--<option value="product">搜商品</option>-->
+                        <!--<option value="order">搜订货单</option>-->
+                        <!--&lt;!&ndash;<option value="returnOrder">搜退货单</option>&ndash;&gt;-->
+                        <!--<option value="member">搜客户</option>-->
+                    <!--</select>-->
+                </div>
+                <input class="form-control" ng-model="searchContent" type="text"
+                       ng-keyup="queryKeyUp($event)">
+                <div class="input-group-btn">
+                    <button class="btn btn-default" type="button" ng-click="search()">
+                        搜索
+                    </button>
+                </div>
+                <audio autoplay></audio>
+            </div>
+        </form>
+        <ul class="nav navbar-nav navbar-right" style="margin-right:5px">
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"
+                   data-hover="dropdown">
+                    <i class="icon-user"></i>&nbsp;
+                    用户
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a ui-sref="#">
+                            <i class="icon-user"></i>
+                            我的信息
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../config/passwordModify.jsp">
+                            <i class="icon-lock"></i>
+                            修改密码
+                        </a>
+                    </li>
+                    <li>
+                        <!--<a ui-sref="sys/sys/sysSetting">-->
+                            <!--<i class="icon-settings"></i>-->
+                            <!--系统设置-->
+                        <!--</a>-->
+                    </li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"
+                   data-hover="dropdown">
+                    <i class="icon-heart"></i>
+                    客服
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li>
+                        <a ui-sref="#">
+                            <i class="icon-emoticon-smile"></i>
+                            在线客服
+                        </a>
+                    </li>
+                    <li>
+                        <!--<a href="../config/passwordModify.jsp">-->
+                            <!--<i class="icon-call-end"></i>-->
+                            <!--电话 400-6565-747-->
+                        <!--</a>-->
+                    </li>
+                    <!--<li>-->
+                    <!--<a href="../sys/sysSetting.jsp">-->
+                    <!--<i class="icon-settings"></i>-->
+                    <!--系统设置-->
+                    <!--</a>-->
+                    <!--</li>-->
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="" ng-click="logout()">
+                    <i class="icon-logout"></i>
+                    <span class="username username-hide-on-mobile "> 退出 </span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <!--############SideBar#############-->
+        <div class="sidebar">
+            <ul class="nav nav-sidebar nav-sidebar-default">
+                <li class="logo text-center">
+                    <img src="../components/images/logo.png">
+                </li>
+
+                <li class="dropdown" >
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       ui-sref="order/order/orderList({orderType:'3'})"
+                       data-hover="dropdown">
+                        <i class="icon-docs"></i>
+                        订单
+                    </a>
+                    <div class="sub-menu-wrap dropdown-menu" role="menu">
+                        <ul class="sub-menu">
+                            <!--<li ng-if="APP_ID_LIST.indexOf('@1075@')>=0">-->
+                            <!--<a ui-sref="order/order/orderList({orderType:'1'})">-->
+                            <!--订货单-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <li >
+                                <a ui-sref="order/order/orderList({orderType:'3'})">
+                                    自提单
+                                </a>
+                            </li>
+                            <!--<li ng-if="APP_ID_LIST.indexOf('@1077@')>=0">-->
+                                <!--<a ui-sref="order/order/refundOrder">-->
+                                    <!--退款单-->
+                                <!--</a>-->
+                                <!--&lt;!&ndash;<a ui-sref="order/order/paymentOrder">&ndash;&gt;-->
+                                <!--&lt;!&ndash;付款单&ndash;&gt;-->
+                                <!--&lt;!&ndash;</a>&ndash;&gt;-->
+                            <!--</li>-->
+                            <!--<li ng-if="APP_ID_LIST.indexOf('@1111@')>=0">-->
+                                <!--<a ui-sref="order/order/reserveOrder({orderType:'5'})">-->
+                                    <!--分拣单-->
+                                <!--</a>-->
+                            <!--</li>-->
+                            <li >
+                                <a ui-sref="order/order/appointmentOrder">
+                                    线上预约单
+                                </a>
+                            </li>
+                            <!--<li>-->
+                            <!--<a ui-sref="order/order/orderList({orderType:'2'})">-->
+                            <!--退货单-->
+                            <!--</a>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                            <!--<a ui-sref="order/order/offlineOrderList">-->
+                            <!--线下订单-->
+                            <!--</a>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       ui-sref="balance/balance/balanceList"
+                       data-hover="dropdown">
+                        <i class="iconfont icon-zijinyue"></i>
+                        财务
+                    </a>
+                    <div class="sub-menu-wrap sub-menu-1 dropdown-menu">
+                        <ul class="sub-menu" role="menu">
+                            <li>
+                                <a ui-sref="balance/balance/balanceList">
+                                    资金明细
+                                </a>
+                            </li>
+                            <li>
+                                <a ui-sref="point/point/pointList">
+                                    积分明细
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+                 <li class="dropdown" ng-if="APP_ID_LIST.indexOf('@1065@')>=0">
+                    <a class="dropdown-toggle" data-toggle="dropdown"
+                       ui-sref="member/member/memberList"
+                       data-hover="dropdown">
+                        <i class="icon-users"></i>
+                        客户
+                    </a>
+                    <div class="sub-menu-wrap sub-menu-1 dropdown-menu">
+                        <ul class="sub-menu" role="menu">
+                            <li ng-if="APP_ID_LIST.indexOf('@1081@')>=0">
+                                <a ui-sref="member/member/memberList">
+                                    客户列表
+                                </a>
+                            </li>
+                            
+                            <li ng-if="APP_ID_LIST.indexOf('@1086@')>=0">
+                                <a ui-sref="card/card/cardList">
+                                    已开会员卡
+                                </a>
+                            </li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1146@')>=0">
+                                <a ui-sref="point/coupon/achievelist">
+                                    年货大集兑换
+                                </a>
+                            </li>
+                        	<li ng-if="APP_ID_LIST.indexOf('@1146@')>=0">
+                                <a ui-sref="member/recharge/rechargeList">
+                                    用户充值列表
+                                </a>
+                            </li>
+                            <li ng-if="APP_ID_LIST.indexOf('@1146@')>=0">
+                                <a ui-sref="order/order/giftList">
+                                    充值赠品兑换
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="row-header">
+            <h4 ng-bind="title"></h4>
+        </div>
+        <div class="row-content">
+            <div ui-view="" class="ng-scope"></div>
+        </div>
+
+    </div>
+
+    <!--带确定和取消的阻塞提示框 -->
+    <div message-modal></div>
+    <!--短时间提示后隐藏的非阻塞提示框 -->
+    <div short-message-modal></div>
+    <!--回调提示框 -->
+    <div return-message-modal></div>
+	<!--回调提示框冻结卡操作 -->
+    <div show-prompt></div>
+
+</div>
+
+<!--############Footer############-->
+<nav class="navbar navbar-default navbar-fixed-bottom" ng-show="navShow" role="navigation">
+    <div class="container-fluid">
+        <form class="navbar-form">
+            <div class="form-group">
+                <a class="btn btn-default"
+                   ng-click="navaBottomSubmit()"
+                   style="background-color: #395170;color: #efefef;width: 80px">
+                    保 存
+                </a>
+                <a type="button"
+                   ng-click="navaBottomCancel()"
+                   class="btn btn-default" style="width: 80px">
+                    取 消
+                </a>
+            </div>
+        </form>
+    </div>
+</nav>
+
+
+<!--############JS引用区############-->
+
+<script src="/AndSell/app/components/libs/jquery/dist/jquery.min.js"></script>
+<script src="/AndSell/app/components/libs/angular/angular.min.js"></script>
+<script
+    src="/AndSell/app/components/libs/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="/AndSell/app/components/libs/ocLazyLoad.min.js"></script>
+<script src="/AndSell/app/components/libs/angular-resource/angular-resource.min.js"></script>
+<script src="/AndSell/app/components/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="/AndSell/app/components/libs/angular/nya-bootstrap-select.js"></script>
+<script src="/AndSell/app/components/libs/bootstrap-fileinput/bootstrap-fileinput.js"></script>
+<script src="/AndSell/app/components/data-hover/data-hover.js"></script>
+<!--时间选择-->
+<script type="text/javascript"
+        src="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript"
+        src="/AndSell/app/components/libs/datepicker/bootstrap-datetimepicker.zh-CN.js"></script>
+<!--表单验证-->
+<script type="text/javascript"
+        src="/AndSell/app/components/form-validator/bootstrapValidator.min.js"></script>
+<script type="text/javascript" src="/AndSell/app/components/form-validator/zh_CN.js"></script>
+
+<script src="/AndSell/app/components/dateTime/moment.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-daterangepicker/daterangepicker.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-timepicker/js/bootstrap-timepicker.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script src="/AndSell/app/components/dateTime/clockface/js/clockface.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js"></script>
+<script
+    src="/AndSell/app/components/dateTime/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="/AndSell/app/components/dateTime/date-pickerJs.js"></script>
+<script src="/AndSell/app/components/dateTime/components-date-time-pickers.min.js"></script>
+
+<!--导出数据-->
+<script src="/AndSell/app/analysis/analysis/analysis-outputexcel.js"></script>
+<!--ECharts-->
+<script type="application/javascript" src="/AndSell/app/components/libs/echarts.min.js"></script>
+
+<!-- 时间选择 -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+<!-- END PAGE LEVEL SCRIPTS -->
+<!--angularjs blockui-->
+<script src="/AndSell/app/components/libs/angular/angularBlockUI/angular-block-ui.js"></script>
+<script src="/AndSell/app/components/tree-list/tree-list.js"></script>
+<!-- UEDITOR 配置文件 -->
+<script type="text/javascript"
+        src="/AndSell/app/components/libs/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="/AndSell/app/components/libs/ueditor/ueditor.all.js"></script>
+<!--标签输入框 -->
+<script src="/AndSell/app/components/libs/angular/ngTagInput/ng-tags-input.js"></script>
+
+<script src="/AndSell/app/components/libs/ngFocusIf/focusIf.min.js"></script>
+
+<!--importantJs -->
+<script src="application.js"></script>
+<!--############通用方法区############-->
+<script src="commonJs.js"></script>
+
+
+<!--############router集合区############-->
+<script src="main_router.js"></script>
+
+<script src="/AndSell/app/product/product-router.js"></script><!--商品相关路由中心-->
+<script src="/AndSell/app/member/member-router.js"></script><!--会员相关路由中心-->
+<script src="/AndSell/app/shop/shop-router.js"></script><!--门店相关路由中心-->
+<script src="/AndSell/app/demo/demo-router.js"></script><!--demo相关路由中心-->
+<script src="/AndSell/app/balance/balance-router.js"></script><!--demo相关路由中心-->
+<script src="/AndSell/app/point/point-router.js"></script><!--demo相关路由中心-->
+<script src="/AndSell/app/card/card-router.js"></script><!--demo相关路由中心-->
+<script src="/AndSell/app/order/order-router.js"></script><!--demo相关路由中心-->
+<script src="/AndSell/app/stock/stock-router.js"></script><!--库存相关路由中心-->
+<script src="/AndSell/app/marketing/marketing-router.js"></script><!--营销相关路由中心-->
+<script src="/AndSell/app/user/user-router.js"></script><!--管理员相关路由中心-->
+<script src="/AndSell/app/analysis/analysis-router.js"></script><!--数据分析相关路由-->
+<script src="/AndSell/app/sys/sys-router.js"></script><!--系统设置相关路由-->
+
+
+<!--############service集合区############-->
+<script src="/AndSell/app/product/product/product-services.js"></script><!--商品-->
+<script src="/AndSell/app/product/class/class-services.js"></script><!--商品分类-->
+<script src="/AndSell/app/product/tag/tag-services.js"></script><!--商品标签-->
+<script src="/AndSell/app/product/unit/service.js"></script><!--商品单位-->
+<script src="/AndSell/app/shop/shop/shop-services.js"></script><!--门店-->
+<script src="/AndSell/app/user/user/user-services.js"></script><!--管理员-->
+<script src="/AndSell/app/user/role/role-services.js"></script><!--管理员-->
+<script src="/AndSell/app/shop/shop_district/district-services.js"></script><!--门店区域-->
+<script src="/AndSell/app/member/member/member-services.js"></script><!--会员 示例使用-->
+<script src="/AndSell/app/member/source/memberSource-services.js"></script><!--客户来源-->
+<script src="/AndSell/app/member/type/memberType-services.js"></script><!--客户类型-->
+<script src="/AndSell/app/member/group/memberGroup-services.js"></script><!--客户类型-->
+<script src="/AndSell/app/stock/stock/stock-services.js"></script><!--实时库存-->
+<script src="/AndSell/app/stock/totalStock/totalStock-services.js"></script><!--总库存-->
+<script src="/AndSell/app/stock/store/store-services.js"></script><!--仓库-->
+<script src="/AndSell/app/marketing/coupon/coupon-services.js"></script><!--优惠券-->
+<script src="/AndSell/app/marketing/lucky/lucky-services.js"></script><!--抽奖-->
+<script src="/AndSell/app/marketing/sales/sales-services.js"></script><!--促销-->
+<script src="/AndSell/app/marketing/banner/banner-services.js"></script><!--横幅-->
+<script src="/AndSell/app/demo/demo/demo-services.js"></script><!--demo 示例使用-->
+<script src="/AndSell/app/demo/demo2/demo2-services.js"></script><!--demo2 示例使用-->
+<script src="/AndSell/app/point/point-services.js"></script><!--demo2 示例使用-->
+<script src="/AndSell/app/balance/balance/balance-services.js"></script><!--资金示例使用-->
+<script src="/AndSell/app/card/card/card-services.js"></script><!--demo2 示例使用-->
+<script src="/AndSell/app/order/order/order-services.js"></script><!--demo2 示例使用-->
+<script src="/AndSell/app/analysis/analysis/analysis-service.js"></script><!--数据分析-->
+<script src="/AndSell/app/sys/sys/sys-services.js"></script><!--数据分析-->
+<script src="/AndSell/app/sys/advice/advice-services.js"></script><!--数据分析-->
+<script src="/AndSell/app/member/recharge/memberRecharge-services.js"></script><!--万元充值相关-->
+
+<!--############controller集合区(以后尝试 切换时注入)############-->
+<script src="main_controller.js"></script>
+
+<script src="/AndSell/app/demo/demo/demoAdd/controllers.js"></script><!--demoList 示例使用-->
+<script src="/AndSell/app/demo/demo/demoList/controllers.js"></script><!--demoList 示例使用-->
+<script src="/AndSell/app/demo/demo/demoModify/controllers.js"></script><!--demoModify 示例使用-->
+
+</body>
+</html>

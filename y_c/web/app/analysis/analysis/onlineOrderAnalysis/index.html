@@ -1,0 +1,70 @@
+<div class="container-fluid" ng-init="initLoad()">
+    <!--时间选择导航-->
+    <div class="row timeBar">
+        <div class="col-md-12">
+            <div class="col-md-6 fixWidth">
+              
+                  <input id="start_hour" type="text" class="form-control inputWidth"  readonly="readonly" placeholder="起始时间"
+                         name="from" ng-model="filter['DATETIME_ADD_FROM']" data-date-format="yyyy-mm-dd">
+                  <span>-</span>
+                  <input id="end_hour" type="text" class="form-control inputWidth"  readonly="readonly" placeholder="截止时间"
+                         name="to" ng-model="filter['DATETIME_ADD_TO']"
+                         data-date-format="yyyy-mm-dd">
+                  <input  type="text" class="form-control inputWidth" placeholder="商品名称" ng-model="filter['PRD_NAME']">
+                            
+               </div>
+               <div class="col-md-3">
+               		 <select id="shop" class="selectpicker show-tick form-control" data-live-search="true" ng-model="filter['SHOP_ID']">
+               		 	<option value='null' selected="true">全部门店</option>
+               		 </select>
+               </div>       
+            <button class="btn " type="button" ng-click="getProdutOrderList()">查询</button>
+            <button class="btn alignRight" type="button" id="ouputBtn" ng-click="outPutQuery()">导出</button>
+            <div class="clear"></div>
+       
+    </div>
+    
+</div>
+ 
+<div class="table-content">
+    <div class="table-toolbar">
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr >
+                <th class="text-center" ng-bind="name" ng-repeat='name in TITLE' ></th>      
+            </tr>        
+            </thead>
+            <tbody>
+            <tr ng-repeat="VALUE in OLDLIST" align="center">
+            	<td style="vertical-align: middle;"><span ng-bind="VALUE['PRD_NAME']"></span></td>
+            	<td style="vertical-align: middle;"><span ng-bind="VALUE['ORDER_COUNT']"></span></td>
+           		<td align="center">
+           			<span ng-bind="VALUE['SKU']"></span>
+           		</td>
+           		<td align="center">
+           			<span ng-bind="VALUE['PRD']"></span>
+           		</td>
+           		<td align="center">
+           			<span ng-bind="VALUE['PRD_COUNT']"></span>
+           		</td>
+           		<td align="center">
+           			<span ng-bind="VALUE['SKU_UNIT']"></span>
+           		</td>
+           		<td ng-bind="VALUE['PRICE_SUM']" align="center"></td>
+           		<td ng-value="VALUE['PRD_NAME']" align="center">   
+           		<a class="table-link" ui-sref="analysis/analysis/onlineShopOrderAnalysis({PRD_NAME:VALUE['PRD_NAME'],SKU:VALUE['SKU'],FILTER:'{{filter}}' })">
+                                    商品订单详情
+                    </a></td>
+            </tr>
+            <tr align="center" ng-if="OLDLIST.length>0">
+               <td colspan=6 style="vertical-align: middle;">合计</td>
+               <td ng-bind="all" align="center">
+           		
+           		</td>
+            	
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

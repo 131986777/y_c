@@ -1,0 +1,449 @@
+<div class="row-wrap containers-order-detail">
+    <div class="showBoard" ng-init="initData()">
+        <div class="pay_head">
+            <span class="wait_pay">
+                <div ng-if="order['SHOP_ORDER.TYPE']=='1'">
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">订单待支付！</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">订单待出库！</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==-1">订单待发货！</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==-1">订单待收货！</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&order['SHOP_ORDER.STATE_ACCEPT']==-1">订单已完成！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
+                </div>
+                 <div ng-if="order['SHOP_ORDER.TYPE']=='4'">
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==1">已预约，待付款！</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.NEED_PAY']==-1">已预约!</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2">已预约且已付款，待自提!</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==-1">已预约且已付款，待发货</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==1">已预约且已付款，待收货</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&order['SHOP_ORDER.NEED_PAY']==1">订单已完成！</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1&&order['SHOP_ORDER.NEED_PAY']==-1">订单已完成！</span>
+                     <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
+                 </div>
+                <div ng-if="order['SHOP_ORDER.TYPE']=='3'">
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">订单待支付！</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==-1">订单待分拣！</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">订单待提货！</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">订单已完成！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
+                </div>
+                <div ng-if="order['SHOP_ORDER.TYPE']=='5'">
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1">订单待支付！</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==-1">订单待分拣！</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==-1">订单待提货！</span>
+                    <span
+                        ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1">订单已完成！</span>
+                    <span ng-if="order['SHOP_ORDER.STATE_ORDER']==-1">订单已取消！</span>
+                </div>
+            </span>
+            <span class="time_warning">
+                  <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.TYPE']=='4'&&order['SHOP_ORDER.NEED_PAY']==1">
+                      请在30分钟之内完成付款，逾期订单将关闭
+                  </p>
+                <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.TYPE']=='3'">
+                    请在30分钟之内完成付款，逾期预约将取消
+                </p>
+                <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.TYPE']=='5'">
+                    请在今天之内完成付款，逾期订单将关闭
+                </p>
+            </span>
+            <div class="opreation_group"
+                 ng-if="(order['SHOP_ORDER.TYPE']=='3'||order['SHOP_ORDER.TYPE']=='5')&&order['SHOP_ORDER.STATE_ORDER']==1">
+                <div class="cancel_order" ng-click="cancelOrder()"
+                     ng-if="((order['SHOP_ORDER.STATE_MONEY']==-1||((order['SHOP_ORDER.STATE_DELIVERY']==-1&&order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&&order['SHOP_ORDER.STATE_MONEY']==1))&& (order['SHOP_ORDER.TYPE']=='3'||order['SHOP_ORDER.TYPE']=='5')))
+                        ||(order['SHOP_ORDER.STATE_MONEY']==-1||(order['SHOP_ORDER.PAY_TYPE']=='ACCOUNT'&& order['SHOP_ORDER.STATE_OUT']==-1)&& order['SHOP_ORDER.TYPE']=='1')">
+                    取消订单
+                </div>
+                <!--ng-click="payNow()"-->
+                <div class="pay_now" ui-sref="pages/personal/pay({ORDER_ID:order['SHOP_ORDER.ID']})"
+                     ng-if="((order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.TYPE']!='5')||(order['SHOP_ORDER.STATE_MONEY']==-1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.TYPE']=='5'))">
+                    立即支付
+                </div>
+            </div>
+
+            <div class="opreation_group"
+                 ng-if="(order['SHOP_ORDER.TYPE']=='4')&&order['SHOP_ORDER.STATE_ORDER']==1">
+                <div class="cancel_order" ng-click="cancelOrder()"
+                     ng-if="(order['SHOP_ORDER.NEED_PAY']==-1&&order['SHOP_ORDER.STATE_DELIVERY']==-1)||(order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.STATE_MONEY']==-1)">
+                    取消订单
+                </div>
+
+                <!--ng-click="payNow()"-->
+                <div class="pay_now" ui-sref="pages/personal/pay({ORDER_ID:order['SHOP_ORDER.ID']})"
+                     ng-if="order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
+                    立即支付
+                </div>
+            </div>
+        </div>
+        <div class="flow_progress" ng-if="order['SHOP_ORDER.STATE_ORDER']==1">
+
+            <div class="gradient_bar "></div>
+
+            <ul class="progress_step" ng-if="order['SHOP_ORDER.TYPE']=='1'">
+                 <li class="stepWidth-6" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                    提交
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_ADD']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_ADD']"></span>
+                </li>
+                 <li class="stepWidth-6" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
+                    付款
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_PAY']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_PAY']"></span>
+                </li>
+                 <li class="stepWidth-6" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
+                    出库
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_OUT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_OUT']"></span>
+                </li>
+                 <li class="stepWidth-6" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1]">
+                    发货
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_SEND']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_SEND']"></span>
+                </li>
+                 <li class="stepWidth-6" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1]">
+                    收货
+                    <span class="finished_time"
+                          ng-if="order['SHOP_ORDER.DATETIME_ACCEPT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_ACCEPT']"></span>
+                </li>
+                 <li class="stepWidth-6" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
+                    交易完成
+                    <span class="finished_time"
+                          ng-if="order['SHOP_ORDER.DATETIME_COMMENT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_COMMENT']"></span>
+                </li>
+            </ul>
+            <ul class="progress_step" ng-if="order['SHOP_ORDER.TYPE']=='3'">
+                 <li class="stepWidth-5" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                    下单
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_ADD']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_ADD']"></span>
+                </li>
+                 <li class="stepWidth-5" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
+                    付款
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_PAY']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_PAY']"></span>
+                </li>
+                 <li class="stepWidth-5" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
+                    捡货
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_OUT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_OUT']"></span>
+                </li>
+                 <li class="stepWidth-5" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
+                    提货
+                    <span class="finished_time"
+                          ng-if="order['SHOP_ORDER.DATETIME_DELIVERY']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_DELIVERY']"></span>
+                </li>
+                 <li class="stepWidth-5" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
+                    交易完成
+                    <span class="finished_time"
+                          ng-if="order['SHOP_ORDER.DATETIME_COMMENT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_COMMENT']"></span>
+                </li>
+            </ul>
+            <ul class="progress_step"
+                ng-if="order['SHOP_ORDER.TYPE']=='4'&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==2">
+                 <li class="stepWidth-3" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                    预约
+                       <span class="finished_time"
+                             ng-if="order['SHOP_ORDER.DATETIME_ADD']!=undefined"
+                             ng-bind="order['SHOP_ORDER.DATETIME_ADD']"></span>
+                </li>
+                 <li class="stepWidth-3" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
+                    预付款
+                       <span class="finished_time"
+                             ng-if="order['SHOP_ORDER.DATETIME_PAY']!=undefined"
+                             ng-bind="order['SHOP_ORDER.DATETIME_PAY']"></span>
+                </li>
+                 <li class="stepWidth-3" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
+                    提货
+                       <span class="finished_time"
+                             ng-if="order['SHOP_ORDER.DATETIME_DELIVERY']!=undefined"
+                             ng-bind="order['SHOP_ORDER.DATETIME_DELIVERY']"></span>
+                </li>
+            </ul>
+            <ul class="progress_step"
+                ng-if="order['SHOP_ORDER.TYPE']=='4'&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1">
+                 <li class="stepWidth-4" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                    预约
+                       <span class="finished_time"
+                             ng-if="order['SHOP_ORDER.DATETIME_ADD']!=undefined"
+                             ng-bind="order['SHOP_ORDER.DATETIME_ADD']"></span>
+                </li>
+                 <li class="stepWidth-4" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1]">
+                    预付款
+                       <span class="finished_time"
+                             ng-if="order['SHOP_ORDER.DATETIME_PAY']!=undefined"
+                             ng-bind="order['SHOP_ORDER.DATETIME_PAY']"></span>
+                </li>
+                 <li class="stepWidth-4" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_SEND']==1]">
+                    发货
+                       <span class="finished_time"
+                             ng-if="order['SHOP_ORDER.DATETIME_SEND']!=undefined"
+                             ng-bind="order['SHOP_ORDER.DATETIME_SEND']"></span>
+                </li>
+                 <li class="stepWidth-4" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
+                    收货
+                       <span class="finished_time"
+                             ng-if="order['SHOP_ORDER.DATETIME_DELIVERY']!=undefined"
+                             ng-bind="order['SHOP_ORDER.DATETIME_DELIVERY']"></span>
+                </li>
+            </ul>
+            <ul class="progress_step"
+                ng-if="order['SHOP_ORDER.TYPE']=='4'&&order['SHOP_ORDER.NEED_PAY']==-1">
+                 <li class="stepWidth-2" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                    预约
+                       <span class="finished_time"
+                             ng-if="order['SHOP_ORDER.DATETIME_ADD']!=undefined"
+                             ng-bind="order['SHOP_ORDER.DATETIME_ADD']"></span>
+                </li>
+                 <li class="stepWidth-2" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
+                    付款并提货
+                       <span class="finished_time"
+                             ng-if="order['SHOP_ORDER.DATETIME_DELIVERY']!=undefined"
+                             ng-bind="order['SHOP_ORDER.DATETIME_DELIVERY']"></span>
+                </li>
+            </ul>
+            <ul class="progress_step"
+                 ng-if="order['SHOP_ORDER.TYPE']=='5'">
+                 <li class="stepWidth-5" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1]">
+                    下单
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_ADD']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_ADD']"></span>
+                </li>
+                 <li class="stepWidth-5" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_ORDER']==1]">
+                    捡货
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_OUT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_OUT']"></span>
+                </li>
+                 <li class="stepWidth-5" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1]">
+                    付款
+                    <span class="finished_time" ng-if="order['SHOP_ORDER.DATETIME_PAY']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_PAY']"></span>
+                </li>
+                </li>
+                 <li class="stepWidth-5" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&order['SHOP_ORDER.STATE_DELIVERY']==1]">
+                    提货
+                    <span class="finished_time"
+                          ng-if="order['SHOP_ORDER.DATETIME_DELIVERY']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_DELIVERY']"></span>
+                </li>
+                 <li class="stepWidth-5" ng-class="{true:'finished'}[order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.STATE_OUT']==1&&(order['SHOP_ORDER.STATE_DELIVERY']==1||(order['SHOP_ORDER.STATE_SEND']==1&&order['SHOP_ORDER.STATE_ACCEPT']==1))&&order['SHOP_ORDER.STATE_COMMENT']==1]">
+                    交易完成
+                    <span class="finished_time"
+                          ng-if="order['SHOP_ORDER.DATETIME_COMMENT']!=undefined"
+                          ng-bind="order['SHOP_ORDER.DATETIME_COMMENT']"></span>
+                </li>
+            </ul>
+
+        </div>
+        <div class="order_info"
+             ng-if="!(order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1)">
+            <h2 class="order_Id">订单号:{{order['SHOP_ORDER.ORDER_NUM']}}</h2>
+            <div class="order_show">
+                <div class="pic_card">
+                    <ul>
+                        <li ng-repeat="detail in orderDetailList"
+                            ng-if="detail['isPresent'] == null">
+                            <img ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}"
+                                 ng-click="toDetail(detail['SHOP_ORDER_INFO.PRD_ID'])">
+                            <div class="goods_intro">
+                                <p class="goods_name"
+                                   ng-click="toDetail(detail['SHOP_ORDER_INFO.PRD_ID'])">
+                                    {{detail['SHOP_ORDER_INFO.PRD_NAME']}}</p>
+                                <p class="goods_size">
+                                    {{detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']}}</p>
+                                <p class="goods_id">{{detail['SHOP_ORDER_INFO.SPU']}}</p>
+                            </div>
+                            <div class="gift"
+                                 ng-if="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ] != null">
+                                <ul>
+                                    <li>
+                                        <img
+                                            ng-src="{{FILE_SERVER_DOMAIN+presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.IMG_URL']}}">
+                                        <span class="gift_name"
+                                              ng-bind="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.PRD_NAME']"></span>
+                                        <span class="count"
+                                              ng-bind="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.SKU_CONTENT_INFO']  +'x'+ presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_ORDER_INFO.COUNT']"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="price" ng-if="order['SHOP_ORDER.STATE_OUT']==-1">
+                                <span>
+                                    <span class="currentPrice"
+                                          ng-bind="detail['SHOP_ORDER_INFO.PRICE_NOW'] | currency : '￥'"></span>
+                                    <span class="originPrice"
+                                          ng-if="detail['SHOP_ORDER_INFO.PRICE_NOW'] != detail['SHOP_ORDER_INFO.PRICE_SUM']"
+                                          ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM']  | currency : '￥'"></span></span>
+                                <span
+                                    class="price_count">x{{detail['SHOP_ORDER_INFO.COUNT']}}</span>
+                                <span class="single_count">小计 {{detail['SHOP_ORDER_INFO.PRICE_NOW']*detail['SHOP_ORDER_INFO.COUNT'] | currency : '￥'}}</span>
+                            </div>
+                            <div class="price" ng-if="order['SHOP_ORDER.STATE_OUT']==1">
+                                <div ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
+                                    <span>{{stocklist.weight}}</span>
+                                    <span class="price_count">x{{stocklist.count}}</span>
+                                <span
+                                    class="single_count">小计 {{stocklist.price | currency : '￥'}}</span>
+                                </div>
+                            </div>
+                        </li>
+                        <div class="gift" ng-if="presentMap['order'] != null">
+                            订单赠品
+                            <ul>
+                                <li>
+                                    <img
+                                        ng-src="{{FILE_SERVER_DOMAIN+presentMap['order']['SHOP_ORDER_INFO.IMG_URL']}}">
+                                    <span class="gift_name"
+                                          ng-bind="presentMap['order']['SHOP_ORDER_INFO.PRD_NAME']"></span>
+                                    <span class="count"
+                                          ng-bind="presentMap['order']['SHOP_ORDER_INFO.SKU_CONTENT_INFO'] +'x'+ presentMap['order']['SHOP_ORDER_INFO.COUNT']"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+
+                <p class="remark"
+                   ng-if="order['SHOP_ORDER.REMARK']!=undefined&&order['SHOP_ORDER.REMARK']!=''">
+                    备注:{{order['SHOP_ORDER.REMARK']}}</p>
+            </div>
+        </div>
+        <div class="order_info"
+             ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==-1">
+            <h2 class="order_Id">订单号:{{order['SHOP_ORDER.ORDER_NUM']}}</h2>
+            <div class="order_show">
+                <div class="pic_card">
+                    <ul>
+                        <li ng-repeat="detail in orderDetailList"
+                            ng-if="detail['isPresent'] == null">
+                            <img ng-src="{{FILE_SERVER_DOMAIN+detail['SHOP_ORDER_INFO.IMG_URL']}}"
+                                 ng-click="toDetail(detail['SHOP_ORDER_INFO.PRD_ID'])">
+                            <div class="goods_intro">
+                                <p class="goods_name"
+                                   ng-click="toDetail(detail['SHOP_ORDER_INFO.PRD_ID'])">
+                                    {{detail['SHOP_ORDER_INFO.PRD_NAME']}}</p>
+                                <p class="goods_size">
+                                    {{detail['SHOP_ORDER_INFO.SKU_CONTENT_INFO']}}</p>
+                                <p class="goods_id">{{detail['SHOP_ORDER_INFO.SPU']}}</p>
+                            </div>
+                            <div class="gift"
+                                 ng-if="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ] != null">
+                                <ul>
+                                    <li>
+                                        <img
+                                            ng-src="{{FILE_SERVER_DOMAIN+presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_PRODUCT.CMP']}}">
+                                        <span class="gift_name"
+                                              ng-bind="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_PRODUCT.PRD_NAME']"></span>
+                                        <span class="count"
+                                              ng-bind="presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ presentMap[ detail['SHOP_ORDER_INFO.SKU_ID'] ]['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ detail['planUnit']['presents'][0]['num']"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="price" ng-if="order['SHOP_ORDER.STATE_OUT']==-1">
+                                <span>
+                                    <span class="currentPrice"
+                                          ng-bind="detail['SHOP_ORDER_INFO.PRICE_NOW'] | currency : '￥'"></span>
+                                    <span class="originPrice"
+                                          ng-if="detail['SHOP_ORDER_INFO.PRICE_NOW'] != detail['SHOP_ORDER_INFO.PRICE_SUM']"
+                                          ng-bind="detail['SHOP_ORDER_INFO.PRICE_SUM']  | currency : '￥'"></span></span>
+                                <span
+                                    class="price_count">x{{detail['SHOP_ORDER_INFO.COUNT']}}</span>
+                                <span class="single_count">小计 {{detail['SHOP_ORDER_INFO.PRICE_NOW']*detail['SHOP_ORDER_INFO.COUNT'] | currency : '￥'}}</span>
+                            </div>
+                            <div class="price" ng-if="order['SHOP_ORDER.STATE_OUT']==1">
+                                <div ng-repeat="stocklist in detail['SHOP_ORDER_INFO.STOCKWEIGHT']">
+                                    <span>{{stocklist.weight}}</span>
+                                    <span class="price_count">x{{stocklist.count}}</span>
+                                <span
+                                    class="single_count">小计 {{stocklist.price | currency : '￥'}}</span>
+                                </div>
+                            </div>
+                        </li>
+                        <div class="gift" ng-if="presentMap['order'] != null">
+                            订单赠品
+                            <ul>
+                                <li>
+                                    <img
+                                        ng-src="{{FILE_SERVER_DOMAIN+presentMap['order']['SHOP_PRODUCT.CMP']}}">
+                                    <span class="gift_name"
+                                          ng-bind="presentMap['order']['SHOP_PRODUCT.PRD_NAME']"></span>
+                                    <span class="count"
+                                          ng-bind="presentMap['order']['SHOP_PRODUCT_SKU.SKU_NAME1'] +':'+ presentMap['order']['SHOP_PRODUCT_SKU.SKU_CONTENT1'] +'x'+ orderPresentNum"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </ul>
+                </div>
+
+                <p class="remark"
+                   ng-if="order['SHOP_ORDER.REMARK']!=undefined&&order['SHOP_ORDER.REMARK']!=''">
+                    备注:{{order['SHOP_ORDER.REMARK']}}</p>
+            </div>
+        </div>
+        <div class="receipt_info">
+
+            <div ng-show="order['SHOP_ORDER.REC_TYPE']=='2'">
+                <h3 class="info_title">提货信息</h3>
+                <p>
+                    <span>联&nbsp;&nbsp;系&nbsp;&nbsp;人</span><span>{{order['SHOP_ORDER.REC_CONTACT']}}</span>
+                </p>
+
+                <p><span>联系电话</span><span>{{order['SHOP_ORDER.REC_PHONE']}}</span></p><br>
+                <p><span>提货方式</span><span>自提</span></p>
+                <p><span>提货门店</span><span>{{order['SHOP_ORDER.SHOP_NAME']}}</span></p>
+                <p><span>提货时间</span><span>{{order['SHOP_ORDER.GET_PRD_DATETIME']}}</span></p>
+                <p>
+                    <span>提&nbsp;&nbsp;货&nbsp;&nbsp;码</span><span>{{order['SHOP_ORDER.REC_CHECKCODE']}}</span>
+                </p>
+            </div>
+            <div ng-show="order['SHOP_ORDER.REC_TYPE']=='1'">
+                <h3 class="info_title">收货信息</h3>
+                <p>
+                    <span>联&nbsp;&nbsp;系&nbsp;&nbsp;人</span><span>{{order['SHOP_ORDER.REC_CONTACT']}}</span>
+                </p>
+
+                <p><span>联系电话</span><span>{{order['SHOP_ORDER.REC_PHONE']}}</span></p><br>
+                <p><span>收货方式</span><span>快递</span></p>
+                <p><span>收货地址</span><span>{{order['SHOP_ORDER.REC_ADDR']}}</span></p>
+                <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==1">
+                    <span ng-if="order['SHOP_ORDER.LOGISTICS_INFO']!=undefined&&order['SHOP_ORDER.LOGISTICS_INFO']!=''"
+                        ng-bind="'物流公司：'+order['SHOP_ORDER.LOGISTICS_INFO']['COMPANY']"></span>
+                </p>
+                <p ng-if="order['SHOP_ORDER.STATE_ORDER']==1&&order['SHOP_ORDER.STATE_MONEY']==1&&order['SHOP_ORDER.NEED_PAY']==1&&order['SHOP_ORDER.REC_TYPE']==1&&order['SHOP_ORDER.STATE_SEND']==1">
+                    <span ng-if="order['SHOP_ORDER.LOGISTICS_INFO']!=undefined&&order['SHOP_ORDER.LOGISTICS_INFO']!=''"
+                        ng-bind="'物流单号：'+order['SHOP_ORDER.LOGISTICS_INFO']['NUM']"></span>
+                </p>
+            </div>
+        </div>
+
+        <div class="total_count">
+            <p><span>商品金额</span><span>{{order['SHOP_ORDER.PRICE_PRD'] | currency : '￥'}}</span></p>
+            <!--<p><span>运费</span><span>¥8.00</span></p>-->
+            <p><span>优惠金额</span><span>{{order['SHOP_ORDER.PRICE_DISCOUNT'] | currency : '￥'}}</span>
+            </p>
+            <p><span>实付金额</span><span class="need_pay">{{order['SHOP_ORDER.PRICE_OVER'] | currency : '￥'}}</span>
+            </p>
+        </div>
+    </div>
+</div>

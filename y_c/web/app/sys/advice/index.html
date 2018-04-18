@@ -1,0 +1,98 @@
+<div class="page-content">
+    <div class="table-content">
+        <div class="table-toolbar" style="padding-top: 20px">
+            <ul class="orderNav  nav-justified list-unstyled " ng-init="filter['GUESTBOOK.STATE']='null'">
+                <li ng-class="{true:' active'}[filter['GUESTBOOK.STATE']=='null']"
+                    ng-click="filter['GUESTBOOK.STATE']='null'"
+                    class="first"><a href="">所有留言</a></li>
+                <li ng-class="{true:' active'}[filter['GUESTBOOK.STATE']=='-1']"
+                    ng-click="filter['GUESTBOOK.STATE']='-1'"><a
+                        href="">待回复<span ng-show="waitBack>0">{{waitBack}}</span></a></li>
+                <li ng-class="{true:' active'}[filter['GUESTBOOK.STATE']=='1']"
+                    ng-click="filter['GUESTBOOK.STATE']='1'"><a
+                        href="">已回复</a></li>
+            </ul>
+        </div>
+
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th>手机号</th>
+                <th>留言内容</th>
+                <th class="text-center">留言时间</th>
+                <th class="text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="advice in adviceList">
+                <td ng-bind="advice['GUESTBOOK.MEMBER_MOBILE']"></td>
+                <td>
+                    <span ng-bind="advice['GUESTBOOK.GUESTBOOK_CONTENT']"></span><br>
+                    <span style="font-size: 12px;color: grey" ng-show="advice['GUESTBOOK.STATE']==1">
+                        回复内容：<span ng-bind="advice['GUESTBOOK.ANSWER_CONTENT']"></span><br>
+                        回复时间：<span ng-bind="advice['GUESTBOOK.ANSWER_DATETIME']"></span><br>
+                        <span ng-show="advice['GUESTBOOK.ANSWER_REMARK']!=undefined">
+                            备注：<span ng-bind="advice['GUESTBOOK.ANSWER_REMARK']"></span>
+                        </span>
+                    </span>
+                </td>
+                <td ng-bind="advice['GUESTBOOK.ADD_DATETIME']" class="text-center"></td>
+                <td class="text-center">
+                    <a ng-show="advice['GUESTBOOK.STATE']==-1" show-modal id="#reply"
+                       ng-click="reply['GUESTBOOK.ID']=advice['GUESTBOOK.ID']">回复</a>
+                    <a ng-click="delGuestbook(advice)">删除</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div page-bar
+             filter-obj="filter"
+             url="/guestbook/guestbook/queryAll"
+             callback="bindData(response)">
+        </div>
+    </div>
+    <!--BEGIN 回复标签-->
+    <div class="modal fade text-left" id="reply" tabindex="-1" aria-hidden="true"
+         style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true"></button>
+                    <h4 class="modal-title">回复留言</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+                    <form class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label">
+                                <span class="required" style="color: red"> * </span> 内容:
+                            </label>
+                            <div class="col-md-10">
+                                <textarea type="text" class="form-control" cols="20" rows="5"
+                                          ng-model="reply['GUESTBOOK.ANSWER_CONTENT']"
+                                          placeholder="请填写回复内容"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 control-label">
+                                备注:
+                            </label>
+                            <div class="col-md-10">
+                                <textarea type="text" class="form-control" cols="20" rows="2"
+                                          ng-model="reply['GUESTBOOK.ANSWER_REMARK']"
+                                          placeholder="请填写回复内容"></textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" ng-click="replyGuestbook()" class="btn green">确定
+                    </button>
+                    <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--END 回复标签-->
+</div>

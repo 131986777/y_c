@@ -1,0 +1,9 @@
+.detailBox{
+    margin: 10px 0;
+}
+.detailBox input{
+    border:0;
+    outline:none;
+    border-bottom: 1px solid #a9a7ab;
+    text-align: center;
+}

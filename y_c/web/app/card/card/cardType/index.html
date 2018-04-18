@@ -1,0 +1,284 @@
+<div class="page-content">
+
+    <div class="table-operbar">
+        <div class="table-toolbar">
+            <ul class="nav nav-tabs">
+                <li ng-repeat=" item in cardSourceList" ng-class="{'active':$first}">
+                    <a href="#newTab" data-toggle="tab" ng-click="tabClick(item['MEMBER_CARD_SOURCE.ID'])">{{item['MEMBER_CARD_SOURCE.NAME']}}</a>
+                </li>
+                <!-- <li class="pull-right">
+                     <button type="buttone" class="btn btn-default" data-toggle="modal" data-target="#channel">+渠道
+                     </button>
+                 </li>-->
+                <li class="pull-right">
+                    <button type="buttone" class="btn btn-default" data-toggle="modal" data-target="#cardType"><i class="fa fa-plus"></i>添加卡种
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+
+                <!-- Tab -->
+                <div id="newTab">
+                    <div class="cardList-wrap">
+                        <div class="card center-block pull-left" ng-repeat="item in cardList"
+                             style="width:411px;height:228px;background-color: {{item['MEMBER_CARD_TYPE.BG_COLOR']}} ">
+                            <div class="row cardTitle">
+                                <div class="col-md-7">{{item['MEMBER_CARD_TYPE.BEGIN_CARD_ID']}}</div>
+                                <div class="col-md-5 text-right">
+                                    {{sourceMap.get(item['MEMBER_CARD_TYPE.CARD_SOURCE_ID'])}}
+                                </div>
+                            </div>
+                            <p class="balance">{{item['MEMBER_CARD_TYPE.NAME']}}</p>
+                            <div class="row cardFooter">
+                                <div class="col-md-4 cardDesc">{{item['MEMBER_CARD_TYPE.INTRO']}}
+                                </div>
+                                <div class="col-md-8 text-right">
+                                    <a type="button" data-toggle="modal" data-target="#modifyCardType"
+                                       ng-click="modifyCardTypeClick(item)" style="color: #FFFFFF">修改</a>
+                                    <a ng-if="item['MEMBER_CARD_TYPE.ID']>1000" type="button" ng-click="deleteCardType(item['MEMBER_CARD_TYPE.ID'])"
+                                       style="color: #FFFFFF">
+                                        删除
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!-- <div page-bar
+              filter-obj="filter"
+              url="/shop/product/queryAll"
+              callback="bindData(response)">
+         </div>-->
+
+
+        <!-MODAL-->
+        <div class="modal fade" id="cardType">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true"></button>
+                        <h4 class="modal-title">添加会员卡信息</h4>
+                    </div>
+                    <div class="modal-body form-body text-right">
+                        <form class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">
+                                    名称
+                                </label>
+
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder=""
+                                           ng-model="add['MEMBER_CARD_TYPE.NAME']"
+                                           ng-init="add['MEMBER_CARD_TYPE.NAME']=''">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">
+                                    描述
+                                </label>
+
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder=""
+                                           ng-model="add['MEMBER_CARD_TYPE.INTRO']"
+                                           ng-init="add['MEMBER_CARD_TYPE.INTRO']=''">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">
+                                    背景色
+                                </label>
+
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" placeholder=""
+                                                   ng-model="add['MEMBER_CARD_TYPE.BG_COLOR']"
+                                                   ng-init="add['MEMBER_CARD_TYPE.BG_COLOR']=''">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="center-block">
+                                                <div class="color" style="background-color: #31C552"
+                                                     ng-click="selectCardColor('#31C552')"></div>
+                                                <div class="color" style="background-color: #199B93"
+                                                     ng-click="selectCardColor('#199B93')"></div>
+                                                <div class="color" style="background-color: #EF5B5B"
+                                                     ng-click="selectCardColor('#EF5B5B')"></div>
+                                                <div class="color" style="background-color: #A90807"
+                                                     ng-click="selectCardColor('#A90807')"></div>
+                                                <div class="color" style="background-color: #3679E1"
+                                                     ng-click="selectCardColor('#3679E1')"></div>
+                                            </div>
+                                            <div class="center-block">
+                                                <div class="color" style="background-color: #8C56B2"
+                                                     ng-click="selectCardColor('#8C56B2')"></div>
+                                                <div class="color" style="background-color: #E19318"
+                                                     ng-click="selectCardColor('#E19318')"></div>
+                                                <div class="color" style="background-color: #CCCA12"
+                                                     ng-click="selectCardColor('#CCCA12')"></div>
+                                                <div class="color" style="background-color: #C7C7C7"
+                                                     ng-click="selectCardColor('#C7C7C7')"></div>
+                                                <div class="color" style="background-color: #303133"
+                                                     ng-click="selectCardColor('#303133')"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">
+                                    发卡渠道
+                                </label>
+
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="add['MEMBER_CARD_TYPE.CARD_SOURCE_ID']"
+                                            ng-options="item['MEMBER_CARD_SOURCE.ID'] as item['MEMBER_CARD_SOURCE.NAME'] for item in cardSourceList">
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">
+                                    起始卡号
+                                </label>
+
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder=""
+                                           ng-model="add['MEMBER_CARD_TYPE.BEGIN_CARD_ID']"
+                                           ng-init="add['MEMBER_CARD_TYPE.BEGIN_CARD_ID']=''">
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-outline" ng-click="addCardType()">确定
+                        </button>
+                        <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div> <!-- modal-content-->
+            </div>
+        </div>
+        <div class="modal fade" id="modifyCardType">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true"></button>
+                        <h4 class="modal-title">修改会员卡信息</h4>
+                    </div>
+                    <div class="modal-body form-body text-right">
+                        <form class="form-horizontal">
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">
+                                    名称
+                                </label>
+
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder=""
+                                           ng-model="modify['MEMBER_CARD_TYPE.NAME']">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">
+                                    描述
+                                </label>
+
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder=""
+                                           ng-model="modify['MEMBER_CARD_TYPE.INTRO']">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">
+                                    背景色
+                                </label>
+
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <input type="text" class="form-control" placeholder=""
+                                                   ng-model="modify['MEMBER_CARD_TYPE.BG_COLOR']">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="center-block">
+                                                <div class="color" style="background-color: #31C552"
+                                                     ng-click="selectCardColor('#31C552')"></div>
+                                                <div class="color" style="background-color: #199B93"
+                                                     ng-click="selectCardColor('#199B93')"></div>
+                                                <div class="color" style="background-color: #EF5B5B"
+                                                     ng-click="selectCardColor('#EF5B5B')"></div>
+                                                <div class="color" style="background-color: #A90807"
+                                                     ng-click="selectCardColor('#A90807')"></div>
+                                                <div class="color" style="background-color: #3679E1"
+                                                     ng-click="selectCardColor('#3679E1')"></div>
+                                            </div>
+                                            <div class="center-block">
+                                                <div class="color" style="background-color: #8C56B2"
+                                                     ng-click="selectCardColor('#8C56B2')"></div>
+                                                <div class="color" style="background-color: #E19318"
+                                                     ng-click="selectCardColor('#E19318')"></div>
+                                                <div class="color" style="background-color: #CCCA12"
+                                                     ng-click="selectCardColor('#CCCA12')"></div>
+                                                <div class="color" style="background-color: #C7C7C7"
+                                                     ng-click="selectCardColor('#C7C7C7')"></div>
+                                                <div class="color" style="background-color: #303133"
+                                                     ng-click="selectCardColor('#303133')"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">
+                                    发卡渠道
+                                </label>
+
+                                <div class="col-md-8">
+                                    <select class="form-control" ng-model="modify['MEMBER_CARD_TYPE.CARD_SOURCE_ID']"
+
+                                            ng-options="item['MEMBER_CARD_SOURCE.ID'] as item['MEMBER_CARD_SOURCE.NAME'] for item in cardSourceList">
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-md-3 control-label">
+                                    起始卡号
+                                </label>
+
+                                <div class="col-md-8">
+                                    <input type="text" class="form-control" placeholder=""
+                                           ng-model="modify['MEMBER_CARD_TYPE.BEGIN_CARD_ID']" disabled>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-outline" ng-click="modifyCardType()">确定
+                        </button>
+                        <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div> <!-- modal-content-->
+            </div>
+        </div>
+    </div>
+</div>
+</div>

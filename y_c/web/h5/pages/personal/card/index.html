@@ -1,0 +1,56 @@
+<script type="text/javascript" src="../personal/card/qrcode.js"></script>
+<script>
+	
+</script>
+<div class="card-list">
+    <span ng-if="cardList.length==0" class="no-coupon">你暂无会员卡！</span>
+    <div ng-repeat="cl in cardList" class="card-wrap" ng-style="cl['MEMBER_CARD.CARD_STYLE']" ng-click="showCode(cl['MEMBER_CARD.CARD_NO'])">
+        <div class="card-head flexbox">
+            <div class="cardNum cell">
+                {{cl['MEMBER_CARD.CARD_NO'] | FormatNo}}
+            </div>
+            <div class="cardType cell text-right">
+                {{cl['MEMBER_CARD.TYPE_NAME']}}
+            </div>
+        </div>
+        <div class="card-detail text-center">
+            <span>余额</span>{{cl['MEMBER_CARD.BALANCE'] | currency : '￥'}}
+            <p ng-show="cl['MEMBER_CARD.FREEZE_BALANCE']!=0" class="froze">
+                （冻结{{cl['MEMBER_CARD.FREEZE_BALANCE'] | currency : '￥'}}）
+            </p>
+        </div>
+        <div class="card-foot flexbox">
+            <div class="cardTime cell">
+                {{cl['MEMBER_CARD.ADD_DATETIME'] |FormatStrDate}}
+            </div>
+            <div class="cardVal cell text-center">
+                <span ng-show="cl['MEMBER_CARD.IS_FACE_VALUE']==1">{{cl['MEMBER_CARD.FACE_VALUE'] | currency : '￥'}}</span>
+            </div>
+            <div class="cardSource cell text-right">
+                {{cl['MEMBER_CARD.SOURCE_NAME']}}
+            </div>
+        </div>
+    </div>
+</div>
+<div  style="    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.7);
+    z-index: 2000;" ng-show="codeShow">
+    <div style="    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    background: url(../personal/card/delete.png) no-repeat;
+    background-size: 100%;z-index='2000';  ng-click="codeHide" class='codeHides'></div>
+	<div id="qrcode" style="    display: inline-block;"></div>
+	
+</div>
+

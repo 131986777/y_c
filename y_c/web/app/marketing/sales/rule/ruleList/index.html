@@ -1,0 +1,239 @@
+<div class="page-content">
+    <div class="col-md-12">
+        <div class="table-toolbar" style="padding: 14px 0;">
+            <div class="form-inline row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="name" placeholder="规则名称"
+                               ng-model="name">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right"
+                                ng-click="queryByName(name)">查询
+                        </button>
+                    </div>
+                </div>
+
+                <!--<div class="col-md-6">-->
+                    <!--<label class="control-label">筛选：</label>-->
+                    <!--<select ng-model="filter['type']"-->
+                            <!--ng-init="filter['type'] = ''"-->
+                            <!--class="nya-bs-select form-control" ng-change="queryBy2()">-->
+                        <!--<option class="nya-bs-option" value="">促销针对</option>-->
+                        <!--<option class="nya-bs-option" value="order" ng-click="queryBy2()">订单-->
+                        <!--</option>-->
+                        <!--<option class="nya-bs-option" value="prd" ng-click="queryBy2()">商品</option>-->
+                    <!--</select>-->
+                    <!--<select ng-model="filter['state']"-->
+                            <!--ng-init="filter['state'] = ''"-->
+                            <!--class="nya-bs-select form-control" ng-change="queryBy2()">-->
+                        <!--<option class="nya-bs-option" value="">状态</option>-->
+                        <!--<option class="nya-bs-option" value="inUse" ng-click="queryBy2()">启用中-->
+                        <!--</option>-->
+                        <!--<option class="nya-bs-option" value="unUse" ng-click="queryBy2()">停用中-->
+                        <!--</option>-->
+                    <!--</select>-->
+                <!--</div>-->
+                <div class="col-md-8 text-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default" data-toggle="dropdown">
+                            <i class="fa fa-plus"></i>新增 <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="mix-width:120px">
+                            <li><a
+                                ui-sref="marketing/sales/rule/ruleAdd({id:1,serviceId:1})">订单促销</a>
+                            </li>
+                            <li><a
+                                ui-sref="marketing/sales/rule/ruleAdd({id:2,serviceId:1})">商品促销</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="table-scrollable">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+                    <th class="col-sm-2">促销规则名称</th>
+                    <th class="col-sm-2">促销针对</th>
+                    <th class="col-sm-3">促销规则详情</th>
+                    <th class="col-sm-2 text-center">添加时间</th>
+                    <th class="col-sm-1 text-center">状态</th>
+                    <th class="col-sm-2 text-center">操作</th>
+                </tr>
+                </thead>
+                <tbody ng-cloak >
+                <tr ng-repeat='salesInfo in salesList' style="width: 400px">
+                    <td ng-bind="salesInfo['PROMOTION_ROLE.NAME']"></td>
+                    <td>
+                        <span
+                            ng-show="salesInfo['adaptor']['PROMO_ROLE_ANDSELL.PROMOTION_TYPE']== 'order'">订单</span>
+                        <span
+                            ng-show="salesInfo['adaptor']['PROMO_ROLE_ANDSELL.PROMOTION_TYPE']== 'prd'">商品</span>
+                    </td>
+                    <td ng-bind="salesInfo['PROMOTION_ROLE.DESCRIBES']"></td>
+                    <td ng-bind="salesInfo['PROMOTION_ROLE.ADD_DATETIME'] | FormatAllDate"
+                        class="text-center"></td>
+                    <!--<td ng-bind="salesInfo['adaptor']['PROMO_ROLE_ANDSELL.STATE'] | FormatState" class="text-center"></td>-->
+                    <td class="text-center">
+                        <span ng-show="salesInfo['adaptor']['PROMO_ROLE_ANDSELL.STATE'] == 'inUse'">启用中</span>
+                        <span ng-show="salesInfo['adaptor']['PROMO_ROLE_ANDSELL.STATE'] == 'unUse'">停用中</span>
+                    </td>
+                    <td class="text-center">
+                        <a data-toggle="modal" data-target="#detailSaleList"
+                           ng-click="queryByGivenInfo(salesInfo)">
+                            促销详情
+                        </a>
+                        <!--<a ui-sref="ruleModify({id:salesInfo['SALES.ID']})">促销详情</a>-->
+                        <a class="table-link" ng-click="changeState(salesInfo['adaptor'])">
+                            <span
+                                ng-show="salesInfo['adaptor']['PROMO_ROLE_ANDSELL.STATE'] == 'inUse'">停用</span>
+                            <span
+                                ng-show="salesInfo['adaptor']['PROMO_ROLE_ANDSELL.STATE'] == 'unUse'">启用</span>
+                        </a>
+                        <a ng-click="Delete(salesInfo)">
+                            删除
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div page-bar
+         filter-obj="filter"
+         url="/promo/promotion/role/queryAll"
+         callback="bindData(response)"
+    >
+    </div>
+
+    <!--MODAL-->
+    <!--显示促销详情-->
+    <div class="modal fade" role="dialog" id="detailSaleList">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">
+                    </button>
+                    <h4 class="modal-title">促销规则详情</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+                    <form class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required">  </span> 名称:
+                            </label>
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="detailSaleList['SALES.NAME']"></h5>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                描述:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="detailSaleList['SALES.INTRO']"></h5>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 详情:
+                            </label>
+                            <div class="col-md-8">
+                                <table>
+                                    <tbody ng-cloak>
+                                    <tr ng-show="detailSaleListInfo[0][1]!=null">
+                                        <td ng-bind="detailSaleListInfo[0][0]"></td>
+                                        <td><input type="text" ng-model="detailSaleListInfo[0][1]"
+                                                   style="width:50px;height: 20px;border:0;outline:none;border-bottom: 1px solid #a9a7ab;text-align: center;">
+                                        </td>
+                                        <td ng-bind="detailSaleListInfo[0][2]"></td>
+                                        <td><input type="text" ng-model="detailSaleListInfo[0][3]"
+                                                   style="width:50px;height: 20px;border:0;outline:none;border-bottom: 1px solid #a9a7ab;text-align: center;">
+                                        </td>
+                                        <td ng-bind="detailSaleListInfo[0][4]"></td>
+                                        <td ng-bind="detailSaleListInfo[0][5]" align="center"></td>
+                                    </tr>
+                                    <tr ng-show="detailSaleListInfo[1][1]!=null">
+                                        <td ng-bind="detailSaleListInfo[1][0]"></td>
+                                        <td><input type="text" ng-model="detailSaleListInfo[1][1]"
+                                                   style="width:50px;height: 20px;border:0;outline:none;border-bottom: 1px solid #a9a7ab;text-align: center;">
+                                        </td>
+                                        <td ng-bind="detailSaleListInfo[1][2]"></td>
+                                        <td><input type="text" ng-model="detailSaleListInfo[1][3]"
+                                                   style="width:50px;height: 20px;border:0;outline:none;border-bottom: 1px solid #a9a7ab;text-align: center;">
+                                        </td>
+                                        <td ng-bind="detailSaleListInfo[1][4]"></td>
+                                        <td ng-bind="detailSaleListInfo[1][5]" align="center"></td>
+                                    </tr>
+                                    <tr ng-show="detailSaleListInfo[2][1]!=null">
+                                        <td ng-bind="detailSaleListInfo[2][0]"></td>
+                                        <td><input type="text" ng-model="detailSaleListInfo[2][1]"
+                                                   style="width:50px;height: 20px;border:0;outline:none;border-bottom: 1px solid #a9a7ab;text-align: center;">
+                                        </td>
+                                        <td ng-bind="detailSaleListInfo[2][2]"></td>
+                                        <td><input type="text" ng-model="detailSaleListInfo[2][3]"
+                                                   style="width:50px;height: 20px;border:0;outline:none;border-bottom: 1px solid #a9a7ab;text-align: center;">
+                                        </td>
+                                        <td ng-bind="detailSaleListInfo[2][4]"></td>
+                                        <td ng-bind="detailSaleListInfo[2][5]" align="center"></td>
+                                    </tr>
+                                    <tr ng-show="detailSaleListInfo[3][1]!=null">
+                                        <td ng-bind="detailSaleListInfo[3][0]"></td>
+                                        <td><input type="text" ng-model="detailSaleListInfo[3][1]"
+                                                   style="width:50px;height: 20px;border:0;outline:none;border-bottom: 1px solid #a9a7ab;text-align: center;">
+                                        </td>
+                                        <td ng-bind="detailSaleListInfo[3][2]"></td>
+                                        <td><input type="text" ng-model="detailSaleListInfo[3][3]"
+                                                   style="width:50px;height: 20px;border:0;outline:none;border-bottom: 1px solid #a9a7ab;text-align: center;">
+                                        </td>
+                                        <td ng-bind="detailSaleListInfo[3][4]"></td>
+                                        <td ng-bind="detailSaleListInfo[3][5]" align="center"></td>
+                                    </tr>
+                                    <tr ng-show="detailSaleListInfo[4][1]!=null">
+                                        <td ng-bind="detailSaleListInfo[4][0]"></td>
+                                        <td><input type="text" ng-model="detailSaleListInfo[4][1]"
+                                                   style="width:50px;height: 20px;border:0;outline:none;border-bottom: 1px solid #a9a7ab;text-align: center;">
+                                        </td>
+                                        <td ng-bind="detailSaleListInfo[4][2]"></td>
+                                        <td><input type="text" ng-model="detailSaleListInfo[4][3]"
+                                                   style="width:50px;height: 20px;border:0;outline:none;border-bottom: 1px solid #a9a7ab;text-align: center;">
+                                        </td>
+                                        <td ng-bind="detailSaleListInfo[4][4]"></td>
+                                        <td ng-bind="detailSaleListInfo[4][5]" align="center"></td>
+                                    </tr>
+                                    <tr ng-show="detailSaleListInfo[5][1]!=null">
+                                        <td ng-bind="detailSaleListInfo[5][0]"></td>
+                                        <td><input type="text" ng-model="detailSaleListInfo[5][1]"
+                                                   style="width:50px;height: 20px;border:0;outline:none;border-bottom: 1px solid #a9a7ab;text-align: center;">
+                                        </td>
+                                        <td ng-bind="detailSaleListInfo[5][2]"></td>
+                                        <td><input type="text" ng-model="detailSaleListInfo[5][3]"
+                                                   style="width:50px;height: 20px;border:0;outline:none;border-bottom: 1px solid #a9a7ab;text-align: center;">
+                                        </td>
+                                        <td ng-bind="detailSaleListInfo[5][4]"></td>
+                                        <td ng-bind="detailSaleListInfo[5][5]" align="center"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info btn-outline" data-dismiss="modal"
+                            ng-click="saveSales()">确定
+                    </button>
+                    <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">
+                        取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

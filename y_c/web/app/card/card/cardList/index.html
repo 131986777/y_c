@@ -1,0 +1,419 @@
+<div class="page-content">
+    <div class="table-content">
+        <div class="table-operbar">
+            <div class="table-toolbar">
+                <div class="form-inline">
+
+                    <div class="form-group">
+                        <label for="name" class="control-label">客户:</label>
+                        <input type="text" class="form-control" id="name" placeholder="登陆ID/手机号"
+                               ng-model="query['MEMBER_CARD.MEMBER']">
+                    </div>
+                    <div class="form-group">
+                        <label for="cardNum" class="control-label">卡号:</label>
+                        <input type="text" class="form-control" id="cardNum"
+                               ng-model="query['MEMBER_CARD.CARD_NO']">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right" ng-click="query()">查询
+                        </button>
+                    </div>
+                    <div class="sort">
+                        <label class="control-label">筛选：</label>
+                        <select ng-model="filter['MEMBER_CARD.SOURCE_ID']"
+                                ng-init="filter['MEMBER_CARD.SOURCE_ID']='null'"
+                                ng-change="queryTypeBySourceId(filter['MEMBER_CARD.SOURCE_ID'])"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="null">
+                                所有渠道
+                            </option>
+                            <option class="nya-bs-option"
+                                    ng-repeat="value in sourceList"
+                                    ng-bind="value['MEMBER_CARD_SOURCE.NAME']"
+                                    value="{{value['MEMBER_CARD_SOURCE.ID']}}">
+                            </option>
+                        </select>
+                        <select ng-model="filter['MEMBER_CARD.TYPE_ID']"
+                                ng-init="filter['MEMBER_CARD.TYPE_ID']='null'"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="null">
+                                所有类型
+                            </option>
+                            <option class="nya-bs-option"
+                                    ng-repeat="value in typeListMap['997']"
+                                    ng-bind="value['MEMBER_CARD_TYPE.NAME']"
+                                    value="{{value['MEMBER_CARD_TYPE.ID']}}">
+                            </option>
+                        </select>
+                        <!-- <select ng-model="filter['MEMBER_CARD.SHOP_ID']"
+                                ng-init="filter['MEMBER_CARD.SHOP_ID']='null'"
+                                class="nya-bs-select form-control" style="width: 90px">
+                            <option class="nya-bs-option" value="null">
+                                所有门店
+                            </option>
+                            <option class="nya-bs-option"
+                                    ng-repeat="value in shopList"
+                                    ng-bind="value['SHOP.SHOP_NAME']"
+                                    value="{{value['SHOP.SHOP_ID']}}">
+                            </option>
+                        </select> -->
+                        <select   id="shop" class="selectpicker show-tick form-control  col-md-6"  data-live-search="true"
+		               		  ng-model="filter['MEMBER_CARD.SHOP_ID']" 
+		               		  ng-init="filter['MEMBER_CARD.SHOP_ID']='null'">
+		               		 	<option value='null' selected="true">全部门店</option>
+		                </select>	
+                        <select ng-model="timeType"
+                                ng-init="timeType='all'"
+                                ng-change="filterTime(timeType)"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="all">
+                                所有时间
+                            </option>
+                            <option class="nya-bs-option" value="aim">
+                                时间段内
+                            </option>
+                        </select>
+
+                        <label class="control-label">排序：</label>
+                        <select ng-model="filter['MEMBER_CARD.ADD_DATETIME']"
+                                ng-init="filter['MEMBER_CARD.ADD_DATETIME']='ADD_DATETIME DESC'"
+                                class="nya-bs-select form-control">
+                            <option class="nya-bs-option" value="ADD_DATETIME DESC">开卡时间↓</option>
+                            <option class="nya-bs-option" value="ADD_DATETIME ASC">开卡时间↑</option>
+                        </select>
+                        <div class="time-pick" ng-show="timeType=='aim'">
+                            <div style="display:inline-block;margin:10px 0 0 36px"
+                                 data-date="10/11/2012"
+                                 language="zh-CN"
+                                 data-date-format="yyyy-mm-dd">
+                                <input id="start_hour" type="text" class="form-control " placeholder="起始时间"
+                                       name="from" ng-model="filter['MEMBER_CARD.ADD_DATETIME_FROM']"
+                                       data-date-format="yyyy/mm/dd" style="margin-right: 10px;width: 125px"> 至
+                            </div>
+
+                            <div style="display: inline-block;margin: 10px 0 0 10px;"
+                                 data-date="10/11/2012"
+                                 language="zh-CN"
+                                 data-date-format="yyyy-mm-dd">
+                                <input id="end_hour" type="text" class="form-control " placeholder="截止时间"
+                                       name="to" ng-model="filter['MEMBER_CARD.ADD_DATETIME_TO']"
+                                       data-date-format="yyyy/mm/dd" style="width: 125px">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-default pull-right"
+                            ng-click="outPutQuery()" id="ouputBtn">导出
+                    </button>
+                    
+                    <button ng-show="ACCOUNT_TYPE!='SHOP'" type="button" class="btn btn-default pull-right" data-toggle="modal"
+                            data-target="#cardList"><i class="fa fa-plus"></i>开卡
+                    </button>
+                    <button ng-show="ACCOUNT_TYPE!=='SHOP'" type="button" class="btn btn-default pull-right" ng-click="initState()" show-modal id="#czkCardIn">
+                        <i class="fa fa-plus"></i>储值卡导入
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- cardList -->
+        <table class="table table-bordered table-hover table-striped">
+            <thead>
+            <tr>
+                <th class="col-sm-2">卡号</th>
+                <th class="col-sm-1">卡类型</th>
+                <th class="col-sm-1 text-center">余额</th>
+                <th class="col-sm-1 text-center">客户姓名</th>
+                <th class="col-sm-1.5 text-center">客户手机号</th>
+                <th class="col-sm-1.5 text-center">所属门店</th>
+                <th class="col-sm-2 text-center">开卡时间</th>
+                <th class="col-sm-1 text-center">状态</th>
+                <th class="col-sm-1 text-center">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="cl in cardList|filter:{}">
+                <td ng-bind="cl['MEMBER_CARD.CARD_NO'] | FormatNo"></td>
+                <td ng-bind="cl['MEMBER_CARD.TYPE_NAME']"></td>
+                <td ng-bind="cl['MEMBER_CARD.BALANCE'] | currency : '￥'" class="text-center"></td>
+                <td ng-bind="cl['MEMBER_CARD.MEMBER_NAME']" class="text-center"></td>
+                <td ng-bind="cl['MEMBER_CARD.MEMBER_PHONE']" class="text-center"></td>
+                <td ng-bind="cl['MEMBER_CARD.SHOP']" class="text-center"></td>
+                <td ng-bind="cl['MEMBER_CARD.ADD_DATETIME'] | FormatAllDate" class="text-center"></td>
+                <td class="text-center">
+                    <span ng-show="cl['MEMBER_CARD.STATE']==1">正常</span>
+                    <span ng-show="cl['MEMBER_CARD.STATE']==-1">冻结</span>
+                </td>
+                <td class="text-center">
+                    <a class="table-link">
+                        <span ng-show="cl['MEMBER_CARD.STATE']==1 && cl['MEMBER_CARD.TYPE_NAME']!='门店VIP卡'" ng-click="frezzeCard(cl)">冻结</span>
+						 <span ng-show="cl['MEMBER_CARD.STATE']==1 && cl['MEMBER_CARD.TYPE_NAME']=='门店VIP卡'"data-toggle="modal" ng-click="empty(cl)" data-target="#balance">退VIP</span>
+                        <span ng-show="cl['MEMBER_CARD.STATE']==-1" ng-click="FrozenCard(cl)">启用</span>
+                       
+                    </a>
+                    <a class="table-link" >
+                     <span ng-if="cl['MEMBER_CARD.STATE']==1 && cookies=='ADMIN'"  ng-click="unwrap(cl)">卡解绑</span>
+                    </a>
+                    
+                     <a class="table-link" >
+                     <span ng-if="cl['MEMBER_CARD.STATE']==-1 && APP_ID_LIST.indexOf('@1109@')>=0"  ng-click="pinCard(cl)">线上销卡</span>
+                    </a>
+                </td>
+                
+            </tr>
+            </tbody>
+        </table>
+
+        <div page-bar
+             filter-obj="filter"
+             url="/member/membercard/queryAll"
+             callback="bindData(response)">
+        </div>
+    </div>
+
+    <div class="modal fade" id="cardList">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true"></button>
+                    <h4 class="modal-title">会员卡信息</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+                    <form class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 客户:
+                            </label>
+
+                            <div class="col-md-8 text-left form-inline">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" ng-model="memberId" placeholder="请输入会员登录名称">
+                                </div>
+                                <button type="submit" class="btn btn-default" ng-click="queryMemberById(memberId)">查询
+                                </button>
+                                <span class="help-block"
+                                      ng-show="editForm.name.$error.required && !editForm.name.$pristine">
+                                    请先输入会员ID
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 姓名:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5>{{memberDetail['MEMBER.USER_NAME']}}</h5>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 手机:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5>{{memberDetail['MEMBER.MOBILE']}}</h5>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                发卡渠道
+                            </label>
+
+                            <div class="col-md-8">
+                                <select ng-model="cardAdd['MEMBER_CARD.SOURCE_ID']"
+                                        ng-init="cardAdd['MEMBER_CARD.SOURCE_ID']='null'"
+                                        ng-change="addQueryTypeBySourceId(cardAdd['MEMBER_CARD.SOURCE_ID'])"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option" value="null">
+                                        所有渠道
+                                    </option>
+                                    <option class="nya-bs-option"
+                                            ng-repeat="value in sourceList"
+                                            ng-bind="value['MEMBER_CARD_SOURCE.NAME']"
+                                            value="{{value['MEMBER_CARD_SOURCE.ID']}}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                类型
+                            </label>
+                            <div class="col-md-8">
+                                <select ng-model="cardAdd['MEMBER_CARD.TYPE_ID']"
+                                        ng-init="cardAdd['MEMBER_CARD.TYPE_ID']='null'"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option" value="null">
+                                        所有类型
+                                    </option>
+                                    <option class="nya-bs-option"
+                                            ng-repeat="value in typeListAdd"
+                                            ng-bind="value['MEMBER_CARD_TYPE.NAME']"
+                                            ng-if="value['MEMBER_CARD_TYPE.ID']!=998"
+                                            value="{{value['MEMBER_CARD_TYPE.ID']}}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                卡号
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" ng-model="cardAdd['MEMBER_CARD.CARD_NO']"
+                                       placeholder="若不填写则自动生成">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 checkbox-inline">
+                                <input type="checkbox" id="" ng-model="isFaceValue" value="option">设置面额
+                            </label>
+                            <div ng-show="isFaceValue" class="col-md-8">
+                                <input type="text"
+                                       ng-change="cardAdd['MEMBER_CARD.BALANCE']=cardAdd['MEMBER_CARD.FACE_VALUE']"
+                                       class="form-control" ng-model="cardAdd['MEMBER_CARD.FACE_VALUE']"
+                                       placeholder="">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                可用余额
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control"
+                                       ng-model="cardAdd['MEMBER_CARD.BALANCE']"
+                                       placeholder="若不填写则为0">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                冻结金额
+                            </label>
+
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" ng-model="cardAdd['MEMBER_CARD.FREEZE_BALANCE']"
+                                       placeholder="若不填写则为0">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-outline" ng-click="addCard()">确定
+                    </button>
+                    <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div> <!-- modal-content-->
+        </div>
+    </div>
+
+    <div class="modal fade" id="czkCardIn">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title">储值卡导入</h4>
+                </div>
+                <form method="post">
+                    <div class="modal-body form-body text-right">
+                        <button class="btn btn-primary btn-outline" ng-click="downMoban()">下载模板
+                        </button>  
+                        <input type="file" file-model="myFile" class="btn btn-default"
+                               accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel">
+                        </input>
+                        <input type="checkbox"  ng-change="changeState()" ng-model="STATE_CHECK" class="md-check"/> 是否冻结
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary btn-outline" ng-click="uploadFile()">确定
+                        </button>
+                        <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </form>
+            </div> <!-- modal-content-->
+        </div>
+    </div>
+
+
+ <div class="modal fade" id="balance">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"
+                            aria-hidden="true">
+                    </button>
+                    <h4 class="modal-title">申请退vip卡</h4>
+                </div>
+                <div class="modal-body form-body text-right">
+                    <form class="form-horizontal">
+                        <!-- <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 总余额:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="cardTotalMoney"></h5>
+                            </div>
+                        </div> -->
+
+                        <div class="form-group row">
+                            <label class="col-sm-3 control-label">
+                                <span class="required"> * </span>返点的会员卡:
+                            </label>
+                            <div class="col-sm-8">
+                                <select ng-model="MEMBER_CARD_ID"
+                                       
+                                        ng-change="getCardBalance(MEMBER_CARD_ID)"
+                                        class="nya-bs-select form-control">
+                                    <option class="nya-bs-option" value="null">
+                                        选择返点的会员卡
+                                    </option>
+                                    <option class="nya-bs-option"
+                                            ng-repeat="(key,value) in cardListy"
+                                            ng-bind="value['MEMBER_CARD.CARD_NO']"
+                                            value="{{value['MEMBER_CARD.CARD_NO']}}">
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row" ng-if="memberDetail.select">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 当前卡余额:
+                            </label>
+
+                            <div class="col-md-8 text-left">
+                                <h5 ng-bind="memberDetail['MEMBER.BALANCE']"></h5>
+                            </div>
+                        </div> 
+
+                       <!--  <div class="form-group row">
+                            <label class="col-md-3 control-label">
+                                <span class="required"> * </span> 申请退vip操作人以及原因
+                            </label>
+
+                            <div class="col-md-8">
+                                <input name="compId" class="form-control" ng-model="introduction">
+                            </div>
+                        </div> -->
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-outline" ng-click="savePinCard()">确定
+                    </button>
+                    <button type="button" class="btn btn-default  btn-outline" data-dismiss="modal">取消
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END CONTENT -->

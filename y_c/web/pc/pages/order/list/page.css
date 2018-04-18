@@ -1,0 +1,424 @@
+/* line 21, ../sass/orderList.scss */
+.containers-order-list .showBoard {
+  width: 960px;
+  min-height: 600px;
+  display: inline-block;
+  float: right;
+  padding: 20px 30px;
+  background-color: #fff;
+}
+/* line 28, ../sass/orderList.scss */
+.containers-order-list .showBoard .showTitle {
+  width: 100%;
+  height: auto;
+  position: relative;
+  border-bottom: 1px solid #dcdcdc;
+}
+/* line 33, ../sass/orderList.scss */
+.containers-order-list .showBoard .showTitle .title {
+  font-size: 25px;
+  color: #4b4b4b;
+  height: 70px;
+  line-height: 70px;
+  font-weight: normal;
+}
+/* line 40, ../sass/orderList.scss */
+.containers-order-list .showBoard .showTitle .searchGroup {
+  position: absolute;
+  right: 0;
+  top: 10px;
+  width: 250px;
+  height: 40px;
+  border: 1px solid #dcdcdc;
+  overflow: hidden;
+}
+/* line 48, ../sass/orderList.scss */
+.containers-order-list .showBoard .showTitle .searchGroup input {
+  border: none;
+  outline: 0;
+}
+/* line 52, ../sass/orderList.scss */
+.containers-order-list .showBoard .showTitle .searchGroup .text {
+  width: 100%;
+  height: 100%;
+  padding-left: 15px;
+  padding-right: 55px;
+  font-size: 15px;
+  color: #8a8a8a;
+}
+/* line 60, ../sass/orderList.scss */
+.containers-order-list .showBoard .showTitle .searchGroup .button {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 1px solid #dcdcdc;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAQCAYAAADJViUEAAAAAXNSR0IArs4c6QAAAbJJREFUKBWVkj9LQmEUxr23wmhoUKLNVoeEHKQghIgoovoAbYphkwZ2FYT6AioObg4NFiEo0dBQ1FDgEPYBhIYChVqChuKCgn/6HeHK26DgC4fznD/P855736PZlJNKpZYIDzVN8/Z6vSnwq67rF4Zh3CptA6gJKpVKE41GI9ntdk8JK1gVkknsQ2iLuGy32yPRaPQHPDiTgur1upDCEHa55WFQBWQyGTcil81ms0i4o9a0bDbrabfbL9ywHo/Hn9WihXO53Fyr1arxKceJROLcyuudTucIYnEYURoZ94semc6wiOJ11FawJzU5BEuPJ5/Pz1h1HcVZgjcrMcy7XK53qZmmOW31yM0fCLitxDDPT5Wez1gs9m31yM13CMhzjDz0bNJbVZt0h8ORJbHMk2yrBRVTW4CYxE7UvB4KhX553wPessCGBdSiYJ7Sz62PwHt2oKbW+xsmiXQ6vYi7wOSHyHgm5oM4j/gZ4gY+gkCBfP8MyBLJmvJj/IznJexiNafTWQkGg03E14hvqIURkG2z/SNLYtRBYIP6NdME2LSrscgiLD8Wchm4PzZZBJhgD7f6BySjquroZZF6AAAAAElFTkSuQmCC');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: auto;
+  cursor: pointer;
+}
+/* line 76, ../sass/orderList.scss */
+.containers-order-list .showBoard .categoriesToggle {
+  width: 100%;
+  height: auto;
+  padding: 13px 0;
+}
+/* line 80, ../sass/orderList.scss */
+.containers-order-list .showBoard .categoriesToggle ul {
+  width: 100%;
+}
+/* line 82, ../sass/orderList.scss */
+.containers-order-list .showBoard .categoriesToggle ul li {
+  display: inline-block;
+  font-size: 14px;
+  color: #4b4b4b;
+  position: relative;
+}
+/* line 87, ../sass/orderList.scss */
+.containers-order-list .showBoard .categoriesToggle ul li a {
+  display: inline-block;
+  font-size: 14px;
+  color: #4b4b4b;
+  position: relative;
+  padding: 0 20px;
+}
+/* line 94, ../sass/orderList.scss */
+.containers-order-list .showBoard .categoriesToggle ul li.active,
+
+.containers-order-list .showBoard .categoriesToggle ul li a.active {
+  color: #f36e19;
+}
+.containers-order-list .showBoard .categoriesToggle ul li span.active {
+  color: #f36e19;
+}
+/* line 98, ../sass/orderList.scss */
+.containers-order-list .showBoard .categoriesToggle ul li:after {
+  content: '';
+  width: 1px;
+  height: 16px;
+  background-color: #dcdcdc;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* line 109, ../sass/orderList.scss */
+.containers-order-list .showBoard .categoriesToggle ul li:first-child a {
+  padding-left: 1px;
+}
+/* line 113, ../sass/orderList.scss */
+.containers-order-list .showBoard .categoriesToggle ul li:last-child:after {
+  display: none;
+}
+/* line 119, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow {
+  width: 100%;
+  height: auto;
+}
+/* line 122, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list {
+  margin-top: 25px;
+  width: 100%;
+  height: auto;
+}
+/* line 126, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listTitle {
+  width: 100%;
+  padding: 22px 55px;
+  border: 1px solid #dcdcdc;
+  transition: all .1s ease;
+  position: relative;
+}
+/* line 132, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listTitle .name {
+  font-size: 18px;
+  color: #4b4b4b;
+}
+/* line 136, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listTitle .intro {
+  margin-top: 18px;
+}
+/* line 139, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listTitle .intro ul li {
+  display: inline-block;
+  font-size: 14px;
+  color: #4b4b4b;
+  padding: 0 18px;
+  position: relative;
+}
+/* line 145, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listTitle .intro ul li:after {
+  content: '';
+  width: 1px;
+  height: 16px;
+  background-color: #dcdcdc;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* line 155, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listTitle .intro ul li:first-child {
+  padding-left: 1px;
+}
+/* line 158, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listTitle .intro ul li:last-child:after {
+  display: none;
+}
+/* line 164, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listTitle .price {
+  display: inline-block;
+  font-size: 14px;
+  color: #4b4b4b;
+  position: absolute;
+  right: 22px;
+  bottom: 18px;
+  vertical-align: bottom;
+  line-height: 20px;
+}
+/* line 173, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listTitle .price span {
+  font-size: 25px;
+  color: #f36e19;
+  margin: 0 17px;
+  vertical-align: bottom;
+}
+/* line 181, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody {
+  width: 100%;
+  padding: 0px 50px;
+  padding-bottom: 40px;
+  border: 1px solid #dcdcdc;
+  margin-top: -1px;
+  transition: all .1s ease;
+  position: relative;
+}
+/* line 191, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li {
+  width: 450px;
+  height: auto;
+  margin-top: 25px;
+  font-size: 0;
+}
+/* line 196, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .pic {
+  display: inline-block;
+  position: relative;
+  width: 98px;
+  height: 70px;
+}
+/* line 201, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .pic img {
+  position: absolute;
+  height: 100%;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  top: 0;
+}
+/* line 210, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .detail {
+  display: inline-block;
+  width: calc(100% - 98px);
+}
+/* line 214, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .info {
+  width: 100%;
+  height: 70px;
+}
+/* line 217, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .info .infoTitle {
+  font-size: 14px;
+  line-height: 1.5;
+  color: #494949;
+}
+/* line 222, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .info .standards {
+  font-size: 13px;
+  color: #8a8a8a;
+  margin: 10px 0;
+  ine-height: 1.5;
+}
+/* line 228, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .info .price {
+  color: #494949;
+  font-size: 14px;
+  ine-height: 1.5;
+}
+/* line 232, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .info .price .unitPrice {
+  margin-right: .6em;
+}
+/* line 235, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .info .price .currentPrice {
+  margin-right: .6em;
+}
+/* line 238, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .info .price .originPrice {
+  color: #a2a2a2;
+  position: relative;
+}
+/* line 241, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .info .price .originPrice:after {
+  content: '';
+  width: calc(100% + 2px);
+  height: 1px;
+  background-color: #a8a8a8;
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+}
+/* line 254, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .gift {
+  margin-top: 14px;
+  position: relative;
+  padding-left: 33px;
+}
+/* line 258, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .gift:after {
+  content: '赠';
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  font-size: 13px;
+  color: #8a8a8a;
+}
+/* line 267, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .gift ul {
+  position: relative;
+}
+/* line 269, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .gift ul li {
+  padding: 0;
+  min-height: auto;
+  margin: 0;
+  margin-bottom: 10px;
+  height: 40px;
+}
+/* line 275, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .gift ul li * {
+  margin-right: 18px;
+  vertical-align: top;
+}
+/* line 279, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .gift ul li img {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+/* line 284, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .gift ul li .gift_name {
+  font-size: 14px;
+  display: inline-block;
+  height: 40px;
+  color: #494949;
+  line-height: 40px;
+}
+/* line 291, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo ul li .gift ul li .count {
+  font-size: 14px;
+  color: #494949;
+  line-height: 40px;
+}
+/* line 302, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift {
+  margin-top: 14px;
+  position: relative;
+  padding-left: 33px;
+}
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift:after {
+  content: '赠';
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-block;
+  font-size: 13px;
+  color: #8a8a8a;
+}
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift ul {
+  position: relative;
+}
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift ul li {
+  padding: 0;
+  min-height: auto;
+  margin: 0;
+  margin-bottom: 10px;
+  height: 40px;
+}
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift ul li * {
+  margin-right: 18px;
+  vertical-align: top;
+}
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift ul li img {
+  width: 40px;
+  height: 40px;
+  position: relative;
+}
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift ul li .gift_name {
+  font-size: 14px;
+  display: inline-block;
+  height: 40px;
+  color: #494949;
+  line-height: 40px;
+}
+.containers-order-list .showBoard .orderListShow .list .listBody .goodsInfo .gift ul li .count {
+  font-size: 14px;
+  color: #494949;
+  line-height: 40px;
+}
+.containers-order-list .showBoard .orderListShow .list .listBody .listControls {
+  position: absolute;
+  display: inline-block;
+  right: 40px;
+  width: 104px;
+  top: 25px;
+}
+/* line 308, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .listControls a {
+  display: inline-block;
+  width: 100%;
+  height: 35px;
+  font-size: 14px;
+  line-height: 35px;
+  text-align: center;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  transition: all .15s ease;
+}
+/* line 318, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .listControls a:last-child {
+  margin-bottom: 0;
+}
+/* line 322, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .listControls .payNow {
+  background-color: #f36f1a;
+  color: #fff;
+  cursor: pointer;
+}
+/* line 325, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .listControls .payNow:hover {
+  background-color: #e46818;
+}
+/* line 329, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .listControls .getDetail {
+  background-color: #fff;
+  color: #8a8a8a;
+  border: 1px solid #dcdcdc;
+  cursor: pointer;
+}
+/* line 333, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list .listBody .listControls .getDetail:hover {
+  background-color: #ededed;
+  border-color: #ededed;
+}
+/* line 341, ../sass/orderList.scss */
+.containers-order-list .showBoard .orderListShow .list:hover .listTitle,
+.containers-order-list .showBoard .orderListShow .list:hover .listBody {
+  border-color: #f36e19;
+}

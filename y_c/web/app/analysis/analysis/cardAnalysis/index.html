@@ -1,0 +1,101 @@
+<div class="page-content" ng-init="initLoad()">
+    <div class="container-fluid">
+    <!--时间选择导航-->
+    <div class="row timeBar">
+        <div class="col-md-12">
+
+            <div class="col-md-2 fixWidth">
+                <input id="startDay" type="text" ng-model="groupRange['STARTDAY']" ng-init="groupRange['STARTDAY']=START" class="form-control inputWidth"  placeholder="">
+                <span>-</span>
+                <input id="endDay" type="text" ng-model="groupRange['ENDDAY']" ng-init="groupRange['ENDDAY']=END"  class="form-control inputWidth"  placeholder="">
+            </div>
+            <button class="btn " type="button" ng-click="getGroupByRange()">查询</button>
+            <span ng-if="weekDay != 1"><a class="showPoint" ng-click="getGroupByThisWeek()">本周</a></span>
+            <a class="showPoint" ng-click="getGroupByYesterWeek()">上周</a>
+            <span ng-if="monthDay != 1"><a class="showPoint" ng-click="getGroupByThisMonth()">本月</a></span>
+            <a class="showPoint" ng-click="getGroupByYesterMonth()">上月</a>
+            <a class="showPoint" ng-click="getGroupByYesterDay()">昨天</a>
+            <button class="btn alignRight"  type="button" onclick="outPutMethod('cardTable')">导出</button>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 showPoint">
+            <div class="layout bgColor-blue " ng-click="chargeChartOnCard('1')">
+                <h2><span ng-bind="addCard | number"></span></h2>
+                <p >期内新增会员<i title="所选时间范围内新增会员的个数">!</i></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="layout bgColor-blue2" >
+                <h2><span ng-bind="invalidTotalCard['SOURCE'] | number"></span></h2>
+                <p>空账户<i title="空账户总数">!</i></p>
+            </div>
+        </div>
+      <div class="col-md-4">
+        <div class="layout bgColor-red">
+            <h2><span ng-bind="totalCard['SOURCE'] | number"></span></h2>
+            <p>会员合计<i title="会员总数">!</i></p>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 showPoint" >
+            <div class="layout bgColor-blue" ng-click="chargeChartOnCard('2')">
+                <h2><span ng-bind="rechargeOnlineSum | currency:'￥'"></span></h2>
+                <p>会员充值<i title="所选时间范围内会员充值总计">!</i></p>
+            </div>
+        </div>
+        <div class="col-md-3 showPoint">
+            <div class="layout bgColor-blue2" ng-click="chargeChartOnCard('3')">
+                <h2><span ng-bind="consumeSum | currency:'￥'"></span></h2>
+                <p>会员消费<i title="所选时间范围内会员消费总计">!</i></p>
+            </div>
+        </div>
+        <div class="col-md-3 showPoint">
+            <div class="layout bgColor-blue2" ng-click="chargeChartOnCard('4')">
+                <h2><span ng-bind="revertSum | currency:'￥'"></span></h2>
+                <p>会员返点<i title="所选时间范围内会员返点总计">!</i></p>
+            </div>
+        </div>
+        <div class="col-md-3 showPoint">
+            <div class="layout bgColor-blue2" ng-click="chargeChartOnCard('5')">
+                <h2><span ng-bind="consumeRedSum | currency:'￥'"></span></h2>
+                <p>会员红冲<i title="所选时间范围内会员红冲总计">!</i></p>
+            </div>
+        </div>
+    </div>
+        <!--<select style="width: 100px" ng-change="chargeChartOnCard()" ng-model="CHART">-->
+            <!--<option value="1" selected>新增会员</option>-->
+            <!--<option value="2">会员充值</option>-->
+            <!--<option value="3">会员消费</option>-->
+            <!--<option value="4">会员返点</option>-->
+            <!--<option value="5">消费红冲</option>-->
+        <!--</select>-->
+    <div class="row" id="main" style="height: 300px;margin-top: 20px;"></div>
+        <div class="row table-content">
+            <div class="col-md-12 table-toolbar">
+                <table class="table table-bordered table-hover table-striped" id="cardTable">
+                        <thead>
+                        <tr>
+                            <th class="col-sm-1 text-center">日期</th>
+                            <th class="col-sm-1 text-center">充值</th>
+                            <th class="col-sm-1 text-center">消费</th>
+                            <th class="col-sm-1 text-center">消费冲红</th>
+                            <th class="col-sm-1 text-center">返点</th>
+                        </tr>
+                        </thead>
+                    <tbody>
+                        <tr align="center" ng-repeat="VALUE in cardMoneyChange">
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.DAY']"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['RECHARGEONLINE']/100 | currency:'￥'"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUME']/100 | currency:'￥'"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['CONSUMERED']/100 | currency:'￥'"></span></td>
+                            <td><span ng-bind="VALUE['MANAGE_DATA_ANALYSIS.SOURCE']['REVERT']/100 | currency:'￥'"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

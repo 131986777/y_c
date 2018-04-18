@@ -1,0 +1,56 @@
+<div class="bg-grey" style="padding-bottom: 53px">
+    <!-- 余额部分 -->
+    <div class="balance-wrap" >
+        <p class="title" style="padding: 7px 0">余额账户(元)</p>
+        <p class="count" style="font-size: 25px ;padding-bottom: 7px;">{{balance }}</p>
+        <div style="display: flex;flex-direction: row;flex-wrap: wrap;padding-bottom: 13px;">
+        	<div style="width: 33%;text-align: center;"><div style="padding-bottom: 5px;">充值账户</div><div>{{balance_left}}</div></div>
+        	<div style="width: 33%;text-align: center;"><div style="padding-bottom: 5px;">赠送账户</div><div>{{balance_gifi_left}}</div></div>
+        	<div style="width: 33%; text-align: center;"><div style="padding-bottom: 5px;">积分账户</div><div>{{point}}</div></div>
+        </div>
+    </div>
+    <div class="main-entry weui_cells weui_cells_access">
+        <a ui-sref="pages/account/recharge" class="weui_cell">
+            <div class="weui_cell_hd recharge">
+                <i class="icon icon-recharge"></i>
+            </div>
+            <div class="weui_cell_bd weui_cell_primary">
+                充值
+            </div>
+            <div class="weui_cell_ft"></div>
+        </a>
+    </div>
+    <div class="balance-detail">
+        <div class="dropdown">
+            <a type="button" data-toggle="dropdown">
+                {{balanceDetail}}
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li ng-click="chooseType('null')">收支明细</li>
+                <li ng-click="chooseType('decrease')">支出</li>
+                <li ng-click="chooseType('increase')">收入</li>
+            </ul>
+        </div>
+        <div class="balance-table" ng-repeat="item in balanceInfo"
+             ng-if="balanceInfo.length > 0 && balanceInfo[0]['FINANCE_LIST.BALANCE'] > 0">
+            <div class="balance-term">
+                <a class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>{{item['FINANCE_LIST.EVENT']}}</p>
+                        <p>余额：{{item['FINANCE_LIST.BALANCE'] | currency : '￥'}}</p>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <p class="balance-time">{{item['FINANCE_LIST.ADD_DATETIME']}}</p>
+                        <p class="balance-count">{{item['FINANCE_LIST.CHANGE_VALUE'] | currency : '￥'}}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="balance-table" ng-if="balanceInfo.length == 0 || balanceInfo[0]['FINANCE_LIST.BALANCE'] == 0">
+            <div class="weui_cell">
+                暂无消费记录
+            </div>
+        </div>
+    </div>
+</div>

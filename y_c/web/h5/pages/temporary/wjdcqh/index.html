@@ -1,0 +1,839 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>云厨一站会员年终调查</title>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/css/swiper.min.css">
+		<link rel="stylesheet" href="../temporary/wjdcqh/css/main.css">
+		<script src="../temporary/wjdcqh/js/rem.js"></script>
+		<script src="../temporary/wjdcqh/js/count.js"></script>
+	</head>
+	<style type="text/css">
+		.row-content {
+			height: 100%;
+		}
+		
+		.ng-scope {
+			height: 100%;
+		}
+		
+		.start {
+			position: relative;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: url(../temporary/wjdcqh/start.jpg);
+			background-size: 100% 100%;
+			z-index: 10;
+			text-align: center;
+			font-family: "微软雅黑";
+			/*Safari and Chrome*/
+		}
+		
+		.end {
+			position: relative;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: #FFFFFF;
+			z-index: 8;
+			text-align: center;
+			font-family: "微软雅黑";
+			/*Safari and Chrome*/
+			display: none;
+		}
+		
+		.title {
+			font-size: .9rem;
+			color: #3775e2;
+			top: 50%;
+			height: 20%;
+			position: absolute;
+			width: 58%;
+			left: 21%;
+		}
+		
+		.message {
+			/* position: absolute; */
+			/* left: 50%; */
+			/* top: 50%; */
+			width: 100%;
+			/* margin-left: -50%; */
+			height: 4rem;
+			/* margin-top: -2rem; */
+			margin-top: 1rem;
+		}
+		
+		.prompt {
+			font-size: .38rem;
+			/* margin-bottom: .3rem; */
+			color: #000000;
+		}
+		
+		input {
+			margin: auto;
+			display: block;
+			height: .6rem;
+			width: 3.08rem;
+			border: 1px solid #000000;
+			text-align: center;
+			font-size: 13px;
+			color: #3775e2;
+			line-height: .6rem;
+		}
+		
+		#logo {
+			width: 1.26rem;
+			height: 1.25rem;
+			margin-top: 1rem;
+			left: 50%;
+			display: inline-block;
+			bottom: .64rem;
+			background: url(images/logo.png);
+			background-size: 100% 100%;
+		}
+		
+		.submits {
+			position: absolute;
+			background: transparent;
+			width: 24%;
+			height: 5%;
+			bottom: 3rem;
+			left: 50%;
+			top: 69%;
+			margin-left: -12%;
+			border: 0;
+			border-radius: 10px;
+			line-height: .56rem;
+		}
+		
+		.swiper-slide {
+			padding: 10px;
+			box-sizing: border-box;
+		}
+		
+		.mind {
+			overflow: hidden;
+		}
+		
+		.mind .swiper-wrapper {
+			padding: 0;
+		}
+		
+		.mind .swiper-slide dt {
+			line-height: 26px;
+			font-size: 15px;
+		}
+		
+		.res {
+			color: #f65d5a;
+			height: 3.2rem;
+			line-height: 3.2rem;
+			font-size: 1.6rem;
+		}
+		
+		.swiper-slide {
+			padding-top: 0;
+		}
+		
+		.end {
+			background: url('../temporary/wjdcqh/end.jpg');
+			background-size: 100% 100%
+		}
+		
+		dl {
+			/*margin-top: 55%;
+			margin-left: 19%;*/
+			background: url(../temporary/wjdcqh/back.jpg);
+			background-size: 100% 100%;
+			position: relative;
+		}
+		
+		.ques {
+			position: absolute;
+			top: 29%;
+			left: 17%;
+			width: 67%;
+		}
+		
+		.swiper-container {
+			/*display: none;*/
+			opacity: 0;
+		}
+		
+		.swiper-button-prev {
+			position: absolute;
+			top: 24%;
+			left: 7%;
+			width: 18%;
+			background: url(../temporary/wjdcqh/prev.png);
+			background-size: 100% 100%;
+		}
+		
+		.swiper-button-next {
+			position: absolute;
+			top: 24%;
+			left: 78%;
+			width: 18%;
+			background: url(../temporary/wjdcqh/next.png);
+			background-size: 100% 100%;
+		}
+		
+		dt {
+			font-size: 17px !important;
+		}
+		
+		dd {
+			font-size: 17px !important;
+		}
+		
+		.num {
+			position: absolute;
+			width: 15%;
+			height: 10%;
+			background: red;
+			top: 53%;
+			left: 32%;
+			font-size: 62px;
+			background: url(../temporary/wjdcqh/num.png) center no-repeat;
+			background-size: contain;
+			color: #fb346c;
+		}
+	</style>
+
+	<body>
+
+		<div class="mind">
+			<div class="start">
+				<!--<div class="title">
+				云厨知识答题
+			</div>
+			<div class="message">
+				<div class="prompt">请输入你的姓名</div>
+				<div id="c">
+					<input type="" name="" id="" value="" class="username" />
+				</div>
+
+				<p class="prompt">请输入你的部门</p>
+
+				<input type="" name="" id="" value="" class="dpm" />
+
+				<p class="prompt">请输入你的手机号</p>
+
+				<input type="" name="" id="" value="" class="mobile" />
+
+			</div>
+			-->
+				<div class="starts"><button class="submits"></button></div>
+
+			</div>
+			<div class="end">
+				<div class="title">
+
+				</div>
+				<div class="num" id="num"></div>
+				<div class="res">
+
+				</div>
+
+			</div>
+			<div class="swiper-container">
+
+				<span class="swiper-button-prev swiper-button-blue"></span>
+
+				<span class="swiper-button-next swiper-button-blue" style="display: none"></span>
+				<div class="swiper-wrapper">
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>1、请问您的性别？</dt>
+							<dd class="">A．男</dd>
+							<dd class="">B．女</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>2、请问您所处的年龄段？</dt>
+							<dd class="">A．18岁以下</dd>
+							<dd class="">B．18~25</dd>
+							<dd class="">C．26~30</dd>
+							<dd class="">D．31~40</dd>
+							<dd class="">E．41~50</dd>
+							<dd class="">F．51~60</dd>
+							<dd class="">G．60岁以上</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>3、请问您的家庭人数？</dt>
+							<dd class="">A．1</dd>
+							<dd class="">B．2</dd>
+							<dd class="">C．3-4</dd>
+							<dd class="">D．5以上</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>4、请问您一日三餐的月支配金额？</dt>
+							<dd class="">A．500元以下</dd>
+							<dd class="">B．501~1000元</dd>
+							<dd class="">C．1001~2000元</dd>
+							<dd class="">D．2000元以上</dd>
+							<dd class="">E．没有计算过</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>5、请问您多久去云厨一站消费一次？</dt>
+							<dd class="">A．几乎每天</dd>
+							<dd class="">B．每周2-3次</dd>
+							<dd class="">C．每周1次</dd>
+							<dd class="">D．每月2-3次</dd>
+							<dd class="">E．每月1次</dd>
+							<dd class="">F．每月不到1次</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>6、请问您在云厨一站消费时，主要购买的商品类目为（多选）？</dt>
+							<dd class="">A．净菜</dd>
+							<dd class="">B．酱卤熟食</dd>
+							<dd class="">C．组配菜</dd>
+							<dd class="">D．水果</dd>
+							<dd class="">E．肉类、水产、腌腊制品</dd>
+							<dd class="">F．米面、粮油、调味品</dd>
+							<dd class="">G．干货、烘焙、休闲食品</dd>
+							<dd class="">H．蛋类、豆制品、乳制品</dd>
+							<dd class="">I． 其他</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>7、请问您选择在云厨一站购买的主要原因（多选)？</dt>
+							<dd class="">A．新鲜</dd>
+							<dd class="">B．卫生</dd>
+							<dd class="">C．便捷</dd>
+							<dd class="">D．服务</dd>
+							<dd class="">E．品牌</dd>
+							<dd class="">F．种类丰富</dd>
+							<dd class="">G．档次</dd>
+							<dd class="">H．价格</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>8、请问您是否会购买预先洗净好的蔬菜（即净菜）？</dt>
+							<dd class="">A．会</dd>
+							<dd class="">B．不会</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>9、您购买的原因是（多选）？</dt>
+							<dd class="">A．蔬菜清洗的干净</dd>
+							<dd class="">B．二次加工时丢弃较少</dd>
+							<dd class="">C．包装好看</dd>
+							<dd class="">D．性价比高</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>9、您不购买的原因是（多选）？</dt>
+							<dd class="">A．感觉没洗干净</dd>
+							<dd class="">B．价格较高</dd>
+							<dd class="">C．包装不好看</dd>
+							<dd class="">D．不知道有净菜卖</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>10、请问您是否会购买酱卤熟食？</dt>
+							<dd class="">A．会</dd>
+							<dd class="">B．不会</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>11、您购买的原因是（多选）？</dt>
+							<dd class="">A．口味好</dd>
+							<dd class="">B．食用方便</dd>
+							<dd class="">C．包装好看</dd>
+							<dd class="">D．性价比高</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>11、您不购买的原因是（多选）？</dt>
+							<dd class="">A．口味不好</dd>
+							<dd class="">B．价格较高</dd>
+							<dd class="">C．包装不好看</dd>
+							<dd class="">D．不知道有酱卤熟食卖</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>12、请问您是否会购买组配菜？</dt>
+							<dd class="">A．会</dd>
+							<dd class="">B．不会</dd>
+						</div>
+
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>13、您购买的原因是（多选）？</dt>
+							<dd class="">A．口味好</dd>
+							<dd class="">B．烹饪方便</dd>
+							<dd class="">C．包装好看</dd>
+							<dd class="">D．性价比高</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>13、您不购买的原因是（多选）？</dt>
+							<dd class="">A．没有喜欢的菜品</dd>
+							<dd class="">B．价格较高</dd>
+							<dd class="">C．包装不好看</dd>
+							<dd class="">D．不知道有组配菜卖</dd>
+						</div>
+					</dl>
+
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>14、请问您是否会购买烘焙？</dt>
+							<dd class="">A．会</dd>
+							<dd class="">B．不会</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>15、您购买的原因是（多选）？</dt>
+							<dd class="">A．口味好</dd>
+							<dd class="">B．品种丰富</dd>
+							<dd class="">C．包装好看</dd>
+							<dd class="">D．性价比高</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>15、您不购买的原因是（多选）？</dt>
+							<dd class="">A．没有喜欢的口味</dd>
+							<dd class="">B．价格较高</dd>
+							<dd class="">C．包装不好看</dd>
+							<dd class="">D．不知道有烘焙卖</dd>
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>16、云厨一站的店内布局合理、环境整洁、卫生条件好。(请用1-5分打分，5分表示非常满意，1分表示非常不满意，3分表示一般。)</dt>
+							<dd class="">A．1分</dd>
+							<dd class="">B．2分</dd>
+							<dd class="">C．3分</dd>
+							<dd class="">D．4分</dd>
+							<dd class="">E．5分</dd>
+
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>17、云厨一站的服务人员热情周到、反应快、对产品介绍详细全面。(请用1-5分打分，5分表示非常满意，1分表示非常不满意，3分表示一般。)</dt>
+							<dd class="">A．1分</dd>
+							<dd class="">B．2分</dd>
+							<dd class="">C．3分</dd>
+							<dd class="">D．4分</dd>
+							<dd class="">E．5分</dd>
+
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>18、云厨一站的产品种类丰富、安全性高、干净卫生。(请用1-5分打分，5分表示非常满意，1分表示非常不满意，3分表示一般。)</dt>
+							<dd class="">A．1分</dd>
+							<dd class="">B．2分</dd>
+							<dd class="">C．3分</dd>
+							<dd class="">D．4分</dd>
+							<dd class="">E．5分</dd>
+
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>19、云厨一站的营业时间合理、地理位置便利，方便您去购买消费。(请用1-5分打分，5分表示非常满意，1分表示非常不满意，3分表示一般。)</dt>
+							<dd class="">A．1分</dd>
+							<dd class="">B．2分</dd>
+							<dd class="">C．3分</dd>
+							<dd class="">D．4分</dd>
+							<dd class="">E．5分</dd>
+
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>20、云厨一站的活动丰富，会员福利多。(请用1-5分打分，5分表示非常满意，1分表示非常不满意，3分表示一般。)</dt>
+							<dd class="">A．1分</dd>
+							<dd class="">B．2分</dd>
+							<dd class="">C．3分</dd>
+							<dd class="">D．4分</dd>
+							<dd class="">E．5分</dd>
+
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>21、您是否愿意持续在云厨一站消费购物。(请用1-5打分，5分表示非常愿意，1分表示非常不愿意，3分表示一般。)</dt>
+							<dd class="">A．1分</dd>
+							<dd class="">B．2分</dd>
+							<dd class="">C．3分</dd>
+							<dd class="">D．4分</dd>
+							<dd class="">E．5分</dd>
+
+						</div>
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="ques">
+							<dt>22、您是否愿意将云厨一站推荐给身边的人。(请用1-5打分，5分表示非常愿意，1分表示非常不愿意，3分表示一般。)</dt>
+							<dd class="">A．1分</dd>
+							<dd class="">B．2分</dd>
+							<dd class="">C．3分</dd>
+							<dd class="">D．4分</dd>
+							<dd class="">E．5分</dd>
+
+					</dl>
+					<dl class="swiper-slide swiper-no-swiping" style="">
+						<div class="end">
+							<div class="title">
+
+							</div>
+							<div class="res">
+
+							</div>
+
+						</div>
+						</div>
+					</dl>
+				</div>
+
+				<!--<div class="maskwhite"></div>-->
+				<!--<div class="subjuan">
+					<p>提示</p>
+					<p>您已经回答了<span id="subnum"></span>题，确定要交卷么？</p>
+					<div class="subyn">
+						<div class="fl-left" id="subno">取消</div>
+						<div class="fl-right" id="subyes">交卷</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+				<div class="tishi">
+					<p>提示</p>
+					<p>你一共还有<span id="num"></span>题未打完</p>
+					<div class="tj">
+						<div class="fl-left" id="sub">确定</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>-->
+
+			</div>
+
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.7/js/swiper.js"></script>
+
+		<script type="text/javascript">
+			function ajaxGet(url, func) {
+				$.ajax({
+					type: 'GET',
+					url: url,
+					async: false,
+					dataType: 'json',
+
+					success: function(result) {
+
+						func(result);
+					}
+				});
+			}
+
+			function ajaxPost(url, data, fnSucceed, fnFail, fnLoading) {
+				$.ajax({
+					url: url,
+					datatype: 'json',
+					type: 'get',
+					data: data,
+					success: function(result) {
+						fnSucceed(result);
+					}
+				});
+
+			}
+
+			function Trim(str, is_global) {
+				var result;
+				result = str.replace(/(^\s+)|(\s+$)/g, "");
+				if(is_global.toLowerCase() == "g") {
+					result = result.replace(/\s/g, "");
+				}
+				return result;
+			}
+
+			function getCookie(name) {
+				var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");　　
+				return(arr = document.cookie.match(reg)) ? unescape(arr[2]) : null;
+			}
+			$('.submits').click(function() {
+				$('.swiper-container').css('opacity', '1')
+				setTimeout(function() {
+					$('.start').css('display', 'none')
+
+				}, 1000)
+				$('.start').animate({
+					opacity: '0'
+				}, 1000)
+			})
+			var obj = {}
+			obj.userid = getCookie('ANDSELLID')
+
+			ajaxPost('http://yx.bblycyz.com/lottery/rest/lottery/surveyInvolved', obj, function(res) {
+				if(res.statusCode == 1) {
+
+				} else {
+					setTimeout(function() {
+						alert(res.message)
+					}, 500)
+
+				}
+			})
+
+			$("input").focus(function() {
+
+				var u = navigator.userAgent,
+					app = navigator.appVersion;
+				var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //g
+				var isIOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+				if(isAndroid) {
+					//	        alert("安卓机！")
+					var scrollT = function() {
+						$("html,body").animate({
+							scrollTop: $(".message").offset().top
+						}, 300);
+
+					}
+					scrollT()
+
+				}
+				if(isIOS) {
+					//	        alert("苹果果机！")
+				}
+
+			})
+
+			//swiper  初始化
+			var swiper = new Swiper('.swiper-container', {
+
+				pagination: '.swiper-pagination',
+				noSwiping: true,
+
+				allowSlidePrev: false,
+				on: {
+					sliderMove: function() {
+						$('.swiper-button-next').css('display', 'none')
+						console.log('111')
+
+					},
+				},
+				paginationClickable: true,
+				paginationBulletRender: function(index, className) {
+					$("#totnum").text(index + 1); //总页码
+					return '<span class="' + className + '">' + (index + 1) + '</span>';
+
+				},
+
+			});
+			// 第一页关闭后退按钮
+
+			if(swiper.activeIndex == 0) {
+				$('.swiper-button-prev').css('display', 'none')
+			}
+
+			//前进按钮逻辑处理
+			$('.swiper-button-next').click(function() {
+				$('.swiper-button-prev').css('display', 'block') //显示后退按钮
+
+				if(swiper.activeIndex == 21) {
+					//最后跳转 end
+					//获取结果
+					$('.end').css('display', 'block')
+					console.log($('.chance'))
+
+					for(var i = 0; i < $('.swiper-slide').length - 1; i++) {
+						var obj = {}
+						obj.id = i;
+						var arr = []
+						for(var k = 0; k < $('.swiper-slide').eq(i).find('.chance').length; k++) {
+							if($('.swiper-slide').eq(i).find('.chance').eq(k).is(':hidden')) { //对于 隐藏的模块 答案赋值为‘’
+								arr.push('')
+							} else {
+								arr.push($('.swiper-slide').eq(i).find('.chance').eq(k).html().slice(0, 1))
+							}
+
+						}
+						obj.answer = arr
+						arrs.push(obj)
+					}
+					console.log(arrs)
+				} else {
+					//正常下一页
+					swiper.slideNext()
+				}
+				$('.swiper-button-next').css('display', 'none') // 前进后 默认关闭前进按钮
+				var k = 0
+				for(var i = 0; i < $('.swiper-slide').length; i++) {
+					//获取前面被隐藏的板块数目
+					if($('.swiper-slide').eq(i).is(':hidden')) {
+						k++
+					}
+
+				}
+				//swiper  对于隐藏 兼容处理
+				if($('.swiper-slide').eq(swiper.activeIndex + k).find('.chance').length > 0) {
+					// 如果本页有选项 开启 前进按钮
+					$('.swiper-button-next').css('display', 'block')
+
+				}
+			})
+			$('.swiper-button-prev').click(function() {
+				//后退逻辑处理
+				swiper.slidePrev()
+
+				$('.swiper-button-next').css('display', 'block') //前进按钮开启
+				if(swiper.activeIndex == 0) {
+
+					$('.swiper-button-prev').css('display', 'none') // 第一页关闭后退按钮
+
+				}
+
+			})
+
+			//选择答案
+
+			var arrs = []
+			$("dl.swiper-slide .ques dd").click(function() {
+				//需求跳转逻辑处理
+
+				//				var indexnum = $(this).parent("dl").index();
+				//				$(".swiper-pagination span").eq(indexnum).addClass("curr");
+
+				console.log(swiper.activeIndex)
+				if(swiper.activeIndex == 5 || swiper.activeIndex == 6 || swiper.activeIndex == 8 || swiper.activeIndex == 10 || swiper.activeIndex == 12 || swiper.activeIndex == 14) {
+					//多选
+					if($(this).hasClass('chance')) {
+						$(this).removeClass("chance")
+						console.log($(this).parent().parent().find('.chance').length)
+						if($(this).parent().parent().find('.chance').length == 0) {
+							console.log('111')
+							$('.swiper-button-next').css('display', 'none')
+						}
+					} else {
+						$(this).addClass("chance");
+						$('.swiper-button-next').css('display', 'block')
+					}
+
+				} else if(swiper.activeIndex == 7 || swiper.activeIndex == 9 || swiper.activeIndex == 11 || swiper.activeIndex == 13) {
+					$(this).addClass("chance");
+
+					if($(this).html() == 'A．会') {
+						console.log($(this).parent().parent("dl").find("dd"))
+						$(this).parent().parent("dl").find("dd").removeClass("chance");
+						$(this).addClass("chance");
+						$('.swiper-button-next').css('display', 'block')
+						console.log('选项1')
+
+						$(this).parent().parent(".swiper-slide").next().css('display', 'block')
+						$(this).parent().parent(".swiper-slide").next().next().css('display', 'none')
+
+						/* 	swiper.slideNext() */
+					} else if($(this).html() == 'B．不会') {
+						console.log($(this).parent().parent("dl").find("dd"))
+						$(this).parent().parent("dl").find("dd").removeClass("chance");
+						$(this).addClass("chance");
+						console.log('选项2')
+						$('.swiper-button-next').css('display', 'block')
+						$(this).parent().parent(".swiper-slide").next().next().css('display', 'block')
+						$(this).parent().parent(".swiper-slide").next().css('display', 'none')
+
+					}
+				} else {
+					//单选
+					$(this).addClass("chance");
+
+					$(this).parent().parent("dl").find("dd").removeClass("chance");
+					$(this).addClass("chance");
+					$('.swiper-button-next').css('display', 'block')
+
+				}
+
+			});
+
+			$('.title').click(function() {
+
+				$('.num').css('background', 'transparent')
+
+				var objs = {}
+				objs.userid = getCookie('ANDSELLID')
+
+				objs['json'] = JSON.stringify(arrs)
+
+				ajaxPost('http://yx.bblycyz.com/lottery/rest/lottery/survey_Submit', objs, function(res) {
+					console.log(res)
+
+					if(res.statusCode == 0) {
+						var x
+						console.log(res.data)
+						switch(res.data) {
+							case '3032':
+								x = "1";
+								break;
+							case '3033':
+								x = "3";
+								break;
+							case '3034':
+								x = "5";
+								break;
+							case '3035':
+								x = "10";
+								break;
+
+						}
+
+						var options = {  
+							useEasing: true,
+							  useGrouping: true,
+							  separator: ',',
+							  decimal: '.',
+						};
+						console.log(x)
+						var num = new CountUp('num', 0, x, 0, 4, options);
+						if(!num.error) { 
+							setTimeout(function() {
+								alert('恭喜你获得' + x + '元优惠卷,稍后为您跳转商城')
+							}, 4500) 
+							setTimeout(function() {
+								window.location.href = 'http://app.bblycyz.com/AndSell/h5/pages/main/main_bak.html#/pages/home'
+							}, 5000)
+							num.start();
+						} else {  
+							console.error(num.error);
+						}
+						//										alert('领取成功')
+
+					} else {
+						alert(res.message)
+					}
+				})
+			})
+		</script>
+	</body>
+
+</html>

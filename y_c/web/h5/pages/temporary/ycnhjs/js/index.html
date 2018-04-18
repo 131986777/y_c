@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+
+		<title>云厨年货节</title>
+		<script src="../temporary/ycnhjs/js/rem.js"></script>
+		<!--<script src="js/rem.js"></script>-->
+		<!--<script src=".../temporary/ycnhj/jquery.min.js"></script>-->
+	</head>
+	<style>
+		body,
+		html,
+		img {
+			margin: 0;
+			padding: 0;
+		}
+		
+		.shop {
+			width: 100%;
+			height: 149.1rem;
+			background: url(../temporary/ycnhjs/imgss.jpg);
+			background-size: 100% 100%;
+		}
+		
+		.a {
+			position: absolute;
+			width: 17.8rem;
+			height: 9.1rem;
+			left: 3%;
+		}
+		
+		.as {
+			position: absolute;
+			width: 8.8rem;
+			height: 11.7rem;
+			left: 3%;
+		}
+		
+		.az {
+			position: absolute;
+			width: 8.8rem;
+			height: 2.7rem;
+			left: 29%;
+
+			top: 32%;
+		}
+		
+		.a1 {
+			top: 39.6%;
+		}
+		
+		.a2 {
+			top: 45.97%;
+		}
+		
+		.a3 {
+			top: 52.4%;
+		}
+		
+		.a4 {
+			top: 58.8%;
+		}
+		
+		.a5 {
+			left: 51.5%;
+			top: 58.8%;
+		}
+		
+		.a6 {
+			top: 73.2%;
+		}
+		
+		.a7 {
+			left: 51.5%;
+			top: 73.2%;
+		}
+		
+		.a8 {
+			top: 81.2%;
+		}
+		
+		.a9 {
+			left: 51.5%;
+			top: 81.2%;
+		}
+		
+		.a10 {
+			top: 89.1%;
+		}
+		
+		.a11 {
+			left: 51.5%;
+			top: 89.1%;
+		}
+	</style>
+
+	<body>
+		<div id="wrapper">
+			<!--<img src="../temporary/ycnhjs/imgs.jpg" style="width: 100%;"/>-->
+			<div style="position: relative;" class="bonus">
+				<div class="shop">
+					<a class="a az" >
+
+					</a>
+					<a class="a a1" href="#/pages/product/detail/7860">
+
+					</a>
+					<a class="a a2" href="#/pages/product/detail/7863">
+
+					</a>
+					<a class="a a3" href="#/pages/product/detail/7893">
+
+					</a>
+					<a class="a as a4" href="#/pages/product/detail/7862">
+
+					</a>
+					<a class="a as a5" href="#/pages/product/detail/7861">
+
+					</a>
+					<a class="a as a6" href="#/pages/product/detail/7386">
+
+					</a>
+					<a class="a as a7" href="#/pages/product/detail/7387">
+
+					</a>
+					<a class="a as a8" href="#/pages/product/detail/7373">
+
+					</a>
+					<a class="a as a9" href="#/pages/product/detail/7385">
+
+					</a>
+					<a class="a as a10" href="#/pages/product/detail/7372">
+
+					</a>
+					<a class="a as a11 " href="#/pages/product/detail/7885">
+
+					</a>
+				</div>
+
+			</div>
+
+		</div>
+
+		</div>
+
+	</body>
+	<script>
+		function ajaxPost(url, data, fnSucceed, fnFail, fnLoading) {
+				$.ajax({
+					url: url,
+					datatype: 'json',
+					type: 'get',
+					data: data,
+					success: function(result) {
+						fnSucceed(result);
+					}
+				});
+
+			}
+			function getCookie(name) {
+				var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");　　
+				return(arr = document.cookie.match(reg)) ? unescape(arr[2]) : null;
+			}
+			var obj={}
+			obj['user_id']=getCookie('ANDSELLID');
+			$(".az").click(function(){
+				ajaxPost('http://app.bblycyz.com/AndSell/bubu/member/coupon/addYearCoupon',obj,function(res){
+					console.log(res)
+				if(res.extraData.STATE==-1) {
+					alert(res.extraData.msg)
+				}
+				if(res.extraData.STATE==1){
+					alert('领取成功')
+				}
+				})
+			})
+			
+	</script>
+	</html>

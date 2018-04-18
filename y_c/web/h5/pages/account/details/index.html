@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=no;" name="viewport" />
+	</head>
+	<style type="text/css">
+		div,
+		header,
+		span {
+			background: #fff;
+		}
+		
+		body,
+		html {
+			margin: 0;
+			padding: 0;
+			background: #F0F0F0;
+			overflow: auto;
+			max-width: 640px;
+			margin: 0 auto;
+		}
+		
+		header {
+			text-align: center;
+			vertical-align: middle;
+			background: url(../../public/img/back.jpg) no-repeat;
+			background-size: 100%;
+		}
+		
+		header>.imgs {
+			width: 50%;
+			height: 100px;
+			vertical-align: middle;
+			margin: 40px 0 40px 0;
+			background: url(../../public/img/30.png) no-repeat;
+			background-size: 100%;
+			display: inline-block;
+		}
+		
+		header>span {
+			height: 100%;
+			vertical-align: middle;
+			display: inline-block;
+		}
+		
+		.img {
+			line-height: 32px;
+			padding-left: 0.87rem;
+		}
+		
+		.num {
+			color: #ff6000;
+			font-size: 22px
+		}
+		
+		.title {
+			font-size: 16px;
+		}
+		
+		.detalis {
+			padding: 0.87rem;
+		}
+		
+		.price {
+			    display: inline-block;
+			    text-align: left;
+			    margin-left: -27%;
+			    margin-top: 11%;
+			    font-size: 43px;
+			    color: #FFFFFF;
+			    background: none;
+		}
+		
+		.details {
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+		
+		.jf {
+			font-size: 14px;
+			line-height: 24px;
+		}
+		
+		.footer {
+			position: fixed;
+			bottom: 0;
+			left: 0;
+			height: 60px;
+			width: 100%;
+			text-align: center;
+			line-height: 60px;
+		}
+		
+		.footer>button {
+			width: 90%;
+			height: 40px;
+			line-height: 40px;
+			border-radius: 3px;
+			background-color: #ffb000;
+			border: 0;
+			font-size: 16px
+		}
+		
+		@media only screen and (max-width:350px) {
+			.price {
+				font-size: 38px!important;
+			}
+		}
+	</style>
+
+	<body>
+		<header>
+			<div class="imgs">
+				<div class="price" ng-bind-template="{{data['POINT_COUPON.VALUE']}}"></div>
+			</div>
+			<span></span>
+
+		</header>
+		<div style=" " class="img">
+			<div style="" class="title" ng-bind-template="{{data['POINT_COUPON.COUPON_NAME']}}"></div>
+			<div><span class="num" ng-bind-template="{{data['POINT_COUPON.POINT_NEED']}}"></span><span>积分</span></div>
+
+		</div>
+		<div style=" " class="detalis">
+			<div class="details">商品简介</div>
+			<div class='jf' ng-bind-template="{{data['POINT_COUPON.CODE']}}">
+
+			</div>
+		</div>
+		<div style="" class='footer'>
+			<button style="" ng-click="exchange()">兑换</button>
+		</div>
+	</body>
+
+</html>

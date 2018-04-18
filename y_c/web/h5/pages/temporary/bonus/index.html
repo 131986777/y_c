@@ -1,0 +1,70 @@
+<style>
+@media screen and (min-width:410px) and (max-width:420px) {
+		body,
+		html {
+			font-size: 14px !important
+		}
+	}
+	
+	.bonus a {
+		position: absolute;
+	}
+	
+	.bonus .integral {
+		white-space: nowrap;
+	
+		top: 30.6%;
+		left: 40%;
+		font-size: 17px;
+	}
+	
+	.bonus .jifen {
+		width: 34%;
+	
+		height: 7rem;
+	}
+	
+	.bonus .two {
+		 top: 34%;
+		left: 11%;
+	}
+	
+	.bonus .five {
+		top: 34%;
+		left: 54%;
+	}
+	
+	.bonus .ten {
+		top: 43%;
+		left: 11%;
+	}
+	 
+	.bonus .cards {
+		width: 25%;
+	
+		height: 2.3rem;
+		top: 30%;
+		left: 67%;
+	}
+	.bonus .tens{
+		top: 43%;
+		left: 54%;
+	}
+}
+</style>
+
+</script>
+<div id="wrapper" >
+
+	<div style="position: relative;" class="bonus">
+		<img src="../temporary/bonus/back.jpg" width="100%" />
+		<a class="integral"><span ng-bind-template="{{jifen}}">4432</span><span ng-model="ss">分</span></a>
+		<a class="cards" ui-sref="pages/personal/coupon"></a>
+		<a class="two jifen" ng-click="exchange(3019)"></a>
+		<a class="five jifen"  ng-click="exchange(3020)"></a>
+		<a class="ten jifen"  ng-click="exchange(3021)"></a>
+		<a class="tens jifen"  ng-click="exchange(3022)"></a>
+
+	</div>
+
+</div>

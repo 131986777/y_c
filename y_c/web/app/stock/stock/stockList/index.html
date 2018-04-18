@@ -1,0 +1,211 @@
+<div class="table-operbar">
+        <div class="table-toolbar">
+            <!-- BEGIN 导航标签 -->
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a> 分库存 </a>
+                </li>
+                <li>
+                    <a ui-sref="stock/totalStock/totalStockList"> 总库存 </a>
+                </li>
+            </ul>
+            <!-- END 导航标签 -->
+        </div>
+
+        <div class="form-inline form-group">
+            <div class="table-operbar">
+                <div class="form-inline row">
+                    <div class="col-md-4">
+                    <div class="form-group ">
+                        <input type="text" class="form-control" placeholder="商品名称" ng-model="pName">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-default pull-right"
+                                ng-click="queryStockById(pName)">查询
+                        </button>
+                    </div>
+                    </div>
+                    <div class="col-md-5">
+                    <label class="control-label">筛选：</label>
+                    <select ng-model="filter['STOCK_REALTIME.STORE_ID']"
+                            ng-init="filter['STOCK_REALTIME.STORE_ID']=''"
+                            class="nya-bs-select form-control"
+                            ng-options="store['STORE.ID'] as store['STORE.NAME'] for store in storeList">
+                        <option class="nya-bs-option" value="">
+                            所有仓库
+                        </option>
+
+                    </select>
+                    <select ng-model="filter['STOCK_REALTIME.ORDER']"
+                            ng-init="filter['STOCK_REALTIME.ORDER']='UPDATE_DATETIME DESC'"
+                            class="nya-bs-select form-control">
+                        <option class="nya-bs-option" value="UPDATE_DATETIME DESC">
+                            最后更新
+                        </option>
+                        <option class="nya-bs-option" value="LOCK_STOCK DESC">
+                            锁定库存降序
+                        </option>
+                        <option class="nya-bs-option" value="LOCK_STOCK ASC">
+                            锁定库存升序
+                        </option>
+                        <option class="nya-bs-option" value="STOCK DESC">
+                            实时库存降序
+                        </option>
+                        <option class="nya-bs-option" value="STOCK ASC">
+                            实时库存升序
+                        </option>
+                    </select>
+                     </div>
+                </div>
+                </div>
+        </div>
+
+        <div class="table-scrollable">
+            <table class="table table-bordered table-hover table-striped">
+                <thead>
+                <tr>
+
+                    <!--<th class="col-md-2"> 发卡渠道编码</th>-->
+                    <th class="col-md-3"> 商品</th>
+                    <th class="col-md-1 text-center"> 单位</th>
+                    <th class="col-md-2 text-center"> 仓库</th>
+                    <th class="col-md-1 text-center"> 实时库存</th>
+                    <th class="col-md-1 text-center"> 带锁库存</th>
+                    <th class="col-md-1.5 text-center">最后变更</th>
+                    <th class="col-md-1 text-center">渠道</th>
+                    <th class="col-md-1 text-center"> 操作</th>
+                </tr>
+                </thead>
+                <tbody ng-cloak>
+                <tr ng-repeat="item in stockList">
+                    <td ng-bind="item['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品ID-->
+                    <td ng-bind="item['SHOP_UNIT.UNIT_NAME']" class="text-center"></td> <!--单位-->
+                    <td class="text-center">{{storeMap[(item['STOCK_REALTIME.STORE_ID'])]}}</td> <!--仓库-->
+                    <td ng-bind="item['STOCK_REALTIME.STOCK']" class="text-center"></td> <!--实时库存-->
+                    <td ng-bind="item['STOCK_REALTIME.LOCK_STOCK']" class="text-center"></td> <!--锁定库存-->
+                    <td ng-bind="item['STOCK_REALTIME.UPDATE_DATETIME']" class="text-center"></td> <!--最后变更-->
+                    <td class="text-center">
+                        <span ng-if="item['SHOP_PRODUCT.REMARK']=='onLine'">线上</span>
+                        <span ng-if="item['SHOP_PRODUCT.REMARK']=='offLine'">线下</span>
+                    </td>
+                    <td class="text-center">
+                    <div>
+                        <a type="button" show-modal id="#Stockmingxi"
+                           ng-click="detailStockClick(item)">明细</a>
+                        <a ng-if="item['SHOP_PRODUCT.REMARK']=='onLine'" type="button" show-modal id="#modifyStock"
+                           ng-click="modifyStockClick(item)">修改</a>
+                    </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    <div page-bar
+         filter-obj="filter"
+         url="/stock/realtime/queryAll"
+         callback="bindData(response)">
+    </div>
+</div>
+
+<!--BEGIN 修改库存信息-->
+<div class="modal fade text-left" id="modifyStock" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">修改库存信息</h4>
+            </div>
+
+            <div class="modal-body form-body text-right">
+
+                <form class="form-horizontal">
+
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            <span class="required">实时库存</span>
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="modify['STOCK_REALTIME.STOCK']"
+                            ></div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-md-3 control-label">
+                            锁定库存
+                        </label>
+
+                        <div class="col-md-8">
+                            <input type="text" class="form-control"
+                                   ng-model="modify['STOCK_REALTIME.LOCK_STOCK']"
+                            ></div>
+                    </div>
+
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click="modifyStock()" class="btn green">确定
+                </button>
+                <button type="button" class="btn green  btn-outline" data-dismiss="modal">取消
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 修改发卡渠道-->
+
+
+
+<!--BEGIN 查看商品明细-->
+<div class="modal fade text-left" id="Stockmingxi" tabindex="-1" aria-hidden="true"
+     style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"
+                        aria-hidden="true"></button>
+                <h4 class="modal-title">商品库存明细</h4>
+            </div>
+
+            <div class="modal-body form-body">
+
+                <table class="table table-bordered table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th class="col-md-4"> 商品</th>
+                            <th class="col-md-4 text-center"> 库存</th>
+                            <th class="col-md-4">变更时间</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-cloak>
+
+                        <tr ng-repeat="item in stockLogList">
+                            <td ng-bind="modify['STOCK_REALTIME.PRD_INFO']"></td>   <!--商品名字-->
+                            <td class="text-center"ng-bind="item['STOCK_LOG.STOCK']"></td>   <!--商品库存-->
+                            <td ng-bind="item['STOCK_LOG.UPDATE_DATETIME']"></td>   <!--商品库存-->
+                        </tr>
+                    </tbody>
+
+                </table>
+                <div page-bar
+                     filter-obj="filterstocklog"
+                     url="/log/stock/getByShopIdAndPrdSku"
+                     callback="stocklogbindData(response)">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" ng-click=" " class="btn green"data-dismiss="modal">确定
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!--END 修改发卡渠道-->
